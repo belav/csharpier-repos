@@ -34,8 +34,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Key exchange allows a sender to create secret information, for example, random data that can be used as a key in a symmetric encryption algorithm, and use encryption to send it to the intended recipient.</para>
       <para
-        >Use <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" /> to receive the key exchange and extract the secret information from it.</para
-      >
+        >Use <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" /> to receive the key exchange and extract the secret information from it.</para>
       <block subset="none" type="note">
         <para>It is highly recommended that you not attempt to create your own key exchange method from the basic functionality provided, because many details of the operation must be performed carefully in order for the key exchange to be successful.</para>
       </block>
@@ -43,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates Optimal Asymmetric Encryption Padding (OAEP) key exchange data using <see cref="T:System.Security.Cryptography.RSA" />.</para
-      >
+        >Creates Optimal Asymmetric Encryption Padding (OAEP) key exchange data using <see cref="T:System.Security.Cryptography.RSA" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,14 +64,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> to set the key before calling <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />.</para
-          >
+            >Use <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> to set the key before calling <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -101,16 +97,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> class with the specified key.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> class with the specified key.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyExchange">
@@ -152,8 +146,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret information to be passed in the key exchange. </param
-        >
+          />The secret information to be passed in the key exchange. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyExchange">
@@ -196,15 +189,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The secret information to be passed in the key exchange. </param
-        >
+          />The secret information to be passed in the key exchange. </param>
         <param name="symAlgType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This parameter is not used in the current version. </param
-        >
+          />This parameter is not used in the current version. </param>
       </Docs>
     </Member>
     <Member MemberName="Parameter">
@@ -304,8 +295,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set the key before calling <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />.</para
-          >
+            >You must set the key before calling <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -316,8 +306,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key. </param
-        >
+          />The instance of the <see cref="T:System.Security.Cryptography.RSA" /> algorithm that holds the public key. </param>
       </Docs>
     </Member>
   </Members>

@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the direction in which a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control is displayed relative to its parent control.</para
-      >
+        >Specifies the direction in which a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control is displayed relative to its parent control.</para>
     </summary>
   </Docs>
   <Members>
@@ -30,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed above and to the left of its parent control.</para
-          >
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed above and to the left of its parent control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed above and to the right of its parent control.</para
-          >
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed above and to the right of its parent control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed below and to the left of its parent control.</para
-          >
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed below and to the left of its parent control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed below and to the right of its parent control.</para
-          >
+            >Uses the mouse position to specify that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed below and to the right of its parent control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compensates for nested drop-down controls and responds to the <see cref="T:System.Windows.Forms.RightToLeft" /> setting, specifying either <see cref="F:System.Windows.Forms.ToolStripDropDownDirection.Left" /> or <see cref="F:System.Windows.Forms.ToolStripDropDownDirection.Right" /> accordingly.</para
-          >
+            >Compensates for nested drop-down controls and responds to the <see cref="T:System.Windows.Forms.RightToLeft" /> setting, specifying either <see cref="F:System.Windows.Forms.ToolStripDropDownDirection.Left" /> or <see cref="F:System.Windows.Forms.ToolStripDropDownDirection.Right" /> accordingly.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -125,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compensates for nested drop-down controls and specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed to the left of its parent control.</para
-          >
+            >Compensates for nested drop-down controls and specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed to the left of its parent control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -144,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compensates for nested drop-down controls and specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed to the right of its parent control.</para
-          >
+            >Compensates for nested drop-down controls and specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> is displayed to the right of its parent control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

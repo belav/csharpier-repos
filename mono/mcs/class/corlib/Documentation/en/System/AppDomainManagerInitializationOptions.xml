@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >These flags are used for property settings in the <see cref="T:System.AppDomainManager" /> class. The <see cref="T:System.AppDomainManagerInitializationOptions" /> flags apply only to custom application domain managers; they do not apply to the default manager. The <see cref="M:System.AppDomainManager.InitializeNewDomain(System.AppDomainSetup)" /> method in the default application domain manager does nothing. The default enumeration value is <see cref="F:System.AppDomainManagerInitializationOptions.None" />. </para
-      >
+        >These flags are used for property settings in the <see cref="T:System.AppDomainManager" /> class. The <see cref="T:System.AppDomainManagerInitializationOptions" /> flags apply only to custom application domain managers; they do not apply to the default manager. The <see cref="M:System.AppDomainManager.InitializeNewDomain(System.AppDomainSetup)" /> method in the default application domain manager does nothing. The default enumeration value is <see cref="F:System.AppDomainManagerInitializationOptions.None" />. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Register the COM callable wrapper for the current <see cref="T:System.AppDomainManager" /> with the unmanaged host. </para
-          >
+            >Register the COM callable wrapper for the current <see cref="T:System.AppDomainManager" /> with the unmanaged host. </para>
         </summary>
       </Docs>
     </Member>

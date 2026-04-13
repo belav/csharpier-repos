@@ -15,9 +15,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -26,17 +24,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" /> objects to build a <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object for a specific digital signature or encrypted XML document. <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> allows recipients of XML digital signatures and encrypted XML documents to determine which signing method and key values should be used for validation and decryption.</para
-      >
+        >You can use <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" /> objects to build a <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object for a specific digital signature or encrypted XML document. <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> allows recipients of XML digital signatures and encrypted XML documents to determine which signing method and key values should be used for validation and decryption.</para>
       <para
-        >For more information about the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> element and its subelements, see the XMLDSIG specification, which is available from the W3C at www.w3.org/TR/xmldsig-core/, or see the XML encryption specification, which is available from the W3C at www.w3.org/TR/xmlenc-core/.</para
-      >
+        >For more information about the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> element and its subelements, see the XMLDSIG specification, which is available from the W3C at www.w3.org/TR/xmldsig-core/, or see the XML encryption specification, which is available from the W3C at www.w3.org/TR/xmlenc-core/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the abstract base class from which all implementations of <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> subelements inherit.</para
-      >
+        >Represents the abstract base class from which all implementations of <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> subelements inherit.</para>
     </summary>
   </Docs>
   <Members>
@@ -62,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -87,20 +81,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlElement" /> returned by this method is suitable for use as a subelement of an XMLDSIG or encrypted XML &lt;KeyInfo&gt; element.</para
-          >
+            >The <see cref="T:System.Xml.XmlElement" /> returned by this method is suitable for use as a subelement of an XMLDSIG or encrypted XML &lt;KeyInfo&gt; element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para
-          >
+            >When overridden in a derived class, returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para
-          >
+            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -133,16 +124,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, parses the input <see cref="T:System.Xml.XmlElement" /> and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" /> to match.</para
-          >
+            >When overridden in a derived class, parses the input <see cref="T:System.Xml.XmlElement" /> and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" /> to match.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />. </param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />. </param>
       </Docs>
     </Member>
   </Members>

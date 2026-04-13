@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework uses classes that are derived from the <see cref="T:System.Web.Services.Protocols.ServerProtocol" /> class to process XML Web service requests.</para
-      >
+        >The .NET Framework uses classes that are derived from the <see cref="T:System.Web.Services.Protocols.ServerProtocol" /> class to process XML Web service requests.</para>
     </summary>
   </Docs>
   <Members>
@@ -30,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor for <see cref="T:System.Web.Services.Protocols.ServerProtocol" />.</para
-          >
+            >The constructor for <see cref="T:System.Web.Services.Protocols.ServerProtocol" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -58,30 +56,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores a <see cref="T:System.Object" /> in the cache using a key that is created from the specified protocol type and server type.</para
-          >
+            >Stores a <see cref="T:System.Object" /> in the cache using a key that is created from the specified protocol type and server type.</para>
         </summary>
         <param name="protocolType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that is used to create the key to store <paramref name="value" /> in the cache.</param
-        >
+          />A <see cref="T:System.Type" /> that is used to create the key to store <paramref name="value" /> in the cache.</param>
         <param name="serverType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that is used to create the key to store <paramref name="value" /> in the cache.</param
-        >
+          />A <see cref="T:System.Type" /> that is used to create the key to store <paramref name="value" /> in the cache.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to be stored in the cache.</param
-        >
+          />The <see cref="T:System.Object" /> to be stored in the cache.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.HttpContext" /> object for the derived class.</para
-          >
+            >Gets the <see cref="T:System.Web.HttpContext" /> object for the derived class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -127,29 +120,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see cref="T:System.Object" /> that is stored in the cache using the key that was created from the specified protocol type and server type.</para
-          >
+            >Retrieves the <see cref="T:System.Object" /> that is stored in the cache using the key that was created from the specified protocol type and server type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Object" /> that is stored in the cache using the key that was created from <paramref name="protocolType" /> and <paramref name="serverType" />.</para
-          >
+            >The <see cref="T:System.Object" /> that is stored in the cache using the key that was created from <paramref name="protocolType" /> and <paramref name="serverType" />.</para>
         </returns>
         <param name="protocolType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that is used to create the key to retrieve <paramref name="value" /> from the cache.</param
-        >
+          />A <see cref="T:System.Type" /> that is used to create the key to retrieve <paramref name="value" /> from the cache.</param>
         <param name="serverType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that is used to create the key to retrieve <paramref name="value" /> from the cache.</param
-        >
+          />A <see cref="T:System.Type" /> that is used to create the key to retrieve <paramref name="value" /> from the cache.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -168,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.HttpRequest" /> object for the derived class.</para
-          >
+            >Gets the <see cref="T:System.Web.HttpRequest" /> object for the derived class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -189,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.HttpResponse" /> object for the derived class.</para
-          >
+            >Gets the <see cref="T:System.Web.HttpResponse" /> object for the derived class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaderInfo" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageHeaderInfo" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -81,9 +80,7 @@
           <para
             >A reference parameter corresponds to the &lt;ReferenceParameters&gt; element described in the in the <see
               cref="http://go.microsoft.com/fwlink/?LinkID=96163"
-              >WS-Addressing specification</see
-            >. </para
-          >
+              >WS-Addressing specification</see>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

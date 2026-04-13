@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows control of code access permissions for <see cref="T:System.Diagnostics.PerformanceCounter" />.</para
-      >
+        >Allows control of code access permissions for <see cref="T:System.Diagnostics.PerformanceCounter" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -86,16 +84,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class with the specified permission access level entries.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class with the specified permission access level entries.</para>
         </summary>
         <param name="permissionAccessEntries">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> objects. The <see cref="P:System.Diagnostics.PerformanceCounterPermission.PermissionEntries" /> property is set to this value. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" /> objects. The <see cref="P:System.Diagnostics.PerformanceCounterPermission.PermissionEntries" /> property is set to this value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -122,16 +118,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class with the specified permission state.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class with the specified permission state.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,30 +157,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class with the specified access levels, the name of the computer to use, and the category associated with the performance counter.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermission" /> class with the specified access levels, the name of the computer to use, and the category associated with the performance counter.</para>
         </summary>
         <param name="permissionAccess">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" /> values. </param>
         <param name="machineName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The server on which the performance counter and its associate category reside. </param
-        >
+          />The server on which the performance counter and its associate category reside. </param>
         <param name="categoryName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter category (performance object) with which the performance counter is associated. </param
-        >
+          />The name of the performance counter category (performance object) with which the performance counter is associated. </param>
       </Docs>
     </Member>
     <Member MemberName="PermissionEntries">

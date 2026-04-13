@@ -52,37 +52,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CompoundAce" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CompoundAce" /> class.</para>
         </summary>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Contains flags that specify information about the inheritance, inheritance propagation, and auditing conditions for the new Access Control Entry (ACE).</param
-        >
+          />Contains flags that specify information about the inheritance, inheritance propagation, and auditing conditions for the new Access Control Entry (ACE).</param>
         <param name="accessMask">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The access mask for the ACE.</param
-        >
+          />The access mask for the ACE.</param>
         <param name="compoundAceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value from the <see cref="T:System.Security.AccessControl.CompoundAceType" /> enumeration.</param
-        >
+          />A value from the <see cref="T:System.Security.AccessControl.CompoundAceType" /> enumeration.</param>
         <param name="sid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Principal.SecurityIdentifier" /> associated with the new ACE.</param
-        >
+          />The <see cref="T:System.Security.Principal.SecurityIdentifier" /> associated with the new ACE.</param>
       </Docs>
     </Member>
     <Member MemberName="BinaryLength">
@@ -103,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.CompoundAce" /> object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl. CompoundAce.GetBinaryForm" /> method.</para
-          >
+            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.CompoundAce" /> object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl. CompoundAce.GetBinaryForm" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -132,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of this <see cref="T:System.Security.AccessControl. CompoundAce" /> object.</para
-          >
+            >Gets or sets the type of this <see cref="T:System.Security.AccessControl. CompoundAce" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -164,23 +157,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marshals the contents of the <see cref="T:System.Security.AccessControl.CompoundAce" /> object into the specified byte array beginning at the specified offset.</para
-          >
+            >Marshals the contents of the <see cref="T:System.Security.AccessControl.CompoundAce" /> object into the specified byte array beginning at the specified offset.</para>
         </summary>
         <param name="binaryForm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array into which the contents of the <see cref="T:System.Security.AccessControl. CompoundAce" /> is marshaled.</param
-        >
+          />The byte array into which the contents of the <see cref="T:System.Security.AccessControl. CompoundAce" /> is marshaled.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset at which to start marshaling.</param
-        >
+          />The offset at which to start marshaling.</param>
       </Docs>
     </Member>
   </Members>

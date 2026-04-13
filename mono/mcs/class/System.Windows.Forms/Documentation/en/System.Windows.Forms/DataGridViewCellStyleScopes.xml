@@ -21,14 +21,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by <see cref="T:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs" /> to indicate which part of the <see cref="T:System.Windows.Forms.DataGridView" /> owns the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed.</para
-      >
+        >This enumeration is used by <see cref="T:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs" /> to indicate which part of the <see cref="T:System.Windows.Forms.DataGridView" /> owns the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that changed.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the <see cref="T:System.Windows.Forms.DataGridView" /> entity that owns the cell style that was changed.</para
-      >
+        >Specifies the <see cref="T:System.Windows.Forms.DataGridView" /> entity that owns the cell style that was changed.</para>
     </summary>
   </Docs>
   <Members>
@@ -43,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -62,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -81,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersDefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersDefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -119,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -155,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -174,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.RowHeadersDefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.RowHeadersDefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -193,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" /> property changed.</para
-          >
+            >One or more values of the object returned by the <see cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" /> property changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

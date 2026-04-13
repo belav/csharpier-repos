@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize instances of a type into a JSON document and to deserialize a JSON document into an instance of a type. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in a JSON document for later retrieval. This JSON document can later be deserialized into the Person class or another class with an equivalent data contract. </para
-      >
+        >Use the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize instances of a type into a JSON document and to deserialize a JSON document into an instance of a type. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in a JSON document for later retrieval. This JSON document can later be deserialized into the Person class or another class with an equivalent data contract. </para>
       <para>If an error occurs during the serialization of an outgoing reply on the server or the reply operation throws an exception for some other reason, it may not get returned to the client as a fault. </para>
     </remarks>
     <summary>
@@ -51,16 +50,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -88,23 +85,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type, with a collection of known types that may be present in the object graph. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type, with a collection of known types that may be present in the object graph. </para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that are serialized or deserialized.</param
-        >
+          />The type of the instances that are serialized or deserialized.</param>
         <param name="knownTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" />  of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" />  of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -132,23 +126,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type and serializer settings.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type and serializer settings.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="settings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serializer settings for the JSON serializer.</param
-        >
+          />The serializer settings for the JSON serializer.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -173,23 +164,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="rootName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element that encloses the content to serialize or deserialize.</param
-        >
+          />The name of the XML element that encloses the content to serialize or deserialize.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -214,23 +202,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter of type <see cref="T:System.Xml.XmlDictionaryString" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter of type <see cref="T:System.Xml.XmlDictionaryString" />.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="rootName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -259,30 +244,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter, with a collection of known types that may be present in the object graph.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter, with a collection of known types that may be present in the object graph.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="rootName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element that encloses the content to serialize or deserialize. The default is "root".</param
-        >
+          />The name of the XML element that encloses the content to serialize or deserialize. The default is "root".</param>
         <param name="knownTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" />  of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" />  of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -311,30 +292,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter of type <see cref="T:System.Xml.XmlDictionaryString" />, with a collection of known types that may be present in the object graph.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of a specified type using the XML root element specified by a parameter of type <see cref="T:System.Xml.XmlDictionaryString" />, with a collection of known types that may be present in the object graph.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="rootName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content. </param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content. </param>
         <param name="knownTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -369,51 +346,44 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize or deserialize, whether to ignore unexpected data or emit type information, and a surrogate for custom serialization.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize or deserialize, whether to ignore unexpected data or emit type information, and a surrogate for custom serialization.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="knownTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content. </param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content. </param>
         <param name="maxItemsInObjectGraph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param>
         <param name="ignoreExtensionDataObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param
-        >
+          />true to ignore the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param>
         <param name="dataContractSurrogate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> to customize the serialization process.</param
-        >
+          />An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> to customize the serialization process.</param>
         <param name="alwaysEmitTypeInformation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to emit type information; otherwise, false. The default is false.</param
-        >
+          />true to emit type information; otherwise, false. The default is false.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -449,58 +419,50 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type. This method also specifies the root name of the XML element, a list of known types that may be present in the object graph, the maximum number of graph items to serialize or deserialize, whether to ignore unexpected data or emit type information, and a surrogate for custom serialization.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type. This method also specifies the root name of the XML element, a list of known types that may be present in the object graph, the maximum number of graph items to serialize or deserialize, whether to ignore unexpected data or emit type information, and a surrogate for custom serialization.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that is serialized or deserialized.</param
-        >
+          />The type of the instances that is serialized or deserialized.</param>
         <param name="rootName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element that encloses the content to serialize or deserialize. The default is "root".</param
-        >
+          />The name of the XML element that encloses the content to serialize or deserialize. The default is "root".</param>
         <param name="knownTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the types that may be present in the object graph.</param>
         <param name="maxItemsInObjectGraph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of items in the graph to serialize or deserialize. The default is the value returned by the <see cref="F:System.Int32.MaxValue" /> property.</param
-        >
+          />The maximum number of items in the graph to serialize or deserialize. The default is the value returned by the <see cref="F:System.Int32.MaxValue" /> property.</param>
         <param name="ignoreExtensionDataObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param
-        >
+          />true to ignore the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param>
         <param name="dataContractSurrogate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> to customize the serialization process.</param
-        >
+          />An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> to customize the serialization process.</param>
         <param name="alwaysEmitTypeInformation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to emit type information; otherwise, false. The default is false.</param
-        >
+          />true to emit type information; otherwise, false. The default is false.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -536,58 +498,50 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type. This method also specifies the root name of the XML element, a list of known types that may be present in the object graph, the maximum number of graph items to serialize or deserialize, whether to ignore unexpected data or emit type information, and a surrogate for custom serialization.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" /> class to serialize or deserialize an object of the specified type. This method also specifies the root name of the XML element, a list of known types that may be present in the object graph, the maximum number of graph items to serialize or deserialize, whether to ignore unexpected data or emit type information, and a surrogate for custom serialization.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the instances that are serialized or deserialized.</param
-        >
+          />The type of the instances that are serialized or deserialized.</param>
         <param name="rootName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that contains the root element name of the content.</param>
         <param name="knownTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the known types that may be present in the object graph.</param
-        >
+          />An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Type" /> that contains the known types that may be present in the object graph.</param>
         <param name="maxItemsInObjectGraph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of items in the graph to serialize or deserialize. The default is the value returned by the <see cref="F:System.Int32.MaxValue" /> property.</param
-        >
+          />The maximum number of items in the graph to serialize or deserialize. The default is the value returned by the <see cref="F:System.Int32.MaxValue" /> property.</param>
         <param name="ignoreExtensionDataObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param
-        >
+          />true to ignore the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param>
         <param name="dataContractSurrogate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> to customize the serialization process.</param
-        >
+          />An implementation of the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> to customize the serialization process.</param>
         <param name="alwaysEmitTypeInformation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to emit type information; otherwise, false. The default is false.</param
-        >
+          />true to emit type information; otherwise, false. The default is false.</param>
       </Docs>
     </Member>
     <Member MemberName="DataContractSurrogate">
@@ -611,14 +565,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> can be used to customize how instances of a type are serialized and deserialized. For example, it can be used to enable serialization of legacy types that are not serializable, that is, types to which the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute has not been applied.</para
-          >
+            >The <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> can be used to customize how instances of a type are serialized and deserialized. For example, it can be used to enable serialization of legacy types that are not serializable, that is, types to which the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute has not been applied.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a surrogate type that is currently active for a given <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> instance. Surrogates can extend the serialization or deserialization process.</para
-          >
+            >Gets a surrogate type that is currently active for a given <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" /> instance. Surrogates can extend the serialization or deserialization process.</para>
         </summary>
       </Docs>
     </Member>
@@ -689,14 +641,12 @@
           <para
             >The <see cref="P:System.Runtime.Serialization.Json.DataContractJsonSerializer.IgnoreExtensionDataObject" /> property affects types to which a <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> attribute has been applied and that also implement the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface. In this case when <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> is true, data added in future versions of the contract is ignored on read and write. crdefault <format type="text/html">
               <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
-            </format>. </para
-          >
+            </format>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies whether unknown data is ignored on deserialization and whether the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is ignored on serialization.</para
-          >
+            >Gets a value that specifies whether unknown data is ignored on deserialization and whether the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" /> interface is ignored on serialization.</para>
         </summary>
       </Docs>
     </Member>
@@ -723,15 +673,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Serialization.Json.DataContractJsonSerializer.IsStartObject(System.Xml.XmlDictionaryReader)" /> determines whether it can read a object by checking that it is positioned on an XML element. It also examines the name and namespace of the XML element that the reader is positioned at and compares the values to the expected name and namespace. The expected name can be set with the <paramref name="rootName" /> value passed into the constructor (if present), or is "root" if absent. The expected namespace is the empty string.</para
-          >
+            >The <see cref="M:System.Runtime.Serialization.Json.DataContractJsonSerializer.IsStartObject(System.Xml.XmlDictionaryReader)" /> determines whether it can read a object by checking that it is positioned on an XML element. It also examines the name and namespace of the XML element that the reader is positioned at and compares the values to the expected name and namespace. The expected name can be set with the <paramref name="rootName" /> value passed into the constructor (if present), or is "root" if absent. The expected namespace is the empty string.</para>
           <para>Note that this method is intended for advanced scenarios when working with XML mapped from JSON.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies whether the <see cref="T:System.Xml.XmlDictionaryReader" /> is positioned over an XML element that represents an object the serializer can deserialize from.</para
-          >
+            >Gets a value that specifies whether the <see cref="T:System.Xml.XmlDictionaryReader" /> is positioned over an XML element that represents an object the serializer can deserialize from.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -742,8 +690,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML stream mapped from JSON.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML stream mapped from JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="IsStartObject">
@@ -773,8 +720,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see cref="T:System.Xml.XmlReader" /> is positioned on an object that can be deserialized.</para
-          >
+            >Determines whether the <see cref="T:System.Xml.XmlReader" /> is positioned on an object that can be deserialized.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -785,8 +731,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> used to read the XML stream.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> used to read the XML stream.</param>
       </Docs>
     </Member>
     <Member MemberName="KnownTypes">
@@ -811,8 +756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of types that may be present in the object graph serialized using this instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" />.</para
-          >
+            >Gets a collection of types that may be present in the object graph serialized using this instance of the <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -831,13 +775,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be set using a constructor. For a list, see <see cref="Overload:System.Runtime.Serialization.Json.DataContractJsonSerializer.#ctor" />.</para
-          >
+            >This property can be set using a constructor. For a list, see <see cref="Overload:System.Runtime.Serialization.Json.DataContractJsonSerializer.#ctor" />.</para>
           <para
             >The <see cref="P:System.Runtime.Serialization.Json.DataContractJsonSerializer.MaxItemsInObjectGraph" /> property specifies the maximum number of objects that the serializer serializes or deserializes in a single <see cref="Overload:System.Runtime.Serialization.Json.DataContractJsonSerializer.ReadObject" /> or <see cref="Overload:System.Runtime.Serialization.Json.DataContractJsonSerializer.WriteObject" /> method call. The method always reads one root object, but this object may have other objects in its data members. Those objects may have other objects. The default is <see cref="F:System.Int32.MaxValue" />. Note that when serializing or deserializing arrays, every array entry counts as a separate object. Also, note that some objects may have a large memory representation, so this quota alone may not be sufficient to prevent Denial of Service attacks. crdefault <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
-            </format>. If you need to increase this quota beyond its default value, it is important to do so both on the sending (serializing) and receiving (deserializing) sides. It applies both when reading and writing data.</para
-          >
+            </format>. If you need to increase this quota beyond its default value, it is important to do so both on the sending (serializing) and receiving (deserializing) sides. It applies both when reading and writing data.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -879,8 +821,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> to be read.</param
-        >
+          />The <see cref="T:System.IO.Stream" /> to be read.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -907,8 +848,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML document mapped from JSON (JavaScript Object Notation) with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object.</para
-          >
+            >Reads the XML document mapped from JSON (JavaScript Object Notation) with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -919,8 +859,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document mapped from JSON.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document mapped from JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -947,8 +886,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML document mapped from JSON (JavaScript Object Notation) with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object.</para
-          >
+            >Reads the XML document mapped from JSON (JavaScript Object Notation) with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -959,8 +897,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML document mapped from JSON.</param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML document mapped from JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -988,8 +925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML document mapped from JSON with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object; it also enables you to specify whether the serializer should verify that it is positioned on an appropriate element before attempting to deserialize.</para
-          >
+            >Reads the XML document mapped from JSON with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object; it also enables you to specify whether the serializer should verify that it is positioned on an appropriate element before attempting to deserialize.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1000,15 +936,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document mapped from JSON.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document mapped from JSON.</param>
         <param name="verifyObjectName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to check whether the enclosing XML element name and namespace correspond to the expected name and namespace; otherwise, false to skip the verification. The default is true.</param
-        >
+          />true to check whether the enclosing XML element name and namespace correspond to the expected name and namespace; otherwise, false to skip the verification. The default is true.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -1036,8 +970,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads an XML document mapped from JSON with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object; it also enables you to specify whether the serializer should verify that it is positioned on an appropriate element before attempting to deserialize.</para
-          >
+            >Reads an XML document mapped from JSON with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object; it also enables you to specify whether the serializer should verify that it is positioned on an appropriate element before attempting to deserialize.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1048,15 +981,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML document mapped from JSON.</param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML document mapped from JSON.</param>
         <param name="verifyObjectName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to check whether the enclosing XML element name and namespace correspond to the expected name and namespace; otherwise, false, which skips the verification. The default is true.</param
-        >
+          />true to check whether the enclosing XML element name and namespace correspond to the expected name and namespace; otherwise, false, which skips the verification. The default is true.</param>
       </Docs>
     </Member>
     <Member MemberName="SerializeReadOnlyTypes">
@@ -1124,16 +1055,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the closing XML element to an XML document, using an <see cref="T:System.Xml.XmlDictionaryWriter" />, which can be mapped to JavaScript Object Notation (JSON).</para
-          >
+            >Writes the closing XML element to an XML document, using an <see cref="T:System.Xml.XmlDictionaryWriter" />, which can be mapped to JavaScript Object Notation (JSON).</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document to map to JSON.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document to map to JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEndObject">
@@ -1160,16 +1089,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the closing XML element to an XML document, using an <see cref="T:System.Xml.XmlWriter" />, which can be mapped to JavaScript Object Notation (JSON).</para
-          >
+            >Writes the closing XML element to an XML document, using an <see cref="T:System.Xml.XmlWriter" />, which can be mapped to JavaScript Object Notation (JSON).</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document mapped to JSON.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document mapped to JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObject">
@@ -1203,15 +1130,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> that is written to.</param
-        >
+          />The <see cref="T:System.IO.Stream" /> that is written to.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the data to write to the stream.</param
-        >
+          />The object that contains the data to write to the stream.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObject">
@@ -1239,23 +1164,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes an object to XML that may be mapped to JavaScript Object Notation (JSON). Writes all the object data, including the starting XML element, content, and closing element, with an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Serializes an object to XML that may be mapped to JavaScript Object Notation (JSON). Writes all the object data, including the starting XML element, content, and closing element, with an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document or stream to map to JSON.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document or stream to map to JSON.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the data to write.</param
-        >
+          />The object that contains the data to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObject">
@@ -1283,23 +1205,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes an object to XML that may be mapped to JavaScript Object Notation (JSON). Writes all the object data, including the starting XML element, content, and closing element, with an <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Serializes an object to XML that may be mapped to JavaScript Object Notation (JSON). Writes all the object data, including the starting XML element, content, and closing element, with an <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write the XML document to map to JSON.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write the XML document to map to JSON.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the data to write.</param
-        >
+          />The object that contains the data to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObjectContent">
@@ -1327,19 +1246,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the XML content that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes the XML content that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> to write to.</param>
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to write.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The object to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObjectContent">
@@ -1367,19 +1287,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the XML content that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the XML content that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write to.</param>
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to write.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The object to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartObject">
@@ -1407,19 +1328,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the opening XML element for serializing an object to XML that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes the opening XML element for serializing an object to XML that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML start element.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML start element.</param>
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to write.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The object to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartObject">
@@ -1447,19 +1369,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the opening XML element for serializing an object to XML that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the opening XML element for serializing an object to XML that can be mapped to JavaScript Object Notation (JSON) using an <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write the XML start element.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write the XML start element.</param>
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to write.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The object to write.</param>
       </Docs>
     </Member>
   </Members>

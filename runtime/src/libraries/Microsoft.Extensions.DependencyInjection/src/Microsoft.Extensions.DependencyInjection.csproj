@@ -13,13 +13,11 @@
   <PropertyGroup>
     <ILEmitBackend Condition="'$(TargetFramework)' != 'netstandard2.0'">true</ILEmitBackend>
     <DefineConstants Condition="'$(ILEmitBackend)' == 'true'"
-      >$(DefineConstants);IL_EMIT</DefineConstants
-    >
+      >$(DefineConstants);IL_EMIT</DefineConstants>
     <DefineConstants
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework' and
                                 '$(ILEmitBackendSaveAssemblies)' == 'true'"
-      >$(DefineConstants);SAVE_ASSEMBLIES</DefineConstants
-    >
+      >$(DefineConstants);SAVE_ASSEMBLIES</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

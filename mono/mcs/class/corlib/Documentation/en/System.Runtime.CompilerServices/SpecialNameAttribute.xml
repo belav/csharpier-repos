@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" /> class is not currently used in the .NET Framework, but is reserved for future use. </para
-      >
+        >The <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" /> class is not currently used in the .NET Framework, but is reserved for future use. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,14 +49,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" /> class is not currently used in the .NET Framework, but is reserved for future use.</para
-          >
+            >The <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" /> class is not currently used in the .NET Framework, but is reserved for future use.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>

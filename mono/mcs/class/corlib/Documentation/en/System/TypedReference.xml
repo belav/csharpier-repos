@@ -61,8 +61,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see cref="M:System.Object.Equals(System.Object)" />.</block
-            >
+      overrides <see cref="M:System.Object.Equals(System.Object)" />.</block>
           </para>
         </remarks>
         <summary>
@@ -78,8 +77,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object with which to compare the current object. </param
-        >
+          />The object with which to compare the current object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -105,8 +103,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see cref="M:System.Object.GetHashCode" />.</block
-            >
+      overrides <see cref="M:System.Object.GetHashCode" />.</block>
           </para>
         </remarks>
         <summary>
@@ -155,8 +152,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value whose target's type is to be returned. </param
-        >
+          />The value whose target's type is to be returned. </param>
       </Docs>
     </Member>
     <Member MemberName="MakeTypedReference">
@@ -190,47 +186,38 @@
         <exception cref="T:System.ArgumentException">
           <para
             >The 
-<paramref name="flds" /> array has no elements. </para
-          >
+<paramref name="flds" /> array has no elements. </para>
           <para>-or-</para>
           <para
-            >An element of <paramref name="flds" /> is not a <see cref="T:System.Reflection.FieldInfo" />. </para
-          >
+            >An element of <paramref name="flds" /> is not a <see cref="T:System.Reflection.FieldInfo" />. </para>
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <para>
-            <paramref name="target" /> or <paramref name="flds" /> is <see langword="null" />. </para
-          >
+            <paramref name="target" /> or <paramref name="flds" /> is <see langword="null" />. </para>
           <para>-or-</para>
           <para>An element of <paramref name="flds" /> is <see langword="null" />. </para>
         </exception>
         <exception cref="T:System.MissingMemberException">
           <para
-            >Parameter <paramref name="target" /> does not contain the field described by the first element of <paramref name="flds" />, or an element of <paramref name="flds" /> describes a field that is not contained in the field described by the succeeding element of <paramref name="flds" />. </para
-          >
+            >Parameter <paramref name="target" /> does not contain the field described by the first element of <paramref name="flds" />, or an element of <paramref name="flds" /> describes a field that is not contained in the field described by the succeeding element of <paramref name="flds" />. </para>
           <para>-or-</para>
           <para
-            >The field described by an element of <paramref name="flds" /> is not a value type.</para
-          >
+            >The field described by an element of <paramref name="flds" /> is not a value type.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.TypedReference.MakeTypedReference(System.Object,System.Reflection.FieldInfo[])" /> method returns a typed reference to some terminal field, where the <paramref name="target" /> parameter contains the field described by the first element of <paramref name="flds" />, the field described by the first element of <paramref name="flds" /> contains the field described by the second element of <paramref name="flds" />, and so on until the terminal field is reached.</para
-          >
+            >The <see cref="M:System.TypedReference.MakeTypedReference(System.Object,System.Reflection.FieldInfo[])" /> method returns a typed reference to some terminal field, where the <paramref name="target" /> parameter contains the field described by the first element of <paramref name="flds" />, the field described by the first element of <paramref name="flds" /> contains the field described by the second element of <paramref name="flds" />, and so on until the terminal field is reached.</para>
           <para
             >For an explanation of run-time type system objects such as RuntimeFieldInfo, see <format type="text/html">
               <a href="c1439fb5-cf76-475d-a9d2-fe64ba858858">Runtime Types in Reflection</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
-                  >Security Considerations for Reflection</a
-                >
-              </format>.) </para
-            >
+                  >Security Considerations for Reflection</a>
+              </format>.) </para>
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
           </block>
         </remarks>
@@ -241,23 +228,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.TypedReference" /> for the field described by the last element of <paramref name="flds" />.</para
-          >
+            >A <see cref="T:System.TypedReference" /> for the field described by the last element of <paramref name="flds" />.</para>
         </returns>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that contains the field described by the first element of <paramref name="flds" />. </param
-        >
+          />An object that contains the field described by the first element of <paramref name="flds" />. </param>
         <param name="flds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A list of field descriptions where each element describes a field that contains the field described by the succeeding element. Each described field must be a value type. The field descriptions must be RuntimeFieldInfo objects supplied by the type system.</param
-        >
+          />A list of field descriptions where each element describes a field that contains the field described by the succeeding element. Each described field must be a value type. The field descriptions must be RuntimeFieldInfo objects supplied by the type system.</param>
       </Docs>
     </Member>
     <Member MemberName="SetTypedReference">
@@ -310,15 +294,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The target of the conversion. </param
-        >
+          />The target of the conversion. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to be converted. </param
-        >
+          />The value to be converted. </param>
       </Docs>
     </Member>
     <Member MemberName="TargetTypeToken">
@@ -357,8 +339,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TypedReference for which the type handle is requested. </param
-        >
+          />The TypedReference for which the type handle is requested. </param>
       </Docs>
     </Member>
     <Member MemberName="ToObject">
@@ -400,8 +381,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TypedReference to be converted. </param
-        >
+          />The TypedReference to be converted. </param>
       </Docs>
     </Member>
   </Members>

@@ -31,17 +31,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see cref="T:System.Windows.Forms.ToolStripPanel" /> to hold one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.StatusStrip" /> or user-defined controls. </para
-      >
+        >Use a <see cref="T:System.Windows.Forms.ToolStripPanel" /> to hold one or more <see cref="T:System.Windows.Forms.ToolStrip" />, <see cref="T:System.Windows.Forms.MenuStrip" />, <see cref="T:System.Windows.Forms.StatusStrip" /> or user-defined controls. </para>
       <para
-        >You might find that one or more <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls meet the needs of your application better than a <see cref="T:System.Windows.Forms.ToolStripContainer" /> if you do not need the four panels and the central <see cref="T:System.Windows.Forms.ToolStripContentPanel" />.</para
-      >
+        >You might find that one or more <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls meet the needs of your application better than a <see cref="T:System.Windows.Forms.ToolStripContainer" /> if you do not need the four panels and the central <see cref="T:System.Windows.Forms.ToolStripContentPanel" />.</para>
       <para
-        >You can use only one panel if you so choose, and <see cref="T:System.Windows.Forms.ToolStripPanel" /> works well in Multiple Document Interface (MDI) scenarios.</para
-      >
+        >You can use only one panel if you so choose, and <see cref="T:System.Windows.Forms.ToolStripPanel" /> works well in Multiple Document Interface (MDI) scenarios.</para>
       <para
-        >Each <see cref="T:System.Windows.Forms.ToolStripPanel" /> is expandable and collapsible. </para
-      >
+        >Each <see cref="T:System.Windows.Forms.ToolStripPanel" /> is expandable and collapsible. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripPanel" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripPanel" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -226,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripPanel" /> automatically adjusts its size when the form is resized.</para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripPanel" /> automatically adjusts its size when the form is resized.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -247,14 +241,12 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanel.AutoSize" /> property changes. </para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanel.AutoSize" /> property changes. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -282,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins the initialization of a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Begins the initialization of a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -308,14 +299,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a collection of <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls.</para
-          >
+            >Retrieves a collection of <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls.</para
-          >
+            >A collection of <see cref="T:System.Windows.Forms.ToolStripPanel" /> controls.</para>
         </returns>
       </Docs>
     </Member>
@@ -370,25 +359,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" /> method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" /> method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ToolStripPanel" /> references. This method invokes the Dispose method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ToolStripPanel" /> references. This method invokes the Dispose method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripPanel" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripPanel" /> and optionally releases the managed resources. </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -426,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends the initialization of a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Ends the initialization of a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -454,16 +438,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
         <param name="toolStripToDrag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Join">
@@ -487,23 +469,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" /> at the specified location.</para
-          >
+            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" /> at the specified location.</para>
         </summary>
         <param name="toolStripToDrag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param>
         <param name="location">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> value representing the x- and y-client coordinates, in pixels, of the new location for the <see cref="T:System.Windows.Forms.ToolStrip" />.</param
-        >
+          />A <see cref="T:System.Drawing.Point" /> value representing the x- and y-client coordinates, in pixels, of the new location for the <see cref="T:System.Windows.Forms.ToolStrip" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Join">
@@ -527,23 +506,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" /> in the specified row.</para
-          >
+            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" /> in the specified row.</para>
         </summary>
         <param name="toolStripToDrag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param>
         <param name="row">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> representing the <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> to which the <see cref="T:System.Windows.Forms.ToolStrip" /> is added.</param
-        >
+          />An <see cref="T:System.Int32" /> representing the <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> to which the <see cref="T:System.Windows.Forms.ToolStrip" /> is added.</param>
       </Docs>
     </Member>
     <Member MemberName="Join">
@@ -568,30 +544,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" /> at the specified coordinates.</para
-          >
+            >Adds the specified <see cref="T:System.Windows.Forms.ToolStrip" /> to a <see cref="T:System.Windows.Forms.ToolStripPanel" /> at the specified coordinates.</para>
         </summary>
         <param name="toolStripToDrag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ToolStrip" /> to add to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The horizontal client coordinate, in pixels.</param
-        >
+          />The horizontal client coordinate, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The vertical client coordinate, in pixels.</param
-        >
+          />The vertical client coordinate, in pixels.</param>
       </Docs>
     </Member>
     <Member MemberName="LayoutEngine">
@@ -626,8 +598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripPanel" /> can be moved or resized.</para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripPanel" /> can be moved or resized.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -662,30 +633,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" /> method is called when a child control is added to the <see cref="T:System.Windows.Forms.ToolStrip" />. </para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" /> method is called when a child control is added to the <see cref="T:System.Windows.Forms.ToolStrip" />. </para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlAdded(System.Windows.Forms.ControlEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ControlAdded" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ControlAdded" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data.</param
-        >
+          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -708,30 +674,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" /> is called when a child control is removed from the <see cref="T:System.Windows.Forms.ToolStrip" />. </para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" /> is called when a child control is removed from the <see cref="T:System.Windows.Forms.ToolStrip" />. </para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnControlRemoved(System.Windows.Forms.ControlEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ControlRemoved" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ControlRemoved" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data.</param
-        >
+          />A <see cref="T:System.Windows.Forms.ControlEventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -753,11 +714,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnDockChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnDockChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -768,8 +727,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -794,11 +752,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnLayout(System.Windows.Forms.LayoutEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnLayout(System.Windows.Forms.LayoutEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -809,8 +765,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.</param
-        >
+          />A <see cref="T:System.Windows.Forms.LayoutEventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -861,12 +816,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="M:System.Windows.Forms.Control.OnParentChanged(System.EventArgs)" /> event.</para
-          >
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnParentChanged(System.EventArgs)" /> event.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -891,25 +844,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnRendererChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnRendererChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.ToolStripPanel.RendererChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripPanel.RendererChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />A <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -936,25 +885,21 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnRightToLeftChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.ToolStripPanel.OnRightToLeftChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" /> event. </para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" /> event. </para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains the event data.</param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
       </Docs>
     </Member>
     <Member MemberName="Orientation">
@@ -973,8 +918,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the horizontal or vertical orientation of the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Gets or sets a value indicating the horizontal or vertical orientation of the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -999,22 +943,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> given a point within the <see cref="T:System.Windows.Forms.ToolStripPanel" /> client area.</para
-          >
+            >Retrieves the <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> given a point within the <see cref="T:System.Windows.Forms.ToolStripPanel" /> client area.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> that contains the <paramref name="raftingContainerPoint" />, or null if no such <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> exists.</para
-          >
+            >The <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> that contains the <paramref name="raftingContainerPoint" />, or null if no such <see cref="T:System.Windows.Forms.ToolStripPanelRow" /> exists.</para>
         </returns>
         <param name="clientLocation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Point" /> used as a reference to find the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />.</param
-        >
+          />A <see cref="T:System.Drawing.Point" /> used as a reference to find the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1044,8 +985,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.Windows.Forms.ToolStripRenderer" /> used to customize the appearance of a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Gets or sets a <see cref="T:System.Windows.Forms.ToolStripRenderer" /> used to customize the appearance of a <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1065,14 +1005,12 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanel.Renderer" /> property changes.</para
-          >
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripPanel.Renderer" /> property changes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1095,8 +1033,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the painting styles to be applied to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Gets or sets the painting styles to be applied to the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1119,8 +1056,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the spacing, in pixels, between the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />s and the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Gets or sets the spacing, in pixels, between the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />s and the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1143,8 +1079,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />s in this <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para
-          >
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripPanelRow" />s in this <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

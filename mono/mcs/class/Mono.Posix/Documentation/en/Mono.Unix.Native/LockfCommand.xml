@@ -21,8 +21,7 @@
   <Docs>
     <summary
       >Possible <see cref="M:Mono.Unix.Native.Syscall.lockf" />
-      <paramref name="cmd" /> values.</summary
-    >
+      <paramref name="cmd" /> values.</summary>
     <remarks></remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.lockf" />
   </Docs>

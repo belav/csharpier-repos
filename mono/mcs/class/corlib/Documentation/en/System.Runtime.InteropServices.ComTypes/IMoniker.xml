@@ -24,8 +24,7 @@
       <para
         >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -439,8 +438,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the moniker to use for comparison. </param
-        >
+          />A reference to the moniker to use for comparison. </param>
       </Docs>
     </Member>
     <Member MemberName="IsRunning">
@@ -484,22 +482,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the bind context to use in this binding operation. </param
-        >
+          />A reference to the bind context to use in this binding operation. </param>
         <param name="pmkToLeft">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the moniker to the left of the current moniker if the current moniker is part of a composite. </param
-        >
+          />A reference to the moniker to the left of the current moniker if the current moniker is part of a composite. </param>
         <param name="pmkNewlyRunning">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A reference to the moniker most recently added to the Running Object Table (ROT). </param
-        >
+          />A reference to the moniker most recently added to the Running Object Table (ROT). </param>
       </Docs>
     </Member>
     <Member MemberName="IsSystemMoniker">
@@ -562,8 +557,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that the object is loaded from. </param
-        >
+          />The stream that the object is loaded from. </param>
       </Docs>
     </Member>
     <Member MemberName="ParseDisplayName">
@@ -715,15 +709,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the object is saved. </param
-        >
+          />The stream to which the object is saved. </param>
         <param name="fClearDirty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to clear the modified flag after the save is complete; otherwise false </param
-        >
+          />true to clear the modified flag after the save is complete; otherwise false </param>
       </Docs>
     </Member>
   </Members>

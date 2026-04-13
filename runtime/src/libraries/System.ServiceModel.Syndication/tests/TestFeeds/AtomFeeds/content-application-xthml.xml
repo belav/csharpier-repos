@@ -21,8 +21,7 @@ Expect:       HtmlFragment{element:content}
     <content type="application/xhtml+xml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         Some <b>bold</b> text.
-      </div
-      >
+      </div>
     </content>
   </entry>
 </feed>

@@ -46,8 +46,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -71,22 +70,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the value under the <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> that contains the dnprdnshort SDK installation path.</para
-          >
+            >Gets the name of the value under the <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> that contains the dnprdnshort SDK installation path.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string containing the name of the registry key value under the <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> that contains the dnprdnshort SDK installation path.</para
-          >
+            >Returns a string containing the name of the registry key value under the <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> that contains the dnprdnshort SDK installation path.</para>
         </returns>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -123,8 +119,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -158,8 +153,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -194,15 +188,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to locate in the dnprdnshort directory.</param
-        >
+          />The file to locate in the dnprdnshort directory.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -236,8 +228,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -262,8 +253,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The path for the SDK takes in consideration the processor architecture environment information for the calling process, so it might end up being ".../bin/i64", for example.</para>
           <para
-            >Unlike <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToDotNetFrameworkFile(System.String,Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> and <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToSystemFile(System.String)" /> this method checks for the existence of the file, so that an invalid <paramref name="fileName" /> returns null.</para
-          >
+            >Unlike <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToDotNetFrameworkFile(System.String,Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> and <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToSystemFile(System.String)" /> this method checks for the existence of the file, so that an invalid <paramref name="fileName" /> returns null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -278,15 +268,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to locate in the dnprdnshort SDK.</param
-        >
+          />The file to locate in the dnprdnshort SDK.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version of the dnprdnshort to target.</param
-        >
+          />The version of the dnprdnshort to target.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -323,8 +311,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file to locate in the System folder.</param
-        >
+          />The file to locate in the System folder.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

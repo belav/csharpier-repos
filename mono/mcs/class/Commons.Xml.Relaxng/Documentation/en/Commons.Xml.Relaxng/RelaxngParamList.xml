@@ -12,13 +12,10 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary
-      >Represents a list that contains <see cref="T:Commons.Xml.Relaxng.RelaxngParam" /> instances.</summary
-    >
+      >Represents a list that contains <see cref="T:Commons.Xml.Relaxng.RelaxngParam" /> instances.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Base>
@@ -113,8 +110,7 @@
         <summary>Gets or sets a parameter object to the indicated position.</summary>
         <param name="i">an <see cref="T:System.Int32" /> that indicates the location.</param>
         <value
-          >a <see cref="T:Commons.Xml.Relaxng.RelaxngParam" /> that is positioned at the specified index.</value
-        >
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngParam" /> that is positioned at the specified index.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

@@ -28,8 +28,7 @@
   <Docs>
     <summary>Password database entry.</summary>
     <remarks
-      >An entry from the password database file described in <c>passwd</c>(5), typically <c>/etc/passwd</c>.</remarks
-    >
+      >An entry from the password database file described in <c>passwd</c>(5), typically <c>/etc/passwd</c>.</remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.getpwent" />
     <altmember cref="M:Mono.Unix.Native.Syscall.getpwnam" />
     <altmember cref="M:Mono.Unix.Native.Syscall.getpwuid" />

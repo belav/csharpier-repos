@@ -115,8 +115,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specified line in the document. </param
-        >
+          />The specified line in the document. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCheckSum">
@@ -186,29 +185,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting line in the current document. </param
-        >
+          />The starting line in the current document. </param>
         <param name="startColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting column in the current document. </param
-        >
+          />The starting column in the current document. </param>
         <param name="endLine">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ending line in the current document. </param
-        >
+          />The ending line in the current document. </param>
         <param name="endColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ending column in the current document. </param
-        >
+          />The ending column in the current document. </param>
       </Docs>
     </Member>
     <Member MemberName="HasEmbeddedSource">

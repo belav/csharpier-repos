@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.SubjectKeyIdentifier" /> is used if present in the X.509 certificate, otherwise <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.IssuerSerial" /> is used.</para
-          >
+            <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.SubjectKeyIdentifier" /> is used if present in the X.509 certificate, otherwise <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.IssuerSerial" /> is used.</para>
         </summary>
       </Docs>
     </Member>

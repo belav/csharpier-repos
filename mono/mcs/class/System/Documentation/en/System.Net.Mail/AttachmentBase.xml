@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Base class that represents an email attachment. Classes <see cref="T:System.Net.Mail.Attachment" />, <see cref="T:System.Net.Mail.AlternateView" />, and <see cref="T:System.Net.Mail.LinkedResource" /> derive from this class.</para
-      >
+        >Base class that represents an email attachment. Classes <see cref="T:System.Net.Mail.Attachment" />, <see cref="T:System.Net.Mail.AlternateView" />, and <see cref="T:System.Net.Mail.LinkedResource" /> derive from this class.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,16 +51,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified <see cref="T:System.IO.Stream" />.</para
-          >
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified <see cref="T:System.IO.Stream" />.</para>
         </summary>
         <param name="contentStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream containing the content for this attachment.</param
-        >
+          />A stream containing the content for this attachment.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -84,16 +81,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified file name.</para
-          >
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified file name.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name holding the content for this attachment.</param
-        >
+          />The file name holding the content for this attachment.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -120,23 +115,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified <see cref="T:System.IO.Stream" /> and <see cref="T:System.Net.Mime.ContentType" />.</para
-          >
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified <see cref="T:System.IO.Stream" /> and <see cref="T:System.Net.Mime.ContentType" />.</para>
         </summary>
         <param name="contentStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream containing the content for this attachment.</param
-        >
+          />A stream containing the content for this attachment.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content.</param
-        >
+          />The type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,23 +155,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified <see cref="T:System.IO.Stream" /> and media type.</para
-          >
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified <see cref="T:System.IO.Stream" /> and media type.</para>
         </summary>
         <param name="contentStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream containing the content for this attachment.</param
-        >
+          />A stream containing the content for this attachment.</param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME media type of the content.</param
-        >
+          />The MIME media type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -206,23 +195,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified file name and content type.</para
-          >
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified file name and content type.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name holding the content for this attachment.</param
-        >
+          />The file name holding the content for this attachment.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content.</param
-        >
+          />The type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -249,23 +235,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified file name and media type.</para
-          >
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" /> with the specified file name and media type.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name holding the content for this attachment.</param
-        >
+          />The file name holding the content for this attachment.</param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME media type of the content.</param
-        >
+          />The MIME media type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName="ContentId">
@@ -364,17 +347,14 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>. </para>
           <para
-            >Note   Always call <see cref="M:System.Net.Mail.AttachmentBase.Dispose" /> before you release your last reference to the <see cref="T:System.Net.Mail.AttachmentBase" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Mail.AttachmentBase" /> object's Finalize method.</para
-          >
+            >Note   Always call <see cref="M:System.Net.Mail.AttachmentBase.Dispose" /> before you release your last reference to the <see cref="T:System.Net.Mail.AttachmentBase" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Mail.AttachmentBase" /> object's Finalize method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see cref="T:System.Net.Mail.AttachmentBase" />. </para
-          >
+            >Releases the resources used by the <see cref="T:System.Net.Mail.AttachmentBase" />. </para>
         </summary>
       </Docs>
     </Member>
@@ -400,25 +380,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Mail.AttachmentBase" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Mail.AttachmentBase" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AttachmentBase" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AttachmentBase" /> and optionally releases the managed resources. </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="TransferEncoding">

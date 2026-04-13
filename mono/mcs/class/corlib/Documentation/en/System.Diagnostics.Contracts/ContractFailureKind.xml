@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.Contracts.ContractFailureKind" /> enumeration is used by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> class.</para
-      >
+        >The <see cref="T:System.Diagnostics.Contracts.ContractFailureKind" /> enumeration is used by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Assert" /> contract failed.</para
-          >
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Assert" /> contract failed.</para>
         </summary>
       </Docs>
     </Member>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Assume" /> contract failed.</para
-          >
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Assume" /> contract failed.</para>
         </summary>
       </Docs>
     </Member>
@@ -86,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Invariant" /> contract failed.</para
-          >
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Invariant" /> contract failed.</para>
         </summary>
       </Docs>
     </Member>
@@ -108,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> contract failed. </para
-          >
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> contract failed. </para>
         </summary>
       </Docs>
     </Member>
@@ -130,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" /> contract failed.</para
-          >
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" /> contract failed.</para>
         </summary>
       </Docs>
     </Member>
@@ -152,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="Overload:System.Diagnostics.Contracts.Contract.Requires" /> contract failed.</para
-          >
+            >A <see cref="Overload:System.Diagnostics.Contracts.Contract.Requires" /> contract failed.</para>
         </summary>
       </Docs>
     </Member>

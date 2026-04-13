@@ -48,16 +48,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para>
         </summary>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -81,16 +79,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> class. </para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -118,23 +114,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type and <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type and <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content, typically expressed as a MIME content type, for example application/xml or application/xml+customer.</param
-        >
+          />The type of the content, typically expressed as a MIME content type, for example application/xml or application/xml+customer.</param>
         <param name="extension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> to place in the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> to place in the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -162,32 +155,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is one subtype of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />. If null is passed, a default instance of <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is instantiated.</para
-          >
+            >The <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is one subtype of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />. If null is passed, a default instance of <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is instantiated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type, object, and <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type, object, and <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />. </para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of content.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The type of content.</param>
         <param name="dataContractExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract extension.</param
-        >
+          />The data contract extension.</param>
         <param name="dataContractSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to use.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to use.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -213,26 +205,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type, object and <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> with the specified type, object and <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of content.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The type of content.</param>
         <param name="xmlSerializerExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML serializer extension.</param
-        >
+          />The XML serializer extension.</param>
         <param name="serializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -257,14 +249,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para
-          >
+            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -294,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para
-          >
+            >Gets the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -321,14 +310,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reader from the content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</para
-          >
+            >Gets a reader from the content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlDictionaryReader" /> from the content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</para
-          >
+            >An <see cref="T:System.Xml.XmlDictionaryReader" /> from the content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -353,14 +340,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />) is returned. If not, a new instance of <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is created and is used to deserialize the inner XML of the XML syndication content element into an instance of <paramref name="TContent" />.</para
-          >
+            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />) is returned. If not, a new instance of <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> is created and is used to deserialize the inner XML of the XML syndication content element into an instance of <paramref name="TContent" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</para
-          >
+            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -371,8 +356,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of content to read.</typeparam
-        >
+          />The type of content to read.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ReadContent&lt;TContent&gt;">
@@ -402,14 +386,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />) is returned. If not, the instance of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref name="TContent" />.</para
-          >
+            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />) is returned. If not, the instance of <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref name="TContent" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> using the specified serializer.</para
-          >
+            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> using the specified serializer.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -420,8 +402,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of content to read.</typeparam
-        >
+          />The type of content to read.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ReadContent&lt;TContent&gt;">
@@ -450,14 +431,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />) is returned. If not, the instance of <see cref="T:System.Xml.Serialization.XmlSerializer" /> passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref name="TContent" />.</para
-          >
+            >On the receive/deserialization side, if the XML syndication content element is an empty XML element, then default(<paramref name="TContent" />) is returned. If not, the instance of <see cref="T:System.Xml.Serialization.XmlSerializer" /> passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref name="TContent" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> using the specified serializer.</para
-          >
+            >Reads the content of the specified type into the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> using the specified serializer.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -468,15 +447,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param>
         <typeparam name="TContent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of content to read.</typeparam
-        >
+          />The type of content to read.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Type">
@@ -521,22 +498,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method writes the inner XML content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance (for example, it does not write the top level start and end elements of the syndication content).</para
-          >
+            >This method writes the inner XML content of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> instance (for example, it does not write the top level start and end elements of the syndication content).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Write the contents of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Write the contents of the <see cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" /> to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
   </Members>

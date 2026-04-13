@@ -42,8 +42,7 @@ class Test
    }  
 }  
 ]]>
-      </code_example>the class A is decorated with the Obsolete attribute. Each use of A in Main results in a warning that includes the specified message, &quot;This class is obsolete; use class B instead.&quot; end example]</example
-    >
+      </code_example>the class A is decorated with the Obsolete attribute. Each use of A in Main results in a warning that includes the specified message, &quot;This class is obsolete; use class B instead.&quot; end example]</example>
     <table_line />
   </paragraph>
 </clause>

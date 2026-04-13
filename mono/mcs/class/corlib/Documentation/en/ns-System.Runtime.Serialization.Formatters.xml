@@ -10,8 +10,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Runtime.Serialization.Formatters" /> namespace provides common enumerations, interfaces, and classes that are used by serialization formatters.</para
-      >
+        >The <see cref="N:System.Runtime.Serialization.Formatters" /> namespace provides common enumerations, interfaces, and classes that are used by serialization formatters.</para>
     </summary>
   </Docs>
 </Namespace>

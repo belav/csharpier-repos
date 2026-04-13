@@ -30,11 +30,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="Overload:System.Linq.Expressions.Expression.Invoke" /> factory methods to create an <see cref="T:System.Linq.Expressions.InvocationExpression" />.</para
-      >
+        >Use the <see cref="Overload:System.Linq.Expressions.Expression.Invoke" /> factory methods to create an <see cref="T:System.Linq.Expressions.InvocationExpression" />.</para>
       <para
-        >The <see cref="P:System.Linq.Expressions.Expression.NodeType" /> of an <see cref="T:System.Linq.Expressions.InvocationExpression" /> is <see cref="F:System.Linq.Expressions.ExpressionType.Invoke" />.</para
-      >
+        >The <see cref="P:System.Linq.Expressions.Expression.NodeType" /> of an <see cref="T:System.Linq.Expressions.InvocationExpression" /> is <see cref="F:System.Linq.Expressions.ExpressionType.Invoke" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> when overriding this method.</para
-          >
+            >Returns the node type of this expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> when overriding this method.</para>
         </summary>
       </Docs>
     </Member>
@@ -211,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see cref="P:System.Linq.Expressions.InvocationExpression.Expression" /> represents.</para
-          >
+            >Gets the static type of the expression that this <see cref="P:System.Linq.Expressions.InvocationExpression.Expression" /> represents.</para>
         </summary>
       </Docs>
     </Member>
@@ -254,15 +250,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.InvocationExpression.Expression" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.InvocationExpression.Expression" /> property of the result.</param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.InvocationExpression.Arguments" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.InvocationExpression.Arguments" /> property of the result.</param>
       </Docs>
     </Member>
   </Members>

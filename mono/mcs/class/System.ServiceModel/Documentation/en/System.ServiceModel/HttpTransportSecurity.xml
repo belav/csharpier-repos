@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by <see cref="P:System.ServiceModel.WSHttpSecurity.Transport" /> to set the transport-level security settings for a binding.</para
-      >
+        >This class is used by <see cref="P:System.ServiceModel.WSHttpSecurity.Transport" /> to set the transport-level security settings for a binding.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the transport-level security settings for the <see cref="T:System.ServiceModel.WSHttpBinding" />.</para
-      >
+        >Represents the transport-level security settings for the <see cref="T:System.ServiceModel.WSHttpBinding" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -44,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.HttpTransportSecurity" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.HttpTransportSecurity" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -204,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <newTerm>authentication realm</newTerm> is a string that contains at least the name of the host performing the authentication and can additionally indicate the collection of users who might have access. An example might be "registered_someone@example.com". The authentication realm is displayed to a user to show which one of several possible user names and passwords can be used.</para
-          >
+            >An <newTerm>authentication realm</newTerm> is a string that contains at least the name of the host performing the authentication and can additionally indicate the collection of users who might have access. An example might be "registered_someone@example.com". The authentication realm is displayed to a user to show which one of several possible user names and passwords can be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

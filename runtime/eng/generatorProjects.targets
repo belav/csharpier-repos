@@ -2,8 +2,7 @@
   <PropertyGroup>
     <GeneratorProjectBaseTargetPath>analyzers/dotnet</GeneratorProjectBaseTargetPath>
     <GeneratorProjectBaseTargetPath Condition="'$(AnalyzerLanguage)' != ''"
-      >$(GeneratorProjectBaseTargetPath)/$(AnalyzerLanguage)</GeneratorProjectBaseTargetPath
-    >
+      >$(GeneratorProjectBaseTargetPath)/$(AnalyzerLanguage)</GeneratorProjectBaseTargetPath>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
@@ -20,11 +19,9 @@
     <PropertyGroup>
       <_analyzerPath>analyzers/dotnet</_analyzerPath>
       <_analyzerPath Condition="'$(AnalyzerRoslynVersion)' != ''"
-        >$(_analyzerPath)/roslyn$(AnalyzerRoslynVersion)</_analyzerPath
-      >
+        >$(_analyzerPath)/roslyn$(AnalyzerRoslynVersion)</_analyzerPath>
       <_analyzerPath Condition="'$(AnalyzerLanguage)' != ''"
-        >$(_analyzerPath)/$(AnalyzerLanguage)</_analyzerPath
-      >
+        >$(_analyzerPath)/$(AnalyzerLanguage)</_analyzerPath>
     </PropertyGroup>
 
     <!-- Filter on netstandard2.0 so that generator projects can multi-target for the purpose of enabling nullable reference type compiler checks. -->

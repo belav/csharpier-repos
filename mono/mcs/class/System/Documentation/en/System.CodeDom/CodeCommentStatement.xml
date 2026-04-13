@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeCommentStatement" /> can be used to represent a single-line comment statement. <see cref="T:System.CodeDom.CodeCommentStatement" /> is a statement, so it can be inserted into a statements collection and will appear on its own line. <see cref="T:System.CodeDom.CodeCommentStatement" /> can also be added to the comments collection of <see cref="T:System.CodeDom.CodeNamespace" /> or any object that derives from <see cref="T:System.CodeDom.CodeTypeMember" />.</para
-      >
+        <see cref="T:System.CodeDom.CodeCommentStatement" /> can be used to represent a single-line comment statement. <see cref="T:System.CodeDom.CodeCommentStatement" /> is a statement, so it can be inserted into a statements collection and will appear on its own line. <see cref="T:System.CodeDom.CodeCommentStatement" /> can also be added to the comments collection of <see cref="T:System.CodeDom.CodeNamespace" /> or any object that derives from <see cref="T:System.CodeDom.CodeTypeMember" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +72,7 @@ demoNs.Comments.Add(new CodeCommentStatement());
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -119,16 +117,14 @@ emits
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class using the specified comment.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class using the specified comment.</para>
         </summary>
         <param name="comment">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeComment" /> that indicates the comment. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeComment" /> that indicates the comment. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -164,16 +160,14 @@ generates the code
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class using the specified text as contents.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class using the specified text as contents.</para>
         </summary>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contents of the comment. </param
-        >
+          />The contents of the comment. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -200,29 +194,25 @@ generates the code
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="docComment" /> parameter is true, the <see cref="T:System.CodeDom.CodeCommentStatement" /> is a documentation comment and the comment is structured using triple delimiter characters. For example, in C# the comment is "///", in Visual Basic "'''". Documentation comments are used to identify an XML comment field, such as a type or member summary identified by the &lt;summary&gt; element.</para
-          >
+            >If the <paramref name="docComment" /> parameter is true, the <see cref="T:System.CodeDom.CodeCommentStatement" /> is a documentation comment and the comment is structured using triple delimiter characters. For example, in C# the comment is "///", in Visual Basic "'''". Documentation comments are used to identify an XML comment field, such as a type or member summary identified by the &lt;summary&gt; element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class using the specified text and documentation comment flag.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCommentStatement" /> class using the specified text and documentation comment flag.</para>
         </summary>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contents of the comment. </param
-        >
+          />The contents of the comment. </param>
         <param name="docComment">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the comment is a documentation comment; otherwise, false. </param
-        >
+          />true if the comment is a documentation comment; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="Comment">

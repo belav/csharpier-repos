@@ -35,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the types of handles the <see cref="T:System.Runtime.InteropServices.GCHandle" /> class can allocate.</para
-      >
+        >Represents the types of handles the <see cref="T:System.Runtime.InteropServices.GCHandle" /> class can allocate.</para>
     </summary>
   </Docs>
   <Members>
@@ -96,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This handle type is similar to <see cref="F:System.Runtime.InteropServices.GCHandleType.Normal" />, but allows the address of the pinned object to be taken. This prevents the garbage collector from moving the object and hence undermines the efficiency of the garbage collector. Use the <see cref="M:System.Runtime.InteropServices.GCHandle.Free" /> method to free the allocated handle as soon as possible.</para
-          >
+            >This handle type is similar to <see cref="F:System.Runtime.InteropServices.GCHandleType.Normal" />, but allows the address of the pinned object to be taken. This prevents the garbage collector from moving the object and hence undermines the efficiency of the garbage collector. Use the <see cref="M:System.Runtime.InteropServices.GCHandle.Free" /> method to free the allocated handle as soon as possible.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -123,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This handle type is used to track an object, but allow it to be collected. When an object is collected, the contents of the <see cref="T:System.Runtime.InteropServices.GCHandle" /> are zeroed. Weak references are zeroed before the finalizer runs, so even if the finalizer resurrects the object, the Weak reference is still zeroed.</para
-          >
+            >This handle type is used to track an object, but allow it to be collected. When an object is collected, the contents of the <see cref="T:System.Runtime.InteropServices.GCHandle" /> are zeroed. Weak references are zeroed before the finalizer runs, so even if the finalizer resurrects the object, the Weak reference is still zeroed.</para>
         </summary>
       </Docs>
     </Member>
@@ -149,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This handle type is similar to <see cref="F:System.Runtime.InteropServices.GCHandleType.Weak" />, but the handle is not zeroed if the object is resurrected during finalization.</para
-          >
+            >This handle type is similar to <see cref="F:System.Runtime.InteropServices.GCHandleType.Weak" />, but the handle is not zeroed if the object is resurrected during finalization.</para>
         </summary>
       </Docs>
     </Member>

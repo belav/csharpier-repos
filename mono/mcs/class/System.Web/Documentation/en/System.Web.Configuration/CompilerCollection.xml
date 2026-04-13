@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.CompilerCollection" /> does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the <see cref="T:System.Web.Configuration.Compiler" /> objects it contains. </para
-      >
+        >The <see cref="T:System.Web.Configuration.CompilerCollection" /> does not refer to any actual element in the underlying configuration file. It is a construct that allows easy access to the <see cref="T:System.Web.Configuration.Compiler" /> objects it contains. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Web.Configuration.Compiler" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Web.Configuration.Compiler" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -43,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.CompilerCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.CompilerCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,14 +60,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this array to access the <see cref="T:System.Web.Configuration.Compiler" /> objects contained in the collection.</para
-          >
+            >You can use this array to access the <see cref="T:System.Web.Configuration.Compiler" /> objects contained in the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the keys of the <see cref="T:System.Web.Configuration.CompilerCollection" />.</para
-          >
+            >Gets all the keys of the <see cref="T:System.Web.Configuration.CompilerCollection" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -153,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Configuration.Compiler" /> collection element at the specified index.</para
-          >
+            >Gets the <see cref="T:System.Web.Configuration.Compiler" /> collection element at the specified index.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -165,8 +159,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer value specifying a <see cref="T:System.Web.Configuration.Compiler" /> within the <see cref="T:System.Web.Configuration.CompilerCollection" />.</param
-        >
+          />An integer value specifying a <see cref="T:System.Web.Configuration.Compiler" /> within the <see cref="T:System.Web.Configuration.CompilerCollection" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -190,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Configuration.Compiler" /> collection element for the specified language.</para
-          >
+            >Gets the <see cref="T:System.Web.Configuration.Compiler" /> collection element for the specified language.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -202,8 +194,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The language for the <see cref="T:System.Web.Configuration.Compiler" /> object within the collection.</param
-        >
+          />The language for the <see cref="T:System.Web.Configuration.Compiler" /> object within the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -247,22 +238,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Configuration.CompilerCollection" /> key name at the specified index.</para
-          >
+            >Gets the <see cref="T:System.Web.Configuration.CompilerCollection" /> key name at the specified index.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The key name at the specified index of the <see cref="T:System.Web.Configuration.CompilerCollection" />.</para
-          >
+            >The key name at the specified index of the <see cref="T:System.Web.Configuration.CompilerCollection" />.</para>
         </returns>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer value specifying a <see cref="T:System.Web.Configuration.Compiler" /> within the <see cref="T:System.Web.Configuration.CompilerCollection" />.</param
-        >
+          />An integer value specifying a <see cref="T:System.Web.Configuration.Compiler" /> within the <see cref="T:System.Web.Configuration.CompilerCollection" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

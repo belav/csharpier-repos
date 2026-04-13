@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a service description format extension applied to an <see cref="T:System.Web.Services.Description.OperationBinding" /> when an XML Web service supports the SOAP protocol version 1.2. This class cannot be inherited.</para
-      >
+        >Represents a service description format extension applied to an <see cref="T:System.Web.Services.Description.OperationBinding" /> when an XML Web service supports the SOAP protocol version 1.2. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Soap12OperationBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Soap12OperationBinding" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>

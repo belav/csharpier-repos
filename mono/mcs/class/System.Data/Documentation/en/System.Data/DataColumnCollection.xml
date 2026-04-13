@@ -29,17 +29,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Data.DataColumnCollection" /> defines the schema of a <see cref="T:System.Data.DataTable" />, and determines what kind of data each <see cref="T:System.Data.DataColumn" /> can contain. You can access the <see cref="T:System.Data.DataColumnCollection" /> through the <see cref="P:System.Data.DataTable.Columns" /> property of the <see cref="T:System.Data.DataTable" /> object.</para
-      >
+        >The <see cref="T:System.Data.DataColumnCollection" /> defines the schema of a <see cref="T:System.Data.DataTable" />, and determines what kind of data each <see cref="T:System.Data.DataColumn" /> can contain. You can access the <see cref="T:System.Data.DataColumnCollection" /> through the <see cref="P:System.Data.DataTable.Columns" /> property of the <see cref="T:System.Data.DataTable" /> object.</para>
       <para
-        >The <see cref="T:System.Data.DataColumnCollection" /> uses the <see cref="M:System.Data.DataColumnCollection.Add(System.Data.DataColumn)" /> and <see cref="M:System.Data.DataColumnCollection.Remove(System.Data.DataColumn)" /> methods to insert and delete <see cref="T:System.Data.DataColumn" /> objects. Use the <see cref="P:System.Data.InternalDataCollectionBase.Count" /> property to determine how many <see cref="T:System.Data.DataColumn" /> objects are in the collection. Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to verify whether a specified index or column name exists in the collection.</para
-      >
+        >The <see cref="T:System.Data.DataColumnCollection" /> uses the <see cref="M:System.Data.DataColumnCollection.Add(System.Data.DataColumn)" /> and <see cref="M:System.Data.DataColumnCollection.Remove(System.Data.DataColumn)" /> methods to insert and delete <see cref="T:System.Data.DataColumn" /> objects. Use the <see cref="P:System.Data.InternalDataCollectionBase.Count" /> property to determine how many <see cref="T:System.Data.DataColumn" /> objects are in the collection. Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to verify whether a specified index or column name exists in the collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Data.DataColumn" /> objects for a <see cref="T:System.Data.DataTable" />.</para
-      >
+        >Represents a collection of <see cref="T:System.Data.DataColumn" /> objects for a <see cref="T:System.Data.DataTable" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -55,14 +52,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A default name ("Column1", "Column2", and so on) is given to the column.</para>
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object to the <see cref="T:System.Data.DataColumnCollection" />.</para
-          >
+            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object to the <see cref="T:System.Data.DataColumnCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -87,22 +82,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and adds the specified <see cref="T:System.Data.DataColumn" /> object to the <see cref="T:System.Data.DataColumnCollection" />.</para
-          >
+            >Creates and adds the specified <see cref="T:System.Data.DataColumn" /> object to the <see cref="T:System.Data.DataColumnCollection" />.</para>
         </summary>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataColumn" /> to add. </param
-        >
+          />The <see cref="T:System.Data.DataColumn" /> to add. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -125,21 +117,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see cref="P:System.Data.DataColumn.DataType" /> for the new column is string.</para
-          >
+            >By default, the <see cref="P:System.Data.DataColumn.DataType" /> for the new column is string.</para>
           <para>If null or an empty string ("") is passed in for the name, a default name ("Column1", "Column2", and so on) is given to the column.</para>
           <para
-            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a column with the proposed name already exists in the collection.</para
-          >
+            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a column with the proposed name already exists in the collection.</para>
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object that has the specified name to the <see cref="T:System.Data.DataColumnCollection" />.</para
-          >
+            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object that has the specified name to the <see cref="T:System.Data.DataColumnCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -150,8 +138,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column. </param
-        >
+          />The name of the column. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -176,17 +163,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If null or an empty string ("") is passed in for the name, a default name ("Column1", "Column2", and so on) is given to the column.</para>
           <para
-            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a column with the proposed name already exists in the collection.</para
-          >
+            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a column with the proposed name already exists in the collection.</para>
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object that has the specified name and type to the <see cref="T:System.Data.DataColumnCollection" />.</para
-          >
+            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object that has the specified name and type to the <see cref="T:System.Data.DataColumnCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,15 +181,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.ColumnName" /> to use when you create the column. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.ColumnName" /> to use when you create the column. </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -231,17 +213,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If null or an empty string ("") is passed in for the name, a default name ("Column1", "Column2", and so on) is given to the column.</para>
           <para
-            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a column with the proposed name already exists in the collection.</para
-          >
+            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a column with the proposed name already exists in the collection.</para>
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object that has the specified name, type, and expression to the <see cref="T:System.Data.DataColumnCollection" />.</para
-          >
+            >Creates and adds a <see cref="T:System.Data.DataColumn" /> object that has the specified name, type, and expression to the <see cref="T:System.Data.DataColumnCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -252,22 +231,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to use when you create the column. </param
-        >
+          />The name to use when you create the column. </param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.DataType" /> of the new column. </param>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to assign to the <see cref="P:System.Data.DataColumn.Expression" /> property. </param
-        >
+          />The expression to assign to the <see cref="P:System.Data.DataColumn.Expression" /> property. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -291,16 +267,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see cref="T:System.Data.DataColumn" /> array to the end of the collection.</para
-          >
+            >Copies the elements of the specified <see cref="T:System.Data.DataColumn" /> array to the end of the collection.</para>
         </summary>
         <param name="columns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.Data.DataColumn" /> objects to add to the collection. </param
-        >
+          />The array of <see cref="T:System.Data.DataColumn" /> objects to add to the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -323,11 +297,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" /> method performs several checks before returning a true or false result. This includes the following: whether the column exists, belongs to the table, or is involved in a constraint or relation.</para
-          >
+            >The <see cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" /> method performs several checks before returning a true or false result. This includes the following: whether the column exists, belongs to the table, or is involved in a constraint or relation.</para>
           <para
-            >Use the <see cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" /> method before you try to remove any column from a collection. You can also use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a particular column exists before you try to remove it.</para
-          >
+            >Use the <see cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" /> method before you try to remove any column from a collection. You can also use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to determine whether a particular column exists before you try to remove it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -356,8 +328,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.DataColumn" /> in the collection.</param
-        >
+          />A <see cref="T:System.Data.DataColumn" /> in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -375,8 +346,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -402,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> and <see cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" /> methods to determine whether a column exists and can be removed.</para
-          >
+            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> and <see cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" /> methods to determine whether a column exists and can be removed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -428,8 +397,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to confirm the existence of a column before you perform additional operations on the column. The method returns false when two or more columns have the same name but different namespaces. The call does not succeed if there is any ambiguity when matching a column name to exactly one column.</para
-          >
+            >Use the <see cref="M:System.Data.DataColumnCollection.Contains(System.String)" /> method to confirm the existence of a column before you perform additional operations on the column. The method returns false when two or more columns have the same name but different namespaces. The call does not succeed if there is any ambiguity when matching a column name to exactly one column.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -444,8 +412,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.DataColumn.ColumnName" /> of the column to look for. </param
-        >
+          />The <see cref="P:System.Data.DataColumn.ColumnName" /> of the column to look for. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -479,15 +446,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Data.DataColumn" /> objects to copy the collection into. </param
-        >
+          />An array of <see cref="T:System.Data.DataColumn" /> objects to copy the collection into. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index to start from.</param
-        >
+          />The index to start from.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -503,8 +468,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Data.DataColumnCollection.IndexOf(System.Data.DataColumn)" /> method is not case-sensitive.</para
-          >
+            >The <see cref="M:System.Data.DataColumnCollection.IndexOf(System.Data.DataColumn)" /> method is not case-sensitive.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -513,16 +477,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the column specified by <paramref name="column" /> if it is found; otherwise, -1.</para
-          >
+            >The index of the column specified by <paramref name="column" /> if it is found; otherwise, -1.</para>
         </returns>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column to return. </param
-        >
+          />The name of the column to return. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -553,8 +515,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column to find. </param
-        >
+          />The name of the column to find. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -646,16 +607,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="System.Data.DataColumnCollection.CollectionChanged" /> event.</para
-          >
+            >Raises the <see cref="System.Data.DataColumnCollection.CollectionChanged" /> event.</para>
         </summary>
         <param name="ccevent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="System.ComponentModel.CollectionChangeEventArgs" /> expression.</param
-        >
+          />A <see cref="System.ComponentModel.CollectionChangeEventArgs" /> expression.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -681,16 +640,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="System.Data.DataColumnCollection.CollectionChanged" /> event.</para
-          >
+            >Raises the <see cref="System.Data.DataColumnCollection.CollectionChanged" /> event.</para>
         </summary>
         <param name="ccevent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="System.ComponentModel.CollectionChangeEventArgs" /> expression.</param
-        >
+          />A <see cref="System.ComponentModel.CollectionChangeEventArgs" /> expression.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -706,22 +663,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Data.DataColumn" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.Data.DataColumn" /> object from the collection.</para>
         </summary>
         <param name="column">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataColumn" /> to remove. </param
-        >
+          />The <see cref="T:System.Data.DataColumn" /> to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -741,22 +695,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Data.DataColumn" /> object that has the specified name from the collection.</para
-          >
+            >Removes the <see cref="T:System.Data.DataColumn" /> object that has the specified name from the collection.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the column to remove. </param
-        >
+          />The name of the column to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -776,8 +727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para
-          >
+            >If the collection is successfully changed by adding or removing columns, the <see cref="E:System.Data.DataColumnCollection.CollectionChanged" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -788,8 +738,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the column to remove. </param
-        >
+          />The index of the column to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

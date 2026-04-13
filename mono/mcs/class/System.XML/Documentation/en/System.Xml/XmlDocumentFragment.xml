@@ -55,22 +55,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see cref="T:System.Xml.XmlDocumentFragment" /> directly; instead, use methods such as <see cref="M:System.Xml.XmlDocument.CreateDocumentFragment" />. </para
-          >
+            >Do not instantiate an <see cref="T:System.Xml.XmlDocumentFragment" /> directly; instead, use methods such as <see cref="M:System.Xml.XmlDocument.CreateDocumentFragment" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlDocumentFragment" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDocumentFragment" /> class.</para>
         </summary>
         <param name="ownerDocument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML document that is the source of the fragment.</param
-        >
+          />The XML document that is the source of the fragment.</param>
       </Docs>
     </Member>
     <Member MemberName="CloneNode">
@@ -98,11 +95,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para
-          >
+            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para>
           <para
-            >The cloned node has no parent (<see cref="P:System.Xml.XmlDocumentFragment.ParentNode" /> returns null).</para
-          >
+            >The cloned node has no parent (<see cref="P:System.Xml.XmlDocumentFragment.ParentNode" /> returns null).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -117,8 +112,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself. </param>
       </Docs>
     </Member>
     <Member MemberName="InnerXml">
@@ -325,16 +319,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -372,8 +364,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
   </Members>

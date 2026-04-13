@@ -5,8 +5,7 @@
     <RootNamespace>Microsoft.EntityFrameworkCore</RootNamespace>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <SkipTests Condition="'$(OS)' != 'Windows_NT' AND '$(Test__SqlServer__DefaultConnection)' == ''"
-      >True</SkipTests
-    >
+      >True</SkipTests>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 

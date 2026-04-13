@@ -21,8 +21,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can use processing instructions in XML to indicate that an XML document can be processed by some processor, such as XSLT. </para>
       <para
-        >Processing instructions are nodes in the XML tree. When a processing instruction is found in the XML being parsed, sqltecxlinq creates an <see cref="T:System.Xml.Linq.XProcessingInstruction" /> node. </para
-      >
+        >Processing instructions are nodes in the XML tree. When a processing instruction is found in the XML being parsed, sqltecxlinq creates an <see cref="T:System.Xml.Linq.XProcessingInstruction" /> node. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,16 +53,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para>
         </summary>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XProcessingInstruction" /> node to copy from.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XProcessingInstruction" /> node to copy from.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -88,23 +85,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XProcessingInstruction" /> class. </para>
         </summary>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> containing the target application for this <see cref="T:System.Xml.Linq.XProcessingInstruction" />.</param
-        >
+          />A <see cref="T:System.String" /> containing the target application for this <see cref="T:System.Xml.Linq.XProcessingInstruction" />.</param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string data for this <see cref="T:System.Xml.Linq.XProcessingInstruction" />.</param
-        >
+          />The string data for this <see cref="T:System.Xml.Linq.XProcessingInstruction" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -150,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para
-          >
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -201,22 +194,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />. </para
-          >
+            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this processing instruction to an <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes this processing instruction to an <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write this processing instruction to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write this processing instruction to.</param>
       </Docs>
     </Member>
   </Members>

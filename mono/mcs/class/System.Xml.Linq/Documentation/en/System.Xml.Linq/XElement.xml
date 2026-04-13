@@ -33,11 +33,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class represents an XML element, the fundamental XML construct.</para>
       <para
-        >An element has an <see cref="T:System.Xml.Linq.XName" />, optionally one or more attributes, and can optionally contain content (for more information, see <see cref="M:System.Xml.Linq.XContainer.Nodes" />).</para
-      >
+        >An element has an <see cref="T:System.Xml.Linq.XName" />, optionally one or more attributes, and can optionally contain content (for more information, see <see cref="M:System.Xml.Linq.XContainer.Nodes" />).</para>
       <para
-        >An <see cref="T:System.Xml.Linq.XElement" /> can contain the following types of content: </para
-      >
+        >An <see cref="T:System.Xml.Linq.XElement" /> can contain the following types of content: </para>
       <list type="bullet">
         <item>
           <para>
@@ -63,18 +61,14 @@
       <para
         >For details about the valid content of an <see cref="T:System.Xml.Linq.XElement" />, see <format type="text/html">
           <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-            >Valid Content of XElement and XDocument Objects</a
-          >
-        </format>.</para
-      >
+            >Valid Content of XElement and XDocument Objects</a>
+        </format>.</para>
       <para>
-        <see cref="T:System.Xml.Linq.XElement" /> derives from <see cref="T:System.Xml.Linq.XContainer" />, which derives from <see cref="T:System.Xml.Linq.XNode" />.</para
-      >
+        <see cref="T:System.Xml.Linq.XElement" /> derives from <see cref="T:System.Xml.Linq.XContainer" />, which derives from <see cref="T:System.Xml.Linq.XNode" />.</para>
       <para
         >Some <see cref="T:System.Xml.Linq.XElement" /> methods can be used from XAML. For more information, see <format type="text/html">
           <a href="0455f47c-4a68-4f2e-a3f8-dd1d85b99012">LINQ to XML Dynamic Properties</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,16 +97,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class from another <see cref="T:System.Xml.Linq.XElement" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class from another <see cref="T:System.Xml.Linq.XElement" /> object.</para>
         </summary>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XElement" /> object to copy from.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XElement" /> object to copy from.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -135,22 +127,19 @@
           <para
             >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />. When creating an element in a namespace, typical use is to use the addition operator overload with an <see cref="T:System.Xml.Linq.XNamespace" /> and a string to create an <see cref="T:System.Xml.Linq.XName" />. For more information, see <format type="text/html">
               <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name. </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the element.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the element.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -173,22 +162,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor iterates through the contents of the specified <see cref="T:System.Xml.Linq.XStreamingElement" />, and creates an element with its contents.</para
-          >
+            >This constructor iterates through the contents of the specified <see cref="T:System.Xml.Linq.XStreamingElement" />, and creates an element with its contents.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class from an <see cref="T:System.Xml.Linq.XStreamingElement" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class from an <see cref="T:System.Xml.Linq.XStreamingElement" /> object.</para>
         </summary>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XStreamingElement" /> that contains unevaluated queries that will be iterated for the contents of this <see cref="T:System.Xml.Linq.XElement" />.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XStreamingElement" /> that contains unevaluated queries that will be iterated for the contents of this <see cref="T:System.Xml.Linq.XElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -213,41 +199,34 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an element with the specified content and attributes.</para>
           <para
-            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />.</para
-          >
+            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />.</para>
           <para
             >When creating an element in a namespace, typical use is to use the addition operator overload with an <see cref="T:System.Xml.Linq.XNamespace" /> and a string to create an <see cref="T:System.Xml.Linq.XName" />. For more information, see <format type="text/html">
               <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
             >For details about the valid content that can be passed to this constructor, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-                >Valid Content of XElement and XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Valid Content of XElement and XDocument Objects</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name and content.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name and content.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XName" /> that contains the element name.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XName" /> that contains the element name.</param>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contents of the element.</param
-        >
+          />The contents of the element.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -278,41 +257,34 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor creates an element with the specified content and attributes.</para>
           <para
-            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />.</para
-          >
+            >There is an implicit conversion from string to <see cref="T:System.Xml.Linq.XName" />. Typical use of this constructor is to specify a string as the parameter instead of creating a new <see cref="T:System.Xml.Linq.XName" />.</para>
           <para
             >When creating an element in a namespace, typical use is to use the addition operator overload with an <see cref="T:System.Xml.Linq.XNamespace" /> and a string to create an <see cref="T:System.Xml.Linq.XName" />. For more information, see <format type="text/html">
               <a href="e3003209-3234-45be-a832-47feb7927430">Working With Namespaces</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
             >For details about the valid content that can be passed to this constructor, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-                >Valid Content of XElement and XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Valid Content of XElement and XDocument Objects</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name and content.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XElement" /> class with the specified name and content.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XName" /> that contains the element name.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XName" /> that contains the element name.</param>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The initial content of the element.</param
-        >
+          />The initial content of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="AncestorsAndSelf">
@@ -345,8 +317,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> of elements that contain this element, and the ancestors of this element. </para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> of elements that contain this element, and the ancestors of this element. </para>
         </returns>
       </Docs>
     </Member>
@@ -378,22 +349,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of elements that contain this element, and the ancestors of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para
-          >
+            >Returns a filtered collection of elements that contain this element, and the ancestors of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> that contain this element, and the ancestors of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> that contain this element, and the ancestors of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XName" /> to match.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XName" /> to match.</param>
       </Docs>
     </Member>
     <Member MemberName="Attribute">
@@ -419,29 +387,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some axis methods return collections of elements or attributes. This method returns only a single attribute. Sometimes this is referred to as a <newTerm>singleton</newTerm> (in contrast to a <newTerm>collection</newTerm>).</para
-          >
+            >Some axis methods return collections of elements or attributes. This method returns only a single attribute. Sometimes this is referred to as a <newTerm>singleton</newTerm> (in contrast to a <newTerm>collection</newTerm>).</para>
           <para>Visual Basic users can use the integrated attribute axis to retrieve the value of an attribute with a specified name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.Xml.Linq.XAttribute" /> of this <see cref="T:System.Xml.Linq.XElement" /> that has the specified <see cref="T:System.Xml.Linq.XName" />.</para
-          >
+            >Returns the <see cref="T:System.Xml.Linq.XAttribute" /> of this <see cref="T:System.Xml.Linq.XElement" /> that has the specified <see cref="T:System.Xml.Linq.XName" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XAttribute" /> that has the specified <see cref="T:System.Xml.Linq.XName" />; null if there is no attribute with the specified name.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XAttribute" /> that has the specified <see cref="T:System.Xml.Linq.XName" />; null if there is no attribute with the specified name.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XName" /> of the <see cref="T:System.Xml.Linq.XAttribute" /> to get.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XName" /> of the <see cref="T:System.Xml.Linq.XAttribute" /> to get.</param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -474,8 +438,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XAttribute" /> of attributes of this element.</para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XAttribute" /> of attributes of this element.</para>
         </returns>
       </Docs>
     </Member>
@@ -507,22 +470,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of attributes of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para
-          >
+            >Returns a filtered collection of attributes of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XAttribute" /> that contains the attributes of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XAttribute" /> that contains the attributes of this element. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XName" /> to match.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XName" /> to match.</param>
       </Docs>
     </Member>
     <Member MemberName="DescendantNodesAndSelf">
@@ -554,8 +514,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XNode" /> that contain this element, and all descendant nodes of this element, in document order.</para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XNode" /> that contain this element, and all descendant nodes of this element, in document order.</para>
         </returns>
       </Docs>
     </Member>
@@ -588,8 +547,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> of elements that contain this element, and all descendant elements of this element, in document order.</para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> of elements that contain this element, and all descendant elements of this element, in document order.</para>
         </returns>
       </Docs>
     </Member>
@@ -620,22 +578,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of elements that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para
-          >
+            >Returns a filtered collection of elements that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para
-          >
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of <see cref="T:System.Xml.Linq.XElement" /> that contain this element, and all descendant elements of this element, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" /> are included in the collection.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Linq.XName" /> to match.</param
-        >
+          />The <see cref="T:System.Xml.Linq.XName" /> to match.</param>
       </Docs>
     </Member>
     <Member MemberName="EmptySequence">
@@ -659,8 +614,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is typically used by class implementers when writing a method that returns a collection of elements. If the method must return no elements, it can use this property to get an empty collection of <see cref="T:System.Xml.Linq.XElement" /> objects.</para
-          >
+            >This property is typically used by class implementers when writing a method that returns a collection of elements. If the method must return no elements, it can use this property to get an empty collection of <see cref="T:System.Xml.Linq.XElement" /> objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -717,25 +671,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Namespace declarations may be persisted as attributes in the XML tree. These special attributes declare namespaces, including default namespaces. This method finds the namespace declaration that declares the default namespace, if there is one, and returns the <see cref="T:System.Xml.Linq.XNamespace" /> for the default namespace.</para
-          >
+            >Namespace declarations may be persisted as attributes in the XML tree. These special attributes declare namespaces, including default namespaces. This method finds the namespace declaration that declares the default namespace, if there is one, and returns the <see cref="T:System.Xml.Linq.XNamespace" /> for the default namespace.</para>
           <para
-            >If there is no attribute that declares the default namespace, then this method returns <see cref="P:System.Xml.Linq.XNamespace.None" />.</para
-          >
+            >If there is no attribute that declares the default namespace, then this method returns <see cref="P:System.Xml.Linq.XNamespace.None" />.</para>
           <para>When creating XML trees using C#, even if an XML tree would be serialized with a default namespace, if the namespace is not persisted in the XML tree as an attribute, this method will not report the namespace as the default namespace.</para>
           <para>When creating XML trees using Visual Basic and XML literals, if you create the XML in a default namespace using the Imports statement, then a namespace attribute will be created in the tree by the Visual Basic compiler, and this method will report that namespace.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default <see cref="T:System.Xml.Linq.XNamespace" /> of this <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >Gets the default <see cref="T:System.Xml.Linq.XNamespace" /> of this <see cref="T:System.Xml.Linq.XElement" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XNamespace" /> that contains the default namespace of this <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XNamespace" /> that contains the default namespace of this <see cref="T:System.Xml.Linq.XElement" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -766,22 +716,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the namespace associated with a particular prefix for this <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >Gets the namespace associated with a particular prefix for this <see cref="T:System.Xml.Linq.XElement" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XNamespace" /> for the namespace associated with the prefix for this <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XNamespace" /> for the namespace associated with the prefix for this <see cref="T:System.Xml.Linq.XElement" />.</para>
         </returns>
         <param name="prefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the namespace prefix to look up.</param
-        >
+          />A string that contains the namespace prefix to look up.</param>
       </Docs>
     </Member>
     <Member MemberName="GetPrefixOfNamespace">
@@ -812,8 +759,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the prefix associated with a namespace for this <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >Gets the prefix associated with a namespace for this <see cref="T:System.Xml.Linq.XElement" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -824,8 +770,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XNamespace" /> to look up.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XNamespace" /> to look up.</param>
       </Docs>
     </Member>
     <Member MemberName="HasAttributes">
@@ -939,46 +884,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to control load options, use the <see cref="Overload:System.Xml.Linq.XElement.Load" /> overload that takes <see cref="T:System.Xml.Linq.LoadOptions" /> as a parameter.</para
-          >
+            >If you want to control load options, use the <see cref="Overload:System.Xml.Linq.XElement.Load" /> overload that takes <see cref="T:System.Xml.Linq.LoadOptions" /> as a parameter.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document. </para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document. </para>
           <para
-            >If you have to modify <see cref="T:System.Xml.XmlReaderSettings" />, following these steps:</para
-          >
+            >If you have to modify <see cref="T:System.Xml.XmlReaderSettings" />, following these steps:</para>
           <list type="ordered">
             <item>
               <para
-                >Create an <see cref="T:System.Xml.XmlReader" /> by calling one of the <see cref="Overload:System.Xml.XmlReader.Create" /> overloads that take <see cref="T:System.Xml.XmlReaderSettings" /> as a parameter.</para
-              >
+                >Create an <see cref="T:System.Xml.XmlReader" /> by calling one of the <see cref="Overload:System.Xml.XmlReader.Create" /> overloads that take <see cref="T:System.Xml.XmlReaderSettings" /> as a parameter.</para>
             </item>
             <item>
               <para
-                >Pass the <see cref="T:System.Xml.XmlReader" /> to one of the <see cref="T:System.Xml.Linq.XElement" />'s <see cref="Overload:System.Xml.Linq.XElement.Load" /> overloads that takes <see cref="T:System.Xml.XmlReader" /> as a parameter.</para
-              >
+                >Pass the <see cref="T:System.Xml.XmlReader" /> to one of the <see cref="T:System.Xml.Linq.XElement" />'s <see cref="Overload:System.Xml.Linq.XElement.Load" /> overloads that takes <see cref="T:System.Xml.XmlReader" /> as a parameter.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Xml.Linq.XElement" /> instance by using the specified stream.</para
-          >
+            >Creates a new <see cref="T:System.Xml.Linq.XElement" /> instance by using the specified stream.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> object used to read the data that is contained in the stream.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> object used to read the data that is contained in the stream.</para>
         </returns>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that contains the XML data.</param
-        >
+          />The stream that contains the XML data.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1005,28 +942,24 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method reads the raw XML into the XML tree. It discards all insignificant white space in the file.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from a <see cref="T:System.IO.TextReader" />. </para
-          >
+            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from a <see cref="T:System.IO.TextReader" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.IO.TextReader" />.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.IO.TextReader" />.</para>
         </returns>
         <param name="textReader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextReader" /> that will be read for the <see cref="T:System.Xml.Linq.XElement" /> content.</param
-        >
+          />A <see cref="T:System.IO.TextReader" /> that will be read for the <see cref="T:System.Xml.Linq.XElement" /> content.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1053,8 +986,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method reads the raw XML into the XML tree. It discards all insignificant white space in the file.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1063,16 +995,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the contents of the specified file.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the contents of the specified file.</para>
         </returns>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI string referencing the file to load into a new <see cref="T:System.Xml.Linq.XElement" />.</param
-        >
+          />A URI string referencing the file to load into a new <see cref="T:System.Xml.Linq.XElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1098,31 +1028,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By creating an <see cref="T:System.Xml.XmlNodeReader" /> from a DOM document, and then using the <see cref="T:System.Xml.XmlNodeReader" /> to create an <see cref="T:System.Xml.Linq.XElement" />, this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para
-          >
+            >By creating an <see cref="T:System.Xml.XmlNodeReader" /> from a DOM document, and then using the <see cref="T:System.Xml.XmlNodeReader" /> to create an <see cref="T:System.Xml.Linq.XElement" />, this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from an <see cref="T:System.Xml.XmlReader" />. </para
-          >
+            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from an <see cref="T:System.Xml.XmlReader" />. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.Xml.XmlReader" />.</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlReader" /> that will be read for the content of the <see cref="T:System.Xml.Linq.XElement" />.</param
-        >
+          />A <see cref="T:System.Xml.XmlReader" /> that will be read for the content of the <see cref="T:System.Xml.Linq.XElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1149,50 +1074,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document. </para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document. </para>
           <para
-            >If you have to modify <see cref="T:System.Xml.XmlReaderSettings" />, following these steps:</para
-          >
+            >If you have to modify <see cref="T:System.Xml.XmlReaderSettings" />, following these steps:</para>
           <list type="ordered">
             <item>
               <para
-                >Create an <see cref="T:System.Xml.XmlReader" /> by calling one of the <see cref="Overload:System.Xml.XmlReader.Create" /> overloads that take <see cref="T:System.Xml.XmlReaderSettings" /> as a parameter.</para
-              >
+                >Create an <see cref="T:System.Xml.XmlReader" /> by calling one of the <see cref="Overload:System.Xml.XmlReader.Create" /> overloads that take <see cref="T:System.Xml.XmlReaderSettings" /> as a parameter.</para>
             </item>
             <item>
               <para
-                >Pass the <see cref="T:System.Xml.XmlReader" /> to one of the <see cref="T:System.Xml.Linq.XElement" />'s <see cref="Overload:System.Xml.Linq.XElement.Load" /> overloads that takes <see cref="T:System.Xml.XmlReader" /> as a parameter.</para
-              >
+                >Pass the <see cref="T:System.Xml.XmlReader" /> to one of the <see cref="T:System.Xml.Linq.XElement" />'s <see cref="Overload:System.Xml.Linq.XElement.Load" /> overloads that takes <see cref="T:System.Xml.XmlReader" /> as a parameter.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Xml.Linq.XElement" /> instance by using the specified stream, optionally preserving white space, setting the base URI, and retaining line information.</para
-          >
+            >Creates a new <see cref="T:System.Xml.Linq.XElement" /> instance by using the specified stream, optionally preserving white space, setting the base URI, and retaining line information.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> object used to read the data that the stream contains.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> object used to read the data that the stream contains.</para>
         </returns>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream containing the XML data.</param
-        >
+          />The stream containing the XML data.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.LoadOptions" /> object that specifies whether to load base URI and line information.</param
-        >
+          />A <see cref="T:System.Xml.Linq.LoadOptions" /> object that specifies whether to load base URI and line information.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1219,65 +1136,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para
-          >
+            >If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para>
           <para
-            >If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para
-          >
+            >If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para>
           <para
-            >If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para
-          >
+            >If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
           <para
-            >Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para
-          >
+            >Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
           <para
-            >Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> will have no effect when loading from a <see cref="T:System.IO.TextReader" />.</para
-          >
+            >Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> will have no effect when loading from a <see cref="T:System.IO.TextReader" />.</para>
           <para
-            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para
-          >
+            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para>
           <para>The line information is accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the line information may become meaningless.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from a <see cref="T:System.IO.TextReader" />, optionally preserving white space and retaining line information. </para
-          >
+            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from a <see cref="T:System.IO.TextReader" />, optionally preserving white space and retaining line information. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.IO.TextReader" />.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.IO.TextReader" />.</para>
         </returns>
         <param name="textReader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextReader" /> that will be read for the <see cref="T:System.Xml.Linq.XElement" /> content.</param
-        >
+          />A <see cref="T:System.IO.TextReader" /> that will be read for the <see cref="T:System.Xml.Linq.XElement" /> content.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param
-        >
+          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1304,62 +1207,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para
-          >
+            >If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para>
           <para
-            >If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para
-          >
+            >If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para>
           <para
-            >If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para
-          >
+            >If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
           <para
-            >Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para
-          >
+            >Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
           <para
-            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> and the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flags.</para
-          >
+            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> and the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flags.</para>
           <para>The base URI and the line information are accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the base URI and line information may become meaningless.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from a file, optionally preserving white space, setting the base URI, and retaining line information.</para
-          >
+            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from a file, optionally preserving white space, setting the base URI, and retaining line information.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the contents of the specified file.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the contents of the specified file.</para>
         </returns>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI string referencing the file to load into an <see cref="T:System.Xml.Linq.XElement" />.</param
-        >
+          />A URI string referencing the file to load into an <see cref="T:System.Xml.Linq.XElement" />.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param
-        >
+          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -1386,54 +1276,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By creating an <see cref="T:System.Xml.XmlNodeReader" /> from a DOM document, and then using the <see cref="T:System.Xml.XmlNodeReader" /> to create an <see cref="T:System.Xml.Linq.XElement" />, this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para
-          >
+            >By creating an <see cref="T:System.Xml.XmlNodeReader" /> from a DOM document, and then using the <see cref="T:System.Xml.XmlNodeReader" /> to create an <see cref="T:System.Xml.Linq.XElement" />, this method can be used to create a copy of a DOM document in a LINQ to XML tree.</para>
           <para
-            >Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para
-          >
+            >Use <see cref="Overload:System.Xml.Linq.XElement.Parse" /> to create an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
           <para
-            >Setting <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> is not valid when loading from a <see cref="T:System.Xml.XmlReader" />. The <see cref="T:System.Xml.XmlReader" /> will be configured to either read whitespace or not. The LINQ to XML tree will be populated with the whitespace nodes that the reader surfaces. This will be the behavior regardless of whether <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> is set or not.</para
-          >
+            >Setting <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> is not valid when loading from a <see cref="T:System.Xml.XmlReader" />. The <see cref="T:System.Xml.XmlReader" /> will be configured to either read whitespace or not. The LINQ to XML tree will be populated with the whitespace nodes that the reader surfaces. This will be the behavior regardless of whether <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> is set or not.</para>
           <para
-            >The <see cref="T:System.Xml.XmlReader" /> may have a valid base URI or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />, the base URI will be set in the XML tree from the base URI that is reported by the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >The <see cref="T:System.Xml.XmlReader" /> may have a valid base URI or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />, the base URI will be set in the XML tree from the base URI that is reported by the <see cref="T:System.Xml.XmlReader" />.</para>
           <para
-            >The <see cref="T:System.Xml.XmlReader" /> may have a valid line information or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />, the line information will be set in the XML tree from the line information that is reported by the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >The <see cref="T:System.Xml.XmlReader" /> may have a valid line information or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />, the line information will be set in the XML tree from the line information that is reported by the <see cref="T:System.Xml.XmlReader" />.</para>
           <para
-            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para
-          >
+            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para>
           <para>The line information is accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the line information may become meaningless.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from an <see cref="T:System.Xml.XmlReader" />, optionally preserving white space, setting the base URI, and retaining line information.</para
-          >
+            >Loads an <see cref="T:System.Xml.Linq.XElement" /> from an <see cref="T:System.Xml.XmlReader" />, optionally preserving white space, setting the base URI, and retaining line information.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> that contains the XML that was read from the specified <see cref="T:System.Xml.XmlReader" />.</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlReader" /> that will be read for the content of the <see cref="T:System.Xml.Linq.XElement" />.</param
-        >
+          />A <see cref="T:System.Xml.XmlReader" /> that will be read for the content of the <see cref="T:System.Xml.Linq.XElement" />.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param
-        >
+          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -1454,8 +1333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1484,8 +1362,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para
-          >
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" /> contain a <see cref="P:System.Xml.Linq.XObject.NodeType" /> property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />. Your code can then test for the node type of each node in the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2293,37 +2170,30 @@
           <para
             >This method does not preserve white space. If you want to preserve white space in the XML tree, use the overload of the <see cref="Overload:System.Xml.Linq.XElement.Parse" /> method that takes <see cref="T:System.Xml.Linq.LoadOptions" /> as a parameter. For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Load an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para
-          >
+            >Load an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> populated from the string that contains XML.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> populated from the string that contains XML.</para>
         </returns>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that contains XML.</param
-        >
+          />A <see cref="T:System.String" /> that contains XML.</param>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -2350,65 +2220,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para
-          >
+            >If the source XML is indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to read all white space in the source XML. Nodes of type <see cref="T:System.Xml.Linq.XText" /> are created for both significant and insignificant white space.</para>
           <para
-            >If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para
-          >
+            >If the source XML is indented, not setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> causes the reader to ignore all of the insignificant white space in the source XML. The XML tree is created without any text nodes for insignificant white space.</para>
           <para
-            >If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para
-          >
+            >If the source XML is not indented, setting the <see cref="F:System.Xml.Linq.LoadOptions.PreserveWhitespace" /> flag in <paramref name="options" /> has no effect. Significant white space is still preserved, and there are no spans of insignificant white space that could cause the creation of more white space text nodes.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
           <para
-            >Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> will have no effect when parsing from a <see cref="T:System.String" />.</para
-          >
+            >Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" /> will have no effect when parsing from a <see cref="T:System.String" />.</para>
           <para
-            >The <see cref="T:System.Xml.XmlReader" /> may have a valid line information or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />, the line information will be set in the XML tree from the line information that is reported by the <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >The <see cref="T:System.Xml.XmlReader" /> may have a valid line information or not. If you set <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />, the line information will be set in the XML tree from the line information that is reported by the <see cref="T:System.Xml.XmlReader" />.</para>
           <para
-            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para
-          >
+            >There is a performance penalty if you set the <see cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" /> flag.</para>
           <para>The line information is accurate immediately after loading the XML document. If you modify the XML tree after loading the document, the line information may become meaningless.</para>
           <para
-            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para
-          >
+            >LINQ to XML's loading functionality is built upon <see cref="T:System.Xml.XmlReader" />. Therefore, you might catch any exceptions that are thrown by the <see cref="Overload:System.Xml.XmlReader.Create" /> overload methods and the <see cref="T:System.Xml.XmlReader" /> methods that read and parse the document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Load an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML, optionally preserving white space and retaining line information.</para
-          >
+            >Load an <see cref="T:System.Xml.Linq.XElement" /> from a string that contains XML, optionally preserving white space and retaining line information.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Linq.XElement" /> populated from the string that contains XML.</para
-          >
+            >An <see cref="T:System.Xml.Linq.XElement" /> populated from the string that contains XML.</para>
         </returns>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that contains XML.</param
-        >
+          />A <see cref="T:System.String" /> that contains XML.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param
-        >
+          />A <see cref="T:System.Xml.Linq.LoadOptions" /> that specifies white space behavior, and whether to load base URI and line information.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAll">
@@ -2429,14 +2285,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes nodes and attributes from this <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >Removes nodes and attributes from this <see cref="T:System.Xml.Linq.XElement" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -2458,8 +2312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2487,19 +2340,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method first removes existing content and attributes. It then adds the specified <paramref name="content" />.</para
-          >
+            >This method first removes existing content and attributes. It then adds the specified <paramref name="content" />.</para>
           <para>This method uses snapshot semantics—that is, it creates a separate copy of the new content before replacing the contents of the current element with the new content. This means that you can query the contents of the current element and use the results of the query as the specified new content.</para>
           <para
             >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-                >Valid Content of XElement and XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Valid Content of XElement and XDocument Objects</a>
+            </format>.</para>
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2510,8 +2359,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content that will replace the child nodes and attributes of this element.</param
-        >
+          />The content that will replace the child nodes and attributes of this element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReplaceAll">
@@ -2540,19 +2388,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method first removes existing content and attributes. It then adds the specified <paramref name="content" />.</para
-          >
+            >This method first removes existing content and attributes. It then adds the specified <paramref name="content" />.</para>
           <para>This method uses snapshot semantics—that is, it creates a separate copy of the new content before replacing the contents of the current element with the new content. This means that you can query the contents of the current element and use the results of the query as the specified new content.</para>
           <para
             >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-                >Valid Content of XElement and XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Valid Content of XElement and XDocument Objects</a>
+            </format>.</para>
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2563,8 +2407,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A parameter list of content objects.</param
-        >
+          />A parameter list of content objects.</param>
       </Docs>
     </Member>
     <Member MemberName="ReplaceAttributes">
@@ -2587,18 +2430,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method first removes existing attributes. It then adds the specified <paramref name="content" />.</para
-          >
+            >This method first removes existing attributes. It then adds the specified <paramref name="content" />.</para>
           <para
             >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-                >Valid Content of XElement and XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Valid Content of XElement and XDocument Objects</a>
+            </format>.</para>
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2609,8 +2448,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content that will replace the attributes of this element.</param
-        >
+          />The content that will replace the attributes of this element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReplaceAttributes">
@@ -2639,18 +2477,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method first removes existing attributes. It then adds the specified <paramref name="content" />.</para
-          >
+            >This method first removes existing attributes. It then adds the specified <paramref name="content" />.</para>
           <para
             >For details about the valid content that can be passed to this function, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
-                >Valid Content of XElement and XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Valid Content of XElement and XDocument Objects</a>
+            </format>.</para>
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2661,8 +2495,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A parameter list of content objects.</param
-        >
+          />A parameter list of content objects.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2686,25 +2519,21 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The serialized XML will be indented. All insignificant white space will be removed, and additional white space will be added so that the XML will be properly indented. The behavior of this method is that insignificant white space will not be preserved.</para>
           <para
-            >If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that takes <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. Use the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
-          >
+            >If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that takes <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. Use the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para>
           <para
-            >Use the <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" /> option if you want to remove duplicate namespace declarations.</para
-          >
+            >Use the <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" /> option if you want to remove duplicate namespace declarations.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs this <see cref="T:System.Xml.Linq.XElement" /> to the specified <see cref="T:System.IO.Stream" />.</para
-          >
+            >Outputs this <see cref="T:System.Xml.Linq.XElement" /> to the specified <see cref="T:System.IO.Stream" />.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to output this <see cref="T:System.Xml.Linq.XElement" /> to.</param
-        >
+          />The stream to output this <see cref="T:System.Xml.Linq.XElement" /> to.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2730,14 +2559,11 @@
           <para
             >If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that allows you to specify <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2748,8 +2574,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextWriter" /> that the <see cref="T:System.Xml.Linq.XElement" /> will be written to.</param
-        >
+          />A <see cref="T:System.IO.TextWriter" /> that the <see cref="T:System.Xml.Linq.XElement" /> will be written to.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2775,14 +2600,11 @@
           <para
             >If you want to control white space, use the overload of <see cref="Overload:System.Xml.Linq.XElement.Save" /> that allows you to specify <see cref="T:System.Xml.Linq.SaveOptions" /> as a parameter. For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2793,8 +2615,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that contains the name of the file.</param
-        >
+          />A <see cref="T:System.String" /> that contains the name of the file.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2824,8 +2645,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlWriter" /> that the <see cref="T:System.Xml.Linq.XElement" /> will be written to.</param
-        >
+          />A <see cref="T:System.Xml.XmlWriter" /> that the <see cref="T:System.Xml.Linq.XElement" /> will be written to.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2852,35 +2672,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default the <paramref name="options" /> are set to <see cref="F:System.Xml.Linq.SaveOptions.None" />. This option will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. </para
-          >
+            >By default the <paramref name="options" /> are set to <see cref="F:System.Xml.Linq.SaveOptions.None" />. This option will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. </para>
           <para
-            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
-          >
+            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para>
           <para
-            >Use <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" /> option if you want to remove duplicate namespace declarations.</para
-          >
+            >Use <see cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" /> option if you want to remove duplicate namespace declarations.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs this <see cref="T:System.Xml.Linq.XElement" /> to the specified <see cref="T:System.IO.Stream" />, optionally specifying formatting behavior.</para
-          >
+            >Outputs this <see cref="T:System.Xml.Linq.XElement" /> to the specified <see cref="T:System.IO.Stream" />, optionally specifying formatting behavior.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to output this <see cref="T:System.Xml.Linq.XElement" /> to.</param
-        >
+          />The stream to output this <see cref="T:System.Xml.Linq.XElement" /> to.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.SaveOptions" /> object that specifies formatting behavior.</param
-        >
+          />A <see cref="T:System.Xml.Linq.SaveOptions" /> object that specifies formatting behavior.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2907,43 +2721,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white space exactly as represented in the XML tree.</para
-          >
+            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white space exactly as represented in the XML tree.</para>
           <para
-            >If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" /> methods that do not take <paramref name="options" /> as a parameter.</para
-          >
+            >If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" /> methods that do not take <paramref name="options" /> as a parameter.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serialize this element to a <see cref="T:System.IO.TextWriter" />, optionally disabling formatting.</para
-          >
+            >Serialize this element to a <see cref="T:System.IO.TextWriter" />, optionally disabling formatting.</para>
         </summary>
         <param name="textWriter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to output the XML to.</param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to output the XML to.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.SaveOptions" /> that specifies formatting behavior.</param
-        >
+          />A <see cref="T:System.Xml.Linq.SaveOptions" /> that specifies formatting behavior.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -2970,22 +2776,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white space exactly as represented in the XML tree.</para
-          >
+            >If you want to save unindented XML, specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will cause the writer to write all white space exactly as represented in the XML tree.</para>
           <para
-            >If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" /> methods that do not take <paramref name="options" /> as a parameter.</para
-          >
+            >If you want to save indented XML, do not specify the <see cref="F:System.Xml.Linq.SaveOptions.DisableFormatting" /> flag for <paramref name="options" />. This will remove all extraneous insignificant white space, and add appropriate insignificant white space so that the XML is properly indented. This is the default behavior, and the behavior of the overloads of the <see cref="Overload:System.Xml.Linq.XElement.Save" /> methods that do not take <paramref name="options" /> as a parameter.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-                >Preserving White Space while Loading or Parsing XML</a
-              >
+                >Preserving White Space while Loading or Parsing XML</a>
             </format> and <format type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-                >Preserving White Space While Serializing</a
-              >
-            </format>.</para
-          >
+                >Preserving White Space While Serializing</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2996,15 +2797,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that contains the name of the file.</param
-        >
+          />A <see cref="T:System.String" /> that contains the name of the file.</param>
         <param name="options">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Linq.SaveOptions" /> that specifies formatting behavior.</param
-        >
+          />A <see cref="T:System.Xml.Linq.SaveOptions" /> that specifies formatting behavior.</param>
       </Docs>
     </Member>
     <Member MemberName="SetAttributeValue">
@@ -3031,17 +2830,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is designed to make it easy to maintain a list of name/value pairs as a set of attributes. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as an attribute, this method creates an attribute for you. If you call this method passing the name of an existing attribute, this method modifies the value of the attribute to the value that you specify. If you pass null for <paramref name="value" />, this method removes the attribute.</para
-          >
+            >This method is designed to make it easy to maintain a list of name/value pairs as a set of attributes. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as an attribute, this method creates an attribute for you. If you call this method passing the name of an existing attribute, this method modifies the value of the attribute to the value that you specify. If you pass null for <paramref name="value" />, this method removes the attribute.</para>
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
           <para>The value is assigned to the attribute with the specified name. If no attribute with the specified name exists, a new attribute is added. If the value is null, the attribute with the specified name, if any, is deleted.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3052,15 +2848,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the attribute to change.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the attribute to change.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the attribute. The attribute is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XAttribute.Value" /> property of the attribute.</param
-        >
+          />The value to assign to the attribute. The attribute is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XAttribute.Value" /> property of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="SetElementValue">
@@ -3087,18 +2881,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is designed to make it easy to maintain a list of name/value pairs as a set of children elements. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as a child element, this method creates a child element for you. If you call this method passing the name of an existing child element, this method modifies the value of the child element to the value that you specify. If you pass null for <paramref name="value" />, this method removes the child element.</para
-          >
+            >This method is designed to make it easy to maintain a list of name/value pairs as a set of children elements. When maintaining the list, you need to add pairs, modify pairs, or delete pairs. If you call this method passing a name that does not exist as a child element, this method creates a child element for you. If you call this method passing the name of an existing child element, this method modifies the value of the child element to the value that you specify. If you pass null for <paramref name="value" />, this method removes the child element.</para>
           <para>This method will raise events.</para>
           <para>The value is assigned to the first child element with the specified name. If no child element with the specified name exists, a new child element is added. If the value is null, the first child element with the specified name, if any, is deleted.</para>
           <para
-            >This method does not add child nodes or attributes to the specified child element. This method throws an exception if any object that derives from <see cref="T:System.Xml.Linq.XObject" /> is passed as <paramref name="value" />.</para
-          >
+            >This method does not add child nodes or attributes to the specified child element. This method throws an exception if any object that derives from <see cref="T:System.Xml.Linq.XObject" /> is passed as <paramref name="value" />.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="fe9798bf-b5e2-4a3c-a86c-7f8638912691">Maintaining Name/Value Pairs</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3109,15 +2900,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the child element to change.</param
-        >
+          />An <see cref="T:System.Xml.Linq.XName" /> that contains the name of the child element to change.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to the child element. The child element is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XElement.Value" /> property of the child element.</param
-        >
+          />The value to assign to the child element. The child element is removed if the value is null. Otherwise, the value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XElement.Value" /> property of the child element.</param>
       </Docs>
     </Member>
     <Member MemberName="SetValue">
@@ -3140,11 +2929,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
           <para
-            >It is invalid to pass an instance of a class that derives from <see cref="T:System.Xml.Linq.XObject" />, such as <see cref="T:System.Xml.Linq.XElement" />.</para
-          >
+            >It is invalid to pass an instance of a class that derives from <see cref="T:System.Xml.Linq.XObject" />, such as <see cref="T:System.Xml.Linq.XElement" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3155,8 +2942,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign to this element. The value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XElement.Value" /> property.</param
-        >
+          />The value to assign to this element. The value is converted to its string representation and assigned to the <see cref="P:System.Xml.Linq.XElement.Value" /> property.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">
@@ -3180,15 +2966,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is part of implementation of the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.</para
-          >
+            >This method is part of implementation of the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.</para>
           <para
             >This method is used internally for serializing object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format type="text/html">
               <a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5"
-                >Serializing Object Graphs that Contain XElement or XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Serializing Object Graphs that Contain XElement or XDocument Objects</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3197,8 +2980,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</para
-          >
+            >An <see cref="T:System.Xml.Schema.XmlSchema" /> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</para>
         </returns>
       </Docs>
     </Member>
@@ -3225,15 +3007,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is part of implementation of the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.</para
-          >
+            >This method is part of implementation of the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface.</para>
           <para
             >This method is used internally for serializing object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format type="text/html">
               <a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5"
-                >Serializing Object Graphs that Contain XElement or XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Serializing Object Graphs that Contain XElement or XDocument Objects</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3244,8 +3023,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> from which the object is deserialized.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> from which the object is deserialized.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
@@ -3273,10 +3051,8 @@
           <para
             >This method is used internally for marshaling object graphs that contain LINQ to XML objects. For an example of serializing an object graph that contains LINQ to XML objects, see <format type="text/html">
               <a href="443d7904-a6f0-450a-b1a4-5d7ed869d1d5"
-                >Serializing Object Graphs that Contain XElement or XDocument Objects</a
-              >
-            </format>.</para
-          >
+                >Serializing Object Graphs that Contain XElement or XDocument Objects</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3287,8 +3063,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to which this object is serialized.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to which this object is serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -3307,11 +3082,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Using this property, you can get or set the value of an element.</para>
           <para
-            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para
-          >
+            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" /> and the <see cref="E:System.Xml.Linq.XObject.Changing" /> events.</para>
           <para
-            >If you want to get the value of an element but you are not sure that it exists, it is more convenient to use the explicit conversion operators, and assign the element to a nullable type such as string or <see cref="T:System.Nullable`1" /> of <see cref="T:System.Int32" />. If the element does not exist, the nullable type is set to null. By contrast, if you want to use this property, you must make sure that the <see cref="M:System.Xml.Linq.XContainer.Element(System.Xml.Linq.XName)" /> method does not return null before you access this property.</para
-          >
+            >If you want to get the value of an element but you are not sure that it exists, it is more convenient to use the explicit conversion operators, and assign the element to a nullable type such as string or <see cref="T:System.Nullable`1" /> of <see cref="T:System.Int32" />. If the element does not exist, the nullable type is set to null. By contrast, if you want to use this property, you must make sure that the <see cref="M:System.Xml.Linq.XContainer.Element(System.Xml.Linq.XName)" /> method does not return null before you access this property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3349,8 +3122,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> into which this method will write.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> into which this method will write.</param>
       </Docs>
     </Member>
   </Members>

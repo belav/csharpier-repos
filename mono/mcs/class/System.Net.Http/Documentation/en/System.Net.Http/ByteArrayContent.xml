@@ -42,16 +42,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.ByteArrayContent" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.ByteArrayContent" /> class.</para>
         </summary>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param
-        >
+          />The content used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -76,36 +74,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the range specified by the <paramref name="offset" /> parameter and the <paramref name="count " /> parameter is used as content. Syntax</para
-          >
+            >Only the range specified by the <paramref name="offset" /> parameter and the <paramref name="count " /> parameter is used as content. Syntax</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.ByteArrayContent" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.ByteArrayContent" /> class.</para>
         </summary>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param
-        >
+          />The content used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset, in bytes, in the <paramref name="content" />  parameter used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param
-        >
+          />The offset, in bytes, in the <paramref name="content" />  parameter used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the <paramref name="content" /> starting from the <paramref name="offset" /> parameter used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param
-        >
+          />The number of bytes in the <paramref name="content" /> starting from the <paramref name="offset" /> parameter used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateContentReadStreamAsync">
@@ -129,14 +122,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />object will complete after all of the content stream has been created.</para
-          >
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />object will complete after all of the content stream has been created.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an HTTP content stream as an asynchronous operation for reading whose backing store is memory from the <see cref="T:System.Net.Http.ByteArrayContent" />.</para
-          >
+            >Creates an HTTP content stream as an asynchronous operation for reading whose backing store is memory from the <see cref="T:System.Net.Http.ByteArrayContent" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -169,8 +160,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation does not block. When the returned <see cref="T:System.Threading.Tasks.Task" /> object completes, the whole byte array has been written to the <paramref name="stream" /> parameter.</para
-          >
+            >This operation does not block. When the returned <see cref="T:System.Threading.Tasks.Task" /> object completes, the whole byte array has been written to the <paramref name="stream" /> parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -182,15 +172,13 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target stream.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The target stream.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information about the transport, like channel binding token. This parameter may be null.</param
-        >
+          />Information about the transport, like channel binding token. This parameter may be null.</param>
       </Docs>
     </Member>
     <Member MemberName="TryComputeLength">

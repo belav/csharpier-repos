@@ -18,12 +18,10 @@
       <para
         >The <see cref="T:System.Windows.Forms.ImageKeyConverter" /> class is used to convert key values of an <see cref="T:System.Windows.Forms.ImageList" /> to and from other data types. For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" /> base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
-        </format>.</para
-      >
+        </format>.</para>
       <block subset="none" type="note">
         <para
-          >Typically, you do not directly create an instance of an <see cref="T:System.Windows.Forms.ImageKeyConverter" />. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para
-        >
+          >Typically, you do not directly create an instance of an <see cref="T:System.Windows.Forms.ImageKeyConverter" />. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para>
       </block>
     </remarks>
     <summary>
@@ -44,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -80,15 +77,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context.</param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that specifies the type you want to convert from.</param
-        >
+          />A <see cref="T:System.Type" /> that specifies the type you want to convert from.</param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -123,22 +118,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> to provide locale information. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> to provide locale information. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -168,37 +160,32 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para
-          >
+            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that provides locale information. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that provides locale information. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to convert, typically an image key.</param
-        >
+          />The object to convert, typically an image key.</param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert the object to.</param
-        >
+          />The type to convert the object to.</param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValues">
@@ -220,8 +207,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no image list is found, and the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> supports null as a standard value, the <see cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> method returns a collection containing a single empty string. If no image list is found, and null is not supported as a standard value, <see cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> returns an empty collection.</para
-          >
+            >If no image list is found, and the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> supports null as a standard value, the <see cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> method returns a collection containing a single empty string. If no image list is found, and null is not supported as a standard value, <see cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> returns an empty collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -230,16 +216,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that contains the standard set of image key values. </para
-          >
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that contains the standard set of image key values. </para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesExclusive">
@@ -261,18 +245,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list returned by the <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" /> method is exclusive, no other values are valid. This is typical of an enumerated data type. If the list is not exclusive, there are other valid values besides the list of standard values that <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" /> provides.</para
-          >
+            >If the list returned by the <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" /> method is exclusive, no other values are valid. This is typical of an enumerated data type. If the list is not exclusive, there are other valid values besides the list of standard values that <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" /> provides.</para>
           <para>As implemented in this type converter, this method always returns true. </para>
           <para
-            >Typically, you should call the <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValuesSupported" /> method before you attempt to use the <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" /> and <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValuesExclusive" /> methods. </para
-          >
+            >Typically, you should call the <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValuesSupported" /> method before you attempt to use the <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" /> and <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValuesExclusive" /> methods. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the list of standard values for the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> is exclusive (that is, whether it allows values other than those returned by <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" />).</para
-          >
+            >Determines whether the list of standard values for the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> is exclusive (that is, whether it allows values other than those returned by <see cref="Overload:System.Windows.Forms.ImageKeyConverter.GetStandardValues" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -283,8 +264,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesSupported">
@@ -306,8 +286,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As implemented in the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> class, the <see cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" /> method always returns true since <see cref="T:System.Windows.Forms.ImageKeyConverter" /> supports a standard set of index values for images that can be picked from a list.</para
-          >
+            >As implemented in the <see cref="T:System.Windows.Forms.ImageKeyConverter" /> class, the <see cref="M:System.Windows.Forms.ImageKeyConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" /> method always returns true since <see cref="T:System.Windows.Forms.ImageKeyConverter" /> supports a standard set of index values for images that can be picked from a list.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -322,8 +301,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null.</param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="IncludeNoneAsStandardValue">
@@ -344,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether null is valid in the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> collection.</para
-          >
+            >Gets or sets a value indicating whether null is valid in the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> collection.</para>
         </summary>
       </Docs>
     </Member>

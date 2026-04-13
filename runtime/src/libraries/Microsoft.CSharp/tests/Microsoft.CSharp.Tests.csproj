@@ -10,8 +10,7 @@
 
     <DebuggerSupport
       Condition="'$(DebuggerSupport)' == '' and ('$(TargetOS)' == 'browser' or '$(TargetOS)' == 'wasi')"
-      >true</DebuggerSupport
-    >
+      >true</DebuggerSupport>
   </PropertyGroup>
   <ItemGroup>
     <Compile

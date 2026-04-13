@@ -29,11 +29,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Attributes can be associated with an element. Use the <see cref="P:System.Xml.XmlAttribute.OwnerElement" /> property to get the <see cref="T:System.Xml.XmlElement" /> to which the attribute belongs.</para
-      >
+        >Attributes can be associated with an element. Use the <see cref="P:System.Xml.XmlAttribute.OwnerElement" /> property to get the <see cref="T:System.Xml.XmlElement" /> to which the attribute belongs.</para>
       <para
-        >The XmlElement class has several methods which allow you to access attribute nodes (<see cref="M:System.Xml.XmlElement.GetAttribute(System.String)" />, <see cref="M:System.Xml.XmlElement.SetAttribute(System.String,System.String)" />, <see cref="M:System.Xml.XmlElement.RemoveAttribute(System.String)" />, and so on). Additionally, you can call the <see cref="P:System.Xml.XmlElement.Attributes" /> property, which returns an <see cref="T:System.Xml.XmlAttributeCollection" /> enabling you to access attributes by name or index from the collection.</para
-      >
+        >The XmlElement class has several methods which allow you to access attribute nodes (<see cref="M:System.Xml.XmlElement.GetAttribute(System.String)" />, <see cref="M:System.Xml.XmlElement.SetAttribute(System.String,System.String)" />, <see cref="M:System.Xml.XmlElement.RemoveAttribute(System.String)" />, and so on). Additionally, you can call the <see cref="P:System.Xml.XmlElement.Attributes" /> property, which returns an <see cref="T:System.Xml.XmlAttributeCollection" /> enabling you to access attributes by name or index from the collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,43 +64,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see cref="T:System.Xml.XmlAttribute" /> directly; instead, use methods such as <see cref="Overload:System.Xml.XmlDocument.CreateAttribute" />.</para
-          >
+            >Do not instantiate an <see cref="T:System.Xml.XmlAttribute" /> directly; instead, use methods such as <see cref="Overload:System.Xml.XmlDocument.CreateAttribute" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlAttribute" /> class.</para>
         </summary>
         <param name="prefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="namespaceURI">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace uniform resource identifier (URI).</param
-        >
+          />The namespace uniform resource identifier (URI).</param>
         <param name="doc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent XML document.</param
-        >
+          />The parent XML document.</param>
       </Docs>
     </Member>
     <Member MemberName="AppendChild">
@@ -130,11 +122,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="newChild" /> is already in the tree, it is first removed.</para
-          >
+            >If the <paramref name="newChild" /> is already in the tree, it is first removed.</para>
           <para
-            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para
-          >
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -149,8 +139,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> to add.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> to add.</param>
       </Docs>
     </Member>
     <Member MemberName="BaseURI">
@@ -167,14 +156,12 @@
       </ReturnValue>
       <Docs>
         <value
-          >The location from which the attribute was loaded. If the location is empty (for example, was created in memory), <see cref="F:System.String.Empty" /> is returned.</value
-        >
+          >The location from which the attribute was loaded. If the location is empty (for example, was created in memory), <see cref="F:System.String.Empty" /> is returned.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A networked XML document is comprised of chunks of data aggregated using various World Wide Web Consortium (W3C) standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from.</para>
           <para
-            >For additional information on BaseURI and how it behaves with other node types, see <see cref="P:System.Xml.XmlNode.BaseURI" />.</para
-          >
+            >For additional information on BaseURI and how it behaves with other node types, see <see cref="P:System.Xml.XmlNode.BaseURI" />.</para>
           <para>This property is a Microsoft extension to the Document Object Model (DOM).</para>
         </remarks>
         <summary>
@@ -208,11 +195,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlAttribute.ParentNode" /> returns null).</para
-          >
+            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlAttribute.ParentNode" /> returns null).</para>
           <para
-            >Cloning an unspecified attribute returns a specified attribute (<see cref="P:System.Xml.XmlAttribute.Specified" /> returns true).</para
-          >
+            >Cloning an unspecified attribute returns a specified attribute (<see cref="P:System.Xml.XmlAttribute.Specified" /> returns true).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,8 +212,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself </param>
       </Docs>
     </Member>
     <Member MemberName="InnerText">
@@ -306,11 +290,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="refChild" /> is null, insert <paramref name="newChild" /> at the beginning of the list of child nodes. If <paramref name="newChild" /> is an <see cref="T:System.Xml.XmlDocumentFragment" /> object, its child nodes are inserted, in the same order, after <paramref name="refChild" />. If the <paramref name="newChild" /> is already in the tree, it is first removed.</para
-          >
+            >If <paramref name="refChild" /> is null, insert <paramref name="newChild" /> at the beginning of the list of child nodes. If <paramref name="newChild" /> is an <see cref="T:System.Xml.XmlDocumentFragment" /> object, its child nodes are inserted, in the same order, after <paramref name="refChild" />. If the <paramref name="newChild" /> is already in the tree, it is first removed.</para>
           <para
-            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para
-          >
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
         </remarks>
         <summary>
@@ -326,15 +308,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> to insert.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> to insert.</param>
         <param name="refChild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that is the reference node. The <paramref name="newChild" /> is placed after the <paramref name="refChild" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that is the reference node. The <paramref name="newChild" /> is placed after the <paramref name="refChild" />.</param>
       </Docs>
     </Member>
     <Member MemberName="InsertBefore">
@@ -363,11 +343,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="refChild" /> is null, insert <paramref name="newChild" /> at the end of the list of child nodes. If <paramref name="newChild" /> is an <see cref="T:System.Xml.XmlDocumentFragment" /> object, its child nodes are inserted, in the same order, before <paramref name="refChild" />. If the <paramref name="newChild" /> is already in the tree, it is first removed.</para
-          >
+            >If <paramref name="refChild" /> is null, insert <paramref name="newChild" /> at the end of the list of child nodes. If <paramref name="newChild" /> is an <see cref="T:System.Xml.XmlDocumentFragment" /> object, its child nodes are inserted, in the same order, before <paramref name="refChild" />. If the <paramref name="newChild" /> is already in the tree, it is first removed.</para>
           <para
-            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para
-          >
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -382,15 +360,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> to insert.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> to insert.</param>
         <param name="refChild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> that is the reference node. The <paramref name="newChild" /> is placed before this node.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> that is the reference node. The <paramref name="newChild" /> is placed before this node.</param>
       </Docs>
     </Member>
     <Member MemberName="LocalName">
@@ -410,8 +386,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the node does not have a prefix, LocalName is the same as <see cref="P:System.Xml.XmlAttribute.Name" />.</para
-          >
+            >If the node does not have a prefix, LocalName is the same as <see cref="P:System.Xml.XmlAttribute.Name" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -542,8 +517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.XmlElement" /> to which the attribute belongs.</para
-          >
+            >Gets the <see cref="T:System.Xml.XmlElement" /> to which the attribute belongs.</para>
         </summary>
       </Docs>
     </Member>
@@ -570,8 +544,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Xml.XmlAttribute.OwnerElement" /> property to get the <see cref="T:System.Xml.XmlElement" /> to which the attribute belongs.</para
-          >
+            >Use the <see cref="P:System.Xml.XmlAttribute.OwnerElement" /> property to get the <see cref="T:System.Xml.XmlElement" /> to which the attribute belongs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -628,11 +601,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="newChild" /> is already in the tree, it is first removed.</para
-          >
+            >If the <paramref name="newChild" /> is already in the tree, it is first removed.</para>
           <para
-            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para
-          >
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document. The imported node can then be inserted into the current document.</para>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
         </remarks>
         <summary>
@@ -648,8 +619,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> to add. If it is an <see cref="T:System.Xml.XmlDocumentFragment" />, the entire contents of the document fragment are moved into the child list of this node.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> to add. If it is an <see cref="T:System.Xml.XmlDocumentFragment" />, the entire contents of the document fragment are moved into the child list of this node.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveChild">
@@ -688,8 +658,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> to remove.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="ReplaceChild">
@@ -718,11 +687,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="newChild" /> is already in the tree, it is first removed.</para
-          >
+            >If the <paramref name="newChild" /> is already in the tree, it is first removed.</para>
           <para
-            >If the <paramref name="newChild" /> was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document.</para
-          >
+            >If the <paramref name="newChild" /> was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" /> to import the node to the current document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -737,15 +704,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new child <see cref="T:System.Xml.XmlNode" />.</param
-        >
+          />The new child <see cref="T:System.Xml.XmlNode" />.</param>
         <param name="oldChild">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlNode" /> to replace.</param
-        >
+          />The <see cref="T:System.Xml.XmlNode" /> to replace.</param>
       </Docs>
     </Member>
     <Member MemberName="SchemaInfo">
@@ -771,8 +736,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.XmlAttribute.SchemaInfo" /> property is set when this node is validated.</para
-          >
+            >The <see cref="P:System.Xml.XmlAttribute.SchemaInfo" /> property is set when this node is validated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -886,22 +850,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlAttribute.InnerXml" /> property.</para
-          >
+            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlAttribute.InnerXml" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save.</param
-        >
+          />The XmlWriter to which you want to save.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -929,8 +890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlNode.OuterXml" /> property.</para
-          >
+            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlNode.OuterXml" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -941,8 +901,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save.</param
-        >
+          />The XmlWriter to which you want to save.</param>
       </Docs>
     </Member>
   </Members>

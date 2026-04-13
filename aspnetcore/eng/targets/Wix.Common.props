@@ -11,16 +11,13 @@
 
     <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
     <MSBuildProjectExtensionsPath Condition="'$(MSBuildProjectExtensionsPath)' == ''"
-      >$(MSBuildProjectDir)\obj\</MSBuildProjectExtensionsPath
-    >
+      >$(MSBuildProjectDir)\obj\</MSBuildProjectExtensionsPath>
     <!-- IsRunningFromVisualStudio may be true even when running msbuild.exe from command line. This generally means that MSBUild is Visual Studio installation and therefore we need to find NuGet.targets in a different location.  -->
     <NuGetRestoreTargets
       Condition="'$(NuGetRestoreTargets)'=='' and '$([MSBuild]::IsRunningFromVisualStudio())'=='true'"
-      >$(MSBuildToolsPath32)\..\..\..\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets</NuGetRestoreTargets
-    >
+      >$(MSBuildToolsPath32)\..\..\..\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets</NuGetRestoreTargets>
     <NuGetRestoreTargets Condition="'$(NuGetRestoreTargets)'==''"
-      >$(MSBuildToolsPath)\NuGet.targets</NuGetRestoreTargets
-    >
+      >$(MSBuildToolsPath)\NuGet.targets</NuGetRestoreTargets>
   </PropertyGroup>
 
   <Import

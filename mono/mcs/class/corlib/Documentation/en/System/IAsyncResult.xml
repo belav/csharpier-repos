@@ -26,23 +26,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.IAsyncResult" /> interface is implemented by classes containing methods that can operate asynchronously. It is the return type of methods that initiate an asynchronous operation, such as <see cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />, and it is passed to methods that conclude an asynchronous operation, such as <see cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />. <see cref="T:System.IAsyncResult" /> objects are also passed to methods invoked by <see cref="T:System.AsyncCallback" /> delegates when an asynchronous operation completes.</para
-      >
+        >The <see cref="T:System.IAsyncResult" /> interface is implemented by classes containing methods that can operate asynchronously. It is the return type of methods that initiate an asynchronous operation, such as <see cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />, and it is passed to methods that conclude an asynchronous operation, such as <see cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />. <see cref="T:System.IAsyncResult" /> objects are also passed to methods invoked by <see cref="T:System.AsyncCallback" /> delegates when an asynchronous operation completes.</para>
       <para
-        >An object that supports the <see cref="T:System.IAsyncResult" /> interface stores state information for an asynchronous operation and provides a synchronization object to allow threads to be signaled when the operation completes.</para
-      >
+        >An object that supports the <see cref="T:System.IAsyncResult" /> interface stores state information for an asynchronous operation and provides a synchronization object to allow threads to be signaled when the operation completes.</para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" /> class is the implementation of <see cref="T:System.IAsyncResult" /> that is returned by the BeginInvoke method when you use a delegate to call a method asynchronously.</para
-        >
+          >The <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" /> class is the implementation of <see cref="T:System.IAsyncResult" /> that is returned by the BeginInvoke method when you use a delegate to call a method asynchronously.</para>
       </block>
       <para
         >For a detailed description of how the <see cref="T:System.IAsyncResult" /> interface is used, see the <format type="text/html">
           <a href="41972034-92ED-450A-9664-AB93FCC6F1FB"
-            >Calling Synchronous Methods Asynchronously</a
-          >
-        </format> topic.</para
-      >
+            >Calling Synchronous Methods Asynchronously</a>
+        </format> topic.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -108,23 +103,19 @@
       <Docs>
         <value>
           <para
-            >A <see cref="T:System.Threading.WaitHandle" /> that is signaled when an asynchronous operation completes.</para
-          >
+            >A <see cref="T:System.Threading.WaitHandle" /> that is signaled when an asynchronous operation completes.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value allows the client to wait for an asynchronous operation to complete instead of polling <see cref="P:System.IAsyncResult.IsCompleted" /> until the operation concludes. The return value can be used to perform a <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />, <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />, or <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" /> operation.</para
-          >
+            >The return value allows the client to wait for an asynchronous operation to complete instead of polling <see cref="P:System.IAsyncResult.IsCompleted" /> until the operation concludes. The return value can be used to perform a <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />, <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />, or <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" /> operation.</para>
           <para
-            >The common language runtime supplies a number of waitable objects, such as <see cref="T:System.Threading.ManualResetEvent" />, <see cref="T:System.Threading.AutoResetEvent" />, and <see cref="T:System.Threading.Mutex" />, all of which mirror Win32 synchronization primitives.</para
-          >
+            >The common language runtime supplies a number of waitable objects, such as <see cref="T:System.Threading.ManualResetEvent" />, <see cref="T:System.Threading.AutoResetEvent" />, and <see cref="T:System.Threading.Mutex" />, all of which mirror Win32 synchronization primitives.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Threading.WaitHandle" /> that is used to wait for an asynchronous operation to complete.</para
-          >
+            >Gets a <see cref="T:System.Threading.WaitHandle" /> that is used to wait for an asynchronous operation to complete.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -150,14 +141,12 @@
         <value>
           <para>
             <see langword="true" /> if the operation synchronously;
-   otherwise <see langword="false" />. </para
-          >
+   otherwise <see langword="false" />. </para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the synchronous completion of the call is detected in the <see cref="T:System.AsyncCallback" /> delegate, it is probable that the thread that initiated the asynchronous operation is the current thread.</para
-          >
+            >If the synchronous completion of the call is detected in the <see cref="T:System.AsyncCallback" /> delegate, it is probable that the thread that initiated the asynchronous operation is the current thread.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -187,8 +176,7 @@
         <value>
           <para>
             <see langword="true" /> if the operation has completed;
-   otherwise <see langword="false" />.</para
-          >
+   otherwise <see langword="false" />.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />

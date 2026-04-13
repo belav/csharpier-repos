@@ -52,15 +52,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application's site identifier. For more information, see ASP.NET Configuration Overview.</param
-        >
+          />The application's site identifier. For more information, see ASP.NET Configuration Overview.</param>
         <param name="vpath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application's virtual path as a string. For more information, see ASP.NET Web Site Paths.</param
-        >
+          />The application's virtual path as a string. For more information, see ASP.NET Web Site Paths.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

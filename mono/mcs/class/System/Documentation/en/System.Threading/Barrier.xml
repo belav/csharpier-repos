@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A group of tasks cooperate by moving through a series of phases, where each in the group signals it has arrived at the <see cref="T:System.Threading.Barrier" /> in a given phase and implicitly waits for all others to arrive. The same <see cref="T:System.Threading.Barrier" /> can be used for multiple phases.</para
-      >
+        >A group of tasks cooperate by moving through a series of phases, where each in the group signals it has arrived at the <see cref="T:System.Threading.Barrier" /> in a given phase and implicitly waits for all others to arrive. The same <see cref="T:System.Threading.Barrier" /> can be used for multiple phases.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,16 +52,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.Barrier" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.Barrier" /> class.</para>
         </summary>
         <param name="participantCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of participating threads.</param
-        >
+          />The number of participating threads.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -86,29 +83,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="postPhaseAction" /> delegate will be executed after all participants have arrived at the barrier in one phase. The participants will not be released to the next phase until the postPhaseAction delegate has completed execution.</para
-          >
+            >The <paramref name="postPhaseAction" /> delegate will be executed after all participants have arrived at the barrier in one phase. The participants will not be released to the next phase until the postPhaseAction delegate has completed execution.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.Barrier" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.Barrier" /> class.</para>
         </summary>
         <param name="participantCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of participating threads.</param
-        >
+          />The number of participating threads.</param>
         <param name="postPhaseAction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Action`1" /> to be executed after each phase. null (Nothing in Visual Basic) may be passed to indicate no action is taken.</param
-        >
+          />The <see cref="T:System.Action`1" /> to be executed after each phase. null (Nothing in Visual Basic) may be passed to indicate no action is taken.</param>
       </Docs>
     </Member>
     <Member MemberName="AddParticipant">
@@ -133,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be an additional participant.</para
-          >
+            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be an additional participant.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -166,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be additional participants.</para
-          >
+            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be additional participants.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -178,8 +169,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of additional participants to add to the barrier.</param
-        >
+          />The number of additional participants to add to the barrier.</param>
       </Docs>
     </Member>
     <Member MemberName="CurrentPhaseNumber">
@@ -219,26 +209,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see cref="T:System.Threading.Barrier" />. The Dispose method leaves the <see cref="T:System.Threading.Barrier" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.Barrier" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.Barrier" /> was occupying.</para
-          >
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.Barrier" />. The Dispose method leaves the <see cref="T:System.Threading.Barrier" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.Barrier" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.Barrier" /> was occupying.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.Barrier" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.Barrier" /> object's Finalize method.</para
-            >
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.Barrier" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.Barrier" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see cref="T:System.Threading.Barrier" /> class.</para
-          >
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.Barrier" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -262,22 +248,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike most of the members of <see cref="T:System.Threading.Barrier" />, Dispose is not thread-safe and may not be used concurrently with other members of this instance.</para
-          >
+            >Unlike most of the members of <see cref="T:System.Threading.Barrier" />, Dispose is not thread-safe and may not be used concurrently with other members of this instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Threading.Barrier" />, and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Threading.Barrier" />, and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
       </Docs>
     </Member>
     <Member MemberName="ParticipantCount">
@@ -345,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be one less participant.</para
-          >
+            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be one less participant.</para>
         </summary>
       </Docs>
     </Member>
@@ -373,22 +355,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="participantCount" /> participants are already waiting on the barrier, this removal fulfills the barrier, the post phase action is executed and all of the participants are woken as if this participant being removed had successfully reached the barrier.</para
-          >
+            >If <paramref name="participantCount" /> participants are already waiting on the barrier, this removal fulfills the barrier, the post phase action is executed and all of the participants are woken as if this participant being removed had successfully reached the barrier.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be fewer participants.</para
-          >
+            >Notifies the <see cref="T:System.Threading.Barrier" /> that there will be fewer participants.</para>
         </summary>
         <param name="participantCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of additional participants to remove from the barrier.</param
-        >
+          />The number of additional participants to remove from the barrier.</param>
       </Docs>
     </Member>
     <Member MemberName="SignalAndWait">
@@ -444,8 +423,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="SignalAndWait">
@@ -478,8 +456,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="SignalAndWait">
@@ -503,8 +480,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals that a participant has reached the barrier and waits for all other participants to reach the barrier as well, using a <see cref="T:System.TimeSpan" /> object to measure the time interval.</para
-          >
+            >Signals that a participant has reached the barrier and waits for all other participants to reach the barrier as well, using a <see cref="T:System.TimeSpan" /> object to measure the time interval.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -515,8 +491,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="SignalAndWait">
@@ -543,8 +518,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="cancellationToken" /> was canceled before the signal took effect, then an <see cref="T:System.OperationCanceledException" /> is thrown and the <see cref="P:System.Threading.Barrier.ParticipantsRemaining" /> value is not decreased. If the <paramref name="cancellationToken" /> is not canceled or is canceled after the signal takes effect then <see cref="P:System.Threading.Barrier.ParticipantsRemaining" /> is decreased and no <see cref="T:System.OperationCanceledException" /> is thrown.</para
-          >
+            >If the <paramref name="cancellationToken" /> was canceled before the signal took effect, then an <see cref="T:System.OperationCanceledException" /> is thrown and the <see cref="P:System.Threading.Barrier.ParticipantsRemaining" /> value is not decreased. If the <paramref name="cancellationToken" /> is not canceled or is canceled after the signal takes effect then <see cref="P:System.Threading.Barrier.ParticipantsRemaining" /> is decreased and no <see cref="T:System.OperationCanceledException" /> is thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -559,15 +533,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="SignalAndWait">
@@ -595,8 +567,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals that a participant has reached the barrier and waits for all other participants to reach the barrier as well, using a <see cref="T:System.TimeSpan" /> object to measure the time interval, while observing a cancellation token.</para
-          >
+            >Signals that a participant has reached the barrier and waits for all other participants to reach the barrier as well, using a <see cref="T:System.TimeSpan" /> object to measure the time interval, while observing a cancellation token.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -607,15 +578,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
   </Members>

@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> provides a way to indicate to the designer serialization manager that a specific type of serializer should be used when serializing the values of an object. This allows you to specify a serializer that is capable of serializing a custom type, for instance. Place this attribute on a class to indicate the serialization object to use when serializing the class.</para
-      >
+        <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> provides a way to indicate to the designer serialization manager that a specific type of serializer should be used when serializing the values of an object. This allows you to specify a serializer that is capable of serializing a custom type, for instance. Place this attribute on a class to indicate the serialization object to use when serializing the class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,23 +67,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> class.</para>
         </summary>
         <param name="serializerTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the data type of the serializer. </param
-        >
+          />The fully qualified name of the data type of the serializer. </param>
         <param name="baseSerializerTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param
-        >
+          />The fully qualified name of the base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -112,23 +108,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> class.</para>
         </summary>
         <param name="serializerTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified name of the data type of the serializer. </param
-        >
+          />The fully qualified name of the data type of the serializer. </param>
         <param name="baseSerializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param
-        >
+          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -156,23 +149,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" /> class.</para>
         </summary>
         <param name="serializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data type of the serializer. </param
-        >
+          />The data type of the serializer. </param>
         <param name="baseSerializerType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param
-        >
+          />The base data type of the serializer. Multiple serializers can be supplied for a class as long as the serializers have different base types. </param>
       </Docs>
     </Member>
     <Member MemberName="SerializerBaseTypeName">
@@ -234,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This ID is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" /> instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" /> overrides this to include the type of the editor base type.</para
-          >
+            >This ID is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" /> instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" /> overrides this to include the type of the editor base type.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

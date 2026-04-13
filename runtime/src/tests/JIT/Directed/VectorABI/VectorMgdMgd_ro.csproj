@@ -8,8 +8,7 @@
     <Optimize>True</Optimize>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <JitOptimizationSensitive Condition="'$(TargetArchitecture)' == 'arm64'"
-      >true</JitOptimizationSensitive
-    >
+      >true</JitOptimizationSensitive>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="VectorMgdMgd.cs" />

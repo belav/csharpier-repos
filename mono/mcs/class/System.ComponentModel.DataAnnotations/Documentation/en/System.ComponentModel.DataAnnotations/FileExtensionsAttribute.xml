@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.FileExtensionsAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.FileExtensionsAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -106,8 +105,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field that caused the validation failure.</param
-        >
+          />The name of the field that caused the validation failure.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -141,8 +139,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A comma delimited list of valid file extensions.</param
-        >
+          />A comma delimited list of valid file extensions.</param>
       </Docs>
     </Member>
   </Members>

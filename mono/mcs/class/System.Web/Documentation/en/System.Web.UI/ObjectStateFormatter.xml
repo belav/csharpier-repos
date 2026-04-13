@@ -24,14 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.ObjectStateFormatter" /> class serializes and deserializes object state graphs in a compact format. </para
-      >
+        >The <see cref="T:System.Web.UI.ObjectStateFormatter" /> class serializes and deserializes object state graphs in a compact format. </para>
       <para>
-        <see cref="T:System.Web.UI.ObjectStateFormatter" /> is used by the <see cref="T:System.Web.UI.PageStatePersister" /> class and classes that derive from it to serialize view state and control state. It is also used by the <see cref="T:System.Web.UI.LosFormatter" /> class to provide object state graph formatting for various parts of the ASP.NET infrastructure.</para
-      >
+        <see cref="T:System.Web.UI.ObjectStateFormatter" /> is used by the <see cref="T:System.Web.UI.PageStatePersister" /> class and classes that derive from it to serialize view state and control state. It is also used by the <see cref="T:System.Web.UI.LosFormatter" /> class to provide object state graph formatting for various parts of the ASP.NET infrastructure.</para>
       <para
-        >The <see cref="T:System.Web.UI.ObjectStateFormatter" /> class is optimized to serialize and format many common .NET Framework reference types, as well as constants. The following table lists the types that are optimized.</para
-      >
+        >The <see cref="T:System.Web.UI.ObjectStateFormatter" /> class is optimized to serialize and format many common .NET Framework reference types, as well as constants. The following table lists the types that are optimized.</para>
       <list type="table">
         <item>
           <term>
@@ -159,14 +156,11 @@
         </item>
       </list>
       <para
-        >Additionally, while conventional string types and string arrays are written to and from a serialized binary writer unaltered, some strings are optimized by creating internal string tables. Strings are optimized using these tables if the string has an associated <see cref="T:System.ComponentModel.TypeConverter" /> object or if the string is actually an instance of the <see cref="T:System.Web.UI.IndexedString" /> class. </para
-      >
+        >Additionally, while conventional string types and string arrays are written to and from a serialized binary writer unaltered, some strings are optimized by creating internal string tables. Strings are optimized using these tables if the string has an associated <see cref="T:System.ComponentModel.TypeConverter" /> object or if the string is actually an instance of the <see cref="T:System.Web.UI.IndexedString" /> class. </para>
       <para
-        >Other types not listed above are binary-serialized using a <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> object if they implement the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface or are decorated with the <see cref="T:System.SerializableAttribute" /> attribute. The <see cref="T:System.Web.UI.ObjectStateFormatter" /> class is not optimized for any of these serializable types. </para
-      >
+        >Other types not listed above are binary-serialized using a <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> object if they implement the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface or are decorated with the <see cref="T:System.SerializableAttribute" /> attribute. The <see cref="T:System.Web.UI.ObjectStateFormatter" /> class is not optimized for any of these serializable types. </para>
       <para
-        >If the <see cref="T:System.Web.UI.ObjectStateFormatter" /> class encounters a type that is not serializable, an <see cref="T:System.ArgumentException" /> exception is thrown. </para
-      >
+        >If the <see cref="T:System.Web.UI.ObjectStateFormatter" /> class encounters a type that is not serializable, an <see cref="T:System.ArgumentException" /> exception is thrown. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -186,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.ObjectStateFormatter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ObjectStateFormatter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -208,22 +201,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any object state graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.IO.Stream)" /> method is used to restore an object state graph stored in a <see cref="T:System.IO.Stream" />, such as a <see cref="T:System.IO.FileStream" />. </para
-          >
+            >Any object state graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.IO.Stream)" /> method is used to restore an object state graph stored in a <see cref="T:System.IO.Stream" />, such as a <see cref="T:System.IO.FileStream" />. </para>
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
                 cref="http://go.microsoft.com/fwlink/?LinkId=330378"
-                >Untrusted Data Security Risks</see
-              >.</para
-            >
+                >Untrusted Data Security Risks</see>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deserializes an object state graph from its binary-serialized form that is contained in the specified <see cref="T:System.IO.Stream" /> object.</para
-          >
+            >Deserializes an object state graph from its binary-serialized form that is contained in the specified <see cref="T:System.IO.Stream" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -234,8 +223,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> that the <see cref="T:System.Web.UI.ObjectStateFormatter" /> deserializes into an initialized object. </param
-        >
+          />A <see cref="T:System.IO.Stream" /> that the <see cref="T:System.Web.UI.ObjectStateFormatter" /> deserializes into an initialized object. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -255,15 +243,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any object state graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.String)" /> method is used to restore an object state graph stored in base64-encoded string form.</para
-          >
+            >Any object state graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.String)" /> method is used to restore an object state graph stored in base64-encoded string form.</para>
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
                 cref="http://go.microsoft.com/fwlink/?LinkId=330378"
-                >Untrusted Data Security Risks</see
-              >.</para
-            >
+                >Untrusted Data Security Risks</see>.</para>
           </block>
         </remarks>
         <summary>
@@ -279,8 +264,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that the <see cref="T:System.Web.UI.ObjectStateFormatter" /> deserializes into an initialized object.</param
-        >
+          />A string that the <see cref="T:System.Web.UI.ObjectStateFormatter" /> deserializes into an initialized object.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -300,8 +284,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any object graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.Object)" /> method is used to serialize an object state graph to a base64-encoded string form.</para
-          >
+            >Any object graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.Object)" /> method is used to serialize an object state graph to a base64-encoded string form.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -310,16 +293,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A base-64 encoded string that represents the serialized object state of the <paramref name="stateGraph" /> parameter.</para
-          >
+            >A base-64 encoded string that represents the serialized object state of the <paramref name="stateGraph" /> parameter.</para>
         </returns>
         <param name="stateGraph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to serialize.</param
-        >
+          />The object to serialize.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -343,29 +324,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any object state graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.IO.Stream,System.Object)" /> method is used to serialize an object state graph to a binary <see cref="T:System.IO.Stream" /> object.</para
-          >
+            >Any object state graph that is serialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Serialize" /> method can be deserialized with the <see cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" /> method. The <see cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.IO.Stream,System.Object)" /> method is used to serialize an object state graph to a binary <see cref="T:System.IO.Stream" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes an object state graph to the specified <see cref="T:System.IO.Stream" /> object.</para
-          >
+            >Serializes an object state graph to the specified <see cref="T:System.IO.Stream" /> object.</para>
         </summary>
         <param name="outputStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> to which the <see cref="T:System.Web.UI.ObjectStateFormatter" /> serializes the state of the specified object.</param
-        >
+          />A <see cref="T:System.IO.Stream" /> to which the <see cref="T:System.Web.UI.ObjectStateFormatter" /> serializes the state of the specified object.</param>
         <param name="stateGraph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to serialize.</param
-        >
+          />The object to serialize.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -388,14 +365,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="P:System.Runtime.Serialization.Formatter.Binder" />.</para
-          >
+            >For a description of this member, see <see cref="P:System.Runtime.Serialization.Formatter.Binder" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -416,14 +391,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="P:System.Runtime.Serialization.IFormatter.Context" />.</para
-          >
+            >For a description of this member, see <see cref="P:System.Runtime.Serialization.IFormatter.Context" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -446,14 +419,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.IO.Stream)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.IO.Stream)" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -464,8 +435,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream that contains the data to deserialize.</param
-        >
+          />The stream that contains the data to deserialize.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.IFormatter.Serialize">
@@ -488,29 +458,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.IO.Stream,System.Object)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.IO.Stream,System.Object)" />.</para>
         </summary>
         <param name="serializationStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on). </param
-        >
+          />The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on). </param>
         <param name="stateGraph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object, or root of the object graph, to serialize. All child objects of this root object are automatically serialized. </param
-        >
+          />The object, or root of the object graph, to serialize. All child objects of this root object are automatically serialized. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.IFormatter.SurrogateSelector">
@@ -530,14 +496,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.ObjectStateFormatter" /> instance is cast to an <see cref="T:System.Runtime.Serialization.IFormatter" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="T:System.Runtime.Serialization.SurrogateSelector" />.</para
-          >
+            >For a description of this member, see <see cref="T:System.Runtime.Serialization.SurrogateSelector" />.</para>
         </summary>
       </Docs>
     </Member>

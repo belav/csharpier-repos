@@ -29,8 +29,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceDescriptor" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -48,14 +47,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Drawing.Bitmap" /> image that represents the data source is typically used in design-time pickers. The image may be null.</para
-          >
+            >A <see cref="T:System.Drawing.Bitmap" /> image that represents the data source is typically used in design-time pickers. The image may be null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, closes this stream and the underlying stream gets the <see cref="T:System.Drawing.Bitmap" /> image that represents the data source.</para
-          >
+            >When overridden in a derived class, closes this stream and the underlying stream gets the <see cref="T:System.Drawing.Bitmap" /> image that represents the data source.</para>
         </summary>
       </Docs>
     </Member>
@@ -73,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the data source is designable, meaning that an instance of this type will be added to the design surface when binding. Designable data sources are bound by instance rather than by type. Data sources of type <see cref="T:System.ComponentModel.IComponent" /> are designable.</para
-          >
+            >Indicates whether the data source is designable, meaning that an instance of this type will be added to the design surface when binding. Designable data sources are bound by instance rather than by type. Data sources of type <see cref="T:System.ComponentModel.IComponent" /> are designable.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

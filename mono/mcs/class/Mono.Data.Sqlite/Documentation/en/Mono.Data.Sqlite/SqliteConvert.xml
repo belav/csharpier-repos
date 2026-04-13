@@ -67,8 +67,7 @@
             [3] Five<br />
           <br />
             Note that the leading and trailing spaces were removed from each item during the split.
-            </remarks
-        >
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ToBoolean">
@@ -167,8 +166,7 @@
       </Parameters>
       <Docs>
         <param name="dateText"
-          >The string containing either a Tick value, a JulianDay double, or an ISO8601-format string</param
-        >
+          >The string containing either a Tick value, a JulianDay double, or an ISO8601-format string</param>
         <summary>
             Converts a string into a DateTime, using the current DateTimeFormat specified for the connection when it was opened.
             </summary>
@@ -258,8 +256,7 @@
       </Parameters>
       <Docs>
         <param name="nativestring"
-          >The pointer to the memory where the UTF-8 string is encoded</param
-        >
+          >The pointer to the memory where the UTF-8 string is encoded</param>
         <param name="nativestringlen">The number of bytes to decode</param>
         <summary>
             Converts a UTF-8 encoded IntPtr of the specified length into a .NET string
@@ -343,8 +340,7 @@
       </Parameters>
       <Docs>
         <param name="nativestring"
-          >The pointer to the memory where the UTF-8 string is encoded</param
-        >
+          >The pointer to the memory where the UTF-8 string is encoded</param>
         <param name="nativestringlen">The number of bytes to decode</param>
         <summary>
             Converts a UTF-8 encoded IntPtr of the specified length into a .NET string

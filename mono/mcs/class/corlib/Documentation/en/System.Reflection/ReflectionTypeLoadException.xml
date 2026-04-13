@@ -36,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown by the <see cref="M:System.Reflection.Module.GetTypes" /> method if any of the classes in a module cannot be loaded. This class cannot be inherited.</para
-      >
+        >The exception that is thrown by the <see cref="M:System.Reflection.Module.GetTypes" /> method if any of the classes in a module cannot be loaded. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,23 +65,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionTypeLoadException" /> class with the given classes and their associated exceptions.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionTypeLoadException" /> class with the given classes and their associated exceptions.</para>
         </summary>
         <param name="classes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param
-        >
+          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param>
         <param name="exceptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array. </param
-        >
+          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,30 +107,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionTypeLoadException" /> class with the given classes, their associated exceptions, and exception descriptions.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionTypeLoadException" /> class with the given classes, their associated exceptions, and exception descriptions.</para>
         </summary>
         <param name="classes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param
-        >
+          />An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param>
         <param name="exceptions">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array. </param
-        >
+          />An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" /> array line up with the exceptions in this <paramref name="exceptions" /> array. </param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A String describing the reason the exception was thrown. </param
-        >
+          />A String describing the reason the exception was thrown. </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -164,23 +156,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an <see cref="T:System.Runtime.Serialization.ISerializable" /> implementation for serialized objects.</para
-          >
+            >Provides an <see cref="T:System.Runtime.Serialization.ISerializable" /> implementation for serialized objects.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information and data needed to serialize or deserialize an object. </param
-        >
+          />The information and data needed to serialize or deserialize an object. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context for the serialization. </param
-        >
+          />The context for the serialization. </param>
       </Docs>
     </Member>
     <Member MemberName="LoaderExceptions">
@@ -203,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The LoaderExceptions property retrieves an array of type Exception that is parallel to the <see cref="P:System.Reflection.ReflectionTypeLoadException.Types" /> array. This array will contain null values whenever reflection cannot load a class.</para
-          >
+            >The LoaderExceptions property retrieves an array of type Exception that is parallel to the <see cref="P:System.Reflection.ReflectionTypeLoadException.Types" /> array. This array will contain null values whenever reflection cannot load a class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -229,8 +217,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Reflection.ReflectionTypeLoadException.LoaderExceptions" /> property retrieves an array of type Exception that is parallel to this Types array. This array will contain null values whenever reflection cannot load a class.</para
-          >
+            >The <see cref="P:System.Reflection.ReflectionTypeLoadException.LoaderExceptions" /> property retrieves an array of type Exception that is parallel to this Types array. This array will contain null values whenever reflection cannot load a class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

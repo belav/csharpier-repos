@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the Web server hosting an ASP.NET application runs low on memory, the <see cref="T:System.Web.Caching.Cache" /> object selectively purges items to free system memory. When an item is added to the cache, you can assign it a relative priority compared to the other items stored in the cache. Items to which you assign higher priority values are less likely to be deleted from the cache when the server is processing a large number of requests, whereas items to which you assign lower priority values are more likely to be deleted. The default is <see cref="F:System.Web.Caching.CacheItemPriority.Normal" />.</para
-      >
+        >When the Web server hosting an ASP.NET application runs low on memory, the <see cref="T:System.Web.Caching.Cache" /> object selectively purges items to free system memory. When an item is added to the cache, you can assign it a relative priority compared to the other items stored in the cache. Items to which you assign higher priority values are less likely to be deleted from the cache when the server is processing a large number of requests, whereas items to which you assign lower priority values are more likely to be deleted. The default is <see cref="F:System.Web.Caching.CacheItemPriority.Normal" />.</para>
       <block subset="none" type="note">
         <para>Items can always be removed from the cache programmatically, regardless of their cache priority.</para>
       </block>
@@ -24,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the relative priority of items stored in the <see cref="T:System.Web.Caching.Cache" /> object.</para
-      >
+        >Specifies the relative priority of items stored in the <see cref="T:System.Web.Caching.Cache" /> object.</para>
     </summary>
   </Docs>
   <Members>
@@ -41,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cache items with this priority level are less likely to be deleted as the server frees system memory than those assigned a <see cref="F:System.Web.Caching.CacheItemPriority.Normal" /> priority.</para
-          >
+            >Cache items with this priority level are less likely to be deleted as the server frees system memory than those assigned a <see cref="F:System.Web.Caching.CacheItemPriority.Normal" /> priority.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -62,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cache items with this priority level are more likely to be deleted from the cache as the server frees system memory than items assigned a <see cref="F:System.Web.Caching.CacheItemPriority.Normal" /> priority.</para
-          >
+            >Cache items with this priority level are more likely to be deleted from the cache as the server frees system memory than items assigned a <see cref="F:System.Web.Caching.CacheItemPriority.Normal" /> priority.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -83,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for a cached item's priority is <see cref="F:System.Web.Caching.CacheItemPriority.Normal" />.</para
-          >
+            >The default value for a cached item's priority is <see cref="F:System.Web.Caching.CacheItemPriority.Normal" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -142,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cache items with this priority level are likely to be deleted from the cache as the server frees system memory only after those items with <see cref="F:System.Web.Caching.CacheItemPriority.Low" /> or <see cref="F:System.Web.Caching.CacheItemPriority.BelowNormal" /> priority. This is the default.</para
-          >
+            >Cache items with this priority level are likely to be deleted from the cache as the server frees system memory only after those items with <see cref="F:System.Web.Caching.CacheItemPriority.Low" /> or <see cref="F:System.Web.Caching.CacheItemPriority.BelowNormal" /> priority. This is the default.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

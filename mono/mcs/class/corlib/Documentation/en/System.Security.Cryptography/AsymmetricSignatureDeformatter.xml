@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Asymmetric signature deformatters verify the digital signatures that are created using implementations of <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />.</para
-      >
+        >Asymmetric signature deformatters verify the digital signatures that are created using implementations of <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,14 +60,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot create an instance of an abstract class. Application code will create a new instance of a derived class.</para>
           <para
-            >Use implementations of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> and <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.SetHashAlgorithm(System.String)" /> to set the key and hash algorithm before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />.</para
-          >
+            >Use implementations of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> and <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.SetHashAlgorithm(System.String)" /> to set the key and hash algorithm before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -97,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a hash algorithm before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />.</para
-          >
+            >You must set a hash algorithm before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,8 +105,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the hash algorithm to use for verifying the signature. </param
-        >
+          />The name of the hash algorithm to use for verifying the signature. </param>
       </Docs>
     </Member>
     <Member MemberName="SetKey">
@@ -138,8 +133,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a key before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />.</para
-          >
+            >You must set a key before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -150,8 +144,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of an implementation of <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> that holds the public key. </param
-        >
+          />The instance of an implementation of <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> that holds the public key. </param>
       </Docs>
     </Member>
     <Member MemberName="VerifySignature">
@@ -188,23 +181,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="rgbSignature" /> matches the signature computed using the specified hash algorithm and key on <paramref name="rgbHash" />; otherwise, false.</para
-          >
+            >true if <paramref name="rgbSignature" /> matches the signature computed using the specified hash algorithm and key on <paramref name="rgbHash" />; otherwise, false.</para>
         </returns>
         <param name="rgbHash">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data signed with <paramref name="rgbSignature" />. </param
-        >
+          />The data signed with <paramref name="rgbSignature" />. </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature to be verified for <paramref name="rgbHash" />. </param
-        >
+          />The signature to be verified for <paramref name="rgbHash" />. </param>
       </Docs>
     </Member>
     <Member MemberName="VerifySignature">
@@ -247,15 +237,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hash algorithm to use to verify the signature. </param
-        >
+          />The hash algorithm to use to verify the signature. </param>
         <param name="rgbSignature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The signature to be verified. </param
-        >
+          />The signature to be verified. </param>
       </Docs>
     </Member>
   </Members>

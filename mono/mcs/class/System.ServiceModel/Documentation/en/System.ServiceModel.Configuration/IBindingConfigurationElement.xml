@@ -47,8 +47,7 @@
           <para>Applies the content of the specified binding to this binding configuration section.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />A binding.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A binding.</param>
       </Docs>
     </Member>
     <Member MemberName="CloseTimeout">

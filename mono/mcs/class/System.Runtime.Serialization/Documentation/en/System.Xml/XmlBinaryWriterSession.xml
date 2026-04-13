@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Session objects (this class together with <see cref="T:System.Xml.XmlBinaryReaderSession" />) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see cref="T:System.Xml.XmlDictionary" />.</para
-      >
+        >Session objects (this class together with <see cref="T:System.Xml.XmlBinaryReaderSession" />) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see cref="T:System.Xml.XmlDictionary" />.</para>
       <para>Due to asynchronous processing, it is possible for messages that arrive synchronously to be processed in a different order than the order in which they were sent. String atomization that spans messages must ensure the messages are processed in the original order or the atomized strings must be conveyed using a different mechanism.</para>
       <para>To use them, you create a session object and pass it to the constructor or initializer for a binary XML reader or writer. </para>
       <para>To reuse a dynamic dictionary pass the same session object to all subsequent readers and writers.</para>

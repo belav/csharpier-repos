@@ -34,14 +34,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" /> event occurs when a designer finalizes a transaction.</para
-      >
+        >The <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" /> event occurs when a designer finalizes a transaction.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" /> and <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosing" /> events.</para
-      >
+        >Provides data for the <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" /> and <see cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosing" /> events.</para>
     </summary>
   </Docs>
   <Members>
@@ -74,16 +72,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerTransactionCloseEventArgs" /> class, using the specified value that indicates whether the designer called <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" /> on the transaction.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerTransactionCloseEventArgs" /> class, using the specified value that indicates whether the designer called <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" /> on the transaction.</para>
         </summary>
         <param name="commit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value indicating whether the transaction was committed.</param
-        >
+          />A value indicating whether the transaction was committed.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -108,29 +104,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="commit" /> is true, the <see cref="P:System.ComponentModel.Design.DesignerTransactionCloseEventArgs.LastTransaction" /> property defaults to true.</para
-          >
+            >If <paramref name="commit" /> is true, the <see cref="P:System.ComponentModel.Design.DesignerTransactionCloseEventArgs.LastTransaction" /> property defaults to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerTransactionCloseEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerTransactionCloseEventArgs" /> class. </para>
         </summary>
         <param name="commit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value indicating whether the transaction was committed.</param
-        >
+          />A value indicating whether the transaction was committed.</param>
         <param name="lastTransaction">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if this is the last transaction to close; otherwise, false.</param
-        >
+          />true if this is the last transaction to close; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="LastTransaction">
@@ -171,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the designer called <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" /> on the transaction.</para
-          >
+            >Indicates whether the designer called <see cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" /> on the transaction.</para>
         </summary>
       </Docs>
     </Member>

@@ -12,9 +12,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>Represents RELAX NG "element" pattern.</summary>
     <remarks>To be added.</remarks>

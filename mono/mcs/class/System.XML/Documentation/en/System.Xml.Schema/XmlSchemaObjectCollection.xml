@@ -75,16 +75,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the XmlSchemaObjectCollection class that takes an <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para
-          >
+            >Initializes a new instance of the XmlSchemaObjectCollection class that takes an <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para>
         </summary>
         <param name="parent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -114,8 +112,7 @@
           <para>If Count already equals the capacity, the capacity of list is doubled by automatically reallocating the internal array and copying the existing elements to the new array before the new element is added.</para>
           <para>If Count is less than the capacity, this method is an 0(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an 0(n) operation, where n is Count.</para>
           <para
-            >The <see cref="M:System.Xml.Schema.XmlSchemaObjectCollection.Add(System.Xml.Schema.XmlSchemaObject)" /> method expects only <see cref="T:System.Xml.Schema.XmlSchemaExternal" /> and its derived types (<see cref="T:System.Xml.Schema.XmlSchemaImport" />, <see cref="T:System.Xml.Schema.XmlSchemaInclude" />, and <see cref="T:System.Xml.Schema.XmlSchemaRedefine" />) as parameters. The following example illustrates adding an included schema to the <see cref="P:System.Xml.Schema.XmlSchema.Includes" /> collection of an existing <see cref="T:System.Xml.Schema.XmlSchema" /> object.</para
-          >
+            >The <see cref="M:System.Xml.Schema.XmlSchemaObjectCollection.Add(System.Xml.Schema.XmlSchemaObject)" /> method expects only <see cref="T:System.Xml.Schema.XmlSchemaExternal" /> and its derived types (<see cref="T:System.Xml.Schema.XmlSchemaImport" />, <see cref="T:System.Xml.Schema.XmlSchemaInclude" />, and <see cref="T:System.Xml.Schema.XmlSchemaRedefine" />) as parameters. The following example illustrates adding an included schema to the <see cref="P:System.Xml.Schema.XmlSchema.Includes" /> collection of an existing <see cref="T:System.Xml.Schema.XmlSchema" /> object.</para>
           <code>Dim schema As XmlSchema = New XmlSchema()
 
 Dim textReader As XmlTextReader = New XmlTextReader("include.xsd")
@@ -136,8 +133,7 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to the XmlSchemaObjectCollection.</para
-          >
+            >Adds an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to the XmlSchemaObjectCollection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -148,8 +144,7 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -178,8 +173,7 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates if the specified <see cref="T:System.Xml.Schema.XmlSchemaObject" /> is in the XmlSchemaObjectCollection.</para
-          >
+            >Indicates if the specified <see cref="T:System.Xml.Schema.XmlSchemaObject" /> is in the XmlSchemaObjectCollection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -190,8 +184,7 @@ schema.Includes.Add(include);</code>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -221,29 +214,25 @@ schema.Includes.Add(include);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified array must be of a compatible type.</para>
           <para
-            >This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" /> to copy the elements.</para
-          >
+            >This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" /> to copy the elements.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the <see cref="T:System.Xml.Schema.XmlSchemaObject" />s from the collection into the given array, starting at the given index.</para
-          >
+            >Copies all the <see cref="T:System.Xml.Schema.XmlSchemaObject" />s from the collection into the given array, starting at the given index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional array that is the destination of the elements copied from the XmlSchemaObjectCollection. The array must have zero-based indexing. </param
-        >
+          />The one-dimensional array that is the destination of the elements copied from the XmlSchemaObjectCollection. The array must have zero-based indexing. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in the array at which copying begins. </param
-        >
+          />The zero-based index in the array at which copying begins. </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -274,8 +263,7 @@ schema.Includes.Add(include);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The iterator returns <see cref="T:System.Xml.Schema.XmlSchemaObjectEnumerator" />.</para
-          >
+            >The iterator returns <see cref="T:System.Xml.Schema.XmlSchemaObjectEnumerator" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -305,22 +293,19 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection index corresponding to the specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para
-          >
+            >Gets the collection index corresponding to the specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index corresponding to the specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para
-          >
+            >The index corresponding to the specified <see cref="T:System.Xml.Schema.XmlSchemaObject" />.</para>
         </returns>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> whose index you want to return. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> whose index you want to return. </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -350,30 +335,26 @@ schema.Includes.Add(include);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If Count already equals the capacity, the capacity of the list is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If <paramref name="index" /> is equal to Count, <paramref name="value" /> is added to the end of XmlSchemaObjectCollection.</para
-          >
+            >If <paramref name="index" /> is equal to Count, <paramref name="value" /> is added to the end of XmlSchemaObjectCollection.</para>
           <para>The elements that follow the insertion point move down to accommodate the new element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to the XmlSchemaObjectCollection.</para
-          >
+            >Inserts an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to the XmlSchemaObjectCollection.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which an item should be inserted. </param
-        >
+          />The zero-based index at which an item should be inserted. </param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to insert. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to insert. </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -425,8 +406,7 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >OnClear is invoked before the standard Clear behavior. For more information, see OnClear method for <see cref="T:System.Collections.CollectionBase" />.</para
-          >
+            >OnClear is invoked before the standard Clear behavior. For more information, see OnClear method for <see cref="T:System.Collections.CollectionBase" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -457,19 +437,16 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >OnInsert is invoked before the standard Insert behavior. For more information, see OnInsert method <see cref="T:System.Collections.CollectionBase" />.</para
-          >
+            >OnInsert is invoked before the standard Insert behavior. For more information, see OnInsert method <see cref="T:System.Collections.CollectionBase" />.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The item. </param>
       </Docs>
     </Member>
     <Member MemberName="OnRemove">
@@ -499,19 +476,16 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >OnRemove is invoked before the standard Remove behavior. For more information, see the OnRemove method for <see cref="T:System.Collections.CollectionBase" />.</para
-          >
+            >OnRemove is invoked before the standard Remove behavior. For more information, see the OnRemove method for <see cref="T:System.Collections.CollectionBase" />.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The item. </param>
       </Docs>
     </Member>
     <Member MemberName="OnSet">
@@ -542,22 +516,18 @@ schema.Includes.Add(include);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >OnSet is invoked before the standard Set behavior. For more information, see the OnSet method for <see cref="T:System.Collections.CollectionBase" />.</para
-          >
+            >OnSet is invoked before the standard Set behavior. For more information, see the OnSet method for <see cref="T:System.Collections.CollectionBase" />.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param
-        >
+          />The index of <see cref="T:System.Xml.Schema.XmlSchemaObject" />. </param>
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The old value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The old value. </param>
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The new value. </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -585,26 +555,22 @@ schema.Includes.Add(include);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />. That is, this method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.CollectionBase.Count" />.</para
-          >
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />. That is, this method is an O(<paramref name="n" />) operation, where <paramref name="n" /> is <see cref="P:System.Collections.CollectionBase.Count" />.</para>
           <para
-            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object,System.Object)" />.</para
-          >
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object,System.Object)" />.</para>
           <para>The elements that follow the removed element move up to occupy the vacated spot.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> from the XmlSchemaObjectCollection.</para
-          >
+            >Removes an <see cref="T:System.Xml.Schema.XmlSchemaObject" /> from the XmlSchemaObjectCollection.</para>
         </summary>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to remove. </param
-        >
+          />The <see cref="T:System.Xml.Schema.XmlSchemaObject" /> to remove. </param>
       </Docs>
     </Member>
   </Members>

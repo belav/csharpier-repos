@@ -6,12 +6,10 @@
 >
   <PropertyGroup>
     <ExcludeLLVMFromWindowsBuild Condition="'$(MONO_ENABLE_LLVM)'=='true'"
-      >false</ExcludeLLVMFromWindowsBuild
-    >
+      >false</ExcludeLLVMFromWindowsBuild>
     <ExcludeLLVMFromWindowsBuild
       Condition="'$(MONO_ENABLE_LLVM)'=='' Or '$(MONO_ENABLE_LLVM)'!='true'"
-      >true</ExcludeLLVMFromWindowsBuild
-    >
+      >true</ExcludeLLVMFromWindowsBuild>
   </PropertyGroup>
   <ItemGroup Label="llvm_sources">
     <ClCompile Include="$(MonoSourceLocation)\mono\mini\mini-llvm.c">

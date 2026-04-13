@@ -6,14 +6,12 @@
 			Element111
 			<elem xmlns="http://default4.htm">
 				Element1111
-			</elem
-      >
+			</elem>
     </elem>
   </elem>
   <elem xmlns="">
 		Element12
-	</elem
-  >
+	</elem>
   <elem xmlns="http://default3.htm" xmlns:prefix="http://prefix.htm">
 		Element13
 		<prefix:elem>

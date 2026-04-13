@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks Condition="'$(TestFrameworks)'==''"
-      >net46;net40;net35;net20;net5.0;net6.0;netcoreapp3.1;netcoreapp2.1</TargetFrameworks
-    >
+      >net46;net40;net35;net20;net5.0;net6.0;netcoreapp3.1;netcoreapp2.1</TargetFrameworks>
     <TargetFrameworks Condition="'$(TestFrameworks)'!=''">$(TestFrameworks)</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <VersionPrefix>1.0</VersionPrefix>
@@ -17,8 +16,7 @@
     <!-- Workaround for https://github.com/nunit/nunit3-vs-adapter/issues/296 -->
     <DebugType
       Condition="'$(TargetFramework)' != '' AND '$(TargetFramework)' != 'netcoreapp2.1' AND '$(TargetFramework)' != 'netcoreapp3.1' AND '$(TargetFramework)' != 'net5.0' AND '$(TargetFramework)' != 'net6.0'"
-      >Full</DebugType
-    >
+      >Full</DebugType>
     <!-- Disabled because SourceLink isn't referenced to calculate paths -->
     <DeterministicSourcePaths>false</DeterministicSourcePaths>
     <!-- It's ok if a test target has exited support. Disable NETSSDK1138 warning -->

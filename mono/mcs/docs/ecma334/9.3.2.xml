@@ -15,8 +15,7 @@ class Hello
    }  
 }  
 ]]>
-      </code_example>includes a delimited comment. end example]</example
-    >
+      </code_example>includes a delimited comment. end example]</example>
   </paragraph>
   <paragraph
     >A single-line comment begins with the characters // and extends to the end of the line. <example
@@ -32,8 +31,7 @@ class Hello // any name will do for this class
    }  
 }  
 ]]>
-      </code_example>shows several single-line comments. end example]</example
-    >
+      </code_example>shows several single-line comments. end example]</example>
     <grammar_production>
       <name>comment</name> :: <rhs>
         <non_terminal where="9.3.2">single-line-comment</non_terminal>
@@ -65,8 +63,7 @@ class Hello // any name will do for this class
         <non_terminal where="9.3.2">input-character</non_terminal>
       </name> :: <rhs
         >Any Unicode character except a <non_terminal where="9.3.2"
-          >new-line-character</non_terminal
-        >
+          >new-line-character</non_terminal>
       </rhs>
     </grammar_production>
     <grammar_production>

@@ -15,8 +15,7 @@
     <BaseTypeName>System.Collections.ObjectModel.Collection&lt;System.Windows.Forms.FileDialogCustomPlace&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="T"
-        >System.Windows.Forms.FileDialogCustomPlace</BaseTypeArgument
-      >
+        >System.Windows.Forms.FileDialogCustomPlace</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -28,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of wiprlhext custom places for the <see cref="T:System.Windows.Forms.FileDialog" /> class.</para
-      >
+        >Represents a collection of wiprlhext custom places for the <see cref="T:System.Windows.Forms.FileDialog" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -66,29 +63,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The folder is added to custom places only for a particular <see cref="T:System.Windows.Forms.FileDialog" /> and is not a system or application wide change.</para
-          >
+            >The folder is added to custom places only for a particular <see cref="T:System.Windows.Forms.FileDialog" /> and is not a system or application wide change.</para>
           <para
             >The folders are positioned in the custom places in the order that they are added to the <see cref="T:System.Windows.Forms.FileDialog" />. The last one added will be at the top. If you add a custom place to the collection that does not exist on the computer running the application, the custom place will not be shown. GUIDs are case-insensitive. For a list of the available wiprlhext Known Folders, see <format type="text/html">
               <a href="d8d8b544-8b4d-4da5-ba3a-b05e93244778"
-                >Known Folder Guids for File Dialog Custom Places</a
-              >
-            </format> or the KnownFolders.h file in the winSDK.</para
-          >
+                >Known Folder Guids for File Dialog Custom Places</a>
+            </format> or the KnownFolders.h file in the winSDK.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a custom place to the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> collection.</para
-          >
+            >Adds a custom place to the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> collection.</para>
         </summary>
         <param name="knownFolderGuid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Guid" /> that represents a wiprlhext Known Folder. </param
-        >
+          />A <see cref="T:System.Guid" /> that represents a wiprlhext Known Folder. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -107,25 +99,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The folder is added to custom places only for a particular <see cref="T:System.Windows.Forms.FileDialog" /> and is not a system or application wide change.</para
-          >
+            >The folder is added to custom places only for a particular <see cref="T:System.Windows.Forms.FileDialog" /> and is not a system or application wide change.</para>
           <para
-            >The folders are positioned in the custom places in the order that they are added to the <see cref="T:System.Windows.Forms.FileDialog" />. The last one added will be at the top. </para
-          >
+            >The folders are positioned in the custom places in the order that they are added to the <see cref="T:System.Windows.Forms.FileDialog" />. The last one added will be at the top. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a custom place to the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> collection.</para
-          >
+            >Adds a custom place to the <see cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" /> collection.</para>
         </summary>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A folder path to the custom place.</param
-        >
+          />A folder path to the custom place.</param>
       </Docs>
     </Member>
   </Members>

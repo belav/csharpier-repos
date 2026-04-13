@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MaxLengthAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MaxLengthAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -71,16 +70,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MaxLengthAttribute" /> class based on the <paramref name="length" /> parameter.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.MaxLengthAttribute" /> class based on the <paramref name="length" /> parameter.</para>
         </summary>
         <param name="length">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum allowable length of array or string data.</param
-        >
+          />The maximum allowable length of array or string data.</param>
       </Docs>
     </Member>
     <Member MemberName="FormatErrorMessage">
@@ -117,8 +114,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to include in the formatted string.</param
-        >
+          />The name to include in the formatted string.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -155,8 +151,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to validate.</param
-        >
+          />The object to validate.</param>
       </Docs>
     </Member>
     <Member MemberName="Length">

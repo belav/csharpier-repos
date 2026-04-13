@@ -244,8 +244,7 @@
         <param name="helper">A <see cref="T:Mono.DocTest.Generic.MyList`1.Helper`2" />.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
       </Docs>
     </Member>
   </Members>

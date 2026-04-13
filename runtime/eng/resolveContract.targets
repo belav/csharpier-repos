@@ -7,11 +7,9 @@
 
   <PropertyGroup>
     <ContractProject Condition="'$(ContractProject)' == ''"
-      >$(LibrariesProjectRoot)$(MSBuildProjectName)\ref\$(MSBuildProjectName).csproj</ContractProject
-    >
+      >$(LibrariesProjectRoot)$(MSBuildProjectName)\ref\$(MSBuildProjectName).csproj</ContractProject>
     <HasMatchingContract Condition="'$(HasMatchingContract)' == '' and Exists('$(ContractProject)')"
-      >true</HasMatchingContract
-    >
+      >true</HasMatchingContract>
     <!-- Don't build against reference assemblies when projects are packable and the tfm is not the latest .NETCoreApp as
          such reference assemblies don't ship to customers and only exist for tooling scenarios. -->
     <AnnotateTargetPathWithContract
@@ -24,8 +22,7 @@
                                                  '$(TargetFrameworkVersion)' == 'v$(NetCoreAppCurrentVersion)'
                                                 )
                                                )"
-      >true</AnnotateTargetPathWithContract
-    >
+      >true</AnnotateTargetPathWithContract>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(HasMatchingContract)' == 'true' and '$(ContractProject)' != ''">
@@ -75,8 +72,7 @@
     <_ApiCompatLibReplacementString>lib/$1/$2</_ApiCompatLibReplacementString>
     <!-- CoreLib source projects have different output paths. -->
     <_ApiCompatLibReplacementString Condition="'$(MSBuildProjectName)' == 'System.Private.CoreLib'"
-      >lib/$(NetCoreAppCurrent)/$2</_ApiCompatLibReplacementString
-    >
+      >lib/$(NetCoreAppCurrent)/$2</_ApiCompatLibReplacementString>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -84,8 +80,7 @@
       Condition="'$(IsRuntimeAndReferenceAssembly)' == '' and
                                               '$(HasMatchingContract)' != 'true' and
                                               '$(IsPrivateAssembly)' != 'true'"
-      >true</IsRuntimeAndReferenceAssembly
-    >
+      >true</IsRuntimeAndReferenceAssembly>
   </PropertyGroup>
 
   <!-- Disable suppression validation for packable projects that have a corresponding reference source project.
@@ -102,13 +97,11 @@
   <PropertyGroup Condition="'$(IsCrossTargetingBuild)' != 'true'">
     <!-- Disable API compat if the project doesn't have a reference assembly. -->
     <ApiCompatValidateAssemblies Condition="'$(HasMatchingContract)' != 'true'"
-      >false</ApiCompatValidateAssemblies
-    >
+      >false</ApiCompatValidateAssemblies>
     <!-- TODO: Move into Microsoft.DotNet.GenFacadesNotSupported.targets. -->
     <!-- Not supported sources are created from the ref assembly, we currently don't produce finalizers in dummy assemblies, so we disable ApiCompat to not fail. -->
     <ApiCompatValidateAssemblies Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' != ''"
-      >false</ApiCompatValidateAssemblies
-    >
+      >false</ApiCompatValidateAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
@@ -172,8 +165,7 @@
     <GenAPITargetPath>$([MSBuild]::NormalizePath('$(MSBuildProjectDirectory)', '..', 'ref', '$(AssemblyName).cs'))</GenAPITargetPath>
     <GenAPILangVersion Condition="'$(LangVersion)' != ''">$(LangVersion)</GenAPILangVersion>
     <ProjectForGenAPIDocIdGeneration Condition="'$(ProjectForGenAPIDocIdGeneration)' == ''"
-      >$(CoreLibProject)</ProjectForGenAPIDocIdGeneration
-    >
+      >$(CoreLibProject)</ProjectForGenAPIDocIdGeneration>
   </PropertyGroup>
 
   <ItemGroup>
@@ -197,8 +189,7 @@
       <!-- We either wrap all contract types in a #if condition (when SymbolForGenAPIConditionalTypeLists is empty),
            or just the types mentioned in GenAPIConditionalTypeLists with the symbol specified in SymbolForGenAPIConditionalTypeLists -->
       <GenAPIDefaultCondition Condition="'$(SymbolForGenAPIConditionalTypeLists)' == ''"
-        >!BUILDING_CORELIB_REFERENCE</GenAPIDefaultCondition
-      >
+        >!BUILDING_CORELIB_REFERENCE</GenAPIDefaultCondition>
     </PropertyGroup>
 
     <ItemGroup>
@@ -207,8 +198,7 @@
 
       <GenAPIConditionalTypeLists Include="$(IntermediateOutputPath)GenAPIConditionalTypeList.txt">
         <Symbol Condition="'$(SymbolForGenAPIConditionalTypeLists)' != ''"
-          >$(SymbolForGenAPIConditionalTypeLists)</Symbol
-        >
+          >$(SymbolForGenAPIConditionalTypeLists)</Symbol>
       </GenAPIConditionalTypeLists>
     </ItemGroup>
 
@@ -230,8 +220,7 @@
     <PropertyGroup>
       <GenAPIFollowTypeForwards
         Condition="'%(ProjectReference.Identity)' == '$(CoreLibProject)' or '%(ProjectReference.Identity)' == '$(UriProject)'"
-        >true</GenAPIFollowTypeForwards
-      >
+        >true</GenAPIFollowTypeForwards>
     </PropertyGroup>
   </Target>
 

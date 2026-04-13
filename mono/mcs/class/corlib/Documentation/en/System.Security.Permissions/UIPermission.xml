@@ -38,8 +38,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Drawing and user input events in windows are user interfaces.</para>
       <para
-        >The permission to use windows can be one of the following: unrestricted, limited to <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />, only <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />, or no window drawing or user input event access allowed. <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" /> and <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" /> are restricted in title and size to prevent possible spoofing by potentially harmful code.</para
-      >
+        >The permission to use windows can be one of the following: unrestricted, limited to <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />, only <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />, or no window drawing or user input event access allowed. <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" /> and <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" /> are restricted in title and size to prevent possible spoofing by potentially harmful code.</para>
       <para>The permission to use the Clipboard can be one of the following: unrestricted, write-only, or no Clipboard access allowed. The paste limitation prevents potentially harmful applications from taking data from the Clipboard without the user's consent, while still allowing the cut, copy, and paste operations when initiated by the user through keyboard commands.</para>
     </remarks>
     <summary>
@@ -75,16 +74,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with either fully restricted or unrestricted access, as specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with either fully restricted or unrestricted access, as specified.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -114,16 +111,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with the permissions for the Clipboard, and no access to windows.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with the permissions for the Clipboard, and no access to windows.</para>
         </summary>
         <param name="clipboardFlag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -153,16 +148,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with the permissions for windows, and no access to the Clipboard.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with the permissions for windows, and no access to the Clipboard.</para>
         </summary>
         <param name="windowFlag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -190,23 +183,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with the specified permissions for windows and the Clipboard.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.UIPermission" /> class with the specified permissions for windows and the Clipboard.</para>
         </summary>
         <param name="windowFlag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values. </param>
         <param name="clipboardFlag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values. </param
-        >
+          />One of the enumeration values. </param>
       </Docs>
     </Member>
     <Member MemberName="Clipboard">
@@ -299,8 +289,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding used to reconstruct the permission. </param
-        >
+          />The XML encoding used to reconstruct the permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -328,8 +317,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The intersection of two permissions is a permission that describes the set of operations they both describe in common. Specifically, it represents the least permissive values of <see cref="T:System.Security.Permissions.UIPermissionWindow" /> and <see cref="T:System.Security.Permissions.UIPermissionClipboard" /> from those in the current permission and the specified permission.</para
-          >
+            >The intersection of two permissions is a permission that describes the set of operations they both describe in common. Specifically, it represents the least permissive values of <see cref="T:System.Security.Permissions.UIPermissionWindow" /> and <see cref="T:System.Security.Permissions.UIPermissionClipboard" /> from those in the current permission and the specified permission.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -344,8 +332,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -373,8 +360,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if all demands that succeed for the current permission also succeed for the specified permission. That is, the specified permission contains at least the permissions contained in the subset. For <see cref="M:System.Security.Permissions.UIPermission.IsSubsetOf(System.Security.IPermission)" /> to return true, both the <see cref="T:System.Security.Permissions.UIPermissionWindow" /> and <see cref="T:System.Security.Permissions.UIPermissionClipboard" /> values of the current permission must be equal to or less permissive than the values of the specified permission.</para
-          >
+            >The current permission is a subset of the specified permission if all demands that succeed for the current permission also succeed for the specified permission. That is, the specified permission contains at least the permissions contained in the subset. For <see cref="M:System.Security.Permissions.UIPermission.IsSubsetOf(System.Security.IPermission)" /> to return true, both the <see cref="T:System.Security.Permissions.UIPermissionWindow" /> and <see cref="T:System.Security.Permissions.UIPermissionClipboard" /> values of the current permission must be equal to or less permissive than the values of the specified permission.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -389,8 +375,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -502,8 +487,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.UIPermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by the current permission as well as all the operations represented by the specified permission. Specifically, it represents the most permissive values of <see cref="T:System.Security.Permissions.UIPermissionWindow" /> and <see cref="T:System.Security.Permissions.UIPermissionClipboard" /> from those in the current permission and the specified permission.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.UIPermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by the current permission as well as all the operations represented by the specified permission. Specifically, it represents the most permissive values of <see cref="T:System.Security.Permissions.UIPermissionWindow" /> and <see cref="T:System.Security.Permissions.UIPermissionClipboard" /> from those in the current permission and the specified permission.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -518,8 +502,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Window">

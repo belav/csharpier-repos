@@ -11,16 +11,13 @@
         .Replace('netcoreapp2.0', '')
         .Trim(';'))</_Temporary>
     <_OpenApiGenerateDocumentsTFM Condition=" '$(_Temporary)' != '' "
-      >$(_Temporary.Split(';')[0])</_OpenApiGenerateDocumentsTFM
-    >
+      >$(_Temporary.Split(';')[0])</_OpenApiGenerateDocumentsTFM>
 
     <OpenApiGenerateDocuments
       Condition=" '$(OpenApiGenerateDocuments)' == '' AND '$(_Temporary)' != '' "
-      >true</OpenApiGenerateDocuments
-    >
+      >true</OpenApiGenerateDocuments>
     <OpenApiGenerateDocumentsOnBuild Condition=" '$(OpenApiGenerateDocumentsOnBuild)' == '' "
-      >$(OpenApiGenerateDocuments)</OpenApiGenerateDocumentsOnBuild
-    >
+      >$(OpenApiGenerateDocuments)</OpenApiGenerateDocumentsOnBuild>
 
     <_Temporary />
   </PropertyGroup>

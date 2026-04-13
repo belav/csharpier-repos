@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.XmlDocumentType" /> class can be used to return information about a document type declaration. Use the <see cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" /> method to create an <see cref="T:System.Xml.XmlDocumentType" /> object.</para
-      >
+        >The <see cref="T:System.Xml.XmlDocumentType" /> class can be used to return information about a document type declaration. Use the <see cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" /> method to create an <see cref="T:System.Xml.XmlDocumentType" /> object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -60,46 +59,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see cref="T:System.Xml.XmlDocumentType" /> directly; instead, use members such as <see cref="P:System.Xml.XmlDocument.DocumentType" /> to obtain one.</para
-          >
+            >Do not instantiate an <see cref="T:System.Xml.XmlDocumentType" /> directly; instead, use members such as <see cref="P:System.Xml.XmlDocument.DocumentType" /> to obtain one.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlDocumentType" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDocumentType" /> class.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name; see the <see cref="P:System.Xml.XmlDocumentType.Name" /> property.</param
-        >
+          />The qualified name; see the <see cref="P:System.Xml.XmlDocumentType.Name" /> property.</param>
         <param name="publicId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The public identifier; see the <see cref="P:System.Xml.XmlDocumentType.PublicId" /> property.</param
-        >
+          />The public identifier; see the <see cref="P:System.Xml.XmlDocumentType.PublicId" /> property.</param>
         <param name="systemId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The system identifier; see the <see cref="P:System.Xml.XmlDocumentType.SystemId" /> property.</param
-        >
+          />The system identifier; see the <see cref="P:System.Xml.XmlDocumentType.SystemId" /> property.</param>
         <param name="internalSubset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The DTD internal subset; see the <see cref="P:System.Xml.XmlDocumentType.InternalSubset" /> property.</param
-        >
+          />The DTD internal subset; see the <see cref="P:System.Xml.XmlDocumentType.InternalSubset" /> property.</param>
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent document.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The parent document.</param>
       </Docs>
     </Member>
     <Member MemberName="CloneNode">
@@ -127,11 +123,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" /> returns null).</para
-          >
+            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" /> returns null).</para>
           <para
-            >To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para
-          >
+            >To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -146,8 +140,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. For document type nodes, the cloned node always includes the subtree, regardless of the parameter setting. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself. For document type nodes, the cloned node always includes the subtree, regardless of the parameter setting. </param>
       </Docs>
     </Member>
     <Member MemberName="Entities">
@@ -174,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see cref="T:System.Xml.XmlEntity" /> nodes declared in the document type declaration.</para
-          >
+            >Gets the collection of <see cref="T:System.Xml.XmlEntity" /> nodes declared in the document type declaration.</para>
         </summary>
       </Docs>
     </Member>
@@ -319,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see cref="T:System.Xml.XmlNotation" /> nodes present in the document type declaration.</para
-          >
+            >Gets the collection of <see cref="T:System.Xml.XmlNotation" /> nodes present in the document type declaration.</para>
         </summary>
       </Docs>
     </Member>
@@ -392,16 +383,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlDocumentType nodes, this method has no effect.</para
-          >
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlDocumentType nodes, this method has no effect.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -436,8 +425,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
   </Members>

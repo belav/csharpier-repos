@@ -21,8 +21,7 @@
       <para
         >This class is used to handle the <format type="text/html">
           <a href="d129d10c-3eb7-45d9-8098-5fa853825e47">&lt;xmlSerializer&gt; Element</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.XmlSerializerSection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.XmlSerializerSection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -68,14 +66,12 @@
           <para
             >Do not use this method. Instead, set the checkDeserializerAdvances attribute of the <format type="text/html">
               <a href="d129d10c-3eb7-45d9-8098-5fa853825e47">&lt;xmlSerializer&gt; Element</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that determines whether an additional check of progress of the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is done.</para
-          >
+            >Gets or sets a value that determines whether an additional check of progress of the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is done.</para>
         </summary>
       </Docs>
     </Member>

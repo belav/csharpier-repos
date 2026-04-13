@@ -537,8 +537,7 @@
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
         <param name="sourceColumnNullMapping"
-          >Whether or not this parameter is for comparing NULL's</param
-        >
+          >Whether or not this parameter is for comparing NULL's</param>
         <param name="value">The intial value to assign the parameter</param>
         <summary>
             Constructs a named parameter, yet another flavor

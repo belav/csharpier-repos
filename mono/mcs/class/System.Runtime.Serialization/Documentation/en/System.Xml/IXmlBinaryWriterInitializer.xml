@@ -51,29 +51,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="dictionary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="session">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlBinaryWriterSession" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlBinaryWriterSession" /> to use.</param>
         <param name="ownsStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />If true, stream is closed by the writer when done; otherwise false.</param
-        >
+          />If true, stream is closed by the writer when done; otherwise false.</param>
       </Docs>
     </Member>
   </Members>

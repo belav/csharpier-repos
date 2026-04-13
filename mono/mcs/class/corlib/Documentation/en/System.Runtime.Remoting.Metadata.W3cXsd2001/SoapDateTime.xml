@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides static methods for the serialization and deserialization of <see cref="T:System.DateTime" /> to a string that is formatted as XSD dateTime. </para
-      >
+        >Provides static methods for the serialization and deserialization of <see cref="T:System.DateTime" /> to a string that is formatted as XSD dateTime. </para>
     </summary>
   </Docs>
   <Members>
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDateTime" />.</para
-          >
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDateTime" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -188,22 +186,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see cref="T:System.String" /> into a <see cref="T:System.DateTime" /> object.</para
-          >
+            >Converts the specified <see cref="T:System.String" /> into a <see cref="T:System.DateTime" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.DateTime" /> object obtained from <paramref name="value" />.</para
-          >
+            >A <see cref="T:System.DateTime" /> object obtained from <paramref name="value" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The String to convert. </param
-        >
+          />The String to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -229,22 +224,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the specified <see cref="T:System.DateTime" /> object as a <see cref="T:System.String" />.</para
-          >
+            >Returns the specified <see cref="T:System.DateTime" /> object as a <see cref="T:System.String" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> representation of <paramref name="value" /> in the format "yyyy-MM-dd'T'HH:mm:ss.fffffffzzz".</para
-          >
+            >A <see cref="T:System.String" /> representation of <paramref name="value" /> in the format "yyyy-MM-dd'T'HH:mm:ss.fffffffzzz".</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> object to convert. </param
-        >
+          />The <see cref="T:System.DateTime" /> object to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="XsdType">

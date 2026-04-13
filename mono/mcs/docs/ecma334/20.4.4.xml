@@ -18,8 +18,7 @@ class MyControl: Control, IControl
    public void Paint() {}  
 }  
 ]]>
-      </code_example>the fact that Control maps IControl.Paint onto Control.IControl.Paint doesn't affect the  re-implementation in MyControl, which maps IControl.Paint onto MyControl.Paint. end example]</example
-    >
+      </code_example>the fact that Control maps IControl.Paint onto Control.IControl.Paint doesn't affect the  re-implementation in MyControl, which maps IControl.Paint onto MyControl.Paint. end example]</example>
   </paragraph>
   <paragraph
     >Inherited public member declarations and inherited explicit interface member declarations participate in the interface mapping process for re-implemented interfaces. <example

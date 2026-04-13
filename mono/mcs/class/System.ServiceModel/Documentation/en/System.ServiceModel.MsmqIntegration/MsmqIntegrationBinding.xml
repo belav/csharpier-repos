@@ -23,14 +23,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This binding can be used to enable indigo2 applications to send and receive messages to and from existing MSMQ applications that use COM, native C++ APIs or the types defined in the <see cref="N:System.Messaging" /> namespace.</para
-      >
+        >This binding can be used to enable indigo2 applications to send and receive messages to and from existing MSMQ applications that use COM, native C++ APIs or the types defined in the <see cref="N:System.Messaging" /> namespace.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class maps Microsoft Message Queuing (MSMQ) messages to indigo1 messages.</para
-      >
+        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class maps Microsoft Message Queuing (MSMQ) messages to indigo1 messages.</para>
     </summary>
   </Docs>
   <Members>
@@ -50,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -78,22 +75,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to instantiate a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> and pass in a security mode. </para
-          >
+            >This method enables you to instantiate a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> and pass in a security mode. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class by using the specified <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class by using the specified <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" />.</para>
         </summary>
         <param name="securityMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security mode supported by the Message Queuing (MSMQ) integration channel</param
-        >
+          />The security mode supported by the Message Queuing (MSMQ) integration channel</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -120,16 +114,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class from the settings of a specified configuration binding element.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" /> class from the settings of a specified configuration binding element.</para>
         </summary>
         <param name="configurationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the configurationName attribute that identifies the binding element whose settings are used to initialize the binding.</param
-        >
+          />The value of the configurationName attribute that identifies the binding element whose settings are used to initialize the binding.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElements">
@@ -158,8 +150,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> that contains the stack of binding elements in the basic profile stack.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.BindingElementCollection" /> that contains the stack of binding elements in the basic profile stack.</para>
         </returns>
       </Docs>
     </Member>
@@ -184,14 +175,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" /> encapsulates Message Queuing (MSMQ) transport security settings.</para
-          >
+            <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" /> encapsulates Message Queuing (MSMQ) transport security settings.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" /> that is associated with this binding. </para
-          >
+            >Gets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" /> that is associated with this binding. </para>
         </summary>
       </Docs>
     </Member>
@@ -216,8 +205,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns an enumeration value that specifies how a indigo2 message will be serialized and deserialized. For more information, see <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />.</para
-          >
+            >This property returns an enumeration value that specifies how a indigo2 message will be serialized and deserialized. For more information, see <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -5,8 +5,7 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <RuntimeIdentifier>$(TargetOS)-$(TargetArchitecture)</RuntimeIdentifier>
     <DefineConstants Condition="'$(ArchiveTests)' == 'true'"
-      >$(DefineConstants);CI_TEST</DefineConstants
-    >
+      >$(DefineConstants);CI_TEST</DefineConstants>
     <MonoForceInterpreter>true</MonoForceInterpreter>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
@@ -28,8 +27,7 @@
   <PropertyGroup Condition="'$(TargetOS)' == 'maccatalyst'">
     <DevTeamProvisioning
       Condition="'$(TargetOS)' == 'maccatalyst' and '$(DevTeamProvisioning)' == ''"
-      >-</DevTeamProvisioning
-    >
+      >-</DevTeamProvisioning>
   </PropertyGroup>
 
   <Import Project="$(RepoTasksDir)AotCompilerTask\MonoAOTCompiler.props" />
@@ -42,8 +40,7 @@
       <Optimized Condition="'$(Configuration)' == 'Release'">True</Optimized>
       <RunAOTCompilation
         Condition="('$(TargetsMacCatalyst)' == 'false' and '$(IosSimulator)' == '') or '$(ForceAOT)' == 'true'"
-        >true</RunAOTCompilation
-      >
+        >true</RunAOTCompilation>
     </PropertyGroup>
 
     <Error

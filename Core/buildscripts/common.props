@@ -8,8 +8,7 @@
     <RepositoryUrl>https://github.com/castleproject/Core</RepositoryUrl>
     <BuildVersion>0.0.0</BuildVersion>
     <BuildVersion Condition="'$(APPVEYOR_BUILD_VERSION)'!=''"
-      >$(APPVEYOR_BUILD_VERSION)</BuildVersion
-    >
+      >$(APPVEYOR_BUILD_VERSION)</BuildVersion>
     <BuildVersionMajor>$(BuildVersion.Split('.')[0])</BuildVersionMajor>
     <BuildVersionNoSuffix>$(BuildVersion.Split('-')[0])</BuildVersionNoSuffix>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

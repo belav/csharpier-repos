@@ -16,8 +16,7 @@
     <BaseTypeName>System.ServiceModel.Configuration.MexBindingElement&lt;System.ServiceModel.Channels.CustomBinding&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.Channels.CustomBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.Channels.CustomBinding</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexTcpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexTcpBindingElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -68,16 +66,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexTcpBindingElement" /> class with the specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexTcpBindingElement" /> class with the specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the binding.</param
-        >
+          />The name of the binding.</param>
       </Docs>
     </Member>
   </Members>

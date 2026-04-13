@@ -9,8 +9,7 @@
   <PropertyGroup>
     <SignAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >false</SignAssembly
-    >
+      >false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>

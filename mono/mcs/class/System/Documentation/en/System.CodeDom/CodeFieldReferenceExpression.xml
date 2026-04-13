@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeFieldReferenceExpression" /> can be used to represent a reference to a field.</para
-      >
+        <see cref="T:System.CodeDom.CodeFieldReferenceExpression" /> can be used to represent a reference to a field.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeFieldReferenceExpression.TargetObject" /> property specifies the object that contains the field. The <see cref="P:System.CodeDom.CodeFieldReferenceExpression.FieldName" /> property specifies the name of the field to reference.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeFieldReferenceExpression.TargetObject" /> property specifies the object that contains the field. The <see cref="P:System.CodeDom.CodeFieldReferenceExpression.FieldName" /> property specifies the name of the field to reference.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeFieldReferenceExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeFieldReferenceExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -95,23 +92,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeFieldReferenceExpression" /> class using the specified target object and field name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeFieldReferenceExpression" /> class using the specified target object and field name.</para>
         </summary>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the field. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the field. </param>
         <param name="fieldName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field. </param
-        >
+          />The name of the field. </param>
       </Docs>
     </Member>
     <Member MemberName="FieldName">

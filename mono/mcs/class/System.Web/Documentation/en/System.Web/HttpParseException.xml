@@ -22,8 +22,7 @@
       <para
         >The <see cref="T:System.Web.HttpParseException" /> class is an HTTP-specific exception class that enables ASP.NET to output parser exception information. For more information on throwing and handling exceptions, see <format type="text/html">
           <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
-        </format>. </para
-      >
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -43,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -62,16 +60,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with a specified error message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with a specified error message. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception message to specify when the error occurs.</param
-        >
+          />The exception message to specify when the error occurs.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -92,23 +88,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with a specified error message and a reference to the inner. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with a specified error message and a reference to the inner. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception message to specify when the error occurs.</param
-        >
+          />The exception message to specify when the error occurs.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -132,44 +125,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with specific information about the source code being compiled and the line number on which the exception occurred. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with specific information about the source code being compiled and the line number on which the exception occurred. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception message to specify when the error occurs.</param
-        >
+          />The exception message to specify when the error occurs.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles the inner exception.</param
-        >
+          />The exception that is the cause of the current exception. If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles the inner exception.</param>
         <param name="virtualPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The virtual path for the exception.</param
-        >
+          />The virtual path for the exception.</param>
         <param name="sourceCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source code being compiled when the exception occurs.</param
-        >
+          />The source code being compiled when the exception occurs.</param>
         <param name="line">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number on which the exception occurred.</param
-        >
+          />The line number on which the exception occurred.</param>
       </Docs>
     </Member>
     <Member MemberName="FileName">
@@ -183,8 +170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.HttpParseException.FileName" /> property returns the physical path to the source file that has the error unless the physical path is null, in which case it returns null.</para
-          >
+            >The <see cref="P:System.Web.HttpParseException.FileName" /> property returns the physical path to the source file that has the error unless the physical path is null, in which case it returns null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -217,22 +203,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.HttpParseException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para
-          >
+            >The <see cref="M:System.Web.HttpParseException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with information about the exception.</para
-          >
+            >When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with information about the exception.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
       </Docs>
     </Member>
     <Member MemberName="Line">

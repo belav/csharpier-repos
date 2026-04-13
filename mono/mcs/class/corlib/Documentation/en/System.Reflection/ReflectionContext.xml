@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The purpose of this class is to provide a way for reflection code to be made aware when reflection objects originate in a context other than the default reflection context, so that operations on those objects can use that context. For example, reflection objects that originate with a <see cref="T:System.Reflection.Context.CustomReflectionContext" /> object should be compared only with reflection objects that have the same origin. For more information, see the <see cref="T:System.Reflection.Context.CustomReflectionContext" /> reference page.</para
-      >
+        >The purpose of this class is to provide a way for reflection code to be made aware when reflection objects originate in a context other than the default reflection context, so that operations on those objects can use that context. For example, reflection objects that originate with a <see cref="T:System.Reflection.Context.CustomReflectionContext" /> object should be compared only with reflection objects that have the same origin. For more information, see the <see cref="T:System.Reflection.Context.CustomReflectionContext" /> reference page.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -42,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionContext" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionContext" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -81,8 +79,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to represent.</param
-        >
+          />The object to represent.</param>
       </Docs>
     </Member>
     <Member MemberName="MapAssembly">
@@ -119,8 +116,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The external representation of the assembly to represent in this context.</param
-        >
+          />The external representation of the assembly to represent in this context.</param>
       </Docs>
     </Member>
     <Member MemberName="MapType">
@@ -157,8 +153,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The external representation of the type to represent in this context.</param
-        >
+          />The external representation of the type to represent in this context.</param>
       </Docs>
     </Member>
   </Members>

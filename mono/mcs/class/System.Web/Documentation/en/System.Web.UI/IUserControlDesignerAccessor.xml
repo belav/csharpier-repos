@@ -33,8 +33,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.IUserControlDesignerAccessor.InnerText" /> property is used by the designer to specify or determine the text between the opening and closing tags of a user control.</para
-          >
+            >The <see cref="P:System.Web.UI.IUserControlDesignerAccessor.InnerText" /> property is used by the designer to specify or determine the text between the opening and closing tags of a user control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,8 +57,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.IUserControlDesignerAccessor.TagName" /> property is used by the designer to specify or determine the full tag name of the user control.</para
-          >
+            >The <see cref="P:System.Web.UI.IUserControlDesignerAccessor.TagName" /> property is used by the designer to specify or determine the full tag name of the user control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

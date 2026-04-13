@@ -20,25 +20,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" /> is passed to the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event handler to provide event data to the handler. The <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event is raised when validation is performed on the server. This allows you to perform a custom server-side validation routine on the value of an input control (with a <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control associated with it) in the event handler.</para
-      >
+        >A <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" /> is passed to the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event handler to provide event data to the handler. The <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event is raised when validation is performed on the server. This allows you to perform a custom server-side validation routine on the value of an input control (with a <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control associated with it) in the event handler.</para>
       <para
-        >The value to validate is determined by using the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property. Once your code has determined whether the value is valid, store the results of the validation in the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.IsValid" /> property.</para
-      >
+        >The value to validate is determined by using the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property. Once your code has determined whether the value is valid, store the results of the validation in the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.IsValid" /> property.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.ServerValidateEventArgs.#ctor(System.String,System.Boolean)" /> constructor.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.ServerValidateEventArgs.#ctor(System.String,System.Boolean)" /> constructor.</para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event of the <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control. This class cannot be inherited.</para
-      >
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event of the <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,11 +53,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" /> class.</para
-          >
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" /> class.</para>
           <para
-            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" />.</para
-          >
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -95,16 +88,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ServerValidateEventArgs" /> class.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate. </param
-        >
+          />The value to validate. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -123,14 +114,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Once your validation routine finishes, use the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.IsValid" /> property to indicate whether the value specified by the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property passed validation. This value determines whether the input control associated with the <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control passed validation.</para
-          >
+            >Once your validation routine finishes, use the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.IsValid" /> property to indicate whether the value specified by the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property passed validation. This value determines whether the input control associated with the <see cref="T:System.Web.UI.WebControls.CustomValidator" /> control passed validation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets whether the value specified by the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property passed validation.</para
-          >
+            >Gets or sets whether the value specified by the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property passed validation.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -149,14 +138,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property determine the value to validate in the custom event handler for the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event. Notice that you cannot programmatically change this value.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.ServerValidateEventArgs.Value" /> property determine the value to validate in the custom event handler for the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event. Notice that you cannot programmatically change this value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value to validate in the custom event handler for the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event.</para
-          >
+            >Gets the value to validate in the custom event handler for the <see cref="E:System.Web.UI.WebControls.CustomValidator.ServerValidate" /> event.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

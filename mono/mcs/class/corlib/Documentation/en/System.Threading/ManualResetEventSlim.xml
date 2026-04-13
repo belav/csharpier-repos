@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use this class for better performance than <see cref="T:System.Threading.ManualResetEvent" /> when wait times are expected to be very short, and when the event does not cross a process boundary. <see cref="T:System.Threading.ManualResetEventSlim" /> uses busy spinning for a short time while it waits for the event to become signaled. When wait times are short, spinning can be much less expensive than waiting by using wait handles. However, if the event does not become signaled within a certain period of time, <see cref="T:System.Threading.ManualResetEventSlim" /> resorts to a regular event handle wait.</para
-      >
+        >You can use this class for better performance than <see cref="T:System.Threading.ManualResetEvent" /> when wait times are expected to be very short, and when the event does not cross a process boundary. <see cref="T:System.Threading.ManualResetEventSlim" /> uses busy spinning for a short time while it waits for the event to become signaled. When wait times are short, spinning can be much less expensive than waiting by using wait handles. However, if the event does not become signaled within a certain period of time, <see cref="T:System.Threading.ManualResetEventSlim" /> resorts to a regular event handle wait.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a slimmed down version of <see cref="T:System.Threading.ManualResetEvent" />.</para
-      >
+        >Provides a slimmed down version of <see cref="T:System.Threading.ManualResetEvent" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class with an initial state of nonsignaled.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class with an initial state of nonsignaled.</para>
         </summary>
       </Docs>
     </Member>
@@ -76,16 +73,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class with a Boolean value indicating whether to set the intial state to signaled.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class with a Boolean value indicating whether to set the intial state to signaled.</para>
         </summary>
         <param name="initialState">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to set the initial state signaled; false to set the initial state to nonsignaled.</param
-        >
+          />true to set the initial state signaled; false to set the initial state to nonsignaled.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -110,23 +105,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class with a Boolean value indicating whether to set the intial state to signaled and a specified spin count.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class with a Boolean value indicating whether to set the intial state to signaled and a specified spin count.</para>
         </summary>
         <param name="initialState">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to set the initial state to signaled; false to set the initial state to nonsignaled.</param
-        >
+          />true to set the initial state to signaled; false to set the initial state to nonsignaled.</param>
         <param name="spinCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of spin waits that will occur before falling back to a kernel-based wait operation.</param
-        >
+          />The number of spin waits that will occur before falling back to a kernel-based wait operation.</param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -147,26 +139,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see cref="T:System.Threading.ManualResetEventSlim" />. The Dispose method leaves the <see cref="T:System.Threading.ManualResetEventSlim" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.ManualResetEventSlim" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.ManualResetEventSlim" /> was occupying.</para
-          >
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.ManualResetEventSlim" />. The Dispose method leaves the <see cref="T:System.Threading.ManualResetEventSlim" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.ManualResetEventSlim" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.ManualResetEventSlim" /> was occupying.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.ManualResetEventSlim" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ManualResetEventSlim" /> object's Finalize method.</para
-            >
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.ManualResetEventSlim" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ManualResetEventSlim" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class.</para
-          >
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.ManualResetEventSlim" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -190,22 +178,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike most of the members of <see cref="T:System.Threading.ManualResetEventSlim" />, <see cref="M:System.Threading.ManualResetEventSlim.Dispose(System.Boolean)" /> is not thread-safe and may not be used concurrently with other members of this instance.</para
-          >
+            >Unlike most of the members of <see cref="T:System.Threading.ManualResetEventSlim" />, <see cref="M:System.Threading.ManualResetEventSlim.Dispose(System.Boolean)" /> is not thread-safe and may not be used concurrently with other members of this instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Threading.ManualResetEventSlim" />, and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Threading.ManualResetEventSlim" />, and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
       </Docs>
     </Member>
     <Member MemberName="IsSet">
@@ -245,8 +230,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Threading.ManualResetEventSlim.Reset" /> can be called concurrently with all members except <see cref="P:System.Threading.ManualResetEventSlim.WaitHandle" />.</para
-          >
+            <see cref="M:System.Threading.ManualResetEventSlim.Reset" /> can be called concurrently with all members except <see cref="P:System.Threading.ManualResetEventSlim.WaitHandle" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -317,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set.</para
-          >
+            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set.</para>
         </summary>
       </Docs>
     </Member>
@@ -343,22 +326,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a 32-bit signed integer to measure the time interval.</para
-          >
+            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a 32-bit signed integer to measure the time interval.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para>
         </returns>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -388,16 +368,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> receives a signal, while observing a <see cref="T:System.Threading.CancellationToken" />.</para
-          >
+            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> receives a signal, while observing a <see cref="T:System.Threading.CancellationToken" />.</para>
         </summary>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -421,22 +399,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the time interval.</para
-          >
+            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the time interval.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -464,29 +439,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a 32-bit signed integer to measure the time interval, while observing a <see cref="T:System.Threading.CancellationToken" />.</para
-          >
+            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a 32-bit signed integer to measure the time interval, while observing a <see cref="T:System.Threading.CancellationToken" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para>
         </returns>
         <param name="millisecondsTimeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param
-        >
+          />The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />(-1) to wait indefinitely.</param>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="Wait">
@@ -514,29 +485,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the time interval, while observing a <see cref="T:System.Threading.CancellationToken" />.</para
-          >
+            >Blocks the current thread until the current <see cref="T:System.Threading.ManualResetEventSlim" /> is set, using a <see cref="T:System.TimeSpan" /> to measure the time interval, while observing a <see cref="T:System.Threading.CancellationToken" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Threading.ManualResetEventSlim" /> was set; otherwise, false.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" /> that represents -1 milliseconds to wait indefinitely.</param>
         <param name="cancellationToken">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param
-        >
+          />The <see cref="T:System.Threading.CancellationToken" /> to observe.</param>
       </Docs>
     </Member>
     <Member MemberName="WaitHandle">
@@ -560,14 +527,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Accessing this property forces initialization of an underlying event object if one hasn't already been created. To simply wait on this <see cref="T:System.Threading.ManualResetEventSlim" />, the public Wait methods should be preferred. It is recommended to dispose the <see cref="T:System.Threading.ManualResetEventSlim" /> instance after accessing this property, in order to prevent a resource leak.</para
-          >
+            >Accessing this property forces initialization of an underlying event object if one hasn't already been created. To simply wait on this <see cref="T:System.Threading.ManualResetEventSlim" />, the public Wait methods should be preferred. It is recommended to dispose the <see cref="T:System.Threading.ManualResetEventSlim" /> instance after accessing this property, in order to prevent a resource leak.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying <see cref="T:System.Threading.WaitHandle" /> object for this <see cref="T:System.Threading.ManualResetEventSlim" />.</para
-          >
+            >Gets the underlying <see cref="T:System.Threading.WaitHandle" /> object for this <see cref="T:System.Threading.ManualResetEventSlim" />.</para>
         </summary>
       </Docs>
     </Member>

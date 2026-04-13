@@ -14,9 +14,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -34,8 +32,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-    <see cref="T:Mono.Unix.Native.Syscall" /> instead.</para
-      >
+    <see cref="T:Mono.Unix.Native.Syscall" /> instead.</para>
       <para>The syscall wrapper follows the posix standard. This means some functionality or flags which are linux specific may not be available. Below is a list of known posix syscall functions and features that are not yet implemented.</para>
       <list type="table">
         <listheader>
@@ -205,13 +202,11 @@
         <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Checks whether the calling task has the necessary access rights to perform operations specified by mode on the file pathname. AccessMode is a mask consisting of one or more of the values R_OK, W_OK, X_OK and F_OK which respectively test if the taks can read, write, execute or test if the file exists.</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.access" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.access" /> instead.</para>
           <para> The test is performed using the real uid and gid of the calling task. Only the access bits of the file are tested. See 'man access(2)' for more information and error codes.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.access" />
@@ -239,13 +234,11 @@
         <param name="seconds">a <see cref="T:System.UInt32" /></param>
         <summary>If the call completes successfully, the taks will receive a SIGALARM signal after a delay of seconds seconds. A delay of zero seconds simply cancel the alarm. If an previous alarm was activated when the call is made then the previous alarm is cancelled.</summary>
         <returns
-          >a <see cref="T:System.UInt32" />. If a previous alarm was activated, the call returns the time delay before the expiration of that previous alarm (now canceled). Otherwise, it returns zero.</returns
-        >
+          >a <see cref="T:System.UInt32" />. If a previous alarm was activated, the call returns the time delay before the expiration of that previous alarm (now canceled). Otherwise, it returns zero.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.getuid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.getuid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.alarm" />
       </Docs>
@@ -272,13 +265,11 @@
         <param name="path">a <see cref="T:System.String" /></param>
         <summary>Changes the current directory to 'path'.</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.chdir" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.chdir" /> instead.</para>
           <para>See 'man chrdir(2)' for more information and error codes.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chdir" />
@@ -311,13 +302,11 @@
         <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Change permissions for a file or folder.</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.chmod" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.chmod" /> instead.</para>
           <para>See 'man chmod(2)' for error codes and more information.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chmod" />
@@ -352,13 +341,11 @@
         <param name="group">a <see cref="T:System.Int32" /> representing Group GID</param>
         <summary>Change owner for a file or folder.</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.chown" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.chown" /> instead.</para>
           <para>The  owner of the file specified by path is changed.  Only the super-user may change the owner of a file.  The owner  of  a  file  may change the group of the file to any group of which that owner is a member.  The super-user may change the group arbitrarily.
  See 'man chown(2)' for more information and error codes.</para>
         </remarks>
@@ -387,13 +374,11 @@
         <param name="path">a <see cref="T:System.String" /> representing new root directory.</param>
         <summary>Change root directory</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.chroot" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.chroot" /> instead.</para>
           <para>See 'man chroot(2)' for more information and error codes.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.chroot" />
@@ -421,13 +406,11 @@
         <param name="fileDescriptor">a <see cref="T:System.Int32" /></param>
         <summary>Closes the file descriptor fileDescriptor. If fileDescriptor is the last file descriptor refering to a file, then the ressources associated with that file are deallocated. The lock held on the file by the current task are released.</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.close" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.close" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.close" />
       </Docs>
@@ -454,13 +437,11 @@
         <param name="dir">a <see cref="T:System.IntPtr" /></param>
         <summary>Closes the directory represented by IntPtr. IntPtr is a pointer retrieved by opendir()</summary>
         <returns
-          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          >a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.closedir" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.closedir" /> instead.</para>
         </remarks>
         <altmember cref="T:Mono.Unix.UnixDirectory" />
         <altmember cref="T:Mono.Unix.UnixDirectoryInfo" />
@@ -497,11 +478,9 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.creat" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.creat" /> instead.</para>
           <para
-            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.creat" />
       </Docs>
@@ -531,11 +510,9 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.dup" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.dup" /> instead.</para>
           <para
-            >On success, the new file descriptor is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >On success, the new file descriptor is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.dup" />
       </Docs>
@@ -570,11 +547,9 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.dup2" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.dup2" /> instead.</para>
           <para
-            >On success, the new file descriptor is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >On success, the new file descriptor is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.dup2" />
       </Docs>
@@ -604,8 +579,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.exit" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.exit" /> instead.</para>
           <example>
             <code lang="C#">
 using System;
@@ -666,11 +640,9 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.fork" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.fork" /> instead.</para>
           <para
-            >On success, fork() returns 0 to the child process and returns the process ID of the child process to the parent process. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >On success, fork() returns 0 to the child process and returns the process ID of the child process to the parent process. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.fork" />
       </Docs>
@@ -697,8 +669,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.geteuid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.geteuid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getegid" />
       </Docs>
@@ -725,8 +696,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.geteuid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.geteuid" /> instead.</para>
           <para>To be added</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.geteuid" />
@@ -754,8 +724,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.getgid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.getgid" /> instead.</para>
           <para>To be added</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getgid" />
@@ -786,8 +755,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.UnixGroup.GetGroupName" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.UnixGroup.GetGroupName" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixGroup.GetGroupName" />
         <altmember cref="F:Mono.Unix.Native.Group.gr_name" />
@@ -824,8 +792,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="P:Mono.Unix.UnixEnvironment.MachineName" /> instead.</para
-          >
+          <see cref="P:Mono.Unix.UnixEnvironment.MachineName" /> instead.</para>
         </remarks>
         <altmember cref="P:Mono.Unix.UnixEnvironment.MachineName" />
         <altmember cref="M:Mono.Unix.Native.Syscall.gethostname" />
@@ -853,8 +820,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.getpgrp" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.getpgrp" /> instead.</para>
           <para>getpgrp always returns the current process group. see 'man getpgrp(2)' for more information.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpgrp" />
@@ -882,8 +848,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.getpid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.getpid" /> instead.</para>
           <para>often used to generate temp. file names etc.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpid" />
@@ -911,8 +876,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.getppid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.getppid" /> instead.</para>
           <para>To be added</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getppid" />
@@ -940,8 +904,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.getuid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.getuid" /> instead.</para>
           <para>To be added</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getuid" />
@@ -972,8 +935,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.UnixUser.GetUserName" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.UnixUser.GetUserName" /> instead.</para>
           <example>
             <code lang="C#">
 	public static void Main(string[] args)
@@ -1019,8 +981,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="P:Mono.Unix.Native.Syscall.isatty" /> instead.</para
-          >
+          <see cref="P:Mono.Unix.Native.Syscall.isatty" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.isatty" />
       </Docs>
@@ -1051,8 +1012,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.kill" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.kill" /> instead.</para>
           <example>
             <code lang="C#">
 		int myPID = Syscall.getpid();
@@ -1095,8 +1055,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.lchown" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.lchown" /> instead.</para>
           <para>The  owner of the file specified by path is changed.  Only the super-user may change the owner of a file.  The owner  of  a  file  may change the group of the file to any group of which that owner is a member.  The super-user may change the group arbitrarily.
  See 'man chown(2)' for more information and error codes.</para>
         </remarks>
@@ -1133,11 +1092,9 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.link" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.link" /> instead.</para>
           <para
-            >There is no way to distinguish the links. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >There is no way to distinguish the links. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.link" />
       </Docs>
@@ -1174,8 +1131,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.lseek" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.lseek" /> instead.</para>
           <para>The offset parameter is interpreted according to the possible following values of whence: </para>
           <list type="table">
             <listheader>
@@ -1195,8 +1151,7 @@ class Test
               <description>the new file offset will be the end of the file plus offset. </description>
             </item>
           </list>
-If we seek past the end of a file, the new file region contains 0. </remarks
-        >
+If we seek past the end of a file, the new file region contains 0. </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.lseek" />
       </Docs>
     </Member>
@@ -1227,13 +1182,11 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <param name="stat">a <see cref="T:Mono.Posix.Stat" /></param>
         <summary>Retrieves via output paramter the file status struct for a file.</summary>
         <returns
-          > a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          > a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="P:Mono.Unix.Native.Syscall.lstat" /> instead.</para
-          >
+          <see cref="P:Mono.Unix.Native.Syscall.lstat" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.lstat" />
       </Docs>
@@ -1265,13 +1218,11 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Create a directory at 'path' with the given FileMode.</summary>
         <returns
-          > a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          > a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.mkdir" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.mkdir" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixDirectory.CreateDirectory" />
         <altmember cref="M:Mono.Unix.UnixDirectoryInfo.Create" />
@@ -1300,13 +1251,11 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <param name="increment">a <see cref="T:System.Int32" /></param>
         <summary>Change the priority of the current process by given increment.</summary>
         <returns
-          > a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns
-        >
+          > a <see cref="T:System.Int32" />. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.nice" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.nice" /> instead.</para>
           <para>Adds 'increment' to the priority of the calling task. Only a task with superuser privileges may specify a negative inc.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.nice" />
@@ -1342,11 +1291,9 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.open" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.open" /> instead.</para>
           <para
-            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.open" />
       </Docs>
@@ -1383,11 +1330,9 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.open" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.open" /> instead.</para>
           <para
-            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.open" />
       </Docs>
@@ -1417,8 +1362,7 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.opendir" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.opendir" /> instead.</para>
           <example>
             <code lang="C#">
 	
@@ -1464,8 +1408,7 @@ public static void Main(string[] argv)
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.pause" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.pause" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.pause" />
       </Docs>
@@ -1502,8 +1445,7 @@ public static void Main(string[] argv)
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.read" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.read" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.read" />
       </Docs>
@@ -1533,8 +1475,7 @@ public static void Main(string[] argv)
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.readdir" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.readdir" /> instead.</para>
           <example>
             <code lang="C#">
 	
@@ -1553,8 +1494,7 @@ public static void Main(string[] argv)
   </code>
           </example>
 
-See also opendir()</remarks
-        >
+See also opendir()</remarks>
         <altmember cref="T:Mono.Unix.UnixDirectory" />
         <altmember cref="T:Mono.Unix.UnixDirectoryInfo" />
         <altmember cref="M:Mono.Unix.Native.Syscall.readdir" />
@@ -1585,8 +1525,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="P:Mono.Unix.Native.Syscall.readlink" /> instead.</para
-          >
+          <see cref="P:Mono.Unix.Native.Syscall.readlink" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.readlink" />
       </Docs>
@@ -1621,8 +1560,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.rename" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.rename" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.rename" />
       </Docs>
@@ -1652,8 +1590,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.rmdir" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.rmdir" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixDirectoryInfo.Delete" />
         <altmember cref="M:Mono.Unix.Native.Syscall.rmdir" />
@@ -1684,8 +1621,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.setgid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.setgid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setgid" />
       </Docs>
@@ -1717,8 +1653,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.setpgid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.setpgid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setpgid" />
       </Docs>
@@ -1750,8 +1685,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.setregid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.setregid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setregid" />
       </Docs>
@@ -1783,8 +1717,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.setreuid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.setreuid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setreuid" />
       </Docs>
@@ -1811,8 +1744,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.setsid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.setsid" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setsid" />
       </Docs>
@@ -1842,8 +1774,7 @@ See also opendir()</remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.setuid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.setuid" /> instead.</para>
           <para>often used to generate temp. file names etc.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setuid" />
@@ -1876,16 +1807,14 @@ See also opendir()</remarks
           >a <see cref="T:System.Int32" />.        The signal() function returns the previous value of the signal handler, or SIG_ERR on error  and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.
 
 
-</param
-        >
+</param>
         <param name="handler">a <see cref="T:Mono.Posix.Syscall+sighandler_t" /></param>
         <summary>Register a handler for a given posix signal. </summary>
         <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Stdlib.signal" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Stdlib.signal" /> instead.</para>
           <para>See 'man signal(2)' and 'man signal(7)' for more information and error codes.</para>
           <example>
             <code lang="C#">
@@ -1974,8 +1903,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="P:Mono.Unix.Native.Syscall.stat" /> instead.</para
-          >
+          <see cref="P:Mono.Unix.Native.Syscall.stat" /> instead.</para>
           <para>see also lstat()</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.stat" />
@@ -2006,8 +1934,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
         <altmember cref="M:Mono.Unix.Native.Stdlib.strerror" />
@@ -2043,8 +1970,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.symlink" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.symlink" /> instead.</para>
           <para>See also: link().</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.symlink" />
@@ -2071,8 +1997,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.sync" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.sync" /> instead.</para>
           <para> The filesystem buffer cache is generally write-behind, for best performance. But since the cache is not persistent, it should be flushed periodically. A sync() call is issued by the update daemon periodically.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.sync" />
@@ -2103,8 +2028,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.umask" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.umask" /> instead.</para>
           <para>Returns previous umask value.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.umask" />
@@ -2135,8 +2059,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.unlink" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.unlink" /> instead.</para>
           <para>If the file is not used and it was the last link, the file is also deleted.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.unlink" />
@@ -2172,11 +2095,9 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.waitpid" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.waitpid" /> instead.</para>
           <para
-            >waitpid() returns the pid of the child. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para
-          >
+            >waitpid() returns the pid of the child. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.waitpid" />
       </Docs>
@@ -2213,11 +2134,9 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.close" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.close" /> instead.</para>
           <para
-            >waitpid() returns the pid of the child. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set. 'status' is an output parameter containing the exit code of the child process in question.</para
-          >
+            >waitpid() returns the pid of the child. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />.GetLastWin32Error is set. 'status' is an output parameter containing the exit code of the child process in question.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.waitpid" />
       </Docs>
@@ -2247,8 +2166,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" /> instead.</para>
           <para>Returns true (1) if process exited normally.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" />
@@ -2279,8 +2197,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.WIFEXITED" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.WIFEXITED" /> instead.</para>
           <para>Result is true (1) if the process has exited.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFEXITED" />
@@ -2311,8 +2228,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" /> instead.</para>
           <para>WIFSIGNALED evaluates to true (1) when the process was terminated with a signal.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" />
@@ -2343,8 +2259,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" /> instead.</para>
           <para>WIFSTOPPED evaluates to true (1) when the process for which the wait() call was made is stopped, or to false (0) otherwise.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" />
@@ -2384,8 +2299,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.write" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.write" /> instead.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.write" />
       </Docs>
@@ -2415,8 +2329,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" /> instead.</para>
           <para>Returns the signal which caused the child to stop</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" />
@@ -2447,8 +2360,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see cref="M:Mono.Unix.Native.Syscall.WTERMSIG" /> instead.</para
-          >
+          <see cref="M:Mono.Unix.Native.Syscall.WTERMSIG" /> instead.</para>
           <para>Returns the signal which caused the child to terminate.</para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.WTERMSIG" />

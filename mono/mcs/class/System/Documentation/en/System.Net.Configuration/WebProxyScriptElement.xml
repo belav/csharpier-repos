@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see cref="T:System.Net.Configuration.WebProxyScriptElement" /> class.</para
-          >
+            >Initializes an instance of the <see cref="T:System.Net.Configuration.WebProxyScriptElement" /> class.</para>
         </summary>
       </Docs>
     </Member>

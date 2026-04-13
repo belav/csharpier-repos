@@ -26,14 +26,11 @@
       <para
         >This attribute is used by the <format type="text/html">
           <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
-        </format> to generate native assembly images.</para
-      >
+        </format> to generate native assembly images.</para>
       <para
-        >Apply the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> attribute to a dependent assembly with a value of the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> enumeration to specify when a referring assembly is to load a dependency.</para
-      >
+        >Apply the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> attribute to a dependent assembly with a value of the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> enumeration to specify when a referring assembly is to load a dependency.</para>
       <para
-        >A dependency that is likely to be loaded (<see cref="F:System.Runtime.CompilerServices.LoadHint.Always" />) will cause Ngen.exe to bind to that dependency.  Using this hint allows Ngen.exe to generate code that will result in a reduced working set and improved throughput  but at the cost of always loading the dependency when the parent assembly is loaded.</para
-      >
+        >A dependency that is likely to be loaded (<see cref="F:System.Runtime.CompilerServices.LoadHint.Always" />) will cause Ngen.exe to bind to that dependency.  Using this hint allows Ngen.exe to generate code that will result in a reduced working set and improved throughput  but at the cost of always loading the dependency when the parent assembly is loaded.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,29 +61,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> attribute gives the common language runtime hints on how tightly to bind to the dependency. The runtime uses these hints to help settle tradeoffs between lazy dependency load and efficient binding to the dependency. For example, hard binding allows the runtime to encode pointers to dependent native images, which results in a reduced working set. This attribute guides the runtime in making these decisions.</para
-          >
+            >The <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> attribute gives the common language runtime hints on how tightly to bind to the dependency. The runtime uses these hints to help settle tradeoffs between lazy dependency load and efficient binding to the dependency. For example, hard binding allows the runtime to encode pointers to dependent native images, which results in a reduced working set. This attribute guides the runtime in making these decisions.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> class with the specified <see cref="T:System.Runtime.CompilerServices.LoadHint" /> value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> class with the specified <see cref="T:System.Runtime.CompilerServices.LoadHint" /> value. </para>
         </summary>
         <param name="dependentAssemblyArgument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The dependent assembly to bind to.</param
-        >
+          />The dependent assembly to bind to.</param>
         <param name="loadHintArgument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> values.</param
-        >
+          />One of the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> values.</param>
       </Docs>
     </Member>
     <Member MemberName="DependentAssembly">
@@ -136,14 +129,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to return the value of the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> enumeration used by the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> attribute.</para
-          >
+            >Use this property to return the value of the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> enumeration used by the <see cref="T:System.Runtime.CompilerServices.DependencyAttribute" /> attribute.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> value that indicates when an assembly is to load a dependency. </para
-          >
+            >Gets the <see cref="T:System.Runtime.CompilerServices.LoadHint" /> value that indicates when an assembly is to load a dependency. </para>
         </summary>
       </Docs>
     </Member>

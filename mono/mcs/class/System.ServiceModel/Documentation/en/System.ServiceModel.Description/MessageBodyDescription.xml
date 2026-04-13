@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.MessageBodyDescription" /> class to construct or modify a SOAP message body when added to the description tree. </para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.MessageBodyDescription" /> class to construct or modify a SOAP message body when added to the description tree. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageBodyDescription" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageBodyDescription" /> class. </para>
         </summary>
       </Docs>
     </Member>

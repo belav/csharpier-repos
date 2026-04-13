@@ -12,9 +12,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>Represents RELAX NG "token" datatype.</summary>
     <remarks>To be added.</remarks>
@@ -39,8 +37,7 @@
       </Parameters>
       <Docs>
         <summary
-          >Validates the value string. See <see cref="M:Commons.Xml.Relaxng.RelaxngDatatype.IsValid" /> for the details of this mehod.</summary
-        >
+          >Validates the value string. See <see cref="M:Commons.Xml.Relaxng.RelaxngDatatype.IsValid" /> for the details of this mehod.</summary>
         <param name="text">a <see cref="T:System.String" /></param>
         <param name="reader">a <see cref="T:System.Xml.XmlReader" /></param>
         <returns>a <see cref="T:System.Boolean" /></returns>
@@ -61,8 +58,7 @@
       </Parameters>
       <Docs>
         <summary
-          >Parses the value string. See <see cref="Commons.Xml.Relaxng.RelaxngDatatype.Parse" /> for the details of this method.</summary
-        >
+          >Parses the value string. See <see cref="Commons.Xml.Relaxng.RelaxngDatatype.Parse" /> for the details of this method.</summary>
         <param name="text">a <see cref="T:System.String" /></param>
         <param name="reader">a <see cref="T:System.Xml.XmlReader" /></param>
         <returns>a <see cref="T:System.Object" /></returns>
@@ -80,8 +76,7 @@
       </Parameters>
       <Docs>
         <summary
-          >Compares two parameters. See <see cref="M:Commons.Xml.Relaxng.RelaxngDatatype.Compare" /> for the details of this method.</summary
-        >
+          >Compares two parameters. See <see cref="M:Commons.Xml.Relaxng.RelaxngDatatype.Compare" /> for the details of this method.</summary>
         <param name="o1">a <see cref="T:System.Object" /></param>
         <param name="o2">a <see cref="T:System.Object" /></param>
         <returns>a <see cref="T:System.Boolean" /></returns>

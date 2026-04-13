@@ -6,8 +6,7 @@
     <TargetOS Condition="'$(TargetOS)' == ''">iossimulator</TargetOS>
     <RuntimeIdentifier>$(TargetOS)-$(TargetArchitecture)</RuntimeIdentifier>
     <DefineConstants Condition="'$(ArchiveTests)' == 'true'"
-      >$(DefineConstants);CI_TEST</DefineConstants
-    >
+      >$(DefineConstants);CI_TEST</DefineConstants>
     <AppName>HelloiOS</AppName>
     <MainLibraryFileName>$(AssemblyName).dll</MainLibraryFileName>
     <SelfContained>true</SelfContained>
@@ -18,8 +17,7 @@
     <Optimized Condition="'$(Configuration)' == 'Release'">true</Optimized>
     <ShouldILStrip
       Condition="'$(RunAOTCompilation)' == 'true' and '$(MonoForceInterpreter)' != 'true'"
-      >true</ShouldILStrip
-    >
+      >true</ShouldILStrip>
 
     <EnableDefaultAssembliesToBundle>true</EnableDefaultAssembliesToBundle>
     <AppleGenerateAppBundle>true</AppleGenerateAppBundle>
@@ -27,14 +25,11 @@
     <UseConsoleUITemplate>false</UseConsoleUITemplate>
 
     <BuildAppBundleAfterTargets Condition="'$(ArchiveTests)' != 'true'"
-      >CopyFilesToPublishDirectory</BuildAppBundleAfterTargets
-    >
+      >CopyFilesToPublishDirectory</BuildAppBundleAfterTargets>
     <BuildAppBundleAfterTargets Condition="'$(ArchiveTests)' == 'true'"
-      >CopyFilesToPublishDirectory;Build</BuildAppBundleAfterTargets
-    >
+      >CopyFilesToPublishDirectory;Build</BuildAppBundleAfterTargets>
     <BuildAppBundleDependsOnTargets Condition="'$(ArchiveTests)' == 'true'"
-      >Publish</BuildAppBundleDependsOnTargets
-    >
+      >Publish</BuildAppBundleDependsOnTargets>
   </PropertyGroup>
 
   <ItemGroup>

@@ -19,18 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface allows an object to provide type information about itself. Typically, this interface is used when an object needs dynamic type information. In contrast, the <see cref="T:System.ComponentModel.TypeDescriptor" /> class provides static type information that is obtained from metadata.</para
-      >
+        >The <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface allows an object to provide type information about itself. Typically, this interface is used when an object needs dynamic type information. In contrast, the <see cref="T:System.ComponentModel.TypeDescriptor" /> class provides static type information that is obtained from metadata.</para>
       <para
-        >For example, <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> to implement properties and attributes for COM objects. </para
-      >
+        >For example, <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> to implement properties and attributes for COM objects. </para>
       <para
-        >To provide dynamic custom type information, a class can implement <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> or derive from the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class, which provides a simple implementation of this interface.</para
-      >
+        >To provide dynamic custom type information, a class can implement <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> or derive from the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class, which provides a simple implementation of this interface.</para>
       <block subset="none" type="note">
         <para
-          >There is no design-time support for data binding to objects that implement the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface. In addition, when binding to a runtime instance of <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, the public properties of the underlying type are ignored.</para
-        >
+          >There is no design-time support for data binding to objects that implement the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface. In addition, when binding to a runtime instance of <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, the public properties of the underlying type are ignored.</para>
       </block>
     </remarks>
     <summary>
@@ -63,8 +59,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The return value is never null.</para>
           <para
-            >Implementers can return an empty <see cref="T:System.ComponentModel.AttributeCollection" /> if no custom attributes are specified for an object.</para
-          >
+            >Implementers can return an empty <see cref="T:System.ComponentModel.AttributeCollection" /> if no custom attributes are specified for an object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +68,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.AttributeCollection" /> containing the attributes for this object.</para
-          >
+            >An <see cref="T:System.ComponentModel.AttributeCollection" /> containing the attributes for this object.</para>
         </returns>
       </Docs>
     </Member>
@@ -98,8 +92,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If null is returned, use the type name from the <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" /> method.</para
-          >
+            >If null is returned, use the type name from the <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -165,8 +158,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If null is returned, use the default <see cref="T:System.ComponentModel.TypeConverter" />.</para
-          >
+            >If null is returned, use the default <see cref="T:System.ComponentModel.TypeConverter" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -175,8 +167,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.TypeConverter" /> that is the converter for this object, or null if there is no <see cref="T:System.ComponentModel.TypeConverter" /> for this object.</para
-          >
+            >A <see cref="T:System.ComponentModel.TypeConverter" /> that is the converter for this object, or null if there is no <see cref="T:System.ComponentModel.TypeConverter" /> for this object.</para>
         </returns>
       </Docs>
     </Member>
@@ -208,8 +199,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptor" /> that represents the default event for this object, or null if this object does not have events.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptor" /> that represents the default event for this object, or null if this object does not have events.</para>
         </returns>
       </Docs>
     </Member>
@@ -241,8 +231,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the default property for this object, or null if this object does not have properties.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the default property for this object, or null if this object does not have properties.</para>
         </returns>
       </Docs>
     </Member>
@@ -268,8 +257,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the <paramref name="editorBaseType" /> parameter is usually <see cref="T:System.Drawing.Design.UITypeEditor" />, but you can also use other types (for example, <see cref="T:System.ComponentModel.ComponentEditor" /> and <see cref="T:System.ComponentModel.InstanceCreationEditor" />).</para
-          >
+            >The type of the <paramref name="editorBaseType" /> parameter is usually <see cref="T:System.Drawing.Design.UITypeEditor" />, but you can also use other types (for example, <see cref="T:System.ComponentModel.ComponentEditor" /> and <see cref="T:System.ComponentModel.InstanceCreationEditor" />).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -278,16 +266,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> of the specified type that is the editor for this object, or null if the editor cannot be found.</para
-          >
+            >An <see cref="T:System.Object" /> of the specified type that is the editor for this object, or null if the editor cannot be found.</para>
         </returns>
         <param name="editorBaseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the editor for this object. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the editor for this object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
@@ -314,8 +300,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The events for this instance can differ from the set of events that the class provides. For example, if the component is site-based, the site can add or remove additional events.</para>
           <para
-            >Implementors can return <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" /> if no properties are specified. This method should never return null.</para
-          >
+            >Implementors can return <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" /> if no properties are specified. This method should never return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -324,8 +309,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for this component instance.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for this component instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -356,8 +340,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The events for this instance can differ from the set of events that the class provides. For example, if the component is site-based, the site can add or remove additional events.</para>
           <para
-            >If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the event does not have an instance of the class for that attribute, the returned array includes the event if the <see cref="T:System.Attribute" /> is the default event.</para
-          >
+            >If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the event does not have an instance of the class for that attribute, the returned array includes the event if the <see cref="T:System.Attribute" /> is the default event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -366,8 +349,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the filtered events for this component instance.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the filtered events for this component instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -395,8 +377,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The properties for this instance can differ from the set of properties that the class provides. For example, if the component is sited, the site can add or remove additional properties.</para>
           <para
-            >Implementers can return <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" /> if no properties are specified. This method should never return null.</para
-          >
+            >Implementers can return <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" /> if no properties are specified. This method should never return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -405,8 +386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the properties for this component instance.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the properties for this component instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -437,11 +417,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The properties for this instance can differ from the set of properties that the class provides. For example, if the component is sited, the site can add or remove additional properties.</para>
           <para
-            >If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the property does not have an instance of the class for that attribute, the returned collection will include the property if the <see cref="T:System.Attribute" /> is the default property.</para
-          >
+            >If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the property does not have an instance of the class for that attribute, the returned collection will include the property if the <see cref="T:System.Attribute" /> is the default property.</para>
           <para
-            >For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />. </para
-          >
+            >For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -450,8 +428,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the filtered properties for this component instance.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the filtered properties for this component instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -480,13 +457,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" /> method retrieves the object that contains the property member that is described by <see cref="T:System.ComponentModel.PropertyDescriptor" /> parameter. Typically, this object is required for the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)" /> and <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" /> methods.</para
-          >
+            >The <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" /> method retrieves the object that contains the property member that is described by <see cref="T:System.ComponentModel.PropertyDescriptor" /> parameter. Typically, this object is required for the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)" /> and <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" /> methods.</para>
           <para>This method should return an object that you can use as follows: </para>
           <code> pd.GetValue(GetPropertyOwner(myPd));</code>
           <para
-            >If myPd is null, your implementation of the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface should return the default object (typically, the base object that exposes the properties and attributes).</para
-          >
+            >If myPd is null, your implementation of the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface should return the default object (typically, the base object that exposes the properties and attributes).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -495,16 +470,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that represents the owner of the specified property.</para
-          >
+            >An <see cref="T:System.Object" /> that represents the owner of the specified property.</para>
         </returns>
         <param name="pd">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the property whose owner is to be found. </param
-        >
+          />A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the property whose owner is to be found. </param>
       </Docs>
     </Member>
   </Members>

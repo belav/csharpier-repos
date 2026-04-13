@@ -22,8 +22,7 @@
       <para
         >The <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding provides support for queuing by using Message Queuing (MSMQ) as a transport and enables support for loosely-coupled applications, failure isolation, load leveling and disconnected operations. For a discussion of these features, see <format type="text/html">
           <a href="b8757992-ffce-40ad-9e9b-3243f6d0fce1">Queues</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para>This is one of the system-provided bindings provided by indigo1. The recommended procedure is to define the binding using configuration values and not to use a code-based approach, except in certain advanced scenarios where configuration values must be set as a service is initialized.</para>
     </remarks>
     <summary>
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> class using the specified security mode.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> class using the specified security mode.</para>
         </summary>
       </Docs>
     </Member>
@@ -102,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> class from the settings of a specified configuration binding element.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> class from the settings of a specified configuration binding element.</para>
         </summary>
       </Docs>
     </Member>
@@ -128,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the binding elements is important. It reflects the order in which the protocol and transport channels are constructed and stacked. This collection of binding elements is a new collection and can be modified and then used to create a <see cref="T:System.ServiceModel.Channels.CustomBinding" />.</para
-          >
+            >The order of the binding elements is important. It reflects the order in which the protocol and transport channels are constructed and stacked. This collection of binding elements is a new collection and can be modified and then used to create a <see cref="T:System.ServiceModel.Channels.CustomBinding" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -138,8 +133,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ordered collection of binding elements described by the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para
-          >
+            >The ordered collection of binding elements described by the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
         </returns>
       </Docs>
     </Member>
@@ -183,8 +177,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.BufferManager" /> minimizes the cost of using buffers by using a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see cref="T:System.ServiceModel.Channels.BufferManager" /> must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see cref="P:System.ServiceModel.BasicHttpBinding.MaxBufferPoolSize" /> limit.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.BufferManager" /> minimizes the cost of using buffers by using a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see cref="T:System.ServiceModel.Channels.BufferManager" /> must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see cref="P:System.ServiceModel.BasicHttpBinding.MaxBufferPoolSize" /> limit.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -213,8 +206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Message Queuing (MSMQ) does not support Active Directory addressing when using SOAP Reliable Messaging Protocol, so do not set <see cref="P:System.ServiceModel.NetMsmqBinding.QueueTransferProtocol" /> to <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" /> or <see cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" /> when <see cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" /> is set to true.</para
-          >
+            >Message Queuing (MSMQ) does not support Active Directory addressing when using SOAP Reliable Messaging Protocol, so do not set <see cref="P:System.ServiceModel.NetMsmqBinding.QueueTransferProtocol" /> to <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" /> or <see cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" /> when <see cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" /> is set to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -243,14 +235,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> object defines constraints on the complexity of SOAP messages that can be processed by endpoints configured with a binding. These constraints include maxArrayLength, maxBytesPerRead, maxDepth, maxNameTableCharCount, and maxStringContentLength. These values aid in the prevention of denial of service attacks. crdefault<see cref="T:System.Xml.XmlDictionaryReaderQuotas" />. </para
-          >
+            >The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> object defines constraints on the complexity of SOAP messages that can be processed by endpoints configured with a binding. These constraints include maxArrayLength, maxBytesPerRead, maxDepth, maxNameTableCharCount, and maxStringContentLength. These values aid in the prevention of denial of service attacks. crdefault<see cref="T:System.Xml.XmlDictionaryReaderQuotas" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> that is associated with this binding.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> that is associated with this binding.</para>
         </summary>
       </Docs>
     </Member>
@@ -275,14 +265,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.NetMsmqSecurity" /> is an encapsulation of both Message Queuing (MSMQ) transport and SOAP security. It specifies whether transport or SOAP security is enabled and, if so, what authentication mode and protection levels are in use.</para
-          >
+            <see cref="T:System.ServiceModel.NetMsmqSecurity" /> is an encapsulation of both Message Queuing (MSMQ) transport and SOAP security. It specifies whether transport or SOAP security is enabled and, if so, what authentication mode and protection levels are in use.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.NetMsmqSecurity" /> that is associated with this binding.</para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.NetMsmqSecurity" /> that is associated with this binding.</para>
         </summary>
       </Docs>
     </Member>
@@ -302,8 +290,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Message Queuing (MSMQ) queue addresses can consist of path names or direct format names. With a direct format name, Message Queuing resolves the queue name using DNS, NetBIOS or IP. With a path name, Message Queuing resolves the queue name using Active Directory.</para>
           <para
-            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" /> property to true, an application can specify that the queued transport should resolve the queue name using Active Directory rather than DNS, NetBIOS, or IP.</para
-          >
+            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" /> property to true, an application can specify that the queued transport should resolve the queue name using Active Directory rather than DNS, NetBIOS, or IP.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

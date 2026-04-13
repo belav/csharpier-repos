@@ -14,9 +14,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
@@ -32,8 +30,7 @@
       <para>See 'man stat(2)' for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See 'man mount(8)' for more information.</para>
       <para
         >This type is obsolete.  Please use 
-    <see cref="T:Mono.Unix.Native.Stat" /> instead.</para
-      >
+    <see cref="T:Mono.Unix.Native.Stat" /> instead.</para>
     </remarks>
     <altmember cref="T:Mono.Unix.Native.Stat" />
   </Docs>

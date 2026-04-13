@@ -1,4 +1,3 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AuthenticationSchemes xmlns="http://schemas.datacontract.org/2004/07/System.Net"
-  >None</AuthenticationSchemes
->
+  >None</AuthenticationSchemes>

@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The presence of <see cref="T:System.Security.Policy.GacInstalled" /> evidence produces a <see cref="T:System.Security.Permissions.GacIdentityPermission" /> in the grant set. If there is a <see cref="M:System.Security.CodeAccessPermission.Demand" /> for <see cref="T:System.Security.Permissions.GacIdentityPermission" />, the <see cref="T:System.Security.Permissions.GacIdentityPermission" /> that corresponds to the <see cref="T:System.Security.Policy.GacInstalled" /> evidence is compared with the demanded permission.</para
-      >
+        >The presence of <see cref="T:System.Security.Policy.GacInstalled" /> evidence produces a <see cref="T:System.Security.Permissions.GacIdentityPermission" /> in the grant set. If there is a <see cref="M:System.Security.CodeAccessPermission.Demand" /> for <see cref="T:System.Security.Permissions.GacIdentityPermission" />, the <see cref="T:System.Security.Permissions.GacIdentityPermission" /> that corresponds to the <see cref="T:System.Security.Policy.GacInstalled" /> evidence is compared with the demanded permission.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -60,14 +59,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor sets no property values because a <see cref="T:System.Security.Policy.GacInstalled" /> object has no properties.</para
-          >
+            >The constructor sets no property values because a <see cref="T:System.Security.Policy.GacInstalled" /> object has no properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.GacInstalled" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.GacInstalled" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -124,8 +121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Permissions.GacIdentityPermission" /> can be used to determine whether the calling code is in the global assembly cache.</para
-          >
+            >The <see cref="T:System.Security.Permissions.GacIdentityPermission" /> can be used to determine whether the calling code is in the global assembly cache.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -140,8 +136,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Evidence" /> from which to construct the identity permission. </param
-        >
+          />The <see cref="T:System.Security.Policy.Evidence" /> from which to construct the identity permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -166,8 +161,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Security.Policy.GacInstalled" /> objects have no properties to distinguish one from another, so all <see cref="T:System.Security.Policy.GacInstalled" /> objects are equal.</para
-          >
+            <see cref="T:System.Security.Policy.GacInstalled" /> objects have no properties to distinguish one from another, so all <see cref="T:System.Security.Policy.GacInstalled" /> objects are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -176,16 +170,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="o" /> is a <see cref="T:System.Security.Policy.GacInstalled" /> object; otherwise, false.</para
-          >
+            >true if <paramref name="o" /> is a <see cref="T:System.Security.Policy.GacInstalled" /> object; otherwise, false.</para>
         </returns>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current object. </param
-        >
+          />The object to compare with the current object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -208,8 +200,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Policy.GacInstalled.GetHashCode" /> method returns 0 (zero) because <see cref="T:System.Security.Policy.GacInstalled" /> objects have no properties to distinguish one from another.</para
-          >
+            >The <see cref="M:System.Security.Policy.GacInstalled.GetHashCode" /> method returns 0 (zero) because <see cref="T:System.Security.Policy.GacInstalled" /> objects have no properties to distinguish one from another.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

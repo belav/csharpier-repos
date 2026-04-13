@@ -27,17 +27,14 @@
       <para
         >A constraint is a rule used to maintain the integrity of the data in the <see cref="T:System.Data.DataTable" />. For example, when you delete a value that is used in one or more related tables, a <see cref="T:System.Data.ForeignKeyConstraint" /> determines whether the values in the related tables are also deleted, set to null values, set to default values, or whether no action occurs. A <see cref="T:System.Data.UniqueConstraint" />, on the other hand, just makes sure that all values within a particular table are unique. For more information, see <format type="text/html">
           <a href="27C9F2FD-F64D-4B4E-BBF6-1D24F47067CB">Adding Constraints to a Table</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
-        >A base <see cref="T:System.Data.Constraint" /> constructor is not used. Primary or unique key constraints are created by using the <see cref="T:System.Data.UniqueConstraint" /> constructor, and foreign key constraints are created by using the <see cref="T:System.Data.ForeignKeyConstraint" /> constructor.</para
-      >
+        >A base <see cref="T:System.Data.Constraint" /> constructor is not used. Primary or unique key constraints are created by using the <see cref="T:System.Data.UniqueConstraint" /> constructor, and foreign key constraints are created by using the <see cref="T:System.Data.ForeignKeyConstraint" /> constructor.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a constraint that can be enforced on one or more <see cref="T:System.Data.DataColumn" /> objects.</para
-      >
+        >Represents a constraint that can be enforced on one or more <see cref="T:System.Data.DataColumn" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.Constraint" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.Constraint" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Data.DataSet" /> to which this constraint belongs.</para
-          >
+            >Gets the <see cref="T:System.Data.DataSet" /> to which this constraint belongs.</para>
         </summary>
       </Docs>
     </Member>
@@ -104,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Data.DataSet" /> to which this constraint belongs.</para
-          >
+            >Gets the <see cref="T:System.Data.DataSet" /> to which this constraint belongs.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -125,14 +119,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Data.ConstraintCollection" /> is returned by the <see cref="P:System.Data.DataTable.Constraints" /> property of the <see cref="T:System.Data.DataTable" /> class.</para
-          >
+            >The <see cref="T:System.Data.ConstraintCollection" /> is returned by the <see cref="P:System.Data.DataTable.Constraints" /> property of the <see cref="T:System.Data.DataTable" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of a constraint in the <see cref="T:System.Data.ConstraintCollection" />.</para
-          >
+            >The name of a constraint in the <see cref="T:System.Data.ConstraintCollection" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -159,8 +151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Extended properties must be of type <see cref="T:System.String" />. Properties that are not of type <see cref="T:System.String" /> are not persisted when the <see cref="T:System.Data.Constraint" /> is written as XML.</para
-          >
+            >Extended properties must be of type <see cref="T:System.String" />. Properties that are not of type <see cref="T:System.String" /> are not persisted when the <see cref="T:System.Data.Constraint" /> is written as XML.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,8 +195,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.DataSet" /> to which this constraint will belong. </param
-        >
+          />The <see cref="T:System.Data.DataSet" /> to which this constraint will belong. </param>
       </Docs>
     </Member>
     <Member MemberName="Table">
@@ -220,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Data.DataTable" /> to which the constraint applies.</para
-          >
+            >Gets the <see cref="T:System.Data.DataTable" /> to which the constraint applies.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -241,14 +230,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="P:System.Data.Constraint.ConstraintName" />, if there is one, as a string.</para
-          >
+            >Gets the <see cref="P:System.Data.Constraint.ConstraintName" />, if there is one, as a string.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the <see cref="P:System.Data.Constraint.ConstraintName" />.</para
-          >
+            >The string value of the <see cref="P:System.Data.Constraint.ConstraintName" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>

@@ -18,14 +18,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration specifies valid values for the <see cref="P:System.Net.Security.SslStream.CipherAlgorithm" /> property.</para
-      >
+        >This enumeration specifies valid values for the <see cref="P:System.Net.Security.SslStream.CipherAlgorithm" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the possible cipher algorithms for the <see cref="T:System.Net.Security.SslStream" /> class.</para
-      >
+        >Defines the possible cipher algorithms for the <see cref="T:System.Net.Security.SslStream" /> class.</para>
     </summary>
   </Docs>
   <Members>

@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An attempt was made to access a <see cref="T:System.Net.Sockets.Socket" /> in a way that is forbidden by its access permissions.</para
-          >
+            >An attempt was made to access a <see cref="T:System.Net.Sockets.Socket" /> in a way that is forbidden by its access permissions.</para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The nonblocking <see cref="T:System.Net.Sockets.Socket" /> already has an operation in progress.</para
-          >
+            >The nonblocking <see cref="T:System.Net.Sockets.Socket" /> already has an operation in progress.</para>
         </summary>
       </Docs>
     </Member>
@@ -224,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A required address was omitted from an operation on a <see cref="T:System.Net.Sockets.Socket" />.</para
-          >
+            >A required address was omitted from an operation on a <see cref="T:System.Net.Sockets.Socket" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -402,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An invalid argument was supplied to a <see cref="T:System.Net.Sockets.Socket" /> member.</para
-          >
+            >An invalid argument was supplied to a <see cref="T:System.Net.Sockets.Socket" /> member.</para>
         </summary>
       </Docs>
     </Member>
@@ -514,8 +510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application tried to set <see cref="F:System.Net.Sockets.SocketOptionName.KeepAlive" /> on a connection that has already timed out.</para
-          >
+            >The application tried to set <see cref="F:System.Net.Sockets.SocketOptionName.KeepAlive" /> on a connection that has already timed out.</para>
         </summary>
       </Docs>
     </Member>
@@ -560,8 +555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No free buffer space is available for a <see cref="T:System.Net.Sockets.Socket" /> operation.</para
-          >
+            >No free buffer space is available for a <see cref="T:System.Net.Sockets.Socket" /> operation.</para>
         </summary>
       </Docs>
     </Member>
@@ -628,8 +622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application tried to send or receive data, and the <see cref="T:System.Net.Sockets.Socket" /> is not connected.</para
-          >
+            >The application tried to send or receive data, and the <see cref="T:System.Net.Sockets.Socket" /> is not connected.</para>
         </summary>
       </Docs>
     </Member>
@@ -674,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.Sockets.Socket" /> operation was attempted on a non-socket.</para
-          >
+            >A <see cref="T:System.Net.Sockets.Socket" /> operation was attempted on a non-socket.</para>
         </summary>
       </Docs>
     </Member>
@@ -698,8 +690,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The overlapped operation was aborted due to the closure of the <see cref="T:System.Net.Sockets.Socket" />.</para
-          >
+            >The overlapped operation was aborted due to the closure of the <see cref="T:System.Net.Sockets.Socket" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -810,8 +801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An unknown, invalid, or unsupported option or level was used with a <see cref="T:System.Net.Sockets.Socket" />.</para
-          >
+            >An unknown, invalid, or unsupported option or level was used with a <see cref="T:System.Net.Sockets.Socket" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -834,8 +824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protocol type is incorrect for this <see cref="T:System.Net.Sockets.Socket" />.</para
-          >
+            >The protocol type is incorrect for this <see cref="T:System.Net.Sockets.Socket" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -858,8 +847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A request to send or receive data was disallowed because the <see cref="T:System.Net.Sockets.Socket" /> has already been closed.</para
-          >
+            >A request to send or receive data was disallowed because the <see cref="T:System.Net.Sockets.Socket" /> has already been closed.</para>
         </summary>
       </Docs>
     </Member>

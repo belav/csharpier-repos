@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class encapsulates the transport security settings for queued transports.</para
-      >
+        >The <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class encapsulates the transport security settings for queued transports.</para>
     </summary>
   </Docs>
   <Members>
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -65,16 +63,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class, using an existing instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class, using an existing instance.</para>
         </summary>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The existing instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class, to be used in initializing the new instance.</param
-        >
+          />The existing instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class, to be used in initializing the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName="MsmqAuthenticationMode">
@@ -98,14 +94,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >MSMQ can authenticate messages that are sent to message queues that require authentication, or messages can explicitly request authentication. The default authentication mode is <see cref="F:System.ServiceModel.MsmqAuthenticationMode.WindowsDomain" />.</para
-          >
+            >MSMQ can authenticate messages that are sent to message queues that require authentication, or messages can explicitly request authentication. The default authentication mode is <see cref="F:System.ServiceModel.MsmqAuthenticationMode.WindowsDomain" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqAuthenticationMode" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqAuthenticationMode" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -130,14 +124,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >MSMQ can encrypt messages on the wire when transferring messages between message queue managers. The default encryption algorithm is <see cref="F:System.ServiceModel.MsmqEncryptionAlgorithm.RC4Stream" />.</para
-          >
+            >MSMQ can encrypt messages on the wire when transferring messages between message queue managers. The default encryption algorithm is <see cref="F:System.ServiceModel.MsmqEncryptionAlgorithm.RC4Stream" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqEncryptionAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqEncryptionAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -162,14 +154,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default protection level is <see cref="F:System.Net.Security.ProtectionLevel.Sign" />.</para
-          >
+            >The default protection level is <see cref="F:System.Net.Security.ProtectionLevel.Sign" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Net.Security.ProtectionLevel" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.Net.Security.ProtectionLevel" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -194,14 +184,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default hash algorithm is <see cref="F:System.ServiceModel.MsmqSecureHashAlgorithm.SHA1" />.</para
-          >
+            >The default hash algorithm is <see cref="F:System.ServiceModel.MsmqSecureHashAlgorithm.SHA1" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.ServiceModel.MsmqSecureHashAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para
-          >
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqSecureHashAlgorithm" /> that is associated with this instance of the <see cref="T:System.ServiceModel.MsmqTransportSecurity" /> class. </para>
         </summary>
       </Docs>
     </Member>

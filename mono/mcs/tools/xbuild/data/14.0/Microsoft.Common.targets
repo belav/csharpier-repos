@@ -11,12 +11,10 @@
   <PropertyGroup>
     <ImportByWildcardBeforeMicrosoftCommonTargets
       Condition="'$(ImportByWildcardBeforeMicrosoftCommonTargets)' == ''"
-      >true</ImportByWildcardBeforeMicrosoftCommonTargets
-    >
+      >true</ImportByWildcardBeforeMicrosoftCommonTargets>
     <ImportByWildcardAfterMicrosoftCommonTargets
       Condition="'$(ImportByWildcardAfterMicrosoftCommonTargets)' == ''"
-      >true</ImportByWildcardAfterMicrosoftCommonTargets
-    >
+      >true</ImportByWildcardAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
   <Import
@@ -49,26 +47,20 @@
   <PropertyGroup>
     <AssemblyName Condition="'$(AssemblyName)' == ''">$(MSBuildProjectName)</AssemblyName>
     <OutputPath Condition="'$(OutputPath)' != '' and !HasTrailingSlash('$(OutputPath)')"
-      >$(OutputPath)\</OutputPath
-    >
+      >$(OutputPath)\</OutputPath>
     <OutputPath Condition=" '$(Platform)'=='' and '$(Configuration)'=='' and '$(OutputPath)'=='' "
-      >bin\Debug\</OutputPath
-    >
+      >bin\Debug\</OutputPath>
 
     <TargetFrameworkIdentifier Condition="'$(TargetFrameworkIdentifier)' == ''"
-      >.NETFramework</TargetFrameworkIdentifier
-    >
+      >.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == ''"
-      >v4.0</TargetFrameworkVersion
-    >
+      >v4.0</TargetFrameworkVersion>
 
     <TargetFrameworkMoniker
       Condition="'$(TargetFrameworkMoniker)' == '' and '$(TargetFrameworkProfile)' != ''"
-      >$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion),Profile=$(TargetFrameworkProfile)</TargetFrameworkMoniker
-    >
+      >$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion),Profile=$(TargetFrameworkProfile)</TargetFrameworkMoniker>
     <TargetFrameworkMoniker Condition="'$(TargetFrameworkMoniker)' == ''"
-      >$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker
-    >
+      >$(TargetFrameworkIdentifier),Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -88,47 +80,38 @@
   <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <AddAdditionalExplicitAssemblyReferences
       Condition="'$(AddAdditionalExplicitAssemblyReferences)' == ''"
-      >true</AddAdditionalExplicitAssemblyReferences
-    >
+      >true</AddAdditionalExplicitAssemblyReferences>
     <AdditionalExplicitAssemblyReferences
       Condition="'$(AddAdditionalExplicitAssemblyReferences)' == 'true' and '$(TargetFrameworkVersion)' != 'v2.0' and '$(TargetFrameworkVersion)' != 'v3.0'"
-      >System.Core;$(AdditionalExplicitAssemblyReferences)</AdditionalExplicitAssemblyReferences
-    >
+      >System.Core;$(AdditionalExplicitAssemblyReferences)</AdditionalExplicitAssemblyReferences>
   </PropertyGroup>
 
   <PropertyGroup>
     <SkipCopyUnchangedFiles Condition="'$(SkipCopyUnchangedFiles)' == ''"
-      >true</SkipCopyUnchangedFiles
-    >
+      >true</SkipCopyUnchangedFiles>
   </PropertyGroup>
 
   <PropertyGroup>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''"
-      >obj\</BaseIntermediateOutputPath
-    >
+      >obj\</BaseIntermediateOutputPath>
     <BaseIntermediateOutputPath
       Condition="'$(BaseIntermediateOutputPath)' != '' and !HasTrailingSlash('$(BaseIntermediateOutputPath)')"
-      >$(BaseIntermediateOutputPath)\</BaseIntermediateOutputPath
-    >
+      >$(BaseIntermediateOutputPath)\</BaseIntermediateOutputPath>
     <CleanFile Condition="'$(CleanFile)'==''"
-      >$(MSBuildProjectFile).FilesWrittenAbsolute.txt</CleanFile
-    >
+      >$(MSBuildProjectFile).FilesWrittenAbsolute.txt</CleanFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IntermediateOutputPath)' == ''">
     <IntermediateOutputPath Condition=" '$(PlatformName)' == 'AnyCPU'"
-      >$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath
-    >
+      >$(BaseIntermediateOutputPath)$(Configuration)\</IntermediateOutputPath>
     <IntermediateOutputPath Condition=" '$(PlatformName)' != 'AnyCPU'"
-      >$(BaseIntermediateOutputPath)$(PlatformName)\$(Configuration)\</IntermediateOutputPath
-    >
+      >$(BaseIntermediateOutputPath)$(PlatformName)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <IntermediateOutputPath
       Condition="'$(IntermediateOutputPath)' != '' and !HasTrailingSlash('$(IntermediateOutputPath)')"
-      >$(IntermediateOutputPath)\</IntermediateOutputPath
-    >
+      >$(IntermediateOutputPath)\</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -141,20 +124,16 @@
   <PropertyGroup>
     <TargetName Condition="'$(TargetName)' == '' ">$(AssemblyName)</TargetName>
     <TargetFileName Condition="'$(TargetFileName)' == '' "
-      >$(TargetName)$(TargetExt)</TargetFileName
-    >
+      >$(TargetName)$(TargetExt)</TargetFileName>
     <TargetDir Condition=" '$(TargetDir)' == '' ">@(_OutDirItem->'%(FullPath)')</TargetDir>
     <TargetPath Condition=" '$(TargetPath)' == '' "
-      >@(_OutDirItem->'%(FullPath)\$(TargetFileName)')</TargetPath
-    >
+      >@(_OutDirItem->'%(FullPath)\$(TargetFileName)')</TargetPath>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildProjectFullPath);$(MSBuildToolsPath)\Microsoft.Common.targets</MSBuildAllProjects>
     <KeyOriginatorFile Condition=" '$(SignAssembly)' == 'true' "
-      >$(AssemblyOriginatorKeyFile)</KeyOriginatorFile
-    >
+      >$(AssemblyOriginatorKeyFile)</KeyOriginatorFile>
     <TargetingClr2Framework
       Condition="('$(TargetFrameworkIdentifier)' == '.NETFramework') and ('$(TargetFrameworkVersion)' == 'v2.0' or '$(TargetFrameworkVersion)' == 'v3.0' or '$(TargetFrameworkVersion)' == 'v3.5')"
-      >true</TargetingClr2Framework
-    >
+      >true</TargetingClr2Framework>
   </PropertyGroup>
 
   <Target Name="_CheckForInvalidConfigurationAndPlatform">
@@ -324,8 +303,7 @@
     >
 			.exe;
 			.dll
-		</AllowedReferenceAssemblyFileExtensions
-    >
+		</AllowedReferenceAssemblyFileExtensions>
 
     <AllowedReferenceRelatedFileExtensions
       Condition=" '$(AllowedReferenceRelatedFileExtensions)' == '' "
@@ -334,8 +312,7 @@
 			.dll.mdb;
 			.pdb;
 			.xml
-		</AllowedReferenceRelatedFileExtensions
-    >
+		</AllowedReferenceRelatedFileExtensions>
 
     <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''">
 			{CandidateAssemblyFiles};
@@ -347,8 +324,7 @@
 			{GAC};
 			{RawFileName};
 			$(OutDir)
-		</AssemblySearchPaths
-    >
+		</AssemblySearchPaths>
 
     <ResolveReferencesDependsOn>
 			BeforeResolveReferences;
@@ -367,13 +343,11 @@
   <PropertyGroup Condition="'$(TargetFrameworkMoniker)' != ''">
     <TargetFrameworkMonikerAssemblyAttributesPath
       Condition="'$(TargetFrameworkMonikerAssemblyAttributesPath)' == ''"
-      >$(IntermediateOutputPath)$(TargetFrameworkMoniker).AssemblyAttribute$(DefaultLanguageSourceExtension)</TargetFrameworkMonikerAssemblyAttributesPath
-    >
+      >$(IntermediateOutputPath)$(TargetFrameworkMoniker).AssemblyAttribute$(DefaultLanguageSourceExtension)</TargetFrameworkMonikerAssemblyAttributesPath>
     <GenerateTargetFrameworkAttribute
       Condition="'$(GenerateTargetFrameworkAttribute)' == '' and '$(TargetFrameworkMoniker)'
 	!= '' and '$(TargetingClr2Framework)' != 'true'"
-      >true</GenerateTargetFrameworkAttribute
-    >
+      >true</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(GenerateTargetFrameworkAttribute)' == 'true'">
@@ -1019,8 +993,7 @@
 			Clean;
 			Build;
 			AfterRebuild;
-		</RebuildDependsOn
-    >
+		</RebuildDependsOn>
   </PropertyGroup>
 
   <Target Name="BeforeRebuild" />
@@ -1140,8 +1113,7 @@
       <!-- Does one of our dependencies reference a System.Runtime-based portable library? -->
       <_HasReferenceToSystemRuntime
         Condition="'$(DependsOnSystemRuntime)' == 'true' or '%(_ResolvedProjectReferencePaths.TargetPlatformIdentifier)' == 'Portable'"
-        >true</_HasReferenceToSystemRuntime
-      >
+        >true</_HasReferenceToSystemRuntime>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(_HasReferenceToSystemRuntime)' == 'true'">

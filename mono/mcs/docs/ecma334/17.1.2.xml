@@ -2,8 +2,7 @@
 <clause number="17.1.2" title="Class base specification">
   <paragraph
     >A class declaration may include a <non_terminal where="17.1.2"
-      >class-base</non_terminal
-    > specification, which defines the direct base class of the class and the interfaces (<hyperlink>20</hyperlink>) implemented by the class. <grammar_production>
+      >class-base</non_terminal> specification, which defines the direct base class of the class and the interfaces (<hyperlink>20</hyperlink>) implemented by the class. <grammar_production>
       <name>
         <non_terminal where="17.1.2">class-base</non_terminal>
       </name> : <rhs>

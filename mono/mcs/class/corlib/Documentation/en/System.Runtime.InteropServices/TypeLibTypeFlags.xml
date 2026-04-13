@@ -28,15 +28,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >TypeLibTypeFlags is used along with the <see cref="T:System.Runtime.InteropServices.TypeLibTypeAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para
-      >
+        >TypeLibTypeFlags is used along with the <see cref="T:System.Runtime.InteropServices.TypeLibTypeAttribute" />. The flags are retained for reference only. They are not used by the common language runtime.</para>
       <para>For more information, see TYPEFLAGS in the MSDN library.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the original settings of the <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" /> in the COM type library from which the type was imported.</para
-      >
+        >Describes the original settings of the <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" /> in the COM type library from which the type was imported.</para>
     </summary>
   </Docs>
   <Members>

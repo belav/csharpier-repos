@@ -22,11 +22,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.StatusStrip" /> replaces the <see cref="T:System.Windows.Forms.StatusBar" /> control. Special features of <see cref="T:System.Windows.Forms.StatusStrip" /> include a custom table layout, support for the form's sizing and moving grips, and support for the <see cref="P:System.Windows.Forms.ToolStripStatusLabel.Spring" /> property, which allows a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> to fill available space automatically. </para
-      >
+        <see cref="T:System.Windows.Forms.StatusStrip" /> replaces the <see cref="T:System.Windows.Forms.StatusBar" /> control. Special features of <see cref="T:System.Windows.Forms.StatusStrip" /> include a custom table layout, support for the form's sizing and moving grips, and support for the <see cref="P:System.Windows.Forms.ToolStripStatusLabel.Spring" /> property, which allows a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> to fill available space automatically. </para>
       <para
-        >The following items are specifically designed to work seamlessly with both <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> and <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> in all orientations. They are available by default at design time for the <see cref="T:System.Windows.Forms.StatusStrip" /> control:</para
-      >
+        >The following items are specifically designed to work seamlessly with both <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" /> and <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> in all orientations. They are available by default at design time for the <see cref="T:System.Windows.Forms.StatusStrip" /> control:</para>
       <list type="bullet">
         <item>
           <para>
@@ -50,18 +48,15 @@
         </item>
       </list>
       <para
-        >A <see cref="T:System.Windows.Forms.StatusStrip" /> control displays information about an object being viewed on a <see cref="T:System.Windows.Forms.Form" />, the object's components, or contextual information that relates to that object's operation within your application. Typically, a <see cref="T:System.Windows.Forms.StatusStrip" /> control consists of <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> objects, each of which displays text, an icon, or both. The <see cref="T:System.Windows.Forms.StatusStrip" /> can also contain <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />, <see cref="T:System.Windows.Forms.ToolStripSplitButton" />, and <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> controls. </para
-      >
+        >A <see cref="T:System.Windows.Forms.StatusStrip" /> control displays information about an object being viewed on a <see cref="T:System.Windows.Forms.Form" />, the object's components, or contextual information that relates to that object's operation within your application. Typically, a <see cref="T:System.Windows.Forms.StatusStrip" /> control consists of <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> objects, each of which displays text, an icon, or both. The <see cref="T:System.Windows.Forms.StatusStrip" /> can also contain <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />, <see cref="T:System.Windows.Forms.ToolStripSplitButton" />, and <see cref="T:System.Windows.Forms.ToolStripProgressBar" /> controls. </para>
       <para
         >The default <see cref="T:System.Windows.Forms.StatusStrip" /> has no panels. To add panels to a <see cref="T:System.Windows.Forms.StatusStrip" />, use the <see cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" /> method, or use the <format type="text/html">
           <a href="7c56677b-d5eb-4eca-949c-a22c4e3833a1">StatusStrip Items Collection Editor</a>
         </format> at design time to add, remove, or reorder items and modify properties. Use the <format type="text/html">
           <a href="c150678b-4873-4743-b23f-84fb3126582c">StatusStrip Tasks Dialog Box</a>
-        </format> at design time to run common commands.</para
-      >
+        </format> at design time to run common commands.</para>
       <para
-        >Although <see cref="T:System.Windows.Forms.StatusStrip" /> replaces and extends the <see cref="T:System.Windows.Forms.StatusBar" /> control of previous versions, <see cref="T:System.Windows.Forms.StatusBar" /> is retained for both backward compatibility and future use if you choose.</para
-      >
+        >Although <see cref="T:System.Windows.Forms.StatusStrip" /> replaces and extends the <see cref="T:System.Windows.Forms.StatusBar" /> control of previous versions, <see cref="T:System.Windows.Forms.StatusBar" /> is retained for both backward compatibility and future use if you choose.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusStrip" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.StatusStrip" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.StatusStrip" /> supports overflow functionality.</para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.StatusStrip" /> supports overflow functionality.</para>
         </summary>
       </Docs>
     </Member>
@@ -132,12 +125,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see cref="M:System.Windows.Forms.StatusStrip.CreateAccessibilityInstance" /> method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property is referenced.</para
-          >
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.StatusStrip.CreateAccessibilityInstance" /> method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property is referenced.</para>
           <block subset="none" type="note">
             <para
-              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the Accessibility assembly installed with the .NET Framework.</para
-            >
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" /> property, you must add a reference to the Accessibility assembly installed with the .NET Framework.</para>
           </block>
         </remarks>
         <summary>
@@ -171,42 +162,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Windows.Forms.StatusStrip.CreateDefaultItem(System.String,System.Drawing.Image,System.EventHandler)" /> method to add a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> with commonly used characteristics to a <see cref="T:System.Windows.Forms.StatusStrip" />.</para
-          >
+            >Use the <see cref="M:System.Windows.Forms.StatusStrip.CreateDefaultItem(System.String,System.Drawing.Image,System.EventHandler)" /> method to add a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> with commonly used characteristics to a <see cref="T:System.Windows.Forms.StatusStrip" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a default <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> with the specified text, image, and event handler on a new <see cref="T:System.Windows.Forms.StatusStrip" /> instance.</para
-          >
+            >Creates a default <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> with the specified text, image, and event handler on a new <see cref="T:System.Windows.Forms.StatusStrip" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="M:System.Windows.Forms.ToolStripStatusLabel.#ctor(System.String,System.Drawing.Image,System.EventHandler)" />, or a <see cref="T:System.Windows.Forms.ToolStripSeparator" /> if the <paramref name="text" /> parameter is a hyphen (-).</para
-          >
+            >A <see cref="M:System.Windows.Forms.ToolStripStatusLabel.#ctor(System.String,System.Drawing.Image,System.EventHandler)" />, or a <see cref="T:System.Windows.Forms.ToolStripSeparator" /> if the <paramref name="text" /> parameter is a hyphen (-).</para>
         </returns>
         <param name="text">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text to use for the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />. If the <paramref name="text" /> parameter is a hyphen (-), this method creates a <see cref="T:System.Windows.Forms.ToolStripSeparator" />.</param
-        >
+          />The text to use for the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />. If the <paramref name="text" /> parameter is a hyphen (-), this method creates a <see cref="T:System.Windows.Forms.ToolStripSeparator" />.</param>
         <param name="image">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Image" /> to display on the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />.</param
-        >
+          />The <see cref="T:System.Drawing.Image" /> to display on the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />.</param>
         <param name="onClick">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An event handler that raises the <see cref="E:System.Windows.Forms.Control.Click" /> event when the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> is clicked.</param
-        >
+          />An event handler that raises the <see cref="E:System.Windows.Forms.Control.Click" /> event when the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" /> is clicked.</param>
       </Docs>
     </Member>
     <Member MemberName="DefaultDock">
@@ -225,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets which borders of the <see cref="T:System.Windows.Forms.StatusStrip" /> are docked to the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para
-          >
+            >Gets which borders of the <see cref="T:System.Windows.Forms.StatusStrip" /> are docked to the <see cref="T:System.Windows.Forms.ToolStripContainer" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -248,14 +232,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.StatusStrip.DefaultPadding" /> property to set the interior space between controls. When a control is a container of items, padding represents the space from the edge of the container.</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.StatusStrip.DefaultPadding" /> property to set the interior space between controls. When a control is a container of items, padding represents the space from the edge of the container.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the spacing, in pixels, between the left, right, top, and bottom edges of the <see cref="T:System.Windows.Forms.StatusStrip" /> from the edges of the form.</para
-          >
+            >Gets the spacing, in pixels, between the left, right, top, and bottom edges of the <see cref="T:System.Windows.Forms.StatusStrip" /> from the edges of the form.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -278,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.StatusStrip" /> by default.</para
-          >
+            >Gets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.StatusStrip" /> by default.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -302,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the size, in pixels, of the <see cref="T:System.Windows.Forms.StatusStrip" /> when it is first created.</para
-          >
+            >Gets the size, in pixels, of the <see cref="T:System.Windows.Forms.StatusStrip" /> when it is first created.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -324,25 +304,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.StatusStrip" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.StatusStrip" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.StatusStrip" /> and optionally releases the managed resources. </para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.StatusStrip" /> and optionally releases the managed resources. </para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -363,15 +339,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.StatusStrip.Dock" /> property to define how a <see cref="T:System.Windows.Forms.StatusStrip" /> is automatically resized as its parent control is resized. For example, setting <see cref="P:System.Windows.Forms.StatusStrip.Dock" /> to <see cref="F:System.Windows.Forms.DockStyle.Left" /> causes the <see cref="T:System.Windows.Forms.StatusStrip" /> to align itself with the left edges of its parent control and to resize as the parent control is resized. Controls are docked in their Z-order, which is the visual layering of controls on a form along the form's Z-axis (depth).</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.StatusStrip.Dock" /> property to define how a <see cref="T:System.Windows.Forms.StatusStrip" /> is automatically resized as its parent control is resized. For example, setting <see cref="P:System.Windows.Forms.StatusStrip.Dock" /> to <see cref="F:System.Windows.Forms.DockStyle.Left" /> causes the <see cref="T:System.Windows.Forms.StatusStrip" /> to align itself with the left edges of its parent control and to resize as the parent control is resized. Controls are docked in their Z-order, which is the visual layering of controls on a form along the form's Z-axis (depth).</para>
           <para>A control can be docked to one edge of its parent container or can be docked to all edges and fill the parent container.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets which <see cref="T:System.Windows.Forms.StatusStrip" /> borders are docked to its parent control and determines how a <see cref="T:System.Windows.Forms.StatusStrip" /> is resized with its parent.</para
-          >
+            >Gets or sets which <see cref="T:System.Windows.Forms.StatusStrip" /> borders are docked to its parent control and determines how a <see cref="T:System.Windows.Forms.StatusStrip" /> is resized with its parent.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -398,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Even with the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property set to true and the <see cref="P:System.Windows.Forms.StatusStrip.GripStyle" /> property set to Visible, the sizing grip will not be displayed unless you also set the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property to one of the overflow values. If the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property is set to <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" /> or <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />, the sizing grip will not be displayed.</para
-          >
+            >Even with the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property set to true and the <see cref="P:System.Windows.Forms.StatusStrip.GripStyle" /> property set to Visible, the sizing grip will not be displayed unless you also set the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property to one of the overflow values. If the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property is set to <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" /> or <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />, the sizing grip will not be displayed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -430,14 +403,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.StatusStrip.LayoutStyle" /> property to get or set how items are arranged on the <see cref="T:System.Windows.Forms.StatusStrip" />.</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.StatusStrip.LayoutStyle" /> property to get or set how items are arranged on the <see cref="T:System.Windows.Forms.StatusStrip" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating how the <see cref="T:System.Windows.Forms.StatusStrip" /> lays out the items collection.</para
-          >
+            >Gets or sets a value indicating how the <see cref="T:System.Windows.Forms.StatusStrip" /> lays out the items collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -469,8 +440,7 @@
           <para>Raises the <see cref="E:System.Windows.Forms.Control.Layout" /> event.</para>
         </summary>
         <param name="levent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -495,11 +465,9 @@
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Windows.Forms.StatusStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Windows.Forms.StatusStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -510,8 +478,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the <see cref="T:System.Windows.Forms.StatusStrip" /> to paint.</param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the <see cref="T:System.Windows.Forms.StatusStrip" /> to paint.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -531,14 +498,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override <see cref="M:System.Windows.Forms.StatusStrip.OnSpringTableLayoutCore" /> to do custom table layouts. The default value of <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" /> is <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />. </para
-          >
+            >Override <see cref="M:System.Windows.Forms.StatusStrip.OnSpringTableLayoutCore" /> to do custom table layouts. The default value of <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" /> is <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides custom table layout for a <see cref="T:System.Windows.Forms.StatusStrip" />.</para
-          >
+            >Provides custom table layout for a <see cref="T:System.Windows.Forms.StatusStrip" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -625,14 +590,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Windows.Forms.StatusStrip.ShowItemToolTips" /> property to get or set <see cref="T:System.Windows.Forms.ToolTip" /> display behavior.</para
-          >
+            >Use the <see cref="P:System.Windows.Forms.StatusStrip.ShowItemToolTips" /> property to get or set <see cref="T:System.Windows.Forms.ToolTip" /> display behavior.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.StatusStrip" />.</para
-          >
+            >Gets or sets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.StatusStrip" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -660,8 +623,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the boundaries of the sizing handle (grip) for a <see cref="T:System.Windows.Forms.StatusStrip" />.</para
-          >
+            >Gets the boundaries of the sizing handle (grip) for a <see cref="T:System.Windows.Forms.StatusStrip" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -685,11 +647,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property to display a grip to provide an indication to the user of when a <see cref="T:System.Windows.Forms.StatusStrip" /> is resizable. </para
-          >
+            >You can use the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property to display a grip to provide an indication to the user of when a <see cref="T:System.Windows.Forms.StatusStrip" /> is resizable. </para>
           <para
-            >Even with the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property set to true and the <see cref="P:System.Windows.Forms.StatusStrip.GripStyle" /> property set to Visible, the sizing grip will not be displayed unless you also set the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property to one of the overflow values. If the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property is set to <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" /> or <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />, the sizing grip will not be displayed.</para
-          >
+            >Even with the <see cref="P:System.Windows.Forms.StatusStrip.SizingGrip" /> property set to true and the <see cref="P:System.Windows.Forms.StatusStrip.GripStyle" /> property set to Visible, the sizing grip will not be displayed unless you also set the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property to one of the overflow values. If the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" /> property is set to <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" /> or <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />, the sizing grip will not be displayed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -718,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.StatusStrip" /> stretches from end to end in its container.</para
-          >
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.StatusStrip" /> stretches from end to end in its container.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

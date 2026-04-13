@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.ComponentModel.Design.CommandID" /> uniquely identifies a command. A unique command identification system prevents conflicts between command identifiers. Command IDs consist of a menu group GUID and a numeric command identifier.</para
-      >
+        >A <see cref="T:System.ComponentModel.Design.CommandID" /> uniquely identifies a command. A unique command identification system prevents conflicts between command identifiers. Command IDs consist of a menu group GUID and a numeric command identifier.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,23 +60,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.CommandID" /> class using the specified menu group GUID and command ID number.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.CommandID" /> class using the specified menu group GUID and command ID number.</para>
         </summary>
         <param name="menuGroup">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The GUID of the group that this menu command belongs to. </param
-        >
+          />The GUID of the group that this menu command belongs to. </param>
         <param name="commandID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numeric identifier of this menu command. </param
-        >
+          />The numeric identifier of this menu command. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -103,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see cref="T:System.ComponentModel.Design.CommandID" /> instances are equal.</para
-          >
+            >Determines whether two <see cref="T:System.ComponentModel.Design.CommandID" /> instances are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -115,8 +110,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare. </param
-        >
+          />The object to compare. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -159,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the GUID of the menu group that the menu command identified by this <see cref="T:System.ComponentModel.Design.CommandID" /> belongs to.</para
-          >
+            >Gets the GUID of the menu group that the menu command identified by this <see cref="T:System.ComponentModel.Design.CommandID" /> belongs to.</para>
         </summary>
       </Docs>
     </Member>
@@ -205,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns a string that contains the significant information of the <see cref="T:System.ComponentModel.Design.CommandID" />, a concatenation that consists of the menu group GUID and the numeric ID for the <see cref="T:System.ComponentModel.Design.CommandID" />.</para
-          >
+            >This method returns a string that contains the significant information of the <see cref="T:System.ComponentModel.Design.CommandID" />, a concatenation that consists of the menu group GUID and the numeric ID for the <see cref="T:System.ComponentModel.Design.CommandID" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

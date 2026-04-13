@@ -55,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" /> class using an existing certificate.</para
-          >
+            >Initializes a new instance of a <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" /> class using an existing certificate.</para>
         </summary>
       </Docs>
     </Member>
@@ -87,29 +86,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="primaryCertificate" /> and <paramref name="supportingCertificates" /> are added to a collection of certificates.</para
-          >
+            >The <paramref name="primaryCertificate" /> and <paramref name="supportingCertificates" /> are added to a collection of certificates.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" /> class using the primary (leaf) certificate and certificates that are part of its trust chain.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" /> class using the primary (leaf) certificate and certificates that are part of its trust chain.</para>
         </summary>
         <param name="primaryCertificate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The primary certificate representing the service's identity.</param
-        >
+          />The primary certificate representing the service's identity.</param>
         <param name="supportingCertificates">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The certificates that are part of the trust chain of the primary certificate.</param
-        >
+          />The certificates that are part of the trust chain of the primary certificate.</param>
       </Docs>
     </Member>
     <Member MemberName="Certificates">
@@ -133,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This collection contains the <paramref name="primaryCertificate" /> used to create the <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" /> as well as any <paramref name="supportingCertificates" />.</para
-          >
+            >This collection contains the <paramref name="primaryCertificate" /> used to create the <see cref="T:System.ServiceModel.X509CertificateEndpointIdentity" /> as well as any <paramref name="supportingCertificates" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create a peer resolver from an instance of this class, call <see cref="M:System.ServiceModel.Channels.PnrpPeerResolverBindingElement.CreatePeerResolver" /> after the instance has been constructed.</para
-      >
+        >To create a peer resolver from an instance of this class, call <see cref="M:System.ServiceModel.Channels.PnrpPeerResolverBindingElement.CreatePeerResolver" /> after the instance has been constructed.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" /> class.</para
-          >
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -87,20 +85,17 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> that contains the new channel factory of the specified type.</para
-          >
+            <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> that contains the new channel factory of the specified type.</para>
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> that specifies the binding context for the channel factory.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> that specifies the binding context for the channel factory.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel to produce.</typeparam
-        >
+          />The type of channel to produce.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -142,17 +137,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.Channels.IChannelListener" /> that contains the new channel listener of the specified type.</para
-          >
+            <see cref="T:System.ServiceModel.Channels.IChannelListener" /> that contains the new channel listener of the specified type.</para>
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> that specifies the binding context for the channel listener.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> that specifies the binding context for the channel listener.</param>
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.IChannel" /> that specifies the type of the channels to produce.</typeparam
-        >
+          <see cref="T:System.ServiceModel.Channels.IChannel" /> that specifies the type of the channels to produce.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -176,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by this method can be reboxed as an object of the more specific <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" /> type.</para
-          >
+            >The object returned by this method can be reboxed as an object of the more specific <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" /> type.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -186,8 +177,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Channels.BindingElement" /> that contains a copy of the current binding element.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Channels.BindingElement" /> that contains a copy of the current binding element.</para>
         </returns>
       </Docs>
     </Member>
@@ -213,14 +203,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a PNRP-specific <see cref="T:System.ServiceModel.PeerResolver" /> instance.</para
-          >
+            >Creates a PNRP-specific <see cref="T:System.ServiceModel.PeerResolver" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.PeerResolver" /> object that contains the new PNRP resolver created by this binding element.</para
-          >
+            <see cref="T:System.ServiceModel.PeerResolver" /> object that contains the new PNRP resolver created by this binding element.</para>
         </returns>
       </Docs>
     </Member>
@@ -255,26 +243,22 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" /> object.</para
-          >
+            >Returns a property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para
-          >
+            >The property from the specified <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para>
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> that specifies the binding context.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> that specifies the binding context.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The specific property to obtain from the binding context.</typeparam
-        >
+          />The specific property to obtain from the binding context.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ReferralPolicy">

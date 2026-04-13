@@ -7,8 +7,7 @@
 
     <!-- these tests depend on the pdb files -->
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
-      >true</DebuggerSupport
-    >
+      >true</DebuggerSupport>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="StackFrameExtensionsTests.cs" />

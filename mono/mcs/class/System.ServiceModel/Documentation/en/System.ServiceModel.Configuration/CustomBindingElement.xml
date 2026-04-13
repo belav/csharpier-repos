@@ -16,8 +16,7 @@
     <BaseTypeName>System.ServiceModel.Configuration.NamedServiceModelExtensionCollectionElement&lt;System.ServiceModel.Configuration.BindingElementExtensionElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TServiceModelExtensionElement"
-        >System.ServiceModel.Configuration.BindingElementExtensionElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.BindingElementExtensionElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -76,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CustomBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CustomBindingElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -99,16 +97,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CustomBindingElement" /> class with the specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CustomBindingElement" /> class with the specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique name for the binding element.</param
-        >
+          />A unique name for the binding element.</param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -144,8 +140,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" /> to be added.</param
-        >
+          />A <see cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" /> to be added.</param>
       </Docs>
     </Member>
     <Member MemberName="ApplyConfiguration">
@@ -174,8 +169,7 @@
           <para>Applies the content of the specified binding to this binding configuration element. This method cannot be inherited.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />A binding.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A binding.</param>
       </Docs>
     </Member>
     <Member MemberName="CanAdd">
@@ -215,8 +209,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" /> to be added.</param
-        >
+          />A <see cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" /> to be added.</param>
       </Docs>
     </Member>
     <Member MemberName="CloseTimeout">
@@ -275,8 +268,7 @@
           <para>Called when the content of a specified binding element is applied to this binding configuration element.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />A binding.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A binding.</param>
       </Docs>
     </Member>
     <Member MemberName="OpenTimeout">
@@ -331,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
         </summary>
       </Docs>
     </Member>

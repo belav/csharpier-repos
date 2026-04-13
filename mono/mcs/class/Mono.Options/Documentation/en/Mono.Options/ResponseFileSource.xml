@@ -25,8 +25,7 @@
         <c>ResponseFileSource</c> looks for arguments which start with
         <c>@</c>, assumes that what follows the <c>@</c> is a valid filename,
         and reads the contents of the filename as the replacement text.
-      </para
-      >
+      </para>
     </remarks>
   </Docs>
   <Members>
@@ -46,8 +45,7 @@
         <summary>
           Constructs and initializes a
           <see cref="T:Mono.Options.ResponseFileSource" /> instance.
-        </summary
-        >
+        </summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -66,12 +64,10 @@
         <summary>
           The description to provide for the argument source within
           <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />.
-        </summary
-        >
+        </summary>
         <value>
           <c>"Read response file for more options."</c>.
-        </value
-        >
+        </value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -104,38 +100,31 @@
         <param name="value">
           A <see cref="T:System.String" /> containing the argument to replace
           with additional arguments.
-        </param
-        >
+        </param>
         <param name="replacement">
           A <see cref="T:System.Collections.Generic.IEnumerable{System.String}" />
           which will refer to teh replacement arguments if this method returns
           <see langword="true" />; otherwise, this value should be ignored by
           callers.
-        </param
-        >
+        </param>
         <summary>
           Replace the argument <paramref name="value" /> with the contents of
           the specified file.
-        </summary
-        >
+        </summary>
         <returns>
           If <paramref name="value" /> starts with <c>@</c>, then
           <paramref name="replacement" /> will contain the parsed contents of
           the filename resulting from <c>
-            <paramref name="value" />.Substring(1)</c
-          >
+            <paramref name="value" />.Substring(1)</c>
           and <see langword="true" /> is returned; otherwise, 
           <see langword="false" /> is returned.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
         <exception cref="T:System.IO.IOException">
           <paramref name="value" /> starts with <c>@</c> and 
           <c>
-            <paramref name="value" />.Substring(1)</c
-          > doees not exist.
-        </exception
-        >
+            <paramref name="value" />.Substring(1)</c> doees not exist.
+        </exception>
         <altmember cref="M:Mono.Options.ArgumentSource.GetArgumentsFromFile(System.String)" />
       </Docs>
     </Member>
@@ -158,13 +147,11 @@
         <summary>
           The names to provide for the argument source within 
           <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />.
-        </summary
-        >
+        </summary>
         <returns>
           A <see cref="T:System.String" /> array containing
           an element with the value <c>"@file"</c>.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
       </Docs>
     </Member>

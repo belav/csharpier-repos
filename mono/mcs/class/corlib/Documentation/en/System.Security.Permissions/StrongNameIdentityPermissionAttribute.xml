@@ -43,24 +43,20 @@
         >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" /> that is used. You can obtain the key string for this attribute by running the Strong Name tool (Sn.exe) with the token and public key options (<system>Sn</system>
         <system>-tp</system> keyfile) against a file that has an Authenticode signature. For more information, see <format type="text/html">
           <a href="c1d2b532-1b8e-4c7a-8ac5-53b801135ec6">Sn.exe (Strong Name Tool)</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
       <para
         >The <see cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" /> attribute can be used to define strong-name requirements for access to public members at the assembly level. In the .NET Framework version 2.0 and later, you can also use the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" /> attribute to specify that all nonpublic types in that assembly are visible to another assembly. For more information, see <format type="text/html">
           <a href="df0c70ea-2c2a-4bdc-9526-df951ad2d055"
-            >Friend Assemblies (C# Programmer's Reference)</a
-          >
+            >Friend Assemblies (C# Programmer's Reference)</a>
         </format> or <format type="text/html">
           <a href="80e7a33a-ca91-450b-a00e-c5a7986e228c">Friend Assemblies (Visual Basic)</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> to be applied to code using declarative security. This class cannot be inherited.</para
-      >
+        >Allows security actions for <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> to be applied to code using declarative security. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -88,16 +84,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" /> class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" /> class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName="CreatePermission">
@@ -128,14 +122,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />.</para
-          >
+            >Creates and returns a new <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> that corresponds to this attribute.</para
-          >
+            >A <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" /> that corresponds to this attribute.</para>
         </returns>
       </Docs>
     </Member>
@@ -156,8 +148,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A strong-named assembly contains a public key, a name, and a version. The name portion of the strong name is the simple name of the assembly; that is, the name of the assembly without the file extension. For example, to reference mylibrary.dll, set the <see cref="P:System.Security.Permissions.StrongNameIdentityPermissionAttribute.Name" /> property to "mylibrary".</para
-          >
+            >A strong-named assembly contains a public key, a name, and a version. The name portion of the strong name is the simple name of the assembly; that is, the name of the assembly without the file extension. For example, to reference mylibrary.dll, set the <see cref="P:System.Security.Permissions.StrongNameIdentityPermissionAttribute.Name" /> property to "mylibrary".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

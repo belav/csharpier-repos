@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown by the <see cref="T:System.Configuration.SettingsBase" /> class when an attempt is made to access a property by name, but either the property was never associated with the <see cref="T:System.Configuration.SettingsBase" /> class instance, or the provider configured for the property did not return a value when asked to load the property data.</para
-      >
+        >This exception is thrown by the <see cref="T:System.Configuration.SettingsBase" /> class when an attempt is made to access a property by name, but either the property was never associated with the <see cref="T:System.Configuration.SettingsBase" /> class instance, or the provider configured for the property did not return a value when asked to load the property data.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an exception for <see cref="T:System.Configuration.SettingsProperty" /> objects that are not found.</para
-      >
+        >Provides an exception for <see cref="T:System.Configuration.SettingsProperty" /> objects that are not found.</para>
     </summary>
   </Docs>
   <Members>
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -79,16 +76,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class, based on a supplied parameter.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class, based on a supplied parameter.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing an exception message.</param
-        >
+          />A string containing an exception message.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -115,23 +110,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class, based on supplied parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class, based on supplied parameters.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that holds the serialized object data about the exception being thrown.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object that holds the serialized object data about the exception being thrown.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains contextual information about the source or destination of the serialized stream.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> object that contains contextual information about the source or destination of the serialized stream.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -158,23 +150,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class, based on supplied parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyNotFoundException" /> class, based on supplied parameters.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string containing an exception message.</param
-        >
+          />A string containing an exception message.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception.</param
-        >
+          />The exception that is the cause of the current exception.</param>
       </Docs>
     </Member>
   </Members>

@@ -292,8 +292,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >EndElement nodes are returned when <see cref="T:System.Xml.XmlReader" /> gets to the end of an element.</para
-          >
+            >EndElement nodes are returned when <see cref="T:System.Xml.XmlReader" /> gets to the end of an element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -328,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returned when XmlReader gets to the end of the entity replacement as a result of a call to <see cref="M:System.Xml.XmlReader.ResolveEntity" />.</para
-          >
+            >Returned when XmlReader gets to the end of the entity replacement as a result of a call to <see cref="M:System.Xml.XmlReader.ResolveEntity" />.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -426,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is returned by the <see cref="T:System.Xml.XmlReader" /> if a Read method has not been called.</para
-          >
+            >This is returned by the <see cref="T:System.Xml.XmlReader" /> if a Read method has not been called.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

@@ -28,8 +28,7 @@
       <para
         >Represents the enumeration facet from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
-        </format>. This class specifies a list of valid values for a simpleType element. Declaration is contained within a restriction declaration.</para
-      >
+        </format>. This class specifies a list of valid values for a simpleType element. Declaration is contained within a restriction declaration.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaEnumerationFacet" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaEnumerationFacet" /> class.</para>
         </summary>
       </Docs>
     </Member>

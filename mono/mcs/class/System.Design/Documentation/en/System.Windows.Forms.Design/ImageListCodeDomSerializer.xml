@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ImageListCodeDomSerializer" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ImageListCodeDomSerializer" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -63,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.Design.ImageListCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" /> method uses the serialization manager to create objects and resolve data types.</para
-          >
+            >The <see cref="M:System.Windows.Forms.Design.ImageListCodeDomSerializer.Deserialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" /> method uses the serialization manager to create objects and resolve data types.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,15 +77,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A serialization manager interface that is used during the deserialization process.</param
-        >
+          />A serialization manager interface that is used during the deserialization process.</param>
         <param name="codeObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A serialized CodeDOM object to deserialize.</param
-        >
+          />A serialized CodeDOM object to deserialize.</param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -124,15 +120,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization manager to use during serialization.</param
-        >
+          />The serialization manager to use during serialization.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to serialize.</param
-        >
+          />The object to serialize.</param>
       </Docs>
     </Member>
   </Members>

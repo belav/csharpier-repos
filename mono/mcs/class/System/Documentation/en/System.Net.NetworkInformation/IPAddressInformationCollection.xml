@@ -32,14 +32,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.Net.NetworkInformation.IPAddressInformationCollection.Item(System.Int32)" /> property returns a member of the collection.</para
-      >
+        >The <see cref="P:System.Net.NetworkInformation.IPAddressInformationCollection.Item(System.Int32)" /> property returns a member of the collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Stores a set of <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types.</para
-      >
+        >Stores a set of <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types.</para>
     </summary>
   </Docs>
   <Members>
@@ -69,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see cref="T:System.NotSupportedException" /> because this operation is not supported for this collection.</para
-          >
+            >Throws a <see cref="T:System.NotSupportedException" /> because this operation is not supported for this collection.</para>
         </summary>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be added to the collection.</param
-        >
+          />The object to be added to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -102,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see cref="T:System.NotSupportedException" /> because this operation is not supported for this collection.</para
-          >
+            >Throws a <see cref="T:System.NotSupportedException" /> because this operation is not supported for this collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -133,22 +128,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the collection contains the specified <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> object.</para
-          >
+            >Checks whether the collection contains the specified <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> object exists in the collection; otherwise. false.</para
-          >
+            >true if the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> object exists in the collection; otherwise. false.</para>
         </returns>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> object to be searched in the collection.</param
-        >
+          />The <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> object to be searched in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -177,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="array" /> parameter must be one-dimensional with zero-based indexing.</para
-          >
+            >The <paramref name="array" /> parameter must be one-dimensional with zero-based indexing.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -189,15 +180,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A one-dimensional array that receives a copy of the collection.</param
-        >
+          />A one-dimensional array that receives a copy of the collection.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which the copy begins.</param
-        >
+          />The zero-based index in <paramref name="array" /> at which the copy begins.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -218,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types in this collection.</para
-          >
+            >Gets the number of <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types in this collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -246,14 +234,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para
-          >
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para>
           <para
-            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> causes an <see cref="T:System.InvalidOperationException" />.</para
-          >
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> causes an <see cref="T:System.InvalidOperationException" />.</para>
           <para
-            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" /> class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para
-          >
+            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" /> class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -262,8 +247,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and provides access to the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types in this collection.</para
-          >
+            >An object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and provides access to the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types in this collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -342,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see cref="T:System.NotSupportedException" /> because this operation is not supported for this collection.</para
-          >
+            >Throws a <see cref="T:System.NotSupportedException" /> because this operation is not supported for this collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -354,8 +337,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be removed.</param
-        >
+          />The object to be removed.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -380,14 +362,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para
-          >
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para>
           <para
-            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> causes an <see cref="T:System.InvalidOperationException" />.</para
-          >
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> causes an <see cref="T:System.InvalidOperationException" />.</para>
           <para
-            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" /> class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para
-          >
+            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" /> class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -396,8 +375,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and provides access to the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types in this collection.</para
-          >
+            >An object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and provides access to the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> types in this collection.</para>
         </returns>
       </Docs>
     </Member>

@@ -24,8 +24,7 @@
   <Docs>
     <summary
       >Possible <see cref="M:Mono.Unix.Native.Syscall.mmap" />
-      <paramref name="flags" /> values.</summary
-    >
+      <paramref name="flags" /> values.</summary>
     <remarks></remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.mmap" />
   </Docs>
@@ -50,8 +49,7 @@
           >Map anonymous memory not associated with any specific
         file.  The file descriptor used for creating <c>MAP_ANON</c>
         must be -1.  The <paramref name="offset" /> argument is ignored.
-        </summary
-        >
+        </summary>
       </Docs>
     </Member>
     <Member MemberName="MAP_ANONYMOUS">
@@ -151,8 +149,7 @@
         the one specified.  If the specified address cannot be used, 
         <see cref="M:Mono.Unix.Native.Syscall.mmap" /> will fail.  If
         <c>MAP_FIXED</c> is specified, <paramref name="addr" /> must be a
-        multiple of the pagesize.  Use of this option is discouraged.</summary
-        >
+        multiple of the pagesize.  Use of this option is discouraged.</summary>
       </Docs>
     </Member>
     <Member MemberName="MAP_GROWSDOWN">

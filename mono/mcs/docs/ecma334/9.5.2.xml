@@ -107,6 +107,5 @@
   </paragraph>
   <paragraph>When referenced in a pre-processing expression, a defined conditional compilation symbol has the boolean value true, and an undefined conditional compilation symbol has the boolean value false. </paragraph>
   <paragraph
-    >Evaluation of a pre-processing expression always yields a boolean value. The rules of evaluation for a  pre-processing expression are the same as those for a constant expression (<hyperlink>14.15</hyperlink>), except that the only  user-defined entities that can be referenced are conditional compilation symbols. </paragraph
-  >
+    >Evaluation of a pre-processing expression always yields a boolean value. The rules of evaluation for a  pre-processing expression are the same as those for a constant expression (<hyperlink>14.15</hyperlink>), except that the only  user-defined entities that can be referenced are conditional compilation symbols. </paragraph>
 </clause>

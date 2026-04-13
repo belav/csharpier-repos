@@ -65,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.Sockets.Socket" /> is listening for new connections.</para
-          >
+            >The <see cref="T:System.Net.Sockets.Socket" /> is listening for new connections.</para>
         </summary>
       </Docs>
     </Member>

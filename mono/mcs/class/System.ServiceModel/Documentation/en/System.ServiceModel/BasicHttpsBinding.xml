@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -66,16 +65,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" /> class with the specified type of security mode.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" /> class with the specified type of security mode.</para>
         </summary>
         <param name="securityMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of <see cref="T:System.ServiceModel.BasicHttpsSecurityMode" /> that specifies the type of security.</param
-        >
+          />The value of <see cref="T:System.ServiceModel.BasicHttpsSecurityMode" /> that specifies the type of security.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -96,16 +93,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" /> class with the specified type of configuration name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpsBinding" /> class with the specified type of configuration name.</para>
         </summary>
         <param name="configurationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding configuration name for the BasicHttpsBindingElement.</param
-        >
+          />The binding configuration name for the BasicHttpsBindingElement.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElements">

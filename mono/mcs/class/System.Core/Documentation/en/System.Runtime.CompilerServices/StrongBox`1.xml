@@ -98,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value that the <see cref="T:System.Runtime.CompilerServices.StrongBox`1" /> references.</para
-          >
+            >Gets or sets the value that the <see cref="T:System.Runtime.CompilerServices.StrongBox`1" /> references.</para>
         </summary>
       </Docs>
     </Member>
@@ -119,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the value that the <see cref="T:System.Runtime.CompilerServices.StrongBox`1" /> references.</para
-          >
+            >Represents the value that the <see cref="T:System.Runtime.CompilerServices.StrongBox`1" /> references.</para>
         </summary>
       </Docs>
     </Member>

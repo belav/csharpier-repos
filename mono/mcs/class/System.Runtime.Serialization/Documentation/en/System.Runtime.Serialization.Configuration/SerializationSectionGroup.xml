@@ -29,19 +29,16 @@
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
         </format> element, specifically, to allow the addition of types to the collection of known types. For more information about data contract known types, see <format type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
         >For an example of using the element to add to the known types collection, see <format type="text/html">
           <a href="f35184e4-9d9e-4d37-8fb4-d5b58220eb3e">&lt;declaredTypes&gt;</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to configure serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para
-      >
+        >Handles the XML elements used to configure serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -88,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.Serialization.Configuration.DataContractSerializerSection" /> used to set up the known types collection. </para
-          >
+            >Gets the <see cref="T:System.Runtime.Serialization.Configuration.DataContractSerializerSection" /> used to set up the known types collection. </para>
         </summary>
       </Docs>
     </Member>
@@ -121,16 +116,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" /> that represents the configuration section.</para
-          >
+            >A <see cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" /> that represents the configuration section.</para>
         </returns>
         <param name="config">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Configuration.Configuration" /> that represents the configuration to retrieve.</param
-        >
+          />A <see cref="T:System.Configuration.Configuration" /> that represents the configuration to retrieve.</param>
       </Docs>
     </Member>
   </Members>

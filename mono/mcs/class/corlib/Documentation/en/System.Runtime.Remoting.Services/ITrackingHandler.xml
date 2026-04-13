@@ -23,15 +23,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Every object that is registered with <see cref="T:System.Runtime.Remoting.Services.TrackingServices" /> is called by remoting when an object or proxy in the current <see cref="T:System.AppDomain" /> is marshaled, unmarshaled, or disconnected.</para
-      >
+        >Every object that is registered with <see cref="T:System.Runtime.Remoting.Services.TrackingServices" /> is called by remoting when an object or proxy in the current <see cref="T:System.AppDomain" /> is marshaled, unmarshaled, or disconnected.</para>
       <para>Note that only objects can be disconnected. An exception is thrown when disconnect is called on a proxy.</para>
       <block subset="none" type="note">
         <para
           >This interface makes a link demand. A SecurityException is thrown if the immediate caller makes the call through a reference to the interface and does not have infrastructure permission. See <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
-          </format> for more information.</para
-        >
+          </format> for more information.</para>
       </block>
     </remarks>
     <summary>
@@ -69,8 +67,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The disconnected object. </param
-        >
+          />The disconnected object. </param>
       </Docs>
     </Member>
     <Member MemberName="MarshaledObject">
@@ -106,15 +103,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that has been marshaled. </param
-        >
+          />The object that has been marshaled. </param>
         <param name="or">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that results from marshaling and represents the specified object. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that results from marshaling and represents the specified object. </param>
       </Docs>
     </Member>
     <Member MemberName="UnmarshaledObject">
@@ -150,15 +145,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmarshaled object. </param
-        >
+          />The unmarshaled object. </param>
         <param name="or">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that represents the specified object. </param
-        >
+          />The <see cref="T:System.Runtime.Remoting.ObjRef" /> that represents the specified object. </param>
       </Docs>
     </Member>
   </Members>

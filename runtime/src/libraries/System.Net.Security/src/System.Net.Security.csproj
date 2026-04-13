@@ -11,29 +11,22 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.SystemNetSecurity_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemNetSecurity_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <ApiExclusionListPath Condition="'$(TargetPlatformIdentifier)' == ''"
-      >ExcludeApiList.PNSE.txt</ApiExclusionListPath
-    >
+      >ExcludeApiList.PNSE.txt</ApiExclusionListPath>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'"
-      >$(DefineConstants);TARGET_WINDOWS</DefineConstants
-    >
+      >$(DefineConstants);TARGET_WINDOWS</DefineConstants>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'android'"
-      >$(DefineConstants);TARGET_ANDROID</DefineConstants
-    >
+      >$(DefineConstants);TARGET_ANDROID</DefineConstants>
     <UseAndroidCrypto Condition="'$(TargetPlatformIdentifier)' == 'android'">true</UseAndroidCrypto>
     <UseAppleCrypto
       Condition="'$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'ios' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >true</UseAppleCrypto
-    >
+      >true</UseAppleCrypto>
     <UseManagedNtlm
       Condition="'$(TargetPlatformIdentifier)' == 'android' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >true</UseManagedNtlm
-    >
+      >true</UseManagedNtlm>
     <DefineConstants Condition="'$(UseAndroidCrypto)' == 'true' or '$(UseAppleCrypto)' == 'true'"
-      >$(DefineConstants);SYSNETSECURITY_NO_OPENSSL</DefineConstants
-    >
+      >$(DefineConstants);SYSNETSECURITY_NO_OPENSSL</DefineConstants>
     <GenAPIExcludeApiList>ReferenceAssemblyExclusions.txt</GenAPIExcludeApiList>
   </PropertyGroup>
 

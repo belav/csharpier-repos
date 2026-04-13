@@ -55,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -97,15 +96,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the license key. </param
-        >
+          />The type of the license key. </param>
         <param name="resourceAssembly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to get the key from. </param
-        >
+          />The assembly to get the key from. </param>
       </Docs>
     </Member>
     <Member MemberName="SetSavedLicenseKey">
@@ -144,11 +141,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the license key. </param
-        >
+          />The type of the license key. </param>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The license key. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The license key. </param>
       </Docs>
     </Member>
     <Member MemberName="UsageMode">

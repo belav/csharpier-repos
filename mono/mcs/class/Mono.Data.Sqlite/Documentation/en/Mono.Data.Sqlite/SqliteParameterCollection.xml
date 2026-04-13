@@ -257,8 +257,7 @@
       </Parameters>
       <Docs>
         <param name="parameterName"
-          >Name of the parameter, or null to indicate an unnamed parameter</param
-        >
+          >Name of the parameter, or null to indicate an unnamed parameter</param>
         <param name="value">The initial value of the parameter</param>
         <summary>
             Adds a named/unnamed parameter and its value to the parameter collection.

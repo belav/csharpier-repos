@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The number of <see cref="T:Microsoft.Build.Framework.ITaskItem" /> objects created during a build may not correspond exactly to items declared in a project file for the following reasons:</para
-      >
+        >The number of <see cref="T:Microsoft.Build.Framework.ITaskItem" /> objects created during a build may not correspond exactly to items declared in a project file for the following reasons:</para>
       <list type="bullet">
         <item>
           <para>Tasks sometimes create items that were not declared in the project file.</para>
@@ -95,8 +94,7 @@
           <list type="bullet">
             <item>
               <para
-                >Do not overwrite the <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> property.</para
-              >
+                >Do not overwrite the <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> property.</para>
             </item>
             <item>
               <para>Do not overwrite existing metadata entries.</para>
@@ -115,8 +113,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to copy the metadata entries to.</param
-        >
+          />The item to copy the metadata entries to.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -147,8 +144,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the metadata entry.</param
-        >
+          />The name of the metadata entry.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -167,8 +163,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The item specification is an arbitrary string. If the item represents a file on disk, the item specification will be the path of that file.</para>
           <para
-            >The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> for the following item declaration in a project file is File.cs.</para
-          >
+            >The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" /> for the following item declaration in a project file is File.cs.</para>
           <code>&lt;ItemGroup&gt;
     &lt;Compile Include="File.cs"/&gt;
 &lt;/ItemGroup&gt;</code>
@@ -244,8 +239,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the metadata entry to remove.</param
-        >
+          />The name of the metadata entry to remove.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -276,15 +270,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the metadata entry.</param
-        >
+          />The name of the metadata entry.</param>
         <param name="metadataValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the metadata entry.</param
-        >
+          />The value of the metadata entry.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

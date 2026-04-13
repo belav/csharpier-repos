@@ -11,8 +11,7 @@
     <!-- Platform manifest and package override metadata -->
     <ReferencePackSharedFxVersion>$(AspNetCoreMajorMinorVersion).0</ReferencePackSharedFxVersion>
     <ReferencePackSharedFxVersion Condition="'$(VersionSuffix)' != ''"
-      >$(ReferencePackSharedFxVersion)-$(VersionSuffix)</ReferencePackSharedFxVersion
-    >
+      >$(ReferencePackSharedFxVersion)-$(VersionSuffix)</ReferencePackSharedFxVersion>
   </PropertyGroup>
 
   <ItemGroup>

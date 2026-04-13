@@ -37,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Runtime.Serialization.Formatter" /> is the abstract base class for all runtime serialization formatters, and provides some helper methods for implementing the <see cref="T:System.Runtime.Serialization.IFormatter" /> interface. The <see cref="T:System.Runtime.Serialization.Formatter" /> also manages queuing objects for serialization and generating IDs on a per-object basis.</para
-      >
+        <see cref="T:System.Runtime.Serialization.Formatter" /> is the abstract base class for all runtime serialization formatters, and provides some helper methods for implementing the <see cref="T:System.Runtime.Serialization.IFormatter" /> interface. The <see cref="T:System.Runtime.Serialization.Formatter" /> also manages queuing objects for serialization and generating IDs on a per-object basis.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,14 +63,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Collections.Queue" /> for objects to serialize and a <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> to generate IDs for them.</para
-          >
+            >Creates a <see cref="T:System.Collections.Queue" /> for objects to serialize and a <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> to generate IDs for them.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Formatter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Formatter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -98,14 +95,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Serialization.SerializationBinder" /> performs lookups for types from the type names passed during deserialization. If no <see cref="T:System.Runtime.Serialization.SerializationBinder" /> is set, a default is used.</para
-          >
+            >The <see cref="T:System.Runtime.Serialization.SerializationBinder" /> performs lookups for types from the type names passed during deserialization. If no <see cref="T:System.Runtime.Serialization.SerializationBinder" /> is set, a default is used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets or sets the <see cref="T:System.Runtime.Serialization.SerializationBinder" /> used with the current formatter.</para
-          >
+            >When overridden in a derived class, gets or sets the <see cref="T:System.Runtime.Serialization.SerializationBinder" /> used with the current formatter.</para>
         </summary>
       </Docs>
     </Member>
@@ -132,14 +127,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Serialization.StreamingContext" /> is an indication of either the source of the bits being deserialized or the destination of the bits being serialized. It has no impact on default serialization, but is passed as an argument to <see cref="T:System.Runtime.Serialization.ISerializable" /> and <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />.</para
-          >
+            >The <see cref="T:System.Runtime.Serialization.StreamingContext" /> is an indication of either the source of the bits being deserialized or the destination of the bits being serialized. It has no impact on default serialization, but is passed as an argument to <see cref="T:System.Runtime.Serialization.ISerializable" /> and <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets or sets the <see cref="T:System.Runtime.Serialization.StreamingContext" /> used for the current serialization.</para
-          >
+            >When overridden in a derived class, gets or sets the <see cref="T:System.Runtime.Serialization.StreamingContext" /> used for the current serialization.</para>
         </summary>
       </Docs>
     </Member>
@@ -179,8 +172,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to deserialize. </param
-        >
+          />The stream to deserialize. </param>
       </Docs>
     </Member>
     <Member MemberName="GetNext">
@@ -231,14 +223,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> maintains a list of the objects that have been identified and the IDs that they were given.</para
-          >
+            >The <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> maintains a list of the objects that have been identified and the IDs that they were given.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Contains the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> used with the current formatter.</para
-          >
+            >Contains the <see cref="T:System.Runtime.Serialization.ObjectIDGenerator" /> used with the current formatter.</para>
         </summary>
       </Docs>
     </Member>
@@ -262,14 +252,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Objects scheduled for serialization with the <see cref="M:System.Runtime.Serialization.Formatter.Schedule(System.Object)" /> method are pushed on the queue.</para
-          >
+            >Objects scheduled for serialization with the <see cref="M:System.Runtime.Serialization.Formatter.Schedule(System.Object)" /> method are pushed on the queue.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Contains a <see cref="T:System.Collections.Queue" /> of the objects left to serialize.</para
-          >
+            >Contains a <see cref="T:System.Collections.Queue" /> of the objects left to serialize.</para>
         </summary>
       </Docs>
     </Member>
@@ -295,8 +283,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Runtime.Serialization.Formatter.Schedule(System.Object)" /> obtains an ID for the object and puts it on the queue for later serialization if this is a new object ID. The schedule is a work queue of objects to serialize, and is held inside the formatter. If the object is already on the work queue, it will not be added a second time, but an exception will not be thrown either.</para
-          >
+            <see cref="M:System.Runtime.Serialization.Formatter.Schedule(System.Object)" /> obtains an ID for the object and puts it on the queue for later serialization if this is a new object ID. The schedule is a work queue of objects to serialize, and is held inside the formatter. If the object is already on the work queue, it will not be added a second time, but an exception will not be thrown either.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -311,8 +298,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to schedule for serialization. </param
-        >
+          />The object to schedule for serialization. </param>
       </Docs>
     </Member>
     <Member MemberName="Serialize">
@@ -348,15 +334,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to which the objects are serialized. </param
-        >
+          />The stream to which the objects are serialized. </param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object at the root of the graph to serialize. </param
-        >
+          />The object at the root of the graph to serialize. </param>
       </Docs>
     </Member>
     <Member MemberName="SurrogateSelector">
@@ -382,17 +366,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="T:System.Runtime.Serialization.SurrogateSelector" /> to look up implementations of <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" /> that control the serialization of a particular type.</para
-          >
+            >Use the <see cref="T:System.Runtime.Serialization.SurrogateSelector" /> to look up implementations of <see cref="T:System.Runtime.Serialization.ISerializationSurrogate" /> that control the serialization of a particular type.</para>
           <para
-            >If an object type has a matching surrogate, then serialization and deserialization are handed off to the surrogate even if the type implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface.</para
-          >
+            >If an object type has a matching surrogate, then serialization and deserialization are handed off to the surrogate even if the type implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets or sets the <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> used with the current formatter.</para
-          >
+            >When overridden in a derived class, gets or sets the <see cref="T:System.Runtime.Serialization.ISurrogateSelector" /> used with the current formatter.</para>
         </summary>
       </Docs>
     </Member>
@@ -426,22 +407,23 @@
           <para>When overridden in a derived class, writes an array to the stream already attached to the formatter.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The array to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the array. </param
-        >
+          />The name of the array. </param>
         <param name="memberType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of elements that the array holds. </param
-        >
+          />The type of elements that the array holds. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteBoolean">
@@ -473,15 +455,17 @@
           <para>When overridden in a derived class, writes a Boolean value to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteByte">
@@ -513,15 +497,17 @@
           <para>When overridden in a derived class, writes an 8-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteChar">
@@ -553,15 +539,17 @@
           <para>When overridden in a derived class, writes a Unicode character to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteDateTime">
@@ -591,19 +579,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, writes a <see cref="T:System.DateTime" /> value to the stream already attached to the formatter.</para
-          >
+            >When overridden in a derived class, writes a <see cref="T:System.DateTime" /> value to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteDecimal">
@@ -633,19 +622,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, writes a <see cref="T:System.Decimal" /> value to the stream already attached to the formatter.</para
-          >
+            >When overridden in a derived class, writes a <see cref="T:System.Decimal" /> value to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteDouble">
@@ -677,15 +667,17 @@
           <para>When overridden in a derived class, writes a double-precision floating-point number to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteInt16">
@@ -717,15 +709,17 @@
           <para>When overridden in a derived class, writes a 16-bit signed integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteInt32">
@@ -757,15 +751,17 @@
           <para>When overridden in a derived class, writes a 32-bit signed integer to the stream.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteInt64">
@@ -797,15 +793,17 @@
           <para>When overridden in a derived class, writes a 64-bit signed integer to the stream.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteMember">
@@ -834,8 +832,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To use this method properly, all the Write methods (<see cref="M:System.Runtime.Serialization.Formatter.WriteArray(System.Object,System.String,System.Type)" /> method, <see cref="M:System.Runtime.Serialization.Formatter.WriteBoolean(System.Boolean,System.String)" /> method, <see cref="M:System.Runtime.Serialization.Formatter.WriteByte(System.Byte,System.String)" /> method, and so on) should have the appropriate functionality.</para
-          >
+            >To use this method properly, all the Write methods (<see cref="M:System.Runtime.Serialization.Formatter.WriteArray(System.Object,System.String,System.Type)" /> method, <see cref="M:System.Runtime.Serialization.Formatter.WriteBoolean(System.Boolean,System.String)" /> method, <see cref="M:System.Runtime.Serialization.Formatter.WriteByte(System.Byte,System.String)" /> method, and so on) should have the appropriate functionality.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -846,15 +843,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to serialize. </param
-        >
+          />The name of the member to serialize. </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to write to the stream attached to the formatter. </param
-        >
+          />The object to write to the stream attached to the formatter. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteObjectRef">
@@ -894,22 +889,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object reference to write. </param
-        >
+          />The object reference to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
         <param name="memberType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of object the reference points to. </param
-        >
+          />The type of object the reference points to. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteSByte">
@@ -946,15 +938,17 @@
           <para>When overridden in a derived class, writes an 8-bit signed integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteSingle">
@@ -986,15 +980,17 @@
           <para>When overridden in a derived class, writes a single-precision floating-point number to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTimeSpan">
@@ -1024,19 +1020,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, writes a <see cref="T:System.TimeSpan" /> value to the stream already attached to the formatter.</para
-          >
+            >When overridden in a derived class, writes a <see cref="T:System.TimeSpan" /> value to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteUInt16">
@@ -1073,15 +1070,17 @@
           <para>When overridden in a derived class, writes a 16-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteUInt32">
@@ -1118,15 +1117,17 @@
           <para>When overridden in a derived class, writes a 32-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteUInt64">
@@ -1163,15 +1164,17 @@
           <para>When overridden in a derived class, writes a 64-bit unsigned integer to the stream already attached to the formatter.</para>
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to write. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to write. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteValueType">
@@ -1208,22 +1211,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object representing the value type. </param
-        >
+          />The object representing the value type. </param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member. </param
-        >
+          />The name of the member. </param>
         <param name="memberType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the value type. </param
-        >
+          />The <see cref="T:System.Type" /> of the value type. </param>
       </Docs>
     </Member>
   </Members>

@@ -31,11 +31,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.InheritanceAttribute" /> represents the type and level of inheritance of a member.</para
-      >
+        <see cref="T:System.ComponentModel.InheritanceAttribute" /> represents the type and level of inheritance of a member.</para>
       <para
-        >When the <see cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" /> method of the <see cref="T:System.ComponentModel.Design.IInheritanceService" /> searches the component fields of a component to identify fields that are inherited from a base class, the method represents the inheritance level of each component using an <see cref="T:System.ComponentModel.InheritanceAttribute" />.</para
-      >
+        >When the <see cref="M:System.ComponentModel.Design.IInheritanceService.AddInheritedComponents(System.ComponentModel.IComponent,System.ComponentModel.IContainer)" /> method of the <see cref="T:System.ComponentModel.Design.IInheritanceService" /> searches the component fields of a component to identify fields that are inherited from a base class, the method represents the inheritance level of each component using an <see cref="T:System.ComponentModel.InheritanceAttribute" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.InheritanceAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InheritanceAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +88,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.InheritanceAttribute" /> class with the specified inheritance level.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InheritanceAttribute" /> class with the specified inheritance level.</para>
         </summary>
         <param name="inheritanceLevel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.InheritanceLevel" /> that indicates the level of inheritance to set this attribute to. </param
-        >
+          />An <see cref="T:System.ComponentModel.InheritanceLevel" /> that indicates the level of inheritance to set this attribute to. </param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -126,14 +121,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is not inherited.</para
-          >
+            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is not inherited.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the default value for <see cref="T:System.ComponentModel.InheritanceAttribute" /> is <see cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />. This field is read-only.</para
-          >
+            >Specifies that the default value for <see cref="T:System.ComponentModel.InheritanceAttribute" /> is <see cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />. This field is read-only.</para>
         </summary>
       </Docs>
     </Member>
@@ -193,8 +186,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see cref="T:System.ComponentModel.InheritanceAttribute" />.</para
-          >
+            >A hash code for the current <see cref="T:System.ComponentModel.InheritanceAttribute" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -248,8 +240,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is inherited.</para
-          >
+            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is inherited.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -280,8 +271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is inherited and read-only.</para
-          >
+            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is inherited and read-only.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -340,8 +330,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is not inherited.</para
-          >
+            >This field creates a new <see cref="T:System.ComponentModel.InheritanceAttribute" /> that indicates that the associated component is not inherited.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -374,8 +363,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents this <see cref="T:System.ComponentModel.InheritanceAttribute" />.</para
-          >
+            >A string that represents this <see cref="T:System.ComponentModel.InheritanceAttribute" />.</para>
         </returns>
       </Docs>
     </Member>

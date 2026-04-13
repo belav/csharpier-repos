@@ -10,8 +10,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Runtime.InteropServices.Expando" /> namespace contains the IExpando interface which allows modification of an object by adding or removing its members.</para
-      >
+        >The <see cref="N:System.Runtime.InteropServices.Expando" /> namespace contains the IExpando interface which allows modification of an object by adding or removing its members.</para>
     </summary>
   </Docs>
 </Namespace>

@@ -37,23 +37,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a <see cref="T:System.Web.Configuration.BuildProvider" /> class, initialized to the provided values.</para
-          >
+            >Creates an instance of a <see cref="T:System.Web.Configuration.BuildProvider" /> class, initialized to the provided values.</para>
         </summary>
         <param name="extension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file extension of the dynamic resource used during compilation.</param
-        >
+          />The file extension of the dynamic resource used during compilation.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that represents the <see cref="T:System.Web.Configuration.BuildProvider" /> instance to use when parsing and compiling the given extension.</param
-        >
+          />The type that represents the <see cref="T:System.Web.Configuration.BuildProvider" /> instance to use when parsing and compiling the given extension.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,8 +84,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The build provider object to compare with the current object.</param
-        >
+          />The build provider object to compare with the current object.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -184,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or set the comma-separated class and assembly combination that indicates the <see cref="T:System.Web.Configuration.BuildProvider" /> instance to use.</para
-          >
+            >Gets or set the comma-separated class and assembly combination that indicates the <see cref="T:System.Web.Configuration.BuildProvider" /> instance to use.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

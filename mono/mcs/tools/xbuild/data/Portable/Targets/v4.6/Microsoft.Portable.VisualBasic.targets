@@ -27,8 +27,7 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
     <PropertyGroup>
       <_VBRuntimeFound
         Condition="Exists('%(_VBRuntimeSearchDirectories.Identity)Microsoft.VisualBasic.dll')"
-        >true</_VBRuntimeFound
-      >
+        >true</_VBRuntimeFound>
     </PropertyGroup>
 
     <PropertyGroup Condition="$(_VBRuntimeFound) != 'true'">

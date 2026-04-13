@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IssuedTokenClientElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IssuedTokenClientElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the default value of <see cref="T:System.ServiceModel.Security.SecurityKeyEntropyMode" />.</para
-          >
+            >Gets or sets the default value of <see cref="T:System.ServiceModel.Security.SecurityKeyEntropyMode" />.</para>
         </summary>
       </Docs>
     </Member>

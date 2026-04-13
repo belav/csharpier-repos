@@ -17,11 +17,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The new endpoint address can have its property values initialized from the property values of an existing endpoint address using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" /> constructor. </para
-      >
+        >The new endpoint address can have its property values initialized from the property values of an existing endpoint address using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" /> constructor. </para>
       <para
-        >The endpoint addresses created can have their URI and identity values set using the <see cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" /> and <see cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" /> properties of the endpoint address builder. Note that <see cref="T:System.ServiceModel.EndpointAddress" /> is an immutable class. </para
-      >
+        >The endpoint addresses created can have their URI and identity values set using the <see cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" /> and <see cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" /> properties of the endpoint address builder. Note that <see cref="T:System.ServiceModel.EndpointAddress" /> is an immutable class. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -74,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" /> class from an existing endpoint address.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" /> class from an existing endpoint address.</para>
         </summary>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> whose property values are used to initialize the property values of this instance.</param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> whose property values are used to initialize the property values of this instance.</param>
       </Docs>
     </Member>
     <Member MemberName="GetReaderAtExtensions">
@@ -115,8 +110,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the extensions of the endpoint address.</para
-          >
+            >The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the extensions of the endpoint address.</para>
         </returns>
       </Docs>
     </Member>
@@ -146,8 +140,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the metadata associated the endpoint address if there is some; otherwise, null.</para
-          >
+            >The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the metadata associated the endpoint address if there is some; otherwise, null.</para>
         </returns>
       </Docs>
     </Member>
@@ -172,8 +165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Address headers for the endpoints can be set using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" /> constructor.</para
-          >
+            >Address headers for the endpoints can be set using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -239,8 +231,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the extensions of the endpoint.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the extensions of the endpoint.</param>
       </Docs>
     </Member>
     <Member MemberName="SetMetadataReader">
@@ -273,8 +264,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the metadata associated with the endpoint.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReader" /> that reads the metadata associated with the endpoint.</param>
       </Docs>
     </Member>
     <Member MemberName="ToEndpointAddress">
@@ -306,8 +296,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.EndpointAddress" /> whose property are initialized with the values of the current endpoint address builder.</para
-          >
+            >The <see cref="T:System.ServiceModel.EndpointAddress" /> whose property are initialized with the values of the current endpoint address builder.</para>
         </returns>
       </Docs>
     </Member>

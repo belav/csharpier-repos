@@ -44,8 +44,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.WebHeaderCollection" /> class is generally accessed through <see cref="P:System.Net.WebRequest.Headers" /> or <see cref="P:System.Net.WebResponse.Headers" />. Some common headers are considered restricted and are either exposed directly by the API (such as Content-Type) or protected by the system and cannot be changed.</para
-      >
+        >The <see cref="T:System.Net.WebHeaderCollection" /> class is generally accessed through <see cref="P:System.Net.WebRequest.Headers" /> or <see cref="P:System.Net.WebResponse.Headers" />. Some common headers are considered restricted and are either exposed directly by the API (such as Content-Type) or protected by the system and cannot be changed.</para>
       <para>The restricted headers are: </para>
       <list type="bullet">
         <item>
@@ -118,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebHeaderCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebHeaderCollection" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -147,29 +145,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.WebHeaderCollection" /> class.</para
-          >
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.WebHeaderCollection" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebHeaderCollection" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebHeaderCollection" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> containing the information required to serialize the <see cref="T:System.Net.WebHeaderCollection" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> containing the information required to serialize the <see cref="T:System.Net.WebHeaderCollection" />. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> containing the source of the serialized stream associated with the new <see cref="T:System.Net.WebHeaderCollection" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> containing the source of the serialized stream associated with the new <see cref="T:System.Net.WebHeaderCollection" />. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -196,29 +190,24 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="header " /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception
-        >
+          <paramref name="header " /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception>
         <exception cref="T:System.ArgumentException">
           <para><paramref name="header" /> does not contain a colon (:) character.</para>
           <para>-or-</para>
           <para>
-            <c>name</c> is <see cref="F:System.String.Empty" />, or contains invalid characters.</para
-          >
+            <c>name</c> is <see cref="F:System.String.Empty" />, or contains invalid characters.</para>
           <para>-or-</para>
           <para>
-            <paramref name="header" /> is a protected header that can only be set with a property accessor or by the system. </para
-          >
+            <paramref name="header" /> is a protected header that can only be set with a property accessor or by the system. </para>
           <para>-or-</para>
           <para><c>value</c> contains invalid characters.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="header" /> parameter must be specified in the format "name:value". If the specified header does not exist in the collection, a new header is added to the collection.</para
-          >
+            >The <paramref name="header" /> parameter must be specified in the format "name:value". If the specified header does not exist in the collection, a new header is added to the collection.</para>
           <para
-            >If the header specified in <paramref name="header" /> is already present in the collection, the value part of the <paramref name="header" /> is concatenated with the existing value.</para
-          >
+            >If the header specified in <paramref name="header" /> is already present in the collection, the value part of the <paramref name="header" /> is concatenated with the existing value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -229,8 +218,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add, with the name and value separated by a colon. </param
-        >
+          />The header to add, with the name and value separated by a colon. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -259,11 +247,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the specified header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the specified header is already present, <paramref name="value" /> is added to the comma-separated list of values associated with the header.</para
-          >
+            >If the specified header is already present, <paramref name="value" /> is added to the comma-separated list of values associated with the header.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -274,15 +260,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header. </param
-        >
+          />The content of the header. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -310,11 +294,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the specified header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the specified header is already present, <paramref name="value" /> is added to the comma-separated list of values associated with the header.</para
-          >
+            >If the specified header is already present, <paramref name="value" /> is added to the comma-separated list of values associated with the header.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -325,15 +307,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header. </param
-        >
+          />The content of the header. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -365,23 +345,19 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="name " /> is <see langword="null" /> or <see cref="F:System.String.Empty" />, or contains invalid characters.</para
-          >
+            <paramref name="name " /> is <see langword="null" /> or <see cref="F:System.String.Empty" />, or contains invalid characters.</para>
           <para>-or-</para>
           <para>
-            <paramref name="name" /> is a protected header that can only be set with a property accessor or by the system.</para
-          >
+            <paramref name="name" /> is a protected header that can only be set with a property accessor or by the system.</para>
           <para>-or-</para>
           <para><paramref name="value" /> contains invalid characters.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in <paramref name="name" /> does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the header specified in <paramref name="name" /> does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the header specified in <paramref name="name" /> is already present, <paramref name="value" /> is added to the existing comma-separated list of values associated with <paramref name="name" />.</para
-          >
+            >If the header specified in <paramref name="name" /> is already present, <paramref name="value" /> is added to the existing comma-separated list of values associated with <paramref name="name" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -392,15 +368,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header. </param
-        >
+          />The content of the header. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -433,16 +407,14 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="headerName " /> is <see langword="null" /> or <see cref="F:System.String.Empty" />, or contains invalid characters.</para
-          >
+            <paramref name="headerName " /> is <see langword="null" /> or <see cref="F:System.String.Empty" />, or contains invalid characters.</para>
           <para>-or-</para>
           <para><paramref name="headerValue" /> contains invalid characters.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebHeaderCollection.AddWithoutValidate(System.String,System.String)" /> method adds a header to the collection without checking whether the header is on the restricted header list.</para
-          >
+            >The <see cref="M:System.Net.WebHeaderCollection.AddWithoutValidate(System.String,System.String)" /> method adds a header to the collection without checking whether the header is on the restricted header list.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -453,15 +425,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to add to the collection. </param
-        >
+          />The header to add to the collection. </param>
         <param name="headerValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header. </param
-        >
+          />The content of the header. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -557,16 +527,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> containing the value of the specified header.</para
-          >
+            >A <see cref="T:System.String" /> containing the value of the specified header.</para>
         </returns>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the key to get from the collection.</param
-        >
+          />The zero-based index of the key to get from the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Get">
@@ -591,8 +559,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns null if there is no <paramref name="name" /> header in the collection.</para
-          >
+            >This method returns null if there is no <paramref name="name" /> header in the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -607,8 +574,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the Web header.</param
-        >
+          />The name of the Web header.</param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -634,14 +600,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see cref="T:System.Net.WebHeaderCollection" /> instance.</para
-          >
+            >Returns an enumerator that can iterate through the <see cref="T:System.Net.WebHeaderCollection" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Net.WebHeaderCollection" />.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:System.Net.WebHeaderCollection" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -678,8 +642,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the key to get from the collection.</param
-        >
+          />The zero-based index of the key to get from the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -708,29 +671,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para
-          >
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the target object.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the target object.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the destination for this serialization.</param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the destination for this serialization.</param>
       </Docs>
     </Member>
     <Member MemberName="GetValues">
@@ -755,14 +714,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Net.WebHeaderCollection.GetValues(System.Int32)" /> returns the contents of the specified header as an array.</para
-          >
+            <see cref="M:System.Net.WebHeaderCollection.GetValues(System.Int32)" /> returns the contents of the specified header as an array.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of header values stored in the <paramref name="index" /> position of the header collection.</para
-          >
+            >Gets an array of header values stored in the <paramref name="index" /> position of the header collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -773,8 +730,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header index to return.</param
-        >
+          />The header index to return.</param>
       </Docs>
     </Member>
     <Member MemberName="GetValues">
@@ -802,8 +758,7 @@
       <Docs>
         <example>
           <para
-            >This example demonstrates the <see cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" /> method.</para
-          >
+            >This example demonstrates the <see cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" /> method.</para>
           <code lang="C#">
 using System;
 using System.Net;
@@ -839,8 +794,7 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" /> returns the contents of the specified header as an array.</para
-          >
+            <see cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" /> returns the contents of the specified header as an array.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -855,8 +809,7 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The header to return. </param
-        >
+          />The header to return. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -884,16 +837,14 @@ Transfer-Encoding:</para>
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="headerName" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception
-        >
+          <paramref name="headerName" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception>
         <exception cref="T:System.ArgumentException">
           <para><paramref name="headerName " /> contains invalid characters.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" /> method returns true to indicate that a header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are: </para
-          >
+            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" /> method returns true to indicate that a header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are: </para>
           <list type="bullet">
             <item>
               <para>Accept </para>
@@ -945,8 +896,11 @@ Transfer-Encoding:</para>
           <para>true if the header is restricted; otherwise false.</para>
         </returns>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header to test. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The header to test. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -975,8 +929,7 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" /> method returns true to indicate that a request or response header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are: </para
-          >
+            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" /> method returns true to indicate that a request or response header is restricted and must be set using properties instead of directly or is set by the system. The restricted headers are: </para>
           <list type="bullet">
             <item>
               <para>Accept </para>
@@ -1028,15 +981,13 @@ Transfer-Encoding:</para>
           <para>true if the header is restricted; otherwise, false.</para>
         </returns>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header to test.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header to test.</param>
         <param name="response">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Does the Framework test the response or the request?</param
-        >
+          />Does the Framework test the response or the request?</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -1146,16 +1097,14 @@ Transfer-Encoding:</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and raises the deserialization event when the deserialization is complete.</para
-          >
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and raises the deserialization event when the deserialization is complete.</para>
         </summary>
         <param name="sender">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source of the deserialization event.</param
-        >
+          />The source of the deserialization event.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -1182,8 +1131,7 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Net.WebHeaderCollection.Remove(System.Net.HttpRequestHeader)" /> deletes the specified header from the collection. If the specified header does not exist, the method does nothing.</para
-          >
+            <see cref="M:System.Net.WebHeaderCollection.Remove(System.Net.HttpRequestHeader)" /> deletes the specified header from the collection. If the specified header does not exist, the method does nothing.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1194,8 +1142,7 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpRequestHeader" /> instance to remove from the collection. </param
-        >
+          />The <see cref="T:System.Net.HttpRequestHeader" /> instance to remove from the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -1222,8 +1169,7 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Net.WebHeaderCollection.Remove(System.Net.HttpRequestHeader)" /> deletes the specified header from the collection. If the specified header does not exist, the method does nothing.</para
-          >
+            <see cref="M:System.Net.WebHeaderCollection.Remove(System.Net.HttpRequestHeader)" /> deletes the specified header from the collection. If the specified header does not exist, the method does nothing.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1234,8 +1180,7 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpResponseHeader" /> instance to remove from the collection. </param
-        >
+          />The <see cref="T:System.Net.HttpResponseHeader" /> instance to remove from the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -1262,20 +1207,17 @@ Transfer-Encoding:</para>
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception
-        >
+          <paramref name="name" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception>
         <exception cref="T:System.ArgumentException">
           <para><paramref name="name " /> contains invalid characters.</para>
           <para>-or-</para>
           <para>
-            <paramref name="name " /> is a protected header that can only be set with a property accessor or by the system.</para
-          >
+            <paramref name="name " /> is a protected header that can only be set with a property accessor or by the system.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Net.WebHeaderCollection.Remove(System.Net.HttpRequestHeader)" /> deletes the specified header from the collection. If the specified header does not exist, the method returns.</para
-          >
+            <see cref="M:System.Net.WebHeaderCollection.Remove(System.Net.HttpRequestHeader)" /> deletes the specified header from the collection. If the specified header does not exist, the method returns.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1286,8 +1228,7 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the header to remove from the collection. </param
-        >
+          />The name of the header to remove from the collection. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1316,11 +1257,9 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the header specified in <paramref name="header" /> is already present, <paramref name="value" /> replaces the existing value.</para
-          >
+            >If the header specified in <paramref name="header" /> is already present, <paramref name="value" /> replaces the existing value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1331,15 +1270,13 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpRequestHeader" /> value to set. </param
-        >
+          />The <see cref="T:System.Net.HttpRequestHeader" /> value to set. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header to set. </param
-        >
+          />The content of the header to set. </param>
       </Docs>
     </Member>
     <Member MemberName="Set">
@@ -1367,11 +1304,9 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the header specified in <paramref name="header" /> is already present, <paramref name="value" /> replaces the existing value.</para
-          >
+            >If the header specified in <paramref name="header" /> is already present, <paramref name="value" /> replaces the existing value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1382,15 +1317,13 @@ Transfer-Encoding:</para>
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.HttpResponseHeader" /> value to set. </param
-        >
+          />The <see cref="T:System.Net.HttpResponseHeader" /> value to set. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header to set. </param
-        >
+          />The content of the header to set. </param>
       </Docs>
     </Member>
     <Member MemberName="Set">
@@ -1421,40 +1354,34 @@ Transfer-Encoding:</para>
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception
-        >
+          <paramref name="name" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception>
         <exception cref="T:System.ArgumentException">
           <para><paramref name="name " /> contains invalid characters.</para>
           <para>-or-</para>
           <para>
-            <paramref name="name " /> is a protected header that can only be set with a property accessor or by the system.</para
-          >
+            <paramref name="name " /> is a protected header that can only be set with a property accessor or by the system.</para>
           <para> -or-</para>
           <para><paramref name="value " /> contains invalid characters.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para
-          >
+            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" /> method inserts a new header into the list of header name/value pairs.</para>
           <para
-            >If the header specified in <paramref name="header" /> is already present, <paramref name="value" /> replaces the existing value.</para
-          >
+            >If the header specified in <paramref name="header" /> is already present, <paramref name="value" /> replaces the existing value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the specified header to the specified value.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header to set. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header to set. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the header to set. </param
-        >
+          />The content of the header to set. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -1485,23 +1412,20 @@ Transfer-Encoding:</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object.</para
-          >
+            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object into which this <see cref="T:System.Net.WebHeaderCollection" /> will be serialized. </param
-        >
+          />The object into which this <see cref="T:System.Net.WebHeaderCollection" /> will be serialized. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination of the serialization. </param
-        >
+          />The destination of the serialization. </param>
       </Docs>
     </Member>
     <Member MemberName="ToByteArray">
@@ -1525,8 +1449,7 @@ Transfer-Encoding:</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see cref="T:System.Net.WebHeaderCollection" /> to a byte array..</para
-          >
+            >Converts the <see cref="T:System.Net.WebHeaderCollection" /> to a byte array..</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -16,21 +16,17 @@
     <BundleTestWasmAppDependsOn>BundleDebuggerTestsForHelix</BundleTestWasmAppDependsOn>
     <ExtractTestClassNamesForHelix
       Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(ArchiveTests)' == 'true'"
-      >true</ExtractTestClassNamesForHelix
-    >
+      >true</ExtractTestClassNamesForHelix>
     <RuntimeConfiguration Condition="'$(RuntimeConfiguration)' == ''"
-      >$(Configuration)</RuntimeConfiguration
-    >
+      >$(Configuration)</RuntimeConfiguration>
     <HelixTargetsFile>wasm.helix.targets</HelixTargetsFile>
   </PropertyGroup>
 
   <PropertyGroup>
     <RunScriptInputName Condition="'$(OS)' != 'Windows_NT'"
-      >RunScriptTemplate.sh</RunScriptInputName
-    >
+      >RunScriptTemplate.sh</RunScriptInputName>
     <RunScriptInputName Condition="'$(OS)' == 'Windows_NT'"
-      >RunScriptTemplate.cmd</RunScriptInputName
-    >
+      >RunScriptTemplate.cmd</RunScriptInputName>
 
     <RunScriptInputPath>$(MSBuildThisFileDirectory)data\$(RunScriptInputName)</RunScriptInputPath>
   </PropertyGroup>
@@ -109,26 +105,20 @@
 
       <RunScriptCommand>$(_DotnetCommand) test DebuggerTestSuite/DebuggerTestSuite.dll</RunScriptCommand>
       <RunScriptCommand Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
-        >$(RunScriptCommand) /e:WASM_TESTS_USING_VARIANT=multithreaded</RunScriptCommand
-      >
+        >$(RunScriptCommand) /e:WASM_TESTS_USING_VARIANT=multithreaded</RunScriptCommand>
       <RunScriptCommand>$(RunScriptCommand) &quot;-l:trx%3BLogFileName=testResults.trx&quot;</RunScriptCommand>
       <RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-        >$(RunScriptCommand) &quot;-l:console%3BVerbosity=normal&quot;</RunScriptCommand
-      >
+        >$(RunScriptCommand) &quot;-l:console%3BVerbosity=normal&quot;</RunScriptCommand>
 
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
-        >$(RunScriptCommand) --results-directory &quot;$TEST_LOG_PATH&quot;</RunScriptCommand
-      >
+        >$(RunScriptCommand) --results-directory &quot;$TEST_LOG_PATH&quot;</RunScriptCommand>
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
-        >$(RunScriptCommand) --results-directory &quot;%TEST_LOG_PATH%&quot;</RunScriptCommand
-      >
+        >$(RunScriptCommand) --results-directory &quot;%TEST_LOG_PATH%&quot;</RunScriptCommand>
 
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
-        >$(RunScriptCommand) %24TEST_ARGS</RunScriptCommand
-      >
+        >$(RunScriptCommand) %24TEST_ARGS</RunScriptCommand>
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
-        >$(RunScriptCommand) %TEST_ARGS%</RunScriptCommand
-      >
+        >$(RunScriptCommand) %TEST_ARGS%</RunScriptCommand>
 
       <!--<RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true' or '$(XUnitShowProgress)' == 'true'">$(RunScriptCommand) -v normal</RunScriptCommand>-->
       <RunScriptCommand>$(RunScriptCommand) -v diag</RunScriptCommand>

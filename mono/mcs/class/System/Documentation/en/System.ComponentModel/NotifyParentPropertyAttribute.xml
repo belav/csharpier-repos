@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" /> to a property if its parent property should receive notification of changes to the property's values. For example, in the Properties window, the <see cref="P:System.Windows.Forms.DataGridView.RowTemplate" /> property has nested properties such as <see cref="P:System.Windows.Forms.DataGridViewRow.Height" /> and <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />. These nested properties are marked with NotifyParentPropertyAttribute(true) so they notify the parent property to update its value and display when the property values change.</para
-      >
+        >Apply <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" /> to a property if its parent property should receive notification of changes to the property's values. For example, in the Properties window, the <see cref="P:System.Windows.Forms.DataGridView.RowTemplate" /> property has nested properties such as <see cref="P:System.Windows.Forms.DataGridViewRow.Height" /> and <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />. These nested properties are marked with NotifyParentPropertyAttribute(true) so they notify the parent property to update its value and display when the property values change.</para>
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,16 +70,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" /> class, using the specified value to determine whether the parent property is notified of changes to the value of the property.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" /> class, using the specified value to determine whether the parent property is notified of changes to the value of the property.</para>
         </summary>
         <param name="notifyParent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the parent should be notified of changes; otherwise, false. </param
-        >
+          />true if the parent should be notified of changes; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -144,8 +140,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test for equality. </param
-        >
+          />The object to test for equality. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">

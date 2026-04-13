@@ -21,19 +21,16 @@
     <!-- Everything built in those projects _except_ the final package & MSI are shipping assets. -->
     <_GeneratedPackageVersion>$(PackageVersion)</_GeneratedPackageVersion>
     <_GeneratedPackageVersion Condition="! $(PackageVersion.Contains('$(_PreReleaseLabel)'))"
-      >$(PackageVersion)-$(_PreReleaseLabel)$(_BuildNumberLabels)</_GeneratedPackageVersion
-    >
+      >$(PackageVersion)-$(_PreReleaseLabel)$(_BuildNumberLabels)</_GeneratedPackageVersion>
     <!-- Insert PackageVersion into OutputName for SharedFx & TargetingPack -->
     <OutputName Condition="'$(OutputNamePrefix)' != '' AND '$(OutputNameSuffix)' != ''"
-      >$(OutputNamePrefix)$(_GeneratedPackageVersion)$(OutputNameSuffix)</OutputName
-    >
+      >$(OutputNamePrefix)$(_GeneratedPackageVersion)$(OutputNameSuffix)</OutputName>
 
     <EmbedCab Condition="'$(EmbedCab)' == ''">yes</EmbedCab>
     <InstallDir>$(ProductName)</InstallDir>
 
     <DefineConstants Condition="'$(Configuration)' == 'Debug'"
-      >$(DefineConstants);Debug</DefineConstants
-    >
+      >$(DefineConstants);Debug</DefineConstants>
     <DefineConstants>$(DefineConstants);EmbedCab=$(EmbedCab)</DefineConstants>
   </PropertyGroup>
 

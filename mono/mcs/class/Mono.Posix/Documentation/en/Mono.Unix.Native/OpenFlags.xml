@@ -24,8 +24,7 @@
   <Docs>
     <summary
       >Possible <see cref="M:Mono.Unix.Native.Syscall.open" />
-      <paramref name="flags" /> values.</summary
-    >
+      <paramref name="flags" /> values.</summary>
     <remarks>Do 'man 2 open' for more information.</remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.open" />
   </Docs>

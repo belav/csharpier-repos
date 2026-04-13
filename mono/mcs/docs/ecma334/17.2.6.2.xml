@@ -32,7 +32,6 @@ public class List
    public int Count { get {...} }  
 }  
 ]]>
-      </code_example>declares a private nested class Node. end example]</example
-    >
+      </code_example>declares a private nested class Node. end example]</example>
   </paragraph>
 </clause>

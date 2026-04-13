@@ -17,11 +17,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.ColumnStyle" /> class represents the user interface (UI) characteristics of column in a <see cref="T:System.Windows.Forms.TableLayoutPanel" />. The styles for all the columns in such a table are collected in the <see cref="P:System.Windows.Forms.TableLayoutPanel.ColumnStyles" /> property.</para
-      >
+        >The <see cref="T:System.Windows.Forms.ColumnStyle" /> class represents the user interface (UI) characteristics of column in a <see cref="T:System.Windows.Forms.TableLayoutPanel" />. The styles for all the columns in such a table are collected in the <see cref="P:System.Windows.Forms.TableLayoutPanel.ColumnStyles" /> property.</para>
       <para
-        >This simple class offers the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> and <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> properties for a column.</para
-      >
+        >This simple class offers the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> and <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> properties for a column.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,14 +36,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> property to <see cref="F:System.Windows.Forms.SizeType.AutoSize" /> and the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> property to 0.</para
-          >
+            >This constructor sets the <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> property to <see cref="F:System.Windows.Forms.SizeType.AutoSize" /> and the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> property to 0.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and instance of the <see cref="T:System.Windows.Forms.ColumnStyle" /> class to its default state.</para
-          >
+            >Initializes and instance of the <see cref="T:System.Windows.Forms.ColumnStyle" /> class to its default state.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -66,22 +62,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> property to 0.</para
-          >
+            >This constructor sets the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> property to 0.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see cref="T:System.Windows.Forms.ColumnStyle" /> class using the supplied <see cref="T:System.Windows.Forms.SizeType" /> value.</para
-          >
+            >Initializes an instance of the <see cref="T:System.Windows.Forms.ColumnStyle" /> class using the supplied <see cref="T:System.Windows.Forms.SizeType" /> value.</para>
         </summary>
         <param name="sizeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> indicating how the column should be should be sized relative to its containing table.</param
-        >
+          />A <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> indicating how the column should be should be sized relative to its containing table.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,29 +95,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The exact meaning of the <paramref name="width" /> parameter will vary depending on the <paramref name="sizeType" /> parameter. For more information, see the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> property. </para
-          >
+            >The exact meaning of the <paramref name="width" /> parameter will vary depending on the <paramref name="sizeType" /> parameter. For more information, see the <see cref="P:System.Windows.Forms.ColumnStyle.Width" /> property. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and instance of the <see cref="T:System.Windows.Forms.ColumnStyle" /> class using the supplied <see cref="T:System.Windows.Forms.SizeType" /> and width values.</para
-          >
+            >Initializes and instance of the <see cref="T:System.Windows.Forms.ColumnStyle" /> class using the supplied <see cref="T:System.Windows.Forms.SizeType" /> and width values.</para>
         </summary>
         <param name="sizeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> indicating how the column should be should be sized relative to its containing table.</param
-        >
+          />A <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> indicating how the column should be should be sized relative to its containing table.</param>
         <param name="width">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The preferred width, in pixels or percentage, depending on the <paramref name="sizeType" /> parameter.</param
-        >
+          />The preferred width, in pixels or percentage, depending on the <paramref name="sizeType" /> parameter.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -142,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="width" /> parameter will take on different meanings depending on the <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> property.</para
-          >
+            >The <paramref name="width" /> parameter will take on different meanings depending on the <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" /> property.</para>
           <list type="table">
             <listheader>
               <item>

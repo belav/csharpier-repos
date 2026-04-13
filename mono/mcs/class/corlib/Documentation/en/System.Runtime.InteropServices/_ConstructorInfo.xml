@@ -34,17 +34,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This interface is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
       <para
-        >The <see cref="T:System.Reflection.ConstructorInfo" /> class discovers the attributes of a class constructor and provides access to constructor metadata. </para
-      >
+        >The <see cref="T:System.Reflection.ConstructorInfo" /> class discovers the attributes of a class constructor and provides access to constructor metadata. </para>
       <para
-        >The <see cref="T:System.Runtime.InteropServices._ConstructorInfo" /> interface preserves the vtable order of the <see cref="T:System.Reflection.ConstructorInfo" /> class members that can be accessed by unmanaged COM objects.</para
-      >
+        >The <see cref="T:System.Runtime.InteropServices._ConstructorInfo" /> interface preserves the vtable order of the <see cref="T:System.Reflection.ConstructorInfo" /> class members that can be accessed by unmanaged COM objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exposes the public members of the <see cref="T:System.Reflection.ConstructorInfo" /> class to unmanaged code.</para
-      >
+        >Exposes the public members of the <see cref="T:System.Reflection.ConstructorInfo" /> class to unmanaged code.</para>
     </summary>
   </Docs>
   <Members>
@@ -72,14 +69,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.Attributes" /> property gets the attributes associated with this method.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.Attributes" /> property gets the attributes associated with this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.Attributes" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.Attributes" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -108,14 +103,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.CallingConvention" /> property gets a value indicating the calling conventions for this method.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.CallingConvention" /> property gets a value indicating the calling conventions for this method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.CallingConvention" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.CallingConvention" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -141,14 +134,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MemberInfo.DeclaringType" /> property gets the class that declares this member.</para
-          >
+            >The <see cref="P:System.Reflection.MemberInfo.DeclaringType" /> property gets the class that declares this member.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.DeclaringType" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.DeclaringType" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -176,28 +167,24 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Object.Equals(System.Object)" /> method determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.</para
-          >
+            >The <see cref="M:System.Object.Equals(System.Object)" /> method determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Object.Equals(System.Object)" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.Equals(System.Object)" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, false.</para
-          >
+            >true if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, false.</para>
         </returns>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />.</param
-        >
+          />The <see cref="T:System.Object" /> to compare with the current <see cref="T:System.Object" />.</param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -224,14 +211,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" /> method returns an array containing all the custom attributes.</para
-          >
+            >The <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" /> method returns an array containing all the custom attributes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -242,8 +227,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes.</param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes.</param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -274,14 +258,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.Emit.MethodBuilder.GetCustomAttributes(System.Type,System.Boolean)" /> method returns an array of custom attributes identified by <see cref="T:System.Type" />.</para
-          >
+            >The <see cref="M:System.Reflection.Emit.MethodBuilder.GetCustomAttributes(System.Type,System.Boolean)" /> method returns an array of custom attributes identified by <see cref="T:System.Type" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.Emit.MethodBuilder.GetCustomAttributes(System.Type,System.Boolean)" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.Emit.MethodBuilder.GetCustomAttributes(System.Type,System.Boolean)" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -292,15 +274,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
-        >
+          />The type of attribute to search for. Only attributes that are assignable to this type are returned. </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes. </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -325,14 +305,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Object.GetHashCode" /> method serves as a hash function for a particular type. <see cref="M:System.Object.GetHashCode" /> is suitable for use in hashing algorithms and data structures like a hash table.</para
-          >
+            >The <see cref="M:System.Object.GetHashCode" /> method serves as a hash function for a particular type. <see cref="M:System.Object.GetHashCode" /> is suitable for use in hashing algorithms and data structures like a hash table.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Object.GetHashCode" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.GetHashCode" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -401,14 +379,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.MethodBase.GetMethodImplementationFlags" /> member returns the <see cref="T:System.Reflection.MethodImplAttributes" /> flags.</para
-          >
+            >The <see cref="M:System.Reflection.MethodBase.GetMethodImplementationFlags" /> member returns the <see cref="T:System.Reflection.MethodImplAttributes" /> flags.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.GetMethodImplementationFlags" /> member.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.GetMethodImplementationFlags" /> member.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -441,20 +417,17 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.MethodBase.GetParameters" /> method gets the parameters of the specified method or constructor.</para
-          >
+            >The <see cref="M:System.Reflection.MethodBase.GetParameters" /> method gets the parameters of the specified method or constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.GetParameters" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.GetParameters" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see cref="T:System.Reflection.ParameterInfo" /> containing information that matches the signature of the method (or constructor) reflected by this instance.</para
-          >
+            >An array of type <see cref="T:System.Reflection.ParameterInfo" /> containing information that matches the signature of the method (or constructor) reflected by this instance.</para>
         </returns>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -480,14 +453,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Object.GetType" /> method gets the type of the current instance.</para
-          >
+            >The <see cref="M:System.Object.GetType" /> method gets the type of the current instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Object.GetType" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.GetType" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -523,8 +494,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para
-          >
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -535,22 +505,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type information to return.</param
-        >
+          />The type information to return.</param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The locale identifier for the type information.</param
-        >
+          />The locale identifier for the type information.</param>
         <param name="ppTInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Receives a pointer to the requested type information object.</param
-        >
+          />Receives a pointer to the requested type information object.</param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -651,14 +618,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method invokes the constructor reflected by this <see cref="T:System.Reflection.ConstructorInfo" /> with the specified arguments, under the constraints of the specified <see cref="T:System.Reflection.Binder" />.</para
-          >
+            >The <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method invokes the constructor reflected by this <see cref="T:System.Reflection.ConstructorInfo" /> with the specified arguments, under the constraints of the specified <see cref="T:System.Reflection.Binder" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -669,36 +634,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance that created this method.</param
-        >
+          />The instance that created this method.</param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the BindingFlags values that specifies the type of binding.</param
-        >
+          />One of the BindingFlags values that specifies the type of binding.</param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used.</param
-        >
+          />A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Object used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />. If this constructor does not require parameters, pass an array with zero elements, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type.</param
-        >
+          />An array of type Object used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />. If this constructor does not require parameters, pass an array with zero elements, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type.</param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.</param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used.</param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -729,14 +689,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" /> method invokes the method or constructor represented by this object, using the specified parameters.</para
-          >
+            >The <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" /> method invokes the method or constructor represented by this object, using the specified parameters.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -747,15 +705,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance that created this method. </param
-        >
+          />The instance that created this method. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref name="parameters" /> should be null.</param
-        >
+          />An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref name="parameters" /> should be null.</param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -788,14 +744,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method invokes the constructor reflected by this <see cref="T:System.Reflection.ConstructorInfo" /> object with the specified arguments, under the constraints of the specified <see cref="T:System.Reflection.Binder" /> object.</para
-          >
+            >The <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method invokes the constructor reflected by this <see cref="T:System.Reflection.ConstructorInfo" /> object with the specified arguments, under the constraints of the specified <see cref="T:System.Reflection.Binder" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -806,29 +760,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the BindingFlags values that specifies the type of binding. </param
-        >
+          />One of the BindingFlags values that specifies the type of binding. </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used. </param
-        >
+          />A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" /> is null, then Binder.DefaultBinding is used. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type Object used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />. If this constructor does not require parameters, pass an array with zero elements, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type. </param
-        >
+          />An array of type Object used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />. If this constructor does not require parameters, pass an array with zero elements, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -855,14 +805,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" /> method invokes the constructor reflected by the instance that has the specified parameters, providing default values for the parameters not commonly used.</para
-          >
+            >The <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" /> method invokes the constructor reflected by the instance that has the specified parameters, providing default values for the parameters not commonly used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -873,8 +821,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of values that matches the number, order, and type (under the constraints of the default binder) of the parameters for this constructor. If this constructor takes no parameters, then use either an array with zero elements or null, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type.</param
-        >
+          />An array of values that matches the number, order, and type (under the constraints of the default binder) of the parameters for this constructor. If this constructor takes no parameters, then use either an array with zero elements or null, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type.</param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -896,14 +843,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsAbstract" /> property gets a value indicating whether the method is abstract.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsAbstract" /> property gets a value indicating whether the method is abstract.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsAbstract" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsAbstract" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -926,14 +871,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsAssembly" /> property gets a value indicating whether this method can be called by other classes in the same assembly.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsAssembly" /> property gets a value indicating whether this method can be called by other classes in the same assembly.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsAssembly" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsAssembly" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -956,14 +899,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsConstructor" /> property gets a value indicating whether the method is a constructor.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsConstructor" /> property gets a value indicating whether the method is a constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsConstructor" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsConstructor" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -995,35 +936,30 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" /> member indicates whether one or more instances of <paramref name="attributeType" /> is applied to this member.</para
-          >
+            >The <see cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" /> member indicates whether one or more instances of <paramref name="attributeType" /> is applied to this member.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" /> member.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MemberInfo.IsDefined(System.Type,System.Boolean)" /> member.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instances of <paramref name="attributeType" /> is applied to this member; otherwise false.</para
-          >
+            >true if one or more instances of <paramref name="attributeType" /> is applied to this member; otherwise false.</para>
         </returns>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Type object to which the custom attributes are applied. </param
-        >
+          />The Type object to which the custom attributes are applied. </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the attributes. </param>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
     </Member>
@@ -1045,14 +981,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsFamily" /> property gets a value indicating whether access to this method is restricted to members of the class and members of its derived classes.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsFamily" /> property gets a value indicating whether access to this method is restricted to members of the class and members of its derived classes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFamily" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFamily" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1075,14 +1009,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsFamilyAndAssembly" /> property gets a value indicating whether this method can be called by derived classes if they are in the same assembly.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsFamilyAndAssembly" /> property gets a value indicating whether this method can be called by derived classes if they are in the same assembly.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFamilyAndAssembly" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFamilyAndAssembly" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1105,14 +1037,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property gets a value indicating whether this method can be called by derived classes, wherever they are, and by all classes in the same assembly.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property gets a value indicating whether this method can be called by derived classes, wherever they are, and by all classes in the same assembly.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1135,14 +1065,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsFinal" /> property gets a value indicating whether this method is final.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsFinal" /> property gets a value indicating whether this method is final.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFinal" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsFinal" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1165,14 +1093,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> property gets a value indicating whether only a member of the same kind with exactly the same signature is hidden in the derived class.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> property gets a value indicating whether only a member of the same kind with exactly the same signature is hidden in the derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsHideBySig" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1195,14 +1121,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsPrivate" /> property gets a value indicating whether this member is private.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsPrivate" /> property gets a value indicating whether this member is private.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsPrivate" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsPrivate" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1225,14 +1149,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsPublic" /> property gets a value indicating whether this is a public method.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsPublic" /> property gets a value indicating whether this is a public method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsPublic" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsPublic" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1255,14 +1177,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsSpecialName" /> property gets a value indicating whether this method has a special name.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsSpecialName" /> property gets a value indicating whether this method has a special name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsSpecialName" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsSpecialName" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1285,14 +1205,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsStatic" /> property gets a value indicating whether the method is static.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsStatic" /> property gets a value indicating whether the method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsStatic" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsStatic" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1315,14 +1233,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.IsVirtual" /> property gets a value indicating whether the method is virtual.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.IsVirtual" /> property gets a value indicating whether the method is virtual.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsVirtual" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.IsVirtual" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1351,14 +1267,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.ConstructorInfo.MemberType" /> property gets a <see cref="T:System.Reflection.MemberTypes" /> value indicating the type of the member — method, constructor, event, and so on.</para
-          >
+            >The <see cref="P:System.Reflection.ConstructorInfo.MemberType" /> property gets a <see cref="T:System.Reflection.MemberTypes" /> value indicating the type of the member — method, constructor, event, and so on.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.ConstructorInfo.MemberType" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.ConstructorInfo.MemberType" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1384,14 +1298,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MethodBase.MethodHandle" /> property gets a handle to the internal metadata representation of a method.</para
-          >
+            >The <see cref="P:System.Reflection.MethodBase.MethodHandle" /> property gets a handle to the internal metadata representation of a method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.MethodHandle" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MethodBase.MethodHandle" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1414,14 +1326,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MemberInfo.Name" /> property gets the name of the current member.</para
-          >
+            >The <see cref="P:System.Reflection.MemberInfo.Name" /> property gets the name of the current member.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.Name" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.Name" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1447,14 +1357,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code.</para>
           <para
-            >The <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property gets the class object that was used to obtain this instance of <see cref="T:System.Reflection.MemberInfo" />.</para
-          >
+            >The <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property gets the class object that was used to obtain this instance of <see cref="T:System.Reflection.MemberInfo" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1483,8 +1391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see cref="M:System.Object.ToString" /> method.</para
-          >
+            >Provides COM objects with version-independent access to the <see cref="M:System.Object.ToString" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

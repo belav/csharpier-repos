@@ -29,9 +29,7 @@
       <para
         >The <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class provides support for a name/value pair with parameters used in various headers  as defined in <see
           cref="http://go.microsoft.com/fwlink/?LinkID=241642"
-          >RFC 2616</see
-        > by the IETF.</para
-      >
+          >RFC 2616</see> by the IETF.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,16 +61,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class.</para>
         </summary>
         <param name="source">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object used to initialize the new instance.</param
-        >
+          />A <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object used to initialize the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -96,12 +92,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header name.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header name.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -126,15 +120,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> class.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header name.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header name.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The header value.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -158,23 +149,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Boolean" />.</para>
           <para
-            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para
-          >
+            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current object.</param
-        >
+          />The object to compare with the current object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -196,14 +184,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
           <para
-            >The <see cref="M:System.Net.Http.Headers.NameValueWithParametersHeaderValue.GetHashCode" /> method is suitable for use in hashing algorithms and data structures such as a hash table.</para
-          >
+            >The <see cref="M:System.Net.Http.Headers.NameValueWithParametersHeaderValue.GetHashCode" /> method is suitable for use in hashing algorithms and data structures such as a hash table.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para
-          >
+            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -234,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parameters from the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para
-          >
+            >Gets the parameters from the <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -263,25 +248,21 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> instance.</para
-          >
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" />.</para
-          >
+            >Returns <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" />.</para>
           <para
-            >An <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> instance.</para
-          >
+            >An <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> instance.</para>
         </returns>
         <param name="input">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents name value with parameter header value information.</param
-        >
+          />A string that represents name value with parameter header value information.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ICloneable.Clone">
@@ -303,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> instance.</para
-          >
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -332,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.NameValueWithParametersHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

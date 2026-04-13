@@ -28,8 +28,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.CommandLineBuilder" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.CommandLineBuilder" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -58,16 +57,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the command line with the file name of the specified <see cref="T:Microsoft.Build.Framework.ITaskItem" /> object.</para
-          >
+            >Appends the command line with the file name of the specified <see cref="T:Microsoft.Build.Framework.ITaskItem" /> object.</para>
         </summary>
         <param name="fileItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The task item specification to append to the command line. If it is null, then this method has no effect.</param
-        >
+          />The task item specification to append to the command line. If it is null, then this method has no effect.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,8 +99,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name to append. If it is null, then this method has no effect.</param
-        >
+          />The file name to append. If it is null, then this method has no effect.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -132,23 +128,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the command line with the list of file names in the specified <see cref="T:Microsoft.Build.Framework.ITaskItem" /> array, separated by the specified delimiter.</para
-          >
+            >Appends the command line with the list of file names in the specified <see cref="T:Microsoft.Build.Framework.ITaskItem" /> array, separated by the specified delimiter.</para>
         </summary>
         <param name="fileItems">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The task item specifications to append. If the array is null, then this method has no effect.</param
-        >
+          />The task item specifications to append. If the array is null, then this method has no effect.</param>
         <param name="delimiter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delimiter to put between task item specifications in the command line.</param
-        >
+          />The delimiter to put between task item specifications in the command line.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -183,15 +176,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file names to append. If the array is null, then this method has no effect.</param
-        >
+          />The file names to append. If the array is null, then this method has no effect.</param>
         <param name="delimiter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delimiter to put between file names in the command line.</param
-        >
+          />The delimiter to put between file names in the command line.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -225,8 +216,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name to append.</param
-        >
+          />The file name to append.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -278,8 +268,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -314,15 +303,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param
-        >
+          />The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -357,15 +344,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param
-        >
+          />The switch parameter to append to the command line. Quotation marks will be added as necessary. If this value is null, then this method has no effect.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -401,22 +386,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param
-        >
+          />An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param>
         <param name="delimiter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
-        >
+          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -452,22 +434,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param
-        >
+          />An array of switch parameters to append to the command line. Quotation marks will be added as necessary. If the array is null, then this method has no effect.</param>
         <param name="delimiter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
-        >
+          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -501,15 +480,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param
-        >
+          />The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -543,15 +520,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param
-        >
+          />The switch parameter to append to the command line. Quotation marks will not be added. If this value is null, then this method has no effect.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -586,22 +561,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param
-        >
+          />An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param>
         <param name="delimiter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
-        >
+          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -636,22 +608,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the switch to append to the command line. This value cannot be null.</param
-        >
+          />The name of the switch to append to the command line. This value cannot be null.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param
-        >
+          />An array of switch parameters to append to the command line. Quotation marks will not be added. If the array is null, then this method has no effect.</param>
         <param name="delimiter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param
-        >
+          />The delimiter that separates individual parameters. This value can be empty, but it cannot be null.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -684,8 +653,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to append to the command line.</param
-        >
+          />The string to append to the command line.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -718,8 +686,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to append to the command line.</param
-        >
+          />The string to append to the command line.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -741,8 +708,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Text.StringBuilder" /> instance representing the command line for inheriting classes.</para
-          >
+            >Gets the <see cref="T:System.Text.StringBuilder" /> instance representing the command line for inheriting classes.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -777,8 +743,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to examine for characters that require quotation marks.</param
-        >
+          />The string to examine for characters that require quotation marks.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -824,8 +789,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:Microsoft.Build.Utilities.CommandLineBuilder.VerifyThrowNoEmbeddedDoubleQuotes(System.String,System.String)" /> is a virtual method so that your applications can override this method if you want to allow double-quotes escaped in filenames.</para
-          >
+            <see cref="M:Microsoft.Build.Utilities.CommandLineBuilder.VerifyThrowNoEmbeddedDoubleQuotes(System.String,System.String)" /> is a virtual method so that your applications can override this method if you want to allow double-quotes escaped in filenames.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -836,15 +800,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representing the switch name for the error message.</param
-        >
+          />A string representing the switch name for the error message.</param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string representing the switch parameter to scan for double-quotes.</param
-        >
+          />A string representing the switch parameter to scan for double-quotes.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

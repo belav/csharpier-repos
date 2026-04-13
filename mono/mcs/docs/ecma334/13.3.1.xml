@@ -7,8 +7,7 @@
       <list_item> Implicit reference conversions (<hyperlink>13.1.4</hyperlink>) </list_item>
       <list_item> Boxing conversions (<hyperlink>13.1.5</hyperlink>) </list_item>
       <list_item
-        > Implicit constant expression conversions (<hyperlink>13.1.6</hyperlink>) </list_item
-      >
+        > Implicit constant expression conversions (<hyperlink>13.1.6</hyperlink>) </list_item>
     </list>
   </paragraph>
   <paragraph>The standard implicit conversions specifically exclude user-defined implicit conversions. </paragraph>

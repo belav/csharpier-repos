@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This abstract class provides default implementations for the methods and properties of the <see cref="T:Microsoft.Build.Framework.ILogger" /> interface.</para
-      >
+        >This abstract class provides default implementations for the methods and properties of the <see cref="T:Microsoft.Build.Framework.ILogger" /> interface.</para>
       <para>This class can only be instantiated in a derived form.</para>
     </remarks>
     <summary>
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.Logger" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.Logger" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -67,22 +65,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates an error message that is in the default format, from a <see cref="T:Microsoft.Build.Framework.BuildErrorEventArgs" /> object.</para
-          >
+            >Generates an error message that is in the default format, from a <see cref="T:Microsoft.Build.Framework.BuildErrorEventArgs" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that represents an error message in canonical format.</para
-          >
+            >A <see cref="T:System.String" /> that represents an error message in canonical format.</para>
         </returns>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments of the error event.</param
-        >
+          />The arguments of the error event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,22 +101,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a warning message that is in the default format, from a <see cref="T:Microsoft.Build.Framework.BuildWarningEventArgs" /> object.</para
-          >
+            >Generates a warning message that is in the default format, from a <see cref="T:Microsoft.Build.Framework.BuildWarningEventArgs" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that represents a warning message in canonical format.</para
-          >
+            >A <see cref="T:System.String" /> that represents a warning message in canonical format.</para>
         </returns>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments of the warning event.</param
-        >
+          />The arguments of the warning event.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -144,8 +136,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must be overridden in the derived class to perform initialization logic and to subscribe to build events published by <see cref="T:Microsoft.Build.Framework.IEventSource" />.</para
-          >
+            >This method must be overridden in the derived class to perform initialization logic and to subscribe to build events published by <see cref="T:Microsoft.Build.Framework.IEventSource" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -156,8 +147,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The available events that a logger can subscribe to.</param
-        >
+          />The available events that a logger can subscribe to.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -182,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current <see cref="P:Microsoft.Build.Utilities.Logger.Verbosity" /> setting is at least the value that is passed in.</para
-          >
+            >Determines whether the current <see cref="P:Microsoft.Build.Utilities.Logger.Verbosity" /> setting is at least the value that is passed in.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

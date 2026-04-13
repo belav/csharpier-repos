@@ -16,8 +16,7 @@ System.Reflection.Context.CustomReflectionContext</PackageDescription>
   <PropertyGroup>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetFramework)' == 'netstandard2.0'"
-      >SR.PlatformNotSupported_ReflectionContext</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_ReflectionContext</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">

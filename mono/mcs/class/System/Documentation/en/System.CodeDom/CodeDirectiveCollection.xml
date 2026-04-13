@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeDirective" /> objects.</para
-      >
+        >The <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeDirective" /> objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -85,16 +83,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class with the code directive objects in the specified array. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class with the code directive objects in the specified array. </para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeDirective" /> objects with which to initialize the collection.</param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeDirective" /> objects with which to initialize the collection.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -120,16 +116,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class with the elements in the specified code directive collection.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" /> class with the elements in the specified code directive collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeDirectiveCollection" /> object with which to initialize the collection.</param
-        >
+          />A <see cref="T:System.CodeDom.CodeDirectiveCollection" /> object with which to initialize the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -155,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.CodeDom.CodeDirective" /> object to the collection.</para
-          >
+            >Adds the specified <see cref="T:System.CodeDom.CodeDirective" /> object to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -167,8 +160,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeDirective" /> object to add.</param
-        >
+          />The <see cref="T:System.CodeDom.CodeDirective" /> object to add.</param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -197,16 +189,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see cref="T:System.CodeDom.CodeDirective" /> objects to the end of the collection.</para
-          >
+            >Adds an array of <see cref="T:System.CodeDom.CodeDirective" /> objects to the end of the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeDirective" /> objects to add to the collection.</param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeDirective" /> objects to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -235,16 +225,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of the specified <see cref="T:System.CodeDom.CodeDirectiveCollection" /> object to the end of the collection.</para
-          >
+            >Adds the contents of the specified <see cref="T:System.CodeDom.CodeDirectiveCollection" /> object to the end of the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeDirectiveCollection" /> object containing the <see cref="T:System.CodeDom.CodeDirective" /> objects to add to the collection.</param
-        >
+          />A <see cref="T:System.CodeDom.CodeDirectiveCollection" /> object containing the <see cref="T:System.CodeDom.CodeDirective" /> objects to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -273,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the collection contains the specified <see cref="T:System.CodeDom.CodeDirective" /> object.</para
-          >
+            >Gets a value indicating whether the collection contains the specified <see cref="T:System.CodeDom.CodeDirective" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -285,8 +272,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeDirective" /> object to search for in the collection.</param
-        >
+          />The <see cref="T:System.CodeDom.CodeDirective" /> object to search for in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -322,15 +308,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeDirective" /> that is the destination of the values copied from the collection. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeDirective" /> that is the destination of the values copied from the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the array at which to begin inserting collection objects. </param
-        >
+          />The index in the array at which to begin inserting collection objects. </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -359,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the specified <see cref="T:System.CodeDom.CodeDirective" /> object, if it exists in the collection.</para
-          >
+            >Gets the index in the collection of the specified <see cref="T:System.CodeDom.CodeDirective" /> object, if it exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -371,8 +354,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeDirective" /> object to locate in the collection.</param
-        >
+          />The <see cref="T:System.CodeDom.CodeDirective" /> object to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -402,23 +384,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see cref="T:System.CodeDom.CodeDirective" /> object into the collection at the specified index.</para
-          >
+            >Inserts the specified <see cref="T:System.CodeDom.CodeDirective" /> object into the collection at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index position where the specified object should be inserted. </param
-        >
+          />The zero-based index position where the specified object should be inserted. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeDirective" /> object to insert. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeDirective" /> object to insert. </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -475,16 +454,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.CodeDom.CodeDirective" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.CodeDom.CodeDirective" /> object from the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeDirective" /> object to remove from the collection.</param
-        >
+          />The <see cref="T:System.CodeDom.CodeDirective" /> object to remove from the collection.</param>
       </Docs>
     </Member>
   </Members>

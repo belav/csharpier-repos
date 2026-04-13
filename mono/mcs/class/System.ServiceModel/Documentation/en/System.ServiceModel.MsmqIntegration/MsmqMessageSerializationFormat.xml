@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat.Xml" />.</para
-      >
+        >The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat.Xml" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize the object.</para
-          >
+            >The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize the object.</para>
         </summary>
       </Docs>
     </Member>
@@ -127,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize the object.</para
-          >
+            <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize the object.</para>
         </summary>
       </Docs>
     </Member>

@@ -12,8 +12,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Web.Hosting" /> namespace provides the functionality for hosting ASP.NET applications from managed applications outside Microsoft Internet Information Services (IIS).</para
-      >
+        >The <see cref="N:System.Web.Hosting" /> namespace provides the functionality for hosting ASP.NET applications from managed applications outside Microsoft Internet Information Services (IIS).</para>
     </summary>
   </Docs>
 </Namespace>

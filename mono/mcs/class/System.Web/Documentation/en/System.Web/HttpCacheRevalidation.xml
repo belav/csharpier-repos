@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.HttpCacheRevalidation" /> enumeration is used to set revalidation-specific HTTP headers, and is set using the <see cref="M:System.Web.HttpCachePolicy.SetRevalidation(System.Web.HttpCacheRevalidation)" /> method. If the <see cref="M:System.Web.HttpCachePolicy.SetRevalidation(System.Web.HttpCacheRevalidation)" /> method is not called, no Cache-Control HTTP header is set.</para
-      >
+        >The <see cref="T:System.Web.HttpCacheRevalidation" /> enumeration is used to set revalidation-specific HTTP headers, and is set using the <see cref="M:System.Web.HttpCachePolicy.SetRevalidation(System.Web.HttpCacheRevalidation)" /> method. If the <see cref="M:System.Web.HttpCachePolicy.SetRevalidation(System.Web.HttpCacheRevalidation)" /> method is not called, no Cache-Control HTTP header is set.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

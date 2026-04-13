@@ -10,8 +10,7 @@
     <IsTrimmable>true</IsTrimmable>
     <Nullable
       Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == '$(DefaultNetFxTargetFramework)'"
-      >annotations</Nullable
-    >
+      >annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

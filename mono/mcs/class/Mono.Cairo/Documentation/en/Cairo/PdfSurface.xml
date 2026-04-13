@@ -29,11 +29,9 @@
       <Docs>
         <param name="filename">Filename for the PDF output as <see cref="t:System.String" /></param>
         <param name="width"
-          >width of the surface, in points as <see cref="t:System.Double" /> (1 point == 1/72.0 inch)</param
-        >
+          >width of the surface, in points as <see cref="t:System.Double" /> (1 point == 1/72.0 inch)</param>
         <param name="height"
-          >height of the surface, in points <see cref="t:System.Double" /> (1 point == 1/72.0 inch)</param
-        >
+          >height of the surface, in points <see cref="t:System.Double" /> (1 point == 1/72.0 inch)</param>
         <summary>Creates a PDF surface of the specified size in points to be written to filename.</summary>
         <remarks />
       </Docs>

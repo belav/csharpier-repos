@@ -5,11 +5,9 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Resources"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Resources.MissingSatelliteAssemblyException</ClassName
-  >
+    >System.Resources.MissingSatelliteAssemblyException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Resource lookup fell back to the ultimate fallback resources in a satellite assembly, but that satellite either was not found or could not be loaded. Please consider reinstalling or repairing the application.</Message
-  >
+    >Resource lookup fell back to the ultimate fallback resources in a satellite assembly, but that satellite either was not found or could not be loaded. Please consider reinstalling or repairing the application.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

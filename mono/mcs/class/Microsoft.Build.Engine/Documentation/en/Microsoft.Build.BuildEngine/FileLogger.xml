@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:Microsoft.Build.BuildEngine.FileLogger" /> writes messages to a file in exactly the same format as the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> writes messages to the console window.</para
-      >
+        >The <see cref="T:Microsoft.Build.BuildEngine.FileLogger" /> writes messages to a file in exactly the same format as the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> writes messages to the console window.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> to log messages to a file rather than the console window.</para
-      >
+        >Extends the <see cref="T:Microsoft.Build.BuildEngine.ConsoleLogger" /> to log messages to a file rather than the console window.</para>
     </summary>
   </Docs>
   <Members>
@@ -38,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.FileLogger" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.FileLogger" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,8 +69,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.Framework.IEventSource" /> to register with the logger.</param
-        >
+          />The <see cref="T:Microsoft.Build.Framework.IEventSource" /> to register with the logger.</param>
       </Docs>
     </Member>
     <Member MemberName="Shutdown">

@@ -24,18 +24,15 @@
       <para
         >This class corresponds to the type attribute of the <format type="text/html">
           <a href="10318725-9666-4d65-ab61-b94c64e59f13">Module Element (Network Settings)</a>
-        </format> configuration element.</para
-      >
+        </format> configuration element.</para>
       <para
-        >This class is used to specify a Web proxy that handles requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para
-      >
+        >This class is used to specify a Web proxy that handles requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the type information for a custom <see cref="T:System.Net.IWebProxy" /> module. This class cannot be inherited.</para
-      >
+        >Represents the type information for a custom <see cref="T:System.Net.IWebProxy" /> module. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -56,14 +53,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds a <see cref="T:System.Configuration.ConfigurationProperty" /> object for the <see cref="P:System.Net.Configuration.ModuleElement.Type" /> property to the <see cref="P:System.Configuration.ConfigurationElement.Properties" /> collection.</para
-          >
+            >This constructor adds a <see cref="T:System.Configuration.ConfigurationProperty" /> object for the <see cref="P:System.Net.Configuration.ModuleElement.Type" /> property to the <see cref="P:System.Configuration.ConfigurationElement.Properties" /> collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ModuleElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ModuleElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -90,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.ModuleElement.Type" /> property.</para
-          >
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.ModuleElement.Type" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

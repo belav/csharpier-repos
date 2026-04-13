@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A delegate that refers to a method in a custom <see cref="T:System.ComponentModel.Design.DesignerActionList" /> object that is to be called by the <see cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" /> method for implementing property changes in the designer's associated control.</para
-      >
+        >A delegate that refers to a method in a custom <see cref="T:System.ComponentModel.Design.DesignerActionList" /> object that is to be called by the <see cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" /> method for implementing property changes in the designer's associated control.</para>
     </summary>
   </Docs>
 </Type>

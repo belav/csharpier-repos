@@ -24,20 +24,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This transport uses URIs of the form "net.tcp://hostname:port/path". Other URI components are optional.</para>
       <para
-        >The <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> class is the starting point for creating a custom binding that implements the TCP transport protocol. This transport is optimized for indigo2-to-indigo2 communication.</para
-      >
+        >The <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> class is the starting point for creating a custom binding that implements the TCP transport protocol. This transport is optimized for indigo2-to-indigo2 communication.</para>
       <para
-        >The indigo2 service model uses this class to create factory objects that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> and <see cref="T:System.ServiceModel.Channels.IChannelListener" /> interfaces. These factory objects, in turn, create and accept the channels that transmit SOAP messages using the TCP protocol.</para
-      >
+        >The indigo2 service model uses this class to create factory objects that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" /> and <see cref="T:System.ServiceModel.Channels.IChannelListener" /> interfaces. These factory objects, in turn, create and accept the channels that transmit SOAP messages using the TCP protocol.</para>
       <para
-        >You configure the factories that this class creates by setting its properties, such as <see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.PortSharingEnabled" /> and <see cref="P:System.ServiceModel.Channels.TcpConnectionPoolSettings.LeaseTimeout" />.</para
-      >
+        >You configure the factories that this class creates by setting its properties, such as <see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.PortSharingEnabled" /> and <see cref="P:System.ServiceModel.Channels.TcpConnectionPoolSettings.LeaseTimeout" />.</para>
       <para
-        >You can also set properties on the base class <see cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />, such as <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxBufferSize" />, <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.TransferMode" />, and <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.ConnectionBufferSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />.</para
-      >
+        >You can also set properties on the base class <see cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />, such as <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxBufferSize" />, <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.TransferMode" />, and <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.ConnectionBufferSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />.</para>
       <para
-        >Finally, you can set properties on the base class <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />, such as <see cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" /> and <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />.</para
-      >
+        >Finally, you can set properties on the base class <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />, such as <see cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" /> and <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxBufferPoolSize" />. For a complete list of properties, see <see cref="T:System.ServiceModel.Channels.TransportBindingElement" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -87,14 +81,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a copy constructor used to clone the binding element, and is exposed so that derived classes can implement <see cref="M:System.ServiceModel.Channels.TcpTransportBindingElement.Clone" />.</para
-          >
+            >This method is a copy constructor used to clone the binding element, and is exposed so that derived classes can implement <see cref="M:System.ServiceModel.Channels.TcpTransportBindingElement.Clone" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -135,15 +127,13 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Type of channel factory.</typeparam
-        >
+          />Type of channel factory.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -188,15 +178,13 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param
-        >
+          <see cref="T:System.ServiceModel.Channels.BindingContext" /> members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Type of channel listener.</typeparam
-        >
+          />Type of channel listener.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -283,35 +271,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method gets the specified object from the base class, or from one of that class's ancestors. The object returned is usually a collection of properties, for example, an object that implements <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />.</para
-          >
+            >This method gets the specified object from the base class, or from one of that class's ancestors. The object returned is usually a collection of properties, for example, an object that implements <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para
-          >
+            >Gets a specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />, or null if the object is not found.</para
-          >
+            >The specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />, or null if the object is not found.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Channels.BindingContext" />.</param
-        >
+          />A <see cref="T:System.ServiceModel.Channels.BindingContext" />.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to get.</typeparam
-        >
+          />The object to get.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ListenBacklog">
@@ -329,8 +312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.ListenBacklog" /> is a socket-level property that describes the number of "pending accept" requests to be queued. Ensure that the underlying socket queue is not exceeded by the maximum number of concurrent connections.</para
-          >
+            <see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.ListenBacklog" /> is a socket-level property that describes the number of "pending accept" requests to be queued. Ensure that the underlying socket queue is not exceeded by the maximum number of concurrent connections.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -356,8 +338,7 @@
           <para
             >For information about the TCP Listener and how to start it, see <format type="text/html">
               <a href="f13692ee-a179-4439-ae72-50db9534eded">Net.TCP Port Sharing</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -404,18 +385,13 @@
           <para
             >This property enables Teredo for the underlying TCP socket. For more information, see <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96649"
-              >Teredo Overview</see
-            >.</para
-          >
+              >Teredo Overview</see>.</para>
           <para
             >This property is applicable only on wxpsp2 and ws2003. wv has a machine-wide configuration option for Teredo, so when running wv, this property is ignored. Teredo requires that the client and service machines both have the Microsoft IPv6 stack installed and correctly configured for Teredo usage. For more information about configuring Teredo, see <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96649"
-              >Teredo Overview</see
-            >. For more information about Microsoft IPv6 stack installation, see <see
+              >Teredo Overview</see>. For more information about Microsoft IPv6 stack installation, see <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96650"
-              >Windows Server 2003 Technology Centers</see
-            >.</para
-          >
+              >Windows Server 2003 Technology Centers</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

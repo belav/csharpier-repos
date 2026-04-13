@@ -3,8 +3,7 @@
   <paragraph
     >A statement list consists of one or more statements written in sequence. Statement lists occur in blocks (<hyperlink>15.2</hyperlink>) and in <non_terminal
       where="15.7.2"
-      >switch-block</non_terminal
-    >s (<hyperlink>15.7.2</hyperlink>). <grammar_production>
+      >switch-block</non_terminal>s (<hyperlink>15.7.2</hyperlink>). <grammar_production>
       <name>
         <non_terminal where="15.2.1">statement-list</non_terminal>
       </name> : <rhs>

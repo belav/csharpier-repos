@@ -13,9 +13,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Security.Cryptography.AsymmetricAlgorithm</BaseTypeName>
   </Base>
@@ -113,8 +111,7 @@
       </Parameters>
       <Docs>
         <param name="keyex"
-          >The key exchange data within which the secret information is hidden.</param
-        >
+          >The key exchange data within which the secret information is hidden.</param>
         <summary>When overridden in a derived class, extracts secret information from the key exchange data.</summary>
         <returns>The secret information derived from the key exchange data.</returns>
         <remarks>To be added</remarks>
@@ -138,8 +135,7 @@
       </Parameters>
       <Docs>
         <param name="includePrivate">
-          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param
-        >
+          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param>
         <summary>When overridden in a derived class, exports the DHParameters.</summary>
         <returns>The parameters for Diffie-Hellman.</returns>
         <remarks>To be added</remarks>
@@ -163,12 +159,10 @@
       </Parameters>
       <Docs>
         <param name="xmlString"
-          >The XML string to use to reconstruct the DiffieHellman object.</param
-        >
+          >The XML string to use to reconstruct the DiffieHellman object.</param>
         <summary>Reconstructs a DiffieHellman object from an XML string.</summary>
         <remarks
-          >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if one of the values in the XML string is invalid.</remarks
-        >
+          >A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if one of the values in the XML string is invalid.</remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -211,8 +205,7 @@
       </Parameters>
       <Docs>
         <param name="includePrivateParameters">
-          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param
-        >
+          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param>
         <summary>Creates and returns an XML string representation of the current DiffieHellman object.</summary>
         <returns>An XML string encoding of the current DiffieHellman object.</returns>
         <remarks>To be added</remarks>

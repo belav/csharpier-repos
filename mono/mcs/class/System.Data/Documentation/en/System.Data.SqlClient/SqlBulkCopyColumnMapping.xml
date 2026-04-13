@@ -15,18 +15,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Column mappings define the mapping between data source and the target table.</para>
       <para
-        >If mappings are not defined—that is, the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" /> collection is empty—the columns are mapped implicitly based on ordinal position. For this to work, source and target schemas must match. If they do not, an <see cref="T:System.InvalidOperationException" /> will be thrown.</para
-      >
+        >If mappings are not defined—that is, the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" /> collection is empty—the columns are mapped implicitly based on ordinal position. For this to work, source and target schemas must match. If they do not, an <see cref="T:System.InvalidOperationException" /> will be thrown.</para>
       <para
-        >If the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" /> collection is not empty, not every column present in the data source has to be specified. Those not mapped by the collection are ignored.</para
-      >
+        >If the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" /> collection is not empty, not every column present in the data source has to be specified. Those not mapped by the collection are ignored.</para>
       <para>You can refer to source and target columns by either name or ordinal. You can also mix by-name and by-ordinal column references in the same mappings collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the mapping between a column in a <see cref="T:System.Data.SqlClient.SqlBulkCopy" /> instance's data source and a column in the instance's destination table. </para
-      >
+        >Defines the mapping between a column in a <see cref="T:System.Data.SqlClient.SqlBulkCopy" /> instance's data source and a column in the instance's destination table. </para>
     </summary>
   </Docs>
   <Members>
@@ -39,14 +36,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor, you must then define the source for the mapping using the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" /> property or the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" /> property, and define the destination for the mapping using the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" /> property or the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" /> property.</para
-          >
+            >If you use this constructor, you must then define the source for the mapping using the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" /> property or the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" /> property, and define the destination for the mapping using the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" /> property or the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Default constructor that initializes a new <see cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" /> object.</para
-          >
+            >Default constructor that initializes a new <see cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -75,15 +70,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ordinal position of the source column within the data source.</param
-        >
+          />The ordinal position of the source column within the data source.</param>
         <param name="destinationOrdinal">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ordinal position of the destination column within the destination table.</param
-        >
+          />The ordinal position of the destination column within the destination table.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -111,15 +104,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ordinal position of the source column within the data source.</param
-        >
+          />The ordinal position of the source column within the data source.</param>
         <param name="destinationColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the destination column within the destination table.</param
-        >
+          />The name of the destination column within the destination table.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -147,15 +138,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source column within the data source.</param
-        >
+          />The name of the source column within the data source.</param>
         <param name="destinationOrdinal">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The ordinal position of the destination column within the destination table.</param
-        >
+          />The ordinal position of the destination column within the destination table.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -183,15 +172,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the source column within the data source.</param
-        >
+          />The name of the source column within the data source.</param>
         <param name="destinationColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the destination column within the destination table.</param
-        >
+          />The name of the destination column within the destination table.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -209,8 +196,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para
-          >
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -233,8 +219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para
-          >
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -257,8 +242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para
-          >
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -281,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para
-          >
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" /> and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" /> properties are mutually exclusive. The last value set takes precedence.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

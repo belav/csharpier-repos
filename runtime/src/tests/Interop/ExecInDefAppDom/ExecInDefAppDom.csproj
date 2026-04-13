@@ -3,8 +3,7 @@
     <!-- Needed for CLRTestTargetUnsupported, NativeAotIncompatible, CMakeProjectReference -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>
   <ItemGroup>

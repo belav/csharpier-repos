@@ -12,8 +12,7 @@
     <HelixTimeout>00:45:00</HelixTimeout>
     <HelixTestName>$(MSBuildProjectName)--$(TargetFramework)</HelixTestName>
     <LoggingTestingDisableFileLogging Condition="'$(IsHelixJob)' == 'true'"
-      >false</LoggingTestingDisableFileLogging
-    >
+      >false</LoggingTestingDisableFileLogging>
     <NodeVersion>20.7.0</NodeVersion>
 
     <!--

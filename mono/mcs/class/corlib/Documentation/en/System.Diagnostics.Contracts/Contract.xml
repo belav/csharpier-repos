@@ -19,21 +19,16 @@
       <para
         >Code contract classes let you specify preconditions, postconditions, and object invariants in your code. Preconditions are requirements that must be met when entering a method or property. Postconditions describe expectations at the time the method or property code exits. Object invariants describe the expected state for a class that has no condition problems. For more information about preconditions, postconditions, and object invariants, see <format type="text/html">
           <a href="84526045-496f-489d-8517-a258cf76f040">Code Contracts</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
         >For tools and detailed instructions for using code contracts, see <see
           cref="http://go.microsoft.com/fwlink/?LinkId=152461"
-          >Code Contracts</see
-        > on the MSDN DevLabs Web site.</para
-      >
+          >Code Contracts</see> on the MSDN DevLabs Web site.</para>
       <block subset="none" type="note">
         <para
           >You must use a binary rewriter to insert run-time enforcement of contracts. Otherwise, contracts such as the <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> method can only be tested statically and will not throw exceptions during run time if a contract is violated. You can download the binary rewriter CCRewrite from <see
             cref="http://go.microsoft.com/fwlink/?LinkId=152461"
-            >Code Contracts</see
-          > on the MSDN DevLabs Web site. CCRewrite comes with a Visual Studio add-in that enables you to activate run-time contract enforcement from the project <ui>Properties</ui> page. The binary rewriter and the Visual Studio add-in do not ship with vs_dev10_long or the Windows SDK.</para
-        >
+            >Code Contracts</see> on the MSDN DevLabs Web site. CCRewrite comes with a Visual Studio add-in that enables you to activate run-time contract enforcement from the project <ui>Properties</ui> page. The binary rewriter and the Visual Studio add-in do not ship with vs_dev10_long or the Windows SDK.</para>
       </block>
     </remarks>
     <summary>
@@ -73,8 +68,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default escalation policy is to notify the attached debugger about a contract failure or to display an <ui>Assert</ui> dialog box if a debugger is not attached. Optionally, the analyzer can be instructed to throw an exception.</para
-          >
+            >The default escalation policy is to notify the attached debugger about a contract failure or to display an <ui>Assert</ui> dialog box if a debugger is not attached. Optionally, the analyzer can be instructed to throw an exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,8 +79,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
       </Docs>
     </Member>
     <Member MemberName="Assert">
@@ -124,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default escalation policy is to notify the attached debugger about a contract failure or to display an <ui>Assert</ui> dialog box if a debugger is not attached. Optionally, the analyzer can be instructed to throw an exception. The <paramref name="userMessage" /> parameter is passed to the debugger output. If <paramref name="userMessage" /> is not a constant string literal, tools may not be able to read it.</para
-          >
+            >The default escalation policy is to notify the attached debugger about a contract failure or to display an <ui>Assert</ui> dialog box if a debugger is not attached. Optionally, the analyzer can be instructed to throw an exception. The <paramref name="userMessage" /> parameter is passed to the debugger output. If <paramref name="userMessage" /> is not a constant string literal, tools may not be able to read it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,15 +128,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message to display if the condition is not met.</param
-        >
+          />A message to display if the condition is not met.</param>
       </Docs>
     </Member>
     <Member MemberName="Assume">
@@ -178,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >At run time, using this method is equivalent to using the <see cref="M:System.Diagnostics.Contracts.Contract.Assert(System.Boolean)" /> method.</para
-          >
+            >At run time, using this method is equivalent to using the <see cref="M:System.Diagnostics.Contracts.Contract.Assert(System.Boolean)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -190,8 +179,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to assume true.</param
-        >
+          />The conditional expression to assume true.</param>
       </Docs>
     </Member>
     <Member MemberName="Assume">
@@ -229,11 +217,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="userMessage" /> is not a constant string literal, the contract may not be understood by tools.</para
-          >
+            >If <paramref name="userMessage" /> is not a constant string literal, the contract may not be understood by tools.</para>
           <para
-            >At run time, using this method is equivalent to using the <see cref="M:System.Diagnostics.Contracts.Contract.Assert(System.Boolean,System.String)" /> method.</para
-          >
+            >At run time, using this method is equivalent to using the <see cref="M:System.Diagnostics.Contracts.Contract.Assert(System.Boolean,System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -244,15 +230,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to assume true.</param
-        >
+          />The conditional expression to assume true.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to post if the assumption fails.</param
-        >
+          />The message to post if the assumption fails.</param>
       </Docs>
     </Member>
     <Member MemberName="ContractFailed">
@@ -275,11 +259,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The event information for this event is supplied by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> object that is passed to the event handler. This event notifies a managed application environment such as an interactive interpreter or a Web browser host that a contract has failed. Before doing so, it will raise an event that an application can handle as it sees fit. For example, if code is being run in a testing framework, you can log a test failure and then end the test. </para
-          >
+            >The event information for this event is supplied by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" /> object that is passed to the event handler. This event notifies a managed application environment such as an interactive interpreter or a Web browser host that a contract has failed. Before doing so, it will raise an event that an application can handle as it sees fit. For example, if code is being run in a testing framework, you can log a test failure and then end the test. </para>
           <para
-            >The default implementation of the <see cref="M:System.Diagnostics.Contracts.Internal.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" /> method in the .NET Framework class library is to call each handler that is registered with the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event. Exceptions thrown by handlers are ignored, but each handler can indicate whether the failure is handled by calling the <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetHandled" /> method for the event arguments. If any handler sets the failure as handled, the method returns null and no further action is taken. Alternatively, handlers can call the <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetUnwind" /> method to instruct the code to unwind. In that case, an exception is thrown after all handlers have executed.</para
-          >
+            >The default implementation of the <see cref="M:System.Diagnostics.Contracts.Internal.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" /> method in the .NET Framework class library is to call each handler that is registered with the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" /> event. Exceptions thrown by handlers are ignored, but each handler can indicate whether the failure is handled by calling the <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetHandled" /> method for the event arguments. If any handler sets the failure as handled, the method returns null and no further action is taken. Alternatively, handlers can call the <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetUnwind" /> method to instruct the code to unwind. In that case, an exception is thrown after all handlers have executed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -313,11 +295,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Most code already contains some parameter validation in the form of if-then-throw code. The contract tools recognize if-then-throw statements as preconditions when the statements appear first inside a method, and the entire set of such statements is followed by an explicit <see cref="T:System.Diagnostics.Contracts.Contract" /> method call, such as a <see cref="Overload:System.Diagnostics.Contracts.Contract.Requires" />, <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" />, <see cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" />, or <see cref="M:System.Diagnostics.Contracts.Contract.EndContractBlock" />.</para
-          >
+            >Most code already contains some parameter validation in the form of if-then-throw code. The contract tools recognize if-then-throw statements as preconditions when the statements appear first inside a method, and the entire set of such statements is followed by an explicit <see cref="T:System.Diagnostics.Contracts.Contract" /> method call, such as a <see cref="Overload:System.Diagnostics.Contracts.Contract.Requires" />, <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" />, <see cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" />, or <see cref="M:System.Diagnostics.Contracts.Contract.EndContractBlock" />.</para>
           <para
-            >When if-then-throw statements appear in this form, the contract tools recognize them as legacy-require statements. The <see cref="M:System.Diagnostics.Contracts.Contract.EndContractBlock" /> form is used only if no other contracts follow the if-then-throw sequences, but they should still be tagged as legacy-requires.</para
-          >
+            >When if-then-throw statements appear in this form, the contract tools recognize them as legacy-require statements. The <see cref="M:System.Diagnostics.Contracts.Contract.EndContractBlock" /> form is used only if no other contracts follow the if-then-throw sequences, but they should still be tagged as legacy-requires.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -353,8 +333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally.</para
-          >
+            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally.</para>
           <list type="bullet">
             <item>
               <para>This method call must be at the beginning of a method or property, before any other code.</para>
@@ -363,9 +342,7 @@
               <para
                 >You must use the binary rewriter (available at <see
                   cref="http://go.microsoft.com/fwlink/?LinkId=152461"
-                  >Code Contracts</see
-                > on the MSDN DevLabs Web site) for run-time enforcement of this postcondition. </para
-              >
+                  >Code Contracts</see> on the MSDN DevLabs Web site) for run-time enforcement of this postcondition. </para>
             </item>
           </list>
         </remarks>
@@ -378,8 +355,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" />, <see cref="M:System.Diagnostics.Contracts.Contract.ValueAtReturn``1(``0@)" />, and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values. </param
-        >
+          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" />, <see cref="M:System.Diagnostics.Contracts.Contract.ValueAtReturn``1(``0@)" />, and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName="Ensures">
@@ -414,8 +390,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally. </para
-          >
+            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property returns normally. </para>
           <list type="bullet">
             <item>
               <para>This method call must be at the beginning of a method or property, before any other code.</para>
@@ -427,14 +402,11 @@
               <para
                 >You must use the binary rewriter (available at <see
                   cref="http://go.microsoft.com/fwlink/?LinkId=152461"
-                  >Code Contracts</see
-                > on the MSDN DevLabs Web site) for run-time enforcement of this postcondition.</para
-              >
+                  >Code Contracts</see> on the MSDN DevLabs Web site) for run-time enforcement of this postcondition.</para>
             </item>
             <item>
               <para
-                >If <paramref name="userMessage" /> is not a constant string literal, the contract may not be understood by tools.</para
-              >
+                >If <paramref name="userMessage" /> is not a constant string literal, the contract may not be understood by tools.</para>
             </item>
           </list>
         </remarks>
@@ -447,15 +419,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" /> and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values. </param
-        >
+          />The conditional expression to test. The expression may include <see cref="M:System.Diagnostics.Contracts.Contract.OldValue``1(``0)" /> and <see cref="M:System.Diagnostics.Contracts.Contract.Result``1" /> values. </param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display if the expression is not true.</param
-        >
+          />The message to display if the expression is not true.</param>
       </Docs>
     </Member>
     <Member MemberName="EnsuresOnThrow&lt;TException&gt;">
@@ -496,8 +466,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property terminates abnormally and an exception of type <paramref name="TException" /> is thrown.</para
-          >
+            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property terminates abnormally and an exception of type <paramref name="TException" /> is thrown.</para>
           <list type="bullet">
             <item>
               <para>This method call must be at the beginning of a method or property, before any other code.</para>
@@ -519,15 +488,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <typeparam name="TException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of exception that invokes the postcondition check.</typeparam
-        >
+          />The type of exception that invokes the postcondition check.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="EnsuresOnThrow&lt;TException&gt;">
@@ -569,8 +536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property terminates abnormally and an exception of type <paramref name="TException" /> is thrown. The <paramref name="message" /> parameter specifies a message to display if the condition is false.</para
-          >
+            >The <paramref name="condition" /> parameter specifies a postcondition that is expected to be true when the enclosing method or property terminates abnormally and an exception of type <paramref name="TException" /> is thrown. The <paramref name="message" /> parameter specifies a message to display if the condition is false.</para>
           <list type="bullet">
             <item>
               <para>This method call must be at the beginning of a method or property, before any other code.</para>
@@ -583,8 +549,7 @@
             </item>
             <item>
               <para
-                >If <paramref name="userMessage" /> is not a constant string literal, the contract may not be understood by tools.</para
-              >
+                >If <paramref name="userMessage" /> is not a constant string literal, the contract may not be understood by tools.</para>
             </item>
           </list>
         </remarks>
@@ -597,22 +562,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display if the expression is false.</param
-        >
+          />The message to display if the expression is false.</param>
         <typeparam name="TException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of exception that invokes the postcondition check.</typeparam
-        >
+          />The type of exception that invokes the postcondition check.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Exists">
@@ -645,8 +607,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="toExclusive" /> parameter is one more than the last integer to facilitate using the length of a range of integers starting at 0. For example, it would be set to 5 for integers 0 through 4.</para
-          >
+            >The <paramref name="toExclusive" /> parameter is one more than the last integer to facilitate using the length of a range of integers starting at 0. For example, it would be set to 5 for integers 0 through 4.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -655,30 +616,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            true if <paramref name="predicate" /> returns true for any integer starting from <paramref name="fromInclusive" /> to <paramref name="toExclusive" /> - 1.</para
-          >
+            true if <paramref name="predicate" /> returns true for any integer starting from <paramref name="fromInclusive" /> to <paramref name="toExclusive" /> - 1.</para>
         </returns>
         <param name="fromInclusive">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first integer to pass to <paramref name="predicate" />.</param
-        >
+          />The first integer to pass to <paramref name="predicate" />.</param>
         <param name="toExclusive">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One more than the last integer to pass to <paramref name="predicate" />.</param
-        >
+          />One more than the last integer to pass to <paramref name="predicate" />.</param>
         <param name="predicate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The function to evaluate for any value of the integer in the specified range.</param
-        >
+          />The function to evaluate for any value of the integer in the specified range.</param>
       </Docs>
     </Member>
     <Member MemberName="Exists&lt;T&gt;">
@@ -718,30 +675,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-                    true if and only if <paramref name="predicate" /> returns true for any element of type <paramref name="T" /> in <paramref name="collection" />.</para
-          >
+                    true if and only if <paramref name="predicate" /> returns true for any element of type <paramref name="T" /> in <paramref name="collection" />.</para>
         </returns>
         <param name="collection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection from which elements of type <paramref name="T" /> will be drawn to pass to <paramref name="predicate" />.</param
-        >
+          />The collection from which elements of type <paramref name="T" /> will be drawn to pass to <paramref name="predicate" />.</param>
         <param name="predicate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The function to evaluate for an element in <paramref name="collection" />.</param
-        >
+          />The function to evaluate for an element in <paramref name="collection" />.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that is contained in <paramref name="collection" />.</typeparam
-        >
+          />The type that is contained in <paramref name="collection" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ForAll">
@@ -774,8 +727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="toExclusive" /> parameter is one more than the last integer to facilitate using the length of a range of integers starting at 0. For example, it would be set to 5 for integers 0 through 4.</para
-          >
+            >The <paramref name="toExclusive" /> parameter is one more than the last integer to facilitate using the length of a range of integers starting at 0. For example, it would be set to 5 for integers 0 through 4.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -784,30 +736,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-                    true if <paramref name="predicate" /> returns true for all integers starting from <paramref name="fromInclusive" /> to <paramref name="toExclusive" /> - 1.</para
-          >
+                    true if <paramref name="predicate" /> returns true for all integers starting from <paramref name="fromInclusive" /> to <paramref name="toExclusive" /> - 1.</para>
         </returns>
         <param name="fromInclusive">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first integer to pass to <paramref name="predicate" />.</param
-        >
+          />The first integer to pass to <paramref name="predicate" />.</param>
         <param name="toExclusive">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One more than the last integer to pass to <paramref name="predicate" />.</param
-        >
+          />One more than the last integer to pass to <paramref name="predicate" />.</param>
         <param name="predicate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The function to evaluate for the existence of the integers in the specified range.</param
-        >
+          />The function to evaluate for the existence of the integers in the specified range.</param>
       </Docs>
     </Member>
     <Member MemberName="ForAll&lt;T&gt;">
@@ -847,30 +795,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-                            true if and only if <paramref name="predicate" /> returns true for all elements of type <paramref name="T" /> in <paramref name="collection" />.</para
-          >
+                            true if and only if <paramref name="predicate" /> returns true for all elements of type <paramref name="T" /> in <paramref name="collection" />.</para>
         </returns>
         <param name="collection">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The collection from which elements of type <paramref name="T" /> will be drawn to pass to <paramref name="predicate" />.</param
-        >
+          />The collection from which elements of type <paramref name="T" /> will be drawn to pass to <paramref name="predicate" />.</param>
         <param name="predicate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The function to evaluate for the existence of all the elements in <paramref name="collection" />.</param
-        >
+          />The function to evaluate for the existence of all the elements in <paramref name="collection" />.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that is contained in <paramref name="collection" />.</typeparam
-        >
+          />The type that is contained in <paramref name="collection" />.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Invariant">
@@ -901,8 +845,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Diagnostics.Contracts.Contract.Invariant(System.Boolean)" /> contracts are contained within a method that is identified by the <see cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" /> attribute; typically, the method is named ObjectInvariant.</para
-          >
+            <see cref="M:System.Diagnostics.Contracts.Contract.Invariant(System.Boolean)" /> contracts are contained within a method that is identified by the <see cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" /> attribute; typically, the method is named ObjectInvariant.</para>
           <list type="bullet">
             <item>
               <para>This contract can be specified only in a dedicated invariant method that is declared on a class. If the method is not sealed, it should refer only to protected members, not private members, so that subclasses can be sure to maintain the invariants.</para>
@@ -930,8 +873,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
       </Docs>
     </Member>
     <Member MemberName="Invariant">
@@ -966,8 +908,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Diagnostics.Contracts.Contract.Invariant(System.Boolean,System.String)" /> contracts are contained within a method that is identified by the <see cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" /> attribute; typically, the method is named ObjectInvariant.</para
-          >
+            <see cref="M:System.Diagnostics.Contracts.Contract.Invariant(System.Boolean,System.String)" /> contracts are contained within a method that is identified by the <see cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" /> attribute; typically, the method is named ObjectInvariant.</para>
           <list type="bullet">
             <item>
               <para>This contract can be specified only in a dedicated invariant method that is declared on a class.</para>
@@ -992,15 +933,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display if the condition is false.</param
-        >
+          />The message to display if the condition is false.</param>
       </Docs>
     </Member>
     <Member MemberName="OldValue&lt;T&gt;">
@@ -1071,8 +1010,7 @@
             </item>
             <item>
               <para
-                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean)" /> method when backward compatibility does not force you to throw a particular exception.</para
-              >
+                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean)" /> method when backward compatibility does not force you to throw a particular exception.</para>
             </item>
           </list>
         </remarks>
@@ -1085,8 +1023,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
       </Docs>
     </Member>
     <Member MemberName="Requires">
@@ -1129,8 +1066,7 @@
             </item>
             <item>
               <para
-                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean,System.String)" /> method when backward compatibility does not force you to throw a particular exception.</para
-              >
+                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean,System.String)" /> method when backward compatibility does not force you to throw a particular exception.</para>
             </item>
           </list>
         </remarks>
@@ -1143,15 +1079,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display if the condition is false.</param
-        >
+          />The message to display if the condition is false.</param>
       </Docs>
     </Member>
     <Member MemberName="Requires&lt;TException&gt;">
@@ -1192,9 +1126,7 @@
             <para
               >You must turn on run-time checking to use the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean)" /> method. If run-time checking is turned off, the process will be terminated. To obtain the tools for runtime checking, see <see
                 cref="http://go.microsoft.com/fwlink/?LinkId=152461"
-                >Code Contracts</see
-              > on the MSDN DevLabs Web site. </para
-            >
+                >Code Contracts</see> on the MSDN DevLabs Web site. </para>
           </block>
           <list type="bullet">
             <item>
@@ -1205,8 +1137,7 @@
             </item>
             <item>
               <para
-                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" /> method when you want to throw an exception if the precondition fails. </para
-              >
+                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" /> method when you want to throw an exception if the precondition fails. </para>
             </item>
           </list>
         </remarks>
@@ -1219,15 +1150,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <typeparam name="TException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception to throw if the condition is false.</typeparam
-        >
+          />The exception to throw if the condition is false.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Requires&lt;TException&gt;">
@@ -1259,8 +1188,7 @@
       </Parameters>
       <Docs>
         <typeparam name="TException"
-          >The exception type that causes this precondition to be verified.</typeparam
-        >
+          >The exception type that causes this precondition to be verified.</typeparam>
         <param name="condition">The precondition to verify.</param>
         <summary>Specifies a precondition contract for when an exception is thrown.</summary>
         <remarks>All code contract method calls must be at the beginning of the method or property. The code contract rewriter tool must be used to enable contracts to be verified at runtime.</remarks>
@@ -1383,9 +1311,7 @@
                 <para
                   >You must turn on run-time checking to use the <see cref="M:System.Diagnostics.Contracts.Contract.Requires``1(System.Boolean,System.String)" /> method. If run-time checking is turned off, the process will be terminated. To obtain the tools for runtime checking, see <see
                     cref="http://go.microsoft.com/fwlink/?LinkId=152461"
-                    >Code Contracts</see
-                  > on the MSDN DevLabs Web site.</para
-                >
+                    >Code Contracts</see> on the MSDN DevLabs Web site.</para>
               </block>
               <para>This method call must be at the beginning of a method or property, before any other code.</para>
             </item>
@@ -1394,8 +1320,7 @@
             </item>
             <item>
               <para
-                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean,System.String)" /> method when you want to throw an exception if the precondition fails. </para
-              >
+                >Use this method instead of the <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean,System.String)" /> method when you want to throw an exception if the precondition fails. </para>
             </item>
           </list>
         </remarks>
@@ -1408,22 +1333,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditional expression to test.</param
-        >
+          />The conditional expression to test.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display if the condition is false.</param
-        >
+          />The message to display if the condition is false.</param>
         <typeparam name="TException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception to throw if the condition is false.</typeparam
-        >
+          />The exception to throw if the condition is false.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Requires&lt;TException&gt;">
@@ -1496,8 +1418,7 @@
       </Parameters>
       <Docs>
         <typeparam name="TException"
-          >The exception type that causes this precondition to be verified.</typeparam
-        >
+          >The exception type that causes this precondition to be verified.</typeparam>
         <param name="condition">The precondition to verify.</param>
         <param name="userMessage">Message to display on contract failure.</param>
         <summary>Specifies a precondition contract for when an exception is thrown.</summary>
@@ -1570,8 +1491,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used only in the conditional expression for the <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> contract.</para
-          >
+            >This method can be used only in the conditional expression for the <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" /> contract.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1586,8 +1506,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Type of return value of the enclosing method or property.</typeparam
-        >
+          />Type of return value of the enclosing method or property.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ValueAtReturn&lt;T&gt;">

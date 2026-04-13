@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.ConstrainedExecution.Consistency" /> enumeration is used as a parameter to the <see cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" /> attribute to specify the reliability guarantee on a given method.</para
-      >
+        >The <see cref="T:System.Runtime.ConstrainedExecution.Consistency" /> enumeration is used as a parameter to the <see cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" /> attribute to specify the reliability guarantee on a given method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

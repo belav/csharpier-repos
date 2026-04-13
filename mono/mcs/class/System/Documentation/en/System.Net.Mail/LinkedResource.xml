@@ -49,16 +49,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> using the supplied <see cref="T:System.IO.Stream" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> using the supplied <see cref="T:System.IO.Stream" />.</para>
         </summary>
         <param name="contentStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream that contains the content for this embedded resource.</param
-        >
+          />A stream that contains the content for this embedded resource.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -81,16 +79,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> using the specified file name.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> using the specified file name.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name holding the content for this embedded resource.</param
-        >
+          />The file name holding the content for this embedded resource.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -117,23 +113,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the values supplied by <see cref="T:System.IO.Stream" /> and <see cref="T:System.Net.Mime.ContentType" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the values supplied by <see cref="T:System.IO.Stream" /> and <see cref="T:System.Net.Mime.ContentType" />.</para>
         </summary>
         <param name="contentStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream that contains the content for this embedded resource.</param
-        >
+          />A stream that contains the content for this embedded resource.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content.</param
-        >
+          />The type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -160,23 +153,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the specified <see cref="T:System.IO.Stream" /> and media type.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the specified <see cref="T:System.IO.Stream" /> and media type.</para>
         </summary>
         <param name="contentStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream that contains the content for this embedded resource.</param
-        >
+          />A stream that contains the content for this embedded resource.</param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME media type of the content.</param
-        >
+          />The MIME media type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -203,23 +193,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the specified file name and content type.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the specified file name and content type.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name that holds the content for this embedded resource.</param
-        >
+          />The file name that holds the content for this embedded resource.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content.</param
-        >
+          />The type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -246,23 +233,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the specified file name and media type.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Net.Mail.LinkedResource" /> with the specified file name and media type.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name that holds the content for this embedded resource.</param
-        >
+          />The file name that holds the content for this embedded resource.</param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME media type of the content.</param
-        >
+          />The MIME media type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName="ContentLink">
@@ -312,22 +296,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Net.Mail.LinkedResource" /> object from a string to be included in an email attachment as an embedded resource. The default media type is plain text, and the default content type is ASCII.</para
-          >
+            >Creates a <see cref="T:System.Net.Mail.LinkedResource" /> object from a string to be included in an email attachment as an embedded resource. The default media type is plain text, and the default content type is ASCII.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.Mail.LinkedResource" /> object that contains the embedded resource to be included in the email attachment.</para
-          >
+            >A <see cref="T:System.Net.Mail.LinkedResource" /> object that contains the embedded resource to be included in the email attachment.</para>
         </returns>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the embedded resource to be included in the email attachment.</param
-        >
+          />A string that contains the embedded resource to be included in the email attachment.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateLinkedResourceFromString">
@@ -357,29 +338,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Net.Mail.LinkedResource" /> object from a string to be included in an email attachment as an embedded resource, with the specified content type, and media type as plain text.</para
-          >
+            >Creates a <see cref="T:System.Net.Mail.LinkedResource" /> object from a string to be included in an email attachment as an embedded resource, with the specified content type, and media type as plain text.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.Mail.LinkedResource" /> object that contains the embedded resource to be included in the email attachment.</para
-          >
+            >A <see cref="T:System.Net.Mail.LinkedResource" /> object that contains the embedded resource to be included in the email attachment.</para>
         </returns>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the embedded resource to be included in the email attachment.</param
-        >
+          />A string that contains the embedded resource to be included in the email attachment.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content.</param
-        >
+          />The type of the content.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateLinkedResourceFromString">
@@ -410,36 +387,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Net.Mail.LinkedResource" /> object from a string to be included in an email attachment as an embedded resource, with the specified content type, and media type.</para
-          >
+            >Creates a <see cref="T:System.Net.Mail.LinkedResource" /> object from a string to be included in an email attachment as an embedded resource, with the specified content type, and media type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.Mail.LinkedResource" /> object that contains the embedded resource to be included in the email attachment.</para
-          >
+            >A <see cref="T:System.Net.Mail.LinkedResource" /> object that contains the embedded resource to be included in the email attachment.</para>
         </returns>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the embedded resource to be included in the email attachment.</param
-        >
+          />A string that contains the embedded resource to be included in the email attachment.</param>
         <param name="contentEncoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the content.</param
-        >
+          />The type of the content.</param>
         <param name="mediaType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME media type of the content.</param
-        >
+          />The MIME media type of the content.</param>
       </Docs>
     </Member>
   </Members>

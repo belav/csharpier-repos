@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -49,19 +48,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ProgressChangedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ProgressChangedEventArgs" /> class.</para>
         </summary>
         <param name="progressPercentage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The percentage of an asynchronous task that has been completed.</param
-        >
+          />The percentage of an asynchronous task that has been completed.</param>
         <param name="userState">
-          <attribution license="cc4" from="Microsoft" modified="false" />A unique user state.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A unique user state.</param>
       </Docs>
     </Member>
     <Member MemberName="ProgressPercentage">
@@ -81,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property determines what percentage of an asynchronous task has been completed.</para
-          >
+            >The <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> property determines what percentage of an asynchronous task has been completed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

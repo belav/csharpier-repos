@@ -106,30 +106,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettings" /> class using default settings; however, the name, event name, and provider are specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettings" /> class using default settings; however, the name, event name, and provider are specified.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param>
         <param name="eventName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -181,58 +177,50 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettings" /> class where all values except those of the <see cref="P:System.Web.Configuration.RuleSettings.Custom" /> class are specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettings" /> class where all values except those of the <see cref="P:System.Web.Configuration.RuleSettings.Custom" /> class are specified.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param>
         <param name="eventName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param>
         <param name="profile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</param>
         <param name="minInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider. </param
-        >
+          />The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider. </param>
         <param name="maxLimit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of times events of the same type can be raised.</param
-        >
+          />The maximum number of times events of the same type can be raised.</param>
         <param name="minInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum time interval between two events of the same type.</param
-        >
+          />The minimum time interval between two events of the same type.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -263,65 +251,56 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> class where all values are specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> class where all values are specified.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object to create.</param>
         <param name="eventName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</param>
         <param name="provider">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</param>
         <param name="profile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</param>
         <param name="minInstances">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum number of occurrences of an event of the same type before the event is fired to the provider. </param
-        >
+          />The minimum number of occurrences of an event of the same type before the event is fired to the provider. </param>
         <param name="maxLimit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of times events of the same type are fired.</param
-        >
+          />The maximum number of times events of the same type are fired.</param>
         <param name="minInterval">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum time interval between two events of the same type.</param
-        >
+          />The minimum time interval between two events of the same type.</param>
         <param name="custom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</param
-        >
+          />The fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</para
-          >
+            >Gets or sets the fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -380,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</para
-          >
+            >Gets or sets the name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> object this rule applies to.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -473,8 +450,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />. Invalid values may cause an exception to be thrown when the configuration section is saved.</para
-          >
+            >The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />. Invalid values may cause an exception to be thrown when the configuration section is saved.</para>
           <para>If the value is zero, then there is no minimum interval.</para>
         </remarks>
         <summary>
@@ -510,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object.</para
-          >
+            >Gets or sets the name of the <see cref="T:System.Web.Configuration.RuleSettings" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -542,8 +517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</para
-          >
+            >Gets or sets the name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object this rule applies to.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -586,14 +560,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Configuration.ProviderSettings" /> object referenced by this property must be contained by the same <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object that also contains this <see cref="T:System.Web.Configuration.RuleSettings" /> object.</para
-          >
+            >The <see cref="T:System.Configuration.ProviderSettings" /> object referenced by this property must be contained by the same <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object that also contains this <see cref="T:System.Web.Configuration.RuleSettings" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</para
-          >
+            >Gets or sets the name of the <see cref="T:System.Configuration.ProviderSettings" /> object this rule applies to.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

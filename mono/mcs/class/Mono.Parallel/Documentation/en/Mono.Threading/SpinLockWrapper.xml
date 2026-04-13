@@ -14,8 +14,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Provide a simplistic class wrapper around <see cref="T:System.Threading.SpinLock" /> to be able to pass around the lock.</summary
-    >
+      >Provide a simplistic class wrapper around <see cref="T:System.Threading.SpinLock" /> to be able to pass around the lock.</summary>
     <remarks />
   </Docs>
   <Members>
@@ -32,8 +31,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Initialize underlying <see cref="T:System.Threading.SpinLock" /> instance with thread tracking disabled.</summary
-        >
+          >Initialize underlying <see cref="T:System.Threading.SpinLock" /> instance with thread tracking disabled.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -52,11 +50,9 @@
       </Parameters>
       <Docs>
         <param name="enableTracking">
-          <see langword="true" /> to enable thread tracking, <see langword="false" /> otherwise.</param
-        >
+          <see langword="true" /> to enable thread tracking, <see langword="false" /> otherwise.</param>
         <summary
-          >Initialize underlying <see cref="T:System.Threading.SpinLock" /> with provided value.</summary
-        >
+          >Initialize underlying <see cref="T:System.Threading.SpinLock" /> with provided value.</summary>
         <remarks />
       </Docs>
     </Member>

@@ -36,9 +36,7 @@
       <para
         >For more information about XSD data types, see the "XML Data Types Reference" in the MSDN Library at <see
           cref="http://msdn.microsoft.com/library"
-          >http://msdn.microsoft.com/library</see
-        >. </para
-      >
+          >http://msdn.microsoft.com/library</see>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +88,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth" /> class with a specified <see cref="T:System.DateTime" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth" /> class with a specified <see cref="T:System.DateTime" /> object.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> object to initialize the current instance. </param
-        >
+          />A <see cref="T:System.DateTime" /> object to initialize the current instance. </param>
       </Docs>
     </Member>
     <Member MemberName="GetXsdType">
@@ -128,8 +123,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that indicates the XSD of the current SOAP type.</para
-          >
+            >A <see cref="T:System.String" /> that indicates the XSD of the current SOAP type.</para>
         </returns>
       </Docs>
     </Member>
@@ -158,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth.Parse(System.String)" /> method is capable of parsing strings in various formats. The recognizable string formats are composed out of the following format patterns.</para
-          >
+            >The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth.Parse(System.String)" /> method is capable of parsing strings in various formats. The recognizable string formats are composed out of the following format patterns.</para>
           <list type="table">
             <listheader>
               <item>
@@ -201,22 +194,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see cref="T:System.String" /> into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth" /> object.</para
-          >
+            >Converts the specified <see cref="T:System.String" /> into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDay" /> object that is obtained from <paramref name="value" />.</para
-          >
+            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDay" /> object that is obtained from <paramref name="value" />.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The String to convert. </param
-        >
+          />The String to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -240,14 +230,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth.Value" /> as a <see cref="T:System.String" />.</para
-          >
+            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth.Value" /> as a <see cref="T:System.String" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.String" /> that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth.Value" /> in the format "--MM--".</para
-          >
+            >A <see cref="T:System.String" /> that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonth.Value" /> in the format "--MM--".</para>
         </returns>
       </Docs>
     </Member>

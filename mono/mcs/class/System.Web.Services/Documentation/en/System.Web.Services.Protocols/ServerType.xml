@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework uses the <see cref="T:System.Web.Services.Protocols.ServerType" /> class to process XML Web service requests.</para
-      >
+        >The .NET Framework uses the <see cref="T:System.Web.Services.Protocols.ServerType" /> class to process XML Web service requests.</para>
     </summary>
   </Docs>
   <Members>
@@ -38,8 +37,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that exposes the XML Web service.</param
-        >
+          />The <see cref="T:System.Type" /> that exposes the XML Web service.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

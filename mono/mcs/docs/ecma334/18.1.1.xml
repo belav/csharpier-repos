@@ -2,8 +2,7 @@
 <clause number="18.1.1" title="Struct modifiers">
   <paragraph
     >A <non_terminal where="18.1"
-      >struct-declaration</non_terminal
-    > may optionally include a sequence of struct modifiers: <grammar_production>
+      >struct-declaration</non_terminal> may optionally include a sequence of struct modifiers: <grammar_production>
       <name><non_terminal where="18.1.1">struct-modifier</non_terminal>s</name> : <rhs>
         <non_terminal where="18.1.1">struct-modifier</non_terminal>
       </rhs>
@@ -34,6 +33,5 @@
   </paragraph>
   <paragraph>It is a compile-time error for the same modifier to appear multiple times in a struct declaration. </paragraph>
   <paragraph
-    >The modifiers of a struct declaration have the same meaning as those of a class declaration (<hyperlink>17.1.1</hyperlink>). </paragraph
-  >
+    >The modifiers of a struct declaration have the same meaning as those of a class declaration (<hyperlink>17.1.1</hyperlink>). </paragraph>
 </clause>

@@ -610,8 +610,7 @@
         <param name="v">A <see cref="T:Mono.DocTest.DocValueType" />.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.M1(System.Char,System.Signle@,Mono.DocTest.DocValueType@)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="M2">
@@ -638,8 +637,7 @@
         <param name="x3">A <see cref="T:System.Int64" /> array.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.M2(System.Int16[],System.Int32[0:,0:],System.Int64[][])</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="M3">
@@ -667,8 +665,7 @@
         <param name="x4">A <see cref="T:Mono.DocTest.Widget" /> array.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.M3(System.Int64[][],Mono.DocTest.Widget[0:,0:,0:][])</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="M4">
@@ -775,8 +772,7 @@
         <param name="a">To be added.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.Widget.M7(Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.M7(Mono.DocTest.Widget.NestedClass.Double.Triple.Quadruple)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="message">
@@ -838,8 +834,7 @@
         <summary>To be added.</summary>
         <returns>A <see cref="T:Mono.DocTest.Widget" /> instance (2).</returns>
         <remarks>
-          <c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.op_Addition(Mono.DocTest.Widget,Mono.DocTest.Widget)</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Division">
@@ -885,8 +880,7 @@
         <summary>To be added.</summary>
         <returns>A <see cref="T:System.Int32" /> instance.</returns>
         <remarks>
-          <c>M:Mono.DocTest.Widget.op_Explicit(Mono.DocTest.Widget)~System.Int32</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.op_Explicit(Mono.DocTest.Widget)~System.Int32</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -913,8 +907,7 @@
         <summary>To be added.</summary>
         <returns>A <see cref="T:System.Int64" /> instance.</returns>
         <remarks>
-          <c>M:Mono.DocTest.Widget.op_Implicit(Mono.DocTest.Widget)~System.Int64</c>.</remarks
-        >
+          <c>M:Mono.DocTest.Widget.op_Implicit(Mono.DocTest.Widget)~System.Int64</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="op_UnaryPlus">

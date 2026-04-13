@@ -30,15 +30,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class provides the basis for strongly typed enumerators such as <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" />.</para
-          >
+            >The <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class provides the basis for strongly typed enumerators such as <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" />.</para>
           <para></para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -134,14 +132,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see cref="T:System.Data.DataTable" /> containing information about all visible instances of the server represented by the strongly typed instance of this class.</para
-          >
+            >Retrieves a <see cref="T:System.Data.DataTable" /> containing information about all visible instances of the server represented by the strongly typed instance of this class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Data.DataTable" /> containing information about the visible instances of the associated data source.</para
-          >
+            >Returns a <see cref="T:System.Data.DataTable" /> containing information about the visible instances of the associated data source.</para>
         </returns>
       </Docs>
       <AssemblyInfo>

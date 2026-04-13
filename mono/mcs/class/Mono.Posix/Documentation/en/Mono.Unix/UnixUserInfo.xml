@@ -23,8 +23,7 @@
         wrapper over the <see cref="T:Mono.Unix.Native.Passwd" /> native type.
         It represents a single entry from the local password database, 
         typically <c>/etc/passwd</c>.
-      </para
-      >
+      </para>
       <para>
         Unix users are part of the file system access rules.  
       </para>
@@ -36,19 +35,16 @@
         <see cref="T:Mono.Unix.FileAccessPermissions" /> is a nine-bit field
         specifying read, write, and execute access for the owner, group, and
         everyone else (other).
-      </para
-      >
+      </para>
       <para>
         Access by the file's owner is controlled by the bits specified by
         <c>
         (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
         &amp; 
-        <see cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />)</c
-        >.
+        <see cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />)</c>.
         The owner permissions supersede group permissions and other
         permissions, even if the owner belongs to the group.
-      </para
-      >
+      </para>
     </remarks>
   </Docs>
   <Members>
@@ -74,21 +70,18 @@
         <param name="passwd">
           A <see cref="T:Mono.Unix.Native.Passwd" /> containing the user 
           to get information about.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixUserInfo" /> by using the specified
           <see cref="T:Mono.Unix.Native.Passwd" /> entry.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor wraps <paramref name="passwd" />,
             providing framework-compliant naming conventions over the native
             <see cref="T:Mono.Unix.Native.Passwd" /> type.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -111,14 +104,12 @@
         <param name="user">
           A <see cref="T:System.Int64" /> containing the user id to get
           information about.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixUserInfo" /> by looking up the specified
           user id in the local password database file.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor looks up the specified user id in the local
@@ -128,8 +119,7 @@
         <exception cref="T:System.ArgumentException">
           The user id <paramref name="user" /> does not exist in the lcoal
           password database.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpwuid_r" />
       </Docs>
     </Member>
@@ -152,14 +142,12 @@
         <param name="user">
           A <see cref="T:System.String" /> containing the user to get
           information about.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixUserInfo" /> by looking up the specified
           user name in the local password database file.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor looks up the specified user name in the local
@@ -169,8 +157,7 @@
         <exception cref="T:System.ArgumentException">
           The user name <paramref name="user" /> does not exist in the lcoal
           password database.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpwnam_r" />
       </Docs>
     </Member>
@@ -198,14 +185,12 @@
         <param name="user">
           A <see cref="T:System.UInt32" /> containing the user id to get
           information about.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of 
           <see cref="T:Mono.Unix.UnixUserInfo" /> by looking up the specified
           user id in the local password database file.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor looks up the specified user id in the local
@@ -215,8 +200,7 @@
         <exception cref="T:System.ArgumentException">
           The user id <paramref name="user" /> does not exist in the lcoal
           password database.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpwuid_r" />
       </Docs>
     </Member>
@@ -291,15 +275,13 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixUserInfo" /> array containing
           information about all users in the local password database.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
         <exception cref="T:Mono.Unix.UnixIOException">
           Insufficient memory to allocate the 
           <see cref="T:Mono.Unix.Native.Passwd" /> structure.
           [<see cref="F:Mono.Unix.Native.Errno.ENOMEM" />]
-        </exception
-        >
+        </exception>
       </Docs>
     </Member>
     <Member MemberName="GetLoginName">
@@ -323,15 +305,13 @@
         <returns>
           A <see cref="T:System.String" /> containing the login name of the
           user executing this process.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             It's generally more useful to use the <c>LOGNAME</c> environment
             variable to find out who the user is, as this provides more
             flexibility.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getlogin_r" />
       </Docs>
@@ -357,8 +337,7 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixUserInfo" /> containing information
           about the real user the process is executing as.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -383,8 +362,7 @@
         <returns>
           A <see cref="T:System.Int64" /> containing the real user id of the
           process.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Syscall.getuid" />
       </Docs>
@@ -409,14 +387,12 @@
         <value>
           A <see cref="T:Mono.Unix.UnixGroupInfo" /> containing information
           about the group the user belongs to.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This is equivalent to 
             <see cref="C:Mono.Unix.UnixGroupInfo" />(<see cref="P:Mono.Unix.UnixUserInfo.GroupId" />).
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -436,8 +412,7 @@
         <summary>Gets the user's group id.</summary>
         <value>
           A <see cref="T:System.Int64" /> containing the users's group id.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             Access to file system objects 
@@ -447,19 +422,16 @@
             <see cref="T:Mono.Unix.FileAccessPermissions" /> is a nine-bit field
             specifying read, write, and execute access for the owner, group, and
             everyone else (other).
-          </para
-          >
+          </para>
           <para>
             Access by the file's owner group is controlled by the bits
             specified by <c>
             (<see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />
             &amp; 
-            <see cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />)</c
-            >.
+            <see cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />)</c>.
             All group members get these access permissions, except for the file's
             owner (if they belong to the file's owner group).
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="F:Mono.Unix.Native.Passwd.pw_gid" />
       </Docs>
@@ -481,14 +453,12 @@
         <value>
           A <see cref="T:System.String" /> containing the group name that the
           user belongs to.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This is equivalent to calling
             <see cref="P:Mono.Unix.UnixUserInfo.Group" />.<see cref="P:Mono.Unix.UnixGroupInfo.GroupName" />.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -509,8 +479,7 @@
         <value>
           A <see cref="T:System.String" /> containing the user's home
           directory.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Passwd.pw_dir" />
       </Docs>
@@ -531,15 +500,13 @@
         <summary>Gets the user's password.</summary>
         <value>
           A <see cref="T:System.String" /> containing the user's password.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             In years past, this <i>used</i> to contain the user's password.
             This was later found to be a security problem, as it made it
             easier to crack the passwords of other users.
-          </para
-          >
+          </para>
           <para>
             Currently, the actual user password is not stored in the password
             database, so this property is of little actual use.
@@ -566,8 +533,7 @@
           A <see cref="T:System.String" /> containing the user's actual name, 
           complete with spaces, first name, last name, and anything else the
           user wishes to provide.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Passwd.pw_gecos" />
       </Docs>
@@ -589,8 +555,7 @@
         <value>
           A <see cref="T:System.String" /> containing the user's login shell
           program.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Passwd.pw_shell" />
       </Docs>
@@ -615,13 +580,11 @@
         <summary>
           Converts this <see cref="T:Mono.Unix.UnixUserInfo" /> instance into
           an equivalent <see cref="T:Mono.Unix.Native.Passwd" /> instance.
-        </summary
-        >
+        </summary>
         <returns>
           A <see cref="T:Mono.Unix.Native.Passwd" /> instance containingn the
           same information as this instance.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -663,8 +626,7 @@
         <summary>Gets the user's id.</summary>
         <value>
           A <see cref="T:System.Int64" /> containing the user's id.
-        </value
-        >
+        </value>
         <remarks></remarks>
         <altmember cref="F:Mono.Unix.Native.Passwd.pw_uid" />
       </Docs>
@@ -685,8 +647,7 @@
         <summary>Gets the user's login name.</summary>
         <value>
           A <see cref="T:System.String" /> containing the user's login name.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This is what the user logs in to the computer as, and is generally

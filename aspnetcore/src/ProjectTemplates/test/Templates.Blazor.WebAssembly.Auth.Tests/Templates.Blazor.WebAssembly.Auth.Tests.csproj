@@ -69,11 +69,9 @@
   <PropertyGroup>
     <PreserveExistingLogsInOutput
       Condition="'$(PreserveExistingLogsInOutput)' == '' AND '$(ContinuousIntegrationBuild)' == 'true'"
-      >true</PreserveExistingLogsInOutput
-    >
+      >true</PreserveExistingLogsInOutput>
     <PreserveExistingLogsInOutput Condition="'$(PreserveExistingLogsInOutput)' == ''"
-      >false</PreserveExistingLogsInOutput
-    >
+      >false</PreserveExistingLogsInOutput>
   </PropertyGroup>
 
   <!-- Shared testing infrastructure for running E2E tests -->

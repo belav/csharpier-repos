@@ -51,15 +51,12 @@
     <Product>Microsoft%AE .NET</Product>
     <!-- Use the .NET product branding version for informational version description -->
     <InformationalVersion Condition="'$(InformationalVersion)' == '' and '$(VersionSuffix)' == ''"
-      >$(ProductVersion)</InformationalVersion
-    >
+      >$(ProductVersion)</InformationalVersion>
     <InformationalVersion
       Condition="'$(InformationalVersion)' == '' and '$(PreReleaseVersionLabel)' == 'servicing'"
-      >$(ProductVersion)</InformationalVersion
-    >
+      >$(ProductVersion)</InformationalVersion>
     <InformationalVersion Condition="'$(InformationalVersion)' == '' and '$(VersionSuffix)' != ''"
-      >$(ProductVersion)-$(VersionSuffix)</InformationalVersion
-    >
+      >$(ProductVersion)-$(VersionSuffix)</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -100,29 +97,24 @@
 
   <PropertyGroup>
     <PackageDescription Condition="'$(PackageDescription)' == '' and '$(Description)' != ''"
-      >$(Description)</PackageDescription
-    >
+      >$(Description)</PackageDescription>
     <RuntimePackageDisclaimer>Internal implementation package not meant for direct consumption. Please do not reference directly.</RuntimePackageDisclaimer>
     <UseRuntimePackageDisclaimer
       Condition="'$(UseRuntimePackageDisclaimer)' == '' and
                                             ($(MSBuildProjectName.StartsWith('runtime.native')) or '$(PackageTargetRuntime)' != '')"
-      >true</UseRuntimePackageDisclaimer
-    >
+      >true</UseRuntimePackageDisclaimer>
     <PackageDescription
       Condition="'$(PackageDescription)' != '' and '$(UseRuntimePackageDisclaimer)' == 'true'"
-      >$(RuntimePackageDisclaimer) %0A$(PackageDescription)</PackageDescription
-    >
+      >$(RuntimePackageDisclaimer) %0A$(PackageDescription)</PackageDescription>
     <PackageDescription
       Condition="'$(PackageDescription)' == '' and '$(UseRuntimePackageDisclaimer)' == 'true'"
-      >$(RuntimePackageDisclaimer)</PackageDescription
-    >
+      >$(RuntimePackageDisclaimer)</PackageDescription>
     <!-- Keep in sync as required by the Packaging SDK in Arcade. -->
     <Description>$(PackageDescription)</Description>
     <!-- Until we update the TFM to match the Major version, we need to patch in support for RequiresPreviewFeatures -->
     <GenerateRequiresPreviewFeaturesAttribute
       Condition="'$(TargetFrameworkMoniker)' == '$(NetCoreAppCurrentTargetFrameworkMoniker)'"
-      >true</GenerateRequiresPreviewFeaturesAttribute
-    >
+      >true</GenerateRequiresPreviewFeaturesAttribute>
   </PropertyGroup>
 
   <Target
@@ -182,8 +174,7 @@
          and ignore architecture mismatches in those implementation assemblies. -->
     <PropertyGroup Condition="@(_ResolvedProjectReferencePaths->AnyHaveMetadataValue('MSBuildSourceProjectFile', '$(CoreLibProject)'))">
       <CompileUsingReferenceAssemblies Condition="'$(CompileUsingReferenceAssemblies)' == ''"
-        >false</CompileUsingReferenceAssemblies
-      >
+        >false</CompileUsingReferenceAssemblies>
       <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     </PropertyGroup>
 
@@ -282,34 +273,25 @@
   <Target Name="GetProductVersions">
     <PropertyGroup>
       <IncludePreReleaseLabelInPackageVersion Condition="'$(DotNetFinalVersionKind)' != 'release'"
-        >true</IncludePreReleaseLabelInPackageVersion
-      >
+        >true</IncludePreReleaseLabelInPackageVersion>
       <IncludePreReleaseLabelInPackageVersion Condition="'$(SuppressFinalPackageVersion)' == 'true'"
-        >true</IncludePreReleaseLabelInPackageVersion
-      >
+        >true</IncludePreReleaseLabelInPackageVersion>
       <IncludePreReleaseLabelInPackageVersion Condition="'$(IsShipping)' != 'true'"
-        >true</IncludePreReleaseLabelInPackageVersion
-      >
+        >true</IncludePreReleaseLabelInPackageVersion>
 
       <IncludeBuildNumberInPackageVersion Condition="'$(StabilizePackageVersion)' != 'true'"
-        >true</IncludeBuildNumberInPackageVersion
-      >
+        >true</IncludeBuildNumberInPackageVersion>
       <IncludeBuildNumberInPackageVersion Condition="'$(SuppressFinalPackageVersion)' == 'true'"
-        >true</IncludeBuildNumberInPackageVersion
-      >
+        >true</IncludeBuildNumberInPackageVersion>
       <IncludeBuildNumberInPackageVersion Condition="'$(IsShipping)' != 'true'"
-        >true</IncludeBuildNumberInPackageVersion
-      >
+        >true</IncludeBuildNumberInPackageVersion>
 
       <ProductVersionSuffix Condition="'$(IncludePreReleaseLabelInPackageVersion)' == 'true'"
-        >-$(VersionSuffix)</ProductVersionSuffix
-      >
+        >-$(VersionSuffix)</ProductVersionSuffix>
       <ProductBandVersion Condition="'$(ProductBandVersion)' == ''"
-        >$(MajorVersion).$(MinorVersion)</ProductBandVersion
-      >
+        >$(MajorVersion).$(MinorVersion)</ProductBandVersion>
       <ProductionVersion Condition="'$(ProductionVersion)' == ''"
-        >$(ProductBandVersion).$(PatchVersion)</ProductionVersion
-      >
+        >$(ProductBandVersion).$(PatchVersion)</ProductionVersion>
       <ProductVersion>$(ProductionVersion)$(ProductVersionSuffix)</ProductVersion>
 
       <SharedFrameworkNugetVersion>$(ProductVersion)</SharedFrameworkNugetVersion>

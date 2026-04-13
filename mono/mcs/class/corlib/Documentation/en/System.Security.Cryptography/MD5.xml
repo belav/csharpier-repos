@@ -31,22 +31,18 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Hash functions map binary strings of an arbitrary length to small binary strings of a fixed length. A cryptographic hash function has the property that it is computationally infeasible to find two distinct inputs that hash to the same value; that is, hashes of two sets of data should match if the corresponding data also matches. Small changes to the data result in large, unpredictable changes in the hash.</para>
       <para
-        >The hash size for the <see cref="T:System.Security.Cryptography.MD5" /> algorithm is 128 bits.</para
-      >
+        >The hash size for the <see cref="T:System.Security.Cryptography.MD5" /> algorithm is 128 bits.</para>
       <para
-        >The <see cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" /> methods of the <see cref="T:System.Security.Cryptography.MD5" /> class return the hash as an array of 16 bytes.  Note that some MD5 implementations produce a 32-character, hexadecimal-formatted hash.  To interoperate with such implementations, format the return value of the <see cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" /> methods as a hexadecimal value.</para
-      >
+        >The <see cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" /> methods of the <see cref="T:System.Security.Cryptography.MD5" /> class return the hash as an array of 16 bytes.  Note that some MD5 implementations produce a 32-character, hexadecimal-formatted hash.  To interoperate with such implementations, format the return value of the <see cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" /> methods as a hexadecimal value.</para>
       <block subset="none" type="note">
         <para
-          >Newer hash functions, such as the Secure Hash Algorithms SHA-256 and SHA-512, are available. Consider using the <see cref="T:System.Security.Cryptography.SHA256" /> class or the <see cref="T:System.Security.Cryptography.SHA512" /> class instead of the <see cref="T:System.Security.Cryptography.MD5" /> class. Use <see cref="T:System.Security.Cryptography.MD5" /> only for compatibility with legacy applications and data.</para
-        >
+          >Newer hash functions, such as the Secure Hash Algorithms SHA-256 and SHA-512, are available. Consider using the <see cref="T:System.Security.Cryptography.SHA256" /> class or the <see cref="T:System.Security.Cryptography.SHA512" /> class instead of the <see cref="T:System.Security.Cryptography.MD5" /> class. Use <see cref="T:System.Security.Cryptography.MD5" /> only for compatibility with legacy applications and data.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the abstract class from which all implementations of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm inherit. </para
-      >
+        >Represents the abstract class from which all implementations of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm inherit. </para>
     </summary>
   </Docs>
   <Members>
@@ -68,14 +64,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create an instance of the <see cref="T:System.Security.Cryptography.MD5" /> class, use the <see cref="Overload:System.Security.Cryptography.MD5.Create" /> method.</para
-          >
+            >To create an instance of the <see cref="T:System.Security.Cryptography.MD5" /> class, use the <see cref="Overload:System.Security.Cryptography.MD5.Create" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.MD5" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.MD5" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -103,14 +97,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the default implementation of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm.</para
-          >
+            >Creates an instance of the default implementation of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm.</para
-          >
+            >A new instance of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm.</para>
         </returns>
       </Docs>
     </Member>
@@ -139,28 +131,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Possible values for <paramref name="algName" /> are: System.Security.Cryptography.MD5, MD5, System.Security.Cryptography.MD5CryptoServiceProvider, and System.Security.Cryptography.MD5Managed.</para
-          >
+            >Possible values for <paramref name="algName" /> are: System.Security.Cryptography.MD5, MD5, System.Security.Cryptography.MD5CryptoServiceProvider, and System.Security.Cryptography.MD5Managed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the specified implementation of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm.</para
-          >
+            >Creates an instance of the specified implementation of the <see cref="T:System.Security.Cryptography.MD5" /> hash algorithm.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the specified implementation of <see cref="T:System.Security.Cryptography.MD5" />.</para
-          >
+            >A new instance of the specified implementation of <see cref="T:System.Security.Cryptography.MD5" />.</para>
         </returns>
         <param name="algName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.MD5" /> to use. </param
-        >
+          />The name of the specific implementation of <see cref="T:System.Security.Cryptography.MD5" /> to use. </param>
       </Docs>
     </Member>
   </Members>

@@ -11,7 +11,5 @@
   </paragraph>
   <paragraph
     >The type of a <non_terminal where="9.4.4.6"
-      >null-literal</non_terminal
-    > is the null type. </paragraph
-  >
+      >null-literal</non_terminal> is the null type. </paragraph>
 </clause>

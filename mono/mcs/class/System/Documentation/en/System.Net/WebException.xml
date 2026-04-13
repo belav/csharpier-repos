@@ -32,11 +32,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.WebException" /> class is thrown by classes descended from <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebResponse" /> that implement pluggable protocols for accessing the Internet.</para
-      >
+        >The <see cref="T:System.Net.WebException" /> class is thrown by classes descended from <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebResponse" /> that implement pluggable protocols for accessing the Internet.</para>
       <para
-        >When <see cref="T:System.Net.WebException" /> is thrown by a descendant of the <see cref="T:System.Net.WebRequest" /> class, the <see cref="P:System.Net.WebException.Response" /> property provides the Internet response to the application.</para
-      >
+        >When <see cref="T:System.Net.WebException" /> is thrown by a descendant of the <see cref="T:System.Net.WebRequest" /> class, the <see cref="P:System.Net.WebException.Response" /> property provides the Internet response to the application.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,14 +64,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor initializes a new instance of the <see cref="T:System.Net.WebException" /> class. The <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message that describes the error. This message takes into account the current system culture. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null. The <see cref="P:System.Net.WebException.Status" /> property is initialized to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para
-          >
+            >The default constructor initializes a new instance of the <see cref="T:System.Net.WebException" /> class. The <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message that describes the error. This message takes into account the current system culture. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null. The <see cref="P:System.Net.WebException.Status" /> property is initialized to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -102,22 +98,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null. The <see cref="P:System.Net.WebException.Status" /> property is initialized to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para
-          >
+            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null. The <see cref="P:System.Net.WebException.Status" /> property is initialized to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the error message. </param
-        >
+          />The text of the error message. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -144,29 +137,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.WebException" /> class.</para
-          >
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.WebException" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class from the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> instances.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class from the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> instances.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains the information required to serialize the new <see cref="T:System.Net.WebException" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains the information required to serialize the new <see cref="T:System.Net.WebException" />. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.WebException" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.WebException" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -197,25 +186,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" /> and the <see cref="P:System.Exception.InnerException" /> property set to the value of <paramref name="innerException" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null. The <see cref="P:System.Net.WebException.Status" /> property is initialized to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para
-          >
+            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" /> and the <see cref="P:System.Exception.InnerException" /> property set to the value of <paramref name="innerException" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null. The <see cref="P:System.Net.WebException.Status" /> property is initialized to <see cref="F:System.Net.WebExceptionStatus.RequestCanceled" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message and nested exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message and nested exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the error message. </param
-        >
+          />The text of the error message. </param>
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />A nested exception. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A nested exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -247,29 +236,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" /> and the <see cref="P:System.Net.WebException.Status" /> property set to the value of <paramref name="status" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null.</para
-          >
+            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" /> and the <see cref="P:System.Net.WebException.Status" /> property set to the value of <paramref name="status" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message. The <see cref="P:System.Exception.InnerException" /> and <see cref="P:System.Net.WebException.Response" /> properties are initialized to null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message and status.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message and status.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the error message. </param
-        >
+          />The text of the error message. </param>
         <param name="status">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.WebExceptionStatus" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.WebExceptionStatus" /> values. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -303,39 +288,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" />, the <see cref="P:System.Exception.InnerException" /> property set to the value of <paramref name="innerException" />, the <see cref="P:System.Net.WebException.Status" /> property set to the value of <paramref name="status" />, and the <see cref="P:System.Net.WebException.Response" /> property set to the value of <paramref name="response" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message.</para
-          >
+            >The <see cref="T:System.Net.WebException" /> instance is initialized with the <see cref="P:System.Exception.Message" /> property set to the value of <paramref name="message" />, the <see cref="P:System.Exception.InnerException" /> property set to the value of <paramref name="innerException" />, the <see cref="P:System.Net.WebException.Status" /> property set to the value of <paramref name="status" />, and the <see cref="P:System.Net.WebException.Response" /> property set to the value of <paramref name="response" />. If <paramref name="message" /> is null, the <see cref="P:System.Exception.Message" /> property is initialized to a system-supplied message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message, nested exception, status, and response.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebException" /> class with the specified error message, nested exception, status, and response.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the error message. </param
-        >
+          />The text of the error message. </param>
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />A nested exception. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A nested exception. </param>
         <param name="status">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.WebExceptionStatus" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.WebExceptionStatus" /> values. </param>
         <param name="response">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.WebResponse" /> instance that contains the response from the remote host. </param
-        >
+          />A <see cref="T:System.Net.WebResponse" /> instance that contains the response from the remote host. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -365,23 +348,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.WebException" />.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.WebException" />.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to be used. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to be used. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> to be used. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> to be used. </param>
       </Docs>
     </Member>
     <Member MemberName="Response">
@@ -409,14 +389,12 @@
           <para
             > A <see cref="T:System.Net.WebResponse" /> instance containing the
    error response if one is available; otherwise, <see langword="null" />
-   .</para
-          >
+   .</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some Internet protocols, such as HTTP, return otherwise valid responses indicating that an error has occurred at the protocol level. When the response to an Internet request indicates an error, <see cref="M:System.Net.WebRequest.GetResponse" /> sets the <see cref="P:System.Net.WebException.Status" /> property to <see cref="F:System.Net.WebExceptionStatus.ProtocolError" /> and provides the <see cref="T:System.Net.WebResponse" /> that contains the error message in the <see cref="P:System.Net.WebException.Response" /> property of the <see cref="T:System.Net.WebException" /> that was thrown. The application can examine the <see cref="T:System.Net.WebResponse" /> to determine the actual error.</para
-          >
+            >Some Internet protocols, such as HTTP, return otherwise valid responses indicating that an error has occurred at the protocol level. When the response to an Internet request indicates an error, <see cref="M:System.Net.WebRequest.GetResponse" /> sets the <see cref="P:System.Net.WebException.Status" /> property to <see cref="F:System.Net.WebExceptionStatus.ProtocolError" /> and provides the <see cref="T:System.Net.WebResponse" /> that contains the error message in the <see cref="P:System.Net.WebException.Response" /> property of the <see cref="T:System.Net.WebException" /> that was thrown. The application can examine the <see cref="T:System.Net.WebResponse" /> to determine the actual error.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -449,21 +427,17 @@
         <value>
           <para
             > A <see cref="T:System.Net.WebExceptionStatus" /> value that indicates the status of the
-   response.</para
-          >
+   response.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebException.Status" /> property indicates the reason for the <see cref="T:System.Net.WebException" />.</para
-          >
+            >The <see cref="P:System.Net.WebException.Status" /> property indicates the reason for the <see cref="T:System.Net.WebException" />.</para>
           <para
-            >The value of <see cref="P:System.Net.WebException.Status" /> is one of the <see cref="T:System.Net.WebExceptionStatus" /> values.</para
-          >
+            >The value of <see cref="P:System.Net.WebException.Status" /> is one of the <see cref="T:System.Net.WebExceptionStatus" /> values.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="F:System.Net.WebExceptionStatus.ProxyNameResolutionFailure" /> error is not returned to win8_appname_long apps.</para
-            >
+              >The <see cref="F:System.Net.WebExceptionStatus.ProxyNameResolutionFailure" /> error is not returned to win8_appname_long apps.</para>
           </block>
         </remarks>
         <summary>
@@ -502,8 +476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object.</para
-          >
+            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object.</para>
         </summary>
       </Docs>
     </Member>

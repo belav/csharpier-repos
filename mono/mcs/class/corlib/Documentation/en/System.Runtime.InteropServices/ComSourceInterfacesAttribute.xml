@@ -39,10 +39,8 @@
       <para
         >You apply this attribute to a managed class to identify the event interfaces that the class exposes as COM connection points. An event interface contains methods that map to the event members of the class. The class event name and the interface method name must be the same. This attribute can accommodate up to four source interfaces for a class by passing the type of the source interface to the appropriate constructor, which take between one and four type arguments. For classes that want to expose more than four source interfaces, the string version of the constructor can be used. For additional information about exposing.NET events to COM clients, see <format type="text/html">
           <a href="7C9944B2-E951-4C3E-A0A1-59B2AE37D7FD"
-            >[&lt;topic://cpconraisingeventshandledbycomsink&gt;]</a
-          >
-        </format>.</para
-      >
+            >[&lt;topic://cpconraisingeventshandledbycomsink&gt;]</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -77,16 +75,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the name of the event source interface.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the name of the event source interface.</para>
         </summary>
         <param name="sourceInterfaces">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A null-delimited list of fully qualified event source interface names. </param
-        >
+          />A null-delimited list of fully qualified event source interface names. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -116,16 +112,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the type to use as a source interface.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the type to use as a source interface.</para>
         </summary>
         <param name="sourceInterface">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the source interface. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -156,23 +150,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the types to use as source interfaces.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the types to use as source interfaces.</para>
         </summary>
         <param name="sourceInterface1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the default source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the default source interface. </param>
         <param name="sourceInterface2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -210,22 +201,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the default source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the default source interface. </param>
         <param name="sourceInterface2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface. </param>
         <param name="sourceInterface3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -258,37 +246,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the types to use as source interfaces.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComSourceInterfacesAttribute" /> class with the types to use as source interfaces.</para>
         </summary>
         <param name="sourceInterface1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the default source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of the default source interface. </param>
         <param name="sourceInterface2">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface. </param>
         <param name="sourceInterface3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface. </param>
         <param name="sourceInterface4">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of a source interface. </param
-        >
+          />The <see cref="T:System.Type" /> of a source interface. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

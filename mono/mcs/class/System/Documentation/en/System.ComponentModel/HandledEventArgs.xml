@@ -19,11 +19,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically, the value of the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property is set in an event handler to indicate that the system should perform no further processing. </para
-      >
+        >Typically, the value of the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property is set in an event handler to indicate that the system should perform no further processing. </para>
       <para
-        >This class is a base class for types such as the <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs" />, and <see cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" /> classes. </para
-      >
+        >This class is a base class for types such as the <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />, <see cref="T:System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs" />, and <see cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" /> classes. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.HandledEventArgs" /> class with a default <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property value of false.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.HandledEventArgs" /> class with a default <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property value of false.</para>
         </summary>
       </Docs>
     </Member>
@@ -74,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.HandledEventArgs" /> class with the specified default value for the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.HandledEventArgs" /> class with the specified default value for the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property.</para>
         </summary>
         <param name="defaultHandledValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The default value for the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property.</param
-        >
+          />The default value for the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property.</param>
       </Docs>
     </Member>
     <Member MemberName="Handled">

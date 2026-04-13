@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DuplicateAddressDetectionState
   xmlns="http://schemas.datacontract.org/2004/07/System.Net.NetworkInformation"
-  >Invalid</DuplicateAddressDetectionState
->
+  >Invalid</DuplicateAddressDetectionState>

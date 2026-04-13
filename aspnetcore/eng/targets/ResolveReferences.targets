@@ -20,8 +20,7 @@
   <PropertyGroup>
     <EnableCustomReferenceResolution
       Condition="'$(EnableCustomReferenceResolution)' == '' AND ('$(DotNetBuildFromSource)' != 'true' OR '$(ExcludeFromSourceBuild)' != 'true')"
-      >true</EnableCustomReferenceResolution
-    >
+      >true</EnableCustomReferenceResolution>
 
     <ResolveReferencesDependsOn>
       ResolveCustomReferences;
@@ -41,19 +40,15 @@
     -->
     <UseLatestPackageReferences
       Condition=" '$(UseLatestPackageReferences)' == '' AND '$(IsServicingBuild)' != 'true' "
-      >true</UseLatestPackageReferences
-    >
+      >true</UseLatestPackageReferences>
     <UseLatestPackageReferences
       Condition=" '$(UseLatestPackageReferences)' == '' AND '$(IsPackableInNonServicingBuild)' != 'true' "
-      >true</UseLatestPackageReferences
-    >
+      >true</UseLatestPackageReferences>
     <UseLatestPackageReferences
       Condition=" '$(UseLatestPackageReferences)' == '' AND '$(IsPackageInThisPatch)' == 'true' "
-      >true</UseLatestPackageReferences
-    >
+      >true</UseLatestPackageReferences>
     <UseLatestPackageReferences Condition=" '$(UseLatestPackageReferences)' == '' "
-      >false</UseLatestPackageReferences
-    >
+      >false</UseLatestPackageReferences>
 
     <!-- Projects should use project references (instead of baseline packages) in almost all cases. -->
     <UseProjectReferences Condition=" '$(UseProjectReferences)' == '' ">true</UseProjectReferences>
@@ -69,8 +64,7 @@
     <Reference Update="@(Reference)">
       <IsSharedSource
         Condition="'%(IsSharedSource)' == '' AND $([System.String]::new('%(Identity)').EndsWith('.Sources'))"
-        >true</IsSharedSource
-      >
+        >true</IsSharedSource>
     </Reference>
 
     <!-- Packages which are implicitly defined by the .NET Core SDK. -->
@@ -314,8 +308,7 @@
     <_CompileTfmUsingReferenceAssemblies>false</_CompileTfmUsingReferenceAssemblies>
     <_CompileTfmUsingReferenceAssemblies
       Condition=" '$(CompileUsingReferenceAssemblies)' != 'false' AND '$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' "
-      >true</_CompileTfmUsingReferenceAssemblies
-    >
+      >true</_CompileTfmUsingReferenceAssemblies>
   </PropertyGroup>
 
   <!--
@@ -420,8 +413,7 @@
   <!-- This is used by the eng/scripts/AddAllProjectRefsToSolution.ps1 script to traverse the ProjectRef graph -->
   <PropertyGroup>
     <_CustomCollectProjectReferenceDependsOn Condition="'$(TargetFramework)' != ''"
-      >ResolveProjectReferences</_CustomCollectProjectReferenceDependsOn
-    >
+      >ResolveProjectReferences</_CustomCollectProjectReferenceDependsOn>
   </PropertyGroup>
   <Target
     Name="_CustomCollectProjectReference"

@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Configures message-level security settings for <see cref="T:System.ServiceModel.BasicHttpBinding" />.</para
-      >
+        >Configures message-level security settings for <see cref="T:System.ServiceModel.BasicHttpBinding" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -44,14 +43,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the algorithm suite to use with <see cref="T:System.ServiceModel.BasicHttpMessageSecurity" />.</para
-          >
+            >Specifies the algorithm suite to use with <see cref="T:System.ServiceModel.BasicHttpMessageSecurity" />.</para>
         </summary>
       </Docs>
     </Member>

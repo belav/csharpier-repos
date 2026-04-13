@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.Security.ISecuritySession" /> instances are provided by message security channels (which use WS-SecureConversation) and by TCP secure transport channels.</para
-      >
+        <see cref="T:System.ServiceModel.Security.ISecuritySession" /> instances are provided by message security channels (which use WS-SecureConversation) and by TCP secure transport channels.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -14,8 +14,7 @@
         </attribute>
         <attribute fullname="System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute">
           <argument type="System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"
-            >PublicParameterlessConstructor</argument
-          >
+            >PublicParameterlessConstructor</argument>
         </attribute>
       </field>
     </type>

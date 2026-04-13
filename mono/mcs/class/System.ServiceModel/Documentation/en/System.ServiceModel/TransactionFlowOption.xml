@@ -16,14 +16,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used to instantiate an instance of the <see cref="T:System.ServiceModel.TransactionFlowAttribute" /> class, which is used to mark a service contract method to indicate its transaction flow policy.</para
-      >
+        >This enumeration is used to instantiate an instance of the <see cref="T:System.ServiceModel.TransactionFlowAttribute" /> class, which is used to mark a service contract method to indicate its transaction flow policy.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An enumeration that is used with the <see cref="T:System.ServiceModel.TransactionFlowAttribute" /> to specify the transaction flow policy for a service operation.</para
-      >
+        >An enumeration that is used with the <see cref="T:System.ServiceModel.TransactionFlowAttribute" /> to specify the transaction flow policy for a service operation.</para>
     </summary>
   </Docs>
   <Members>

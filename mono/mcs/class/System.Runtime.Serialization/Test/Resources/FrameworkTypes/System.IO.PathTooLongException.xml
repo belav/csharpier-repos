@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.IO.PathTooLongException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters.</Message
-  >
+    >The specified path, file name, or both are too long. The fully qualified file name must be less than 260 characters, and the directory name must be less than 248 characters.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

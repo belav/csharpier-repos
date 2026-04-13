@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.Threading.SemaphoreFullException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Adding the given count to the semaphore would cause it to exceed its maximum count.</Message
-  >
+    >Adding the given count to the semaphore would cause it to exceed its maximum count.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

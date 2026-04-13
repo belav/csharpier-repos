@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -99,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration of inactivity the channel waits before it times out. </para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration of inactivity the channel waits before it times out. </para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the lifetime issued to all new security cookies.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the lifetime issued to all new security cookies.</para>
         </summary>
       </Docs>
     </Member>
@@ -192,14 +189,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to the default, the receiver accepts messages with send-time timestamps up to 5 minutes later or earlier than the time the message was received. Messages that do not pass the send-time test are rejected. This setting is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.ReplayWindow" /> property.</para
-          >
+            >When this property is set to the default, the receiver accepts messages with send-time timestamps up to 5 minutes later or earlier than the time the message was received. Messages that do not pass the send-time test are rejected. This setting is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.ReplayWindow" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the maximum time difference between the system clocks of the two communicating parties.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the maximum time difference between the system clocks of the two communicating parties.</para>
         </summary>
       </Docs>
     </Member>
@@ -293,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the maximum duration for the security negotiation phase between server and client.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the maximum duration for the security negotiation phase between server and client.</para>
         </summary>
       </Docs>
     </Member>
@@ -409,14 +403,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After the time specified by this property, a message sent with the same nonce as the one sent before is not accepted. This property is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.MaxClockSkew" /> property to prevent replay attacks. An attacker can replay a message after its replay window has expired. This message, however, fails the maxClockSkew test that rejects messages with send-time timestamps up to a specified time later or earlier than the time the message was received. </para
-          >
+            >After the time specified by this property, a message sent with the same nonce as the one sent before is not accepted. This property is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.MaxClockSkew" /> property to prevent replay attacks. An attacker can replay a message after its replay window has expired. This message, however, fails the maxClockSkew test that rejects messages with send-time timestamps up to a specified time later or earlier than the time the message was received. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration in which individual message nonces are valid.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration in which individual message nonces are valid.</para>
         </summary>
       </Docs>
     </Member>
@@ -450,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration after which the initiator renews the key for the security session.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration after which the initiator renews the key for the security session.</para>
         </summary>
       </Docs>
     </Member>
@@ -488,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the time interval a previous session key is valid on incoming messages during a key renewal. The default is "00:05:00".</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the time interval a previous session key is valid on incoming messages during a key renewal. The default is "00:05:00".</para>
         </summary>
       </Docs>
     </Member>
@@ -523,8 +513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration in which a time stamp is valid.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that specifies the duration in which a time stamp is valid.</para>
         </summary>
       </Docs>
     </Member>

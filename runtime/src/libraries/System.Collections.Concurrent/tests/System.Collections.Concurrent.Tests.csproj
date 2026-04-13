@@ -4,8 +4,7 @@
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
-      >true</DebuggerSupport
-    >
+      >true</DebuggerSupport>
   </PropertyGroup>
   <ItemGroup>
     <Compile

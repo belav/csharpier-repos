@@ -197,18 +197,14 @@
   <Target Name="GenerateMSBuildEditorConfigFileShouldRun">
     <PropertyGroup>
       <GeneratedMSBuildEditorConfigFile Condition="'$(GeneratedMSBuildEditorConfigFile)' == ''"
-        >$(IntermediateOutputPath)$(MSBuildProjectName).GeneratedMSBuildEditorConfig.editorconfig</GeneratedMSBuildEditorConfigFile
-      >
+        >$(IntermediateOutputPath)$(MSBuildProjectName).GeneratedMSBuildEditorConfig.editorconfig</GeneratedMSBuildEditorConfigFile>
       <GenerateMSBuildEditorConfigFile Condition="'$(GenerateMSBuildEditorConfigFile)' == ''"
-        >true</GenerateMSBuildEditorConfigFile
-      >
+        >true</GenerateMSBuildEditorConfigFile>
       <_GeneratedEditorConfigHasItems Condition="'@(CompilerVisibleItemMetadata->Count())' != '0'"
-        >true</_GeneratedEditorConfigHasItems
-      >
+        >true</_GeneratedEditorConfigHasItems>
       <_GeneratedEditorConfigShouldRun
         Condition="'$(GenerateMSBuildEditorConfigFile)' == 'true' and ('$(_GeneratedEditorConfigHasItems)' == 'true' or '@(CompilerVisibleProperty->Count())' != '0')"
-        >true</_GeneratedEditorConfigShouldRun
-      >
+        >true</_GeneratedEditorConfigShouldRun>
     </PropertyGroup>
   </Target>
 
@@ -256,8 +252,7 @@
   <PropertyGroup>
     <DeterministicSourcePaths
       Condition="'$(DeterministicSourcePaths)' == '' and '$(Deterministic)' == 'true' and '$(ContinuousIntegrationBuild)' == 'true'"
-      >true</DeterministicSourcePaths
-    >
+      >true</DeterministicSourcePaths>
   </PropertyGroup>
 
   <!--
@@ -386,15 +381,13 @@
     -->
   <PropertyGroup>
     <EmitCompilerGeneratedFiles Condition="'$(EmitCompilerGeneratedFiles)' == ''"
-      >false</EmitCompilerGeneratedFiles
-    >
+      >false</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath
       Condition="'$(EmitCompilerGeneratedFiles)' != 'true'"
     ></CompilerGeneratedFilesOutputPath>
     <CompilerGeneratedFilesOutputPath
       Condition="'$(EmitCompilerGeneratedFiles)' == 'true' and '$(CompilerGeneratedFilesOutputPath)' == '' and '$(IntermediateOutputPath)' != ''"
-      >$(IntermediateOutputPath)/generated</CompilerGeneratedFilesOutputPath
-    >
+      >$(IntermediateOutputPath)/generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <Target

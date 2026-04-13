@@ -11,8 +11,7 @@
   <PropertyGroup>
     <IsPartialFacadeAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >true</IsPartialFacadeAssembly
-    >
+      >true</IsPartialFacadeAssembly>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">

@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IdentityElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IdentityElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -165,8 +164,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The endpoint identity.</param
-        >
+          />The endpoint identity.</param>
       </Docs>
     </Member>
     <Member MemberName="Properties">

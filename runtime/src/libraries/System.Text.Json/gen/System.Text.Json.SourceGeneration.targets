@@ -16,8 +16,7 @@
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);BUILDING_SOURCE_GENERATOR</DefineConstants>
     <DefineConstants Condition="'$(LaunchDebugger)' == 'true'"
-      >$(DefineConstants);LAUNCH_DEBUGGER</DefineConstants
-    >
+      >$(DefineConstants);LAUNCH_DEBUGGER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

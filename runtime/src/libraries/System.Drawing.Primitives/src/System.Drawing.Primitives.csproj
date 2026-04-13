@@ -9,8 +9,7 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'"
-      >$(DefineConstants);FEATURE_WINDOWS_SYSTEM_COLORS</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_WINDOWS_SYSTEM_COLORS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

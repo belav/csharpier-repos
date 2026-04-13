@@ -29,8 +29,7 @@
 
     <DotNetPath>$(DotNetRoot)dotnet.exe</DotNetPath>
     <DotNetPath Condition="'$(NativePlatform)' != 'x64'"
-      >$(DotNetRoot)$(NativePlatform)\dotnet.exe</DotNetPath
-    >
+      >$(DotNetRoot)$(NativePlatform)\dotnet.exe</DotNetPath>
   </PropertyGroup>
 
   <Target Name="CopyLaunchSettings" AfterTargets="CoreBuild">

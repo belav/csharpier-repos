@@ -45,8 +45,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,23 +54,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to inspect.</param
-        >
+          />The assembly to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute">
@@ -98,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -108,23 +103,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute">
@@ -151,8 +143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -161,23 +152,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The module to inspect.</param
-        >
+          />The module to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute">
@@ -204,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -214,23 +201,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute">
@@ -258,8 +242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -268,30 +251,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="attributeType" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute">
@@ -319,8 +298,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -329,30 +307,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute matching <paramref name="attributeType" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute matching <paramref name="attributeType" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -385,8 +359,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -395,23 +368,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to inspect.</param
-        >
+          />The assembly to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -444,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -454,23 +423,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -503,8 +469,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -513,23 +478,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The module to inspect.</param
-        >
+          />The module to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -562,8 +524,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -572,23 +533,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -622,8 +580,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -632,30 +589,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttribute&lt;T&gt;">
@@ -689,8 +642,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para
-          >
+            >Use the <see cref="M:System.Reflection.CustomAttributeExtensions.GetCustomAttributes(System.Reflection.Assembly,System.Type)" /> extension method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" /> will be thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -699,30 +651,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para
-          >
+            >A custom attribute that matches <paramref name="T" />, or null if no such attribute is found.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -753,16 +701,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to inspect.</param
-        >
+          />The assembly to inspect.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -793,16 +739,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -833,16 +777,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The module to inspect.</param
-        >
+          />The module to inspect.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -873,16 +815,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -914,23 +854,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to inspect.</param
-        >
+          />The assembly to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -962,23 +899,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> that match the specified criteria, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> that match the specified criteria, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1010,23 +944,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1058,23 +989,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.</para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The module to inspect.</param
-        >
+          />The module to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1106,23 +1034,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1154,23 +1079,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1203,30 +1125,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.</para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -1259,30 +1177,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="attributeType" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1320,23 +1234,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to inspect.</param
-        >
+          />The assembly to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1374,23 +1285,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1428,23 +1336,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The module to inspect.</param
-        >
+          />The module to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1482,23 +1387,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1537,30 +1439,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes&lt;T&gt;">
@@ -1599,30 +1497,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para
-          >
+            >A collection of the custom attributes that are applied to <paramref name="element" /> and that match <paramref name="T" />, or an empty collection if no such attributes exist. </para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</typeparam
-        >
+          />The type of attribute to search for.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1654,23 +1548,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para
-          >
+            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly to inspect.</param
-        >
+          />The assembly to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the attribute to search for.</param
-        >
+          />The type of the attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1702,23 +1593,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para
-          >
+            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1750,23 +1638,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para
-          >
+            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The module to inspect.</param
-        >
+          />The module to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1798,23 +1683,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para
-          >
+            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1847,30 +1729,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para
-          >
+            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The member to inspect.</param
-        >
+          />The member to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the attribute to search for.</param
-        >
+          />The type of the attribute to search for.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1903,30 +1781,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para
-          >
+            >true if an attribute of the specified type is applied to <paramref name="element" />; otherwise, false.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter to inspect.</param
-        >
+          />The parameter to inspect.</param>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of attribute to search for.</param
-        >
+          />The type of attribute to search for.</param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param
-        >
+          />true to inspect the ancestors of <paramref name="element" />; otherwise, false. </param>
       </Docs>
     </Member>
   </Members>

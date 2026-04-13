@@ -34,8 +34,7 @@
         /> objects using
       the <see cref="T:System.Xml.NameTable" />
       class.
-      </para
-      >
+      </para>
       <code lang="C#"
         >using System;
 using System.Text;
@@ -76,8 +75,7 @@ class Ntable {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Several classes, such as <see cref="T:System.Xml.XmlDocument" /> and <see cref="T:System.Xml.XmlReader" />, use the NameTable class internally to store attribute and element names. When an element or attribute name occurs multiple times in an XML document, it is stored only once in the NameTable.</para
-      >
+        >Several classes, such as <see cref="T:System.Xml.XmlDocument" /> and <see cref="T:System.Xml.XmlReader" />, use the NameTable class internally to store attribute and element names. When an element or attribute name occurs multiple times in an XML document, it is stored only once in the NameTable.</para>
       <para>The names are stored as common language runtime (CLR) object types. This enables you to do object comparisons on these strings rather than a more expensive string comparison. These string objects are referred to as atomized strings.</para>
     </remarks>
     <summary>
@@ -140,13 +138,11 @@ class Ntable {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="key" /> is <see langword="null" />.</exception
-        >
+          <paramref name="key" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para
-          >
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,8 +153,7 @@ class Ntable {
           <para>The atomized string or the existing string if it already exists in the NameTable.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to add. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The string to add. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -196,18 +191,15 @@ class Ntable {
           <para><paramref name="start" /> &gt;= <paramref name="key" />.Length.</para>
           <para>- or -</para>
           <para>
-            <paramref name="len" /> &gt; <paramref name="key" />.Length - <paramref name="start" />.</para
-          >
+            <paramref name="len" /> &gt; <paramref name="key" />.Length - <paramref name="start" />.</para>
           <para
-            >The above conditions do not cause an exception to be thrown if <paramref name="len" /> = 0.</para
-          >
+            >The above conditions do not cause an exception to be thrown if <paramref name="len" /> = 0.</para>
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">len &lt; 0.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para
-          >
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,30 +208,26 @@ class Ntable {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The atomized string or the existing string if one already exists in the NameTable. If <paramref name="len" /> is zero, String.Empty is returned.</para
-          >
+            >The atomized string or the existing string if one already exists in the NameTable. If <paramref name="len" /> is zero, String.Empty is returned.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the string to add. </param
-        >
+          />The character array containing the string to add. </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying the first character of the string. </param
-        >
+          />The zero-based index into the array specifying the first character of the string. </param>
         <param name="len">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in the string. </param
-        >
+          />The number of characters in the string. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -267,13 +255,11 @@ class Ntable {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="value" /> is <see langword="null" />.</exception
-        >
+          <paramref name="value" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para
-          >
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -284,8 +270,7 @@ class Ntable {
           <para>The atomized string object or null if the string has not already been atomized.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name to find. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The name to find. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -326,18 +311,15 @@ class Ntable {
           <para><paramref name="start" /> &gt;= <paramref name="key" />.Length.</para>
           <para>- or -</para>
           <para>
-            <paramref name="len" /> &gt; <paramref name="key" />.Length - <paramref name="start" />.</para
-          >
+            <paramref name="len" /> &gt; <paramref name="key" />.Length - <paramref name="start" />.</para>
           <para
-            >The above conditions do not cause an exception to be thrown if <paramref name="len" /> = 0.</para
-          >
+            >The above conditions do not cause an exception to be thrown if <paramref name="len" /> = 0.</para>
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">len &lt; 0.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para
-          >
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -346,30 +328,26 @@ class Ntable {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The atomized string or null if the string has not already been atomized. If <paramref name="len" /> is zero, String.Empty is returned.</para
-          >
+            >The atomized string or null if the string has not already been atomized. If <paramref name="len" /> is zero, String.Empty is returned.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array containing the name to find. </param
-        >
+          />The character array containing the name to find. </param>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index into the array specifying the first character of the name. </param
-        >
+          />The zero-based index into the array specifying the first character of the name. </param>
         <param name="len">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters in the name. </param
-        >
+          />The number of characters in the name. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

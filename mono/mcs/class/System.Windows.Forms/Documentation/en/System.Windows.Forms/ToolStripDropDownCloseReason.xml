@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the reason that a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed.</para
-      >
+        >Specifies the reason that a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed.</para>
     </summary>
   </Docs>
   <Members>
@@ -33,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because an application was launched.</para
-          >
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because an application was launched.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because another application has received the focus.</para
-          >
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because another application has received the focus.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -71,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because the <see cref="M:System.Windows.Forms.ToolStripDropDown.Close" /> method was called.</para
-          >
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because the <see cref="M:System.Windows.Forms.ToolStripDropDown.Close" /> method was called.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -90,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because one of its items was clicked.</para
-          >
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because one of its items was clicked.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -109,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because of keyboard activity, such as the ESC key being pressed.</para
-          >
+            >Specifies that the <see cref="T:System.Windows.Forms.ToolStripDropDown" /> control was closed because of keyboard activity, such as the ESC key being pressed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

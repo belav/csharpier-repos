@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TransportElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TransportElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -72,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of the specified <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</para
-          >
+            >Applies the settings of the specified <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</para>
         </summary>
         <param name="bindingElement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
@@ -117,8 +114,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration element whose settings are to be copied to this configuration element.</param
-        >
+          />The configuration element whose settings are to be copied to this configuration element.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElement">
@@ -176,8 +172,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A custom <see cref="T:System.ServiceModel.Channels.BindingElement" /> object with default values.</para
-          >
+            >A custom <see cref="T:System.ServiceModel.Channels.BindingElement" /> object with default values.</para>
         </returns>
       </Docs>
     </Member>
@@ -207,8 +202,7 @@
           <para>Initializes this binding configuration element with the content of the specified binding element.</para>
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />A binding element.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A binding element.</param>
       </Docs>
     </Member>
     <Member MemberName="ManualAddressing">
@@ -319,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
         </summary>
       </Docs>
     </Member>

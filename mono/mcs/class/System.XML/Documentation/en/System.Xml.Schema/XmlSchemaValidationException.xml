@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -72,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the exception message specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the exception message specified.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string description of the error condition.</param
-        >
+          />A string description of the error condition.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,23 +108,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects specified.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object.</param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object.</param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -154,23 +148,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the exception message and original <see cref="T:System.Exception" /> object that caused this exception specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the exception message and original <see cref="T:System.Exception" /> object that caused this exception specified.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string description of the error condition.</param
-        >
+          />A string description of the error condition.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original <see cref="T:System.Exception" /> object that caused this exception.</param
-        >
+          />The original <see cref="T:System.Exception" /> object that caused this exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -199,37 +190,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the exception message specified, and the original <see cref="T:System.Exception" /> object, line number, and line position of the XML that cause this exception specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> class with the exception message specified, and the original <see cref="T:System.Exception" /> object, line number, and line position of the XML that cause this exception specified.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string description of the error condition.</param
-        >
+          />A string description of the error condition.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original <see cref="T:System.Exception" /> object that caused this exception.</param
-        >
+          />The original <see cref="T:System.Exception" /> object that caused this exception.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number of the XML that caused this exception.</param
-        >
+          />The line number of the XML that caused this exception.</param>
         <param name="linePosition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line position of the XML that caused this exception.</param
-        >
+          />The line position of the XML that caused this exception.</param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -259,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> object with the given <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> information that contains all the properties of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" />.</para
-          >
+            >Constructs a new <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> object with the given <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> information that contains all the properties of the <see cref="T:System.Xml.Schema.XmlSchemaValidationException" />.</para>
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -303,8 +288,7 @@
           <para>Sets the XML node that causes the error.</para>
         </summary>
         <param name="sourceObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The source object.</param>
       </Docs>
     </Member>
     <Member MemberName="SourceObject">
@@ -324,17 +308,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation of a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface such as the <see cref="T:System.Xml.XPath.XPathNavigator" /> or <see cref="T:System.Xml.XmlNode" /> class, the object returned by the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is an instance of a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface.</para
-          >
+            >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation of a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface such as the <see cref="T:System.Xml.XPath.XPathNavigator" /> or <see cref="T:System.Xml.XmlNode" /> class, the object returned by the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is an instance of a class that implements the <see cref="T:System.Xml.XPath.IXPathNavigable" /> interface.</para>
           <para
-            >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation by a validating <see cref="T:System.Xml.XmlReader" /> object, the value of the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is null. </para
-          >
+            >When an <see cref="T:System.Xml.Schema.XmlSchemaValidationException" /> is thrown during validation by a validating <see cref="T:System.Xml.XmlReader" /> object, the value of the <see cref="P:System.Xml.Schema.XmlSchemaValidationException.SourceObject" /> property is null. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the XML node that caused this <see cref="T:System.Xml.Schema.XmlSchemaValidationException" />.</para
-          >
+            >Gets the XML node that caused this <see cref="T:System.Xml.Schema.XmlSchemaValidationException" />.</para>
         </summary>
       </Docs>
     </Member>

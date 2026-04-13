@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A method message is used to send information to and from remote methods. For example, messages used for remote method calls implement the <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" /> interface.</para
-      >
+        >A method message is used to send information to and from remote methods. For example, messages used for remote method calls implement the <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" /> interface.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.Args" /> property is redundant since the same functionality can be achieved through the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.ArgCount" /> and <see cref="M:System.Runtime.Remoting.Messaging.IMethodMessage.GetArg(System.Int32)" />, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para
-          >
+            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.Args" /> property is redundant since the same functionality can be achieved through the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.ArgCount" /> and <see cref="M:System.Runtime.Remoting.Messaging.IMethodMessage.GetArg(System.Int32)" />, there might be performance optimization available if the implementer understands when all the arguments will be retrieved.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -120,8 +118,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested argument. </param
-        >
+          />The number of the requested argument. </param>
       </Docs>
     </Member>
     <Member MemberName="GetArgName">
@@ -157,8 +154,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of the requested argument. </param
-        >
+          />The number of the requested argument. </param>
       </Docs>
     </Member>
     <Member MemberName="HasVarArgs">
@@ -206,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call.</para
-          >
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call.</para>
         </summary>
       </Docs>
     </Member>
@@ -279,8 +274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All the current implementations of <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" /> return an array of <see cref="T:System.Type" /> objects containing the parameter types of the method.</para
-          >
+            >All the current implementations of <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" /> return an array of <see cref="T:System.Type" /> objects containing the parameter types of the method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -306,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the full <see cref="T:System.Type" /> name of the specific object that the call is destined for.</para
-          >
+            >Gets the full <see cref="T:System.Type" /> name of the specific object that the call is destined for.</para>
         </summary>
       </Docs>
     </Member>

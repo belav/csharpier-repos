@@ -9,9 +9,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -41,18 +39,15 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see cref="T:System.Security.Cryptography.RSA" />  instance that has a private key </param
-        >
+          >an <see cref="T:System.Security.Cryptography.RSA" />  instance that has a private key </param>
         <param name="hash"
-          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param
-        >
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param>
         <param name="C">the encrypted message</param>
         <summary>RSA Encryption Scheme OAEP (Optimal Asymmetric Encryption Padding) Decryption.</summary>
         <returns>the decrypted message</returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" /> for the actual framework implementation.</para>
           <para>See section 7.1.2 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -76,15 +71,13 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param
-        >
+          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
         <param name="C">the encrypted message</param>
         <summary>RSA Encryption Scheme PKCS1 v1.5 Decryption.</summary>
         <returns>the decrypted message </returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" /> for the actual framework implementation.</para>
           <para>See section 7.2.2 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -109,8 +102,7 @@
       </Parameters>
       <Docs>
         <param name="hash"
-          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> to include it's OID into the padding.</param
-        >
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> to include it's OID into the padding.</param>
         <param name="hashValue">the message (generally a hash) to be encoded</param>
         <param name="emLength">length of the encoded message</param>
         <summary>Encoding Method for Signature with Appendix PKCS1 v1.5.</summary>
@@ -142,18 +134,15 @@
       <Docs>
         <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
         <param name="hash"
-          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param
-        >
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param>
         <param name="rng"
-          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding</param
-        >
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding</param>
         <param name="M">the message to encrypt</param>
         <summary>RSA Encryption Scheme OAEP (Optimal Asymmetric Encryption Padding) Encryption.</summary>
         <returns>the encrypted message </returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> for the actual framework implementation.</para>
           <para>See section 7.1.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -179,15 +168,13 @@
       <Docs>
         <param name="rsa">a <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
         <param name="rng"
-          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding </param
-        >
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding </param>
         <param name="M">the message to encrypt</param>
         <summary>RSA Encryption Scheme PKCS1 v1.5 Encryption.</summary>
         <returns>the encrypted message</returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" /> for the actual framework implementation.</para>
           <para>See section 7.2.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -256,16 +243,14 @@
       </Parameters>
       <Docs>
         <param name="hash"
-          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> to generate the mask</param
-        >
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> to generate the mask</param>
         <param name="mgfSeed">seed used to generate the mask</param>
         <param name="maskLen">length of the mask</param>
         <summary>Mask Generation Function #1</summary>
         <returns>the mask</returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" /> for the actual framework implementation.</para>
           <para>See section B.2.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -285,8 +270,7 @@
       </Parameters>
       <Docs>
         <param name="x"
-          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param
-        >
+          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param>
         <summary>Octet String to Integer primitive.</summary>
         <returns>an array of bytes representing a large non-negative integer.</returns>
         <remarks>See section 4.2 of PKCS #1 v2.1 for more details.</remarks>
@@ -311,8 +295,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param
-        >
+          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
         <param name="c">the encrypted message</param>
         <summary>RSA Decryption Primitive.</summary>
         <returns>the decrypted message</returns>
@@ -363,8 +346,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param
-        >
+          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
         <param name="m">the message (generally a properly padded hash) to sign</param>
         <summary>RSA Signature Primitive #1.</summary>
         <returns>the message signature</returns>
@@ -416,18 +398,15 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param
-        >
+          >an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
         <param name="hash"
-          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the PKCS#1 encoding</param
-        >
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the PKCS#1 encoding</param>
         <param name="hashValue">the hash value to sign</param>
         <summary>RSA Signature Scheme with Appendix PKCS1 v1.5 Signature generation</summary>
         <returns>the message signature </returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" /> for the actual framework implementation.</para>
           <para>See section 8.2.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -460,8 +439,7 @@
         <returns>True if the signature can be verified, false otherwise.</returns>
         <remarks>
           <para
-            >See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> for the actual framework implementation.</para
-          >
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> for the actual framework implementation.</para>
           <para>See section 8.2.2 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>

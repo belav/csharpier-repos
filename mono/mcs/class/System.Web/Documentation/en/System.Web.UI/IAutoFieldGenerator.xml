@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Automatically generates <see cref="T:System.Web.DynamicData.DynamicField" /> objects based on metadata information for the table.</para
-          >
+            >Automatically generates <see cref="T:System.Web.DynamicData.DynamicField" /> objects based on metadata information for the table.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +53,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data-bound control that will contain the <see cref="T:System.Web.DynamicData.DynamicField" /> objects.</param
-        >
+          />The data-bound control that will contain the <see cref="T:System.Web.DynamicData.DynamicField" /> objects.</param>
       </Docs>
     </Member>
   </Members>

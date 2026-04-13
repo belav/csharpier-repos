@@ -13,25 +13,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> base class is implemented by designer hosts to provide access to types, directives, and user controls defined in a Web project document. A control designer class can use the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> to access the definitions in the current document, and to add a new tag prefix to the current document.</para
-      >
+        >The <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> base class is implemented by designer hosts to provide access to types, directives, and user controls defined in a Web project document. A control designer class can use the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> to access the definitions in the current document, and to add a new tag prefix to the current document.</para>
       <para
-        >You access the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> services supplied by the designer host through the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" /> property of a <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation. The <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation can be accessed in two ways:</para
-      >
+        >You access the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> services supplied by the designer host through the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" /> property of a <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation. The <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation can be accessed in two ways:</para>
       <list type="bullet">
         <item>
           <para
-            >Classes deriving from <see cref="T:System.Web.UI.Design.ControlDesigner" /> can use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property to access a <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation supplied by the designer host. The <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> implementation is supplied through the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" /> property of <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property.</para
-          >
+            >Classes deriving from <see cref="T:System.Web.UI.Design.ControlDesigner" /> can use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property to access a <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation supplied by the designer host. The <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> implementation is supplied through the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" /> property of <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" /> property.</para>
         </item>
         <item>
           <para
-            >Other designer classes can access the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation by first obtaining the <see cref="T:System.ComponentModel.Design.IDesignerHost" /> services implementation through the designer component's <see cref="P:System.ComponentModel.Component.Site" />, and then calling the <see cref="M:System.ComponentModel.Design.IDesignerHost.GetDesigner(System.ComponentModel.IComponent)" /> method using the designer host <see cref="P:System.ComponentModel.Design.IDesignerHost.RootComponent" /> property.</para
-          >
+            >Other designer classes can access the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> implementation by first obtaining the <see cref="T:System.ComponentModel.Design.IDesignerHost" /> services implementation through the designer component's <see cref="P:System.ComponentModel.Component.Site" />, and then calling the <see cref="M:System.ComponentModel.Design.IDesignerHost.GetDesigner(System.ComponentModel.IComponent)" /> method using the designer host <see cref="P:System.ComponentModel.Design.IDesignerHost.RootComponent" /> property.</para>
           <block subset="none" type="note">
             <para>
-              <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> replaces the obsolete interface <see cref="T:System.Web.UI.Design.IWebFormReferenceManager" />. Older designer hosts may only support the <see cref="T:System.Web.UI.Design.IWebFormReferenceManager" /> interface implementation. Check that the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> and <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> implementations supplied by the designer host are not null to ensure the designer host implements the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> and <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> classes. </para
-            >
+              <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> replaces the obsolete interface <see cref="T:System.Web.UI.Design.IWebFormReferenceManager" />. Older designer hosts may only support the <see cref="T:System.Web.UI.Design.IWebFormReferenceManager" /> interface implementation. Check that the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> and <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> implementations supplied by the designer host are not null to ensure the designer host implements the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" /> and <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> classes. </para>
           </block>
         </item>
       </list>
@@ -53,17 +48,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> class is abstract, you cannot create an instance of <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> directly using the constructor.</para
-          >
+            >Because the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> class is abstract, you cannot create an instance of <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> directly using the constructor.</para>
           <para
-            >When deriving from the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> class, override the constructor to implement custom initialization actions for your reference manager implementation.</para
-          >
+            >When deriving from the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> class, override the constructor to implement custom initialization actions for your reference manager implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -122,8 +114,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object.</param
-        >
+          />The type of the object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetType">
@@ -151,23 +142,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Type" /> of the object with the specified tag prefix and name, if found; otherwise, null.</para
-          >
+            >The <see cref="T:System.Type" /> of the object with the specified tag prefix and name, if found; otherwise, null.</para>
         </returns>
         <param name="tagPrefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag prefix of the type to retrieve.</param
-        >
+          />The tag prefix of the type to retrieve.</param>
         <param name="tagName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag name of the type to retrieve.</param
-        >
+          />The tag name of the type to retrieve.</param>
       </Docs>
     </Member>
     <Member MemberName="GetUserControlPath">
@@ -190,8 +178,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Web.UI.Design.WebFormsReferenceManager.GetUserControlPath(System.String,System.String)" /> uses the tag prefix and name to locate the user control register directive in the current document, and returns the src attribute value defined in the register directive.</para
-          >
+            <see cref="M:System.Web.UI.Design.WebFormsReferenceManager.GetUserControlPath(System.String,System.String)" /> uses the tag prefix and name to locate the user control register directive in the current document, and returns the src attribute value defined in the register directive.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -206,15 +193,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag prefix of the user control to retrieve.</param
-        >
+          />The tag prefix of the user control to retrieve.</param>
         <param name="tagName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tag name of the user control to retrieve.</param
-        >
+          />The tag name of the user control to retrieve.</param>
       </Docs>
     </Member>
     <Member MemberName="RegisterTagPrefix">
@@ -250,8 +235,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to add a tag prefix for in the current document.</param
-        >
+          />The type to add a tag prefix for in the current document.</param>
       </Docs>
     </Member>
   </Members>

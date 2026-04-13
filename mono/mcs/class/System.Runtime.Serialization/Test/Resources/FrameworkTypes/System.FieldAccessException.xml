@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.FieldAccessException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Attempted to access a field that is not accessible by the caller.</Message
-  >
+    >Attempted to access a field that is not accessible by the caller.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

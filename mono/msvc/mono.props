@@ -65,8 +65,7 @@
     <GC_LIB>libgcmonosgen.lib</GC_LIB>
     <MONO_TARGET_SUFFIX Condition="'$(MONO_USE_TARGET_SUFFIX)'=='true'">-sgen</MONO_TARGET_SUFFIX>
     <MONO_BUILD_DIR_PREFIX Condition="'$(MONO_USE_SEPARATE_BUILD_DIR)'=='true'"
-      >$(MONO_BUILD_DIR_PREFIX)sgen/</MONO_BUILD_DIR_PREFIX
-    >
+      >$(MONO_BUILD_DIR_PREFIX)sgen/</MONO_BUILD_DIR_PREFIX>
   </PropertyGroup>
   <PropertyGroup Label="MonoBOEHM" Condition="'$(MONO_TARGET_GC)'=='boehm'">
     <BOEHM_DEFINES>HAVE_BOEHM_GC</BOEHM_DEFINES>
@@ -74,8 +73,7 @@
     <GC_LIB>libgc.lib</GC_LIB>
     <MONO_TARGET_SUFFIX Condition="'$(MONO_USE_TARGET_SUFFIX)'=='true'">-boehm</MONO_TARGET_SUFFIX>
     <MONO_BUILD_DIR_PREFIX Condition="'$(MONO_USE_SEPARATE_BUILD_DIR)'=='true'"
-      >$(MONO_BUILD_DIR_PREFIX)boehm/</MONO_BUILD_DIR_PREFIX
-    >
+      >$(MONO_BUILD_DIR_PREFIX)boehm/</MONO_BUILD_DIR_PREFIX>
   </PropertyGroup>
   <PropertyGroup Label="Static-Mono-Libraries">
     <MONO_RUNTIME_LIBS>libmonoutils.lib;libmonoruntime$(MONO_TARGET_SUFFIX).lib;libmini$(MONO_TARGET_SUFFIX).lib;$(GC_LIB)</MONO_RUNTIME_LIBS>
@@ -128,8 +126,7 @@
   </ItemGroup>
   <PropertyGroup Label="MonoDefaultPreprocessorDefinitions">
     <HAVE_CONFIG_H_DEFINE Condition="'$(MonoDisableHaveConfigH)'!='true'"
-      >HAVE_CONFIG_H</HAVE_CONFIG_H_DEFINE
-    >
+      >HAVE_CONFIG_H</HAVE_CONFIG_H_DEFINE>
     <MONO_PREPROCESSOR_DEFINITIONS>__default_codegen__;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;$(HAVE_CONFIG_H_DEFINE);GC_NOT_DLL;WIN32_THREADS;WINVER=0x0601;_WIN32_WINNT=0x0601;_WIN32_IE=0x0501;_UNICODE;UNICODE;FD_SETSIZE=1024;NVALGRIND;$(MONO_ADDITIONAL_PREPROCESSOR_DEFINITIONS)</MONO_PREPROCESSOR_DEFINITIONS>
   </PropertyGroup>
   <ItemDefinitionGroup>

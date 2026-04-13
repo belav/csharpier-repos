@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection holds instances of the authenticationModules configuration element, which are used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para
-      >
+        >This collection holds instances of the authenticationModules configuration element, which are used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" /> and <see cref="T:System.Net.WebClient" /> classes. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -102,8 +100,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Configuration.AuthenticationModuleElement" /> to add to the collection.</param
-        >
+          />The <see cref="T:System.Net.Configuration.AuthenticationModuleElement" /> to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -202,8 +199,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />.</param
-        >
+          />A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -242,8 +238,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />.</param
-        >
+          />A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -344,8 +339,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.Configuration.AuthenticationModuleElement" /> to remove.</param
-        >
+          />The <see cref="T:System.Net.Configuration.AuthenticationModuleElement" /> to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -377,8 +371,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove.</param
-        >
+          />The key of the element to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -410,8 +403,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the element to remove.</param
-        >
+          />The zero-based index of the element to remove.</param>
       </Docs>
     </Member>
   </Members>

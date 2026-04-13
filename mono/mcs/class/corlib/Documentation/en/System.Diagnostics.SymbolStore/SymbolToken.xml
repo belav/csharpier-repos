@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure is an object representation of a token that represents symbolic information.</para
-      >
+        >The <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure is an object representation of a token that represents symbolic information.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,16 +52,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure when given a value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure when given a value.</para>
         </summary>
         <param name="val">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to be used for the token. </param
-        >
+          />The value to be used for the token. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -101,8 +98,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> to check.</param
-        >
+          />The <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> to check.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -128,22 +124,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether <paramref name="obj" /> is an instance of <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> and is equal to this instance.</para
-          >
+            >Determines whether <paramref name="obj" /> is an instance of <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> and is equal to this instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> is an instance of <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> and is equal to this instance; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> is an instance of <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> and is equal to this instance; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to check. </param
-        >
+          />The object to check. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -228,29 +221,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> objects are equal.</para
-          >
+            >Returns a value indicating whether two <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> objects are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="a" /> and <paramref name="b" /> are equal; otherwise, false.</para
-          >
+            >true if <paramref name="a" /> and <paramref name="b" /> are equal; otherwise, false.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param
-        >
+          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param
-        >
+          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -279,29 +268,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> objects are not equal.</para
-          >
+            >Returns a value indicating whether two <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> objects are not equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="a" /> and <paramref name="b" /> are not equal; otherwise, false.</para
-          >
+            >true if <paramref name="a" /> and <paramref name="b" /> are not equal; otherwise, false.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param
-        >
+          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param
-        >
+          />A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" /> structure.</param>
       </Docs>
     </Member>
   </Members>

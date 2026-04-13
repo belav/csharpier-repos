@@ -32,18 +32,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When editing the property, a visual designer should create a new instance of the specified editor through a dialog box or drop-down window.</para>
       <para
-        >Use the <see cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" /> property to find this editor's base type. The only available base type is <see cref="T:System.Drawing.Design.UITypeEditor" />.</para
-      >
+        >Use the <see cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" /> property to find this editor's base type. The only available base type is <see cref="T:System.Drawing.Design.UITypeEditor" />.</para>
       <para
-        >Use the <see cref="P:System.ComponentModel.EditorAttribute.EditorTypeName" /> property to get the name of the type of editor associated with this attribute.</para
-      >
+        >Use the <see cref="P:System.ComponentModel.EditorAttribute.EditorTypeName" /> property to get the name of the type of editor associated with this attribute.</para>
       <para
         >For general information on using attributes. see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>. For more information on design-time attributes, see <format type="text/html">
           <a href="7aed9eb4-124b-4a15-a0a3-458f37ac9ef7">Attributes and Design-Time Support</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the default editor, which is no editor.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the default editor, which is no editor.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,35 +95,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="typeName" /> parameter must be in the <see cref="P:System.Type.AssemblyQualifiedName" /> format.</para
-          >
+            >The <paramref name="typeName" /> parameter must be in the <see cref="P:System.Type.AssemblyQualifiedName" /> format.</para>
           <para
-            >The <see cref="T:System.Type" /> represented by the <paramref name="typeName" /> parameter must either derive from or implement the base class.</para
-          >
+            >The <see cref="T:System.Type" /> represented by the <paramref name="typeName" /> parameter must either derive from or implement the base class.</para>
           <para
-            >The <see cref="T:System.Type" /> represented by the <paramref name="baseTypeName" /> parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it. This can be any class, but is typically <see cref="T:System.Drawing.Design.UITypeEditor" /> or <see cref="T:System.ComponentModel.ComponentEditor" />.</para
-          >
+            >The <see cref="T:System.Type" /> represented by the <paramref name="baseTypeName" /> parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it. This can be any class, but is typically <see cref="T:System.Drawing.Design.UITypeEditor" /> or <see cref="T:System.ComponentModel.ComponentEditor" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the type name and base type name of the editor.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the type name and base type name of the editor.</para>
         </summary>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type name of the editor. </param
-        >
+          />The fully qualified type name of the editor. </param>
         <param name="baseTypeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param
-        >
+          />The fully qualified type name of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -154,35 +144,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="typeName" /> parameter must be in the <see cref="P:System.Type.AssemblyQualifiedName" /> format.</para
-          >
+            >The <paramref name="typeName" /> parameter must be in the <see cref="P:System.Type.AssemblyQualifiedName" /> format.</para>
           <para
-            >The <see cref="T:System.Type" /> represented by the <paramref name="typeName" /> must either derive from or implement the base class.</para
-          >
+            >The <see cref="T:System.Type" /> represented by the <paramref name="typeName" /> must either derive from or implement the base class.</para>
           <para
-            >The <paramref name="baseType" /> parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it.</para
-          >
+            >The <paramref name="baseType" /> parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the type name and the base type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the type name and the base type.</para>
         </summary>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The fully qualified type name of the editor. </param
-        >
+          />The fully qualified type name of the editor. </param>
         <param name="baseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param
-        >
+          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -206,32 +190,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Type" /> represented by the <paramref name="type" /> parameter must either derive from or implement the base class.</para
-          >
+            >The <see cref="T:System.Type" /> represented by the <paramref name="type" /> parameter must either derive from or implement the base class.</para>
           <para
-            >The <paramref name="baseType" /> parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it.</para
-          >
+            >The <paramref name="baseType" /> parameter is used as a key to find a particular editor, because a data type can have more than one editor associated with it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the type and the base type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EditorAttribute" /> class with the type and the base type.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of the editor. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of the editor. </param>
         <param name="baseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param
-        >
+          />The <see cref="T:System.Type" /> of the base class or interface to use as a lookup key for the editor. This class must be or derive from <see cref="T:System.Drawing.Design.UITypeEditor" />. </param>
       </Docs>
     </Member>
     <Member MemberName="EditorBaseTypeName">
@@ -251,8 +230,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" /> property is an assembly qualified type name. The dnprdnshort provides both <see cref="T:System.Drawing.Design.UITypeEditor" /> and <see cref="T:System.ComponentModel.ComponentEditor" /> as valid base classes, but any value is valid here.</para
-          >
+            >The <see cref="P:System.ComponentModel.EditorAttribute.EditorBaseTypeName" /> property is an assembly qualified type name. The dnprdnshort provides both <see cref="T:System.Drawing.Design.UITypeEditor" /> and <see cref="T:System.ComponentModel.ComponentEditor" /> as valid base classes, but any value is valid here.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -278,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the editor class in the <see cref="P:System.Type.AssemblyQualifiedName" /> format.</para
-          >
+            >Gets the name of the editor class in the <see cref="P:System.Type.AssemblyQualifiedName" /> format.</para>
         </summary>
       </Docs>
     </Member>
@@ -306,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.EditorAttribute" />.</para
-          >
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.EditorAttribute" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -318,8 +294,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -361,8 +336,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.EditorAttribute.TypeId" /> property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" /> instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" /> overrides this to include the type of the editor base type.</para
-          >
+            >The <see cref="P:System.ComponentModel.EditorAttribute.TypeId" /> property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" /> instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" /> overrides this to include the type of the editor base type.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

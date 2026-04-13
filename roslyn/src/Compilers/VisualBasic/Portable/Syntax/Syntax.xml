@@ -2646,21 +2646,17 @@ Unify Enum declarations with other block type declarations.
       <child name="Nullable" optional="true" kind="QuestionToken">
         <description>The "?" token that indicates a nullable type.</description>
         <lm-equiv name="IdentifierNode.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv>
         <native-equiv name="IdentifierDescriptor.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </native-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </native-equiv>
       </child>
 
       <child name="ArrayBounds" optional="true" kind="ArgumentList">
         <description>The optional array bounds, such as "(4)" or "(0 to 5, 0 To 6)".</description>
         <lm-equiv name="IdentifierNode.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </lm-equiv>
         <native-equiv name="IdentifierDescriptor.IsNullable"
-          >IsNullable moves to the ModifiedIdentifier node. </native-equiv
-        >
+          >IsNullable moves to the ModifiedIdentifier node. </native-equiv>
       </child>
 
       <child name="ArrayRankSpecifiers" optional="true" list="true" kind="ArrayRankSpecifier">
@@ -3327,11 +3323,9 @@ Unify Enum declarations with other block type declarations.
         Represents the "Else ..." clause of a single-line "If" statement.
       </description>
       <lm-equiv name="ElseNode"
-        >A SingleLineElseClause exactly corresponds to an ElseNode -- the Else statement and its following body.</lm-equiv
-      >
+        >A SingleLineElseClause exactly corresponds to an ElseNode -- the Else statement and its following body.</lm-equiv>
       <native-equiv name="ElseStatement"
-        >A SingleLineElseClause exactly corresponds to an ElseStatement -- the Else statement and its following body.</native-equiv
-      >
+        >A SingleLineElseClause exactly corresponds to an ElseStatement -- the Else statement and its following body.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>ElseStatement</grammar>
 
@@ -3361,11 +3355,9 @@ Unify Enum declarations with other block type declarations.
         Represents a multi-line "If ... Then ... ElseIf ... Then ... Else ... End If" block.
       </description>
       <lm-equiv name="IfNode"
-        >A MultiLineIfBlock corresponds to an IfNode -- the If statement and its following body.</lm-equiv
-      >
+        >A MultiLineIfBlock corresponds to an IfNode -- the If statement and its following body.</lm-equiv>
       <native-equiv name="IfStatement"
-        >A MultiLineIfBlock corresponds to an IfStatement -- the If statement and its following body.</native-equiv
-      >
+        >A MultiLineIfBlock corresponds to an IfStatement -- the If statement and its following body.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>IfStatement</grammar>
 
@@ -3402,11 +3394,9 @@ Unify Enum declarations with other block type declarations.
         Represents the "If ... Then" statement that begins a multi-line "If" block.
       </description>
       <lm-equiv name="IfNode"
-        >An IfStatement represents just the header statement, not the body of the If.</lm-equiv
-      >
+        >An IfStatement represents just the header statement, not the body of the If.</lm-equiv>
       <native-equiv name="IfStatement"
-        >An IfStatement represents just the header statement, not the body of the If.</native-equiv
-      >
+        >An IfStatement represents just the header statement, not the body of the If.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>IfStatement</grammar>
 
@@ -3443,11 +3433,9 @@ Unify Enum declarations with other block type declarations.
         Represents an "ElseIf ... Then ..." block.
       </description>
       <lm-equiv name="ElseIfNode"
-        >ElseIfBlock exactly corresponds to an ElseIfNode -- the ElseIf statement and its following body.</lm-equiv
-      >
+        >ElseIfBlock exactly corresponds to an ElseIfNode -- the ElseIf statement and its following body.</lm-equiv>
       <native-equiv name="ElseIfStatement"
-        >ElseIfBlock exactly corresponds to an ElseIfStatement -- the ElseIf statement and its following body.</native-equiv
-      >
+        >ElseIfBlock exactly corresponds to an ElseIfStatement -- the ElseIf statement and its following body.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>ElseIfStatement</grammar>
 
@@ -3475,11 +3463,9 @@ Unify Enum declarations with other block type declarations.
         Represents the "ElseIf ... Then" statement that begins an "ElseIf" block.
       </description>
       <lm-equiv name="ElseIfNode"
-        >An IfStatement represents just the header statement, not the body of the ElseIf.</lm-equiv
-      >
+        >An IfStatement represents just the header statement, not the body of the ElseIf.</lm-equiv>
       <native-equiv name="ElseIfStatement"
-        >An IfStatement represents just the header statement, not the body of the ElseIf.</native-equiv
-      >
+        >An IfStatement represents just the header statement, not the body of the ElseIf.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>ElseIfStatement</grammar>
 
@@ -3510,11 +3496,9 @@ Unify Enum declarations with other block type declarations.
         Represents an "Else ..." block.
       </description>
       <lm-equiv name="ElseNode"
-        >An ElseBlock exactly corresponds to an ElseNode -- the Else statement and its following body.</lm-equiv
-      >
+        >An ElseBlock exactly corresponds to an ElseNode -- the Else statement and its following body.</lm-equiv>
       <native-equiv name="ElseStatement"
-        >An ElseBlock exactly corresponds to an ElseStatement -- the Else statement and its following body.</native-equiv
-      >
+        >An ElseBlock exactly corresponds to an ElseStatement -- the Else statement and its following body.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>ElseStatement</grammar>
 
@@ -3542,11 +3526,9 @@ Unify Enum declarations with other block type declarations.
         Represents the "Else" statement that begins an "Else" block.
       </description>
       <lm-equiv name="ElseNode"
-        >An ElseStatement represents just the header statement, not the body of the Else.</lm-equiv
-      >
+        >An ElseStatement represents just the header statement, not the body of the Else.</lm-equiv>
       <native-equiv name="ElseStatement"
-        >An ElseStatement represents just the header statement, not the body of the Else.</native-equiv
-      >
+        >An ElseStatement represents just the header statement, not the body of the Else.</native-equiv>
       <spec-section>10.8.1</spec-section>
       <grammar>ElseStatement</grammar>
 
@@ -3571,11 +3553,9 @@ Unify Enum declarations with other block type declarations.
         Represents a "Try ... Catch ... Finally ... End Try" block.
       </description>
       <lm-equiv name="TryNode"
-        >A TryBlock corresponds to a TryNode -- the Try statement and its following body.</lm-equiv
-      >
+        >A TryBlock corresponds to a TryNode -- the Try statement and its following body.</lm-equiv>
       <native-equiv name="ExecutableBlockStatement"
-        >A TryBlock corresponds to a Try statement and its following body.</native-equiv
-      >
+        >A TryBlock corresponds to a Try statement and its following body.</native-equiv>
       <spec-section>10.10.1</spec-section>
       <grammar>TryStatement</grammar>
 
@@ -3636,11 +3616,9 @@ Unify Enum declarations with other block type declarations.
         Represents a "Catch ..." block.
       </description>
       <lm-equiv name="CatchNode"
-        >A CatchBlock exactly corresponds to a CatchNode -- the Catch statement and its following body.</lm-equiv
-      >
+        >A CatchBlock exactly corresponds to a CatchNode -- the Catch statement and its following body.</lm-equiv>
       <native-equiv name="CatchStatement"
-        >A CatchBlock exactly corresponds to an ElseIfStatement -- the ElseIf statement and its following body.</native-equiv
-      >
+        >A CatchBlock exactly corresponds to an ElseIfStatement -- the ElseIf statement and its following body.</native-equiv>
       <spec-section>10.10.1</spec-section>
       <grammar>TryStatement&gt;</grammar>
 
@@ -3734,11 +3712,9 @@ Unify Enum declarations with other block type declarations.
         Represents a "Finally ..." block of a "Try" block.
       </description>
       <lm-equiv name="FinallyNode"
-        >A FinallyBlock exactly corresponds to a FinallyNode -- the Finally statement and its following body.</lm-equiv
-      >
+        >A FinallyBlock exactly corresponds to a FinallyNode -- the Finally statement and its following body.</lm-equiv>
       <native-equiv name="FinallyStatement"
-        >A FinallyBlock exactly corresponds to a FinallyStatement -- the Finally statement and its following body.</native-equiv
-      >
+        >A FinallyBlock exactly corresponds to a FinallyStatement -- the Finally statement and its following body.</native-equiv>
       <spec-section>10.10.1</spec-section>
       <grammar>TryStatement&gt;</grammar>
 
@@ -4909,17 +4885,13 @@ Unify Enum declarations with other block type declarations.
           no parentheses were supplied.)
         </description>
         <lm-equiv name="Target"
-          >The target of the call is the target of the Invocation expression referenced by Invocation.</lm-equiv
-        >
+          >The target of the call is the target of the Invocation expression referenced by Invocation.</lm-equiv>
         <lm-equiv name="Arguments"
-          >The arguments of the call is the arguments of the Invocation expression referenced by Invocation.</lm-equiv
-        >
+          >The arguments of the call is the arguments of the Invocation expression referenced by Invocation.</lm-equiv>
         <native-equiv name="Target"
-          >The target of the call is the target of the Invocation expression referenced by Invocation.</native-equiv
-        >
+          >The target of the call is the target of the Invocation expression referenced by Invocation.</native-equiv>
         <native-equiv name="Arguments"
-          >The arguments of the call is the arguments of the Invocation expression referenced by Invocation.</native-equiv
-        >
+          >The arguments of the call is the arguments of the Invocation expression referenced by Invocation.</native-equiv>
       </child>
     </node-structure>
 
@@ -5768,11 +5740,9 @@ Unify Enum declarations with other block type declarations.
 
       <node-kind name="AnonymousObjectCreationExpression">
         <lm-equiv name="NewWithInitializer"
-          >If an anonymous object is being initialized, maps to NewAnonymousObject</lm-equiv
-        >
+          >If an anonymous object is being initialized, maps to NewAnonymousObject</lm-equiv>
         <native-equiv name="Expression.Opcodes.NewObjectInitializer"
-          >If an anonymous object is being initialized, maps to NewAnonymousObject</native-equiv
-        >
+          >If an anonymous object is being initialized, maps to NewAnonymousObject</native-equiv>
       </node-kind>
 
       <child name="Initializer" kind="ObjectMemberInitializer">
@@ -5943,53 +5913,37 @@ Unify Enum declarations with other block type declarations.
       <node-kind name="PredefinedCastExpression">
         <lm-equiv name="PredefinedCast" />
         <native-equiv name="Expression.Opcodes.CastBoolean"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastCharacter"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastDate"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastDouble"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastSignedByte"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastByte"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastShort"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastUnsignedShort"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastInteger"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastUnsignedInteger"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastLong"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastUnsignedLong"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastDecimal"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastSingle"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastString"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
         <native-equiv name="Expression.Opcodes.CastObject"
-          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv
-        >
+          >The built-in type being cast to is represented by BuiltInCast.Type</native-equiv>
       </node-kind>
 
       <child
@@ -6647,8 +6601,7 @@ Unify Enum declarations with other block type declarations.
         <description>Describes the type of the variable being defined.</description>
         <lm-equiv name="VariableGroup.VariableType">In a Let or From query operator.</lm-equiv>
         <native-equiv name="VariableDeclaration.Type"
-          >In a Let or From query operator.</native-equiv
-        >
+          >In a Let or From query operator.</native-equiv>
       </child>
 
       <child name="InKeyword" kind="InKeyword">
@@ -6759,8 +6712,7 @@ Unify Enum declarations with other block type declarations.
         <description>Describes the type of the variable being defined.</description>
         <lm-equiv name="VariableGroup.VariableType">In a Let or From query operator.</lm-equiv>
         <native-equiv name="VariableDeclaration.Type"
-          >In a Let or From query operator.</native-equiv
-        >
+          >In a Let or From query operator.</native-equiv>
       </child>
 
       <child name="EqualsToken" kind="EqualsToken">
@@ -6857,12 +6809,10 @@ Unify Enum declarations with other block type declarations.
       </description>
       <lm-equiv name="FromNode"></lm-equiv>
       <lm-equiv name="CrossJoinNode"
-        >CrossJoinExpression is no longer used. Instead the Source property of the FromClause defines the source.</lm-equiv
-      >
+        >CrossJoinExpression is no longer used. Instead the Source property of the FromClause defines the source.</lm-equiv>
       <native-equiv name="FromExpression"></native-equiv>
       <native-equiv name="CrossJoinExpression"
-        >CrossJoinExpression is no longer used. Instead the Source property of the FromClause defines the source.</native-equiv
-      >
+        >CrossJoinExpression is no longer used. Instead the Source property of the FromClause defines the source.</native-equiv>
       <spec-section>11.21.4</spec-section>
       <grammar>FromClause</grammar>
 
@@ -6899,12 +6849,10 @@ Unify Enum declarations with other block type declarations.
       <description>Represents a "Let" query operator.</description>
       <lm-equiv name="LetNode"></lm-equiv>
       <lm-equiv name="CrossJoinNode"
-        >CrossJoinExpression is no longer used. Instead the Source property of the LetClause defines the source.</lm-equiv
-      >
+        >CrossJoinExpression is no longer used. Instead the Source property of the LetClause defines the source.</lm-equiv>
       <native-equiv name="FromExpression"></native-equiv>
       <native-equiv name="CrossJoinExpression"
-        >CrossJoinExpression is no longer used. Instead the Source property of the LetClause defines the source.</native-equiv
-      >
+        >CrossJoinExpression is no longer used. Instead the Source property of the LetClause defines the source.</native-equiv>
       <spec-section>11.21.6</spec-section>
       <grammar>LetClause</grammar>
 
@@ -7901,15 +7849,12 @@ Unify Enum declarations with other block type declarations.
     <node-structure name="IdentifierNameSyntax" parent="SimpleNameSyntax">
       <description>Represents a type name consisting of a single identifier (which might include brackets or a type character).</description>
       <lm-equiv name="IdentifierNode"
-        >The ? modifier (IsNullable) is no longer present on Identifiers. It moves to declarators and types.</lm-equiv
-      >
+        >The ? modifier (IsNullable) is no longer present on Identifiers. It moves to declarators and types.</lm-equiv>
       <lm-equiv name="NamedTypeNode"></lm-equiv>
       <native-equiv name="SimpleName"
-        >The ? modifier (IsNullable) is no longer present on Identifiers. It moves to declarators and types.</native-equiv
-      >
+        >The ? modifier (IsNullable) is no longer present on Identifiers. It moves to declarators and types.</native-equiv>
       <native-equiv name="IdentifierDescriptor"
-        >The ? modifier (IsNullable) is no longer present on Identifiers. It moves to declarators and types.</native-equiv
-      >
+        >The ? modifier (IsNullable) is no longer present on Identifiers. It moves to declarators and types.</native-equiv>
       <native-equiv name="NamedType"></native-equiv>
 
       <node-kind name="IdentifierName">

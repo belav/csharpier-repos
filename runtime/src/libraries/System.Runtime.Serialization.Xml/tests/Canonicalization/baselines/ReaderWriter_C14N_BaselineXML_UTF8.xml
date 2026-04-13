@@ -6,8 +6,7 @@
   namesp1:attr0="value0"
 >
   <textElement
-    >This is a &amp; text element <!-- this is a comment --> with numbers &#x30;&#x31;&#x32;&#x33;&#x34;&#x35;&#x36;&#x37;</textElement
-  >
+    >This is a &amp; text element <!-- this is a comment --> with numbers &#x30;&#x31;&#x32;&#x33;&#x34;&#x35;&#x36;&#x37;</textElement>
 
   <emptyElement myAttr="wee" yourAttr="woo" />
   <elementWithDefaultNamespace xmlns="">
@@ -35,6 +34,5 @@ but also some CRLF combinations.</elementWhoseContentContainsCRLF>
     </nesting2>
   </nesting>
   <specialChars attr1="áéíóú" attr2="&lt;'va&amp;lue'&gt;" attr0="瑟的瓦达洒洒"
-    >Value with special characters: áéíóú ثجض萨么çèñð 提寺萨么特大厦喀拾 أبثجضسذل שׁשׂסּפּוֹפֿ and that's it.</specialChars
-  >
+    >Value with special characters: áéíóú ثجض萨么çèñð 提寺萨么特大厦喀拾 أبثجضسذل שׁשׂסּפּוֹפֿ and that's it.</specialChars>
 </root>

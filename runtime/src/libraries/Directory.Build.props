@@ -10,8 +10,7 @@
     <!-- Prevent native-binplace.proj from being treated as a source project, to avoid importing illink targets
          and thereby avoid hitting a static graph restore bug: https://github.com/dotnet/runtime/issues/92194 -->
     <IsSourceProject Condition="'$(MSBuildProjectFile)' == 'native-binplace.proj'"
-      >false</IsSourceProject
-    >
+      >false</IsSourceProject>
   </PropertyGroup>
 
   <Import Project="..\..\Directory.Build.props" />
@@ -38,8 +37,7 @@
     <StrongNameKeyId>Open</StrongNameKeyId>
     <!-- Microsoft.Extensions projects have a separate StrongNameKeyId -->
     <StrongNameKeyId Condition="$(MSBuildProjectName.StartsWith('Microsoft.Extensions.'))"
-      >MicrosoftAspNetCore</StrongNameKeyId
-    >
+      >MicrosoftAspNetCore</StrongNameKeyId>
     <!-- We can't generate an apphost without restoring the targeting pack. -->
     <UseAppHost>false</UseAppHost>
     <EnableDefaultItems>false</EnableDefaultItems>
@@ -53,26 +51,21 @@
     <!-- Disable analyzers for tests and unsupported projects -->
     <RunAnalyzers
       Condition="'$(IsTestProject)' != 'true' and '$(IsSourceProject)' != 'true' and '$(IsGeneratorProject)' != 'true'"
-      >false</RunAnalyzers
-    >
+      >false</RunAnalyzers>
     <!-- Enable documentation file generation by the compiler for all libraries except for vbproj. -->
     <GenerateDocumentationFile
       Condition="'$(IsSourceProject)' == 'true' and '$(MSBuildProjectExtension)' != '.vbproj'"
-      >true</GenerateDocumentationFile
-    >
+      >true</GenerateDocumentationFile>
     <CLSCompliant
       Condition="'$(CLSCompliant)' == '' and '$(IsTestProject)' != 'true' and '$(IsTestSupportProject)' != 'true'"
-      >true</CLSCompliant
-    >
+      >true</CLSCompliant>
     <!-- Nullability is enabled by default except for test projects, which instead default to annotations. -->
     <Nullable Condition="'$(Nullable)' == '' and '$(IsTestProject)' != 'true'">enable</Nullable>
     <Nullable Condition="'$(Nullable)' == '' and '$(IsTestProject)' == 'true'"
-      >annotations</Nullable
-    >
+      >annotations</Nullable>
     <!-- EnableAOTAnalyzer is enabled by default for src projects. -->
     <EnableAOTAnalyzer Condition="'$(EnableAOTAnalyzer)' == '' and '$(IsSourceProject)' == 'true'"
-      >true</EnableAOTAnalyzer
-    >
+      >true</EnableAOTAnalyzer>
   </PropertyGroup>
 
   <!-- Set up common paths -->
@@ -81,24 +74,19 @@
     <OSPlatformConfig>$(TargetOS).$(Platform).$(Configuration)</OSPlatformConfig>
     <TestArchiveRoot>$(ArtifactsDir)helix/</TestArchiveRoot>
     <TestArchiveTestsRoot Condition="$(IsFunctionalTest) != true"
-      >$(TestArchiveRoot)tests/</TestArchiveTestsRoot
-    >
+      >$(TestArchiveRoot)tests/</TestArchiveTestsRoot>
     <TestArchiveTestsRoot Condition="$(IsFunctionalTest) == true"
-      >$(TestArchiveRoot)runonly/</TestArchiveTestsRoot
-    >
+      >$(TestArchiveRoot)runonly/</TestArchiveTestsRoot>
     <TestArchiveTestsRoot Condition="'$(Scenario)' == 'BuildWasmApps'"
-      >$(TestArchiveRoot)buildwasmapps/</TestArchiveTestsRoot
-    >
+      >$(TestArchiveRoot)buildwasmapps/</TestArchiveTestsRoot>
     <TestArchiveTestsDir>$(TestArchiveTestsRoot)$(OSPlatformConfig)/</TestArchiveTestsDir>
     <TestArchiveRuntimeRoot>$(TestArchiveRoot)runtime/</TestArchiveRuntimeRoot>
 
     <UseAppBundleRootForBuildingTests
       Condition="'$(ArchiveTests)' == 'true' and '$(BuildTestsOnHelix)' != 'true' and '$(TargetsAppleMobile)' == 'true'"
-      >true</UseAppBundleRootForBuildingTests
-    >
+      >true</UseAppBundleRootForBuildingTests>
     <AppBundleRoot Condition="'$(UseAppBundleRootForBuildingTests)' == 'true'"
-      >$(ArtifactsDir)bundles\</AppBundleRoot
-    >
+      >$(ArtifactsDir)bundles\</AppBundleRoot>
 
     <CommonPathRoot>$([MSBuild]::NormalizeDirectory('$(LibrariesProjectRoot)', 'Common'))</CommonPathRoot>
     <CommonPath>$([MSBuild]::NormalizeDirectory('$(CommonPathRoot)', 'src'))</CommonPath>
@@ -113,19 +101,16 @@
     <EnableTestSupport>true</EnableTestSupport>
     <!-- TODO: Remove these conditions when VSTest is used in CI. -->
     <EnableRunSettingsSupport Condition="'$(ContinuousIntegrationBuild)' != 'true'"
-      >true</EnableRunSettingsSupport
-    >
+      >true</EnableRunSettingsSupport>
     <EnableCoverageSupport Condition="'$(ContinuousIntegrationBuild)' != 'true'"
-      >true</EnableCoverageSupport
-    >
+      >true</EnableCoverageSupport>
   </PropertyGroup>
 
   <!-- To enable the interpreter for mono desktop, we need to pass an env switch -->
   <PropertyGroup>
     <MonoEnvOptions
       Condition="'$(MonoEnvOptions)' == '' and '$(TargetsMobile)' != 'true' and '$(MonoForceInterpreter)' == 'true'"
-      >--interpreter</MonoEnvOptions
-    >
+      >--interpreter</MonoEnvOptions>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetsMobile)' == 'true'">
@@ -136,14 +121,11 @@
     <SdkWithNoWorkload_WorkloadStampPath>$(SdkWithNoWorkloadForTestingPath)workload.stamp</SdkWithNoWorkload_WorkloadStampPath>
 
     <SdkWithWorkloadForTestingPath Condition="'$(TargetOS)' == 'browser'"
-      >$(ArtifactsBinDir)dotnet-latest\</SdkWithWorkloadForTestingPath
-    >
+      >$(ArtifactsBinDir)dotnet-latest\</SdkWithWorkloadForTestingPath>
     <SdkWithWorkloadForTestingPath Condition="'$(TargetOS)' == 'wasi'"
-      >$(ArtifactsBinDir)dotnet-latest\</SdkWithWorkloadForTestingPath
-    >
+      >$(ArtifactsBinDir)dotnet-latest\</SdkWithWorkloadForTestingPath>
     <SdkWithWorkloadForTestingPath Condition="'$(SdkWithWorkloadForTestingPath)' != ''"
-      >$([MSBuild]::NormalizeDirectory($(SdkWithWorkloadForTestingPath)))</SdkWithWorkloadForTestingPath
-    >
+      >$([MSBuild]::NormalizeDirectory($(SdkWithWorkloadForTestingPath)))</SdkWithWorkloadForTestingPath>
 
     <SdkWithWorkloadStampPath>$(SdkWithWorkloadForTestingPath)version-$(SdkVersionForWorkloadTesting).stamp</SdkWithWorkloadStampPath>
     <SdkWithWorkload_WorkloadStampPath>$(SdkWithWorkloadForTestingPath)workload.stamp</SdkWithWorkload_WorkloadStampPath>

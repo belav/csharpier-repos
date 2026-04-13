@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates the data that makes up a <see cref="T:System.Drawing.Region" /> object. This class cannot be inherited.</para
-      >
+        >Encapsulates the data that makes up a <see cref="T:System.Drawing.Region" /> object. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -36,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of bytes that specify the <see cref="T:System.Drawing.Region" /> object.</para
-          >
+            >Gets or sets an array of bytes that specify the <see cref="T:System.Drawing.Region" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
-      >true</DebuggerSupport
-    >
+      >true</DebuggerSupport>
   </PropertyGroup>
   <ItemGroup>
     <RdXmlFile Include="default.rd.xml" />

@@ -26,24 +26,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This converter can only convert an enumeration object to and from a string. The <see cref="T:System.ComponentModel.EnumConverter" /> class provides the <see cref="P:System.ComponentModel.EnumConverter.Comparer" /> property to get an <see cref="T:System.Collections.IComparer" /> interface that can be used to sort the values of the enumeration. By default, the enumeration values are sorted in the order they appear in the file.</para
-      >
+        >This converter can only convert an enumeration object to and from a string. The <see cref="T:System.ComponentModel.EnumConverter" /> class provides the <see cref="P:System.ComponentModel.EnumConverter.Comparer" /> property to get an <see cref="T:System.Collections.IComparer" /> interface that can be used to sort the values of the enumeration. By default, the enumeration values are sorted in the order they appear in the file.</para>
       <para
         >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" /> base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
-        </format>.</para
-      >
+        </format>.</para>
       <block subset="none" type="note">
         <para
-          >You should never create an instance of an <see cref="T:System.ComponentModel.EnumConverter" />. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para
-        >
+          >You should never create an instance of an <see cref="T:System.ComponentModel.EnumConverter" />. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see cref="T:System.Enum" /> objects to and from various other representations.</para
-      >
+        >Provides a type converter to convert <see cref="T:System.Enum" /> objects to and from various other representations.</para>
     </summary>
   </Docs>
   <Members>
@@ -68,16 +64,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EnumConverter" /> class for the given type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EnumConverter" /> class for the given type.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type of enumeration to associate with this enumeration converter. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type of enumeration to associate with this enumeration converter. </param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertFrom">
@@ -107,8 +101,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This converter can only convert an enumeration object to and from a string.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -123,15 +116,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
@@ -160,8 +151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -176,15 +166,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert to. </param>
       </Docs>
     </Member>
     <Member MemberName="Comparer">
@@ -214,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.IComparer" /> that can be used to sort the values of the enumeration.</para
-          >
+            >Gets an <see cref="T:System.Collections.IComparer" /> that can be used to sort the values of the enumeration.</para>
         </summary>
       </Docs>
     </Member>
@@ -247,8 +234,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This converter can only convert an enumeration object to and from a string.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -257,30 +243,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para
-          >
+            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional <see cref="T:System.Globalization.CultureInfo" />. If not supplied, the current culture is assumed. </param
-        >
+          />An optional <see cref="T:System.Globalization.CultureInfo" />. If not supplied, the current culture is assumed. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -312,12 +294,10 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This converter can only convert an enumeration object to and from a string.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
           <block subset="none" type="note">
             <para
-              >The behavior of the <see cref="Overload:System.ComponentModel.EnumConverter.ConvertTo" /> method is undefined if the enumeration has multiple fields with the same value.</para
-            >
+              >The behavior of the <see cref="Overload:System.ComponentModel.EnumConverter.ConvertTo" /> method is undefined if the enumeration has multiple fields with the same value.</para>
           </block>
         </remarks>
         <summary>
@@ -327,37 +307,32 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para
-          >
+            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional <see cref="T:System.Globalization.CultureInfo" />. If not supplied, the current culture is assumed. </param
-        >
+          />An optional <see cref="T:System.Globalization.CultureInfo" />. If not supplied, the current culture is assumed. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> to convert the value to. </param
-        >
+          />The <see cref="T:System.Type" /> to convert the value to. </param>
       </Docs>
     </Member>
     <Member MemberName="EnumType">
@@ -406,12 +381,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
           <block subset="none" type="note">
             <para
-              >Any fields of the enumeration that are marked with <see cref="T:System.ComponentModel.BrowsableAttribute" /> set to false will not be returned.</para
-            >
+              >Any fields of the enumeration that are marked with <see cref="T:System.ComponentModel.BrowsableAttribute" /> set to false will not be returned.</para>
           </block>
         </remarks>
         <summary>
@@ -421,16 +394,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para
-          >
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesExclusive">
@@ -458,28 +429,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the list of standard values returned from <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" /> is an exclusive list using the specified context.</para
-          >
+            >Gets a value indicating whether the list of standard values returned from <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" /> is an exclusive list using the specified context.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> returned from <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" /> is an exhaustive list of possible values; false if other values are possible.</para
-          >
+            >true if the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> returned from <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" /> is an exhaustive list of possible values; false if other values are possible.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesSupported">
@@ -507,8 +474,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -517,16 +483,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true because <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" /> should be called to find a common set of values the object supports. This method never returns false.</para
-          >
+            >true because <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" /> should be called to find a common set of values the object supports. This method never returns false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -555,8 +519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -571,15 +534,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to test. </param
-        >
+          />The <see cref="T:System.Object" /> to test. </param>
       </Docs>
     </Member>
     <Member MemberName="Values">
@@ -606,8 +567,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that specifies the possible values for the enumeration.</para
-          >
+            >Gets or sets a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that specifies the possible values for the enumeration.</para>
         </summary>
       </Docs>
     </Member>

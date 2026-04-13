@@ -18,11 +18,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Media.SystemSounds" /> class provides methods for retrieving the sounds associated with a set of operating system sound-event types for the current user. The sounds associated with each type of operating system sound event can be configured in Windows Control Panel.</para
-      >
+        >The <see cref="T:System.Media.SystemSounds" /> class provides methods for retrieving the sounds associated with a set of operating system sound-event types for the current user. The sounds associated with each type of operating system sound event can be configured in Windows Control Panel.</para>
       <para>
-        <see cref="T:System.Media.SystemSounds" /> provides static methods to access the sounds associated with the <see cref="P:System.Media.SystemSounds.Asterisk" />, <see cref="P:System.Media.SystemSounds.Beep" />, <see cref="P:System.Media.SystemSounds.Exclamation" />, <see cref="P:System.Media.SystemSounds.Hand" /> and <see cref="P:System.Media.SystemSounds.Question" /> sound events. Each property returns a <see cref="T:System.Media.SystemSound" /> that can be used to play the sound.</para
-      >
+        <see cref="T:System.Media.SystemSounds" /> provides static methods to access the sounds associated with the <see cref="P:System.Media.SystemSounds.Asterisk" />, <see cref="P:System.Media.SystemSounds.Beep" />, <see cref="P:System.Media.SystemSounds.Exclamation" />, <see cref="P:System.Media.SystemSounds.Hand" /> and <see cref="P:System.Media.SystemSounds.Question" /> sound events. Each property returns a <see cref="T:System.Media.SystemSound" /> that can be used to play the sound.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

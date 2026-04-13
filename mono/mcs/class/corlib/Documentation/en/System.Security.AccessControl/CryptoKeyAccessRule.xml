@@ -51,30 +51,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAccessRule" /> class using the specified values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAccessRule" /> class using the specified values. </para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identity to which the access rule applies. This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param
-        >
+          />The identity to which the access rule applies. This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
         <param name="cryptoKeyRights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cryptographic key operation to which this access rule controls access.</param
-        >
+          />The cryptographic key operation to which this access rule controls access.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The valid access control type.</param
-        >
+          />The valid access control type.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -102,30 +98,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAccessRule" /> class using the specified values.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAccessRule" /> class using the specified values.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identity to which the access rule applies.</param
-        >
+          />The identity to which the access rule applies.</param>
         <param name="cryptoKeyRights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cryptographic key operation to which this access rule controls access.</param
-        >
+          />The cryptographic key operation to which this access rule controls access.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The valid access control type.</param
-        >
+          />The valid access control type.</param>
       </Docs>
     </Member>
     <Member MemberName="CryptoKeyRights">

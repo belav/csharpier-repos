@@ -21,11 +21,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" /> method. It allows parameters and extension objects to be invoked from within the style sheet.</para
-      >
+        >This class is used by the <see cref="Overload:System.Xml.Xsl.XslCompiledTransform.Transform" /> method. It allows parameters and extension objects to be invoked from within the style sheet.</para>
       <para
-        >When the parameters and objects are added to the <see cref="T:System.Xml.Xsl.XsltArgumentList" />, they are associated with a namespace qualified name and a namespace URI, respectively.</para
-      >
+        >When the parameters and objects are added to the <see cref="T:System.Xml.Xsl.XsltArgumentList" />, they are associated with a namespace qualified name and a namespace URI, respectively.</para>
       <para>The following are advantages to passing an object rather than using an embedded script such as &lt;msxsl:script&gt;: </para>
       <list type="bullet">
         <item>
@@ -36,8 +34,7 @@
         </item>
         <item>
           <para
-            >Supports passing node fragments (through the <see cref="T:System.Xml.XPath.XPathNavigator" />) to the style sheet.</para
-          >
+            >Supports passing node fragments (through the <see cref="T:System.Xml.XPath.XPathNavigator" />) to the style sheet.</para>
         </item>
       </list>
       <para
@@ -45,8 +42,7 @@
           <a href="a4ebdbad-087c-4cfe-acc0-17c48142f81a">XSLT Extension Objects</a>
         </format> and <format type="text/html">
           <a href="fe60aaa0-ae43-4b1c-9be1-426af66ba757">XSLT Parameters</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements a new instance of the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para
-          >
+            >Implements a new instance of the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -106,29 +101,25 @@
           <para
             >The params keyword, which allows an unspecified number of parameters to be passed, is currently not supported. XSLT style sheets that utilize methods defined with the params keyword does not work correctly. For more information, see <format type="text/html">
               <a href="1690815e-b52b-4967-8380-5780aff08012">params</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new object to the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> and associates it with the namespace URI.</para
-          >
+            >Adds a new object to the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> and associates it with the namespace URI.</para>
         </summary>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the object. To use the default namespace, specify an empty string. </param
-        >
+          />The namespace URI to associate with the object. To use the default namespace, specify an empty string. </param>
         <param name="extension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to add to the list. </param
-        >
+          />The object to add to the list. </param>
       </Docs>
     </Member>
     <Member MemberName="AddParam">
@@ -158,8 +149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="parameter" /> should correspond to a W3C type. The following table shows the W3C types, either XPath or XSLT, and the corresponding.NET class.</para
-          >
+            >The <paramref name="parameter" /> should correspond to a W3C type. The following table shows the W3C types, either XPath or XSLT, and the corresponding.NET class.</para>
           <list type="table">
             <listheader>
               <item>
@@ -241,13 +231,11 @@
             </item>
             <item>
               <para
-                >The <see cref="T:System.DateTime" /> type is converted to <see cref="T:System.String" />.</para
-              >
+                >The <see cref="T:System.DateTime" /> type is converted to <see cref="T:System.String" />.</para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Xml.XPath.IXPathNavigable" /> types are converted to <see cref="T:System.Xml.XPath.XPathNavigator" />. XPathNavigator[] is converted to <see cref="T:System.Xml.XPath.XPathNodeIterator" />.</para
-              >
+                <see cref="T:System.Xml.XPath.IXPathNavigable" /> types are converted to <see cref="T:System.Xml.XPath.XPathNavigator" />. XPathNavigator[] is converted to <see cref="T:System.Xml.XPath.XPathNodeIterator" />.</para>
             </item>
           </list>
           <para>All other types throw an error.</para>
@@ -255,30 +243,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a parameter to the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> and associates it with the namespace qualified name.</para
-          >
+            >Adds a parameter to the <see cref="T:System.Xml.Xsl.XsltArgumentList" /> and associates it with the namespace qualified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to associate with the parameter. </param
-        >
+          />The name to associate with the parameter. </param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI to associate with the parameter. To use the default namespace, specify an empty string. </param
-        >
+          />The namespace URI to associate with the parameter. To use the default namespace, specify an empty string. </param>
         <param name="parameter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter value or object to add to the list. </param
-        >
+          />The parameter value or object to add to the list. </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -302,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all parameters and extension objects from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para
-          >
+            >Removes all parameters and extension objects from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -343,8 +326,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the object. </param
-        >
+          />The namespace URI of the object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetParam">
@@ -384,15 +366,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param
-        >
+          />The name of the parameter. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the parameter. </param
-        >
+          />The namespace URI associated with the parameter. </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveExtensionObject">
@@ -421,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the object with the namespace URI from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para
-          >
+            >Removes the object with the namespace URI from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -433,8 +412,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI associated with the object to remove. </param
-        >
+          />The namespace URI associated with the object to remove. </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveParam">
@@ -464,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the parameter from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para
-          >
+            >Removes the parameter from the <see cref="T:System.Xml.Xsl.XsltArgumentList" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -476,15 +453,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter to remove. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param
-        >
+          />The name of the parameter to remove. <see cref="T:System.Xml.Xsl.XsltArgumentList" /> does not check to ensure the name passed is a valid local name; however, the name cannot be null. </param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the parameter to remove. </param
-        >
+          />The namespace URI of the parameter to remove. </param>
       </Docs>
     </Member>
     <Member MemberName="XsltMessageEncountered">

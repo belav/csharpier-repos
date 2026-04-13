@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see cref="T:System.Security.Cryptography.SHA512" /> algorithm. </para
-      >
+        >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see cref="T:System.Security.Cryptography.SHA512" /> algorithm. </para>
     </summary>
   </Docs>
   <Members>
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA512CryptoServiceProvider" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA512CryptoServiceProvider" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -164,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not need to be called when using a newly created <see cref="T:System.Security.Cryptography.SHA512CryptoServiceProvider" /> object.</para
-          >
+            >This method does not need to be called when using a newly created <see cref="T:System.Security.Cryptography.SHA512CryptoServiceProvider" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

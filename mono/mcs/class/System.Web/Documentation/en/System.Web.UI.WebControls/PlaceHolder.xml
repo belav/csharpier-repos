@@ -48,8 +48,7 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >Use the <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> control as a container to store server controls that are dynamically added to the Web page. The <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> control does not produce any visible output and is used only as a container for other controls on the Web page. You can use the <see cref="P:System.Web.UI.Control.Controls" /> collection to add, insert, or remove a control in the <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> control.</para
-      >
+        >Use the <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> control as a container to store server controls that are dynamically added to the Web page. The <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> control does not produce any visible output and is used only as a container for other controls on the Web page. You can use the <see cref="P:System.Web.UI.Control.Controls" /> collection to add, insert, or remove a control in the <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> control.</para>
       <format type="text/html">
         <a href="#declarative_syntax" />
       </format>
@@ -70,8 +69,7 @@
     runat="server"
     SkinID="string"
     Visible="<codeFeaturedElement>True</codeFeaturedElement>|False"
-/&gt;</code
-      >
+/&gt;</code>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -89,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.PlaceHolder" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.NullReferenceException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Object reference not set to an instance of an object.</Message
-  >
+    >Object reference not set to an instance of an object.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

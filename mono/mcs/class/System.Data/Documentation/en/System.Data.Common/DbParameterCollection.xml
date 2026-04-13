@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The base class for a collection of parameters relevant to a <see cref="T:System.Data.Common.DbCommand" />. </para
-      >
+        >The base class for a collection of parameters relevant to a <see cref="T:System.Data.Common.DbCommand" />. </para>
     </summary>
   </Docs>
   <Members>
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.Common.DbParameterCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbParameterCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -60,22 +58,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Data.Common.DbParameter" /> object to the <see cref="T:System.Data.Common.DbParameterCollection" />.</para
-          >
+            >Adds the specified <see cref="T:System.Data.Common.DbParameter" /> object to the <see cref="T:System.Data.Common.DbParameterCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</para
-          >
+            >The index of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.Common.DbParameter.Value" /> of the <see cref="T:System.Data.Common.DbParameter" /> to add to the collection.</param
-        >
+          />The <see cref="P:System.Data.Common.DbParameter.Value" /> of the <see cref="T:System.Data.Common.DbParameter" /> to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -96,16 +91,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of items with the specified values to the <see cref="T:System.Data.Common.DbParameterCollection" />.</para
-          >
+            >Adds an array of items with the specified values to the <see cref="T:System.Data.Common.DbParameterCollection" />.</para>
         </summary>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of values of type <see cref="T:System.Data.Common.DbParameter" /> to add to the collection.</param
-        >
+          />An array of values of type <see cref="T:System.Data.Common.DbParameter" /> to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Data.Common.DbParameter" /> values from the <see cref="T:System.Data.Common.DbParameterCollection" />.</para
-          >
+            >Removes all <see cref="T:System.Data.Common.DbParameter" /> values from the <see cref="T:System.Data.Common.DbParameterCollection" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -147,22 +139,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see cref="T:System.Data.Common.DbParameter" /> with the specified <see cref="P:System.Data.Common.DbParameter.Value" /> is contained in the collection.</para
-          >
+            >Indicates whether a <see cref="T:System.Data.Common.DbParameter" /> with the specified <see cref="P:System.Data.Common.DbParameter.Value" /> is contained in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Data.Common.DbParameter" /> is in the collection; otherwise false.</para
-          >
+            >true if the <see cref="T:System.Data.Common.DbParameter" /> is in the collection; otherwise false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Data.Common.DbParameter.Value" /> of the <see cref="T:System.Data.Common.DbParameter" /> to look for in the collection.</param
-        >
+          />The <see cref="P:System.Data.Common.DbParameter.Value" /> of the <see cref="T:System.Data.Common.DbParameter" /> to look for in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -183,22 +172,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see cref="T:System.Data.Common.DbParameter" /> with the specified name exists in the collection.</para
-          >
+            >Indicates whether a <see cref="T:System.Data.Common.DbParameter" /> with the specified name exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Data.Common.DbParameter" /> is in the collection; otherwise false.</para
-          >
+            >true if the <see cref="T:System.Data.Common.DbParameter" /> is in the collection; otherwise false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.Common.DbParameter" /> to look for in the collection.</param
-        >
+          />The name of the <see cref="T:System.Data.Common.DbParameter" /> to look for in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -229,15 +215,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of items to copy to the collection.</param
-        >
+          />The array of items to copy to the collection.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index in the collection to copy the items.</param
-        >
+          />The index in the collection to copy the items.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -286,14 +270,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exposes the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method, which supports a simple iteration over a collection by a .NET Framework data provider.</para
-          >
+            >Exposes the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method, which supports a simple iteration over a collection by a .NET Framework data provider.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -323,22 +305,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index in the collection.</para
-          >
+            >Returns the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Data.Common.DbParameter" /> object at the specified index in the collection.</para
-          >
+            >The <see cref="T:System.Data.Common.DbParameter" /> object at the specified index in the collection.</para>
         </returns>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Data.Common.DbParameter" /> in the collection.</param
-        >
+          />The index of the <see cref="T:System.Data.Common.DbParameter" /> in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -362,22 +341,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see cref="T:System.Data.Common.DbParameter" /> the object with the specified name.</para
-          >
+            >Returns <see cref="T:System.Data.Common.DbParameter" /> the object with the specified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Data.Common.DbParameter" /> the object with the specified name.</para
-          >
+            >The <see cref="T:System.Data.Common.DbParameter" /> the object with the specified name.</para>
         </returns>
         <param name="parameterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.Common.DbParameter" /> in the collection.</param
-        >
+          />The name of the <see cref="T:System.Data.Common.DbParameter" /> in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -398,22 +374,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the specified <see cref="T:System.Data.Common.DbParameter" /> object.</para
-          >
+            >Returns the index of the specified <see cref="T:System.Data.Common.DbParameter" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see cref="T:System.Data.Common.DbParameter" /> object.</para
-          >
+            >The index of the specified <see cref="T:System.Data.Common.DbParameter" /> object.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param
-        >
+          />The <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -434,22 +407,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name.</para
-          >
+            >Returns the index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name.</para
-          >
+            >The index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name.</para>
         </returns>
         <param name="parameterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param
-        >
+          />The name of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -474,23 +444,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name into the collection at the specified index.</para
-          >
+            >Inserts the specified index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name into the collection at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to insert the <see cref="T:System.Data.Common.DbParameter" /> object.</param
-        >
+          />The index at which to insert the <see cref="T:System.Data.Common.DbParameter" /> object.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.Common.DbParameter" /> object to insert into the collection.</param
-        >
+          />The <see cref="T:System.Data.Common.DbParameter" /> object to insert into the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -647,16 +614,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Data.Common.DbParameter" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.Data.Common.DbParameter" /> object from the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.Common.DbParameter" /> object to remove.</param
-        >
+          />The <see cref="T:System.Data.Common.DbParameter" /> object to remove.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -677,16 +642,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Data.Common.DbParameter" /> object at the specified from the collection.</para
-          >
+            >Removes the <see cref="T:System.Data.Common.DbParameter" /> object at the specified from the collection.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index where the <see cref="T:System.Data.Common.DbParameter" /> object is located.</param
-        >
+          />The index where the <see cref="T:System.Data.Common.DbParameter" /> object is located.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -710,16 +673,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name from the collection.</para
-          >
+            >Removes the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name from the collection.</para>
         </summary>
         <param name="parameterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.Common.DbParameter" /> object to remove.</param
-        >
+          />The name of the <see cref="T:System.Data.Common.DbParameter" /> object to remove.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -744,23 +705,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index to a new value. </para
-          >
+            >Sets the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index to a new value. </para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index where the <see cref="T:System.Data.Common.DbParameter" /> object is located.</param
-        >
+          />The index where the <see cref="T:System.Data.Common.DbParameter" /> object is located.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="T:System.Data.Common.DbParameter" /> value.</param
-        >
+          />The new <see cref="T:System.Data.Common.DbParameter" /> value.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -785,23 +743,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name to a new value.</para
-          >
+            >Sets the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name to a new value.</para>
         </summary>
         <param name="parameterName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param
-        >
+          />The name of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new <see cref="T:System.Data.Common.DbParameter" /> value.</param
-        >
+          />The new <see cref="T:System.Data.Common.DbParameter" /> value.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -831,8 +786,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see cref="T:System.Object" /> to be used to synchronize access to the collection.</para
-          >
+            >Specifies the <see cref="T:System.Object" /> to be used to synchronize access to the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

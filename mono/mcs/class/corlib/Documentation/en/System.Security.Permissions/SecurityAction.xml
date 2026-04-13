@@ -38,14 +38,11 @@
         <para
           >In the net_v40_long, runtime support has been removed for enforcing the <see cref="F:System.Security.Permissions.SecurityAction.Deny" />, <see cref="F:System.Security.Permissions.SecurityAction.RequestMinimum" />, <see cref="F:System.Security.Permissions.SecurityAction.RequestOptional" />, and <see cref="F:System.Security.Permissions.SecurityAction.RequestRefuse" /> permission requests. These requests should not be used in code that is based on net_v40_short or later. For more information about this and other changes, see <format type="text/html">
             <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
-              >Security Changes in the .NET Framework Version 4.0</a
-            >
-          </format>.</para
-        >
+              >Security Changes in the .NET Framework Version 4.0</a>
+          </format>.</para>
       </block>
       <para
-        >You should not use <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" /> in the net_v40_short. Instead, use the <see cref="T:System.Security.SecurityCriticalAttribute" /> to restrict usage to fully trusted applications, or use <see cref="F:System.Security.Permissions.SecurityAction.Demand" /> to restrict partially trusted callers.</para
-      >
+        >You should not use <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" /> in the net_v40_short. Instead, use the <see cref="T:System.Security.SecurityCriticalAttribute" /> to restrict usage to fully trusted applications, or use <see cref="F:System.Security.Permissions.SecurityAction.Demand" /> to restrict partially trusted callers.</para>
       <list type="table">
         <listheader>
           <item>
@@ -161,8 +158,7 @@
         </item>
       </list>
       <para
-        >For additional information about attribute targets, see <see cref="T:System.Attribute" />.</para
-      >
+        >For additional information about attribute targets, see <see cref="T:System.Attribute" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -198,8 +194,7 @@
           <para
             >The calling code can access the resource identified by the current permission object, even if callers higher in the stack have not been granted permission to access the resource (see <format type="text/html">
               <a href="1E40F4D3-FB7D-4F19-B334-B6076D469EA9">[&lt;topic://cpconassert&gt;]</a>
-            </format>). </para
-          >
+            </format>). </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -232,10 +227,8 @@
           <para
             >All callers higher in the call stack are required to have been granted the permission specified by the current permission object (see <format type="text/html">
               <a href="324C14F8-54FF-494D-9FD1-BFD20962C8BA"
-                >[&lt;topic://cpconmakingsecuritydemands&gt;]</a
-              >
-            </format>).</para
-          >
+                >[&lt;topic://cpconmakingsecuritydemands&gt;]</a>
+            </format>).</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -273,8 +266,7 @@
           <para
             >The ability to access the resource specified by the current permission object is denied to callers, even if they have been granted permission to access it (see <format type="text/html">
               <a href="6B4D2E01-C504-4AC3-B50E-D6F5E7F5DF25">[&lt;topic://cpcondeny&gt;]</a>
-            </format>).</para
-          >
+            </format>).</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -307,8 +299,7 @@
           <para
             >The derived class inheriting the class or overriding a method is required to have been granted the specified permission. For more information, see <format type="text/html">
               <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
-            </format>.</para
-          >
+            </format>.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -339,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The immediate caller is required to have been granted the specified permission. Do not use in the net_v40_short. For full trust, use <see cref="T:System.Security.SecurityCriticalAttribute" /> instead; for partial trust, use <see cref="F:System.Security.Permissions.SecurityAction.Demand" />.</para
-          >
+            >The immediate caller is required to have been granted the specified permission. Do not use in the net_v40_short. For full trust, use <see cref="T:System.Security.SecurityCriticalAttribute" /> instead; for partial trust, use <see cref="F:System.Security.Permissions.SecurityAction.Demand" />.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -373,8 +363,7 @@
           <para
             >Only the resources specified by this permission object can be accessed, even if the code has been granted permission to access other resources (see <format type="text/html">
               <a href="8C7BDB7F-882F-45B7-908C-6CBAA1767649">[&lt;topic://cpconpermitonly&gt;]</a>
-            </format>).</para
-          >
+            </format>).</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

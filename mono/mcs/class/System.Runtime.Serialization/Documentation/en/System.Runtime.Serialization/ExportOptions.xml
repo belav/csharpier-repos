@@ -17,31 +17,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> is used to generate XSD schemas from a type or assembly. You can also use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> to generate dnprdnshort code from a schema document. </para
-      >
+        >The <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" /> is used to generate XSD schemas from a type or assembly. You can also use the <see cref="T:System.Runtime.Serialization.XsdDataContractImporter" /> to generate dnprdnshort code from a schema document. </para>
       <para
         >crabout importing and exporting schemas, see <format type="text/html">
           <a href="0da32b50-ccd9-463a-844c-7fe803d3bf44">Schema Import and Export</a>
         </format> and <format type="text/html">
           <a href="bb57b962-70c1-45a9-93d5-e721e340a13f">Exporting Schemas From Classes</a>
-        </format>. </para
-      >
+        </format>. </para>
       <para
         >The <see cref="P:System.Runtime.Serialization.ExportOptions.KnownTypes" /> property is used by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to include types that can be read in an object graph. crabout the data contract and known types, see <format type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
         >crabout data contracts, see <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Using Data Contracts</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the options that can be set for an <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />.</para
-      >
+        >Represents the options that can be set for an <see cref="T:System.Runtime.Serialization.XsdDataContractExporter" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -61,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.ExportOptions" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.ExportOptions" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -112,13 +106,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Runtime.Serialization.ExportOptions.KnownTypes" /> property is used by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to include types that can be read in an object graph (set using the <see cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" /> property). </para
-          >
+            >The <see cref="P:System.Runtime.Serialization.ExportOptions.KnownTypes" /> property is used by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> to include types that can be read in an object graph (set using the <see cref="P:System.Runtime.Serialization.DataContractSerializer.KnownTypes" /> property). </para>
           <para
             >crabout the data contract and known types, see <format type="text/html">
               <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

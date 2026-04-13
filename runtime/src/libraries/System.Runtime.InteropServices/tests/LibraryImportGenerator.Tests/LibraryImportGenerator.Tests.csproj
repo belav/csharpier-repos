@@ -6,11 +6,9 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <!-- Declare InteropCompilerGeneratedFilesOutputPath to put generated files in a single repo to easily view diffs -->
     <CompilerGeneratedFilesOutputPath Condition="'$(InteropCompilerGeneratedFilesOutputPath)' == ''"
-      >$(OutputPath)\Generated</CompilerGeneratedFilesOutputPath
-    >
+      >$(OutputPath)\Generated</CompilerGeneratedFilesOutputPath>
     <CompilerGeneratedFilesOutputPath Condition="'$(InteropCompilerGeneratedFilesOutputPath)' != ''"
-      >$(InteropCompilerGeneratedFilesOutputPath)\LibraryImportGenerator.Tests</CompilerGeneratedFilesOutputPath
-    >
+      >$(InteropCompilerGeneratedFilesOutputPath)\LibraryImportGenerator.Tests</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

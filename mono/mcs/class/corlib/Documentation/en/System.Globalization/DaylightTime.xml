@@ -28,8 +28,7 @@
       <para>Daylight saving time is a period during the year when the clock is advanced, usually by an hour, to take advantage of extended daylight hours. At the end of the period, the clock is set back to the standard time.</para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Globalization.DaylightTime" /> object returned by the <see cref="M:System.TimeZone.GetDaylightChanges(System.Int32)" /> method recognizes only the time zone adjustment rule that is currently in effect, and ignores any previous adjustment rules for which the system has information. Instead, it applies the current adjustment rule backward in time to periods when it may not have been in effect. To retrieve information about all the known adjustment rules for a particular time zone, use the <see cref="M:System.TimeZoneInfo.GetAdjustmentRules" /> method.</para
-        >
+          >The <see cref="T:System.Globalization.DaylightTime" /> object returned by the <see cref="M:System.TimeZone.GetDaylightChanges(System.Int32)" /> method recognizes only the time zone adjustment rule that is currently in effect, and ignores any previous adjustment rules for which the system has information. Instead, it applies the current adjustment rule backward in time to periods when it may not have been in effect. To retrieve information about all the known adjustment rules for a particular time zone, use the <see cref="M:System.TimeZoneInfo.GetAdjustmentRules" /> method.</para>
       </block>
     </remarks>
     <summary>
@@ -63,36 +62,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="start" /> parameter becomes the value of the <see cref="P:System.Globalization.DaylightTime.Start" /> property of the new object. The <paramref name="end" /> parameter becomes the value of the <see cref="P:System.Globalization.DaylightTime.End" /> property of the new object. The <paramref name="delta" /> parameter becomes the value of the <see cref="P:System.Globalization.DaylightTime.Delta" /> property of the new object.</para
-          >
+            >The <paramref name="start" /> parameter becomes the value of the <see cref="P:System.Globalization.DaylightTime.Start" /> property of the new object. The <paramref name="end" /> parameter becomes the value of the <see cref="P:System.Globalization.DaylightTime.End" /> property of the new object. The <paramref name="delta" /> parameter becomes the value of the <see cref="P:System.Globalization.DaylightTime.Delta" /> property of the new object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Globalization.DaylightTime" /> class with the specified start, end, and time difference information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Globalization.DaylightTime" /> class with the specified start, end, and time difference information.</para>
         </summary>
         <param name="start">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the date and time when daylight saving time begins. The value must be in local time. </param
-        >
+          />The object that represents the date and time when daylight saving time begins. The value must be in local time. </param>
         <param name="end">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the date and time when daylight saving time ends. The value must be in local time. </param
-        >
+          />The object that represents the date and time when daylight saving time ends. The value must be in local time. </param>
         <param name="delta">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the difference between standard time and daylight saving time, in ticks. </param
-        >
+          />The object that represents the difference between standard time and daylight saving time, in ticks. </param>
       </Docs>
     </Member>
     <Member MemberName="Delta">
@@ -115,8 +109,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the <see cref="P:System.TimeZoneInfo.AdjustmentRule.DaylightDelta" /> property. Generally, the <see cref="T:System.TimeZoneInfo" /> class is a more accurate source of information on time zone adjustments than the <see cref="T:System.TimeZone" /> and <see cref="T:System.Globalization.DaylightTime" /> classes.</para
-          >
+            >This property corresponds to the <see cref="P:System.TimeZoneInfo.AdjustmentRule.DaylightDelta" /> property. Generally, the <see cref="T:System.TimeZoneInfo" /> class is a more accurate source of information on time zone adjustments than the <see cref="T:System.TimeZone" /> and <see cref="T:System.Globalization.DaylightTime" /> classes.</para>
           <para>If the property value is positive, at the start of daylight saving time, the clock time is advanced by the length of time specified by this property. At the end of daylight saving time, the clock time is set back by the length of time specified by this property. If the property value is negative, the clock time is set back at the start of daylight saving time and advanced at the end.</para>
         </remarks>
         <summary>
@@ -142,8 +135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the <see cref="P:System.TimeZoneInfo.AdjustmentRule.DateEnd" /> property. Generally, the <see cref="T:System.TimeZoneInfo" /> class is a more accurate source of information on time zone adjustments than the <see cref="T:System.TimeZone" /> and <see cref="T:System.Globalization.DaylightTime" /> classes.</para
-          >
+            >This property corresponds to the <see cref="P:System.TimeZoneInfo.AdjustmentRule.DateEnd" /> property. Generally, the <see cref="T:System.TimeZoneInfo" /> class is a more accurate source of information on time zone adjustments than the <see cref="T:System.TimeZone" /> and <see cref="T:System.Globalization.DaylightTime" /> classes.</para>
           <para>When the daylight saving period ends, the clock time is set back to standard time.</para>
         </remarks>
         <summary>
@@ -172,11 +164,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the <see cref="P:System.TimeZoneInfo.AdjustmentRule.DateStart" /> property. Generally, the <see cref="T:System.TimeZoneInfo" /> class is a more accurate source of information on time zone adjustments than the <see cref="T:System.TimeZone" /> and <see cref="T:System.Globalization.DaylightTime" /> classes.</para
-          >
+            >This property corresponds to the <see cref="P:System.TimeZoneInfo.AdjustmentRule.DateStart" /> property. Generally, the <see cref="T:System.TimeZoneInfo" /> class is a more accurate source of information on time zone adjustments than the <see cref="T:System.TimeZone" /> and <see cref="T:System.Globalization.DaylightTime" /> classes.</para>
           <para
-            >When the daylight saving period begins, the clock time is advanced by the number of ticks defined by the <see cref="P:System.Globalization.DaylightTime.Delta" /> property to take advantage of the extended daylight hours.</para
-          >
+            >When the daylight saving period begins, the clock time is advanced by the number of ticks defined by the <see cref="P:System.Globalization.DaylightTime.Delta" /> property to take advantage of the extended daylight hours.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

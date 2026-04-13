@@ -2,19 +2,15 @@
   <PropertyGroup>
     <AndroidGenerateAppBundle
       Condition="'$(AndroidGenerateAppBundle)' == '' and '$(GenerateAppBundle)' != ''"
-      >$(GenerateAppBundle)</AndroidGenerateAppBundle
-    >
+      >$(GenerateAppBundle)</AndroidGenerateAppBundle>
     <AndroidGenerateAppBundle Condition="'$(AndroidGenerateAppBundle)' == ''"
-      >true</AndroidGenerateAppBundle
-    >
+      >true</AndroidGenerateAppBundle>
     <AndroidGenerateAppBundle
       Condition="'$(_IsLibraryMode)' == 'true' and '$(ForceLibraryModeGenerateAppBundle)' != 'true'"
-      >false</AndroidGenerateAppBundle
-    >
+      >false</AndroidGenerateAppBundle>
 
     <EnableDefaultAssembliesToBundle Condition="'$(EnableDefaultAssembliesToBundle)' == ''"
-      >false</EnableDefaultAssembliesToBundle
-    >
+      >false</EnableDefaultAssembliesToBundle>
   </PropertyGroup>
 
   <UsingTask
@@ -45,29 +41,24 @@
     <PropertyGroup>
       <_MobileIntermediateOutputPath>$([MSBuild]::NormalizeDirectory($(IntermediateOutputPath), 'mobile'))</_MobileIntermediateOutputPath>
       <TargetArchitecture Condition="'$(TargetArchitecture)' == ''"
-        >$(PlatformTarget)</TargetArchitecture
-      >
+        >$(PlatformTarget)</TargetArchitecture>
     </PropertyGroup>
 
     <PropertyGroup>
       <MicrosoftNetCoreAppRuntimePackDir Condition="'$(MicrosoftNetCoreAppRuntimePackDir)' == ''"
-        >%(ResolvedRuntimePack.PackageDirectory)</MicrosoftNetCoreAppRuntimePackDir
-      >
+        >%(ResolvedRuntimePack.PackageDirectory)</MicrosoftNetCoreAppRuntimePackDir>
       <MicrosoftNetCoreAppRuntimePackRidDir
         Condition="'$(MicrosoftNetCoreAppRuntimePackRidDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackDir), 'runtimes', '$(TargetOS)-$(TargetArchitecture)'))</MicrosoftNetCoreAppRuntimePackRidDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackDir), 'runtimes', '$(TargetOS)-$(TargetArchitecture)'))</MicrosoftNetCoreAppRuntimePackRidDir>
       <MicrosoftNetCoreAppRuntimePackRidDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidDir)))</MicrosoftNetCoreAppRuntimePackRidDir>
       <MicrosoftNetCoreAppRuntimePackRidNativeDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidDir), 'native'))</MicrosoftNetCoreAppRuntimePackRidNativeDir>
     </PropertyGroup>
 
     <PropertyGroup>
       <AndroidBuildDir Condition="'$(AndroidBuildDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(PublishDir)))</AndroidBuildDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(PublishDir)))</AndroidBuildDir>
       <AndroidBundleDir Condition="'$(AndroidBundleDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'Bundle'))</AndroidBundleDir
-      >
+        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'Bundle'))</AndroidBundleDir>
 
       <BundleDir>$(AndroidBundleDir)</BundleDir>
       <_MonoHeaderPath>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidNativeDir), 'include', 'mono-2.0'))</_MonoHeaderPath>
@@ -116,11 +107,9 @@
   <Target Name="_BeforeAndroidBuild">
     <PropertyGroup>
       <_AndroidRuntimeConfigFilePath Condition="'$(_AndroidRuntimeConfigFilePath)' == ''"
-        >$([MSBuild]::NormalizePath($(AndroidBuildDir), '$(AssemblyName).runtimeconfig.json'))</_AndroidRuntimeConfigFilePath
-      >
+        >$([MSBuild]::NormalizePath($(AndroidBuildDir), '$(AssemblyName).runtimeconfig.json'))</_AndroidRuntimeConfigFilePath>
       <_ParsedRuntimeConfigFilePath Condition="'$(_ParsedRuntimeConfigFilePath)' == ''"
-        >$([MSBuild]::NormalizePath($(AndroidBuildDir), 'runtimeconfig.bin'))</_ParsedRuntimeConfigFilePath
-      >
+        >$([MSBuild]::NormalizePath($(AndroidBuildDir), 'runtimeconfig.bin'))</_ParsedRuntimeConfigFilePath>
     </PropertyGroup>
 
     <RemoveDir Directories="$(AndroidBundleDir)" />
@@ -161,8 +150,7 @@
     <PropertyGroup Condition="'$(_IsLibraryMode)' == 'true'">
       <_UsesRuntimeInitCallback>$(UsesRuntimeInitCallback)</_UsesRuntimeInitCallback>
       <_UsesRuntimeInitCallback Condition="'$(_UsesRuntimeInitCallback)' == ''"
-        >true</_UsesRuntimeInitCallback
-      >
+        >true</_UsesRuntimeInitCallback>
       <_AotOutputType>ObjectFile</_AotOutputType>
     </PropertyGroup>
 
@@ -214,8 +202,7 @@
 
     <PropertyGroup>
       <AndroidLibraryMinApiLevel Condition="'$(AndroidLibraryMinApiLevel)' == ''"
-        >21</AndroidLibraryMinApiLevel
-      >
+        >21</AndroidLibraryMinApiLevel>
     </PropertyGroup>
 
     <NdkToolFinderTask
@@ -301,8 +288,7 @@
       <_CompilerBinaryPath>@(MonoAotCrossCompiler->WithMetadataValue('RuntimeIdentifier','$(TargetOS.ToLowerInvariant())-$(TargetArchitecture.ToLowerInvariant())'))</_CompilerBinaryPath>
       <_MonoLLVMPath>$(MonoAotCrossDir)</_MonoLLVMPath>
       <_MonoLLVMPath Condition="'$(_MonoLLVMPath)' == '' and '$(MonoEnableLLVM)' == 'true'"
-        >$([System.IO.Path]::GetDirectoryName("$(_CompilerBinaryPath)"))</_MonoLLVMPath
-      >
+        >$([System.IO.Path]::GetDirectoryName("$(_CompilerBinaryPath)"))</_MonoLLVMPath>
     </PropertyGroup>
 
     <MonoAOTCompiler

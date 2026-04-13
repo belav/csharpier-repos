@@ -31,10 +31,8 @@
       <para
         >For more information about processing XML data by using the XPath data model, see the <format type="text/html">
           <a href="536c6fce-1453-4654-9c72-bca54d47e081"
-            >Process XML Data Using the XPath Data Model</a
-          >
-        </format> topic.</para
-      >
+            >Process XML Data Using the XPath Data Model</a>
+        </format> topic.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,16 +61,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data in the specified <see cref="T:System.IO.Stream" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data in the specified <see cref="T:System.IO.Stream" /> object.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.Stream" /> object that contains the XML data.</param
-        >
+          />The <see cref="T:System.IO.Stream" /> object that contains the XML data.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -98,22 +94,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After the <see cref="T:System.IO.TextReader" /> object has been used to load XML data, the cursor of the <see cref="T:System.IO.TextReader" /> object is positioned at the end of the data. The <see cref="T:System.IO.TextReader" /> object must be reset to read through the data again.</para
-          >
+            >After the <see cref="T:System.IO.TextReader" /> object has been used to load XML data, the cursor of the <see cref="T:System.IO.TextReader" /> object is positioned at the end of the data. The <see cref="T:System.IO.TextReader" /> object must be reset to read through the data again.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data that is contained in the specified <see cref="T:System.IO.TextReader" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data that is contained in the specified <see cref="T:System.IO.TextReader" /> object.</para>
         </summary>
         <param name="textReader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextReader" /> object that contains the XML data.</param
-        >
+          />The <see cref="T:System.IO.TextReader" /> object that contains the XML data.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -136,22 +129,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To preserve white space, use the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String,System.Xml.XmlSpace)" /> constructor that accepts an <see cref="T:System.Xml.XmlSpace" /> object as a parameter.</para
-          >
+            >To preserve white space, use the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String,System.Xml.XmlSpace)" /> constructor that accepts an <see cref="T:System.Xml.XmlSpace" /> object as a parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data in the specified file.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data in the specified file.</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of the file that contains the XML data.</param
-        >
+          />The path of the file that contains the XML data.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -174,42 +164,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.XmlReader" /> object can be used to load a whole XML document or part of an XML document into an <see cref="T:System.Xml.XPath.XPathDocument" />. To load part of an XML document into an <see cref="T:System.Xml.XPath.XPathDocument" />, position the <see cref="T:System.Xml.XmlReader" /> object on the top XML node to load data from. When you create an <see cref="T:System.Xml.XPath.XPathDocument" /> by using the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" /> constructor, data is loaded from the current top node through all its siblings. Afterwards, the <see cref="T:System.Xml.XmlReader" /> is positioned on the outer scope of the top XML node. Alternatively, you can use the <see cref="M:System.XmlReader.ReadSubtree" /> method to load the <see cref="T:System.Xml.XPath.XPathDocument" /> into a particular  element in the XML document.</para
-          >
+            >An <see cref="T:System.Xml.XmlReader" /> object can be used to load a whole XML document or part of an XML document into an <see cref="T:System.Xml.XPath.XPathDocument" />. To load part of an XML document into an <see cref="T:System.Xml.XPath.XPathDocument" />, position the <see cref="T:System.Xml.XmlReader" /> object on the top XML node to load data from. When you create an <see cref="T:System.Xml.XPath.XPathDocument" /> by using the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" /> constructor, data is loaded from the current top node through all its siblings. Afterwards, the <see cref="T:System.Xml.XmlReader" /> is positioned on the outer scope of the top XML node. Alternatively, you can use the <see cref="M:System.XmlReader.ReadSubtree" /> method to load the <see cref="T:System.Xml.XPath.XPathDocument" /> into a particular  element in the XML document.</para>
           <para
-            >The following are important notes to consider when you use the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" /> constructor.</para
-          >
+            >The following are important notes to consider when you use the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" /> constructor.</para>
           <list type="bullet">
             <item>
               <para
-                >An <see cref="T:System.Xml.XmlReader" /> object with the appropriate associated <see cref="T:System.Xml.XmlResolver" /> object settings can be used to resolve entities or other references in XML data.</para
-              >
+                >An <see cref="T:System.Xml.XmlReader" /> object with the appropriate associated <see cref="T:System.Xml.XmlResolver" /> object settings can be used to resolve entities or other references in XML data.</para>
             </item>
             <item>
               <para
-                >If the <see cref="T:System.Xml.XmlReader" /> object is positioned on a leaf node that is not valid for the root level of a document—for example, a white space or attribute node—the <see cref="T:System.Xml.XmlReader" /> object continues to read until it is positioned on a node that can be used for the root. The <see cref="T:System.Xml.XPath.XPathDocument" /> begins loading at this point.</para
-              >
+                >If the <see cref="T:System.Xml.XmlReader" /> object is positioned on a leaf node that is not valid for the root level of a document—for example, a white space or attribute node—the <see cref="T:System.Xml.XmlReader" /> object continues to read until it is positioned on a node that can be used for the root. The <see cref="T:System.Xml.XPath.XPathDocument" /> begins loading at this point.</para>
             </item>
             <item>
               <para
-                >To preserve white space, use the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader,System.Xml.XmlSpace)" /> constructor that accepts an <see cref="T:System.Xml.XmlSpace" /> object as a parameter.</para
-              >
+                >To preserve white space, use the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader,System.Xml.XmlSpace)" /> constructor that accepts an <see cref="T:System.Xml.XmlSpace" /> object as a parameter.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data that is contained in the specified <see cref="T:System.Xml.XmlReader" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data that is contained in the specified <see cref="T:System.Xml.XmlReader" /> object.</para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> object that contains the XML data. </param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> object that contains the XML data. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -238,36 +221,31 @@
           <list type="bullet">
             <item>
               <para
-                >The <see cref="T:System.Xml.XmlSpace" /> object passed as a parameter specifies whether to preserve white space. <see cref="F:System.Xml.XmlSpace.Default" /> preserves only significant white space; <see cref="F:System.Xml.XmlSpace.Preserve" /> preserves all white space. By default, the <see cref="T:System.Xml.XmlSpace" /> object is set to <see cref="F:System.Xml.XmlSpace.Default" />.</para
-              >
+                >The <see cref="T:System.Xml.XmlSpace" /> object passed as a parameter specifies whether to preserve white space. <see cref="F:System.Xml.XmlSpace.Default" /> preserves only significant white space; <see cref="F:System.Xml.XmlSpace.Preserve" /> preserves all white space. By default, the <see cref="T:System.Xml.XmlSpace" /> object is set to <see cref="F:System.Xml.XmlSpace.Default" />.</para>
             </item>
             <item>
               <para
-                >The functionality of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String,System.Xml.XmlSpace)" /> constructor is identical to that of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String)" /> constructor, except for the white space handling options described.</para
-              >
+                >The functionality of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String,System.Xml.XmlSpace)" /> constructor is identical to that of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.String)" /> constructor, except for the white space handling options described.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data in the file specified with the white space handling specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data in the file specified with the white space handling specified.</para>
         </summary>
         <param name="uri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of the file that contains the XML data.</param
-        >
+          />The path of the file that contains the XML data.</param>
         <param name="space">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlSpace" /> object.</param
-        >
+          />An <see cref="T:System.Xml.XmlSpace" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -296,36 +274,31 @@
           <list type="bullet">
             <item>
               <para
-                >The <see cref="T:System.Xml.XmlSpace" /> object passed as a parameter specifies whether to preserve white space. <see cref="F:System.Xml.XmlSpace.Default" /> preserves only significant white space; <see cref="F:System.Xml.XmlSpace.Preserve" /> preserves all white space. By default, the <see cref="T:System.Xml.XmlSpace" /> object is set to <see cref="F:System.Xml.XmlSpace.Default" />.</para
-              >
+                >The <see cref="T:System.Xml.XmlSpace" /> object passed as a parameter specifies whether to preserve white space. <see cref="F:System.Xml.XmlSpace.Default" /> preserves only significant white space; <see cref="F:System.Xml.XmlSpace.Preserve" /> preserves all white space. By default, the <see cref="T:System.Xml.XmlSpace" /> object is set to <see cref="F:System.Xml.XmlSpace.Default" />.</para>
             </item>
             <item>
               <para
-                >The functionality of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader,System.Xml.XmlSpace)" /> constructor is identical to that of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" /> constructor, except for the white space handling options described.</para
-              >
+                >The functionality of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader,System.Xml.XmlSpace)" /> constructor is identical to that of the <see cref="M:System.Xml.XPath.XPathDocument.#ctor(System.Xml.XmlReader)" /> constructor, except for the white space handling options described.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data that is contained in the specified <see cref="T:System.Xml.XmlReader" /> object with the specified white space handling.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathDocument" /> class from the XML data that is contained in the specified <see cref="T:System.Xml.XmlReader" /> object with the specified white space handling.</para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> object that contains the XML data.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> object that contains the XML data.</param>
         <param name="space">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlSpace" /> object.</param
-        >
+          />An <see cref="T:System.Xml.XmlSpace" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateNavigator">
@@ -351,14 +324,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the root element of the <see cref="T:System.Xml.XPath.XPathDocument" />. If there is no root element, the <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the first element in the <see cref="T:System.Xml.XPath.XPathDocument" />.</para
-          >
+            >The <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the root element of the <see cref="T:System.Xml.XPath.XPathDocument" />. If there is no root element, the <see cref="T:System.Xml.XPath.XPathNavigator" /> is positioned on the first element in the <see cref="T:System.Xml.XPath.XPathDocument" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a read-only <see cref="T:System.Xml.XPath.XPathNavigator" /> object for navigating through nodes in this <see cref="T:System.Xml.XPath.XPathDocument" />.</para
-          >
+            >Initializes a read-only <see cref="T:System.Xml.XPath.XPathNavigator" /> object for navigating through nodes in this <see cref="T:System.Xml.XPath.XPathDocument" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BindingCollectionElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BindingCollectionElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -136,16 +135,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains the binding with the specified <paramref name="name" />; otherwise, false. </para
-          >
+            >true if the collection contains the binding with the specified <paramref name="name" />; otherwise, false. </para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the binding to be located.</param
-        >
+          />The name of the binding to be located.</param>
       </Docs>
     </Member>
     <Member MemberName="GetDefault">
@@ -174,8 +171,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Channels.Binding" /> object that represents the default binding.</para
-          >
+            >A <see cref="T:System.ServiceModel.Channels.Binding" /> object that represents the default binding.</para>
         </returns>
       </Docs>
     </Member>
@@ -215,22 +211,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the binding to be added.</param
-        >
+          />The name of the binding to be added.</param>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Channels.Binding" /> object that represents the binding to be added.</param
-        >
+          />A <see cref="T:System.ServiceModel.Channels.Binding" /> object that represents the binding to be added.</param>
         <param name="config">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration settings of this binding.</param
-        >
+          />The configuration settings of this binding.</param>
       </Docs>
     </Member>
   </Members>

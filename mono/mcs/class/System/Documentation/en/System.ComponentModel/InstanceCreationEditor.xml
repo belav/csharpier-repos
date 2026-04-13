@@ -18,14 +18,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Usually, the text specified by <see cref="P:System.ComponentModel.InstanceCreationEditor.Text" /> is displayed on the drop-down box from the <see cref="T:System.Windows.Forms.PropertyGrid" /> as a link or button. When clicked, the <see cref="M:System.ComponentModel.InstanceCreationEditor.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Type)" /> method is called with the <see cref="T:System.Type" /> of the object to create.</para
-      >
+        >Usually, the text specified by <see cref="P:System.ComponentModel.InstanceCreationEditor.Text" /> is displayed on the drop-down box from the <see cref="T:System.Windows.Forms.PropertyGrid" /> as a link or button. When clicked, the <see cref="M:System.ComponentModel.InstanceCreationEditor.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Type)" /> method is called with the <see cref="T:System.Type" /> of the object to create.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates an instance of a particular type of property from a drop-down box within the <see cref="T:System.Windows.Forms.PropertyGrid" />. </para
-      >
+        >Creates an instance of a particular type of property from a drop-down box within the <see cref="T:System.Windows.Forms.PropertyGrid" />. </para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.InstanceCreationEditor" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InstanceCreationEditor" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -88,8 +85,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context information.</param
-        >
+          />The context information.</param>
       </Docs>
     </Member>
     <Member MemberName="Text">

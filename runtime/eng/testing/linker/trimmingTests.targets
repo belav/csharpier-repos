@@ -3,8 +3,7 @@
     <IlcToolsPath>$(CoreCLRILCompilerDir)</IlcToolsPath>
     <IlcToolsPath
       Condition="'$(TargetArchitecture)' != '$(BuildArchitecture)' or '$(EnableNativeSanitizers)' != ''"
-      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath
-    >
+      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,26 +36,21 @@
         <TestRuntimeIdentifier>$(PackageRID)</TestRuntimeIdentifier>
         <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
         <TargetFramework Condition="'%(TestConsoleAppSourceFiles.TargetOS)' != ''"
-          >$(NetCoreAppCurrent)-%(TestConsoleAppSourceFiles.TargetOS)</TargetFramework
-        >
+          >$(NetCoreAppCurrent)-%(TestConsoleAppSourceFiles.TargetOS)</TargetFramework>
       </TestConsoleAppSourceFiles>
       <!-- We need to separate Item metadata declaration in two in order to be able to use ProjectDir and TestRuntimeIdentifier below -->
       <TestConsoleAppSourceFiles>
         <ProjectFile>%(ProjectDir)project.csproj</ProjectFile>
         <TestCommand Condition="'$(TargetArchitecture)' != 'wasm' or '$(TargetOS)' != 'browser'"
-          >$([MSBuild]::NormalizePath('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'publish', 'project'))</TestCommand
-        >
+          >$([MSBuild]::NormalizePath('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'publish', 'project'))</TestCommand>
         <TestCommand Condition="'$(TargetArchitecture)' == 'wasm' and '$(TargetOS)' == 'browser'"
-          >$([MSBuild]::NormalizePath('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'AppBundle', 'run-v8.sh'))</TestCommand
-        >
+          >$([MSBuild]::NormalizePath('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'AppBundle', 'run-v8.sh'))</TestCommand>
         <TestExecutionDirectory
           Condition="'$(TargetArchitecture)' != 'wasm' or '$(TargetOS)' != 'browser'"
-          >$([MSBuild]::NormalizeDirectory('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'publish'))</TestExecutionDirectory
-        >
+          >$([MSBuild]::NormalizeDirectory('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'publish'))</TestExecutionDirectory>
         <TestExecutionDirectory
           Condition="'$(TargetArchitecture)' == 'wasm' and '$(TargetOS)' == 'browser'"
-          >$([MSBuild]::NormalizeDirectory('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'AppBundle'))</TestExecutionDirectory
-        >
+          >$([MSBuild]::NormalizeDirectory('%(ProjectDir)', 'bin', '$(Configuration)', '%(TargetFramework)', '%(TestRuntimeIdentifier)', 'AppBundle'))</TestExecutionDirectory>
       </TestConsoleAppSourceFiles>
     </ItemGroup>
 

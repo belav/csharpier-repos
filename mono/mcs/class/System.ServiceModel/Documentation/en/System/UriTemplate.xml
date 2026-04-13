@@ -35,8 +35,7 @@
         </item>
       </list>
       <para
-        >The preceding URI templates might be used for organizing weather reports. Segments enclosed in curly braces are variables, everything else is a literal. You can convert a <see cref="T:System.UriTemplate" /> instance into a <see cref="T:System.Uri" /> by replacing variables with actual values. For example, taking the template "weather/{state}/{city}" and putting in values for the variables "{state}" and "{city}" gives you "weather/WA/Seattle". Given a candidate URI, you can test whether it matches a given URI template by calling <see cref="M:System.UriTemplate.Match(System.Uri,System.Uri)" />. You can also use <see cref="T:System.UriTemplate" /> instances to create a <see cref="T:System.Uri" /> from a set of variable values by calling <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" /> or <see cref="M:System.UriTemplate.BindByPosition(System.Uri,System.String[])" />.</para
-      >
+        >The preceding URI templates might be used for organizing weather reports. Segments enclosed in curly braces are variables, everything else is a literal. You can convert a <see cref="T:System.UriTemplate" /> instance into a <see cref="T:System.Uri" /> by replacing variables with actual values. For example, taking the template "weather/{state}/{city}" and putting in values for the variables "{state}" and "{city}" gives you "weather/WA/Seattle". Given a candidate URI, you can test whether it matches a given URI template by calling <see cref="M:System.UriTemplate.Match(System.Uri,System.Uri)" />. You can also use <see cref="T:System.UriTemplate" /> instances to create a <see cref="T:System.Uri" /> from a set of variable values by calling <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" /> or <see cref="M:System.UriTemplate.BindByPosition(System.Uri,System.String[])" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,12 +61,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.UriTemplate" /> class with the specified template string.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.UriTemplate" /> class with the specified template string.</para>
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />The template.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The template.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -91,8 +88,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref name="ignoreTrailingSlash" /> is set to true, trailing slashes on the end of template are ignored when matching a candidate URI. For example, a template such as “http://www.microsoft.com/customer/” would match the following candidate URIs: </para
-          >
+            >When the <paramref name="ignoreTrailingSlash" /> is set to true, trailing slashes on the end of template are ignored when matching a candidate URI. For example, a template such as “http://www.microsoft.com/customer/” would match the following candidate URIs: </para>
           <list type="bullet">
             <item>
               <para>"http://www.microsoft.com/customer/"</para>
@@ -113,15 +109,17 @@
           <para>Initializes a new instance of the <see cref="T:System.UriTemplate" /> class.</para>
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />The template string.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The template string.</param>
         <param name="ignoreTrailingSlash">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that specifies whether trailing slash “/” characters should be ignored.</param
-        >
+          />A value that specifies whether trailing slash “/” characters should be ignored.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -151,15 +149,17 @@
           <para>Initializes a new instance of the <see cref="T:System.UriTemplate" /> class.</para>
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />The template string.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The template string.</param>
         <param name="additionalDefaults">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary that contains a list of default values for the template parameters.</param
-        >
+          />A dictionary that contains a list of default values for the template parameters.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -190,22 +190,23 @@
           <para>Initializes a new instance of the <see cref="T:System.UriTemplate" /> class.</para>
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />The template string.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The template string.</param>
         <param name="ignoreTrailingSlash">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the trailing slash “/” characters are ignored; otherwise false.</param
-        >
+          />true if the trailing slash “/” characters are ignored; otherwise false.</param>
         <param name="additionalDefaults">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary that contains a list of default values for the template parameters.</param
-        >
+          />A dictionary that contains a list of default values for the template parameters.</param>
       </Docs>
     </Member>
     <Member MemberName="BindByName">
@@ -235,8 +236,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Collections.Generic.IDictionary{System.String,System.String}" /> parameter contains a collection of parameter name and value pairs. The parameters are matched up against the variables within the template by a case-insensitive comparison.</para
-          >
+            >The <see cref="T:System.Collections.Generic.IDictionary{System.String,System.String}" /> parameter contains a collection of parameter name and value pairs. The parameters are matched up against the variables within the template by a case-insensitive comparison.</para>
           <block subset="none" type="note">
             <para>The name/value collection passed to this method must contain a key for every template variable. Extra name/value pairs that do not match template variables are appended to the query string of the final URI. </para>
           </block>
@@ -253,15 +253,13 @@
           <para>A URI.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary that contains a collection of parameter name/value pairs.</param
-        >
+          />A dictionary that contains a collection of parameter name/value pairs.</param>
       </Docs>
     </Member>
     <Member MemberName="BindByName">
@@ -288,12 +286,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Collections.Specialized.NameValueCollection" /> parameter contains a collection of parameter name/value pairs. The parameters are matched up against the variables within the template by a case-insensitive comparison. Values passed in this collection are escaped.</para
-          >
+            >The <see cref="T:System.Collections.Specialized.NameValueCollection" /> parameter contains a collection of parameter name/value pairs. The parameters are matched up against the variables within the template by a case-insensitive comparison. Values passed in this collection are escaped.</para>
           <block subset="none" type="note">
             <para
-              >The name/value collection passed to <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" /> must contain a key for every template variable. Extra name/value pairs that do not match template variables are appended to the query string of the final URI. </para
-            >
+              >The name/value collection passed to <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" /> must contain a key for every template variable. Extra name/value pairs that do not match template variables are appended to the query string of the final URI. </para>
           </block>
           <block subset="none" type="note">
             <para>It is possible to pass in text within the name/value pairs that prevent the generated URI from matching the template that is used to generate it. Examples of such text includes: '/', '..', '*', '{', and '}'.</para>
@@ -308,15 +304,13 @@
           <para>A new instance.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter values.</param
-        >
+          />The parameter values.</param>
       </Docs>
     </Member>
     <Member MemberName="BindByName">
@@ -358,22 +352,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A URI that contains the base address.</param
-        >
+          />A URI that contains the base address.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A dictionary that contains a collection of parameter name/value pairs.</param
-        >
+          />A dictionary that contains a collection of parameter name/value pairs.</param>
         <param name="omitDefaults">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true is the default values are ignored; otherwise false.</param
-        >
+          />true is the default values are ignored; otherwise false.</param>
       </Docs>
     </Member>
     <Member MemberName="BindByName">
@@ -408,22 +399,19 @@
           <para>A URI.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of parameter name/value pairs. </param
-        >
+          />A collection of parameter name/value pairs. </param>
         <param name="omitDefaults">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the default values are ignored; otherwise false.</param
-        >
+          />true if the default values are ignored; otherwise false.</param>
       </Docs>
     </Member>
     <Member MemberName="BindByPosition">
@@ -458,8 +446,7 @@
           <para>The parameter values are bound by position left to right. The first parameter value replaces the first variable found in the template, the second parameter value replaces the second variable, and so on. Variables passed to this method are escaped.</para>
           <block subset="none" type="note">
             <para
-              >The number of parameters passed in the values parameter must match the number of variables in the template. If not, a <see cref="T:System.FormatException" /> is thrown.</para
-            >
+              >The number of parameters passed in the values parameter must match the number of variables in the template. If not, a <see cref="T:System.FormatException" /> is thrown.</para>
           </block>
           <block subset="none" type="note">
             <para>It is possible to pass in text within the parameter values array that prevents the generated URI from matching the template that is used to generate it. Examples of such text includes: '/', '.','..', '*', '{', and '}'. The following code demonstrates this.</para>
@@ -485,15 +472,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> that contains the base address.</param
-        >
+          />A <see cref="T:System.Uri" /> that contains the base address.</param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter values.</param
-        >
+          />The parameter values.</param>
       </Docs>
     </Member>
     <Member MemberName="Defaults">
@@ -560,28 +545,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.UriTemplate" /> instances are equivalent if their literal strings are identical and the variables appear in the same segments. For example "weather/{state}/{city}" is equivalent to "weather/{country}/{village}".</para
-          >
+            >Two <see cref="T:System.UriTemplate" /> instances are equivalent if their literal strings are identical and the variables appear in the same segments. For example "weather/{state}/{city}" is equivalent to "weather/{country}/{village}".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see cref="T:System.UriTemplate" /> is structurally equivalent to another.</para
-          >
+            >Indicates whether a <see cref="T:System.UriTemplate" /> is structurally equivalent to another.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.UriTemplate" /> is structurally equivalent to another; otherwise false.</para
-          >
+            >true if the <see cref="T:System.UriTemplate" /> is structurally equivalent to another; otherwise false.</para>
         </returns>
         <param name="other">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.UriTemplate" /> to compare.</param
-        >
+          />The <see cref="T:System.UriTemplate" /> to compare.</param>
       </Docs>
     </Member>
     <Member MemberName="Match">
@@ -608,29 +589,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the match is successful the <see cref="T:System.UriTemplateMatch" /> is populated with the URI segments, variable values, query string values, and wildcard segments from the candidate URI. If the match is unsuccessful, null is returned.</para
-          >
+            >If the match is successful the <see cref="T:System.UriTemplateMatch" /> is populated with the URI segments, variable values, query string values, and wildcard segments from the candidate URI. If the match is unsuccessful, null is returned.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to match a <see cref="T:System.URI" /> to a <see cref="T:System.UriTemplate" />.</para
-          >
+            >Attempts to match a <see cref="T:System.URI" /> to a <see cref="T:System.UriTemplate" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An instance.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The base address.</param>
         <param name="candidate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> to match against the template.</param
-        >
+          />The <see cref="T:System.Uri" /> to match against the template.</param>
       </Docs>
     </Member>
     <Member MemberName="PathSegmentVariableNames">
@@ -708,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the <see cref="T:System.UriTemplate" /> instance.</para
-          >
+            >Returns a string representation of the <see cref="T:System.UriTemplate" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

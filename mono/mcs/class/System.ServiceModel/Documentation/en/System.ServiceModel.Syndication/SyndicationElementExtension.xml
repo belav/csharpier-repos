@@ -48,8 +48,7 @@
         </item>
       </list>
       <para
-        >The syndication object model makes this extensibility easier using <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />, which can be placed in a <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtensionCollection" />.</para
-      >
+        >The syndication object model makes this extensibility easier using <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />, which can be placed in a <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtensionCollection" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,16 +77,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object.</para>
         </summary>
         <param name="dataContractExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract object used to initialize the extension. </param
-        >
+          />The data contract object used to initialize the extension. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,16 +108,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class. </para>
         </summary>
         <param name="xmlReader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> that contains the content of the new <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> that contains the content of the new <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -148,23 +143,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object and data contract serializer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object and data contract serializer.</para>
         </summary>
         <param name="dataContractExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract object used to initialize the extension.</param
-        >
+          />The data contract object used to initialize the extension.</param>
         <param name="dataContractSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract serializer to use.</param
-        >
+          />The data contract serializer to use.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -189,23 +181,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object and XML serializer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object and XML serializer.</para>
         </summary>
         <param name="xmlSerializerExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object used to initialize the extension.</param
-        >
+          />The object used to initialize the extension.</param>
         <param name="serializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML serializer to use.</param
-        >
+          />The XML serializer to use.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -231,30 +220,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified outer name, outer namespace, and object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified outer name, outer namespace, and object.</para>
         </summary>
         <param name="outerName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the enclosing XML element.</param
-        >
+          />The name of the enclosing XML element.</param>
         <param name="outerNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the enclosing XML element.</param
-        >
+          />The namespace of the enclosing XML element.</param>
         <param name="dataContractExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object used to initialize the extension.</param
-        >
+          />The object used to initialize the extension.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -284,37 +269,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified outer name, outer namespace, object, and data contract serializer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified outer name, outer namespace, object, and data contract serializer.</para>
         </summary>
         <param name="outerName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the enclosing XML element.</param
-        >
+          />The name of the enclosing XML element.</param>
         <param name="outerNamespace">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the enclosing XML element.</param
-        >
+          />The namespace of the enclosing XML element.</param>
         <param name="dataContractExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object used to initialize the extension.</param
-        >
+          />The object used to initialize the extension.</param>
         <param name="dataContractSerializer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data contract serializer to use.</param
-        >
+          />The data contract serializer to use.</param>
       </Docs>
     </Member>
     <Member MemberName="GetObject&lt;TExtension&gt;">
@@ -349,8 +329,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the extension to retrieve.</typeparam
-        >
+          />The type of the extension to retrieve.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetObject&lt;TExtension&gt;">
@@ -390,15 +369,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to use.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to use.</param>
         <typeparam name="TExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the extension to retrieve.</typeparam
-        >
+          />The type of the extension to retrieve.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetObject&lt;TExtension&gt;">
@@ -438,15 +415,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param>
         <typeparam name="TExtension">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the extension to retrieve.</typeparam
-        >
+          />The type of the extension to retrieve.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetReader">
@@ -468,14 +443,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Xml.XmlReader" /> associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para
-          >
+            >Gets the <see cref="T:System.Xml.XmlReader" /> associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlReader" /> associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para
-          >
+            >The <see cref="T:System.Xml.XmlReader" /> associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -550,16 +523,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the current extension to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the current extension to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
   </Members>

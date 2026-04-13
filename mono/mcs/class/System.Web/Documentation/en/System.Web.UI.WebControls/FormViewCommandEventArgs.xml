@@ -17,11 +17,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" /> event is raised when a button within the <see cref="T:System.Web.UI.WebControls.FormView" /> control is clicked. This allows you to provide an event-handling method that performs a custom routine whenever this event occurs.</para
-      >
+        >The <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" /> event is raised when a button within the <see cref="T:System.Web.UI.WebControls.FormView" /> control is clicked. This allows you to provide an event-handling method that performs a custom routine whenever this event occurs.</para>
       <para
-        >Buttons within a <see cref="T:System.Web.UI.WebControls.FormView" /> control can also invoke some of the built-in functionality of the control. To perform one of these operations, set the CommandName property of a button to one of the values in the following table.</para
-      >
+        >Buttons within a <see cref="T:System.Web.UI.WebControls.FormView" /> control can also invoke some of the built-in functionality of the control. To perform one of these operations, set the CommandName property of a button to one of the values in the following table.</para>
       <list type="table">
         <listheader>
           <item>
@@ -39,8 +37,7 @@
           </term>
           <description>
             <para
-              >Cancels an edit or insert operation and returns the <see cref="T:System.Web.UI.WebControls.FormView" /> control to the mode specified by the <see cref="P:System.Web.UI.WebControls.FormView.DefaultMode" /> property. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" /> events.</para
-            >
+              >Cancels an edit or insert operation and returns the <see cref="T:System.Web.UI.WebControls.FormView" /> control to the mode specified by the <see cref="P:System.Web.UI.WebControls.FormView.DefaultMode" /> property. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" /> events.</para>
           </description>
         </item>
         <item>
@@ -49,8 +46,7 @@
           </term>
           <description>
             <para
-              >Deletes the current record. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" /> and <see cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" /> events.</para
-            >
+              >Deletes the current record. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" /> and <see cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" /> events.</para>
           </description>
         </item>
         <item>
@@ -59,8 +55,7 @@
           </term>
           <description>
             <para
-              >Puts the <see cref="T:System.Web.UI.WebControls.FormView" /> control in edit mode. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" /> events.</para
-            >
+              >Puts the <see cref="T:System.Web.UI.WebControls.FormView" /> control in edit mode. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" /> events.</para>
           </description>
         </item>
         <item>
@@ -69,8 +64,7 @@
           </term>
           <description>
             <para
-              >Inserts the current record in the data source. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemInserted" /> and <see cref="E:System.Web.UI.WebControls.FormView.ItemInserting" /> events.</para
-            >
+              >Inserts the current record in the data source. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemInserted" /> and <see cref="E:System.Web.UI.WebControls.FormView.ItemInserting" /> events.</para>
           </description>
         </item>
         <item>
@@ -79,8 +73,7 @@
           </term>
           <description>
             <para
-              >Puts the <see cref="T:System.Web.UI.WebControls.FormView" /> control in insert mode. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" /> events.</para
-            >
+              >Puts the <see cref="T:System.Web.UI.WebControls.FormView" /> control in insert mode. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ModeChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.ModeChanging" /> events.</para>
           </description>
         </item>
         <item>
@@ -89,8 +82,7 @@
           </term>
           <description>
             <para
-              >Performs a paging operation. Set the CommandArgument property of the button to "First", "Last", "Next", "Prev", or a page number to specify the type of paging operation to perform. Raises the <see cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" /> events.</para
-            >
+              >Performs a paging operation. Set the CommandArgument property of the button to "First", "Last", "Next", "Prev", or a page number to specify the type of paging operation to perform. Raises the <see cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" /> and <see cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" /> events.</para>
           </description>
         </item>
         <item>
@@ -99,31 +91,25 @@
           </term>
           <description>
             <para
-              >Updates the current record in the data source. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" /> and <see cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" /> events.</para
-            >
+              >Updates the current record in the data source. Raises the <see cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" /> and <see cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" /> events.</para>
           </description>
         </item>
       </list>
       <para
-        >Although the <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" /> event is raised when a button listed in the previous table is clicked, it is recommended that you use the events listed in the table for the operation.</para
-      >
+        >Although the <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" /> event is raised when a button listed in the previous table is clicked, it is recommended that you use the events listed in the table for the operation.</para>
       <para
-        >A <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> object is passed to the event-handling method, which allows you to determine the command name and command argument of the button clicked. To determine the command name and command argument, use the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" /> and <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" /> properties, respectively. You can also access the button control that raised the event by using the <see cref="P:System.Web.UI.WebControls.DetailsViewCommandEventArgs.CommandSource" /> property.</para
-      >
+        >A <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> object is passed to the event-handling method, which allows you to determine the command name and command argument of the button clicked. To determine the command name and command argument, use the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" /> and <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" /> properties, respectively. You can also access the button control that raised the event by using the <see cref="P:System.Web.UI.WebControls.DetailsViewCommandEventArgs.CommandSource" /> property.</para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
-        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> class, see the <see cref="M:System.Web.UI.WebControls.FormViewCommandEventArgs.#ctor(System.Object,System.Web.UI.WebControls.CommandEventArgs)" /> constructor.</para
-      >
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> class, see the <see cref="M:System.Web.UI.WebControls.FormViewCommandEventArgs.#ctor(System.Object,System.Web.UI.WebControls.CommandEventArgs)" /> constructor.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.FormView.ItemCommand" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -144,11 +130,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> class.</para
-          >
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> class.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -168,8 +152,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> contained in the <paramref name="originalArgs" /> parameter. </para
-                >
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> contained in the <paramref name="originalArgs" /> parameter. </para>
               </description>
             </item>
             <item>
@@ -180,8 +163,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> contained in the <paramref name="originalArgs" /> parameter. </para
-                >
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" /> property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" /> contained in the <paramref name="originalArgs" /> parameter. </para>
               </description>
             </item>
             <item>
@@ -192,8 +174,7 @@
               </term>
               <description>
                 <para
-                  >The object contained in the <paramref name="commandSource" /> parameter. </para
-                >
+                  >The object contained in the <paramref name="commandSource" /> parameter. </para>
               </description>
             </item>
           </list>
@@ -204,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -224,8 +204,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.FormViewCommandEventArgs.CommandSource" /> property to access the properties of the control that raised the event. In the case of a <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> object, the control is the button that was clicked by the user.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.FormViewCommandEventArgs.CommandSource" /> property to access the properties of the control that raised the event. In the case of a <see cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" /> object, the control is the button that was clicked by the user.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

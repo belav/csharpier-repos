@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used primarily for control developers. To create a custom control builder for a <see cref="T:System.Web.UI.WebControls.ListItem" /> derived control, you need to inherit from this class.</para
-      >
+        >This class is used primarily for control developers. To create a custom control builder for a <see cref="T:System.Web.UI.WebControls.ListItem" /> derived control, you need to inherit from this class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.ListItem" /> control.</para
-      >
+        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.ListItem" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -41,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ListItemControlBuilder" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ListItemControlBuilder" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -61,14 +58,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" /> method to always indicate that white spaces in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> control are not represented by <see cref="T:System.Web.UI.LiteralControl" /> objects.</para
-          >
+            >This method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" /> method to always indicate that white spaces in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> control are not represented by <see cref="T:System.Web.UI.LiteralControl" /> objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether white spaces in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> are represented by <see cref="T:System.Web.UI.LiteralControl" /> objects.</para
-          >
+            >Determines whether white spaces in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> are represented by <see cref="T:System.Web.UI.LiteralControl" /> objects.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -91,19 +86,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.WebControls.ListItemControlBuilder.HtmlDecodeLiterals" /> method is used to determine whether HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> are converted to their equivalent characters when the text is parsed. This method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.HtmlDecodeLiterals" /> method to always return true. This indicates that HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> control are always automatically converted to their equivalent, plain text characters.</para
-          >
+            >The <see cref="M:System.Web.UI.WebControls.ListItemControlBuilder.HtmlDecodeLiterals" /> method is used to determine whether HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> are converted to their equivalent characters when the text is parsed. This method overrides the inherited implementation of the <see cref="M:System.Web.UI.ControlBuilder.HtmlDecodeLiterals" /> method to always return true. This indicates that HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> control are always automatically converted to their equivalent, plain text characters.</para>
           <block subset="none" type="note">
             <para
-              >The text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> is rendered as an attribute of the &lt;option&gt; HTML element. When the attribute is rendered on the client, special characters are automatically converted to their equivalent HTML entity. For example, the less than character (&lt;) is converted to &amp;lt;. When the attribute is parsed, HTML entities are automatically converted back to their equivalent, plain text characters.</para
-            >
+              >The text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> is rendered as an attribute of the &lt;option&gt; HTML element. When the attribute is rendered on the client, special characters are automatically converted to their equivalent HTML entity. For example, the less than character (&lt;) is converted to &amp;lt;. When the attribute is parsed, HTML entities are automatically converted back to their equivalent, plain text characters.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> are converted to their equivalent characters when the text is parsed.</para
-          >
+            >Determines whether HTML entities in the text associated with the <see cref="T:System.Web.UI.WebControls.ListItem" /> are converted to their equivalent characters when the text is parsed.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

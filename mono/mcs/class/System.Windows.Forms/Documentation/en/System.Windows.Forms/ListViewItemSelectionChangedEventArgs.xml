@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" /> event occurs when the selection state of a <see cref="T:System.Windows.Forms.ListViewItem" /> changes from selected to deselected or deselected to selected. The <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" /> will not occur if the <see cref="T:System.Windows.Forms.ListView" /> is in virtual mode. </para
-      >
+        >The <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" /> event occurs when the selection state of a <see cref="T:System.Windows.Forms.ListViewItem" /> changes from selected to deselected or deselected to selected. The <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" /> will not occur if the <see cref="T:System.Windows.Forms.ListView" /> is in virtual mode. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemSelectionChanged" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -48,30 +46,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItemSelectionChangedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItemSelectionChangedEventArgs" /> class. </para>
         </summary>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ListViewItem" /> whose selection state has changed.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ListViewItem" /> whose selection state has changed.</param>
         <param name="itemIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Windows.Forms.ListViewItem" /> whose selection state has changed.</param
-        >
+          />The index of the <see cref="T:System.Windows.Forms.ListViewItem" /> whose selection state has changed.</param>
         <param name="isSelected">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate the item's state has changed to selected; false to indicate the item's state has changed to deselected.</param
-        >
+          />true to indicate the item's state has changed to selected; false to indicate the item's state has changed to deselected.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

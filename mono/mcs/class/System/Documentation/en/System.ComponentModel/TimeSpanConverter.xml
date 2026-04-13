@@ -26,24 +26,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This converter can only convert a <see cref="T:System.TimeSpan" /> object to and from a string.</para
-      >
+        >This converter can only convert a <see cref="T:System.TimeSpan" /> object to and from a string.</para>
       <para
         >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" /> base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
-        </format>.</para
-      >
+        </format>.</para>
       <block subset="none" type="note">
         <para
-          >You should never create an instance of a <see cref="T:System.ComponentModel.TimeSpanConverter" />. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para
-        >
+          >You should never create an instance of a <see cref="T:System.ComponentModel.TimeSpanConverter" />. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see cref="T:System.TimeSpan" /> objects to and from other representations.</para
-      >
+        >Provides a type converter to convert <see cref="T:System.TimeSpan" /> objects to and from other representations.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.TimeSpanConverter" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.TimeSpanConverter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -97,17 +92,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This converter can only convert a <see cref="T:System.TimeSpan" /> object to and from a string.</para
-          >
+            >This converter can only convert a <see cref="T:System.TimeSpan" /> object to and from a string.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this converter can convert an object in the given source type to a <see cref="T:System.TimeSpan" /> using the specified context.</para
-          >
+            >Gets a value indicating whether this converter can convert an object in the given source type to a <see cref="T:System.TimeSpan" /> using the specified context.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,15 +110,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
@@ -155,8 +145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -171,15 +160,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert to. </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -209,11 +196,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This converter can only convert a <see cref="T:System.TimeSpan" /> object to and from a string.</para
-          >
+            >This converter can only convert a <see cref="T:System.TimeSpan" /> object to and from a string.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -228,22 +213,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An optional <see cref="T:System.Globalization.CultureInfo" />. If not supplied, the current culture is assumed. </param
-        >
+          />An optional <see cref="T:System.Globalization.CultureInfo" />. If not supplied, the current culture is assumed. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -275,11 +257,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method most commonly converts types to and from string objects.</para>
           <para
-            >The default implementation will make a call to <see cref="M:System.Object.ToString" /> on the object if the object is valid and if the destination type is string. If this method cannot convert to the destination type, it will throw a <see cref="T:System.NotSupportedException" />.</para
-          >
+            >The default implementation will make a call to <see cref="M:System.Object.ToString" /> on the object if the object is valid and if the destination type is string. If this method cannot convert to the destination type, it will throw a <see cref="T:System.NotSupportedException" />.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -294,29 +274,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A formatter context. </param
-        >
+          />A formatter context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The culture into which <paramref name="value" /> will be converted.</param
-        >
+          />The culture into which <paramref name="value" /> will be converted.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to convert. </param
-        >
+          />The object to convert. </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert the object to. </param
-        >
+          />The type to convert the object to. </param>
       </Docs>
     </Member>
   </Members>

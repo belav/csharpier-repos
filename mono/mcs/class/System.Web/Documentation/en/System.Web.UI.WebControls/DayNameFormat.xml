@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.DayNameFormat" /> enumeration represents the display formats for the days of the week in a <see cref="T:System.Web.UI.WebControls.Calendar" /> control.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.DayNameFormat" /> enumeration represents the display formats for the days of the week in a <see cref="T:System.Web.UI.WebControls.Calendar" /> control.</para>
       <block subset="none" type="note">
         <para>In some cultures, DayNameFormat.FirstLetter and DayNameFormat.FirstTwoLetter display identical values for one or more days of the week. In these cultures, consider using DayNameFormat.Shortest, which displays the shortest abbreviation possible without using identical abbreviations.</para>
       </block>
@@ -24,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the display format for the days of the week on a <see cref="T:System.Web.UI.WebControls.Calendar" /> control.</para
-      >
+        >Specifies the display format for the days of the week on a <see cref="T:System.Web.UI.WebControls.Calendar" /> control.</para>
     </summary>
   </Docs>
   <Members>

@@ -53,12 +53,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.AssemblyTargetedPatchBandAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.AssemblyTargetedPatchBandAttribute" /> class.</para>
         </summary>
         <param name="targetedPatchBand">
-          <attribution license="cc4" from="Microsoft" modified="false" />The patch band.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The patch band.</param>
       </Docs>
     </Member>
     <Member MemberName="TargetedPatchBand">

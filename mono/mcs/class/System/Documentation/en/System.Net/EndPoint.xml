@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.EndPoint" /> class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.</para
-      >
+        >The <see cref="T:System.Net.EndPoint" /> class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.EndPoint" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.EndPoint" /> class. </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -93,17 +91,14 @@
       <Docs>
         <value>
           <para
-            >One of the values defined in <see cref="T:System.Net.Sockets.AddressFamily" /> .</para
-          >
+            >One of the values defined in <see cref="T:System.Net.Sockets.AddressFamily" /> .</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is required to be overridden in types derived from <see cref="T:System.Net.EndPoint" /> .</exception
-        >
+          >This property is required to be overridden in types derived from <see cref="T:System.Net.EndPoint" /> .</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.EndPoint.AddressFamily" /> property specifies the addressing scheme that is used by the endpoint's underlying network protocol.</para
-          >
+            >The <see cref="P:System.Net.EndPoint.AddressFamily" /> property specifies the addressing scheme that is used by the endpoint's underlying network protocol.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,47 +140,40 @@
           <para>
             <block subset="none" type="default"
               >The default implementation throws
-   <see cref="T:System.NotSupportedException" />. </block
-            >
+   <see cref="T:System.NotSupportedException" />. </block>
           </para>
           <para>
             <block subset="none" type="overrides"
               >Override this
       method to return a <see cref="T:System.Net.EndPoint" /> instance that contains the address information from
-      the specified <see cref="T:System.Net.SocketAddress" />.</block
-            >
+      the specified <see cref="T:System.Net.SocketAddress" />.</block>
           </para>
           <para>
             <block subset="none" type="usage"
               >Use this method to
       obtain a <see cref="T:System.Net.EndPoint" />
       instance that represents the same network resource or service as the specified
-   <see cref="T:System.Net.SocketAddress" />. </block
-            >
+   <see cref="T:System.Net.SocketAddress" />. </block>
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException"
-          >This method is required to be overridden in types derived from <see cref="T:System.Net.EndPoint" /> .</exception
-        >
+          >This method is required to be overridden in types derived from <see cref="T:System.Net.EndPoint" /> .</exception>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.Net.EndPoint" /> instance from a <see cref="T:System.Net.SocketAddress" /> instance.</para
-          >
+            >Creates an <see cref="T:System.Net.EndPoint" /> instance from a <see cref="T:System.Net.SocketAddress" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Net.EndPoint" /> instance that is initialized from the specified <see cref="T:System.Net.SocketAddress" /> instance.</para
-          >
+            >A new <see cref="T:System.Net.EndPoint" /> instance that is initialized from the specified <see cref="T:System.Net.SocketAddress" /> instance.</para>
         </returns>
         <param name="socketAddress">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The socket address that serves as the endpoint for a connection. </param
-        >
+          />The socket address that serves as the endpoint for a connection. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -213,14 +201,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes endpoint information into a <see cref="T:System.Net.SocketAddress" /> instance.</para
-          >
+            >Serializes endpoint information into a <see cref="T:System.Net.SocketAddress" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Net.SocketAddress" /> instance that contains the endpoint information.</para
-          >
+            >A <see cref="T:System.Net.SocketAddress" /> instance that contains the endpoint information.</para>
         </returns>
       </Docs>
     </Member>

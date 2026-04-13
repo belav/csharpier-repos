@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an initializer for a single element of an <see cref="T:System.Collections.IEnumerable" /> collection.</para
-      >
+        >Represents an initializer for a single element of an <see cref="T:System.Collections.IEnumerable" /> collection.</para>
     </summary>
   </Docs>
   <Members>
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the instance method that is used to add an element to an <see cref="T:System.Collections.IEnumerable" /> collection.</para
-          >
+            >Gets the instance method that is used to add an element to an <see cref="T:System.Collections.IEnumerable" /> collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of arguments that are passed to a method that adds an element to an <see cref="T:System.Collections.IEnumerable" /> collection.</para
-          >
+            >Gets the collection of arguments that are passed to a method that adds an element to an <see cref="T:System.Collections.IEnumerable" /> collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -155,14 +152,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a textual representation of an <see cref="T:System.Linq.Expressions.ElementInit" /> object.</para
-          >
+            >Returns a textual representation of an <see cref="T:System.Linq.Expressions.ElementInit" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A textual representation of the <see cref="T:System.Linq.Expressions.ElementInit" /> object.</para
-          >
+            >A textual representation of the <see cref="T:System.Linq.Expressions.ElementInit" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -203,8 +198,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.ElementInit.Arguments" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.ElementInit.Arguments" /> property of the result.</param>
       </Docs>
     </Member>
   </Members>

@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent);$(NetCoreAppMinimum)-windows;$(NetCoreAppMinimum);netstandard2.1;netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''"
-      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks
-    >
+      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks>
     <DefineConstants>$(DefineConstants);BUILDING_PKCS</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IncludeDllSafeSearchPathAttribute>true</IncludeDllSafeSearchPathAttribute>
@@ -20,8 +19,7 @@ System.Security.Cryptography.Pkcs.EnvelopedCms</PackageDescription>
   <PropertyGroup>
     <IsPartialFacadeAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >true</IsPartialFacadeAssembly
-    >
+      >true</IsPartialFacadeAssembly>
     <OmitResources Condition="'$(IsPartialFacadeAssembly)' == 'true'">true</OmitResources>
   </PropertyGroup>
 

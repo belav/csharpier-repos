@@ -32,11 +32,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.EndpointAddress" /> is not serializable nor is it tied to a particular version of the WS-Addressing specification. This class provides a WS-Addressing V1 compliant wrapper for the <see cref="T:System.ServiceModel.EndpointAddress" /> that is serializable (implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface) and bound to the WS-Addressing V1 wire format. The <see cref="M:System.ServiceModel.EndpointAddress10.FromEndpointAddress(System.ServiceModel.EndpointAddress)" /> method does the wrapping and the <see cref="M:System.ServiceModel.EndpointAddress10.ToEndpointAddress" /> method does the unwrapping, allowing the recovery of the endpoint address after it is serialized on the wire.</para
-      >
+        >The <see cref="T:System.ServiceModel.EndpointAddress" /> is not serializable nor is it tied to a particular version of the WS-Addressing specification. This class provides a WS-Addressing V1 compliant wrapper for the <see cref="T:System.ServiceModel.EndpointAddress" /> that is serializable (implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface) and bound to the WS-Addressing V1 wire format. The <see cref="M:System.ServiceModel.EndpointAddress10.FromEndpointAddress(System.ServiceModel.EndpointAddress)" /> method does the wrapping and the <see cref="M:System.ServiceModel.EndpointAddress10.ToEndpointAddress" /> method does the unwrapping, allowing the recovery of the endpoint address after it is serialized on the wire.</para>
       <para
-        >indigo1 also supplies a class that provides a serializable type, <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />, which is WS-Addressing August 2004 compliant for legacy purposes.</para
-      >
+        >indigo1 also supplies a class that provides a serializable type, <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />, which is WS-Addressing August 2004 compliant for legacy purposes.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -67,28 +65,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.EndpointAddress" /> is not tied to a particular version of the WS-Addressing specification or bound to a particular wire format.</para
-          >
+            >The <see cref="T:System.ServiceModel.EndpointAddress" /> is not tied to a particular version of the WS-Addressing specification or bound to a particular wire format.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress10" /> class with a specified endpoint address.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress10" /> class with a specified endpoint address.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.EndpointAddress10" /> class that contains the specified endpoint address.</para
-          >
+            >The <see cref="T:System.ServiceModel.EndpointAddress10" /> class that contains the specified endpoint address.</para>
         </returns>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class.</param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class.</param>
       </Docs>
     </Member>
     <Member MemberName="GetSchema">
@@ -114,8 +108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is required by the serialization contract. It must be public to be seen by the <see cref="T:System.Xml.Serialization.XmlSerializer" />. It is not intended to be called by developers.</para
-          >
+            >This method is required by the serialization contract. It must be public to be seen by the <see cref="T:System.Xml.Serialization.XmlSerializer" />. It is not intended to be called by developers.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -124,16 +117,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Xml.XmlQualifiedName" /> that describes the XML representation of the endpoint address.</para
-          >
+            >A <see cref="T:System.Xml.XmlQualifiedName" /> that describes the XML representation of the endpoint address.</para>
         </returns>
         <param name="xmlSchemaSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchema" /> that contains a cache of the XML schema definition language (XSD) schemas for the endpoint address.</param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchema" /> that contains a cache of the XML schema definition language (XSD) schemas for the endpoint address.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">
@@ -195,8 +186,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> from which the endpoint address is obtained.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> from which the endpoint address is obtained.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
@@ -229,8 +219,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to which the current endpoint address is saved.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to which the current endpoint address is saved.</param>
       </Docs>
     </Member>
     <Member MemberName="ToEndpointAddress">
@@ -259,8 +248,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class. </para
-          >
+            >The <see cref="T:System.ServiceModel.EndpointAddress" /> used to initialize the instance of this class. </para>
         </returns>
       </Docs>
     </Member>

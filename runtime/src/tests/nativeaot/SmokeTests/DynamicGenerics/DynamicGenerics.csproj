@@ -10,8 +10,7 @@
 
     <!-- Look for MULTIMODULE_BUILD #define for the more specific incompatible parts -->
     <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
   </PropertyGroup>
 
   <ItemGroup>

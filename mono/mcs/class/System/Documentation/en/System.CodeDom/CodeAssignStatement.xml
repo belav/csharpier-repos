@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeAssignStatement" /> can be used to represent a statement that assigns the value of an object to another object, or a reference to another reference. Simple assignment statements are usually of the form " <paramref name="value1" /> = <paramref name="value2" /> ", where <paramref name="value1" /> is the object being assigned to, and <paramref name="value2" /> is being assigned. The <see cref="P:System.CodeDom.CodeAssignStatement.Left" /> property indicates the object to assign to. The <see cref="P:System.CodeDom.CodeAssignStatement.Right" /> property indicates the object to assign.</para
-      >
+        <see cref="T:System.CodeDom.CodeAssignStatement" /> can be used to represent a statement that assigns the value of an object to another object, or a reference to another reference. Simple assignment statements are usually of the form " <paramref name="value1" /> = <paramref name="value2" /> ", where <paramref name="value1" /> is the object being assigned to, and <paramref name="value2" /> is being assigned. The <see cref="P:System.CodeDom.CodeAssignStatement.Left" /> property indicates the object to assign to. The <see cref="P:System.CodeDom.CodeAssignStatement.Right" /> property indicates the object to assign.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAssignStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAssignStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -92,23 +90,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAssignStatement" /> class using the specified expressions.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAssignStatement" /> class using the specified expressions.</para>
         </summary>
         <param name="left">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The variable to assign to. </param
-        >
+          />The variable to assign to. </param>
         <param name="right">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to assign. </param
-        >
+          />The value to assign. </param>
       </Docs>
     </Member>
     <Member MemberName="Left">

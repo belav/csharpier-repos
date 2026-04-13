@@ -10,8 +10,7 @@
   <PropertyGroup>
     <IsMergedTestRunnerAssembly>true</IsMergedTestRunnerAssembly>
     <EmitCompilerGeneratedFiles Condition="'$(EmitCompilerGeneratedFiles)' == ''"
-      >true</EmitCompilerGeneratedFiles
-    >
+      >true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>

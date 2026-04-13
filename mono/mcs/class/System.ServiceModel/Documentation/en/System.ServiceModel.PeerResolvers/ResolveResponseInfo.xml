@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When <see cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Resolve(System.ServiceModel.PeerResolvers.ResolveInfo)" /> or an implementation of <see cref="M:System.ServiceModel.PeerResolvers.IPeerResolverContract.Resolve(System.ServiceModel.PeerResolvers.ResolveInfo)" /> is called, this object is returned to the client. It contains the endpoints registered to the peer specified in a previous corresponding <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" /> instance sent to the peer resolver.</para
-      >
+        >When <see cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Resolve(System.ServiceModel.PeerResolvers.ResolveInfo)" /> or an implementation of <see cref="M:System.ServiceModel.PeerResolvers.IPeerResolverContract.Resolve(System.ServiceModel.PeerResolvers.ResolveInfo)" /> is called, this object is returned to the client. It contains the endpoints registered to the peer specified in a previous corresponding <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" /> instance sent to the peer resolver.</para>
       <para>Instances of this class are primarily used to pass information from the resolver service to a network client of that service.</para>
     </remarks>
     <summary>
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveResponseInfo" /> class. </para
-          >
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveResponseInfo" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -74,16 +72,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveResponseInfo" /> class with the provided set of peer endpoint addresses.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveResponseInfo" /> class with the provided set of peer endpoint addresses.</para>
         </summary>
         <param name="addresses">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Array of <see cref="T:System.ServiceModel.PeerNodeAddress" /> objects that contain the endpoint addresses registered to the peer whose endpoints were requested in a previous resolution operation.</param
-        >
+          />Array of <see cref="T:System.ServiceModel.PeerNodeAddress" /> objects that contain the endpoint addresses registered to the peer whose endpoints were requested in a previous resolution operation.</param>
       </Docs>
     </Member>
     <Member MemberName="Addresses">

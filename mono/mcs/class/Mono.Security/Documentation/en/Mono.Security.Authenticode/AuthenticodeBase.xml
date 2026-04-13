@@ -9,9 +9,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -50,11 +48,9 @@
       </Parameters>
       <Docs>
         <param name="fileName"
-          >a <see cref="T:System.String" /> representing the PE file to hash.</param
-        >
+          >a <see cref="T:System.String" /> representing the PE file to hash.</param>
         <param name="hashName"
-          >a <see cref="T:System.String" /> representing the hash algorithm to use for hashing the file.</param
-        >
+          >a <see cref="T:System.String" /> representing the hash algorithm to use for hashing the file.</param>
         <summary>Hash the specified PE file using the specified hash algorithm.</summary>
         <returns>an array of bytes containing the hash value of the specified PE file.</returns>
         <remarks>This method can only be used to hash PE files. CAB files can also have Authenticode signatures but this is currently unsupported by Mono.</remarks>

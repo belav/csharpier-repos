@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.WSHttpBinding" /> class is designed for interoperation with services that implement WS-* specifications. The transport security for this binding is Secure Sockets Layer (SSL) over HTTP, or HTTPS.</para
-      >
+        >The <see cref="T:System.ServiceModel.WSHttpBinding" /> class is designed for interoperation with services that implement WS-* specifications. The transport security for this binding is Secure Sockets Layer (SSL) over HTTP, or HTTPS.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the security settings for the <see cref="T:System.ServiceModel.WSHttpBinding" />.</para
-      >
+        >Represents the security settings for the <see cref="T:System.ServiceModel.WSHttpBinding" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -74,14 +72,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property determines whether the settings from the <see cref="P:System.ServiceModel.WSHttpSecurity.Transport" /> and/or <see cref="P:System.ServiceModel.WSHttpSecurity.Message" /> property buckets may or may not become effective.</para
-          >
+            >This property determines whether the settings from the <see cref="P:System.ServiceModel.WSHttpSecurity.Transport" /> and/or <see cref="P:System.ServiceModel.WSHttpSecurity.Message" /> property buckets may or may not become effective.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the message <see cref="T:System.ServiceModel.SecurityMode" /> for this binding.</para
-          >
+            >Specifies the message <see cref="T:System.ServiceModel.SecurityMode" /> for this binding.</para>
         </summary>
       </Docs>
     </Member>

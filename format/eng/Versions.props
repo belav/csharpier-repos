@@ -15,11 +15,9 @@
     <!-- Prohibit the usage of .NET Standard 1.x dependencies. -->
     <FlagNetStandard1XDependencies>true</FlagNetStandard1XDependencies>
     <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''"
-      >false</StabilizePackageVersion
-    >
+      >false</StabilizePackageVersion>
     <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
-      >release</DotNetFinalVersionKind
-    >
+      >release</DotNetFinalVersionKind>
   </PropertyGroup>
   <PropertyGroup>
     <!-- command-line-api -->

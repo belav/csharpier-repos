@@ -59,23 +59,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlSignificantWhitespace" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlSignificantWhitespace" /> class.</para>
         </summary>
         <param name="strData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The white space characters of the node.</param
-        >
+          />The white space characters of the node.</param>
         <param name="doc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDocument" /> object.</param
-        >
+          />The <see cref="T:System.Xml.XmlDocument" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="CloneNode">
@@ -103,11 +100,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para
-          >
+            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />.</para>
           <para
-            >The cloned node has no parent. <see cref="P:System.Xml.XmlNode.ParentNode" /> returns null.</para
-          >
+            >The cloned node has no parent. <see cref="P:System.Xml.XmlNode.ParentNode" /> returns null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -122,8 +117,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. For significant white space nodes, the cloned node always includes the data value, regardless of the parameter setting. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself. For significant white space nodes, the cloned node always includes the data value, regardless of the parameter setting. </param>
       </Docs>
     </Member>
     <Member MemberName="LocalName">
@@ -276,16 +270,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -323,8 +315,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
   </Members>

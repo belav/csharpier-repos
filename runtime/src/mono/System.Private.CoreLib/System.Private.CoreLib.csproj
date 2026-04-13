@@ -32,11 +32,9 @@
     <RuntimeMetadataVersion>v4.0.30319</RuntimeMetadataVersion>
     <!-- Override InformationalVersion during servicing as it's returned via public api. -->
     <InformationalVersion Condition="'$(PreReleaseVersionLabel)' == 'servicing'"
-      >$(ProductVersion)</InformationalVersion
-    >
+      >$(ProductVersion)</InformationalVersion>
     <InformationalVersion Condition="'$(StabilizePackageVersion)' == 'true'"
-      >$(ProductVersion)</InformationalVersion
-    >
+      >$(ProductVersion)</InformationalVersion>
     <!-- AD0001 : https://github.com/dotnet/runtime/issues/90356 -->
     <NoWarn>$(NoWarn),0419,0649,AD0001</NoWarn>
     <Nullable>enable</Nullable>
@@ -126,43 +124,33 @@
     <FeatureMono>true</FeatureMono>
     <FeatureWasmThreads
       Condition="('$(TargetsBrowser)' == 'true' or '$(TargetsWasi)' == 'true') and '$(MonoWasmBuildVariant)' == 'multithread'"
-      >true</FeatureWasmThreads
-    >
+      >true</FeatureWasmThreads>
     <FeatureWasmPerfTracing
       Condition="('$(TargetsBrowser)' == 'true' or '$(TargetsWasi)' == 'true') and ('$(MonoWasmBuildVariant)' == 'multithread')"
-      >true</FeatureWasmPerfTracing
-    >
+      >true</FeatureWasmPerfTracing>
     <FeaturePortableTimer
       Condition="('$(TargetsBrowser)' != 'true' and '$(TargetsWasi)' != 'true') or '$(FeatureWasmThreads)' == 'true'"
-      >true</FeaturePortableTimer
-    >
+      >true</FeaturePortableTimer>
     <FeaturePortableThreadPool
       Condition="('$(TargetsBrowser)' != 'true' and '$(TargetsWasi)' != 'true') or '$(FeatureWasmThreads)' == 'true'"
-      >true</FeaturePortableThreadPool
-    >
+      >true</FeaturePortableThreadPool>
     <FeaturePerfTracing
       Condition="('$(TargetsBrowser)' != 'true' and '$(TargetsWasi)' != 'true') or '$(FeatureWasmPerftracing)' == 'true'"
-      >true</FeaturePerfTracing
-    >
+      >true</FeaturePerfTracing>
     <FeatureObjCMarshal
       Condition="'$(TargetsOSX)' == 'true' or '$(TargetsMacCatalyst)' == 'true' or '$(TargetsiOS)' == 'true' or '$(TargetstvOS)' == 'true'"
-      >true</FeatureObjCMarshal
-    >
+      >true</FeatureObjCMarshal>
   </PropertyGroup>
 
   <PropertyGroup>
     <DefineConstants Condition="'$(FeaturePerfTracing)' == 'true'"
-      >$(DefineConstants);FEATURE_PERFTRACING</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_PERFTRACING</DefineConstants>
     <DefineConstants Condition="'$(FeatureObjCMarshal)' == 'true'"
-      >$(DefineConstants);FEATURE_OBJCMARSHAL</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_OBJCMARSHAL</DefineConstants>
     <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'"
-      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants>
     <DefineConstants Condition="'$(FeatureWasmPerfTracing)' == 'true'"
-      >$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants>
   </PropertyGroup>
 
   <!-- ILLinker settings -->
@@ -406,12 +394,10 @@
     <PropertyGroup>
       <_PythonWarningParameter>-Wall</_PythonWarningParameter>
       <_PythonWarningParameter Condition="'$(MSBuildTreatWarningsAsErrors)' == 'true'"
-        >$(_PythonWarningParameter) -Werror</_PythonWarningParameter
-      >
+        >$(_PythonWarningParameter) -Werror</_PythonWarningParameter>
       <_EventingSourceFileDirectory>%(EventingSourceFile.RootDir)%(EventingSourceFile.Directory)</_EventingSourceFileDirectory>
       <_EventingSourceFileDirectory Condition="HasTrailingSlash('$(_EventingSourceFileDirectory)')"
-        >$(_EventingSourceFileDirectory.TrimEnd('\'))</_EventingSourceFileDirectory
-      >
+        >$(_EventingSourceFileDirectory.TrimEnd('\'))</_EventingSourceFileDirectory>
     </PropertyGroup>
 
     <Exec Command="&quot;$(PYTHON)&quot; -B $(_PythonWarningParameter) &quot;@(EventingGenerationScript)&quot; --man &quot;@(EventManifestFile)&quot; --intermediate &quot;$(_EventingSourceFileDirectory)&quot; --runtimeflavor mono" />

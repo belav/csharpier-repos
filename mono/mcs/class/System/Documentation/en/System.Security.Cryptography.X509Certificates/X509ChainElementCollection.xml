@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of this class is returned when the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainElements" /> property is called.</para
-      >
+        >An instance of this class is returned when the <see cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainElements" /> property is called.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -70,23 +68,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object into an array, starting at the specified index.</para
-          >
+            >Copies an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object into an array, starting at the specified index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects. </param
-        >
+          />An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" /> objects. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer representing the index value. </param
-        >
+          />An integer representing the index value. </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -136,20 +131,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" /> class implements <see cref="T:System.Collections.IEnumerator" />, which enables you to use methods such as <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />, <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" /> and <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" /> to view the contents of the collection.</para
-          >
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" /> class implements <see cref="T:System.Collections.IEnumerator" />, which enables you to use methods such as <see cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />, <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" /> and <see cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" /> to view the contents of the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" /> object that can be used to navigate through a collection of chain elements.</para
-          >
+            >Gets an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" /> object that can be used to navigate through a collection of chain elements.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" /> object.</para
-          >
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -170,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is always false because an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object is not thread safe.</para
-          >
+            >This value is always false because an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object is not thread safe.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -228,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object.</para
-          >
+            >Gets an object that can be used to synchronize access to an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -256,23 +246,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object into an array, starting at the specified index.</para
-          >
+            >Copies an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object into an array, starting at the specified index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array to copy the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object to.</param
-        >
+          />An array to copy the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" /> object to.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of <paramref name="array" /> at which to start copying.</param
-        >
+          />The index of <paramref name="array" /> at which to start copying.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -301,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Collections.IEnumerator" /> object that can be used to navigate a collection of chain elements.</para
-          >
+            >Gets an <see cref="T:System.Collections.IEnumerator" /> object that can be used to navigate a collection of chain elements.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

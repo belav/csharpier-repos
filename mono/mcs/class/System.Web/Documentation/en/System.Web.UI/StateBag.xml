@@ -27,16 +27,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >View state for a page or control is the cumulative property values, or view, of that page or control. You can access this class through the <see cref="P:System.Web.UI.Control.ViewState" /> property. Controls can also store essential state information in control state, but that information is not stored as a <see cref="T:System.Web.UI.StateBag" /> object.</para
-      >
+        >View state for a page or control is the cumulative property values, or view, of that page or control. You can access this class through the <see cref="P:System.Web.UI.Control.ViewState" /> property. Controls can also store essential state information in control state, but that information is not stored as a <see cref="T:System.Web.UI.StateBag" /> object.</para>
       <para
-        >This class is the primary storage mechanism for all HTML and Web server controls. It stores attribute/value pairs as strings associated with the control. It tracks changes to these attributes only after the <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" /> method is executed for a page request, and saves the changes to the page's or control's view state.</para
-      >
+        >This class is the primary storage mechanism for all HTML and Web server controls. It stores attribute/value pairs as strings associated with the control. It tracks changes to these attributes only after the <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" /> method is executed for a page request, and saves the changes to the page's or control's view state.</para>
       <para
         >This class implements a dictionary, and you can add items to it or remove items from it as you would any dictionary object. For more information about data collections, such as dictionaries, see <format type="text/html">
           <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.StateBag" /> class. This is the default constructor for this class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.StateBag" /> class. This is the default constructor for this class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -75,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.StateBag" /> class that allows stored state values to be case-insensitive.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.StateBag" /> class that allows stored state values to be case-insensitive.</para>
         </summary>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore case; otherwise, false. </param
-        >
+          />true to ignore case; otherwise, false. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -109,29 +103,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see cref="T:System.Web.UI.StateItem" /> object to the <see cref="T:System.Web.UI.StateBag" /> object. If the item already exists in the <see cref="T:System.Web.UI.StateBag" /> object, this method updates the value of the item.</para
-          >
+            >Adds a new <see cref="T:System.Web.UI.StateItem" /> object to the <see cref="T:System.Web.UI.StateBag" /> object. If the item already exists in the <see cref="T:System.Web.UI.StateBag" /> object, this method updates the value of the item.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Web.UI.StateItem" /> that represents the object added to view state.</para
-          >
+            >Returns a <see cref="T:System.Web.UI.StateItem" /> that represents the object added to view state.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute name for the <see cref="T:System.Web.UI.StateItem" />. </param
-        >
+          />The attribute name for the <see cref="T:System.Web.UI.StateItem" />. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the item to add to the <see cref="T:System.Web.UI.StateBag" />. </param
-        >
+          />The value of the item to add to the <see cref="T:System.Web.UI.StateBag" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -150,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all items from the current <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Removes all items from the current <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -171,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Web.UI.StateItem" /> objects in the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Gets the number of <see cref="T:System.Web.UI.StateItem" /> objects in the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -195,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates over all the key/value pairs of the <see cref="T:System.Web.UI.StateItem" /> objects stored in the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Returns an enumerator that iterates over all the key/value pairs of the <see cref="T:System.Web.UI.StateItem" /> objects stored in the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -221,14 +208,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method also returns false if the <paramref name="key" /> parameter does not exist in the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >This method also returns false if the <paramref name="key" /> parameter does not exist in the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks a <see cref="T:System.Web.UI.StateItem" /> object stored in the <see cref="T:System.Web.UI.StateBag" /> object to evaluate whether it has been modified since the call to <see cref="M:System.Web.UI.Control.TrackViewState" />.</para
-          >
+            >Checks a <see cref="T:System.Web.UI.StateItem" /> object stored in the <see cref="T:System.Web.UI.StateBag" /> object to evaluate whether it has been modified since the call to <see cref="M:System.Web.UI.Control.TrackViewState" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -239,8 +224,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the item to check. </param
-        >
+          />The key of the item to check. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -280,17 +264,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>These keys are the names of the control properties. For example, if you created a BGColor property on a Table control that you customized, a BGColor entry is created in this collection representing that property on your Table control.</para>
           <para
-            >These keys correspond to the names of the <see cref="T:System.Web.UI.StateItem" /> objects stored in the <see cref="T:System.Web.UI.StateBag" /> collection for the current page or server control.</para
-          >
+            >These keys correspond to the names of the <see cref="T:System.Web.UI.StateItem" /> objects stored in the <see cref="T:System.Web.UI.StateBag" /> collection for the current page or server control.</para>
           <para
-            >You can iterate over this collection using the <see cref="M:System.Web.UI.StateBag.GetEnumerator" /> method.</para
-          >
+            >You can iterate over this collection using the <see cref="M:System.Web.UI.StateBag.GetEnumerator" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of keys representing the items in the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Gets a collection of keys representing the items in the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -312,12 +293,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified key/value pair from the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Removes the specified key/value pair from the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to remove. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The item to remove. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -340,22 +323,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.StateBag.SetDirty(System.Boolean)" /> method is used to force the collection and its contents to be serialized during a call to the <see cref="M:System.Web.UI.StateBag.System.Web.UI.IStateManager.SaveViewState" /> method.</para
-          >
+            >The <see cref="M:System.Web.UI.StateBag.SetDirty(System.Boolean)" /> method is used to force the collection and its contents to be serialized during a call to the <see cref="M:System.Web.UI.StateBag.System.Web.UI.IStateManager.SaveViewState" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the state of the <see cref="T:System.Web.UI.StateBag" /> object as well as the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" /> property of each of the <see cref="T:System.Web.UI.StateItem" /> objects contained by it.</para
-          >
+            >Sets the state of the <see cref="T:System.Web.UI.StateBag" /> object as well as the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" /> property of each of the <see cref="T:System.Web.UI.StateItem" /> objects contained by it.</para>
         </summary>
         <param name="dirty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to mark the state of the collection and its items as modified; otherwise, false.</param
-        >
+          />true to mark the state of the collection and its items as modified; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="SetItemDirty">
@@ -372,29 +352,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.StateBag.SetItemDirty(System.String,System.Boolean)" /> method is used to prevent or force state management of specific properties, represented by <see cref="T:System.Web.UI.StateItem" /> objects in the <see cref="T:System.Web.UI.StateBag" /> collection.</para
-          >
+            >The <see cref="M:System.Web.UI.StateBag.SetItemDirty(System.String,System.Boolean)" /> method is used to prevent or force state management of specific properties, represented by <see cref="T:System.Web.UI.StateItem" /> objects in the <see cref="T:System.Web.UI.StateBag" /> collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" /> property for the specified <see cref="T:System.Web.UI.StateItem" /> object in the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Sets the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" /> property for the specified <see cref="T:System.Web.UI.StateItem" /> object in the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key that identifies which <see cref="T:System.Web.UI.StateItem" /> in the <see cref="T:System.Web.UI.StateBag" /> to set. </param
-        >
+          />The key that identifies which <see cref="T:System.Web.UI.StateItem" /> in the <see cref="T:System.Web.UI.StateBag" /> to set. </param>
         <param name="dirty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to mark the state of the item as modified; otherwise, false.</param
-        >
+          />true to mark the state of the item as modified; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -419,29 +395,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />. The <see cref="T:System.Array" /> must have zero-based indexing.</param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection" />. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins.</param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
@@ -462,14 +434,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="P:System.Collections.ICollection.IsSynchronized" />.</para
-          >
+            >For a description of this member, see <see cref="P:System.Collections.ICollection.IsSynchronized" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -491,14 +461,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="P:System.Collections.ICollection.SyncRoot" />.</para
-          >
+            >For a description of this member, see <see cref="P:System.Collections.ICollection.SyncRoot" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -520,29 +488,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Add(System.Object,System.Object)" />.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to use as the key of the element to add.</param
-        >
+          />The <see cref="T:System.Object" /> to use as the key of the element to add.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to use as the value of the element to add. </param
-        >
+          />The <see cref="T:System.Object" /> to use as the value of the element to add. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Contains">
@@ -562,28 +526,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Contains(System.Object)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Contains(System.Object)" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Collections.IDictionary" /> contains an element with the key; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Collections.IDictionary" /> contains an element with the key; otherwise, false.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to locate in the <see cref="T:System.Collections.IDictionary" /> object.</param
-        >
+          />The key to locate in the <see cref="T:System.Collections.IDictionary" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.IsFixedSize">
@@ -604,14 +564,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="P:System.Collections.IDictionary.IsFixedSize" />.</para
-          >
+            >For a description of this member, see <see cref="P:System.Collections.IDictionary.IsFixedSize" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -633,14 +591,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="P:System.Collections.IDictionary.IsReadOnly" />.</para
-          >
+            >For a description of this member, see <see cref="P:System.Collections.IDictionary.IsReadOnly" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -684,22 +640,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IDictionary" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Remove(System.Object)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Collections.IDictionary.Remove(System.Object)" />.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the element to remove. </param
-        >
+          />The key of the element to remove. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -720,20 +673,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IEnumerable" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.StateBag" /> instance is cast to an <see cref="T:System.Collections.IEnumerable" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.Collections.IEnumerable.GetEnumerator" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.Collections.IEnumerable.GetEnumerator" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -780,19 +730,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method restores view-state information for the <see cref="T:System.Web.UI.StateBag" /> object from a previous page request that was saved by the <see cref="M:System.Web.UI.StateBag.System.Web.UI.IStateManager.SaveViewState" /> method.</para
-          >
+            >This method restores view-state information for the <see cref="T:System.Web.UI.StateBag" /> object from a previous page request that was saved by the <see cref="M:System.Web.UI.StateBag.System.Web.UI.IStateManager.SaveViewState" /> method.</para>
           <para
             >This method is primarily used by control developers. You can override this method to control how a custom server control restores its view state. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Restores the previously saved view state of the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Restores the previously saved view state of the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -814,29 +761,24 @@
           <para
             >View state is the accumulation of the values of a server control's properties. These values are automatically placed in the server control's <see cref="P:System.Web.UI.Control.ViewState" />  property, which is an instance of the <see cref="T:System.Web.UI.StateBag" /> class. This property's value is then persisted to a string object after the save state stage of the server control life cycle. For more information, see <format type="text/html">
               <a href="e18eb2f2-cf00-47ae-b1a1-dfc188a6dea1">ASP.NET Web Server Controls</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
             >When view state is saved, this string object is returned to the client as a variable that is stored in an HTML Hidden element. When you author custom server controls, you can improve efficiency by overriding this method and modifying your server control's <see cref="P:System.Web.UI.Control.ViewState" /> property. For more information, see <format type="text/html">
               <a href="e18eb2f2-cf00-47ae-b1a1-dfc188a6dea1"
-                >ASP.NET Web Server Controls Controls</a
-              >
+                >ASP.NET Web Server Controls Controls</a>
             </format> and <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the changes to the <see cref="T:System.Web.UI.StateBag" /> object since the time the page was posted back to the server.</para
-          >
+            >Saves the changes to the <see cref="T:System.Web.UI.StateBag" /> object since the time the page was posted back to the server.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that contains the changes to the view state of the <see cref="T:System.Web.UI.StateBag" />. If there are no changes, or there are no <see cref="T:System.Web.UI.StateItem" /> elements in the <see cref="T:System.Web.UI.StateBag" />, this method returns null.</para
-          >
+            >The object that contains the changes to the view state of the <see cref="T:System.Web.UI.StateBag" />. If there are no changes, or there are no <see cref="T:System.Web.UI.StateItem" /> elements in the <see cref="T:System.Web.UI.StateBag" />, this method returns null.</para>
         </returns>
       </Docs>
     </Member>
@@ -856,8 +798,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes the <see cref="T:System.Web.UI.StateBag" /> object to track changes to its state so that it can be persisted across requests.</para
-          >
+            >Causes the <see cref="T:System.Web.UI.StateBag" /> object to track changes to its state so that it can be persisted across requests.</para>
         </summary>
       </Docs>
     </Member>
@@ -876,14 +817,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a collection that contains the values for all the <see cref="T:System.Web.UI.StateItem" /> objects in the specified page or control. You can iterate through these values by using the <see cref="M:System.Web.UI.StateBag.GetEnumerator" /> method.</para
-          >
+            >This is a collection that contains the values for all the <see cref="T:System.Web.UI.StateItem" /> objects in the specified page or control. You can iterate through these values by using the <see cref="M:System.Web.UI.StateBag.GetEnumerator" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of the view-state values stored in the <see cref="T:System.Web.UI.StateBag" /> object.</para
-          >
+            >Gets a collection of the view-state values stored in the <see cref="T:System.Web.UI.StateBag" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -5,8 +5,7 @@
     <RuntimeIdentifier>$(TestTargetRid)</RuntimeIdentifier>
     <RuntimeFrameworkVersion>$(MNAVersion)</RuntimeFrameworkVersion>
     <DefineConstants Condition="'$(OS)' == 'Windows_NT'"
-      >WINDOWS;$(DefineConstants)</DefineConstants
-    >
+      >WINDOWS;$(DefineConstants)</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 </Project>

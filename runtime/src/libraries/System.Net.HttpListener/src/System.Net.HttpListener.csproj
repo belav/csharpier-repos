@@ -10,11 +10,9 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.SystemNetHttpListener_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemNetHttpListener_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'"
-      >$(DefineConstants);TARGET_WINDOWS</DefineConstants
-    >
+      >$(DefineConstants);TARGET_WINDOWS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

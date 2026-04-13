@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.Threading.ThreadStateException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Thread was in an invalid state for the operation being executed.</Message
-  >
+    >Thread was in an invalid state for the operation being executed.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

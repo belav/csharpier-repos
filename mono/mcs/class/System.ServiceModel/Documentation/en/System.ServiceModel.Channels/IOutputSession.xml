@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >On the other side of the message interchange, the <see cref="T:System.ServiceModel.Channels.IInputSession" /> interface represents an incoming <see cref="T:System.ServiceModel.Channels.ISession" /> implemented on the receiving side of a one-way communication between messaging endpoints. Note these two sessions are distinct.</para
-      >
+        >On the other side of the message interchange, the <see cref="T:System.ServiceModel.Channels.IInputSession" /> interface represents an incoming <see cref="T:System.ServiceModel.Channels.ISession" /> implemented on the receiving side of a one-way communication between messaging endpoints. Note these two sessions are distinct.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

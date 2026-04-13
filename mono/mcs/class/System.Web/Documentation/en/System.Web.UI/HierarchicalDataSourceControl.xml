@@ -36,14 +36,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ASP.NET supports a controls data-binding architecture that enables Web server controls to bind to data and present it in a consistent fashion. Web server controls that bind to data are called data-bound controls, and the classes that facilitate binding are called data source controls. Data source controls can represent any data source: a file, a stream, a relational database, a business object, and so on. Data source controls present data in a consistent way to data-bound controls, regardless of the source or format of the underlying data.</para>
       <para
-        >Data source controls that represent hierarchical data derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class, while data source controls that represent lists or tables of data derive from the <see cref="T:System.Web.UI.DataSourceControl" /> class. The <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class is the base implementation of the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface, which defines a single method to retrieve hierarchical data source view objects associated with the data source control, <see cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />.</para
-      >
+        >Data source controls that represent hierarchical data derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class, while data source controls that represent lists or tables of data derive from the <see cref="T:System.Web.UI.DataSourceControl" /> class. The <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class is the base implementation of the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface, which defines a single method to retrieve hierarchical data source view objects associated with the data source control, <see cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />.</para>
       <para
-        >You can think of a data source control as the combination of the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> object and its associated views on the underlying data, called data source view objects. While data source controls that represent tabular data are typically associated with only one named view, the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class supports a data source view for each level of hierarchical data that the data source control represents. The level of hierarchical data is identified by a unique hierarchical path, passed to the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" /> method in the <paramref name="viewPath" /> parameter. Each <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object defines the capabilities of a data source control for the hierarchical level represented, and performs operations such as insert, update, delete, and sort.</para
-      >
+        >You can think of a data source control as the combination of the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> object and its associated views on the underlying data, called data source view objects. While data source controls that represent tabular data are typically associated with only one named view, the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class supports a data source view for each level of hierarchical data that the data source control represents. The level of hierarchical data is identified by a unique hierarchical path, passed to the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" /> method in the <paramref name="viewPath" /> parameter. Each <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> object defines the capabilities of a data source control for the hierarchical level represented, and performs operations such as insert, update, delete, and sort.</para>
       <para
-        >Web server controls that derive from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class, such as <see cref="T:System.Web.UI.WebControls.TreeView" />, use hierarchical data source controls to bind to hierarchical data.</para
-      >
+        >Web server controls that derive from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" /> class, such as <see cref="T:System.Web.UI.WebControls.TreeView" />, use hierarchical data source controls to bind to hierarchical data.</para>
       <para>Data source controls are implemented as controls to enable declarative persistence and to optionally permit participation in state management. Data source controls have no visual rendering, and therefore do not support themes.</para>
     </remarks>
     <summary>
@@ -62,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,20 +81,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.HierarchicalDataSourceControl.CreateControlCollection" /> method is overridden by the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class to prevent child controls from being added. </para
-          >
+            >The <see cref="M:System.Web.UI.HierarchicalDataSourceControl.CreateControlCollection" /> method is overridden by the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class to prevent child controls from being added. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Web.UI.ControlCollection" /> object to hold the child controls (both literal and server) of the server control.</para
-          >
+            >Creates a new <see cref="T:System.Web.UI.ControlCollection" /> object to hold the child controls (both literal and server) of the server control.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Web.UI.EmptyControlCollection" /> that prevents any child controls from being added.</para
-          >
+            >An <see cref="T:System.Web.UI.EmptyControlCollection" /> that prevents any child controls from being added.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -128,8 +121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class has no visual rendering, it does not support themes.</para
-          >
+            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class has no visual rendering, it does not support themes.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the current naming container for a server control with the specified <paramref name="id" /> parameter.</para
-          >
+            >Searches the current naming container for a server control with the specified <paramref name="id" /> parameter.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -170,8 +161,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identifier for the control to be found.</param
-        >
+          />The identifier for the control to be found.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -194,8 +184,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class has no visual rendering, calling the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.Focus" /> method on it throws a <see cref="T:System.NotSupportedException" /> exception.</para
-          >
+            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class has no visual rendering, calling the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.Focus" /> method on it throws a <see cref="T:System.NotSupportedException" /> exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -228,28 +217,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" /> method provides the default implementation for the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class, which simply returns null. Classes that derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class override this method and provide an implementation to return a strongly typed view that derives from <see cref="T:System.Web.UI.HierarchicalDataSourceView" />.</para
-          >
+            >This <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" /> method provides the default implementation for the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class, which simply returns null. Classes that derive from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class override this method and provide an implementation to return a strongly typed view that derives from <see cref="T:System.Web.UI.HierarchicalDataSourceView" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the view helper object for the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface for the specified path.</para
-          >
+            >Gets the view helper object for the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface for the specified path.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> that represents a single view of the data at the hierarchical level identified by the <paramref name="viewPath" /> parameter.</para
-          >
+            >A <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> that represents a single view of the data at the hierarchical level identified by the <paramref name="viewPath" /> parameter.</para>
         </returns>
         <param name="viewPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hierarchical path of the view to retrieve. </param
-        >
+          />The hierarchical path of the view to retrieve. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -300,30 +285,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.HierarchicalDataSourceControl.OnDataSourceChanged(System.EventArgs)" /> method notifies a data-bound control that the underlying data source or the data cached in memory has changed, that the control should rebind, and that any necessary work should be performed.</para
-          >
+            >The <see cref="M:System.Web.UI.HierarchicalDataSourceControl.OnDataSourceChanged(System.EventArgs)" /> method notifies a data-bound control that the underlying data source or the data cached in memory has changed, that the control should rebind, and that any necessary work should be performed.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
-            </format>.</para
-          >
+            </format>.</para>
           <para
-            >The <see cref="M:System.Web.UI.HierarchicalDataSourceControl.OnDataSourceChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
-          >
+            >The <see cref="M:System.Web.UI.HierarchicalDataSourceControl.OnDataSourceChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" /> event.</para
-          >
+            >Raises the <see cref="E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged" /> event.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.EventArgs" /> that contains event data. </param
-        >
+          />An <see cref="T:System.EventArgs" /> that contains event data. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -350,8 +330,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HTML text writer.</param
-        >
+          />The HTML text writer.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -385,14 +364,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> has no visual rendering, it does not support themes or skins.</para
-          >
+            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> has no visual rendering, it does not support themes or skins.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the skin to apply to the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> control.</para
-          >
+            >Gets or sets the skin to apply to the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> control.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -418,28 +395,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" /> method is called by clients when a <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> is manipulated as an <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface. It delegates to the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" /> method, which derived classes override to return strongly typed <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> objects.</para
-          >
+            >The <see cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" /> method is called by clients when a <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> is manipulated as an <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface. It delegates to the <see cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" /> method, which derived classes override to return strongly typed <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the view helper object for the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface for the specified path.</para
-          >
+            >Gets the view helper object for the <see cref="T:System.Web.UI.IHierarchicalDataSource" /> interface for the specified path.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> that represents a single view of the data at the hierarchical level identified by the <paramref name="viewPath" /> parameter.</para
-          >
+            >Returns a <see cref="T:System.Web.UI.HierarchicalDataSourceView" /> that represents a single view of the data at the hierarchical level identified by the <paramref name="viewPath" /> parameter.</para>
         </returns>
         <param name="viewPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hierarchical path of the view to retrieve. </param
-        >
+          />The hierarchical path of the view to retrieve. </param>
       </Docs>
     </Member>
     <Member MemberName="Visible">
@@ -465,8 +438,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class has no visual rendering, <see cref="P:System.Web.UI.HierarchicalDataSourceControl.Visible" /> always returns false.</para
-          >
+            >Because the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" /> class has no visual rendering, <see cref="P:System.Web.UI.HierarchicalDataSourceControl.Visible" /> always returns false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

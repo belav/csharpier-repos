@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Web.Configuration.RuleSettings" /> objects are used to define event rules.</para
-      >
+        <see cref="T:System.Web.Configuration.RuleSettings" /> objects are used to define event rules.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see cref="T:System.Web.Configuration.RuleSettings" /> objects. This class cannot be inherited.</para
-      >
+        >A collection of <see cref="T:System.Web.Configuration.RuleSettings" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -42,14 +40,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" /> property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> class always contains an instance of the <see cref="T:System.Web.Configuration.RuleSettingsCollection" />. Use this instance, rather than creating a new instance of the class.</para
-          >
+            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" /> property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> class always contains an instance of the <see cref="T:System.Web.Configuration.RuleSettingsCollection" />. Use this instance, rather than creating a new instance of the class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettingsCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettingsCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -73,22 +69,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the same name.</para
-          >
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the same name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Configuration.RuleSettings" /> object to the collection.</para
-          >
+            >Adds a <see cref="T:System.Web.Configuration.RuleSettings" /> object to the collection.</para>
         </summary>
         <param name="ruleSettings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.RuleSettings" /> object to add to the collection.</param
-        >
+          />A <see cref="T:System.Web.Configuration.RuleSettings" /> object to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Web.Configuration.RuleSettings" /> objects from the collection.</para
-          >
+            >Removes all <see cref="T:System.Web.Configuration.RuleSettings" /> objects from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,22 +128,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns true if the collection contains a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the specified name.</para
-          >
+            >Returns true if the collection contains a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the specified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the specified name; otherwise, false.</para
-          >
+            >true if the collection contains a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the specified name; otherwise, false.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param
-        >
+          />The name of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -199,16 +188,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key of the passed <see cref="T:System.Configuration.ConfigurationElement" /> object.</para
-          >
+            >Gets the key of the passed <see cref="T:System.Configuration.ConfigurationElement" /> object.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param
-        >
+          />A <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -228,28 +215,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns -1 if a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the specified name is not in the collection.</para
-          >
+            >Returns -1 if a <see cref="T:System.Web.Configuration.RuleSettings" /> object with the specified name is not in the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Finds the index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection with the specified name.</para
-          >
+            >Finds the index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection with the specified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection with the specified name.</para
-          >
+            >The index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection with the specified name.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param
-        >
+          />The name of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -277,23 +260,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Web.Configuration.RuleSettings" /> object to the specified index point in the collection.</para
-          >
+            >Adds the specified <see cref="T:System.Web.Configuration.RuleSettings" /> object to the specified index point in the collection.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A valid index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param
-        >
+          />A valid index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param>
         <param name="eventSettings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Configuration.RuleSettings" /> object to insert into the collection.</param
-        >
+          />The <see cref="T:System.Web.Configuration.RuleSettings" /> object to insert into the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -382,16 +362,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.RuleSettings" /> object from the collection.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.RuleSettings" /> object from the collection.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param
-        >
+          />The name of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -415,16 +393,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.RuleSettings" /> object at the specified index location from the collection.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.RuleSettings" /> object at the specified index location from the collection.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A valid index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param
-        >
+          />A valid index of a <see cref="T:System.Web.Configuration.RuleSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -28,24 +28,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a lambda expression is assigned to a variable, field, or parameter whose type is <see cref="T:System.Linq.Expressions.Expression`1" />, the compiler emits instructions to build an expression tree.</para
-      >
+        >When a lambda expression is assigned to a variable, field, or parameter whose type is <see cref="T:System.Linq.Expressions.Expression`1" />, the compiler emits instructions to build an expression tree.</para>
       <block subset="none" type="note">
         <para
-          >A conversion from a lambda expression to type <unmanagedCodeEntityReference>Expression&lt;D&gt;</unmanagedCodeEntityReference> (<unmanagedCodeEntityReference>Expression(Of D)</unmanagedCodeEntityReference> in Visual Basic) exists if a conversion from the lambda expression to a delegate of type <unmanagedCodeEntityReference>D</unmanagedCodeEntityReference> exists. However, the conversion may fail, for example, if the body of the lambda expression is a block. This means that delegates and expression trees behave similarly with regard to overload resolution.</para
-        >
+          >A conversion from a lambda expression to type <unmanagedCodeEntityReference>Expression&lt;D&gt;</unmanagedCodeEntityReference> (<unmanagedCodeEntityReference>Expression(Of D)</unmanagedCodeEntityReference> in Visual Basic) exists if a conversion from the lambda expression to a delegate of type <unmanagedCodeEntityReference>D</unmanagedCodeEntityReference> exists. However, the conversion may fail, for example, if the body of the lambda expression is a block. This means that delegates and expression trees behave similarly with regard to overload resolution.</para>
       </block>
       <para>The expression tree is an in-memory data representation of the lambda expression. The expression tree makes the structure of the lambda expression transparent and explicit. You can interact with the data in the expression tree just as you can with any other data structure.</para>
       <para>The ability to treat expressions as data structures enables APIs to receive user code in a format that can be inspected, transformed, and processed in a custom manner. For example, the vbtecdlinq data access implementation uses this facility to translate expression trees to Transact-SQL statements that can be evaluated by the database.</para>
       <para
-        >Many standard query operators defined in the <see cref="T:System.Linq.Queryable" /> class have one or more parameters of type <see cref="T:System.Linq.Expressions.Expression`1" />.</para
-      >
+        >Many standard query operators defined in the <see cref="T:System.Linq.Queryable" /> class have one or more parameters of type <see cref="T:System.Linq.Expressions.Expression`1" />.</para>
       <para
-        >The <see cref="P:System.Linq.Expressions.Expression.NodeType" /> of an <see cref="T:System.Linq.Expressions.Expression`1" /> is <see cref="F:System.Linq.Expressions.ExpressionType.Lambda" />.</para
-      >
+        >The <see cref="P:System.Linq.Expressions.Expression.NodeType" /> of an <see cref="T:System.Linq.Expressions.Expression`1" /> is <see cref="F:System.Linq.Expressions.ExpressionType.Lambda" />.</para>
       <para
-        >Use the <see cref="M:System.Linq.Expressions.Expression.Lambda``1(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression})" /> or <see cref="M:System.Linq.Expressions.Expression.Lambda``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" /> method to create an <see cref="T:System.Linq.Expressions.Expression`1" /> object.</para
-      >
+        >Use the <see cref="M:System.Linq.Expressions.Expression.Lambda``1(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable{System.Linq.Expressions.ParameterExpression})" /> or <see cref="M:System.Linq.Expressions.Expression.Lambda``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" /> method to create an <see cref="T:System.Linq.Expressions.Expression`1" /> object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -98,11 +93,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Linq.Expressions.Expression`1.Compile" /> method produces a delegate of type <paramref name="TDelegate" /> at runtime. When that delegate is executed, it has the behavior described by the semantics of the <see cref="T:System.Linq.Expressions.Expression`1" />.</para
-          >
+            >The <see cref="M:System.Linq.Expressions.Expression`1.Compile" /> method produces a delegate of type <paramref name="TDelegate" /> at runtime. When that delegate is executed, it has the behavior described by the semantics of the <see cref="T:System.Linq.Expressions.Expression`1" />.</para>
           <para
-            >The <see cref="M:System.Linq.Expressions.Expression`1.Compile" /> method can be used to obtain the value of any expression tree. First, create a lambda expression that has the expression as its body by using the <see cref="M:System.Linq.Expressions.Expression.Lambda(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" /> method. Then call <see cref="M:System.Linq.Expressions.Expression`1.Compile" /> to obtain a delegate, and execute the delegate to obtain the value of the expression.</para
-          >
+            >The <see cref="M:System.Linq.Expressions.Expression`1.Compile" /> method can be used to obtain the value of any expression tree. First, create a lambda expression that has the expression as its body by using the <see cref="M:System.Linq.Expressions.Expression.Lambda(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" /> method. Then call <see cref="M:System.Linq.Expressions.Expression`1.Compile" /> to obtain a delegate, and execute the delegate to obtain the value of the expression.</para>
           <para />
         </remarks>
         <summary>
@@ -112,8 +105,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A delegate of type <paramref name="TDelegate" /> that represents the compiled lambda expression described by the <see cref="T:System.Linq.Expressions.Expression`1" />.</para
-          >
+            >A delegate of type <paramref name="TDelegate" /> that represents the compiled lambda expression described by the <see cref="T:System.Linq.Expressions.Expression`1" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -154,8 +146,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Debugging information generator used by the compiler to mark sequence points and annotate local variables.</param
-        >
+          />Debugging information generator used by the compiler to mark sequence points and annotate local variables.</param>
       </Docs>
     </Member>
     <Member MemberName="Update">
@@ -196,15 +187,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.LambdaExpression.Body" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.LambdaExpression.Body" /> property of the result.</param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> property of the result. </param
-        >
+          />The <see cref="P:System.Linq.Expressions.LambdaExpression.Parameters" /> property of the result. </param>
       </Docs>
     </Member>
   </Members>

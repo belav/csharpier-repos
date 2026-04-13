@@ -19,14 +19,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="E:Microsoft.Win32.SystemEvents.SessionEnded" /> event is raised when the user logs off or shuts down the system.</para
-      >
+        >A <see cref="E:Microsoft.Win32.SystemEvents.SessionEnded" /> event is raised when the user logs off or shuts down the system.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.SessionEnded" /> event.</para
-      >
+        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.SessionEnded" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,16 +51,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SessionEndedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SessionEndedEventArgs" /> class.</para>
         </summary>
         <param name="reason">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:Microsoft.Win32.SessionEndReasons" /> values indicating how the session ended. </param
-        >
+          />One of the <see cref="T:Microsoft.Win32.SessionEndReasons" /> values indicating how the session ended. </param>
       </Docs>
     </Member>
     <Member MemberName="Reason">

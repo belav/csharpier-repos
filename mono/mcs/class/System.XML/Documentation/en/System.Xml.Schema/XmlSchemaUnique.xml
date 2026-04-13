@@ -31,8 +31,7 @@
       <para
         >Represents the unique element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
-        </format>. This class can be used to identify a unique constraint among a set of elements.</para
-      >
+        </format>. This class can be used to identify a unique constraint among a set of elements.</para>
     </summary>
   </Docs>
   <Members>
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaUnique" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaUnique" /> class.</para>
         </summary>
       </Docs>
     </Member>

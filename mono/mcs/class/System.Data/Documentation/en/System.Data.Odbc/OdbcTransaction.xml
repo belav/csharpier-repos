@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The application creates an <see cref="T:System.Data.Odbc.OdbcTransaction" /> object by calling <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" /> on the <see cref="T:System.Data.Odbc.OdbcConnection" /> object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction) are performed on the <see cref="T:System.Data.Odbc.OdbcTransaction" /> object.</para
-      >
+        >The application creates an <see cref="T:System.Data.Odbc.OdbcTransaction" /> object by calling <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" /> on the <see cref="T:System.Data.Odbc.OdbcConnection" /> object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction) are performed on the <see cref="T:System.Data.Odbc.OdbcTransaction" /> object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,14 +58,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single application may have multiple database connections, each with zero or more transactions. This property lets you determine the connection object associated with a particular transaction created by <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />.</para
-          >
+            >A single application may have multiple database connections, each with zero or more transactions. This property lets you determine the connection object associated with a particular transaction created by <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Data.Odbc.OdbcConnection" /> object associated with the transaction, or null if the transaction is no longer valid.</para
-          >
+            >Gets the <see cref="T:System.Data.Odbc.OdbcConnection" /> object associated with the transaction, or null if the transaction is no longer valid.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -126,14 +123,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parallel transactions are not supported. Therefore, the <see cref="T:System.Data.IsolationLevel" /> applies to the whole transaction.</para
-          >
+            >Parallel transactions are not supported. Therefore, the <see cref="T:System.Data.IsolationLevel" /> applies to the whole transaction.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see cref="T:System.Data.IsolationLevel" /> for this transaction.</para
-          >
+            >Specifies the <see cref="T:System.Data.IsolationLevel" /> for this transaction.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -152,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transaction can be rolled back only from a pending state (after <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" /> has been called, but before <see cref="M:System.Data.Odbc.OdbcTransaction.Commit" /> is called). The transaction will be rolled back in the event it is disposed before Commit or Rollback is called.</para
-          >
+            >The transaction can be rolled back only from a pending state (after <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" /> has been called, but before <see cref="M:System.Data.Odbc.OdbcTransaction.Commit" /> is called). The transaction will be rolled back in the event it is disposed before Commit or Rollback is called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

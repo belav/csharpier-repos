@@ -1,8 +1,7 @@
 <Project DefaultTargets="Build">
   <PropertyGroup>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)' == ''"
-      >$(ArtifactsDir)\obj\</BaseIntermediateOutputPath
-    >
+      >$(ArtifactsDir)\obj\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$([MSBuild]::NormalizeDirectory('$(BaseIntermediateOutputPath)'))$(Configuration)\</IntermediateOutputPath>
     <BuildDependsOn>
       PrepareForBuild;
@@ -10,8 +9,7 @@
       _Build;
     </BuildDependsOn>
     <JavaBuildArgs Condition="'$(JavaBuildArgs)' == ''"
-      >../gradlew $(GradleOptions) compileJava</JavaBuildArgs
-    >
+      >../gradlew $(GradleOptions) compileJava</JavaBuildArgs>
     <GradleOptions>$(GradleOptions) -PpackageVersion="$(PackageVersion)"</GradleOptions>
   </PropertyGroup>
 

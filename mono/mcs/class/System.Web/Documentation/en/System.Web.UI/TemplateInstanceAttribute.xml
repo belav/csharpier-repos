@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class allows you to mark a template property as one that allows single or multiple instantiations. A template that only allows a single instantiation can have the controls that are contained inside of it referenced. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPartZone.ZoneTemplate" /> property is an example of a property that can be instantiated only one time.</para
-      >
+        >The <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class allows you to mark a template property as one that allows single or multiple instantiations. A template that only allows a single instantiation can have the controls that are contained inside of it referenced. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPartZone.ZoneTemplate" /> property is an example of a property that can be instantiated only one time.</para>
       <para
         >This <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class is optional. If a template property is not extended with a <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class, the default value, the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" /> field, is used. For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class with the specified <see cref="T:System.Web.UI.TemplateInstance" /> enumeration value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class with the specified <see cref="T:System.Web.UI.TemplateInstance" /> enumeration value.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -71,14 +68,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior is to create multiple instances of the template using the <see cref="F:System.Web.UI.TemplateInstance.Multiple" /> enumeration value.</para
-          >
+            >The default behavior is to create multiple instances of the template using the <see cref="F:System.Web.UI.TemplateInstance.Multiple" /> enumeration value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class. This field is read-only. </para
-          >
+            >Defines the default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class. This field is read-only. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,22 +95,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified object is a <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object and is identical to the this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para
-          >
+            >Indicates whether the specified object is a <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object and is identical to the this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if value is both a <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object and is identical to the this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object; otherwise false.</para
-          >
+            >true if value is both a <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object and is identical to the this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object; otherwise false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to test.</param
-        >
+          />The <see cref="T:System.Object" /> to test.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -134,14 +126,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para
-          >
+            >Gets a hash code for this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para
-          >
+            >The hash code for this <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -163,14 +153,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible values are either the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Single" /> field or the <see cref="F:System.Web.UI.TemplateInstance.Multiple" /> field.</para
-          >
+            >The possible values are either the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Single" /> field or the <see cref="F:System.Web.UI.TemplateInstance.Multiple" /> field.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.UI.TemplateInstance" /> enumeration value that the current template instance represents.</para
-          >
+            >Gets the <see cref="T:System.Web.UI.TemplateInstance" /> enumeration value that the current template instance represents.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -189,20 +177,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class is the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" /> field.</para
-          >
+            >The default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class is the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" /> field.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating if the current <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object is the same as the default <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para
-          >
+            >Returns a value indicating if the current <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object is the same as the default <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of the current instance of <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> is the default; otherwise, false.</para
-          >
+            >true if the value of the current instance of <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> is the default; otherwise, false.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -223,14 +208,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" /> field is accessed, a new template instance is instantiated multiple times.</para
-          >
+            >If the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" /> field is accessed, a new template instance is instantiated multiple times.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class as one representing a template that will be instantiated multiple times. This field is read-only.</para
-          >
+            >Creates an instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class as one representing a template that will be instantiated multiple times. This field is read-only.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,14 +234,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Single" /> field is accessed, a new template instance is instantiated a single time.</para
-          >
+            >If the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Single" /> field is accessed, a new template instance is instantiated a single time.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class as one representing a template that will be instantiated a single time. This field is read-only.</para
-          >
+            >Creates an instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" /> class as one representing a template that will be instantiated a single time. This field is read-only.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

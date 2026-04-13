@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This object is accessed from the binding by using the <see cref="P:System.ServiceModel.NetTcpBinding.Security" /> property, which returns a <see cref="T:System.ServiceModel.NetTcpSecurity" /> object. The <see cref="P:System.ServiceModel.NetTcpSecurity.Message" /> property provides a reference to the <see cref="T:System.ServiceModel.MessageSecurityOverTcp" /> object.</para
-      >
+        >This object is accessed from the binding by using the <see cref="P:System.ServiceModel.NetTcpBinding.Security" /> property, which returns a <see cref="T:System.ServiceModel.NetTcpSecurity" /> object. The <see cref="P:System.ServiceModel.NetTcpSecurity.Message" /> property provides a reference to the <see cref="T:System.ServiceModel.MessageSecurityOverTcp" /> object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,10 +49,8 @@
           <para
             >If you set this property to a value other than the default and generate a configuration file using <format type="text/html">
               <a href="1abf3d9f-b420-46f1-b628-df238751f308"
-                >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
-              >
-            </format>, it is not generated correctly and you must manually edit the configuration file to set the corresponding configuration attribute to the desired value.</para
-          >
+                >ServiceModel Metadata Utility Tool (Svcutil.exe)</a>
+            </format>, it is not generated correctly and you must manually edit the configuration file to set the corresponding configuration attribute to the desired value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

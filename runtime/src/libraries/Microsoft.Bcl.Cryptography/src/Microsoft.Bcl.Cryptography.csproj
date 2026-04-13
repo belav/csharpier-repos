@@ -14,8 +14,7 @@ System.Security.Cryptography.SP800108HmacCounterKdf</PackageDescription>
   <PropertyGroup>
     <IsPartialFacadeAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETCoreApp'"
-      >true</IsPartialFacadeAssembly
-    >
+      >true</IsPartialFacadeAssembly>
     <OmitResources Condition="'$(IsPartialFacadeAssembly)' == 'true'">true</OmitResources>
   </PropertyGroup>
 

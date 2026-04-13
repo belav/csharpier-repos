@@ -25,17 +25,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization that is derived from the abstract <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> class. <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> is also implemented within the .NET Framework for serialization of <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> and <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects into XML documents.</para
-      >
+        >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization that is derived from the abstract <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> class. <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> is also implemented within the .NET Framework for serialization of <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" /> and <see cref="T:System.Web.Services.Description.ServiceDescription" /> objects into XML documents.</para>
       <para
-        >You should not derive classes from <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />. Instead, call the <see cref="Overload:System.Xml.Serialization.XmlSerializer.Serialize" /> method.</para
-      >
+        >You should not derive classes from <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />. Instead, call the <see cref="Overload:System.Xml.Serialization.XmlSerializer.Serialize" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an abstract class used for controlling serialization by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class.</para
-      >
+        >Represents an abstract class used for controlling serialization by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,50 +87,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization that is derived from <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />. During this process, the .NET Framework generates write methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized via SOAP-encoded XML and are not root elements. Then, as necessary, a write method is called during serialization.</para
-          >
+            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization that is derived from <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />. During this process, the .NET Framework generates write methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized via SOAP-encoded XML and are not root elements. Then, as necessary, a write method is called during serialization.</para>
           <para
-            >You should not directly create an instance of <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />.</para
-          >
+            >You should not directly create an instance of <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores an implementation of the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate and the type it applies to, for a later invocation.</para
-          >
+            >Stores an implementation of the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate and the type it applies to, for a later invocation.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of objects that are serialized.</param
-        >
+          />The <see cref="T:System.Type" /> of objects that are serialized.</param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type of objects that are serialized.</param
-        >
+          />The name of the type of objects that are serialized.</param>
         <param name="typeNs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the type of objects that are serialized.</param
-        >
+          />The namespace of the type of objects that are serialized.</param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate.</param
-        >
+          />An instance of the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateChoiceIdentifierValueException">
@@ -165,14 +153,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates an unexpected name for an element that adheres to an XML Schema choice element declaration.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates an unexpected name for an element that adheres to an XML Schema choice element declaration.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -183,29 +169,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name that is not valid.</param
-        >
+          />The name that is not valid.</param>
         <param name="identifier">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The choice element declaration that the name belongs to.</param
-        >
+          />The choice element declaration that the name belongs to.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expected local name of an element.</param
-        >
+          />The expected local name of an element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expected namespace of an element.</param
-        >
+          />The expected namespace of an element.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInvalidAnyTypeException">
@@ -234,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" /> which has been invalidly applied to a member; only members that are of type <see cref="T:System.Xml.XmlNode" />, or derived from <see cref="T:System.Xml.XmlNode" />, are valid.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" /> which has been invalidly applied to a member; only members that are of type <see cref="T:System.Xml.XmlNode" />, or derived from <see cref="T:System.Xml.XmlNode" />, are valid.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,8 +227,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that represents the invalid member.</param
-        >
+          />The object that represents the invalid member.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInvalidAnyTypeException">
@@ -276,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" /> which has been invalidly applied to a member; only members that are of type <see cref="T:System.Xml.XmlNode" />, or derived from <see cref="T:System.Xml.XmlNode" />, are valid.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" /> which has been invalidly applied to a member; only members that are of type <see cref="T:System.Xml.XmlNode" />, or derived from <see cref="T:System.Xml.XmlNode" />, are valid.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -288,8 +267,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that is invalid.</param
-        >
+          />The <see cref="T:System.Type" /> that is invalid.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInvalidChoiceIdentifierValueException">
@@ -318,14 +296,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates a failure while writing an array where an XML Schema choice element declaration is applied.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates a failure while writing an array where an XML Schema choice element declaration is applied.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -336,15 +312,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type being serialized.</param
-        >
+          />The type being serialized.</param>
         <param name="identifier">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A name for the choice element declaration.</param
-        >
+          />A name for the choice element declaration.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateInvalidEnumValueException">
@@ -374,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> for an invalid enumeration value.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> for an invalid enumeration value.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -386,11 +359,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that represents the invalid enumeration.</param
-        >
+          />An object that represents the invalid enumeration.</param>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XML type name.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The XML type name.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMismatchChoiceException">
@@ -420,14 +391,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a value for an XML element does not match an enumeration type.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a value for an XML element does not match an enumeration type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -438,18 +407,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value that is not valid.</param
-        >
+          />The value that is not valid.</param>
         <param name="elementName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML element with an invalid value.</param
-        >
+          />The name of the XML element with an invalid value.</param>
         <param name="enumValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The valid value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The valid value.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateUnknownAnyElementException">
@@ -478,14 +444,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an XML element that should adhere to the XML Schema any element declaration cannot be processed.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that an XML element that should adhere to the XML Schema any element declaration cannot be processed.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -496,15 +460,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element that cannot be processed.</param
-        >
+          />The XML element that cannot be processed.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateUnknownTypeException">
@@ -532,14 +494,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a type being serialized is not being used in a valid manner or is unexpectedly encountered.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a type being serialized is not being used in a valid manner or is unexpectedly encountered.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -550,8 +510,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object whose type cannot be serialized.</param
-        >
+          />The object whose type cannot be serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateUnknownTypeException">
@@ -579,14 +538,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a type being serialized is not being used in a valid manner or is unexpectedly encountered.</para
-          >
+            >Creates an <see cref="T:System.InvalidOperationException" /> that indicates that a type being serialized is not being used in a valid manner or is unexpectedly encountered.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -597,8 +554,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that cannot be serialized.</param
-        >
+          />The type that cannot be serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="EscapeName">
@@ -618,14 +574,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" /> method writes valid XML from invalid sources. For example, the <see cref="P:System.Data.DataColumn.ColumnName" /> property of the <see cref="T:System.Data.DataColumn" /> class can contain spaces, which are invalid as XML. The <see cref="M:System.Xml.XmlConvert.DecodeName(System.String)" /> method reads the encoded XML and restores it to the original value. However, the <see cref="Overload:System.Xml.Schema.XmlSchema.Read" /> method of the <see cref="T:System.Xml.Schema.XmlSchema" /> cannot read such encoded XML. In that case, set the <see cref="P:System.Xml.Serialization.XmlSerializationWriter.EscapeName" /> property to false to disable the encoding of the XML.</para
-          >
+            >The <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" /> method writes valid XML from invalid sources. For example, the <see cref="P:System.Data.DataColumn.ColumnName" /> property of the <see cref="T:System.Data.DataColumn" /> class can contain spaces, which are invalid as XML. The <see cref="M:System.Xml.XmlConvert.DecodeName(System.String)" /> method reads the encoded XML and restores it to the original value. However, the <see cref="Overload:System.Xml.Schema.XmlSchema.Read" /> method of the <see cref="T:System.Xml.Schema.XmlSchema" /> cannot read such encoded XML. In that case, set the <see cref="P:System.Xml.Serialization.XmlSerializationWriter.EscapeName" /> property to false to disable the encoding of the XML.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" /> method is used to write valid XML.</para
-          >
+            >Gets or sets a value that indicates whether the <see cref="M:System.Xml.XmlConvert.EncodeName(System.String)" /> method is used to write valid XML.</para>
         </summary>
       </Docs>
     </Member>
@@ -654,11 +608,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >Rather than return a string as other similar "from" methods, the static <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromByteArrayBase64(System.Byte[])" /> method returns the original byte[] object to improve performance and conserve memory.</para
-          >
+            >Rather than return a string as other similar "from" methods, the static <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromByteArrayBase64(System.Byte[])" /> method returns the original byte[] object to improve performance and conserve memory.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -673,8 +625,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A base-64 <see cref="T:System.Byte" /> array.</param
-        >
+          />A base-64 <see cref="T:System.Byte" /> array.</param>
       </Docs>
     </Member>
     <Member MemberName="FromByteArrayHex">
@@ -702,11 +653,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromByteArrayHex(System.Byte[])" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromByteArrayHex(System.Byte[])" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -721,8 +670,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A hexadecimal byte array to translate to a string.</param
-        >
+          />A hexadecimal byte array to translate to a string.</param>
       </Docs>
     </Member>
     <Member MemberName="FromChar">
@@ -747,11 +695,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromChar(System.Char)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromChar(System.Char)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -766,8 +712,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Char" /> to translate to a string.</param
-        >
+          />A <see cref="T:System.Char" /> to translate to a string.</param>
       </Docs>
     </Member>
     <Member MemberName="FromDate">
@@ -792,11 +737,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromDate(System.DateTime)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromDate(System.DateTime)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -805,16 +748,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the <see cref="T:System.DateTime" /> that shows the date but no time.</para
-          >
+            >A string representation of the <see cref="T:System.DateTime" /> that shows the date but no time.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> to translate to a string.</param
-        >
+          />A <see cref="T:System.DateTime" /> to translate to a string.</param>
       </Docs>
     </Member>
     <Member MemberName="FromDateTime">
@@ -842,11 +783,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromDateTime(System.DateTime)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromDateTime(System.DateTime)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -855,16 +794,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the <see cref="T:System.DateTime" /> that shows the date and time.</para
-          >
+            >A string representation of the <see cref="T:System.DateTime" /> that shows the date and time.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> to translate to a string.</param
-        >
+          />A <see cref="T:System.DateTime" /> to translate to a string.</param>
       </Docs>
     </Member>
     <Member MemberName="FromEnum">
@@ -894,11 +831,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromEnum(System.Int64,System.String[],System.Int64[])" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromEnum(System.Int64,System.String[],System.Int64[])" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -913,22 +848,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration value as a series of bitwise OR operations.</param
-        >
+          />The enumeration value as a series of bitwise OR operations.</param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration's name values.</param
-        >
+          />The enumeration's name values.</param>
         <param name="ids">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration's constant values.</param
-        >
+          />The enumeration's constant values.</param>
       </Docs>
     </Member>
     <Member MemberName="FromEnum">
@@ -959,8 +891,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -975,29 +906,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The enumeration value as a series of bitwise OR operations.</param
-        >
+          />The enumeration value as a series of bitwise OR operations.</param>
         <param name="values">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The values of the enumeration.</param
-        >
+          />The values of the enumeration.</param>
         <param name="ids">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constants of the enumeration.</param
-        >
+          />The constants of the enumeration.</param>
         <param name="typeName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the type </param
-        >
+          />The name of the type </param>
       </Docs>
     </Member>
     <Member MemberName="FromTime">
@@ -1022,11 +949,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromTime(System.DateTime)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromTime(System.DateTime)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1035,16 +960,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the <see cref="T:System.DateTime" /> object that shows the time but no date.</para
-          >
+            >A string representation of the <see cref="T:System.DateTime" /> object that shows the time but no date.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.DateTime" /> that is translated to a string.</param
-        >
+          />A <see cref="T:System.DateTime" /> that is translated to a string.</param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlName">
@@ -1069,11 +992,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlName(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlName(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1088,8 +1009,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to be used as an XML name.</param
-        >
+          />A string to be used as an XML name.</param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlNCName">
@@ -1117,11 +1037,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> class are intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> class are intended for use by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNCName(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNCName(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1136,8 +1054,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to be used as a local (unqualified) XML name.</param
-        >
+          />A string to be used as a local (unqualified) XML name.</param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlNmToken">
@@ -1165,11 +1082,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNmToken(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNmToken(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1184,8 +1099,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An XML name to be encoded.</param
-        >
+          />An XML name to be encoded.</param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlNmTokens">
@@ -1213,11 +1127,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNmTokens(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.FromXmlNmTokens(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1232,8 +1144,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A space-delimited sequence of XML names to be encoded.</param
-        >
+          />A space-delimited sequence of XML names to be encoded.</param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlQualifiedName">
@@ -1261,8 +1172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1277,8 +1187,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the XML to be written.</param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the XML to be written.</param>
       </Docs>
     </Member>
     <Member MemberName="FromXmlQualifiedName">
@@ -1319,15 +1228,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the XML to be written.</param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> that represents the XML to be written.</param>
         <param name="ignoreEmpty">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore empty spaces in the string; otherwise, false.</param
-        >
+          />true to ignore empty spaces in the string; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="InitCallbacks">
@@ -1350,24 +1257,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization that is derived from <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />. During this process, the .NET Framework generates write methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized using SOAP-encoded XML and are not root elements. Then, as necessary, a write method is called during serialization.</para
-          >
+            >During initialization, the .NET Framework XML serialization infrastructure dynamically generates and compiles a temporary class for serialization that is derived from <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />. During this process, the .NET Framework generates write methods that implement the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate. It does so for certain mappings between .NET Framework types and XML data types that are serialized using SOAP-encoded XML and are not root elements. Then, as necessary, a write method is called during serialization.</para>
           <para
-            >The abstract <see cref="M:System.Xml.Serialization.XmlSerializationWriter.InitCallbacks" /> method is where the temporary derived class creates an instance of and initializes write callback methods.</para
-          >
+            >The abstract <see cref="M:System.Xml.Serialization.XmlSerializationWriter.InitCallbacks" /> method is where the temporary derived class creates an instance of and initializes write callback methods.</para>
           <para
-            >You should not directly create an instance of <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />.</para
-          >
+            >You should not directly create an instance of <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instances of the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate to serialize SOAP-encoded XML data.</para
-          >
+            >Initializes an instances of the <see cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" /> delegate to serialize SOAP-encoded XML data.</para>
         </summary>
       </Docs>
     </Member>
@@ -1394,8 +1296,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1428,11 +1329,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.ResolveDynamicAssembly(System.String)" /> method is static.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.ResolveDynamicAssembly(System.String)" /> method is static.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1447,8 +1346,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The full name of the assembly.</param
-        >
+          />The full name of the assembly.</param>
       </Docs>
     </Member>
     <Member MemberName="TopLevelElement">
@@ -1471,11 +1369,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element and to be referenced any number of times by substitute elements. The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.TopLevelElement" /> method helps keep track of the objects that can be serialized as multiRef elements.</para
-          >
+            >SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element and to be referenced any number of times by substitute elements. The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.TopLevelElement" /> method helps keep track of the objects that can be serialized as multiRef elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
@@ -1510,29 +1406,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs an <see cref="T:System.Xml.XmlWriter" /> object to write an XML attribute that has no namespace specified for its name.</para
-          >
+            >Instructs an <see cref="T:System.Xml.XmlWriter" /> object to write an XML attribute that has no namespace specified for its name.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML attribute.</param
-        >
+          />The local name of the XML attribute.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the XML attribute as a byte array.</param
-        >
+          />The value of the XML attribute as a byte array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttribute">
@@ -1561,29 +1453,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see cref="T:System.Xml.XmlWriter" /> to write an XML attribute that has no namespace specified for its name.</para
-          >
+            >Instructs the <see cref="T:System.Xml.XmlWriter" /> to write an XML attribute that has no namespace specified for its name.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML attribute.</param
-        >
+          />The local name of the XML attribute.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the XML attribute as a string.</param
-        >
+          />The value of the XML attribute as a string.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttribute">
@@ -1613,36 +1501,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs an <see cref="T:System.Xml.XmlWriter" /> object to write an XML attribute.</para
-          >
+            >Instructs an <see cref="T:System.Xml.XmlWriter" /> object to write an XML attribute.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML attribute.</param
-        >
+          />The local name of the XML attribute.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML attribute.</param
-        >
+          />The namespace of the XML attribute.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the XML attribute as a byte array.</param
-        >
+          />The value of the XML attribute as a byte array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttribute">
@@ -1672,8 +1555,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1684,22 +1566,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML attribute.</param
-        >
+          />The local name of the XML attribute.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML attribute.</param
-        >
+          />The namespace of the XML attribute.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the XML attribute as a string.</param
-        >
+          />The value of the XML attribute as a string.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttribute">
@@ -1730,8 +1609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1742,29 +1620,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix to write.</param
-        >
+          />The namespace prefix to write.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML attribute.</param
-        >
+          />The local name of the XML attribute.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace represented by the prefix.</param
-        >
+          />The namespace represented by the prefix.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the XML attribute as a string.</param
-        >
+          />The value of the XML attribute as a string.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementEncoded">
@@ -1796,11 +1670,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteElementEncoded(System.Xml.XmlNode,System.String,System.String,System.Boolean,System.Boolean)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteElementEncoded(System.Xml.XmlNode,System.String,System.String,System.Boolean,System.Boolean)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1811,36 +1683,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML node to write, possibly a child XML element.</param
-        >
+          />The XML node to write, possibly a child XML element.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the parent XML element to write.</param
-        >
+          />The local name of the parent XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the parent XML element to write.</param
-        >
+          />The namespace of the parent XML element to write.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param
-        >
+          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param>
         <param name="any">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the node, if an XML element, adheres to an XML Schema any element declaration; otherwise, false.</param
-        >
+          />true to indicate that the node, if an XML element, adheres to an XML Schema any element declaration; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementLiteral">
@@ -1872,53 +1739,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteElementLiteral(System.Xml.XmlNode,System.String,System.String,System.Boolean,System.Boolean)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteElementLiteral(System.Xml.XmlNode,System.String,System.String,System.Boolean,System.Boolean)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs an <see cref="T:System.Xml.XmlWriter" /> object to write an <see cref="T:System.Xml.XmlNode" /> object within the body of a named XML element.</para
-          >
+            >Instructs an <see cref="T:System.Xml.XmlWriter" /> object to write an <see cref="T:System.Xml.XmlNode" /> object within the body of a named XML element.</para>
         </summary>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML node to write, possibly a child XML element.</param
-        >
+          />The XML node to write, possibly a child XML element.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the parent XML element to write.</param
-        >
+          />The local name of the parent XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the parent XML element to write.</param
-        >
+          />The namespace of the parent XML element to write.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param
-        >
+          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param>
         <param name="any">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the node, if an XML element, adheres to an XML Schema any element declaration; otherwise, false.</param
-        >
+          />true to indicate that the node, if an XML element, adheres to an XML Schema any element declaration; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementQualifiedName">
@@ -1947,8 +1806,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1959,15 +1817,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to write, using its prefix if namespace-qualified, in the element text.</param
-        >
+          />The name to write, using its prefix if namespace-qualified, in the element text.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementQualifiedName">
@@ -1997,8 +1853,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2009,22 +1864,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to write, using its prefix if namespace-qualified, in the element text.</param
-        >
+          />The name to write, using its prefix if namespace-qualified, in the element text.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementQualifiedName">
@@ -2054,8 +1906,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2066,22 +1917,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to write, using its prefix if namespace-qualified, in the element text.</param
-        >
+          />The name to write, using its prefix if namespace-qualified, in the element text.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementQualifiedName">
@@ -2112,8 +1960,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2124,29 +1971,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to write, using its prefix if namespace-qualified, in the element text.</param
-        >
+          />The name to write, using its prefix if namespace-qualified, in the element text.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementString">
@@ -2175,8 +2018,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2187,15 +2029,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to be written without namespace qualification.</param
-        >
+          />The local name of the XML element to be written without namespace qualification.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementString">
@@ -2225,8 +2065,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2237,22 +2076,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementString">
@@ -2282,8 +2118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2294,22 +2129,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementString">
@@ -2340,8 +2172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2352,29 +2183,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2403,8 +2230,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2415,15 +2241,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2452,8 +2276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2464,15 +2287,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2502,8 +2323,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2514,22 +2334,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2559,8 +2376,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2571,22 +2387,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2616,8 +2429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2628,22 +2440,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2673,8 +2482,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2685,22 +2493,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2731,8 +2536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2743,29 +2547,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementStringRaw">
@@ -2796,8 +2596,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2808,29 +2607,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element.</param
-        >
+          />The local name of the XML element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element.</param
-        >
+          />The namespace of the XML element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text value of the XML element.</param
-        >
+          />The text value of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEmptyTag">
@@ -2855,8 +2650,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2867,8 +2661,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEmptyTag">
@@ -2897,8 +2690,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2909,15 +2701,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEndElement">
@@ -2940,8 +2730,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2971,8 +2760,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2983,8 +2771,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized.</param
-        >
+          />The object being serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteId">
@@ -3009,8 +2796,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times by href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -3023,8 +2809,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized.</param
-        >
+          />The object being serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNamespaceDeclarations">
@@ -3052,8 +2837,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3064,8 +2848,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML namespaces to declare.</param
-        >
+          />The XML namespaces to declare.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableQualifiedNameEncoded">
@@ -3096,47 +2879,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableQualifiedNameEncoded(System.String,System.String,System.Xml.XmlQualifiedName,System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableQualifiedNameEncoded(System.String,System.String,System.Xml.XmlQualifiedName,System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an XML element whose body contains a valid XML qualified name. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes an XML element whose body contains a valid XML qualified name. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML qualified name to write in the body of the XML element.</param
-        >
+          />The XML qualified name to write in the body of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableQualifiedNameLiteral">
@@ -3166,40 +2942,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableQualifiedNameLiteral(System.String,System.String,System.Xml.XmlQualifiedName)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableQualifiedNameLiteral(System.String,System.String,System.Xml.XmlQualifiedName)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an XML element whose body contains a valid XML qualified name. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes an XML element whose body contains a valid XML qualified name. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML qualified name to write in the body of the XML element.</param
-        >
+          />The XML qualified name to write in the body of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableStringEncoded">
@@ -3230,47 +3000,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncoded(System.String,System.String,System.String,System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncoded(System.String,System.String,System.String,System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write in the body of the XML element.</param
-        >
+          />The string to write in the body of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableStringEncodedRaw">
@@ -3301,47 +3064,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncodedRaw(System.String,System.String,System.Byte[],System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncodedRaw(System.String,System.String,System.Byte[],System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a byte array as the body of an XML element. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes a byte array as the body of an XML element. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to write in the body of the XML element.</param
-        >
+          />The byte array to write in the body of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableStringEncodedRaw">
@@ -3372,47 +3128,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncodedRaw(System.String,System.String,System.String,System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringEncodedRaw(System.String,System.String,System.String,System.Xml.XmlQualifiedName)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write in the body of the XML element.</param
-        >
+          />The string to write in the body of the XML element.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the XML Schema data type to be written to the xsi:type attribute.</param
-        >
+          />The name of the XML Schema data type to be written to the xsi:type attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableStringLiteral">
@@ -3442,40 +3191,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteral(System.String,System.String,System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteral(System.String,System.String,System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write in the body of the XML element.</param
-        >
+          />The string to write in the body of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableStringLiteralRaw">
@@ -3505,40 +3248,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteralRaw(System.String,System.String,System.Byte[])" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteralRaw(System.String,System.String,System.Byte[])" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a byte array as the body of an XML element. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes a byte array as the body of an XML element. <see cref="T:System.Xml.XmlWriter" /> inserts an xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to write in the body of the XML element.</param
-        >
+          />The byte array to write in the body of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullableStringLiteralRaw">
@@ -3568,40 +3305,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteralRaw(System.String,System.String,System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullableStringLiteralRaw(System.String,System.String,System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts a xsi:nil='true' attribute if the string's value is null.</para
-          >
+            >Writes an XML element that contains a string as the body. <see cref="T:System.Xml.XmlWriter" /> inserts a xsi:nil='true' attribute if the string's value is null.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to write in the body of the XML element.</param
-        >
+          />The string to write in the body of the XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullTagEncoded">
@@ -3626,12 +3357,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagEncoded(System.String)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagEncoded(System.String)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3642,8 +3371,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullTagEncoded">
@@ -3672,12 +3400,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagEncoded(System.String,System.String)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagEncoded(System.String,System.String)" /> method is called only when writing SOAP-encoded XML, as described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3688,15 +3414,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullTagLiteral">
@@ -3721,12 +3445,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagLiteral(System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagLiteral(System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3737,8 +3459,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNullTagLiteral">
@@ -3767,12 +3488,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>When set to true, the nil attribute from the XML Schema instance namespace (abbreviated xsi) indicates a null value.</para>
           <para
-            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagLiteral(System.String,System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.XmlSerializationWriter.WriteNullTagLiteral(System.String,System.String)" /> method is called only when writing literal XML that can be defined in an XML Schema document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3783,15 +3502,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WritePotentiallyReferencingElement">
@@ -3821,8 +3538,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a &lt;multiRef&gt; element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -3835,22 +3551,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized either in the current XML element or a multiRef element that is referenced by the current element.</param
-        >
+          />The object being serialized either in the current XML element or a multiRef element that is referenced by the current element.</param>
       </Docs>
     </Member>
     <Member MemberName="WritePotentiallyReferencingElement">
@@ -3881,8 +3594,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a &lt;multiRef&gt; element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -3895,29 +3607,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized either in the current XML element or a multiRef element that referenced by the current element.</param
-        >
+          />The object being serialized either in the current XML element or a multiRef element that referenced by the current element.</param>
         <param name="ambientType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param
-        >
+          />The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param>
       </Docs>
     </Member>
     <Member MemberName="WritePotentiallyReferencingElement">
@@ -3949,8 +3657,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -3963,36 +3670,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized either in the current XML element or a multiRef element that is referenced by the current element.</param
-        >
+          />The object being serialized either in the current XML element or a multiRef element that is referenced by the current element.</param>
         <param name="ambientType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param
-        >
+          />The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param>
         <param name="suppressReference">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to serialize the object directly into the XML element rather than make the element reference another element that contains the data; otherwise, false.</param
-        >
+          />true to serialize the object directly into the XML element rather than make the element reference another element that contains the data; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WritePotentiallyReferencingElement">
@@ -4025,8 +3727,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -4039,43 +3740,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized either in the current XML element or a multiRef element that referenced by the current element.</param
-        >
+          />The object being serialized either in the current XML element or a multiRef element that referenced by the current element.</param>
         <param name="ambientType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param
-        >
+          />The type stored in the object's type mapping (as opposed to the object's type found directly through the typeof operation).</param>
         <param name="suppressReference">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to serialize the object directly into the XML element rather than make the element reference another element that contains the data; otherwise, false.</param
-        >
+          />true to serialize the object directly into the XML element rather than make the element reference another element that contains the data; otherwise, false.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param
-        >
+          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="Writer">
@@ -4098,14 +3793,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.XmlWriter" /> that is being used by the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.XmlWriter" /> that is being used by the <see cref="T:System.Xml.Serialization.XmlSerializationWriter" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -4129,8 +3822,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -4167,8 +3859,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -4181,22 +3872,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the referencing element being written.</param
-        >
+          />The local name of the referencing element being written.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the referencing element being written.</param
-        >
+          />The namespace of the referencing element being written.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized.</param
-        >
+          />The object being serialized.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteReferencingElement">
@@ -4227,8 +3915,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>SOAP encoding allows a unique XML element to appear once within a SOAP message as a multiRef element identified by an id attribute. The id value can be referenced multiple times using href attributes (or ref attributes in SOAP 1.2) in substitute elements.</para>
           <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
         </remarks>
@@ -4241,29 +3928,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the referencing element being written.</param
-        >
+          />The local name of the referencing element being written.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the referencing element being written.</param
-        >
+          />The namespace of the referencing element being written.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized.</param
-        >
+          />The object being serialized.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param
-        >
+          />true to write an xsi:nil='true' attribute if the object to serialize is null; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteRpcResult">
@@ -4292,8 +3975,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>The result element is defined in the namespace "http://www.w3.org/2002/12/soap-rpc".</para>
         </remarks>
         <summary>
@@ -4305,15 +3987,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the result body.</param
-        >
+          />The local name of the result body.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the result body.</param
-        >
+          />The namespace of the result body.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteSerializable">
@@ -4344,8 +4024,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4356,29 +4035,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface that uses custom XML formatting.</param
-        >
+          />An object that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface that uses custom XML formatting.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write an xsi:nil='true' attribute if the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> class object is null; otherwise, false.</param
-        >
+          />true to write an xsi:nil='true' attribute if the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> class object is null; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteSerializable">
@@ -4411,44 +4086,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs <see cref="T:System.Xml.XmlNode" /> to write an object that uses custom XML formatting as an XML element.</para
-          >
+            >Instructs <see cref="T:System.Xml.XmlNode" /> to write an object that uses custom XML formatting as an XML element.</para>
         </summary>
         <param name="serializable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface that uses custom XML formatting.</param
-        >
+          />An object that implements the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> interface that uses custom XML formatting.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="isNullable">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write an xsi:nil='true' attribute if the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> object is null; otherwise, false.</param
-        >
+          />true to write an xsi:nil='true' attribute if the <see cref="T:System.Xml.Serialization.IXmlSerializable" /> object is null; otherwise, false.</param>
         <param name="wrapped">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to ignore writing the opening element tag; otherwise, false to write the opening element tag.</param
-        >
+          />true to ignore writing the opening element tag; otherwise, false to write the opening element tag.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartDocument">
@@ -4471,8 +4140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4502,8 +4170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4514,8 +4181,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -4544,8 +4210,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4556,15 +4221,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -4594,8 +4257,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4606,22 +4268,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="writePrefixed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write the element name with a prefix if none is available for the specified namespace; otherwise, false.</param
-        >
+          />true to write the element name with a prefix if none is available for the specified namespace; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -4651,8 +4310,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4663,22 +4321,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized as an XML element.</param
-        >
+          />The object being serialized as an XML element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -4709,8 +4364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4721,29 +4375,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized as an XML element.</param
-        >
+          />The object being serialized as an XML element.</param>
         <param name="writePrefixed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write the element name with a prefix if none is available for the specified namespace; otherwise, false.</param
-        >
+          />true to write the element name with a prefix if none is available for the specified namespace; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -4782,36 +4432,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the XML element to write.</param
-        >
+          />The local name of the XML element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the XML element to write.</param
-        >
+          />The namespace of the XML element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object being serialized as an XML element.</param
-        >
+          />The object being serialized as an XML element.</param>
         <param name="writePrefixed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write the element name with a prefix if none is available for the specified namespace; otherwise, false.</param
-        >
+          />true to write the element name with a prefix if none is available for the specified namespace; otherwise, false.</param>
         <param name="xmlns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> class that contains prefix and namespace pairs to be used in the generated XML.</param
-        >
+          />An instance of the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" /> class that contains prefix and namespace pairs to be used in the generated XML.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteTypedPrimitive">
@@ -4842,8 +4487,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>The xsi:type attribute explicitly indicates the XML Schema data type. The prefix xsi refers to the XML Schema instance namespace.</para>
         </remarks>
         <summary>
@@ -4855,29 +4499,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element to write.</param
-        >
+          />The local name of the element to write.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the element to write.</param
-        >
+          />The namespace of the element to write.</param>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be serialized in the element body.</param
-        >
+          />The object to be serialized in the element body.</param>
         <param name="xsiType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the XML element explicitly specifies the text value's type using the xsi:type attribute; otherwise, false.</param
-        >
+          />true if the XML element explicitly specifies the text value's type using the xsi:type attribute; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteValue">
@@ -4902,8 +4542,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4914,8 +4553,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array to write.</param
-        >
+          />The byte array to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteValue">
@@ -4940,8 +4578,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4952,8 +4589,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the string to write.</param
-        >
+          />The value of the string to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlAttribute">
@@ -4981,8 +4617,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4993,8 +4628,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML node to write.</param
-        >
+          />The XML node to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlAttribute">
@@ -5023,29 +4657,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the specified <see cref="T:System.Xml.XmlNode" /> object as an XML attribute.</para
-          >
+            >Writes the specified <see cref="T:System.Xml.XmlNode" /> object as an XML attribute.</para>
         </summary>
         <param name="node">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML node to write.</param
-        >
+          />The XML node to write.</param>
         <param name="container">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaObject" /> object (or null) used to generate a qualified name value for an arrayType attribute from the Web Services Description Language (WSDL) namespace ("http://schemas.xmlsoap.org/wsdl/").</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaObject" /> object (or null) used to generate a qualified name value for an arrayType attribute from the Web Services Description Language (WSDL) namespace ("http://schemas.xmlsoap.org/wsdl/").</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXsiType">
@@ -5074,8 +4704,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para
-          >
+            >The protected members of <see cref="T:System.Xml.Serialization.XmlSerializationWriter" /> are intended for use only by derived classes that are used internally within the .NET Framework XML serialization infrastructure.</para>
           <para>The xsi:type attribute explicitly indicates the XML Schema data type. The prefix xsi refers to the XML Schema instance namespace.</para>
         </remarks>
         <summary>
@@ -5087,15 +4716,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of an XML Schema data type.</param
-        >
+          />The local name of an XML Schema data type.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of an XML Schema data type.</param
-        >
+          />The namespace of an XML Schema data type.</param>
       </Docs>
     </Member>
   </Members>

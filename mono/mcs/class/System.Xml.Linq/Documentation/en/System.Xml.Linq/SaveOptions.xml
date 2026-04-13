@@ -24,14 +24,11 @@
       <para
         >This type allows you to control how LINQ to XML handles white space when serializing. For more information, see <format type="text/html">
           <a href="093a7169-a04e-4638-b08c-d1cb98aa650d"
-            >Preserving White Space while Loading or Parsing XML</a
-          >
+            >Preserving White Space while Loading or Parsing XML</a>
         </format> and <format type="text/html">
           <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
-            >Preserving White Space While Serializing</a
-          >
-        </format>.</para
-      >
+            >Preserving White Space While Serializing</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

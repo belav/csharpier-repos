@@ -26,24 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.ReferenceConverter" /> is typically used within the context of sited components or a design environment. Without a component site or a usable <see cref="T:System.ComponentModel.ITypeDescriptorContext" />, this converter is of little use.</para
-      >
+        >The <see cref="T:System.ComponentModel.ReferenceConverter" /> is typically used within the context of sited components or a design environment. Without a component site or a usable <see cref="T:System.ComponentModel.ITypeDescriptorContext" />, this converter is of little use.</para>
       <para
-        >This converter converts a reference of an object that implements the <see cref="T:System.ComponentModel.IComponent" /> interface and displays its properties in the <ui>Properties</ui> window.</para
-      >
+        >This converter converts a reference of an object that implements the <see cref="T:System.ComponentModel.IComponent" /> interface and displays its properties in the <ui>Properties</ui> window.</para>
       <para
         >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" /> base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
-        </format>.</para
-      >
+        </format>.</para>
       <block subset="none" type="note">
         <para
-          >You should never create an instance of the <see cref="T:System.ComponentModel.ReferenceConverter" /> class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para
-        >
+          >You should never create an instance of the <see cref="T:System.ComponentModel.ReferenceConverter" /> class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" /> method of the <see cref="T:System.ComponentModel.TypeDescriptor" /> class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" /> base class.</para>
       </block>
       <para
-        >This class provides the <see cref="M:System.ComponentModel.ReferenceConverter.IsValueAllowed(System.ComponentModel.ITypeDescriptorContext,System.Object)" /> method to check whether a particular value can be added to the standard values collection. If you do not want to add the value to the collection, override this method.</para
-      >
+        >This class provides the <see cref="M:System.ComponentModel.ReferenceConverter.IsValueAllowed(System.ComponentModel.ITypeDescriptorContext,System.Object)" /> method to check whether a particular value can be added to the standard values collection. If you do not want to add the value to the collection, override this method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ReferenceConverter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ReferenceConverter" /> class.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to associate with this reference converter. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to associate with this reference converter. </param>
       </Docs>
     </Member>
     <Member MemberName="CanConvertFrom">
@@ -110,8 +103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -126,15 +118,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="sourceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type you wish to convert from. </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
@@ -164,8 +154,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -174,30 +163,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para
-          >
+            >An <see cref="T:System.Object" /> that represents the converted <paramref name="value" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
@@ -229,8 +214,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method most commonly converts types to and from string objects.</para>
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,29 +229,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font. </param
-        >
+          />A <see cref="T:System.Globalization.CultureInfo" /> that specifies the culture used to represent the font. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to convert. </param
-        >
+          />The <see cref="T:System.Object" /> to convert. </param>
         <param name="destinationType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert the object to. </param
-        >
+          />The type to convert the object to. </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValues">
@@ -295,8 +275,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -305,16 +284,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para
-          >
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesExclusive">
@@ -342,28 +319,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the list of standard values returned from <see cref="M:System.ComponentModel.ReferenceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> is an exclusive list.</para
-          >
+            >Gets a value indicating whether the list of standard values returned from <see cref="M:System.ComponentModel.ReferenceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> is an exclusive list.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true because the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> returned from <see cref="M:System.ComponentModel.ReferenceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> is an exhaustive list of possible values. This method never returns false.</para
-          >
+            >true because the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" /> returned from <see cref="M:System.ComponentModel.ReferenceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> is an exhaustive list of possible values. This method never returns false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
     <Member MemberName="GetStandardValuesSupported">
@@ -391,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
-          >
+            >The <paramref name="context" /> parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -401,16 +373,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true because <see cref="M:System.ComponentModel.ReferenceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> can be called to find a common set of values the object supports. This method never returns false.</para
-          >
+            >true because <see cref="M:System.ComponentModel.ReferenceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" /> can be called to find a common set of values the object supports. This method never returns false.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides a format context. </param>
       </Docs>
     </Member>
     <Member MemberName="IsValueAllowed">
@@ -439,8 +409,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called for each value that matches the type associated with this <see cref="T:System.ComponentModel.ReferenceConverter" /> and for each component found that is of the associated type. By default, this method returns true, that is, it allows adding the value into the standard values collection.</para
-          >
+            >This method is called for each value that matches the type associated with this <see cref="T:System.ComponentModel.ReferenceConverter" /> and for each component found that is of the associated type. By default, this method returns true, that is, it allows adding the value into the standard values collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -455,11 +424,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides an additional context. </param
-        >
+          />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> that provides an additional context. </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to check. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The value to check. </param>
       </Docs>
     </Member>
   </Members>

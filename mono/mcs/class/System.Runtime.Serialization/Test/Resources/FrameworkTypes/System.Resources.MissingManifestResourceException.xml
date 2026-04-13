@@ -5,8 +5,7 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Resources"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Resources.MissingManifestResourceException</ClassName
-  >
+    >System.Resources.MissingManifestResourceException</ClassName>
   <Message i:type="x:string" xmlns="">Unable to find manifest resource.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />

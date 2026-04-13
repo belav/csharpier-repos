@@ -40,16 +40,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplatedEditableDesignerRegion" /> class using the provided template definition.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplatedEditableDesignerRegion" /> class using the provided template definition.</para>
         </summary>
         <param name="templateDefinition">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.Design.TemplateDefinition" /> instance for the template to edit.</param
-        >
+          />A <see cref="T:System.Web.UI.Design.TemplateDefinition" /> instance for the template to edit.</param>
       </Docs>
     </Member>
     <Member MemberName="IsSingleInstanceTemplate">
@@ -112,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Web.UI.Design.TemplateDefinition" /> object describing the template that is referenced by the region.</para
-          >
+            >Gets a <see cref="T:System.Web.UI.Design.TemplateDefinition" /> object describing the template that is referenced by the region.</para>
         </summary>
       </Docs>
     </Member>

@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides programmatic access to information that can be stored in configuration files that are used by classes that support SMTP in the <see cref="N:System.Net.Mail" /> namespace.</para
-      >
+        >This class provides programmatic access to information that can be stored in configuration files that are used by classes that support SMTP in the <see cref="N:System.Net.Mail" /> namespace.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.SmtpSection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.SmtpSection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,14 +80,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Valid values for this property are <see cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />, <see cref="F:System.Net.Mail.SmtpDeliveryMethod.PickupDirectoryFromIis" />, and <see cref="F:System.Net.Mail.SmtpDeliveryMethod.SpecifiedPickupDirectory" />. These values have configurable sub-items and have a corresponding section in the System.Net configuration file. All the sections are camel-cased, to allow the users to match the delivery method with their corresponding section names.</para
-          >
+            >Valid values for this property are <see cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />, <see cref="F:System.Net.Mail.SmtpDeliveryMethod.PickupDirectoryFromIis" />, and <see cref="F:System.Net.Mail.SmtpDeliveryMethod.SpecifiedPickupDirectory" />. These values have configurable sub-items and have a corresponding section in the System.Net configuration file. All the sections are camel-cased, to allow the users to match the delivery method with their corresponding section names.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Simple Mail Transport Protocol (SMTP) delivery method. The default delivery method is <see cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />.</para
-          >
+            >Gets or sets the Simple Mail Transport Protocol (SMTP) delivery method. The default delivery method is <see cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -148,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that controls the network settings used by the Simple Mail Transport Protocol (SMTP). file.<see cref="T:System.Net.Configuration.SmtpNetworkElement" />.</para
-          >
+            >Gets the configuration element that controls the network settings used by the Simple Mail Transport Protocol (SMTP). file.<see cref="T:System.Net.Configuration.SmtpNetworkElement" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -204,8 +199,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that directory specified by <see cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" /> will be used as the SMTP pickup directory. If the SMTP client is unable to write to the pickup directory location an I/O exception is thrown by <see cref="Overload:System.Net.Mail.SmtpClient.Send" />. The directory will not be created if it does not exist. The credentials of the currently running thread or process will be used to access the directory.</para
-          >
+            >Indicates that directory specified by <see cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" /> will be used as the SMTP pickup directory. If the SMTP client is unable to write to the pickup directory location an I/O exception is thrown by <see cref="Overload:System.Net.Mail.SmtpClient.Send" />. The directory will not be created if it does not exist. The credentials of the currently running thread or process will be used to access the directory.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

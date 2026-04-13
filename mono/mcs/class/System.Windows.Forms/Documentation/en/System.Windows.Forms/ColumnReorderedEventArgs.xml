@@ -17,14 +17,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. However, if the event is cancelled, the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.NewDisplayIndex" /> will not change to the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" /> value.</para
-      >
+        >The <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. However, if the event is cancelled, the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.NewDisplayIndex" /> will not change to the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" /> value.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -45,30 +43,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnReorderedEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnReorderedEventArgs" /> class. </para>
         </summary>
         <param name="oldDisplayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The previous display position of the <see cref="T:System.Windows.Forms.ColumnHeader" />.</param
-        >
+          />The previous display position of the <see cref="T:System.Windows.Forms.ColumnHeader" />.</param>
         <param name="newDisplayIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new display position for the <see cref="T:System.Windows.Forms.ColumnHeader" />.</param
-        >
+          />The new display position for the <see cref="T:System.Windows.Forms.ColumnHeader" />.</param>
         <param name="header">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.ColumnHeader" /> that is being reordered.</param
-        >
+          />The <see cref="T:System.Windows.Forms.ColumnHeader" /> that is being reordered.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Windows.Forms.ColumnHeader" /> that is being reordered.</para
-          >
+            >Gets the <see cref="T:System.Windows.Forms.ColumnHeader" /> that is being reordered.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,8 +103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. However, if the event is cancelled, the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.NewDisplayIndex" /> will not change to the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" /> value.</para
-          >
+            >The <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. However, if the event is cancelled, the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.NewDisplayIndex" /> will not change to the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" /> value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,14 +128,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. However, if the event is cancelled, the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.NewDisplayIndex" /> will not change to the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" /> value.</para
-          >
+            >The <see cref="E:System.Windows.Forms.ListView.ColumnReordered" /> event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. However, if the event is cancelled, the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.NewDisplayIndex" /> will not change to the <see cref="P:System.Windows.Forms.ColumnReorderedEventArgs.OldDisplayIndex" /> value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the previous display position of the <see cref="T:System.Windows.Forms.ColumnHeader" />.</para
-          >
+            >Gets the previous display position of the <see cref="T:System.Windows.Forms.ColumnHeader" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

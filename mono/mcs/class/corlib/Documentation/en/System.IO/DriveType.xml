@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.IO.DriveType" /> is used by the <see cref="T:System.IO.DriveInfo" /> class to indicate drive type. It can be used with the <see cref="T:System.IO.DriveType" /> property.</para
-      >
+        <see cref="T:System.IO.DriveType" /> is used by the <see cref="T:System.IO.DriveInfo" /> class to indicate drive type. It can be used with the <see cref="T:System.IO.DriveType" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

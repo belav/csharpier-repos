@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission is used to control the ability to encrypt data and memory using the <see cref="T:System.Security.Cryptography.ProtectedData" /> and <see cref="T:System.Security.Cryptography.ProtectedMemory" /> classes.</para
-      >
+        >This permission is used to control the ability to encrypt data and memory using the <see cref="T:System.Security.Cryptography.ProtectedData" /> and <see cref="T:System.Security.Cryptography.ProtectedMemory" /> classes.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission flags. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission flags. </para>
         </summary>
       </Docs>
     </Member>
@@ -93,16 +91,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission state. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission state. </para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -159,8 +155,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property specifies whether the Protect and Unprotect methods of the <see cref="T:System.Security.Cryptography.ProtectedData" /> and <see cref="T:System.Security.Cryptography.ProtectedMemory" /> classes can be used.</para
-          >
+            >This property specifies whether the Protect and Unprotect methods of the <see cref="T:System.Security.Cryptography.ProtectedData" /> and <see cref="T:System.Security.Cryptography.ProtectedMemory" /> classes can be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -194,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.DataProtectionPermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.DataProtectionPermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.DataProtectionPermission" />, including state information.</para
-          >
+            >The <see cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.DataProtectionPermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.DataProtectionPermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.DataProtectionPermission" />, including state information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -242,8 +236,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -271,8 +264,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained in the specified permission.  For example, a permission for <see cref="F:System.Security.Permissions.DataProtectionPermissionFlags.ProtectData" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.DataProtectionPermissionFlags.AllFlags" /> access.</para
-          >
+            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained in the specified permission.  For example, a permission for <see cref="F:System.Security.Permissions.DataProtectionPermissionFlags.ProtectData" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.DataProtectionPermissionFlags.AllFlags" /> access.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -287,8 +279,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param
-        >
+          />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -345,8 +336,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para
-          >
+            >Use the <see cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -383,8 +373,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.DataProtectionPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.DataProtectionPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -399,8 +388,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
     </Member>
   </Members>

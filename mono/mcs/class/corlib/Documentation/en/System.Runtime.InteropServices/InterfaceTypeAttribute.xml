@@ -39,21 +39,16 @@
       <para
         >By default, the <format type="text/html">
           <a href="A487D61B-D166-467B-A7CA-D8B52FBFF42D"
-            >[&lt;topic://cpgrftypelibraryExportertlbexpexe&gt;]</a
-          >
+            >[&lt;topic://cpgrftypelibraryExportertlbexpexe&gt;]</a>
         </format> exposes a managed interface to COM as a dual interface, giving you the flexibility of late binding or the performance of early binding. The <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> enumeration enables you to override the default behavior and specify late binding only or early binding only. For example, you can apply InterfaceType (ComInterfaceType.InterfaceIsIDispatch) to an interface to produce metadata to restrict callers to late binding only. Although interfaces that derive from the IDispatch interface are often dual, the InterfaceIsIDispatch enumeration member allows only late-bound calls to the interface methods. This attribute has no effect on the managed view of the interface. For additional information on how interfaces are exposed to COM, see <format type="text/html">
           <a href="1DFE55F4-07A2-4B61-AABF-A8CF65783A6B"
-            >[&lt;topic://cpcontlbexptypeconversion&gt;]</a
-          >
-        </format>.</para
-      >
+            >[&lt;topic://cpcontlbexptypeconversion&gt;]</a>
+        </format>.</para>
       <para
         >The <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
-            >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a
-          >
-        </format> also applies this attribute to imported, nondual interfaces; it applies the appropriate enumeration member to indicate that the interface is dispatch-only or IUnknown -only.</para
-      >
+            >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a>
+        </format> also applies this attribute to imported, nondual interfaces; it applies the appropriate enumeration member to indicate that the interface is dispatch-only or IUnknown -only.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -83,24 +78,20 @@
           <para
             >This constructor takes an underlying 16-bit integer that represents each <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> enumeration member. The <format type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
-                >[&lt;topic://cpgrftypelibraryimportertlbimpexe&gt;]</a
-              >
-            </format> uses this constructor.</para
-          >
+                >[&lt;topic://cpgrftypelibraryimportertlbimpexe&gt;]</a>
+            </format> uses this constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.InterfaceTypeAttribute" /> class with the specified <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> enumeration member.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.InterfaceTypeAttribute" /> class with the specified <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> enumeration member.</para>
         </summary>
         <param name="interfaceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Describes how the interface should be exposed to COM clients. </param
-        >
+          />Describes how the interface should be exposed to COM clients. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -130,16 +121,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.InterfaceTypeAttribute" /> class with the specified <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> enumeration member.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.InterfaceTypeAttribute" /> class with the specified <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> enumeration member.</para>
         </summary>
         <param name="interfaceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> values that describes how the interface should be exposed to COM clients. </param
-        >
+          />One of the <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> values that describes how the interface should be exposed to COM clients. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -166,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> value that describes how the interface should be exposed to COM.</para
-          >
+            >Gets the <see cref="T:System.Runtime.InteropServices.ComInterfaceType" /> value that describes how the interface should be exposed to COM.</para>
         </summary>
       </Docs>
     </Member>

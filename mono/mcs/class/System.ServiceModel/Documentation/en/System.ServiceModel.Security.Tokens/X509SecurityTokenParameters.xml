@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -78,18 +77,15 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.Any" />.</para
-              >
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.Any" />.</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />.</para
-              >
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />.</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para
-              >
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
             </item>
           </list>
           <para>The corresponding properties are set to the values in the input parameters.</para>
@@ -97,16 +93,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
         </summary>
         <param name="x509ReferenceStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />.</param
-        >
+          />An <see cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -133,14 +127,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new instance property values are set to the corresponding values in <paramref name="other" />.</para
-          >
+            >The new instance property values are set to the corresponding values in <paramref name="other" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -174,18 +166,15 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <paramref name="inclusionMode" />.</para
-              >
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <paramref name="inclusionMode" />.</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <paramref name="x509ReferenceStyle" />.</para
-              >
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <paramref name="x509ReferenceStyle" />.</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para
-              >
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
             </item>
           </list>
           <para>The corresponding properties are set to the values in the input parameters.</para>
@@ -193,23 +182,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
         </summary>
         <param name="x509ReferenceStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />.</param
-        >
+          />An <see cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />.</param>
         <param name="inclusionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />.</param
-        >
+          />A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CloneCore">
@@ -233,14 +219,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" /> and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> methods follow the Core design pattern. </para
-          >
+            >The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" /> and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> methods follow the Core design pattern. </para>
           <para>
-            <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> is an abstract class which is overridden by <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" />.</para
-          >
+            <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> is an abstract class which is overridden by <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" />.</para>
           <para
-            >The <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" /> method calls the <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.X509SecurityTokenParameters)" /> constructor.</para
-          >
+            >The <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" /> method calls the <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.X509SecurityTokenParameters)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -249,8 +232,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />.</para
-          >
+            >A new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -288,15 +270,13 @@
           <para>The security key identifier clause.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The token.</param>
         <param name="referenceStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />.</param
-        >
+          />The <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />.</param>
       </Docs>
     </Member>
     <Member MemberName="HasAsymmetricKey">
@@ -347,23 +327,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following properties of the <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> are initialized:</para
-          >
+            >The following properties of the <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> are initialized:</para>
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" /> = <see cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.X509Certificate" />.</para
-              >
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" /> = <see cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.X509Certificate" />.</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" /> = true.</para
-              >
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" /> = true.</para>
             </item>
           </list>
           <para>
-            <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" /> = <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />.</para
-          >
+            <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" /> = <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -374,8 +350,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />.</param
-        >
+          />The <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />.</param>
       </Docs>
     </Member>
     <Member MemberName="SupportsClientAuthentication">

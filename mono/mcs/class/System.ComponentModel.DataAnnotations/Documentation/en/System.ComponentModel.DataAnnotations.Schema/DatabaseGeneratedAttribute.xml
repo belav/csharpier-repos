@@ -53,16 +53,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedAttribute" /> class.</para>
         </summary>
         <param name="databaseGeneratedOption">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The database generated option.</param
-        >
+          />The database generated option.</param>
       </Docs>
     </Member>
     <Member MemberName="DatabaseGeneratedOption">

@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Hash algorithms are an example of cryptographic transformations (<see cref="T:System.Security.Cryptography.HashAlgorithm" />).</para
-      >
+        >Hash algorithms are an example of cryptographic transformations (<see cref="T:System.Security.Cryptography.HashAlgorithm" />).</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,8 +54,7 @@
       <Docs>
         <value>True if the transform can be reused. False if a new transform must be created for a new operation.</value>
         <remarks
-          >You should never assume that a specific algorithm can be reused without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. The new implementation could behave differently than the old one.</remarks
-        >
+          >You should never assume that a specific algorithm can be reused without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. The new implementation could behave differently than the old one.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Gets a value indicating whether the current transform can be reused.</para>
@@ -80,11 +78,9 @@
       </ReturnValue>
       <Docs>
         <value
-          >True if a single call to either <see cref="M:System.Security.Cryptography.HashAlgorithm.TransformBlock" /> or <see cref="M:System.Security.Cryptography.HashAlgorithm.TransformFinalBlock" /> can process more than one block at the time. False if the data must be processed block per block.</value
-        >
+          >True if a single call to either <see cref="M:System.Security.Cryptography.HashAlgorithm.TransformBlock" /> or <see cref="M:System.Security.Cryptography.HashAlgorithm.TransformFinalBlock" /> can process more than one block at the time. False if the data must be processed block per block.</value>
         <remarks
-          >You should never assume that a specific algorithm can transform multiple blocks without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. The new implementation could behave differently than the old one.</remarks
-        >
+          >You should never assume that a specific algorithm can transform multiple blocks without checking this property. A cryptographic implementation can be changed by modifying the machine.config file and by using, directly or indirectly, the <see cref="T:System.Security.Cryptography.CryptoConfig" /> class. The new implementation could behave differently than the old one.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Gets a value indicating whether multiple blocks can be transformed.</para>
@@ -173,36 +169,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input for which to compute the transform. </param
-        >
+          />The input for which to compute the transform. </param>
         <param name="inputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the input byte array from which to begin using data. </param
-        >
+          />The offset into the input byte array from which to begin using data. </param>
         <param name="inputCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the input byte array to use as data. </param
-        >
+          />The number of bytes in the input byte array to use as data. </param>
         <param name="outputBuffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The output to which to write the transform. </param
-        >
+          />The output to which to write the transform. </param>
         <param name="outputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the output byte array from which to begin writing data. </param
-        >
+          />The offset into the output byte array from which to begin writing data. </param>
       </Docs>
     </Member>
     <Member MemberName="TransformFinalBlock">
@@ -232,8 +223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Security.Cryptography.ICryptoTransform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)" /> is a special function for transforming the last block or a partial block in the stream. It returns a new array that contains the remaining transformed bytes. A new array is returned, because the amount of information returned at the end might be larger than a single block when padding is added.</para
-          >
+            <see cref="M:System.Security.Cryptography.ICryptoTransform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)" /> is a special function for transforming the last block or a partial block in the stream. It returns a new array that contains the remaining transformed bytes. A new array is returned, because the amount of information returned at the end might be larger than a single block when padding is added.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -248,22 +238,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The input for which to compute the transform. </param
-        >
+          />The input for which to compute the transform. </param>
         <param name="inputOffset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The offset into the byte array from which to begin using data. </param
-        >
+          />The offset into the byte array from which to begin using data. </param>
         <param name="inputCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes in the byte array to use as data. </param
-        >
+          />The number of bytes in the byte array to use as data. </param>
       </Docs>
     </Member>
   </Members>

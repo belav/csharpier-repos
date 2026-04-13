@@ -4,11 +4,9 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <!-- The test tests Windows ARM64 Varargs (managed) calling convention -->
     <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <CLRTestTargetUnsupported Condition="'$(TargetArchitecture)' != 'arm64'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <Optimize>True</Optimize>
   </PropertyGroup>
   <ItemGroup>

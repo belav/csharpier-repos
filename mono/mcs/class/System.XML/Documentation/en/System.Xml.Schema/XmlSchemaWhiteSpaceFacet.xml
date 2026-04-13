@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.Schema.XmlSchemaWhiteSpaceFacet" /> class defines how the simpleType value's white space will be treated. The whiteSpace facet value can be one of preserve, replace, or collapse.</para
-      >
+        >The <see cref="T:System.Xml.Schema.XmlSchemaWhiteSpaceFacet" /> class defines how the simpleType value's white space will be treated. The whiteSpace facet value can be one of preserve, replace, or collapse.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaWhiteSpaceFacet" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaWhiteSpaceFacet" /> class.</para>
         </summary>
       </Docs>
     </Member>

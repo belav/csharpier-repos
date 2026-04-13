@@ -26,17 +26,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Diagnostics.StackFrame" /> is created and pushed on the call stack for every function call made during the execution of a thread. The stack frame always includes <see cref="T:System.Reflection.MethodBase" /> information, and optionally includes file name, line number, and column number information.</para
-      >
+        >A <see cref="T:System.Diagnostics.StackFrame" /> is created and pushed on the call stack for every function call made during the execution of a thread. The stack frame always includes <see cref="T:System.Reflection.MethodBase" /> information, and optionally includes file name, line number, and column number information.</para>
       <para>
-        <see cref="T:System.Diagnostics.StackFrame" /> information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing <see cref="T:System.Diagnostics.StackFrame" /> objects.</para
-      >
+        <see cref="T:System.Diagnostics.StackFrame" /> information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing <see cref="T:System.Diagnostics.StackFrame" /> objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides information about a <see cref="T:System.Diagnostics.StackFrame" />, which represents a function call on the call stack for the current thread.</para
-      >
+        >Provides information about a <see cref="T:System.Diagnostics.StackFrame" />, which represents a function call on the call stack for the current thread.</para>
     </summary>
   </Docs>
   <Members>
@@ -59,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -85,16 +81,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class, optionally capturing source information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class, optionally capturing source information.</para>
         </summary>
         <param name="fNeedFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number of the stack frame; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number of the stack frame; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -118,16 +112,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that corresponds to a frame above the current stack frame.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that corresponds to a frame above the current stack frame.</para>
         </summary>
         <param name="skipFrames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack to skip. </param
-        >
+          />The number of frames up the stack to skip. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -155,23 +147,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that corresponds to a frame above the current stack frame, optionally capturing source information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that corresponds to a frame above the current stack frame, optionally capturing source information.</para>
         </summary>
         <param name="skipFrames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of frames up the stack to skip. </param
-        >
+          />The number of frames up the stack to skip. </param>
         <param name="fNeedFileInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to capture the file name, line number, and column number of the stack frame; otherwise, false. </param
-        >
+          />true to capture the file name, line number, and column number of the stack frame; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -199,19 +188,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that contains only the given file name and line number.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that contains only the given file name and line number.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file name. </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number in the specified file. </param
-        >
+          />The line number in the specified file. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -243,26 +229,22 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that contains only the given file name, line number, and column number.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.StackFrame" /> class that contains only the given file name, line number, and column number.</para>
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file name. </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number in the specified file. </param
-        >
+          />The line number in the specified file. </param>
         <param name="colNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column number in the specified file. </param
-        >
+          />The column number in the specified file. </param>
       </Docs>
     </Member>
     <Member MemberName="GetFileColumnNumber">
@@ -370,8 +352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the offset from the start of the Microsoft intermediate language (MSIL) code for the method that is executing. This offset might be an approximation depending on whether or not the just-in-time (JIT) compiler is generating debugging code. The generation of this debugging information is controlled by the <see cref="T:System.Diagnostics.DebuggableAttribute" />.</para
-          >
+            >Gets the offset from the start of the Microsoft intermediate language (MSIL) code for the method that is executing. This offset might be an approximation depending on whether or not the just-in-time (JIT) compiler is generating debugging code. The generation of this debugging information is controlled by the <see cref="T:System.Diagnostics.DebuggableAttribute" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -402,8 +383,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method that is currently executing may be inherited from a base class, although it is called in a derived class. In this case, the <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property of the <see cref="T:System.Reflection.MethodBase" /> object that is returned by <see cref="M:System.Diagnostics.StackFrame.GetMethod" /> identifies the base class, not the derived class.  </para
-          >
+            >The method that is currently executing may be inherited from a base class, although it is called in a derived class. In this case, the <see cref="P:System.Reflection.MemberInfo.ReflectedType" /> property of the <see cref="T:System.Reflection.MethodBase" /> object that is returned by <see cref="M:System.Diagnostics.StackFrame.GetMethod" /> identifies the base class, not the derived class.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -436,8 +416,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the offset from the start of the native just-in-time (JIT)-compiled code for the method that is being executed. The generation of this debugging information is controlled by the <see cref="T:System.Diagnostics.DebuggableAttribute" /> class.</para
-          >
+            >Gets the offset from the start of the native just-in-time (JIT)-compiled code for the method that is being executed. The generation of this debugging information is controlled by the <see cref="T:System.Diagnostics.DebuggableAttribute" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -470,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the value that is returned from the <see cref="M:System.Diagnostics.StackFrame.GetNativeOffset" /> or <see cref="M:System.Diagnostics.StackFrame.GetILOffset" /> method when the native or Microsoft intermediate language (MSIL) offset is unknown. This field is constant.</para
-          >
+            >Defines the value that is returned from the <see cref="M:System.Diagnostics.StackFrame.GetNativeOffset" /> or <see cref="M:System.Diagnostics.StackFrame.GetILOffset" /> method when the native or Microsoft intermediate language (MSIL) offset is unknown. This field is constant.</para>
         </summary>
       </Docs>
     </Member>

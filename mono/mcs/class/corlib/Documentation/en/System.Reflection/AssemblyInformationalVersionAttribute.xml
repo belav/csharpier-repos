@@ -36,8 +36,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The attribute defined by this class attaches additional version information to an assembly. If this attribute is applied to an assembly, the string it specifies can be obtained at run time by using the <see cref="P:System.Windows.Forms.Application.ProductVersion" /> property. The string is also used in the path and registry key provided by the <see cref="P:System.Windows.Forms.Application.UserAppDataPath" /> property and the <see cref="P:System.Windows.Forms.Application.UserAppDataRegistry" /> property. If the <see cref="T:System.Reflection.AssemblyInformationalVersionAttribute" /> is not applied to an assembly, the version number specified by the <see cref="T:System.Reflection.AssemblyVersionAttribute" /> attribute is used instead.</para
-      >
+        >The attribute defined by this class attaches additional version information to an assembly. If this attribute is applied to an assembly, the string it specifies can be obtained at run time by using the <see cref="P:System.Windows.Forms.Application.ProductVersion" /> property. The string is also used in the path and registry key provided by the <see cref="P:System.Windows.Forms.Application.UserAppDataPath" /> property and the <see cref="P:System.Windows.Forms.Application.UserAppDataRegistry" /> property. If the <see cref="T:System.Reflection.AssemblyInformationalVersionAttribute" /> is not applied to an assembly, the version number specified by the <see cref="T:System.Reflection.AssemblyVersionAttribute" /> attribute is used instead.</para>
       <para>Although you can specify any text, a warning message appears on compilation if the string is not in the format used by the assembly version number, or if it is in that format but contains wildcard characters. This warning is harmless.</para>
     </remarks>
     <summary>
@@ -73,16 +72,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyInformationalVersionAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyInformationalVersionAttribute" /> class.</para>
         </summary>
         <param name="informationalVersion">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly version information. </param
-        >
+          />The assembly version information. </param>
       </Docs>
     </Member>
     <Member MemberName="InformationalVersion">

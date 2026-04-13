@@ -44,30 +44,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketReceiveResult" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketReceiveResult" /> class.</para>
         </summary>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes received.</param
-        >
+          />The number of bytes received.</param>
         <param name="messageType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of message that was received.</param
-        >
+          />The type of message that was received.</param>
         <param name="endOfMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether this is the final message.</param
-        >
+          />Indicates whether this is the final message.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -98,44 +94,38 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketReceiveResult" /> class.</para
-          >
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketReceiveResult" /> class.</para>
         </summary>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes received.</param
-        >
+          />The number of bytes received.</param>
         <param name="messageType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of message that was received.</param
-        >
+          />The type of message that was received.</param>
         <param name="endOfMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates whether this is the final message.</param
-        >
+          />Indicates whether this is the final message.</param>
         <param name="closeStatus">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the <see cref="T:System.Net.WebSockets.WebSocketCloseStatus" /> of the connection.</param
-        >
+          />Indicates the <see cref="T:System.Net.WebSockets.WebSocketCloseStatus" /> of the connection.</param>
         <param name="closeStatusDescription">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of <paramref name="closeStatus" />.</param
-        >
+          />The description of <paramref name="closeStatus" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CloseStatus">
@@ -200,13 +190,11 @@
           <list type="ordered">
             <item>
               <para
-                >The WebSocket received an empty message. In this case the <see cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" /> property is None.</para
-              >
+                >The WebSocket received an empty message. In this case the <see cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" /> property is None.</para>
             </item>
             <item>
               <para
-                >The WebSocket received a close message was received from the remote endpoint. In this case the <see cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" /> property is set to a value other than None.</para
-              >
+                >The WebSocket received a close message was received from the remote endpoint. In this case the <see cref="P:System.Net.WebSockets.WebSocketReceiveResult.CloseStatus" /> property is set to a value other than None.</para>
             </item>
           </list>
         </remarks>

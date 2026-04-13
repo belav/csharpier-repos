@@ -7,15 +7,12 @@
     <!-- Don't set platform too early as test app paths are currently hardcoded. -->
     <Platform Condition="'$(Platform)' == ''">$(TargetArchitecture)</Platform>
     <DefineConstants Condition="'$(Configuration)' == 'Debug'"
-      >$(DefineConstants),DEBUG,TRACE</DefineConstants
-    >
+      >$(DefineConstants),DEBUG,TRACE</DefineConstants>
     <DefineConstants Condition="'$(Configuration)' == 'Release'"
-      >$(DefineConstants),TRACE</DefineConstants
-    >
+      >$(DefineConstants),TRACE</DefineConstants>
     <RuntimeIdentifier
       Condition="'$(RuntimeIdentifier)' == '' and '$(EnsureRuntimeIdentifierSet)' == 'true'"
-      >$(OutputRID)</RuntimeIdentifier
-    >
+      >$(OutputRID)</RuntimeIdentifier>
     <TestTargetRid Condition="'$(TestTargetRid)' == ''">$(OutputRID)</TestTargetRid>
     <!-- Never use the NuGet fallback folder that comes with the SDK we use to build.
       The NuGet fallback folder can/will contain packages we are building in this repo, and we

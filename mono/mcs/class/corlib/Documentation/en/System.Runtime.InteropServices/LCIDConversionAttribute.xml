@@ -71,8 +71,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Indicates the position of the LCID argument in the unmanaged signature, where 0 is the first argument. </param
-        >
+          />Indicates the position of the LCID argument in the unmanaged signature, where 0 is the first argument. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">

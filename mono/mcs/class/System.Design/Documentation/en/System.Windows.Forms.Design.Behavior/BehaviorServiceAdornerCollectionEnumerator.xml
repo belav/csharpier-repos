@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supports iteration over a <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />. </para
-      >
+        >Supports iteration over a <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />. </para>
     </summary>
   </Docs>
   <Members>
@@ -49,16 +48,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> class. </para>
         </summary>
         <param name="mappings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" /> for which to create the enumerator. </param
-        >
+          />The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" /> for which to create the enumerator. </param>
       </Docs>
     </Member>
     <Member MemberName="Current">
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current element in the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />.</para
-          >
+            >Gets the current element in the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the enumerator to the next element of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />.</para
-          >
+            >Advances the enumerator to the next element of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -143,14 +138,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para
-          >
+            >For a description of this member, see the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -168,14 +161,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method.</para
-          >
+            >For a description of this member, see the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,14 +188,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para
-          >
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollectionEnumerator" /> instance is cast to an <see cref="T:System.Collections.IEnumerator" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see the <see cref="M:System.Collections.IEnumerator.Reset" /> method.</para
-          >
+            >For a description of this member, see the <see cref="M:System.Collections.IEnumerator.Reset" /> method.</para>
         </summary>
       </Docs>
     </Member>

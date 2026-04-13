@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an interface for creating a custom <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" /> class.</para
-      >
+        >Provides an interface for creating a custom <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" /> object.</para
-          >
+            >Creates a <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

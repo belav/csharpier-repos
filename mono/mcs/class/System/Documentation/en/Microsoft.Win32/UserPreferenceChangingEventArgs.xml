@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" /> event occurs when a change to a user preference is about to be applied.</para
-      >
+        >A <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" /> event occurs when a change to a user preference is about to be applied.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" /> event.</para
-      >
+        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -56,16 +54,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Win32.UserPreferenceChangingEventArgs" /> class using the specified user preference category identifier.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.UserPreferenceChangingEventArgs" /> class using the specified user preference category identifier.</para>
         </summary>
         <param name="category">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:Microsoft.Win32.UserPreferenceCategory" /> values that indicate the user preference category that is changing. </param
-        >
+          />One of the <see cref="T:Microsoft.Win32.UserPreferenceCategory" /> values that indicate the user preference category that is changing. </param>
       </Docs>
     </Member>
     <Member MemberName="Category">

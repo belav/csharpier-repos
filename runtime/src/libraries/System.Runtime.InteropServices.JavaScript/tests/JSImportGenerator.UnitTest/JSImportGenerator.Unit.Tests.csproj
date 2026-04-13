@@ -5,8 +5,7 @@
     <TestRunRequiresLiveRefPack>true</TestRunRequiresLiveRefPack>
     <IgnoreForCI
       Condition="'$(TargetsMobile)' == 'true' or '$(TargetsLinuxBionic)' == 'true' or '$(TargetArchitecture)' == 'ARMv6'"
-      >true</IgnoreForCI
-    >
+      >true</IgnoreForCI>
   </PropertyGroup>
   <ItemGroup>
     <Compile

@@ -6,8 +6,7 @@
     <!-- CS0436: DynamicallyAccessedMemberTypes conflicts with imported type -->
     <NoWarn
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >$(NoWarn);CS0436</NoWarn
-    >
+      >$(NoWarn);CS0436</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

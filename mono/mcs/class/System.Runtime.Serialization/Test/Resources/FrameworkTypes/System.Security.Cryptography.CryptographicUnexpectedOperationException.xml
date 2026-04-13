@@ -5,8 +5,7 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Security.Cryptography"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Security.Cryptography.CryptographicUnexpectedOperationException</ClassName
-  >
+    >System.Security.Cryptography.CryptographicUnexpectedOperationException</ClassName>
   <Message i:type="x:string" xmlns="">Error occurred during a cryptographic operation.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />

@@ -68,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The base URI of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.</para
-          >
+            >The base URI of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -100,23 +99,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.
-</para
-          >
+</para>
         </returns>
         <param name="categories">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> instances used to initialize the new <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance. </param
-        >
+          />A collection of <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" /> instances used to initialize the new <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance. </param>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -143,23 +139,20 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> initializing it with the specified <see cref="T:System.Uri" />.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> initializing it with the specified <see cref="T:System.Uri" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />.
-</para
-          >
+</para>
         </returns>
         <param name="linkToCategoriesDocument">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URI of the categories document.</param
-        >
+          />The URI of the categories document.</param>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -190,43 +183,37 @@ Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocumen
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="isFixed" /> parameter is set to true, the categories contained within the categories document are immutable. If the <paramref name="isFixed" /> parameter is set to true, additional categories can be added to the categories document.</para
-          >
+            >If the <paramref name="isFixed" /> parameter is set to true, the categories contained within the categories document are immutable. If the <paramref name="isFixed" /> parameter is set to true, additional categories can be added to the categories document.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> class. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.
-</para
-          >
+</para>
         </returns>
         <param name="categories">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of categories.</param
-        >
+          />A collection of categories.</param>
         <param name="isFixed">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that specifies whether a user can add a category to the categories document.</param
-        >
+          />A value that specifies whether a user can add a category to the categories document.</param>
         <param name="scheme">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The scheme of the categories document.</param
-        >
+          />The scheme of the categories document.</param>
       </Docs>
     </Member>
     <Member MemberName="ElementExtensions">
@@ -251,8 +238,7 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element extensions for the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.</para
-          >
+            >Gets the element extensions for the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -278,15 +264,13 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a new <see cref="T:System.ServiceModel.Syndication.AtomPub10CategoriesDocumentFormatter" /> instance initialized with the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> on which this method is called.</para
-          >
+            >Gets a new <see cref="T:System.ServiceModel.Syndication.AtomPub10CategoriesDocumentFormatter" /> instance initialized with the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> on which this method is called.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" />.
-</para
-          >
+</para>
         </returns>
       </Docs>
     </Member>
@@ -306,8 +290,7 @@ Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the language of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.</para
-          >
+            >Gets and sets the language of the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -335,23 +318,20 @@ Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance from an <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Loads a <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> instance from an <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.
-</para
-          >
+</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -375,16 +355,14 @@ Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> to a <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Saves the <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> to a <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
     <Member MemberName="TryParseAttribute">
@@ -419,37 +397,32 @@ Returns <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the element.</param
-        >
+          />The name of the element.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the element.</param
-        >
+          />The namespace of the element.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The attribute to parse.</param
-        >
+          />The attribute to parse.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when parsing.</param
-        >
+          />The syndication version to use when parsing.</param>
       </Docs>
     </Member>
     <Member MemberName="TryParseElement">
@@ -482,23 +455,20 @@ Returns <see cref="T:System.Boolean" />.
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
 Returns <see cref="T:System.Boolean" />.
-</para
-          >
+</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when parsing.</param
-        >
+          />The syndication version to use when parsing.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttributeExtensions">
@@ -526,23 +496,20 @@ Returns <see cref="T:System.Boolean" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when writing.</param
-        >
+          />The syndication version to use when writing.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementExtensions">
@@ -570,23 +537,20 @@ Returns <see cref="T:System.Boolean" />.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extension to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the element extension to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The syndication version to use when writing.</param
-        >
+          />The syndication version to use when writing.</param>
       </Docs>
     </Member>
   </Members>

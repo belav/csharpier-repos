@@ -9,17 +9,13 @@ using (resource-acquisition) embedded-statement
     <list>
       <list_item
         > The definite assignment state of v at the beginning of <non_terminal where="15.13"
-          >resource-acquisition</non_terminal
-        > is the same as the state of v at the beginning of stmt. </list_item
-      >
+          >resource-acquisition</non_terminal> is the same as the state of v at the beginning of stmt. </list_item>
       <list_item
         > The definite assignment state of v on the control flow transfer to <non_terminal
           where="15"
-          >embedded-statement</non_terminal
-        > is the same as the state of v at the end of <non_terminal where="15.13"
-          >resource-acquisition</non_terminal
-        >. </list_item
-      >
+          >embedded-statement</non_terminal> is the same as the state of v at the end of <non_terminal
+          where="15.13"
+          >resource-acquisition</non_terminal>. </list_item>
     </list>
   </paragraph>
 </clause>

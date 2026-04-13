@@ -2,8 +2,7 @@
 <clause number="15.4" title="Labeled statements">
   <paragraph
     >A <non_terminal where="15.4"
-      >labeled-statement</non_terminal
-    > permits a statement to be prefixed by a label. Labeled statements are permitted in blocks, but are not permitted as embedded statements. <grammar_production>
+      >labeled-statement</non_terminal> permits a statement to be prefixed by a label. Labeled statements are permitted in blocks, but are not permitted as embedded statements. <grammar_production>
       <name>
         <non_terminal where="15.4">labeled-statement</non_terminal>
       </name> : <rhs>
@@ -27,8 +26,7 @@ int F(int x) {
    x: return x;  
 }  
 ]]>
-      </code_example>is valid and uses the name x as both a parameter and a label. end example]</example
-    >
+      </code_example>is valid and uses the name x as both a parameter and a label. end example]</example>
   </paragraph>
   <paragraph>Execution of a labeled statement corresponds exactly to execution of the statement following the label. </paragraph>
   <paragraph>In addition to the reachability provided by normal flow of control, a labeled statement is reachable if the label is referenced by a reachable goto statement. (Exception: If a goto statement is inside a try that includes a finally block, and the labeled statement is outside the try, and the end point of the finally block is unreachable, then the labeled statement is not reachable from that goto statement.) </paragraph>

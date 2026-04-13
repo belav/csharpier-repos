@@ -19,8 +19,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the HTML tags that can be passed to an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object output stream.</para
-      >
+        >Specifies the HTML tags that can be passed to an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object output stream.</para>
     </summary>
   </Docs>
   <Members>

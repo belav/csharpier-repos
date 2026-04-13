@@ -37,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown by the marshaler when it encounters a <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> it does not support.</para
-      >
+        >The exception that is thrown by the marshaler when it encounters a <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" /> it does not support.</para>
     </summary>
   </Docs>
   <Members>
@@ -163,8 +162,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that specifies the reason for the exception. </param
-        >
+          />The error message that specifies the reason for the exception. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -193,10 +191,8 @@
           <para
             >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
-                >[&lt;topic://cpconSerialization&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconSerialization&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -207,15 +203,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -242,11 +236,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Runtime.InteropServices.MarshalDirectiveException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Runtime.InteropServices.MarshalDirectiveException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -283,23 +275,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.MarshalDirectiveException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.MarshalDirectiveException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
     </Member>
   </Members>

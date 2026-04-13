@@ -23,9 +23,7 @@
       <para
         >The <see cref="T:System.Net.Http.Headers.RangeHeaderValue" /> class provides support for a byte range in a Range header as defined in <see
           cref="http://go.microsoft.com/fwlink/?LinkID=241642"
-          >RFC 2616</see
-        > by the IETF. </para
-      >
+          >RFC 2616</see> by the IETF. </para>
       <para>A Range header can specify multiple byte ranges.</para>
       <para>An example of a byte-range in a Range header in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
       <para>Range: bytes=0-99\r\n\r\n</para>
@@ -63,29 +61,25 @@
           <para>An example of a byte-range in a Range header in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
           <para>Range: bytes=0-99\r\n\r\n</para>
           <para
-            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. </para
-          >
+            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> class.</para>
         </summary>
         <param name="from">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position at which to start sending data.</param
-        >
+          />The position at which to start sending data.</param>
         <param name="to">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position at which to stop sending data.</param
-        >
+          />The position at which to stop sending data.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -109,23 +103,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Boolean" />.</para>
           <para
-            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para
-          >
+            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current object.</param
-        >
+          />The object to compare with the current object.</param>
       </Docs>
     </Member>
     <Member MemberName="From">
@@ -169,14 +160,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
           <para
-            >The <see cref="M:System.Net.Http.Headers.RangeItemHeaderValue.GetHashCode" />  method is suitable for use in hashing algorithms and data structures such as a hash table.</para
-          >
+            >The <see cref="M:System.Net.Http.Headers.RangeItemHeaderValue.GetHashCode" />  method is suitable for use in hashing algorithms and data structures such as a hash table.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para
-          >
+            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> instance.</para
-          >
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -255,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

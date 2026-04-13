@@ -22,8 +22,7 @@
             <see cref="M:System.String.Format(System.String,System.Object[])" />.
             <see cref="M:System.String.Format(System.String,System.Object[])" />.
             <see cref="M:System.String.Format(System.String,System.Object[])" />.
-            </summary
-      >
+            </summary>
       <param name="line">The formatting string.</param>
       <param name="args">The object array to write into format string.</param>
     </member>

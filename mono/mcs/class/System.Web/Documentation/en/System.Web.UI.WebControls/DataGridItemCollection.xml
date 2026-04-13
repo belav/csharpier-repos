@@ -24,34 +24,28 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> class represents a collection of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects, which in turn represent the data items in a <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. To programmatically retrieve <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects from a <see cref="T:System.Web.UI.WebControls.DataGrid" /> control, use one of following methods: </para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> class represents a collection of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects, which in turn represent the data items in a <see cref="T:System.Web.UI.WebControls.DataGrid" /> control. To programmatically retrieve <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects from a <see cref="T:System.Web.UI.WebControls.DataGrid" /> control, use one of following methods: </para>
       <list type="bullet">
         <item>
           <para
-            >Use the indexer to get a single <see cref="T:System.Web.UI.WebControls.DataGridItem" /> object from the collection, using array notation.</para
-          >
+            >Use the indexer to get a single <see cref="T:System.Web.UI.WebControls.DataGridItem" /> object from the collection, using array notation.</para>
         </item>
         <item>
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.DataGridItemCollection.CopyTo(System.Array,System.Int32)" /> method to copy the contents of the collection to a <see cref="T:System.Array" />, which can then be used to get items from the collection.</para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.DataGridItemCollection.CopyTo(System.Array,System.Int32)" /> method to copy the contents of the collection to a <see cref="T:System.Array" />, which can then be used to get items from the collection.</para>
         </item>
         <item>
           <para
-            >Use the <see cref="M:System.Web.UI.WebControls.DataGridItemCollection.GetEnumerator" /> method to create a <see cref="T:System.Collections.IEnumerator" /> interface, which can then be used to get items from the collection.</para
-          >
+            >Use the <see cref="M:System.Web.UI.WebControls.DataGridItemCollection.GetEnumerator" /> method to create a <see cref="T:System.Collections.IEnumerator" /> interface, which can then be used to get items from the collection.</para>
         </item>
       </list>
       <para
-        >The <see cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" /> property specifies the total number of items in the collection and is commonly used to determine the upper bound of the collection.</para
-      >
+        >The <see cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" /> property specifies the total number of items in the collection and is commonly used to determine the upper bound of the collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in a <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.</para
-      >
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in a <see cref="T:System.Web.UI.WebControls.DataGrid" /> control.</para>
     </summary>
   </Docs>
   <Members>
@@ -69,22 +63,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> class.</para
-          >
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> class.</para>
         </summary>
         <param name="items">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Collections.ArrayList" /> that contains the items with which to initialize the collection. </param
-        >
+          />A <see cref="T:System.Collections.ArrayList" /> that contains the items with which to initialize the collection. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -105,34 +96,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection into the specified <see cref="T:System.Array" />, starting at the specified index.</para
-          >
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection into the specified <see cref="T:System.Array" />, starting at the specified index.</para>
           <block subset="none" type="note">
             <para
-              >The <paramref name="array" /> parameter must be a zero-based <see cref="T:System.Array" />.</para
-            >
+              >The <paramref name="array" /> parameter must be a zero-based <see cref="T:System.Array" />.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from this <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection to the specified <see cref="T:System.Array" />, starting at the specified index in the <see cref="T:System.Array" />.</para
-          >
+            >Copies all the items from this <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection to the specified <see cref="T:System.Array" />, starting at the specified index in the <see cref="T:System.Array" />.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A zero-based <see cref="T:System.Array" /> that receives the copied items from the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" />. </param
-        >
+          />A zero-based <see cref="T:System.Array" /> that receives the copied items from the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" />. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first position in the specified <see cref="T:System.Array" /> to receive the copied contents. </param
-        >
+          />The first position in the specified <see cref="T:System.Array" /> to receive the copied contents. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -150,14 +136,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" /> property to determine the number of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection. The <see cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" /> property is commonly used when iterating through the collection to determine the upper bound of the collection.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" /> property to determine the number of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection. The <see cref="P:System.Web.UI.WebControls.DataGridItemCollection.Count" /> property is commonly used when iterating through the collection to determine the upper bound of the collection.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the collection.</para
-          >
+            >Gets the number of <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -179,34 +163,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />-implemented object that can be iterated through to get each item in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection.</para
-          >
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />-implemented object that can be iterated through to get each item in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection.</para>
           <para
-            >Use the <see cref="P:System.Collections.IEnumerator.Current" /> property to get the item currently pointed to in the collection.</para
-          >
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" /> property to get the item currently pointed to in the collection.</para>
           <para
-            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method to move to the next item in the collection.</para
-          >
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method to move to the next item in the collection.</para>
           <para
-            >Use the <see cref="M:System.Collections.IEnumerator.Reset" /> method to move the enumerator to its initial position.</para
-          >
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" /> method to move the enumerator to its initial position.</para>
           <block subset="none" type="note">
             <para
-              >After you create a <see cref="T:System.Collections.IEnumerator" />-implemented object or use the <see cref="M:System.Collections.IEnumerator.Reset" /> method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" /> property is undefined.</para
-            >
+              >After you create a <see cref="T:System.Collections.IEnumerator" />-implemented object or use the <see cref="M:System.Collections.IEnumerator.Reset" /> method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" /> property is undefined.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Collections.IEnumerator" />-implemented object that contains all the <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection.</para
-          >
+            >Returns a <see cref="T:System.Collections.IEnumerator" />-implemented object that contains all the <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.IEnumerator" />-implemented object that contains all <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" />.</para
-          >
+            >A <see cref="T:System.Collections.IEnumerator" />-implemented object that contains all <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -225,14 +202,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection can be written to in all cases.</para
-          >
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection can be written to in all cases.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection can be modified.</para
-          >
+            >Gets a value that indicates whether the <see cref="T:System.Web.UI.WebControls.DataGridItem" /> objects in the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection can be modified.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,17 +226,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from the <see cref="T:System.Collections.ICollection" /> interface and is overridden to always return false.</para
-          >
+            >This property is derived from the <see cref="T:System.Collections.ICollection" /> interface and is overridden to always return false.</para>
           <para
-            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" /> property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" /> property of the <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" /> property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" /> property of the <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection is synchronized (thread-safe).</para
-          >
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection is synchronized (thread-safe).</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -303,17 +275,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> object itself.</para
-          >
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> object itself.</para>
           <para
-            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" /> property, see the <see cref="P:System.Collections.ICollection.SyncRoot" /> property of the <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" /> property, see the <see cref="P:System.Collections.ICollection.SyncRoot" /> property of the <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection.</para
-          >
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.DataGridItemCollection" /> collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -18,11 +18,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Windows.Forms.Binding" /> contains a reference to its <see cref="T:System.Windows.Forms.IBindableComponent" /> owner through the <see cref="P:System.Windows.Forms.Binding.BindableComponent" /> property.</para
-      >
+        >A <see cref="T:System.Windows.Forms.Binding" /> contains a reference to its <see cref="T:System.Windows.Forms.IBindableComponent" /> owner through the <see cref="P:System.Windows.Forms.Binding.BindableComponent" /> property.</para>
       <para
-        >The <see cref="T:System.Windows.Forms.Control" /> class implements this interface, so if your bindable component inherits from <see cref="T:System.Windows.Forms.Control" />, you do not need to implement this interface.</para
-      >
+        >The <see cref="T:System.Windows.Forms.Control" /> class implements this interface, so if your bindable component inherits from <see cref="T:System.Windows.Forms.Control" />, you do not need to implement this interface.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the collection of currency managers for the <see cref="T:System.Windows.Forms.IBindableComponent" />. </para
-          >
+            >Gets or sets the collection of currency managers for the <see cref="T:System.Windows.Forms.IBindableComponent" />. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -70,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of data-binding objects for this <see cref="T:System.Windows.Forms.IBindableComponent" />.</para
-          >
+            >Gets the collection of data-binding objects for this <see cref="T:System.Windows.Forms.IBindableComponent" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

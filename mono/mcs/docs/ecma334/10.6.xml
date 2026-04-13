@@ -38,7 +38,6 @@ interface ITest
   </paragraph>
   <paragraph>
     <example
-      >Note that any ref and out parameter modifiers (<hyperlink>17.5.1</hyperlink>) are part of a signature. Thus, F(<keyword>int</keyword>), F(ref <keyword>int</keyword>), and F(out <keyword>int</keyword>) are all unique signatures. Also, note that the return type and the params modifier are not part of a signature, so it is not possible to overload solely based on return type or on the inclusion or exclusion of the params modifier. As such, the declarations of the methods F(<keyword>int</keyword>) and F(params string[]) identified above, result in a compile-time error. end example]</example
-    >
+      >Note that any ref and out parameter modifiers (<hyperlink>17.5.1</hyperlink>) are part of a signature. Thus, F(<keyword>int</keyword>), F(ref <keyword>int</keyword>), and F(out <keyword>int</keyword>) are all unique signatures. Also, note that the return type and the params modifier are not part of a signature, so it is not possible to overload solely based on return type or on the inclusion or exclusion of the params modifier. As such, the declarations of the methods F(<keyword>int</keyword>) and F(params string[]) identified above, result in a compile-time error. end example]</example>
   </paragraph>
 </clause>

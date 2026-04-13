@@ -2,45 +2,35 @@
   <!-- Define project type conventions. -->
   <PropertyGroup>
     <IsTrimmingTestProject Condition="$(MSBuildProjectName.EndsWith('.TrimmingTests'))"
-      >true</IsTrimmingTestProject
-    >
+      >true</IsTrimmingTestProject>
     <IsNativeAotTestProject Condition="$(MSBuildProjectName.EndsWith('.NativeAotTests'))"
-      >true</IsNativeAotTestProject
-    >
+      >true</IsNativeAotTestProject>
     <IsPublishedAppTestProject
       Condition="'$(IsTrimmingTestProject)' == 'true' or '$(IsNativeAotTestProject)' == 'true'"
-      >true</IsPublishedAppTestProject
-    >
+      >true</IsPublishedAppTestProject>
     <IsSpecificationTestProject Condition="$(MSBuildProjectName.EndsWith('.Specification.Tests'))"
-      >true</IsSpecificationTestProject
-    >
+      >true</IsSpecificationTestProject>
     <IsUnitTestProject
       Condition=" '$(IsUnitTestProject)' == '' AND
         '$(IsSpecificationTestProject)' != 'true' AND
         ( $(MSBuildProjectName.EndsWith('.Tests')) OR
           $(MSBuildProjectName.EndsWith('.FunctionalTests'))) "
-      >true</IsUnitTestProject
-    >
+      >true</IsUnitTestProject>
     <IsUnitTestProject Condition=" '$(IsUnitTestProject)' == '' ">false</IsUnitTestProject>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetOsName Condition=" '$(TargetOsName)' == '' AND $([MSBuild]::IsOSPlatform('Windows'))"
-      >win</TargetOsName
-    >
+      >win</TargetOsName>
     <TargetOsName Condition=" '$(TargetOsName)' == '' AND $([MSBuild]::IsOSPlatform('OSX'))"
-      >osx</TargetOsName
-    >
+      >osx</TargetOsName>
     <TargetOsName Condition=" '$(TargetOsName)' == '' AND $([MSBuild]::IsOSPlatform('Linux'))"
-      >linux</TargetOsName
-    >
+      >linux</TargetOsName>
     <TargetOsName Condition=" '$(TargetOsName)' == '' AND $([MSBuild]::IsOSPlatform('FreeBSD'))"
-      >freebsd</TargetOsName
-    >
+      >freebsd</TargetOsName>
     <TargetArchitecture Condition="'$(TargetArchitecture)' == ''">x64</TargetArchitecture>
     <TargetRuntimeIdentifier Condition="'$(TargetRuntimeIdentifier)' == ''"
-      >$(TargetOsName)-$(TargetArchitecture)</TargetRuntimeIdentifier
-    >
+      >$(TargetOsName)-$(TargetArchitecture)</TargetRuntimeIdentifier>
   </PropertyGroup>
 
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />

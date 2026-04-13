@@ -16,11 +16,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" /> interface. Controls access schema objects by calling the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" /> method of the interface.</para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" /> interface. Controls access schema objects by calling the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" /> method of the interface.</para>
       <para
-        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class represents a single data view in the data store. A collection of <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> objects is returned when you call the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method with the <paramref name="schemaClass" /> parameter set to <see cref="F:System.ComponentModel.Design.Data.DesignerDataSchemaClass.Views" />.</para
-      >
+        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class represents a single data view in the data store. A collection of <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> objects is returned when you call the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method with the <paramref name="schemaClass" /> parameter set to <see cref="F:System.ComponentModel.Design.Data.DesignerDataSchemaClass.Views" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -42,16 +40,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class with the specified name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class with the specified name. </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the view.</param
-        >
+          />The name of the view.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -72,23 +68,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class with the specified name and owner. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataView" /> class with the specified name and owner. </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the view.</param
-        >
+          />The name of the view.</param>
         <param name="owner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data-store owner of the view.</param
-        >
+          />The data-store owner of the view.</param>
       </Docs>
     </Member>
   </Members>

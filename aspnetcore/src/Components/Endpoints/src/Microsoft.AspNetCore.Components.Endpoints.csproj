@@ -104,11 +104,9 @@
     <BlazorWebJSFilename>blazor.web.js</BlazorWebJSFilename>
     <!-- Microsoft.AspNetCore.Components.Web.JS.npmproj always capitalizes the directory name. -->
     <BlazorWebJSFile Condition=" '$(Configuration)' == 'Debug' "
-      >..\..\Web.JS\dist\Debug\$(BlazorWebJSFilename)</BlazorWebJSFile
-    >
+      >..\..\Web.JS\dist\Debug\$(BlazorWebJSFilename)</BlazorWebJSFile>
     <BlazorWebJSFile Condition=" '$(Configuration)' != 'Debug' "
-      >..\..\Web.JS\dist\Release\$(BlazorWebJSFilename)</BlazorWebJSFile
-    >
+      >..\..\Web.JS\dist\Release\$(BlazorWebJSFilename)</BlazorWebJSFile>
   </PropertyGroup>
 
   <!-- blazor.web.js should exist after Microsoft.AspNetCore.Components.Web.JS.npmproj builds. Fall back if not. -->

@@ -20,8 +20,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ICMPv4 is a set of error and informational messages for use with Internet Protocol version 4. ICMP version 4 is defined in IETF RFC 792.</para>
       <para
-        >This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIcmpV4Statistics" /> method to return ICMPv4 traffic information.</para
-      >
+        >This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIcmpV4Statistics" /> method to return ICMPv4 traffic information.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -46,14 +45,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />.</para
-          >
+            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" /> class.</para>
         </summary>
       </Docs>
     </Member>

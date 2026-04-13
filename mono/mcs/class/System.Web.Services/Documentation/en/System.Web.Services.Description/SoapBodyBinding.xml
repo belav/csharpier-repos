@@ -28,16 +28,13 @@
       <para
         >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
-            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
-          >
-        </format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
-      >
+            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a>
+        </format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" /> or an <see cref="T:System.Web.Services.Description.OutputBinding" />.</para
-      >
+        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" /> or an <see cref="T:System.Web.Services.Description.OutputBinding" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -51,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapBodyBinding" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapBodyBinding" /> class. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,8 +68,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property should be set only if the value of the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Use" /> property is Encoded. Otherwise this property value will be ignored.</para
-          >
+            >The value of this property should be set only if the value of the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Use" /> property is Encoded. Otherwise this property value will be ignored.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,14 +100,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property will return an empty string ("") if the property value has not been set. The value should only be set if the value of the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Use" /> property is Encoded. Otherwise the property value will be ignored, thus leading to unexpected behavior by the XML Web service.</para
-          >
+            >This property will return an empty string ("") if the property value has not been set. The value should only be set if the value of the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Use" /> property is Encoded. Otherwise the property value will be ignored, thus leading to unexpected behavior by the XML Web service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get or sets the URI representing the location of the specifications for encoding of content not specifically defined by the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Encoding" /> property.</para
-          >
+            >Get or sets the URI representing the location of the specifications for encoding of content not specifically defined by the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Encoding" /> property.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -140,11 +133,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some parts of the transmitted message can appear in portions other than the SOAP body, such as when SOAP is used with a <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />. In such a case, the other members of the <see cref="P:System.Web.Services.Description.MimePart.Extensions" /> property determine the locations of the other parts of the message.</para
-          >
+            >Some parts of the transmitted message can appear in portions other than the SOAP body, such as when SOAP is used with a <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />. In such a case, the other members of the <see cref="P:System.Web.Services.Description.MimePart.Extensions" /> property determine the locations of the other parts of the message.</para>
           <para
-            >This property returns exactly the same information as the <see cref="P:System.Web.Services.Description.SoapBodyBinding.PartsString" /> property, but the results are returned within an array rather than within a space-delimited string.</para
-          >
+            >This property returns exactly the same information as the <see cref="P:System.Web.Services.Description.SoapBodyBinding.PartsString" /> property, but the results are returned within an array rather than within a space-delimited string.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,11 +164,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some parts of the transmitted message can appear in portions other than the SOAP body, such as when SOAP is used with a <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />. In such a case, the other members of the <see cref="P:System.Web.Services.Description.MimePart.Extensions" /> property determine the locations of other parts of the message.</para
-          >
+            >Some parts of the transmitted message can appear in portions other than the SOAP body, such as when SOAP is used with a <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />. In such a case, the other members of the <see cref="P:System.Web.Services.Description.MimePart.Extensions" /> property determine the locations of other parts of the message.</para>
           <para
-            >This property returns exactly the same information as the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Parts" /> property, but the results are returned within a space-delimited string rather than within an array. PartsString is used internally for xml serialization and shouldn't be called directly. To return the transmitted message parts appearing within the SOAP body portion of the transmission, use the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Parts" /> property.</para
-          >
+            >This property returns exactly the same information as the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Parts" /> property, but the results are returned within a space-delimited string rather than within an array. PartsString is used internally for xml serialization and shouldn't be called directly. To return the transmitted message parts appearing within the SOAP body portion of the transmission, use the <see cref="P:System.Web.Services.Description.SoapBodyBinding.Parts" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -209,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Services.Description.SoapBodyBinding.Namespace" /> and <see cref="P:System.Web.Services.Description.SoapBodyBinding.Encoding" /> properties depend on the value of this property. Their values should be set only if the value of this property is Encoded. Otherwise the XML Web service will produce unexpected behavior.</para
-          >
+            >The <see cref="P:System.Web.Services.Description.SoapBodyBinding.Namespace" /> and <see cref="P:System.Web.Services.Description.SoapBodyBinding.Encoding" /> properties depend on the value of this property. Their values should be set only if the value of this property is Encoded. Otherwise the XML Web service will produce unexpected behavior.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

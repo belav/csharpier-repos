@@ -19,8 +19,7 @@
        once our integration CI moves to VS 17.7 Preview 2.
     -->
     <VisualStudioInsertionComponent Condition="'$(OfficialBuild)' == 'true'"
-      >Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent
-    >
+      >Microsoft.CodeAnalysis.LanguageServices</VisualStudioInsertionComponent>
 
     <!-- ServiceHub AssemblyPath -->
     <!-- Path to our servicehub entry point dll in the vsix directory relative 

@@ -3,8 +3,7 @@
     <NpmTestArgs>test</NpmTestArgs>
     <Configuration
       Condition="'$(Configuration)' == '' AND '$(ContinuousIntegrationBuild)' == 'true'"
-      >Release</Configuration
-    >
+      >Release</Configuration>
     <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
     <PackOnBuild>false</PackOnBuild>
   </PropertyGroup>
@@ -13,7 +12,6 @@
   <PropertyGroup>
     <IgnoreYarnWarnings>false</IgnoreYarnWarnings>
     <IgnoreYarnWarnings Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-      >true</IgnoreYarnWarnings
-    >
+      >true</IgnoreYarnWarnings>
   </PropertyGroup>
 </Project>

@@ -1,8 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <WebApplicationOutputDir Condition="'$(OutDir)' != '$(OutputPath)'"
-      >$(OutDir)_PublishedWebsites\$(MSBuildProjectName)</WebApplicationOutputDir
-    >
+      >$(OutDir)_PublishedWebsites\$(MSBuildProjectName)</WebApplicationOutputDir>
 
     <PrepareForRunDependsOn>
 			$(PrepareForRunDependsOn);

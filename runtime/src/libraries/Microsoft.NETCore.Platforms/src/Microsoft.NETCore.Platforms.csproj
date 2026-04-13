@@ -16,11 +16,9 @@
     <IncludeSymbols>false</IncludeSymbols>
 
     <_generateRuntimeGraphTargetFramework Condition="'$(MSBuildRuntimeType)' == 'core'"
-      >$(NetCoreAppToolCurrent)</_generateRuntimeGraphTargetFramework
-    >
+      >$(NetCoreAppToolCurrent)</_generateRuntimeGraphTargetFramework>
     <_generateRuntimeGraphTargetFramework Condition="'$(MSBuildRuntimeType)' != 'core'"
-      >$(NetFrameworkToolCurrent)</_generateRuntimeGraphTargetFramework
-    >
+      >$(NetFrameworkToolCurrent)</_generateRuntimeGraphTargetFramework>
     <_generateRuntimeGraphTask>$([MSBuild]::NormalizePath('$(BaseOutputPath)', $(Configuration), '$(_generateRuntimeGraphTargetFramework)', '$(AssemblyName).dll'))</_generateRuntimeGraphTask>
   </PropertyGroup>
 

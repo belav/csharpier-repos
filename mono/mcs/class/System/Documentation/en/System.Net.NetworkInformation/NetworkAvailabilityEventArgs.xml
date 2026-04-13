@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to a <see cref="T:System.Net.NetworkInformation.NetworkAvailabilityChangedEventHandler" /> method that is called when the status of the network changes.</para
-      >
+        >Instances of this class are passed to a <see cref="T:System.Net.NetworkInformation.NetworkAvailabilityChangedEventHandler" /> method that is called when the status of the network changes.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" /> event.</para>
     </summary>
   </Docs>
   <Members>

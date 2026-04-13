@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Security.FormsIdentity" /> class is used by the <see cref="T:System.Web.Security.FormsAuthenticationModule" /> when a user is authenticated with forms authentication. An instance of the <see cref="T:System.Web.Security.FormsIdentity" /> class is created using the <see cref="T:System.Web.Security.FormsAuthenticationTicket" /> that is decrypted from the forms-authentication cookie or from the URL. The new instance of the <see cref="T:System.Web.Security.FormsIdentity" /> class is used to construct a new <see cref="T:System.Security.Principal.GenericPrincipal" /> object that is set as the value of the <see cref="P:System.Web.HttpContext.User" /> property for the current <see cref="T:System.Web.HttpContext" />.</para
-      >
+        >The <see cref="T:System.Web.Security.FormsIdentity" /> class is used by the <see cref="T:System.Web.Security.FormsAuthenticationModule" /> when a user is authenticated with forms authentication. An instance of the <see cref="T:System.Web.Security.FormsIdentity" /> class is created using the <see cref="T:System.Web.Security.FormsAuthenticationTicket" /> that is decrypted from the forms-authentication cookie or from the URL. The new instance of the <see cref="T:System.Web.Security.FormsIdentity" /> class is used to construct a new <see cref="T:System.Security.Principal.GenericPrincipal" /> object that is set as the value of the <see cref="P:System.Web.HttpContext.User" /> property for the current <see cref="T:System.Web.HttpContext" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,16 +47,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Security.FormsIdentity" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Security.FormsIdentity" /> class.</para>
         </summary>
         <param name="ticket">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The authentication ticket upon which this identity is based. </param
-        >
+          />The authentication ticket upon which this identity is based. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -113,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Security.FormsIdentity.Name" /> property returns the value of the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Name" /> property from the <see cref="T:System.Web.Security.FormsAuthenticationTicket" /> supplied to the constructor.</para
-          >
+            >The <see cref="P:System.Web.Security.FormsIdentity.Name" /> property returns the value of the <see cref="P:System.Web.Security.FormsAuthenticationTicket.Name" /> property from the <see cref="T:System.Web.Security.FormsAuthenticationTicket" /> supplied to the constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -141,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Security.FormsAuthenticationTicket" /> for the forms-authentication user identity.</para
-          >
+            >Gets the <see cref="T:System.Web.Security.FormsAuthenticationTicket" /> for the forms-authentication user identity.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

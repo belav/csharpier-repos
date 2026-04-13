@@ -12,9 +12,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>An implementation that validates XML document against RELAX NG pattern.</summary>
     <remarks>To be added.</remarks>
@@ -33,14 +31,12 @@
       <Parameters />
       <Docs>
         <summary
-          >Overrides the target XmlReader's <see cref="M:System.Xml.XmlReader.Read" /> and validates the reader against the target grammar. </summary
-        >
+          >Overrides the target XmlReader's <see cref="M:System.Xml.XmlReader.Read" /> and validates the reader against the target grammar. </summary>
         <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>
           <para>
 		When the XML node consumed by this method was invalid in the context of the target pattern, <see cref="T:Commons.Xml.Relaxng.RelaxngException" /> will be thrown.
-		</para
-          >
+		</para>
           <para>
 		The exception does not contain any location of the target grammar element, since RELAX NG grammar supports non-deterministic content model.
 		</para>
@@ -76,8 +72,7 @@
       </Parameters>
       <Docs>
         <param name="reader"
-          >a <see cref="T:System.Xml.XmlReader" /> that is being validated.</param
-        >
+          >a <see cref="T:System.Xml.XmlReader" /> that is being validated.</param>
         <param name="grammarXml">To be added.</param>
         <summary>Creates a new instance of this validating reader. This method equals to the call to new RelaxngValidatingReader (reader, grammarXml, RelaxngMergedProvider.DefaultProvider).</summary>
         <summary>Creates a new instance of this validating reader.</summary>
@@ -99,14 +94,11 @@
       <Docs>
         <summary>Creates a new instance of this validating reader.</summary>
         <param name="reader"
-          >a <see cref="T:System.Xml.XmlReader" /> that is being validated.</param
-        >
+          >a <see cref="T:System.Xml.XmlReader" /> that is being validated.</param>
         <param name="grammarXml"
-          >a <see cref="T:System.Xml.XmlReader" /> that contains the RELAX NG pattern that is being compiled and being used to validate.</param
-        >
+          >a <see cref="T:System.Xml.XmlReader" /> that contains the RELAX NG pattern that is being compiled and being used to validate.</param>
         <param name="provider"
-          >a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" /> that is used to compile the pattern.</param
-        >
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" /> that is used to compile the pattern.</param>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -124,11 +116,9 @@
       <Docs>
         <summary>Creates a new instance of this validating reader.</summary>
         <param name="reader"
-          >a <see cref="T:System.Xml.XmlReader" /> that is being validated.</param
-        >
+          >a <see cref="T:System.Xml.XmlReader" /> that is being validated.</param>
         <param name="pattern"
-          >a <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" /> that is used to validate the XmlReader.</param
-        >
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" /> that is used to validate the XmlReader.</param>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

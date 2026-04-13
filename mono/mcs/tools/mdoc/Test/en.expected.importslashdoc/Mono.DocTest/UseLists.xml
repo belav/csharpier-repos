@@ -92,8 +92,7 @@
         <param name="list">A <see cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.UseLists.Process(Mono.DocTest.MyList{System.Int32})</c>.</remarks
-        >
+          <c>M:Mono.DocTest.UseLists.Process(Mono.DocTest.MyList{System.Int32})</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Process">
@@ -117,13 +116,11 @@
       </Parameters>
       <Docs>
         <param name="list"
-          >Another <see cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />.</param
-        >
+          >Another <see cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />.</param>
         <summary>To be added.</summary>
         <remarks>
           <para>
-            <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>.</para
-          >
+            <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>.</para>
           <para>
             <see cref="M:System.Collections.Generic.List{System.Int32}.Remove(`0)" />
           </para>
@@ -155,12 +152,10 @@
       </Parameters>
       <Docs>
         <param name="list"
-          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />.</param
-        >
+          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>.</remarks
-        >
+          <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Process&lt;T&gt;">
@@ -191,12 +186,10 @@
       <Docs>
         <typeparam name="T">Something Else</typeparam>
         <param name="list"
-          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />.</param
-        >
+          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>.</remarks
-        >
+          <c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UseHelper&lt;T,U,V&gt;">
@@ -234,12 +227,10 @@
           <c>V</c>
         </typeparam>
         <param name="helper"
-          >A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />.</param
-        >
+          >A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />.</param>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks
-        >
+          <c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>.</remarks>
       </Docs>
     </Member>
   </Members>

@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Session objects (this class together with <see cref="T:System.Xml.XmlBinaryWriterSession" />) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries of <see cref="T:System.Xml.XmlDictionaryString" /> instances. For more information about dynamic dictionaries see <see cref="T:System.Xml.XmlDictionary" />.</para
-      >
+        >Session objects (this class together with <see cref="T:System.Xml.XmlBinaryWriterSession" />) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries of <see cref="T:System.Xml.XmlDictionaryString" /> instances. For more information about dynamic dictionaries see <see cref="T:System.Xml.XmlDictionary" />.</para>
       <para>Due to asynchronous processing, it is possible for messages that arrive synchronously to be processed in a different order than they order in which they were sent. String atomization that spans messages must ensure the messages are processed in the original order, or the atomized strings must be conveyed using a different mechanism.</para>
       <para>To use them you create a session object and pass it to the constructor or initializer for a binary XML reader or writer.</para>
       <para>To reuse a dynamic dictionary simply pass the same session object to all subsequent readers and/or writers.</para>
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlBinaryReaderSession" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlBinaryReaderSession" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,21 +80,17 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see cref="T:System.Xml.XmlDictionaryString" /> from the input parameters and adds it to an internal collection.</para
-          >
+            >Creates an <see cref="T:System.Xml.XmlDictionaryString" /> from the input parameters and adds it to an internal collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see cref="T:System.Xml.XmlDictionaryString" /> that is added to an internal collection.</para
-          >
+            >The newly created <see cref="T:System.Xml.XmlDictionaryString" /> that is added to an internal collection.</para>
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The key value.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The value.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">

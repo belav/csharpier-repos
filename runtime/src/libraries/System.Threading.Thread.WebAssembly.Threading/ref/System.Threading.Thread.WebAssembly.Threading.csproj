@@ -11,8 +11,7 @@
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <IncludePlatformAttributes>true</IncludePlatformAttributes>
     <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'"
-      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

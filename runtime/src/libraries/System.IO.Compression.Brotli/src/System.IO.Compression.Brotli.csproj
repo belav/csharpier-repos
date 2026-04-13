@@ -9,8 +9,7 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.IOCompressionBrotli_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.IOCompressionBrotli_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

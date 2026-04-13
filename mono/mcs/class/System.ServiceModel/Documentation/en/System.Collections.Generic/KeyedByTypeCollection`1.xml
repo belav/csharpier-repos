@@ -54,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Collections.Generic.KeyedByTypeCollection`1" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.KeyedByTypeCollection`1" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -107,16 +106,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object of type <paramref name="T" /> if it is a reference type and the value of type <paramref name="T" /> if it is a value type. The default value of the type is returned if no object of type <paramref name="T" /> is contained in the collection: null if it is a reference type and 0 if it is a value type.</para
-          >
+            >The object of type <paramref name="T" /> if it is a reference type and the value of type <paramref name="T" /> if it is a value type. The default value of the type is returned if no object of type <paramref name="T" /> is contained in the collection: null if it is a reference type and 0 if it is a value type.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of item in the collection to find.</typeparam
-        >
+          />The type of item in the collection to find.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="FindAll&lt;T&gt;">
@@ -144,22 +141,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of objects of type <paramref name="T" /> that are contained in the <see cref="T:System.Collections.Generic.KeyedByTypeCollection`1" />.</para
-          >
+            >Returns a collection of objects of type <paramref name="T" /> that are contained in the <see cref="T:System.Collections.Generic.KeyedByTypeCollection`1" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <paramref name="T" /> that contains the objects of type <paramref name="T" /> from the original collection.</para
-          >
+            >A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <paramref name="T" /> that contains the objects of type <paramref name="T" /> from the original collection.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of item in the collection to find.</typeparam
-        >
+          />The type of item in the collection to find.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetKeyForItem">
@@ -244,8 +238,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of item in the collection to remove.</typeparam
-        >
+          />The type of item in the collection to remove.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="RemoveAll&lt;T&gt;">
@@ -277,16 +270,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Collections.ObjectModel.Collection`1" /> that contains the objects of type <paramref name="T" /> from the original collection.</para
-          >
+            >The <see cref="T:System.Collections.ObjectModel.Collection`1" /> that contains the objects of type <paramref name="T" /> from the original collection.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of item in the collection to remove.</typeparam
-        >
+          />The type of item in the collection to remove.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="SetItem">

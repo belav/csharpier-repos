@@ -55,8 +55,7 @@
             <para>
               <format type="text/html">
                 <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                  >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                >
+                  >[&lt;topic://cpconwritingtexttofile&gt;]</a>
               </format>
             </para>
           </description>
@@ -69,8 +68,7 @@
             <para>
               <format type="text/html">
                 <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                  >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                >
+                  >[&lt;topic://cpconwritingtexttofile&gt;]</a>
               </format>
             </para>
           </description>
@@ -83,8 +81,7 @@
             <para>
               <format type="text/html">
                 <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                  >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                >
+                  >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
               </format>
             </para>
           </description>
@@ -97,8 +94,7 @@
             <para>
               <format type="text/html">
                 <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                  >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                >
+                  >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
               </format>
             </para>
             <para>
@@ -157,8 +153,7 @@
             <para>
               <format type="text/html">
                 <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                >
+                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
               </format>
             </para>
           </description>
@@ -171,8 +166,7 @@
             <para>
               <format type="text/html">
                 <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                >
+                  >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
               </format>
             </para>
           </description>
@@ -207,8 +201,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="s" /> is <see langword="null" />.</exception
-        >
+          <paramref name="s" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists examples of other typical or related I/O tasks.</para>
@@ -231,8 +224,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -245,8 +237,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -259,8 +250,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -273,8 +263,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -333,8 +322,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -347,8 +335,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -358,16 +345,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.StringReader" /> class that reads from the specified string.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.StringReader" /> class that reads from the specified string.</para>
         </summary>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to which the <see cref="T:System.IO.StringReader" /> should be initialized. </param
-        >
+          />The string to which the <see cref="T:System.IO.StringReader" /> should be initialized. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -394,25 +379,19 @@
           <para
             >For an example of creating a file and writing text to a file, see <format type="text/html">
               <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                >[&lt;topic://cpconwritingtexttofile&gt;]</a
-              >
+                >[&lt;topic://cpconwritingtexttofile&gt;]</a>
             </format>. For an example of reading text from a file, see <format type="text/html">
               <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-              >
+                >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
             </format>. For an example of reading from and writing to a binary file, see <format type="text/html">
               <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
+            </format>.</para>
           <para>This method overrides the <see cref="M:System.IO.Stream.Close" /> method.</para>
           <para
-            >This implementation of Close calls the <see cref="M:System.IO.StringReader.Dispose(System.Boolean)" /> method passing a true value.</para
-          >
+            >This implementation of Close calls the <see cref="M:System.IO.StringReader.Dispose(System.Boolean)" /> method passing a true value.</para>
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" /> to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
-          >
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see cref="P:System.IO.StreamWriter.AutoFlush" /> to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para>
           <para>Following a call to Close, other methods might throw an exception.</para>
         </remarks>
         <summary>
@@ -448,22 +427,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.StringReader" /> references. This method invokes the Dispose method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.StringReader" /> references. This method invokes the Dispose method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.IO.StringReader" /> and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.StringReader" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -489,8 +465,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.IO.StringReader.Peek" /> method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see cref="T:System.Char" /> type.</para
-          >
+            >The <see cref="M:System.IO.StringReader.Peek" /> method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see cref="T:System.Char" /> type.</para>
           <para>This method overrides the <see cref="M:System.IO.TextReader.Peek" /> method.</para>
           <para>The current position of the StringReader is not changed by this operation.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
@@ -513,8 +488,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -527,8 +501,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -541,8 +514,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -612,8 +584,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -626,8 +597,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -640,8 +610,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -654,8 +623,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -714,8 +682,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -728,8 +695,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -776,12 +742,10 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="buffer " /> is <see langword="null" />.</exception
-        >
+          <paramref name="buffer " /> is <see langword="null" />.</exception>
         <exception cref="T:System.ArgumentException"
           >(<paramref name="index" /> + <paramref name="count" /> ) &gt; <paramref name="buffer" />
-          <see langword="." />Length.</exception
-        >
+          <see langword="." />Length.</exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para><paramref name="index " />&lt; 0<paramref name=" " /></para>
           <para><paramref name="-" /> or-</para>
@@ -792,8 +756,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method overrides <see cref="M:System.IO.TextReader.Read" />.</para>
           <para
-            >The method will read up to <paramref name="count" /> characters from the <see cref="T:System.IO.StringReader" /> into the <paramref name="buffer" /> character array starting at position <paramref name="index" />. Returns the actual number of characters read, or zero if the end of the string has been reached and no characters are read.</para
-          >
+            >The method will read up to <paramref name="count" /> characters from the <see cref="T:System.IO.StringReader" /> into the <paramref name="buffer" /> character array starting at position <paramref name="index" />. Returns the actual number of characters read, or zero if the end of the string has been reached and no characters are read.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
             <listheader>
@@ -814,8 +777,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -828,8 +790,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -842,8 +803,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -856,8 +816,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -916,8 +875,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -930,8 +888,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -941,8 +898,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads a block of characters from the input string and advances the character position by <paramref name="count" />.</para
-          >
+            >Reads a block of characters from the input string and advances the character position by <paramref name="count" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -953,22 +909,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source. </param
-        >
+          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the buffer. </param
-        >
+          />The starting index in the buffer. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to read. </param
-        >
+          />The number of characters to read. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -997,8 +950,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task completes after either the number of characters specified by the <paramref name="count" /> parameter are read or the end of the string is reached. </para
-          >
+            >The task completes after either the number of characters specified by the <paramref name="count" /> parameter are read or the end of the string is reached. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1007,30 +959,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the string has been reached.</para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the string has been reached.</para>
         </returns>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source.</param
-        >
+          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in <paramref name="buffer" /> at which to begin writing.</param
-        >
+          />The position in <paramref name="buffer" /> at which to begin writing.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to read. If the end of the string is reached before the specified number of characters is written into the buffer, the method returns.</param
-        >
+          />The maximum number of characters to read. If the end of the string is reached before the specified number of characters is written into the buffer, the method returns.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadBlockAsync">
@@ -1058,8 +1006,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task does not complete until either the number of characters specified by the <paramref name="count" /> parameter are read, or the end of the string has been reached.</para
-          >
+            >The task does not complete until either the number of characters specified by the <paramref name="count" /> parameter are read, or the end of the string has been reached.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1068,30 +1015,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the string has been reached.</para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the string has been reached.</para>
         </returns>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source.</param
-        >
+          />When this method returns, contains the specified character array with the values between <paramref name="index" /> and (<paramref name="index" /> + <paramref name="count" /> - 1) replaced by the characters read from the current source.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in <paramref name="buffer" /> at which to begin writing.</param
-        >
+          />The position in <paramref name="buffer" /> at which to begin writing.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of characters to read. If the end of the string is reached before the specified number of characters is written into the buffer, the method returns.</param
-        >
+          />The maximum number of characters to read. If the end of the string is reached before the specified number of characters is written into the buffer, the method returns.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadLine">
@@ -1117,17 +1060,14 @@
       <Docs>
         <exception cref="T:System.ObjectDisposedException">The current reader is closed.</exception>
         <exception cref="T:System.OutOfMemoryException"
-          >There is insufficient memory to allocate a buffer for the returned string.</exception
-        >
+          >There is insufficient memory to allocate a buffer for the returned string.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see cref="M:System.IO.TextReader.ReadLine" /> method.</para
-          >
+            >This method overrides the <see cref="M:System.IO.TextReader.ReadLine" /> method.</para>
           <para>A line is defined as a sequence of characters followed by a line feed ("\n"), a carriage return ("\r"), or a carriage return immediately followed by a line feed ("\r\n"). The string that is returned does not contain the terminating carriage return or line feed. The returned value is null if the end of the string has been reached.</para>
           <para
-            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StringReader.ReadLine" /> buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see cref="T:System.IO.StringReader" />. To avoid such a situation, use the <see cref="M:System.IO.StringReader.Read" /> method and store the read characters in a preallocated buffer.</para
-          >
+            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StringReader.ReadLine" /> buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see cref="T:System.IO.StringReader" />. To avoid such a situation, use the <see cref="M:System.IO.StringReader.Read" /> method and store the read characters in a preallocated buffer.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
             <listheader>
@@ -1148,8 +1088,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1162,8 +1101,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1176,8 +1114,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1190,8 +1127,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -1250,8 +1186,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1264,8 +1199,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1309,8 +1243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the next line from the string reader, or is null if all the characters have been read.</para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains the next line from the string reader, or is null if all the characters have been read.</para>
         </returns>
       </Docs>
     </Member>
@@ -1337,16 +1270,13 @@
       <Docs>
         <exception cref="T:System.ObjectDisposedException">The current reader is closed.</exception>
         <exception cref="T:System.OutOfMemoryException"
-          >There is insufficient memory to allocate a buffer for the returned string.</exception
-        >
+          >There is insufficient memory to allocate a buffer for the returned string.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see cref="M:System.IO.TextReader.ReadToEnd" /> method.</para
-          >
+            >This method overrides the <see cref="M:System.IO.TextReader.ReadToEnd" /> method.</para>
           <para
-            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StringReader.ReadToEnd" /> buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see cref="T:System.IO.StringReader" />. To avoid such a situation, use the <see cref="M:System.IO.StringReader.Read" /> method and store the read characters in a preallocated buffer.</para
-          >
+            >If the current method throws an <see cref="T:System.OutOfMemoryException" />, the reader's position in the underlying string is advanced by the number of characters the method was able to read, but the characters already read into the internal <see cref="M:System.IO.StringReader.ReadToEnd" /> buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see cref="T:System.IO.StringReader" />. To avoid such a situation, use the <see cref="M:System.IO.StringReader.Read" /> method and store the read characters in a preallocated buffer.</para>
           <para>The following table lists examples of other typical or related I/O tasks.</para>
           <list type="table">
             <listheader>
@@ -1367,8 +1297,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1381,8 +1310,7 @@
                 <para>
                   <format type="text/html">
                     <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
-                      >[&lt;topic://cpconwritingtexttofile&gt;]</a
-                    >
+                      >[&lt;topic://cpconwritingtexttofile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1395,8 +1323,7 @@
                 <para>
                   <format type="text/html">
                     <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
-                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconreadingtextfromfile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1409,8 +1336,7 @@
                 <para>
                   <format type="text/html">
                     <a href="74423362-1721-49CB-AA0A-E04005F72A06"
-                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a
-                    >
+                      >[&lt;topic://cpconopeningappendingtologfile&gt;]</a>
                   </format>
                 </para>
                 <para>
@@ -1469,8 +1395,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1483,8 +1408,7 @@
                 <para>
                   <format type="text/html">
                     <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
-                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
-                    >
+                      >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a>
                   </format>
                 </para>
               </description>
@@ -1528,8 +1452,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains a string with the characters from the current position to the end of the string. </para
-          >
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" /> parameter contains a string with the characters from the current position to the end of the string. </para>
         </returns>
       </Docs>
     </Member>

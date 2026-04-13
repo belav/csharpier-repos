@@ -61,11 +61,9 @@ class Test
   <paragraph
     >The Digit type defines the following operators: <list>
       <list_item
-        > An implicit conversion operator from Digit to <keyword>byte</keyword>. </list_item
-      >
+        > An implicit conversion operator from Digit to <keyword>byte</keyword>. </list_item>
       <list_item
-        > An explicit conversion operator from <keyword>byte</keyword> to Digit. </list_item
-      >
+        > An explicit conversion operator from <keyword>byte</keyword> to Digit. </list_item>
       <list_item> An addition operator that adds two Digit values and returns a Digit value. </list_item>
       <list_item> A subtraction operator that subtracts one Digit value from another, and returns a Digit value. </list_item>
       <list_item> The equality (==) and inequality (!=) operators, which compare two Digit values. </list_item>

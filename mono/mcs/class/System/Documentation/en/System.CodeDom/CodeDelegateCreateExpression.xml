@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> represents code that creates a delegate. <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> is often used with <see cref="T:System.CodeDom.CodeAttachEventStatement" /> or <see cref="T:System.CodeDom.CodeRemoveEventStatement" /> to represent an event handler to attach or remove from an event.</para
-      >
+        <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> represents code that creates a delegate. <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> is often used with <see cref="T:System.CodeDom.CodeAttachEventStatement" /> or <see cref="T:System.CodeDom.CodeRemoveEventStatement" /> to represent an event handler to attach or remove from an event.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.DelegateType" /> property specifies the type of delegate to create. The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.TargetObject" /> property indicates the object that contains the event-handler method. The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.MethodName" /> property indicates the name of the event-handler method whose method signature matches the method signature of the delegate.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.DelegateType" /> property specifies the type of delegate to create. The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.TargetObject" /> property indicates the object that contains the event-handler method. The <see cref="P:System.CodeDom.CodeDelegateCreateExpression.MethodName" /> property indicates the name of the event-handler method whose method signature matches the method signature of the delegate.</para>
       <para>In C#, a delegate creation expression is typically of the following form: new EventHandler(this.HandleEventMethod). In Visual Basic, a delegate creation expression is typically of the following form: AddressOf Me.HandleEventMethod.</para>
     </remarks>
     <summary>
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -97,30 +94,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDelegateCreateExpression" /> class.</para>
         </summary>
         <param name="delegateType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the delegate. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type of the delegate. </param>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object containing the event-handler method. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object containing the event-handler method. </param>
         <param name="methodName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event-handler method. </param
-        >
+          />The name of the event-handler method. </param>
       </Docs>
     </Member>
     <Member MemberName="DelegateType">

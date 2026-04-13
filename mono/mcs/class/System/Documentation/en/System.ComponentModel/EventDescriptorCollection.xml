@@ -35,20 +35,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.EventDescriptorCollection" /> is read-only; it does not implement methods that add or remove events. You must inherit from this class to implement these methods.</para
-      >
+        <see cref="T:System.ComponentModel.EventDescriptorCollection" /> is read-only; it does not implement methods that add or remove events. You must inherit from this class to implement these methods.</para>
       <para
-        >Using the properties available in the <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class, you can query the collection about its contents. Use the <see cref="P:System.ComponentModel.EventDescriptorCollection.Count" /> property to determine the number of elements in the collection. Use the <see cref="P:System.ComponentModel.EventDescriptorCollection.Item(System.Int32)" /> property to get a specific property by index number or by name.</para
-      >
+        >Using the properties available in the <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class, you can query the collection about its contents. Use the <see cref="P:System.ComponentModel.EventDescriptorCollection.Count" /> property to determine the number of elements in the collection. Use the <see cref="P:System.ComponentModel.EventDescriptorCollection.Item(System.Int32)" /> property to get a specific property by index number or by name.</para>
       <para
-        >You can also use the <see cref="M:System.ComponentModel.EventDescriptorCollection.Find(System.String,System.Boolean)" /> method to get a description of the event with the specified name from the collection.</para
-      >
+        >You can also use the <see cref="M:System.ComponentModel.EventDescriptorCollection.Find(System.String,System.Boolean)" /> method to get a description of the event with the specified name from the collection.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.ComponentModel.EventDescriptor" /> objects.</para
-      >
+        >Represents a collection of <see cref="T:System.ComponentModel.EventDescriptor" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -75,29 +71,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="events" /> parameter is empty, this constructor creates an empty <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class.</para
-          >
+            >If the <paramref name="events" /> parameter is empty, this constructor creates an empty <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class.</para>
           <para
             >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this member has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
               <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                >SQL Server Programming and Host Protection Attributes</a
-              >
-            </format>.</para
-          >
+                >SQL Server Programming and Host Protection Attributes</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class with the given array of <see cref="T:System.ComponentModel.EventDescriptor" /> objects.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class with the given array of <see cref="T:System.ComponentModel.EventDescriptor" /> objects.</para>
         </summary>
         <param name="events">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection. </param
-        >
+          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -122,38 +113,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="events" /> parameter is empty, this constructor creates an empty <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class.</para
-          >
+            >If the <paramref name="events" /> parameter is empty, this constructor creates an empty <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class.</para>
           <block subset="none" type="note">
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class with the given array of <see cref="T:System.ComponentModel.EventDescriptor" /> objects. The collection is optionally read-only.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.EventDescriptorCollection" /> class with the given array of <see cref="T:System.ComponentModel.EventDescriptor" /> objects. The collection is optionally read-only.</para>
         </summary>
         <param name="events">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection. </param
-        >
+          />An array of type <see cref="T:System.ComponentModel.EventDescriptor" /> that provides the events for this collection. </param>
         <param name="readOnly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to specify a read-only collection; otherwise, false.</param
-        >
+          />true to specify a read-only collection; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -184,31 +169,26 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see cref="T:System.ComponentModel.EventDescriptor" /> to the end of the collection.</para
-          >
+            >Adds an <see cref="T:System.ComponentModel.EventDescriptor" /> to the end of the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The position of the <see cref="T:System.ComponentModel.EventDescriptor" /> within the collection.</para
-          >
+            >The position of the <see cref="T:System.ComponentModel.EventDescriptor" /> within the collection.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to add to the collection. </param
-        >
+          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to add to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -234,10 +214,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -274,31 +252,26 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the collection contains the given <see cref="T:System.ComponentModel.EventDescriptor" />.</para
-          >
+            >Returns whether the collection contains the given <see cref="T:System.ComponentModel.EventDescriptor" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains the <paramref name="value" /> parameter given; otherwise, false.</para
-          >
+            >true if the collection contains the <paramref name="value" /> parameter given; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -318,16 +291,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ComponentModel.EventDescriptorCollection.Count" /> property can be used to set the limits of a loop that iterates through a collection of objects. If the collection is zero-based, be sure to use Count - 1 as the upper boundary of the loop.</para
-          >
+            >The <see cref="P:System.ComponentModel.EventDescriptorCollection.Count" /> property can be used to set the limits of a loop that iterates through a collection of objects. If the collection is zero-based, be sure to use Count - 1 as the upper boundary of the loop.</para>
           <block subset="none" type="note">
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -392,10 +362,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -405,23 +373,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.EventDescriptor" /> with the specified name, or null if the event does not exist.</para
-          >
+            >The <see cref="T:System.ComponentModel.EventDescriptor" /> with the specified name, or null if the event does not exist.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to get from the collection. </param
-        >
+          />The name of the event to get from the collection. </param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if you want to ignore the case of the event; otherwise, false. </param
-        >
+          />true if you want to ignore the case of the event; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -450,23 +415,19 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator for this <see cref="T:System.ComponentModel.EventDescriptorCollection" />.</para
-          >
+            >Gets an enumerator for this <see cref="T:System.ComponentModel.EventDescriptorCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator that implements <see cref="T:System.Collections.IEnumerator" />.</para
-          >
+            >An enumerator that implements <see cref="T:System.Collections.IEnumerator" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -498,31 +459,26 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the given <see cref="T:System.ComponentModel.EventDescriptor" />.</para
-          >
+            >Returns the index of the given <see cref="T:System.ComponentModel.EventDescriptor" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the given <see cref="T:System.ComponentModel.EventDescriptor" /> within the collection.</para
-          >
+            >The index of the given <see cref="T:System.ComponentModel.EventDescriptor" /> within the collection.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to find within the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -554,32 +510,27 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see cref="T:System.ComponentModel.EventDescriptor" /> to the collection at a specified index.</para
-          >
+            >Inserts an <see cref="T:System.ComponentModel.EventDescriptor" /> to the collection at a specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index within the collection in which to insert the <paramref name="value" /> parameter. </param
-        >
+          />The index within the collection in which to insert the <paramref name="value" /> parameter. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to insert into the collection. </param
-        >
+          />An <see cref="T:System.ComponentModel.EventDescriptor" /> to insert into the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="InternalSort">
@@ -608,23 +559,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="sorter" /> parameter is null, the default sort order is used.</para
-          >
+            >If the <paramref name="sorter" /> parameter is null, the default sort order is used.</para>
           <block subset="none" type="note">
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, using the specified <see cref="T:System.Collections.IComparer" />.</para
-          >
+            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, using the specified <see cref="T:System.Collections.IComparer" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -654,17 +601,14 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />. The specified order is applied first, followed by the default sort for this collection, which is usually alphabetical.</para
-          >
+            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />. The specified order is applied first, followed by the default sort for this collection, which is usually alphabetical.</para>
         </summary>
       </Docs>
     </Member>
@@ -752,25 +696,21 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.ComponentModel.EventDescriptor" /> from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.ComponentModel.EventDescriptor" /> from the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.ComponentModel.EventDescriptor" /> to remove from the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -798,25 +738,21 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.ComponentModel.EventDescriptor" /> at the specified index from the collection.</para
-          >
+            >Removes the <see cref="T:System.ComponentModel.EventDescriptor" /> at the specified index from the collection.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.ComponentModel.EventDescriptor" /> to remove. </param
-        >
+          />The index of the <see cref="T:System.ComponentModel.EventDescriptor" /> to remove. </param>
       </Docs>
     </Member>
     <Member MemberName="Sort">
@@ -845,17 +781,14 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, using the default sort for this collection, which is usually alphabetical.</para
-          >
+            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, using the default sort for this collection, which is usually alphabetical.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -888,23 +821,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified <see cref="T:System.Collections.IComparer" /> is applied first, followed by the default sort for this collection, which is usually alphabetical.</para
-          >
+            >The specified <see cref="T:System.Collections.IComparer" /> is applied first, followed by the default sort for this collection, which is usually alphabetical.</para>
           <block subset="none" type="note">
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, using the specified <see cref="T:System.Collections.IComparer" />.</para
-          >
+            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, using the specified <see cref="T:System.Collections.IComparer" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -915,8 +844,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection. </param
-        >
+          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Sort">
@@ -949,17 +877,14 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, given a specified sort order.</para
-          >
+            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, given a specified sort order.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -994,23 +919,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specified sort order is applied first, followed by the sort using the specified <see cref="T:System.Collections.IComparer" />.</para
-          >
+            >The specified sort order is applied first, followed by the sort using the specified <see cref="T:System.Collections.IComparer" />.</para>
           <block subset="none" type="note">
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, given a specified sort order and an <see cref="T:System.Collections.IComparer" />.</para
-          >
+            >Sorts the members of this <see cref="T:System.ComponentModel.EventDescriptorCollection" />, given a specified sort order and an <see cref="T:System.Collections.IComparer" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1021,8 +942,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection. </param
-        >
+          />An <see cref="T:System.Collections.IComparer" /> to use to sort the <see cref="T:System.ComponentModel.EventDescriptor" /> objects in this collection. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">
@@ -1051,32 +971,27 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the collection to an <see cref="T:System.Array" />, starting at a particular <see cref="T:System.Array" /> index.</para
-          >
+            >Copies the elements of the collection to an <see cref="T:System.Array" />, starting at a particular <see cref="T:System.Array" /> index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from collection. The <see cref="T:System.Array" /> must have zero-based indexing.</param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from collection. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="array" /> at which copying begins.</param
-        >
+          />The zero-based index in <paramref name="array" /> at which copying begins.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.Count">
@@ -1102,10 +1017,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1140,10 +1053,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1178,10 +1089,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1216,10 +1125,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1229,8 +1136,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -1259,10 +1165,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1278,8 +1182,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to add to the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Clear">
@@ -1305,10 +1208,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1342,10 +1243,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1355,16 +1254,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Object" /> is found in the collection; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Object" /> is found in the collection; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -1392,10 +1289,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1411,8 +1306,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -1441,10 +1335,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1456,15 +1348,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which <paramref name="value" /> should be inserted.</param
-        >
+          />The zero-based index at which <paramref name="value" /> should be inserted.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to insert into the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to insert into the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -1490,10 +1380,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1525,10 +1413,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1590,10 +1476,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1605,8 +1489,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to remove from the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to remove from the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.RemoveAt">
@@ -1634,10 +1517,8 @@
             <para
               >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" /> property value: <see cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />. The <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class or <format type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
-                  >SQL Server Programming and Host Protection Attributes</a
-                >
-              </format>.</para
-            >
+                  >SQL Server Programming and Host Protection Attributes</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
@@ -1649,8 +1530,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to remove.</param
-        >
+          />The zero-based index of the item to remove.</param>
       </Docs>
     </Member>
   </Members>

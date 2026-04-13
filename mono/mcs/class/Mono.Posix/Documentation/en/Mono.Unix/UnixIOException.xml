@@ -29,8 +29,7 @@
 				contain the underlying error number that generated the exception.
 				This error number can be used to look up additional information if
 				necessary.
-			</para
-      >
+			</para>
     </remarks>
   </Docs>
   <Members>
@@ -52,8 +51,7 @@
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the last
           error generated.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -63,20 +61,17 @@
             and initializes the 
             <see cref="P:System.Exception.Message" /> property to a
             system-supplied message that describes the last error.
-          </para
-          >
+          </para>
           <para>
             The <see cref="P:System.Exception.InnerException" /> property is
             initialized to <see langword="null" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           The value returned by 
           <see cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
           is not a valid error value on this platform.
-        </exception
-        >
+        </exception>
         <altmember cref="M:System.Runtime.InteropServices.Marshal.GetLastWin32Error" />
       </Docs>
     </Member>
@@ -102,14 +97,12 @@
         <param name="errno">
           A <see cref="T:Mono.Unix.Native.Errno" /> that specifies which 
           error occurred.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the specified
           error value.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -117,19 +110,16 @@
             property to <paramref name="errno" />, and initializes the
             <see cref="P:System.Exception.Message" /> property to a
             system-supplied message that describes <paramref name="errno" />.
-          </para
-          >
+          </para>
           <para>
             The <see cref="P:System.Exception.InnerException" /> property is
             initialized to <see langword="null" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           The value <paramref name="errno" />
           is not a valid error value on this platform.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
       </Docs>
     </Member>
@@ -151,14 +141,12 @@
       <Docs>
         <param name="errno">
           A <see cref="T:System.Int32" /> that specifies which error occurred.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the
           specified error value.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -166,19 +154,16 @@
             property to <paramref name="errno" />, and initializes the
             <see cref="P:System.Exception.Message" /> property to a
             system-supplied message that describes <paramref name="errno" />.
-          </para
-          >
+          </para>
           <para>
             The <see cref="P:System.Exception.InnerException" /> property is
             initialized to <see langword="null" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           The value <paramref name="errno" />
           is not a valid error value on this platform.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
       </Docs>
     </Member>
@@ -203,14 +188,12 @@
           contents of <paramref name="message" /> is intended to be understood
           by humans.  The caller of this constructor is required to ensure
           that this string has been localized for the current system culture.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the specified
           message.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -218,13 +201,11 @@
             property to 0, and initializes the
             <see cref="P:System.Exception.Message" /> property to 
             <paramref name="message" />.
-          </para
-          >
+          </para>
           <para>
             The <see cref="P:System.Exception.InnerException" /> property is
             initialized to <see langword="null" />.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -250,21 +231,18 @@
       <Docs>
         <param name="errno">
           A <see cref="T:System.Int32" /> that specifies which error occurred.
-        </param
-        >
+        </param>
         <param name="inner">
           An instance of <see cref="T:System.Exception" /> that is the cause
           of the current exception.  If <paramref name="inner" /> is 
           non-<see langword="null" />, then the current Exception was raised
           in a catch block handling <paramref name="inner" />.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the specified
           error value and nested exception.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -275,14 +253,12 @@
             and initializes the 
             <see cref="P:System.Exception.InnerException" /> property to
             <paramref name="inner" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           The value <paramref name="errno" />
           is not a valid error value on this platform.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
       </Docs>
     </Member>
@@ -305,21 +281,18 @@
       <Docs>
         <param name="errno">
           A <see cref="T:System.Int32" /> that specifies which error occurred.
-        </param
-        >
+        </param>
         <param name="inner">
           An instance of <see cref="T:System.Exception" /> that is the cause
           of the current exception.  If <paramref name="inner" /> is 
           non-<see langword="null" />, then the current Exception was raised
           in a catch block handling <paramref name="inner" />.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the
           sxpecified error value and nested exception.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -330,14 +303,12 @@
             and initializes the 
             <see cref="P:System.Exception.InnerException" /> property to
             <paramref name="inner" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:System.ArgumentOutOfRangeException">
           The value <paramref name="errno" />
           is not a valid error value on this platform.
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
       </Docs>
     </Member>
@@ -364,13 +335,11 @@
         <param name="info">
           A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
           instance.
-        </param
-        >
+        </param>
         <param name="context">
           A <see cref="System.Runtime.Serialization.StreamingContext" />
           instance.
-        </param
-        >
+        </param>
         <summary>Serialization constructor.</summary>
         <remarks>This constructor is intended to be used by the system for
           serialization purposes.</remarks>
@@ -401,21 +370,18 @@
           contents of <paramref name="message" /> is intended to be understood
           by humans.  The caller of this constructor is required to ensure
           that this string has been localized for the current system culture.
-        </param
-        >
+        </param>
         <param name="inner">
           An instance of <see cref="T:System.Exception" /> that is the cause
           of the current exception.  If <paramref name="inner" /> is 
           non-<see langword="null" />, then the current Exception was raised
           in a catch block handling <paramref name="inner" />.
-        </param
-        >
+        </param>
         <summary>
           Constructs and initializes a new instance of the 
           <see cref="T:Mono.Unix.UnixIOException" /> class using the specified
           error value and nested exception.
-        </summary
-        >
+        </summary>
         <remarks>
           <para>
             This constructor initializes the 
@@ -425,8 +391,7 @@
             <paramref name="message" />, and initializes the
             <see cref="P:System.Exception.InnerException" /> property 
             to <paramref name="inner" />.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -450,14 +415,12 @@
         <value>
           A <see cref="T:Mono.Unix.Native.Errno" /> value describing the error
           specified in the constructor.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This is the translated value of 
             <see cref="P:Mono.Unix.UnixIOException.NativeErrorCode" />.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.NativeConvert.ToErrno" />
       </Docs>
@@ -479,15 +442,13 @@
         <value>
           A <see cref="T:System.Int32" /> containing the native error value
           specified in the constructor.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The native error value and the value of 
             <see cref="P:Mono.Unix.UnixIOException.ErrorCode" /> are not going
             to be the same on all platforms.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>

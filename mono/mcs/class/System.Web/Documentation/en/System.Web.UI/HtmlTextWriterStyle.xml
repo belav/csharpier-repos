@@ -15,14 +15,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Web.UI.HtmlTextWriter" /> and <see cref="T:System.Web.UI.Html32TextWriter" /> objects use these enumeration values to register HTML strings to the proper HTML style.</para
-      >
+        <see cref="T:System.Web.UI.HtmlTextWriter" /> and <see cref="T:System.Web.UI.Html32TextWriter" /> objects use these enumeration values to register HTML strings to the proper HTML style.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the HTML styles available to an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object output stream.</para
-      >
+        >Specifies the HTML styles available to an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object output stream.</para>
     </summary>
   </Docs>
   <Members>

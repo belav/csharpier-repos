@@ -20,8 +20,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class provides access to the Data Protection API (DPAPI) available in the Windows XP and later operating systems. This is a service that is provided by the operating system and does not require additional libraries. It provides encryption for sensitive data in memory.</para>
       <para
-        >The class consists of two wrappers for the unmanaged DPAPI, <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" /> and <see cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />. These two methods can be used to encrypt and decrypt data in memory.</para
-      >
+        >The class consists of two wrappers for the unmanaged DPAPI, <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" /> and <see cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />. These two methods can be used to encrypt and decrypt data in memory.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to protect data in memory. Note that the method does not make a copy of the data, but encrypts the byte array in place. The <paramref name="userData" /> parameter must be 16 bytes in length or a multiple of 16 bytes.</para
-          >
+            >This method can be used to protect data in memory. Note that the method does not make a copy of the data, but encrypts the byte array in place. The <paramref name="userData" /> parameter must be 16 bytes in length or a multiple of 16 bytes.</para>
           <para>Support for this method is available in the Windows XP and later operating systems.</para>
         </remarks>
         <summary>
@@ -68,15 +66,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array containing data in memory to protect. The array must be a multiple of 16 bytes. </param
-        >
+          />The byte array containing data in memory to protect. The array must be a multiple of 16 bytes. </param>
         <param name="scope">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the scope of memory protection. </param
-        >
+          />One of the enumeration values that specifies the scope of memory protection. </param>
       </Docs>
     </Member>
     <Member MemberName="Unprotect">
@@ -105,30 +101,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used to unencrypt data in memory that was encrypted using the <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" /> method.</para
-          >
+            >This method can be used to unencrypt data in memory that was encrypted using the <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" /> method.</para>
           <para>Support for this method is available in the Windows XP and later operating systems.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unprotects data in memory that was protected using the <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" /> method.</para
-          >
+            >Unprotects data in memory that was protected using the <see cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" /> method.</para>
         </summary>
         <param name="encryptedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array in memory to unencrypt. </param
-        >
+          />The byte array in memory to unencrypt. </param>
         <param name="scope">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the scope of memory protection. </param
-        >
+          />One of the enumeration values that specifies the scope of memory protection. </param>
       </Docs>
     </Member>
   </Members>

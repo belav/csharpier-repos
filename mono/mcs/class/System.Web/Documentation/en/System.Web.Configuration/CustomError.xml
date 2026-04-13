@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.CustomError" /> class provides a way to programmatically access and modify the error section of a configuration file. This type is part of a group that includes the <see cref="T:System.Web.Configuration.CustomErrorCollection" />, <see cref="T:System.Web.Configuration.CustomErrorsMode" />, and <see cref="T:System.Web.Configuration.CustomErrorsSection" />.</para
-      >
+        >The <see cref="T:System.Web.Configuration.CustomError" /> class provides a way to programmatically access and modify the error section of a configuration file. This type is part of a group that includes the <see cref="T:System.Web.Configuration.CustomErrorCollection" />, <see cref="T:System.Web.Configuration.CustomErrorsMode" />, and <see cref="T:System.Web.Configuration.CustomErrorsSection" />.</para>
       <block subset="none" type="note">
         <para>When you define a custom error, ASP.NET assigns to it the standard error normally issued by the underlying service, such as IIS. For instance, if you define a custom error for the status code 404, ASP.NET will issue it anytime you refer to a non-existing .aspx page. The custom errors are only issued for those elements handled by ASP.NET. For instance, if you refer to a non-existing .htm page, IIS issues the standard 404 error. </para>
       </block>
@@ -26,8 +25,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Configures a <see cref="T:System.Web.Configuration.CustomError" /> section to map an ASP.NET error code to a custom page. This class cannot be inherited.</para
-      >
+        >Configures a <see cref="T:System.Web.Configuration.CustomError" /> section to map an ASP.NET error code to a custom page. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -46,29 +44,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.CustomError.#ctor(System.Int32,System.String)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.CustomError" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para
-          >
+            >The <see cref="M:System.Web.Configuration.CustomError.#ctor(System.Int32,System.String)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.CustomError" /> class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.CustomError" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.CustomError" /> class. </para>
         </summary>
         <param name="statusCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HTTP status code that will result in redirection to the error page.</param
-        >
+          />The HTTP status code that will result in redirection to the error page.</param>
         <param name="redirect">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL of the custom page mapped to the error code.</param
-        >
+          />The URL of the custom page mapped to the error code.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -88,8 +82,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Web.Configuration.CustomError.Equals(System.Object)" /> method compares all errors against objects that are passed to the method.</para
-          >
+            >The <see cref="M:System.Web.Configuration.CustomError.Equals(System.Object)" /> method compares all errors against objects that are passed to the method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -104,8 +97,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error to compare against.</param
-        >
+          />The error to compare against.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Web.Configuration.CustomError" /> object hash code.</para
-          >
+            >Gets the <see cref="T:System.Web.Configuration.CustomError" /> object hash code.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -175,8 +166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.CustomError.Redirect" /> property identifies the URL of the custom page associated with a specific error.</para
-          >
+            >The <see cref="P:System.Web.Configuration.CustomError.Redirect" /> property identifies the URL of the custom page associated with a specific error.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

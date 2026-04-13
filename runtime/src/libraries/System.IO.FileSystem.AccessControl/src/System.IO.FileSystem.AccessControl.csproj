@@ -8,12 +8,10 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <AllowUnsafeBlocks Condition="'$(TargetPlatformIdentifier)' == 'windows'"
-      >true</AllowUnsafeBlocks
-    >
+      >true</AllowUnsafeBlocks>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_AccessControl</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_AccessControl</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <!-- Source includes -->

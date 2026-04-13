@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the data in a SOAP request received or a SOAP response sent by an XML Web service method at a specific <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />. This class cannot be inherited.</para
-      >
+        >Represents the data in a SOAP request received or a SOAP response sent by an XML Web service method at a specific <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -38,8 +37,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Action" /> property can be accessed during any <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />.</para
-          >
+            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Action" /> property can be accessed during any <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,14 +60,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For XML Web service methods, the in parameters are available after the SOAP request in the deserialization process of the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" /> stage. If the <see cref="M:System.Web.Services.Protocols.SoapServerMessage.EnsureInStage" /> method is invoked in any other <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />, the <see cref="T:System.InvalidOperationException" /> is thrown.</para
-          >
+            >For XML Web service methods, the in parameters are available after the SOAP request in the deserialization process of the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" /> stage. If the <see cref="M:System.Web.Services.Protocols.SoapServerMessage.EnsureInStage" /> method is invoked in any other <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />, the <see cref="T:System.InvalidOperationException" /> is thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Asserts that the current <see cref="T:System.Web.Services.Protocols.SoapMessageStage" /> is a stage where in parameters are available. If not, an exception is thrown.</para
-          >
+            >Asserts that the current <see cref="T:System.Web.Services.Protocols.SoapMessageStage" /> is a stage where in parameters are available. If not, an exception is thrown.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -88,14 +84,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For XML Web service methods, the out parameters are available prior to the SOAP response serialization process in the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" /> stage. If the <see cref="M:System.Web.Services.Protocols.SoapServerMessage.EnsureOutStage" /> method is invoked in any other <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />, the <see cref="T:System.InvalidOperationException" /> is thrown.</para
-          >
+            >For XML Web service methods, the out parameters are available prior to the SOAP response serialization process in the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" /> stage. If the <see cref="M:System.Web.Services.Protocols.SoapServerMessage.EnsureOutStage" /> method is invoked in any other <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />, the <see cref="T:System.InvalidOperationException" /> is thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Asserts that the current <see cref="T:System.Web.Services.Protocols.SoapMessageStage" /> is a stage where out parameters are available. If not, an exception is thrown.</para
-          >
+            >Asserts that the current <see cref="T:System.Web.Services.Protocols.SoapMessageStage" /> is a stage where out parameters are available. If not, an exception is thrown.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -118,8 +112,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see cref="P:System.Web.Services.Protocols.SoapServerMessage.MethodInfo" /> property can be accessed during any stage, the method information is only available during <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" /> and <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />.</para
-          >
+            >Although the <see cref="P:System.Web.Services.Protocols.SoapServerMessage.MethodInfo" /> property can be accessed during any stage, the method information is only available during <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" /> and <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -143,11 +136,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> applied to an XML Web service method or XML Web service client can specify whether the XML Web service method is one way or not by setting the <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" /> property of the attribute.</para
-          >
+            >A <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" /> or <see cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" /> applied to an XML Web service method or XML Web service client can specify whether the XML Web service method is one way or not by setting the <see cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" /> property of the attribute.</para>
           <para
-            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.OneWay" /> property can be accessed during any <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />.</para
-          >
+            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.OneWay" /> property can be accessed during any <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -170,8 +161,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" /> property is an instance of the class implementing the XML Web service. If a SOAP extension knew ahead of time the type of the class, it could cast <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" /> to that type and access properties and methods of the class implementing the XML Web service. The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" /> property can be accessed during <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" /> or <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />.</para
-          >
+            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" /> property is an instance of the class implementing the XML Web service. If a SOAP extension knew ahead of time the type of the class, it could cast <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" /> to that type and access properties and methods of the class implementing the XML Web service. The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" /> property can be accessed during <see cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" /> or <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -205,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.SoapVersion" /> property is guaranteed to be valid after the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" /> stage. In the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" /> stage the property is available, but the SOAP message has not been completely processed and SOAP extensions that may alter the contents of the SOAP message have not run.</para
-          >
+            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.SoapVersion" /> property is guaranteed to be valid after the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" /> stage. In the <see cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" /> stage the property is available, but the SOAP message has not been completely processed and SOAP extensions that may alter the contents of the SOAP message have not run.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -226,8 +215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Url" /> property can be accessed during any <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />.</para
-          >
+            >The <see cref="P:System.Web.Services.Protocols.SoapServerMessage.Url" /> property can be accessed during any <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.BufferModeSettings" /> object is used to define roles for event providers such as Critical, Notification, Analysis, and Logging. Each role sets buffer mode events differently. For example, a Critical role keeps the <see cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />, <see cref="P:System.Web.Configuration.BufferModeSettings.MaxFlushSize" /> and <see cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" /> properties small, whereas an Analysis role sets those properties to higher values.</para
-      >
+        >The <see cref="T:System.Web.Configuration.BufferModeSettings" /> object is used to define roles for event providers such as Critical, Notification, Analysis, and Logging. Each role sets buffer mode events differently. For example, a Critical role keeps the <see cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />, <see cref="P:System.Web.Configuration.BufferModeSettings.MaxFlushSize" /> and <see cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" /> properties small, whereas an Analysis role sets those properties to higher values.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects. This class cannot be inherited.</para
-      >
+        >A collection of <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -42,14 +40,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> class always contains an instance of the <see cref="T:System.Web.Configuration.BufferModesCollection" /> class.</para
-          >
+            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> class always contains an instance of the <see cref="T:System.Web.Configuration.BufferModesCollection" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModesCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModesCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -73,22 +69,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object with the same name.</para
-          >
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object with the same name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object to the collection.</para
-          >
+            >Adds a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object to the collection.</para>
         </summary>
         <param name="bufferModeSettings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.BufferModeSettings" /> object to add to the collection.</param
-        >
+          />A <see cref="T:System.Web.Configuration.BufferModeSettings" /> object to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects from the collection.</para
-          >
+            >Removes all <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -166,8 +158,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Configuration.ConfigurationElement" /> object in the collection.</param
-        >
+          />A <see cref="T:System.Configuration.ConfigurationElement" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -235,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> for this <see cref="T:System.Configuration.ConfigurationElement" /> object.</para
-          >
+            >Gets the <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> for this <see cref="T:System.Configuration.ConfigurationElement" /> object.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -261,16 +251,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object from the collection.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object from the collection.</para>
         </summary>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object in the collection.</param
-        >
+          />The name of a <see cref="T:System.Web.Configuration.BufferModeSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

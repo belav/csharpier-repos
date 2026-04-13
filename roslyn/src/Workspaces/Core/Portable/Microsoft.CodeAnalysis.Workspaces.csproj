@@ -9,8 +9,7 @@
     <DefineConstants>$(DefineConstants);WORKSPACE</DefineConstants>
     <GeneratePerformanceSensitiveAttribute>true</GeneratePerformanceSensitiveAttribute>
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
-      >full</ApplyNgenOptimization
-    >
+      >full</ApplyNgenOptimization>
 
     <!-- NuGet -->
     <IsPackable>true</IsPackable>

@@ -22,8 +22,7 @@
       <para
         >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -314,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant used with the <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" /> and <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" /> fields.</para
-          >
+            >A constant used with the <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" /> and <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" /> fields.</para>
         </summary>
       </Docs>
     </Member>
@@ -339,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ID of constructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para
-          >
+            >ID of constructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para>
         </summary>
       </Docs>
     </Member>
@@ -364,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ID of destructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para
-          >
+            >ID of destructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para>
         </summary>
       </Docs>
     </Member>
@@ -395,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" /> == <see cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />, specifies the type for which this type is an alias.</para
-          >
+            >If <see cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" /> == <see cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />, specifies the type for which this type is an alias.</para>
         </summary>
       </Docs>
     </Member>
@@ -426,8 +421,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Runtime.InteropServices.TYPEKIND" /> value describing the type this information describes.</para
-          >
+            >A <see cref="T:System.Runtime.InteropServices.TYPEKIND" /> value describing the type this information describes.</para>
         </summary>
       </Docs>
     </Member>
@@ -503,8 +497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" /> value describing this information.</para
-          >
+            >A <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" /> value describing this information.</para>
         </summary>
       </Docs>
     </Member>

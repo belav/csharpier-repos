@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.InsufficientMemoryException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Insufficient memory to continue the execution of the program.</Message
-  >
+    >Insufficient memory to continue the execution of the program.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

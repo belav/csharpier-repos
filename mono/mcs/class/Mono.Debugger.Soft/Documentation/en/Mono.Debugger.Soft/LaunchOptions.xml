@@ -14,8 +14,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Options used to control <see cref="M:Mono.Debugger.Soft.VirtualMachineManager.Launch(System.String[],Mono.Debugger.Soft.LaunchOptions)" />.</summary
-    >
+      >Options used to control <see cref="M:Mono.Debugger.Soft.VirtualMachineManager.Launch(System.String[],Mono.Debugger.Soft.LaunchOptions)" />.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>

@@ -10,11 +10,9 @@
 
   <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <AutoGenerateBindingRedirects Condition="'$(AutoGenerateBindingRedirects)' == ''"
-      >true</AutoGenerateBindingRedirects
-    >
+      >true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType Condition="'$(GenerateBindingRedirectsOutputType)' == ''"
-      >true</GenerateBindingRedirectsOutputType
-    >
+      >true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
 
   <!-- Run target (F5) support. -->

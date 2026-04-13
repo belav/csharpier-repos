@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> and to create an instance of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> from an XML document that represents an RSS 2.0 item. If you have derived a class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> and want to serialize it, use the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" /> formatter.</para
-      >
+        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> and to create an instance of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> from an XML document that represents an RSS 2.0 item. If you have derived a class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> and want to serialize it, use the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" /> formatter.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A class that serializes a <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance to and from RSS 2.0 format.</para
-      >
+        >A class that serializes a <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance to and from RSS 2.0 format.</para>
     </summary>
   </Docs>
   <Members>
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -82,16 +79,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class.  </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class.  </para>
         </summary>
         <param name="itemToWrite">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to serialize.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to serialize.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -111,22 +106,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to specify a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to instantiate when a syndication item is read in.</para
-          >
+            >Use this constructor to specify a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to instantiate when a syndication item is read in.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class. </para>
         </summary>
         <param name="itemTypeToCreate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance derived from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to associate with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />.</param
-        >
+          />The instance derived from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to associate with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -150,29 +142,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="serializeExtensionsAsAtom" /> parameter is true, all elements defined in the Atom 1.0 specification that are not defined in the RSS 2.0 specification are serialized with the Atom 1.0 namespace.</para
-          >
+            >If the <paramref name="serializeExtensionsAsAtom" /> parameter is true, all elements defined in the Atom 1.0 specification that are not defined in the RSS 2.0 specification are serialized with the Atom 1.0 namespace.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> class. </para>
         </summary>
         <param name="itemToWrite">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to serialize.</param
-        >
+          />The <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> to serialize.</param>
         <param name="serializeExtensionsAsAtom">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that specifies whether to serialize elements that are defined in the Atom 1.0 specification but not in the RSS 2.0 specification. The default value is true.</param
-        >
+          />A value that specifies whether to serialize elements that are defined in the Atom 1.0 specification but not in the RSS 2.0 specification. The default value is true.</param>
       </Docs>
     </Member>
     <Member MemberName="CanRead">
@@ -199,22 +187,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether the specified <see cref="T:System.Xml.XmlReader" /> contains a valid RSS 2.0 syndication item.</para
-          >
+            >Verifies whether the specified <see cref="T:System.Xml.XmlReader" /> contains a valid RSS 2.0 syndication item.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value that specifies if the <see cref="T:System.Xml.XmlReader" /> contains a valid RSS 2.0 syndication item.</para
-          >
+            >A value that specifies if the <see cref="T:System.Xml.XmlReader" /> contains a valid RSS 2.0 syndication item.</para>
         </returns>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateItemInstance">
@@ -238,20 +223,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance is not automatically associated with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> used to create it.</para
-          >
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance is not automatically associated with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" /> used to create it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance.</para
-          >
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance.</para>
         </returns>
       </Docs>
     </Member>
@@ -271,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the syndication item associated with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />.</para
-          >
+            >Gets the type of the syndication item associated with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -297,8 +278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of this property is true. Attribute extensions are XML attributes that are not defined in the Atom 1.0 specification. This property determines whether to write these attributes during serialization. Similarly, this property determines whether to preserve attribute extensions inside the AttributeExtensions properties in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance when deserializing an RSS 2.0 item.</para
-          >
+            >The default value of this property is true. Attribute extensions are XML attributes that are not defined in the Atom 1.0 specification. This property determines whether to write these attributes during serialization. Similarly, this property determines whether to preserve attribute extensions inside the AttributeExtensions properties in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance when deserializing an RSS 2.0 item.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -321,8 +301,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of this property is true. Element extensions are XML elements that are not defined in the Atom 1.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve element extensions inside the ElementExtensions property in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance when deserializing an RSS 2.0 item.</para
-          >
+            >The default value of this property is true. Element extensions are XML elements that are not defined in the Atom 1.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve element extensions inside the ElementExtensions property in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> instance when deserializing an RSS 2.0 item.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -354,16 +333,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads an RSS 2.0 syndication item from the specified <see cref="T:System.Xml.XmlReader" /> instance.</para
-          >
+            >Reads an RSS 2.0 syndication item from the specified <see cref="T:System.Xml.XmlReader" /> instance.</para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
       </Docs>
     </Member>
     <Member MemberName="SerializeExtensionsAsAtom">
@@ -381,8 +358,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of this property is true. When this property is true, any properties in the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class that cannot be represented in the RSS 2.0 format are serialized within the Atom 1.0 namespace; otherwise these properties are not be serialized.</para
-          >
+            >The default value of this property is true. When this property is true, any properties in the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" /> class that cannot be represented in the RSS 2.0 format are serialized within the Atom 1.0 namespace; otherwise these properties are not be serialized.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -415,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" /> method.</para
-          >
+            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" /> method.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -448,16 +423,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</para
-          >
+            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" /> method.</para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" /> used to read the XML document.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" /> used to read the XML document.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
@@ -484,16 +457,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method.</para
-          >
+            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" /> method.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write XML node.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write XML node.</param>
       </Docs>
     </Member>
     <Member MemberName="Version">
@@ -542,16 +513,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> associated with the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> to the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" /> associated with the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" /> to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
       </Docs>
     </Member>
   </Members>

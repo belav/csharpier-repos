@@ -48,16 +48,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.RsaEndpointIdentity" /> class from a claim.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.RsaEndpointIdentity" /> class from a claim.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IdentityModel.Claims.Claim" />.</param
-        >
+          />The <see cref="T:System.IdentityModel.Claims.Claim" />.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -84,14 +82,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="certificate" /> is converted to an RSA claim and an endpoint identity is created by the method <see cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />.</para
-          >
+            >The <paramref name="certificate" /> is converted to an RSA claim and an endpoint identity is created by the method <see cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.RsaEndpointIdentity" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.RsaEndpointIdentity" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -112,18 +108,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The public key is converted to an RSA claim and an endpoint identity is created by the method <see cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />.</para
-          >
+            >The public key is converted to an RSA claim and an endpoint identity is created by the method <see cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.RsaEndpointIdentity" /> class from a public key.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.RsaEndpointIdentity" /> class from a public key.</para>
         </summary>
         <param name="publicKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />The public key.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The public key.</param>
       </Docs>
     </Member>
   </Members>

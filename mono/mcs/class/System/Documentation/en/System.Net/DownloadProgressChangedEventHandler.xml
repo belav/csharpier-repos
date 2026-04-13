@@ -41,15 +41,13 @@
       </para>
       <block subset="none" type="note">
         <para
-          >If the server does not send the size of the downloaded file (such as in the case of a passive FTP connection), <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> may always be zero.</para
-        >
+          >If the server does not send the size of the downloaded file (such as in the case of a passive FTP connection), <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" /> may always be zero.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see cref="E:System.Net.WebClient.DownloadProgressChanged" /> event of a <see cref="T:System.Net.WebClient" />.</para
-      >
+        >Represents the method that will handle the <see cref="E:System.Net.WebClient.DownloadProgressChanged" /> event of a <see cref="T:System.Net.WebClient" />.</para>
     </summary>
   </Docs>
 </Type>

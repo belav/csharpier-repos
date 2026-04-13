@@ -2,12 +2,10 @@
   <PropertyGroup>
     <ImportByWildcardBeforeMicrosoftCommonProps
       Condition="'$(ImportByWildcardBeforeMicrosoftCommonProps)' == ''"
-      >true</ImportByWildcardBeforeMicrosoftCommonProps
-    >
+      >true</ImportByWildcardBeforeMicrosoftCommonProps>
     <ImportByWildcardAfterMicrosoftCommonProps
       Condition="'$(ImportByWildcardAfterMicrosoftCommonProps)' == ''"
-      >true</ImportByWildcardAfterMicrosoftCommonProps
-    >
+      >true</ImportByWildcardAfterMicrosoftCommonProps>
   </PropertyGroup>
 
   <Import

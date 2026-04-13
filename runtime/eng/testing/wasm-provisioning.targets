@@ -6,18 +6,15 @@
     <ChromeChannel>stable</ChromeChannel>
 
     <ChromeOSIdentifier Condition="$([MSBuild]::IsOSPlatform('windows'))"
-      >Windows</ChromeOSIdentifier
-    >
+      >Windows</ChromeOSIdentifier>
     <ChromeOSIdentifier Condition="$([MSBuild]::IsOSPlatform('linux'))">Linux</ChromeOSIdentifier>
     <ChromeOSIdentifier Condition="'$(ChromeOSIdentifier)' == ''"
-      >unsupported-platform</ChromeOSIdentifier
-    >
+      >unsupported-platform</ChromeOSIdentifier>
 
     <!-- disable by default on unsupported platforms -->
     <InstallChromeForTests
       Condition="'$(InstallChromeForTests)' == '' and '$(ChromeOSIdentifier)' == ''"
-      >false</InstallChromeForTests
-    >
+      >false</InstallChromeForTests>
     <InstallV8ForTests Condition="'$(InstallV8ForTests)' == ''">false</InstallV8ForTests>
 
     <FirefoxDir>$(ArtifactsBinDir)firefox\</FirefoxDir>
@@ -25,8 +22,7 @@
     <_BrowserStampDir>$(ArtifactsBinDir)\</_BrowserStampDir>
 
     <WasmProvisionAfterTarget Condition="'$(WasmProvisionAfterTarget)' == ''"
-      >Build</WasmProvisionAfterTarget
-    >
+      >Build</WasmProvisionAfterTarget>
   </PropertyGroup>
 
   <Import Project="$(MSBuildThisFileDirectory)ChromeVersions.props" />

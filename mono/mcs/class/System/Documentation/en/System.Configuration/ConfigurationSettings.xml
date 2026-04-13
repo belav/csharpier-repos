@@ -26,12 +26,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Using the static methods and properties of the <see cref="T:System.Configuration.ConfigurationSettings" /> type is the recommended method for reading configuration information at runtime for versions 1.0 and 1.1 applications. </para
-      >
+        >Using the static methods and properties of the <see cref="T:System.Configuration.ConfigurationSettings" /> type is the recommended method for reading configuration information at runtime for versions 1.0 and 1.1 applications. </para>
       <block subset="none" type="note">
         <para
-          >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. For new applications you should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead. To use these two classes, you must add a reference in your project or application to the System.Configuration namespace.</para
-        >
+          >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. For new applications you should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead. To use these two classes, you must add a reference in your project or application to the System.Configuration namespace.</para>
       </block>
     </remarks>
     <summary>
@@ -65,23 +63,20 @@
       </ReturnValue>
       <Docs>
         <value
-          >a <see cref="T:System.Collections.Specialized.NameValueCollection" /> containing values of the keys contained in the &lt;appSettings&gt; element of the config file.</value
-        >
+          >a <see cref="T:System.Collections.Specialized.NameValueCollection" /> containing values of the keys contained in the &lt;appSettings&gt; element of the config file.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The appSettings section element of the configuration file contains a series of name/value pairs that your application can use for any purpose. </para>
           <para>This method is deprecated and is maintained for backward compatibility. Please use the GetSection method instead.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. You should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead.</para
-            >
+              >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. You should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a read-only <see cref="T:System.Collections.Specialized.NameValueCollection" /> of the application settings section of the configuration file.</para
-          >
+            >Gets a read-only <see cref="T:System.Collections.Specialized.NameValueCollection" /> of the application settings section of the configuration file.</para>
         </summary>
       </Docs>
     </Member>
@@ -116,18 +111,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.Configuration.ConfigurationSection" /> object for the passed configuration section name and path.</para
-          >
+            >Returns the <see cref="T:System.Configuration.ConfigurationSection" /> object for the passed configuration section name and path.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Configuration.ConfigurationSection" /> object for the passed configuration section name and path.</para
-          >
+            >The <see cref="T:System.Configuration.ConfigurationSection" /> object for the passed configuration section name and path.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. You should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead.</para
-            >
+              >The <see cref="T:System.Configuration.ConfigurationSettings" /> class provides backward compatibility only. You should use the <see cref="T:System.Configuration.ConfigurationManager" /> class or <see cref="T:System.Web.Configuration.WebConfigurationManager" /> class instead.</para>
           </block>
         </returns>
         <param name="sectionName">
@@ -135,8 +127,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A configuration name and path, such as "system.net/settings".</param
-        >
+          />A configuration name and path, such as "system.net/settings".</param>
       </Docs>
     </Member>
   </Members>

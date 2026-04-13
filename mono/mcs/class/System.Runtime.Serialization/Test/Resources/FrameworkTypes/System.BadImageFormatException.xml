@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.BadImageFormatException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Format of the executable (.exe) or library (.dll) is invalid.</Message
-  >
+    >Format of the executable (.exe) or library (.dll) is invalid.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

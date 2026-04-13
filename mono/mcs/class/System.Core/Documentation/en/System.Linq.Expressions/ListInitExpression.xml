@@ -26,11 +26,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="Overload:System.Linq.Expressions.Expression.ListInit" /> factory methods to create a <see cref="T:System.Linq.Expressions.ListInitExpression" />.</para
-      >
+        >Use the <see cref="Overload:System.Linq.Expressions.Expression.ListInit" /> factory methods to create a <see cref="T:System.Linq.Expressions.ListInitExpression" />.</para>
       <para
-        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property of a <see cref="T:System.Linq.Expressions.ListInitExpression" /> is <see cref="F:System.Linq.Expressions.ExpressionType.ListInit" />.</para
-      >
+        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property of a <see cref="T:System.Linq.Expressions.ListInitExpression" /> is <see cref="F:System.Linq.Expressions.ExpressionType.ListInit" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -157,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para
-          >
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -211,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para
-          >
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
         </summary>
       </Docs>
     </Member>
@@ -254,15 +250,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.ListInitExpression.NewExpression" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.ListInitExpression.NewExpression" /> property of the result.</param>
         <param name="initializers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.ListInitExpression.Initializers" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.ListInitExpression.Initializers" /> property of the result.</param>
       </Docs>
     </Member>
   </Members>

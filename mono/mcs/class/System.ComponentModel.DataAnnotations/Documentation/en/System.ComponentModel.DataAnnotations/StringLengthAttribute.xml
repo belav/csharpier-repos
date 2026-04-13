@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET Dynamic Data enables CRUD (Create, Read, Update and Delete) operations in a data model. You can specify the minimum and maximum length of characters for each field when data is being inserted or updated. For character data types, the <see cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MinimumLength" /> and <see cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MaximumLength" /> properties identify the largest number of bytes that are required in order to store a string. </para
-      >
+        >ASP.NET Dynamic Data enables CRUD (Create, Read, Update and Delete) operations in a data model. You can specify the minimum and maximum length of characters for each field when data is being inserted or updated. For character data types, the <see cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MinimumLength" /> and <see cref="P:System.ComponentModel.DataAnnotations.StringLengthAttribute.MaximumLength" /> properties identify the largest number of bytes that are required in order to store a string. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,16 +54,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.StringLengthAttribute" /> class by using a specified maximum length.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.StringLengthAttribute" /> class by using a specified maximum length.</para>
         </summary>
         <param name="maximumLength">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum length of a string. </param
-        >
+          />The maximum length of a string. </param>
       </Docs>
     </Member>
     <Member MemberName="FormatErrorMessage">
@@ -101,8 +98,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the field that caused the validation failure.</param
-        >
+          />The name of the field that caused the validation failure.</param>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -139,8 +135,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to validate.</param
-        >
+          />The object to validate.</param>
       </Docs>
     </Member>
     <Member MemberName="MaximumLength">

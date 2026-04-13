@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Data.ReadOnlyException" /> is thrown when you invoke the following methods or properties when you are trying to change the value of a read-only column.</para
-      >
+        >The <see cref="T:System.Data.ReadOnlyException" /> is thrown when you invoke the following methods or properties when you are trying to change the value of a read-only column.</para>
       <list type="bullet">
         <item>
           <para>
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -73,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class with the specified string.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class with the specified string.</para>
         </summary>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to display when the exception is thrown. </param
-        >
+          />The string to display when the exception is thrown. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -105,23 +101,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class with serialization information.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class with serialization information.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data that is required to serialize or deserialize an object. </param
-        >
+          />The data that is required to serialize or deserialize an object. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Description of the source and destination of the specified serialized stream. </param
-        >
+          />Description of the source and destination of the specified serialized stream. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -147,16 +140,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.ReadOnlyException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception.</param
-        >
+          />The error message that explains the reason for the exception.</param>
       </Docs>
     </Member>
   </Members>

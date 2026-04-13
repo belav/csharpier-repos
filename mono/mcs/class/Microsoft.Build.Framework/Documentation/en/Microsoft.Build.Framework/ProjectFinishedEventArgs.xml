@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" /> event. </para
-      >
+        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -33,8 +32,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,37 +57,32 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" /> class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />, <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />, <see cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.ProjectFile" />, and <see cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.Succeeded" /> values.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" /> class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />, <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />, <see cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.ProjectFile" />, and <see cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.Succeeded" /> values.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The text of the event.</param
-        >
+          />The text of the event.</param>
         <param name="helpKeyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword associated with the event.</param
-        >
+          />The Help keyword associated with the event.</param>
         <param name="projectFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The project file associated with the event.</param
-        >
+          />The project file associated with the event.</param>
         <param name="succeeded">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate the build succeeded; otherwise, false.</param
-        >
+          />true to indicate the build succeeded; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

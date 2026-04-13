@@ -11,11 +11,9 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.SystemNetRequests_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemNetRequests_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <NoWarn Condition="'$(GeneratePlatformNotSupportedAssemblyMessage)' != ''"
-      >$(NoWarn);CS0809</NoWarn
-    >
+      >$(NoWarn);CS0809</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.RefreshProperties" /> defines identifiers for types of refresh methods that can be used when refreshing the view of the Properties window.</para
-      >
+        <see cref="T:System.ComponentModel.RefreshProperties" /> defines identifiers for types of refresh methods that can be used when refreshing the view of the Properties window.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

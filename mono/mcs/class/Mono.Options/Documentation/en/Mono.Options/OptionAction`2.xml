@@ -39,14 +39,12 @@
     <summary>
       A delegate that can refer to any method taking two arguments and
       returning <see cref="T:System.Void" />.
-    </summary
-    >
+    </summary>
     <remarks>
       <para>
         Use this to support <see cref="T:Mono.Options.Option" />s 
         accepting two values registered with:
-      </para
-      >
+      </para>
       <list type="bullet">
         <item>
           <term>

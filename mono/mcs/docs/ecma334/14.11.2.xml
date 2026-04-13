@@ -14,6 +14,5 @@
   </paragraph>
   <paragraph>In either of these operations, the expression given by x is only evaluated once, and the expression given by y is either not evaluated or evaluated exactly once. </paragraph>
   <paragraph
-    >For an example of a type that implements operator true and operator false, see <hyperlink>18.4.2</hyperlink>. </paragraph
-  >
+    >For an example of a type that implements operator true and operator false, see <hyperlink>18.4.2</hyperlink>. </paragraph>
 </clause>

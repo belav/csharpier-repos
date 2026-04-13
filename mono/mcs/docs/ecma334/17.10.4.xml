@@ -10,8 +10,7 @@ protected C(): base() {}
         <![CDATA[
 public C(): base() {}  
 ]]>
-      </code_example>where C is the name of the class. end note]</note
-    >
+      </code_example>where C is the name of the class. end note]</note>
   </paragraph>
   <paragraph>
     <example
@@ -32,7 +31,6 @@ class Message
    public Message(): base() {}  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
 </clause>

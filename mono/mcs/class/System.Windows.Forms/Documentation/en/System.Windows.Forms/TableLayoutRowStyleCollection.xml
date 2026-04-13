@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class represents the collection of all the styles used to describe the rows in an associated <see cref="T:System.Windows.Forms.TableLayoutPanel" />.</para
-      >
+        >The <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class represents the collection of all the styles used to describe the rows in an associated <see cref="T:System.Windows.Forms.TableLayoutPanel" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,15 +46,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Add(System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container.</para
-          >
+            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Add(System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container.</para>
           <para>The number of styles stored in a collection is limited only by available memory.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see cref="T:System.Windows.Forms.RowStyle" /> to the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</para
-          >
+            >Adds a new <see cref="T:System.Windows.Forms.RowStyle" /> to the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,8 +63,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.RowStyle" /> to add to the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.RowStyle" /> to add to the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -90,22 +86,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> contains a specific style.</para
-          >
+            >Determines whether the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> contains a specific style.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Windows.Forms.RowStyle" /> is found in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Windows.Forms.RowStyle" /> is found in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />; otherwise, false.</para>
         </returns>
         <param name="rowStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.RowStyle" /> to locate in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.RowStyle" /> to locate in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -127,28 +120,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.IndexOf(System.Windows.Forms.RowStyle)" /> method begins searching at the first element of the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> and ends either when it finds a match or it reaches the last element.</para
-          >
+            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.IndexOf(System.Windows.Forms.RowStyle)" /> method begins searching at the first element of the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> and ends either when it finds a match or it reaches the last element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</para
-          >
+            >Determines the index of a specific item in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref name="rowStyle" /> if found in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />; otherwise, -1.</para
-          >
+            >The index of <paramref name="rowStyle" /> if found in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />; otherwise, -1.</para>
         </returns>
         <param name="rowStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.RowStyle" /> to locate in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</param
-        >
+          />The <see cref="T:System.Windows.Forms.RowStyle" /> to locate in the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -171,33 +160,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Insert(System.Int32,System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container. </para
-          >
+            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Insert(System.Int32,System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container. </para>
           <para>The number of styles stored in a collection is limited only by available memory.</para>
           <para
-            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class, the elements that follow the insertion point move down to accommodate the inserted element. The indexes of the elements that are moved are also updated. </para
-          >
+            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class, the elements that follow the insertion point move down to accommodate the inserted element. The indexes of the elements that are moved are also updated. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see cref="T:System.Windows.Forms.RowStyle" /> into the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> at the specified position.</para
-          >
+            >Inserts a <see cref="T:System.Windows.Forms.RowStyle" /> into the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> at the specified position.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index at which the <see cref="T:System.Windows.Forms.RowStyle" /> should be inserted.</param
-        >
+          />The zero-based index at which the <see cref="T:System.Windows.Forms.RowStyle" /> should be inserted.</param>
         <param name="rowStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.RowStyle" /> to insert into the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />. The value can be null.</param
-        >
+          />The <see cref="T:System.Windows.Forms.RowStyle" /> to insert into the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />. The value can be null.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -241,25 +225,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Remove(System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container.</para
-          >
+            >The <see cref="M:System.Windows.Forms.TableLayoutRowStyleCollection.Remove(System.Windows.Forms.RowStyle)" /> method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" /> container.</para>
           <para
-            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class, the elements that follow the deletion point move up to occupy the vacated spot. The indexes of the elements that are moved are also updated.</para
-          >
+            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" /> class, the elements that follow the deletion point move up to occupy the vacated spot. The indexes of the elements that are moved are also updated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</para
-          >
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />.</para>
         </summary>
         <param name="rowStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.RowStyle" /> to remove from the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />. The value can be null.</param
-        >
+          />The <see cref="T:System.Windows.Forms.RowStyle" /> to remove from the <see cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />. The value can be null.</param>
       </Docs>
     </Member>
   </Members>

@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create a new <see cref="T:System.AppDomain" />, the common language runtime queries the <see cref="T:System.AppDomainManager" /> for the presence of a <see cref="T:System.Security.HostSecurityManager" />, which participates in making security decisions for the <see cref="T:System.AppDomain" />.  Host providers should implement a host security manager that inherits from the <see cref="T:System.Security.HostSecurityManager" /> class.</para
-      >
+        >When you create a new <see cref="T:System.AppDomain" />, the common language runtime queries the <see cref="T:System.AppDomainManager" /> for the presence of a <see cref="T:System.Security.HostSecurityManager" />, which participates in making security decisions for the <see cref="T:System.AppDomain" />.  Host providers should implement a host security manager that inherits from the <see cref="T:System.Security.HostSecurityManager" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.HostSecurityManager" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.HostSecurityManager" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -98,18 +96,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence for the application to be activated.</param
-        >
+          />The evidence for the application to be activated.</param>
         <param name="activatorEvidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optionally, the evidence for the activating application domain. </param
-        >
+          />Optionally, the evidence for the activating application domain. </param>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The trust context. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The trust context. </param>
       </Docs>
     </Member>
     <Member MemberName="DomainPolicy">
@@ -136,8 +131,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property can be overridden in a derived class. The base implementation always returns null.  </para>
           <para
-            >This property is called at <see cref="T:System.AppDomain" /> creation time. It allows a host to supply a policy for the current <see cref="T:System.AppDomain" />.  A policy level consists of the following:</para
-          >
+            >This property is called at <see cref="T:System.AppDomain" /> creation time. It allows a host to supply a policy for the current <see cref="T:System.AppDomain" />.  A policy level consists of the following:</para>
           <list type="bullet">
             <item>
               <para>A set of code groups organized into a single rooted tree.</para>
@@ -151,8 +145,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para
-            >
+              >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para>
           </block>
         </remarks>
         <summary>
@@ -184,11 +177,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be overridden in a derived class. The base implementation always returns <see cref="F:System.Security.HostSecurityManagerOptions.AllFlags" />.  </para
-          >
+            >This property can be overridden in a derived class. The base implementation always returns <see cref="F:System.Security.HostSecurityManagerOptions.AllFlags" />.  </para>
           <para
-            >The derived host can change the value of this property when only a subset of the <see cref="T:System.Security.HostSecurityManagerOptions" /> is of interest.  The possible subsets include none, the refused set, the policy level, and assembly evidence.  </para
-          >
+            >The derived host can change the value of this property when only a subset of the <see cref="T:System.Security.HostSecurityManagerOptions" /> is of interest.  The possible subsets include none, the refused set, the policy level, and assembly evidence.  </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -222,12 +213,10 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden in a derived class. </para>
           <para
-            >This method is called whenever an <see cref="T:System.AppDomain" /> object is created. The <paramref name="inputEvidence" /> parameter is the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the application domain.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.  </para
-          >
+            >This method is called whenever an <see cref="T:System.AppDomain" /> object is created. The <paramref name="inputEvidence" /> parameter is the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the application domain.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.  </para>
           <block subset="none" type="note">
             <para
-              >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para
-            >
+              >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para>
           </block>
         </remarks>
         <summary>
@@ -243,8 +232,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Additional evidence to add to the <see cref="T:System.AppDomain" /> evidence.</param
-        >
+          />Additional evidence to add to the <see cref="T:System.AppDomain" /> evidence.</param>
       </Docs>
     </Member>
     <Member MemberName="ProvideAssemblyEvidence">
@@ -274,12 +262,10 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method can be overridden in a derived class. </para>
           <para
-            >This method is called whenever an assembly is loaded, either implicitly or explicitly. The passed in parameters are the assembly being loaded, and the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the assembly.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.  </para
-          >
+            >This method is called whenever an assembly is loaded, either implicitly or explicitly. The passed in parameters are the assembly being loaded, and the computed evidence from the common language runtime. The host implementation can choose to extend or reduce the evidence. The return value is the evidence to be used for the assembly.  The base implementation always returns the evidence object passed in as the <paramref name="inputEvidence" /> parameter.  </para>
           <block subset="none" type="note">
             <para
-              >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para
-            >
+              >See the Notes to Inheritors for the <see cref="T:System.Security.HostSecurityManager" /> class for critical implementation information.</para>
           </block>
         </remarks>
         <summary>
@@ -295,15 +281,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The loaded assembly. </param
-        >
+          />The loaded assembly. </param>
         <param name="inputEvidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Additional evidence to add to the assembly evidence.</param
-        >
+          />Additional evidence to add to the assembly evidence.</param>
       </Docs>
     </Member>
     <Member MemberName="ResolvePolicy">
@@ -345,8 +329,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set used to evaluate policy.</param
-        >
+          />The evidence set used to evaluate policy.</param>
       </Docs>
     </Member>
   </Members>

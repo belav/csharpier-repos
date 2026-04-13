@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is intended to facilitate the use of the <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" /> and <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" /> classes.</para
-      >
+        >This class is intended to facilitate the use of the <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" /> and <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" /> classes.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The original name is returned with a scope related suffix. The suffix may include the process identity, the current <see cref="T:System.AppDomain" /> identity, or both.</para
-          >
+            >The original name is returned with a scope related suffix. The suffix may include the process identity, the current <see cref="T:System.AppDomain" /> identity, or both.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,22 +69,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource.</param
-        >
+          />The name of the resource.</param>
         <param name="from">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The scope of the resource.</param
-        >
+          />The scope of the resource.</param>
         <param name="to">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The desired resource consumption scope.</param
-        >
+          />The desired resource consumption scope.</param>
       </Docs>
     </Member>
     <Member MemberName="MakeVersionSafeName">
@@ -131,29 +126,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the resource.</param
-        >
+          />The name of the resource.</param>
         <param name="from">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The beginning of the scope range.</param
-        >
+          />The beginning of the scope range.</param>
         <param name="to">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end of the scope range.</param
-        >
+          />The end of the scope range.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the resource.</param
-        >
+          />The <see cref="T:System.Type" /> of the resource.</param>
       </Docs>
     </Member>
   </Members>

@@ -5,50 +5,41 @@
       Condition="'$(EnablePackageValidation)' == '' and
                                         '$(UsingMicrosoftDotNetSharedFrameworkSdk)' != 'true' and
                                         '$(DotNetBuildFromSource)' != 'true'"
-      >true</EnablePackageValidation
-    >
+      >true</EnablePackageValidation>
     <!-- Don't perform baseline validation if we don't have a stable prebuilt version.
          Don't attempt to restore prebuilts during source-build. -->
     <DisablePackageBaselineValidation
       Condition="'$(IsShipping)' == 'false' or
                                                  '$(SuppressFinalPackageVersion)' == 'true' or
                                                  '$(DotNetBuildFromSource)' == 'true'"
-      >true</DisablePackageBaselineValidation
-    >
+      >true</DisablePackageBaselineValidation>
     <PackageValidationBaselineVersion Condition="'$(PackageValidationBaselineVersion)' == ''"
-      >$(ApiCompatNetCoreAppBaselineVersion)</PackageValidationBaselineVersion
-    >
+      >$(ApiCompatNetCoreAppBaselineVersion)</PackageValidationBaselineVersion>
 
     <BeforePack>$(BeforePack);IncludeAnalyzersInPackage;AddNETStandardCompatErrorFileForPackaging</BeforePack>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);AddRuntimeSpecificFilesToPackage;IncludeProjectReferencesWithPackAttributeInPackage</TargetsForTfmSpecificContentInPackage>
     <!-- Don't include target platform specific dependencies, since we use the target platform to represent RIDs instead -->
     <IncludeBuildOutput
       Condition="'$(PackageUsePlatformTargeting)' != 'true' and '$(TargetPlatformIdentifier)' != '' and '$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
-      >false</IncludeBuildOutput
-    >
+      >false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking
       Condition="'$(PackageUsePlatformTargeting)' != 'true' and '$(TargetPlatformIdentifier)' != '' and '$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
-      >true</SuppressDependenciesWhenPacking
-    >
+      >true</SuppressDependenciesWhenPacking>
     <!-- Don't treat the TPM as an input to APICompat PackageValidation's reference assembly calculation. -->
     <ApiCompatIgnoreTargetPlatformMoniker Condition="'$(SuppressDependenciesWhenPacking)' == 'true'"
-      >true</ApiCompatIgnoreTargetPlatformMoniker
-    >
+      >true</ApiCompatIgnoreTargetPlatformMoniker>
     <PackageDesignerMarkerFile>$(MSBuildThisFileDirectory)useSharedDesignerContext.txt</PackageDesignerMarkerFile>
     <PackageReadmeFile Condition="'$(PackageReadmeFile)' == '' and Exists('PACKAGE.md')"
-      >PACKAGE.md</PackageReadmeFile
-    >
+      >PACKAGE.md</PackageReadmeFile>
     <!-- Non-shipping packages shouldn't incrementally serviced. -->
     <PackageUseIncrementalServicingVersion Condition="'$(IsShipping)' != 'true'"
-      >false</PackageUseIncrementalServicingVersion
-    >
+      >false</PackageUseIncrementalServicingVersion>
     <!-- Generate packages for rid specific projects or for allconfigurations during build. -->
     <!-- A package isn't generated if in servicing or in runtimelab. Intended to be overridden at project level. -->
     <IsRIDSpecificProject
       Condition="$(MSBuildProjectName.StartsWith('runtime.')) and
                                      !$(MSBuildProjectName.StartsWith('runtime.native'))"
-      >true</IsRIDSpecificProject
-    >
+      >true</IsRIDSpecificProject>
     <GeneratePackageOnBuild
       Condition="(
                                         '$(BuildAllConfigurations)' == 'true' or
@@ -59,15 +50,13 @@
                                         '$(PackageUseIncrementalServicingVersion)' != 'true'
                                        ) and
                                        '$(GitHubRepositoryName)' != 'runtimelab'"
-      >true</GeneratePackageOnBuild
-    >
+      >true</GeneratePackageOnBuild>
     <!-- When in source-build we need to generate all packages when building for all configurations even in servicing. -->
     <GeneratePackageOnBuild
       Condition="'$(GeneratePackageOnBuild)' != 'true' and
                                        '$(BuildAllConfigurations)' == 'true' and
                                        '$(DotNetBuildFromSource)' == 'true'"
-      >true</GeneratePackageOnBuild
-    >
+      >true</GeneratePackageOnBuild>
 
     <!-- During NoBuild pack invocations, skip project reference build. Necessary for the IncludeProjectReferencesWithPackAttributeInPackage target. -->
     <BuildProjectReferences Condition="'$(NoBuild)' == 'true'">false</BuildProjectReferences>
@@ -178,8 +167,7 @@
       <_packageTargetRuntime>$(TargetPlatformIdentifier.ToLowerInvariant().Replace('windows', 'win'))</_packageTargetRuntime>
       <_targetFrameworkWithoutSuffix>$(TargetFramework)</_targetFrameworkWithoutSuffix>
       <_targetFrameworkWithoutSuffix Condition="$(TargetFramework.Contains('-'))"
-        >$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_targetFrameworkWithoutSuffix
-      >
+        >$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_targetFrameworkWithoutSuffix>
     </PropertyGroup>
 
     <ItemGroup>
@@ -237,8 +225,7 @@
     <MultiTargetRoslynComponentTargetsFileIntermediatePath>$(IntermediateOutputPath)MultiTargetRoslynComponent.targets</MultiTargetRoslynComponentTargetsFileIntermediatePath>
     <IncludeMultiTargetRoslynComponentTargets
       Condition="'$(IncludeMultiTargetRoslynComponentTargets)' == ''"
-      >true</IncludeMultiTargetRoslynComponentTargets
-    >
+      >true</IncludeMultiTargetRoslynComponentTargets>
   </PropertyGroup>
 
   <!-- In packages that contain multi-target Analyzers, include a .targets file that will select the correct analyzer. -->
@@ -271,8 +258,7 @@
     <PropertyGroup>
       <_MultiTargetRoslynComponentTargetPrefix>$(PackageId.Replace('.', '_'))</_MultiTargetRoslynComponentTargetPrefix>
       <DisableSourceGeneratorPropertyName Condition="'$(DisableSourceGeneratorPropertyName)' == ''"
-        >Disable$(PackageId.Replace('.', ''))SourceGenerator</DisableSourceGeneratorPropertyName
-      >
+        >Disable$(PackageId.Replace('.', ''))SourceGenerator</DisableSourceGeneratorPropertyName>
     </PropertyGroup>
 
     <WriteLinesToFile
@@ -345,8 +331,7 @@
       <_referringTargetFramework>$(TargetFramework)</_referringTargetFramework>
       <_referringTargetFramework
         Condition="'$(PackageUsePlatformTargeting)' != 'true' and $(TargetFramework.Contains('-'))"
-        >$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_referringTargetFramework
-      >
+        >$(TargetFramework.SubString(0, $(TargetFramework.IndexOf('-'))))</_referringTargetFramework>
     </PropertyGroup>
 
     <ItemGroup>

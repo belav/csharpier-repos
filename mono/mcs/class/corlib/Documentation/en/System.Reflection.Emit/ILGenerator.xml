@@ -40,8 +40,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Reflection.Emit.ILGenerator" /> is used to generate method bodies for methods and constructors in dynamic assemblies (represented by the <see cref="T:System.Reflection.Emit.MethodBuilder" /> and <see cref="T:System.Reflection.Emit.ConstructorBuilder" /> classes) and for standalone dynamic methods (represented by the <see cref="T:System.Reflection.Emit.DynamicMethod" /> class). To obtain an <see cref="T:System.Reflection.Emit.ILGenerator" />, use the <see cref="M:System.Reflection.Emit.ConstructorBuilder.GetILGenerator" />, <see cref="M:System.Reflection.Emit.DynamicMethod.GetILGenerator" />, and <see cref="M:System.Reflection.Emit.MethodBuilder.GetILGenerator" /> methods.</para
-      >
+        <see cref="T:System.Reflection.Emit.ILGenerator" /> is used to generate method bodies for methods and constructors in dynamic assemblies (represented by the <see cref="T:System.Reflection.Emit.MethodBuilder" /> and <see cref="T:System.Reflection.Emit.ConstructorBuilder" /> classes) and for standalone dynamic methods (represented by the <see cref="T:System.Reflection.Emit.DynamicMethod" /> class). To obtain an <see cref="T:System.Reflection.Emit.ILGenerator" />, use the <see cref="M:System.Reflection.Emit.ConstructorBuilder.GetILGenerator" />, <see cref="M:System.Reflection.Emit.DynamicMethod.GetILGenerator" />, and <see cref="M:System.Reflection.Emit.MethodBuilder.GetILGenerator" /> methods.</para>
       <para>MSIL is used as input to a just-in-time (JIT) compiler.</para>
     </remarks>
     <summary>
@@ -88,8 +87,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> object that represents the exception. </param
-        >
+          />The <see cref="T:System.Type" /> object that represents the exception. </param>
       </Docs>
     </Member>
     <Member MemberName="BeginExceptFilterBlock">
@@ -113,8 +111,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Emits a branch instruction to the end of the current exception block.</para>
           <para
-            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, emitting filtered exception blocks is not supported. <see cref="T:System.Reflection.Emit.DynamicILInfo" /> can be used to construct a dynamic method that uses filtered exception blocks.</para
-          >
+            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, emitting filtered exception blocks is not supported. <see cref="T:System.Reflection.Emit.DynamicILInfo" /> can be used to construct a dynamic method that uses filtered exception blocks.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -176,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, emitting exception fault blocks is not supported. <see cref="T:System.Reflection.Emit.DynamicILInfo" /> can be used to construct a dynamic method that uses exception fault blocks.</para
-          >
+            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, emitting exception fault blocks is not supported. <see cref="T:System.Reflection.Emit.DynamicILInfo" /> can be used to construct a dynamic method that uses exception fault blocks.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -203,8 +199,7 @@
       <Parameters />
       <Docs>
         <remarks
-          >Code that was protected by the <see cref="M:System.Reflectoin.Emit.ILGenerator.BeginExceptionBlock()" /> will always execude the code following this point.</remarks
-        >
+          >Code that was protected by the <see cref="M:System.Reflectoin.Emit.ILGenerator.BeginExceptionBlock()" /> will always execude the code following this point.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Begins a finally block in the Microsoft intermediate language (MSIL) instruction stream.</para>
@@ -231,11 +226,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to emit symbolic information. Local variables declared after <see cref="M:System.Reflection.Emit.ILGenerator.BeginScope" /> are scoped until the corresponding <see cref="M:System.Reflection.Emit.ILGenerator.EndScope" /> is called.</para
-          >
+            >This method is used to emit symbolic information. Local variables declared after <see cref="M:System.Reflection.Emit.ILGenerator.BeginScope" /> are scoped until the corresponding <see cref="M:System.Reflection.Emit.ILGenerator.EndScope" /> is called.</para>
           <para
-            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, it does not support symbolic information.</para
-          >
+            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, it does not support symbolic information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,8 +262,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The local variable is created in the current lexical scope; for example, if code is being emitted in a for loop (For loop in Visual Basic), the scope of the variable is the loop.</para>
           <para
-            >A local variable created with this overload is not pinned. To create a pinned variable for use with unmanaged pointers, use the <see cref="M:System.Reflection.Emit.ILGenerator.DeclareLocal(System.Type,System.Boolean)" /> method overload.</para
-          >
+            >A local variable created with this overload is not pinned. To create a pinned variable for use with unmanaged pointers, use the <see cref="M:System.Reflection.Emit.ILGenerator.DeclareLocal(System.Type,System.Boolean)" /> method overload.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -285,8 +277,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that represents the type of the local variable. </param
-        >
+          />A <see cref="T:System.Type" /> object that represents the type of the local variable. </param>
       </Docs>
     </Member>
     <Member MemberName="DeclareLocal">
@@ -324,23 +315,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.Emit.LocalBuilder" /> object that represents the local variable.</para
-          >
+            >A <see cref="T:System.Reflection.Emit.LocalBuilder" /> object that represents the local variable.</para>
         </returns>
         <param name="localType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that represents the type of the local variable.</param
-        >
+          />A <see cref="T:System.Type" /> object that represents the type of the local variable.</param>
         <param name="pinned">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to pin the object in memory; otherwise, false.</param
-        >
+          />true to pin the object in memory; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="DefineLabel">
@@ -366,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the position of the label within the stream, you must call <see cref="M:System.Reflection.Emit.ILGenerator.MarkLabel(System.Reflection.Emit.Label)" />.</para
-          >
+            >To set the position of the label within the stream, you must call <see cref="M:System.Reflection.Emit.ILGenerator.MarkLabel(System.Reflection.Emit.Label)" />.</para>
           <para>This is just a token and does not yet represent any particular location within the stream.</para>
         </remarks>
         <summary>
@@ -405,11 +392,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref name="opcode" /> parameter requires an argument, the caller must ensure that the argument length matches the length of the declared parameter. Otherwise, results will be unpredictable. For example, if the Emit instruction requires a 2-byte operand and the caller supplies a 4-byte operand, the runtime will emit two additional bytes to the instruction stream. These extra bytes will be <see cref="F:System.Reflection.Emit.OpCodes.Nop" /> instructions.</para
-          >
+            >If the <paramref name="opcode" /> parameter requires an argument, the caller must ensure that the argument length matches the length of the declared parameter. Otherwise, results will be unpredictable. For example, if the Emit instruction requires a 2-byte operand and the caller supplies a 4-byte operand, the runtime will emit two additional bytes to the instruction stream. These extra bytes will be <see cref="F:System.Reflection.Emit.OpCodes.Nop" /> instructions.</para>
           <para
-            >The instruction values are defined in <see cref="T:System.Reflection.Emit.OpCodes" />.</para
-          >
+            >The instruction values are defined in <see cref="T:System.Reflection.Emit.OpCodes" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -420,8 +405,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Microsoft Intermediate Language (MSIL) instruction to be put onto the stream. </param
-        >
+          />The Microsoft Intermediate Language (MSIL) instruction to be put onto the stream. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -460,15 +444,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The character argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -507,15 +489,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. Defined in the OpCodes enumeration. </param
-        >
+          />The MSIL instruction to be put onto the stream. Defined in the OpCodes enumeration. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numerical argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The numerical argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -554,15 +534,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Int argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The Int argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -601,15 +579,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numerical argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The numerical argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -648,15 +624,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The numerical argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The numerical argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -691,8 +665,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The instruction values are defined in the OpCodes enumeration.</para>
           <para
-            >The location of <paramref name="con" /> is recorded so that the instruction stream can be patched if necessary when persisting the module to a portable executable (PE) file.</para
-          >
+            >The location of <paramref name="con" /> is recorded so that the instruction stream can be patched if necessary when persisting the module to a portable executable (PE) file.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -703,15 +676,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="con">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A ConstructorInfo representing a constructor. </param
-        >
+          />A ConstructorInfo representing a constructor. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -741,8 +712,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The instruction values are defined in the OpCodes enumeration.</para>
           <para
-            >Labels are created using <see cref="M:System.Reflection.Emit.ILGenerator.DefineLabel" />, and their location within the stream is fixed by using <see cref="M:System.Reflection.Emit.ILGenerator.MarkLabel(System.Reflection.Emit.Label)" />. If a single-byte instruction is used, the label can represent a jump of at most 127 bytes along the stream. <paramref name="opcode" /> must represent a branch instruction. Because branches are relative instructions, <paramref name="label" /> will be replaced with the correct offset to branch during the fixup process.</para
-          >
+            >Labels are created using <see cref="M:System.Reflection.Emit.ILGenerator.DefineLabel" />, and their location within the stream is fixed by using <see cref="M:System.Reflection.Emit.ILGenerator.MarkLabel(System.Reflection.Emit.Label)" />. If a single-byte instruction is used, the label can represent a jump of at most 127 bytes along the stream. <paramref name="opcode" /> must represent a branch instruction. Because branches are relative instructions, <paramref name="label" /> will be replaced with the correct offset to branch during the fixup process.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -753,15 +723,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="label">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The label to which to branch from this location. </param
-        >
+          />The label to which to branch from this location. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -792,8 +760,7 @@
           <para>Emits a switch table.</para>
           <para>The instruction values are defined in the OpCodes enumeration.</para>
           <para
-            >Labels are created using <see cref="M:System.Reflection.Emit.ILGenerator.DefineLabel" /> and their location within the stream is fixed by using <see cref="M:System.Reflection.Emit.ILGenerator.MarkLabel(System.Reflection.Emit.Label)" />. If a single-byte instruction is used, the label can represent a jump of at most 127 bytes along the stream. <paramref name="opcode" /> must represent a branch instruction. Because branches are relative instructions, <paramref name="label" /> will be replaced with the correct offset to branch during the fixup process.</para
-          >
+            >Labels are created using <see cref="M:System.Reflection.Emit.ILGenerator.DefineLabel" /> and their location within the stream is fixed by using <see cref="M:System.Reflection.Emit.ILGenerator.MarkLabel(System.Reflection.Emit.Label)" />. If a single-byte instruction is used, the label can represent a jump of at most 127 bytes along the stream. <paramref name="opcode" /> must represent a branch instruction. Because branches are relative instructions, <paramref name="label" /> will be replaced with the correct offset to branch during the fixup process.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -804,15 +771,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="labels">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of label objects to which to branch from this location. All of the labels will be used. </param
-        >
+          />The array of label objects to which to branch from this location. All of the labels will be used. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -851,11 +816,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="local">
-          <attribution license="cc4" from="Microsoft" modified="false" />A local variable. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A local variable. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -894,15 +857,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="signature">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A helper for constructing a signature token. </param
-        >
+          />A helper for constructing a signature token. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -931,8 +892,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The instruction values are defined in the OpCodes enumeration. The location of <paramref name="field" /> is recorded so that the instruction stream can be patched if necessary when persisting the module to a portable executable (PE) file.</para
-          >
+            >The instruction values are defined in the OpCodes enumeration. The location of <paramref name="field" /> is recorded so that the instruction stream can be patched if necessary when persisting the module to a portable executable (PE) file.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -943,15 +903,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="field">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A FieldInfo representing a field. </param
-        >
+          />A FieldInfo representing a field. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -981,11 +939,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The instruction values are defined in the OpCodes enumeration.</para>
           <para
-            >The location of <paramref name="meth" /> is recorded so that the instruction stream can be patched if necessary when persisting the module to a portable executable (PE) file.</para
-          >
+            >The location of <paramref name="meth" /> is recorded so that the instruction stream can be patched if necessary when persisting the module to a portable executable (PE) file.</para>
           <para
-            >If <paramref name="meth" /> represents a generic method, it must be a generic method definition. That is, its <see cref="P:System.Reflection.MethodInfo.IsGenericMethodDefinition" /> property must be true.</para
-          >
+            >If <paramref name="meth" /> represents a generic method, it must be a generic method definition. That is, its <see cref="P:System.Reflection.MethodInfo.IsGenericMethodDefinition" /> property must be true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -996,15 +952,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="meth">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A MethodInfo representing a method. </param
-        >
+          />A MethodInfo representing a method. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1048,15 +1002,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The character argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1095,15 +1047,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream. </param>
         <param name="arg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Single argument pushed onto the stream immediately after the instruction. </param
-        >
+          />The Single argument pushed onto the stream immediately after the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1132,8 +1082,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The instruction values are defined in the OpCodes enumeration. The location of <paramref name="str" /> is recorded for future fixups if the module is persisted to a portable executable (PE) file.</para
-          >
+            >The instruction values are defined in the OpCodes enumeration. The location of <paramref name="str" /> is recorded for future fixups if the module is persisted to a portable executable (PE) file.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1144,15 +1093,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. </param>
         <param name="str">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The String to be emitted. </param
-        >
+          />The String to be emitted. </param>
       </Docs>
     </Member>
     <Member MemberName="Emit">
@@ -1181,8 +1128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The instruction values are defined in the OpCodes enumeration. The location of <paramref name="cls" /> is recorded so that the token can be patched if necessary when persisting the module to a portable executable (PE) file.</para
-          >
+            >The instruction values are defined in the OpCodes enumeration. The location of <paramref name="cls" /> is recorded so that the token can be patched if necessary when persisting the module to a portable executable (PE) file.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1193,11 +1139,9 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be put onto the stream. </param
-        >
+          />The MSIL instruction to be put onto the stream. </param>
         <param name="cls">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Type. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A Type. </param>
       </Docs>
     </Member>
     <Member MemberName="EmitCall">
@@ -1227,17 +1171,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method is used to emit calls to varargs methods because there is no overload of the <see cref="Overload:System.Reflection.Emit.ILGenerator.Emit" /> method that specifies the parameter types of the variable arguments.</para
-          >
+            >The <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method is used to emit calls to varargs methods because there is no overload of the <see cref="Overload:System.Reflection.Emit.ILGenerator.Emit" /> method that specifies the parameter types of the variable arguments.</para>
           <para
-            >To emit calls to methods that do not use the <see cref="F:System.Reflection.CallingConventions.VarArgs" /> calling convention, use the <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo)" /> method overload. </para
-          >
+            >To emit calls to methods that do not use the <see cref="F:System.Reflection.CallingConventions.VarArgs" /> calling convention, use the <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo)" /> method overload. </para>
           <format type="text/html">
             <h2>Version Information</h2>
           </format>
           <para
-            >Beginning with the .NET Framework version 2.0, the <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method does not throw an exception when optional parameter types are specified for a method that is not varargs. <see cref="T:System.InvalidProgramException" /> is thrown when the call is executed. </para
-          >
+            >Beginning with the .NET Framework version 2.0, the <see cref="M:System.Reflection.Emit.ILGenerator.EmitCall(System.Reflection.Emit.OpCode,System.Reflection.MethodInfo,System.Type[])" /> method does not throw an exception when optional parameter types are specified for a method that is not varargs. <see cref="T:System.InvalidProgramException" /> is thrown when the call is executed. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1248,22 +1189,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Call" />, <see cref="F:System.Reflection.Emit.OpCodes.Callvirt" />, or <see cref="F:System.Reflection.Emit.OpCodes.Newobj" />.</param
-        >
+          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Call" />, <see cref="F:System.Reflection.Emit.OpCodes.Callvirt" />, or <see cref="F:System.Reflection.Emit.OpCodes.Newobj" />.</param>
         <param name="methodInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The varargs method to be called. </param
-        >
+          />The varargs method to be called. </param>
         <param name="optionalParameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the optional arguments if the method is a varargs method; otherwise, null. </param
-        >
+          />The types of the optional arguments if the method is a varargs method; otherwise, null. </param>
       </Docs>
     </Member>
     <Member MemberName="EmitCalli">
@@ -1297,43 +1235,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Reflection.Emit.ILGenerator.EmitCalli(System.Reflection.Emit.OpCode,System.Reflection.CallingConventions,System.Type,System.Type[],System.Type[])" /> to put a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the stream. Do not use <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode)" />.</para
-          >
+            >Use <see cref="M:System.Reflection.Emit.ILGenerator.EmitCalli(System.Reflection.Emit.OpCode,System.Reflection.CallingConventions,System.Type,System.Type[],System.Type[])" /> to put a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the stream. Do not use <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Puts a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the Microsoft intermediate language (MSIL) stream, specifying an unmanaged calling convention for the indirect call.</para
-          >
+            >Puts a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the Microsoft intermediate language (MSIL) stream, specifying an unmanaged calling convention for the indirect call.</para>
         </summary>
         <param name="opcode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Calli" />.</param
-        >
+          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Calli" />.</param>
         <param name="unmanagedCallConv">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged calling convention to be used. </param
-        >
+          />The unmanaged calling convention to be used. </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the result. </param
-        >
+          />The <see cref="T:System.Type" /> of the result. </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the required arguments to the instruction. </param
-        >
+          />The types of the required arguments to the instruction. </param>
       </Docs>
     </Member>
     <Member MemberName="EmitCalli">
@@ -1365,53 +1297,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see cref="M:System.Reflection.Emit.ILGenerator.EmitCalli(System.Reflection.Emit.OpCode,System.Reflection.CallingConventions,System.Type,System.Type[],System.Type[])" /> to put a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the stream. Do not use <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode)" />.</para
-          >
+            >Use <see cref="M:System.Reflection.Emit.ILGenerator.EmitCalli(System.Reflection.Emit.OpCode,System.Reflection.CallingConventions,System.Type,System.Type[],System.Type[])" /> to put a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the stream. Do not use <see cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode)" />.</para>
           <para
-            >If <paramref name="optionalParameterTypes" /> specifies optional arguments, <paramref name="callingConvention" /> must include the <see cref="F:System.Reflection.CallingConventions.VarArgs" /> flag.</para
-          >
+            >If <paramref name="optionalParameterTypes" /> specifies optional arguments, <paramref name="callingConvention" /> must include the <see cref="F:System.Reflection.CallingConventions.VarArgs" /> flag.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Puts a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the Microsoft intermediate language (MSIL) stream, specifying a managed calling convention for the indirect call.</para
-          >
+            >Puts a <see cref="F:System.Reflection.Emit.OpCodes.Calli" /> instruction onto the Microsoft intermediate language (MSIL) stream, specifying a managed calling convention for the indirect call.</para>
         </summary>
         <param name="opcode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Calli" />. </param
-        >
+          />The MSIL instruction to be emitted onto the stream. Must be <see cref="F:System.Reflection.Emit.OpCodes.Calli" />. </param>
         <param name="callingConvention">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The managed calling convention to be used. </param
-        >
+          />The managed calling convention to be used. </param>
         <param name="returnType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the result. </param
-        >
+          />The <see cref="T:System.Type" /> of the result. </param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the required arguments to the instruction. </param
-        >
+          />The types of the required arguments to the instruction. </param>
         <param name="optionalParameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the optional arguments for varargs calls. </param
-        >
+          />The types of the optional arguments for varargs calls. </param>
       </Docs>
     </Member>
     <Member MemberName="EmitWriteLine">
@@ -1439,22 +1363,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of <paramref name="localBuilder" /> must match the parameter type of an overload of the <see cref="Overload:System.Console.WriteLine" /> method.</para
-          >
+            >The type of <paramref name="localBuilder" /> must match the parameter type of an overload of the <see cref="Overload:System.Console.WriteLine" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Emits the Microsoft intermediate language (MSIL) necessary to call <see cref="Overload:System.Console.WriteLine" /> with the given local variable.</para
-          >
+            >Emits the Microsoft intermediate language (MSIL) necessary to call <see cref="Overload:System.Console.WriteLine" /> with the given local variable.</para>
         </summary>
         <param name="localBuilder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local variable whose value is to be written to the console. </param
-        >
+          />The local variable whose value is to be written to the console. </param>
       </Docs>
     </Member>
     <Member MemberName="EmitWriteLine">
@@ -1482,22 +1403,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of <paramref name="fld" /> must match the parameter type of an overload of the <see cref="Overload:System.Console.WriteLine" /> method.</para
-          >
+            >The type of <paramref name="fld" /> must match the parameter type of an overload of the <see cref="Overload:System.Console.WriteLine" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Emits the Microsoft intermediate language (MSIL) necessary to call <see cref="Overload:System.Console.WriteLine" /> with the given field.</para
-          >
+            >Emits the Microsoft intermediate language (MSIL) necessary to call <see cref="Overload:System.Console.WriteLine" /> with the given field.</para>
         </summary>
         <param name="fld">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The field whose value is to be written to the console. </param
-        >
+          />The field whose value is to be written to the console. </param>
       </Docs>
     </Member>
     <Member MemberName="EmitWriteLine">
@@ -1526,16 +1444,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Emits the Microsoft intermediate language (MSIL) to call <see cref="Overload:System.Console.WriteLine" /> with a string.</para
-          >
+            >Emits the Microsoft intermediate language (MSIL) to call <see cref="Overload:System.Console.WriteLine" /> with a string.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to be printed. </param
-        >
+          />The string to be printed. </param>
       </Docs>
     </Member>
     <Member MemberName="EndExceptionBlock">
@@ -1556,8 +1472,7 @@
       <Parameters />
       <Docs>
         <remarks
-          >This terminates an exception block that was started with <see cref="M:System.Reflection.Emit.BeginExceptionBlock" />.</remarks
-        >
+          >This terminates an exception block that was started with <see cref="M:System.Reflection.Emit.BeginExceptionBlock" />.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Ends an exception block.</para>
@@ -1584,11 +1499,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to emit symbolic information. It is used with <see cref="M:System.Reflection.Emit.ILGenerator.BeginScope" />.</para
-          >
+            >This method is used to emit symbolic information. It is used with <see cref="M:System.Reflection.Emit.ILGenerator.BeginScope" />.</para>
           <para
-            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, it does not support symbolic information.</para
-          >
+            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, it does not support symbolic information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1612,15 +1525,13 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is transparent, and can be called from partially trusted code.</para>
           <para
-            >If the <see cref="P:System.Reflection.Emit.ILGenerator.ILOffset" /> property is accessed before any MSIL instructions have been emitted, it returns 0 (zero).</para
-          >
+            >If the <see cref="P:System.Reflection.Emit.ILGenerator.ILOffset" /> property is accessed before any MSIL instructions have been emitted, it returns 0 (zero).</para>
           <para>When MSIL is generated for dynamic languages, this property can be used to map offsets in the MSIL stream to source code line numbers. The resulting information can be used to provide stack traces when exceptions are thrown. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current offset, in bytes, in the Microsoft intermediate language (MSIL) stream that is being emitted by the <see cref="T:System.Reflection.Emit.ILGenerator" />.</para
-          >
+            >Gets the current offset, in bytes, in the Microsoft intermediate language (MSIL) stream that is being emitted by the <see cref="T:System.Reflection.Emit.ILGenerator" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1659,8 +1570,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The label for which to set an index. </param
-        >
+          />The label for which to set an index. </param>
       </Docs>
     </Member>
     <Member MemberName="MarkSequencePoint">
@@ -1693,11 +1603,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Line numbers are indexed from 1. Columns are indexed from 0.</para>
           <para
-            >The symbolic information normally includes at least one MSIL offset for each source line. When the just-in-time (JIT) compiler is about to compile a method, it asks the profiling services for a list of MSIL offsets that should be preserved. These MSIL offsets are called <newTerm>sequence points</newTerm>.</para
-          >
+            >The symbolic information normally includes at least one MSIL offset for each source line. When the just-in-time (JIT) compiler is about to compile a method, it asks the profiling services for a list of MSIL offsets that should be preserved. These MSIL offsets are called <newTerm>sequence points</newTerm>.</para>
           <para
-            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, it does not support symbolic information.</para
-          >
+            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, it does not support symbolic information.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1708,36 +1616,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document for which the sequence point is being defined. </param
-        >
+          />The document for which the sequence point is being defined. </param>
         <param name="startLine">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line where the sequence point begins. </param
-        >
+          />The line where the sequence point begins. </param>
         <param name="startColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the line where the sequence point begins. </param
-        >
+          />The column in the line where the sequence point begins. </param>
         <param name="endLine">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line where the sequence point ends. </param
-        >
+          />The line where the sequence point ends. </param>
         <param name="endColumn">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the line where the sequence point ends. </param
-        >
+          />The column in the line where the sequence point ends. </param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._ILGenerator.GetIDsOfNames">
@@ -1802,8 +1705,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for accessing managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para
-          >
+            >This method is for accessing managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1814,22 +1716,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type information to return.</param
-        >
+          />The type information to return.</param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The locale identifier for the type information.</param
-        >
+          />The locale identifier for the type information.</param>
         <param name="ppTInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Receives a pointer to the requested type information object.</param
-        >
+          />Receives a pointer to the requested type information object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._ILGenerator.GetTypeInfoCount">
@@ -1920,8 +1819,7 @@
       </Parameters>
       <Docs>
         <remarks
-          >This will create an instance of the exception specified by the <paramref name="excType" /> and throw that.</remarks
-        >
+          >This will create an instance of the exception specified by the <paramref name="excType" /> and throw that.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Emits an instruction to throw an exception.</para>
@@ -1931,8 +1829,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class of the type of exception to throw. </param
-        >
+          />The class of the type of exception to throw. </param>
       </Docs>
     </Member>
     <Member MemberName="UsingNamespace">
@@ -1960,8 +1857,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, this method is not supported.</para
-          >
+            >If the current <see cref="T:System.Reflection.Emit.ILGenerator" /> is associated with a <see cref="T:System.Reflection.Emit.DynamicMethod" /> object, this method is not supported.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1972,8 +1868,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to be used in evaluating locals and watches for the current active lexical scope </param
-        >
+          />The namespace to be used in evaluating locals and watches for the current active lexical scope </param>
       </Docs>
     </Member>
   </Members>

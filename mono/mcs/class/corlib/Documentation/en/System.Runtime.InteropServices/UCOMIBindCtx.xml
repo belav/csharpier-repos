@@ -187,8 +187,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to register for release. </param
-        >
+          />The object to register for release. </param>
       </Docs>
     </Member>
     <Member MemberName="RegisterObjectParam">
@@ -227,15 +226,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to register <paramref name="punk" /> with. </param
-        >
+          />The name to register <paramref name="punk" /> with. </param>
         <param name="punk">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to register. </param
-        >
+          />The object to register. </param>
       </Docs>
     </Member>
     <Member MemberName="ReleaseBoundObjects">
@@ -262,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all the objects currently registered with the bind context by <see cref="M:System.Runtime.InteropServices.UCOMIBindCtx.RegisterObjectBound(System.Object)" />.</para
-          >
+            >Releases all the objects currently registered with the bind context by <see cref="M:System.Runtime.InteropServices.UCOMIBindCtx.RegisterObjectBound(System.Object)" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -299,8 +295,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to unregister for release. </param
-        >
+          />The object to unregister for release. </param>
       </Docs>
     </Member>
     <Member MemberName="RevokeObjectParam">
@@ -335,8 +330,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key to unregister. </param
-        >
+          />The key to unregister. </param>
       </Docs>
     </Member>
     <Member MemberName="SetBindOptions">

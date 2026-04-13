@@ -15,8 +15,7 @@
 
     <!-- TargetRid names what gets built. -->
     <TargetRid Condition="'$(TargetRid)' == ''"
-      >$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)</TargetRid
-    >
+      >$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)</TargetRid>
 
     <!-- Split e.g. 'fedora.33-x64' into 'fedora.33' and 'x64'. -->
     <_targetRidPlatformIndex>$(TargetRid.LastIndexOf('-'))</_targetRidPlatformIndex>
@@ -43,25 +42,20 @@
       <!-- PackageOS and ToolsOS control the rids of prebuilts consumed by the build.
            They are set to RuntimeOS so they match with the build SDK rid. -->
       <InnerBuildArgs Condition="'$(RuntimeOS)' != ''"
-        >$(InnerBuildArgs) /p:PackageOS=$(RuntimeOS) /p:ToolsOS=$(RuntimeOS)</InnerBuildArgs
-      >
+        >$(InnerBuildArgs) /p:PackageOS=$(RuntimeOS) /p:ToolsOS=$(RuntimeOS)</InnerBuildArgs>
       <!-- BaseOS is an expected known rid in the graph that TargetRid is compatible with.
            It's used to add TargetRid in the graph if the parent can't be detected. -->
       <InnerBuildArgs>$(InnerBuildArgs) /p:AdditionalRuntimeIdentifierParent=$(BaseOS)</InnerBuildArgs>
       <!-- This prop needs to be passed to the inner build manually as the BaseInnerSourceBuildCommand gets overriden above -->
       <InnerBuildArgs>$(InnerBuildArgs) /p:ArcadeBuildFromSource=true</InnerBuildArgs>
       <InnerBuildArgs Condition="'$(OfficialBuildId)' != ''"
-        >$(InnerBuildArgs) /p:OfficialBuildId=$(OfficialBuildId)</InnerBuildArgs
-      >
+        >$(InnerBuildArgs) /p:OfficialBuildId=$(OfficialBuildId)</InnerBuildArgs>
       <InnerBuildArgs Condition="'$(ContinuousIntegrationBuild)' != ''"
-        >$(InnerBuildArgs) /p:ContinuousIntegrationBuild=$(ContinuousIntegrationBuild)</InnerBuildArgs
-      >
+        >$(InnerBuildArgs) /p:ContinuousIntegrationBuild=$(ContinuousIntegrationBuild)</InnerBuildArgs>
       <InnerBuildArgs Condition="'$(SourceBuildUseMonoRuntime)' == 'true'"
-        >$(InnerBuildArgs) --usemonoruntime</InnerBuildArgs
-      >
+        >$(InnerBuildArgs) --usemonoruntime</InnerBuildArgs>
       <InnerBuildArgs Condition="'$(PortableBuild)' != ''"
-        >$(InnerBuildArgs) /p:PortableBuild=$(PortableBuild)</InnerBuildArgs
-      >
+        >$(InnerBuildArgs) /p:PortableBuild=$(PortableBuild)</InnerBuildArgs>
     </PropertyGroup>
   </Target>
 

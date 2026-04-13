@@ -57,15 +57,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constant values that are used by the method.</param
-        >
+          />The constant values that are used by the method.</param>
         <param name="locals">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hoisted local variables from the parent context.</param
-        >
+          />The hoisted local variables from the parent context.</param>
       </Docs>
     </Member>
     <Member MemberName="Constants">

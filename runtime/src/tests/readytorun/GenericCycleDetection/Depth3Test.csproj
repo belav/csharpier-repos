@@ -3,8 +3,7 @@
     <!-- Needed for CLRTestTargetUnsupported -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <CLRTestTargetUnsupported Condition="'$(RuntimeFlavor)' != 'coreclr'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <!-- This is an explicit crossgen test -->
     <AlwaysUseCrossGen2>true</AlwaysUseCrossGen2>
     <!-- Without this flag Crossgen2 crashes after several minutes with arithmetic overflow -->

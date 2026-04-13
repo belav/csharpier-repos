@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The methods of the <see cref="T:System.Xml.Serialization.CodeIdentifier" /> class are used by the XML serialization infrastructure while producing .NET Framework types from XML element and data type definitions. XML element or attribute names typically provide the methods' input text.</para
-      >
+        >The methods of the <see cref="T:System.Xml.Serialization.CodeIdentifier" /> class are used by the XML serialization infrastructure while producing .NET Framework types from XML element and data type definitions. XML element or attribute names typically provide the methods' input text.</para>
       <para
         >You do not need to call the methods of the <see cref="T:System.Xml.Serialization.CodeIdentifier" /> class directly from your code. Instead, use the various tools and APIs provided by the .NET Framework for XML serialization, such as the <see cref="T:System.Xml.Serialization.XmlSerializer" />, or the <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
-        </format> tool.</para
-      >
+        </format> tool.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifier" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifier" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -86,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakeCamel(System.String)" /> method converts the initial character from an upper-case to lower-case letter, if necessary.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakeCamel(System.String)" /> method converts the initial character from an upper-case to lower-case letter, if necessary.</para>
           <para>You do not need to call this method directly.</para>
         </remarks>
         <summary>
@@ -103,8 +99,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a code entity, such as a method parameter, typically taken from an XML element or attribute name.</param
-        >
+          />The name of a code entity, such as a method parameter, typically taken from an XML element or attribute name.</param>
       </Docs>
     </Member>
     <Member MemberName="MakePascal">
@@ -129,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakePascal(System.String)" /> method converts the initial character from a lower-case to upper-case letter, if necessary.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakePascal(System.String)" /> method converts the initial character from a lower-case to upper-case letter, if necessary.</para>
           <para>You do not need to call this method directly.</para>
         </remarks>
         <summary>
@@ -146,8 +140,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a code entity, such as a method parameter, typically taken from an XML element or attribute name.</param
-        >
+          />The name of a code entity, such as a method parameter, typically taken from an XML element or attribute name.</param>
       </Docs>
     </Member>
     <Member MemberName="MakeValid">
@@ -172,8 +165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakeValid(System.String)" /> method removes any characters that cannot appear in a code identifier. It returns the string "Item" if no characters are valid. It prefixes the string "Item" to an input that begins with an invalid start character, for example, a digit, or a currency symbol.</para
-          >
+            >The <see cref="M:System.Xml.Serialization.CodeIdentifier.MakeValid(System.String)" /> method removes any characters that cannot appear in a code identifier. It returns the string "Item" if no characters are valid. It prefixes the string "Item" to an input that begins with an invalid start character, for example, a digit, or a currency symbol.</para>
           <para>You do not need to call this method directly.</para>
         </remarks>
         <summary>
@@ -189,8 +181,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of a code entity, such as a method parameter, typically taken from an XML element or attribute name.</param
-        >
+          />The name of a code entity, such as a method parameter, typically taken from an XML element or attribute name.</param>
       </Docs>
     </Member>
   </Members>

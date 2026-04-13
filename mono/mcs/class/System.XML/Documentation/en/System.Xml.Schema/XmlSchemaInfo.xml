@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaInfo" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaContentType" /> object that corresponds to the content type of this validated XML node.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaContentType" /> object that corresponds to the content type of this validated XML node.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" /> property does not report DTD defaults.</para
-          >
+            >The <see cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" /> property does not report DTD defaults.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -155,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" /> property is set only if the static type of the XML node is a union type in which case the <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" /> property will return the type from the union the XML node validated against.</para
-          >
+            >The <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" /> property is set only if the static type of the XML node is a union type in which case the <see cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" /> property will return the type from the union the XML node validated against.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -188,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the compiled <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object that corresponds to this validated XML node.</para
-          >
+            >Gets or sets the compiled <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> object that corresponds to this validated XML node.</para>
         </summary>
       </Docs>
     </Member>
@@ -217,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the compiled <see cref="T:System.Xml.Schema.XmlSchemaElement" /> object that corresponds to this validated XML node.</para
-          >
+            >Gets or sets the compiled <see cref="T:System.Xml.Schema.XmlSchemaElement" /> object that corresponds to this validated XML node.</para>
         </summary>
       </Docs>
     </Member>
@@ -275,14 +269,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible <see cref="T:System.Xml.Schema.XmlSchemaValidity" /> values for this XML node are <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />, <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />, and <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para
-          >
+            >The possible <see cref="T:System.Xml.Schema.XmlSchemaValidity" /> values for this XML node are <see cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />, <see cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />, and <see cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaValidity" /> value of this validated XML node.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaValidity" /> value of this validated XML node.</para>
         </summary>
       </Docs>
     </Member>

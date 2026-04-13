@@ -19,8 +19,7 @@
   </ReturnValue>
   <Docs>
     <param name="ar"
-      >A <see cref="T:System.IAsyncResult" /> object containing information about the asynchronous operation that has completed.</param
-    >
+      >A <see cref="T:System.IAsyncResult" /> object containing information about the asynchronous operation that has completed.</param>
     <summary>
       <para> References one or more methods called when an asynchronous operation completes.</para>
     </summary>

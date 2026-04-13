@@ -30,14 +30,12 @@
       <para
         >This class is used to handle the <format type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt; Element</a>
-        </format>, specifically, to allow the addition of types to the collection of known types.</para
-      >
+        </format>, specifically, to allow the addition of types to the collection of known types.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to configure XML serialization using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para
-      >
+        >Handles the XML elements used to configure XML serialization using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElementCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElementCollection" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -95,8 +92,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> to add.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> to add.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -152,8 +148,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the configuration element to search for.</param
-        >
+          />The name of the configuration element to search for.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateNewElement">
@@ -242,8 +237,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> to find.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> to find.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -331,8 +325,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> to remove.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -362,8 +355,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type name (that functions as a key) of the configuration element to remove.</param
-        >
+          />The type name (that functions as a key) of the configuration element to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
@@ -393,8 +385,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the configuration element to remove.</param
-        >
+          />The index of the configuration element to remove.</param>
       </Docs>
     </Member>
   </Members>

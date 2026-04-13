@@ -138,8 +138,7 @@
     <author>
       <first-name>Toni</first-name>
       <last-name>Bob</last-name><![CDATA[CDATA Section in Author]]><degree from="Trenton U"
-        >B.A.</degree
-      >
+        >B.A.</degree>
       <degree from="Harvard">Ph.D.</degree>
       <award>Pulizer</award>
       <publication>Still in Trenton</publication>
@@ -152,8 +151,7 @@
         >But then all nights in Trenton seem dark and
 			stormy to someone who has gone through what
 			<emph>I</emph> have.
-			</p
-      >
+			</p>
       <definition-list>
         <term>Trenton</term>
         <definition>misery</definition>

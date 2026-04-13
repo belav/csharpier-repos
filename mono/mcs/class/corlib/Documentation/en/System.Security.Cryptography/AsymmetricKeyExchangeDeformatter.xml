@@ -63,14 +63,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot create an instance of an abstract class. Application code will create a new instance of a derived class.</para>
           <para
-            >Use an implementation of <see cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> to establish the key before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />.</para
-          >
+            >Use an implementation of <see cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" /> to establish the key before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -113,8 +111,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key exchange data within which the secret information is hidden. </param
-        >
+          />The key exchange data within which the secret information is hidden. </param>
       </Docs>
     </Member>
     <Member MemberName="Parameters">
@@ -163,8 +160,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a key before calling a <see cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" /> implementation.</para
-          >
+            >You must set a key before calling a <see cref="M:System.Security.Cryptography.AsymmetricKeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" /> implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -175,8 +171,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The instance of the implementation of <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> that holds the private key. </param
-        >
+          />The instance of the implementation of <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> that holds the private key. </param>
       </Docs>
     </Member>
   </Members>

@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.ContextMarshalException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Attempted to marshal an object across a context boundary.</Message
-  >
+    >Attempted to marshal an object across a context boundary.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

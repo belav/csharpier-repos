@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used by the <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" /> property of the <see cref="T:System.ComponentModel.ListChangedEventArgs" /> class to indicate the way an <see cref="T:System.ComponentModel.IBindingList" /> object changes.</para
-      >
+        >Used by the <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" /> property of the <see cref="T:System.ComponentModel.ListChangedEventArgs" /> class to indicate the way an <see cref="T:System.ComponentModel.IBindingList" /> object changes.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item added to the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the index of the item that was added.</para
-          >
+            >An item added to the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the index of the item that was added.</para>
         </summary>
       </Docs>
     </Member>
@@ -77,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item changed in the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the index of the item that was changed.</para
-          >
+            >An item changed in the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the index of the item that was changed.</para>
         </summary>
       </Docs>
     </Member>
@@ -103,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item deleted from the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the index of the item that was deleted.</para
-          >
+            >An item deleted from the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the index of the item that was deleted.</para>
         </summary>
       </Docs>
     </Member>
@@ -129,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An item moved within the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" /> contains the previous index for the item, whereas <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the new index for the item.</para
-          >
+            >An item moved within the list. <see cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" /> contains the previous index for the item, whereas <see cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" /> contains the new index for the item.</para>
         </summary>
       </Docs>
     </Member>
@@ -155,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> was added, which changed the schema.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> was added, which changed the schema.</para>
         </summary>
       </Docs>
     </Member>
@@ -181,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> was changed, which changed the schema.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> was changed, which changed the schema.</para>
         </summary>
       </Docs>
     </Member>
@@ -207,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> was deleted, which changed the schema.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> was deleted, which changed the schema.</para>
         </summary>
       </Docs>
     </Member>

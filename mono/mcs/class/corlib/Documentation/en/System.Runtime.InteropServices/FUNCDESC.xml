@@ -246,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the size of <see cref="F:System.Runtime.InteropServices.FUNCDESC.cParams" />.</para
-          >
+            >Indicates the size of <see cref="F:System.Runtime.InteropServices.FUNCDESC.cParams" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -320,8 +319,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the offset in the VTBL for <see cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_VIRTUAL" />.</para
-          >
+            >Specifies the offset in the VTBL for <see cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_VIRTUAL" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -346,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the <see cref="T:System.Runtime.InteropServices.FUNCFLAGS" /> of a function.</para
-          >
+            >Indicates the <see cref="T:System.Runtime.InteropServices.FUNCFLAGS" /> of a function.</para>
         </summary>
       </Docs>
     </Member>

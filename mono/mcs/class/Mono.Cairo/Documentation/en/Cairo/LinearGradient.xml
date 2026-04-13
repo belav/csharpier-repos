@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Extends <see cref="T:Cairo.Gradient" /> by providing a linear gradient along the line defined by (x0, y0) and (x1, y1).  </summary
-    >
+      >Extends <see cref="T:Cairo.Gradient" /> by providing a linear gradient along the line defined by (x0, y0) and (x1, y1).  </summary>
     <remarks>
       <para>Before using the gradient pattern, a number of color stops should be defined using AddColorStop() or AddColorStopRgb().
 </para>
@@ -54,8 +53,7 @@ pat.Destroy ();
         <param name="x1">x coordinate of the end point</param>
         <param name="y1">y coordinate of the end point</param>
         <summary
-          >Create a new linear gradient <see cref="T:Cairo.Pattern" /> along the line defined by (x0, y0) and (x1, y1). </summary
-        >
+          >Create a new linear gradient <see cref="T:Cairo.Pattern" /> along the line defined by (x0, y0) and (x1, y1). </summary>
         <remarks />
       </Docs>
       <AssemblyInfo>

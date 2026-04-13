@@ -16,13 +16,11 @@
   <Interfaces />
   <Docs>
     <summary
-      >A <see cref="T:System.Net.EndPoint" /> implementation for abstract UNIX sockets as network addresses.</summary
-    >
+      >A <see cref="T:System.Net.EndPoint" /> implementation for abstract UNIX sockets as network addresses.</summary>
     <remarks>
       <para>
         This class implements abstract UNIX domain sockets as found in the Linux operating system. Unlike <see cref="T:Mono.Unix.UnixEndPoint" />, the path used to create this type of endpoint need not be a filename in the filesystem as it is just a unique string in the abstract namespace.
-      </para
-      >
+      </para>
       <example>
         <code lang="C#">
 try
@@ -36,8 +34,7 @@ catch (Exception ex)
 {
 	baseException = ex;
 	return false;
-}</code
-        >
+}</code>
       </example>
     </remarks>
   </Docs>
@@ -61,8 +58,7 @@ catch (Exception ex)
         <param name="path">a <see cref="T:System.String" /> representing the socket name.</param>
         <summary>Constructor with socketName as parameter.</summary>
         <remarks
-          >Unlike <see cref="T:Mono.Unix.UnixEndPoint" />, the path need not be a filename in the filesystem as it is just a unique string in the abstract namespace.</remarks
-        >
+          >Unlike <see cref="T:Mono.Unix.UnixEndPoint" />, the path need not be a filename in the filesystem as it is just a unique string in the abstract namespace.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddressFamily">

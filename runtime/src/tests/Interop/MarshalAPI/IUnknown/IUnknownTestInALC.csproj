@@ -5,8 +5,7 @@
     <ReferenceXUnitWrapperGenerator>false</ReferenceXUnitWrapperGenerator>
     <!-- Test unsupported outside of windows -->
     <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>
   <ItemGroup>

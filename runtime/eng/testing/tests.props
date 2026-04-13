@@ -4,8 +4,7 @@
     <TestFramework Condition="'$(TestFramework)' == ''">xunit</TestFramework>
     <!-- Implicit test build support when invoking the Test target on the project directly. -->
     <TestDependsOn Condition="'$(TestNoBuild)' != 'true' and '$(BuildAllProjects)' != 'true'"
-      >Build</TestDependsOn
-    >
+      >Build</TestDependsOn>
     <TestDependsOn>$(TestDependsOn);GenerateRunScript;RunTests</TestDependsOn>
     <VSTestNoLogo>true</VSTestNoLogo>
     <ILLinkDescriptorsPath>$(MSBuildThisFileDirectory)ILLinkDescriptors\</ILLinkDescriptorsPath>

@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract class that the indigo1 derives from <see cref="T:System.Xml.XmlReader" /> to do serialization and deserialization.</para
-      >
+        >An abstract class that the indigo1 derives from <see cref="T:System.Xml.XmlReader" /> to do serialization and deserialization.</para>
     </summary>
   </Docs>
   <Members>
@@ -99,14 +98,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -117,15 +114,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas that apply to this operation.</param
-        >
+          />The quotas that apply to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -152,14 +147,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -170,15 +163,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas that apply to this operation.</param
-        >
+          />The quotas that apply to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -206,14 +197,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -224,19 +213,16 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas that apply to this operation.</param
-        >
+          />The quotas that apply to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -265,14 +251,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -283,29 +267,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas that apply to this operation.</param
-        >
+          />The quotas that apply to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -334,14 +314,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -352,23 +330,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas that apply to this operation.</param
-        >
+          />The quotas that apply to this operation.</param>
         <param name="session">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -398,14 +372,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -416,33 +388,28 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas that apply to this operation.</param
-        >
+          />The quotas that apply to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -472,14 +439,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -490,27 +455,22 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="dictionary">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="quotas">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param
-        >
+          <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param>
         <param name="session">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param
-        >
+          <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Delegate to be called when the reader is closed.</param
-        >
+          />Delegate to be called when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -541,14 +501,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -559,43 +517,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="dictionary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param>
         <param name="session">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryReader">
@@ -627,14 +579,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para
-          >
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" /> properties are set to default values or null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can read .NET Binary XML Format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -645,50 +595,43 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="dictionary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionary" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionary" /> to use.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param>
         <param name="session">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlBinaryReaderSession" /> to use.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Delegate to be called when the reader is closed.</param
-        >
+          />Delegate to be called when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDictionaryReader">
@@ -715,8 +658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> from an existing <see cref="T:System.Xml.XmlReader" />.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> from an existing <see cref="T:System.Xml.XmlReader" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -727,8 +669,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Xml.XmlReader" />.</param
-        >
+          />An instance of <see cref="T:System.Xml.XmlReader" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -756,14 +697,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using the character encoding specified by <paramref name="encoding" />, an instance of <see cref="T:System.Text.Encoding" />.</para
-          >
+            >This method reads from a stream, using the character encoding specified by <paramref name="encoding" />, an instance of <see cref="T:System.Text.Encoding" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -774,22 +713,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encoding of the stream.</param
-        >
+          />The possible character encoding of the stream.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas to apply to this reader.</param
-        >
+          />The quotas to apply to this reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -817,14 +753,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />.</para
-          >
+            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -835,22 +769,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="encodings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encodings of the stream.</param
-        >
+          />The possible character encodings of the stream.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas to apply to this reader.</param
-        >
+          />The quotas to apply to this reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -879,14 +810,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para
-          >
+            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -897,29 +826,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="encodings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encodings of the stream.</param
-        >
+          />The possible character encodings of the stream.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Content-Type MIME type of the message.</param
-        >
+          />The Content-Type MIME type of the message.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas to apply to this reader.</param
-        >
+          />The quotas to apply to this reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -949,14 +874,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using the character encoding specified by <paramref name="encoding" />, an instance of <see cref="T:System.Text.Encoding" />.</para
-          >
+            >This method reads from a buffer with a specified offset and count, using the character encoding specified by <paramref name="encoding" />, an instance of <see cref="T:System.Text.Encoding" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -967,36 +890,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encoding of the input.</param
-        >
+          />The possible character encoding of the input.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas to apply to this reader.</param
-        >
+          />The quotas to apply to this reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -1026,14 +944,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />.</para
-          >
+            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1044,36 +960,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="encodings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encodings of the input.</param
-        >
+          />The possible character encodings of the input.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas to apply to this reader.</param
-        >
+          />The quotas to apply to this reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -1104,14 +1015,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using one of the  character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para
-          >
+            >This method reads from a buffer with a specified offset and count, using one of the  character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1122,43 +1031,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="encodings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encodings of the input.</param
-        >
+          />The possible character encodings of the input.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Content-Type MIME type of the message.</param
-        >
+          />The Content-Type MIME type of the message.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas to apply to this reader.</param
-        >
+          />The quotas to apply to this reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -1189,14 +1092,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para
-          >
+            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1207,43 +1108,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="encodings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encodings of the stream.</param
-        >
+          />The possible character encodings of the stream.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Content-Type MIME type of the message.</param
-        >
+          />The Content-Type MIME type of the message.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME type of the message.</param
-        >
+          />The MIME type of the message.</param>
         <param name="maxBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply to the reader.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply to the reader.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to be called when the reader is closed.</param
-        >
+          />The delegate to be called when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomReader">
@@ -1276,14 +1171,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para
-          >
+            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref name="encodings" />, an array of instances of <see cref="T:System.Text.Encoding" />. The message is of the specified MIME type. If <paramref name="contentType" /> is null, the Content-Type MIME header must be present in the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that reads XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1294,57 +1187,49 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="encodings">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The possible character encodings of the input.</param
-        >
+          />The possible character encodings of the input.</param>
         <param name="contentType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Content-Type MIME type of the message.</param
-        >
+          />The Content-Type MIME type of the message.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply to the reader.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply to the reader.</param>
         <param name="maxBufferSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum allowed size of the buffer.</param
-        >
+          />The maximum allowed size of the buffer.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to be called when the reader is closed.</param
-        >
+          />The delegate to be called when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextReader">
@@ -1385,15 +1270,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas applied to the reader.</param
-        >
+          />The quotas applied to the reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextReader">
@@ -1434,15 +1317,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas applied to the reader.</param
-        >
+          />The quotas applied to the reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextReader">
@@ -1485,29 +1366,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The quotas applied to the reader.</param
-        >
+          />The quotas applied to the reader.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextReader">
@@ -1550,29 +1427,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Text.Encoding" /> object that specifies the encoding properties to apply.</param
-        >
+          />The <see cref="T:System.Text.Encoding" /> object that specifies the encoding properties to apply.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to be called when the reader is closed.</param
-        >
+          />The delegate to be called when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextReader">
@@ -1617,43 +1490,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer from which to read.</param
-        >
+          />The buffer from which to read.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting position from which to read in <paramref name="buffer" />.</param
-        >
+          />The starting position from which to read in <paramref name="buffer" />.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes that can be read from <paramref name="buffer" />.</param
-        >
+          />The number of bytes that can be read from <paramref name="buffer" />.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Text.Encoding" /> object that specifies the encoding properties to apply.</param
-        >
+          />The <see cref="T:System.Text.Encoding" /> object that specifies the encoding properties to apply.</param>
         <param name="quotas">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" /> to apply.</param>
         <param name="onClose">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The delegate to be called when the reader is closed.</param
-        >
+          />The delegate to be called when the reader is closed.</param>
       </Docs>
     </Member>
     <Member MemberName="EndCanonicalization">
@@ -1713,15 +1580,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the local name of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the local name of the attribute.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the namespace of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the namespace of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOfLocalName">
@@ -1748,8 +1613,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="localNames" /> is an array of strings, and <paramref name="namespaceUri" /> is a string.</para
-          >
+            <paramref name="localNames" /> is an array of strings, and <paramref name="namespaceUri" /> is a string.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1764,15 +1628,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string array of local names to be searched.</param
-        >
+          />The string array of local names to be searched.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of current node.</param
-        >
+          />The namespace of current node.</param>
       </Docs>
     </Member>
     <Member MemberName="IndexOfLocalName">
@@ -1799,8 +1661,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="localNames" /> is an array of <see cref="T:System.Xml.XmlDictionaryString" />, and <paramref name="namespaceUri" /> is an <see cref="T:System.Xml.XmlDictionaryString" />.</para
-          >
+            <paramref name="localNames" /> is an array of <see cref="T:System.Xml.XmlDictionaryString" />, and <paramref name="namespaceUri" /> is an <see cref="T:System.Xml.XmlDictionaryString" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1815,15 +1676,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryString" /> array of local names to be searched.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryString" /> array of local names to be searched.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of current node.</param
-        >
+          />The namespace of current node.</param>
       </Docs>
     </Member>
     <Member MemberName="IsArray">
@@ -1870,22 +1729,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref name="localName" />, is the local name of the current node.</para
-          >
+            >Checks whether the parameter, <paramref name="localName" />, is the local name of the current node.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="localName" /> matches local name of the current node; otherwise false.</para
-          >
+            >true if <paramref name="localName" /> matches local name of the current node; otherwise false.</para>
         </returns>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the current node.</param
-        >
+          />The local name of the current node.</param>
       </Docs>
     </Member>
     <Member MemberName="IsLocalName">
@@ -1912,22 +1768,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref name="localName" />, is the local name of the current node.</para
-          >
+            >Checks whether the parameter, <paramref name="localName" />, is the local name of the current node.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="localName" /> matches local name of the current node; otherwise false.</para
-          >
+            >true if <paramref name="localName" /> matches local name of the current node; otherwise false.</para>
         </returns>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the local name of the current node.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the local name of the current node.</param>
       </Docs>
     </Member>
     <Member MemberName="IsNamespaceUri">
@@ -1954,22 +1807,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref name="namespaceUri" />, is the namespace of the current node.</para
-          >
+            >Checks whether the parameter, <paramref name="namespaceUri" />, is the namespace of the current node.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="namespaceUri" /> matches namespace of the current node; otherwise false.</para
-          >
+            >true if <paramref name="namespaceUri" /> matches namespace of the current node; otherwise false.</para>
         </returns>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of current node.</param
-        >
+          />The namespace of current node.</param>
       </Docs>
     </Member>
     <Member MemberName="IsNamespaceUri">
@@ -1996,22 +1846,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref name="namespaceUri" />, is the namespace of the current node.</para
-          >
+            >Checks whether the parameter, <paramref name="namespaceUri" />, is the namespace of the current node.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="namespaceUri" /> matches namespace of the current node; otherwise false.</para
-          >
+            >true if <paramref name="namespaceUri" /> matches namespace of the current node; otherwise false.</para>
         </returns>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Namespace of current node.</param
-        >
+          />Namespace of current node.</param>
       </Docs>
     </Member>
     <Member MemberName="IsStartArray">
@@ -2066,23 +1913,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the first tag in the array is a start tag or empty element tag and matches <paramref name="localName" /> and <paramref name="namespaceUri" />; otherwise false.</para
-          >
+            >true if the first tag in the array is a start tag or empty element tag and matches <paramref name="localName" /> and <paramref name="namespaceUri" />; otherwise false.</para>
         </returns>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the local name of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the local name of the attribute.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the namespace of the attribute.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryString" /> that represents the namespace of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="IsTextNode">
@@ -2113,16 +1957,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the node type is <see cref="F:System.Xml.XmlNodetype.Text" />, <see cref="F:System.Xml.XmlNodetype.Whitespace" />, <see cref="F:System.Xml.XmlNodetype.SignificantWhitespace" />, <see cref="F:System.Xml.XmlNodetype.CDATA" />, or <see cref="F:System.Xml.XmlNodetype.Attribute" />; otherwise false.</para
-          >
+            >true if the node type is <see cref="F:System.Xml.XmlNodetype.Text" />, <see cref="F:System.Xml.XmlNodetype.Whitespace" />, <see cref="F:System.Xml.XmlNodetype.SignificantWhitespace" />, <see cref="F:System.Xml.XmlNodetype.CDATA" />, or <see cref="F:System.Xml.XmlNodetype.Attribute" />; otherwise false.</para>
         </returns>
         <param name="nodeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Type of the node being tested.</param
-        >
+          />Type of the node being tested.</param>
       </Docs>
     </Member>
     <Member MemberName="MoveToStartElement">
@@ -2171,16 +2013,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.Name" /> property of the element matches the given argument.</para
-          >
+            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.Name" /> property of the element matches the given argument.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Xml.XmlReader.Name" /> property of the element.</param
-        >
+          />The <see cref="P:System.Xml.XmlReader.Name" /> property of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="MoveToStartElement">
@@ -2208,23 +2048,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.LocalName" /> and <see cref="P:System.Xml.XmlReader.NamespaceURI" /> properties of the element matches the given arguments.</para
-          >
+            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.LocalName" /> and <see cref="P:System.Xml.XmlReader.NamespaceURI" /> properties of the element matches the given arguments.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="MoveToStartElement">
@@ -2252,23 +2089,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.LocalName" /> and <see cref="P:System.Xml.XmlReader.NamespaceURI" /> properties of the element matches the given argument.</para
-          >
+            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.LocalName" /> and <see cref="P:System.Xml.XmlReader.NamespaceURI" /> properties of the element matches the given argument.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="Quotas">
@@ -2325,8 +2159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2337,29 +2170,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2391,8 +2220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.DateTime" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.DateTime" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2403,29 +2231,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2457,8 +2281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Decimal" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Decimal" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2469,29 +2292,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2523,8 +2342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Double" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Double" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2535,29 +2353,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2589,8 +2403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Guid" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Guid" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2601,29 +2414,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2665,29 +2474,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the integers are put.</param
-        >
+          />The array into which the integers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2729,29 +2534,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the integers are put.</param
-        >
+          />The array into which the integers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2793,29 +2594,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the integers are put.</param
-        >
+          />The array into which the integers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2857,29 +2654,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the float numbers are put.</param
-        >
+          />The array into which the float numbers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2911,8 +2704,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.TimeSpan" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.TimeSpan" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2923,29 +2715,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -2977,8 +2765,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2989,29 +2776,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3043,8 +2826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.DateTime" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.DateTime" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3055,29 +2837,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3109,8 +2887,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Decimal" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Decimal" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3121,29 +2898,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3175,8 +2948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Double" /> nodes type into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Double" /> nodes type into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3187,29 +2959,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3241,8 +3009,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Guid" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Guid" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3253,29 +3020,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3317,29 +3080,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the integers are put.</param
-        >
+          />The array into which the integers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3381,29 +3140,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the integers are put.</param
-        >
+          />The array into which the integers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3445,29 +3200,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the integers are put.</param
-        >
+          />The array into which the integers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3509,29 +3260,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the float numbers are put.</param
-        >
+          />The array into which the float numbers are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadArray">
@@ -3563,8 +3310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.TimeSpan" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.TimeSpan" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3575,29 +3321,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the nodes are put.</param
-        >
+          />The array into which the nodes are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadBooleanArray">
@@ -3628,29 +3370,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Boolean" /> array of the <see cref="T:System.Boolean" /> nodes.</para
-          >
+            >A <see cref="T:System.Boolean" /> array of the <see cref="T:System.Boolean" /> nodes.</para>
         </returns>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadBooleanArray">
@@ -3681,29 +3419,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para
-          >
+            >Reads repeated occurrences of <see cref="T:System.Boolean" /> nodes into a typed array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Boolean" /> array of the <see cref="T:System.Boolean" /> nodes.</para
-          >
+            >A <see cref="T:System.Boolean" /> array of the <see cref="T:System.Boolean" /> nodes.</para>
         </returns>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadContentAs">
@@ -3742,8 +3476,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of the value to be returned.</param
-        >
+          />The <see cref="T:System.Type" /> of the value to be returned.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadContentAsBase64">
@@ -3838,8 +3571,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum array length.</param
-        >
+          />The maximum array length.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadContentAsChars">
@@ -3878,22 +3610,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array into which the characters are put.</param
-        >
+          />The array into which the characters are put.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to put in the array.</param
-        >
+          />The number of characters to put in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadContentAsDecimal">
@@ -4067,8 +3796,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum string length.</param
-        >
+          />The maximum string length.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadContentAsString">
@@ -4220,15 +3948,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDateTimeArray">
@@ -4266,15 +3992,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDecimalArray">
@@ -4315,15 +4039,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDecimalArray">
@@ -4364,15 +4086,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDoubleArray">
@@ -4413,15 +4133,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadDoubleArray">
@@ -4462,15 +4180,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadElementContentAsBase64">
@@ -4663,14 +4379,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a floating point number (<see cref="T:System.Single" />).</para
-          >
+            >Converts an element's content to a floating point number (<see cref="T:System.Single" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a floating point number (<see cref="T:System.Single" />).</para
-          >
+            >The node's content represented as a floating point number (<see cref="T:System.Single" />).</para>
         </returns>
       </Docs>
     </Member>
@@ -4745,14 +4459,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a long integer (<see cref="T:System.Int64" />).</para
-          >
+            >Converts an element's content to a long integer (<see cref="T:System.Int64" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a long integer (<see cref="T:System.Int64" />).</para
-          >
+            >The node's content represented as a long integer (<see cref="T:System.Int64" />).</para>
         </returns>
       </Docs>
     </Member>
@@ -4892,16 +4604,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref name="name" /> and advances the reader to the next node.</para
-          >
+            >Checks whether the current node is an element with the given <paramref name="name" /> and advances the reader to the next node.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The qualified name of the element.</param
-        >
+          />The qualified name of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadFullStartElement">
@@ -4929,23 +4639,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> and advances the reader to the next node.</para
-          >
+            >Checks whether the current node is an element with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> and advances the reader to the next node.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadFullStartElement">
@@ -4973,23 +4680,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> and advances the reader to the next node.</para
-          >
+            >Checks whether the current node is an element with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> and advances the reader to the next node.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadGuidArray">
@@ -5020,8 +4724,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of <see cref="T:System.Guid" />.</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of <see cref="T:System.Guid" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5032,15 +4735,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadGuidArray">
@@ -5071,8 +4772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of <see cref="T:System.Guid" />.</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of <see cref="T:System.Guid" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5083,15 +4783,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt16Array">
@@ -5122,8 +4820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of short integers (<see cref="T:System.Int16" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of short integers (<see cref="T:System.Int16" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5134,15 +4831,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt16Array">
@@ -5173,8 +4868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of short integers (<see cref="T:System.Int16" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of short integers (<see cref="T:System.Int16" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5185,15 +4879,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt32Array">
@@ -5224,8 +4916,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of integers (<see cref="T:System.Int32" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of integers (<see cref="T:System.Int32" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5236,15 +4927,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt32Array">
@@ -5275,8 +4964,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of integers (<see cref="T:System.Int32" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of integers (<see cref="T:System.Int32" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5287,15 +4975,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt64Array">
@@ -5326,8 +5012,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of long integers (<see cref="T:System.Int64" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of long integers (<see cref="T:System.Int64" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5338,15 +5023,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadInt64Array">
@@ -5377,8 +5060,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of long integers (<see cref="T:System.Int64" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of long integers (<see cref="T:System.Int64" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5389,15 +5071,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadSingleArray">
@@ -5428,8 +5108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of float numbers (<see cref="T:System.Single" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of float numbers (<see cref="T:System.Single" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5440,15 +5119,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadSingleArray">
@@ -5479,8 +5156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of float numbers (<see cref="T:System.Single" />).</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into an array of float numbers (<see cref="T:System.Single" />).</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5491,15 +5167,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadStartElement">
@@ -5527,23 +5201,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> and advances the reader to the next node.</para
-          >
+            >Checks whether the current node is an element with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> and advances the reader to the next node.</para>
         </summary>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadString">
@@ -5606,8 +5277,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Maximum allowed string length.</param
-        >
+          />Maximum allowed string length.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadTimeSpanArray">
@@ -5638,8 +5308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into a <see cref="T:System.TimeSpan" /> array.</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into a <see cref="T:System.TimeSpan" /> array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5650,15 +5319,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadTimeSpanArray">
@@ -5689,8 +5356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into a <see cref="T:System.TimeSpan" /> array.</para
-          >
+            >Reads the contents of a series of nodes with the given <paramref name="localName" /> and <paramref name="namespaceUri" /> into a <see cref="T:System.TimeSpan" /> array.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5701,15 +5367,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadValueAsBase64">
@@ -5773,8 +5437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Start reading the canonical octets of the XML being read to this reader from the supplied stream until the matching EndCanonicalization call is made. The content read from the main reader stream is unaffected by this call. <paramref name="includeComments" /> defines whether comments are to be included in the canonical input and <paramref name="inclusivePrefixes" /> provides the list of prefixes to be treated as inclusive prefixes with the exclusive canonicalization algorithm.</para
-          >
+            >Start reading the canonical octets of the XML being read to this reader from the supplied stream until the matching EndCanonicalization call is made. The content read from the main reader stream is unaffected by this call. <paramref name="includeComments" /> defines whether comments are to be included in the canonical input and <paramref name="inclusivePrefixes" /> provides the list of prefixes to be treated as inclusive prefixes with the exclusive canonicalization algorithm.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -5785,22 +5448,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to read from.</param
-        >
+          />The stream to read from.</param>
         <param name="includeComments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Determines whether comments are included.</param
-        >
+          />Determines whether comments are included.</param>
         <param name="inclusivePrefixes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefixes to be included.</param
-        >
+          />The prefixes to be included.</param>
       </Docs>
     </Member>
     <Member MemberName="TryGetArrayLength">

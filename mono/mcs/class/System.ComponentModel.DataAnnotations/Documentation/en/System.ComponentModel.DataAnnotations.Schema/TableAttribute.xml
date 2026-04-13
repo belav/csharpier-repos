@@ -44,16 +44,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.TableAttribute" /> class using the specified name of the table.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.Schema.TableAttribute" /> class using the specified name of the table.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the table.</param
-        >
+          />The name of the table.</param>
       </Docs>
     </Member>
     <Member MemberName="Name">

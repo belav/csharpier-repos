@@ -7,8 +7,7 @@
     <_SampleAssembly Condition="'$(_SampleAssembly)' == ''">$(TargetFileName)</_SampleAssembly>
     <_SampleProjectName>$([System.String]::Copy('$(_SampleProject)').Replace('.csproj',''))</_SampleProjectName>
     <MONO_LOG_LEVEL Condition="false"
-      >--env MONO_LOG_LEVEL=debug --env MONO_LOG_MASK=all</MONO_LOG_LEVEL
-    >
+      >--env MONO_LOG_LEVEL=debug --env MONO_LOG_MASK=all</MONO_LOG_LEVEL>
     <_ExeExt Condition="$([MSBuild]::IsOSPlatform('WINDOWS'))">.exe</_ExeExt>
   </PropertyGroup>
 

@@ -56,16 +56,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractClassAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractClassAttribute" /> class. </para>
         </summary>
         <param name="typeContainingContracts">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type that contains the code contracts for this type.</param
-        >
+          />The type that contains the code contracts for this type.</param>
       </Docs>
     </Member>
     <Member MemberName="TypeContainingContracts">

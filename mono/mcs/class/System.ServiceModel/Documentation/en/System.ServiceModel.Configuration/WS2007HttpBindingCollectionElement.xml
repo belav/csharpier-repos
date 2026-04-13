@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.WS2007HttpBinding,System.ServiceModel.Configuration.WS2007HttpBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.WS2007HttpBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.WS2007HttpBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >System.ServiceModel.Configuration.WS2007HttpBindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.WS2007HttpBindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a configuration element that contains sub-elements that specify settings for using the <see cref="T:System.ServiceModel.WS2007HttpBinding" /> binding.</para
-      >
+        >Represents a configuration element that contains sub-elements that specify settings for using the <see cref="T:System.ServiceModel.WS2007HttpBinding" /> binding.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WS2007HttpBindingCollectionElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WS2007HttpBindingCollectionElement" /> class. </para>
         </summary>
       </Docs>
     </Member>

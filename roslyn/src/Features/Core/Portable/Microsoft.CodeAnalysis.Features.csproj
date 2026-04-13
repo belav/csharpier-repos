@@ -6,8 +6,7 @@
     <RootNamespace>Microsoft.CodeAnalysis</RootNamespace>
     <TargetFrameworks>$(SourceBuildTargetFrameworks);netstandard2.0</TargetFrameworks>
     <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
-      >full</ApplyNgenOptimization
-    >
+      >full</ApplyNgenOptimization>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <!-- NuGet -->
@@ -268,11 +267,9 @@
       <AnalyzerDocumentationFileDir>$(RepoRoot)src\Features</AnalyzerDocumentationFileDir>
       <EscapeDirectorySuffix Condition="'$(OS)' == 'Windows_NT'">\</EscapeDirectorySuffix>
       <DotNetExecutable Condition="'$(OS)' == 'Windows_NT'"
-        >$(DotNetRoot)dotnet.exe</DotNetExecutable
-      >
+        >$(DotNetRoot)dotnet.exe</DotNetExecutable>
       <DotNetExecutable Condition="'$(DotNetExecutable)' == ''"
-        >$(DotNetRoot)dotnet</DotNetExecutable
-      >
+        >$(DotNetRoot)dotnet</DotNetExecutable>
     </PropertyGroup>
 
     <MSBuild

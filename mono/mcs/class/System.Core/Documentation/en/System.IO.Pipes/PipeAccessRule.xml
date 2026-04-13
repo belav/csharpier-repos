@@ -21,11 +21,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para>
       <para
-        >The <see cref="T:System.IO.Pipes.PipeAccessRule" /> class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to allow or deny that right.  This class can also specify how access rules are propagated to child objects.</para
-      >
+        >The <see cref="T:System.IO.Pipes.PipeAccessRule" /> class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to allow or deny that right.  This class can also specify how access rules are propagated to child objects.</para>
       <para
-        >Use the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class to create a new access rule.  You can persist the rule using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class.</para
-      >
+        >Use the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class to create a new access rule.  You can persist the rule using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,36 +53,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para
-          >
+            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class with the specified identity, pipe access rights, and access control type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class with the specified identity, pipe access rights, and access control type.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Principal.IdentityReference" /> object that encapsulates a reference to a user account.</param
-        >
+          />An <see cref="T:System.Security.Principal.IdentityReference" /> object that encapsulates a reference to a user account.</param>
         <param name="rights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param
-        >
+          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.AccessControlType" /> values that specifies whether to allow or deny the operation.</param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.AccessControlType" /> values that specifies whether to allow or deny the operation.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -109,36 +102,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para
-          >
+            >Use this constructor to create an access control rule that you can persist using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Access control rules define user account rights that determine which actions are allowed or disallowed on computers that are running Microsoft Windows.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class with the specified identity, pipe access rights, and access control type.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAccessRule" /> class with the specified identity, pipe access rights, and access control type.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user account.</param
-        >
+          />The name of the user account.</param>
         <param name="rights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param
-        >
+          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.AccessControlType" /> values that specifies whether to allow or deny the operation.</param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.AccessControlType" /> values that specifies whether to allow or deny the operation.</param>
       </Docs>
     </Member>
     <Member MemberName="PipeAccessRights">
@@ -163,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.IO.Pipes.PipeAccessRights" /> flags that are associated with the current <see cref="T:System.IO.Pipes.PipeAccessRule" /> object.</para
-          >
+            >Gets the <see cref="T:System.IO.Pipes.PipeAccessRights" /> flags that are associated with the current <see cref="T:System.IO.Pipes.PipeAccessRule" /> object.</para>
         </summary>
       </Docs>
     </Member>

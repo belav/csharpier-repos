@@ -33,8 +33,7 @@
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding">TStandardBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >TBindingConfiguration</BaseTypeArgument
-      >
+        >TBindingConfiguration</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexBindingBindingCollectionElement`2" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexBindingBindingCollectionElement`2" /> class. </para>
         </summary>
       </Docs>
     </Member>

@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.WebSocketTransportSettings" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.WebSocketTransportSettings" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -198,8 +197,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The web socket transport settings object to compare with the current object.</param
-        >
+          />The web socket transport settings object to compare with the current object.</param>
       </Docs>
     </Member>
     <Member MemberName="KeepAliveInterval">

@@ -24,14 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Certain application settings properties have a special significance that alters the way in which their associated settings provider should process them. The <see cref="T:System.Configuration.SpecialSettingAttribute" /> is used to identify such properties. This class uses the <see cref="T:System.Configuration.SpecialSetting" /> enumeration to indicate what special category the property belongs to.</para
-      >
+        >Certain application settings properties have a special significance that alters the way in which their associated settings provider should process them. The <see cref="T:System.Configuration.SpecialSettingAttribute" /> is used to identify such properties. This class uses the <see cref="T:System.Configuration.SpecialSetting" /> enumeration to indicate what special category the property belongs to.</para>
       <para>
-        <see cref="T:System.Configuration.SpecialSettingAttribute" /> can only be applied to the settings class or to the individual settings property.</para
-      >
+        <see cref="T:System.Configuration.SpecialSettingAttribute" /> can only be applied to the settings class or to the individual settings property.</para>
       <para
-        >For an example of how a settings provider deals with the <see cref="T:System.Configuration.SpecialSettingAttribute" />, see the <see cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" /> method of the <see cref="T:System.Configuration.LocalFileSettingsProvider" /> class.</para
-      >
+        >For an example of how a settings provider deals with the <see cref="T:System.Configuration.SpecialSettingAttribute" />, see the <see cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" /> method of the <see cref="T:System.Configuration.LocalFileSettingsProvider" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SpecialSettingAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SpecialSettingAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,8 +87,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.SpecialSettingAttribute.SpecialSetting" /> property is set in the <see cref="M:System.Configuration.SpecialSettingAttribute.#ctor(System.Configuration.SpecialSetting)" /> constructor of this class.</para
-          >
+            >The <see cref="P:System.Configuration.SpecialSettingAttribute.SpecialSetting" /> property is set in the <see cref="M:System.Configuration.SpecialSettingAttribute.#ctor(System.Configuration.SpecialSetting)" /> constructor of this class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

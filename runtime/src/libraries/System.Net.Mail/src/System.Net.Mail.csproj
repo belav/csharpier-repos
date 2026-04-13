@@ -9,8 +9,7 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.PlatformNotSupported_NetMail</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_NetMail</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

@@ -29,22 +29,19 @@
       <para
         >Apply the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" /> attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-        </format>.  </para
-      >
+        </format>.  </para>
       <para>This attribute does not prevent an assembly from being viewed using reflection.  </para>
       <para
         >Note that <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" /> attribute does not block the <format type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-        </format> from viewing header information and meta-information.       </para
-      >
+        </format> from viewing header information and meta-information.       </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >Prevents the <format type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-        </format> from disassembling an assembly. This class cannot be inherited.</para
-      >
+        </format> from disassembling an assembly. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -67,14 +64,12 @@
           <para
             >Apply the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" /> attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format type="text/html">
               <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>

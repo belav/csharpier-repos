@@ -4,8 +4,7 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <SkipTestsOnPlatform
       Condition="'$(TargetsMobile)' == 'true' or '$(TargetOS)' == 'freebsd' or '$(TargetArchitecture)' == 'arm' or '$(TargetArchitecture)' == 'arm64' or '$(TargetArchitecture)' == 'armel' or '$(TargetArchitecture)' == 'wasm'"
-      >true</SkipTestsOnPlatform
-    >
+      >true</SkipTestsOnPlatform>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(SkipTestsOnPlatform)' != 'true'">

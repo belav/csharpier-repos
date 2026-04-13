@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.AppSettingsReader" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.AppSettingsReader" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -74,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value for a specified key from the <see cref="P:System.Configuration.ConfigurationSettings.AppSettings" /> property and returns an object of the specified type containing the value from the configuration.</para
-          >
+            >Gets the value for a specified key from the <see cref="P:System.Configuration.ConfigurationSettings.AppSettings" /> property and returns an object of the specified type containing the value from the configuration.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,15 +84,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key for which to get the value.</param
-        >
+          />The key for which to get the value.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of the object to return.</param
-        >
+          />The type of the object to return.</param>
       </Docs>
     </Member>
   </Members>

@@ -6,14 +6,11 @@
 
   <PropertyGroup>
     <TestAssemblyDir Condition="'$(TestAssemblyDir)' == ''"
-      >$(BaseOutputPathWithConfig)\tests\</TestAssemblyDir
-    >
+      >$(BaseOutputPathWithConfig)\tests\</TestAssemblyDir>
     <__TestRunHtmlLog Condition="'$(__TestRunHtmlLog)' == ''"
-      >$(__LogsDir)\TestRun.html</__TestRunHtmlLog
-    >
+      >$(__LogsDir)\TestRun.html</__TestRunHtmlLog>
     <__TestRunXmlLog Condition="'$(__TestRunXmlLog)' == ''"
-      >$(__LogsDir)\TestRun.xml</__TestRunXmlLog
-    >
+      >$(__LogsDir)\TestRun.xml</__TestRunXmlLog>
   </PropertyGroup>
 
   <Target Name="FindLegacyTestDirectories">
@@ -56,8 +53,7 @@
 
     <PropertyGroup>
       <ExcludeTraits Condition="'$(ExcludeTraits)'==''"
-        >category=outerloop;category=failing</ExcludeTraits
-      >
+        >category=outerloop;category=failing</ExcludeTraits>
       <!-- Run one assembly at a time to avoid excessive parallelism leading to test timeouts -->
       <ParallelRun Condition="'$(ParallelRun)'==''">collections</ParallelRun>
     </PropertyGroup>
@@ -71,11 +67,9 @@
       <XunitConsoleRunner>$(CORE_ROOT)\xunit\xunit.console.dll</XunitConsoleRunner>
 
       <XunitArgs Condition="'$(TargetOS)' == 'android' or '$(TargetOS)' == 'iossimulator'"
-        >-parallel none</XunitArgs
-      >
+        >-parallel none</XunitArgs>
       <XunitArgs Condition="'$(TargetOS)' != 'android' and '$(TargetOS)' != 'iossimulator'"
-        >-parallel $(ParallelRun)</XunitArgs
-      >
+        >-parallel $(ParallelRun)</XunitArgs>
       <XunitArgs>$(XunitArgs) -html $(__TestRunHtmlLog)</XunitArgs>
       <XunitArgs>$(XunitArgs) -xml $(__TestRunXmlLog)</XunitArgs>
       <XunitArgs>$(XunitArgs) @(IncludeTraitsItems->'-trait %(Identity)', ' ')</XunitArgs>

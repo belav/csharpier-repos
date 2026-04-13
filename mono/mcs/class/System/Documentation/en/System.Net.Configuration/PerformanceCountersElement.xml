@@ -27,10 +27,8 @@
       <para
         >This class corresponds to the <format type="text/html">
           <a href="3afa1586-e1b8-473d-8985-c3fc90cf561b"
-            >&lt;performanceCounter&gt; Element (Network Settings)</a
-          >
-        </format> configuration element. This class provides programmatic access to information that can be stored in configuration files.</para
-      >
+            >&lt;performanceCounter&gt; Element (Network Settings)</a>
+        </format> configuration element. This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates a <see cref="T:System.Net.Configuration.PerformanceCountersElement" /> object.</para
-          >
+            >Instantiates a <see cref="T:System.Net.Configuration.PerformanceCountersElement" /> object.</para>
         </summary>
       </Docs>
     </Member>

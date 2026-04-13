@@ -20,6 +20,5 @@ class Point
    }  
 }  
 ]]>
-    </code_example>shows a Point class with a destructor. </paragraph
-  >
+    </code_example>shows a Point class with a destructor. </paragraph>
 </clause>

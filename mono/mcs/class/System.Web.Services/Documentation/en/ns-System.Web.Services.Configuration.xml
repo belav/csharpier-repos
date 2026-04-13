@@ -12,8 +12,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Web.Services.Configuration" /> namespace consists of the classes that configure how XML Web services created using ASP.NET run.</para
-      >
+        >The <see cref="N:System.Web.Services.Configuration" /> namespace consists of the classes that configure how XML Web services created using ASP.NET run.</para>
     </summary>
   </Docs>
 </Namespace>

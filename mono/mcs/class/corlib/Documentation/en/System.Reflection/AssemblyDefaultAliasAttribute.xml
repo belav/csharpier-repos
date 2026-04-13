@@ -67,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyDefaultAliasAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyDefaultAliasAttribute" /> class.</para>
         </summary>
         <param name="defaultAlias">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The assembly default alias information. </param
-        >
+          />The assembly default alias information. </param>
       </Docs>
     </Member>
     <Member MemberName="DefaultAlias">

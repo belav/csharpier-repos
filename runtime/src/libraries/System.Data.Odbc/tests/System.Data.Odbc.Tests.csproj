@@ -7,8 +7,7 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <DefineConstants
       Condition="'$(TargetPlatformIdentifier)' == 'windows' or $([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >$(DefineConstants);TargetsWindows</DefineConstants
-    >
+      >$(DefineConstants);TargetsWindows</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DependencyCheckTest.cs" />

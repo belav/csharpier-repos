@@ -16,14 +16,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" /> class contains the <see cref="P:System.Windows.Forms.Design.Behavior.ComponentGlyph.RelatedComponent" /> property, which points back to the glyph's related component. This property can be used to trace <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects back to their component, such as during drag operations.</para
-      >
+        >The <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" /> class contains the <see cref="P:System.Windows.Forms.Design.Behavior.ComponentGlyph.RelatedComponent" /> property, which points back to the glyph's related component. This property can be used to trace <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects back to their component, such as during drag operations.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Associates a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> with its component.</para
-      >
+        >Associates a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> with its component.</para>
     </summary>
   </Docs>
   <Members>
@@ -44,16 +42,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" /> class.</para>
         </summary>
         <param name="relatedComponent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param
-        >
+          />The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -74,23 +70,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" /> class. </para>
         </summary>
         <param name="relatedComponent">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param
-        >
+          />The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
         <param name="behavior">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param
-        >
+          />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHitTest">
@@ -116,18 +109,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a mouse click at the specified point should be handled by the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />.</para
-          >
+            >Indicates whether a mouse click at the specified point should be handled by the <see cref="T:System.Windows.Forms.Design.Behavior.ComponentGlyph" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Windows.Forms.Cursor" /> if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated with <paramref name="p" />; otherwise, null.</para
-          >
+            >A <see cref="T:System.Windows.Forms.Cursor" /> if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated with <paramref name="p" />; otherwise, null.</para>
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />A point to hit-test.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A point to hit-test.</param>
       </Docs>
     </Member>
     <Member MemberName="Paint">
@@ -159,8 +153,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> containing the <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.AdornerWindowGraphics" />  of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</param
-        >
+          />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> containing the <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.AdornerWindowGraphics" />  of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</param>
       </Docs>
     </Member>
     <Member MemberName="RelatedComponent">
@@ -181,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the component that is associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> .</para
-          >
+            >Gets the component that is associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> .</para>
         </summary>
       </Docs>
     </Member>

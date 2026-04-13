@@ -63,8 +63,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that initiated the callback. The functionality for this parameter is not currently implemented. </param
-        >
+          />The object that initiated the callback. The functionality for this parameter is not currently implemented. </param>
       </Docs>
     </Member>
   </Members>

@@ -19,11 +19,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ConsoleKeyInfo" /> type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see cref="M:System.Console.ReadKey" /> method.</para
-      >
+        >The <see cref="T:System.ConsoleKeyInfo" /> type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see cref="M:System.Console.ReadKey" /> method.</para>
       <para
-        >The <see cref="T:System.ConsoleKeyInfo" /> object describes the <see cref="T:System.ConsoleKey" /> constant and Unicode character, if any, that correspond to the pressed console key. The <see cref="T:System.ConsoleKeyInfo" /> object also describes, in a bitwise combination of <see cref="T:System.ConsoleModifiers" /> values, whether one or more SHIFT, ALT, or CTRL modifier keys was pressed simultaneously with the console key.</para
-      >
+        >The <see cref="T:System.ConsoleKeyInfo" /> object describes the <see cref="T:System.ConsoleKey" /> constant and Unicode character, if any, that correspond to the pressed console key. The <see cref="T:System.ConsoleKeyInfo" /> object also describes, in a bitwise combination of <see cref="T:System.ConsoleModifiers" /> values, whether one or more SHIFT, ALT, or CTRL modifier keys was pressed simultaneously with the console key.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,53 +55,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see cref="M:System.Console.ReadKey" /> method.</para
-          >
+            >This type is not intended to be created by users. Instead, it is returned to the user in response to calling the <see cref="M:System.Console.ReadKey" /> method.</para>
           <para
-            >The <see cref="T:System.ConsoleKeyInfo" /> type does not specify whether the left or right SHIFT, ALT, or CTRL modifier key was pressed.</para
-          >
+            >The <see cref="T:System.ConsoleKeyInfo" /> type does not specify whether the left or right SHIFT, ALT, or CTRL modifier key was pressed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ConsoleKeyInfo" /> structure using the specified character, console key, and modifier keys.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ConsoleKeyInfo" /> structure using the specified character, console key, and modifier keys.</para>
         </summary>
         <param name="keyChar">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Unicode character that corresponds to the <paramref name="key" /> parameter. </param
-        >
+          />The Unicode character that corresponds to the <paramref name="key" /> parameter. </param>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The console key that corresponds to the <paramref name="keyChar" /> parameter. </param
-        >
+          />The console key that corresponds to the <paramref name="keyChar" /> parameter. </param>
         <param name="shift">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that a SHIFT key was pressed; otherwise, false. </param
-        >
+          />true to indicate that a SHIFT key was pressed; otherwise, false. </param>
         <param name="alt">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that an ALT key was pressed; otherwise, false. </param
-        >
+          />true to indicate that an ALT key was pressed; otherwise, false. </param>
         <param name="control">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that a CTRL key was pressed; otherwise, false. </param
-        >
+          />true to indicate that a CTRL key was pressed; otherwise, false. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -128,31 +118,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para
-          >
+            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para>
           <para
-            >The <see cref="M:System.ConsoleKeyInfo.Equals(System.ConsoleKeyInfo)" /> method performs slightly better than the <see cref="M:System.ConsoleKeyInfo.Equals(System.Object)" /> method because it does not have to convert <paramref name="obj" /> to an object.</para
-          >
+            >The <see cref="M:System.ConsoleKeyInfo.Equals(System.ConsoleKeyInfo)" /> method performs slightly better than the <see cref="M:System.ConsoleKeyInfo.Equals(System.Object)" /> method because it does not have to convert <paramref name="obj" /> to an object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified <see cref="T:System.ConsoleKeyInfo" /> object is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object.</para
-          >
+            >Gets a value indicating whether the specified <see cref="T:System.ConsoleKeyInfo" /> object is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to the current <see cref="T:System.ConsoleKeyInfo" /> object.</param
-        >
+          />An object to compare to the current <see cref="T:System.ConsoleKeyInfo" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -177,28 +162,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para
-          >
+            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified object is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object.</para
-          >
+            >Gets a value indicating whether the specified object is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="value" /> is a <see cref="T:System.ConsoleKeyInfo" /> object and is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object; otherwise, false.</para
-          >
+            >true if <paramref name="value" /> is a <see cref="T:System.ConsoleKeyInfo" /> object and is equal to the current <see cref="T:System.ConsoleKeyInfo" /> object; otherwise, false.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object to compare to the current <see cref="T:System.ConsoleKeyInfo" /> object.</param
-        >
+          />An object to compare to the current <see cref="T:System.ConsoleKeyInfo" /> object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -221,14 +202,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value returned by the <see cref="M:System.ConsoleKeyInfo.GetHashCode" /> method is not suitable for distinguishing one <see cref="T:System.ConsoleKeyInfo" /> object from another. If your application needs a unique hash code, override the <see cref="M:System.ConsoleKeyInfo.GetHashCode" /> method with your own method.</para
-          >
+            >The value returned by the <see cref="M:System.ConsoleKeyInfo.GetHashCode" /> method is not suitable for distinguishing one <see cref="T:System.ConsoleKeyInfo" /> object from another. If your application needs a unique hash code, override the <see cref="M:System.ConsoleKeyInfo.GetHashCode" /> method with your own method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the current <see cref="T:System.ConsoleKeyInfo" /> object.</para
-          >
+            >Returns the hash code for the current <see cref="T:System.ConsoleKeyInfo" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -257,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the console key represented by the current <see cref="T:System.ConsoleKeyInfo" /> object.</para
-          >
+            >Gets the console key represented by the current <see cref="T:System.ConsoleKeyInfo" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -279,14 +257,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the key pressed does not map to a Unicode character (for example, if the user presses the <ui>F1</ui> key or the <ui>Home</ui> key), the value of the <see cref="P:System.ConsoleKeyInfo.KeyChar" /> property is \U0000.</para
-          >
+            >If the key pressed does not map to a Unicode character (for example, if the user presses the <ui>F1</ui> key or the <ui>Home</ui> key), the value of the <see cref="P:System.ConsoleKeyInfo.KeyChar" /> property is \U0000.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Unicode character represented by the current <see cref="T:System.ConsoleKeyInfo" /> object.</para
-          >
+            >Gets the Unicode character represented by the current <see cref="T:System.ConsoleKeyInfo" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -311,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a bitwise combination of <see cref="T:System.ConsoleModifiers" /> values that specifies one or more modifier keys pressed simultaneously with the console key.</para
-          >
+            >Gets a bitwise combination of <see cref="T:System.ConsoleModifiers" /> values that specifies one or more modifier keys pressed simultaneously with the console key.</para>
         </summary>
       </Docs>
     </Member>
@@ -341,35 +316,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para
-          >
+            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified <see cref="T:System.ConsoleKeyInfo" /> objects are equal.</para
-          >
+            >Indicates whether the specified <see cref="T:System.ConsoleKeyInfo" /> objects are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="a" /> is equal to <paramref name="b" />; otherwise, false.</para
-          >
+            >true if <paramref name="a" /> is equal to <paramref name="b" />; otherwise, false.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare.</param
-        >
+          />The first object to compare.</param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare.</param
-        >
+          />The second object to compare.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -397,35 +367,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para
-          >
+            >Two <see cref="T:System.ConsoleKeyInfo" /> objects are equal if their corresponding <see cref="P:System.ConsoleKeyInfo.KeyChar" />, <see cref="P:System.ConsoleKeyInfo.Key" />, and <see cref="P:System.ConsoleKeyInfo.Modifiers" /> properties are equal.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified <see cref="T:System.ConsoleKeyInfo" /> objects are not equal.</para
-          >
+            >Indicates whether the specified <see cref="T:System.ConsoleKeyInfo" /> objects are not equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="a" /> is not equal to <paramref name="b" />; otherwise, false.</para
-          >
+            >true if <paramref name="a" /> is not equal to <paramref name="b" />; otherwise, false.</para>
         </returns>
         <param name="a">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to compare.</param
-        >
+          />The first object to compare.</param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to compare.</param
-        >
+          />The second object to compare.</param>
       </Docs>
     </Member>
   </Members>

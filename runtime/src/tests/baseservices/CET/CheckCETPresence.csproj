@@ -4,8 +4,7 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <CLRTestTargetUnsupported
       Condition="'$(TargetArchitecture)' != 'x64' or '$(TargetOS)' != 'windows'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />

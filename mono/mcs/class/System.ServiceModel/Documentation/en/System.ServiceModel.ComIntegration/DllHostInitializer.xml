@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides the implementation of the <see cref="T:System.EnterpriseServices.IProcessInitializer" /> interface for the initialization of indigo1 COM+ integration services. It should not be used directly.</para
-      >
+        >This class provides the implementation of the <see cref="T:System.EnterpriseServices.IProcessInitializer" /> interface for the initialization of indigo1 COM+ integration services. It should not be used directly.</para>
     </summary>
   </Docs>
   <Members>
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ComIntegration.DllHostInitializer" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ComIntegration.DllHostInitializer" /> class. </para>
         </summary>
       </Docs>
     </Member>

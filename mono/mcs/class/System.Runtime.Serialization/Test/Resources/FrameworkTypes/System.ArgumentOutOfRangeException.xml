@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.ArgumentOutOfRangeException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Specified argument was out of the range of valid values.</Message
-  >
+    >Specified argument was out of the range of valid values.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

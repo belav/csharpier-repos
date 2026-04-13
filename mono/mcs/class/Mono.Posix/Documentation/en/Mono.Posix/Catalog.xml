@@ -24,8 +24,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-    <see cref="T:Mono.Unix.Catalog" /> instead.</para
-      >
+    <see cref="T:Mono.Unix.Catalog" /> instead.</para>
     </remarks>
     <altmember cref="T:Mono.Unix.Catalog" />
   </Docs>
@@ -79,8 +78,7 @@
         <returns>To be added.</returns>
         <remarks
           >This member is obsolete.  Please use 
-				<see cref="M:Mono.Unix.Catalog.GetPluralString" /> instead.</remarks
-        >
+				<see cref="M:Mono.Unix.Catalog.GetPluralString" /> instead.</remarks>
         <altmember cref="M:Mono.Unix.Catalog.GetPluralString" />
       </Docs>
     </Member>
@@ -108,8 +106,7 @@
         <returns>To be added.</returns>
         <remarks
           >This member is obsolete.  Please use 
-				<see cref="M:Mono.Unix.Catalog.GetString" /> instead.</remarks
-        >
+				<see cref="M:Mono.Unix.Catalog.GetString" /> instead.</remarks>
         <altmember cref="M:Mono.Unix.Catalog.GetString" />
       </Docs>
     </Member>
@@ -141,8 +138,7 @@
         <summary>To be added.</summary>
         <remarks
           >This member is obsolete.  Please use 
-				<see cref="M:Mono.Unix.Catalog.Init" /> instead.</remarks
-        >
+				<see cref="M:Mono.Unix.Catalog.Init" /> instead.</remarks>
         <altmember cref="M:Mono.Unix.Catalog.Init" />
       </Docs>
     </Member>

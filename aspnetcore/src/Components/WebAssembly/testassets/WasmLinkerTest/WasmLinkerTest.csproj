@@ -32,8 +32,7 @@
       <!-- Link all assemblies -->
       <ILLinkArgs>$(ILLinkArgs) --action link</ILLinkArgs>
       <ILLinkArgs Condition="'$(GenerateLinkerWarningSuppressions)' == 'true'"
-        >$(ILLinkArgs) --generate-warning-suppressions xml</ILLinkArgs
-      >
+        >$(ILLinkArgs) --generate-warning-suppressions xml</ILLinkArgs>
     </PropertyGroup>
     <ItemGroup>
       <RootAssemblies Include="@(ReferencePath->HasMetadata('ProjectPath'))" RootMode="visible" />
@@ -50,8 +49,7 @@
     <PropertyGroup>
       <ILLinkArgs
         Condition="'$(GenerateLinkerWarningSuppressions)' != 'true' AND '@(ILLinkSuppressionFile->Count())' != '0'"
-        >$(ILLinkArgs) --link-attributes @(ILLinkSuppressionFile->'%(FullPath)', ' --link-attributes ')</ILLinkArgs
-      >
+        >$(ILLinkArgs) --link-attributes @(ILLinkSuppressionFile->'%(FullPath)', ' --link-attributes ')</ILLinkArgs>
     </PropertyGroup>
 
     <!--

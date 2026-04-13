@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If the <see cref="T:System.Reflection.AssemblyFileVersionAttribute" /> is not supplied, the <see cref="T:System.Reflection.AssemblyVersionAttribute" /> is used for the Win32 file version that is displayed on the <ui>Version</ui> tab of the Windows file properties dialog.</para
-      >
+        >If the <see cref="T:System.Reflection.AssemblyFileVersionAttribute" /> is not supplied, the <see cref="T:System.Reflection.AssemblyVersionAttribute" /> is used for the Win32 file version that is displayed on the <ui>Version</ui> tab of the Windows file properties dialog.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,18 +64,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The file version is normally a string of four numbers, separated by periods, reflecting the major version number, minor version number, build number, and revision number; for example, "1.0.4309.00". If <paramref name="version" /> is not in this format, a compiler warning occurs, and the results displayed in the file properties dialog are unpredictable. Wildcards are not supported.</para
-          >
+            >The file version is normally a string of four numbers, separated by periods, reflecting the major version number, minor version number, build number, and revision number; for example, "1.0.4309.00". If <paramref name="version" /> is not in this format, a compiler warning occurs, and the results displayed in the file properties dialog are unpredictable. Wildcards are not supported.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyFileVersionAttribute" /> class, specifying the file version.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyFileVersionAttribute" /> class, specifying the file version.</para>
         </summary>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file version. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The file version. </param>
       </Docs>
     </Member>
     <Member MemberName="Version">

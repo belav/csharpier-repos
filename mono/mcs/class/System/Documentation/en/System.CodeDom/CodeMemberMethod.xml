@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeMemberMethod" /> can be used to represent the declaration for a method.</para
-      >
+        <see cref="T:System.CodeDom.CodeMemberMethod" /> can be used to represent the declaration for a method.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeMemberMethod.ReturnType" /> property specifies the data type of the method's return value. The <see cref="P:System.CodeDom.CodeMemberMethod.Parameters" /> property contains the method's parameters. The <see cref="P:System.CodeDom.CodeMemberMethod.Statements" /> property contains the statements of the method.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeMemberMethod.ReturnType" /> property specifies the data type of the method's return value. The <see cref="P:System.CodeDom.CodeMemberMethod.Parameters" /> property contains the method's parameters. The <see cref="P:System.CodeDom.CodeMemberMethod.Statements" /> property contains the statements of the method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,14 +62,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see cref="T:System.CodeDom.CodeMemberMethod" /> object.</para
-          >
+            >This constructor creates an empty <see cref="T:System.CodeDom.CodeMemberMethod" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberMethod" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeMemberMethod" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -99,17 +95,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The types referenced by this collection must consist of interfaces.</para>
           <para
-            >If this <see cref="T:System.CodeDom.CodeMemberMethod" /> represents a declaration for a public method, and this method implements a method on an interface, the interface or interfaces this method implements a method of should be referenced in this collection.</para
-          >
+            >If this <see cref="T:System.CodeDom.CodeMemberMethod" /> represents a declaration for a public method, and this method implements a method on an interface, the interface or interfaces this method implements a method of should be referenced in this collection.</para>
           <para
-            >The method should still have the same name as the method of the interface that is implemented by this method. For some languages, like C#, this has no effect on the syntax. For others, like Visual Basic, there is a special syntax for implementing interfaces. If the method is privately implementing a single interface, the <see cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" /> property should be used instead.</para
-          >
+            >The method should still have the same name as the method of the interface that is implemented by this method. For some languages, like C#, this has no effect on the syntax. For others, like Visual Basic, there is a special syntax for implementing interfaces. If the method is privately implementing a single interface, the <see cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" /> property should be used instead.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the data types of the interfaces implemented by this method, unless it is a private method implementation, which is indicated by the <see cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" /> property.</para
-          >
+            >Gets the data types of the interfaces implemented by this method, unless it is a private method implementation, which is indicated by the <see cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -164,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.ImplementationTypes" /> collection is accessed.</para
-          >
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.ImplementationTypes" /> collection is accessed.</para>
         </summary>
       </Docs>
     </Member>
@@ -190,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.Parameters" /> collection is accessed.</para
-          >
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.Parameters" /> collection is accessed.</para>
         </summary>
       </Docs>
     </Member>
@@ -216,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.Statements" /> collection is accessed.</para
-          >
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeMemberMethod.Statements" /> collection is accessed.</para>
         </summary>
       </Docs>
     </Member>
@@ -245,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this <see cref="T:System.CodeDom.CodeMemberMethod" /> represents the declaration of a private method and the method implements a method of an interface, this property should indicate the interface type that the method is implementing a method of.</para
-          >
+            >If this <see cref="T:System.CodeDom.CodeMemberMethod" /> represents the declaration of a private method and the method implements a method of an interface, this property should indicate the interface type that the method is implementing a method of.</para>
           <para>The type referenced by this property must be an interface.</para>
         </remarks>
         <summary>

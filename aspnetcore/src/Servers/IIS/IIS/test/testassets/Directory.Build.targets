@@ -16,8 +16,7 @@
   >
     <PropertyGroup>
       <BuildProjectReferences Condition="'$(HasTestAssetProfile)' == 'true'"
-        >false</BuildProjectReferences
-      >
+        >false</BuildProjectReferences>
     </PropertyGroup>
   </Target>
 

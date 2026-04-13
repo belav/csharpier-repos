@@ -97,8 +97,7 @@
           <para
             >The dynamic assembly can be unloaded and its memory reclaimed, subject to the restrictions described in <format type="text/html">
               <a href="4c3432e6-0dfd-453a-88a7-533979ec5d2b">Collectible Dynamic Assemblies</a>
-            </format>.</para
-          >
+            </format>.</para>
         </summary>
       </Docs>
     </Member>

@@ -6,11 +6,9 @@
 
     <NeedsToBuildAppsOnHelix
       Condition="('$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator') and '$(NeedsToBuildAppsOnHelix)' == '' and '$(Scenario)' == 'BuildiOSApps'"
-      >true</NeedsToBuildAppsOnHelix
-    >
+      >true</NeedsToBuildAppsOnHelix>
     <NeedsiOSSDK Condition="'$(NeedsToBuildAppsOnHelix)' == 'true' and '$(NeedsWorkload)' != 'true'"
-      >true</NeedsiOSSDK
-    >
+      >true</NeedsiOSSDK>
   </PropertyGroup>
 
   <ItemDefinitionGroup Condition="'$(TargetOS)' == 'maccatalyst'">
@@ -46,8 +44,7 @@
   <Target Name="PrepareForBuildHelixWorkItems_Mobile">
     <PropertyGroup Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst'">
       <AppleTestTarget Condition="'$(TargetOS)' == 'iossimulator'"
-        >ios-simulator-64</AppleTestTarget
-      >
+        >ios-simulator-64</AppleTestTarget>
       <AppleTestTarget Condition="'$(TargetOS)' == 'tvossimulator'">tvos-simulator</AppleTestTarget>
       <AppleTestTarget Condition="'$(TargetOS)' == 'ios'">ios-device</AppleTestTarget>
       <AppleTestTarget Condition="'$(TargetOS)' == 'tvos'">tvos-device</AppleTestTarget>
@@ -59,8 +56,7 @@
       <iOSLikeLibraryBuilderTargetsDir>$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'src', 'mono', 'msbuild', 'common'))</iOSLikeLibraryBuilderTargetsDir>
       <WorkItemPrefix
         Condition="'$(Scenario)' == 'BuildiOSApps' and '$(TestUsingWorkloads)' != 'true'"
-        >$(TargetOS)-</WorkItemPrefix
-      >
+        >$(TargetOS)-</WorkItemPrefix>
 
       <CMakeUrl>https://netcorenativeassets.blob.core.windows.net/resource-packages/external/macos/cmake/cmake-3.16.4-Darwin-x86_64.tar.gz</CMakeUrl>
 
@@ -190,8 +186,7 @@
   <Target Name="AfterBuildHelixWorkItems_Mobile" AfterTargets="BuildHelixWorkItems">
     <PropertyGroup>
       <_TestPath Condition="'%(XHarnessAppBundleToTest.CustomCommands)' != ''"
-        >$([System.IO.Path]::GetDirectoryName('%(XHarnessAppBundleToTest.Identity)'))</_TestPath
-      >
+        >$([System.IO.Path]::GetDirectoryName('%(XHarnessAppBundleToTest.Identity)'))</_TestPath>
     </PropertyGroup>
 
     <Exec

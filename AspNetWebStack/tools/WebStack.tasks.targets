@@ -6,23 +6,18 @@
   <PropertyGroup>
     <BuildTaskAssemblyReference
       Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll') "
-      >Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference
-    >
+      >Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference>
     <BuildTaskAssemblyReference
       Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll') "
-      >Microsoft.Build.Tasks.v$(MSBuildToolsVersion)</BuildTaskAssemblyReference
-    >
+      >Microsoft.Build.Tasks.v$(MSBuildToolsVersion)</BuildTaskAssemblyReference>
     <BuildTaskAssemblyReference
       Condition=" '$(BuildTaskAssemblyReference)' == '' And Exists('$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll') "
-      >Microsoft.Build.Tasks.v4.0</BuildTaskAssemblyReference
-    >
+      >Microsoft.Build.Tasks.v4.0</BuildTaskAssemblyReference>
     <!-- Know this file does not exist. But, error message will contain meaningful information. -->
     <BuildTaskAssemblyReference Condition=" '$(BuildTaskAssemblyReference)' == '' "
-      >Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference
-    >
+      >Microsoft.Build.Tasks.Core</BuildTaskAssemblyReference>
     <CodeTaskFactoryAssemblyFile Condition=" '$(CodeTaskFactoryAssemblyFile)' == '' "
-      >$(MSBuildToolsPath)\$(BuildTaskAssemblyReference).dll</CodeTaskFactoryAssemblyFile
-    >
+      >$(MSBuildToolsPath)\$(BuildTaskAssemblyReference).dll</CodeTaskFactoryAssemblyFile>
   </PropertyGroup>
 
   <!-- This task does not support concurrent execution from multiple project files. Its use is only appropriate when

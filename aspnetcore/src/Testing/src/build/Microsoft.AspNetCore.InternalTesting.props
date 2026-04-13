@@ -1,17 +1,14 @@
 ﻿<Project>
   <PropertyGroup>
     <RepoRoot Condition=" '$(RepoRoot)' == '' OR !HasTrailingSlash('$(RepoRoot)') "
-      >$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..', '..', '..'))</RepoRoot
-    >
+      >$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..', '..', '..'))</RepoRoot>
 
     <!-- Priority: LoggingTestingDisableFileLogging > LoggingTestingFileLoggingDirectory > ASPNETCORE_TEST_LOG_DIR > Default location -->
     <LoggingTestingFileLoggingDirectory
       Condition=" '$(LoggingTestingFileLoggingDirectory)' == '' AND '$(ASPNETCORE_TEST_LOG_DIR)' != '' "
-      >$(ASPNETCORE_TEST_LOG_DIR)</LoggingTestingFileLoggingDirectory
-    >
+      >$(ASPNETCORE_TEST_LOG_DIR)</LoggingTestingFileLoggingDirectory>
     <LoggingTestingFileLoggingDirectory Condition=" '$(LoggingTestingFileLoggingDirectory)' == ''"
-      >$(RepoRoot)artifacts\log\</LoggingTestingFileLoggingDirectory
-    >
+      >$(RepoRoot)artifacts\log\</LoggingTestingFileLoggingDirectory>
   </PropertyGroup>
 
   <Target
@@ -22,11 +19,9 @@
     <PropertyGroup>
       <PreserveExistingLogsInOutput
         Condition="'$(PreserveExistingLogsInOutput)' == '' AND '$(ContinuousIntegrationBuild)' == 'true'"
-        >true</PreserveExistingLogsInOutput
-      >
+        >true</PreserveExistingLogsInOutput>
       <PreserveExistingLogsInOutput Condition="'$(PreserveExistingLogsInOutput)' == ''"
-        >false</PreserveExistingLogsInOutput
-      >
+        >false</PreserveExistingLogsInOutput>
     </PropertyGroup>
 
     <ItemGroup>
@@ -40,8 +35,7 @@
         <_Parameter1>$(PreserveExistingLogsInOutput)</_Parameter1>
         <_Parameter2>$(TargetFramework)</_Parameter2>
         <_Parameter3 Condition="'$(LoggingTestingDisableFileLogging)' != 'true'"
-          >$(LoggingTestingFileLoggingDirectory)</_Parameter3
-        >
+          >$(LoggingTestingFileLoggingDirectory)</_Parameter3>
       </AssemblyAttribute>
     </ItemGroup>
   </Target>

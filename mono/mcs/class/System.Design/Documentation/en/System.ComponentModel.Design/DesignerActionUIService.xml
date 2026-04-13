@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can control the display of your designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" /> with the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> class. <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> provides a straightforward interface for displaying the items for each component, including the following methods and events:</para
-      >
+        >You can control the display of your designer's <see cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" /> with the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> class. <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> provides a straightforward interface for displaying the items for each component, including the following methods and events:</para>
       <list type="bullet">
         <item>
           <para
-            >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> methods display and hide the items for a component.</para
-          >
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> methods display and hide the items for a component.</para>
         </item>
         <item>
           <para
-            >The <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event indicates when the UI changes for a component.</para
-          >
+            >The <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event indicates when the UI changes for a component.</para>
         </item>
       </list>
       <para
-        >Use the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> to manage the <see cref="T:System.ComponentModel.Design.DesignerActionList" /> collections associated with your component. </para
-      >
+        >Use the <see cref="T:System.ComponentModel.Design.DesignerActionService" /> to manage the <see cref="T:System.ComponentModel.Design.DesignerActionList" /> collections associated with your component. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -60,8 +56,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table lists the set of specialized classes associated with the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event.</para
-          >
+            >The following table lists the set of specialized classes associated with the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event.</para>
           <list type="table">
             <listheader>
               <item>
@@ -81,8 +76,7 @@
               </term>
               <description>
                 <para
-                  >Adds information specific to smart tag panel management. This class is specialized from <see cref="T:System.EventArgs" />.</para
-                >
+                  >Adds information specific to smart tag panel management. This class is specialized from <see cref="T:System.EventArgs" />.</para>
               </description>
             </item>
             <item>
@@ -93,8 +87,7 @@
               </term>
               <description>
                 <para
-                  >Connects the <see cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" /> with its handler.</para
-                >
+                  >Connects the <see cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" /> with its handler.</para>
               </description>
             </item>
             <item>
@@ -111,8 +104,7 @@
           <para
             >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-            </format>. </para
-          >
+            </format>. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -138,19 +130,16 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>. </para>
           <block subset="none" type="note">
             <para
-              >Always call <see cref="M:System.ComponentModel.Design.DesignerActionUIService.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> object's Finalize method.</para
-            >
+              >Always call <see cref="M:System.ComponentModel.Design.DesignerActionUIService.Dispose" /> before you release your last reference to the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> class.</para
-          >
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.DesignerActionUIService" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -173,12 +162,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the smart tag panel is currently being displayed, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> method will hide it. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Hide" /> as the event type. </para
-          >
+            >If the smart tag panel is currently being displayed, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> method will hide it. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Hide" /> as the event type. </para>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> methods are implemented only to raise their corresponding events. The actual functionality is found in the handlers for these events, which are part of the design-time environment.</para
-            >
+              >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> methods are implemented only to raise their corresponding events. The actual functionality is found in the handlers for these events, which are part of the design-time environment.</para>
           </block>
         </remarks>
         <summary>
@@ -190,8 +177,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component whose smart tag panel should be hidden.</param
-        >
+          />The component whose smart tag panel should be hidden.</param>
       </Docs>
     </Member>
     <Member MemberName="Refresh">
@@ -213,8 +199,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.Refresh(System.ComponentModel.IComponent)" /> method updates the internal DesignerAction <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />, as well as the smart tag panel.</para
-          >
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.Refresh(System.ComponentModel.IComponent)" /> method updates the internal DesignerAction <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />, as well as the smart tag panel.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -225,8 +210,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to refresh.</param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to refresh.</param>
       </Docs>
     </Member>
     <Member MemberName="ShouldAutoShow">
@@ -259,8 +243,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.IComponent" /> to automatically show.</param
-        >
+          />The <see cref="T:System.ComponentModel.IComponent" /> to automatically show.</param>
       </Docs>
     </Member>
     <Member MemberName="ShowUI">
@@ -282,12 +265,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the smart tag panel is currently hidden, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> method will display the panel. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Show" /> as the event type. </para
-          >
+            >If the smart tag panel is currently hidden, the <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> method will display the panel. This method raises the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" /> event, stipulating <see cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Show" /> as the event type. </para>
           <block subset="none" type="note">
             <para
-              >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> methods are implemented only to raise their corresponding events. The actual functionality is found in the handlers for these events, which are part of the design-time environment.</para
-            >
+              >The <see cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" /> and <see cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" /> methods are implemented only to raise their corresponding events. The actual functionality is found in the handlers for these events, which are part of the design-time environment.</para>
           </block>
         </remarks>
         <summary>
@@ -299,8 +280,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The component whose smart tag panel should be displayed.</param
-        >
+          />The component whose smart tag panel should be displayed.</param>
       </Docs>
     </Member>
   </Members>

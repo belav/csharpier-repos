@@ -12,9 +12,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>Represents RELAX NG "include" element.</summary>
     <remarks>To be added.</remarks>
@@ -125,8 +123,7 @@
       <Parameters />
       <Docs>
         <summary
-          >Returns the context namespace. This namespace is filled when read through <see cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" /> and that affects on the compilation of the components contained in this include.</summary
-        >
+          >Returns the context namespace. This namespace is filled when read through <see cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" /> and that affects on the compilation of the components contained in this include.</summary>
         <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>

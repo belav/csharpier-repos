@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A visual designer can display the description when referencing the component member, such as in a Properties window. Access the <see cref="P:System.Diagnostics.MonitoringDescriptionAttribute.Description" /> property to get or set the text associated with this attribute.</para
-      >
+        >A visual designer can display the description when referencing the component member, such as in a Properties window. Access the <see cref="P:System.Diagnostics.MonitoringDescriptionAttribute.Description" /> property to get or set the text associated with this attribute.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,22 +65,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The description you specify in the <see cref="M:System.Diagnostics.MonitoringDescriptionAttribute.#ctor(System.String)" /> constructor is displayed by a visual designer when you access the property, event, or extender to which the attribute applies </para
-          >
+            >The description you specify in the <see cref="M:System.Diagnostics.MonitoringDescriptionAttribute.#ctor(System.String)" /> constructor is displayed by a visual designer when you access the property, event, or extender to which the attribute applies </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.MonitoringDescriptionAttribute" /> class, using the specified description.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.MonitoringDescriptionAttribute" /> class, using the specified description.</para>
         </summary>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The application-defined description text. </param
-        >
+          />The application-defined description text. </param>
       </Docs>
     </Member>
     <Member MemberName="Description">

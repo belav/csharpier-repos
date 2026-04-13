@@ -94,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Limits the search to the base object. The result contains a maximum of one object.  When the <see cref="P:System.DirectoryServices.DirectorySearcher.AttributeScopeQuery" /> property is specified for a search, the scope of the search must be set to <see cref="F:System.DirectoryServices.SearchScope.Base" />.</para
-          >
+            >Limits the search to the base object. The result contains a maximum of one object.  When the <see cref="P:System.DirectoryServices.DirectorySearcher.AttributeScopeQuery" /> property is specified for a search, the scope of the search must be set to <see cref="F:System.DirectoryServices.SearchScope.Base" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -132,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the whole subtree, including the base object and all its child objects. If the scope of a directory search is not specified, a <see cref="F:System.DirectoryServices.SearchScope.Subtree" /> type of search is performed. </para
-          >
+            >Searches the whole subtree, including the base object and all its child objects. If the scope of a directory search is not specified, a <see cref="F:System.DirectoryServices.SearchScope.Subtree" /> type of search is performed. </para>
         </summary>
       </Docs>
     </Member>
@@ -143,8 +141,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the possible scopes for a directory search that is performed using the <see cref="T:System.DirectoryServices.DirectorySearcher" /> object.</para
-      >
+        >Specifies the possible scopes for a directory search that is performed using the <see cref="T:System.DirectoryServices.DirectorySearcher" /> object.</para>
     </summary>
   </Docs>
 </Type>

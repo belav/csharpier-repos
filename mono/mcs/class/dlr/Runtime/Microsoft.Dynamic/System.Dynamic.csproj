@@ -18,8 +18,7 @@
     <NoWarn>1591</NoWarn>
     <AssemblyOriginatorKeyFile>$(SolutionDir)\Runtime\MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
     <SignAssembly Condition="'$(SignAssembly)' == '' And Exists('$(AssemblyOriginatorKeyFile)')"
-      >true</SignAssembly
-    >
+      >true</SignAssembly>
     <SignedSym Condition="'$(SignAssembly)' == 'true'">SIGNED</SignedSym>
     <DelaySign>true</DelaySign>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>

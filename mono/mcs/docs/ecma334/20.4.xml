@@ -18,8 +18,7 @@ class ListEntry: ICloneable, IComparable
    public int CompareTo(object other) {...}  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >A class or struct that implements an interface also implicitly implements all of the interface's base interfaces. This is true even if the class or struct doesn't explicitly list all base interfaces in the base class list. <example

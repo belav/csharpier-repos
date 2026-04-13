@@ -12,22 +12,18 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>
       <para>This class functions as a provider for data type support for "data" and "value" patterns. Usually, RELAX NG recognizes each datatype by its "datatypeLibrary" and the type (local) name, but this class is designed to just return datatypes by the type's qualified name.
 	</para>
       <para>
 	Each data type is represented as a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatype" /> instance. The datatype class abstract and can be used to support custom datatypes.
-	</para
-      >
+	</para>
       <remarks>
         <para
           >By default, <see cref="P:Commons.Xml.Relaxng.RelaxngMergedProvider.DefaultProvider" /> is used to support RELAX NG "string" and "token" datatypes, plus XML Schema primitive datatypes indentified by the following URL: http://www.w3.org/2001/XMLSchema-datatypes .
-	</para
-        >
+	</para>
       </remarks>
     </summary>
     <remarks>To be added.</remarks>
@@ -54,17 +50,13 @@
       <Docs>
         <summary>Returns each datatype idenfitied by its local name and datatype library namespace. Derived classes should return null if the target type is not supported by the provider itself.</summary>
         <param name="name"
-          >a <see cref="T:System.String" /> that represents the local name of the datatype.</param
-        >
+          >a <see cref="T:System.String" /> that represents the local name of the datatype.</param>
         <param name="ns"
-          >a URI <see cref="T:System.String" /> that represents the datatype library namespace.</param
-        >
+          >a URI <see cref="T:System.String" /> that represents the datatype library namespace.</param>
         <param name="parameters"
-          >a <see cref="T:Commons.Xml.Relaxng.RelaxngParamList" />; list of datatype parameters.</param
-        >
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngParamList" />; list of datatype parameters.</param>
         <returns
-          >a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatype" /> identified by the name and datatype library, customized by the parameters.</returns
-        >
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatype" /> identified by the name and datatype library, customized by the parameters.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

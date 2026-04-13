@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" /> class to access the properties of the Message Queuing message.</para
-      >
+        >Use the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" /> class to access the properties of the Message Queuing message.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" /> class encapsulates aMessage Queuing (MSMQ) message that is sent and received, over a Message Queuing integration channel, to and from an existing Message Queuing application.</para
-      >
+        >The <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" /> class encapsulates aMessage Queuing (MSMQ) message that is sent and received, over a Message Queuing integration channel, to and from an existing Message Queuing application.</para>
     </summary>
   </Docs>
   <Members>
@@ -80,14 +78,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property specifies the type of acknowledgment messages that are requested by the sending application. The application can use this property to request notification of certain events. For example, the application might want to be notified when the message reaches its destination queue, when the message is retrieved, or if the message times out before it reaches its destination queue or is retrieved. For member details, see <see cref="T:System.Messaging.AcknowledgeTypes" />.</para
-          >
+            >This property specifies the type of acknowledgment messages that are requested by the sending application. The application can use this property to request notification of certain events. For example, the application might want to be notified when the message reaches its destination queue, when the message is retrieved, or if the message times out before it reaches its destination queue or is retrieved. For member details, see <see cref="T:System.Messaging.AcknowledgeTypes" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Messaging.AcknowledgeTypes" /> that is associated with this message.</para
-          >
+            >Gets or sets the <see cref="T:System.Messaging.AcknowledgeTypes" /> that is associated with this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -116,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Messaging.Acknowledgment" /> that is associated with this message.</para
-          >
+            >Gets the <see cref="T:System.Messaging.Acknowledgment" /> that is associated with this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -143,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Uri" /> of the administration queue that is associated with this message.</para
-          >
+            >Gets or sets the <see cref="T:System.Uri" /> of the administration queue that is associated with this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -167,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Int32" /> value that represents any additional application-specific information that is associated with this message.</para
-          >
+            >Gets or sets an <see cref="T:System.Int32" /> value that represents any additional application-specific information that is associated with this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -191,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.DateTime" /> that indicates when the message arrived in the destination queue.</para
-          >
+            >Gets or sets a <see cref="T:System.DateTime" /> that indicates when the message arrived in the destination queue.</para>
         </summary>
       </Docs>
     </Member>
@@ -263,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.Int32" /> value that indicates the type of the body of the message.</para
-          >
+            >Gets or sets an <see cref="T:System.Int32" /> value that indicates the type of the body of the message.</para>
         </summary>
       </Docs>
     </Member>
@@ -288,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.String" /> that contains the correlation identifier for this message.</para
-          >
+            >Gets or sets a <see cref="T:System.String" /> that contains the correlation identifier for this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -312,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Uri" /> of the destination queue for this message.</para
-          >
+            >Gets the <see cref="T:System.Uri" /> of the destination queue for this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -336,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of <see cref="T:System.Byte" /> that contains any additional, application-defined information that is associated with this message.</para
-          >
+            >Gets or sets an array of <see cref="T:System.Byte" /> that contains any additional, application-defined information that is associated with this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -362,8 +350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.String" /> that contains the message identifier for this message.</para
-          >
+            >Gets a <see cref="T:System.String" /> that contains the message identifier for this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -387,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.String" /> that contains the message label.</para
-          >
+            >Gets or sets a <see cref="T:System.String" /> that contains the message label.</para>
         </summary>
       </Docs>
     </Member>
@@ -416,26 +402,22 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="F:System.Messaging.MessageType.Normal" />: A message sent by an application.</para
-              >
+                <see cref="F:System.Messaging.MessageType.Normal" />: A message sent by an application.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.Messaging.MessageType.Acknowledgment" />: A message that Message Queuing generates when an application sends a normal message and requests an acknowledgment. For example, Message Queuing can generate a positive or negative acknowledgment to indicate whether the original message arrived at its destination queue, or whether it was retrieved from the destination queue by the receiving application. Message Queuing returns the appropriate acknowledgment message to the administration queue specified by the sending application.</para
-              >
+                <see cref="F:System.Messaging.MessageType.Acknowledgment" />: A message that Message Queuing generates when an application sends a normal message and requests an acknowledgment. For example, Message Queuing can generate a positive or negative acknowledgment to indicate whether the original message arrived at its destination queue, or whether it was retrieved from the destination queue by the receiving application. Message Queuing returns the appropriate acknowledgment message to the administration queue specified by the sending application.</para>
             </item>
             <item>
               <para>
-                <see cref="F:System.Messaging.MessageType.Report" />: Whenever an application sends a message, if the local Queue Manager has a report queue defined, Message Queuing generates a report message and sends it to the report queue. If tracing is enabled, Message Queuing sends a report message to the report queue each time the original message enters or leaves a Message Queuing server.</para
-              >
+                <see cref="F:System.Messaging.MessageType.Report" />: Whenever an application sends a message, if the local Queue Manager has a report queue defined, Message Queuing generates a report message and sends it to the report queue. If tracing is enabled, Message Queuing sends a report message to the report queue each time the original message enters or leaves a Message Queuing server.</para>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Messaging.MessageType" /> that is associated with this message. </para
-          >
+            >Gets the <see cref="T:System.Messaging.MessageType" /> that is associated with this message. </para>
         </summary>
       </Docs>
     </Member>
@@ -464,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Messaging.MessagePriority" /> that is associated with this message.</para
-          >
+            >Gets or sets the <see cref="T:System.Messaging.MessagePriority" /> that is associated with this message.</para>
         </summary>
       </Docs>
     </Member>
@@ -485,8 +466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Uri" /> of the message queue that receives response messages from the receiving application.</para
-          >
+            >Gets or sets the <see cref="T:System.Uri" /> of the message queue that receives response messages from the receiving application.</para>
         </summary>
       </Docs>
     </Member>
@@ -509,8 +489,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see cref="T:System.Byte" /> that contains the sender identifier of the sending application.</para
-          >
+            >Gets an array of <see cref="T:System.Byte" /> that contains the sender identifier of the sending application.</para>
         </summary>
       </Docs>
     </Member>
@@ -537,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.DateTime" /> that indicates when the message was sent by the queue manager of the sending application's computer.</para
-          >
+            >Gets a <see cref="T:System.DateTime" /> that indicates when the message was sent by the queue manager of the sending application's computer.</para>
         </summary>
       </Docs>
     </Member>
@@ -563,15 +541,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the interval specified by this property expires before the message reaches its destination queue, Message Queuing (MSMQ) discards the message in one of two ways. If the message's <see cref="P:System.Messaging.Message.UseDeadLetterQueue" /> property is true, the message is sent to the dead-letter queue. Otherwise, the message is dropped.</para
-          >
+            >If the interval specified by this property expires before the message reaches its destination queue, Message Queuing (MSMQ) discards the message in one of two ways. If the message's <see cref="P:System.Messaging.Message.UseDeadLetterQueue" /> property is true, the message is sent to the dead-letter queue. Otherwise, the message is dropped.</para>
           <para>The default for this property is null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see cref="T:System.TimeSpan" /> that indicates the maximum amount of time allowed for the message to reach the destination queue.</para
-          >
+            >Gets or sets a <see cref="T:System.TimeSpan" /> that indicates the maximum amount of time allowed for the message to reach the destination queue.</para>
         </summary>
       </Docs>
     </Member>

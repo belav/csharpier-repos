@@ -33,8 +33,7 @@
       SkipGetTargetFrameworkProperties="true"
     >
       <Targets Condition=" '$(TargetFramework)' != '$(DefaultNetFxTargetFramework)' "
-        >Publish</Targets
-      >
+        >Publish</Targets>
     </Reference>
   </ItemGroup>
 

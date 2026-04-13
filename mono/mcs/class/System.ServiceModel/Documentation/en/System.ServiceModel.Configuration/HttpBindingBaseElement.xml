@@ -61,16 +61,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.HttpBindingBaseElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.HttpBindingBaseElement" /> class.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />the name of the binding.</param
-        >
+          />the name of the binding.</param>
       </Docs>
     </Member>
     <Member MemberName="AllowCookies">
@@ -181,8 +179,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of binding elements.</param
-        >
+          />A collection of binding elements.</param>
       </Docs>
     </Member>
     <Member MemberName="MaxBufferPoolSize">
@@ -296,8 +293,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binding to be applied.</param
-        >
+          />The binding to be applied.</param>
       </Docs>
     </Member>
     <Member MemberName="Properties">

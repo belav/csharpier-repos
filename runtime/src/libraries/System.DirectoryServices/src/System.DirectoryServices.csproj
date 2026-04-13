@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent);$(NetCoreAppMinimum)-windows;$(NetCoreAppMinimum);netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''"
-      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks
-    >
+      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IncludeInternalObsoleteAttribute>true</IncludeInternalObsoleteAttribute>
     <NoWarn>$(NoWarn);IDE0059;IDE0060;CA1822</NoWarn>
@@ -30,8 +29,7 @@ System.DirectoryServices.ActiveDirectory.DomainController</PackageDescription>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.DirectoryServices_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.DirectoryServices_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">

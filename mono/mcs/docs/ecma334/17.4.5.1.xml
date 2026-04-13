@@ -65,7 +65,6 @@ Init B
 Init A  
 1 1  
 ]]>
-      </code_example>because the rules for when static constructors execute provide that B's static constructor (and hence B's static field initializers) must run before A's static constructor and field initializers. end example]</example
-    >
+      </code_example>because the rules for when static constructors execute provide that B's static constructor (and hence B's static field initializers) must run before A's static constructor and field initializers. end example]</example>
   </paragraph>
 </clause>

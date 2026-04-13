@@ -8,8 +8,7 @@
     <PropertyGroup>
       <_MonoRuntimeComponentManifestJsonFilePath
         Condition="'$(_MonoRuntimeComponentManifestJsonFilePath)' == '' and '%(ResolvedFrameworkReference.Identity)' == 'Microsoft.NETCore.App'"
-        >$([MSBuild]::NormalizePath('%(RuntimePackPath)', 'runtimes', '$(RuntimeIdentifier)', 'build', 'RuntimeComponentManifest.json'))</_MonoRuntimeComponentManifestJsonFilePath
-      >
+        >$([MSBuild]::NormalizePath('%(RuntimePackPath)', 'runtimes', '$(RuntimeIdentifier)', 'build', 'RuntimeComponentManifest.json'))</_MonoRuntimeComponentManifestJsonFilePath>
     </PropertyGroup>
 
     <Error

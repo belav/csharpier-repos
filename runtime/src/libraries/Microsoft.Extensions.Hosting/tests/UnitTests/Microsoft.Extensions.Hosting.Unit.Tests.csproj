@@ -5,8 +5,7 @@
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
     <AutoGenerateBindingRedirects
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >true</AutoGenerateBindingRedirects
-    >
+      >true</AutoGenerateBindingRedirects>
     <EventSourceSupport Condition="'$(TestNativeAot)' == 'true'">true</EventSourceSupport>
   </PropertyGroup>
 

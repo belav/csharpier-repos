@@ -21,36 +21,30 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Audit rules determine when and how actions performed on system objects are logged.</para>
       <para
-        >The <see cref="T:System.IO.Pipes.PipeAuditRule" /> class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to perform auditing. This class can specify how audit rules are inherited from and propagated to objects.</para
-      >
+        >The <see cref="T:System.IO.Pipes.PipeAuditRule" /> class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to perform auditing. This class can specify how audit rules are inherited from and propagated to objects.</para>
       <para
-        >To allow file auditing on computers that are running Windows NT or later operating systems, the Audit Access Security policy must be enabled; by default, this policy is set to <ui>No Auditing</ui>.</para
-      >
+        >To allow file auditing on computers that are running Windows NT or later operating systems, the Audit Access Security policy must be enabled; by default, this policy is set to <ui>No Auditing</ui>.</para>
       <para>To enable the Audit Access Security policy, perform the following steps:</para>
       <list type="ordered">
         <item>
           <para
-            >Click the <ui>Start</ui> button and then point to <ui>All Programs</ui>. Point to <ui>Administrative Tools</ui> and then click <ui>Local Security Policy</ui>.</para
-          >
+            >Click the <ui>Start</ui> button and then point to <ui>All Programs</ui>. Point to <ui>Administrative Tools</ui> and then click <ui>Local Security Policy</ui>.</para>
         </item>
         <item>
           <para>In the Local Security Settings window, expand the Local Policies folder and left-click the Audit Policy folder.</para>
         </item>
         <item>
           <para
-            >Double-click the <ui>Audit object access</ui> entry in the right pane of the Local Security Settings window to display the <ui>Audit object access Properties</ui> dialog box. </para
-          >
+            >Double-click the <ui>Audit object access</ui> entry in the right pane of the Local Security Settings window to display the <ui>Audit object access Properties</ui> dialog box. </para>
         </item>
         <item>
           <para
-            >Select the <ui>Success</ui> or <ui>Failure</ui> boxes to log successes or failures.   </para
-          >
+            >Select the <ui>Success</ui> or <ui>Failure</ui> boxes to log successes or failures.   </para>
         </item>
       </list>
       <para>Note that an audit rule for a user account requires a corresponding access rule for the same user account.</para>
       <para
-        >Use the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class to create a new audit rule. You can persist this rule using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class.</para
-      >
+        >Use the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class to create a new audit rule. You can persist this rule using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -80,36 +74,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that can be persisted using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Audit rules determine when and how actions performed on system objects are logged.</para
-          >
+            >Use this constructor to create an audit rule that can be persisted using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Audit rules determine when and how actions performed on system objects are logged.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class for a user account specified in a <see cref="T:System.Security.Principal.IdentityReference" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class for a user account specified in a <see cref="T:System.Security.Principal.IdentityReference" /> object.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Principal.IdentityReference" /> object that encapsulates a reference to a user account.</param
-        >
+          />An <see cref="T:System.Security.Principal.IdentityReference" /> object that encapsulates a reference to a user account.</param>
         <param name="rights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param
-        >
+          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.AuditFlags" /> values that specifies when to perform auditing.</param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.AuditFlags" /> values that specifies when to perform auditing.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -134,36 +123,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that can be persisted using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Audit rules determine when and how actions performed on system objects are logged.</para
-          >
+            >Use this constructor to create an audit rule that can be persisted using the <see cref="T:System.IO.Pipes.PipeSecurity" /> class. Audit rules determine when and how actions performed on system objects are logged.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class for a named user account.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAuditRule" /> class for a named user account.</para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the user account.</param
-        >
+          />The name of the user account.</param>
         <param name="rights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param
-        >
+          />One of the <see cref="T:System.IO.Pipes.PipeAccessRights" /> values that specifies the type of operation associated with the access rule.</param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.AccessControl.AuditFlags" /> values that specifies when to perform auditing.</param
-        >
+          />One of the <see cref="T:System.Security.AccessControl.AuditFlags" /> values that specifies when to perform auditing.</param>
       </Docs>
     </Member>
     <Member MemberName="PipeAccessRights">
@@ -188,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.IO.Pipes.PipeAccessRights" /> flags that are associated with the current <see cref="T:System.IO.Pipes.PipeAuditRule" /> object.</para
-          >
+            >Gets the <see cref="T:System.IO.Pipes.PipeAccessRights" /> flags that are associated with the current <see cref="T:System.IO.Pipes.PipeAuditRule" /> object.</para>
         </summary>
       </Docs>
     </Member>

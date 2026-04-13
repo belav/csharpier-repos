@@ -39,19 +39,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerObject" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerObject" /> class.</para>
         </summary>
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent designer.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The parent designer.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the object.</param
-        >
+          />The name of the object.</param>
       </Docs>
     </Member>
     <Member MemberName="Designer">
@@ -102,8 +103,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service being requested.</param
-        >
+          />The type of service being requested.</param>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -165,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see cref="M:System.IServiceProvider.GetService(System.Type)" />.</para
-          >
+            >For a description of this member, see <see cref="M:System.IServiceProvider.GetService(System.Type)" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -177,8 +176,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of service being requested.</param
-        >
+          />The type of service being requested.</param>
       </Docs>
     </Member>
   </Members>

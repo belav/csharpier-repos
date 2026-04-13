@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.DataGridView.CellPainting" /> event is raised for each <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is visible on a <see cref="T:System.Windows.Forms.DataGridView" />. To improve performance, set the properties in a <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" /> to change the appearance of the cell instead of directly accessing a cell in the <see cref="T:System.Windows.Forms.DataGridView" />. If you manually paint the cell, set the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property to true. If you do not set <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> to true, the cell will paint over your customizations.</para
-      >
+        >The <see cref="E:System.Windows.Forms.DataGridView.CellPainting" /> event is raised for each <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is visible on a <see cref="T:System.Windows.Forms.DataGridView" />. To improve performance, set the properties in a <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" /> to change the appearance of the cell instead of directly accessing a cell in the <see cref="T:System.Windows.Forms.DataGridView" />. If you manually paint the cell, set the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> property to true. If you do not set <see cref="P:System.ComponentModel.HandledEventArgs.Handled" /> to true, the cell will paint over your customizations.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellPainting" /> event. </para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellPainting" /> event. </para>
     </summary>
   </Docs>
   <Members>
@@ -61,100 +59,86 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" /> class. </para>
         </summary>
         <param name="dataGridView">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Windows.Forms.DataGridView" /> that contains the cell to be painted.</param
-        >
+          />The <see cref="T:System.Windows.Forms.DataGridView" /> that contains the cell to be painted.</param>
         <param name="graphics">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Graphics" /> used to paint the <see cref="T:System.Windows.Forms.DataGridViewCell" />.</param
-        >
+          />The <see cref="T:System.Drawing.Graphics" /> used to paint the <see cref="T:System.Windows.Forms.DataGridViewCell" />.</param>
         <param name="clipBounds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that represents the area of the <see cref="T:System.Windows.Forms.DataGridView" /> that needs to be repainted.</param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that represents the area of the <see cref="T:System.Windows.Forms.DataGridView" /> that needs to be repainted.</param>
         <param name="cellBounds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that contains the bounds of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is being painted.</param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that contains the bounds of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is being painted.</param>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The row index of the cell that is being painted.</param
-        >
+          />The row index of the cell that is being painted.</param>
         <param name="columnIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column index of the cell that is being painted.</param
-        >
+          />The column index of the cell that is being painted.</param>
         <param name="cellState">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" /> values that specifies the state of the cell.</param
-        >
+          />A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewElementStates" /> values that specifies the state of the cell.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The data of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is being painted.</param
-        >
+          />The data of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is being painted.</param>
         <param name="formattedValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatted data of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is being painted.</param
-        >
+          />The formatted data of the <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is being painted.</param>
         <param name="errorText">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An error message that is associated with the cell.</param
-        >
+          />An error message that is associated with the cell.</param>
         <param name="cellStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that contains formatting and style information about the cell.</param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" /> that contains formatting and style information about the cell.</param>
         <param name="advancedBorderStyle">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> that contains border styles for the cell that is being painted.</param
-        >
+          />A <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" /> that contains border styles for the cell that is being painted.</param>
         <param name="paintParts">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewPaintParts" /> values specifying the parts to paint.</param
-        >
+          />A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewPaintParts" /> values specifying the parts to paint.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -175,14 +159,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Change the borders of the current <see cref="T:System.Windows.Forms.DataGridViewCell" /> by setting the properties of the <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.AdvancedBorderStyle" /> property to one of the <see cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" /> values.</para
-          >
+            >Change the borders of the current <see cref="T:System.Windows.Forms.DataGridViewCell" /> by setting the properties of the <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.AdvancedBorderStyle" /> property to one of the <see cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" /> values.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border style of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the border style of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -202,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get the bounds of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Get the bounds of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -225,14 +206,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Change the appearance of the current <see cref="T:System.Windows.Forms.DataGridViewCell" /> by setting the properties of the <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.CellStyle" /> property.</para
-          >
+            >Change the appearance of the current <see cref="T:System.Windows.Forms.DataGridViewCell" /> by setting the properties of the <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.CellStyle" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the cell style of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the cell style of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,14 +230,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ClipBounds" /> property represents the area of the <see cref="T:System.Windows.Forms.DataGridView" /> that needs to be repainted. For example, if a user covers the entire <see cref="T:System.Windows.Forms.DataGridView" /> with another window, and then uncovers it, then <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ClipBounds" /> represents the entire <see cref="T:System.Windows.Forms.DataGridView" />. If a user covers a small area of the <see cref="T:System.Windows.Forms.DataGridView" />, and then uncovers it, then <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ClipBounds" /> represents the small area that was covered.</para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ClipBounds" /> property represents the area of the <see cref="T:System.Windows.Forms.DataGridView" /> that needs to be repainted. For example, if a user covers the entire <see cref="T:System.Windows.Forms.DataGridView" /> with another window, and then uncovers it, then <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ClipBounds" /> represents the entire <see cref="T:System.Windows.Forms.DataGridView" />. If a user covers a small area of the <see cref="T:System.Windows.Forms.DataGridView" />, and then uncovers it, then <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ClipBounds" /> represents the small area that was covered.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the area of the <see cref="T:System.Windows.Forms.DataGridView" /> that needs to be repainted.</para
-          >
+            >Gets the area of the <see cref="T:System.Windows.Forms.DataGridView" /> that needs to be repainted.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -277,14 +254,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ColumnIndex" /> property returns -1 when a row header cell is being painted.</para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ColumnIndex" /> property returns -1 when a row header cell is being painted.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the column index of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the column index of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -303,14 +278,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the current <see cref="T:System.Windows.Forms.DataGridViewCell" /> is a row header cell, the <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ErrorText" /> property is the same as the <see cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" /> property of the <see cref="T:System.Windows.Forms.DataGridViewRow" />. When the current cell is a data cell, <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ErrorText" /> is the same as the <see cref="P:System.Windows.Forms.DataGridViewCell.ErrorText" /> property of the <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >When the current <see cref="T:System.Windows.Forms.DataGridViewCell" /> is a row header cell, the <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ErrorText" /> property is the same as the <see cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" /> property of the <see cref="T:System.Windows.Forms.DataGridViewRow" />. When the current cell is a data cell, <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.ErrorText" /> is the same as the <see cref="P:System.Windows.Forms.DataGridViewCell.ErrorText" /> property of the <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string that represents an error message for the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets a string that represents an error message for the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -329,14 +302,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.FormattedValue" /> property contains the value of the cell after the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Format" /> or <see cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" /> property has been applied to it, and after the <see cref="E:System.Windows.Forms.DataGridView.CellFormatting" /> event has been handled.</para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.FormattedValue" /> property contains the value of the cell after the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Format" /> or <see cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" /> property has been applied to it, and after the <see cref="E:System.Windows.Forms.DataGridView.CellFormatting" /> event has been handled.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the formatted value of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the formatted value of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -356,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Drawing.Graphics" /> used to paint the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the <see cref="T:System.Drawing.Graphics" /> used to paint the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -389,15 +359,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area of the <see cref="T:System.Windows.Forms.DataGridView" /> to be painted.</param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area of the <see cref="T:System.Windows.Forms.DataGridView" /> to be painted.</param>
         <param name="paintParts">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewPaintParts" /> values specifying the parts to paint.</param
-        >
+          />A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewPaintParts" /> values specifying the parts to paint.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -428,15 +396,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area of the <see cref="T:System.Windows.Forms.DataGridView" /> to be painted.</param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area of the <see cref="T:System.Windows.Forms.DataGridView" /> to be painted.</param>
         <param name="cellsPaintSelectionBackground">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to paint the background of the specified bounds with the color of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" /> property of the <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />; false to paint the background of the specified bounds with the color of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.BackColor" /> property of the <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />.</param
-        >
+          />true to paint the background of the specified bounds with the color of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" /> property of the <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />; false to paint the background of the specified bounds with the color of the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.BackColor" /> property of the <see cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -466,8 +432,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area of the <see cref="T:System.Windows.Forms.DataGridView" /> to be painted.</param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" /> that specifies the area of the <see cref="T:System.Windows.Forms.DataGridView" /> to be painted.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -507,14 +472,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.RowIndex" /> property returns -1 when a column header is being painted.</para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.RowIndex" /> property returns -1 when a column header is being painted.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the row index of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the row index of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -537,8 +500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the state of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the state of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -557,14 +519,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.Value" /> property contains the value of the cell before any formatting occurs.</para
-          >
+            >The <see cref="P:System.Windows.Forms.DataGridViewCellPaintingEventArgs.Value" /> property contains the value of the cell before any formatting occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para
-          >
+            >Gets the value of the current <see cref="T:System.Windows.Forms.DataGridViewCell" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

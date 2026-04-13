@@ -13,8 +13,7 @@
     <IsShipping>true</IsShipping>
     <BuildingOutsideDiagnostics>false</BuildingOutsideDiagnostics>
     <BuildingOutsideDiagnostics Condition="'$(GitHubRepositoryName)' != 'diagnostics'"
-      >true</BuildingOutsideDiagnostics
-    >
+      >true</BuildingOutsideDiagnostics>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(BuildingOutsideDiagnostics)">

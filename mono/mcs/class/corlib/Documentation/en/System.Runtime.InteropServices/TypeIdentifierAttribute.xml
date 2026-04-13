@@ -25,21 +25,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> attribute is primarily emitted by compilers. It serves two purposes: </para
-      >
+        >The <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> attribute is primarily emitted by compilers. It serves two purposes: </para>
       <list type="bullet">
         <item>
           <para>For all imported types, it indicates that the type is intended to be used for type equivalence. </para>
         </item>
         <item>
           <para
-            >For types that don’t have GUIDs in their type library, it has a constructor that takes two strings (<paramref name="scope" /> and <paramref name="identifier" />). These are combined into a GUID and become the key that is used for type equivalence.</para
-          >
+            >For types that don’t have GUIDs in their type library, it has a constructor that takes two strings (<paramref name="scope" /> and <paramref name="identifier" />). These are combined into a GUID and become the key that is used for type equivalence.</para>
         </item>
       </list>
       <para
-        >Type equivalence is discussed in the <see cref="M:System.Type.IsEquivalentTo(System.Type)" /> topic.</para
-      >
+        >Type equivalence is discussed in the <see cref="M:System.Type.IsEquivalentTo(System.Type)" /> topic.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -92,32 +88,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="scope" /> and <paramref name="identifier" /> parameters are used to establish type equivalence. They are combined into a GUID and become the key that is used for type equivalence. This constructor is particularly useful for types that do not have GUIDs in their type library.</para
-          >
+            >The <paramref name="scope" /> and <paramref name="identifier" /> parameters are used to establish type equivalence. They are combined into a GUID and become the key that is used for type equivalence. This constructor is particularly useful for types that do not have GUIDs in their type library.</para>
           <para
-            >The <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> class internally maintains the <paramref name="scope" /> and <paramref name="identifier" /> parameters as private members.</para
-          >
+            >The <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> class internally maintains the <paramref name="scope" /> and <paramref name="identifier" /> parameters as private members.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> class with the specified scope and identifier. </para
-          >
+            >Creates a new instance of the <see cref="T:System.Runtime.InteropServices.TypeIdentifierAttribute" /> class with the specified scope and identifier. </para>
         </summary>
         <param name="scope">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first type equivalence string.</param
-        >
+          />The first type equivalence string.</param>
         <param name="identifier">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second type equivalence string.</param
-        >
+          />The second type equivalence string.</param>
       </Docs>
     </Member>
     <Member MemberName="Identifier">
@@ -136,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <paramref name="identifier" /> parameter that was passed to the <see cref="M:System.Runtime.InteropServices.TypeIdentifierAttribute.#ctor(System.String,System.String)" /> constructor.</para
-          >
+            >Gets the value of the <paramref name="identifier" /> parameter that was passed to the <see cref="M:System.Runtime.InteropServices.TypeIdentifierAttribute.#ctor(System.String,System.String)" /> constructor.</para>
         </summary>
       </Docs>
     </Member>
@@ -157,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <paramref name="scope" /> parameter that was passed to the <see cref="M:System.Runtime.InteropServices.TypeIdentifierAttribute.#ctor(System.String,System.String)" /> constructor.</para
-          >
+            >Gets the value of the <paramref name="scope" /> parameter that was passed to the <see cref="M:System.Runtime.InteropServices.TypeIdentifierAttribute.#ctor(System.String,System.String)" /> constructor.</para>
         </summary>
       </Docs>
     </Member>

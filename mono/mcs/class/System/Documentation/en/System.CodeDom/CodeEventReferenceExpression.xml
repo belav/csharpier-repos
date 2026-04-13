@@ -34,11 +34,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> can be used to represent a reference to an event.</para
-      >
+        <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> can be used to represent a reference to an event.</para>
       <para
-        >The <see cref="P:System.CodeDom.CodeEventReferenceExpression.TargetObject" /> property specifies the object that contains the event. The <see cref="P:System.CodeDom.CodeEventReferenceExpression.EventName" /> property specifies the name of the event.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeEventReferenceExpression.TargetObject" /> property specifies the object that contains the event. The <see cref="P:System.CodeDom.CodeEventReferenceExpression.EventName" /> property specifies the name of the event.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -95,23 +92,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> class using the specified target object and event name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEventReferenceExpression" /> class using the specified target object and event name.</para>
         </summary>
         <param name="targetObject">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the event. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> that indicates the object that contains the event. </param>
         <param name="eventName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to reference. </param
-        >
+          />The name of the event to reference. </param>
       </Docs>
     </Member>
     <Member MemberName="EventName">

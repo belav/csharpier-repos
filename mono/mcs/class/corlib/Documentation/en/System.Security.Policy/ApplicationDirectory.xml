@@ -65,16 +65,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationDirectory" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.ApplicationDirectory" /> class.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path of the application directory. </param
-        >
+          />The path of the application directory. </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -98,14 +96,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new copy of the <see cref="T:System.Security.Policy.ApplicationDirectory" />.</para
-          >
+            >Creates a new copy of the <see cref="T:System.Security.Policy.ApplicationDirectory" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new, identical copy of the <see cref="T:System.Security.Policy.ApplicationDirectory" />.</para
-          >
+            >A new, identical copy of the <see cref="T:System.Security.Policy.ApplicationDirectory" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -166,8 +162,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object of same type as the current evidence object. </param
-        >
+          />An object of same type as the current evidence object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -309,14 +304,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the state of the <see cref="T:System.Security.Policy.ApplicationDirectory" /> evidence object.</para
-          >
+            >Gets a string representation of the state of the <see cref="T:System.Security.Policy.ApplicationDirectory" /> evidence object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A representation of the state of the <see cref="T:System.Security.Policy.ApplicationDirectory" /> evidence object.</para
-          >
+            >A representation of the state of the <see cref="T:System.Security.Policy.ApplicationDirectory" /> evidence object.</para>
         </returns>
       </Docs>
     </Member>

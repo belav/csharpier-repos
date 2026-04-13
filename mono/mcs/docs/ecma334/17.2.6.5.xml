@@ -24,8 +24,7 @@ class Test
    }  
 }  
 ]]>
-      </code_example>shows a class C that contains a nested class Nested. Within Nested, themethod G calls the static method F defined in C, and F has private declared accessibility. end example]</example
-    >
+      </code_example>shows a class C that contains a nested class Nested. Within Nested, themethod G calls the static method F defined in C, and F has private declared accessibility. end example]</example>
   </paragraph>
   <paragraph
     >A nested type also may access protected members defined in a base type of its containing type. <example
@@ -56,7 +55,6 @@ class Test
    }  
 }  
 ]]>
-      </code_example>the nested class Derived.Nested accesses the protected method F defined in Derived's base class, Base, by calling through an instance of Derived. end example]</example
-    >
+      </code_example>the nested class Derived.Nested accesses the protected method F defined in Derived's base class, Base, by calling through an instance of Derived. end example]</example>
   </paragraph>
 </clause>

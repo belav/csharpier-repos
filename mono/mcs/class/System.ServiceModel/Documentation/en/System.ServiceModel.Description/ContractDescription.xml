@@ -23,11 +23,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A indigo2 contract is a collection of operations that specifies what the endpoint communicates to the outside world. Each operation is a message exchange. For example, a request message and an associated reply message form a request/reply message exchange. </para>
       <para
-        >A <see cref="T:System.ServiceModel.Description.ContractDescription" /> object is used to describe indigo2 contracts and their operations. Within a <see cref="T:System.ServiceModel.Description.ContractDescription" />, each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" /> that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" /> also describes the messages that make up the operation using a <see cref="T:System.ServiceModel.Description.MessageDescriptionCollection" />. <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see cref="T:System.ServiceModel.ServiceContractAttribute" /> and its methods that correspond to endpoint operations are marked with the <see cref="T:System.ServiceModel.OperationContractAttribute" />. </para
-      >
+        >A <see cref="T:System.ServiceModel.Description.ContractDescription" /> object is used to describe indigo2 contracts and their operations. Within a <see cref="T:System.ServiceModel.Description.ContractDescription" />, each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" /> that describes aspects of the each operation that is part of the contract, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" /> also describes the messages that make up the operation using a <see cref="T:System.ServiceModel.Description.MessageDescriptionCollection" />. <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see cref="T:System.ServiceModel.ServiceContractAttribute" /> and its methods that correspond to endpoint operations are marked with the <see cref="T:System.ServiceModel.OperationContractAttribute" />. </para>
       <para
-        >A <newTerm>duplex</newTerm> contract defines the following logical sets of operations: </para
-      >
+        >A <newTerm>duplex</newTerm> contract defines the following logical sets of operations: </para>
       <list type="bullet">
         <item>
           <para>A set that the service exposes for the client to call. </para>
@@ -37,11 +35,9 @@
         </item>
       </list>
       <para
-        >The programming model for defining a duplex contract is to split each set in a separate interface and apply attributes to each interface. In this case, <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to each of the interfaces that groups them into one duplex contract. </para
-      >
+        >The programming model for defining a duplex contract is to split each set in a separate interface and apply attributes to each interface. In this case, <see cref="T:System.ServiceModel.Description.ContractDescription" /> contains a reference to each of the interfaces that groups them into one duplex contract. </para>
       <para
-        >Similar to bindings, each contract has a <see cref="P:System.ServiceModel.Description.ContractDescription.Name" /> and <see cref="P:System.ServiceModel.Description.ContractDescription.Namespace" /> that uniquely identify it in the metadata of the service.</para
-      >
+        >Similar to bindings, each contract has a <see cref="P:System.ServiceModel.Description.ContractDescription.Name" /> and <see cref="P:System.ServiceModel.Description.ContractDescription.Namespace" /> that uniquely identify it in the metadata of the service.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -67,16 +63,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class with a specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class with a specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the contract.</param
-        >
+          />The name of the contract.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -101,23 +95,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class with a namespace-qualified name specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ContractDescription" /> class with a namespace-qualified name specified.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the contract.</param
-        >
+          />The name of the contract.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace that contains the name of the contract.</param
-        >
+          />The namespace that contains the name of the contract.</param>
       </Docs>
     </Member>
     <Member MemberName="Behaviors">
@@ -163,8 +154,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.Description.ContractDescription.CallbackContractType" /> property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para
-          >
+            >The <see cref="P:System.ServiceModel.Description.ContractDescription.CallbackContractType" /> property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -231,8 +221,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para
-          >
+            >The <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" /> property is not serializable, so it is only available when the description is bound to runtime. It cannot be imported or exported as part of the metadata.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -263,8 +252,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para
-          >
+            >The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -273,16 +261,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract.</para
-          >
+            >The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract.</para>
         </returns>
         <param name="contractType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of contract.</param
-        >
+          />The <see cref="T:System.Type" /> of contract.</param>
       </Docs>
     </Member>
     <Member MemberName="GetContract">
@@ -309,8 +295,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para
-          >
+            >The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -319,23 +304,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract and service implementation.</para
-          >
+            >The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract and service implementation.</para>
         </returns>
         <param name="contractType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of contract.</param
-        >
+          />The <see cref="T:System.Type" /> of contract.</param>
         <param name="serviceImplementation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> that implements the service.</param
-        >
+          />The <see cref="T:System.Object" /> that implements the service.</param>
       </Docs>
     </Member>
     <Member MemberName="GetContract">
@@ -362,8 +344,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para
-          >
+            >The difference between the <see cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" /> overloads is that the ones with two arguments allow you to find attributes from the service (for example, <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -372,23 +353,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract and type of service.</para
-          >
+            >The <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the specified type of contract and type of service.</para>
         </returns>
         <param name="contractType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of contract.</param
-        >
+          />The <see cref="T:System.Type" /> of contract.</param>
         <param name="serviceType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> of service.</param
-        >
+          />The <see cref="T:System.Type" /> of service.</param>
       </Docs>
     </Member>
     <Member MemberName="GetInheritedContracts">
@@ -417,8 +395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <see cref="T:System.ServiceModel.Description.ContractDescription" /> that is inherited by the current contract description.</para
-          >
+            >The <see cref="T:System.Collections.ObjectModel.Collection`1" /> of type <see cref="T:System.ServiceModel.Description.ContractDescription" /> that is inherited by the current contract description.</para>
         </returns>
       </Docs>
     </Member>
@@ -437,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" /> is set, the <see cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" /> property is set to true.</para
-          >
+            >When the <see cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" /> is set, the <see cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" /> property is set to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -533,8 +509,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" /> is set, the <see cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" /> property is set to true.</para
-          >
+            >When the <see cref="P:System.ServiceModel.Description.ContractDescription.ProtectionLevel" /> is set, the <see cref="P:System.ServiceModel.Description.ContractDescription.HasProtectionLevel" /> property is set to true.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -565,9 +540,7 @@
           <para
             >A reliable session is a way of correlating a set of messages exchanged between two or more endpoints (using the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96680"
-              >WS-ReliableMessaging</see
-            > specification) to provide assurances of the reliability of the connection. </para
-          >
+              >WS-ReliableMessaging</see> specification) to provide assurances of the reliability of the connection. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

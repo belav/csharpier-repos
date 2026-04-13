@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Principal.WindowsAccountType" /> enumeration is used by the <see cref="T:System.Security.Principal.WindowsIdentity" /> class. </para
-      >
+        >The <see cref="T:System.Security.Principal.WindowsAccountType" /> enumeration is used by the <see cref="T:System.Security.Principal.WindowsIdentity" /> class. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

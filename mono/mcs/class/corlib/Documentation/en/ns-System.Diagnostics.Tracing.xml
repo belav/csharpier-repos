@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="N:System.Diagnostics.Tracing" /> namespace provides types and members that enable you to create strongly typed events to be captured by event tracing for Windows (ETW).</para
-      >
+        >The <see cref="N:System.Diagnostics.Tracing" /> namespace provides types and members that enable you to create strongly typed events to be captured by event tracing for Windows (ETW).</para>
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />

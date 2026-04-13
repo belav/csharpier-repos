@@ -32,13 +32,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This generic class enables more advanced scenarios where there is a requirement to create a channel factory that can be used to create more than one type of channel.</para>
       <para
-        >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see cref="T:System.ServiceModel.ChannelFactory" /> prior to the creation of any channel. See the example section for a code sample.</para
-      >
+        >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see cref="T:System.ServiceModel.ChannelFactory" /> prior to the creation of any channel. See the example section for a code sample.</para>
       <para
         >Frequently client or calling applications (for example, middle-tier applications are client applications, too) using this type also have complex state management needs as well as performance needs. For more information about these scenarios, please see <format type="text/html">
           <a href="f9714a64-d0ae-4a98-bca0-5d370fdbd631">Middle-Tier Client Applications</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +88,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class.  </para>
         </summary>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Binding" /> specified for the channels produced by the factory.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Binding" /> specified for the channels produced by the factory.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -127,16 +122,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class that produces channels with a specified endpoint.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class that produces channels with a specified endpoint.</para>
         </summary>
         <param name="endpoint">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> for the channels produced by the factory.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> for the channels produced by the factory.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,16 +156,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class with a specified endpoint configuration name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class with a specified endpoint configuration name.</para>
         </summary>
         <param name="endpointConfigurationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration name used for the endpoint.</param
-        >
+          />The configuration name used for the endpoint.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -193,14 +184,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to pass the channel type information programmatically rather than using an application configuration file. The <paramref name="channelType" /> parameter must be an interface.</para
-          >
+            >Use this constructor when you want to pass the channel type information programmatically rather than using an application configuration file. The <paramref name="channelType" /> parameter must be an interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -229,23 +218,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class with a specified binding and endpoint address.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class with a specified binding and endpoint address.</para>
         </summary>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param>
         <param name="remoteAddress">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -273,23 +259,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class with a specified binding and remote address.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class with a specified binding and remote address.</para>
         </summary>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param>
         <param name="remoteAddress">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The address that provides the location of the service.</param
-        >
+          />The address that provides the location of the service.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -314,23 +297,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class associated with a specified name for the endpoint configuration and remote address.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" /> class associated with a specified name for the endpoint configuration and remote address.</para>
         </summary>
         <param name="endpointConfigurationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration name used for the endpoint.</param
-        >
+          />The configuration name used for the endpoint.</param>
         <param name="remoteAddress">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateChannel">
@@ -351,8 +331,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a channel of type <paramref name="TChannel" />, the generic parameter for the class.</para
-          >
+            >Creates a channel of type <paramref name="TChannel" />, the generic parameter for the class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -361,8 +340,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para
-          >
+            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para>
         </returns>
       </Docs>
     </Member>
@@ -394,16 +372,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para
-          >
+            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para>
         </returns>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateChannel">
@@ -434,16 +410,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para
-          >
+            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para>
         </returns>
         <param name="endpointConfigurationName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the endpoint configuration used for the service.</param
-        >
+          />The name of the endpoint configuration used for the service.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateChannel">
@@ -476,16 +450,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para
-          >
+            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para>
         </returns>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateChannel">
@@ -517,23 +489,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para
-          >
+            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para>
         </returns>
         <param name="address">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param
-        >
+          />The <see cref="T:System.ServiceModel.EndpointAddress" /> that provides the location of the service.</param>
         <param name="via">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> that contains the transport address to which the channel sends messages.</param
-        >
+          />The <see cref="T:System.Uri" /> that contains the transport address to which the channel sends messages.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateChannel">
@@ -567,23 +536,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para
-          >
+            >The <paramref name="TChannel" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> created by the factory.</para>
         </returns>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.Binding" /> used to configure the endpoint.</param>
         <param name="via">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> that contains the transport address to which the channel sends messages.</param
-        >
+          />The <see cref="T:System.Uri" /> that contains the transport address to which the channel sends messages.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDescription">
@@ -612,8 +578,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> of the service.</para
-          >
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> of the service.</para>
         </returns>
       </Docs>
     </Member>

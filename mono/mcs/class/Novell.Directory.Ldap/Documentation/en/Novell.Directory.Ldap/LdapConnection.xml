@@ -399,8 +399,7 @@
       <Docs>
         <summary>Synchronously adds an entry to the directory.</summary>
         <param name="entry"
-          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
-        >
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -420,8 +419,7 @@
       <Docs>
         <summary>Synchronously adds an entry to the directory, using the specified constraints.</summary>
         <param name="entry"
-          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
-        >
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
         <param name="cons">Constraints specific to the operation.</param>
         <remarks>To be added.</remarks>
       </Docs>
@@ -442,11 +440,9 @@
       <Docs>
         <summary>Asynchronously adds an entry to the directory.</summary>
         <param name="entry"
-          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
-        >
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
         <param name="queue"
-          >Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param
-        >
+          >Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -468,11 +464,9 @@
       <Docs>
         <summary>Asynchronously adds an entry to the directory, using the specified constraints.</summary>
         <param name="entry"
-          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
-        >
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
         <param name="queue"
-          >Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param
-        >
+          >Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param>
         <param name="cons">Constraints specific to the operation.</param>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>

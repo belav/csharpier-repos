@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.NetPeerTcpBinding,System.ServiceModel.Configuration.NetPeerTcpBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.NetPeerTcpBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.NetPeerTcpBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >System.ServiceModel.Configuration.NetPeerTcpBindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.NetPeerTcpBindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingCollectionElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingCollectionElement" /> class. </para>
         </summary>
       </Docs>
     </Member>

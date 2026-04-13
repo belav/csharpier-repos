@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeLinePragma" /> can be used to represent a specific location within a file. This type of object is often used after compilation by debugging tools to store locations of associated code elements, such as position references associated with compiler warnings and errors.</para
-      >
+        <see cref="T:System.CodeDom.CodeLinePragma" /> can be used to represent a specific location within a file. This type of object is often used after compilation by debugging tools to store locations of associated code elements, such as position references associated with compiler warnings and errors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -55,14 +54,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor you should also set the <see cref="P:System.CodeDom.CodeLinePragma.LineNumber" /> and <see cref="P:System.CodeDom.CodeLinePragma.FileName" /> properties.</para
-          >
+            >If you use this constructor you should also set the <see cref="P:System.CodeDom.CodeLinePragma.LineNumber" /> and <see cref="P:System.CodeDom.CodeLinePragma.FileName" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -91,23 +88,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" /> class.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The file name of the associated file. </param
-        >
+          />The file name of the associated file. </param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line number to store a reference to. </param
-        >
+          />The line number to store a reference to. </param>
       </Docs>
     </Member>
     <Member MemberName="FileName">

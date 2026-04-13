@@ -4,11 +4,9 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Data.OleDb"
 >
   <_allowBlankPassword xmlns="http://schemas.datacontract.org/2004/07/System.Data.Common"
-    >false</_allowBlankPassword
-  >
+    >false</_allowBlankPassword>
   <_isUnrestricted xmlns="http://schemas.datacontract.org/2004/07/System.Data.Common"
-    >false</_isUnrestricted
-  >
+    >false</_isUnrestricted>
   <_keyvalues
     xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"
     i:nil="true"

@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used to specify the method used to authenticate client requests being processed by <see cref="T:System.Net.HttpListener" /> objects.</para
-      >
+        >This enumeration is used to specify the method used to authenticate client requests being processed by <see cref="T:System.Net.HttpListener" /> objects.</para>
       <para>Note   Basic authentication requires the exchange of a password and should therefore be avoided except in the case of secure, encrypted connections.</para>
     </remarks>
     <summary>
@@ -76,9 +75,7 @@
           <para
             >For additional information, see RFC2617 – HTTP Authentication: Basic and Digest Authentication. This document is available at <see
               cref="http://www.rfc-editor.org/"
-              >http://www.rfc-editor.org</see
-            >.</para
-          >
+              >http://www.rfc-editor.org</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -107,8 +104,7 @@
           <para
             >For additional information, see RFC2617 – HTTP Authentication: Basic and Digest Authentication. This document is available at <see
               cref="http://www.rfc-editor.org/"
-              >http://www.rfc-editor.org</see
-            >
+              >http://www.rfc-editor.org</see>
           </para>
         </remarks>
         <summary>
@@ -180,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No authentication is allowed. A client requesting an <see cref="T:System.Net.HttpListener" /> object with this flag set will always receive a 403 Forbidden status. Use this flag when a resource should never be served to a client.</para
-          >
+            >No authentication is allowed. A client requesting an <see cref="T:System.Net.HttpListener" /> object with this flag set will always receive a 403 Forbidden status. Use this flag when a resource should never be served to a client.</para>
         </summary>
       </Docs>
     </Member>

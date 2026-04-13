@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -66,16 +65,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" /> class.  </para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param
-        >
+          />The configuration name of the binding. This value should be unique because it is used as identification for the binding.</param>
       </Docs>
     </Member>
     <Member MemberName="AllowCookies">
@@ -98,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to true is useful when a client is interacting with one web service that uses cookies.  If you are accessing multiple services with the same cookie, set <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to false and you will have to manually add the cookie header to each outgoing message. The following code shows how to do this: </para
-          >
+            >Setting <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to true is useful when a client is interacting with one web service that uses cookies.  If you are accessing multiple services with the same cookie, set <see cref="P:System.ServiceModel.BaseHttpBinding.AllowCookies" /> to false and you will have to manually add the cookie header to each outgoing message. The following code shows how to do this: </para>
           <code>MyWebServiceClient client = new MyWebServiceClient();
 
         using (new OperationContextScope(client.InnerChannel))
@@ -188,8 +184,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A collection of binding elements.</param
-        >
+          />A collection of binding elements.</param>
       </Docs>
     </Member>
     <Member MemberName="Properties">
@@ -214,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para
-          >
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
         </summary>
       </Docs>
     </Member>

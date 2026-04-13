@@ -26,11 +26,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default, <see cref="T:System.Object" /> type arguments are marshaled as a VARIANT type, where the object type determines the VARTYPE value of the VARIANT.</para
-      >
+        >By default, <see cref="T:System.Object" /> type arguments are marshaled as a VARIANT type, where the object type determines the VARTYPE value of the VARIANT.</para>
       <para
-        >The <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> type must to be passed as an <see cref="T:System.Object" /> type to be marshaled as a VARIANT of type VT_ERROR, otherwise the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> type is marshaled as an integer.</para
-      >
+        >The <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> type must to be passed as an <see cref="T:System.Object" /> type to be marshaled as a VARIANT of type VT_ERROR, otherwise the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> type is marshaled as an integer.</para>
       <para>The following table illustrates marshaling in a managed call to a native function, using platform invoke.</para>
       <list type="table">
         <listheader>
@@ -130,8 +128,7 @@
         </item>
       </list>
       <para
-        >Note that <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> objects are not marshaled as type VT_ERROR after they are passed back from COM.  A single value is marshaled back from COM as type VT_I4, while arrays are marshaled back from COM as type VT_UI4.  </para
-      >
+        >Note that <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> objects are not marshaled as type VT_ERROR after they are passed back from COM.  A single value is marshaled back from COM as type VT_I4, while arrays are marshaled back from COM as type VT_UI4.  </para>
       <para>For more information on VT_ERROR, please see the existing documentation for VARENUM::VT_ERROR in the MSDN library.</para>
     </remarks>
     <summary>
@@ -161,16 +158,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> class with the HRESULT that corresponds to the exception supplied.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> class with the HRESULT that corresponds to the exception supplied.</para>
         </summary>
         <param name="e">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception to be converted to an error code. </param
-        >
+          />The exception to be converted to an error code. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -194,16 +189,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> class with the HRESULT of the error.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> class with the HRESULT of the error.</para>
         </summary>
         <param name="errorCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The HRESULT of the error. </param
-        >
+          />The HRESULT of the error. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -227,16 +220,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> class with an object containing the HRESULT of the error.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ErrorWrapper" /> class with an object containing the HRESULT of the error.</para>
         </summary>
         <param name="errorCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object containing the HRESULT of the error. </param
-        >
+          />The object containing the HRESULT of the error. </param>
       </Docs>
     </Member>
     <Member MemberName="ErrorCode">

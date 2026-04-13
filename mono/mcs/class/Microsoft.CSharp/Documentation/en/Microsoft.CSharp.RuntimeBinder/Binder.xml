@@ -61,29 +61,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="operation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The binary operation kind.</param
-        >
+          />The binary operation kind.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="Convert">
@@ -122,22 +118,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type to convert to.</param
-        >
+          />The type to convert to.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
       </Docs>
     </Member>
     <Member MemberName="GetIndex">
@@ -179,22 +172,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="GetMember">
@@ -237,29 +227,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to get.</param
-        >
+          />The name of the member to get.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="Invoke">
@@ -301,22 +287,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="InvokeConstructor">
@@ -358,22 +341,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="InvokeMember">
@@ -420,36 +400,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to invoke.</param
-        >
+          />The name of the member to invoke.</param>
         <param name="typeArguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The list of type arguments specified for this invoke.</param
-        >
+          />The list of type arguments specified for this invoke.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="IsEvent">
@@ -488,22 +463,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the event to look for.</param
-        >
+          />The name of the event to look for.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
       </Docs>
     </Member>
     <Member MemberName="SetIndex">
@@ -545,22 +517,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="SetMember">
@@ -603,29 +572,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member to set.</param
-        >
+          />The name of the member to set.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
     <Member MemberName="UnaryOperation">
@@ -668,29 +633,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The flags with which to initialize the binder.</param
-        >
+          />The flags with which to initialize the binder.</param>
         <param name="operation">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unary operation kind.</param
-        >
+          />The unary operation kind.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param
-        >
+          />The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
         <param name="argumentInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param
-        >
+          />The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
       </Docs>
     </Member>
   </Members>

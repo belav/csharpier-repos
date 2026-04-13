@@ -10,12 +10,10 @@
     <!-- Can't use NativeAOT in source build yet https://github.com/dotnet/runtime/issues/66859 -->
     <NativeAotSupported Condition="'$(DotNetBuildFromSource)' == 'true'">false</NativeAotSupported>
     <NativeAotSupported Condition="$(OutputRID.StartsWith('tizen')) == 'true'"
-      >false</NativeAotSupported
-    >
+      >false</NativeAotSupported>
     <!-- Publish crossgen2 as a single-file app on native-OS builds. Cross-OS NativeAOT compilation is not supported yet -->
     <NativeAotSupported Condition="'$(CrossBuild)' == 'true' and '$(TargetOS)' != '$(HostOS)'"
-      >false</NativeAotSupported
-    >
+      >false</NativeAotSupported>
     <PublishTrimmed>true</PublishTrimmed>
     <RuntimeIdentifier>$(PackageRID)</RuntimeIdentifier>
     <SelfContained>true</SelfContained>
@@ -31,12 +29,10 @@
     <!-- Disable crossgen on NetBSD, illumos, Solaris, and Haiku for now. This can be revisited when we have full support. -->
     <PublishReadyToRun
       Condition="'$(TargetOS)' == 'netbsd' Or '$(TargetOS)' == 'illumos' Or '$(TargetOS)' == 'solaris' Or '$(TargetOS)' == 'haiku'"
-      >false</PublishReadyToRun
-    >
+      >false</PublishReadyToRun>
     <!-- Disable crossgen on FreeBSD when cross building from Linux. -->
     <PublishReadyToRun Condition="'$(TargetOS)' == 'freebsd' and '$(CrossBuild)' == 'true'"
-      >false</PublishReadyToRun
-    >
+      >false</PublishReadyToRun>
     <PublishReadyToRunComposite>true</PublishReadyToRunComposite>
   </PropertyGroup>
 
@@ -54,12 +50,10 @@
     <IlcToolsPath>$(CoreCLRILCompilerDir)</IlcToolsPath>
     <IlcToolsPath
       Condition="'$(CrossBuild)' == 'true' or '$(BuildArchitecture)' != '$(TargetArchitecture)' or '$(EnableNativeSanitizers)' != ''"
-      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath
-    >
+      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath>
     <SysRoot
       Condition="('$(CrossBuild)' == 'true' or '$(BuildArchitecture)' != '$(TargetArchitecture)') and '$(HostOS)' != 'windows'"
-      >$(ROOTFS_DIR)</SysRoot
-    >
+      >$(ROOTFS_DIR)</SysRoot>
     <IlcBuildTasksPath>$(CoreCLRILCompilerDir)netstandard/ILCompiler.Build.Tasks.dll</IlcBuildTasksPath>
     <IlcSdkPath>$(CoreCLRAotSdkDir)</IlcSdkPath>
     <IlcFrameworkPath>$(MicrosoftNetCoreAppRuntimePackRidLibTfmDir)</IlcFrameworkPath>
@@ -97,25 +91,20 @@
       <CrossCompileArch Condition="$(CrossCompileRid.EndsWith('-x64'))">x86_64</CrossCompileArch>
       <CrossCompileArch
         Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' != 'true'"
-        >aarch64</CrossCompileArch
-      >
+        >aarch64</CrossCompileArch>
       <CrossCompileArch
         Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' == 'true'"
-        >arm64</CrossCompileArch
-      >
+        >arm64</CrossCompileArch>
 
       <TargetTriple />
       <TargetTriple Condition="'$(CrossCompileArch)' != ''"
-        >$(CrossCompileArch)-linux-gnu</TargetTriple
-      >
+        >$(CrossCompileArch)-linux-gnu</TargetTriple>
       <TargetTriple
         Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('linux-musl')) or $(CrossCompileRid.StartsWith('alpine')))"
-        >$(CrossCompileArch)-alpine-linux-musl</TargetTriple
-      >
+        >$(CrossCompileArch)-alpine-linux-musl</TargetTriple>
       <TargetTriple
         Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('freebsd')))"
-        >$(CrossCompileArch)-unknown-freebsd12</TargetTriple
-      >
+        >$(CrossCompileArch)-unknown-freebsd12</TargetTriple>
     </PropertyGroup>
 
     <ItemGroup>

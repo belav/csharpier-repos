@@ -6,36 +6,28 @@
     <RunAnalyzers>false</RunAnalyzers>
     <DebuggerHost
       Condition="'$(DebuggerHost)' == '' or ('$(DebuggerHost)' != 'chrome' and '$(DebuggerHost)' != 'firefox')"
-      >chrome</DebuggerHost
-    >
+      >chrome</DebuggerHost>
     <DefineConstants Condition="'$(DebuggerHost)' == 'chrome'"
-      >$(DefineConstants);RUN_IN_CHROME</DefineConstants
-    >
+      >$(DefineConstants);RUN_IN_CHROME</DefineConstants>
     <DefineConstants Condition="'$(RuntimeConfiguration)' == 'release'"
-      >$(DefineConstants);RELEASE_RUNTIME</DefineConstants
-    >
+      >$(DefineConstants);RELEASE_RUNTIME</DefineConstants>
     <BrowserHost Condition="$([MSBuild]::IsOSPlatform('windows'))">windows</BrowserHost>
     <!-- '/.dockerenv' - is to check if this is running in a codespace -->
     <_ProvisionBrowser
       Condition="'$(ContinuousIntegrationBuild)' == 'true' or Exists('/.dockerenv')"
-      >true</_ProvisionBrowser
-    >
+      >true</_ProvisionBrowser>
     <InstallChromeForTests
       Condition="'$(InstallChromeForTests)' == '' and '$(DebuggerHost)' == 'chrome' and '$(_ProvisionBrowser)' == 'true'"
-      >true</InstallChromeForTests
-    >
+      >true</InstallChromeForTests>
     <InstallFirefoxForTests
       Condition="'$(InstallFirefoxForTests)' == '' and '$(DebuggerHost)' == 'firefox' and '$(_ProvisionBrowser)' == 'true'"
-      >true</InstallFirefoxForTests
-    >
+      >true</InstallFirefoxForTests>
 
     <!-- Set RunSettingsFilePath property which is read by VSTest. -->
     <RunSettingsFilePath Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-      >$(OutputPath).runsettings</RunSettingsFilePath
-    >
+      >$(OutputPath).runsettings</RunSettingsFilePath>
     <RunSettingsFilePath Condition="'$(ContinuousIntegrationBuild)' != 'true'"
-      >$(ArtifactsObjDir)vscode\.runsettings</RunSettingsFilePath
-    >
+      >$(ArtifactsObjDir)vscode\.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <Import Project="$(RepositoryEngineeringDir)testing\wasm-provisioning.targets" />
@@ -130,20 +122,16 @@
     <PropertyGroup>
       <DotNetForTests
         Condition="'$(DotNetForTests)' == '' and  $([System.IO.Path]::IsPathRooted($(DotNetTool)))"
-        >$(DotNetTool)</DotNetForTests
-      >
+        >$(DotNetTool)</DotNetForTests>
       <DotNetForTests Condition="'$(DotNetForTests)' == ''"
-        >$([System.IO.Path]::Combine($(DotNetRoot), $(DotNetTool)))</DotNetForTests
-      >
+        >$([System.IO.Path]::Combine($(DotNetRoot), $(DotNetTool)))</DotNetForTests>
 
       <_RunSettingsInputFilePath>$(RepositoryEngineeringDir)testing\.runsettings</_RunSettingsInputFilePath>
       <RunSettingsFileContent>$([System.IO.File]::ReadAllText('$(_RunSettingsInputFilePath)'))</RunSettingsFileContent>
       <RunSettingsFileContent Condition="'$(TestDisableParallelization)' == 'true'"
-        >$(RunSettingsFileContent.Replace('$$MAXCPUCOUNT$$', '1'))</RunSettingsFileContent
-      >
+        >$(RunSettingsFileContent.Replace('$$MAXCPUCOUNT$$', '1'))</RunSettingsFileContent>
       <RunSettingsFileContent Condition="'$(TestDisableParallelization)' != 'true'"
-        >$(RunSettingsFileContent.Replace('$$MAXCPUCOUNT$$', '0'))</RunSettingsFileContent
-      >
+        >$(RunSettingsFileContent.Replace('$$MAXCPUCOUNT$$', '0'))</RunSettingsFileContent>
       <RunSettingsFileContent>$(RunSettingsFileContent.Replace('$$TARGETPLATFORM$$', ''))</RunSettingsFileContent>
       <RunSettingsFileContent>$(RunSettingsFileContent.Replace('$$COVERAGE_INCLUDE$$', '$(CoverageIncludeFilter)')
                                                       .Replace('$$COVERAGE_EXCLUDEBYFILE$$', '$(CoverageExcludeByFileFilter)')

@@ -16,8 +16,7 @@
       <para
         >An <format type="text/html">
           <a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a>
-        </format> element in a project can represent multiple items through the use of wildcards. Therefore, each <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> object does not necessarily represent an <unmanagedCodeEntityReference>Item</unmanagedCodeEntityReference> element in the project.</para
-      >
+        </format> element in a project can represent multiple items through the use of wildcards. Therefore, each <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> object does not necessarily represent an <unmanagedCodeEntityReference>Item</unmanagedCodeEntityReference> element in the project.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,23 +40,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> class based on an <see cref="T:Microsoft.Build.Framework.ITaskItem" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> class based on an <see cref="T:Microsoft.Build.Framework.ITaskItem" /> object.</para>
         </summary>
         <param name="itemName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param
-        >
+          />The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param>
         <param name="taskItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.Framework.ITaskItem" /> from which to create the <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param
-        >
+          />The <see cref="T:Microsoft.Build.Framework.ITaskItem" /> from which to create the <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -79,23 +75,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> class with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" /> and <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" /> property values.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> class with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" /> and <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" /> property values.</para>
         </summary>
         <param name="itemName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param
-        >
+          />The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param>
         <param name="itemInclude">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param
-        >
+          />The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" /> property of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -117,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</para
-          >
+            >Creates a shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the item.</para
-          >
+            >Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the item.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -168,16 +159,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all item metadata on this <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> to the specified <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</para
-          >
+            >Copies all item metadata on this <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> to the specified <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</para>
         </summary>
         <param name="destinationItem">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> to which to copy the item metadata.</param
-        >
+          />The <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> to which to copy the item metadata.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference>Exclude</unmanagedCodeEntityReference> attribute value of the item.</para
-          >
+            >Gets or sets the <unmanagedCodeEntityReference>Exclude</unmanagedCodeEntityReference> attribute value of the item.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,8 +239,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata name.</param
-        >
+          />The item metadata name.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -283,8 +270,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata name.</param
-        >
+          />The item metadata name.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -315,8 +301,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata name.</param
-        >
+          />The item metadata name.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -335,8 +320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference>Include</unmanagedCodeEntityReference> attribute that created the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</para
-          >
+            >Gets or sets the <unmanagedCodeEntityReference>Include</unmanagedCodeEntityReference> attribute that created the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -402,8 +386,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata name.</param
-        >
+          />The item metadata name.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -434,15 +417,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata name.</param
-        >
+          />The item metadata name.</param>
         <param name="metadataValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata value.</param
-        >
+          />The item metadata value.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -474,22 +455,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata name.</param
-        >
+          />The item metadata name.</param>
         <param name="metadataValue">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item metadata value.</param
-        >
+          />The item metadata value.</param>
         <param name="treatMetadataValueAsLiteral">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to treat the metadata as a literal value by escaping all vstecmsbuild special characters; otherwise, false.</param
-        >
+          />true to treat the metadata as a literal value by escaping all vstecmsbuild special characters; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

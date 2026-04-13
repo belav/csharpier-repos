@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.Design.DesignerOptionService" /> class provides a collection of options. Each of these option collections has an indexer that enables it to be further filtered. Each option collection contains its own set of options, as well as a rollup of all of its child options. In the event of a naming conflict between properties, the outermost options object takes precedence. The following <ui>Tools | Options</ui> user interface (UI) structure shows how the outermost options object takes on greater importance:</para
-      >
+        >The <see cref="T:System.ComponentModel.Design.DesignerOptionService" /> class provides a collection of options. Each of these option collections has an indexer that enables it to be further filtered. Each option collection contains its own set of options, as well as a rollup of all of its child options. In the event of a naming conflict between properties, the outermost options object takes precedence. The following <ui>Tools | Options</ui> user interface (UI) structure shows how the outermost options object takes on greater importance:</para>
       <para>
         <ui>WindowsFormsDesigner | General</ui>
       </para>
@@ -48,15 +47,12 @@
         </item>
       </list>
       <para
-        >Given a <see cref="T:System.ComponentModel.Design.IDesignerOptionService" /> named service, to get to the value of the <see cref="P:System.Windows.Forms.Design.ParentControlDesigner.GridSize" /> property, you would make the following call:</para
-      >
+        >Given a <see cref="T:System.ComponentModel.Design.IDesignerOptionService" /> named service, to get to the value of the <see cref="P:System.Windows.Forms.Design.ParentControlDesigner.GridSize" /> property, you would make the following call:</para>
       <para>code reference: IDesignerOptionServiceExample#2</para>
       <para
-        >This works, until you want to move <see cref="P:System.Windows.Forms.Design.ParentControlDesigner.GridSize" /> to another page. Also, <see cref="T:System.ComponentModel.Design.IDesignerOptionService" /> provides no discovery mechanism. If you do not know what string to pass in, the service cannot find the property value.</para
-      >
+        >This works, until you want to move <see cref="P:System.Windows.Forms.Design.ParentControlDesigner.GridSize" /> to another page. Also, <see cref="T:System.ComponentModel.Design.IDesignerOptionService" /> provides no discovery mechanism. If you do not know what string to pass in, the service cannot find the property value.</para>
       <para
-        >The <see cref="T:System.ComponentModel.Design.DesignerOptionService" /> class addresses these issues. You can query collections, and there is a type converter defined on the <see cref="T:System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection" /> object that marks the collection as expandable. With this type converter, you can pass the entire designer option service to a property window and visually inspect the service.</para
-      >
+        >The <see cref="T:System.ComponentModel.Design.DesignerOptionService" /> class addresses these issues. You can query collections, and there is a type converter defined on the <see cref="T:System.ComponentModel.Design.DesignerOptionService.DesignerOptionCollection" /> object that marks the collection as expandable. With this type converter, you can pass the entire designer option service to a property window and visually inspect the service.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -81,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerOptionService" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerOptionService" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -246,15 +241,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The page to which the option is bound.</param
-        >
+          />The page to which the option is bound.</param>
         <param name="valueName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the option value.</param
-        >
+          />The name of the option value.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.Design.IDesignerOptionService.SetOptionValue">
@@ -290,22 +283,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The page to which the option is bound</param
-        >
+          />The page to which the option is bound</param>
         <param name="valueName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the option value.</param
-        >
+          />The name of the option value.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the option.</param
-        >
+          />The value of the option.</param>
       </Docs>
     </Member>
   </Members>

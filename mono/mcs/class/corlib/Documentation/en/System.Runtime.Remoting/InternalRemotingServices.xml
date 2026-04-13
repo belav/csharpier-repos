@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para
-      >
+        >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Runtime.Remoting.InternalRemotingServices" />.</para
-          >
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.InternalRemotingServices" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -86,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para
-          >
+            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -98,8 +95,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string to place in the message.</param
-        >
+          />A string to place in the message.</param>
       </Docs>
     </Member>
     <Member MemberName="GetCachedSoapAttribute">
@@ -127,14 +123,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class. </para
-          >
+            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class. </para>
           <para
-            >A "_LOGGING" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para
-          >
+            >A "_LOGGING" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para>
           <para
-            >The <see cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" /> class is the base class for various SOAP-related attribute classes in the <see cref="N:System.Runtime.Remoting.Metadata" /> namespace.</para
-          >
+            >The <see cref="T:System.Runtime.Remoting.Metadata.SoapAttribute" /> class is the base class for various SOAP-related attribute classes in the <see cref="N:System.Runtime.Remoting.Metadata" /> namespace.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -149,8 +142,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A class member or method parameter.</param
-        >
+          />A class member or method parameter.</param>
       </Docs>
     </Member>
     <Member MemberName="RemotingAssert">
@@ -184,11 +176,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para
-          >
+            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para>
           <para
-            >A "_DEBUG" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para
-          >
+            >A "_DEBUG" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -199,15 +189,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to prevent a message from being displayed; otherwise, false.</param
-        >
+          />true to prevent a message from being displayed; otherwise, false.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display if <paramref name="condition" /> is false.</param
-        >
+          />The message to display if <paramref name="condition" /> is false.</param>
       </Docs>
     </Member>
     <Member MemberName="RemotingTrace">
@@ -246,11 +234,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para
-          >
+            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para>
           <para
-            >A "_LOGGING" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para
-          >
+            >A "_LOGGING" preprocessing symbol is applied to the method by means of the <see cref="T:System.Diagnostics.ConditionalAttribute" /> attribute.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -261,8 +247,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Object" /> that contains any number of messages.</param
-        >
+          />An array of type <see cref="T:System.Object" /> that contains any number of messages.</param>
       </Docs>
     </Member>
     <Member MemberName="SetServerIdentity">
@@ -296,8 +281,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para
-          >
+            >You do not need to call the static methods of the <see cref="T:System.Runtime.Remoting.InternalRemotingServices" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -308,15 +292,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" /> that represents a method call on a remote object.</param
-        >
+          />A <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" /> that represents a method call on a remote object.</param>
         <param name="srvID">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Internal identifying information for a remoted server object.</param
-        >
+          />Internal identifying information for a remoted server object.</param>
       </Docs>
     </Member>
   </Members>

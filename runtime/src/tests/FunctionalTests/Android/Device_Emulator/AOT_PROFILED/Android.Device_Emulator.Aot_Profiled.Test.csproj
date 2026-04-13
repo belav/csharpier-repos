@@ -29,11 +29,9 @@
   <!-- Profiled AOT with .mibc-->
   <PropertyGroup>
     <ProfiledAOTProfilePaths Condition="'$(Configuration)' == 'Release'"
-      >$(MSBuildThisFileDirectory)\test_release.mibc</ProfiledAOTProfilePaths
-    >
+      >$(MSBuildThisFileDirectory)\test_release.mibc</ProfiledAOTProfilePaths>
     <ProfiledAOTProfilePaths Condition="'$(Configuration)' == 'Debug'"
-      >$(MSBuildThisFileDirectory)\test_debug.mibc</ProfiledAOTProfilePaths
-    >
+      >$(MSBuildThisFileDirectory)\test_debug.mibc</ProfiledAOTProfilePaths>
   </PropertyGroup>
 
   <ItemGroup>

@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can create a <see cref="T:System.ComponentModel.DefaultValueAttribute" /> with any value. A member's default value is typically its initial value. A visual designer can use the default value to reset the member's value. Code generators can use the default values also to determine whether code should be generated for the member.</para
-      >
+        >You can create a <see cref="T:System.ComponentModel.DefaultValueAttribute" /> with any value. A member's default value is typically its initial value. A visual designer can use the default value to reset the member's value. Code generators can use the default values also to determine whether code should be generated for the member.</para>
       <block subset="none" type="note">
         <para
-          >A <see cref="T:System.ComponentModel.DefaultValueAttribute" /> will not cause a member to be automatically initialized with the attribute's value. You must set the initial value in your code.</para
-        >
+          >A <see cref="T:System.ComponentModel.DefaultValueAttribute" /> will not cause a member to be automatically initialized with the attribute's value. You must set the initial value in your code.</para>
       </block>
       <para
         >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a <see cref="T:System.Boolean" /> value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a <see cref="T:System.Boolean" /> value.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Boolean" /> that is the default value. </param
-        >
+          />A <see cref="T:System.Boolean" /> that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -104,16 +99,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using an 8-bit unsigned integer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using an 8-bit unsigned integer.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An 8-bit unsigned integer that is the default value. </param
-        >
+          />An 8-bit unsigned integer that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -137,16 +130,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a Unicode character.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a Unicode character.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Unicode character that is the default value. </param
-        >
+          />A Unicode character that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -170,16 +161,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a double-precision floating point number.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a double-precision floating point number.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double-precision floating point number that is the default value. </param
-        >
+          />A double-precision floating point number that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -203,16 +192,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a 16-bit signed integer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a 16-bit signed integer.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 16-bit signed integer that is the default value. </param
-        >
+          />A 16-bit signed integer that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -236,16 +223,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a 32-bit signed integer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a 32-bit signed integer.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 32-bit signed integer that is the default value. </param
-        >
+          />A 32-bit signed integer that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -269,16 +254,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a 64-bit signed integer.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a 64-bit signed integer.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A 64-bit signed integer that is the default value. </param
-        >
+          />A 64-bit signed integer that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -302,16 +285,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the default value. </param
-        >
+          />An <see cref="T:System.Object" /> that represents the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -335,16 +316,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a single-precision floating point number.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a single-precision floating point number.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A single-precision floating point number that is the default value. </param
-        >
+          />A single-precision floating point number that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -368,16 +347,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a <see cref="T:System.String" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class using a <see cref="T:System.String" />.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that is the default value. </param
-        >
+          />A <see cref="T:System.String" /> that is the default value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -405,23 +382,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class, converting the specified value to the specified type, and using an invariant culture as the translation context.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DefaultValueAttribute" /> class, converting the specified value to the specified type, and using an invariant culture as the translation context.</para>
         </summary>
         <param name="type">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the type to convert the value to. </param
-        >
+          />A <see cref="T:System.Type" /> that represents the type to convert the value to. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that can be converted to the type using the <see cref="T:System.ComponentModel.TypeConverter" /> for the type and the U.S. English culture. </param
-        >
+          />A <see cref="T:System.String" /> that can be converted to the type using the <see cref="T:System.ComponentModel.TypeConverter" /> for the type and the U.S. English culture. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -447,8 +421,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DefaultValueAttribute" />.</para
-          >
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DefaultValueAttribute" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -459,8 +432,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -509,8 +481,7 @@
           <para>Sets the default value for the property to which this attribute is bound.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The default value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The default value.</param>
       </Docs>
     </Member>
     <Member MemberName="Value">

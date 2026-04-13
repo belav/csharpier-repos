@@ -31,11 +31,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This exception is typically thrown when the code requests more permissions than the policy will grant or the policy is configured to prohibit running the code.</para>
       <para>
-        <see cref="T:System.Security.Policy.PolicyException" /> uses the HRESULT CORSEC_E_POLICY_EXCEPTION.</para
-      >
+        <see cref="T:System.Security.Policy.PolicyException" /> uses the HRESULT CORSEC_E_POLICY_EXCEPTION.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />, see the constructor.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />, see the constructor.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -61,8 +59,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -99,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with default properties.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with default properties.</para>
         </summary>
       </Docs>
     </Member>
@@ -124,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -162,16 +157,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -202,23 +195,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -245,11 +235,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -286,23 +274,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="exception">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="exception" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="exception" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
     </Member>
   </Members>

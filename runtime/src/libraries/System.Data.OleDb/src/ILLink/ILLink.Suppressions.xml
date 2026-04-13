@@ -6,40 +6,35 @@
       <argument>IL2067</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbEnumerator.GetEnumeratorFromType(System.Type)</property
-      >
+        >M:System.Data.OleDb.OleDbEnumerator.GetEnumeratorFromType(System.Type)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2072</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbConnectionInternal.CreateInstanceDataLinks</property
-      >
+        >M:System.Data.OleDb.OleDbConnectionInternal.CreateInstanceDataLinks</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.ProviderBase.DbMetaDataFactory.#ctor(System.IO.Stream,System.String,System.String)</property
-      >
+        >M:System.Data.ProviderBase.DbMetaDataFactory.#ctor(System.IO.Stream,System.String,System.String)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2072</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.ProviderBase.DbMetaDataFactory.ExecuteCommand(System.Data.DataRow,System.String[],System.Data.Common.DbConnection)</property
-      >
+        >M:System.Data.ProviderBase.DbMetaDataFactory.ExecuteCommand(System.Data.DataRow,System.String[],System.Data.Common.DbConnection)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbCommandBuilder.DeriveParametersFromStoredProcedure(System.Data.OleDb.OleDbConnection,System.Data.OleDb.OleDbCommand)</property
-      >
+        >M:System.Data.OleDb.OleDbCommandBuilder.DeriveParametersFromStoredProcedure(System.Data.OleDb.OleDbConnection,System.Data.OleDb.OleDbCommand)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
@@ -52,56 +47,49 @@
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.String,System.String)</property
-      >
+        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.String,System.String)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.String,System.Data.OleDb.OleDbConnection)</property
-      >
+        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.String,System.Data.OleDb.OleDbConnection)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.Data.OleDb.OleDbCommand)</property
-      >
+        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.Data.OleDb.OleDbCommand)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.Data.OleDb.OleDbDataAdapter)</property
-      >
+        >M:System.Data.OleDb.OleDbDataAdapter.#ctor(System.Data.OleDb.OleDbDataAdapter)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbMetaDataFactory.GetDataSourceInformationTable(System.Data.OleDb.OleDbConnection,System.Data.OleDb.OleDbConnectionInternal)</property
-      >
+        >M:System.Data.OleDb.OleDbMetaDataFactory.GetDataSourceInformationTable(System.Data.OleDb.OleDbConnection,System.Data.OleDb.OleDbConnectionInternal)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2093</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbDataReader.GetFieldType(System.Int32)</property
-      >
+        >M:System.Data.OleDb.OleDbDataReader.GetFieldType(System.Int32)</property>
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2111</argument>
       <property name="Scope">member</property>
       <property name="Target"
-        >M:System.Data.OleDb.OleDbDataReader.BuildSchemaTable(System.Data.OleDb.MetaData[])</property
-      >
+        >M:System.Data.OleDb.OleDbDataReader.BuildSchemaTable(System.Data.OleDb.MetaData[])</property>
     </attribute>
   </assembly>
 </linker>

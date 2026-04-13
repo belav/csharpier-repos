@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.CodeDom.CodeExpressionStatement" /> contains a <see cref="T:System.CodeDom.CodeExpression" /> object, and it can be added to a <see cref="T:System.CodeDom.CodeStatementCollection" /> object, allowing some expressions to stand alone. For example, a <see cref="T:System.CodeDom.CodeMethodInvokeExpression" /> contained by a <see cref="T:System.CodeDom.CodeExpressionStatement" /> can represent a method call without a return value.</para
-      >
+        >A <see cref="T:System.CodeDom.CodeExpressionStatement" /> contains a <see cref="T:System.CodeDom.CodeExpression" /> object, and it can be added to a <see cref="T:System.CodeDom.CodeStatementCollection" /> object, allowing some expressions to stand alone. For example, a <see cref="T:System.CodeDom.CodeMethodInvokeExpression" /> contained by a <see cref="T:System.CodeDom.CodeExpressionStatement" /> can represent a method call without a return value.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionStatement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionStatement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +89,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionStatement" /> class by using the specified expression.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionStatement" /> class by using the specified expression.</para>
         </summary>
         <param name="expression">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeExpression" /> for the statement. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeExpression" /> for the statement. </param>
       </Docs>
     </Member>
     <Member MemberName="Expression">

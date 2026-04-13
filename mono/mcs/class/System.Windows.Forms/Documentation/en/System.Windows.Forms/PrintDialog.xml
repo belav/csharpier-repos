@@ -25,11 +25,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />, the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PrintDialog.#ctor" /> constructor. To get printer settings that are modified by the user with the <see cref="T:System.Windows.Forms.PrintDialog" />, use the <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> property.</para
-      >
+        >When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />, the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PrintDialog.#ctor" /> constructor. To get printer settings that are modified by the user with the <see cref="T:System.Windows.Forms.PrintDialog" />, use the <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> property.</para>
       <para
-        >For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" /> namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" /> namespace.</para
-      >
+        >For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" /> namespace overview. If you want to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" /> namespace.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +43,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />, the following read/write properties are set to initial values.</para
-          >
+            >When you create an instance of <see cref="T:System.Windows.Forms.PrintDialog" />, the following read/write properties are set to initial values.</para>
           <list type="table">
             <listheader>
               <item>
@@ -144,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PrintDialog" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PrintDialog" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -165,14 +161,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is valid for Windows 2000 and later versions of Windows operating systems. On operating systems earlier than Windows 2000, the <see cref="P:System.Windows.Forms.PrintDialog.AllowCurrentPage" /> property has no effect.</para
-          >
+            >This property is valid for Windows 2000 and later versions of Windows operating systems. On operating systems earlier than Windows 2000, the <see cref="P:System.Windows.Forms.PrintDialog.AllowCurrentPage" /> property has no effect.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Current Page</ui> option button is displayed.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Current Page</ui> option button is displayed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -201,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Print to file</ui> check box is enabled.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Print to file</ui> check box is enabled.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -227,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Selection</ui> option button is enabled.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Selection</ui> option button is enabled.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -253,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Pages</ui> option button is enabled.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Pages</ui> option button is enabled.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -282,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" /> used to obtain <see cref="T:System.Drawing.Printing.PrinterSettings" />.</para
-          >
+            >Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" /> used to obtain <see cref="T:System.Drawing.Printing.PrinterSettings" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -316,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> property must be set before you call <see cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" /> or an exception will occur.</para
-          >
+            >The <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" /> property must be set before you call <see cref="Overload:System.Windows.Forms.CommonDialog.ShowDialog" /> or an exception will occur.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -346,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Print to file</ui> check box is selected.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Print to file</ui> check box is selected.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -417,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Help</ui> button is displayed.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Help</ui> button is displayed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -446,8 +433,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui>Network</ui> button is displayed.</para
-          >
+            >Gets or sets a value indicating whether the <ui>Network</ui> button is displayed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -474,8 +460,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to true, <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" /> and <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" /> will be ignored as these properties were made obsolete for Windows 2000 and later versions of Windows. </para
-          >
+            >When this property is set to true, <see cref="P:System.Windows.Forms.PrintDialog.ShowHelp" /> and <see cref="P:System.Windows.Forms.PrintDialog.ShowNetwork" /> will be ignored as these properties were made obsolete for Windows 2000 and later versions of Windows. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

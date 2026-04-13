@@ -46,25 +46,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Without <see cref="T:System.Security.Permissions.ReflectionPermission" />, code can use reflection to access only the public members of objects. Code with <see cref="T:System.Security.Permissions.ReflectionPermission" /> and the appropriate <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> flags can access the protected and private members of objects. </para
-      >
+        >Without <see cref="T:System.Security.Permissions.ReflectionPermission" />, code can use reflection to access only the public members of objects. Code with <see cref="T:System.Security.Permissions.ReflectionPermission" /> and the appropriate <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> flags can access the protected and private members of objects. </para>
       <block subset="none" type="note">
         <para
-          >Because <see cref="T:System.Security.Permissions.ReflectionPermission" /> can provide access to non-public types and members, we recommend that you do not grant <see cref="T:System.Security.Permissions.ReflectionPermission" /> to Internet code, except with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag. <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> allows access to non-public members, with the restriction that the grant set of the non-public members must be equal to, or a subset of, the grant set of the code that accesses the non-public members.</para
-        >
+          >Because <see cref="T:System.Security.Permissions.ReflectionPermission" /> can provide access to non-public types and members, we recommend that you do not grant <see cref="T:System.Security.Permissions.ReflectionPermission" /> to Internet code, except with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> flag. <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" /> allows access to non-public members, with the restriction that the grant set of the non-public members must be equal to, or a subset of, the grant set of the code that accesses the non-public members.</para>
       </block>
       <para
-        >Certain features of reflection emit, such as emitting debug symbols, require <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag.</para
-      >
+        >Certain features of reflection emit, such as emitting debug symbols, require <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag.</para>
       <para
-        >For more information, see the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> enumeration.</para
-      >
+        >For more information, see the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> enumeration.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls access to non-public types and members through the <see cref="N:System.Reflection" /> APIs. Controls some features of the <see cref="N:System.Reflection.Emit" /> APIs.</para
-      >
+        >Controls access to non-public types and members through the <see cref="N:System.Reflection" /> APIs. Controls some features of the <see cref="N:System.Reflection.Emit" /> APIs.</para>
     </summary>
   </Docs>
   <Members>
@@ -94,16 +89,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermission" /> class with either fully restricted or unrestricted permission as specified.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermission" /> class with either fully restricted or unrestricted permission as specified.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -132,21 +125,18 @@
       <Docs>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentException"
-          >The <paramref name="flag" /> parameter contains a value that is not a combination of <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> values.</exception
-        >
+          >The <paramref name="flag" /> parameter contains a value that is not a combination of <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> values.</exception>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermission" /> class with the specified access.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ReflectionPermission" /> class with the specified access.</para>
         </summary>
         <param name="flag">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.ReflectionPermissionFlag" /> values. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -242,29 +232,24 @@
         <remarks>
           <para
             >The state of the current instance is changed to the state encoded in 
-   <paramref name="esd" />.</para
-          >
+   <paramref name="esd" />.</para>
           <block subset="none" type="note">
             <para
               >For the XML encoding for this class, see the 
       <see cref="T:System.Security.Permissions.ReflectionPermission" /> class 
-         page.</para
-            >
+         page.</para>
             <para
               >This method overrides <see
                 cref="M:System.Security.CodeAccessPermission.FromXml(System.Security.SecurityElement)"
                 qualify="true"
-              /> .</para
-            >
+              /> .</para>
           </block>
         </remarks>
         <exception cref="T:System.ArgumentNullException"
-          >The <paramref name="esd" /> parameter is <see langword="null" />.</exception
-        >
+          >The <paramref name="esd" /> parameter is <see langword="null" />.</exception>
         <exception cref="T:System.ArgumentException">
           <para
-            >The <paramref name="esd" /> parameter is not a <see cref="T:System.Security.Permissions.ReflectionPermission" /> element.</para
-          >
+            >The <paramref name="esd" /> parameter is not a <see cref="T:System.Security.Permissions.ReflectionPermission" /> element.</para>
           <para>-or-</para>
           <para>The <paramref name="esd" /> parameter's version number is not valid.</para>
         </exception>
@@ -277,8 +262,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding to use to reconstruct the permission. </param
-        >
+          />The XML encoding to use to reconstruct the permission. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -309,8 +293,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref name="target" /> parameter is not <see langword="null" /> and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" /> . </exception
-        >
+          >The <paramref name="target" /> parameter is not <see langword="null" /> and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" /> . </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The intersection of two permissions is a permission that describes the set of operations they both describe in common. Only a demand that passes both original permissions will pass the intersection.</para>
@@ -328,8 +311,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to intersect with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -360,8 +342,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref name="target" /> parameter is not <see langword="null" /> and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" /> . </exception
-        >
+          >The <paramref name="target" /> parameter is not <see langword="null" /> and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" /> . </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, a permission that represents access to C:\example.txt is a subset of a permission that represents access to C:\. If this method returns true, the current permission represents no more access to the protected resource than does the specified permission.</para>
@@ -379,8 +360,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
-        >
+          />A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -464,14 +444,12 @@
         <remarks>
           <block subset="none" type="note">
             <para
-              >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.ReflectionPermission" /> class page.</para
-            >
+              >For the XML encoding for this class, see the <see cref="T:System.Security.Permissions.ReflectionPermission" /> class page.</para>
             <para
               >This method overrides <see
                 cref="M:System.Security.CodeAccessPermission.ToXml"
                 qualify="true"
-              /> .</para
-            >
+              /> .</para>
           </block>
         </remarks>
         <summary>
@@ -512,13 +490,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The <paramref name="other " />parameter is not <see langword="null" /> and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" /> .</exception
-        >
+          >The <paramref name="other " />parameter is not <see langword="null" /> and is not an instance of <see cref="T:System.Security.Permissions.ReflectionPermission" /> .</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Security.Permissions.ReflectionPermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
-          >
+            >The result of a call to <see cref="M:System.Security.Permissions.ReflectionPermission.Union(System.Security.IPermission)" /> is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -533,8 +509,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A permission to combine with the current permission. It must be of the same type as the current permission. </param
-        >
+          />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

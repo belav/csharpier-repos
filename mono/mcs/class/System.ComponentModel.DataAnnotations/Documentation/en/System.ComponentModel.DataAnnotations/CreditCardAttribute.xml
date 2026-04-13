@@ -51,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CreditCardAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.CreditCardAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -90,8 +89,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value to validate.</param
-        >
+          />The value to validate.</param>
       </Docs>
     </Member>
   </Members>

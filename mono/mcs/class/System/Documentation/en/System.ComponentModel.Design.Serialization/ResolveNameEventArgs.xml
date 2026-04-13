@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.Design.Serialization.ResolveNameEventArgs" /> is used by the serialization process to match a name to an object instance.</para
-      >
+        <see cref="T:System.ComponentModel.Design.Serialization.ResolveNameEventArgs" /> is used by the serialization process to match a name to an object instance.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ResolveName" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ResolveName" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -61,16 +59,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ResolveNameEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ResolveNameEventArgs" /> class.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name to resolve. </param
-        >
+          />The name to resolve. </param>
       </Docs>
     </Member>
     <Member MemberName="Name">

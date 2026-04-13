@@ -105,15 +105,13 @@
           <para>An interface to access variables.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The closure array.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The closure array.</param>
         <param name="indexes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of indicies into the closure array where variables are found.</param
-        >
+          />An array of indicies into the closure array where variables are found.</param>
       </Docs>
     </Member>
     <Member MemberName="ExpandoCheckVersion">
@@ -155,15 +153,13 @@
           <para>Returns true if the version is equal; otherwise, false.</para>
         </returns>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Expando object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The Expando object.</param>
         <param name="version">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The version to check.</param
-        >
+          />The version to check.</param>
       </Docs>
     </Member>
     <Member MemberName="ExpandoPromoteClass">
@@ -202,22 +198,19 @@
           <para>Promotes an Expando object from one class to a new class.</para>
         </summary>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Expando object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The Expando object.</param>
         <param name="oldClass">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The old class of the Expando object.</param
-        >
+          />The old class of the Expando object.</param>
         <param name="newClass">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new class of the Expando object.</param
-        >
+          />The new class of the Expando object.</param>
       </Docs>
     </Member>
     <Member MemberName="ExpandoTryDeleteValue">
@@ -262,36 +255,31 @@
           <para>true if the item was successfully removed; otherwise, false.</para>
         </returns>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expando object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The expando object.</param>
         <param name="indexClass">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class of the expando object.</param
-        >
+          />The class of the expando object.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the member.</param
-        >
+          />The index of the member.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member.</param
-        >
+          />The name of the member.</param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the name should be matched ignoring case; false otherwise.</param
-        >
+          />true if the name should be matched ignoring case; false otherwise.</param>
       </Docs>
     </Member>
     <Member MemberName="ExpandoTryGetValue">
@@ -381,43 +369,37 @@
           <para>Returns the index for the set member.</para>
         </returns>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expando object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The expando object.</param>
         <param name="indexClass">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The class of the expando object.</param
-        >
+          />The class of the expando object.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the member.</param
-        >
+          />The index of the member.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the member.</param
-        >
+          />The value of the member.</param>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the member.</param
-        >
+          />The name of the member.</param>
         <param name="ignoreCase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the name should be matched ignoring case; false otherwise.</param
-        >
+          />true if the name should be matched ignoring case; false otherwise.</param>
       </Docs>
     </Member>
     <Member MemberName="MergeRuntimeVariables">
@@ -460,18 +442,15 @@
           <para>The merged runtime variables.</para>
         </returns>
         <param name="first">
-          <attribution license="cc4" from="Microsoft" modified="false" />The first list.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The first list.</param>
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />The second list.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The second list.</param>
         <param name="indexes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index array indicating which list to get variables from.</param
-        >
+          />The index array indicating which list to get variables from.</param>
       </Docs>
     </Member>
     <Member MemberName="Quote">
@@ -518,22 +497,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The expression to quote.</param
-        >
+          />The expression to quote.</param>
         <param name="hoistedLocals">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The hoisted local state provided by the compiler.</param
-        >
+          />The hoisted local state provided by the compiler.</param>
         <param name="locals">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The actual hoisted local values.</param
-        >
+          />The actual hoisted local values.</param>
       </Docs>
     </Member>
   </Members>

@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.CodeDom.CodeRegionDirective.RegionMode" /> property specifies whether an instance represents the start or end of the region.</para
-      >
+        >The <see cref="P:System.CodeDom.CodeRegionDirective.RegionMode" /> property specifies whether an instance represents the start or end of the region.</para>
       <block subset="none" type="note">
         <para>Not all compilers support code region directives. To prevent compiler errors, code providers normally do not include code region directives in the provider output for compilers that do not support them.</para>
       </block>
@@ -59,14 +58,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor, you should also set the <see cref="P:System.CodeDom.CodeRegionDirective.RegionMode" /> and <see cref="P:System.CodeDom.CodeRegionDirective.RegionText" /> properties.</para
-          >
+            >If you use this constructor, you should also set the <see cref="P:System.CodeDom.CodeRegionDirective.RegionMode" /> and <see cref="P:System.CodeDom.CodeRegionDirective.RegionText" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class with default values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class with default values. </para>
         </summary>
       </Docs>
     </Member>
@@ -94,23 +91,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class, specifying its mode and name. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeRegionDirective" /> class, specifying its mode and name. </para>
         </summary>
         <param name="regionMode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.CodeDom.CodeRegionMode" /> values.</param
-        >
+          />One of the <see cref="T:System.CodeDom.CodeRegionMode" /> values.</param>
         <param name="regionText">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name for the region.</param
-        >
+          />The name for the region.</param>
       </Docs>
     </Member>
     <Member MemberName="RegionMode">

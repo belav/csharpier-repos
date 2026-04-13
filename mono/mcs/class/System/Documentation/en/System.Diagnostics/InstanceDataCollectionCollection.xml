@@ -29,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" /> class represents the collection returned from the <see cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" /> method. This collection contains all the counter and instance data. The collection contains an <see cref="T:System.Diagnostics.InstanceDataCollection" /> object for each counter. Each <see cref="T:System.Diagnostics.InstanceDataCollection" /> object contains the performance data for all counters for that instance. Thus, the data is indexed by counter name and then by instance name.</para
-      >
+        >The <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" /> class represents the collection returned from the <see cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" /> method. This collection contains all the counter and instance data. The collection contains an <see cref="T:System.Diagnostics.InstanceDataCollection" /> object for each counter. Each <see cref="T:System.Diagnostics.InstanceDataCollection" /> object contains the performance data for all counters for that instance. Thus, the data is indexed by counter name and then by instance name.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.InstanceDataCollection" /> objects.</para
-      >
+        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.InstanceDataCollection" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.InstanceDataCollectionCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -92,14 +89,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The <paramref name="counterName" /> parameter is case-insensitive.</para>
           <para
-            >Each <see cref="T:System.Diagnostics.InstanceDataCollection" /> object in the collection contains the performance data for all counters for an instance. The data is indexed by counter name and then by instance name. <see cref="M:System.Diagnostics.InstanceDataCollectionCollection.Contains(System.String)" /> returns true if there is an <see cref="T:System.Diagnostics.InstanceDataCollection" /> object whose associated counter has the name specified by the <paramref name="counterName" /> parameter.</para
-          >
+            >Each <see cref="T:System.Diagnostics.InstanceDataCollection" /> object in the collection contains the performance data for all counters for an instance. The data is indexed by counter name and then by instance name. <see cref="M:System.Diagnostics.InstanceDataCollectionCollection.Contains(System.String)" /> returns true if there is an <see cref="T:System.Diagnostics.InstanceDataCollection" /> object whose associated counter has the name specified by the <paramref name="counterName" /> parameter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether an instance data collection for the specified counter (identified by one of the indexed <see cref="T:System.Diagnostics.InstanceDataCollection" /> objects) exists in the collection.</para
-          >
+            >Determines whether an instance data collection for the specified counter (identified by one of the indexed <see cref="T:System.Diagnostics.InstanceDataCollection" /> objects) exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -110,8 +105,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the performance counter. </param
-        >
+          />The name of the performance counter. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -141,23 +135,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an array of <see cref="T:System.Diagnostics.InstanceDataCollection" /> instances to the collection, at the specified index.</para
-          >
+            >Copies an array of <see cref="T:System.Diagnostics.InstanceDataCollection" /> instances to the collection, at the specified index.</para>
         </summary>
         <param name="counters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Diagnostics.InstanceDataCollection" /> instances (identified by the counters they contain) to add to the collection. </param
-        >
+          />An array of <see cref="T:System.Diagnostics.InstanceDataCollection" /> instances (identified by the counters they contain) to add to the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The location at which to add the new instances. </param
-        >
+          />The location at which to add the new instances. </param>
       </Docs>
     </Member>
     <Member MemberName="Item">

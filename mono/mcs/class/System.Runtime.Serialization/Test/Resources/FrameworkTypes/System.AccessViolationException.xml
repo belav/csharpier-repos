@@ -6,8 +6,7 @@
 >
   <ClassName i:type="x:string" xmlns="">System.AccessViolationException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >Attempted to read or write protected memory. This is often an indication that other memory is corrupt.</Message
-  >
+    >Attempted to read or write protected memory. This is often an indication that other memory is corrupt.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

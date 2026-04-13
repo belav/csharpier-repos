@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see cref="T:System.ServiceModel.Channels.AddressHeader" /> is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Name" /> property and the namespace by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" /> property. </para
-      >
+        >An <see cref="T:System.ServiceModel.Channels.AddressHeader" /> is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Name" /> property and the namespace by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" /> property. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,14 +40,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="Overload:System.ServiceModel.Channels.AddressHeader.CreateAddressHeader" /> to create new <see cref="T:System.ServiceModel.Channels.AddressHeader" /> objects.</para
-          >
+            >Use the <see cref="Overload:System.ServiceModel.Channels.AddressHeader.CreateAddressHeader" /> to create new <see cref="T:System.ServiceModel.Channels.AddressHeader" /> objects.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -76,22 +73,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified value.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified value.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> that contains the information item specified by the <paramref name="value" /> parameter.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> that contains the information item specified by the <paramref name="value" /> parameter.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information item for the address header.</param
-        >
+          />The information item for the address header.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
@@ -120,22 +114,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class using a specified formatter to serialize the information item from a specified object.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class using a specified formatter to serialize the information item from a specified object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> that contains the information item specified by the value parameter.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> that contains the information item specified by the value parameter.</para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information item for the address header.</param
-        >
+          />The information item for the address header.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
@@ -164,36 +155,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified value, name and namespace.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified value, name and namespace.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> with the specified <paramref name="name" /> and <paramref name="ns" /> that contains the information item specified by <paramref name="value" />.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> with the specified <paramref name="name" /> and <paramref name="ns" /> that contains the information item specified by <paramref name="value" />.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the address header.</param
-        >
+          />The name of the address header.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the address header.</param
-        >
+          />The namespace of the address header.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information item for the address header.</param
-        >
+          />The information item for the address header.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateAddressHeader">
@@ -224,36 +210,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified name and namespace that uses a specified formatter to serialize the information item from a specified object.</para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" /> class with a specified name and namespace that uses a specified formatter to serialize the information item from a specified object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> with the specified <paramref name="name" /> and <paramref name="ns" /> that contains the information item specified by <paramref name="value" />.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" /> with the specified <paramref name="name" /> and <paramref name="ns" /> that contains the information item specified by <paramref name="value" />.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the address header.</param
-        >
+          />The name of the address header.</param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the address header.</param
-        >
+          />The namespace of the address header.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The information item for the address header.</param
-        >
+          />The information item for the address header.</param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -284,16 +265,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the information item in a specified <paramref name="obj" /> is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref name="obj" /> is null.</para
-          >
+            >true if the information item in a specified <paramref name="obj" /> is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref name="obj" /> is null.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare with the object contained in the current address header.</param
-        >
+          />The <see cref="T:System.Object" /> to compare with the object contained in the current address header.</param>
       </Docs>
     </Member>
     <Member MemberName="GetAddressHeaderReader">
@@ -322,8 +301,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can serialize the current address header object.</para
-          >
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" /> that can serialize the current address header object.</para>
         </returns>
       </Docs>
     </Member>
@@ -346,8 +324,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is the string-based implementation.</para>
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.GetHashCode" /> is suitable for use in hashing algorithms and data structures like a hash table.</para
-          >
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.GetHashCode" /> is suitable for use in hashing algorithms and data structures like a hash table.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -380,11 +357,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter. </para
-          >
+            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter. </para>
           <para
-            >Use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" /> overload if you want to use a customized XML formatter.</para
-          >
+            >Use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" /> overload if you want to use a customized XML formatter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -393,16 +368,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</para
-          >
+            >An instance of a class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</typeparam
-        >
+          />A class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="GetValue&lt;T&gt;">
@@ -432,11 +405,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter.</para
-          >
+            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />. The type of the return value is determined by the generic type parameter.</para>
           <para
-            >Use this overload only if you want to use a customized XML formatter; otherwise use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" /> overload.</para
-          >
+            >Use this overload only if you want to use a customized XML formatter; otherwise use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" /> overload.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -445,16 +416,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</para
-          >
+            >An instance of a class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</para>
         </returns>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</typeparam
-        >
+          />A class of type <paramref name="T" /> with its fields and properties set to the values supplied by the current address header object.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -525,8 +494,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header contents to a stream or file.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header contents to a stream or file.</param>
       </Docs>
     </Member>
     <Member MemberName="OnWriteStartAddressHeader">
@@ -559,8 +527,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param>
       </Docs>
     </Member>
     <Member MemberName="ToMessageHeader">
@@ -589,8 +556,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.MessageHeader" /> that wraps the current address header.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.MessageHeader" /> that wraps the current address header.</para>
         </returns>
       </Docs>
     </Member>
@@ -618,22 +584,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This overload calls the abstract </para>
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method, so users must provide an implementation of that method to use this method. </para
-          >
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method, so users must provide an implementation of that method to use this method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAddressHeader">
@@ -659,25 +622,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload wraps <see cref="T:System.Xml.XmlWriter" /> as a <see cref="T:System.Xml.XmlDictionaryWriter" /> and then the calls the abstract </para
-          >
+            >This overload wraps <see cref="T:System.Xml.XmlWriter" /> as a <see cref="T:System.Xml.XmlDictionaryWriter" /> and then the calls the abstract </para>
           <para>
-            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method. Users must provide an implementation for that abstract method to use this overload.</para
-          >
+            <see cref="M:System.ServiceModel.Channels.AddressHeader.OnWriteAddressHeaderContents(System.Xml.XmlDictionaryWriter)" /> method. Users must provide an implementation for that abstract method to use this overload.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlWriter" /> used to write the address header to a stream or file.</param
-        >
+          />The <see cref="T:System.Xml.XmlWriter" /> used to write the address header to a stream or file.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAddressHeaderContents">
@@ -710,8 +669,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header contents to a stream or file.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header contents to a stream or file.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartAddressHeader">
@@ -744,8 +702,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the address header to a stream or file.</param>
       </Docs>
     </Member>
   </Members>

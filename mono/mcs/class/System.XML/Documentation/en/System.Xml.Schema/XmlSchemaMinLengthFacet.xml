@@ -28,8 +28,7 @@
       <para
         >Represents the minLength element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
-        </format>. This class can be used to specify a restriction on the minimum length of the data value of a simpleType element. The length must be greater than the value of the minLength element.</para
-      >
+        </format>. This class can be used to specify a restriction on the minimum length of the data value of a simpleType element. The length must be greater than the value of the minLength element.</para>
     </summary>
   </Docs>
   <Members>
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaMinLengthFacet" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaMinLengthFacet" /> class.</para>
         </summary>
       </Docs>
     </Member>

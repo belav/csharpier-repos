@@ -10,8 +10,7 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_AccessControl</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_AccessControl</GeneratePlatformNotSupportedAssemblyMessage>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">

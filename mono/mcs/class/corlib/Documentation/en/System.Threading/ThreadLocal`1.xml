@@ -49,8 +49,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value is used to initialize the instance when <see cref="P:System.Threading.ThreadLocal`1.Value" /> is accessed for the first time</para
-          >
+            >The default value is used to initialize the instance when <see cref="P:System.Threading.ThreadLocal`1.Value" /> is accessed for the first time</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -82,8 +81,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Whether to track all values set on the instance and expose them through the <see cref="P:System.Threading.ThreadLocal`1.Values" /> property.</param
-        >
+          />Whether to track all values set on the instance and expose them through the <see cref="P:System.Threading.ThreadLocal`1.Values" /> property.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -147,26 +145,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see cref="T:System.Threading.ThreadLocal`1" />. The Dispose method leaves the <see cref="T:System.Threading.ThreadLocal`1" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.ThreadLocal`1" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.ThreadLocal`1" /> was occupying.</para
-          >
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.ThreadLocal`1" />. The Dispose method leaves the <see cref="T:System.Threading.ThreadLocal`1" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.ThreadLocal`1" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.ThreadLocal`1" /> was occupying.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.ThreadLocal`1" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ThreadLocal`1" /> object's Finalize method.</para
-            >
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.ThreadLocal`1" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.ThreadLocal`1" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see cref="T:System.Threading.ThreadLocal`1" /> class.</para
-          >
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.ThreadLocal`1" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -190,22 +184,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike most of the members of <see cref="T:System.Threading.ThreadLocal`1" />, this method is not thread-safe.</para
-          >
+            >Unlike most of the members of <see cref="T:System.Threading.ThreadLocal`1" />, this method is not thread-safe.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by this <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para
-          >
+            >Releases the resources used by this <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A Boolean value that indicates whether this method is being called due to a call to <see cref="M:System.Threading.ThreadLocal`1.Dispose" />.</param
-        >
+          />A Boolean value that indicates whether this method is being called due to a call to <see cref="M:System.Threading.ThreadLocal`1.Dispose" />.</param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -227,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by this <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para
-          >
+            >Releases the resources used by this <see cref="T:System.Threading.ThreadLocal`1" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -248,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether <see cref="P:System.Threading.ThreadLocal`1.Value" /> is initialized on the current thread.</para
-          >
+            >Gets whether <see cref="P:System.Threading.ThreadLocal`1.Value" /> is initialized on the current thread.</para>
         </summary>
       </Docs>
     </Member>
@@ -271,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method forces initialization for the current thread, as is the case with accessing <see cref="P:System.Threading.ThreadLocal`1.Value" /> directly.</para
-          >
+            >Calling this method forces initialization for the current thread, as is the case with accessing <see cref="P:System.Threading.ThreadLocal`1.Value" /> directly.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -281,8 +269,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of calling <see cref="M:System.Object.ToString" /> on the <see cref="P:System.Threading.ThreadLocal`1.Value" />.</para
-          >
+            >The result of calling <see cref="M:System.Object.ToString" /> on the <see cref="P:System.Threading.ThreadLocal`1.Value" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -306,8 +293,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this instance was not previously initialized for the current thread, accessing <see cref="P:System.Threading.ThreadLocal`1.Value" /> will attempt to initialize it. If an initialization function was supplied during the construction, that initialization will happen by invoking the function to retrieve the initial value for <see cref="P:System.Threading.ThreadLocal`1.Value" />. Otherwise, the default value of will be used. If an exception is thrown, that exception is cached and thrown on each subsequent access of the property.</para
-          >
+            >If this instance was not previously initialized for the current thread, accessing <see cref="P:System.Threading.ThreadLocal`1.Value" /> will attempt to initialize it. If an initialization function was supplied during the construction, that initialization will happen by invoking the function to retrieve the initial value for <see cref="P:System.Threading.ThreadLocal`1.Value" />. Otherwise, the default value of will be used. If an exception is thrown, that exception is cached and thrown on each subsequent access of the property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

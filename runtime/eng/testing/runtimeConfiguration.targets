@@ -4,21 +4,17 @@
     <IsTestProjectOrExecutable
       Condition="'$(IsTestProject)' == 'true' or
                                           '$(OutputType.ToLower())' == 'exe'"
-      >true</IsTestProjectOrExecutable
-    >
+      >true</IsTestProjectOrExecutable>
     <GenerateRuntimeConfigurationFiles
       Condition="'$(GenerateRuntimeConfigurationFiles)' == '' and
                                                   '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and
                                                   '$(IsTestProjectOrExecutable)' == 'true'"
-      >true</GenerateRuntimeConfigurationFiles
-    >
+      >true</GenerateRuntimeConfigurationFiles>
     <GenerateAppConfigurationFile
       Condition="'$(IsTestProjectOrExecutable)' == 'true' and
                                              '$(TargetFrameworkIdentifier)' == '.NETFramework'"
-      >true</GenerateAppConfigurationFile
-    >
+      >true</GenerateAppConfigurationFile>
     <AppConfig Condition="'$(GenerateAppConfigurationFile)' == 'true'"
-      >$(MSBuildThisFileDirectory)netfx.exe.config</AppConfig
-    >
+      >$(MSBuildThisFileDirectory)netfx.exe.config</AppConfig>
   </PropertyGroup>
 </Project>

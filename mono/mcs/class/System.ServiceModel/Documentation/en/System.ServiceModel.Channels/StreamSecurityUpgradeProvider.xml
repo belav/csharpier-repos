@@ -23,32 +23,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To add a security upgrade, you implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. </para
-      >
+        >To add a security upgrade, you implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. </para>
       <para>The upgrade process has the following steps:</para>
       <list type="ordered">
         <item>
           <para
-            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. </para
-          >
+            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. </para>
         </item>
         <item>
           <para>Register it. You do this by creating a binding element for it, and registering the provider in a custom binding.</para>
         </item>
         <item>
           <para
-            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />, which at run time initiates a request to the other end of its connection to upgrade the channel transport layer.</para
-          >
+            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />, which at run time initiates a request to the other end of its connection to upgrade the channel transport layer.</para>
         </item>
         <item>
           <para
-            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />, which at run time receives the upgrade request from the preceding step, and if possible, accepts the upgrade, and returns the upgraded stream to the other side of its connection.</para
-          >
+            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />, which at run time receives the upgrade request from the preceding step, and if possible, accepts the upgrade, and returns the upgraded stream to the other side of its connection.</para>
         </item>
       </list>
       <para
-        >The security upgrade request can be one of many similar requests. If so, the requests are processed in a definite order. For more information, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />.</para
-      >
+        >The security upgrade request can be one of many similar requests. If so, the requests are processed in a definite order. For more information, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -102,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" /> class.</para>
         </summary>
       </Docs>
     </Member>

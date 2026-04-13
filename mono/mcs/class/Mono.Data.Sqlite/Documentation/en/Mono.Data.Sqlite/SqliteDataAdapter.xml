@@ -97,8 +97,7 @@
       </Parameters>
       <Docs>
         <param name="commandText"
-          >The select command text to associate with the data adapter.</param
-        >
+          >The select command text to associate with the data adapter.</param>
         <param name="connection">The connection to associate with the select command.</param>
         <summary>
             Constructs a data adapter with the supplied select command text and associated with the specified connection.
@@ -125,11 +124,9 @@
       </Parameters>
       <Docs>
         <param name="commandText"
-          >The select command text to use to construct a select command.</param
-        >
+          >The select command text to use to construct a select command.</param>
         <param name="connectionString"
-          >A connection string suitable for passing to a new SqliteConnection, which is associated with the select command.</param
-        >
+          >A connection string suitable for passing to a new SqliteConnection, which is associated with the select command.</param>
         <summary>
             Constructs a data adapter with the specified select command text, and using the specified database connection string.
             </summary>

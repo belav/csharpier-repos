@@ -28,8 +28,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The service endpoint must have enabled transaction flow and its methods must flow transactions. The converted policy assertions all adhere to the WS-PolicyAssertions standard.</para>
       <para
-        >This class is used mainly by the infrastructure when it builds a proxy for a service that is transaction-flow enabled. Calling the <see cref="M:System.ServiceModel.Channels.TransactionFlowBindingElementImporter.System.ServiceModel.Description.IPolicyImportExtension.ImportPolicy(System.ServiceModel.Description.MetadataImporter,System.ServiceModel.Description.PolicyConversionContext)" /> method adds a <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" /> instance to the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> collection of binding elements. This also adds <see cref="T:System.ServiceModel.TransactionFlowAttribute" /> instances, as appropriate, on the Operations collection present in the conversion context’s contract.</para
-      >
+        >This class is used mainly by the infrastructure when it builds a proxy for a service that is transaction-flow enabled. Calling the <see cref="M:System.ServiceModel.Channels.TransactionFlowBindingElementImporter.System.ServiceModel.Description.IPolicyImportExtension.ImportPolicy(System.ServiceModel.Description.MetadataImporter,System.ServiceModel.Description.PolicyConversionContext)" /> method adds a <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" /> instance to the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> collection of binding elements. This also adds <see cref="T:System.ServiceModel.TransactionFlowAttribute" /> instances, as appropriate, on the Operations collection present in the conversion context’s contract.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElementImporter" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElementImporter" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -150,15 +148,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.MetadataImporter" /> object to use.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.MetadataImporter" /> object to use.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that contains both the policy assertions that can be imported and the collections of binding elements to which implementing binding elements can be added.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that contains both the policy assertions that can be imported and the collections of binding elements to which implementing binding elements can be added.</param>
       </Docs>
     </Member>
   </Members>

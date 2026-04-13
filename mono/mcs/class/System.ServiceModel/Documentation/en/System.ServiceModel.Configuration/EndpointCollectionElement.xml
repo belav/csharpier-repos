@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.EndpointCollectionElement" /> class. </para
-          >
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.EndpointCollectionElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented in a derived class, provides a read-only collection of <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" /> methods and properties.</para
-          >
+            >When implemented in a derived class, provides a read-only collection of <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" /> methods and properties.</para>
         </summary>
       </Docs>
     </Member>
@@ -106,8 +104,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the key in a key/value pair that represents an endpoint element name and value.</param
-        >
+          />The name of the key in a key/value pair that represents an endpoint element name and value.</param>
       </Docs>
     </Member>
     <Member MemberName="EndpointName">
@@ -170,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented in a derived class, returns the default <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" />.</para
-          >
+            >When implemented in a derived class, returns the default <see cref="T:System.ServiceModel.Configuration.StandardEndpointElement" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -215,22 +211,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the service endpoint that contains the endpoint collection.</param
-        >
+          />The name of the service endpoint that contains the endpoint collection.</param>
         <param name="endpoint">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The service endpoint element to be added to the collection.</param
-        >
+          />The service endpoint element to be added to the collection.</param>
         <param name="config">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration file that receives the service endpoint.</param
-        >
+          />The configuration file that receives the service endpoint.</param>
       </Docs>
     </Member>
   </Members>

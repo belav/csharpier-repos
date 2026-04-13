@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.NetMsmqBinding,System.ServiceModel.Configuration.NetMsmqBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.NetMsmqBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.NetMsmqBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >System.ServiceModel.Configuration.NetMsmqBindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.NetMsmqBindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -31,14 +29,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection of <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" /> objects contains all of the settings required for the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding to function. The <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding provides support for queuing by leveraging Microsoft Message Queuing (MSMQ) as a transport and enables support for loosely coupled applications, failure isolation, load leveling, and disconnected operations.</para
-      >
+        >This collection of <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" /> objects contains all of the settings required for the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding to function. The <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding provides support for queuing by leveraging Microsoft Message Queuing (MSMQ) as a transport and enables support for loosely coupled applications, failure isolation, load leveling, and disconnected operations.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a configuration section that holds a collection of <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" /> instances.</para
-      >
+        >Represents a configuration section that holds a collection of <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" /> instances.</para>
     </summary>
   </Docs>
   <Members>
@@ -58,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingCollectionElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingCollectionElement" /> class.</para>
         </summary>
       </Docs>
     </Member>

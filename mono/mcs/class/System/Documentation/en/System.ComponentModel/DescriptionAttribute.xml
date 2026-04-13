@@ -31,13 +31,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A visual designer can display the specified description when referencing the component member, such as in a Properties window. Call <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> to access the value of this attribute.</para
-      >
+        >A visual designer can display the specified description when referencing the component member, such as in a Properties window. Call <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> to access the value of this attribute.</para>
       <para
         >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DescriptionAttribute" /> class with no parameters.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DescriptionAttribute" /> class with no parameters.</para>
         </summary>
       </Docs>
     </Member>
@@ -90,16 +87,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.DescriptionAttribute" /> class with a description.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DescriptionAttribute" /> class with a description.</para>
         </summary>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description text. </param
-        >
+          />The description text. </param>
       </Docs>
     </Member>
     <Member MemberName="Default">
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default value for the <see cref="T:System.ComponentModel.DescriptionAttribute" />, which is an empty string (""). This static field is read-only.</para
-          >
+            >Specifies the default value for the <see cref="T:System.ComponentModel.DescriptionAttribute" />, which is an empty string (""). This static field is read-only.</para>
         </summary>
       </Docs>
     </Member>
@@ -169,11 +163,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> property simply returns this value.</para
-          >
+            >The default implementation of the <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> property simply returns this value.</para>
           <para
-            >This extra property exists so that you can derive from <see cref="T:System.ComponentModel.DescriptionAttribute" /> and provide a localized version. The derived localizable <see cref="T:System.ComponentModel.DescriptionAttribute" /> will maintain a private Boolean field to indicate if it has been localized. On the first access to the <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> property, it will look up the localized string and store it back in the <see cref="P:System.ComponentModel.DescriptionAttribute.DescriptionValue" /> property.</para
-          >
+            >This extra property exists so that you can derive from <see cref="T:System.ComponentModel.DescriptionAttribute" /> and provide a localized version. The derived localizable <see cref="T:System.ComponentModel.DescriptionAttribute" /> will maintain a private Boolean field to indicate if it has been localized. On the first access to the <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> property, it will look up the localized string and store it back in the <see cref="P:System.ComponentModel.DescriptionAttribute.DescriptionValue" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DescriptionAttribute" />.</para
-          >
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DescriptionAttribute" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,8 +207,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to test the value equality of. </param
-        >
+          />The object to test the value equality of. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -265,14 +255,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this is the default <see cref="T:System.ComponentModel.DescriptionAttribute" /> instance.</para
-          >
+            >Returns a value indicating whether this is the default <see cref="T:System.ComponentModel.DescriptionAttribute" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true, if this is the default <see cref="T:System.ComponentModel.DescriptionAttribute" /> instance; otherwise, false.</para
-          >
+            >true, if this is the default <see cref="T:System.ComponentModel.DescriptionAttribute" /> instance; otherwise, false.</para>
         </returns>
       </Docs>
     </Member>

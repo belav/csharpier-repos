@@ -27,11 +27,9 @@
   </Interfaces>
   <Docs>
     <summary
-      >Every file has a unique INODE data structure. Mono's managed representation is the Stat struct. the <see cref="M:Mono.Unix.Native.Syscall.stat" /> and <see cref="M:Mono.Unix.Native.Syscall.lstat" /> methods return the Stat struct as an output parameter.</summary
-    >
+      >Every file has a unique INODE data structure. Mono's managed representation is the Stat struct. the <see cref="M:Mono.Unix.Native.Syscall.stat" /> and <see cref="M:Mono.Unix.Native.Syscall.lstat" /> methods return the Stat struct as an output parameter.</summary>
     <remarks
-      >See <c>stat</c>(2) for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See <c>mount</c>(8) for more information.</remarks
-    >
+      >See <c>stat</c>(2) for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See <c>mount</c>(8) for more information.</remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.fstat" />
     <altmember cref="M:Mono.Unix.Native.Syscall.lstat" />
     <altmember cref="M:Mono.Unix.Native.Syscall.stat" />
@@ -404,8 +402,7 @@
       <Docs>
         <summary>Size gives the size of the file in bytes.</summary>
         <remarks
-          >If the file is a symlink and <see cref="M:Mono.Unix.Native.Syscall.lstat" /> was used, then this is the length of the pathname it contains without trailing null.</remarks
-        >
+          >If the file is a symlink and <see cref="M:Mono.Unix.Native.Syscall.lstat" /> was used, then this is the length of the pathname it contains without trailing null.</remarks>
       </Docs>
     </Member>
     <Member MemberName="st_uid">

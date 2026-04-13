@@ -105,8 +105,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the fixed-length array. </param
-        >
+          />The number of elements in the fixed-length array. </param>
       </Docs>
     </Member>
     <Member MemberName="DefineByValTStr">
@@ -150,8 +149,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of elements in the fixed array buffer. </param
-        >
+          />The number of elements in the fixed array buffer. </param>
       </Docs>
     </Member>
     <Member MemberName="DefineCustom">
@@ -224,8 +222,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged type to which to marshal the array. </param
-        >
+          />The unmanaged type to which to marshal the array. </param>
       </Docs>
     </Member>
     <Member MemberName="DefineSafeArray">
@@ -269,8 +266,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base type or the UnmanagedType of each element of the array. </param
-        >
+          />The base type or the UnmanagedType of each element of the array. </param>
       </Docs>
     </Member>
     <Member MemberName="DefineUnmanagedMarshal">
@@ -298,8 +294,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> passed to this method must be a simple native type. None of the following values may be used: <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />, <see cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />, <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />, <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />, or <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />.</para
-          >
+            >The <see cref="T:System.Runtime.InteropServices.UnmanagedType" /> passed to this method must be a simple native type. None of the following values may be used: <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />, <see cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />, <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />, <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />, or <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />.</para>
           <para>Only unmanaged marshal constructs can be made using this method.</para>
         </remarks>
         <summary>
@@ -315,8 +310,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unmanaged type to which the type is to be marshaled. </param
-        >
+          />The unmanaged type to which the type is to be marshaled. </param>
       </Docs>
     </Member>
     <Member MemberName="ElementCount">

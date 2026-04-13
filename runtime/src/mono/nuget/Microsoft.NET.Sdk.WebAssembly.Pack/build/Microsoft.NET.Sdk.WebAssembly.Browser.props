@@ -27,19 +27,16 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PublishTrimmed Condition="'$(PublishTrimmed)' == ''">true</PublishTrimmed>
     <TrimMode
       Condition="'$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkBlazorWebAssembly)' == 'true'"
-      >partial</TrimMode
-    >
+      >partial</TrimMode>
     <TrimMode
       Condition="'$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkBlazorWebAssembly)' != 'true'"
-      >full</TrimMode
-    >
+      >full</TrimMode>
     <TrimmerRemoveSymbols Condition="'$(TrimmerRemoveSymbols)' == ''">false</TrimmerRemoveSymbols>
 
     <!-- Static web assets defaults -->
     <StaticWebAssetBasePath Condition="'$(StaticWebAssetBasePath)' == ''">/</StaticWebAssetBasePath>
     <StaticWebAssetProjectMode Condition="'$(StaticWebAssetProjectMode)' == ''"
-      >Root</StaticWebAssetProjectMode
-    >
+      >Root</StaticWebAssetProjectMode>
     <StaticWebAssetsAdditionalBuildPropertiesToRemove>$(StaticWebAssetsAdditionalBuildPropertiesToRemove);RuntimeIdentifier;SelfContained</StaticWebAssetsAdditionalBuildPropertiesToRemove>
     <!-- The 'SelfContained' is set in Wasm SDK in SDK repo -->
     <StaticWebAssetsGetPublishAssetsTargets>ComputeFilesToPublish;GetCurrentProjectPublishStaticWebAssetItems</StaticWebAssetsGetPublishAssetsTargets>

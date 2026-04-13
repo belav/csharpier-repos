@@ -2,8 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(TargetFrameworkForNETSDK)</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'"
-      >$(TargetFrameworks);net462</TargetFrameworks
-    >
+      >$(TargetFrameworks);net462</TargetFrameworks>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 

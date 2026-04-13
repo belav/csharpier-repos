@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the IConfigSectionHandler interface. The <see cref="T:System.Configuration.DictionarySectionHandler" /> defines rules for manipulating XML configuration sections.</para
-      >
+        >This class implements the IConfigSectionHandler interface. The <see cref="T:System.Configuration.DictionarySectionHandler" /> defines rules for manipulating XML configuration sections.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.DictionarySectionHandler" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.DictionarySectionHandler" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -90,8 +88,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="parent" /> object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref name="context" /> object parameter is the virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null.  The <paramref name="section" /> parameter is the <see cref="T:System.Xml.XmlNode" /> that contains the configuration information to be handled. The <paramref name="section" /> parameter provides direct access to the XML contents of the configuration section.</para
-          >
+            >The <paramref name="parent" /> object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref name="context" /> object parameter is the virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null.  The <paramref name="section" /> parameter is the <see cref="T:System.Xml.XmlNode" /> that contains the configuration information to be handled. The <paramref name="section" /> parameter provides direct access to the XML contents of the configuration section.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -102,18 +99,15 @@
           <para>A configuration object.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />Parent object.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Parent object.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Configuration context object.</param
-        >
+          />Configuration context object.</param>
         <param name="section">
-          <attribution license="cc4" from="Microsoft" modified="false" />Section XML node.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Section XML node.</param>
       </Docs>
     </Member>
     <Member MemberName="KeyAttributeName">

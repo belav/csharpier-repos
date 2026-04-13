@@ -4,8 +4,7 @@
     <AssemblyName>Microsoft.EntityFrameworkCore.AspNet.SqlServer.FunctionalTests</AssemblyName>
     <RootNamespace>Microsoft.EntityFrameworkCore</RootNamespace>
     <SkipTests Condition="'$(OS)' != 'Windows_NT' AND '$(Test__SqlServer__DefaultConnection)' == ''"
-      >True</SkipTests
-    >
+      >True</SkipTests>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 

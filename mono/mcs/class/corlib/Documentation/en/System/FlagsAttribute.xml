@@ -44,8 +44,7 @@
       | Left) is considered a valid value for the enumeration when formatting. Without this
       attribute, the enumeration <paramref name="Color" /> is not used as a
       bit-field, and the value 3 (Red | Blue) is not considered a valid value for the
-      enumeration when formatting.</para
-      >
+      enumeration when formatting.</para>
       <code lang="C#">
 using System;
 [FlagsAttribute()] 
@@ -89,16 +88,14 @@ public class enumFormat {
         <h2>Attributes of the FlagsAttribute</h2>
       </format>
       <para>
-        <see cref="T:System.AttributeUsageAttribute" /> is applied to this class, and its <see cref="P:System.AttributeUsageAttribute.Inherited" /> property specifies false. This attribute can only be applied to enumerations.</para
-      >
+        <see cref="T:System.AttributeUsageAttribute" /> is applied to this class, and its <see cref="P:System.AttributeUsageAttribute.Inherited" /> property specifies false. This attribute can only be applied to enumerations.</para>
       <format type="text/html">
         <h2>Guidelines for FlagsAttribute and Enum</h2>
       </format>
       <list type="bullet">
         <item>
           <para
-            >Use the <see cref="T:System.FlagsAttribute" /> custom attribute for an enumeration only if a bitwise operation (AND, OR, EXCLUSIVE OR) is to be performed on a numeric value. </para
-          >
+            >Use the <see cref="T:System.FlagsAttribute" /> custom attribute for an enumeration only if a bitwise operation (AND, OR, EXCLUSIVE OR) is to be performed on a numeric value. </para>
         </item>
         <item>
           <para>Define enumeration constants in powers of two, that is, 1, 2, 4, 8, and so on. This means the individual flags in combined enumeration constants do not overlap. </para>
@@ -157,8 +154,7 @@ public class enumFormat {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.FlagsAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.FlagsAttribute" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

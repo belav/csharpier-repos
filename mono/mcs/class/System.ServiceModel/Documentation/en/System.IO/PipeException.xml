@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -60,16 +59,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the error message that explains the reason for the exception.</param
-        >
+          />A string that contains the error message that explains the reason for the exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -94,23 +91,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with the specified serialization information and streaming context.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with the specified serialization information and streaming context.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains all the data required to serialize the exception.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains all the data required to serialize the exception.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the source and destination of the stream.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the source and destination of the stream.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -135,23 +129,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with the specified error message and the inner exception.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with the specified error message and the inner exception.  </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the error message that explains the reason for the exception.</param
-        >
+          />A string that contains the error message that explains the reason for the exception.</param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Exception" /> that caused the current exception to be thrown. </param
-        >
+          />The <see cref="T:System.Exception" /> that caused the current exception to be thrown. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -176,23 +167,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message and error code. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.PipeException" /> class with a specified error message and error code. </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that contains the error message that explains the reason for the exception.</param
-        >
+          />A string that contains the error message that explains the reason for the exception.</param>
         <param name="errorCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An integer that contains the error code.</param
-        >
+          />An integer that contains the error code.</param>
       </Docs>
     </Member>
     <Member MemberName="ErrorCode">

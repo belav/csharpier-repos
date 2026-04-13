@@ -67,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" /> class with the specified hash algorithm, using one of the members of <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" /> to represent the hash algorithm.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" /> class with the specified hash algorithm, using one of the members of <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" /> to represent the hash algorithm.</para>
         </summary>
         <param name="algorithmId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A member of AssemblyHashAlgorithm that represents the hash algorithm. </param
-        >
+          />A member of AssemblyHashAlgorithm that represents the hash algorithm. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -108,16 +106,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" /> class with the specified hash algorithm, using an unsigned integer to represent the hash algorithm.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" /> class with the specified hash algorithm, using an unsigned integer to represent the hash algorithm.</para>
         </summary>
         <param name="algorithmId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An unsigned integer representing the hash algorithm. </param
-        >
+          />An unsigned integer representing the hash algorithm. </param>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmId">

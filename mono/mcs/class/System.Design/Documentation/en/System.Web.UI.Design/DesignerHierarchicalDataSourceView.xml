@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" /> class is used by developers of custom data source designers.</para
-      >
+        >The <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" /> class is used by developers of custom data source designers.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -43,23 +42,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates a new instance of the <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" /> class.</para
-          >
+            >Initiates a new instance of the <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" /> class.</para>
         </summary>
         <param name="owner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" /> that is the designer for the associated control.</param
-        >
+          />The <see cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" /> that is the designer for the associated control.</param>
         <param name="viewPath">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique path to the block of data to use for the view.</param
-        >
+          />A unique path to the block of data to use for the view.</param>
       </Docs>
     </Member>
     <Member MemberName="DataSourceDesigner">
@@ -119,8 +115,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The specific nature of the <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Path" /> property is determined by the nature of the data. For XML data, it would be an XPath query, but for other kinds of data it could be a URL or some other unique identifying path.</para
-          >
+            >The specific nature of the <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Path" /> property is determined by the nature of the data. For XML data, it would be an XPath query, but for other kinds of data it could be a URL or some other unique identifying path.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" /> property allows the control designer of a data-bound control to provide intelligent choices based on the design-time data source view that is selected for data binding.</para
-          >
+            >The <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" /> property allows the control designer of a data-bound control to provide intelligent choices based on the design-time data source view that is selected for data binding.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

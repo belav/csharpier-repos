@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to increase the performance of a Web service client application. </para
-      >
+        >Use the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to increase the performance of a Web service client application. </para>
       <para>A typical method of using this attribute is as follows:</para>
       <list type="ordered">
         <item>
@@ -56,14 +55,12 @@
         </item>
         <item>
           <para
-            >Open a command window and navigate to the \Temp directory used by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to cache files. </para
-          >
+            >Open a command window and navigate to the \Temp directory used by the <see cref="T:System.Xml.Serialization.XmlSerializer" /> to cache files. </para>
           <code>cd %temp%</code>
         </item>
         <item>
           <para
-            >Find the last file created using the <system>dir</system> command with the <system>/OD</system> switch. </para
-          >
+            >Find the last file created using the <system>dir</system> command with the <system>/OD</system> switch. </para>
           <code>dir *.vb /OD </code>
         </item>
         <item>
@@ -71,8 +68,7 @@
         </item>
         <item>
           <para
-            >Edit the original proxy code by applying the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the class. Specify the assembly name, as shown in the following C# code.</para
-          >
+            >Edit the original proxy code by applying the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> to the class. Specify the assembly name, as shown in the following C# code.</para>
           <code>[XmlSerializerAssemblyAttribute(AssemblyName="hello.serializer")]
 public class Hello: System.Web.Services.Protocols.SoapHttpClientProtocol {
    // Proxy code not shown.
@@ -109,8 +105,7 @@ End Class</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -137,16 +132,14 @@ End Class</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class with the specified assembly name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class with the specified assembly name.</para>
         </summary>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple, unencrypted name of the assembly. </param
-        >
+          />The simple, unencrypted name of the assembly. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -173,23 +166,20 @@ End Class</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class with the specified assembly name and location of the assembly.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" /> class with the specified assembly name and location of the assembly.</para>
         </summary>
         <param name="assemblyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The simple, unencrypted name of the assembly. </param
-        >
+          />The simple, unencrypted name of the assembly. </param>
         <param name="codeBase">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that is the URL location of the assembly.</param
-        >
+          />A string that is the URL location of the assembly.</param>
       </Docs>
     </Member>
     <Member MemberName="AssemblyName">

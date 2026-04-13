@@ -37,11 +37,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The presence of <see cref="T:System.Security.Policy.Zone" /> evidence produces a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> in the grant set. If there is a <see cref="M:System.Security.CodeAccessPermission.Demand" /> for <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />, the <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> that corresponds to the <see cref="T:System.Security.Policy.Zone" /> evidence will be compared with the demanded permission.</para
-      >
+        >The presence of <see cref="T:System.Security.Policy.Zone" /> evidence produces a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> in the grant set. If there is a <see cref="M:System.Security.CodeAccessPermission.Demand" /> for <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />, the <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> that corresponds to the <see cref="T:System.Security.Policy.Zone" /> evidence will be compared with the demanded permission.</para>
       <para
-        >Zones are defined by the <see cref="T:System.Security.SecurityZone" /> enumeration.</para
-      >
+        >Zones are defined by the <see cref="T:System.Security.SecurityZone" /> enumeration.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.Zone" /> class with the zone from which a code assembly originates.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.Zone" /> class with the zone from which a code assembly originates.</para>
         </summary>
         <param name="zone">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zone of origin for the associated code assembly. </param
-        >
+          />The zone of origin for the associated code assembly. </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -149,8 +145,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL from which to create the zone. </param
-        >
+          />The URL from which to create the zone. </param>
       </Docs>
     </Member>
     <Member MemberName="CreateIdentityPermission">
@@ -179,22 +174,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an identity permission that corresponds to the current instance of the <see cref="T:System.Security.Policy.Zone" /> evidence class.</para
-          >
+            >Creates an identity permission that corresponds to the current instance of the <see cref="T:System.Security.Policy.Zone" /> evidence class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> for the specified <see cref="T:System.Security.Policy.Zone" /> evidence.</para
-          >
+            >A <see cref="T:System.Security.Permissions.ZoneIdentityPermission" /> for the specified <see cref="T:System.Security.Policy.Zone" /> evidence.</para>
         </returns>
         <param name="evidence">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The evidence set from which to construct the identity permission. </param
-        >
+          />The evidence set from which to construct the identity permission. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -219,28 +211,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Security.Policy.Zone" /> objects are equal if they designate the same <see cref="T:System.Security.SecurityZone" />.</para
-          >
+            <see cref="T:System.Security.Policy.Zone" /> objects are equal if they designate the same <see cref="T:System.Security.SecurityZone" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the current <see cref="T:System.Security.Policy.Zone" /> evidence object to the specified object for equivalence.</para
-          >
+            >Compares the current <see cref="T:System.Security.Policy.Zone" /> evidence object to the specified object for equivalence.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see cref="T:System.Security.Policy.Zone" /> objects are equal; otherwise, false.</para
-          >
+            >true if the two <see cref="T:System.Security.Policy.Zone" /> objects are equal; otherwise, false.</para>
         </returns>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Policy.Zone" /> evidence object to test for equivalence with the current object. </param
-        >
+          />The <see cref="T:System.Security.Policy.Zone" /> evidence object to test for equivalence with the current object. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -406,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the current <see cref="T:System.Security.Policy.Zone" />.</para
-          >
+            >Returns a string representation of the current <see cref="T:System.Security.Policy.Zone" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

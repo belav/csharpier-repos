@@ -24,14 +24,12 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A Web Service Description Language (WSDL) file typically describes a class in XML schema language as an xsd:complex type composed of various primitive xsd:complex and xsd:simple types. When generating a .NET Framework class that represents a given xsd:complex type, you must choose how to represent the various primitive types it contains.</para>
       <para
-        >By default, each primitive is implemented as a field. If you specify the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateProperties" /> option, each primitive type is instead implemented as a property.</para
-      >
+        >By default, each primitive is implemented as a field. If you specify the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateProperties" /> option, each primitive type is instead implemented as a property.</para>
       <format type="text/html">
         <h2>Ordering of Serialization Code</h2>
       </format>
       <para
-        >The <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> member instructs the code generator to create the serialization code in a specific order as determined by the Order property of the following attributes:</para
-      >
+        >The <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" /> member instructs the code generator to create the serialization code in a specific order as determined by the Order property of the following attributes:</para>
       <para>
         <dynamicLink>
           <keyword>T:System.Xml.Serialization.XmlAnyElementAttribute </keyword>
@@ -154,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates explicitly ordered serialization code as specified through the Order property of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />, <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />, and <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> attributes. </para
-          >
+            >Generates explicitly ordered serialization code as specified through the Order property of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />, <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />, and <see cref="T:System.Xml.Serialization.XmlElementAttribute" /> attributes. </para>
         </summary>
       </Docs>
     </Member>
@@ -210,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents primitive types by fields and primitive types by <see cref="N:System" /> namespace types.</para
-          >
+            >Represents primitive types by fields and primitive types by <see cref="N:System" /> namespace types.</para>
         </summary>
       </Docs>
     </Member>

@@ -29,19 +29,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.ComponentModel.Design.IDesignerEventService.ActiveDesigner" /> event occurs when the currently active document changes. The active document changes when a new document is created, an existing document is opened, or a document is closed.</para
-      >
+        >The <see cref="P:System.ComponentModel.Design.IDesignerEventService.ActiveDesigner" /> event occurs when the currently active document changes. The active document changes when a new document is created, an existing document is opened, or a document is closed.</para>
       <para
         >When you create an <see cref="T:System.ComponentModel.Design.ActiveDesignerEventArgs" /> delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
-        </format>.</para
-      >
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="P:System.ComponentModel.Design.IDesignerEventService.ActiveDesigner" /> event.</para
-      >
+        >Provides data for the <see cref="P:System.ComponentModel.Design.IDesignerEventService.ActiveDesigner" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -70,23 +67,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ActiveDesignerEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ActiveDesignerEventArgs" /> class.</para>
         </summary>
         <param name="oldDesigner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document that is losing activation. </param
-        >
+          />The document that is losing activation. </param>
         <param name="newDesigner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The document that is gaining activation. </param
-        >
+          />The document that is gaining activation. </param>
       </Docs>
     </Member>
     <Member MemberName="NewDesigner">

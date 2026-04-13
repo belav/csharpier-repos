@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TcpTransportElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TcpTransportElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -72,16 +71,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of the specified <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</para
-          >
+            >Applies the settings of the specified <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</para>
         </summary>
         <param name="bindingElement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> whose settings are to be applied to this configuration element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> whose settings are to be applied to this configuration element.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -103,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Type" /> object that represents the custom binding element.</para
-          >
+            >Gets the <see cref="T:System.Type" /> object that represents the custom binding element.</para>
         </summary>
       </Docs>
     </Member>
@@ -171,8 +167,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration element whose settings are to be copied to this configuration element section.</param
-        >
+          />The configuration element whose settings are to be copied to this configuration element section.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultBindingElement">
@@ -246,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Connections in excess of the limit are queued until a space below the limit becomes available. The <see cref="P:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement.LeaseTimeout" /> property limits the duration the client waits to be connected before throwing a connection exception.</para
-          >
+            >Connections in excess of the limit are queued until a space below the limit becomes available. The <see cref="P:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement.LeaseTimeout" /> property limits the duration the client waits to be connected before throwing a connection exception.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -277,8 +271,7 @@
           <para>This setting is relevant only to services. Clients are not affected.</para>
           <para>Using this setting requires enabling the indigo1 TCP Port Sharing Service by changing its Startup Type to Manual or Automatic.</para>
           <para
-            >crabout the TCP Listener and how to start it, see <see cref="T:System.Net.Sockets.TcpListener" />.</para
-          >
+            >crabout the TCP Listener and how to start it, see <see cref="T:System.Net.Sockets.TcpListener" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -330,17 +323,13 @@
           <para
             >This property enables Teredo for the underlying TCP socket. For more information, see <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96651"
-              >Teredo Overview</see
-            >.</para
-          >
+              >Teredo Overview</see>.</para>
           <para
             >This property is only applicable on wxpsp2 and ws2003. wv has a machine-wide configuration option for Teredo, so when running wv, this property is ignored. Teredo requires that the client and service machines both have the Microsoft IPv6 stack installed and correctly configured for Teredo usage. For more information about configuring Teredo, see <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96651"
-              >Teredo Overview</see
-            >. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=96652"
-              >Windows Server 2003 Technology Centers</see
-            >.</para
-          >
+              >Teredo Overview</see>. For more information, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=96652"
+              >Windows Server 2003 Technology Centers</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

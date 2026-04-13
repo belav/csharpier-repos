@@ -33,16 +33,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskLoggingHelper" /> class and associates it with the specified task instance.</para
-          >
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.TaskLoggingHelper" /> class and associates it with the specified task instance.</para>
         </summary>
         <param name="taskInstance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The task containing an instance of this task.</param
-        >
+          />The task containing an instance of this task.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,8 +118,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The culture of the current thread is used for formatting.</para>
           <para
-            >This method requires the owner task to have registered its resources with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.TaskResources" /> property.</para
-          >
+            >This method requires the owner task to have registered its resources with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.TaskResources" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,15 +133,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional arguments for formatting the loaded string.</param
-        >
+          />Optional arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -188,15 +183,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to format.</param
-        >
+          />The string to format.</param>
         <param name="args">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Arguments for formatting.</param
-        >
+          />Arguments for formatting.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -233,8 +226,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a task does not have Help keywords associated with its messages, it can ignore this property or set it to null. If this property is set to an empty <see cref="T:System.String" />, resource names will be used verbatim as Help keywords.</para
-          >
+            >If a task does not have Help keywords associated with its messages, it can ignore this property or set it to null. If this property is set to an empty <see cref="T:System.String" />, resource names will be used verbatim as Help keywords.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,8 +261,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The command line string.</param
-        >
+          />The command line string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -304,15 +295,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the values of <see cref="T:Microsoft.Build.Framework.MessageImportance" /> that indicates the importance level of the command line.</param
-        >
+          />One of the values of <see cref="T:Microsoft.Build.Framework.MessageImportance" /> that indicates the importance level of the command line.</param>
         <param name="commandLine">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The command line string.</param
-        >
+          />The command line string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,15 +337,13 @@
           <para>Logs an error with the specified message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional arguments for formatting the message string.</param
-        >
+          />Optional arguments for formatting the message string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -394,11 +381,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parameters <paramref name="subCategory" />, <paramref name="errorCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para
-          >
+            >The parameters <paramref name="subCategory" />, <paramref name="errorCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
           <para
-            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para
-          >
+            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -409,63 +394,53 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the error type.</param
-        >
+          />The description of the error type.</param>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error code.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The error code.</param>
         <param name="helpKeyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to associate with the error.</param
-        >
+          />The Help keyword to associate with the error.</param>
         <param name="file">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file containing the error.</param
-        >
+          />The path to the file containing the error.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line in the file where the error occurs.</param
-        >
+          />The line in the file where the error occurs.</param>
         <param name="columnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the file where the error occurs.</param
-        >
+          />The column in the file where the error occurs.</param>
         <param name="endLineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end line in the file where the error occurs.</param
-        >
+          />The end line in the file where the error occurs.</param>
         <param name="endColumnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end column in the file where the error occurs.</param
-        >
+          />The end column in the file where the error occurs.</param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional arguments for formatting the message string.</param
-        >
+          />Optional arguments for formatting the message string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -525,8 +500,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include the stack trace in the log; otherwise, false.</param
-        >
+          />true to include the stack trace in the log; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -566,15 +540,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -612,11 +584,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parameters <paramref name="subCategoryResourceName" />, <paramref name="errorCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para
-          >
+            >The parameters <paramref name="subCategoryResourceName" />, <paramref name="errorCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
           <para
-            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para
-          >
+            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -627,67 +597,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource that describes the error type.</param
-        >
+          />The name of the string resource that describes the error type.</param>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error code.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The error code.</param>
         <param name="helpKeyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to associate with the error.</param
-        >
+          />The Help keyword to associate with the error.</param>
         <param name="file">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file containing the error.</param
-        >
+          />The path to the file containing the error.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line in the file where the error occurs.</param
-        >
+          />The line in the file where the error occurs.</param>
         <param name="columnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the file where the error occurs.</param
-        >
+          />The column in the file where the error occurs.</param>
         <param name="endLineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end line in the file where the error occurs.</param
-        >
+          />The end line in the file where the error occurs.</param>
         <param name="endColumnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end column in the file where the error occurs.</param
-        >
+          />The end column in the file where the error occurs.</param>
         <param name="messageResourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -718,8 +678,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with an error code, the code is extracted and logged with the message.</para>
           <para
-            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para
-          >
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -730,15 +689,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -775,14 +732,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with an error code, the code is extracted and logged with the message.</para>
           <para
-            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para
-          >
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
           <para
-            >The parameters <paramref name="subCategoryResourceName" />, and <paramref name="file" /> can be null.</para
-          >
+            >The parameters <paramref name="subCategoryResourceName" />, and <paramref name="file" /> can be null.</para>
           <para
-            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para
-          >
+            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -793,57 +747,49 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource that describes the error type.</param
-        >
+          />The name of the string resource that describes the error type.</param>
         <param name="file">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file containing the error.</param
-        >
+          />The path to the file containing the error.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line in the file where the error occurs.</param
-        >
+          />The line in the file where the error occurs.</param>
         <param name="columnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the file where the error occurs.</param
-        >
+          />The column in the file where the error occurs.</param>
         <param name="endLineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end line in the file where the error occurs.</param
-        >
+          />The end line in the file where the error occurs.</param>
         <param name="endColumnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end column in the file where the error occurs.</param
-        >
+          />The end column in the file where the error occurs.</param>
         <param name="messageResourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -870,29 +816,24 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Helps log the custom <see cref="T:Microsoft.Build.Framework.ExternalProjectFinishedEventArgs" /> build event.</para
-          >
+            >Helps log the custom <see cref="T:Microsoft.Build.Framework.ExternalProjectFinishedEventArgs" /> build event.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text message.</param>
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The help keyword.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The help keyword.</param>
         <param name="projectFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the project.</param
-        >
+          />The name of the project.</param>
         <param name="succeeded">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that project was built successfully; otherwise, false.</param
-        >
+          />true to indicate that project was built successfully; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -919,29 +860,24 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Helps log the custom <see cref="T:Microsoft.Build.Framework.ExternalProjectStartedEventArgs" /> build event.</para
-          >
+            >Helps log the custom <see cref="T:Microsoft.Build.Framework.ExternalProjectStartedEventArgs" /> build event.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text message.</param>
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The help keyword.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The help keyword.</param>
         <param name="projectFile">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the project.</param
-        >
+          />The name of the project.</param>
         <param name="targetNames">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The targets to build. An empty string indicates default targets.</param
-        >
+          />The targets to build. An empty string indicates default targets.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -971,23 +907,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value of a message is <unmanagedCodeEntityReference>Normal</unmanagedCodeEntityReference> by default.</para
-          >
+            >The <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value of a message is <unmanagedCodeEntityReference>Normal</unmanagedCodeEntityReference> by default.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Logs a message with the specified string.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the message.</param
-        >
+          />The arguments for formatting the message.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1028,18 +961,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the importance of the message.</param
-        >
+          />One of the enumeration values that specifies the importance of the message.</param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the message.</param
-        >
+          />The arguments for formatting the message.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1069,8 +999,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value of a message is <unmanagedCodeEntityReference>Normal</unmanagedCodeEntityReference> by default.</para
-          >
+            >The <see cref="T:Microsoft.Build.Framework.MessageImportance" /> value of a message is <unmanagedCodeEntityReference>Normal</unmanagedCodeEntityReference> by default.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1081,15 +1010,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1130,22 +1057,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the importance of the message.</param
-        >
+          />One of the enumeration values that specifies the importance of the message.</param>
         <param name="messageResourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1184,8 +1108,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line of text to log from.</param
-        >
+          />The line of text to log from.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1253,8 +1176,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the importance of logged messages.</param
-        >
+          />One of the enumeration values that specifies the importance of logged messages.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1292,15 +1214,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.TextReader" /> that reads the stream to log from.</param
-        >
+          />A <see cref="T:System.IO.TextReader" /> that reads the stream to log from.</param>
         <param name="messageImportance">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the values of <see cref="T:Microsoft.Build.Framework.MessageImportance" /> that indicates the importance level of the command line.</param
-        >
+          />One of the values of <see cref="T:Microsoft.Build.Framework.MessageImportance" /> that indicates the importance level of the command line.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1336,15 +1256,13 @@
           <para>Logs a warning with the specified message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional arguments for formatting the message string.</param
-        >
+          />Optional arguments for formatting the message string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1382,11 +1300,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parameters <paramref name="subCategory" />, <paramref name="warningCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para
-          >
+            >The parameters <paramref name="subCategory" />, <paramref name="warningCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
           <para
-            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para
-          >
+            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1397,63 +1313,53 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the warning type.</param
-        >
+          />The description of the warning type.</param>
         <param name="warningCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The warning code.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The warning code.</param>
         <param name="helpKeyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to associate with the warning.</param
-        >
+          />The Help keyword to associate with the warning.</param>
         <param name="file">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file containing the warning.</param
-        >
+          />The path to the file containing the warning.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line in the file where the warning occurs.</param
-        >
+          />The line in the file where the warning occurs.</param>
         <param name="columnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the file where the warning occurs.</param
-        >
+          />The column in the file where the warning occurs.</param>
         <param name="endLineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end line in the file where the warning occurs.</param
-        >
+          />The end line in the file where the warning occurs.</param>
         <param name="endColumnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end column in the file where the warning occurs.</param
-        >
+          />The end column in the file where the warning occurs.</param>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The message.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Optional arguments for formatting the message string.</param
-        >
+          />Optional arguments for formatting the message string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1513,8 +1419,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include the stack trace in the log; otherwise, false.</param
-        >
+          />true to include the stack trace in the log; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1554,15 +1459,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1600,11 +1503,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parameters <paramref name="subCategoryResourceName" />, <paramref name="warningCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para
-          >
+            >The parameters <paramref name="subCategoryResourceName" />, <paramref name="warningCode" />, <paramref name="helpKeyword" />, and <paramref name="file" /> can be null.</para>
           <para
-            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para
-          >
+            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1615,67 +1516,57 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource that describes the warning type.</param
-        >
+          />The name of the string resource that describes the warning type.</param>
         <param name="warningCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The warning code.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The warning code.</param>
         <param name="helpKeyword">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Help keyword to associate with the warning.</param
-        >
+          />The Help keyword to associate with the warning.</param>
         <param name="file">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file containing the warning.</param
-        >
+          />The path to the file containing the warning.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line in the file where the warning occurs.</param
-        >
+          />The line in the file where the warning occurs.</param>
         <param name="columnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the file where the warning occurs.</param
-        >
+          />The column in the file where the warning occurs.</param>
         <param name="endLineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end line in the file where the warning occurs.</param
-        >
+          />The end line in the file where the warning occurs.</param>
         <param name="endColumnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end column in the file where the warning occurs.</param
-        >
+          />The end column in the file where the warning occurs.</param>
         <param name="messageResourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1706,8 +1597,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with a warning code, the code is extracted and logged with the message.</para>
           <para
-            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para
-          >
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1718,15 +1608,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1763,14 +1651,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the message begins with a warning code, the code is extracted and logged with the message.</para>
           <para
-            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para
-          >
+            >If a Help keyword prefix has been provided, it is also logged with the message. The Help keyword is composed by appending the string resource name to the Help keyword prefix. A task can provide a Help keyword prefix with either the <see cref="T:Microsoft.Build.Utilities.Task" /> base class constructor, or the <see cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" /> property.</para>
           <para
-            >The parameters <paramref name="subCategoryResourceName" />, and <paramref name="file" /> can be null.</para
-          >
+            >The parameters <paramref name="subCategoryResourceName" />, and <paramref name="file" /> can be null.</para>
           <para
-            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para
-          >
+            >The parameters <paramref name="lineNumber" />, <paramref name="columnNumber" />, <paramref name="endLineNumber" />, and <paramref name="endColumnNumber" /> should be set to <math>0</math> if they are not available.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1781,57 +1666,49 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource that describes the warning type.</param
-        >
+          />The name of the string resource that describes the warning type.</param>
         <param name="file">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the file containing the warning.</param
-        >
+          />The path to the file containing the warning.</param>
         <param name="lineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The line in the file where the warning occurs.</param
-        >
+          />The line in the file where the warning occurs.</param>
         <param name="columnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The column in the file where the warning occurs.</param
-        >
+          />The column in the file where the warning occurs.</param>
         <param name="endLineNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end line in the file where the warning occurs.</param
-        >
+          />The end line in the file where the warning occurs.</param>
         <param name="endColumnNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The end column in the file where the warning occurs.</param
-        >
+          />The end column in the file where the warning occurs.</param>
         <param name="messageResourceName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the string resource to load.</param
-        >
+          />The name of the string resource to load.</param>
         <param name="messageArgs">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The arguments for formatting the loaded string.</param
-        >
+          />The arguments for formatting the loaded string.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

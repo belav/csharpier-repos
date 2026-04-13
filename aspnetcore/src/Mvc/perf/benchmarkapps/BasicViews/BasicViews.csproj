@@ -3,8 +3,7 @@
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
 
     <DefineConstants Condition=" '$(GenerateSqlScripts)'=='true' "
-      >$(DefineConstants);GENERATE_SQL_SCRIPTS</DefineConstants
-    >
+      >$(DefineConstants);GENERATE_SQL_SCRIPTS</DefineConstants>
     <DefineConstants>$(DefineConstants);__RemoveThisBitTo__GENERATE_SQL_SCRIPTS</DefineConstants>
 
     <!-- Pomelo.EntityFrameworkCore.MySql is not strong named, so this test assembly cannot be strong-named signed either. -->

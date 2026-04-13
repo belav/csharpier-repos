@@ -17,19 +17,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When rows are deleted from a <see cref="T:System.Windows.Forms.DataGridView" /> control, the index numbers of subsequent rows are lowered to compensate.</para
-      >
+        >When rows are deleted from a <see cref="T:System.Windows.Forms.DataGridView" /> control, the index numbers of subsequent rows are lowered to compensate.</para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-        </format>. </para
-      >
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowsRemoved" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowsRemoved" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -49,23 +46,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowsRemovedEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowsRemovedEventArgs" /> class.</para>
         </summary>
         <param name="rowIndex">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the row that was deleted, or the first deleted row if multiple rows were deleted. </param
-        >
+          />The zero-based index of the row that was deleted, or the first deleted row if multiple rows were deleted. </param>
         <param name="rowCount">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of rows that were deleted.</param
-        >
+          />The number of rows that were deleted.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

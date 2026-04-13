@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.Design.IDesignerEventService" /> provides notification when a new root designer is created, changed, or disposed. A root designer provides design time support for the base component of a document in designer view. The <see cref="E:System.ComponentModel.Design.IDesignerEventService.SelectionChanged" /> event provides notification when the current component selection has changed.</para
-      >
+        <see cref="T:System.ComponentModel.Design.IDesignerEventService" /> provides notification when a new root designer is created, changed, or disposed. A root designer provides design time support for the base component of a document in designer view. The <see cref="E:System.ComponentModel.Design.IDesignerEventService.SelectionChanged" /> event provides notification when the current component selection has changed.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -48,21 +48,18 @@ class HelloApp
    }  
 }  
 ]]>
-    </code_example>shows a using namespace directive that refers to the CSharp.Introduction namespace. The occurrences of HelloMessage are shorthand for CSharp.Introduction.HelloMessage. </paragraph
-  >
+    </code_example>shows a using namespace directive that refers to the CSharp.Introduction namespace. The occurrences of HelloMessage are shorthand for CSharp.Introduction.HelloMessage. </paragraph>
   <paragraph
     >C# also enables the definition and use of aliases. A using alias directive defines an alias for a type. Such aliases can be useful in situation in which name collisions occur between two class libraries, or when a small number of types from a much larger namespace are being used. The example <code_example>
       <![CDATA[
 using MessageSource = CSharp.Introduction.HelloMessage;  
 ]]>
-    </code_example>shows a using alias directive that defines MessageSource as an alias for the HelloMessage class. </paragraph
-  >
+    </code_example>shows a using alias directive that defines MessageSource as an alias for the HelloMessage class. </paragraph>
   <paragraph
     >The code we have written can be compiled into a class library containing the class HelloMessage and an application containing the class HelloApp. The details of this compilation step might differ based on the compiler or tool being used. A command-line compiler might enable compilation of a class library and an application that uses that library with the following command-line invocations: <code_example>
       <![CDATA[
 csc /target:library HelloLibrary.cs   
 csc /reference:HelloLibrary.dll HelloApp.cs  
 ]]>
-    </code_example>which produce a class library named HelloLibrary.dll and an application named HelloApp.exe. </paragraph
-  >
+    </code_example>which produce a class library named HelloLibrary.dll and an application named HelloApp.exe. </paragraph>
 </clause>

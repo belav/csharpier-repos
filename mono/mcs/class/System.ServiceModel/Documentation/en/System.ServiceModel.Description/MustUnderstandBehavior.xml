@@ -27,17 +27,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default the indigo2 client or service runtime throws an exception when it encounters a <see cref="T:System.ServiceModel.Channels.MessageHeader" /> in a message for which the <see cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" /> property is true but the header is not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> property for the message.</para
-      >
+        >By default the indigo2 client or service runtime throws an exception when it encounters a <see cref="T:System.ServiceModel.Channels.MessageHeader" /> in a message for which the <see cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" /> property is true but the header is not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> property for the message.</para>
       <para
-        >To prevent this behavior, use the <see cref="T:System.ServiceModel.Description.MustUnderstandBehavior" /> and set the <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> property to false. Typically, this is used in scenarios where the message content is meant to be relayed somewhere else and not processed, such as a router service.</para
-      >
+        >To prevent this behavior, use the <see cref="T:System.ServiceModel.Description.MustUnderstandBehavior" /> and set the <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> property to false. Typically, this is used in scenarios where the message content is meant to be relayed somewhere else and not processed, such as a router service.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instructs indigo1 to disable the mandatory processing of headers not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> collection that must be understood according to the SOAP 1.1 and 1.2 specifications.  </para
-      >
+        >Instructs indigo1 to disable the mandatory processing of headers not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> collection that must be understood according to the SOAP 1.1 and 1.2 specifications.  </para>
     </summary>
   </Docs>
   <Members>
@@ -58,22 +55,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Pass false as the <paramref name="validate" /> parameter to this constructor to prevent an exception from being thrown when the runtime encounters a <see cref="T:System.ServiceModel.Channels.MessageHeader" /> in a message for which the <see cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" /> property is true but the header is not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> property for the message.</para
-          >
+            >Pass false as the <paramref name="validate" /> parameter to this constructor to prevent an exception from being thrown when the runtime encounters a <see cref="T:System.ServiceModel.Channels.MessageHeader" /> in a message for which the <see cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" /> property is true but the header is not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> property for the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MustUnderstandBehavior" /> class using the specified value. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MustUnderstandBehavior" /> class using the specified value. </para>
         </summary>
         <param name="validate">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A value that specifies whether to enforce validation of mustUnderstand headers.</param
-        >
+          />A value that specifies whether to enforce validation of mustUnderstand headers.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters">
@@ -105,8 +99,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements <see cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" /> to support behavior functionality.</para
-          >
+            >Implements <see cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" /> to support behavior functionality.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -140,14 +133,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" /> method to support behavior functionality.</para
-          >
+            >Implements the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" /> method to support behavior functionality.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigns the value of <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> to the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ValidateMustUnderstand" /> property.</para
-          >
+            >Assigns the value of <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> to the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ValidateMustUnderstand" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -177,14 +168,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" /> to support behavior functionality.</para
-          >
+            >Implements the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" /> to support behavior functionality.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigns the value of <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ValidateMustUnderstand" /> property.</para
-          >
+            >Assigns the value of <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ValidateMustUnderstand" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -212,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)" /> method to support behavior functionality.</para
-          >
+            >Implements the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)" /> method to support behavior functionality.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -236,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> property to false to prevent an exception from being thrown when the runtime encounters a <see cref="T:System.ServiceModel.Channels.MessageHeader" /> in a message for which the <see cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" /> property is true but the header is not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> property for the message.</para
-          >
+            >Set the <see cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" /> property to false to prevent an exception from being thrown when the runtime encounters a <see cref="T:System.ServiceModel.Channels.MessageHeader" /> in a message for which the <see cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" /> property is true but the header is not in the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" /> property for the message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

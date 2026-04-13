@@ -3,8 +3,7 @@
   <paragraph
     >The sizeof operator returns the number of bytes occupied by a variable of a given type. The type specified as an operand to sizeof must be an <non_terminal
       where="25.2"
-      >unmanaged-type</non_terminal
-    > (<hyperlink>25.2</hyperlink>). <grammar_production>
+      >unmanaged-type</non_terminal> (<hyperlink>25.2</hyperlink>). <grammar_production>
       <name>
         <non_terminal where="25.5.8">sizeof-expression</non_terminal>
       </name> : <rhs>

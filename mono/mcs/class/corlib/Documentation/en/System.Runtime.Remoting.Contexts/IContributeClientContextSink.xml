@@ -30,11 +30,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" /> interface is implemented by context properties in a <see cref="T:System.Runtime.Remoting.Contexts.Context" /> class that want to contribute an interception sink at the context boundary on the client end of a remoting call.</para
-      >
+        >The <see cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" /> interface is implemented by context properties in a <see cref="T:System.Runtime.Remoting.Contexts.Context" /> class that want to contribute an interception sink at the context boundary on the client end of a remoting call.</para>
       <para
-        >The client context chain is composed from those properties in the client context that implement <see cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" />, which contributes to a sink through the <see cref="M:System.Runtime.Remoting.Contexts.IContributeClientContextSink.GetClientContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" /> method call. This chain is cached for future use.</para
-      >
+        >The client context chain is composed from those properties in the client context that implement <see cref="T:System.Runtime.Remoting.Contexts.IContributeClientContextSink" />, which contributes to a sink through the <see cref="M:System.Runtime.Remoting.Contexts.IContributeClientContextSink.GetClientContextSink(System.Runtime.Remoting.Messaging.IMessageSink)" /> method call. This chain is cached for future use.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,8 +76,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The chain of sinks composed so far. </param
-        >
+          />The chain of sinks composed so far. </param>
       </Docs>
     </Member>
   </Members>

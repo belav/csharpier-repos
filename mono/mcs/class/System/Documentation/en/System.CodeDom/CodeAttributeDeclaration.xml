@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> can be used to represent an expression that declares an attribute. The attribute name and the arguments for the attribute are stored as properties of the object. A <see cref="T:System.CodeDom.CodeAttributeArgument" /> can be used to represent each argument for the attribute.</para
-      >
+        >A <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> can be used to represent an expression that declares an attribute. The attribute name and the arguments for the attribute are stored as properties of the object. A <see cref="T:System.CodeDom.CodeAttributeArgument" /> can be used to represent each argument for the attribute.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -84,22 +82,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="attributeType" /> parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" /> and <see cref="P:System.CodeDom.CodeAttributeDeclaration.Name" /> properties.</para
-          >
+            >The <paramref name="attributeType" /> parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" /> and <see cref="P:System.CodeDom.CodeAttributeDeclaration.Name" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified code type reference.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified code type reference.</para>
         </summary>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> that identifies the attribute.</param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> that identifies the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -123,16 +118,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute. </param
-        >
+          />The name of the attribute. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -163,29 +156,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="attributeType" /> parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" /> and <see cref="P:System.CodeDom.CodeAttributeDeclaration.Name" /> properties, and the <paramref name="arguments" /> parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.Arguments" /> property for the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />. </para
-          >
+            >The <paramref name="attributeType" /> parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" /> and <see cref="P:System.CodeDom.CodeAttributeDeclaration.Name" /> properties, and the <paramref name="arguments" /> parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.Arguments" /> property for the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified code type reference and arguments.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified code type reference and arguments.</para>
         </summary>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeTypeReference" /> that identifies the attribute.</param
-        >
+          />The <see cref="T:System.CodeDom.CodeTypeReference" /> that identifies the attribute.</param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" /> that contains the arguments for the attribute.</param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" /> that contains the arguments for the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -219,23 +208,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified name and arguments.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" /> class using the specified name and arguments.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the attribute. </param
-        >
+          />The name of the attribute. </param>
         <param name="arguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" />  that contains the arguments for the attribute. </param
-        >
+          />An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" />  that contains the arguments for the attribute. </param>
       </Docs>
     </Member>
     <Member MemberName="Arguments">

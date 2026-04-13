@@ -21,11 +21,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of using this class directly, use Wsdl.exe.</para
-      >
+        >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of using this class directly, use Wsdl.exe.</para>
       <para
-        >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class has properties that correspond to the name and type attributes of a WSDL part element. The class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification.</para
-      >
+        >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class has properties that correspond to the name and type attributes of a WSDL part element. The class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -77,12 +74,9 @@
           <para
             >This property corresponds to the XML name attribute of the XML element &lt;wsdl:part&gt;. For more information about the element, see <see
               cref="http://www.w3.org/TR/wsdl"
-              >http://www.w3.org/TR/wsdl</see
-            >. </para
-          >
+              >http://www.w3.org/TR/wsdl</see>. </para>
           <para
-            >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class is used by the Wsdl.exe tool while generating classes from a Web Services Description Language (WSDL) document that specifies SOAP encoding. Instead of using this class directly, use Wsdl.exe.</para
-          >
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class is used by the Wsdl.exe tool while generating classes from a Web Services Description Language (WSDL) document that specifies SOAP encoding. Instead of using this class directly, use Wsdl.exe.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -116,12 +110,9 @@
           <para
             >This property corresponds to the XML type attribute of the XML element &lt;wsdl:part&gt;. For more information about the element, see <see
               cref="http://www.w3.org/TR/wsdl"
-              >http://www.w3.org/TR/wsdl</see
-            >. </para
-          >
+              >http://www.w3.org/TR/wsdl</see>. </para>
           <para
-            >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class is used by the Wsdl.exe tool while generating classes from a Web Services Description Language (WSDL) document that specifies SOAP encoding. Instead of using this class directly, use Wsdl.exe.</para
-          >
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaMember" /> class is used by the Wsdl.exe tool while generating classes from a Web Services Description Language (WSDL) document that specifies SOAP encoding. Instead of using this class directly, use Wsdl.exe.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

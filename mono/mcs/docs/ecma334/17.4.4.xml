@@ -19,7 +19,6 @@ class Test
         <![CDATA[
 b = False, i = 0  
 ]]>
-      </code_example>because b and i are both automatically initialized to default values. end example]</example
-    >
+      </code_example>because b and i are both automatically initialized to default values. end example]</example>
   </paragraph>
 </clause>

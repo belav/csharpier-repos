@@ -33,14 +33,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.ConfigXmlDocument" /> wraps the corresponding <see cref="T:System.Xml.XmlDocument" /> type to carry the necessary information for reporting file-name and line numbers. This information is necessary when the system issues configuration errors.</para
-      >
+        >The <see cref="T:System.Configuration.ConfigXmlDocument" /> wraps the corresponding <see cref="T:System.Xml.XmlDocument" /> type to carry the necessary information for reporting file-name and line numbers. This information is necessary when the system issues configuration errors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Wraps the corresponding <see cref="T:System.Xml.XmlDocument" /> type and also carries the necessary information for reporting file-name and line numbers. </para
-      >
+        >Wraps the corresponding <see cref="T:System.Xml.XmlDocument" /> type and also carries the necessary information for reporting file-name and line numbers. </para>
     </summary>
   </Docs>
   <Members>
@@ -63,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigXmlDocument" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.ConfigXmlDocument" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -100,30 +97,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" /> attribute.</para
-          >
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" /> attribute.</para>
         </returns>
         <param name="prefix">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix definition.</param
-        >
+          />The prefix definition.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name that is used locally.</param
-        >
+          />The name that is used locally.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The URL that is assigned to the namespace.</param
-        >
+          />The URL that is assigned to the namespace.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateCDataSection">
@@ -158,8 +151,7 @@
           <para>The <see cref="T:System.Xml.XmlCDataSection" /> value.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to use.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to use.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateComment">
@@ -234,22 +226,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix definition.</param
-        >
+          />The prefix definition.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name used locally.</param
-        >
+          />The name used locally.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace for the URL.</param
-        >
+          />The namespace for the URL.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateSignificantWhitespace">
@@ -284,8 +273,7 @@
           <para>The <see cref="T:System.Xml.XmlSignificantWhitespace" /> value.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to use.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to use.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextNode">
@@ -320,8 +308,7 @@
           <para>The <see cref="T:System.Xml.XmlText" /> value.</para>
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to use.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text to use.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateWhitespace">
@@ -356,8 +343,7 @@
           <para>The <see cref="T:System.Xml.XmlWhitespace" /> value.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to use.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The data to use.</param>
       </Docs>
     </Member>
     <Member MemberName="Filename">
@@ -431,8 +417,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file.</param
-        >
+          />The name of the file.</param>
       </Docs>
     </Member>
     <Member MemberName="LoadSingleElement">
@@ -468,15 +453,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the file.</param
-        >
+          />The name of the file.</param>
         <param name="sourceReader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The source for the reader.</param
-        >
+          />The source for the reader.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Configuration.IConfigXmlNode.Filename">

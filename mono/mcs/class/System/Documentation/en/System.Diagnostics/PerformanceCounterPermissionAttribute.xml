@@ -36,10 +36,8 @@
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
-            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
-          >
-        </format>.</para
-      >
+            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,16 +69,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterPermissionAttribute" /> class.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName="CategoryName">
@@ -129,14 +125,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the permission based on the requested access levels that are set through the <see cref="P:System.Diagnostics.PerformanceCounterPermissionAttribute.PermissionAccess" /> property on the attribute.</para
-          >
+            >Creates the permission based on the requested access levels that are set through the <see cref="P:System.Diagnostics.PerformanceCounterPermissionAttribute.PermissionAccess" /> property on the attribute.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.IPermission" /> that represents the created permission.</para
-          >
+            >An <see cref="T:System.Security.IPermission" /> that represents the created permission.</para>
         </returns>
       </Docs>
     </Member>

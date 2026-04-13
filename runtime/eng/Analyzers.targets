@@ -12,8 +12,7 @@
     <!-- Disable analyzers in sourcebuild -->
     <RunAnalyzers Condition="'$(DotNetBuildFromSource)' == 'true'">false</RunAnalyzers>
     <EnableNETAnalyzers Condition="'$(EnableNETAnalyzers)' == ''"
-      >$(RunAnalyzers)</EnableNETAnalyzers
-    >
+      >$(RunAnalyzers)</EnableNETAnalyzers>
   </PropertyGroup>
   <PropertyGroup Condition="'$(RunAnalyzers)' != 'false'">
     <EnableSingleFileAnalyzer
@@ -21,8 +20,7 @@
       '$(EnableSingleFileAnalyzer)' == '' and
       '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and
       '$(IsSourceProject)' == 'true'"
-      >true</EnableSingleFileAnalyzer
-    >
+      >true</EnableSingleFileAnalyzer>
   </PropertyGroup>
   <ItemGroup Condition="'$(RunAnalyzers)' != 'false'">
     <EditorConfigFiles Include="$(MSBuildThisFileDirectory)CodeAnalysis.src.globalconfig" />

@@ -5,11 +5,9 @@
   xmlns="http://schemas.datacontract.org/2004/07/System.Security.AccessControl"
 >
   <ClassName i:type="x:string" xmlns=""
-    >System.Security.AccessControl.PrivilegeNotHeldException</ClassName
-  >
+    >System.Security.AccessControl.PrivilegeNotHeldException</ClassName>
   <Message i:type="x:string" xmlns=""
-    >The process does not possess some privilege required for this operation.</Message
-  >
+    >The process does not possess some privilege required for this operation.</Message>
   <Data i:nil="true" xmlns="" />
   <InnerException i:nil="true" xmlns="" />
   <HelpURL i:nil="true" xmlns="" />

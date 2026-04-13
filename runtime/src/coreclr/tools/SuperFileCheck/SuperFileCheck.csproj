@@ -6,8 +6,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendTargetFrameworkToOutputPath Condition="'$(BuildingInsideVisualStudio)' == 'true'"
-      >true</AppendTargetFrameworkToOutputPath
-    >
+      >true</AppendTargetFrameworkToOutputPath>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -25,44 +24,33 @@
     <!-- If it's not win/osx/linux-musl, it's a non-portable Linux. Treat as Linux. -->
     <JITToolsRidWithoutPlatform
       Condition="'$(JITToolsRidWithoutPlatform)' != 'win' and '$(JITToolsRidWithoutPlatform)' != 'osx' and '$(JITToolsRidWithoutPlatform)' != 'linux-musl'"
-      >linux</JITToolsRidWithoutPlatform
-    >
+      >linux</JITToolsRidWithoutPlatform>
 
     <!-- There are no x86 packages, so use x64 -->
     <JITToolsRidPlatform Condition="'$(JITToolsRidPlatform)' == 'x86'">x64</JITToolsRidPlatform>
     <JITToolsRidPlatform
       Condition="'$(JITToolsRidPlatform)' == 'arm' and '$(JITToolsRidWithoutPlatform)' == 'win'"
-      >arm64</JITToolsRidPlatform
-    >
+      >arm64</JITToolsRidPlatform>
     <JITToolsRid Condition="'$(JITToolsRid)' == ''"
-      >$(JITToolsRidWithoutPlatform)-$(JITToolsRidPlatform)</JITToolsRid
-    >
+      >$(JITToolsRidWithoutPlatform)-$(JITToolsRidPlatform)</JITToolsRid>
 
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'linux-arm64'"
-      >$(runtimelinuxarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimelinuxarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'linux-x64'"
-      >$(runtimelinuxx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimelinuxx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion
       Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'linux-musl-arm64'"
-      >$(runtimelinuxmuslarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimelinuxmuslarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'linux-musl-x64'"
-      >$(runtimelinuxmuslx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimelinuxmuslx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'win-arm64'"
-      >$(runtimewinarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimewinarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'win-x64'"
-      >$(runtimewinx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimewinx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'osx-arm64'"
-      >$(runtimeosxarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimeosxarm64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
     <JITToolsVersion Condition="'$(JITToolsVersion)' == '' and '$(JITToolsRid)' == 'osx-x64'"
-      >$(runtimeosxx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion
-    >
+      >$(runtimeosxx64MicrosoftNETCoreRuntimeJITToolsVersion)</JITToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>

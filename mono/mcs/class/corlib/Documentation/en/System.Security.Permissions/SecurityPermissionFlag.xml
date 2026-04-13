@@ -37,11 +37,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration has a <see cref="T:System.FlagsAttribute" /> attribute that allows a bitwise combination of its member values.</para
-      >
+        >This enumeration has a <see cref="T:System.FlagsAttribute" /> attribute that allows a bitwise combination of its member values.</para>
       <para
-        >This enumeration is used by <see cref="T:System.Security.Permissions.SecurityPermission" />.</para
-      >
+        >This enumeration is used by <see cref="T:System.Security.Permissions.SecurityPermission" />.</para>
       <block subset="none" type="note">
         <para>Many of these flags are powerful and should only be granted to highly trusted code.</para>
       </block>
@@ -311,8 +309,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This flag has no effect when used dynamically with stack modifiers such as <see cref="M:System.Security.CodeAccessPermission.Deny" />, <see cref="M:System.Security.CodeAccessPermission.Assert" />, and <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />.</para
-          >
+            >This flag has no effect when used dynamically with stack modifiers such as <see cref="M:System.Security.CodeAccessPermission.Deny" />, <see cref="M:System.Security.CodeAccessPermission.Assert" />, and <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -449,8 +446,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is a powerful permission that should be granted only to highly trusted code.</para>
           <para
-            >This flag has no effect when used dynamically with stack modifiers such as <see cref="M:System.Security.CodeAccessPermission.Deny" />, <see cref="M:System.Security.CodeAccessPermission.Assert" />, and <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />.</para
-          >
+            >This flag has no effect when used dynamically with stack modifiers such as <see cref="M:System.Security.CodeAccessPermission.Deny" />, <see cref="M:System.Security.CodeAccessPermission.Assert" />, and <see cref="M:System.Security.CodeAccessPermission.PermitOnly" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -43,8 +43,7 @@
       <para
         >The following example creates a <see cref="T:System.Net.WebResponse" />
 instance from a <see cref="T:System.Net.WebRequest" />
-.</para
-      >
+.</para>
       <code lang="C#"
         >using System;
 using System.Net;
@@ -71,11 +70,9 @@ public class WebResponseExample {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.WebResponse" /> class is the abstract base class from which protocol-specific response classes are derived. Applications can participate in request and response transactions in a protocol-agnostic manner using instances of the <see cref="T:System.Net.WebResponse" /> class while protocol-specific classes derived from <see cref="T:System.Net.WebResponse" /> carry out the details of the request.</para
-      >
+        >The <see cref="T:System.Net.WebResponse" /> class is the abstract base class from which protocol-specific response classes are derived. Applications can participate in request and response transactions in a protocol-agnostic manner using instances of the <see cref="T:System.Net.WebResponse" /> class while protocol-specific classes derived from <see cref="T:System.Net.WebResponse" /> carry out the details of the request.</para>
       <para
-        >Client applications do not create <see cref="T:System.Net.WebResponse" /> objects directly; they are created by calling the <see cref="M:System.Net.WebRequest.GetResponse" /> method on a <see cref="T:System.Net.WebRequest" /> instance.</para
-      >
+        >Client applications do not create <see cref="T:System.Net.WebResponse" /> objects directly; they are created by calling the <see cref="M:System.Net.WebRequest.GetResponse" /> method on a <see cref="T:System.Net.WebRequest" /> instance.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,14 +102,12 @@ public class WebResponseExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications do not call the <see cref="T:System.Net.WebResponse" /> constructor directly; use the <see cref="M:System.Net.WebRequest.GetResponse" /> method on a <see cref="T:System.Net.WebRequest" /> instance.</para
-          >
+            >Applications do not call the <see cref="T:System.Net.WebResponse" /> constructor directly; use the <see cref="M:System.Net.WebRequest.GetResponse" /> method on a <see cref="T:System.Net.WebRequest" /> instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebResponse" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebResponse" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -140,29 +135,25 @@ public class WebResponseExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented by a descendant class, this constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.WebResponse" /> descendant.</para
-          >
+            >When implemented by a descendant class, this constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.WebResponse" /> descendant.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.WebResponse" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.WebResponse" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> class that contains the information required to serialize the new <see cref="T:System.Net.WebRequest" /> instance. </param
-        >
+          />An instance of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> class that contains the information required to serialize the new <see cref="T:System.Net.WebRequest" /> instance. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" /> class that indicates the source of the serialized stream that is associated with the new <see cref="T:System.Net.WebRequest" /> instance. </param
-        >
+          />An instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" /> class that indicates the source of the serialized stream that is associated with the new <see cref="T:System.Net.WebRequest" /> instance. </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -184,22 +175,18 @@ public class WebResponseExample {
       <Parameters />
       <Docs>
         <exception cref="T:System.NotSupportedException"
-          >This method is not implemented in the derived class.</exception
-        >
+          >This method is not implemented in the derived class.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebResponse.Close" /> method cleans up the resources used by a <see cref="T:System.Net.WebResponse" /> and closes the underlying stream by calling the <see cref="M:System.IO.Stream.Close" /> method.</para
-          >
+            >The <see cref="M:System.Net.WebResponse.Close" /> method cleans up the resources used by a <see cref="T:System.Net.WebResponse" /> and closes the underlying stream by calling the <see cref="M:System.IO.Stream.Close" /> method.</para>
           <block subset="none" type="note">
             <para
-              >The response must be closed to avoid running out of system resources. The response stream can be closed by calling <see cref="M:System.IO.Stream.Close" /> or <see cref="M:System.Net.WebResponse.Close" />.</para
-            >
+              >The response must be closed to avoid running out of system resources. The response stream can be closed by calling <see cref="M:System.IO.Stream.Close" /> or <see cref="M:System.Net.WebResponse.Close" />.</para>
           </block>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para
-            >
+              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para>
           </block>
         </remarks>
         <summary>
@@ -230,21 +217,17 @@ public class WebResponseExample {
         <value>
           <para
             >A <see cref="T:System.Int64" />
-containing the number of bytes returned from the resource.</para
-          >
+containing the number of bytes returned from the resource.</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebResponse.ContentLength" /> property contains the length, in bytes, of the response from the Internet resource. For request methods that contain header information, the <see cref="P:System.Net.WebResponse.ContentLength" /> does not include the length of the header information.</para
-          >
+            >The <see cref="P:System.Net.WebResponse.ContentLength" /> property contains the length, in bytes, of the response from the Internet resource. For request methods that contain header information, the <see cref="P:System.Net.WebResponse.ContentLength" /> does not include the length of the header information.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para
-            >
+              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para>
           </block>
         </remarks>
         <summary>
@@ -275,21 +258,17 @@ containing the number of bytes returned from the resource.</para
         <value>
           <para
             >A <see cref="T:System.String" /> that
-   contains the media type of the response data.</para
-          >
+   contains the media type of the response data.</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebResponse.ContentType" /> property contains the MIME content type of the response from the Internet resource, if known.</para
-          >
+            >The <see cref="P:System.Net.WebResponse.ContentType" /> property contains the MIME content type of the response from the Internet resource, if known.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para
-            >
+              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para>
           </block>
         </remarks>
         <summary>
@@ -318,8 +297,7 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebResponse" /> object.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebResponse" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -343,34 +321,28 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.WebResponse" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.WebResponse" /> references. This method invokes the Dispose() method of each referenced object.</para>
           <block subset="none" type="note">
             <para
               >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
-                  >[&lt;topic://conUsingNetworkTracing&gt;]</a
-                >
-              </format>.</para
-            >
+                  >[&lt;topic://conUsingNetworkTracing&gt;]</a>
+              </format>.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebResponse" /> object, and optionally disposes of the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebResponse" /> object, and optionally disposes of the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to releases only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to releases only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -403,29 +375,25 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para
-          >
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data that is needed to serialize the target object.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data that is needed to serialize the target object.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the destination for this serialization. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the destination for this serialization. </param>
       </Docs>
     </Member>
     <Member MemberName="GetResponseStream">
@@ -453,13 +421,11 @@ containing the number of bytes returned from the resource.</para
       <Parameters />
       <Docs>
         <exception cref="T:System.NotSupportedException"
-          >This method is not implemented in the derived class. </exception
-        >
+          >This method is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.WebResponse.GetResponseStream" /> method returns the data stream from the Internet resource.</para
-          >
+            >The <see cref="M:System.Net.WebResponse.GetResponseStream" /> method returns the data stream from the Internet resource.</para>
           <block subset="none" type="note">
             <para
               >The response stream must be closed to avoid running out of system resources. The response stream can be closed by calling <see cref="M:System.IO.Stream.Close" /> or <see cref="M:System.Net.WebResponse.Close" />
@@ -473,8 +439,7 @@ containing the number of bytes returned from the resource.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see cref="T:System.IO.Stream" /> class for reading data from the Internet resource.</para
-          >
+            >An instance of the <see cref="T:System.IO.Stream" /> class for reading data from the Internet resource.</para>
         </returns>
       </Docs>
       <Excluded>0</Excluded>
@@ -506,21 +471,17 @@ containing the number of bytes returned from the resource.</para
         <value>
           <para
             >A <see cref="T:System.Net.WebHeaderCollection" /> containing the header name/value pairs associated
-   with the current instance.</para
-          >
+   with the current instance.</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebResponse.Headers" /> property contains the name-value header pairs returned in the response.</para
-          >
+            >The <see cref="P:System.Net.WebResponse.Headers" /> property contains the name-value header pairs returned in the response.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para
-            >
+              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para>
           </block>
         </remarks>
         <summary>
@@ -551,14 +512,12 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current cache policy and the presence of the requested resource in the cache determine whether a response can be retrieved from the cache. Using cached responses usually improves application performance, but there is a risk that the response in the cache does not match the response on the server. Use the <see cref="P:System.Net.WebRequest.CachePolicy" /> property to set and the <see cref="T:System.Net.Cache.RequestCachePolicy" /> class to enumerate the current caching policy.</para
-          >
+            >The current cache policy and the presence of the requested resource in the cache determine whether a response can be retrieved from the cache. Using cached responses usually improves application performance, but there is a risk that the response in the cache does not match the response on the server. Use the <see cref="P:System.Net.WebRequest.CachePolicy" /> property to set and the <see cref="T:System.Net.Cache.RequestCachePolicy" /> class to enumerate the current caching policy.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether this response was obtained from the cache.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether this response was obtained from the cache.</para>
         </summary>
       </Docs>
     </Member>
@@ -583,14 +542,12 @@ containing the number of bytes returned from the resource.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To request mutual authentication, set the <see cref="P:System.Net.WebRequest.AuthenticationLevel" /> property using the <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" /> or <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" /> enumeration value. The default value for the <see cref="P:System.Net.WebRequest.AuthenticationLevel" /> property contains <see cref="F:System.Security.Principal.TokenImpersonationLevel.Delegation" />  and <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />.</para
-          >
+            >To request mutual authentication, set the <see cref="P:System.Net.WebRequest.AuthenticationLevel" /> property using the <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" /> or <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" /> enumeration value. The default value for the <see cref="P:System.Net.WebRequest.AuthenticationLevel" /> property contains <see cref="F:System.Security.Principal.TokenImpersonationLevel.Delegation" />  and <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether mutual authentication occurred.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether mutual authentication occurred.</para>
         </summary>
       </Docs>
     </Member>
@@ -615,21 +572,17 @@ containing the number of bytes returned from the resource.</para
         <value>
           <para
             >A <see cref="T:System.Uri" /> containing the URI 
-   of the resource associated with the current response.</para
-          >
+   of the resource associated with the current response.</para>
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is not implemented in the derived class. </exception
-        >
+          >This property is not implemented in the derived class. </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.WebResponse.ResponseUri" /> property contains the URI of the Internet resource that actually provided the response data. This resource might not be the originally requested URI if the underlying protocol allows redirection of the request.</para
-          >
+            >The <see cref="P:System.Net.WebResponse.ResponseUri" /> property contains the URI of the Internet resource that actually provided the response data. This resource might not be the originally requested URI if the underlying protocol allows redirection of the request.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para
-            >
+              >The <see cref="T:System.Net.WebResponse" /> class is an abstract class. The actual behavior of <see cref="T:System.Net.WebResponse" /> instances at run time is determined by the descendant class returned by <see cref="M:System.Net.WebRequest.GetResponse" />. For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see cref="T:System.Net.HttpWebResponse" /> and <see cref="T:System.Net.FileWebResponse" />.</para>
           </block>
         </remarks>
         <summary>
@@ -685,19 +638,16 @@ containing the number of bytes returned from the resource.</para
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>. </para>
           <block subset="none" type="note">
             <para
-              >Always call <see cref="M:System.Net.WebResponse.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.WebResponse" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.WebResponse" /> object's Finalize method.</para
-            >
+              >Always call <see cref="M:System.Net.WebResponse.System#IDisposable#Dispose" /> before you release your last reference to the <see cref="T:System.Net.WebResponse" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.WebResponse" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, releases all resources used by the <see cref="T:System.Net.WebResponse" />. </para
-          >
+            >When overridden in a derived class, releases all resources used by the <see cref="T:System.Net.WebResponse" />. </para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -733,23 +683,20 @@ containing the number of bytes returned from the resource.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data that is needed to serialize <see cref="T:System.Net.WebResponse" />.  </para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data that is needed to serialize <see cref="T:System.Net.WebResponse" />.  </para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that will hold the serialized data for the <see cref="T:System.Net.WebResponse" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that will hold the serialized data for the <see cref="T:System.Net.WebResponse" />. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.WebResponse" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.WebResponse" />. </param>
       </Docs>
     </Member>
   </Members>

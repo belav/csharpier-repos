@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.BasicHttpsBinding,System.ServiceModel.Configuration.BasicHttpsBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.BasicHttpsBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.BasicHttpsBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >System.ServiceModel.Configuration.BasicHttpsBindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.BasicHttpsBindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingCollectionElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingCollectionElement" /> class.</para>
         </summary>
       </Docs>
     </Member>

@@ -33,14 +33,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> attribute to a managed interface to specify which <see cref="T:System.Type" /> object exclusively uses the interface.  This attribute allows COM interoperation to map the interface back to the original type when converting the interface from metadata to a type library and back again.</para
-      >
+        >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> attribute to a managed interface to specify which <see cref="T:System.Type" /> object exclusively uses the interface.  This attribute allows COM interoperation to map the interface back to the original type when converting the interface from metadata to a type library and back again.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies which <see cref="T:System.Type" /> exclusively uses an interface. This class cannot be inherited.</para
-      >
+        >Specifies which <see cref="T:System.Type" /> exclusively uses an interface. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,22 +64,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> attribute to a managed interface to specify the <see cref="T:System.Type" /> object that exclusively uses the interface.   </para
-          >
+            >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> attribute to a managed interface to specify the <see cref="T:System.Type" /> object that exclusively uses the interface.   </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> class specifying the <see cref="T:System.Type" /> that exclusively uses an interface. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> class specifying the <see cref="T:System.Type" /> that exclusively uses an interface. </para>
         </summary>
         <param name="importClass">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Type" /> object that exclusively uses an interface.</param
-        >
+          />The <see cref="T:System.Type" /> object that exclusively uses an interface.</param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -101,14 +96,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> attribute to a managed interface to specify the type that exclusively uses an interface.</para
-          >
+            >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" /> attribute to a managed interface to specify the type that exclusively uses an interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of a <see cref="T:System.Type" /> object that exclusively uses an interface.</para
-          >
+            >Gets the name of a <see cref="T:System.Type" /> object that exclusively uses an interface.</para>
         </summary>
       </Docs>
       <AssemblyVersion>2.0.0.0</AssemblyVersion>

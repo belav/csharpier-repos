@@ -21,8 +21,7 @@
   <PropertyGroup>
     <RunningOnUnix
       Condition="('$(RunningOnUnix)' == '') And ('$(MSBuildRuntimeType)' == 'Core') And ('$(OS)'!='Windows_NT')"
-      >true</RunningOnUnix
-    >
+      >true</RunningOnUnix>
   </PropertyGroup>
 
   <!-- Common repo directories -->
@@ -34,8 +33,7 @@
   <PropertyGroup>
     <AltJitArch>$(__AltJitArch)</AltJitArch>
     <EnableNativeSanitizers Condition="'$(__EnableNativeSanitizers)' != ''"
-      >$(__EnableNativeSanitizers)</EnableNativeSanitizers
-    >
+      >$(__EnableNativeSanitizers)</EnableNativeSanitizers>
   </PropertyGroup>
 
   <!-- Output paths -->
@@ -44,21 +42,17 @@
          that BuildVersionFile gets the correct value. -->
     <BaseIntermediateOutputPath
       Condition="'$(BaseIntermediateOutputPath)' == '' Or '$(UsingMicrosoftNETSdk)' != 'true'"
-      >$(ArtifactsDir)obj\</BaseIntermediateOutputPath
-    >
+      >$(ArtifactsDir)obj\</BaseIntermediateOutputPath>
     <IntermediateOutputPath Condition="'$(IntermediateOutputPath)' == ''"
-      >$(BaseIntermediateOutputPath)\$(TargetOS).$(TargetArchitecture).$(Configuration)</IntermediateOutputPath
-    >
+      >$(BaseIntermediateOutputPath)\$(TargetOS).$(TargetArchitecture).$(Configuration)</IntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)' == ''"
-      >$(BaseIntermediateOutputPath)\coreclr\$(TargetOS).$(TargetArchitecture).$(Configuration)</OutputPath
-    >
+      >$(BaseIntermediateOutputPath)\coreclr\$(TargetOS).$(TargetArchitecture).$(Configuration)</OutputPath>
   </PropertyGroup>
 
   <!-- Targeting Package paths -->
   <PropertyGroup>
     <TargetingPackPath Condition="'$(BaseTargetingPackPath)' == ''"
-      >$(ArtifactsDir)TargetingPack\</TargetingPackPath
-    >
+      >$(ArtifactsDir)TargetingPack\</TargetingPackPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(BuildAllProjects)'=='true'">
@@ -101,12 +95,10 @@
 
     <RestoreDefaultOptimizationDataPackage
       Condition="'$(RestoreDefaultOptimizationDataPackage)' == ''"
-      >false</RestoreDefaultOptimizationDataPackage
-    >
+      >false</RestoreDefaultOptimizationDataPackage>
 
     <UsePartialNGENOptimization Condition="'$(UsePartialNGENOptimization)' == ''"
-      >false</UsePartialNGENOptimization
-    >
+      >false</UsePartialNGENOptimization>
 
     <RunWithAndroid>false</RunWithAndroid>
     <RunWithAndroid Condition="'$(TargetOS)' == 'android'">true</RunWithAndroid>
@@ -114,8 +106,7 @@
     <RunWithiOS>false</RunWithiOS>
     <RunWithiOS
       Condition="'$(TargetOS)' == 'ios' or '$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst'"
-      >true</RunWithiOS
-    >
+      >true</RunWithiOS>
 
     <MonoAot>false</MonoAot>
     <MonoAot Condition="'$(__MonoAot)' == '1'">true</MonoAot>
@@ -186,14 +177,11 @@
 
   <PropertyGroup>
     <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.csproj'"
-      >C#</Language
-    >
+      >C#</Language>
     <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.fsproj'"
-      >F#</Language
-    >
+      >F#</Language>
     <Language Condition="'$(Language)' == '' and  '$(MSBuildProjectExtension)' == '.ilproj'"
-      >IL</Language
-    >
+      >IL</Language>
   </PropertyGroup>
 
   <!-- Don't reference the mscorlib facade -->
@@ -223,14 +211,11 @@
     <TestWrapperTargetsWindows>false</TestWrapperTargetsWindows>
     <TestWrapperTargetsWindows
       Condition=" ('$(TargetsWindows)' != '' And '$(TargetsWindows)' ) OR ('$(TargetOS)' == 'android' And '$(TargetArchitecture)' == 'arm64' )"
-      >true</TestWrapperTargetsWindows
-    >
+      >true</TestWrapperTargetsWindows>
     <TestScriptExtension Condition="'$(TestWrapperTargetsWindows)' != 'true' "
-      >sh</TestScriptExtension
-    >
+      >sh</TestScriptExtension>
     <TestScriptExtension Condition="'$(TestWrapperTargetsWindows)' == 'true' "
-      >cmd</TestScriptExtension
-    >
+      >cmd</TestScriptExtension>
   </PropertyGroup>
 
   <PropertyGroup>

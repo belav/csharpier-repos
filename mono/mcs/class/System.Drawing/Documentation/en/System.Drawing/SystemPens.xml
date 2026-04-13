@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each property of the <see cref="T:System.Drawing.SystemPens" /> class is a <see cref="T:System.Drawing.Pen" /> that is the color of a Windows display element and that has a width of 1 pixel.</para
-      >
+        >Each property of the <see cref="T:System.Drawing.SystemPens" /> class is a <see cref="T:System.Drawing.Pen" /> that is the color of a Windows display element and that has a width of 1 pixel.</para>
     </summary>
   </Docs>
   <Members>
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the active window's border.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the active window's border.</para>
         </summary>
       </Docs>
     </Member>
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of the active window's title bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of the active window's title bar.</para>
         </summary>
       </Docs>
     </Member>
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text in the active window's title bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text in the active window's title bar.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -114,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the application workspace.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the application workspace.</para>
         </summary>
       </Docs>
     </Member>
@@ -134,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the face color of a 3-D element.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the face color of a 3-D element.</para>
         </summary>
       </Docs>
     </Member>
@@ -160,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the highlight color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the highlight color of a 3-D element. </para>
         </summary>
       </Docs>
     </Member>
@@ -186,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the shadow color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the shadow color of a 3-D element. </para>
         </summary>
       </Docs>
     </Member>
@@ -203,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the face color of a 3-D element.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the face color of a 3-D element.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -230,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the shadow color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the shadow color of a 3-D element. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -257,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the dark shadow color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the dark shadow color of a 3-D element. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -284,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the light color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the light color of a 3-D element. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -311,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the highlight color of a 3-D element. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the highlight color of a 3-D element. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -335,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of text in a 3-D element.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of text in a 3-D element.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -359,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the Windows desktop.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the Windows desktop.</para>
         </summary>
       </Docs>
     </Member>
@@ -381,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see cref="T:System.Drawing.Pen" /> from the specified <see cref="T:System.Drawing.Color" />.</para
-          >
+            >Creates a <see cref="T:System.Drawing.Pen" /> from the specified <see cref="T:System.Drawing.Color" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -393,8 +377,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Color" /> for the new <see cref="T:System.Drawing.Pen" />. </param
-        >
+          />The <see cref="T:System.Drawing.Color" /> for the new <see cref="T:System.Drawing.Pen" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -419,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the lightest color in the color gradient of an active window's title bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the lightest color in the color gradient of an active window's title bar.</para>
         </summary>
       </Docs>
     </Member>
@@ -442,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the lightest color in the color gradient of an inactive window's title bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the lightest color in the color gradient of an inactive window's title bar.</para>
         </summary>
       </Docs>
     </Member>
@@ -484,8 +465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of selected items. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of selected items. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -511,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text of selected items. </para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text of selected items. </para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -535,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color used to designate a hot-tracked item.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color used to designate a hot-tracked item.</para>
         </summary>
       </Docs>
     </Member>
@@ -558,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> is the color of the border of an inactive window.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> is the color of the border of an inactive window.</para>
         </summary>
       </Docs>
     </Member>
@@ -581,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the title bar caption of an inactive window.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the title bar caption of an inactive window.</para>
         </summary>
       </Docs>
     </Member>
@@ -601,8 +577,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text in an inactive window's title bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text in an inactive window's title bar.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -625,8 +600,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of a ToolTip.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of a ToolTip.</para>
         </summary>
       </Docs>
     </Member>
@@ -642,8 +616,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text of a ToolTip.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text of a ToolTip.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -666,8 +639,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of a menu's background.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of a menu's background.</para>
         </summary>
       </Docs>
     </Member>
@@ -686,8 +658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of a menu bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of a menu bar.</para>
         </summary>
       </Docs>
     </Member>
@@ -709,8 +680,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color used to highlight menu items when the menu appears as a flat menu.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color used to highlight menu items when the menu appears as a flat menu.</para>
         </summary>
       </Docs>
     </Member>
@@ -726,8 +696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of a menu's text.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of a menu's text.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -750,8 +719,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of a scroll bar.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background of a scroll bar.</para>
         </summary>
       </Docs>
     </Member>
@@ -770,8 +738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background in the client area of a window.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the background in the client area of a window.</para>
         </summary>
       </Docs>
     </Member>
@@ -790,8 +757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of a window frame.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of a window frame.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -811,8 +777,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text in the client area of a window.</para
-          >
+            >Gets a <see cref="T:System.Drawing.Pen" /> that is the color of the text in the client area of a window.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

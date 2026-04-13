@@ -13,17 +13,14 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.SystemSecurityCryptography_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemSecurityCryptography_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <UseAndroidCrypto Condition="'$(TargetPlatformIdentifier)' == 'android'">true</UseAndroidCrypto>
     <UseAppleCrypto
       Condition="'$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'ios' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >true</UseAppleCrypto
-    >
+      >true</UseAppleCrypto>
     <UseOpenSsl Condition="'$(TargetPlatformIdentifier)' == 'unix'">true</UseOpenSsl>
     <UseOpenSslAead Condition="'$(UseOpenSsl)' == 'true' or '$(TargetPlatformIdentifier)' == 'osx'"
-      >true</UseOpenSslAead
-    >
+      >true</UseOpenSslAead>
     <NeedOpenSslInitializer Condition="'$(UseOpenSslAead)' == 'true'">true</NeedOpenSslInitializer>
   </PropertyGroup>
 

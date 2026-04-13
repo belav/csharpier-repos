@@ -19,8 +19,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines identifiers for settings of a <see cref="T:System.Web.UI.Design.UrlBuilder" />.</para
-      >
+        >Defines identifiers for settings of a <see cref="T:System.Web.UI.Design.UrlBuilder" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use no additional options for the <see cref="T:System.Web.UI.Design.UrlBuilder" />.</para
-          >
+            >Use no additional options for the <see cref="T:System.Web.UI.Design.UrlBuilder" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

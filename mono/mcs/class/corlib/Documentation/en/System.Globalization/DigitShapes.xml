@@ -23,14 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.Globalization.DigitShapes" /> value specifies that no digit shape is substituted for the Unicode input, a digit shape is substituted based on context, or a native national digit shape is substituted for the input.</para
-      >
+        >A <see cref="T:System.Globalization.DigitShapes" /> value specifies that no digit shape is substituted for the Unicode input, a digit shape is substituted based on context, or a native national digit shape is substituted for the input.</para>
       <para
-        >The Arabic, Indic, and Thai languages have classical shapes for numbers that are different from the digits 0 through 9 (Unicode U+0030 through U+0039), which are most often used on computers. The application uses the <see cref="T:System.Globalization.DigitShapes" /> enumeration with the <see cref="P:System.Globalization.NumberFormatInfo.DigitSubstitution" /> property to specify how to display digits U+0030 through U+0039 in the absence of other formatting information. </para
-      >
+        >The Arabic, Indic, and Thai languages have classical shapes for numbers that are different from the digits 0 through 9 (Unicode U+0030 through U+0039), which are most often used on computers. The application uses the <see cref="T:System.Globalization.DigitShapes" /> enumeration with the <see cref="P:System.Globalization.NumberFormatInfo.DigitSubstitution" /> property to specify how to display digits U+0030 through U+0039 in the absence of other formatting information. </para>
       <para
-        >The <see cref="T:System.Globalization.DigitShapes" /> enumeration is primarily used by applications intended for cultures that use bidirectional scripts. For example, the reading order of Arabic and Indic scripts is bidirectional.</para
-      >
+        >The <see cref="T:System.Globalization.DigitShapes" /> enumeration is primarily used by applications intended for cultures that use bidirectional scripts. For example, the reading order of Arabic and Indic scripts is bidirectional.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

@@ -2,8 +2,7 @@
   <Target Name="SetBuildTargetFramework">
     <PropertyGroup>
       <BuildTargetFramework Condition="'$(BuildTargetFramework)' == ''"
-        >$(NetCoreAppCurrent)</BuildTargetFramework
-      >
+        >$(NetCoreAppCurrent)</BuildTargetFramework>
     </PropertyGroup>
   </Target>
 

@@ -68,8 +68,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >TargetParameterCountException inherits from <see cref="T:System.Exception" />. This constructor sets the properties of the Exception object as shown in the following table.</para
-          >
+            >TargetParameterCountException inherits from <see cref="T:System.Exception" />. This constructor sets the properties of the Exception object as shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -106,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with an empty message string and the root cause of the exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with an empty message string and the root cause of the exception.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -139,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >TargetParmeterCountException inherits from <see cref="T:System.Exception" />. This constructor sets the properties of the Exception object as shown in the following table.</para
-          >
+            >TargetParmeterCountException inherits from <see cref="T:System.Exception" />. This constructor sets the properties of the Exception object as shown in the following table.</para>
           <list type="table">
             <listheader>
               <item>
@@ -177,16 +174,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with its message string set to the given message and the root cause exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with its message string set to the given message and the root cause exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A String describing the reason this exception was thrown. </param
-        >
+          />A String describing the reason this exception was thrown. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -218,11 +213,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.Reflection.TargetParameterCountException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.Reflection.TargetParameterCountException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -259,23 +252,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.TargetParameterCountException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

@@ -22,8 +22,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>An XML qualified name is a namespace qualified local name in the format of namespace:localname.</para>
       <para
-        >Because prefixes are only required when XML is persisted or read, they are irrelevant for <see cref="T:System.Xml.XmlQualifiedName" /> objects. This class assumes that prefixes are irrelevant. It is the responsibility of the user to ensure the local name does not contain a ":".</para
-      >
+        >Because prefixes are only required when XML is persisted or read, they are irrelevant for <see cref="T:System.Xml.XmlQualifiedName" /> objects. This class assumes that prefixes are irrelevant. It is the responsibility of the user to ensure the local name does not contain a ":".</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,16 +80,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" /> class with the specified name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" /> class with the specified name.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param
-        >
+          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -116,23 +112,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" /> class with the specified name and namespace.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" /> class with the specified name and namespace.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param
-        >
+          />The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace for the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param
-        >
+          />The namespace for the <see cref="T:System.Xml.XmlQualifiedName" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="Empty">
@@ -185,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Xml.XmlQualifiedName" /> object is equal to the current <see cref="T:System.Xml.XmlQualifiedName" /> object. </para
-          >
+            >Determines whether the specified <see cref="T:System.Xml.XmlQualifiedName" /> object is equal to the current <see cref="T:System.Xml.XmlQualifiedName" /> object. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,8 +189,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -247,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Xml.XmlQualifiedName" /> is empty.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Xml.XmlQualifiedName" /> is empty.</para>
         </summary>
       </Docs>
     </Member>
@@ -270,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the qualified name of the <see cref="T:System.Xml.XmlQualifiedName" />.</para
-          >
+            >Gets a string representation of the qualified name of the <see cref="T:System.Xml.XmlQualifiedName" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -293,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the namespace of the <see cref="T:System.Xml.XmlQualifiedName" />.</para
-          >
+            >Gets a string representation of the namespace of the <see cref="T:System.Xml.XmlQualifiedName" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -335,15 +323,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -383,15 +369,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param>
         <param name="b">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param
-        >
+          />An <see cref="T:System.Xml.XmlQualifiedName" /> to compare. </param>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -419,8 +403,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the <see cref="T:System.Xml.XmlQualifiedName" /> in the format of namespace:localname. If the object does not have a namespace defined, this method returns just the local name.</para
-          >
+            >The string value of the <see cref="T:System.Xml.XmlQualifiedName" /> in the format of namespace:localname. If the object does not have a namespace defined, this method returns just the local name.</para>
         </returns>
       </Docs>
     </Member>
@@ -455,23 +438,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the <see cref="T:System.Xml.XmlQualifiedName" /> in the format of namespace:localname. If the object does not have a namespace defined, this method returns just the local name.</para
-          >
+            >The string value of the <see cref="T:System.Xml.XmlQualifiedName" /> in the format of namespace:localname. If the object does not have a namespace defined, this method returns just the local name.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the object. </param
-        >
+          />The name of the object. </param>
         <param name="ns">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace of the object. </param
-        >
+          />The namespace of the object. </param>
       </Docs>
     </Member>
   </Members>

@@ -12,8 +12,7 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetPlatformIdentifier)' != 'windows'"
-      >SR.PlatformNotSupported_Registry</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.PlatformNotSupported_Registry</GeneratePlatformNotSupportedAssemblyMessage>
     <NoWarn Condition="'$(TargetPlatformIdentifier)' != 'windows'">$(NoWarn);IDE0280</NoWarn>
     <!-- https://github.com/dotnet/runtime/issues/84104 -->
   </PropertyGroup>

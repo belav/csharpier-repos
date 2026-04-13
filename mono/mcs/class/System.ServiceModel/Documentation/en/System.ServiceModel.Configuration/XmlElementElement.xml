@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.XmlElementElement" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.XmlElementElement" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -66,16 +65,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.XmlElementElement" /> class with the specified XML element.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.XmlElementElement" /> class with the specified XML element.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> from which this instance is initialized.</param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> from which this instance is initialized.</param>
       </Docs>
     </Member>
     <Member MemberName="DeserializeElement">
@@ -201,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Xml.XmlElement" /> that this class encapsulates.</para
-          >
+            >Gets or sets the <see cref="T:System.Xml.XmlElement" /> that this class encapsulates.</para>
         </summary>
       </Docs>
     </Member>

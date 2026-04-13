@@ -11,8 +11,7 @@
         '$(PublishTrimmed)' == 'true' Or
         '$(IsTrimmable)' == 'true' Or '$(EnableTrimAnalyzer)' == 'true' Or
         '$(EnableSingleFileAnalyzer)' == 'true')"
-      >true</_RequiresLiveILLink
-    >
+      >true</_RequiresLiveILLink>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(_RequiresLiveILLink)' == 'true'">
@@ -30,11 +29,9 @@
     <_RequiresILLinkPack>false</_RequiresILLinkPack>
     <!-- Keep in sync with SetTargetFramework metadata on the ProjectReference below. -->
     <ILLinkTasksAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'"
-      >$(ToolsILLinkDir)$(NetCoreAppToolCurrent)\ILLink.Tasks.dll</ILLinkTasksAssembly
-    >
+      >$(ToolsILLinkDir)$(NetCoreAppToolCurrent)\ILLink.Tasks.dll</ILLinkTasksAssembly>
     <ILLinkTasksAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'"
-      >$(ToolsILLinkDir)$(NetFrameworkToolCurrent)\ILLink.Tasks.dll</ILLinkTasksAssembly
-    >
+      >$(ToolsILLinkDir)$(NetFrameworkToolCurrent)\ILLink.Tasks.dll</ILLinkTasksAssembly>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(_RequiresLiveILLink)' == 'true'">
@@ -48,11 +45,9 @@
     >
       <!-- Keep TFMs in sync with ILLink.Tasks.csproj -->
       <SetTargetFramework Condition="'$(MSBuildRuntimeType)' == 'Core'"
-        >TargetFramework=$(NetCoreAppToolCurrent)</SetTargetFramework
-      >
+        >TargetFramework=$(NetCoreAppToolCurrent)</SetTargetFramework>
       <SetTargetFramework Condition="'$(MSBuildRuntimeType)' != 'Core'"
-        >TargetFramework=$(NetFrameworkToolCurrent)</SetTargetFramework
-      >
+        >TargetFramework=$(NetFrameworkToolCurrent)</SetTargetFramework>
     </ProjectReference>
 
     <!-- Need to reference the analyzer project separately, because there's no easy way to get it as a transitive reference of ILLink.Tasks.csproj -->

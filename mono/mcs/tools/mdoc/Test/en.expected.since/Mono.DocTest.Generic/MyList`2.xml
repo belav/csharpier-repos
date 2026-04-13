@@ -31,8 +31,7 @@
     <BaseTypeName>Mono.DocTest.Generic.GenericBase&lt;System.Collections.Generic.Dictionary&lt;A,B&gt;&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="U"
-        >System.Collections.Generic.Dictionary&lt;A,B&gt;</BaseTypeArgument
-      >
+        >System.Collections.Generic.Dictionary&lt;A,B&gt;</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces>

@@ -12,9 +12,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>Represents RELAX NG "name" name class.</summary>
     <remarks>To be added.</remarks>
@@ -61,11 +59,9 @@
       </Parameters>
       <Docs>
         <summary
-          >The constructor that initializes <see cref="P:Commons.Xml.Relaxng.RelaxngName.Name" /> and <see cref="P:Commons.Xml.Relaxng.RelaxngName.Namespace" />.</summary
-        >
+          >The constructor that initializes <see cref="P:Commons.Xml.Relaxng.RelaxngName.Name" /> and <see cref="P:Commons.Xml.Relaxng.RelaxngName.Namespace" />.</summary>
         <param name="ncname"
-          >a <see cref="T:System.String" /> that represents the local name.</param
-        >
+          >a <see cref="T:System.String" /> that represents the local name.</param>
         <param name="ns">a <see cref="T:System.String" /> that represents the namespace URI.</param>
         <remarks>To be added.</remarks>
       </Docs>

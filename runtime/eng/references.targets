@@ -20,13 +20,11 @@
       <SetConfiguration
         Condition="'$(RuntimeFlavor)' == 'CoreCLR' and
                                    '$(Configuration)' != '$(CoreCLRConfiguration)'"
-        >Configuration=$(CoreCLRConfiguration)</SetConfiguration
-      >
+        >Configuration=$(CoreCLRConfiguration)</SetConfiguration>
       <SetConfiguration
         Condition="'$(RuntimeFlavor)' == 'Mono' and
                                    '$(Configuration)' != '$(MonoConfiguration)'"
-        >Configuration=$(MonoConfiguration)</SetConfiguration
-      >
+        >Configuration=$(MonoConfiguration)</SetConfiguration>
     </ProjectReference>
     <!-- If a CoreLib ProjectReference is present, make all P2P assets non transitive. -->
     <ProjectReference

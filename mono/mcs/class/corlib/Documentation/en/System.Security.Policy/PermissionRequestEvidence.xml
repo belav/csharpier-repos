@@ -66,36 +66,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework security policy system uses the requested permissions along with a code assembly's <see cref="T:System.Security.Policy.Evidence" /> to determine which permissions the code should be granted.</para
-          >
+            >The .NET Framework security policy system uses the requested permissions along with a code assembly's <see cref="T:System.Security.Policy.Evidence" /> to determine which permissions the code should be granted.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" /> class with the permission request of a code assembly.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" /> class with the permission request of a code assembly.</para>
         </summary>
         <param name="request">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The minimum permissions the code requires to run. </param
-        >
+          />The minimum permissions the code requires to run. </param>
         <param name="optional">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permissions the code can use if they are granted, but that are not required. </param
-        >
+          />The permissions the code can use if they are granted, but that are not required. </param>
         <param name="denied">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The permissions the code explicitly asks not to be granted. </param
-        >
+          />The permissions the code explicitly asks not to be granted. </param>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -122,14 +117,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an equivalent copy of the current <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para
-          >
+            >Creates an equivalent copy of the current <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An equivalent copy of the current <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para
-          >
+            >An equivalent copy of the current <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -321,20 +314,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is useful during debugging to get an easy-to-read representation of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para
-          >
+            >This method is useful during debugging to get an easy-to-read representation of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the state of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para
-          >
+            >Gets a string representation of the state of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A representation of the state of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para
-          >
+            >A representation of the state of the <see cref="T:System.Security.Policy.PermissionRequestEvidence" />.</para>
         </returns>
       </Docs>
     </Member>

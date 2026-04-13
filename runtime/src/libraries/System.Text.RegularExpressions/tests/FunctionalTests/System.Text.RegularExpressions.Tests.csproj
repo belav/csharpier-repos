@@ -7,8 +7,7 @@
     <NoWarn>$(NoWarn);xUnit2008;SYSLIB0036;SYSLIB1045</NoWarn>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
     <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
-      >true</DebuggerSupport
-    >
+      >true</DebuggerSupport>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <IsHighAotMemoryUsageTest>true</IsHighAotMemoryUsageTest>
     <!-- to avoid OOMs with source generation in wasm: https://github.com/dotnet/runtime/pull/60701 -->

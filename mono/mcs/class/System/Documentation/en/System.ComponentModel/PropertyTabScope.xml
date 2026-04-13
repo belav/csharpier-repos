@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ComponentModel.PropertyTabScope" /> indicates the persistence scope of a tab that is displayed in the Properties window when a component of a design document has an associated <see cref="T:System.ComponentModel.PropertyTabAttribute" />.</para
-      >
+        <see cref="T:System.ComponentModel.PropertyTabScope" /> indicates the persistence scope of a tab that is displayed in the Properties window when a component of a design document has an associated <see cref="T:System.ComponentModel.PropertyTabAttribute" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

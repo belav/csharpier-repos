@@ -56,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -92,8 +91,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> whose key is being retrieved.</param
-        >
+          />The <see cref="T:System.Uri" /> whose key is being retrieved.</param>
       </Docs>
     </Member>
     <Member MemberName="InsertItem">
@@ -127,15 +125,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index that specifies the insertion location for the item in the collection.</param
-        >
+          />The zero-based index that specifies the insertion location for the item in the collection.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> to be inserted into the collection.</param
-        >
+          />The <see cref="T:System.Uri" /> to be inserted into the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="SetItem">
@@ -169,15 +165,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index that specifies the insertion location for the URI in the collection.</param
-        >
+          />The zero-based index that specifies the insertion location for the URI in the collection.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Uri" /> to be placed into the collection.</param
-        >
+          />The <see cref="T:System.Uri" /> to be placed into the collection.</param>
       </Docs>
     </Member>
   </Members>

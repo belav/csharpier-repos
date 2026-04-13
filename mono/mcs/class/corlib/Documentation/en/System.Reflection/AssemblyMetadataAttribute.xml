@@ -48,15 +48,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyMetadataAttribute" /> class by using the specified metadata key and value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyMetadataAttribute" /> class by using the specified metadata key and value.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The metadata key.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The metadata key.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The metadata value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The metadata value.</param>
       </Docs>
     </Member>
     <Member MemberName="Key">

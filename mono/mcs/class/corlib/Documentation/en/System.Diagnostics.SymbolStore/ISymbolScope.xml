@@ -20,19 +20,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Diagnostics.SymbolStore.ISymbolScope" /> interface also provides access to all locals defined within the current scope.</para
-      >
+        >The <see cref="T:System.Diagnostics.SymbolStore.ISymbolScope" /> interface also provides access to all locals defined within the current scope.</para>
       <block subset="none" type="note">
         <para
-          >This interface is the managed counterpart of the <unmanagedCodeEntityReference>ISymUnmanagedScope</unmanagedCodeEntityReference> interface, which is one of the unmanaged symbol store interfaces that provide an alternate way to read and write debug symbol information.</para
-        >
+          >This interface is the managed counterpart of the <unmanagedCodeEntityReference>ISymUnmanagedScope</unmanagedCodeEntityReference> interface, which is one of the unmanaged symbol store interfaces that provide an alternate way to read and write debug symbol information.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a lexical scope within <see cref="T:System.Diagnostics.SymbolStore.ISymbolMethod" />, providing access to the start and end offsets of the scope, as well as its child and parent scopes.</para
-      >
+        >Represents a lexical scope within <see cref="T:System.Diagnostics.SymbolStore.ISymbolMethod" />, providing access to the start and end offsets of the scope, as well as its child and parent scopes.</para>
     </summary>
   </Docs>
   <Members>

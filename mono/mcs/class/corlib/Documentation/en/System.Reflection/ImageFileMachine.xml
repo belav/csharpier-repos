@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To obtain this value for a module, use the <see cref="M:System.Reflection.Module.GetPEKind(System.Reflection.PortableExecutableKinds@,System.Reflection.ImageFileMachine@)" /> method.</para
-      >
+        >To obtain this value for a module, use the <see cref="M:System.Reflection.Module.GetPEKind(System.Reflection.PortableExecutableKinds@,System.Reflection.ImageFileMachine@)" /> method.</para>
       <block subset="none" type="note">
         <para>The values in this enumeration correspond to the constants IMAGE_FILE_MACHINE_I386, IMAGE_FILE_MACHINE_IA64, and IMAGE_FILE_MACHINE_AMD64 in the unmanaged Win32 API, which are accessed by the unmanaged GetPEKind function.</para>
       </block>

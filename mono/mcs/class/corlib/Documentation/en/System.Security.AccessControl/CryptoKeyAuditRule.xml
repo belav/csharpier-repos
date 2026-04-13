@@ -51,30 +51,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAuditRule" /> class using the specified values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAuditRule" /> class using the specified values. </para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identity to which the audit rule applies. This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param
-        >
+          />The identity to which the audit rule applies. This parameter must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
         <param name="cryptoKeyRights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cryptographic key operation for which this audit rule generates audits.</param
-        >
+          />The cryptographic key operation for which this audit rule generates audits.</param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditions that generate audits.</param
-        >
+          />The conditions that generate audits.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -102,30 +98,26 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAuditRule" /> class using the specified values. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.CryptoKeyAuditRule" /> class using the specified values. </para>
         </summary>
         <param name="identity">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The identity to which the audit rule applies.</param
-        >
+          />The identity to which the audit rule applies.</param>
         <param name="cryptoKeyRights">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The cryptographic key operation for which this audit rule generates audits.</param
-        >
+          />The cryptographic key operation for which this audit rule generates audits.</param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The conditions that generate audits.</param
-        >
+          />The conditions that generate audits.</param>
       </Docs>
     </Member>
     <Member MemberName="CryptoKeyRights">

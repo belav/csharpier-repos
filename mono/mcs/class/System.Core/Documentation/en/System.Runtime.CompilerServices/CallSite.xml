@@ -81,15 +81,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The call site delegate type.</param
-        >
+          />The call site delegate type.</param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The call site binder.</param
-        >
+          />The call site binder.</param>
       </Docs>
     </Member>
   </Members>

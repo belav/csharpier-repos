@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see cref="T:System.Net.Security.NegotiateStream" /> class.</para
-      >
+        >This enumeration is used by the <see cref="T:System.Net.Security.NegotiateStream" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

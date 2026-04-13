@@ -27,14 +27,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use one of the DbProviderFactories.GetFactory methods to get an instance of <see cref="T:System.Data.Common.DbProviderFactory" />.</para
-          >
+            >Use one of the DbProviderFactories.GetFactory methods to get an instance of <see cref="T:System.Data.Common.DbProviderFactory" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see cref="T:System.Data.Common.DbProviderFactory" /> class.</para
-          >
+            >Initializes a new instance of a <see cref="T:System.Data.Common.DbProviderFactory" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies whether the specific <see cref="T:System.Data.Common.DbProviderFactory" /> supports the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class.</para
-          >
+            >Specifies whether the specific <see cref="T:System.Data.Common.DbProviderFactory" /> supports the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -81,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommand" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommand" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -109,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommandBuilder" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommandBuilder" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,8 +132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnection" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnection" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -165,14 +159,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnectionStringBuilder" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />.</para
-          >
+            >A new instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -195,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataAdapter" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataAdapter" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -223,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataSourceEnumerator" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -251,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbParameter" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbParameter" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -281,22 +270,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the provider's version of the <see cref="T:System.Security.CodeAccessPermission" /> class.</para
-          >
+            >Returns a new instance of the provider's class that implements the provider's version of the <see cref="T:System.Security.CodeAccessPermission" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.CodeAccessPermission" /> object for the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para
-          >
+            >A <see cref="T:System.Security.CodeAccessPermission" /> object for the specified <see cref="T:System.Security.Permissions.PermissionState" />.</para>
         </returns>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

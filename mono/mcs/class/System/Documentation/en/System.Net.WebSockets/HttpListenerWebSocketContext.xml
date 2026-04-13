@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to information received by the <see cref="T:System.Net.HttpListener" /> class when accepting WebSocket connections.</para
-      >
+        >Provides access to information received by the <see cref="T:System.Net.HttpListener" /> class when accepting WebSocket connections.</para>
     </summary>
   </Docs>
   <Members>
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the cookies received by the <see cref="T:System.Net.HttpListener" /> object in the WebSocket opening handshake.</para
-          >
+            >Gets the cookies received by the <see cref="T:System.Net.HttpListener" /> object in the WebSocket opening handshake.</para>
         </summary>
       </Docs>
     </Member>
@@ -104,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the HTTP headers received by the <see cref="T:System.Net.HttpListener" /> object in the WebSocket opening handshake.</para
-          >
+            >Gets the HTTP headers received by the <see cref="T:System.Net.HttpListener" /> object in the WebSocket opening handshake.</para>
         </summary>
       </Docs>
     </Member>

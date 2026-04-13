@@ -5,13 +5,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <InvariantGlobalization>true</InvariantGlobalization>
     <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
     <!-- Tracking issue: https://github.com/dotnet/runtime/issues/90460 -->
     <CLRTestTargetUnsupported
       Condition="'$(TargetOS)' == 'tvos' and '$(TargetArchitecture)' == 'arm64'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="StackTraceMetadata.cs" />

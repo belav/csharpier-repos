@@ -39,23 +39,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Web.UI.Design.IDocumentProjectItem" /> representing the added document.</para
-          >
+            >An <see cref="T:System.Web.UI.Design.IDocumentProjectItem" /> representing the added document.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the document.</param
-        >
+          />The name of the document.</param>
         <param name="content">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Byte" /> containing the document contents.</param
-        >
+          />An array of type <see cref="T:System.Byte" /> containing the document contents.</param>
       </Docs>
     </Member>
     <Member MemberName="AddFolder">
@@ -82,16 +79,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Web.UI.Design.IFolderProjectItem" /> representing the new folder.</para
-          >
+            >An <see cref="T:System.Web.UI.Design.IFolderProjectItem" /> representing the new folder.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name for the new folder.</param
-        >
+          />The name for the new folder.</param>
       </Docs>
     </Member>
     <Member MemberName="Children">

@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.CodeDom.CodeEntryPointMethod" /> is a <see cref="T:System.CodeDom.CodeMemberMethod" /> that represents the entry point method of an executable.</para
-      >
+        >A <see cref="T:System.CodeDom.CodeEntryPointMethod" /> is a <see cref="T:System.CodeDom.CodeMemberMethod" /> that represents the entry point method of an executable.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEntryPointMethod" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeEntryPointMethod" /> class.</para>
         </summary>
       </Docs>
     </Member>

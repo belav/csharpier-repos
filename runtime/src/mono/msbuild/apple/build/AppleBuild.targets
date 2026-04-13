@@ -2,22 +2,17 @@
   <PropertyGroup>
     <AppleGenerateAppBundle
       Condition="'$(AppleGenerateAppBundle)' == '' and '$(GenerateAppBundle)' != ''"
-      >$(GenerateAppBundle)</AppleGenerateAppBundle
-    >
+      >$(GenerateAppBundle)</AppleGenerateAppBundle>
     <AppleGenerateAppBundle Condition="'$(AppleGenerateAppBundle)' == ''"
-      >true</AppleGenerateAppBundle
-    >
+      >true</AppleGenerateAppBundle>
     <!-- Unable to properly integrate nativelib into app build, so not supported for now. -->
     <AppleGenerateAppBundle
       Condition="'$(_IsLibraryMode)' == 'true' and '$(ForceLibraryModeGenerateAppBundle)' != 'true' and '$(UseNativeAOTRuntime)' != 'true'"
-      >false</AppleGenerateAppBundle
-    >
+      >false</AppleGenerateAppBundle>
     <_ProcessRuntimeComponentsForLibraryMode Condition="'$(_IsLibraryMode)' == 'true'"
-      >_ProcessRuntimeComponentsForLibraryMode</_ProcessRuntimeComponentsForLibraryMode
-    >
+      >_ProcessRuntimeComponentsForLibraryMode</_ProcessRuntimeComponentsForLibraryMode>
     <EnableDefaultAssembliesToBundle Condition="'$(EnableDefaultAssembliesToBundle)' == ''"
-      >false</EnableDefaultAssembliesToBundle
-    >
+      >false</EnableDefaultAssembliesToBundle>
   </PropertyGroup>
 
   <UsingTask
@@ -69,34 +64,28 @@
     <PropertyGroup>
       <_MobileIntermediateOutputPath>$([MSBuild]::NormalizeDirectory($(IntermediateOutputPath), 'mobile'))</_MobileIntermediateOutputPath>
       <TargetArchitecture Condition="'$(TargetArchitecture)' == ''"
-        >$(PlatformTarget)</TargetArchitecture
-      >
+        >$(PlatformTarget)</TargetArchitecture>
     </PropertyGroup>
 
     <PropertyGroup>
       <MicrosoftNetCoreAppRuntimePackDir Condition="'$(MicrosoftNetCoreAppRuntimePackDir)' == ''"
-        >%(ResolvedRuntimePack.PackageDirectory)</MicrosoftNetCoreAppRuntimePackDir
-      >
+        >%(ResolvedRuntimePack.PackageDirectory)</MicrosoftNetCoreAppRuntimePackDir>
       <MicrosoftNetCoreAppRuntimePackRidDir
         Condition="'$(MicrosoftNetCoreAppRuntimePackRidDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackDir), 'runtimes', '$(TargetOS)-$(TargetArchitecture)'))</MicrosoftNetCoreAppRuntimePackRidDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackDir), 'runtimes', '$(TargetOS)-$(TargetArchitecture)'))</MicrosoftNetCoreAppRuntimePackRidDir>
       <MicrosoftNetCoreAppRuntimePackRidDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidDir)))</MicrosoftNetCoreAppRuntimePackRidDir>
       <MicrosoftNetCoreAppRuntimePackRidNativeDir>$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidDir), 'native'))</MicrosoftNetCoreAppRuntimePackRidNativeDir>
     </PropertyGroup>
 
     <PropertyGroup>
       <AppleBuildDir Condition="'$(AppleBuildDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory($(PublishDir)))</AppleBuildDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(PublishDir)))</AppleBuildDir>
       <AppleBundleDir Condition="'$(AppleBundleDir)' == ''"
-        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'Bundle'))</AppleBundleDir
-      >
+        >$([MSBuild]::NormalizeDirectory('$(OutDir)', 'Bundle'))</AppleBundleDir>
 
       <BundleDir>$(AppleBundleDir)</BundleDir>
       <_MonoHeaderPath Condition="'$(UseNativeAOTRuntime)' != 'true'"
-        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidNativeDir), 'include', 'mono-2.0'))</_MonoHeaderPath
-      >
+        >$([MSBuild]::NormalizeDirectory($(MicrosoftNetCoreAppRuntimePackRidNativeDir), 'include', 'mono-2.0'))</_MonoHeaderPath>
       <_AotModuleTablePath>$(AppleBundleDir)\modules.m</_AotModuleTablePath>
       <AppName Condition="'$(AppName)' == ''">$(AssemblyName)</AppName>
     </PropertyGroup>
@@ -135,15 +124,12 @@
   <Target Name="_BeforeAppleBuild">
     <PropertyGroup>
       <_AppleRuntimeConfigFilePath Condition="'$(_AppleRuntimeConfigFilePath)' == ''"
-        >$([MSBuild]::NormalizePath($(AppleBuildDir), '$(AssemblyName).runtimeconfig.json'))</_AppleRuntimeConfigFilePath
-      >
+        >$([MSBuild]::NormalizePath($(AppleBuildDir), '$(AssemblyName).runtimeconfig.json'))</_AppleRuntimeConfigFilePath>
       <_ParsedRuntimeConfigFilePath Condition="'$(_ParsedRuntimeConfigFilePath)' == ''"
-        >$([MSBuild]::NormalizePath($(AppleBuildDir), 'runtimeconfig.bin'))</_ParsedRuntimeConfigFilePath
-      >
+        >$([MSBuild]::NormalizePath($(AppleBuildDir), 'runtimeconfig.bin'))</_ParsedRuntimeConfigFilePath>
       <UseConsoleUITemplate
         Condition="'$(UseConsoleUITemplate)' == '' and '$(UseNativeAOTRuntime)' != 'true'"
-        >true</UseConsoleUITemplate
-      >
+        >true</UseConsoleUITemplate>
     </PropertyGroup>
 
     <RemoveDir Directories="$(AppleBundleDir)" />
@@ -152,8 +138,7 @@
   <Target Name="_AppleResolveReferences">
     <PropertyGroup>
       <_FullPublishDir Condition="'$(PublishDir)' != ''"
-        >$([MSBuild]::NormalizeDirectory($(PublishDir)))</_FullPublishDir
-      >
+        >$([MSBuild]::NormalizeDirectory($(PublishDir)))</_FullPublishDir>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(EnableDefaultAssembliesToBundle)' == 'true'">
@@ -232,8 +217,7 @@
       <_UseAotDataFile Condition="'$(_UseAotDataFile)' == ''">false</_UseAotDataFile>
       <_UsesRuntimeInitCallback>$(UsesRuntimeInitCallback)</_UsesRuntimeInitCallback>
       <_UsesRuntimeInitCallback Condition="'$(_UsesRuntimeInitCallback)' == ''"
-        >true</_UsesRuntimeInitCallback
-      >
+        >true</_UsesRuntimeInitCallback>
     </PropertyGroup>
 
     <ItemGroup>
@@ -290,8 +274,7 @@
       <_AssembliesToBundleInternal>
         <_InternalForceInterpret
           Condition="'$(MonoForceInterpreter)' == 'true' and '%(FileName)%(Extension)' != 'System.Private.CoreLib.dll'"
-          >true</_InternalForceInterpret
-        >
+          >true</_InternalForceInterpret>
         <_IsNative>false</_IsNative>
       </_AssembliesToBundleInternal>
 
@@ -352,8 +335,7 @@
       <_CompilerBinaryPath>@(MonoAotCrossCompiler->WithMetadataValue('RuntimeIdentifier','$(TargetOS.ToLowerInvariant())-$(TargetArchitecture.ToLowerInvariant())'))</_CompilerBinaryPath>
       <_MonoLLVMPath>$(MonoAotCrossDir)</_MonoLLVMPath>
       <_MonoLLVMPath Condition="'$(_MonoLLVMPath)' == '' and '$(MonoEnableLLVM)' == 'true'"
-        >$([System.IO.Path]::GetDirectoryName("$(_CompilerBinaryPath)"))</_MonoLLVMPath
-      >
+        >$([System.IO.Path]::GetDirectoryName("$(_CompilerBinaryPath)"))</_MonoLLVMPath>
     </PropertyGroup>
 
     <MonoAOTCompiler

@@ -115,7 +115,6 @@
   </paragraph>
   <paragraph
     >In some places in the grammar, specific identifiers have special meaning, but are not keywords. <note
-      >[Note: For example, within a property declaration, the &quot;get&quot; and &quot;set&quot; identifiers have special meaning (<hyperlink>17.6.2</hyperlink>). An identifier other than get or set is never permitted in these locations, so this use does not conflict with a use of these words as identifiers. end note]</note
-    >
+      >[Note: For example, within a property declaration, the &quot;get&quot; and &quot;set&quot; identifiers have special meaning (<hyperlink>17.6.2</hyperlink>). An identifier other than get or set is never permitted in these locations, so this use does not conflict with a use of these words as identifiers. end note]</note>
   </paragraph>
 </clause>

@@ -39,10 +39,8 @@
       <para
         >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
-            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
-          >
-        </format>.</para
-      >
+            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a>
+        </format>.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -69,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ContextStaticAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ContextStaticAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>

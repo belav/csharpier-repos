@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following table summarizes the factory methods that can be used to create a <see cref="T:System.Linq.Expressions.UnaryExpression" /> that has a specific node type.</para
-      >
+        >The following table summarizes the factory methods that can be used to create a <see cref="T:System.Linq.Expressions.UnaryExpression" /> that has a specific node type.</para>
       <list type="table">
         <listheader>
           <item>
@@ -151,8 +150,7 @@
         </item>
       </list>
       <para
-        >In addition, the <see cref="Overload:System.Linq.Expressions.Expression.MakeUnary" /> methods can also be used to create a <see cref="T:System.Linq.Expressions.UnaryExpression" />. These factory methods can be used to create a <see cref="T:System.Linq.Expressions.UnaryExpression" /> of any node type that represents a unary operation. The parameter of these methods that is of type <see cref="P:System.Linq.Expressions.Expression.NodeType" /> specifies the desired node type.</para
-      >
+        >In addition, the <see cref="Overload:System.Linq.Expressions.Expression.MakeUnary" /> methods can also be used to create a <see cref="T:System.Linq.Expressions.UnaryExpression" />. These factory methods can be used to create a <see cref="T:System.Linq.Expressions.UnaryExpression" /> of any node type that represents a unary operation. The parameter of these methods that is of type <see cref="P:System.Linq.Expressions.Expression.NodeType" /> specifies the desired node type.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -221,8 +219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An operator call is <newTerm>lifted</newTerm> if the operator expects a non-nullable operand but a nullable operand is passed to it.</para
-          >
+            >An operator call is <newTerm>lifted</newTerm> if the operator expects a non-nullable operand but a nullable operand is passed to it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,8 +243,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An operator call is <newTerm>lifted</newTerm> if the operator expects a non-nullable operand but a nullable operand is passed to it. If the value of <see cref="P:System.Linq.Expressions.UnaryExpression.IsLiftedToNull" /> is true, the operator returns a nullable type and if the nullable operand evaluates to null, the operator returns null.</para
-          >
+            >An operator call is <newTerm>lifted</newTerm> if the operator expects a non-nullable operand but a nullable operand is passed to it. If the value of <see cref="P:System.Linq.Expressions.UnaryExpression.IsLiftedToNull" /> is true, the operator returns a nullable type and if the nullable operand evaluates to null, the operator returns null.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -300,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para
-          >
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -380,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para
-          >
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
         </summary>
       </Docs>
     </Member>
@@ -419,8 +413,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Linq.Expressions.UnaryExpression.Operand" /> property of the result.</param
-        >
+          />The <see cref="P:System.Linq.Expressions.UnaryExpression.Operand" /> property of the result.</param>
       </Docs>
     </Member>
   </Members>

@@ -37,15 +37,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The current class is a standard enumerator that parses over the values stored in <see cref="T:System.Runtime.Serialization.SerializationInfo" />. Instead of recording the values, the <see cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" /> keeps pointers to the member variables of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that created it.</para
-      >
+        >The current class is a standard enumerator that parses over the values stored in <see cref="T:System.Runtime.Serialization.SerializationInfo" />. Instead of recording the values, the <see cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" /> keeps pointers to the member variables of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that created it.</para>
       <para>This class follows the <see cref="T:System.Collections.IEnumerator" /> mechanism.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a formatter-friendly mechanism for parsing the data in <see cref="T:System.Runtime.Serialization.SerializationInfo" />. This class cannot be inherited.</para
-      >
+        >Provides a formatter-friendly mechanism for parsing the data in <see cref="T:System.Runtime.Serialization.SerializationInfo" />. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -96,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To initialize the enumerator, call <see cref="M:System.Runtime.Serialization.SerializationInfoEnumerator.MoveNext" /> and go through each item until you reach the last element.</para
-          >
+            >To initialize the enumerator, call <see cref="M:System.Runtime.Serialization.SerializationInfoEnumerator.MoveNext" /> and go through each item until you reach the last element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -171,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling this method, the <see cref="P:System.Runtime.Serialization.SerializationInfoEnumerator.Current" /> property will contain the first item in the current set of elements.</para
-          >
+            >After calling this method, the <see cref="P:System.Runtime.Serialization.SerializationInfoEnumerator.Current" /> property will contain the first item in the current set of elements.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

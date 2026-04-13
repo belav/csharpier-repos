@@ -36,8 +36,7 @@
       <para>Cryptographic random number generators create cryptographically strong random values.</para>
       <para>Application code does not directly use this class. This abstract class is provided as the base class for all cryptographic random number generators.</para>
       <para
-        >For an implementation of a cryptographic random number generator, use the derived class <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />.</para
-      >
+        >For an implementation of a cryptographic random number generator, use the derived class <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,14 +62,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For an implementation of a cryptographic random number generator, use the derived class <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />.</para
-          >
+            >You cannot create an instance of an abstract class. Application code will create a new instance of a derived class. For an implementation of a cryptographic random number generator, use the derived class <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -141,8 +138,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the random number generator implementation to use. </param
-        >
+          />The name of the random number generator implementation to use. </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -163,26 +159,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />. The Dispose method leaves the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> was occupying.</para
-          >
+            >Call Dispose when you are finished using the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />. The Dispose method leaves the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> was occupying.</para>
           <para
             >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>.</para
-          >
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> object's Finalize method.</para
-            >
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> object's Finalize method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> class.</para
-          >
+            >When overridden in a derived class, releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -206,25 +198,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. Finalize invokes Dispose with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. Finalize invokes Dispose with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> references. This method invokes the Dispose() method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> references. This method invokes the Dispose() method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> and optionally releases the managed resources.</para
-          >
+            >When overridden in a derived class, releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
       </Docs>
     </Member>
     <Member MemberName="GetBytes">
@@ -259,8 +247,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with cryptographically strong random bytes. </param
-        >
+          />The array to fill with cryptographically strong random bytes. </param>
       </Docs>
     </Member>
     <Member MemberName="GetNonZeroBytes">
@@ -295,8 +282,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array to fill with cryptographically strong random nonzero bytes. </param
-        >
+          />The array to fill with cryptographically strong random nonzero bytes. </param>
       </Docs>
     </Member>
   </Members>

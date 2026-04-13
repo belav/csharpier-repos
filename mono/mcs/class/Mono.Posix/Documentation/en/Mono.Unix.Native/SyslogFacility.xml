@@ -22,8 +22,7 @@
     <summary>System logging facilities.</summary>
     <remarks
       >Possible <see cref="M:Mono.Unix.Native.Syscall.openlog" />
-      <paramref name="facility" /> values.</remarks
-    >
+      <paramref name="facility" /> values.</remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.openlog" />
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
       <Docs>
         <summary
           >The authorization system: <c>login</c>(1), <c>su</c>(1),
-        <c>getty</c>(8), etc.</summary
-        >
+        <c>getty</c>(8), etc.</summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_AUTHPRIV">
@@ -68,8 +66,7 @@
         <summary
           >The same as 
         <see cref="F:Mono.Unix.Native.SyslogFacility.LOG_AUTH" />,
-        but logged to a file readable only by selected individuals.</summary
-        >
+        but logged to a file readable only by selected individuals.</summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_CRON">
@@ -109,8 +106,7 @@
       <Docs>
         <summary
           >System daemons, such as <c>routed</c>(8), that are not
-        provided for explicitly by other facilities.</summary
-        >
+        provided for explicitly by other facilities.</summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_FTP">
@@ -131,8 +127,7 @@
       <Docs>
         <summary
           >The file transfer protocol daemons: <c>ftpd</c>(8),
-        <c>tftpd</c>(8), etc.</summary
-        >
+        <c>tftpd</c>(8), etc.</summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_KERN">
@@ -325,8 +320,7 @@
       <Docs>
         <summary
           >The line printer spooling system: <c>lpr</c>(1),
-        <c>lpc</c>(8), <c>lpd</c>(8), etc.</summary
-        >
+        <c>lpc</c>(8), <c>lpd</c>(8), etc.</summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_MAIL">

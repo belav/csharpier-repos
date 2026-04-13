@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.CodeDom.CodeStatementCollection" /> class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeStatement" /> objects.</para
-      >
+        >The <see cref="T:System.CodeDom.CodeStatementCollection" /> class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeStatement" /> objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatementCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatementCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -91,16 +89,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatementCollection" /> class that contains the specified array of <see cref="T:System.CodeDom.CodeStatement" /> objects.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatementCollection" /> class that contains the specified array of <see cref="T:System.CodeDom.CodeStatement" /> objects.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects with which to initialize the collection. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects with which to initialize the collection. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -127,16 +123,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatementCollection" /> class that contains the elements of the specified source collection.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatementCollection" /> class that contains the elements of the specified source collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeStatementCollection" /> object with which to initialize the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeStatementCollection" /> object with which to initialize the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -165,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.CodeDom.CodeExpression" /> object to the collection.</para
-          >
+            >Adds the specified <see cref="T:System.CodeDom.CodeExpression" /> object to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -177,8 +170,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeExpression" /> object to add. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeExpression" /> object to add. </param>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -204,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.CodeDom.CodeStatement" /> object to the collection.</para
-          >
+            >Adds the specified <see cref="T:System.CodeDom.CodeStatement" /> object to the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,8 +207,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> object to add. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> object to add. </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -246,16 +236,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a set of <see cref="T:System.CodeDom.CodeStatement" /> objects to the collection.</para
-          >
+            >Adds a set of <see cref="T:System.CodeDom.CodeStatement" /> objects to the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects to add to the collection. </param
-        >
+          />An array of <see cref="T:System.CodeDom.CodeStatement" /> objects to add to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -284,16 +272,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of another <see cref="T:System.CodeDom.CodeStatementCollection" /> object to the end of the collection.</para
-          >
+            >Adds the contents of another <see cref="T:System.CodeDom.CodeStatementCollection" /> object to the end of the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.CodeDom.CodeStatementCollection" /> object that contains the objects to add to the collection. </param
-        >
+          />A <see cref="T:System.CodeDom.CodeStatementCollection" /> object that contains the objects to add to the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -322,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.CodeStatement" /> object.</para
-          >
+            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.CodeStatement" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -334,8 +319,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> object to search for in the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> object to search for in the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -365,23 +349,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see cref="T:System.CodeDom.CodeStatementCollection" /> object to a one-dimensional <see cref="T:System.Array" /> instance, starting at the specified index.</para
-          >
+            >Copies the elements of the <see cref="T:System.CodeDom.CodeStatementCollection" /> object to a one-dimensional <see cref="T:System.Array" /> instance, starting at the specified index.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param
-        >
+          />The one-dimensional <see cref="T:System.Array" /> that is the destination of the values copied from the collection. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the array at which to begin inserting. </param
-        >
+          />The index of the array at which to begin inserting. </param>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
@@ -410,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see cref="T:System.CodeDom.CodeStatement" /> object in the <see cref="T:System.CodeDom.CodeStatementCollection" />, if it exists in the collection.</para
-          >
+            >Gets the index of the specified <see cref="T:System.CodeDom.CodeStatement" /> object in the <see cref="T:System.CodeDom.CodeStatementCollection" />, if it exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -422,8 +402,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> to locate in the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> to locate in the collection. </param>
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -453,23 +432,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see cref="T:System.CodeDom.CodeStatement" /> object into the collection at the specified index.</para
-          >
+            >Inserts the specified <see cref="T:System.CodeDom.CodeStatement" /> object into the collection at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index where the specified object should be inserted. </param
-        >
+          />The zero-based index where the specified object should be inserted. </param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> object to insert. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> object to insert. </param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -526,16 +502,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.CodeDom.CodeStatement" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.CodeDom.CodeStatement" /> object from the collection.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.CodeDom.CodeStatement" /> to remove from the collection. </param
-        >
+          />The <see cref="T:System.CodeDom.CodeStatement" /> to remove from the collection. </param>
       </Docs>
     </Member>
   </Members>

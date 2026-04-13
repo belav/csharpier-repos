@@ -23,9 +23,7 @@
       <para
         >The <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class provides support for the product and comment tokens values used in  a User-Agent header as defined in <see
           cref="http://go.microsoft.com/fwlink/?LinkID=241642"
-          >RFC 2616</see
-        > by the IETF.</para
-      >
+          >RFC 2616</see> by the IETF.</para>
       <para>The User-Agent field contains information about the user agent originating the request. The field can contain multiple product tokens and comments identifying the user agent and any sub-products.</para>
     </remarks>
     <summary>
@@ -55,16 +53,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class.</para>
         </summary>
         <param name="product">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object used to initialize the new instance.</param
-        >
+          />A <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object used to initialize the new instance.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -85,12 +81,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class.</para>
         </summary>
         <param name="comment">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comment value.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A comment value.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -115,23 +109,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> class.</para>
         </summary>
         <param name="productName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The product name value.</param
-        >
+          />The product name value.</param>
         <param name="productVersion">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The product version value.</param
-        >
+          />The product version value.</param>
       </Docs>
     </Member>
     <Member MemberName="Comment">
@@ -150,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the comment from the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para
-          >
+            >Gets the comment from the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -176,23 +166,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para
-          >
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Boolean" />.</para>
           <para
-            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para
-          >
+            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with the current object.</param
-        >
+          />The object to compare with the current object.</param>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -214,14 +201,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
           <para
-            >The <see cref="M:System.Net.Http.Headers.ProductInfoHeaderValue.GetHashCode" />  method is suitable for use in hashing algorithms and data structures such as a hash table.</para
-          >
+            >The <see cref="M:System.Net.Http.Headers.ProductInfoHeaderValue.GetHashCode" />  method is suitable for use in hashing algorithms and data structures such as a hash table.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para
-          >
+            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -254,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> instance.</para
-          >
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -267,8 +251,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents product info header value information.</param
-        >
+          />A string that represents product info header value information.</param>
       </Docs>
     </Member>
     <Member MemberName="Product">
@@ -293,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the product from the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para
-          >
+            >Gets the product from the <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -317,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> instance.</para
-          >
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -346,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para
-          >
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

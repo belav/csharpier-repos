@@ -25,14 +25,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Services.Configuration.ProtocolElementCollection" /> class is used to work with a collection of <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> objects.</para
-      >
+        >The <see cref="T:System.Web.Services.Configuration.ProtocolElementCollection" /> class is used to work with a collection of <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> objects.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a strongly typed collection of <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> objects.</para
-      >
+        >Contains a strongly typed collection of <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -46,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />.</para
-          >
+            >Creates a new <see cref="T:System.Web.Services.Configuration.ProtocolElementCollection" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,16 +69,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to the collection.</para
-          >
+            >Adds a <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to the collection.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to add.</param
-        >
+          />The <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to add.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> objects from the collection.</para
-          >
+            >Removes all <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> objects from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -123,22 +117,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Boolean" /> that indicates whether a <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> with the specified key exists in the collection.</para
-          >
+            >Returns a <see cref="T:System.Boolean" /> that indicates whether a <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> with the specified key exists in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> with the specified key; otherwise, false.</para
-          >
+            >true if the collection contains a <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> with the specified key; otherwise, false.</para>
         </returns>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to find in the collection.</param
-        >
+          />The key of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to find in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -169,15 +160,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to which to copy the contents of the collection.</param
-        >
+          />An array of type <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to which to copy the contents of the collection.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index in <paramref name="Array" /> at which copying begins.</param
-        >
+          />The zero-based index in <paramref name="Array" /> at which copying begins.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -244,22 +233,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the zero-based index of a specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> in the collection.</para
-          >
+            >Returns the zero-based index of a specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" />, or -1 if the element was not found in the collection.</para
-          >
+            >The zero-based index of the specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" />, or -1 if the element was not found in the collection.</para>
         </returns>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to find in the collection.</param
-        >
+          />The <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to find in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -329,16 +315,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> from the collection.</para
-          >
+            >Removes a specified <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> from the collection.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to remove from the collection.</param
-        >
+          />The <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -365,8 +349,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to remove from the collection.</param
-        >
+          />The zero-based index of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -387,16 +370,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> with the specified key from the collection.</para
-          >
+            >Removes the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> with the specified key from the collection.</para>
         </summary>
         <param name="key">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The key of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to be removed from the collection.</param
-        >
+          />The key of the <see cref="T:System.Web.Services.Configuration.ProtocolElement" /> to be removed from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

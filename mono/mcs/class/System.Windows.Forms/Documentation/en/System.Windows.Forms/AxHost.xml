@@ -46,25 +46,19 @@
       <para
         >You typically do not use the <see cref="T:System.Windows.Forms.AxHost" /> class directly. You can use the <format type="text/html">
           <a href="482C0D83-7144-4497-B626-87D2351B78D0"
-            >Windows Forms ActiveX Control Importer (AxImp.exe) </a
-          >
-        </format> to generate the wrappers that extend <see cref="T:System.Windows.Forms.AxHost" />.</para
-      >
+            >Windows Forms ActiveX Control Importer (AxImp.exe) </a>
+        </format> to generate the wrappers that extend <see cref="T:System.Windows.Forms.AxHost" />.</para>
       <para
-        >The ActiveX Control Importer generates a class that is derived from the <see cref="T:System.Windows.Forms.AxHost" /> class, and compiles it into a library file (DLL) that can be added as a reference to your application. Alternatively, you can use the /source switch with the ActiveX Control Importer and a C# file is generated for your <see cref="T:System.Windows.Forms.AxHost" /> derived class. You can then make changes to the code and recompile it into a library file.</para
-      >
+        >The ActiveX Control Importer generates a class that is derived from the <see cref="T:System.Windows.Forms.AxHost" /> class, and compiles it into a library file (DLL) that can be added as a reference to your application. Alternatively, you can use the /source switch with the ActiveX Control Importer and a C# file is generated for your <see cref="T:System.Windows.Forms.AxHost" /> derived class. You can then make changes to the code and recompile it into a library file.</para>
       <block subset="none" type="note">
         <para
-          >If the name of a member of the ActiveX control matches a name defined in the .NET Framework, then the ActiveX Control Importer will prefix the member name with "Ctl" when it creates the <see cref="T:System.Windows.Forms.AxHost" /> derived class. For example, if your ActiveX control has a member named "Layout", it is renamed "CtlLayout" in the <see cref="T:System.Windows.Forms.AxHost" /> derived class because the Layout event is defined within the .NET Framework.</para
-        >
+          >If the name of a member of the ActiveX control matches a name defined in the .NET Framework, then the ActiveX Control Importer will prefix the member name with "Ctl" when it creates the <see cref="T:System.Windows.Forms.AxHost" /> derived class. For example, if your ActiveX control has a member named "Layout", it is renamed "CtlLayout" in the <see cref="T:System.Windows.Forms.AxHost" /> derived class because the Layout event is defined within the .NET Framework.</para>
       </block>
       <para
-        >Most of the common properties of the <see cref="T:System.Windows.Forms.AxHost" /> class are only valid and used if the underlying ActiveX control exposes those properties. A few examples of the common properties are <see cref="P:System.Windows.Forms.Control.BackColor" />, <see cref="P:System.Windows.Forms.Control.Cursor" />, <see cref="P:System.Windows.Forms.Control.Font" />, and <see cref="P:System.Windows.Forms.Control.Text" />.</para
-      >
+        >Most of the common properties of the <see cref="T:System.Windows.Forms.AxHost" /> class are only valid and used if the underlying ActiveX control exposes those properties. A few examples of the common properties are <see cref="P:System.Windows.Forms.Control.BackColor" />, <see cref="P:System.Windows.Forms.Control.Cursor" />, <see cref="P:System.Windows.Forms.Control.Font" />, and <see cref="P:System.Windows.Forms.Control.Text" />.</para>
       <block subset="none" type="note">
         <para
-          >If you are using Visual Studio as your Windows Forms design environment, you can make an ActiveX control available to your application by adding the ActiveX control to your Toolbox. To accomplish this, right-click the <ui>Toolbox</ui>, select <ui>Customize Toolbox</ui>, then browse to the ActiveX control's.ocx file. For more information, see "Adding ActiveX Controls to Windows Forms" in the Visual Studio documentation.</para
-        >
+          >If you are using Visual Studio as your Windows Forms design environment, you can make an ActiveX control available to your application by adding the ActiveX control to your Toolbox. To accomplish this, right-click the <ui>Toolbox</ui>, select <ui>Customize Toolbox</ui>, then browse to the ActiveX control's.ocx file. For more information, see "Adding ActiveX Controls to Windows Forms" in the Visual Studio documentation.</para>
       </block>
     </remarks>
     <summary>
@@ -84,16 +78,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AxHost" /> class, wrapping the ActiveX control indicated by the specified CLSID. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AxHost" /> class, wrapping the ActiveX control indicated by the specified CLSID. </para>
         </summary>
         <param name="clsid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CLSID of the ActiveX control to wrap.</param
-        >
+          />The CLSID of the ActiveX control to wrap.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -111,32 +103,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the binary representation of the <paramref name="flags" /> parameter value contains the bit represented by the value 0x1, the shortcut menu for the control will not contain an <ui>Edit</ui> option unless the ActiveX control explicitly provides it.</para
-          >
+            >If the binary representation of the <paramref name="flags" /> parameter value contains the bit represented by the value 0x1, the shortcut menu for the control will not contain an <ui>Edit</ui> option unless the ActiveX control explicitly provides it.</para>
           <para
-            >If the binary representation of the <paramref name="flags" /> parameter value contains the bit represented by the value 0x2, the shortcut menu for the control will contain a Properties option if the ActiveX control offers a set of property pages; otherwise, the shortcut menu will contain a Properties option only if the ActiveX control explicitly provides it.</para
-          >
+            >If the binary representation of the <paramref name="flags" /> parameter value contains the bit represented by the value 0x2, the shortcut menu for the control will contain a Properties option if the ActiveX control offers a set of property pages; otherwise, the shortcut menu will contain a Properties option only if the ActiveX control explicitly provides it.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AxHost" /> class, wrapping the ActiveX control indicated by the specified CLSID, and using the shortcut-menu behavior indicated by the specified <paramref name="flags" /> value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.AxHost" /> class, wrapping the ActiveX control indicated by the specified CLSID, and using the shortcut-menu behavior indicated by the specified <paramref name="flags" /> value.</para>
         </summary>
         <param name="clsid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CLSID of the ActiveX control to wrap.</param
-        >
+          />The CLSID of the ActiveX control to wrap.</param>
         <param name="flags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> that modifies the shortcut-menu behavior for the control.</param
-        >
+          />An <see cref="T:System.Int32" /> that modifies the shortcut-menu behavior for the control.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -210,14 +197,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BackColorChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BackColorChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.BackColorChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.BackColorChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -276,14 +261,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.BackgroundImageChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -362,8 +345,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Design environments typically use this method to start the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.AxHost.EndInit" /> method ends the initialization. Using the <see cref="M:System.Windows.Forms.AxHost.BeginInit" /> and <see cref="M:System.Windows.Forms.AxHost.EndInit" /> methods prevents the control from being used before it is fully initialized. The initialization occurs at run time.</para
-          >
+            >Design environments typically use this method to start the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.AxHost.EndInit" /> method ends the initialization. Using the <see cref="M:System.Windows.Forms.AxHost.BeginInit" /> and <see cref="M:System.Windows.Forms.AxHost.EndInit" /> methods prevents the control from being used before it is fully initialized. The initialization occurs at run time.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -398,14 +380,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BindingContextChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.BindingContextChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.BindingContextChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.BindingContextChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -434,14 +414,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ChangeUICues" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ChangeUICues" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.ChangeUICues" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.ChangeUICues" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -467,14 +445,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Click" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Click" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.Click" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.Click" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -507,8 +483,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Windows.Forms.AxHost.ContainingControl" /> property value can be different from the <see cref="P:System.Windows.Forms.Control.Parent" /> property. The <see cref="T:System.Windows.Forms.ContainerControl" /> represented by this property is the ActiveX control's logical container. For example, if an ActiveX control is hosted in a <see cref="T:System.Windows.Forms.GroupBox" /> control, and the <see cref="T:System.Windows.Forms.GroupBox" /> is contained on a <see cref="T:System.Windows.Forms.Form" />, then the <see cref="P:System.Windows.Forms.AxHost.ContainingControl" /> property value of the ActiveX control is the <see cref="T:System.Windows.Forms.Form" />, and the <see cref="P:System.Windows.Forms.Control.Parent" /> property value is the <see cref="T:System.Windows.Forms.GroupBox" /> control.</para
-          >
+            >The <see cref="P:System.Windows.Forms.AxHost.ContainingControl" /> property value can be different from the <see cref="P:System.Windows.Forms.Control.Parent" /> property. The <see cref="T:System.Windows.Forms.ContainerControl" /> represented by this property is the ActiveX control's logical container. For example, if an ActiveX control is hosted in a <see cref="T:System.Windows.Forms.GroupBox" /> control, and the <see cref="T:System.Windows.Forms.GroupBox" /> is contained on a <see cref="T:System.Windows.Forms.Form" />, then the <see cref="P:System.Windows.Forms.AxHost.ContainingControl" /> property value of the ActiveX control is the <see cref="T:System.Windows.Forms.Form" />, and the <see cref="P:System.Windows.Forms.Control.Parent" /> property value is the <see cref="T:System.Windows.Forms.GroupBox" /> control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -568,14 +543,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.ContextMenuChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -630,8 +603,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The CLSID of the ActiveX control.</param
-        >
+          />The CLSID of the ActiveX control.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateParams">
@@ -729,14 +701,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.CursorChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.CursorChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.CursorChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.CursorChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -843,14 +813,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DoubleClick" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DoubleClick" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.DoubleClick" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.DoubleClick" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -873,9 +841,7 @@
           <para
             >This method passes the specified verb to the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=166076"
-              >IOleObject::DoVerb</see
-            > method of the hosted control.</para
-          >
+              >IOleObject::DoVerb</see> method of the hosted control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -886,8 +852,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the actions enumerated for the object in IOleObject::EnumVerbs.</param
-        >
+          />One of the actions enumerated for the object in IOleObject::EnumVerbs.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -915,14 +880,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragDrop" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragDrop" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.DragDrop" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.DragDrop" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -951,14 +914,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragEnter" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragEnter" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.DragEnter" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.DragEnter" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -984,14 +945,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragLeave" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragLeave" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.DragLeave" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.DragLeave" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1020,14 +979,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragOver" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.DragOver" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.DragOver" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.DragOver" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1067,15 +1024,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Bitmap" />.</param
-        >
+          />A <see cref="T:System.Drawing.Bitmap" />.</param>
         <param name="targetBounds">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Drawing.Rectangle" />.</param
-        >
+          />A <see cref="T:System.Drawing.Rectangle" />.</param>
       </Docs>
     </Member>
     <Member MemberName="EditMode">
@@ -1153,14 +1108,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.EnabledChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.EnabledChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.EnabledChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.EnabledChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1179,8 +1132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Design environments typically use this method to finish the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.AxHost.EndInit" /> method ends the initialization. Using the <see cref="M:System.Windows.Forms.AxHost.BeginInit" /> and <see cref="M:System.Windows.Forms.AxHost.EndInit" /> methods prevents the control from being used before it is fully initialized. The initialization occurs at run time.</para
-          >
+            >Design environments typically use this method to finish the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.AxHost.EndInit" /> method ends the initialization. Using the <see cref="M:System.Windows.Forms.AxHost.BeginInit" /> and <see cref="M:System.Windows.Forms.AxHost.EndInit" /> methods prevents the control from being used before it is fully initialized. The initialization occurs at run time.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1245,14 +1197,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.FontChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.FontChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.FontChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.FontChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1308,14 +1258,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ForeColorChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ForeColorChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.ForeColorChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.ForeColorChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1340,22 +1288,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.Drawing.Color" /> structure that corresponds to the specified OLE color value.</para
-          >
+            >Returns a <see cref="T:System.Drawing.Color" /> structure that corresponds to the specified OLE color value.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Drawing.Color" /> structure that represents the translated OLE color value.</para
-          >
+            >The <see cref="T:System.Drawing.Color" /> structure that represents the translated OLE color value.</para>
         </returns>
         <param name="color">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The OLE color value to translate.</param
-        >
+          />The OLE color value to translate.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1389,26 +1334,21 @@
           <para
             >Returns a <see cref="T:System.Drawing.Font" /> created from the specified OLE <see
               cref="http://go.microsoft.com/fwlink/?LinkId=166075"
-              >IFont</see
-            > object.</para
-          >
+              >IFont</see> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The <see cref="T:System.Drawing.Font" /> created from the specified <see
               cref="http://go.microsoft.com/fwlink/?LinkId=166075"
-              >IFont</see
-            >, <see cref="P:System.Windows.Forms.Control.DefaultFont" /> if the font could not be created, or null if <paramref name="font" /> is null.</para
-          >
+              >IFont</see>, <see cref="P:System.Windows.Forms.Control.DefaultFont" /> if the font could not be created, or null if <paramref name="font" /> is null.</para>
         </returns>
         <param name="font">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IFont to create a <see cref="T:System.Drawing.Font" /> from.</param
-        >
+          />The IFont to create a <see cref="T:System.Drawing.Font" /> from.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1439,26 +1379,21 @@
           <para
             >Returns a <see cref="T:System.Drawing.Font" /> created from the specified OLE <see
               cref="http://go.microsoft.com/fwlink/?LinkId=166073"
-              >IFontDisp</see
-            > object.</para
-          >
+              >IFontDisp</see> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The <see cref="T:System.Drawing.Font" /> created from the specified <see
               cref="http://go.microsoft.com/fwlink/?LinkId=166073"
-              >IFontDisp</see
-            >, <see cref="P:System.Windows.Forms.Control.DefaultFont" /> if the font could not be created, or null if <paramref name="font" /> is null.</para
-          >
+              >IFontDisp</see>, <see cref="P:System.Windows.Forms.Control.DefaultFont" /> if the font could not be created, or null if <paramref name="font" /> is null.</para>
         </returns>
         <param name="font">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IFontDisp to create a <see cref="T:System.Drawing.Font" /> from.</param
-        >
+          />The IFontDisp to create a <see cref="T:System.Drawing.Font" /> from.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1488,25 +1423,20 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Returns an OLE <see cref="http://go.microsoft.com/fwlink/?LinkId=166073"
-              >IFontDisp</see
-            > object created from the specified <see cref="T:System.Drawing.Font" /> object.</para
-          >
+              >IFontDisp</see> object created from the specified <see cref="T:System.Drawing.Font" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The <see cref="http://go.microsoft.com/fwlink/?LinkId=166073"
-              >IFontDisp</see
-            > object created from the specified font or null if <paramref name="font" /> is null.</para
-          >
+              >IFontDisp</see> object created from the specified font or null if <paramref name="font" /> is null.</para>
         </returns>
         <param name="font">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The font to create an IFontDisp object from.</param
-        >
+          />The font to create an IFontDisp object from.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1536,28 +1466,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Returns an OLE <see cref="http://go.microsoft.com/fwlink/?LinkId=166075"
-              >IFont</see
-            > object created from the specified <see cref="T:System.Drawing.Font" /> object.</para
-          >
+              >IFont</see> object created from the specified <see cref="T:System.Drawing.Font" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The <see cref="http://go.microsoft.com/fwlink/?LinkId=166075"
-              >IFont</see
-            > object created from the specified font, or null if <paramref name="font" /> is null or the <see
+              >IFont</see> object created from the specified font, or null if <paramref name="font" /> is null or the <see
               cref="http://go.microsoft.com/fwlink/?LinkId=166075"
-              >IFont</see
-            > could not be created.</para
-          >
+              >IFont</see> could not be created.</para>
         </returns>
         <param name="font">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The font to create an IFont object from.</param
-        >
+          />The font to create an IFont object from.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1586,8 +1510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE IPictureDisp object corresponding to the specified <see cref="T:System.Drawing.Image" />.</para
-          >
+            >Returns an OLE IPictureDisp object corresponding to the specified <see cref="T:System.Drawing.Image" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1598,8 +1521,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Image" /> to convert.</param
-        >
+          />The <see cref="T:System.Drawing.Image" /> to convert.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1628,8 +1550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE IPicture object corresponding to the specified <see cref="T:System.Windows.Forms.Cursor" />.</para
-          >
+            >Returns an OLE IPicture object corresponding to the specified <see cref="T:System.Windows.Forms.Cursor" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1667,8 +1588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE IPicture object corresponding to the specified <see cref="T:System.Drawing.Image" />.</para
-          >
+            >Returns an OLE IPicture object corresponding to the specified <see cref="T:System.Drawing.Image" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1679,8 +1599,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Image" /> to convert.</param
-        >
+          />The <see cref="T:System.Drawing.Image" /> to convert.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1709,34 +1628,28 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An OLE Automation date is implemented as a floating-point number whose value is the number of days from midnight, 30 December 1899. For example, midnight, 31 December 1899 is represented by 1.0; 6 A.M., 1 January 1900 is represented by 2.25; midnight, 29 December 1899 is represented by -1.0; and 6 A.M., 29 December 1899 is represented by -1.25.</para>
           <para
-            >The base OLE Automation Date is midnight, 30 December 1899. The maximum OLE Automation Date is the same as <see cref="F:System.DateTime.MaxValue" />, the last moment of 31 December 9999.</para
-          >
+            >The base OLE Automation Date is midnight, 30 December 1899. The maximum OLE Automation Date is the same as <see cref="F:System.DateTime.MaxValue" />, the last moment of 31 December 9999.</para>
           <para
             >For more information about OLE Automation, see the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37118"
-              >MSDN Library</see
-            >.</para
-          >
+              >MSDN Library</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE Automation date that corresponds to the specified <see cref="T:System.DateTime" /> structure. </para
-          >
+            >Returns an OLE Automation date that corresponds to the specified <see cref="T:System.DateTime" /> structure. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A double-precision floating-point number that contains an OLE Automation date equivalent to specified <paramref name="time" /> value.</para
-          >
+            >A double-precision floating-point number that contains an OLE Automation date equivalent to specified <paramref name="time" /> value.</para>
         </returns>
         <param name="time">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.DateTime" /> structure to translate.</param
-        >
+          />The <see cref="T:System.DateTime" /> structure to translate.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1793,22 +1706,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an OLE color value that corresponds to the specified <see cref="T:System.Drawing.Color" /> structure.</para
-          >
+            >Returns an OLE color value that corresponds to the specified <see cref="T:System.Drawing.Color" /> structure.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The OLE color value that represents the translated <see cref="T:System.Drawing.Color" /> structure.</para
-          >
+            >The OLE color value that represents the translated <see cref="T:System.Drawing.Color" /> structure.</para>
         </returns>
         <param name="color">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Drawing.Color" /> structure to translate.</param
-        >
+          />The <see cref="T:System.Drawing.Color" /> structure to translate.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1839,14 +1749,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to convert IPictureDisp objects in addition to IPicture objects. This works because the IPictureDisp OLE interface is a subset of the IPicture interface. Converting IPictureDisp objects with this method is necessary because the <see cref="M:System.Windows.Forms.AxHost.GetPictureFromIPictureDisp(System.Object)" /> does not work correctly at this time.</para
-          >
+            >You can use this method to convert IPictureDisp objects in addition to IPicture objects. This works because the IPictureDisp OLE interface is a subset of the IPicture interface. Converting IPictureDisp objects with this method is necessary because the <see cref="M:System.Windows.Forms.AxHost.GetPictureFromIPictureDisp(System.Object)" /> does not work correctly at this time.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Drawing.Image" /> corresponding to the specified OLE IPicture object.</para
-          >
+            >Returns an <see cref="T:System.Drawing.Image" /> corresponding to the specified OLE IPicture object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1857,8 +1765,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IPicture to convert.</param
-        >
+          />The IPicture to convert.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1886,14 +1793,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not work correctly. You can use the <see cref="M:System.Windows.Forms.AxHost.GetPictureFromIPicture(System.Object)" /> method to convert an IPictureDisp object into an <see cref="T:System.Drawing.Image" />, however, because the IPictureDisp OLE interface is a subset of the IPicture interface. </para
-          >
+            >This method does not work correctly. You can use the <see cref="M:System.Windows.Forms.AxHost.GetPictureFromIPicture(System.Object)" /> method to convert an IPictureDisp object into an <see cref="T:System.Drawing.Image" />, however, because the IPictureDisp OLE interface is a subset of the IPicture interface. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Drawing.Image" /> corresponding to the specified OLE IPictureDisp object.</para
-          >
+            >Returns an <see cref="T:System.Drawing.Image" /> corresponding to the specified OLE IPictureDisp object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1904,8 +1809,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The IPictureDisp to convert.</param
-        >
+          />The IPictureDisp to convert.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1943,8 +1847,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ActiveX controls scale themselves, so this method does not perform any special calculations, ignores the <paramref name="factor" /> and <paramref name="specified" /> values, and returns the <paramref name="bounds" /> value unchanged. </para
-          >
+            >ActiveX controls scale themselves, so this method does not perform any special calculations, ignores the <paramref name="factor" /> and <paramref name="specified" /> values, and returns the <paramref name="bounds" /> value unchanged. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1959,18 +1862,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The original bounds of the ActiveX control.</param
-        >
+          />The original bounds of the ActiveX control.</param>
         <param name="factor">
-          <attribution license="cc4" from="Microsoft" modified="false" />A scaling factor. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A scaling factor. </param>
         <param name="specified">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Windows.Forms.BoundsSpecified" /> value.</param
-        >
+          />A <see cref="T:System.Windows.Forms.BoundsSpecified" /> value.</param>
       </Docs>
     </Member>
     <Member MemberName="GetTimeFromOADate">
@@ -1989,35 +1889,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="date" /> parameter is a double-precision floating-point number that represents a date as the number of days before or after the base date, midnight, 30 December 1899. The sign and integral part of <paramref name="date" /> encode the date as a positive or negative day displacement from 30 December 1899, and the absolute value of the fractional part of <paramref name="date" /> encodes the time of day as a fraction of a day displacement from midnight. <paramref name="date" /> must be a value between negative 657435.0 through positive 2958466.0.</para
-          >
+            >The <paramref name="date" /> parameter is a double-precision floating-point number that represents a date as the number of days before or after the base date, midnight, 30 December 1899. The sign and integral part of <paramref name="date" /> encode the date as a positive or negative day displacement from 30 December 1899, and the absolute value of the fractional part of <paramref name="date" /> encodes the time of day as a fraction of a day displacement from midnight. <paramref name="date" /> must be a value between negative 657435.0 through positive 2958466.0.</para>
           <para>Note that because of the way dates are encoded, there are two ways of representing any time of day on 30 December 1899. For example, -0.5 and 0.5 both mean noon on 30 December 1899 because a day displacement of plus or minus zero days from the base date is still the base date, and a half day displacement from midnight is noon.</para>
           <para
             >For more information about OLE Automation, see the <see
               cref="http://go.microsoft.com/fwlink/?linkid=37118"
-              >MSDN Library</see
-            >.</para
-          >
+              >MSDN Library</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see cref="T:System.DateTime" /> structure that corresponds to the specified OLE Automation date.</para
-          >
+            >Returns a <see cref="T:System.DateTime" /> structure that corresponds to the specified OLE Automation date.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.DateTime" /> that represents the same date and time as <paramref name="date" />.</para
-          >
+            >A <see cref="T:System.DateTime" /> that represents the same date and time as <paramref name="date" />.</para>
         </returns>
         <param name="date">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The OLE Automate date to translate.</param
-        >
+          />The OLE Automate date to translate.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2050,14 +1944,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.GiveFeedback" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.GiveFeedback" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.GiveFeedback" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.GiveFeedback" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2087,14 +1979,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <ui>About</ui> dialog box typically displays version and copyright information about the ActiveX control.</para
-          >
+            >The <ui>About</ui> dialog box typically displays version and copyright information about the ActiveX control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the ActiveX control has an <ui>About</ui> dialog box.</para
-          >
+            >Gets a value indicating whether the ActiveX control has an <ui>About</ui> dialog box.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2149,14 +2039,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.HelpRequested" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.HelpRequested" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.HelpRequested" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.HelpRequested" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2215,14 +2103,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ImeModeChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.ImeModeChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.ImeModeChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.ImeModeChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2267,11 +2153,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" /> method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the ActiveX control. The preprocessing of a character includes checking whether the character is a mnemonic of another control.</para
-          >
+            >The <see cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" /> method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the ActiveX control. The preprocessing of a character includes checking whether the character is a mnemonic of another control.</para>
           <para
-            >As implemented in the <see cref="T:System.Windows.Forms.AxHost" /> class, the <see cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" /> method always returns true, so the specified character is sent directly to the ActiveX control.</para
-          >
+            >As implemented in the <see cref="T:System.Windows.Forms.AxHost" /> class, the <see cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" /> method always returns true, so the specified character is sent directly to the ActiveX control.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2286,8 +2170,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to test. </param
-        >
+          />The character to test. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2315,14 +2198,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyDown" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyDown" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.KeyDown" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.KeyDown" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2351,14 +2232,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyPress" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyPress" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.KeyPress" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.KeyPress" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2387,14 +2266,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyUp" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.KeyUp" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.KeyUp" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.KeyUp" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2423,14 +2300,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Layout" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Layout" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.Layout" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.Layout" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2450,8 +2325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Announces to the component change service that the <see cref="T:System.Windows.Forms.AxHost" /> has changed.</para
-          >
+            >Announces to the component change service that the <see cref="T:System.Windows.Forms.AxHost" /> has changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2535,14 +2409,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2568,14 +2440,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseEnter" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseEnter" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseEnter" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseEnter" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2601,14 +2471,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseHover" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseHover" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseHover" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseHover" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2634,14 +2502,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseLeave" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseLeave" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseLeave" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseLeave" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2670,14 +2536,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2706,14 +2570,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2742,14 +2604,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseWheel" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.MouseWheel" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.MouseWheel" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.MouseWheel" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2785,8 +2645,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see cref="P:System.Windows.Forms.AxHost.OcxState" /> property is used after the control is created but before it is shown. The persisted state of the underlying ActiveX control is returned in the <see cref="T:System.Windows.Forms.AxHost.State" />.</para
-          >
+            >The value of the <see cref="P:System.Windows.Forms.AxHost.OcxState" /> property is used after the control is created but before it is shown. The persisted state of the underlying ActiveX control is returned in the <see cref="T:System.Windows.Forms.AxHost.State" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2951,14 +2810,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Paint" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.Paint" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.Paint" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.Paint" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3085,14 +2942,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.QueryAccessibilityHelp" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3121,14 +2976,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.QueryContinueDrag" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3156,33 +3009,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event using the specified 32-bit signed integers.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event using the specified 32-bit signed integers.</para>
         </summary>
         <param name="button">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3214,33 +3062,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event using the specified single-precision floating-point numbers.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event using the specified single-precision floating-point numbers.</para>
         </summary>
         <param name="button">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3272,33 +3115,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event using the specified objects.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseDown" /> event using the specified objects.</para>
         </summary>
         <param name="o1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="o2">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="o3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="o4">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3330,33 +3168,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event using the specified 32-bit signed integers.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event using the specified 32-bit signed integers.</para>
         </summary>
         <param name="button">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3388,33 +3221,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event using the specified single-precision floating-point numbers.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event using the specified single-precision floating-point numbers.</para>
         </summary>
         <param name="button">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3446,33 +3274,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event using the specified objects.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseMove" /> event using the specified objects.</para>
         </summary>
         <param name="o1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="o2">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="o3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="o4">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3504,33 +3327,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event using the specified 32-bit signed integers.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event using the specified 32-bit signed integers.</para>
         </summary>
         <param name="button">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3562,33 +3380,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event using the specified single-precision floating-point numbers.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event using the specified single-precision floating-point numbers.</para>
         </summary>
         <param name="button">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="shift">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3620,33 +3433,28 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event using the specified objects.</para
-          >
+            >Raises the <see cref="E:System.Windows.Forms.AxHost.MouseUp" /> event using the specified objects.</para>
         </summary>
         <param name="o1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param
-        >
+          />One of the <see cref="T:System.Windows.Forms.MouseButtons" /> values that indicate which mouse button was pressed. </param>
         <param name="o2">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
         <param name="o3">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The x-coordinate of a mouse click, in pixels.</param
-        >
+          />The x-coordinate of a mouse click, in pixels.</param>
         <param name="o4">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The y-coordinate of a mouse click, in pixels. </param
-        >
+          />The y-coordinate of a mouse click, in pixels. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3706,14 +3514,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.RightToLeftChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3804,8 +3610,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="P:System.Windows.Forms.AxHost.HasAboutBox" /> is false, no <ui>About</ui> dialog box is displayed.</para
-          >
+            >If <see cref="P:System.Windows.Forms.AxHost.HasAboutBox" /> is false, no <ui>About</ui> dialog box is displayed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3828,8 +3633,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="M:System.Windows.Forms.AxHost.HasPropertyPages" /> is false, no property pages are displayed.</para
-          >
+            >If <see cref="M:System.Windows.Forms.AxHost.HasPropertyPages" /> is false, no property pages are displayed.</para>
           <para>Property pages allow an ActiveX control user to view and change ActiveX control properties. These properties are accessed by invoking a control properties dialog box, which contains one or more property pages that provide a customized, graphical interface for viewing and editing the control properties.</para>
         </remarks>
         <summary>
@@ -3858,8 +3662,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see cref="M:System.Windows.Forms.AxHost.HasPropertyPages" /> is false, no property pages are displayed.</para
-          >
+            >If <see cref="M:System.Windows.Forms.AxHost.HasPropertyPages" /> is false, no property pages are displayed.</para>
           <para>Property pages allow an ActiveX control user to view and change ActiveX control properties. These properties are accessed by invoking a control properties dialog box, which contains one or more property pages that provide a customized, graphical interface for viewing and editing the control properties.</para>
         </remarks>
         <summary>
@@ -3871,8 +3674,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent <see cref="T:System.Windows.Forms.Control" /> of the ActiveX control. </param
-        >
+          />The parent <see cref="T:System.Windows.Forms.Control" /> of the ActiveX control. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3917,14 +3719,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.StyleChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.StyleChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.StyleChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.StyleChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3956,14 +3756,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of type <see cref="T:System.Attribute" /> for the current object.</para
-          >
+            >Returns a collection of type <see cref="T:System.Attribute" /> for the current object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.AttributeCollection" /> with the attributes for the current object.</para
-          >
+            >An <see cref="T:System.ComponentModel.AttributeCollection" /> with the attributes for the current object.</para>
         </returns>
       </Docs>
     </Member>
@@ -3987,8 +3785,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the type name instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetClassName" /> method returns.</para
-          >
+            >Use the type name instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetClassName" /> method returns.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4020,8 +3817,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the default name instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetComponentName" /> method returns.</para
-          >
+            >Use the default name instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetComponentName" /> method returns.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4056,8 +3852,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the default type converter instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetConverter" /> method returns.</para
-          >
+            >Use the default type converter instead of the value that the <see cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetConverter" /> method returns.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -4097,8 +3892,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptor" /> that represents the default event for the current object, or null if the object does not have events.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptor" /> that represents the default event for the current object, or null if the object does not have events.</para>
         </returns>
       </Docs>
     </Member>
@@ -4130,8 +3924,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the default property for the current object, or null if the object does not have properties.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the default property for the current object, or null if the object does not have properties.</para>
         </returns>
       </Docs>
     </Member>
@@ -4171,8 +3964,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> that represents the editor for the current object.</param
-        >
+          />A <see cref="T:System.Type" /> that represents the editor for the current object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetEvents">
@@ -4203,8 +3995,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for the current object.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for the current object.</para>
         </returns>
       </Docs>
     </Member>
@@ -4238,16 +4029,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for the <see cref="T:System.Windows.Forms.AxHost" /> that match the given set of attributes.</para
-          >
+            >An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for the <see cref="T:System.Windows.Forms.AxHost" /> that match the given set of attributes.</para>
         </returns>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetProperties">
@@ -4278,8 +4067,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the events for the current object.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the events for the current object.</para>
         </returns>
       </Docs>
     </Member>
@@ -4313,16 +4101,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the events for the current <see cref="T:System.Windows.Forms.AxHost" /> that match the given set of attributes.</para
-          >
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the events for the current <see cref="T:System.Windows.Forms.AxHost" /> that match the given set of attributes.</para>
         </returns>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param
-        >
+          />An array of type <see cref="T:System.Attribute" /> that is used as a filter.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner">
@@ -4357,8 +4143,7 @@
           <para>The current object.</para>
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />Not used.</param>
       </Docs>
     </Member>
     <Member MemberName="TabIndexChanged">
@@ -4452,14 +4237,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.TextChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para
-          >
+            >If you attempt to add or remove a handler for the <see cref="E:System.Windows.Forms.AxHost.TextChanged" /> event, a <see cref="T:System.NotSupportedException" /> is thrown. The events derived from the <see cref="T:System.Windows.Forms.Control" /> class are not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class. The events exposed by the ActiveX control when the <see cref="T:System.Windows.Forms.AxHost" /> wrapper is created are the events that should be used.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Windows.Forms.AxHost.TextChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para
-          >
+            >The <see cref="E:System.Windows.Forms.AxHost.TextChanged" /> event is not supported by the <see cref="T:System.Windows.Forms.AxHost" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

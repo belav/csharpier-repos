@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies what kind of jump this <see cref="T:System.Linq.Expressions.GotoExpression" /> represents.</para
-      >
+        >Specifies what kind of jump this <see cref="T:System.Linq.Expressions.GotoExpression" /> represents.</para>
     </summary>
   </Docs>
   <Members>
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a break statement.</para
-          >
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a break statement.</para>
         </summary>
       </Docs>
     </Member>
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a continue statement.</para
-          >
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a continue statement.</para>
         </summary>
       </Docs>
     </Member>
@@ -83,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a jump to some location.</para
-          >
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a jump to some location.</para>
         </summary>
       </Docs>
     </Member>
@@ -105,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a return statement.</para
-          >
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" /> that represents a return statement.</para>
         </summary>
       </Docs>
     </Member>

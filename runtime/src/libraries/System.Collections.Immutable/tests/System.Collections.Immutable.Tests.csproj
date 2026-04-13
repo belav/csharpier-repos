@@ -4,8 +4,7 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
     <DebuggerSupport
       Condition="'$(DebuggerSupport)' == '' and ('$(TargetOS)' == 'browser' or '$(TargetOS)' == 'wasi')"
-      >true</DebuggerSupport
-    >
+      >true</DebuggerSupport>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetOS)' == 'browser'">

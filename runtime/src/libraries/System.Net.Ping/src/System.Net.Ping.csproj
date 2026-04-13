@@ -9,12 +9,10 @@
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.SystemNetPing_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemNetPing_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <IsApplePlatform
       Condition="'$(TargetPlatformIdentifier)' == 'osx' or '$(TargetPlatformIdentifier)' == 'ios' or '$(TargetPlatformIdentifier)' == 'tvos'"
-      >true</IsApplePlatform
-    >
+      >true</IsApplePlatform>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">

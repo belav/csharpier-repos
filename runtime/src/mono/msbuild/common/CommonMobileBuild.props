@@ -1,8 +1,7 @@
 <Project>
   <PropertyGroup>
     <UseAllRuntimeComponents Condition="'$(UseAllRuntimeComponents)' == ''"
-      >false</UseAllRuntimeComponents
-    >
+      >false</UseAllRuntimeComponents>
     <!-- Resolving _MonoRuntimeComponentManifestJsonFilePath:
         First we resolve _RuntimeComponentManifestDir:
             1) If it is a local build - use artifacts dir $(MonoArtifactsPath) or $(RuntimeBinDir) when building mono samples
@@ -12,21 +11,17 @@
     -->
     <_RuntimeComponentManifestDir
       Condition="'$(_RuntimeComponentManifestDir)' == '' and '$(BuildTestsOn)' != 'helix' and '$(MonoArtifactsPath)' != ''"
-      >$([MSBuild]::NormalizePath('$(MonoArtifactsPath)', 'build'))</_RuntimeComponentManifestDir
-    >
+      >$([MSBuild]::NormalizePath('$(MonoArtifactsPath)', 'build'))</_RuntimeComponentManifestDir>
     <_RuntimeComponentManifestDir
       Condition="'$(_RuntimeComponentManifestDir)' == '' and '$(BuildTestsOn)' != 'helix' and '$(RuntimeBinDir)' != ''"
-      >$([MSBuild]::NormalizePath('$(RuntimeBinDir)', 'build'))</_RuntimeComponentManifestDir
-    >
+      >$([MSBuild]::NormalizePath('$(RuntimeBinDir)', 'build'))</_RuntimeComponentManifestDir>
     <_RuntimeComponentManifestDir
       Condition="'$(_RuntimeComponentManifestDir)' == '' and '$(MicrosoftNetCoreAppRuntimePackRidDir)' != ''"
-      >$([MSBuild]::NormalizePath('$(MicrosoftNetCoreAppRuntimePackRidDir)', 'build'))</_RuntimeComponentManifestDir
-    >
+      >$([MSBuild]::NormalizePath('$(MicrosoftNetCoreAppRuntimePackRidDir)', 'build'))</_RuntimeComponentManifestDir>
     <_RuntimeComponentManifestDir>$([MSBuild]::EnsureTrailingSlash('$(_RuntimeComponentManifestDir)'))</_RuntimeComponentManifestDir>
     <_MonoRuntimeComponentManifestJsonFilePath
       Condition="'$(_MonoRuntimeComponentManifestJsonFilePath)' == '' and '$(_RuntimeComponentManifestDir)' != ''"
-      >$(_RuntimeComponentManifestDir)RuntimeComponentManifest.json</_MonoRuntimeComponentManifestJsonFilePath
-    >
+      >$(_RuntimeComponentManifestDir)RuntimeComponentManifest.json</_MonoRuntimeComponentManifestJsonFilePath>
   </PropertyGroup>
 
   <UsingTask

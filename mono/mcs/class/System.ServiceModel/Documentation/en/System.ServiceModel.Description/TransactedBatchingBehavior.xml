@@ -54,22 +54,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="maxBatchSize" /> value passed into the constructor is only a hint. It is possible that all messages are received before reaching the <paramref name="maxBatchSize" />. When that occurs, it is unnecessary to wait indefinitely for another message to be received. To prevent this from happening, indigo2 commits the batch early and open a new batch to receive additional messages. The batch is committed if there are no messages to be received and 20 percent of the transaction time-out value has elapsed. </para
-          >
+            >The <paramref name="maxBatchSize" /> value passed into the constructor is only a hint. It is possible that all messages are received before reaching the <paramref name="maxBatchSize" />. When that occurs, it is unnecessary to wait indefinitely for another message to be received. To prevent this from happening, indigo2 commits the batch early and open a new batch to receive additional messages. The batch is committed if there are no messages to be received and 20 percent of the transaction time-out value has elapsed. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.TransactedBatchingBehavior" /> class with the specified batch size.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.TransactedBatchingBehavior" /> class with the specified batch size.</para>
         </summary>
         <param name="maxBatchSize">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of receive operations that can be batched together.</param
-        >
+          />The maximum number of receive operations that can be batched together.</param>
       </Docs>
     </Member>
     <Member MemberName="MaxBatchSize">
@@ -87,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="maxBatchSize" /> value is only a hint. It is possible that all messages are received before reaching the <paramref name="maxBatchSize" />. When that occurs, it is unnecessary to wait indefinitely for another message to be received. To prevent this from happening, indigo2 commits the batch early and open a new batch to receive additional messages. The batch is committed if there are no messages to be received and 20 percent of the transaction time-out value has elapsed. </para
-          >
+            >The <paramref name="maxBatchSize" /> value is only a hint. It is possible that all messages are received before reaching the <paramref name="maxBatchSize" />. When that occurs, it is unnecessary to wait indefinitely for another message to be received. To prevent this from happening, indigo2 commits the batch early and open a new batch to receive additional messages. The batch is committed if there are no messages to be received and 20 percent of the transaction time-out value has elapsed. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -163,15 +159,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A service endpoint where behavior settings are applied.</param
-        >
+          />A service endpoint where behavior settings are applied.</param>
         <param name="behavior">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Contains the transaction batching behavior.</param
-        >
+          />Contains the transaction batching behavior.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior">
@@ -209,8 +203,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A service endpoint where behavior settings are applied.</param
-        >
+          />A service endpoint where behavior settings are applied.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.Validate">
@@ -246,8 +239,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A service endpoint for which batching behavior is validated.</param
-        >
+          />A service endpoint for which batching behavior is validated.</param>
       </Docs>
     </Member>
   </Members>

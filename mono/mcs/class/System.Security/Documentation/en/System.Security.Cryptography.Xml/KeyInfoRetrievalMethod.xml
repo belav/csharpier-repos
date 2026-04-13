@@ -22,9 +22,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Security.Cryptography.Xml.KeyInfoClause</BaseTypeName>
   </Base>
@@ -33,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class represents the &lt;RetrievalMethod&gt; element for both XML encryption and XML digital signatures.</para
-      >
+        >The <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class represents the &lt;RetrievalMethod&gt; element for both XML encryption and XML digital signatures.</para>
       <para
-        >Use the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class to reference the same <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> information in multiple XMLDSIG signatures or encrypted XML documents, especially when the referenced information is large. For example, a &lt;RetrievalMethod&gt; subelement can be used to reference a <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object that contains an X.509v3 certificate chain, which validates the signing key.</para
-      >
+        >Use the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class to reference the same <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> information in multiple XMLDSIG signatures or encrypted XML documents, especially when the referenced information is large. For example, a &lt;RetrievalMethod&gt; subelement can be used to reference a <see cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" /> object that contains an X.509v3 certificate chain, which validates the signing key.</para>
       <para>For more information about the &lt;RetrievalMethod&gt; element, see Section 4.4.3 of the XMLDSIG specification, which is available from the World Wide Web Consortium (W3C) at www.w3.org/TR/xmldsig-core/, or see the XML Encryption specification, which is available from the W3C at www.w3.org/TR/xmlenc-core/.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >References <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> objects stored at a different location when using XMLDSIG or XML encryption.</para
-      >
+        >References <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> objects stored at a different location when using XMLDSIG or XML encryption.</para>
     </summary>
   </Docs>
   <Members>
@@ -67,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -93,16 +87,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class with the specified Uniform Resource Identifier (URI) pointing to the referenced <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class with the specified Uniform Resource Identifier (URI) pointing to the referenced <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object.</para>
         </summary>
         <param name="strUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Uniform Resource Identifier (URI) of the information to be referenced by the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />. </param
-        >
+          />The Uniform Resource Identifier (URI) of the information to be referenced by the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -129,16 +121,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class with the specified Uniform Resource Identifier (URI) pointing to the referenced <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object and the URI that describes the type of data to retrieve.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> class with the specified Uniform Resource Identifier (URI) pointing to the referenced <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /> object and the URI that describes the type of data to retrieve.  </para>
         </summary>
         <param name="strUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Uniform Resource Identifier (URI) of the information to be referenced by the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />.</param
-        >
+          />The Uniform Resource Identifier (URI) of the information to be referenced by the new instance of <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" />.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -161,20 +151,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlElement" /> object returned by this method is suitable for use as a subelement of an XMLDSIG or XML encryption &lt;KeyInfo&gt; element.</para
-          >
+            >The <see cref="T:System.Xml.XmlElement" /> object returned by this method is suitable for use as a subelement of an XMLDSIG or XML encryption &lt;KeyInfo&gt; element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object.</para
-          >
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object.</para
-          >
+            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -207,16 +194,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the input <see cref="T:System.Xml.XmlElement" /> object and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object to match.</para
-          >
+            >Parses the input <see cref="T:System.Xml.XmlElement" /> object and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object to match.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML element that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object. </param
-        >
+          />The XML element that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="Type">
@@ -263,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Uniform Resource Identifier (URI) of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object.</para
-          >
+            >Gets or sets the Uniform Resource Identifier (URI) of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoRetrievalMethod" /> object.</para>
         </summary>
       </Docs>
     </Member>

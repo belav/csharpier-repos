@@ -10,8 +10,7 @@ struct Point
    public int y = 1;  // Error, initializer not permitted  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph>This restriction applies only to instance fields. Static fields of a struct are permitted to include variable initializers. </paragraph>
 </clause>

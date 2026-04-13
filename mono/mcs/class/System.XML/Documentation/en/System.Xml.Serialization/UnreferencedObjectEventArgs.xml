@@ -28,11 +28,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about the <see cref="T:System.Xml.Serialization.UnreferencedObjectEventArgs" /> class, see the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event of the <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para
-      >
+        >For more information about the <see cref="T:System.Xml.Serialization.UnreferencedObjectEventArgs" /> class, see the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event of the <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para>
       <para
-        >The <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event occurs only when you call the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" /> method.</para
-      >
+        >The <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event occurs only when you call the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" /> method.</para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="814a6a43-a312-4791-88d8-f75f9a4f8c4c">Events Overview [Windows Forms]</a>
@@ -70,29 +68,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.UnreferencedObjectEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.UnreferencedObjectEventArgs" /> class.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Xml.Serialization.UnreferencedObjectEventArgs" /> that contains information about the unreferenced object.</para
-          >
+            >An <see cref="T:System.Xml.Serialization.UnreferencedObjectEventArgs" /> that contains information about the unreferenced object.</para>
         </returns>
         <param name="o">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The unreferenced object. </param
-        >
+          />The unreferenced object. </param>
         <param name="id">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A unique string used to identify the unreferenced object. </param
-        >
+          />A unique string used to identify the unreferenced object. </param>
       </Docs>
     </Member>
     <Member MemberName="UnreferencedId">
@@ -112,11 +106,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" /> property when you need to know when more than one object raises the event. The property allows you to distinguish between multiple instances of unreferenced objects.</para
-          >
+            >Use the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" /> property when you need to know when more than one object raises the event. The property allows you to distinguish between multiple instances of unreferenced objects.</para>
           <para
-            >For more information about the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" /> property, see the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event.</para
-          >
+            >For more information about the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" /> property, see the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -141,11 +133,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" /> can be cast to the known type if examining its properties is required.</para
-          >
+            >The <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" /> can be cast to the known type if examining its properties is required.</para>
           <para
-            >See the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event for more information about the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" /> property.</para
-          >
+            >See the <see cref="E:System.Xml.Serialization.XmlSerializer.UnreferencedObject" /> event for more information about the <see cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

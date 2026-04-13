@@ -40,8 +40,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >MethodBuilder is used to fully describe a method in Microsoft intermediate language (MSIL), including the name, attributes, signature, and method body. It is used in conjunction with the <see cref="T:System.Reflection.Emit.TypeBuilder" /> class to create classes at runtime.</para
-      >
+        >MethodBuilder is used to fully describe a method in Microsoft intermediate language (MSIL), including the name, attributes, signature, and method body. It is used in conjunction with the <see cref="T:System.Reflection.Emit.TypeBuilder" /> class to create classes at runtime.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -75,12 +74,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Reflection.Emit.MethodBuilder.AddDeclarativeSecurity(System.Security.Permissions.SecurityAction,System.Security.PermissionSet)" /> can be called several times, with each call specifying a security action (such as Demand, Assert, and Deny) and a set of permissions that the action applies to.</para
-          >
+            <see cref="M:System.Reflection.Emit.MethodBuilder.AddDeclarativeSecurity(System.Security.Permissions.SecurityAction,System.Security.PermissionSet)" /> can be called several times, with each call specifying a security action (such as Demand, Assert, and Deny) and a set of permissions that the action applies to.</para>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0, 1.1, and 2.0, the declarative security attributes applied to a method by using the <see cref="M:System.Reflection.Emit.MethodBuilder.AddDeclarativeSecurity(System.Security.Permissions.SecurityAction,System.Security.PermissionSet)" /> method are stored in the old XML metadata format. See Emitting Declarative Security Attributes.</para
-            >
+              >In the .NET Framework versions 1.0, 1.1, and 2.0, the declarative security attributes applied to a method by using the <see cref="M:System.Reflection.Emit.MethodBuilder.AddDeclarativeSecurity(System.Security.Permissions.SecurityAction,System.Security.PermissionSet)" /> method are stored in the old XML metadata format. See Emitting Declarative Security Attributes.</para>
           </block>
         </remarks>
         <summary>
@@ -92,15 +89,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The security action to be taken (Demand, Assert, and so on). </param
-        >
+          />The security action to be taken (Demand, Assert, and so on). </param>
         <param name="pset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The set of permissions the action applies to. </param
-        >
+          />The set of permissions the action applies to. </param>
       </Docs>
     </Member>
     <Member MemberName="Attributes">
@@ -176,11 +171,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.Emit.MethodBuilder" /> always represents a generic method definition, and thus cannot be invoked.</para
-          >
+            >A <see cref="T:System.Reflection.Emit.MethodBuilder" /> always represents a generic method definition, and thus cannot be invoked.</para>
           <para
-            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para
-          >
+            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="P:System.Reflection.MethodInfo.ContainsGenericParameters" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -211,8 +204,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates the method's body from <paramref name="il" />, an array containing MSIL instructions as opcodes. The number of bytes of valid MSIL is given by count.</para
-          >
+            >This method creates the method's body from <paramref name="il" />, an array containing MSIL instructions as opcodes. The number of bytes of valid MSIL is given by count.</para>
           <block subset="none" type="note">
             <para>This is currently not fully supported. The user cannot supply the location of token fix ups and exception handlers.</para>
           </block>
@@ -226,15 +218,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array containing valid MSIL instructions. If this parameter is null, the method's body is cleared. </param
-        >
+          />An array containing valid MSIL instructions. If this parameter is null, the method's body is cleared. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of valid bytes in the MSIL array. This value is ignored if MSIL is null. </param
-        >
+          />The number of valid bytes in the MSIL array. This value is ignored if MSIL is null. </param>
       </Docs>
     </Member>
     <Member MemberName="DeclaringType">
@@ -292,35 +282,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" /> method makes the current method generic. There is no way to undo this change. Calling this method a second time causes an <see cref="T:System.InvalidOperationException" />.</para
-          >
+            >Calling the <see cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" /> method makes the current method generic. There is no way to undo this change. Calling this method a second time causes an <see cref="T:System.InvalidOperationException" />.</para>
           <para
-            >The type parameters of the generic method can be retrieved later by using the <see cref="M:System.Reflection.Emit.MethodBuilder.GetGenericArguments" /> method.</para
-          >
+            >The type parameters of the generic method can be retrieved later by using the <see cref="M:System.Reflection.Emit.MethodBuilder.GetGenericArguments" /> method.</para>
           <para>By convention, a type parameter name is a single uppercase letter.</para>
           <para
-            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="M:System.Reflection.MethodInfo.GetGenericMethodDefinition" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para
-          >
+            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="M:System.Reflection.MethodInfo.GetGenericMethodDefinition" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the number of generic type parameters for the current method, specifies their names, and returns an array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects that can be used to define their constraints.</para
-          >
+            >Sets the number of generic type parameters for the current method, specifies their names, and returns an array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects that can be used to define their constraints.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects representing the type parameters of the generic method.</para
-          >
+            >An array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects representing the type parameters of the generic method.</para>
         </returns>
         <param name="names">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of strings that represent the names of the generic type parameters.</param
-        >
+          />An array of strings that represent the names of the generic type parameters.</param>
       </Docs>
     </Member>
     <Member MemberName="DefineParameter">
@@ -350,15 +334,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Reflection.Emit.ParameterBuilder" /> object returned by this method can be used to set the default value for a parameter or to apply custom attributes. </para
-          >
+            >The <see cref="T:System.Reflection.Emit.ParameterBuilder" /> object returned by this method can be used to set the default value for a parameter or to apply custom attributes. </para>
           <para
-            >Parameter numbering begins with 1, so <paramref name="position" /> is 1 for the first parameter. If <paramref name="position" /> is zero, this method affects the return value.</para
-          >
+            >Parameter numbering begins with 1, so <paramref name="position" /> is 1 for the first parameter. If <paramref name="position" /> is zero, this method affects the return value.</para>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, an exception is thrown if <paramref name="position" /> is zero, so this method cannot be used to modify attributes of the return value in those versions.</para
-            >
+              >In the .NET Framework versions 1.0 and 1.1, an exception is thrown if <paramref name="position" /> is zero, so this method cannot be used to modify attributes of the return value in those versions.</para>
           </block>
         </remarks>
         <summary>
@@ -374,22 +355,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter; the number 0 represents the return value of the method. </param
-        >
+          />The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter; the number 0 represents the return value of the method. </param>
         <param name="attributes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parameter attributes of the parameter. </param
-        >
+          />The parameter attributes of the parameter. </param>
         <param name="strParamName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the parameter. The name can be the null string. </param
-        >
+          />The name of the parameter. The name can be the null string. </param>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -422,16 +400,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref name="obj" /> is an instance of MethodBuilder and is equal to this object; otherwise, false.</para
-          >
+            >true if <paramref name="obj" /> is an instance of MethodBuilder and is equal to this object; otherwise, false.</para>
         </returns>
         <param name="obj">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to compare with this MethodBuilder instance. </param
-        >
+          />The object to compare with this MethodBuilder instance. </param>
       </Docs>
     </Member>
     <Member MemberName="GetBaseDefinition">
@@ -504,8 +480,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param>
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
@@ -539,23 +514,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of objects representing the attributes of this method that are of type <paramref name="attributeType" />.</para
-          >
+            >Returns an array of objects representing the attributes of this method that are of type <paramref name="attributeType" />.</para>
         </returns>
         <param name="attributeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom attribute type. </param
-        >
+          />The custom attribute type. </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param>
       </Docs>
     </Member>
     <Member MemberName="GetGenericArguments">
@@ -578,23 +550,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type parameters of a generic method also are returned by the <see cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" /> method that is used to define them.</para
-          >
+            >The type parameters of a generic method also are returned by the <see cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" /> method that is used to define them.</para>
           <para
-            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para
-          >
+            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="M:System.Reflection.MethodInfo.GetGenericArguments" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects that represent the type parameters of the method, if it is generic.</para
-          >
+            >Returns an array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects that represent the type parameters of the method, if it is generic.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects representing the type parameters, if the method is generic, or null if the method is not generic. </para
-          >
+            >An array of <see cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" /> objects representing the type parameters, if the method is generic, or null if the method is not generic. </para>
         </returns>
       </Docs>
     </Member>
@@ -621,11 +589,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.Emit.MethodBuilder" /> cannot be used to emit a constructed generic method directly. The emitted method is a generic method definition.</para
-          >
+            >A <see cref="T:System.Reflection.Emit.MethodBuilder" /> cannot be used to emit a constructed generic method directly. The emitted method is a generic method definition.</para>
           <para
-            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="M:System.Reflection.MethodInfo.GetGenericMethodDefinition" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para
-          >
+            >For more information, see <see cref="P:System.Reflection.MethodInfo.IsGenericMethod" /> and <see cref="M:System.Reflection.MethodInfo.GetGenericMethodDefinition" />. For information on generic types, see <see cref="P:System.Type.IsGenericType" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -634,8 +600,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current instance of <see cref="T:System.Reflection.Emit.MethodBuilder" />. </para
-          >
+            >The current instance of <see cref="T:System.Reflection.Emit.MethodBuilder" />. </para>
         </returns>
       </Docs>
     </Member>
@@ -734,8 +699,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The size of the MSIL stream, in bytes. </param
-        >
+          />The size of the MSIL stream, in bytes. </param>
       </Docs>
     </Member>
     <Member MemberName="GetMethodImplementationFlags">
@@ -913,8 +877,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the method is static, the <paramref name="obj" /> parameter is ignored. For non-static methods, <paramref name="obj" /> should be an instance of a class that inherits or declares the method and must be the same type as this class. If the method has no parameters, the value of <paramref name="parameters" /> should be null. Otherwise the number, type, and order of elements in the parameters array should be identical to the number, type, and order of parameters for the method reflected by this instance.</para
-          >
+            >If the method is static, the <paramref name="obj" /> parameter is ignored. For non-static methods, <paramref name="obj" /> should be an instance of a class that inherits or declares the method and must be the same type as this class. If the method has no parameters, the value of <paramref name="parameters" /> should be null. Otherwise the number, type, and order of elements in the parameters array should be identical to the number, type, and order of parameters for the method reflected by this instance.</para>
           <block subset="none" type="note">
             <para>Access restrictions are ignored for fully-trusted code. That is, private constructors, methods, fields, and properties can be accessed and invoked using Reflection whenever the code is fully-trusted.</para>
           </block>
@@ -932,36 +895,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object on which to invoke the specified method. If the method is static, this parameter is ignored. </param
-        >
+          />The object on which to invoke the specified method. If the method is static, this parameter is ignored. </param>
         <param name="invokeAttr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param
-        >
+          />This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, NonPublic, and so on. </param>
         <param name="binder">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If binder is null, the default binder is used. For more details, see <see cref="T:System.Reflection.Binder" />. </param
-        >
+          />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If binder is null, the default binder is used. For more details, see <see cref="T:System.Reflection.Binder" />. </param>
         <param name="parameters">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this should be null. </param
-        >
+          />An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this should be null. </param>
         <param name="culture">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. (Note that this is necessary to, for example, convert a <see cref="T:System.String" /> that represents 1000 to a <see cref="T:System.Double" /> value, since 1000 is represented differently by different cultures.) </param
-        >
+          />An instance of <see cref="T:System.Globalization.CultureInfo" /> used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" /> for the current thread is used. (Note that this is necessary to, for example, convert a <see cref="T:System.String" /> that represents 1000 to a <see cref="T:System.Double" /> value, since 1000 is represented differently by different cultures.) </param>
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
@@ -1001,15 +959,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The custom attribute type. </param
-        >
+          />The custom attribute type. </param>
         <param name="inherit">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param
-        >
+          />Specifies whether to search this member's inheritance chain to find the custom attributes. </param>
       </Docs>
     </Member>
     <Member MemberName="IsGenericMethod">
@@ -1029,8 +985,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A method is generic if it has type parameters. You can make a method generic by calling the <see cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" /> method to add type parameters. This change cannot be reversed.</para
-          >
+            >A method is generic if it has type parameters. You can make a method generic by calling the <see cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" /> method to add type parameters. This change cannot be reversed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1058,14 +1013,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.Emit.MethodBuilder" /> can only be used to create generic method definitions; it cannot be used to create a constructed generic method directly. However, a subclass of <see cref="T:System.Reflection.Emit.MethodBuilder" /> might represent a constructed generic method.</para
-          >
+            >A <see cref="T:System.Reflection.Emit.MethodBuilder" /> can only be used to create generic method definitions; it cannot be used to create a constructed generic method directly. However, a subclass of <see cref="T:System.Reflection.Emit.MethodBuilder" /> might represent a constructed generic method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current <see cref="T:System.Reflection.Emit.MethodBuilder" /> object represents the definition of a generic method.</para
-          >
+            >Gets a value indicating whether the current <see cref="T:System.Reflection.Emit.MethodBuilder" /> object represents the definition of a generic method.</para>
         </summary>
       </Docs>
     </Member>
@@ -1100,8 +1053,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you are emitting dynamic code, you might need to emit a call to a method constructed from the generic method definition represented by a <see cref="T:System.Reflection.Emit.MethodBuilder" />, before the enclosing type has been completed. You can use the <see cref="M:System.Reflection.Emit.MethodBuilder.MakeGenericMethod(System.Type[])" /> method to create a <see cref="T:System.Reflection.MethodInfo" /> for such a constructed method, and use the <see cref="T:System.Reflection.MethodInfo" /> in the emitted call.</para
-          >
+            >When you are emitting dynamic code, you might need to emit a call to a method constructed from the generic method definition represented by a <see cref="T:System.Reflection.Emit.MethodBuilder" />, before the enclosing type has been completed. You can use the <see cref="M:System.Reflection.Emit.MethodBuilder.MakeGenericMethod(System.Type[])" /> method to create a <see cref="T:System.Reflection.MethodInfo" /> for such a constructed method, and use the <see cref="T:System.Reflection.MethodInfo" /> in the emitted call.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1110,16 +1062,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Reflection.MethodInfo" /> representing the generic method constructed from the current generic method definition using the specified generic type arguments.</para
-          >
+            >A <see cref="T:System.Reflection.MethodInfo" /> representing the generic method constructed from the current generic method definition using the specified generic type arguments.</para>
         </returns>
         <param name="typeArguments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects that represent the type arguments for the generic method.</param
-        >
+          />An array of <see cref="T:System.Type" /> objects that represent the type arguments for the generic method.</param>
       </Docs>
     </Member>
     <Member MemberName="MethodHandle">
@@ -1172,11 +1122,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is provided as a convenience. It is equivalent to using the <see cref="P:System.Reflection.Emit.MethodBuilder.DeclaringType" /> property to get the type in which the method is being declared, and then calling the <see cref="P:System.Type.Module" /> property of the resulting <see cref="T:System.Type" /> object.</para
-          >
+            >This property is provided as a convenience. It is equivalent to using the <see cref="P:System.Reflection.Emit.MethodBuilder.DeclaringType" /> property to get the type in which the method is being declared, and then calling the <see cref="P:System.Type.Module" /> property of the resulting <see cref="T:System.Type" /> object.</para>
           <para
-            >This property is also equivalent to calling <see cref="M:System.Reflection.Emit.MethodBuilder.GetModule" />.</para
-          >
+            >This property is also equivalent to calling <see cref="M:System.Reflection.Emit.MethodBuilder.GetModule" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1250,14 +1198,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiler designers can use the <see cref="T:System.Reflection.ParameterInfo" /> object returned by this property to discover whether custom modifiers, such as <see cref="T:Microsoft.VisualC.IsConstModifier" />, have been applied to the return type.</para
-          >
+            >Compiler designers can use the <see cref="T:System.Reflection.ParameterInfo" /> object returned by this property to discover whether custom modifiers, such as <see cref="T:Microsoft.VisualC.IsConstModifier" />, have been applied to the return type.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Reflection.ParameterInfo" /> object that contains information about the return type of the method, such as whether the return type has custom modifiers. </para
-          >
+            >Gets a <see cref="T:System.Reflection.ParameterInfo" /> object that contains information about the return type of the method, such as whether the return type has custom modifiers. </para>
         </summary>
       </Docs>
     </Member>
@@ -1279,15 +1225,13 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework 2.0 and the .NET Compact Framework 2.0, this member is inherited from the base class, <see cref="T:System.Reflection.MethodInfo" />. See <see cref="P:System.Reflection.MethodInfo.ReturnType" />.</para
-            >
+              >Starting with the .NET Framework 2.0 and the .NET Compact Framework 2.0, this member is inherited from the base class, <see cref="T:System.Reflection.MethodInfo" />. See <see cref="P:System.Reflection.MethodInfo.ReturnType" />.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the return type of the method represented by this <see cref="T:System.Reflection.Emit.MethodBuilder" />.</para
-          >
+            >Gets the return type of the method represented by this <see cref="T:System.Reflection.Emit.MethodBuilder" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1314,8 +1258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method always returns null. Get the <see cref="T:System.Reflection.MethodInfo" /> after the containing <see cref="T:System.Type" /> has been created and invoked <see cref="P:System.Reflection.MethodInfo.ReturnTypeCustomAttributes" /> on the <see cref="T:System.Reflection.MethodInfo" />.</para
-          >
+            >This method always returns null. Get the <see cref="T:System.Reflection.MethodInfo" /> after the containing <see cref="T:System.Type" /> has been created and invoked <see cref="P:System.Reflection.MethodInfo.ReturnTypeCustomAttributes" /> on the <see cref="T:System.Reflection.MethodInfo" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1348,8 +1291,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method can interact with the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method when the two methods are used in combination. See the Remarks section of the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method for details.</para
-          >
+            >The <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method can interact with the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method when the two methods are used in combination. See the Remarks section of the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method for details.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1360,8 +1302,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of a helper class to describe the custom attribute. </param
-        >
+          />An instance of a helper class to describe the custom attribute. </param>
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
@@ -1397,14 +1338,11 @@
           <para
             >For details on how to format <paramref name="binaryAttribute" />, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-              >ECMA C# and Common Language Infrastructure Standards</see
-            > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-            > on the Ecma International Web site.</para
-          >
+              >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
           <para
-            >The <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method can interact with the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method when the two methods are used in combination. See the Remarks section of the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method for details.</para
-          >
+            >The <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method can interact with the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method when the two methods are used in combination. See the Remarks section of the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method for details.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1415,15 +1353,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The constructor for the custom attribute. </param
-        >
+          />The constructor for the custom attribute. </param>
         <param name="binaryAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte blob representing the attributes. </param
-        >
+          />A byte blob representing the attributes. </param>
       </Docs>
     </Member>
     <Member MemberName="SetImplementationFlags">
@@ -1451,18 +1387,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method in combination with the <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method, be aware of potential interactions. For example, using the <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method to add the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" /> attribute also sets the <see cref="F:System.Reflection.MethodImplAttributes.PreserveSig" /> flag. If you subsequently call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method, the <see cref="F:System.Reflection.MethodImplAttributes.PreserveSig" /> flag is overwritten. There are two ways to avoid this:</para
-          >
+            >When you use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method in combination with the <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method, be aware of potential interactions. For example, using the <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method to add the <see cref="T:System.Runtime.InteropServices.DllImportAttribute" /> attribute also sets the <see cref="F:System.Reflection.MethodImplAttributes.PreserveSig" /> flag. If you subsequently call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method, the <see cref="F:System.Reflection.MethodImplAttributes.PreserveSig" /> flag is overwritten. There are two ways to avoid this:</para>
           <list type="bullet">
             <item>
               <para
-                >Call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method before you call the <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method. The <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method always respects existing method implementation flags.</para
-              >
+                >Call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method before you call the <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method. The <see cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" /> method always respects existing method implementation flags.</para>
             </item>
             <item>
               <para
-                >When you set implementation flags, call the <see cref="M:System.Reflection.Emit.MethodBuilder.GetMethodImplementationFlags" /> method to retrieve the existing flags, use bitwise OR to add your flag, and then call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method. </para
-              >
+                >When you set implementation flags, call the <see cref="M:System.Reflection.Emit.MethodBuilder.GetMethodImplementationFlags" /> method to retrieve the existing flags, use bitwise OR to add your flag, and then call the <see cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" /> method. </para>
             </item>
           </list>
         </remarks>
@@ -1475,8 +1408,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The implementation flags to set. </param
-        >
+          />The implementation flags to set. </param>
       </Docs>
     </Member>
     <Member MemberName="SetMarshal">
@@ -1516,8 +1448,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Marshaling information for the return type of this method. </param
-        >
+          />Marshaling information for the return type of this method. </param>
       </Docs>
     </Member>
     <Member MemberName="SetParameters">
@@ -1548,14 +1479,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the number and types of the parameters are known when the method is defined, they can be set using any overload of the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method that accepts an array of parameter types. However, a generic method can have parameters whose types are specified by one or more of its own generic type parameters, which cannot be defined until after the method has been defined. Use this method to set the parameter types in that case.</para
-          >
+            >If the number and types of the parameters are known when the method is defined, they can be set using any overload of the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method that accepts an array of parameter types. However, a generic method can have parameters whose types are specified by one or more of its own generic type parameters, which cannot be defined until after the method has been defined. Use this method to set the parameter types in that case.</para>
           <para
-            >If the return type has optional or required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method overload.</para
-          >
+            >If the return type has optional or required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method overload.</para>
           <para
-            >Calling this method replaces any parameter types that were set using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para
-          >
+            >Calling this method replaces any parameter types that were set using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1566,8 +1494,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of <see cref="T:System.Type" /> objects representing the parameter types.</param
-        >
+          />An array of <see cref="T:System.Type" /> objects representing the parameter types.</param>
       </Docs>
     </Member>
     <Member MemberName="SetReturnType">
@@ -1592,11 +1519,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to set the return type of a generic method, when the return type is specified by one of the generic type parameters of the method. If the return type has optional or required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method overload. </para
-          >
+            >Use this method to set the return type of a generic method, when the return type is specified by one of the generic type parameters of the method. If the return type has optional or required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" /> method overload. </para>
           <para
-            >Calling this method replaces a return type established using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para
-          >
+            >Calling this method replaces a return type established using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1607,8 +1532,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Type" /> object that represents the return type of the method.</param
-        >
+          />A <see cref="T:System.Type" /> object that represents the return type of the method.</param>
       </Docs>
     </Member>
     <Member MemberName="SetSignature">
@@ -1641,14 +1565,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the return type and the number and types of the parameters are known when the method is defined, they can be established using any overload of the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method that accepts an array of parameter types. However, a generic method can have parameters whose types are specified by one or more of its own generic type parameters, which cannot be defined until after the method has been defined. Use this method to set the parameter types in that case.</para
-          >
+            >If the return type and the number and types of the parameters are known when the method is defined, they can be established using any overload of the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method that accepts an array of parameter types. However, a generic method can have parameters whose types are specified by one or more of its own generic type parameters, which cannot be defined until after the method has been defined. Use this method to set the parameter types in that case.</para>
           <para
-            >If neither the return type nor the parameter types have optional or required custom modifiers, such as <see cref="T:Microsoft.VisualC.IsConstModifier" />, you can use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetReturnType(System.Type)" /> and <see cref="M:System.Reflection.Emit.MethodBuilder.SetParameters(System.Type[])" /> methods.</para
-          >
+            >If neither the return type nor the parameter types have optional or required custom modifiers, such as <see cref="T:Microsoft.VisualC.IsConstModifier" />, you can use the <see cref="M:System.Reflection.Emit.MethodBuilder.SetReturnType(System.Type)" /> and <see cref="M:System.Reflection.Emit.MethodBuilder.SetParameters(System.Type[])" /> methods.</para>
           <para
-            >Calling this method replaces the parameters and return type established using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para
-          >
+            >Calling this method replaces the parameters and return type established using the <see cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1659,43 +1580,37 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The return type of the method.</param
-        >
+          />The return type of the method.</param>
         <param name="returnTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of types representing the required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, for the return type of the method. If the return type has no required custom modifiers, specify null.</param
-        >
+          />An array of types representing the required custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, for the return type of the method. If the return type has no required custom modifiers, specify null.</param>
         <param name="returnTypeOptionalCustomModifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of types representing the optional custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, for the return type of the method. If the return type has no optional custom modifiers, specify null.</param
-        >
+          />An array of types representing the optional custom modifiers, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />, for the return type of the method. If the return type has no optional custom modifiers, specify null.</param>
         <param name="parameterTypes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The types of the parameters of the method.</param
-        >
+          />The types of the parameters of the method.</param>
         <param name="parameterTypeRequiredCustomModifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />. If a particular parameter has no required custom modifiers, specify null instead of an array of types. If none of the parameters have required custom modifiers, specify null instead of an array of arrays.</param
-        >
+          />An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />. If a particular parameter has no required custom modifiers, specify null instead of an array of types. If none of the parameters have required custom modifiers, specify null instead of an array of arrays.</param>
         <param name="parameterTypeOptionalCustomModifiers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />. If a particular parameter has no optional custom modifiers, specify null instead of an array of types. If none of the parameters have optional custom modifiers, specify null instead of an array of arrays.</param
-        >
+          />An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />. If a particular parameter has no optional custom modifiers, specify null instead of an array of types. If none of the parameters have optional custom modifiers, specify null instead of an array of arrays.</param>
       </Docs>
     </Member>
     <Member MemberName="SetSymCustomAttribute">
@@ -1734,15 +1649,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the symbolic custom attribute. </param
-        >
+          />The name of the symbolic custom attribute. </param>
         <param name="data">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte blob that represents the value of the symbolic custom attribute. </param
-        >
+          />The byte blob that represents the value of the symbolic custom attribute. </param>
       </Docs>
     </Member>
     <Member MemberName="Signature">
@@ -1828,8 +1741,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para
-          >
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1840,22 +1752,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type information to return.</param
-        >
+          />The type information to return.</param>
         <param name="lcid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The locale identifier for the type information.</param
-        >
+          />The locale identifier for the type information.</param>
         <param name="ppTInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Receives a pointer to the requested type information object.</param
-        >
+          />Receives a pointer to the requested type information object.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._MethodBuilder.GetTypeInfoCount">

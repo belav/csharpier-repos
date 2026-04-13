@@ -52,29 +52,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate a <see cref="T:System.Xml.XmlComment" /> directly; instead, use methods such as <see cref="Overload:System.Xml.XmlDocument.CreateNode" />. </para
-          >
+            >Do not instantiate a <see cref="T:System.Xml.XmlComment" /> directly; instead, use methods such as <see cref="Overload:System.Xml.XmlDocument.CreateNode" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlComment" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlComment" /> class.</para>
         </summary>
         <param name="comment">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content of the comment element.</param
-        >
+          />The content of the comment element.</param>
         <param name="doc">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent XML document.</param
-        >
+          />The parent XML document.</param>
       </Docs>
     </Member>
     <Member MemberName="CloneNode">
@@ -102,11 +98,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see the <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" /> method in the XmlNode class.</para
-          >
+            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see the <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" /> method in the XmlNode class.</para>
           <para
-            >The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" /> returns null).</para
-          >
+            >The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" /> returns null).</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -121,8 +115,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself. Because comment nodes do not have children, the cloned node always includes the text content, regardless of the parameter setting. </param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself. Because comment nodes do not have children, the cloned node always includes the text content, regardless of the parameter setting. </param>
       </Docs>
     </Member>
     <Member MemberName="LocalName">
@@ -223,16 +216,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. Because comment nodes do not have children, this method has no effect.</para
-          >
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. Because comment nodes do not have children, this method has no effect.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -270,8 +261,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
   </Members>

@@ -39,8 +39,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Net.SocketPermission" /> instances control permission to accept connections or initiate <see cref="T:System.Net.Sockets.Socket" /> connections. A <see cref="T:System.Net.Sockets.Socket" /> permission can be established for a host name or IP address, a port number, and a transport protocol.</para
-      >
+        <see cref="T:System.Net.SocketPermission" /> instances control permission to accept connections or initiate <see cref="T:System.Net.Sockets.Socket" /> connections. A <see cref="T:System.Net.Sockets.Socket" /> permission can be established for a host name or IP address, a port number, and a transport protocol.</para>
       <block subset="none" type="note">
         <para>Avoid creating socket permissions using host names, as these names have to be resolved to IP addresses, and this might block the stack.</para>
       </block>
@@ -78,22 +77,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see cref="T:System.Net.SocketPermission" /> instance is created with the Unrestricted value from <see cref="T:System.Security.Permissions.PermissionState" /> then the <see cref="T:System.Net.SocketPermission" /> instance passes all demands. Any other value for <paramref name="state" /> results in a <see cref="T:System.Net.SocketPermission" /> instance that fails all demands unless a transport address permission is added with <see cref="M:System.Net.SocketPermission.AddPermission(System.Net.NetworkAccess,System.Net.TransportType,System.String,System.Int32)" />.</para
-          >
+            >If the <see cref="T:System.Net.SocketPermission" /> instance is created with the Unrestricted value from <see cref="T:System.Security.Permissions.PermissionState" /> then the <see cref="T:System.Net.SocketPermission" /> instance passes all demands. Any other value for <paramref name="state" /> results in a <see cref="T:System.Net.SocketPermission" /> instance that fails all demands unless a transport address permission is added with <see cref="M:System.Net.SocketPermission.AddPermission(System.Net.NetworkAccess,System.Net.TransportType,System.String,System.Int32)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.SocketPermission" /> class that allows unrestricted access to the <see cref="T:System.Net.Sockets.Socket" /> or disallows access to the <see cref="T:System.Net.Sockets.Socket" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.SocketPermission" /> class that allows unrestricted access to the <see cref="T:System.Net.Sockets.Socket" /> or disallows access to the <see cref="T:System.Net.Sockets.Socket" />.</para>
         </summary>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -125,54 +121,45 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException"
-          >The <paramref name="hostName" /> parameter is <see langword="null" />.</exception
-        >
+          >The <paramref name="hostName" /> parameter is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Net.SocketPermission" /> that controls access to the specified <paramref name="hostName" /> and <paramref name="portNumber" /> using the specified <paramref name="transport" />.</para
-          >
+            >This constructor creates a <see cref="T:System.Net.SocketPermission" /> that controls access to the specified <paramref name="hostName" /> and <paramref name="portNumber" /> using the specified <paramref name="transport" />.</para>
           <para
-            >The <paramref name="hostName" /> can be a DNS name, an IP address, or a specified IP subnet, such as 192.168.1.*.</para
-          >
+            >The <paramref name="hostName" /> can be a DNS name, an IP address, or a specified IP subnet, such as 192.168.1.*.</para>
           <para
-            >The <paramref name="portNumber" /> can be any valid port number defined by the transport, or <see cref="F:System.Net.SocketPermission.AllPorts" />.</para
-          >
+            >The <paramref name="portNumber" /> can be any valid port number defined by the transport, or <see cref="F:System.Net.SocketPermission.AllPorts" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.SocketPermission" /> class for the given transport address with the specified permission.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.SocketPermission" /> class for the given transport address with the specified permission.</para>
         </summary>
         <param name="access">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.NetworkAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.NetworkAccess" /> values. </param>
         <param name="transport">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.TransportType" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.TransportType" /> values. </param>
         <param name="hostName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The host name for the transport address. </param
-        >
+          />The host name for the transport address. </param>
         <param name="portNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number for the transport address. </param
-        >
+          />The port number for the transport address. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -200,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of <see cref="T:System.Net.EndpointPermission" /> instances that identifies the endpoints that can be accepted under this permission instance.</para
-          >
+            >Gets a list of <see cref="T:System.Net.EndpointPermission" /> instances that identifies the endpoints that can be accepted under this permission instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -233,8 +219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="hostName" /> can be a DNS name, an IP address, or a specified IP subnet, such as 192.168.1.*.</para
-          >
+            >The <paramref name="hostName" /> can be a DNS name, an IP address, or a specified IP subnet, such as 192.168.1.*.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,29 +230,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.NetworkAccess" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.NetworkAccess" /> values. </param>
         <param name="transport">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Net.TransportType" /> values. </param
-        >
+          />One of the <see cref="T:System.Net.TransportType" /> values. </param>
         <param name="hostName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The host name for the transport address. </param
-        >
+          />The host name for the transport address. </param>
         <param name="portNumber">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The port number for the transport address. </param
-        >
+          />The port number for the transport address. </param>
       </Docs>
     </Member>
     <Member MemberName="AllPorts">
@@ -324,8 +305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of <see cref="T:System.Net.EndpointPermission" /> instances that identifies the endpoints that can be connected to under this permission instance.</para
-          >
+            >Gets a list of <see cref="T:System.Net.EndpointPermission" /> instances that identifies the endpoints that can be connected to under this permission instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -353,8 +333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by this method represents the same level of access as the current instance. This method overrides <see cref="M:System.Security.CodeAccessPermission.Copy" /> and is implemented to support the <see cref="T:System.Security.IPermission" /> interface.</para
-          >
+            >The object returned by this method represents the same level of access as the current instance. This method overrides <see cref="M:System.Security.CodeAccessPermission.Copy" /> and is implemented to support the <see cref="T:System.Security.IPermission" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -363,8 +342,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see cref="T:System.Net.SocketPermission" /> class that is a copy of the current instance.</para
-          >
+            >A new instance of the <see cref="T:System.Net.SocketPermission" /> class that is a copy of the current instance.</para>
         </returns>
       </Docs>
       <Excluded>0</Excluded>
@@ -400,31 +378,26 @@
         </exception>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="securityElement " />is not a <see cref="T:System.Net.SocketPermission" /> permission element.</para
-          >
+            <paramref name="securityElement " />is not a <see cref="T:System.Net.SocketPermission" /> permission element.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.SocketPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Net.SocketPermission" /> instance from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class.</para
-          >
+            >The <see cref="M:System.Net.SocketPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Net.SocketPermission" /> instance from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class.</para>
           <para
-            >Use the <see cref="M:System.Net.SocketPermission.ToXml" /> method to encode the <see cref="T:System.Net.SocketPermission" /> instance, including state information, in XML.</para
-          >
+            >Use the <see cref="M:System.Net.SocketPermission.ToXml" /> method to encode the <see cref="T:System.Net.SocketPermission" /> instance, including state information, in XML.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reconstructs a <see cref="T:System.Net.SocketPermission" /> instance for an XML encoding.</para
-          >
+            >Reconstructs a <see cref="T:System.Net.SocketPermission" /> instance for an XML encoding.</para>
         </summary>
         <param name="securityElement">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XML encoding used to reconstruct the <see cref="T:System.Net.SocketPermission" /> instance. </param
-        >
+          />The XML encoding used to reconstruct the <see cref="T:System.Net.SocketPermission" /> instance. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -455,33 +428,28 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException">
-          <paramref name="target" /> is not of type <see cref="T:System.Net.SocketPermission" /> .</exception
-        >
+          <paramref name="target" /> is not of type <see cref="T:System.Net.SocketPermission" /> .</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The intersection of two permissions is a permission that helps to protect the resources and operations protected by both permissions. Specifically, it represents the minimum permission such that any demand that passes both permissions also passes their intersection. This method overrides <see cref="M:System.Security.CodeAccessPermission.Intersect(System.Security.IPermission)" /> and is implemented to support the <see cref="T:System.Security.IPermission" /> interface.</para
-          >
+            >The intersection of two permissions is a permission that helps to protect the resources and operations protected by both permissions. Specifically, it represents the minimum permission such that any demand that passes both permissions also passes their intersection. This method overrides <see cref="M:System.Security.CodeAccessPermission.Intersect(System.Security.IPermission)" /> and is implemented to support the <see cref="T:System.Security.IPermission" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the logical intersection between two <see cref="T:System.Net.SocketPermission" /> instances.</para
-          >
+            >Returns the logical intersection between two <see cref="T:System.Net.SocketPermission" /> instances.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.SocketPermission" /> instance that represents the intersection of two <see cref="T:System.Net.SocketPermission" /> instances. If the intersection is empty, the method returns null. If the <paramref name="target" /> parameter is a null reference, the method returns null.</para
-          >
+            >The <see cref="T:System.Net.SocketPermission" /> instance that represents the intersection of two <see cref="T:System.Net.SocketPermission" /> instances. If the intersection is empty, the method returns null. If the <paramref name="target" /> parameter is a null reference, the method returns null.</para>
         </returns>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.SocketPermission" /> instance to intersect with the current instance. </param
-        >
+          />The <see cref="T:System.Net.SocketPermission" /> instance to intersect with the current instance. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -513,8 +481,7 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="target " />is not <see langword="null" /> and is not of type <see cref="T:System.Net.SocketPermission" />.</para
-          >
+            <paramref name="target " />is not <see langword="null" /> and is not of type <see cref="T:System.Net.SocketPermission" />.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -528,16 +495,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref name="target" /> is null, this method returns true if the current instance defines no permissions; otherwise, false. If <paramref name="target" /> is not null, this method returns true if the current instance defines a subset of <paramref name="target" /> permissions; otherwise, false.</para
-          >
+            >If <paramref name="target" /> is null, this method returns true if the current instance defines no permissions; otherwise, false. If <paramref name="target" /> is not null, this method returns true if the current instance defines a subset of <paramref name="target" /> permissions; otherwise, false.</para>
         </returns>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Net.SocketPermission" /> that is to be tested for the subset relationship. </param
-        >
+          />A <see cref="T:System.Net.SocketPermission" /> that is to be tested for the subset relationship. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -566,8 +531,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Net.SocketPermission" /> instance is created with the Unrestricted value from <see cref="T:System.Security.Permissions.PermissionState" />; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Net.SocketPermission" /> instance is created with the Unrestricted value from <see cref="T:System.Security.Permissions.PermissionState" />; otherwise, false.</para>
         </returns>
       </Docs>
     </Member>
@@ -598,23 +562,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.SocketPermission.ToXml" /> method creates a <see cref="T:System.Security.SecurityElement" /> instance to encode a representation of the <see cref="T:System.Net.SocketPermission" /> instance, including state information, in XML.</para
-          >
+            >The <see cref="M:System.Net.SocketPermission.ToXml" /> method creates a <see cref="T:System.Security.SecurityElement" /> instance to encode a representation of the <see cref="T:System.Net.SocketPermission" /> instance, including state information, in XML.</para>
           <para
-            >Use the <see cref="M:System.Net.SocketPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" /> instance.</para
-          >
+            >Use the <see cref="M:System.Net.SocketPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" /> instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an XML encoding of a <see cref="T:System.Net.SocketPermission" /> instance and its current state.</para
-          >
+            >Creates an XML encoding of a <see cref="T:System.Net.SocketPermission" /> instance and its current state.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Security.SecurityElement" /> instance that contains an XML-encoded representation of the <see cref="T:System.Net.SocketPermission" /> instance, including state information.</para
-          >
+            >A <see cref="T:System.Security.SecurityElement" /> instance that contains an XML-encoded representation of the <see cref="T:System.Net.SocketPermission" /> instance, including state information.</para>
         </returns>
       </Docs>
       <Excluded>0</Excluded>
@@ -646,36 +606,30 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="target " /> is <see langword="null" />.</exception
-        >
+          <paramref name="target " /> is <see langword="null" />.</exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="target" /> is not of type <see cref="T:System.Net.SocketPermission" /> .</exception
-        >
+          <paramref name="target" /> is not of type <see cref="T:System.Net.SocketPermission" /> .</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see cref="M:System.Net.SocketPermission.Union(System.Security.IPermission)" /> is a permission that represents all of the access to <see cref="T:System.Net.Sockets.Socket" /> connections represented by the current instance as well as the access represented by <paramref name="target" />. Any demand that passes either the current instance or <paramref name="target" /> passes their union. This method overrides <see cref="M:System.Security.CodeAccessPermission.Union(System.Security.IPermission)" /> and is implemented to support the <see cref="T:System.Security.IPermission" /> interface.</para
-          >
+            >The result of a call to <see cref="M:System.Net.SocketPermission.Union(System.Security.IPermission)" /> is a permission that represents all of the access to <see cref="T:System.Net.Sockets.Socket" /> connections represented by the current instance as well as the access represented by <paramref name="target" />. Any demand that passes either the current instance or <paramref name="target" /> passes their union. This method overrides <see cref="M:System.Security.CodeAccessPermission.Union(System.Security.IPermission)" /> and is implemented to support the <see cref="T:System.Security.IPermission" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the logical union between two <see cref="T:System.Net.SocketPermission" /> instances.</para
-          >
+            >Returns the logical union between two <see cref="T:System.Net.SocketPermission" /> instances.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.SocketPermission" /> instance that represents the union of two <see cref="T:System.Net.SocketPermission" /> instances. If <paramref name="target" /> parameter is null, it returns a copy of the current instance.</para
-          >
+            >The <see cref="T:System.Net.SocketPermission" /> instance that represents the union of two <see cref="T:System.Net.SocketPermission" /> instances. If <paramref name="target" /> parameter is null, it returns a copy of the current instance.</para>
         </returns>
         <param name="target">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Net.SocketPermission" /> instance to combine with the current instance. </param
-        >
+          />The <see cref="T:System.Net.SocketPermission" /> instance to combine with the current instance. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

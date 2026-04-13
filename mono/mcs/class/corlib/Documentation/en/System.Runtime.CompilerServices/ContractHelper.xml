@@ -55,8 +55,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The binary rewriter calls this method to notify listeners about a contract failure. The <see cref="M:System.Runtime.CompilerServices.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" /> method does not perform the failure behavior (an assert or throw) itself. If the failure is handled by the listeners, the method returns null. If the failure is not handled by the listeners, a localized failure message is returned.</para
-          >
+            >The binary rewriter calls this method to notify listeners about a contract failure. The <see cref="M:System.Runtime.CompilerServices.ContractHelper.RaiseContractFailedEvent(System.Diagnostics.Contracts.ContractFailureKind,System.String,System.String,System.Exception)" /> method does not perform the failure behavior (an assert or throw) itself. If the failure is handled by the listeners, the method returns null. If the failure is not handled by the listeners, a localized failure message is returned.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -71,29 +70,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of failure.</param
-        >
+          />One of the enumeration values that specifies the type of failure.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Additional user information.</param
-        >
+          />Additional user information.</param>
         <param name="conditionText">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the condition that caused the failure.</param
-        >
+          />The description of the condition that caused the failure.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception that caused the current exception.</param
-        >
+          />The inner exception that caused the current exception.</param>
       </Docs>
     </Member>
     <Member MemberName="TriggerFailure">
@@ -131,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default failure behavior is to raise an <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />, which causes the <ui>Assert</ui> dialog box to be displayed. You can change that behavior to throw an exception instead of displaying the dialog box. </para
-          >
+            >The default failure behavior is to raise an <see cref="M:System.Diagnostics.Debug.Assert(System.Boolean)" />, which causes the <ui>Assert</ui> dialog box to be displayed. You can change that behavior to throw an exception instead of displaying the dialog box. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -143,36 +137,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the enumeration values that specifies the type of failure.</param
-        >
+          />One of the enumeration values that specifies the type of failure.</param>
         <param name="displayMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display.</param
-        >
+          />The message to display.</param>
         <param name="userMessage">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Additional user information.</param
-        >
+          />Additional user information.</param>
         <param name="conditionText">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The description of the condition that caused the failure.</param
-        >
+          />The description of the condition that caused the failure.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner exception that caused the current exception.</param
-        >
+          />The inner exception that caused the current exception.</param>
       </Docs>
     </Member>
   </Members>

@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> values are used throughout the common language runtime to detect a change in assembly contents.</para
-      >
+        <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> values are used throughout the common language runtime to detect a change in assembly contents.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,12 +67,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> structure with the specified hash value. The hash algorithm defaults to <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> structure with the specified hash value. The hash algorithm defaults to <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -106,19 +103,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> structure with the specified hash algorithm and the hash value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> structure with the specified hash algorithm and the hash value.</para>
         </summary>
         <param name="algorithm">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The algorithm used to generate the hash. Values for this parameter come from the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" /> enumeration. </param
-        >
+          />The algorithm used to generate the hash. Values for this parameter come from the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" /> enumeration. </param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param>
       </Docs>
     </Member>
     <Member MemberName="Algorithm">
@@ -219,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> object.</para
-          >
+            >An empty <see cref="T:System.Configuration.Assemblies.AssemblyHash" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -287,8 +280,7 @@
           <para>Sets the hash value.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The hash value. </param>
       </Docs>
     </Member>
   </Members>

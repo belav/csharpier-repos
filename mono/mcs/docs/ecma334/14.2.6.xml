@@ -17,8 +17,7 @@ decimal operator *(decimal x, decimal y);
   </paragraph>
   <paragraph
     >When overload resolution rules (<hyperlink>14.4.2</hyperlink>) are applied to this set of operators, the effect is to select the first of the operators for which implicit conversions exist from the operand types. <example
-      >[Example: For example, for the operation b * s, where b is a <keyword>byte</keyword> and s is a <keyword>short</keyword>, overload resolution selects operator *(<keyword>int</keyword>, <keyword>int</keyword>) as the best operator. Thus, the effect is that b and s are converted to <keyword>int</keyword>, and the type of the result is <keyword>int</keyword>. Likewise, for the operation i * d, where i is an <keyword>int</keyword> and d is a <keyword>double</keyword>, overload resolution selects operator *(<keyword>double</keyword>, <keyword>double</keyword>) as the best operator. end example]</example
-    >
+      >[Example: For example, for the operation b * s, where b is a <keyword>byte</keyword> and s is a <keyword>short</keyword>, overload resolution selects operator *(<keyword>int</keyword>, <keyword>int</keyword>) as the best operator. Thus, the effect is that b and s are converted to <keyword>int</keyword>, and the type of the result is <keyword>int</keyword>. Likewise, for the operation i * d, where i is an <keyword>int</keyword> and d is a <keyword>double</keyword>, overload resolution selects operator *(<keyword>double</keyword>, <keyword>double</keyword>) as the best operator. end example]</example>
   </paragraph>
   <paragraph>End of informative text. </paragraph>
 </clause>

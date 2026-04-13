@@ -11,8 +11,7 @@
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
     <IncludePlatformAttributes>true</IncludePlatformAttributes>
     <DefineConstants Condition="'$(FeatureWasmPerfTracing)' == 'true'"
-      >$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\System.Diagnostics.Tracing\ref\System.Diagnostics.Tracing.cs" />

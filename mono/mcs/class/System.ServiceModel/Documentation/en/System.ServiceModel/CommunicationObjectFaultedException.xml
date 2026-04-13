@@ -23,12 +23,10 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> is thrown when a call is made to a faulted communication object. <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> is a derived class of <see cref="T:System.ServiceModel.CommunicationException" /> and can occur in correct applications. Because typically the code that calls the <see cref="M:System.ServiceModel.ICommunicationObject.Abort" /> method reports the error condition that caused the call to <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />, this exception indicates that the call failed but the most useful error information is elsewhere.</para
-      >
+        >A <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> is thrown when a call is made to a faulted communication object. <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> is a derived class of <see cref="T:System.ServiceModel.CommunicationException" /> and can occur in correct applications. Because typically the code that calls the <see cref="M:System.ServiceModel.ICommunicationObject.Abort" /> method reports the error condition that caused the call to <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />, this exception indicates that the call failed but the most useful error information is elsewhere.</para>
       <block subset="none" type="note">
         <para
-          >If an object is faulted with several pending calls, only one call throws a specific exception; the others throw <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" />.</para
-        >
+          >If an object is faulted with several pending calls, only one call throws a specific exception; the others throw <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" />.</para>
       </block>
     </remarks>
     <summary>
@@ -52,14 +50,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" />.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -84,14 +80,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> using the specified <paramref name="message" />.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> using the specified <paramref name="message" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class using the specified message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class using the specified message.</para>
         </summary>
       </Docs>
     </Member>
@@ -116,29 +110,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called when deserializing a <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> object from a stream.</para
-          >
+            >This constructor is called when deserializing a <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> object from a stream.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class when deserializing a stream using the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class when deserializing a stream using the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The serialization information used to create the exception object.</param
-        >
+          />The serialization information used to create the exception object.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context within which the exception object is created.</param
-        >
+          />The context within which the exception object is created.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -164,14 +154,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> using the specified <paramref name="message" /> and <paramref name="innerException" />.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> using the specified <paramref name="message" /> and <paramref name="innerException" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class using the specified message and inner exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectFaultedException" /> class using the specified message and inner exception.</para>
         </summary>
       </Docs>
     </Member>

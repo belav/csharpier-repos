@@ -14,20 +14,16 @@
     />
     <PropertyGroup>
       <HotreloadDeltaGenFullPath Condition="'$(HotreloadDeltaGenFullPath)' == ''"
-        >hotreload-delta-gen</HotreloadDeltaGenFullPath
-      >
+        >hotreload-delta-gen</HotreloadDeltaGenFullPath>
       <HotreloadDeltaGenArgs>-msbuild:$(MSBuildProjectFullPath)</HotreloadDeltaGenArgs>
       <!-- HACK: have to pass config and RID  so that this target works for a 'dotnet publish' run.
 	         What other properties do  I need to pass? Maybe hotreload-delta-gen should just expose an MSBuild task so we can pass everything -->
       <HotreloadDeltaGenArgs Condition="'$(Configuration)' != ''"
-        >$(HotreloadDeltaGenArgs) -p:Configuration=$(Configuration)</HotreloadDeltaGenArgs
-      >
+        >$(HotreloadDeltaGenArgs) -p:Configuration=$(Configuration)</HotreloadDeltaGenArgs>
       <HotreloadDeltaGenArgs Condition="'$(RuntimeIdentifier)' != ''"
-        >$(HotreloadDeltaGenArgs) -p:RuntimeIdentifier=$(RuntimeIdentifier)</HotreloadDeltaGenArgs
-      >
+        >$(HotreloadDeltaGenArgs) -p:RuntimeIdentifier=$(RuntimeIdentifier)</HotreloadDeltaGenArgs>
       <HotreloadDeltaGenArgs Condition="'$(BuiltRuntimeConfiguration)' != ''"
-        >$(HotreloadDeltaGenArgs) -p:BuiltRuntimeConfiguration=$(BuiltRuntimeConfiguration)</HotreloadDeltaGenArgs
-      >
+        >$(HotreloadDeltaGenArgs) -p:BuiltRuntimeConfiguration=$(BuiltRuntimeConfiguration)</HotreloadDeltaGenArgs>
       <HotreloadDeltaGenArgs>$(HotreloadDeltaGenArgs) -script:$(DeltaScript)</HotreloadDeltaGenArgs>
     </PropertyGroup>
     <Exec Command="$(HotreloadDeltaGenFullPath) $(HotreloadDeltaGenArgs)" />

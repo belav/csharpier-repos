@@ -33,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a mutable reference type that wraps either a <see cref="P:System.Data.SqlTypes.SqlBytes.Buffer" /> or a <see cref="P:System.Data.SqlTypes.SqlBytes.Stream" />.</para
-      >
+        >Represents a mutable reference type that wraps either a <see cref="P:System.Data.SqlTypes.SqlBytes.Buffer" /> or a <see cref="P:System.Data.SqlTypes.SqlBytes.Stream" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -70,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class based on the specified byte array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class based on the specified byte array.</para>
         </summary>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of unsigned bytes. </param
-        >
+          />The array of unsigned bytes. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -103,16 +99,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class based on the specified <see cref="T:System.Data.SqlTypes.SqlBinary" /> value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class based on the specified <see cref="T:System.Data.SqlTypes.SqlBinary" /> value.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> value.</param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlBinary" /> value.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -133,16 +127,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class based on the specified <see cref="T:System.IO.Stream" /> value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlBytes" /> class based on the specified <see cref="T:System.IO.Stream" /> value.</para>
         </summary>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" />. </param
-        >
+          />A <see cref="T:System.IO.Stream" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -162,11 +154,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a null reference for null value <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Returns a null reference for null value <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
           <para
-            >Throws an <see cref="T:System.InvalidOperationException" /> for stream-wrapped instances of <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Throws an <see cref="T:System.InvalidOperationException" /> for stream-wrapped instances of <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -194,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para
-          >
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -206,8 +195,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param
-        >
+          />A <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param>
       </Docs>
     </Member>
     <Member MemberName="IsNull">
@@ -226,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether this <see cref="T:System.Data.SqlTypes.SqlBytes" /> is null.</para
-          >
+            >Gets a Boolean value that indicates whether this <see cref="T:System.Data.SqlTypes.SqlBytes" /> is null.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -271,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length of the value that is contained in the <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para
-          >
+            >Gets the length of the value that is contained in the <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -294,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the maximum length of the value of the internal buffer of this <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Gets the maximum length of the value of the internal buffer of this <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -317,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a null instance of this <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Returns a null instance of this <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -388,54 +372,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an attempt is made to read beyond <see cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />, an exception is thrown.</para
-          >
+            >If an attempt is made to read beyond <see cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />, an exception is thrown.</para>
           <para
-            >If <paramref name="count" /> specifies more bytes to be copied than are available from the <paramref name="offset" /> to the end of the value, only the available bytes are copied.</para
-          >
+            >If <paramref name="count" /> specifies more bytes to be copied than are available from the <paramref name="offset" /> to the end of the value, only the available bytes are copied.</para>
           <para>An exception is thrown if the destination buffer is a null reference.</para>
           <para>An exception is thrown if the destination buffer cannot receive as many characters as requested.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies bytes from this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance to the passed-in buffer and returns the number of copied bytes.</para
-          >
+            >Copies bytes from this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance to the passed-in buffer and returns the number of copied bytes.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Int64" /> long value representing the number of copied bytes.</para
-          >
+            >An <see cref="T:System.Int64" /> long value representing the number of copied bytes.</para>
         </returns>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int64" /> long value offset into the value that is contained in the <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</param
-        >
+          />An <see cref="T:System.Int64" /> long value offset into the value that is contained in the <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array buffer to copy into.</param
-        >
+          />The byte array buffer to copy into.</param>
         <param name="offsetInBuffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> integer offset into the buffer to start copying into.</param
-        >
+          />An <see cref="T:System.Int32" /> integer offset into the buffer to start copying into.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> integer representing the number of bytes to copy.</param
-        >
+          />An <see cref="T:System.Int32" /> integer representing the number of bytes to copy.</param>
       </Docs>
     </Member>
     <Member MemberName="SetLength">
@@ -458,16 +434,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the length of this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para
-          >
+            >Sets the length of this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Int64" /> long value representing the length.</param
-        >
+          />The <see cref="T:System.Int64" /> long value representing the length.</param>
       </Docs>
     </Member>
     <Member MemberName="SetNull">
@@ -506,8 +480,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns information about the storage state of this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para
-          >
+            >Returns information about the storage state of this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para>
         </summary>
       </Docs>
     </Member>
@@ -525,14 +498,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Getting or setting the <see cref="P:System.Data.SqlTypes.SqlBytes.Stream" /> property loads all the data into memory. Using it with large value data can cause an <see cref="T:System.OutOfMemoryException" />.</para
-          >
+            >Getting or setting the <see cref="P:System.Data.SqlTypes.SqlBytes.Stream" /> property loads all the data into memory. Using it with large value data can cause an <see cref="T:System.OutOfMemoryException" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the data of this <see cref="T:System.Data.SqlTypes.SqlBytes" /> as a stream.</para
-          >
+            >Gets or sets the data of this <see cref="T:System.Data.SqlTypes.SqlBytes" /> as a stream.</para>
         </summary>
       </Docs>
     </Member>
@@ -557,23 +528,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets serialization information with all the data needed to reinstantiate this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para
-          >
+            >Gets serialization information with all the data needed to reinstantiate this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be populated with serialization information. </param
-        >
+          />The object to be populated with serialization information. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination context of the serialization.</param
-        >
+          />The destination context of the serialization.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">
@@ -623,8 +591,7 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />XmlReader</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />XmlReader</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
@@ -649,8 +616,7 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />XmlWriter</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />XmlWriter</param>
       </Docs>
     </Member>
     <Member MemberName="ToSqlBinary">
@@ -671,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs and returns a <see cref="T:System.Data.SqlTypes.SqlBinary" /> from this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para
-          >
+            >Constructs and returns a <see cref="T:System.Data.SqlTypes.SqlBinary" /> from this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -694,14 +659,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a null reference for null value <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Returns a null reference for null value <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a managed copy of the value held by this <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para
-          >
+            >Returns a managed copy of the value held by this <see cref="T:System.Data.SqlTypes.SqlBytes" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -727,49 +690,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this operation writes to a position beyond <see cref="P:System.Data.SqlTypes.SqlBytes.Length" /> but within <see cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />, <see cref="P:System.Data.SqlTypes.SqlBytes.Length" /> is updated to reflect the new ending position.</para
-          >
+            >If this operation writes to a position beyond <see cref="P:System.Data.SqlTypes.SqlBytes.Length" /> but within <see cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />, <see cref="P:System.Data.SqlTypes.SqlBytes.Length" /> is updated to reflect the new ending position.</para>
           <para
-            >The value of <paramref name="offsetInBuffer" /> must be less than or equal to <see cref="P:System.Data.SqlTypes.SqlBytes.Length" />. An exception is thrown otherwise. Only a value of 0 can be specified when writing to a null value instance.</para
-          >
+            >The value of <paramref name="offsetInBuffer" /> must be less than or equal to <see cref="P:System.Data.SqlTypes.SqlBytes.Length" />. An exception is thrown otherwise. Only a value of 0 can be specified when writing to a null value instance.</para>
           <para
-            >If an attempt is made to write beyond <see cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />, an exception is thrown.</para
-          >
+            >If an attempt is made to write beyond <see cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />, an exception is thrown.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies bytes from the passed-in buffer to this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para
-          >
+            >Copies bytes from the passed-in buffer to this <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</para>
         </summary>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int64" /> long value offset into the value that is contained in the <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</param
-        >
+          />An <see cref="T:System.Int64" /> long value offset into the value that is contained in the <see cref="T:System.Data.SqlTypes.SqlBytes" /> instance.</param>
         <param name="buffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The byte array buffer to copy into.</param
-        >
+          />The byte array buffer to copy into.</param>
         <param name="offsetInBuffer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> integer offset into the buffer to start copying into.</param
-        >
+          />An <see cref="T:System.Int32" /> integer offset into the buffer to start copying into.</param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Int32" /> integer representing the number of bytes to copy.</param
-        >
+          />An <see cref="T:System.Int32" /> integer representing the number of bytes to copy.</param>
       </Docs>
     </Member>
   </Members>

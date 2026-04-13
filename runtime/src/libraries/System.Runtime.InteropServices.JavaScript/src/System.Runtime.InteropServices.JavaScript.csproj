@@ -11,37 +11,28 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <GeneratePlatformNotSupportedAssemblyMessage
       Condition="'$(TargetPlatformIdentifier)' != 'browser'"
-      >SR.SystemRuntimeInteropServicesJavaScript_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemRuntimeInteropServicesJavaScript_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <FeatureWasmThreads
       Condition="'$(TargetPlatformIdentifier)' == 'browser' and '$(MonoWasmBuildVariant)' == 'multithread'"
-      >true</FeatureWasmThreads
-    >
+      >true</FeatureWasmThreads>
     <WasmEnableJsInteropByValue
       Condition="'$(TargetPlatformIdentifier)' == 'browser' and '$(WasmEnableJsInteropByValue)' == '' and '$(FeatureWasmThreads)' == 'true'"
-      >true</WasmEnableJsInteropByValue
-    >
+      >true</WasmEnableJsInteropByValue>
     <WasmEnableJsInteropByValue
       Condition="'$(TargetPlatformIdentifier)' == 'browser' and '$(WasmEnableJsInteropByValue)' == ''"
-      >false</WasmEnableJsInteropByValue
-    >
+      >false</WasmEnableJsInteropByValue>
     <WasmEnableLegacyJsInterop
       Condition="'$(TargetPlatformIdentifier)' == 'browser' and '$(WasmEnableLegacyJsInterop)' == ''"
-      >true</WasmEnableLegacyJsInterop
-    >
+      >true</WasmEnableLegacyJsInterop>
     <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'"
-      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants
-    >
+      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants>
     <DefineConstants Condition="'$(WasmEnableLegacyJsInterop)' == 'false'"
-      >$(DefineConstants);DISABLE_LEGACY_JS_INTEROP</DefineConstants
-    >
+      >$(DefineConstants);DISABLE_LEGACY_JS_INTEROP</DefineConstants>
     <DefineConstants Condition="'$(WasmEnableJsInteropByValue)' == 'true'"
-      >$(DefineConstants);ENABLE_JS_INTEROP_BY_VALUE</DefineConstants
-    >
+      >$(DefineConstants);ENABLE_JS_INTEROP_BY_VALUE</DefineConstants>
     <EmitCompilerGeneratedFiles
       Condition="'$(Configuration)' == 'Debug' and '$(TargetPlatformIdentifier)' == 'browser'"
-      >true</EmitCompilerGeneratedFiles
-    >
+      >true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>

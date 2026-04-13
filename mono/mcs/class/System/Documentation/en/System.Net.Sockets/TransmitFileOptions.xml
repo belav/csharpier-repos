@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Note   The flags <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" /> and <see cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" /> return the socket to a disconnected, reusable state after the file has been transmitted. These flags should not be used on a socket where quality of service (QOS) has been requested, because the service provider might immediately delete any quality of service associated with the socket before the file transfer has completed. The best approach for a QOS-enabled socket is to call <see cref="M:System.Net.Sockets.Socket.Close" /> when the file transfer has completed, rather than relying on these flags.</para
-      >
+        >Note   The flags <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" /> and <see cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" /> return the socket to a disconnected, reusable state after the file has been transmitted. These flags should not be used on a socket where quality of service (QOS) has been requested, because the service provider might immediately delete any quality of service associated with the socket before the file transfer has completed. The best approach for a QOS-enabled socket is to call <see cref="M:System.Net.Sockets.Socket.Close" /> when the file transfer has completed, rather than relying on these flags.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.Sockets.TransmitFileOptions" /> enumeration defines values used in file transfer requests.</para
-      >
+        >The <see cref="T:System.Net.Sockets.TransmitFileOptions" /> enumeration defines values used in file transfer requests.</para>
     </summary>
   </Docs>
   <Members>
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Start a transport-level disconnect after all the file data has been queued for transmission. When used with <see cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" />, these flags return the socket to a disconnected, reusable state after the file has been transmitted.</para
-          >
+            >Start a transport-level disconnect after all the file data has been queued for transmission. When used with <see cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" />, these flags return the socket to a disconnected, reusable state after the file has been transmitted.</para>
         </summary>
       </Docs>
     </Member>
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The socket handle may be reused when the request completes. This flag is valid only if <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" /> is also specified. When used with <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" />, these flags return the socket to a disconnected, reusable state after the file has been transmitted.</para
-          >
+            >The socket handle may be reused when the request completes. This flag is valid only if <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" /> is also specified. When used with <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" />, these flags return the socket to a disconnected, reusable state after the file has been transmitted.</para>
         </summary>
       </Docs>
     </Member>
@@ -160,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Complete the file transfer request immediately, without pending. If this flag is specified and the file transfer succeeds, the data has been accepted by the system but not necessarily acknowledged by the remote end. Do not use this flag with the <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" /> and <see cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" /> flags.</para
-          >
+            >Complete the file transfer request immediately, without pending. If this flag is specified and the file transfer succeeds, the data has been accepted by the system but not necessarily acknowledged by the remote end. Do not use this flag with the <see cref="F:System.Net.Sockets.TransmitFileOptions.Disconnect" /> and <see cref="F:System.Net.Sockets.TransmitFileOptions.ReuseSocket" /> flags.</para>
         </summary>
       </Docs>
     </Member>

@@ -12,22 +12,17 @@
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
     <DefineConstants
       Condition="'$(TargetPlatformIdentifier)' == 'freebsd' or '$(TargetPlatformIdentifier)' == 'osx'"
-      >$(DefineConstants);SOCKADDR_HAS_LENGTH</DefineConstants
-    >
+      >$(DefineConstants);SOCKADDR_HAS_LENGTH</DefineConstants>
     <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'"
-      >$(DefineConstants);TARGET_WINDOWS</DefineConstants
-    >
+      >$(DefineConstants);TARGET_WINDOWS</DefineConstants>
     <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
-      >SR.SystemNetQuic_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
-    >
+      >SR.SystemNetQuic_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
     <ApiExclusionListPath Condition="'$(TargetPlatformIdentifier)' == ''"
-      >ExcludeApiList.PNSE.txt</ApiExclusionListPath
-    >
+      >ExcludeApiList.PNSE.txt</ApiExclusionListPath>
     <!-- This controls if we consume official binaries from MsQuic or if we use binaries published from dotnet/msquic repo.
          Release branches should generally consume MsQuic release code, transport allows us to consume and test pre-released versions -->
     <UseQuicTransportPackage Condition="'$(UseQuicTransportPackage)' == ''"
-      >false</UseQuicTransportPackage
-    >
+      >false</UseQuicTransportPackage>
   </PropertyGroup>
 
   <ItemGroup>

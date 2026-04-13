@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" /> methods to return IP traffic information.</para
-      >
+        >This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" /> methods to return IP traffic information.</para>
       <para>The Internet protocol is used to move IP packets from a source computer to a destination computer. IP also handles dividing a packet that is too large into multiple packets that are small enough for transport, in a process known as fragmentation.</para>
       <para>The properties in this class correlate to the Management Information Base objects for IP defined in IETF RFC 2011.</para>
     </remarks>
@@ -47,14 +46,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />.</para
-          >
+            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -103,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that specifies whether Internet Protocol (IP) packet forwarding is enabled.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that specifies whether Internet Protocol (IP) packet forwarding is enabled.</para>
         </summary>
       </Docs>
     </Member>
@@ -151,8 +147,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The data returned by this property includes addresses of pseudo network interfaces such as tunnels.</para>
           <para
-            >If this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />, this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />, this property returns the number of IPv6 addresses assigned to the local computer.</para
-          >
+            >If this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />, this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />, this property returns the number of IPv6 addresses assigned to the local computer.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

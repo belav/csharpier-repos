@@ -37,17 +37,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface.</para
-      >
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface.</para>
       <para>
-        <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> wraps remoting data for passing between message sinks. A remoting client sends a <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> message to a server.</para
-      >
+        <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> wraps remoting data for passing between message sinks. A remoting client sends a <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> message to a server.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface to create a request message that acts as a method call on a remote object.</para
-      >
+        >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface to create a request message that acts as a method call on a remote object.</para>
     </summary>
   </Docs>
   <Members>
@@ -74,22 +71,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface.</para
-          >
+            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class by wrapping an <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" /> class by wrapping an <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" /> interface.</para>
         </summary>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A message that acts as an outgoing method call on a remote object.</param
-        >
+          />A message that acts as an outgoing method call on a remote object.</param>
       </Docs>
     </Member>
     <Member MemberName="ArgCount">
@@ -176,8 +170,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the requested argument.</param
-        >
+          />The index of the requested argument.</param>
       </Docs>
     </Member>
     <Member MemberName="GetArgName">
@@ -216,8 +209,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the requested argument.</param
-        >
+          />The index of the requested argument.</param>
       </Docs>
     </Member>
     <Member MemberName="GetInArg">
@@ -256,8 +248,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the requested argument.</param
-        >
+          />The index of the requested argument.</param>
       </Docs>
     </Member>
     <Member MemberName="GetInArgName">
@@ -296,8 +287,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the requested argument.</param
-        >
+          />The index of the requested argument.</param>
       </Docs>
     </Member>
     <Member MemberName="HasVarArgs">
@@ -399,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call. </para
-          >
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call. </para>
         </summary>
       </Docs>
     </Member>
@@ -509,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IDictionary" /> that represents a collection of the remoting message's properties. </para
-          >
+            >An <see cref="T:System.Collections.IDictionary" /> that represents a collection of the remoting message's properties. </para>
         </summary>
       </Docs>
     </Member>

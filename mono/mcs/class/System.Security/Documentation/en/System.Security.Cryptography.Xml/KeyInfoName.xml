@@ -19,9 +19,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Base>
     <BaseTypeName>System.Security.Cryptography.Xml.KeyInfoClause</BaseTypeName>
   </Base>
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -80,25 +77,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="keyName" /> parameter can contain any string; the interpretation of the string is specific to the application. White space is significant in the string value.</para
-          >
+            >The <paramref name="keyName" /> parameter can contain any string; the interpretation of the string is specific to the application. White space is significant in the string value.</para>
           <para
-            >The <paramref name="keyName" /> parameter specifies the value of the <see cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" /> property.</para
-          >
+            >The <paramref name="keyName" /> parameter specifies the value of the <see cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> class by specifying the string identifier that is the value of the &lt;KeyName&gt; element.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> class by specifying the string identifier that is the value of the &lt;KeyName&gt; element.</para>
         </summary>
         <param name="keyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string identifier that is the value of the &lt;KeyName&gt; element.</param
-        >
+          />The string identifier that is the value of the &lt;KeyName&gt; element.</param>
       </Docs>
     </Member>
     <Member MemberName="GetXml">
@@ -121,20 +114,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.XmlElement" /> object returned by this method is suitable for use as a subelement of an XMLDSIG or XML Encryption &lt;KeyInfo&gt; element.</para
-          >
+            >The <see cref="T:System.Xml.XmlElement" /> object returned by this method is suitable for use as a subelement of an XMLDSIG or XML Encryption &lt;KeyInfo&gt; element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object.</para
-          >
+            >Returns an XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object.</para
-          >
+            >An XML representation of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object.</para>
         </returns>
       </Docs>
     </Member>
@@ -163,22 +153,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Security.Cryptography.Xml.KeyInfoName.LoadXml(System.Xml.XmlElement)" /> method is typically used to process a &lt;KeyName&gt; subelement of a &lt;KeyInfo&gt; element.</para
-          >
+            >The <see cref="M:System.Security.Cryptography.Xml.KeyInfoName.LoadXml(System.Xml.XmlElement)" /> method is typically used to process a &lt;KeyName&gt; subelement of a &lt;KeyInfo&gt; element.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the input <see cref="T:System.Xml.XmlElement" /> object and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object to match.</para
-          >
+            >Parses the input <see cref="T:System.Xml.XmlElement" /> object and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object to match.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlElement" /> object that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object. </param
-        >
+          />The <see cref="T:System.Xml.XmlElement" /> object that specifies the state of the <see cref="T:System.Security.Cryptography.Xml.KeyInfoName" /> object. </param>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -199,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" /> property can contain any string; the interpretation of the string is specific to the application. White space is significant in the string value.</para
-          >
+            >The <see cref="P:System.Security.Cryptography.Xml.KeyInfoName.Value" /> property can contain any string; the interpretation of the string is specific to the application. White space is significant in the string value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

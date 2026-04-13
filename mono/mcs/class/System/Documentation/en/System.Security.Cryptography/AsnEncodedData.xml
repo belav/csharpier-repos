@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -70,16 +69,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using a byte array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using a byte array.</para>
         </summary>
         <param name="rawData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param
-        >
+          />A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -104,22 +101,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor makes a copy of the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> instance.</para
-          >
+            >This constructor makes a copy of the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> instance.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using an instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using an instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</para>
         </summary>
         <param name="asnEncodedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</param
-        >
+          />An instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -146,23 +140,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using an <see cref="T:System.Security.Cryptography.Oid" /> object and a byte array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using an <see cref="T:System.Security.Cryptography.Oid" /> object and a byte array.</para>
         </summary>
         <param name="oid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Security.Cryptography.Oid" /> object.</param
-        >
+          />An <see cref="T:System.Security.Cryptography.Oid" /> object.</param>
         <param name="rawData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param
-        >
+          />A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -186,23 +177,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using a byte array.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using a byte array.</para>
         </summary>
         <param name="oid">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string that represents <see cref="T:System.Security.Cryptography.Oid" /> information.</param
-        >
+          />A string that represents <see cref="T:System.Security.Cryptography.Oid" /> information.</param>
         <param name="rawData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param
-        >
+          />A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
@@ -230,22 +218,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies information to an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object based on the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para
-          >
+            >This method copies information to an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object based on the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para
-          >
+            >Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para>
         </summary>
         <param name="asnEncodedData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to base the new object on.</param
-        >
+          />The <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to base the new object on.</param>
       </Docs>
     </Member>
     <Member MemberName="Format">
@@ -270,8 +255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you need to print Abstract Syntax Notation One (ASN.1)-encoded data or output the information to a text box. Use the <paramref name="multiLine" /> parameter to control the layout of the output.</para
-          >
+            >Use this method if you need to print Abstract Syntax Notation One (ASN.1)-encoded data or output the information to a text box. Use the <paramref name="multiLine" /> parameter to control the layout of the output.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -286,8 +270,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true if the return string should contain carriage returns; otherwise, false.</param
-        >
+          />true if the return string should contain carriage returns; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="Oid">
@@ -317,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see cref="T:System.Security.Cryptography.Oid" /> value for an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para
-          >
+            >Gets or sets the <see cref="T:System.Security.Cryptography.Oid" /> value for an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para>
         </summary>
       </Docs>
     </Member>
@@ -339,8 +321,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is the easiest way to access the information in an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para
-          >
+            >This property is the easiest way to access the information in an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

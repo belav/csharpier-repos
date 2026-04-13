@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Collections.Generic.IList`1" /> generic interface is a descendant of the <see cref="T:System.Collections.Generic.ICollection`1" /> generic interface and is the base interface of all generic lists.</para
-      >
+        >The <see cref="T:System.Collections.Generic.IList`1" /> generic interface is a descendant of the <see cref="T:System.Collections.Generic.ICollection`1" /> generic interface and is the base interface of all generic lists.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,12 +61,10 @@
           <para>Determines the index of a specific item in the current instance.</para>
         </summary>
         <returns
-          >The index of <paramref name="value" /> if found in the current instance; otherwise, -1.</returns
-        >
+          >The index of <paramref name="value" /> if found in the current instance; otherwise, -1.</returns>
         <remarks>
           <para
-            >Implementations can vary in how they determine equality of objects; for example, <see cref="T:System.Collections.Generic.List&lt;T&gt;" />  uses the default comparer, whereas, <see cref="T:System.Collections.Generic.Dictionary&lt;T,U&gt;" /> allows the user to specify the <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" /> implementation to use for comparing keys.</para
-          >
+            >Implementations can vary in how they determine equality of objects; for example, <see cref="T:System.Collections.Generic.List&lt;T&gt;" />  uses the default comparer, whereas, <see cref="T:System.Collections.Generic.Dictionary&lt;T,U&gt;" /> allows the user to specify the <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" /> implementation to use for comparing keys.</para>
         </remarks>
         <since version=".NET 2.0" />
       </Docs>
@@ -92,8 +89,7 @@
       </Parameters>
       <Docs>
         <param name="index"
-          >A <see cref="System.Int32" /> that specifies the zero-based index at which value is inserted.</param
-        >
+          >A <see cref="System.Int32" /> that specifies the zero-based index at which value is inserted.</param>
         <param name="item">To be added.</param>
         <summary>
           <para>Inserts an item into the current instance at the specified position.</para>
@@ -103,16 +99,14 @@
           <para>
             <block subset="none" type="behaviors">
               <para
-                >If <paramref name="index" /> equals the number of items in the <see cref="System.Collections.Generic.IList&lt;T&gt;" />, then value is required to be appended to the end of the current instance.</para
-              >
+                >If <paramref name="index" /> equals the number of items in the <see cref="System.Collections.Generic.IList&lt;T&gt;" />, then value is required to be appended to the end of the current instance.</para>
             </block>
           </para>
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
-            <paramref name="index" /> is not a valid index in the current instance (i.e. is negative or greater than the number of elements in the current instance).</para
-          >
+            <paramref name="index" /> is not a valid index in the current instance (i.e. is negative or greater than the number of elements in the current instance).</para>
         </exception>
         <exception cref="T:System.NotSupportedException">
           <para>The current instance is read-only.</para>
@@ -185,16 +179,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see cref="T:System.Collections.Generic.IList`1" /> item at the specified index.</para
-          >
+            >Removes the <see cref="T:System.Collections.Generic.IList`1" /> item at the specified index.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the item to remove.</param
-        >
+          />The zero-based index of the item to remove.</param>
       </Docs>
     </Member>
   </Members>

@@ -33,23 +33,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Net.FileWebResponse" /> class implements the <see cref="T:System.Net.WebResponse" /> abstract base class to return file system resources for the <see cref="T:System.Net.FileWebRequest" /> class.</para
-      >
+        >The <see cref="T:System.Net.FileWebResponse" /> class implements the <see cref="T:System.Net.WebResponse" /> abstract base class to return file system resources for the <see cref="T:System.Net.FileWebRequest" /> class.</para>
       <para
-        >Client applications do not create <see cref="T:System.Net.FileWebResponse" /> instances directly; instead, they are created by calling the <see cref="M:System.Net.FileWebRequest.GetResponse" /> method on a <see cref="T:System.Net.FileWebRequest" /> instance.</para
-      >
+        >Client applications do not create <see cref="T:System.Net.FileWebResponse" /> instances directly; instead, they are created by calling the <see cref="M:System.Net.FileWebRequest.GetResponse" /> method on a <see cref="T:System.Net.FileWebRequest" /> instance.</para>
       <para
-        >The <see cref="M:System.Net.FileWebResponse.GetResponseStream" /> method returns a <see cref="T:System.IO.Stream" /> instance that provides read-only access to a file system resource.</para
-      >
+        >The <see cref="M:System.Net.FileWebResponse.GetResponseStream" /> method returns a <see cref="T:System.IO.Stream" /> instance that provides read-only access to a file system resource.</para>
       <para
-        >The <see cref="T:System.Net.FileWebResponse" /> class relies on the <see cref="T:System.IO.File" /> class for error handling and code access security.</para
-      >
+        >The <see cref="T:System.Net.FileWebResponse" /> class relies on the <see cref="T:System.IO.File" /> class for error handling and code access security.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a file system implementation of the <see cref="T:System.Net.WebResponse" /> class.</para
-      >
+        >Provides a file system implementation of the <see cref="T:System.Net.WebResponse" /> class.</para>
     </summary>
   </Docs>
   <Members>
@@ -82,29 +77,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.FileWebResponse" /> class.</para
-          >
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.FileWebResponse" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.FileWebResponse" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.FileWebResponse" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance that contains the information required to serialize the new <see cref="T:System.Net.FileWebResponse" /> instance. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance that contains the information required to serialize the new <see cref="T:System.Net.FileWebResponse" /> instance. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" /> class that contains the source of the serialized stream associated with the new <see cref="T:System.Net.FileWebResponse" /> instance. </param
-        >
+          />An instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" /> class that contains the source of the serialized stream associated with the new <see cref="T:System.Net.FileWebResponse" /> instance. </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -127,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebResponse.Close" /> method cleans up the resources used by a <see cref="T:System.Net.FileWebResponse" /> and closes the response stream by calling the <see cref="M:System.IO.Stream.Close" /> method.</para
-          >
+            >The <see cref="M:System.Net.FileWebResponse.Close" /> method cleans up the resources used by a <see cref="T:System.Net.FileWebResponse" /> and closes the response stream by calling the <see cref="M:System.IO.Stream.Close" /> method.</para>
           <block subset="none" type="note">
             <para
               >The response stream must be closed to avoid running out of system resources. You can closes the response stream by calling either <see cref="M:System.IO.Stream.Close" /> or <see cref="M:System.Net.FileWebResponse.Close" />
@@ -158,8 +148,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebResponse.ContentLength" /> property contains the length, in bytes, of the file system resource.</para
-          >
+            >The <see cref="P:System.Net.FileWebResponse.ContentLength" /> property contains the length, in bytes, of the file system resource.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -184,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebResponse.ContentType" /> property contains the content type of the file system resource. The value of <see cref="P:System.Net.FileWebResponse.ContentType" /> is always "binary/octet-stream".</para
-          >
+            >The <see cref="P:System.Net.FileWebResponse.ContentType" /> property contains the content type of the file system resource. The value of <see cref="P:System.Net.FileWebResponse.ContentType" /> is always "binary/octet-stream".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -214,25 +202,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method derived from the <see cref="M:System.IDisposable.Dispose" /> and is called by the <see cref="M:System.Object.Finalize" /> method. The public Dispose method invokes the protected <see cref="M:System.Net.FileWebResponse.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes the protected <see cref="M:System.Net.FileWebResponse.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to false.</para
-          >
+            >This method is called by the public Dispose method derived from the <see cref="M:System.IDisposable.Dispose" /> and is called by the <see cref="M:System.Object.Finalize" /> method. The public Dispose method invokes the protected <see cref="M:System.Net.FileWebResponse.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes the protected <see cref="M:System.Net.FileWebResponse.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.FileWebResponse" /> references. This method invokes the Dispose method derived from <see cref="M:System.IDisposable.Dispose" /> of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.FileWebResponse" /> references. This method invokes the Dispose method derived from <see cref="M:System.IDisposable.Dispose" /> of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.Net.FileWebResponse" /> and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.FileWebResponse" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
       </Docs>
     </Member>
     <Member MemberName="Finalize">
@@ -281,29 +265,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para
-          >
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the target object.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the target object.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the destination for this serialization.</param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the destination for this serialization.</param>
       </Docs>
     </Member>
     <Member MemberName="GetResponseStream">
@@ -329,8 +309,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="M:System.Net.FileWebResponse.GetResponseStream" /> method returns the data stream from the file system resource.</para
-          >
+            >The <see cref="M:System.Net.FileWebResponse.GetResponseStream" /> method returns the data stream from the file system resource.</para>
           <block subset="none" type="note">
             <para
               >The response stream must be closed to avoid running out of system resources. The response stream can be closed by calling <see cref="M:System.IO.Stream.Close" /> or <see cref="M:System.Net.FileWebResponse.Close" />
@@ -344,8 +323,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.Stream" /> for reading data from the file system resource.</para
-          >
+            >A <see cref="T:System.IO.Stream" /> for reading data from the file system resource.</para>
         </returns>
       </Docs>
     </Member>
@@ -372,8 +350,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebResponse.Headers" /> property contains two name/value pairs, one for content length and one for content type, both of which are also exposed as properties, <see cref="P:System.Net.FileWebResponse.ContentLength" /> and <see cref="P:System.Net.FileWebResponse.ContentType" />.</para
-          >
+            >The <see cref="P:System.Net.FileWebResponse.Headers" /> property contains two name/value pairs, one for content length and one for content type, both of which are also exposed as properties, <see cref="P:System.Net.FileWebResponse.ContentLength" /> and <see cref="P:System.Net.FileWebResponse.ContentType" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -398,8 +375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Net.FileWebResponse.ResponseUri" /> property contains the URI of the file system resource that provided the response. This is always the file system resource that was requested.</para
-          >
+            >The <see cref="P:System.Net.FileWebResponse.ResponseUri" /> property contains the URI of the file system resource that provided the response. This is always the file system resource that was requested.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -431,20 +407,17 @@
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format> and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
-            </format>. </para
-          >
+            </format>. </para>
           <block subset="none" type="note">
             <para
-              >Always call <see cref="M:System.Net.FileWebResponse.System.IDisposable.Dispose" /> before you release your last reference to the <see cref="T:System.Net.FileWebResponse" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.FileWebResponse" /> object's Finalize method.</para
-            >
+              >Always call <see cref="M:System.Net.FileWebResponse.System.IDisposable.Dispose" /> before you release your last reference to the <see cref="T:System.Net.FileWebResponse" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.FileWebResponse" /> object's Finalize method.</para>
           </block>
           <para></para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see cref="T:System.Net.FileWebResponse" />.</para
-          >
+            >Releases all resources used by the <see cref="T:System.Net.FileWebResponse" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -475,23 +448,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.FileWebResponse" />.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.FileWebResponse" />.</para>
         </summary>
         <param name="serializationInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> , which will hold the serialized data for the <see cref="T:System.Net.FileWebResponse" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> , which will hold the serialized data for the <see cref="T:System.Net.FileWebResponse" />. </param>
         <param name="streamingContext">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> containing the destination of the serialized stream associated with the new <see cref="T:System.Net.FileWebResponse" />. </param
-        >
+          />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> containing the destination of the serialized stream associated with the new <see cref="T:System.Net.FileWebResponse" />. </param>
       </Docs>
     </Member>
   </Members>

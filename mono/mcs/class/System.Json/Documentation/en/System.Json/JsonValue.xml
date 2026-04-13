@@ -71,8 +71,7 @@
           <para>True if the operation exception is invalid; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to check.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The key to check.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -205,8 +204,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stream that contains text-based JSON content.</param
-        >
+          />A stream that contains text-based JSON content.</param>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -243,8 +241,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A TextReader over text-based JSON content.</param
-        >
+          />A TextReader over text-based JSON content.</param>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -1294,8 +1291,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Stream to which to write text-based JSON.</param
-        >
+          />Stream to which to write text-based JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="Save">
@@ -1328,8 +1324,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The TextWriter used to write text-based JSON.</param
-        >
+          />The TextWriter used to write text-based JSON.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">

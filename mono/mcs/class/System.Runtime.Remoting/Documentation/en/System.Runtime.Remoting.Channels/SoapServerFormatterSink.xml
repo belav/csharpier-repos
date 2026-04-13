@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The request stream propagates from the server transport sink through the server channel sinks until it reaches the appropriate formatter sink. The formatter sink deserializes the message and passes it through the pipeline. A special dispatch sink is inserted at the end of the channel sink chain by <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.CreateServerChannelSinkChain(System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IChannelReceiver)" /> method, which is called by server channels to create the server channel sink chains. When the message reaches the dispatch sink, the dispatch sink passes the message to the remoting infrastructure.</para
-      >
+        >The request stream propagates from the server transport sink through the server channel sinks until it reaches the appropriate formatter sink. The formatter sink deserializes the message and passes it through the pipeline. A special dispatch sink is inserted at the end of the channel sink chain by <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.CreateServerChannelSinkChain(System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IChannelReceiver)" /> method, which is called by server channels to create the server channel sink chains. When the message reaches the dispatch sink, the dispatch sink passes the message to the remoting infrastructure.</para>
       <list type="table">
         <listheader>
           <item>
@@ -65,10 +64,8 @@
             <para
               >A string value specifying the level of automatic deserialization a server channel attempts. Supported values are Low (the default) and Full. For details about deserialization levels, see <format type="text/html">
                 <a href="313A0E88-5B2B-4A17-8391-0DDF9F7A787B"
-                  >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
-                >
-              </format>.</para
-            >
+                  >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a>
+              </format>.</para>
             <para>This property is supported only by the .NET Framework version 1.1 on the following platforms: Windows 98, Windows NT 4.0, Windows Millennium Edition, Windows 2000, Windows XP Home Edition, Windows XP Professional, and Windows Server 2003 family. </para>
           </description>
         </item>
@@ -77,16 +74,13 @@
         <para
           >Using an instance of this object with untrusted data or across an unsecure channel is a security risk. Use this object only with trusted data and across a secure channel. For more information, see <see
             cref="http://go.microsoft.com/fwlink/?LinkId=330378"
-            >Untrusted Data Security Risks</see
-          >.</para
-        >
+            >Untrusted Data Security Risks</see>.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the implementation for a server formatter sink that uses the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para
-      >
+        >Provides the implementation for a server formatter sink that uses the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para>
     </summary>
   </Docs>
   <Members>
@@ -107,8 +101,7 @@
       </Parameters>
       <Docs>
         <param name="protocol"
-          >To be added: an object of type 'SoapServerFormatterSink+Protocol'</param
-        >
+          >To be added: an object of type 'SoapServerFormatterSink+Protocol'</param>
         <param name="nextSink">To be added: an object of type 'IServerChannelSink'</param>
         <param name="receiver">To be added: an object of type 'IChannelReceiver'</param>
         <summary>To be added</summary>
@@ -149,36 +142,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stack of sinks leading back to the server transport sink. </param
-        >
+          />A stack of sinks leading back to the server transport sink. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information associated with the current sink, generated on the request side, and needed on the response side. </param
-        >
+          />Information associated with the current sink, generated on the request side, and needed on the response side. </param>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The response message. </param
-        >
+          />The response message. </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers to add to the return message heading to the client. </param
-        >
+          />The headers to add to the return message heading to the client. </param>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream heading back to the transport sink. </param
-        >
+          />The stream heading back to the transport sink. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -211,43 +199,37 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.IO.Stream" /> onto which the provided response message is to be serialized.</para
-          >
+            >Returns the <see cref="T:System.IO.Stream" /> onto which the provided response message is to be serialized.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IO.Stream" /> onto which the provided response message is to be serialized.</para
-          >
+            >The <see cref="T:System.IO.Stream" /> onto which the provided response message is to be serialized.</para>
         </returns>
         <param name="sinkStack">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A stack of sinks leading back to the server transport sink. </param
-        >
+          />A stack of sinks leading back to the server transport sink. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Information associated with the current sink, generated on the request side, and needed on the response side. </param
-        >
+          />Information associated with the current sink, generated on the request side, and needed on the response side. </param>
         <param name="msg">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The response message that is to be serialized. </param
-        >
+          />The response message that is to be serialized. </param>
         <param name="headers">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The headers to put in the response stream to the client. </param
-        >
+          />The headers to put in the response stream to the client. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -269,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the next <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSink" /> in the sink chain.</para
-          >
+            >Gets the next <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSink" /> in the sink chain.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -313,16 +294,13 @@
       <Docs>
         <param name="sinkStack">To be added: an object of type 'IServerChannelSinkStack'</param>
         <param name="requestMsg"
-          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage'</param
-        >
+          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage'</param>
         <param name="requestHeaders">To be added: an object of type 'ITransportHeaders'</param>
         <param name="requestStream">To be added: an object of type 'IO.Stream'</param>
         <param name="responseMsg"
-          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage&amp;'</param
-        >
+          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage&amp;'</param>
         <param name="responseHeaders"
-          >To be added: an object of type 'ITransportHeaders&amp;'</param
-        >
+          >To be added: an object of type 'ITransportHeaders&amp;'</param>
         <param name="responseStream">To be added: an object of type 'IO.Stream&amp;'</param>
         <summary>To be added</summary>
         <returns>To be added: an object of type 'ServerProcessing'</returns>
@@ -348,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.IDictionary" /> of properties for the current channel sink.</para
-          >
+            >Gets a <see cref="T:System.Collections.IDictionary" /> of properties for the current channel sink.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -382,10 +359,8 @@
           <para
             >Supported values are Low (the default) and Full. For details about deserialization levels, see <format type="text/html">
               <a href="313a0e88-5b2b-4a17-8391-0ddf9f7a787b"
-                >Automatic Deserialization in .NET Remoting</a
-              >
-            </format>.</para
-          >
+                >Automatic Deserialization in .NET Remoting</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

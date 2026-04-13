@@ -32,8 +32,7 @@
       <para>This attribute affects only unmanaged applications that host the common language runtime and implement host protection, such as SQL Server. If the code is run in a client application or on a server that is not host-protected, the attribute "evaporates"; it is not detected and therefore not applied. When applied, the security action results in the creation of a link demand based on the host resources the class or method exposes. </para>
       <block subset="none" type="note">
         <para
-          >The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.  Although a link demand is used to check for conformance to programming model requirements, the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> is not a security permission.</para
-        >
+          >The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.  Although a link demand is used to check for conformance to programming model requirements, the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> is not a security permission.</para>
       </block>
       <para>If the host does not have programming model requirements, the link demands do not occur.</para>
       <para>This attribute identifies the following: </para>
@@ -50,15 +49,13 @@
       </list>
       <block subset="none" type="note">
         <para
-          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see cref="T:System.Security.Permissions.HostProtectionResource" /> resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner. </para
-        >
+          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see cref="T:System.Security.Permissions.HostProtectionResource" /> resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner. </para>
       </block>
       <block subset="none" type="note">
         <para
           >Do not use the <format type="text/html">
             <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
-          </format> to create a native image of assemblies that are protected by the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />. In a full-trust environment, the image is always loaded, without regard to the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />, and in a partial-trust environment the image is not loaded. </para
-        >
+          </format> to create a native image of assemblies that are protected by the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />. In a full-trust environment, the image is always loaded, without regard to the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />, and in a partial-trust environment the image is not loaded. </para>
         <para />
       </block>
     </remarks>
@@ -85,14 +82,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> with all Boolean properties set to false.</para
-          >
+            >This constructor creates a <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> with all Boolean properties set to false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with default values.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with default values.</para>
         </summary>
       </Docs>
     </Member>
@@ -122,16 +117,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with the specified <see cref="T:System.Security.Permissions.SecurityAction" /> value.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with the specified <see cref="T:System.Security.Permissions.SecurityAction" /> value.</para>
         </summary>
         <param name="action">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param
-        >
+          />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
       </Docs>
     </Member>
     <Member MemberName="CreatePermission">
@@ -166,8 +159,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Security.IPermission" /> that corresponds to the current attribute.</para
-          >
+            >An <see cref="T:System.Security.IPermission" /> that corresponds to the current attribute.</para>
         </returns>
       </Docs>
     </Member>
@@ -266,8 +258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Security.Permissions.HostProtectionResource" /> flags specify the resources exposed by the method or class that are potentially harmful to the host.</para
-          >
+            >The <see cref="T:System.Security.Permissions.HostProtectionResource" /> flags specify the resources exposed by the method or class that are potentially harmful to the host.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -297,8 +288,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The use of a <see cref="T:System.Security.Principal.WindowsIdentity" /> object to impersonate a user is an example of exposing the security infrastructure.</para
-          >
+            >The use of a <see cref="T:System.Security.Principal.WindowsIdentity" /> object to impersonate a user is an example of exposing the security infrastructure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -371,8 +361,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" /> is true, it indicates that a state is exposed that might be shared between threads.</para
-          >
+            >When <see cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" /> is true, it indicates that a state is exposed that might be shared between threads.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

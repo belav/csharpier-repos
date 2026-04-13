@@ -26,11 +26,9 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class to group together policy assertions and to enumerate or modify a group of assertions.</para
-      >
+        >Use the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class to group together policy assertions and to enumerate or modify a group of assertions.</para>
       <para
-        >The <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> is used most frequently as a return value for the methods of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> class. </para
-      >
+        >The <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> is used most frequently as a return value for the methods of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> class. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class using the specified <see cref="T:System.Xml.XmlElement" /> objects. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyAssertionCollection" /> class using the specified <see cref="T:System.Xml.XmlElement" /> objects. </para>
         </summary>
       </Docs>
     </Member>
@@ -219,15 +215,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index at which to insert <paramref name="item" />.</param
-        >
+          />The index at which to insert <paramref name="item" />.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy assertion to insert at <paramref name="index" />. The assertion must not be null.</param
-        >
+          />The policy assertion to insert at <paramref name="index" />. The assertion must not be null.</param>
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -329,15 +323,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index that contains the assertion to replace.</param
-        >
+          />The index that contains the assertion to replace.</param>
         <param name="item">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The policy assertion to replace the assertion already at <paramref name="index" />. The assertion must not be null.</param
-        >
+          />The policy assertion to replace the assertion already at <paramref name="index" />. The assertion must not be null.</param>
       </Docs>
     </Member>
   </Members>

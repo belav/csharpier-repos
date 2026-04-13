@@ -21,8 +21,7 @@
     -->
     <ILEmitSaveAssemblies Condition="'$(ILEmitSaveAssemblies)'==''">false</ILEmitSaveAssemblies>
     <DefineConstants Condition="'$(ILEmitSaveAssemblies)'=='true'"
-      >IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants
-    >
+      >IL_EMIT_SAVE_ASSEMBLIES;$(DefineConstants)</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

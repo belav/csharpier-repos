@@ -15,14 +15,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.UI.WebControls.ListSelectionMode" /> enumeration represents the selection mode of the <see cref="T:System.Web.UI.WebControls.ListBox" /> control that determines whether a user can select multiple items or just a single item.</para
-      >
+        >The <see cref="T:System.Web.UI.WebControls.ListSelectionMode" /> enumeration represents the selection mode of the <see cref="T:System.Web.UI.WebControls.ListBox" /> control that determines whether a user can select multiple items or just a single item.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the selection mode of the <see cref="T:System.Web.UI.WebControls.ListBox" /> control.</para
-      >
+        >Specifies the selection mode of the <see cref="T:System.Web.UI.WebControls.ListBox" /> control.</para>
     </summary>
   </Docs>
   <Members>

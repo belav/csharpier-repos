@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.Web.UI.ExpressionBinding" /> objects. This class cannot be inherited.</para
-      >
+        >Represents a collection of <see cref="T:System.Web.UI.ExpressionBinding" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,16 +61,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object to the end of the collection.</para
-          >
+            >Appends the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object to the end of the collection.</para>
         </summary>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.ExpressionBinding" /> to append to the <see cref="T:System.Web.UI.ExpressionBindingCollection" />.</param
-        >
+          />The <see cref="T:System.Web.UI.ExpressionBinding" /> to append to the <see cref="T:System.Web.UI.ExpressionBindingCollection" />.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -89,14 +85,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.Web.UI.ExpressionBindingCollection.Changed" /> event occurs when the <see cref="M:System.Web.UI.ExpressionBindingCollection.Add(System.Web.UI.ExpressionBinding)" /> method, the <see cref="Overload:System.Web.UI.ExpressionBindingCollection.Remove" /> method, or the <see cref="M:System.Web.UI.ExpressionBindingCollection.Clear" /> method is called.</para
-          >
+            >The <see cref="E:System.Web.UI.ExpressionBindingCollection.Changed" /> event occurs when the <see cref="M:System.Web.UI.ExpressionBindingCollection.Add(System.Web.UI.ExpressionBinding)" /> method, the <see cref="Overload:System.Web.UI.ExpressionBindingCollection.Remove" /> method, or the <see cref="M:System.Web.UI.ExpressionBindingCollection.Clear" /> method is called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the collection of <see cref="T:System.Web.UI.ExpressionBinding" /> objects is changed.</para
-          >
+            >Occurs when the collection of <see cref="T:System.Web.UI.ExpressionBinding" /> objects is changed.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -116,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects from the collection.</para
-          >
+            >Removes all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -140,14 +133,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection contains a specific <see cref="T:System.Web.UI.ExpressionBinding" /> object.</para
-          >
+            >Determines whether the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection contains a specific <see cref="T:System.Web.UI.ExpressionBinding" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Web.UI.ExpressionBinding" /> is found in the <see cref="T:System.Web.UI.ExpressionBindingCollection" />; otherwise, false.</para
-          >
+            >true if the <see cref="T:System.Web.UI.ExpressionBinding" /> is found in the <see cref="T:System.Web.UI.ExpressionBindingCollection" />; otherwise, false.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -170,23 +161,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects from the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection to a one-dimensional array, starting at the specified index in the target array.</para
-          >
+            >Copies all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects from the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection to a one-dimensional array, starting at the specified index in the target array.</para>
         </summary>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based array that receives the <see cref="T:System.Web.UI.ExpressionBinding" /> objects copied from the collection.</param
-        >
+          />The zero-based array that receives the <see cref="T:System.Web.UI.ExpressionBinding" /> objects copied from the collection.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the target array at which the array starts receiving the copied items.</param
-        >
+          />The position in the target array at which the array starts receiving the copied items.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -212,16 +200,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects from the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection to a one-dimensional array of <see cref="T:System.Web.UI.ExpressionBinding" /> objects, starting at the specified index in the target array.</para
-          >
+            >Copies all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects from the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection to a one-dimensional array of <see cref="T:System.Web.UI.ExpressionBinding" /> objects, starting at the specified index in the target array.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The position in the target array at which the array starts receiving the copied items.</param
-        >
+          />The position in the target array at which the array starts receiving the copied items.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -240,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection.</para
-          >
+            >Gets the number of <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the <see cref="T:System.Web.UI.ExpressionBindingCollection" /> collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -264,14 +249,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Collections.IEnumerator" />-implemented object that can be used to iterate through the <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the collection.</para
-          >
+            >Returns an <see cref="T:System.Collections.IEnumerator" />-implemented object that can be used to iterate through the <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" />-implemented object that contains all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the <see cref="T:System.Web.UI.ExpressionBindingCollection" />.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" />-implemented object that contains all the <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the <see cref="T:System.Web.UI.ExpressionBindingCollection" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -291,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the collection can be modified.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.ExpressionBinding" /> objects in the collection can be modified.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -356,16 +338,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object from the collection.</para>
         </summary>
         <param name="propertyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Web.UI.ExpressionBinding.PropertyName" /> of the <see cref="T:System.Web.UI.ExpressionBinding" /> to remove from the collection.</param
-        >
+          />The <see cref="P:System.Web.UI.ExpressionBinding.PropertyName" /> of the <see cref="T:System.Web.UI.ExpressionBinding" /> to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -389,16 +369,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object from the collection.</para>
         </summary>
         <param name="binding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Web.UI.ExpressionBinding" /> to remove from the collection.</param
-        >
+          />The <see cref="T:System.Web.UI.ExpressionBinding" /> to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -423,23 +401,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object from the collection.</para
-          >
+            >Removes the specified <see cref="T:System.Web.UI.ExpressionBinding" /> object from the collection.</para>
         </summary>
         <param name="propertyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="P:System.Web.UI.ExpressionBinding.PropertyName" /> of the <see cref="T:System.Web.UI.ExpressionBinding" /> to remove from the collection.</param
-        >
+          />The <see cref="P:System.Web.UI.ExpressionBinding.PropertyName" /> of the <see cref="T:System.Web.UI.ExpressionBinding" /> to remove from the collection.</param>
         <param name="addToRemovedList">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to add the <see cref="T:System.Web.UI.ExpressionBinding" /> to the <see cref="P:System.Web.UI.ExpressionBindingCollection.RemovedBindings" /> collection; otherwise, false.</param
-        >
+          />true to add the <see cref="T:System.Web.UI.ExpressionBinding" /> to the <see cref="P:System.Web.UI.ExpressionBindingCollection.RemovedBindings" /> collection; otherwise, false.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

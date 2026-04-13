@@ -26,14 +26,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >With the <see cref="T:System.ComponentModel.IBindingListView" /> interface, you implement advanced sorting as a set of property descriptor-direction pairs. You implement filtering as a string to be interpreted by the data source implementation. The <see cref="T:System.ComponentModel.IBindingListView" /> interface is implemented by the <see cref="T:System.Windows.Forms.BindingSource" /> class.</para
-      >
+        >With the <see cref="T:System.ComponentModel.IBindingListView" /> interface, you implement advanced sorting as a set of property descriptor-direction pairs. You implement filtering as a string to be interpreted by the data source implementation. The <see cref="T:System.ComponentModel.IBindingListView" /> interface is implemented by the <see cref="T:System.Windows.Forms.BindingSource" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends the <see cref="T:System.ComponentModel.IBindingList" /> interface by providing advanced sorting and filtering capabilities.</para
-      >
+        >Extends the <see cref="T:System.ComponentModel.IBindingList" /> interface by providing advanced sorting and filtering capabilities.</para>
     </summary>
   </Docs>
   <Members>
@@ -62,22 +60,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is a read-only collection, once constructed.</para
-          >
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is a read-only collection, once constructed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sorts the data source based on the given <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />.</para
-          >
+            >Sorts the data source based on the given <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />.</para>
         </summary>
         <param name="sorts">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> containing the sorts to apply to the data source.</param
-        >
+          />The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> containing the sorts to apply to the data source.</param>
       </Docs>
     </Member>
     <Member MemberName="Filter">
@@ -97,8 +92,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Your implementation of the <see cref="P:System.ComponentModel.IBindingListView.Filter" /> property should exhibit the following behavior when the <see cref="P:System.ComponentModel.IBindingListView.Filter" /> property is set: The data source returns only the items that meet the filter criteria when the list is accessed by item index or when the list is enumerated. The definition of the filter string is dependent on the data-source implementation, but the behavior associated with setting the filter should be modeled on <see cref="P:System.Data.DataColumn.Expression" />.</para
-          >
+            >Your implementation of the <see cref="P:System.ComponentModel.IBindingListView.Filter" /> property should exhibit the following behavior when the <see cref="P:System.ComponentModel.IBindingListView.Filter" /> property is set: The data source returns only the items that meet the filter criteria when the list is accessed by item index or when the list is enumerated. The definition of the filter string is dependent on the data-source implementation, but the behavior associated with setting the filter should be modeled on <see cref="P:System.Data.DataColumn.Expression" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -126,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With the <see cref="T:System.ComponentModel.IBindingListView" /> type, you implement filtering as a string to be interpreted by the data source implementation.</para
-          >
+            >With the <see cref="T:System.ComponentModel.IBindingListView" /> type, you implement filtering as a string to be interpreted by the data source implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,8 +151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is a read-only collection, once constructed.</para
-          >
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is a read-only collection, once constructed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -208,8 +200,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With the <see cref="P:System.ComponentModel.IBindingListView.SupportsFiltering" /> property, you implement filtering as a string to be interpreted by the data source implementation.</para
-          >
+            >With the <see cref="P:System.ComponentModel.IBindingListView.SupportsFiltering" /> property, you implement filtering as a string to be interpreted by the data source implementation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

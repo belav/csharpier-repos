@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" /> event occurs during XSLT processing when an xsl:message is specified in the style sheet.</para
-      >
+        >The <see cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" /> event occurs during XSLT processing when an xsl:message is specified in the style sheet.</para>
       <block subset="none" type="note">
         <para>If the terminate attribute is set to "yes", the XSLT processor stops executing the style sheet stops after the message is processed.</para>
       </block>
@@ -34,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltMessageEncounteredEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltMessageEncounteredEventArgs" /> class.</para>
         </summary>
       </Docs>
     </Member>

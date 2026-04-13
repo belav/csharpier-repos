@@ -37,8 +37,7 @@
       <para
         >The following example demonstrates a scenario under
       which <see cref="T:System.FieldAccessException" />
-      is thrown.</para
-      >
+      is thrown.</para>
       <para>The following code contains a class with a public field (myField). This class
       is compiled into a class library.</para>
       <code lang="C#"
@@ -103,20 +102,16 @@ namespace TestNameSpace
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This exception is typically thrown when the access level of a field in a class library is changed, and one or more assemblies referencing the library have not been recompiled.</para>
       <para>
-        <see cref="T:System.FieldAccessException" /> uses the HRESULT COR_E_FIELDACCESS, which has the value 0x80131507.</para
-      >
+        <see cref="T:System.FieldAccessException" /> uses the HRESULT COR_E_FIELDACCESS, which has the value 0x80131507.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.FieldAccessException" />, see the <see cref="M:System.FieldAccessException.#ctor" /> constructors.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.FieldAccessException" />, see the <see cref="M:System.FieldAccessException.#ctor" /> constructors.</para>
       <block subset="none" type="note">
         <para
           >This exception is not included in the <see
             cref="http://go.microsoft.com/fwlink/?LinkID=247912"
-            >.NET for Windows Store apps</see
-          > or the <format type="text/html">
+            >.NET for Windows Store apps</see> or the <format type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
-          </format>, but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see cref="T:System.MemberAccessException" /> instead.</para
-        >
+          </format>, but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see cref="T:System.MemberAccessException" /> instead.</para>
       </block>
     </remarks>
     <summary>
@@ -147,11 +142,9 @@ namespace TestNameSpace
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Attempted to access a field that is not accessible by the caller." This message takes the current system culture into account.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Attempted to access a field that is not accessible by the caller." This message takes the current system culture into account.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.FieldAccessException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.FieldAccessException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -188,8 +181,7 @@ namespace TestNameSpace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -218,11 +210,9 @@ namespace TestNameSpace
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance by using the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor must ensure that this string has been localized for the current system culture.</para
-          >
+            >This constructor initializes the <see cref="P:System.Exception.Message" /> property of the new instance by using the <paramref name="message" /> parameter. The content of <paramref name="message" /> is intended to be understood by humans. The caller of this constructor must ensure that this string has been localized for the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.FieldAccessException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.FieldAccessException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -259,16 +249,14 @@ namespace TestNameSpace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class with a specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception.</param
-        >
+          />The error message that explains the reason for the exception.</param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -299,23 +287,20 @@ namespace TestNameSpace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class with serialized data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class with serialized data.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that holds the serialized object data. </param
-        >
+          />The object that holds the serialized object data. </param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The contextual information about the source or destination. </param
-        >
+          />The contextual information about the source or destination. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -346,11 +331,9 @@ namespace TestNameSpace
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or returns null if it does not supply the inner exception value to the constructor. The caller of this constructor must ensure that this string has been localized for the current system culture.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or returns null if it does not supply the inner exception value to the constructor. The caller of this constructor must ensure that this string has been localized for the current system culture.</para>
           <para
-            >The following table shows the initial property values for an instance of <see cref="T:System.FieldAccessException" />.</para
-          >
+            >The following table shows the initial property values for an instance of <see cref="T:System.FieldAccessException" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -387,23 +370,20 @@ namespace TestNameSpace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.FieldAccessException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception.</param
-        >
+          />The error message that explains the reason for the exception.</param>
         <param name="inner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

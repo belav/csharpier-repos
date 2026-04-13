@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NamedPipeTransportElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NamedPipeTransportElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -74,8 +73,7 @@
           <para>Applies the content of the specified configuration element to this configuration element.</para>
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />A binding element.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />A binding element.</param>
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
@@ -163,8 +161,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration element to be copied.</param
-        >
+          />The configuration element to be copied.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultBindingElement">

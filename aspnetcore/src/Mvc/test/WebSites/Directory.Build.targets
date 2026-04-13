@@ -10,8 +10,7 @@
     <ItemGroup>
       <ContentWithTargetPath>
         <CopyToPublishDirectory Condition=" '%(Extension)' == '.cshtml' "
-          >None</CopyToPublishDirectory
-        >
+          >None</CopyToPublishDirectory>
       </ContentWithTargetPath>
     </ItemGroup>
   </Target>

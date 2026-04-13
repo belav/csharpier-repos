@@ -34,8 +34,7 @@
       operation, the read state is changed to <see langword="Error" />. When the end of the
       XML data is reached, the read state is set to <see langword="EndOfFile" />. When the
    <see cref="M:System.Xml.XmlReader.Close" /> method
-      is called, the read state is set to <see langword="Closed" />.</para
-      >
+      is called, the read state is set to <see langword="Closed" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

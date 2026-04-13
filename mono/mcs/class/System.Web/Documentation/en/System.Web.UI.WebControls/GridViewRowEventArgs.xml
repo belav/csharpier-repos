@@ -14,28 +14,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Before the <see cref="T:System.Web.UI.WebControls.GridView" /> control can be rendered, a <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object must be created for each row in the control. The <see cref="E:System.Web.UI.WebControls.GridView.RowCreated" /> event is raised each time a row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control is created. This allows you to provide an event-handling method that performs a custom routine, such as adding custom content to a row, whenever this event occurs.</para
-      >
+        >Before the <see cref="T:System.Web.UI.WebControls.GridView" /> control can be rendered, a <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object must be created for each row in the control. The <see cref="E:System.Web.UI.WebControls.GridView.RowCreated" /> event is raised each time a row in the <see cref="T:System.Web.UI.WebControls.GridView" /> control is created. This allows you to provide an event-handling method that performs a custom routine, such as adding custom content to a row, whenever this event occurs.</para>
       <para
-        >Similarly, each row in the control must be bound to a record in the data source before the <see cref="T:System.Web.UI.WebControls.GridView" /> control can be rendered. The <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" /> event is raised when a data row (represented by a <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object) is bound to data in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This allows you to provide an event-handling method that performs a custom routine, such as modifying the values of the data bound to the row, whenever this event occurs.</para
-      >
+        >Similarly, each row in the control must be bound to a record in the data source before the <see cref="T:System.Web.UI.WebControls.GridView" /> control can be rendered. The <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" /> event is raised when a data row (represented by a <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object) is bound to data in the <see cref="T:System.Web.UI.WebControls.GridView" /> control. This allows you to provide an event-handling method that performs a custom routine, such as modifying the values of the data bound to the row, whenever this event occurs.</para>
       <para
-        >A <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> object is passed to the event-handling method, which allows you to access the properties of the row that raised the event. To access a specific cell in the row, use the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <see cref="P:System.Web.UI.WebControls.GridViewRowEventArgs.Row" /> property. You can also determine which row type (header row, data row, and so on) is being created by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object.</para
-      >
+        >A <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> object is passed to the event-handling method, which allows you to access the properties of the row that raised the event. To access a specific cell in the row, use the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <see cref="P:System.Web.UI.WebControls.GridViewRowEventArgs.Row" /> property. You can also determine which row type (header row, data row, and so on) is being created by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object.</para>
       <para
         >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
-        </format>.</para
-      >
+        </format>.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.GridViewRowEventArgs.#ctor(System.Web.UI.WebControls.GridViewRow)" /> constructor.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.GridViewRowEventArgs.#ctor(System.Web.UI.WebControls.GridViewRow)" /> constructor.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowCreated" /> and <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" /> events.</para
-      >
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowCreated" /> and <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" /> events.</para>
     </summary>
   </Docs>
   <Members>
@@ -53,11 +47,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> class.</para
-          >
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> class.</para>
           <para
-            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" />.</para
-          >
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -77,8 +69,7 @@
               </term>
               <description>
                 <para
-                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <paramref name="row" /> parameter. </para
-                >
+                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <paramref name="row" /> parameter. </para>
               </description>
             </item>
           </list>
@@ -89,16 +80,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" /> class.</para>
         </summary>
         <param name="row">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object that represents the row being created or data-bound. </param
-        >
+          />A <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object that represents the row being created or data-bound. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -119,8 +108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRowEventArgs.Row" /> property to access the properties of the row being created or data-bound. To access a specific cell in the row, use the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <see cref="P:System.Web.UI.WebControls.GridViewRowEventArgs.Row" /> property. You can also determine which row type (header row, data row, and so on) is being created by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object.</para
-          >
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRowEventArgs.Row" /> property to access the properties of the row being created or data-bound. To access a specific cell in the row, use the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object contained in the <see cref="P:System.Web.UI.WebControls.GridViewRowEventArgs.Row" /> property. You can also determine which row type (header row, data row, and so on) is being created by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" /> property of the <see cref="T:System.Web.UI.WebControls.GridViewRow" /> object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

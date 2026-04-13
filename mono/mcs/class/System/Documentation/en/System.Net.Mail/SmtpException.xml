@@ -19,14 +19,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property contains the status code returned by the SMTP server.</para
-      >
+        >The <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property contains the status code returned by the SMTP server.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when the <see cref="T:System.Net.Mail.SmtpClient" /> is not able to complete a <see cref="Overload:System.Net.Mail.SmtpClient.Send" /> or <see cref="Overload:System.Net.Mail.SmtpClient.SendAsync" /> operation.</para
-      >
+        >Represents the exception that is thrown when the <see cref="T:System.Net.Mail.SmtpClient" /> is not able to complete a <see cref="Overload:System.Net.Mail.SmtpClient.Send" /> or <see cref="Overload:System.Net.Mail.SmtpClient.SendAsync" /> operation.</para>
     </summary>
   </Docs>
   <Members>
@@ -47,14 +45,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The exception returned by this constructor has its <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property set to <see cref="F:System.Net.Mail.SmtpStatusCode.GeneralFailure" />.</para
-          >
+            >The exception returned by this constructor has its <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property set to <see cref="F:System.Net.Mail.SmtpStatusCode.GeneralFailure" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -80,22 +76,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref name="statusCode" /> parameter to initialize the <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property.</para
-          >
+            >This constructor uses the <paramref name="statusCode" /> parameter to initialize the <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified status code.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified status code.</para>
         </summary>
         <param name="statusCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.Mail.SmtpStatusCode" /> value.</param
-        >
+          />An <see cref="T:System.Net.Mail.SmtpStatusCode" /> value.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -117,22 +110,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property.</para
-          >
+            >This constructor uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified error message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error that occurred.</param
-        >
+          />A <see cref="T:System.String" /> that describes the error that occurred.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -158,29 +148,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref name="statusCode" /> parameter to initialize the <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property and uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property.</para
-          >
+            >This constructor uses the <paramref name="statusCode" /> parameter to initialize the <see cref="P:System.Net.Mail.SmtpException.StatusCode" /> property and uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified status code and error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified status code and error message.</para>
         </summary>
         <param name="statusCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Net.Mail.SmtpStatusCode" /> value.</param
-        >
+          />An <see cref="T:System.Net.Mail.SmtpStatusCode" /> value.</param>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error that occurred.</param
-        >
+          />A <see cref="T:System.String" /> that describes the error that occurred.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -208,14 +194,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.Mail.SmtpException" /> class.</para
-          >
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface for the <see cref="T:System.Net.Mail.SmtpException" /> class.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> classes. </para>
         </summary>
       </Docs>
     </Member>
@@ -242,32 +226,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property and the <paramref name="innerException" /> parameter to initialize the <see cref="P:System.Exception.InnerException" /> property.</para
-          >
+            >This constructor uses the <paramref name="message" /> parameter to initialize the <see cref="P:System.Exception.Message" /> property and the <paramref name="innerException" /> parameter to initialize the <see cref="P:System.Exception.InnerException" /> property.</para>
           <para
-            >If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles <paramref name="innerException" />. </para
-          >
+            >If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles <paramref name="innerException" />. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified error message and inner exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" /> class with the specified error message and inner exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.String" /> that describes the error that occurred.</param
-        >
+          />A <see cref="T:System.String" /> that describes the error that occurred.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. </param
-        >
+          />The exception that is the cause of the current exception. </param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -298,14 +277,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para
-          >
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> are automatically tracked and serialized by the formatter.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.Mail.SmtpException" />.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.Mail.SmtpException" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -364,8 +341,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.Mail.SmtpException" />.</para
-          >
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> instance with the data needed to serialize the <see cref="T:System.Net.Mail.SmtpException" />.</para>
         </summary>
       </Docs>
     </Member>

@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extend the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to create your own serializer to serialize and deserialize objects. Both the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> class and the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> class inherit from the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> and are used to serialize and deserialize objects that conform to data contract rules (objects created using the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> and the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />).</para
-      >
+        >Extend the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to create your own serializer to serialize and deserialize objects. Both the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> class and the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" /> class inherit from the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> and are used to serialize and deserialize objects that conform to data contract rules (objects created using the <see cref="T:System.Runtime.Serialization.DataContractAttribute" /> and the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />).</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -73,17 +71,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method checks if the reader is positioned on an element to read, and returns true if the element is the top-level element for the object found in the XML stream or document. The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> implementation determines when to return true. Implementations may check that they are positioned on an element or look for an expected element name. One implementation of the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, checks that it is positioned on an element and also checks that the element name is the top level expected name for the type currently being deserialized. </para
-          >
+            >This method checks if the reader is positioned on an element to read, and returns true if the element is the top-level element for the object found in the XML stream or document. The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> implementation determines when to return true. Implementations may check that they are positioned on an element or look for an expected element name. One implementation of the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, checks that it is positioned on an element and also checks that the element name is the top level expected name for the type currently being deserialized. </para>
           <para
-            >If needed, additional attributes in the XML stream can be read while positioned on the top level element before reading XML contents using the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.ReadObject" /> method.</para
-          >
+            >If needed, additional attributes in the XML stream can be read while positioned on the top level element before reading XML contents using the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.ReadObject" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies whether the <see cref="T:System.Xml.XmlDictionaryReader" /> is positioned over an XML element that can be read.</para
-          >
+            >Gets a value that specifies whether the <see cref="T:System.Xml.XmlDictionaryReader" /> is positioned over an XML element that can be read.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -94,8 +89,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML stream or document.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML stream or document.</param>
       </Docs>
     </Member>
     <Member MemberName="IsStartObject">
@@ -122,14 +116,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method checks whether the reader is positioned on an element to read, and returns true if the element is the top-level element for the object found in the XML stream or document. To return true, the found element must have an expected name. The actual expected element name depends on the implementation of the serializer. </para>
           <para
-            >With the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, the starting element is specified in the constructor of the extension class.  For an example, see the constructors for the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> class. </para
-          >
+            >With the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />, the starting element is specified in the constructor of the extension class.  For an example, see the constructors for the <see cref="T:System.Runtime.Serialization.DataContractSerializer" /> class. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies whether the <see cref="T:System.Xml.XmlReader" /> is positioned over an XML element that can be read. </para
-          >
+            >Gets a value that specifies whether the <see cref="T:System.Xml.XmlReader" /> is positioned over an XML element that can be read. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -140,8 +132,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML stream or document.</param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML stream or document.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -171,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML stream or document with a <see cref="T:System.IO.Stream" /> and returns the deserialized object.</para
-          >
+            >Reads the XML stream or document with a <see cref="T:System.IO.Stream" /> and returns the deserialized object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -183,8 +173,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> used to read the XML stream or document.</param
-        >
+          />A <see cref="T:System.IO.Stream" /> used to read the XML stream or document.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -214,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML document or stream with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object.</para
-          >
+            >Reads the XML document or stream with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -226,8 +214,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -254,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML document or stream with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object.</para
-          >
+            >Reads the XML document or stream with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -266,8 +252,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML stream or document.</param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML stream or document.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -295,14 +280,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="verifyObjectName" /> parameter uses the same code as the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.IsStartObject" /> method to determine whether the element is the start of the object.</para
-          >
+            >The <paramref name="verifyObjectName" /> parameter uses the same code as the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.IsStartObject" /> method to determine whether the element is the start of the object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML stream or document with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object; it also enables you to specify whether the serializer can read the data before attempting to read it.</para
-          >
+            >Reads the XML stream or document with an <see cref="T:System.Xml.XmlDictionaryReader" /> and returns the deserialized object; it also enables you to specify whether the serializer can read the data before attempting to read it.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -313,8 +296,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryReader" /> used to read the XML document.</param>
       </Docs>
     </Member>
     <Member MemberName="ReadObject">
@@ -342,14 +324,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref name="verifyObjectName" /> parameter uses the same code as the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.IsStartObject" /> method to determine whether the element is the start of the object.</para
-          >
+            >The <paramref name="verifyObjectName" /> parameter uses the same code as the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.IsStartObject" /> method to determine whether the element is the start of the object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the XML document or stream with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object; it also enables you to specify whether the serializer can read the data before attempting to read it.</para
-          >
+            >Reads the XML document or stream with an <see cref="T:System.Xml.XmlReader" /> and returns the deserialized object; it also enables you to specify whether the serializer can read the data before attempting to read it.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -360,8 +340,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlReader" /> used to read the XML document or stream.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEndObject">
@@ -388,16 +367,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the end of the object data as a closing XML element to the XML document or stream with an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes the end of the object data as a closing XML element to the XML document or stream with an <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document or stream.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEndObject">
@@ -424,16 +401,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the end of the object data as a closing XML element to the XML document or stream with an <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the end of the object data as a closing XML element to the XML document or stream with an <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document or stream.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObject">
@@ -461,23 +436,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the complete content (start, content, and end) of the object to the XML document or stream with the specified <see cref="T:System.IO.Stream" />.</para
-          >
+            >Writes the complete content (start, content, and end) of the object to the XML document or stream with the specified <see cref="T:System.IO.Stream" />.</para>
         </summary>
         <param name="stream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.Stream" /> used to write the XML document or stream.</param
-        >
+          />A <see cref="T:System.IO.Stream" /> used to write the XML document or stream.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the data to write to the stream.</param
-        >
+          />The object that contains the data to write to the stream.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObject">
@@ -504,29 +476,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a virtual method and has a default implementation that calls the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteStartObject" />, <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteObjectContent" />, and <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteEndObject" /> methods. Because of this, this method is intended to be the most commonly used method on a serializer. </para
-          >
+            >This is a virtual method and has a default implementation that calls the <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteStartObject" />, <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteObjectContent" />, and <see cref="Overload:System.Runtime.Serialization.XmlObjectSerializer.WriteEndObject" /> methods. Because of this, this method is intended to be the most commonly used method on a serializer. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the complete content (start, content, and end) of the object to the XML document or stream with the specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes the complete content (start, content, and end) of the object to the XML document or stream with the specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the content to the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the content to the XML document or stream.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the content to write.</param
-        >
+          />The object that contains the content to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObject">
@@ -553,29 +521,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a virtual method, and has a default implementation that delegates writing to the <see cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" /> overload.</para
-          >
+            >This is a virtual method, and has a default implementation that delegates writing to the <see cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" /> overload.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the complete content (start, content, and end) of the object to the XML document or stream with the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the complete content (start, content, and end) of the object to the XML document or stream with the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document or stream.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the content to write.</param
-        >
+          />The object that contains the content to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObjectContent">
@@ -603,23 +567,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes only the content of the object to the XML document or stream using the specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes only the content of the object to the XML document or stream using the specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document or stream.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the content to write.</param
-        >
+          />The object that contains the content to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteObjectContent">
@@ -647,23 +608,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes only the content of the object to the XML document or stream with the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes only the content of the object to the XML document or stream with the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document or stream.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document or stream.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object that contains the content to write.</param
-        >
+          />The object that contains the content to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartObject">
@@ -691,23 +649,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the start of the object's data as an opening XML element using the specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para
-          >
+            >Writes the start of the object's data as an opening XML element using the specified <see cref="T:System.Xml.XmlDictionaryWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document.</param
-        >
+          />An <see cref="T:System.Xml.XmlDictionaryWriter" /> used to write the XML document.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to serialize.</param
-        >
+          />The object to serialize.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartObject">
@@ -735,23 +690,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the start of the object's data as an opening XML element using the specified <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Writes the start of the object's data as an opening XML element using the specified <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document.</param
-        >
+          />An <see cref="T:System.Xml.XmlWriter" /> used to write the XML document.</param>
         <param name="graph">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to serialize.</param
-        >
+          />The object to serialize.</param>
       </Docs>
     </Member>
   </Members>

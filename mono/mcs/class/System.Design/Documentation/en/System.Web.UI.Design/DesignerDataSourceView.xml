@@ -35,23 +35,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> class using the specified data source designer and view name.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> class using the specified data source designer and view name.</para>
         </summary>
         <param name="owner">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The parent data source designer.</param
-        >
+          />The parent data source designer.</param>
         <param name="viewName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the view in the data source.</param
-        >
+          />The name of the view in the data source.</param>
       </Docs>
     </Member>
     <Member MemberName="CanDelete">
@@ -69,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -89,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" /> method.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -109,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports paging through the data that is retrieved by the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" /> method.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports paging through the data that is retrieved by the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -132,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports retrieving the total number of data rows instead of the data itself.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports retrieving the total number of data rows instead of the data itself.</para>
         </summary>
       </Docs>
     </Member>
@@ -152,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports a sorted view on the underlying data source.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports a sorted view on the underlying data source.</para>
         </summary>
       </Docs>
     </Member>
@@ -172,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" /> method.</para
-          >
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.DataSourceView" /> object that is associated with the current <see cref="T:System.Web.UI.DataSourceControl" /> object supports the <see cref="M:System.Web.UI.DataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" /> method.</para>
         </summary>
       </Docs>
     </Member>
@@ -195,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the designer that created this <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> control.</para
-          >
+            >Gets a reference to the designer that created this <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> control.</para>
         </summary>
       </Docs>
     </Member>
@@ -239,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the view as provided when this instance of the <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> class was created.</para
-          >
+            >Gets the name of the view as provided when this instance of the <see cref="T:System.Web.UI.Design.DesignerDataSourceView" /> class was created.</para>
         </summary>
       </Docs>
     </Member>

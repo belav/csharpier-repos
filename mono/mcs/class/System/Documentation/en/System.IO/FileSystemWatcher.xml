@@ -38,62 +38,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see cref="T:System.IO.FileSystemWatcher" /> to watch for changes in a specified directory. You can watch for changes in files and subdirectories of the specified directory. You can create a component to watch files on a local computer, a network drive, or a remote computer.</para
-      >
+        >Use <see cref="T:System.IO.FileSystemWatcher" /> to watch for changes in a specified directory. You can watch for changes in files and subdirectories of the specified directory. You can create a component to watch files on a local computer, a network drive, or a remote computer.</para>
       <para
-        >To watch for changes in all files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to an empty string ("") or use wildcards ("*.*"). To watch a specific file, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to the file name. For example, to watch for changes in the file MyDoc.txt, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "MyDoc.txt". You can also watch for changes in a certain type of file. For example, to watch for changes in text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt".</para
-      >
+        >To watch for changes in all files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to an empty string ("") or use wildcards ("*.*"). To watch a specific file, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to the file name. For example, to watch for changes in the file MyDoc.txt, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "MyDoc.txt". You can also watch for changes in a certain type of file. For example, to watch for changes in text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt".</para>
       <para
-        >There are several types of changes you can watch for in a directory or file. For example, you can watch for changes in Attributes, the LastWrite date and time, or the Size of files or directories. This is done by setting the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> property to one of the <see cref="T:System.IO.NotifyFilters" /> values. For more information on the type of changes you can watch, see <see cref="T:System.IO.NotifyFilters" />.</para
-      >
+        >There are several types of changes you can watch for in a directory or file. For example, you can watch for changes in Attributes, the LastWrite date and time, or the Size of files or directories. This is done by setting the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> property to one of the <see cref="T:System.IO.NotifyFilters" /> values. For more information on the type of changes you can watch, see <see cref="T:System.IO.NotifyFilters" />.</para>
       <para
-        >You can watch for renaming, deletion, or creation of files or directories. For example, to watch for renaming of text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt" and call the <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes)" /> method with a <see cref="F:System.IO.WatcherChangeTypes.Renamed" /> specified for its parameter.</para
-      >
+        >You can watch for renaming, deletion, or creation of files or directories. For example, to watch for renaming of text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt" and call the <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes)" /> method with a <see cref="F:System.IO.WatcherChangeTypes.Renamed" /> specified for its parameter.</para>
       <para
-        >The Windows operating system notifies your component of file changes in a buffer created by the <see cref="T:System.IO.FileSystemWatcher" />. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer with the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />  property is expensive, as it comes from non-paged memory that cannot be swapped out to disk, so keep the buffer as small yet large enough to not miss any file change events. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties so you can filter out unwanted change notifications. </para
-      >
+        >The Windows operating system notifies your component of file changes in a buffer created by the <see cref="T:System.IO.FileSystemWatcher" />. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer with the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />  property is expensive, as it comes from non-paged memory that cannot be swapped out to disk, so keep the buffer as small yet large enough to not miss any file change events. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties so you can filter out unwanted change notifications. </para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.IO.FileSystemWatcher" />, see the <see cref="M:System.IO.FileSystemWatcher.#ctor" /> constructor.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.IO.FileSystemWatcher" />, see the <see cref="M:System.IO.FileSystemWatcher.#ctor" /> constructor.</para>
       <para
-        >Please note the following when using the <see cref="T:System.IO.FileSystemWatcher" /> class.</para
-      >
+        >Please note the following when using the <see cref="T:System.IO.FileSystemWatcher" /> class.</para>
       <list type="bullet">
         <item>
           <para>Hidden files are not ignored.</para>
         </item>
         <item>
           <para
-            >In some systems, <see cref="T:System.IO.FileSystemWatcher" /> reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFil~.Lon".</para
-          >
+            >In some systems, <see cref="T:System.IO.FileSystemWatcher" /> reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFil~.Lon".</para>
         </item>
         <item>
           <para
             >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" /> is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
               <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
-            </format>.</para
-          >
+            </format>.</para>
         </item>
         <item>
           <para
-            >The maximum size you can set for the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property for monitoring a directory over the network is 64 KB.</para
-          >
+            >The maximum size you can set for the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property for monitoring a directory over the network is 64 KB.</para>
         </item>
       </list>
       <block subset="none" type="note">
         <para
-          > Running <see cref="T:System.IO.FileSystemWatcher" /> on Windows 98 is not supported.</para
-        >
+          > Running <see cref="T:System.IO.FileSystemWatcher" /> on Windows 98 is not supported.</para>
       </block>
       <format type="text/html">
         <h2>Copying and moving folders</h2>
       </format>
       <para
-        >The operating system and <see cref="T:System.IO.FileSystemWatcher" /> object interpret a cut-and-paste action or a move action as a rename action for a folder and its contents. If you cut and paste a folder with files into a folder being watched, the <see cref="T:System.IO.FileSystemWatcher" /> object reports only the folder as new, but not its contents because they are essentially only renamed. </para
-      >
+        >The operating system and <see cref="T:System.IO.FileSystemWatcher" /> object interpret a cut-and-paste action or a move action as a rename action for a folder and its contents. If you cut and paste a folder with files into a folder being watched, the <see cref="T:System.IO.FileSystemWatcher" /> object reports only the folder as new, but not its contents because they are essentially only renamed. </para>
       <para
-        >To be notified that the contents of folders have been moved or copied into a watched folder, provide <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />  and <see cref="M:System.IO.FileSystemWatcher.OnRenamed(System.IO.RenamedEventArgs)" /> event handler methods as suggested in the following table.</para
-      >
+        >To be notified that the contents of folders have been moved or copied into a watched folder, provide <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />  and <see cref="M:System.IO.FileSystemWatcher.OnRenamed(System.IO.RenamedEventArgs)" /> event handler methods as suggested in the following table.</para>
       <list type="table">
         <listheader>
           <item>
@@ -146,28 +133,23 @@
       <list type="bullet">
         <item>
           <para
-            >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para
-          >
+            >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para>
         </item>
         <item>
           <para
-            >The <see cref="T:System.IO.FileSystemWatcher" /> can watch disks as long as they are not switched or removed. The <see cref="T:System.IO.FileSystemWatcher" /> does not raise events for CDs and DVDs, because time stamps and properties cannot change. Remote computers must have one of the required platforms installed for the component to function properly.</para
-          >
+            >The <see cref="T:System.IO.FileSystemWatcher" /> can watch disks as long as they are not switched or removed. The <see cref="T:System.IO.FileSystemWatcher" /> does not raise events for CDs and DVDs, because time stamps and properties cannot change. Remote computers must have one of the required platforms installed for the component to function properly.</para>
         </item>
         <item>
           <para
-            >If multiple <see cref="T:System.IO.FileSystemWatcher" /> objects are watching the same UNC path in Windows XP prior to Service Pack 1, or Windows 2000 SP2 or earlier, then only one of the objects will raise an event. On machines running Windows XP SP1 and newer, Windows 2000 SP3 or newer or Windows Server 2003, all <see cref="T:System.IO.FileSystemWatcher" /> objects will raise the appropriate events.</para
-          >
+            >If multiple <see cref="T:System.IO.FileSystemWatcher" /> objects are watching the same UNC path in Windows XP prior to Service Pack 1, or Windows 2000 SP2 or earlier, then only one of the objects will raise an event. On machines running Windows XP SP1 and newer, Windows 2000 SP3 or newer or Windows Server 2003, all <see cref="T:System.IO.FileSystemWatcher" /> objects will raise the appropriate events.</para>
         </item>
       </list>
       <para
-        >Note that a <see cref="T:System.IO.FileSystemWatcher" /> may miss an event when the buffer size is exceeded. To avoid missing events, follow these guidelines:</para
-      >
+        >Note that a <see cref="T:System.IO.FileSystemWatcher" /> may miss an event when the buffer size is exceeded. To avoid missing events, follow these guidelines:</para>
       <list type="bullet">
         <item>
           <para
-            >Increase the buffer size by setting the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property.  </para
-          >
+            >Increase the buffer size by setting the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property.  </para>
         </item>
         <item>
           <para>Avoid watching files with long file names, because a long file name contributes to filling up the buffer. Consider renaming these files using shorter names.</para>
@@ -202,8 +184,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot watch a remote computer that does not have Windows NT or Windows 2000. You cannot watch a remote Windows NT 4.0 computer from a Windows NT 4.0 computer.</para>
           <para
-            >The following table shows initial property values for an instance of <see cref="T:System.IO.FileSystemWatcher" />.</para
-          >
+            >The following table shows initial property values for an instance of <see cref="T:System.IO.FileSystemWatcher" />.</para>
           <list type="table">
             <listheader>
               <item>
@@ -278,15 +259,13 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> is set, and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para
-            >
+              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> is set, and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.FileSystemWatcher" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.FileSystemWatcher" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -311,27 +290,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> is set, and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para
-            >
+              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> is set, and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para>
           </block>
           <para>The component can watch files on your personal computer, a network drive, or a remote computer.</para>
           <para
-            >You cannot watch a remote computer that does not have Windows NT or Windows 2000. You cannot watch a remote Windows NT 4.0 computer from a Windows NT 4.0 computer. The <see cref="P:System.IO.FileSystemWatcher.Filter" /> property is set by default to watch all files.</para
-          >
+            >You cannot watch a remote computer that does not have Windows NT or Windows 2000. You cannot watch a remote Windows NT 4.0 computer from a Windows NT 4.0 computer. The <see cref="P:System.IO.FileSystemWatcher.Filter" /> property is set by default to watch all files.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.FileSystemWatcher" /> class, given the specified directory to monitor.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.FileSystemWatcher" /> class, given the specified directory to monitor.</para>
         </summary>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param
-        >
+          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -359,8 +334,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> is set, and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para
-            >
+              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> is set, and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para>
           </block>
           <para>The component can watch files on your personal computer, a network drive, or a remote computer.</para>
           <para>You cannot watch a remote computer that does not have Windows NT or Windows 2000. You cannot watch a remote Windows NT 4.0 computer from a Windows NT 4.0 computer.</para>
@@ -368,23 +342,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.IO.FileSystemWatcher" /> class, given the specified directory and type of files to monitor.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.IO.FileSystemWatcher" /> class, given the specified directory and type of files to monitor.</para>
         </summary>
         <param name="path">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param
-        >
+          />The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param>
         <param name="filter">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of files to watch. For example, "*.txt" watches for changes to all text files. </param
-        >
+          />The type of files to watch. For example, "*.txt" watches for changes to all text files. </param>
       </Docs>
     </Member>
     <Member MemberName="BeginInit">
@@ -407,14 +378,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvslong design environment uses this method to start the initialization of a component used on a form or used by another component. The <see cref="M:System.IO.FileSystemWatcher.EndInit" /> method ends the initialization. Using the <see cref="M:System.IO.FileSystemWatcher.BeginInit" /> and <see cref="M:System.IO.FileSystemWatcher.EndInit" /> methods prevents the control from being used before it is fully initialized.</para
-          >
+            >The vsprvslong design environment uses this method to start the initialization of a component used on a form or used by another component. The <see cref="M:System.IO.FileSystemWatcher.EndInit" /> method ends the initialization. Using the <see cref="M:System.IO.FileSystemWatcher.BeginInit" /> and <see cref="M:System.IO.FileSystemWatcher.EndInit" /> methods prevents the control from being used before it is fully initialized.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins the initialization of a <see cref="T:System.IO.FileSystemWatcher" /> used on a form or used by another component. The initialization occurs at run time.</para
-          >
+            >Begins the initialization of a <see cref="T:System.IO.FileSystemWatcher" /> used on a form or used by another component. The initialization occurs at run time.</para>
         </summary>
       </Docs>
     </Member>
@@ -446,32 +415,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is raised when changes are made to the size, system attributes, last write time, last access time, or security permissions of a file or directory in the directory being monitored.</para
-          >
+            >The <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is raised when changes are made to the size, system attributes, last write time, last access time, or security permissions of a file or directory in the directory being monitored.</para>
           <block subset="none" type="note">
             <para
-              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para
-            >
+              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para>
           </block>
           <para
-            >Use <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> to restrict the number of notifications raised when this event is handled.</para
-          >
+            >Use <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> to restrict the number of notifications raised when this event is handled.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is raised unexpectedly when a file is renamed, but is not raised when a directory is renamed. To watch for renaming, use the <see cref="E:System.IO.FileSystemWatcher.Renamed" /> event.</para
-            >
+              >The <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is raised unexpectedly when a file is renamed, but is not raised when a directory is renamed. To watch for renaming, use the <see cref="E:System.IO.FileSystemWatcher.Renamed" /> event.</para>
           </block>
           <block subset="none" type="note">
             <para
-              >The order in which the <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is raised in relation to the other <see cref="T:System.IO.FileSystemWatcher" /> events may change when the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property is not null.</para
-            >
+              >The order in which the <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is raised in relation to the other <see cref="T:System.IO.FileSystemWatcher" /> events may change when the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property is not null.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is changed.</para
-          >
+            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is changed.</para>
         </summary>
       </Docs>
     </Member>
@@ -503,27 +466,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory would raise two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised by FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised by FileSystemWatcher1.</para
-          >
+            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory would raise two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised by FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised by FileSystemWatcher1.</para>
           <block subset="none" type="note">
             <para
-              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para
-            >
+              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para>
           </block>
           <block subset="none" type="note">
             <para
-              >The order in which the <see cref="E:System.IO.FileSystemWatcher.Created" /> event is raised in relation to the other <see cref="T:System.IO.FileSystemWatcher" /> events may change when the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property is not null.</para
-            >
+              >The order in which the <see cref="E:System.IO.FileSystemWatcher.Created" /> event is raised in relation to the other <see cref="T:System.IO.FileSystemWatcher" /> events may change when the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property is not null.</para>
           </block>
           <para
-            >The <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event will be raised immediately, followed by one or more <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> events.</para
-          >
+            >The <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event will be raised immediately, followed by one or more <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> events.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is created.</para
-          >
+            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is created.</para>
         </summary>
       </Docs>
     </Member>
@@ -555,24 +513,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory would raise two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised by FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised by FileSystemWatcher1.</para
-          >
+            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory would raise two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised by FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised by FileSystemWatcher1.</para>
           <block subset="none" type="note">
             <para
-              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para
-            >
+              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para>
           </block>
           <block subset="none" type="note">
             <para
-              >The order in which the <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event is raised in relation to the other <see cref="T:System.IO.FileSystemWatcher" /> events may change when the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property is not null.</para
-            >
+              >The order in which the <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event is raised in relation to the other <see cref="T:System.IO.FileSystemWatcher" /> events may change when the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property is not null.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is deleted.</para
-          >
+            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is deleted.</para>
         </summary>
       </Docs>
     </Member>
@@ -598,25 +552,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see cref="M:System.ComponentModel.Component.Dispose" /> method and the <see cref="M:System.Object.Finalize" /> method. <see cref="M:System.ComponentModel.Component.Dispose" /> invokes the protected <see cref="M:System.IO.FileSystemWatcher.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes <see cref="M:System.IO.FileSystemWatcher.Dispose(System.Boolean)" /> with <paramref name="disposing" /> set to false.</para
-          >
+            >This method is called by the public <see cref="M:System.ComponentModel.Component.Dispose" /> method and the <see cref="M:System.Object.Finalize" /> method. <see cref="M:System.ComponentModel.Component.Dispose" /> invokes the protected <see cref="M:System.IO.FileSystemWatcher.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes <see cref="M:System.IO.FileSystemWatcher.Dispose(System.Boolean)" /> with <paramref name="disposing" /> set to false.</para>
           <para
-            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.Compression.DeflateStream" /> references. This method invokes the <see cref="M:System.ComponentModel.Component.Dispose" /> method of each referenced object.</para
-          >
+            >When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.Compression.DeflateStream" /> references. This method invokes the <see cref="M:System.ComponentModel.Component.Dispose" /> method of each referenced object.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see cref="T:System.IO.FileSystemWatcher" /> and optionally releases the managed resources.</para
-          >
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.FileSystemWatcher" /> and optionally releases the managed resources.</para>
         </summary>
         <param name="disposing">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param
-        >
+          />true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
       </Docs>
     </Member>
     <Member MemberName="EnableRaisingEvents">
@@ -645,16 +595,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The component will not raise events unless you set <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> to true.</para
-          >
+            >The component will not raise events unless you set <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> to true.</para>
           <block subset="none" type="note">
             <para
-              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> property has been set and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para
-            >
+              >The component will not watch the specified directory until the <see cref="P:System.IO.FileSystemWatcher.Path" /> property has been set and <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> is true.</para>
           </block>
           <para
-            >The <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes,System.Int32)" /> method allows event handlers to be invoked to respond to file changes even if this property is set to false.</para
-          >
+            >The <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes,System.Int32)" /> method allows event handlers to be invoked to respond to file changes even if this property is set to false.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -682,14 +629,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvslong design environment uses this method to end the initialization of a component used on a form or used by another component. The <see cref="M:System.IO.FileSystemWatcher.BeginInit" /> method starts the initialization. Using the <see cref="M:System.IO.FileSystemWatcher.BeginInit" /> and <see cref="M:System.IO.FileSystemWatcher.EndInit" /> methods prevents the control from being used before it is fully initialized.</para
-          >
+            >The vsprvslong design environment uses this method to end the initialization of a component used on a form or used by another component. The <see cref="M:System.IO.FileSystemWatcher.BeginInit" /> method starts the initialization. Using the <see cref="M:System.IO.FileSystemWatcher.BeginInit" /> and <see cref="M:System.IO.FileSystemWatcher.EndInit" /> methods prevents the control from being used before it is fully initialized.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends the initialization of a <see cref="T:System.IO.FileSystemWatcher" /> used on a form or used by another component. The initialization occurs at run time.</para
-          >
+            >Ends the initialization of a <see cref="T:System.IO.FileSystemWatcher" /> used on a form or used by another component. The initialization occurs at run time.</para>
         </summary>
       </Docs>
     </Member>
@@ -715,22 +660,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised whenever something prevents the <see cref="T:System.IO.FileSystemWatcher" /> object from monitoring changes. For example, if the object is monitoring changes in a remote directory and the connection to that directory is lost, the <see cref="E:System.IO.FileSystemWatcher.Error" /> event is raised.</para
-          >
+            >This event is raised whenever something prevents the <see cref="T:System.IO.FileSystemWatcher" /> object from monitoring changes. For example, if the object is monitoring changes in a remote directory and the connection to that directory is lost, the <see cref="E:System.IO.FileSystemWatcher.Error" /> event is raised.</para>
           <para
-            >The system notifies you of file changes, and it stores those changes in a buffer that the component creates and passes to the APIs. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer is expensive, because it comes from non paged memory that cannot be swapped out to disk, so keep the buffer as small as possible. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />, <see cref="P:System.IO.FileSystemWatcher.Filter" />, and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties to filter out unwanted change notifications.</para
-          >
+            >The system notifies you of file changes, and it stores those changes in a buffer that the component creates and passes to the APIs. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer is expensive, because it comes from non paged memory that cannot be swapped out to disk, so keep the buffer as small as possible. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />, <see cref="P:System.IO.FileSystemWatcher.Filter" />, and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties to filter out unwanted change notifications.</para>
           <block subset="none" type="note">
             <para
-              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para
-            >
+              >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> and some <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> and <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see cref="T:System.IO.FileSystemWatcher" />.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the instance of <see cref="T:System.IO.FileSystemWatcher" /> is unable to continue monitoring changes or when the internal buffer overflows.</para
-          >
+            >Occurs when the instance of <see cref="T:System.IO.FileSystemWatcher" /> is unable to continue monitoring changes or when the internal buffer overflows.</para>
         </summary>
       </Docs>
     </Member>
@@ -766,17 +707,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To watch changes in all files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to an empty string (""). To watch a specific file, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to the file name. For example, to watch for changes in the file MyDoc.txt, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "MyDoc.txt". You can also watch for changes in a certain type of file. For example, to watch for changes in any text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt". Use of multiple filters such as "*.txt|*.doc" is not supported.</para
-          >
+            >To watch changes in all files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to an empty string (""). To watch a specific file, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to the file name. For example, to watch for changes in the file MyDoc.txt, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "MyDoc.txt". You can also watch for changes in a certain type of file. For example, to watch for changes in any text files, set the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to "*.txt". Use of multiple filters such as "*.txt|*.doc" is not supported.</para>
           <para
-            >The <see cref="P:System.IO.FileSystemWatcher.Filter" /> property can be changed after the <see cref="T:System.IO.FileSystemWatcher" /> object has started receiving events.</para
-          >
+            >The <see cref="P:System.IO.FileSystemWatcher.Filter" /> property can be changed after the <see cref="T:System.IO.FileSystemWatcher" /> object has started receiving events.</para>
           <para
-            >For more information about filtering out unwanted notifications, see the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />, <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />, and <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> properties.</para
-          >
+            >For more information about filtering out unwanted notifications, see the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />, <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />, and <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> properties.</para>
           <para>
-            <see cref="P:System.IO.FileSystemWatcher.Filter" /> accepts wildcards for matching files, as shown in the following examples.</para
-          >
+            <see cref="P:System.IO.FileSystemWatcher.Filter" /> accepts wildcards for matching files, as shown in the following examples.</para>
           <list type="table">
             <listheader>
               <item>
@@ -894,14 +831,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> to true when you want to watch for change notifications for files and directories contained within the directory specified through the <see cref="P:System.IO.FileSystemWatcher.Path" /> property, and its subdirectories. Setting the <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> property to false helps reduce the number of notifications sent to the internal buffer. For more information on filtering out unwanted notifications, see the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> properties.</para
-          >
+            >Set <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> to true when you want to watch for change notifications for files and directories contained within the directory specified through the <see cref="P:System.IO.FileSystemWatcher.Path" /> property, and its subdirectories. Setting the <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> property to false helps reduce the number of notifications sent to the internal buffer. For more information on filtering out unwanted notifications, see the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> properties.</para>
           <para
-            >When true, <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> is recursive through the entire sub tree, not just the immediate child directories. The relative path to a file or directory within the sub tree returns in the <see cref="P:System.IO.FileSystemEventArgs.Name" /> property of <see cref="T:System.IO.FileSystemEventArgs" /> and the <see cref="P:System.IO.RenamedEventArgs.OldName" /> property of <see cref="T:System.IO.RenamedEventArgs" />, depending on changes you are watching for. You can get the fully qualified path from the <see cref="P:System.IO.FileSystemEventArgs.FullPath" /> property of <see cref="T:System.IO.FileSystemEventArgs" /> and the <see cref="P:System.IO.RenamedEventArgs.OldFullPath" /> property of <see cref="T:System.IO.RenamedEventArgs" />, depending on the changes you are watching for.</para
-          >
+            >When true, <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> is recursive through the entire sub tree, not just the immediate child directories. The relative path to a file or directory within the sub tree returns in the <see cref="P:System.IO.FileSystemEventArgs.Name" /> property of <see cref="T:System.IO.FileSystemEventArgs" /> and the <see cref="P:System.IO.RenamedEventArgs.OldName" /> property of <see cref="T:System.IO.RenamedEventArgs" />, depending on changes you are watching for. You can get the fully qualified path from the <see cref="P:System.IO.FileSystemEventArgs.FullPath" /> property of <see cref="T:System.IO.FileSystemEventArgs" /> and the <see cref="P:System.IO.RenamedEventArgs.OldFullPath" /> property of <see cref="T:System.IO.RenamedEventArgs" />, depending on the changes you are watching for.</para>
           <para
-            >If a directory is created in the sub tree of the directory you are watching, and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> is true, that directory will automatically be watched.</para
-          >
+            >If a directory is created in the sub tree of the directory you are watching, and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> is true, that directory will automatically be watched.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -935,11 +869,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set the buffer to 4 KB or larger, but it must not exceed 64 KB. If you try to set the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property to less than 4096 bytes, your value is discarded and the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property is set to 4096 bytes. For best performance, use a multiple of 4 KB on Intel-based computers.</para
-          >
+            >You can set the buffer to 4 KB or larger, but it must not exceed 64 KB. If you try to set the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property to less than 4096 bytes, your value is discarded and the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> property is set to 4096 bytes. For best performance, use a multiple of 4 KB on Intel-based computers.</para>
           <para
-            >The system notifies the component of file changes, and it stores those changes in a buffer the component creates and passes to the APIs. Each event can use up to 16 bytes of memory, not including the file name. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer can prevent missing file system change events. However, increasing buffer size is expensive, because it comes from non-paged memory that cannot be swapped out to disk, so keep the buffer as small as possible. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties to filter out unwanted change notifications.</para
-          >
+            >The system notifies the component of file changes, and it stores those changes in a buffer the component creates and passes to the APIs. Each event can use up to 16 bytes of memory, not including the file name. If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer can prevent missing file system change events. However, increasing buffer size is expensive, because it comes from non-paged memory that cannot be swapped out to disk, so keep the buffer as small as possible. To avoid a buffer overflow, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> properties to filter out unwanted change notifications.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -979,11 +911,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can combine the members of the <see cref="T:System.IO.NotifyFilters" /> enumeration to watch for more than one type of change at a time. For example, you can watch for changes in size of a file, and for changes in the LastWrite time. This raises an event anytime there is a change in file or folder size, or a change in the LastWrite time of the file or folder.</para
-          >
+            >You can combine the members of the <see cref="T:System.IO.NotifyFilters" /> enumeration to watch for more than one type of change at a time. For example, you can watch for changes in size of a file, and for changes in the LastWrite time. This raises an event anytime there is a change in file or folder size, or a change in the LastWrite time of the file or folder.</para>
           <para
-            >This is one way to filter out unwanted notifications. For more information on filtering out unwanted notifications, see the <see cref="P:System.IO.FileSystemWatcher.Filter" />, <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />, and <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> properties.</para
-          >
+            >This is one way to filter out unwanted notifications. For more information on filtering out unwanted notifications, see the <see cref="P:System.IO.FileSystemWatcher.Filter" />, <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />, and <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1016,21 +946,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> is called when changes are made to the size, system attributes, last write time, last access time, or security permissions of a file or directory in the directory being monitored.</para
-          >
+            <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> is called when changes are made to the size, system attributes, last write time, last access time, or security permissions of a file or directory in the directory being monitored.</para>
           <para
-            >Use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> property to restrict the number of events raised when the <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is handled.</para
-          >
+            >Use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" /> property to restrict the number of events raised when the <see cref="E:System.IO.FileSystemWatcher.Changed" /> event is handled.</para>
           <para
-            >The <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event will be raised immediately, followed by one or more <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> events.</para
-          >
+            >The <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event will be raised immediately, followed by one or more <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> events.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
-                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1041,8 +966,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param>
       </Docs>
     </Member>
     <Member MemberName="OnCreated">
@@ -1070,21 +994,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> is called when a file or directory is created in the directory being monitored.</para
-          >
+            <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> is called when a file or directory is created in the directory being monitored.</para>
           <para
-            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" and paste it into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised in FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory raises two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised in FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised in FileSystemWatcher1.</para
-          >
+            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" and paste it into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised in FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory raises two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised in FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised in FileSystemWatcher1.</para>
           <para
-            >The <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event will be raised immediately, followed by one or more <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> events.</para
-          >
+            >The <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" /> event will be raised immediately, followed by one or more <see cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" /> events.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
-                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1095,8 +1014,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param>
       </Docs>
     </Member>
     <Member MemberName="OnDeleted">
@@ -1124,18 +1042,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> is called when a file or directory, within the directory being monitored, is deleted.</para
-          >
+            <see cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" /> is called when a file or directory, within the directory being monitored, is deleted.</para>
           <para
-            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory raises two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised by FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised by FileSystemWatcher1.</para
-          >
+            >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see cref="E:System.IO.FileSystemWatcher.Created" /> event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see cref="T:System.IO.FileSystemWatcher" />, no event would be raised. For example, you create two instances of <see cref="T:System.IO.FileSystemWatcher" />. FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory raises two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see cref="E:System.IO.FileSystemWatcher.Created" /> event would be raised by FileSystemWatcher2 and a <see cref="E:System.IO.FileSystemWatcher.Deleted" /> event would be raised by FileSystemWatcher1.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
-                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1146,8 +1060,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.FileSystemEventArgs" /> that contains the event data. </param>
       </Docs>
     </Member>
     <Member MemberName="OnError">
@@ -1172,15 +1085,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.IO.FileSystemWatcher.OnError(System.IO.ErrorEventArgs)" /> is called when an error occurs.</para
-          >
+            <see cref="M:System.IO.FileSystemWatcher.OnError(System.IO.ErrorEventArgs)" /> is called when an error occurs.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
-                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1191,8 +1101,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IO.ErrorEventArgs" /> that contains the event data. </param
-        >
+          />An <see cref="T:System.IO.ErrorEventArgs" /> that contains the event data. </param>
       </Docs>
     </Member>
     <Member MemberName="OnRenamed">
@@ -1220,15 +1129,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.IO.FileSystemWatcher.OnRenamed(System.IO.RenamedEventArgs)" /> is called when a file or directory within the directory being monitored is renamed.</para
-          >
+            <see cref="M:System.IO.FileSystemWatcher.OnRenamed(System.IO.RenamedEventArgs)" /> is called when a file or directory within the directory being monitored is renamed.</para>
           <para
             >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
-                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a>
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1239,8 +1145,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.IO.RenamedEventArgs" /> that contains the event data. </param
-        >
+          />A <see cref="T:System.IO.RenamedEventArgs" /> that contains the event data. </param>
       </Docs>
     </Member>
     <Member MemberName="Path">
@@ -1278,17 +1183,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a fully qualified path to a directory. If the <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> property is true, this directory is the root at which the system watches for changes; otherwise it is the only directory watched. To watch a specific file, set the <see cref="P:System.IO.FileSystemWatcher.Path" /> property to the fully qualified, correct directory, and the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to the file name.</para
-          >
+            >This is a fully qualified path to a directory. If the <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" /> property is true, this directory is the root at which the system watches for changes; otherwise it is the only directory watched. To watch a specific file, set the <see cref="P:System.IO.FileSystemWatcher.Path" /> property to the fully qualified, correct directory, and the <see cref="P:System.IO.FileSystemWatcher.Filter" /> property to the file name.</para>
           <para
-            >The <see cref="P:System.IO.FileSystemWatcher.Path" /> property supports Universal Naming Convention (UNC) paths.</para
-          >
+            >The <see cref="P:System.IO.FileSystemWatcher.Path" /> property supports Universal Naming Convention (UNC) paths.</para>
           <block subset="none" type="note">
             <para>This property must be set before the component can watch for changes.</para>
           </block>
           <para
-            >When a directory is renamed, the <see cref="T:System.IO.FileSystemWatcher" /> automatically reattaches itself to the newly renamed item. For example, if you set the <see cref="P:System.IO.FileSystemWatcher.Path" /> property to "C:\My Documents" and then manually rename the directory to "C:\Your Documents", the component continues listening for change notifications on the newly renamed directory. However, when you ask for the <see cref="P:System.IO.FileSystemWatcher.Path" /> property, it contains the old path. This happens because the component determines what directory watches based on the handle, rather than the name of the directory. Renaming does not affect the handle. So, if you destroy the component, and then recreate it without updating the <see cref="P:System.IO.FileSystemWatcher.Path" /> property, your application will fail because the directory no longer exists.</para
-          >
+            >When a directory is renamed, the <see cref="T:System.IO.FileSystemWatcher" /> automatically reattaches itself to the newly renamed item. For example, if you set the <see cref="P:System.IO.FileSystemWatcher.Path" /> property to "C:\My Documents" and then manually rename the directory to "C:\Your Documents", the component continues listening for change notifications on the newly renamed directory. However, when you ask for the <see cref="P:System.IO.FileSystemWatcher.Path" /> property, it contains the old path. This happens because the component determines what directory watches based on the handle, rather than the name of the directory. Renaming does not affect the handle. So, if you destroy the component, and then recreate it without updating the <see cref="P:System.IO.FileSystemWatcher.Path" /> property, your application will fail because the directory no longer exists.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1325,8 +1227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is renamed.</para
-          >
+            >Occurs when a file or directory in the specified <see cref="P:System.IO.FileSystemWatcher.Path" /> is renamed.</para>
         </summary>
       </Docs>
     </Member>
@@ -1359,14 +1260,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sites bind a <see cref="T:System.ComponentModel.Component" /> to a <see cref="P:System.ComponentModel.Design.IDesignerHost.Container" /> and enable communication between them, as well as provide a way for the container to manage its components.</para
-          >
+            >Sites bind a <see cref="T:System.ComponentModel.Component" /> to a <see cref="P:System.ComponentModel.Design.IDesignerHost.Container" /> and enable communication between them, as well as provide a way for the container to manage its components.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see cref="T:System.ComponentModel.ISite" /> for the <see cref="T:System.IO.FileSystemWatcher" />.</para
-          >
+            >Gets or sets an <see cref="T:System.ComponentModel.ISite" /> for the <see cref="T:System.IO.FileSystemWatcher" />.</para>
         </summary>
       </Docs>
     </Member>
@@ -1405,14 +1304,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> is null, methods handling the <see cref="E:System.IO.FileSystemWatcher.Changed" />, <see cref="E:System.IO.FileSystemWatcher.Created" />, <see cref="E:System.IO.FileSystemWatcher.Deleted" />, and <see cref="E:System.IO.FileSystemWatcher.Renamed" /> events are called on a thread from the system thread pool. For more information on system thread pools, see <see cref="T:System.Threading.ThreadPool" />.</para
-          >
+            >When <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> is null, methods handling the <see cref="E:System.IO.FileSystemWatcher.Changed" />, <see cref="E:System.IO.FileSystemWatcher.Created" />, <see cref="E:System.IO.FileSystemWatcher.Deleted" />, and <see cref="E:System.IO.FileSystemWatcher.Renamed" /> events are called on a thread from the system thread pool. For more information on system thread pools, see <see cref="T:System.Threading.ThreadPool" />.</para>
           <para
-            >When the <see cref="E:System.IO.FileSystemWatcher.Changed" />, <see cref="E:System.IO.FileSystemWatcher.Created" />, <see cref="E:System.IO.FileSystemWatcher.Deleted" />, and <see cref="E:System.IO.FileSystemWatcher.Renamed" /> events are handled by a visual Windows Forms component, such as a <see cref="T:System.Windows.Forms.Button" />, accessing the component through the system thread pool might not work, or may result in an exception. Avoid this by setting <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> to a Windows Forms component, which causes the methods that handle the <see cref="E:System.IO.FileSystemWatcher.Changed" />, <see cref="E:System.IO.FileSystemWatcher.Created" />, <see cref="E:System.IO.FileSystemWatcher.Deleted" />, and <see cref="E:System.IO.FileSystemWatcher.Renamed" /> events to be called on the same thread on which the component was created.</para
-          >
+            >When the <see cref="E:System.IO.FileSystemWatcher.Changed" />, <see cref="E:System.IO.FileSystemWatcher.Created" />, <see cref="E:System.IO.FileSystemWatcher.Deleted" />, and <see cref="E:System.IO.FileSystemWatcher.Renamed" /> events are handled by a visual Windows Forms component, such as a <see cref="T:System.Windows.Forms.Button" />, accessing the component through the system thread pool might not work, or may result in an exception. Avoid this by setting <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> to a Windows Forms component, which causes the methods that handle the <see cref="E:System.IO.FileSystemWatcher.Changed" />, <see cref="E:System.IO.FileSystemWatcher.Created" />, <see cref="E:System.IO.FileSystemWatcher.Deleted" />, and <see cref="E:System.IO.FileSystemWatcher.Renamed" /> events to be called on the same thread on which the component was created.</para>
           <para
-            >If the <see cref="T:System.IO.FileSystemWatcher" /> is used inside vsprvslong in a Windows Forms designer, <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> automatically sets to the control that contains the <see cref="T:System.IO.FileSystemWatcher" />. For example, if you place a <see cref="T:System.IO.FileSystemWatcher" /> on a designer for Form1 (which inherits from <see cref="T:System.Windows.Forms.Form" />) the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property of <see cref="T:System.IO.FileSystemWatcher" /> is set to the instance of Form1.</para
-          >
+            >If the <see cref="T:System.IO.FileSystemWatcher" /> is used inside vsprvslong in a Windows Forms designer, <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> automatically sets to the control that contains the <see cref="T:System.IO.FileSystemWatcher" />. For example, if you place a <see cref="T:System.IO.FileSystemWatcher" /> on a designer for Form1 (which inherits from <see cref="T:System.Windows.Forms.Form" />) the <see cref="P:System.IO.FileSystemWatcher.SynchronizingObject" /> property of <see cref="T:System.IO.FileSystemWatcher" /> is set to the instance of Form1.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1445,16 +1341,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method waits indefinitely until the first change occurs and then returns. This is the same as using <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes)" /> with the <paramref name="timeout" /> parameter set to -1.</para
-          >
+            >This method waits indefinitely until the first change occurs and then returns. This is the same as using <see cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes)" /> with the <paramref name="timeout" /> parameter set to -1.</para>
           <block subset="none" type="note">
             <para
-              >This method allows an event handler to be invoked to respond to file changes even if the <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> property is set to false.</para
-            >
+              >This method allows an event handler to be invoked to respond to file changes even if the <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> property is set to false.</para>
           </block>
           <para
-            >In some systems, <see cref="T:System.IO.FileSystemWatcher" /> reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFi~.Lon".</para
-          >
+            >In some systems, <see cref="T:System.IO.FileSystemWatcher" /> reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFi~.Lon".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1463,16 +1356,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.WaitForChangedResult" /> that contains specific information on the change that occurred.</para
-          >
+            >A <see cref="T:System.IO.WaitForChangedResult" /> that contains specific information on the change that occurred.</para>
         </returns>
         <param name="changeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for. </param
-        >
+          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for. </param>
       </Docs>
     </Member>
     <Member MemberName="WaitForChanged">
@@ -1501,16 +1392,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method waits until a change occurs or it has timed out. A value of -1 for the <paramref name="timeout" /> parameter means wait indefinitely.</para
-          >
+            >This method waits until a change occurs or it has timed out. A value of -1 for the <paramref name="timeout" /> parameter means wait indefinitely.</para>
           <block subset="none" type="note">
             <para
-              >This method allows an event handler to be invoked to respond to file changes even if the <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> property is set to false.</para
-            >
+              >This method allows an event handler to be invoked to respond to file changes even if the <see cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" /> property is set to false.</para>
           </block>
           <para
-            >In some systems, <see cref="T:System.IO.FileSystemWatcher" /> reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFi~.Lon".</para
-          >
+            >In some systems, <see cref="T:System.IO.FileSystemWatcher" /> reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFi~.Lon".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1519,23 +1407,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.IO.WaitForChangedResult" /> that contains specific information on the change that occurred.</para
-          >
+            >A <see cref="T:System.IO.WaitForChangedResult" /> that contains specific information on the change that occurred.</para>
         </returns>
         <param name="changeType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for. </param
-        >
+          />The <see cref="T:System.IO.WatcherChangeTypes" /> to watch for. </param>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time (in milliseconds) to wait before timing out. </param
-        >
+          />The time (in milliseconds) to wait before timing out. </param>
       </Docs>
     </Member>
   </Members>

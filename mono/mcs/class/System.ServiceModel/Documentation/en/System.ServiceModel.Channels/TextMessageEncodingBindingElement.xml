@@ -31,17 +31,13 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Encoding is the process of transforming a message into a sequence of bytes. Decoding is the reverse process. indigo1 includes three types of encoding for SOAP messages: Text, Binary and Message Transmission Optimization Mechanism (MTOM). </para>
       <para
-        >The text encoding represented by the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is the most interoperable, but the least efficient encoder for XML messages. Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient. </para
-      >
+        >The text encoding represented by the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is the most interoperable, but the least efficient encoder for XML messages. Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient. </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the .NET Binary Format for XML, see <see cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />. </para>
       <para
-        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />. </para
-      >
+        >crabout the binding element that specifies messages are encoded using the MTOM message encoding, see <see cref="T:System.ServiceModel.Channels.MtomMessageEncodingBindingElement" />. </para>
       <para
-        >crabout how to implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.</para
-      >
+        >crabout how to implement a custom message encoder, use the <see cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -64,14 +60,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> for this constructor is the version of WS-Addressing 1.0 and SOAP 1.2. The default text encoding is the UTF-8 format.</para
-          >
+            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> for this constructor is the version of WS-Addressing 1.0 and SOAP 1.2. The default text encoding is the UTF-8 format.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -97,23 +91,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> class with a specified message version and encoding.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> class with a specified message version and encoding.</para>
         </summary>
         <param name="messageVersion">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.MessageVersion" /> that is used for the message version.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.MessageVersion" /> that is used for the message version.</param>
         <param name="writeEncoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Text.Encoding" /> that is used to format the message characters.</param
-        >
+          />The <see cref="T:System.Text.Encoding" /> that is used to format the message characters.</param>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelFactory&lt;TChannel&gt;">
@@ -147,23 +138,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <paramref name="TChannel" /> for the specified context.</para
-          >
+            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <paramref name="TChannel" /> for the specified context.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel the channel factory produces.</typeparam
-        >
+          />The type of channel the channel factory produces.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -202,23 +190,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> of type <paramref name="TChannel" /> for the specified context.</para
-          >
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> of type <paramref name="TChannel" /> for the specified context.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel the channel listener accepts.</typeparam
-        >
+          />The type of channel the channel listener accepts.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
@@ -263,15 +248,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the listener.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The type of channel the channel listener accepts.</typeparam
-        >
+          />The type of channel the channel listener accepts.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -299,14 +282,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> object initialized from the current one.</para
-          >
+            >Creates a new <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> object initialized from the current one.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> object with property values equal to those of the current element.</para
-          >
+            >A <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> object with property values equal to those of the current element.</para>
         </returns>
       </Docs>
     </Member>
@@ -331,8 +312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> objects that the factory produces can read messages from a stream and write them to a stream for specific types of message encoding.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> objects that the factory produces can read messages from a stream and write them to a stream for specific types of message encoding.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -341,8 +321,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> that this factory creates.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> that this factory creates.</para>
         </returns>
       </Docs>
     </Member>
@@ -384,23 +363,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref name="T" /> requested if it is present or null if it is not.</para
-          >
+            >The typed object <paramref name="T" /> requested if it is present or null if it is not.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the binding element.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the binding element.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The typed object for which the method is querying.</typeparam
-        >
+          />The typed object for which the method is querying.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="MaxReadPoolSize">
@@ -468,8 +444,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> for this constructor is the version of WS-Addressing 1.0 and SOAP 1.2.</para
-          >
+            >The default <see cref="T:System.ServiceModel.Channels.MessageVersion" /> for this constructor is the version of WS-Addressing 1.0 and SOAP 1.2.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -535,23 +510,19 @@
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" /> = 8192</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" /> = 8192</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxArrayLength" /> = 16384</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxArrayLength" /> = 16384</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" /> = 4096</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" /> = 4096</para>
             </item>
             <item>
               <para>
-                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" /> = 16384</para
-              >
+                <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" /> = 16384</para>
             </item>
           </list>
         </remarks>
@@ -592,15 +563,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the contract description.</param
-        >
+          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the contract description.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportContract">
@@ -630,8 +599,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is responsible for setting information about the message version in the WSDL. But this is done by the <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method, not by <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />, which is implemented but empty.</para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is responsible for setting information about the message version in the WSDL. But this is done by the <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method, not by <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />, which is implemented but empty.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -642,15 +610,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the contract description.</param
-        >
+          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the contract description.</param>
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint">
@@ -680,8 +646,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is responsible for setting information about the message version in the WSDL. But this is done by the <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method. </para
-          >
+            >The <see cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" /> is responsible for setting information about the message version in the WSDL. But this is done by the <see cref="M:System.ServiceModel.Channels.TextMessageEncodingBindingElement.System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" /> method. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -692,15 +657,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param
-        >
+          />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the endpoint description.</param
-        >
+          />A <see cref="T:System.ServiceModel.Description.WsdlContractConversionContext" /> object that provides mappings from exported WSDL elements to the endpoint description.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteEncoding">

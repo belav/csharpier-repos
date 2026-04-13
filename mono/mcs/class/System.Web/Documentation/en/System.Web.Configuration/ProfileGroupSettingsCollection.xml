@@ -25,29 +25,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" /> class contains a collection of <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> objects, which each contain a collection of <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> objects. </para
-      >
+        >The <see cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" /> class contains a collection of <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> objects, which each contain a collection of <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> objects. </para>
       <para
-        >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> class provides a way to programmatically create, access, and modify the definition of an individual property added to the &lt;properties&gt; subsection of the &lt;profile&gt; section of a configuration file. </para
-      >
+        >The <see cref="T:System.Web.Configuration.ProfilePropertySettings" /> class provides a way to programmatically create, access, and modify the definition of an individual property added to the &lt;properties&gt; subsection of the &lt;profile&gt; section of a configuration file. </para>
       <para
-        >The &lt;profile&gt; section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the &lt;profile&gt; section to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />. The ProfileCommon class definition is based on the properties defined in the &lt;properties&gt; subsection of the &lt;profile&gt; section of the configuration file. </para
-      >
+        >The &lt;profile&gt; section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the &lt;profile&gt; section to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />. The ProfileCommon class definition is based on the properties defined in the &lt;properties&gt; subsection of the &lt;profile&gt; section of the configuration file. </para>
       <para
         >For more information about profile properties, see <format type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d"
-            >Understanding ASP.NET Profile Properties</a
-          >
+            >Understanding ASP.NET Profile Properties</a>
         </format>. For more information about the profile features added to ASP.NET version 2.0, see <format type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
-        </format>. </para
-      >
+        </format>. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a set of <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> objects.</para
-      >
+        >Contains a set of <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -61,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" /> class.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -86,22 +79,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object with the same name.</para
-          >
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object with the same name.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to the collection.</para
-          >
+            >Adds a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to the collection.</para>
         </summary>
         <param name="group">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to add to the collection.</param
-        >
+          />A <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to add to the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -141,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> objects from the collection.</para
-          >
+            >Removes all <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> objects from the collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -165,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see cref="T:System.Configuration.ConfigurationElementCollectionType" /> of this collection.</para
-          >
+            >Gets the <see cref="T:System.Configuration.ConfigurationElementCollectionType" /> of this collection.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -211,22 +199,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index.</para
-          >
+            >Returns the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index, or null if there is no object at that index.</para
-          >
+            >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index, or null if there is no object at that index.</para>
         </returns>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to get.</param
-        >
+          />The index of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to get.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -250,22 +235,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object with the specified name.</para
-          >
+            >Returns the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object with the specified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object with the specified name, or null if the name does not exist.</para
-          >
+            >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object with the specified name, or null if the name does not exist.</para>
         </returns>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to get.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to get.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -293,8 +275,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Configuration.ConfigurationElement" /> in the collection.</param
-        >
+          />A <see cref="T:System.Configuration.ConfigurationElement" /> in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -315,22 +296,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index.</para
-          >
+            >Returns the name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index, or null if there is no object at that index.</para
-          >
+            >The name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object at the specified index, or null if there is no object at that index.</para>
         </returns>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object.</param
-        >
+          />The index of a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -354,22 +332,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object.</para
-          >
+            >Returns the index of the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object, or -1 if the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object is not contained in the collection.</para
-          >
+            >The index of the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object, or -1 if the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object is not contained in the collection.</para>
         </returns>
         <param name="group">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object in the collection.</param
-        >
+          />A <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object in the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -473,16 +448,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object from the collection.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object from the collection.</para>
         </summary>
         <param name="name">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to remove from the collection.</param
-        >
+          />The name of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -506,16 +479,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object from the collection.</para
-          >
+            >Removes a <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object from the collection.</para>
         </summary>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to remove from the collection.</param
-        >
+          />The index of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to remove from the collection.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -553,22 +524,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method has the same effect as calling the <see cref="M:System.Web.Configuration.ProfileGroupSettingsCollection.Add(System.Web.Configuration.ProfileGroupSettings)" /> method.</para
-          >
+            >Calling this method has the same effect as calling the <see cref="M:System.Web.Configuration.ProfileGroupSettingsCollection.Add(System.Web.Configuration.ProfileGroupSettings)" /> method.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to the collection.</para
-          >
+            >Adds the specified <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object to the collection.</para>
         </summary>
         <param name="group">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object.</param
-        >
+          />A <see cref="T:System.Web.Configuration.ProfileGroupSettings" /> object.</param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

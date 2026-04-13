@@ -40,8 +40,7 @@
       <!-- If we are targeting winmdobj we want to specifically the pdbFile property since we do not want it to collide with the output of winmdexp-->
       <PdbFile
         Condition="'$(PdbFile)' == '' AND '$(OutputType)' == 'winmdobj' AND '$(DebugSymbols)' == 'true'"
-        >$(IntermediateOutputPath)$(TargetName).compile.pdb</PdbFile
-      >
+        >$(IntermediateOutputPath)$(TargetName).compile.pdb</PdbFile>
     </PropertyGroup>
 
     <!-- Condition is to filter out the _CoreCompileResourceInputs so that it doesn't pass in culture resources to the compiler -->
@@ -169,10 +168,8 @@
   <PropertyGroup>
     <CommandLineArgsForDesignTimeEvaluation>-langversion:$(LangVersion)</CommandLineArgsForDesignTimeEvaluation>
     <CommandLineArgsForDesignTimeEvaluation Condition="'$(ChecksumAlgorithm)' != ''"
-      >$(CommandLineArgsForDesignTimeEvaluation) -checksumalgorithm:$(ChecksumAlgorithm)</CommandLineArgsForDesignTimeEvaluation
-    >
+      >$(CommandLineArgsForDesignTimeEvaluation) -checksumalgorithm:$(ChecksumAlgorithm)</CommandLineArgsForDesignTimeEvaluation>
     <CommandLineArgsForDesignTimeEvaluation Condition="'$(FinalDefineConstants)' != ''"
-      >$(CommandLineArgsForDesignTimeEvaluation) -define:$(FinalDefineConstants)</CommandLineArgsForDesignTimeEvaluation
-    >
+      >$(CommandLineArgsForDesignTimeEvaluation) -define:$(FinalDefineConstants)</CommandLineArgsForDesignTimeEvaluation>
   </PropertyGroup>
 </Project>

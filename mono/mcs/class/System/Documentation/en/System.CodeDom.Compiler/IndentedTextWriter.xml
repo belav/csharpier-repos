@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.Compiler.IndentedTextWriter" /> extends a <see cref="T:System.IO.TextWriter" /> by providing methods that insert a tab string and track the current indentation level. Text formatted with multiple indentation levels is useful for generated code, so this class is used by CodeDOM code generator implementations.</para
-      >
+        <see cref="T:System.CodeDom.Compiler.IndentedTextWriter" /> extends a <see cref="T:System.IO.TextWriter" /> by providing methods that insert a tab string and track the current indentation level. Text formatted with multiple indentation levels is useful for generated code, so this class is used by CodeDOM code generator implementations.</para>
       <para>The tab string is the string that each indentation consists of. Typically the tab string contains white space.</para>
       <block subset="none" type="note">
         <para
@@ -35,8 +34,7 @@
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format> and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
-          </format>.</para
-        >
+          </format>.</para>
       </block>
     </remarks>
     <summary>
@@ -69,16 +67,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.IndentedTextWriter" /> class using the specified text writer and default tab string.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.IndentedTextWriter" /> class using the specified text writer and default tab string.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to use for output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to use for output. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -106,23 +102,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.IndentedTextWriter" /> class using the specified text writer and tab string.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.IndentedTextWriter" /> class using the specified text writer and tab string.</para>
         </summary>
         <param name="writer">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.IO.TextWriter" /> to use for output. </param
-        >
+          />The <see cref="T:System.IO.TextWriter" /> to use for output. </param>
         <param name="tabString">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The tab string to use for indentation. </param
-        >
+          />The tab string to use for indentation. </param>
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -319,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Outputs the tab string once for each level of indentation according to the <see cref="P:System.CodeDom.Compiler.IndentedTextWriter.Indent" /> property.</para
-          >
+            >Outputs the tab string once for each level of indentation according to the <see cref="P:System.CodeDom.Compiler.IndentedTextWriter.Indent" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -353,8 +345,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean value to write. </param
-        >
+          />The Boolean value to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -386,8 +377,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write. </param
-        >
+          />The character to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -446,8 +436,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The double to write. </param
-        >
+          />The double to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -479,8 +468,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The integer to write. </param
-        >
+          />The integer to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -512,8 +500,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte integer to write. </param
-        >
+          />The 8-byte integer to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -545,8 +532,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to write. </param
-        >
+          />The object to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -578,8 +564,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The single to write. </param
-        >
+          />The single to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -643,8 +628,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatting string. </param
-        >
+          />The formatting string. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -687,8 +671,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatting string to use. </param
-        >
+          />The formatting string to use. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -725,22 +708,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Starting index in the buffer. </param
-        >
+          />Starting index in the buffer. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write. </param>
       </Docs>
     </Member>
     <Member MemberName="Write">
@@ -777,22 +757,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatting string to use. </param
-        >
+          />The formatting string to use. </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to write into the formatted string. </param
-        >
+          />The first object to write into the formatted string. </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to write into the formatted string. </param
-        >
+          />The second object to write into the formatted string. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -848,8 +825,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The Boolean to write. </param
-        >
+          />The Boolean to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -881,8 +857,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to write. </param
-        >
+          />The character to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -941,8 +916,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The double to write. </param
-        >
+          />The double to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -974,8 +948,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The integer to write. </param
-        >
+          />The integer to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1007,8 +980,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The 8-byte integer to write. </param
-        >
+          />The 8-byte integer to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1040,8 +1012,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to write. </param
-        >
+          />The object to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1073,8 +1044,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The single to write. </param
-        >
+          />The single to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1134,8 +1104,11 @@
           <para>Writes the text representation of a UInt32, followed by a line terminator, to the text stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A UInt32 to output. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />A UInt32 to output. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1172,8 +1145,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatting string. </param
-        >
+          />The formatting string. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1216,8 +1188,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatting string to use. </param
-        >
+          />The formatting string to use. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1254,22 +1225,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character array to write data from. </param
-        >
+          />The character array to write data from. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Starting index in the buffer. </param
-        >
+          />Starting index in the buffer. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to write. </param
-        >
+          />The number of characters to write. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLine">
@@ -1306,22 +1274,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The formatting string to use. </param
-        >
+          />The formatting string to use. </param>
         <param name="arg0">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The first object to write into the formatted string. </param
-        >
+          />The first object to write into the formatted string. </param>
         <param name="arg1">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The second object to write into the formatted string. </param
-        >
+          />The second object to write into the formatted string. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteLineNoTabs">

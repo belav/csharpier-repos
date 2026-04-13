@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides a host application with settings to perform policy decisions in the host's implementation of the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method.</para
-      >
+        >This class provides a host application with settings to perform policy decisions in the host's implementation of the <see cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" /> method.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is equal to the <see cref="F:System.IO.IsolatedStorage.IsolatedStorageSecurityOptions.IncreaseQuotaForApplication" /> enumeration value, which is the only value in the enumeration. </para
-          >
+            >This property is equal to the <see cref="F:System.IO.IsolatedStorage.IsolatedStorageSecurityOptions.IncreaseQuotaForApplication" /> enumeration value, which is the only value in the enumeration. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

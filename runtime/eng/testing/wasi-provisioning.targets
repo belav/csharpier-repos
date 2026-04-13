@@ -4,8 +4,7 @@
     <_WasmtimeStampPath>$(WasmtimeDir)\.stamp-wasmtime-version.txt</_WasmtimeStampPath>
     <InstallWasmtimeForTests
       Condition="'$(InstallWasmtimeForTests)' == '' and !Exists($(WasmtimeDir))"
-      >true</InstallWasmtimeForTests
-    >
+      >true</InstallWasmtimeForTests>
   </PropertyGroup>
 
   <!-- FIXMEWASI: prevent multiple downloads -->
@@ -24,11 +23,9 @@
       <WasmtimeVersion>%(_VersionLines.Identity)</WasmtimeVersion>
       <WasmtimeURL>https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-linux.tar.xz</WasmtimeURL>
       <WasmtimeURL Condition="'$(HostOS)' == 'osx'"
-        >https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-macos.tar.xz</WasmtimeURL
-      >
+        >https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-macos.tar.xz</WasmtimeURL>
       <WasmtimeURL Condition="'$(HostOS)' == 'windows'"
-        >https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-windows.zip</WasmtimeURL
-      >
+        >https://github.com/bytecodealliance/wasmtime/releases/download/v$(WasmtimeVersion)/wasmtime-v$(WasmtimeVersion)-x86_64-windows.zip</WasmtimeURL>
     </PropertyGroup>
 
     <DownloadFile

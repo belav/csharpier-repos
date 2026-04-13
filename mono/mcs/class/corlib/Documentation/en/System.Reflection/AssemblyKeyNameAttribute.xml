@@ -33,18 +33,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When building a strong-named assembly, the author must supply either this attribute or <see cref="T:System.Reflection.AssemblyKeyFileAttribute" />.</para
-      >
+        >When building a strong-named assembly, the author must supply either this attribute or <see cref="T:System.Reflection.AssemblyKeyFileAttribute" />.</para>
       <para>An example of the syntax is [assembly:AssemblyKeyNameAttribute("myContainer")].</para>
       <para>The classes in System.Runtime.CompilerServices are intended for use by compilers only. Do not use them unless you are building a compiler.</para>
       <para
         >For more information, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
           cref="http://go.microsoft.com/fwlink/?LinkID=99212"
-          >ECMA C# and Common Language Infrastructure Standards</see
-        > on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552"
-          >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
-        > on the Ecma International Web site.</para
-      >
+          >ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see
+          cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+          >Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,16 +70,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyKeyNameAttribute" /> class with the name of the container holding the key pair used to generate a strong name for the assembly being attributed.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyKeyNameAttribute" /> class with the name of the container holding the key pair used to generate a strong name for the assembly being attributed.</para>
         </summary>
         <param name="keyName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the container containing the key pair. </param
-        >
+          />The name of the container containing the key pair. </param>
       </Docs>
     </Member>
     <Member MemberName="KeyName">

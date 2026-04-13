@@ -44,14 +44,12 @@
         </item>
       </list>
       <para
-        >For definitions of URL, site, and zone, see <see cref="T:System.Security.Permissions.UrlIdentityPermission" />, <see cref="T:System.Security.Permissions.SiteIdentityPermission" />, and <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />.</para
-      >
+        >For definitions of URL, site, and zone, see <see cref="T:System.Security.Permissions.UrlIdentityPermission" />, <see cref="T:System.Security.Permissions.SiteIdentityPermission" />, and <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />.</para>
       <para>These identities are grouped together, in which case the identities are applied one after another until the desired isolated storage is created. The valid groupings are User+Assembly and User+Assembly+Domain. This grouping of identities is useful in many different applications.</para>
       <para>If data is stored by domain, user, and assembly, the data is private in that only code in that assembly can access the data. The data store is also isolated by the application in which it runs, so that the assembly does not represent a potential leak by exposing data to other applications.</para>
       <para>Isolation by assembly and user could be used for user data that applies across multiple applications; for example, license information, or a user's personal information (name, authentication credentials, and so on) that is independent of an application.</para>
       <para>
-        <see cref="T:System.Security.Permissions.IsolatedStorageContainment" /> exposes flags that determine whether an application is allowed to use isolated storage and, if so, which identity combinations are allowed to use it. It also determines whether an application is allowed to store information in a location that can roam with a user (Windows Roaming User Profiles or Folder Redirection must be configured).</para
-      >
+        <see cref="T:System.Security.Permissions.IsolatedStorageContainment" /> exposes flags that determine whether an application is allowed to use isolated storage and, if so, which identity combinations are allowed to use it. It also determines whether an application is allowed to store information in a location that can roam with a user (Windows Roaming User Profiles or Folder Redirection must be configured).</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

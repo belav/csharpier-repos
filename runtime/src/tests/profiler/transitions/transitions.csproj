@@ -10,8 +10,7 @@
     <UnloadabilityIncompatible>true</UnloadabilityIncompatible>
     <!-- Issue https://github.com/dotnet/runtime/issues/50306 -->
     <GCStressIncompatible Condition="'$(TargetArchitecture)' == 'arm64' and '$(TargetOS)' == 'osx'"
-      >true</GCStressIncompatible
-    >
+      >true</GCStressIncompatible>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />

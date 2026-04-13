@@ -23,8 +23,7 @@
     <summary>SQLite implentation of DbConnection.</summary>
     <remarks>
       The <see cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString"
-        >ConnectionString</see
-      > property of the SqliteConnection class can contain the following parameter(s), delimited with a semi-colon:
+        >ConnectionString</see> property of the SqliteConnection class can contain the following parameter(s), delimited with a semi-colon:
       <list type="table">
         <listheader>
           <term>Parameter</term>
@@ -58,8 +57,7 @@
           <description>DateTimeFormat</description>
           <description>
             <b>Ticks</b> - Use DateTime.Ticks<br />
-            <b>ISO8601</b> - Use ISO8601 DateTime format</description
-          >
+            <b>ISO8601</b> - Use ISO8601 DateTime format</description>
           <description>N</description>
           <description>ISO8601</description>
         </item>
@@ -68,8 +66,7 @@
           <description>
             <b>True</b> - Store GUID columns in binary form<br />
             <b>False</b> - Store GUID columns as text
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>True</description>
         </item>
@@ -85,8 +82,7 @@
             <b>Normal</b> - Normal file flushing behavior<br />
             <b>Full</b> - Full flushing after all writes<br />
             <b>Off</b> - Underlying OS flushes I/O's
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>Normal</description>
         </item>
@@ -107,8 +103,7 @@
           <description>
             <b>Y</b> - Automatically enlist in distributed transactions<br />
             <b>N</b> - No automatic enlistment
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>Y</description>
         </item>
@@ -117,8 +112,7 @@
           <description>
             <b>True</b> - Use connection pooling<br />
             <b>False</b> - Do not use connection pooling
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -127,8 +121,7 @@
           <description>
             <b>True</b> - Don't create the database if it does not exist, throw an error instead<br />
             <b>False</b> - Automatically create the database if it does not exist
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -143,8 +136,7 @@
           <description>
             <b>True</b> - Use the more compatible legacy 3.x database format<br />
             <b>False</b> - Use the newer 3.3x database format which compresses numbers more effectively
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -160,8 +152,7 @@
             <b>Delete</b> - Delete the journal file after a commit<br />
             <b>Persist</b> - Zero out and leave the journal file on disk after a commit<br />
             <b>Off</b> - Disable the rollback journal entirely
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>Delete</description>
         </item>
@@ -170,8 +161,7 @@
           <description>
             <b>True</b> - Open the database for read only access<br />
             <b>False</b> - Open the database for normal read/write access
-	    </description
-          >
+	    </description>
           <description>N</description>
           <description>False</description>
         </item>
@@ -304,8 +294,7 @@
       </Parameters>
       <Docs>
         <param name="isolationLevel"
-          >Supported isolation levels are Unspecified, Serializable, and ReadCommitted</param
-        >
+          >Supported isolation levels are Unspecified, Serializable, and ReadCommitted</param>
         <summary>
             Forwards to the local BeginTransaction() function
             </summary>
@@ -366,8 +355,7 @@
         <param name="deferredLock"
           >When TRUE, SQLite defers obtaining a write lock until a write operation is requested.
             When FALSE, a writelock is obtained immediately.  The default is false, but in a multi-threaded multi-writer
-            environment, one may instead choose to lock the database immediately to avoid any possible writer deadlock.</param
-        >
+            environment, one may instead choose to lock the database immediately to avoid any possible writer deadlock.</param>
         <summary>
             OBSOLETE.  Creates a new SqliteTransaction if one isn't already active on the connection.
             </summary>
@@ -396,8 +384,7 @@
       </Parameters>
       <Docs>
         <param name="isolationLevel"
-          >Supported isolation levels are Serializable, ReadCommitted and Unspecified.</param
-        >
+          >Supported isolation levels are Serializable, ReadCommitted and Unspecified.</param>
         <summary>
             Creates a new SqliteTransaction if one isn't already active on the connection.
             </summary>
@@ -443,8 +430,7 @@
         <param name="deferredLock"
           >When TRUE, SQLite defers obtaining a write lock until a write operation is requested.
             When FALSE, a writelock is obtained immediately.  The default is TRUE, but in a multi-threaded multi-writer
-            environment, one may instead choose to lock the database immediately to avoid any possible writer deadlock.</param
-        >
+            environment, one may instead choose to lock the database immediately to avoid any possible writer deadlock.</param>
         <summary>
             OBSOLETE.  Creates a new SqliteTransaction if one isn't already active on the connection.
             </summary>
@@ -714,8 +700,7 @@
               <description>
                 <b>Ticks</b> - Use DateTime.Ticks<br />
                 <b>ISO8601</b> - Use ISO8601 DateTime format<br />
-                <b>JulianDay</b> - Use JulianDay format</description
-              >
+                <b>JulianDay</b> - Use JulianDay format</description>
               <description>N</description>
               <description>ISO8601</description>
             </item>
@@ -723,8 +708,7 @@
               <description>BinaryGUID</description>
               <description>
                 <b>Yes/On/1</b> - Store GUID columns in binary form<br />
-                <b>No/Off/0</b> - Store GUID columns as text</description
-              >
+                <b>No/Off/0</b> - Store GUID columns as text</description>
               <description>N</description>
               <description>On</description>
             </item>
@@ -739,8 +723,7 @@
               <description>
                 <b>Normal</b> - Normal file flushing behavior<br />
                 <b>Full</b> - Full flushing after all writes<br />
-                <b>Off</b> - Underlying OS flushes I/O's</description
-              >
+                <b>Off</b> - Underlying OS flushes I/O's</description>
               <description>N</description>
               <description>Normal</description>
             </item>
@@ -760,8 +743,7 @@
               <description>Enlist</description>
               <description>
                 <B>Y</B> - Automatically enlist in distributed transactions<br />
-                <b>N</b> - No automatic enlistment</description
-              >
+                <b>N</b> - No automatic enlistment</description>
               <description>N</description>
               <description>Y</description>
             </item>
@@ -769,8 +751,7 @@
               <description>Pooling</description>
               <description>
                 <b>True</b> - Use connection pooling<br />
-                <b>False</b> - Do not use connection pooling</description
-              >
+                <b>False</b> - Do not use connection pooling</description>
               <description>N</description>
               <description>False</description>
             </item>
@@ -778,8 +759,7 @@
               <description>FailIfMissing</description>
               <description>
                 <b>True</b> - Don't create the database if it does not exist, throw an error instead<br />
-                <b>False</b> - Automatically create the database if it does not exist</description
-              >
+                <b>False</b> - Automatically create the database if it does not exist</description>
               <description>N</description>
               <description>False</description>
             </item>
@@ -793,8 +773,7 @@
               <description>Legacy Format</description>
               <description>
                 <b>True</b> - Use the more compatible legacy 3.x database format<br />
-                <b>False</b> - Use the newer 3.3x database format which compresses numbers more effectively</description
-              >
+                <b>False</b> - Use the newer 3.3x database format which compresses numbers more effectively</description>
               <description>N</description>
               <description>False</description>
             </item>
@@ -809,8 +788,7 @@
               <description>
                 <b>Delete</b> - Delete the journal file after a commit<br />
                 <b>Persist</b> - Zero out and leave the journal file on disk after a commit<br />
-                <b>Off</b> - Disable the rollback journal entirely</description
-              >
+                <b>Off</b> - Disable the rollback journal entirely</description>
               <description>N</description>
               <description>Delete</description>
             </item>
@@ -818,8 +796,7 @@
               <description>Read Only</description>
               <description>
                 <b>True</b> - Open the database for read only access<br />
-                <b>False</b> - Open the database for normal read/write access</description
-              >
+                <b>False</b> - Open the database for normal read/write access</description>
               <description>N</description>
               <description>False</description>
             </item>
@@ -1191,8 +1168,7 @@
         <summary>
             Opens the connection using the parameters found in the <see
             cref="P:Mono.Data.Sqlite.SqliteConnection.ConnectionString"
-            >ConnectionString</see
-          >
+            >ConnectionString</see>
         </summary>
         <remarks>To be added.</remarks>
       </Docs>

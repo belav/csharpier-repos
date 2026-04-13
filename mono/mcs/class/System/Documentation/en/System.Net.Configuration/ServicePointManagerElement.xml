@@ -27,13 +27,10 @@
       <para
         >This class corresponds to the servicePointManager attribute of the settings <format type="text/html">
           <a href="6e5def51-3646-4ef6-a7bd-c69151321bec"
-            >ServicePointManager Element (Network Settings)</a
-          >
-        </format> configuration element.</para
-      >
+            >ServicePointManager Element (Network Settings)</a>
+        </format> configuration element.</para>
       <para
-        >This class is used to specify the values that are used to initialize new <see cref="T:System.Net.ServicePoint" /> objects. </para
-      >
+        >This class is used to specify the values that are used to initialize new <see cref="T:System.Net.ServicePoint" /> objects. </para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
@@ -60,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ServicePointManagerElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ServicePointManagerElement" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -148,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property sets the <see cref="P:System.Net.ServicePointManager.DnsRefreshTimeout" /> property.</para
-          >
+            >The value of this property sets the <see cref="P:System.Net.ServicePointManager.DnsRefreshTimeout" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -206,8 +201,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When this property is set to true, client requests that use the POST method expect to receive a 100-Continue response from the server to indicate that the client should send the data to be posted. This mechanism allows clients to avoid sending large amounts of data over the network when the server, based on the request headers, intends to reject the request.</para>
           <para
-            >For additional information, see <see cref="P:System.Net.ServicePointManager.Expect100Continue" />.</para
-          >
+            >For additional information, see <see cref="P:System.Net.ServicePointManager.Expect100Continue" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -264,11 +258,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains six elements, which correspond to the <see cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateName" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.DnsRefreshTimeout" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.EnableDnsRoundRobin" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.Expect100Continue" />,</para
-          >
+            >The collection contains six elements, which correspond to the <see cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateName" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.DnsRefreshTimeout" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.EnableDnsRoundRobin" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.Expect100Continue" />,</para>
           <para>
-            <see cref="P:System.Net.Configuration.ServicePointManagerElement.UseNagleAlgorithm" />, and <see cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateRevocationList" /> properties.</para
-          >
+            <see cref="P:System.Net.Configuration.ServicePointManagerElement.UseNagleAlgorithm" />, and <see cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateRevocationList" /> properties.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates that the use of <see cref="T:System.Object" /> on a member is meant to be treated as a dynamically dispatched type.</para
-      >
+        >Indicates that the use of <see cref="T:System.Object" /> on a member is meant to be treated as a dynamically dispatched type.</para>
     </summary>
   </Docs>
   <Members>
@@ -43,14 +42,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When used in an attribute specification, the default constructor is semantically equivalent to DynamicAttribute({ true }), and can be considered a shorthand for that expression. It should therefore only be used on an element of type <see cref="T:System.Object" />.</para
-          >
+            >When used in an attribute specification, the default constructor is semantically equivalent to DynamicAttribute({ true }), and can be considered a shorthand for that expression. It should therefore only be used on an element of type <see cref="T:System.Object" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DynamicAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DynamicAttribute" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -71,23 +68,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is meant to be used on types that are built on an underlying occurrence of <see cref="T:System.Object" /> that is meant to be treated dynamically.</para
-          >
+            >This constructor is meant to be used on types that are built on an underlying occurrence of <see cref="T:System.Object" /> that is meant to be treated dynamically.</para>
           <para>For instance, if C is a generic type with two type parameters, a use of the constructed type C&lt;Object,Object&gt; might be intended to treat the first type argument dynamically and the second typically, in which case the appropriate attribute specification should use a transformFlags value of { false, true, false }.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DynamicAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DynamicAttribute" /> class.</para>
         </summary>
         <param name="transformFlags">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />Specifies, in a prefix traversal of a type's construction, which <see cref="T:System.Object" /> occurrences are meant to be treated as a dynamically dispatched type.</param
-        >
+          />Specifies, in a prefix traversal of a type's construction, which <see cref="T:System.Object" /> occurrences are meant to be treated as a dynamically dispatched type.</param>
       </Docs>
     </Member>
     <Member MemberName="TransformFlags">
@@ -112,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies, in a prefix traversal of a type's construction, which <see cref="T:System.Object" /> occurrences are meant to be treated as a dynamically dispatched type.</para
-          >
+            >Specifies, in a prefix traversal of a type's construction, which <see cref="T:System.Object" /> occurrences are meant to be treated as a dynamically dispatched type.</para>
         </summary>
       </Docs>
     </Member>

@@ -16,8 +16,7 @@
   <Docs>
     <summary>Base class for surfaces</summary>
     <remarks
-      >A <see cref="T:Cairo.Surface" /> represents an image, either as the destination of a drawing operation or as source when drawing onto another surface. There are different subtypes of Surface for different drawing backends; for example, <see cref="T:Cairo.ImageSurface" /> creates a bitmap image in memory.</remarks
-    >
+      >A <see cref="T:Cairo.Surface" /> represents an image, either as the destination of a drawing operation or as source when drawing onto another surface. There are different subtypes of Surface for different drawing backends; for example, <see cref="T:Cairo.ImageSurface" /> creates a bitmap image in memory.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -121,8 +120,7 @@
         <param name="width">the width of the image to be stored in the buffer</param>
         <param name="height">the height of the image to be stored in the buffer</param>
         <param name="stride"
-          >the number of bytes between the start of rows in the buffer. Having this be specified separate from width  allows for padding at the end of rows, or for writing to a subportion of a larger image</param
-        >
+          >the number of bytes between the start of rows in the buffer. Having this be specified separate from width  allows for padding at the end of rows, or for writing to a subportion of a larger image</param>
         <summary>Creates an image surface for the provided pixel data. The output buffer must be kept around until the cairo_surface_t is destroyed or cairo_surface_finish() is called on the surface. The initial contents of buffer will be used as the inital image contents; you must explicitely clear the buffer, using, for example, cairo_rectangle() and cairo_fill() if you want it cleared.</summary>
         <returns>Newly created surface.</returns>
         <remarks>To be added.</remarks>
@@ -482,8 +480,7 @@
       <Docs>
         <param name="filename">The name of a file to write to</param>
         <summary
-          >Writes the contents of the surface to a new file <paramref name="filename" /> as a PNG image.</summary
-        >
+          >Writes the contents of the surface to a new file <paramref name="filename" /> as a PNG image.</summary>
         <remarks></remarks>
       </Docs>
       <AssemblyInfo>

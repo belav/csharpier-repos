@@ -16,8 +16,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     <Language>IL</Language>
     <TargetRuntime>Managed</TargetRuntime>
     <DefaultProjectTypeGuid Condition="'$(DefaultProjectTypeGuid)' == ''"
-      >{9A19103F-16F7-4668-BE54-9A1E7A4F7556}</DefaultProjectTypeGuid
-    >
+      >{9A19103F-16F7-4668-BE54-9A1E7A4F7556}</DefaultProjectTypeGuid>
     <AppDesignerFolder Condition="'$(AppDesignerFolder)' == ''">Properties</AppDesignerFolder>
     <AlwaysUseNumericalSuffixInItemNames>true</AlwaysUseNumericalSuffixInItemNames>
   </PropertyGroup>
@@ -30,25 +29,20 @@ Copyright (c) .NET Foundation. All rights reserved.
   <PropertyGroup>
     <MicrosoftNetCoreIlasmPackageRuntimeId
       Condition="'$(MicrosoftNetCoreIlasmPackageRuntimeId)' == ''"
-      >$(NETCoreSdkPortableRuntimeIdentifier)</MicrosoftNetCoreIlasmPackageRuntimeId
-    >
+      >$(NETCoreSdkPortableRuntimeIdentifier)</MicrosoftNetCoreIlasmPackageRuntimeId>
     <MicrosoftNETCoreILAsmVersion Condition="'$(MicrosoftNETCoreILAsmVersion)' == ''"
-      >6.0.0</MicrosoftNETCoreILAsmVersion
-    >
+      >6.0.0</MicrosoftNETCoreILAsmVersion>
     <MicrosoftNetCoreIlasmPackageName>runtime.$(MicrosoftNetCoreIlasmPackageRuntimeId).microsoft.netcore.ilasm</MicrosoftNetCoreIlasmPackageName>
     <MicrosoftNetCoreIldasmPackageName>runtime.$(MicrosoftNetCoreIlasmPackageRuntimeId).microsoft.netcore.ildasm</MicrosoftNetCoreIldasmPackageName>
 
     <!-- If ILAsmToolPath is specified, it will be used and no packages will be restored
          Otherwise packages will be restored and ilasm and ildasm will be referenced from their packages.  -->
     <_IlasmDir Condition="'$(ILAsmToolPath)' != ''"
-      >$([MSBuild]::NormalizeDirectory($(ILAsmToolPath)))</_IlasmDir
-    >
+      >$([MSBuild]::NormalizeDirectory($(ILAsmToolPath)))</_IlasmDir>
     <_IldasmDir Condition="'$(ILAsmToolPath)' != ''"
-      >$([MSBuild]::NormalizeDirectory($(ILAsmToolPath)))</_IldasmDir
-    >
+      >$([MSBuild]::NormalizeDirectory($(ILAsmToolPath)))</_IldasmDir>
     <CoreCompileDependsOn Condition="'$(ILAsmToolPath)' == ''"
-      >$(CoreCompileDependsOn);ResolveIlAsmToolPaths</CoreCompileDependsOn
-    >
+      >$(CoreCompileDependsOn);ResolveIlAsmToolPaths</CoreCompileDependsOn>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ILAsmToolPath)' == ''">
@@ -93,12 +87,10 @@ Copyright (c) .NET Foundation. All rights reserved.
     <PropertyGroup>
       <_IlasmDir
         Condition="'$(_IlasmDir)' == '' and '%(_IlasmPackageReference.Identity)' == '$(MicrosoftNetCoreIlasmPackageName)'"
-        >%(_IlasmPackageReference.NativePath)/</_IlasmDir
-      >
+        >%(_IlasmPackageReference.NativePath)/</_IlasmDir>
       <_IldasmDir
         Condition="'$(_IldasmDir)' == '' and '%(_IlasmPackageReference.Identity)' == '$(MicrosoftNetCoreIldasmPackageName)'"
-        >%(_IlasmPackageReference.NativePath)/</_IldasmDir
-      >
+        >%(_IlasmPackageReference.NativePath)/</_IldasmDir>
     </PropertyGroup>
   </Target>
 
@@ -168,29 +160,22 @@ Copyright (c) .NET Foundation. All rights reserved.
       <_OutputTypeArgument Condition="'$(OutputType)' == 'Exe'">-EXE</_OutputTypeArgument>
 
       <_KeyFileArgument Condition="'$(KeyOriginatorFile)' != ''"
-        >-KEY="$(KeyOriginatorFile)"</_KeyFileArgument
-      >
+        >-KEY="$(KeyOriginatorFile)"</_KeyFileArgument>
 
       <_IlasmSwitches>-QUIET -NOLOGO</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(FoldIdenticalMethods)' == 'True'"
-        >$(_IlasmSwitches) -FOLD</_IlasmSwitches
-      >
+        >$(_IlasmSwitches) -FOLD</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(SizeOfStackReserve)' != ''"
-        >$(_IlasmSwitches) -STACK=$(SizeOfStackReserve)</_IlasmSwitches
-      >
+        >$(_IlasmSwitches) -STACK=$(SizeOfStackReserve)</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(DebugType)' == 'Full'">$(_IlasmSwitches) -DEBUG</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(DebugType)' == 'Impl'"
-        >$(_IlasmSwitches) -DEBUG=IMPL</_IlasmSwitches
-      >
+        >$(_IlasmSwitches) -DEBUG=IMPL</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(DebugType)' == 'PdbOnly'"
-        >$(_IlasmSwitches) -DEBUG=OPT</_IlasmSwitches
-      >
+        >$(_IlasmSwitches) -DEBUG=OPT</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(Optimize)' == 'True'"
-        >$(_IlasmSwitches) -OPTIMIZE</_IlasmSwitches
-      >
+        >$(_IlasmSwitches) -OPTIMIZE</_IlasmSwitches>
       <_IlasmSwitches Condition="'$(IlasmResourceFile)' != ''"
-        >$(_IlasmSwitches) -RESOURCES="$(IlasmResourceFile)"</_IlasmSwitches
-      >
+        >$(_IlasmSwitches) -RESOURCES="$(IlasmResourceFile)"</_IlasmSwitches>
     </PropertyGroup>
 
     <Exec Command="&quot;$(_IlasmDir)ilasm&quot; $(_IlasmSwitches) $(_OutputTypeArgument) $(IlasmFlags) -OUTPUT=&quot;@(IntermediateAssembly)&quot; $(_KeyFileArgument) @(Compile, ' ')">
@@ -212,8 +197,7 @@ Copyright (c) .NET Foundation. All rights reserved.
   <!-- Required for project to load in Visual Studio. -->
   <PropertyGroup>
     <ManagedDesignTimeTargetsPath Condition="'$(ManagedDesignTimeTargetsPath)'==''"
-      >$(MSBuildExtensionsPath)\Microsoft\VisualStudio\Managed\Microsoft.Managed.DesignTime.targets</ManagedDesignTimeTargetsPath
-    >
+      >$(MSBuildExtensionsPath)\Microsoft\VisualStudio\Managed\Microsoft.Managed.DesignTime.targets</ManagedDesignTimeTargetsPath>
   </PropertyGroup>
   <Import
     Project="$(ManagedDesignTimeTargetsPath)"

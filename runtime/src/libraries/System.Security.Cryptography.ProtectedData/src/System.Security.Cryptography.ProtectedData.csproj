@@ -16,8 +16,7 @@ System.Security.Cryptography.ProtectedData</PackageDescription>
   <PropertyGroup>
     <IsPartialFacadeAssembly
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
-      >true</IsPartialFacadeAssembly
-    >
+      >true</IsPartialFacadeAssembly>
     <OmitResources Condition="'$(IsPartialFacadeAssembly)' == 'true'">true</OmitResources>
   </PropertyGroup>
 

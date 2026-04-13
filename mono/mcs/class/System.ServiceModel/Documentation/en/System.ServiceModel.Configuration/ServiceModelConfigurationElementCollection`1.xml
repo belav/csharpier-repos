@@ -33,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an abstract base class for a <see cref="T:System.Configuration.ConfigurationElementCollection" /> used within the <see cref="N:System.ServiceModel.Configuration" /> namespace.</para
-      >
+        >Represents an abstract base class for a <see cref="T:System.Configuration.ConfigurationElementCollection" /> used within the <see cref="N:System.ServiceModel.Configuration" /> namespace.</para>
     </summary>
   </Docs>
   <Members>
@@ -84,16 +83,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see cref="T:System.Configuration.ConfigurationElement" /> object to this collection.</para
-          >
+            >Adds the specified <see cref="T:System.Configuration.ConfigurationElement" /> object to this collection.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration element to add.</param
-        >
+          />The configuration element to add.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -174,8 +171,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The configuration element to search for in the collection.</param
-        >
+          />The configuration element to search for in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -227,14 +223,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" /> instance of type <paramref name="ConfigurationElementType" />.</para
-          >
+            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" /> instance of type <paramref name="ConfigurationElementType" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Configuration.ConfigurationElement" /> instance of type <paramref name="ConfigurationElementType" />.</para
-          >
+            >A new <see cref="T:System.Configuration.ConfigurationElement" /> instance of type <paramref name="ConfigurationElementType" />.</para>
         </returns>
       </Docs>
     </Member>
@@ -381,8 +375,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the configuration element to remove.</param
-        >
+          />The zero-based index of the configuration element to remove.</param>
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">

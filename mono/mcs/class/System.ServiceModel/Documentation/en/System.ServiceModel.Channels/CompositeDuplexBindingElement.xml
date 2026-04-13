@@ -24,8 +24,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This is commonly used with transports, such as HTTP, that do not allow duplex communications natively. TCP, by contrast, does allow duplex communications natively and so does not require the use of this binding element for the service to send messages back to a client.</para>
       <para
-        >The client must expose an address at which the service can contact it to establish a connection from the service to the client. This client address is provided by the <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" /> property. Note that indigo1 auto-generates a <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" /> if one is not explicitly set by the user.</para
-      >
+        >The client must expose an address at which the service can contact it to establish a connection from the service to the client. This client address is provided by the <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" /> property. Note that indigo1 auto-generates a <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" /> if one is not explicitly set by the user.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -80,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The build context requires an <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> for the <paramref name="TChannel" />.</para
-          >
+            >The build context requires an <see cref="T:System.ServiceModel.Channels.IOutputChannel" /> for the <paramref name="TChannel" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -90,23 +87,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> that creates a composite duplex channel of type <paramref name="TChannel" />.</para
-          >
+            >A <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> that creates a composite duplex channel of type <paramref name="TChannel" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides the context required to build the channel factory.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides the context required to build the channel factory.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.IChannel" /> that the factory produces.</typeparam
-        >
+          />The <see cref="T:System.ServiceModel.Channels.IChannel" /> that the factory produces.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="BuildChannelListener&lt;TChannel&gt;">
@@ -140,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The build context requires an <see cref="T:System.ServiceModel.Channels.IInputChannel" /> for the <paramref name="TChannel" />.</para
-          >
+            >The build context requires an <see cref="T:System.ServiceModel.Channels.IInputChannel" /> for the <paramref name="TChannel" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -150,23 +143,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> that accepts a composite duplex channel of type <paramref name="TChannel" />.</para
-          >
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> that accepts a composite duplex channel of type <paramref name="TChannel" />.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides the context required to build the channel listener.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides the context required to build the channel listener.</param>
         <typeparam name="TChannel">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.IChannel" /> that the listener accepts.</typeparam
-        >
+          />The <see cref="T:System.ServiceModel.Channels.IChannel" /> that the listener accepts.</typeparam>
       </Docs>
     </Member>
     <Member MemberName="ClientBaseAddress">
@@ -217,8 +207,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returning a clone enables the runtime to support the case in which multiple custom bindings share a custom binding element. If a clone is not returned, the run-time behavior is undefined.</para>
           <para
-            >A deep clone of an object creates a copy of the object and a copy of everything directly or indirectly referenced by that object. (This is also called copying the entire object graph.) A shallow clone of an object, by contrast, is a copy of the object only. If the object contains references to other objects, the shallow copy does not create copies of the referred objects; instead, it copies only the references to the original objects. In particular, a deep copy of <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" /> copies over the <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" /> value.</para
-          >
+            >A deep clone of an object creates a copy of the object and a copy of everything directly or indirectly referenced by that object. (This is also called copying the entire object graph.) A shallow clone of an object, by contrast, is a copy of the object only. If the object contains references to other objects, the shallow copy does not create copies of the referred objects; instead, it copies only the references to the original objects. In particular, a deep copy of <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" /> copies over the <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" /> value.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,8 +216,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" /> that is a deep clone of the current binding element.</para
-          >
+            >A <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElement" /> that is a deep clone of the current binding element.</para>
         </returns>
       </Docs>
     </Member>
@@ -270,23 +258,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref name="T" /> requested if it is supported; or null if it is not.</para
-          >
+            >The typed object <paramref name="T" /> requested if it is supported; or null if it is not.</para>
         </returns>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides the context required to build the channel.</param
-        >
+          />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> that provides the context required to build the channel.</param>
         <typeparam name="T">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The typed object whose support is being tested.</typeparam
-        >
+          />The typed object whose support is being tested.</typeparam>
       </Docs>
     </Member>
   </Members>

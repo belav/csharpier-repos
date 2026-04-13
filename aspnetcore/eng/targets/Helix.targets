@@ -17,11 +17,9 @@
   <PropertyGroup>
     <_TestingArchitecture>x64</_TestingArchitecture>
     <_TestingArchitecture Condition=" '$(IsArm64HelixQueue)' == 'true' "
-      >arm64</_TestingArchitecture
-    >
+      >arm64</_TestingArchitecture>
     <TestDependsOnPlaywright Condition="'$(TestDependsOnPlaywright)' == ''"
-      >false</TestDependsOnPlaywright
-    >
+      >false</TestDependsOnPlaywright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TestDependsOnPlaywright)' == 'true'">
@@ -185,20 +183,16 @@
       <!-- Check HelixTargetQueues to allow RunHelix.ps1 to submit jobs anywhere. -->
       <BuildHelixPayload
         Condition=" '$(HelixTargetQueues)' == '' AND @(_HelixApplicableTargetQueue->Count()) == 0 "
-        >false</BuildHelixPayload
-      >
+        >false</BuildHelixPayload>
 
       <BuildHelixPayload
         Condition="'$(IsArm64HelixQueue)' == 'true' AND '$(SkipHelixArm)' == 'true'"
-        >false</BuildHelixPayload
-      >
+        >false</BuildHelixPayload>
       <BuildHelixPayload
         Condition="$(HelixTargetQueue.StartsWith('%28Alpine.')) AND '$(SkipHelixAlpine)' == 'true'"
-        >false</BuildHelixPayload
-      >
+        >false</BuildHelixPayload>
       <BuildHelixPayload Condition="$(SkipHelixQueues.Contains('$(HelixTargetQueue)'))"
-        >false</BuildHelixPayload
-      >
+        >false</BuildHelixPayload>
     </PropertyGroup>
   </Target>
 
@@ -207,8 +201,7 @@
       <!-- Extract the effective queue name from this format "(name)host@dockerimage". This is sometimes used in test code to skip tests.  -->
       <_HelixFriendlyNameTargetQueue>$(HelixTargetQueue)</_HelixFriendlyNameTargetQueue>
       <_HelixFriendlyNameTargetQueue Condition="$(HelixTargetQueue.Contains('@'))"
-        >$(HelixTargetQueue.Substring(1, $([MSBuild]::Subtract($(HelixTargetQueue.LastIndexOf(')')), 1))))</_HelixFriendlyNameTargetQueue
-      >
+        >$(HelixTargetQueue.Substring(1, $([MSBuild]::Subtract($(HelixTargetQueue.LastIndexOf(')')), 1))))</_HelixFriendlyNameTargetQueue>
     </PropertyGroup>
 
     <!-- Important: If HelixTargetQueue is not removed here, then Publish will occur for every single queue type. And since Publish shouldn't depend on the queue we can just publish once -->
@@ -276,11 +269,9 @@
           SharedFxVersion because that's needed even when the targeting pack isn't building.
         -->
         <Command Condition="$(IsWindowsHelixQueue)"
-          >call runtests.cmd $(TargetFileName) $(SharedFxVersion) $(_HelixFriendlyNameTargetQueue) $(_TestingArchitecture) $(RunQuarantinedTests) $(HelixTimeout) $(TestDependsOnPlaywright)</Command
-        >
+          >call runtests.cmd $(TargetFileName) $(SharedFxVersion) $(_HelixFriendlyNameTargetQueue) $(_TestingArchitecture) $(RunQuarantinedTests) $(HelixTimeout) $(TestDependsOnPlaywright)</Command>
         <Command Condition="!$(IsWindowsHelixQueue)"
-          >./runtests.sh $(TargetFileName) $(SharedFxVersion) $(_HelixFriendlyNameTargetQueue) $(_TestingArchitecture) $(RunQuarantinedTests) $(HelixTimeout) $(TestDependsOnPlaywright)</Command
-        >
+          >./runtests.sh $(TargetFileName) $(SharedFxVersion) $(_HelixFriendlyNameTargetQueue) $(_TestingArchitecture) $(RunQuarantinedTests) $(HelixTimeout) $(TestDependsOnPlaywright)</Command>
         <Command Condition="'$(HelixCommand)' != ''">$(HelixCommand)</Command>
         <Timeout>$(HelixTimeout)</Timeout>
       </HelixWorkItem>

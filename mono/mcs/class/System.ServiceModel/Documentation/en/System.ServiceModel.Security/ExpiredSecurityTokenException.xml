@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para>
         </summary>
       </Docs>
     </Member>
@@ -69,16 +68,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display.</param
-        >
+          />The message to display.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -103,23 +100,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> for the exception.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> for the exception.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> for the exception.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> for the exception.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -144,23 +138,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ExpiredSecurityTokenException" /> class.  </para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message to display.</param
-        >
+          />The message to display.</param>
         <param name="innerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The inner <see cref="T:System.Exception" /> for this instance.</param
-        >
+          />The inner <see cref="T:System.Exception" /> for this instance.</param>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
@@ -195,8 +186,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> for the exception.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> for the exception.</param>
       </Docs>
     </Member>
   </Members>

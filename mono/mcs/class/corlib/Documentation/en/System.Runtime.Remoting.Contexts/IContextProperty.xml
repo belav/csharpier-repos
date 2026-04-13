@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Remoting.Contexts.IContextProperty" /> interface is exposed by the property contributed to a context by an attribute. By default, it is also implemented by the <see cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" /> base class, from which <see cref="T:System.Runtime.Remoting.Contexts.Context" /> attribute classes can extend.</para
-      >
+        >The <see cref="T:System.Runtime.Remoting.Contexts.IContextProperty" /> interface is exposed by the property contributed to a context by an attribute. By default, it is also implemented by the <see cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" /> base class, from which <see cref="T:System.Runtime.Remoting.Contexts.Context" /> attribute classes can extend.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -67,8 +66,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The context to freeze. </param
-        >
+          />The context to freeze. </param>
       </Docs>
     </Member>
     <Member MemberName="IsNewContextOK">
@@ -96,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Once all the context properties have been added to the new context, they are all queried as to whether they are okay in the new context. The context property could look at the other context properties from <paramref name="newCtx" /> and determine whether it is compatible with these other context properties. </para
-          >
+            >Once all the context properties have been added to the new context, they are all queried as to whether they are okay in the new context. The context property could look at the other context properties from <paramref name="newCtx" /> and determine whether it is compatible with these other context properties. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -112,8 +109,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The new context in which the <see cref="T:System.Runtime.Remoting.Contexts.ContextProperty" /> has been created. </param
-        >
+          />The new context in which the <see cref="T:System.Runtime.Remoting.Contexts.ContextProperty" /> has been created. </param>
       </Docs>
     </Member>
     <Member MemberName="Name">

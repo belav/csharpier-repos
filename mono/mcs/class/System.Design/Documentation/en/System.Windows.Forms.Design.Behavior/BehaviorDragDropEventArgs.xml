@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" /> and <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" /> events.</para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" /> and <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" /> events.</para>
     </summary>
   </Docs>
   <Members>
@@ -39,16 +38,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorDragDropEventArgs" /> class.</para>
         </summary>
         <param name="dragComponents">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Collections.ICollection" /> of <see cref="T:System.ComponentModel.IComponent" /> objects currently being dragged.</param
-        >
+          />The <see cref="T:System.Collections.ICollection" /> of <see cref="T:System.ComponentModel.IComponent" /> objects currently being dragged.</param>
       </Docs>
     </Member>
     <Member MemberName="DragComponents">
@@ -69,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list of <see cref="T:System.ComponentModel.IComponent" /> objects currently being dragged.</para
-          >
+            >Gets the list of <see cref="T:System.ComponentModel.IComponent" /> objects currently being dragged.</para>
         </summary>
       </Docs>
     </Member>

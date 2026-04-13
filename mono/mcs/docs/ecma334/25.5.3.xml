@@ -2,10 +2,8 @@
 <clause number="25.5.3" title="Pointer element access">
   <paragraph
     >A <non_terminal where="25.5.3"
-      >pointer-element-access</non_terminal
-    > consists of a <non_terminal where="14.5"
-      >primary-no-array-creation-expression</non_terminal
-    > followed by an expression enclosed in &quot;[&quot; and &quot;]&quot;. <grammar_production>
+      >pointer-element-access</non_terminal> consists of a <non_terminal where="14.5"
+      >primary-no-array-creation-expression</non_terminal> followed by an expression enclosed in &quot;[&quot; and &quot;]&quot;. <grammar_production>
       <name>
         <non_terminal where="25.5.3">pointer-element-access</non_terminal>
       </name> : <rhs>
@@ -17,11 +15,9 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >In a pointer element access of the form P[E], P must be an expression of a pointer type other than void*, and E must be an expression of a type that can be implicitly converted to <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, or <keyword>ulong</keyword>. </paragraph
-  >
+    >In a pointer element access of the form P[E], P must be an expression of a pointer type other than void*, and E must be an expression of a type that can be implicitly converted to <keyword>int</keyword>, <keyword>uint</keyword>, <keyword>long</keyword>, or <keyword>ulong</keyword>. </paragraph>
   <paragraph
-    >A pointer element access of the form P[E] is evaluated exactly as *(P + E). For a description of the pointer indirection operator (*), see <hyperlink>25.5.1</hyperlink>. For a description of the pointer addition operator (+), see <hyperlink>25.5.6</hyperlink>. </paragraph
-  >
+    >A pointer element access of the form P[E] is evaluated exactly as *(P + E). For a description of the pointer indirection operator (*), see <hyperlink>25.5.1</hyperlink>. For a description of the pointer addition operator (+), see <hyperlink>25.5.6</hyperlink>. </paragraph>
   <paragraph>
     <example
       >[Example: In the example <code_example>
@@ -48,8 +44,7 @@ class Test
    }  
 }  
 ]]>
-      </code_example>end example]</example
-    >
+      </code_example>end example]</example>
   </paragraph>
   <paragraph
     >The pointer element access operator does not check for out-of-bounds errors and the behavior when accessing an out-of-bounds element is undefined. <note>[Note: This is the same as C and C++. end note]</note>

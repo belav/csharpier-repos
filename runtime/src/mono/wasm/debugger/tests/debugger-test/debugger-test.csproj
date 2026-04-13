@@ -11,8 +11,7 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <!-- is 40 threads too many for debugger ? -->
     <_WasmPThreadPoolSize Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
-      >10</_WasmPThreadPoolSize
-    >
+      >10</_WasmPThreadPoolSize>
   </PropertyGroup>
   <ItemGroup>
     <!-- keep this version to make sure it will pause in the expected line -->

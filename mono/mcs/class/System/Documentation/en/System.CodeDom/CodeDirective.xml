@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A class must inherit from the <see cref="T:System.CodeDom.CodeDirective" /> class to be contained in a <see cref="T:System.CodeDom.CodeDirectiveCollection" />.</para
-      >
+        >A class must inherit from the <see cref="T:System.CodeDom.CodeDirective" /> class to be contained in a <see cref="T:System.CodeDom.CodeDirectiveCollection" />.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirective" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirective" /> class. </para>
         </summary>
       </Docs>
     </Member>

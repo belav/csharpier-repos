@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="M:System.Web.HttpResponse.Write(System.String)" /> methods of the intrinsic <see cref="T:System.Web.HttpResponse" /> object make internal calls to an <see cref="T:System.Web.HttpWriter" /> object.</para
-      >
+        >The <see cref="M:System.Web.HttpResponse.Write(System.String)" /> methods of the intrinsic <see cref="T:System.Web.HttpResponse" /> object make internal calls to an <see cref="T:System.Web.HttpWriter" /> object.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a <see cref="T:System.IO.TextWriter" /> object that is accessed through the intrinsic <see cref="T:System.Web.HttpResponse" /> object.</para
-      >
+        >Provides a <see cref="T:System.IO.TextWriter" /> object that is accessed through the intrinsic <see cref="T:System.Web.HttpResponse" /> object.</para>
     </summary>
   </Docs>
   <Members>
@@ -66,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Text.Encoding" /> object for the <see cref="T:System.IO.TextWriter" />.</para
-          >
+            >Gets an <see cref="T:System.Text.Encoding" /> object for the <see cref="T:System.IO.TextWriter" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -107,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.IO.Stream" /> object to enable HTTP output directly from the <see cref="T:System.IO.Stream" />.</para
-          >
+            >Gets a <see cref="T:System.IO.Stream" /> object to enable HTTP output directly from the <see cref="T:System.IO.Stream" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -136,8 +132,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character to send to the HTTP output stream. </param
-        >
+          />The character to send to the HTTP output stream. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -164,8 +159,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to send to the HTTP output stream. </param
-        >
+          />The <see cref="T:System.Object" /> to send to the HTTP output stream. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,8 +186,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to send to the HTTP output stream. </param
-        >
+          />The string to send to the HTTP output stream. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -225,22 +218,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The memory buffer containing the characters to send to the HTTP output stream </param
-        >
+          />The memory buffer containing the characters to send to the HTTP output stream </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer position of the first character to send. </param
-        >
+          />The buffer position of the first character to send. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to send beginning at the position specified by <paramref name="index" />. </param
-        >
+          />The number of characters to send beginning at the position specified by <paramref name="index" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -272,22 +262,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The memory buffer containing the bytes to send to the HTTP output stream. </param
-        >
+          />The memory buffer containing the bytes to send to the HTTP output stream. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The buffer position of the first byte to send. </param
-        >
+          />The buffer position of the first byte to send. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of bytes to send, beginning at the byte position specified by <paramref name="index" />. </param
-        >
+          />The number of bytes to send, beginning at the byte position specified by <paramref name="index" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -338,22 +325,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The string to send to the HTTP output stream. </param
-        >
+          />The string to send to the HTTP output stream. </param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character position of the first byte to send. </param
-        >
+          />The character position of the first byte to send. </param>
         <param name="count">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The number of characters to send, beginning at the character position specified by <paramref name="index" />. </param
-        >
+          />The number of characters to send, beginning at the character position specified by <paramref name="index" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

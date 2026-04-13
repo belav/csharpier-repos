@@ -19,7 +19,6 @@ Text t1 = new Text();          // Same as Text(0, 0, null)
 Text t2 = new Text(5, 10);       // Same as Text(5, 10, null)  
 Text t3 = new Text(5, 20, "Hello");  
 ]]>
-      </code_example>end note]</note
-    >
+      </code_example>end note]</note>
   </paragraph>
 </clause>

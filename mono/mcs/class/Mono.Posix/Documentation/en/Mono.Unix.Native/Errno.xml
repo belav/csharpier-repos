@@ -21,16 +21,14 @@
         <see cref="T:Mono.Unix.Native.Syscall" /> methods.  
         The most recent error can be retrieved from 
         <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />.
-      </para
-      >
+      </para>
       <para>
         The value of these members may not match the actual <c>errno</c> value
         used by your operating system.  Use
         <see cref="T:Mono.Unix.Native.NativeConvert" /> to convert between the
         native <c>errno</c> value and an 
         <see cref="T:Mono.Unix.Native.Errno" /> value.
-      </para
-      >
+      </para>
     </remarks>
     <altmember cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
     <altmember cref="M:Mono.Unix.Native.NativeConvert.FromErrno" />
@@ -54,8 +52,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Argument list too long</i>.  The number of bytes used for the argument and environment list of the new process exceeded the current limit of 65536 bytes (NCARGS in <c>sys/param.h</c>).</summary
-        >
+          <i>Argument list too long</i>.  The number of bytes used for the argument and environment list of the new process exceeded the current limit of 65536 bytes (NCARGS in <c>sys/param.h</c>).</summary>
       </Docs>
     </Member>
     <Member MemberName="EACCES">
@@ -75,8 +72,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Permission denied</i>.  An attempt was made to access a file in a way forbidden by its file access permissions.</summary
-        >
+          <i>Permission denied</i>.  An attempt was made to access a file in a way forbidden by its file access permissions.</summary>
       </Docs>
     </Member>
     <Member MemberName="EADDRINUSE">
@@ -96,8 +92,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Address already in use</i>.  Only one usage of each address is normally permitted.</summary
-        >
+          <i>Address already in use</i>.  Only one usage of each address is normally permitted.</summary>
       </Docs>
     </Member>
     <Member MemberName="EADDRNOTAVAIL">
@@ -117,8 +112,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Cannot assign requested address</i>.  Normally results from an attempt to create a socket with an address not on this machine.</summary
-        >
+          <i>Cannot assign requested address</i>.  Normally results from an attempt to create a socket with an address not on this machine.</summary>
       </Docs>
     </Member>
     <Member MemberName="EADV">
@@ -157,8 +151,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Address family not supported by protocol family</i>.  An address incompatible with the requested protocol was used.  For example, you shouldn’t necessarily expect to be able to use NS addresses with ARPA Internet protocols.</summary
-        >
+          <i>Address family not supported by protocol family</i>.  An address incompatible with the requested protocol was used.  For example, you shouldn’t necessarily expect to be able to use NS addresses with ARPA Internet protocols.</summary>
       </Docs>
     </Member>
     <Member MemberName="EAGAIN">
@@ -178,8 +171,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Resource temporarily unavailable</i>.  This is a temporary condition and later calls to the same routine may complete normally.</summary
-        >
+          <i>Resource temporarily unavailable</i>.  This is a temporary condition and later calls to the same routine may complete normally.</summary>
       </Docs>
     </Member>
     <Member MemberName="EALREADY">
@@ -199,8 +191,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Operation already in progress</i>.  An operation was attempted on a non-blocking object that already had an operation in progress.</summary
-        >
+          <i>Operation already in progress</i>.  An operation was attempted on a non-blocking object that already had an operation in progress.</summary>
       </Docs>
     </Member>
     <Member MemberName="EBADE">
@@ -239,8 +230,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Bad file descriptor</i>.  A file descriptor argument was out of range, referred to no open file, or a read (write) request was made to a file that was only open for writing (reading).</summary
-        >
+          <i>Bad file descriptor</i>.  A file descriptor argument was out of range, referred to no open file, or a read (write) request was made to a file that was only open for writing (reading).</summary>
       </Docs>
     </Member>
     <Member MemberName="EBADFD">
@@ -260,8 +250,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Bad file descriptor</i>.  A file descriptor argument was out of range, referred to no open file, or a read (write) request was made to a file that was only open for writing (reading).</summary
-        >
+          <i>Bad file descriptor</i>.  A file descriptor argument was out of range, referred to no open file, or a read (write) request was made to a file that was only open for writing (reading).</summary>
       </Docs>
     </Member>
     <Member MemberName="EBADMSG">
@@ -376,8 +365,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Device busy</i>.  An attempt to use a system resource which was in use at the time in a manner which would have conflicted with the request.</summary
-        >
+          <i>Device busy</i>.  An attempt to use a system resource which was in use at the time in a manner which would have conflicted with the request.</summary>
       </Docs>
     </Member>
     <Member MemberName="ECHILD">
@@ -400,8 +388,7 @@
           <i>No child processes</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.wait" />(2) or 
 				<see cref="M:Mono.Unix.Native.Syscall.waitpid" />(2)
-				function was executed by a process that had no existing or unwaited-for child processes.</summary
-        >
+				function was executed by a process that had no existing or unwaited-for child processes.</summary>
       </Docs>
     </Member>
     <Member MemberName="ECHRNG">
@@ -459,8 +446,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Software caused connection abort</i>.  A connection abort was caused internal to your host machine.</summary
-        >
+          <i>Software caused connection abort</i>.  A connection abort was caused internal to your host machine.</summary>
       </Docs>
     </Member>
     <Member MemberName="ECONNREFUSED">
@@ -480,8 +466,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Connection refused</i>.  No connection could be made because the target machine actively refused it.  This usually results from trying to connect to a service that is inactive on the foreign host.</summary
-        >
+          <i>Connection refused</i>.  No connection could be made because the target machine actively refused it.  This usually results from trying to connect to a service that is inactive on the foreign host.</summary>
       </Docs>
     </Member>
     <Member MemberName="ECONNRESET">
@@ -501,8 +486,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Connection reset by peer</i>.  A connection was forcibly closed by a peer.  This normally results from a loss of the connection on the remote socket due to a timeout or a reboot.</summary
-        >
+          <i>Connection reset by peer</i>.  A connection was forcibly closed by a peer.  This normally results from a loss of the connection on the remote socket due to a timeout or a reboot.</summary>
       </Docs>
     </Member>
     <Member MemberName="EDEADLK">
@@ -522,8 +506,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Resource deadlock avoided</i>.  An attempt was made to lock a system resource that would have resulted in a deadlock situation</summary
-        >
+          <i>Resource deadlock avoided</i>.  An attempt was made to lock a system resource that would have resulted in a deadlock situation</summary>
       </Docs>
     </Member>
     <Member MemberName="EDEADLOCK">
@@ -562,8 +545,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Destination address required</i>.  A required address was omitted from an operation on a socket.</summary
-        >
+          <i>Destination address required</i>.  A required address was omitted from an operation on a socket.</summary>
       </Docs>
     </Member>
     <Member MemberName="EDOM">
@@ -583,8 +565,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Numerical argument out of domain</i>.  A numerical input argument was outside the defined domain of the mathematical function.</summary
-        >
+          <i>Numerical argument out of domain</i>.  A numerical input argument was outside the defined domain of the mathematical function.</summary>
       </Docs>
     </Member>
     <Member MemberName="EDOTDOT">
@@ -625,8 +606,7 @@
         <summary>
           <i>Disc quota exceeded</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.write" />(2) 
-				to an ordinary file, the creation of a directory or symbolic link, or the creation of a directory entry failed because the user’s quota of disk blocks was exhausted, or the allocation of an inode for a newly created file failed because the user’s quota of inodes was exhausted.</summary
-        >
+				to an ordinary file, the creation of a directory or symbolic link, or the creation of a directory entry failed because the user’s quota of disk blocks was exhausted, or the allocation of an inode for a newly created file failed because the user’s quota of inodes was exhausted.</summary>
       </Docs>
     </Member>
     <Member MemberName="EEXIST">
@@ -647,8 +627,7 @@
       <Docs>
         <summary>
           <i>File exists</i>.  An existing file was mentioned in an inappropriate context, for instance, as the new link name in a 
-				<see cref="M:Mono.Unix.Native.Syscall.link" />(2) system call</summary
-        >
+				<see cref="M:Mono.Unix.Native.Syscall.link" />(2) system call</summary>
       </Docs>
     </Member>
     <Member MemberName="EFAULT">
@@ -668,8 +647,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Bad address</i>.  The system detected an invalid address in attempting to use an argument of a call.</summary
-        >
+          <i>Bad address</i>.  The system detected an invalid address in attempting to use an argument of a call.</summary>
       </Docs>
     </Member>
     <Member MemberName="EFBIG">
@@ -708,8 +686,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Host is down</i>.  A socket operation failed because the destination host was down.</summary
-        >
+          <i>Host is down</i>.  A socket operation failed because the destination host was down.</summary>
       </Docs>
     </Member>
     <Member MemberName="EHOSTUNREACH">
@@ -729,8 +706,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No route to host</i>.  A socket operation was attempted to an unreachable host.</summary
-        >
+          <i>No route to host</i>.  A socket operation was attempted to an unreachable host.</summary>
       </Docs>
     </Member>
     <Member MemberName="EIDRM">
@@ -750,8 +726,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Identifier removed</i>.  An IPC identifier was removed while the current process was waiting on it.</summary
-        >
+          <i>Identifier removed</i>.  An IPC identifier was removed while the current process was waiting on it.</summary>
       </Docs>
     </Member>
     <Member MemberName="EILSEQ">
@@ -771,8 +746,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Illegal byte sequence</i>.  While decoding a multibyte character the function came along an invalid or an incomplete sequence of bytes or the given wide character is invalid.</summary
-        >
+          <i>Illegal byte sequence</i>.  While decoding a multibyte character the function came along an invalid or an incomplete sequence of bytes or the given wide character is invalid.</summary>
       </Docs>
     </Member>
     <Member MemberName="EINPROGRESS">
@@ -794,8 +768,7 @@
         <summary>
           <i>Operation now in progress</i>.  An operation that takes a long time to complete (such as a 
 				<see cref="M:Mono.Unix.Native.Syscall.connect" />(2)) was attempted on a non-blocking object (see 
-				<see cref="M:Mono.Unix.Native.Syscall.fcntl" />(2)).</summary
-        >
+				<see cref="M:Mono.Unix.Native.Syscall.fcntl" />(2)).</summary>
       </Docs>
     </Member>
     <Member MemberName="EINTR">
@@ -821,8 +794,7 @@
 				was caught by the process during the 
 				execution of an interruptible function.  If the signal handler 
 				performs a normal return, the interrupted system call will seem to 
-				have returned the error condition.</summary
-        >
+				have returned the error condition.</summary>
       </Docs>
     </Member>
     <Member MemberName="EINVAL">
@@ -845,8 +817,7 @@
           <i>Invalid argument</i>.  Some invalid argument was supplied.  
 				(For example, specifying an undefined signal to a 
 				<see cref="M:Mono.Unix.Native.Stdlib.signal" />(3) function or a 
-				<see cref="M:Mono.Unix.Native.Syscall.kill" />(2) system call).</summary
-        >
+				<see cref="M:Mono.Unix.Native.Syscall.kill" />(2) system call).</summary>
       </Docs>
     </Member>
     <Member MemberName="EIO">
@@ -866,8 +837,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Input/output error</i>.  Some physical input or output error occurred.  This error will not be reported until a subsequent operation on the same file descriptor and may be lost (over written) by any subsequent errors.</summary
-        >
+          <i>Input/output error</i>.  Some physical input or output error occurred.  This error will not be reported until a subsequent operation on the same file descriptor and may be lost (over written) by any subsequent errors.</summary>
       </Docs>
     </Member>
     <Member MemberName="EISCONN">
@@ -892,8 +862,7 @@
              connected socket; or, a 
 						 <see cref="M:Mono.Unix.Native.Syscall.sendto" />(2) or 
 						 <see cref="M:Mono.Unix.Native.Syscall.sendmsg" />(2) request on a connected socket
-             specified a destination when already connected.</summary
-        >
+             specified a destination when already connected.</summary>
       </Docs>
     </Member>
     <Member MemberName="EISDIR">
@@ -913,8 +882,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Is a directory</i>.  An attempt was made to open a directory with write mode specified.</summary
-        >
+          <i>Is a directory</i>.  An attempt was made to open a directory with write mode specified.</summary>
       </Docs>
     </Member>
     <Member MemberName="EISNAM">
@@ -1144,8 +1112,7 @@
       <Docs>
         <summary>
           <i>Too many levels of symbolic links</i>.  
-				A path name lookup involved more than 32 (MAXSYMLINKS) symbolic links</summary
-        >
+				A path name lookup involved more than 32 (MAXSYMLINKS) symbolic links</summary>
       </Docs>
     </Member>
     <Member MemberName="EMEDIUMTYPE">
@@ -1203,8 +1170,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Too many links</i>.  Maximum allowable hard links to a single file has been exceeded.</summary
-        >
+          <i>Too many links</i>.  Maximum allowable hard links to a single file has been exceeded.</summary>
       </Docs>
     </Member>
     <Member MemberName="EMSGSIZE">
@@ -1224,8 +1190,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Message too long</i>.  A message sent on a socket was larger than the internal message buffer or some other network limit.</summary
-        >
+          <i>Message too long</i>.  A message sent on a socket was larger than the internal message buffer or some other network limit.</summary>
       </Docs>
     </Member>
     <Member MemberName="EMULTIHOP">
@@ -1266,8 +1231,7 @@
         <summary>
           <i>File name too long</i>.  A component of a path name exceeded <c>{NAME_MAX}</c> characters, or an entire path name exceeded <c>{PATH_MAX}</c> characters.  (See also the description of 
 				<see cref="F:Mono.Unix.Native.PathConf._PC_NO_TRUNC" /> in 
-				<see cref="M:Mono.Unix.Native.Syscall.pathconf" />(2).)</summary
-        >
+				<see cref="M:Mono.Unix.Native.Syscall.pathconf" />(2).)</summary>
       </Docs>
     </Member>
     <Member MemberName="ENAVAIL">
@@ -1325,8 +1289,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Network dropped connection on reset</i>.  The host you were connected to crashed and rebooted.</summary
-        >
+          <i>Network dropped connection on reset</i>.  The host you were connected to crashed and rebooted.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENETUNREACH">
@@ -1346,8 +1309,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Network is unreachable</i>.  A socket operation was attempted to an unreachable network.</summary
-        >
+          <i>Network is unreachable</i>.  A socket operation was attempted to an unreachable network.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENFILE">
@@ -1367,8 +1329,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Too many open files in system</i>.  Maximum number of file descriptors allowable on the system has been reached and a requests for an open cannot be satisfied until at least one has been closed.</summary
-        >
+          <i>Too many open files in system</i>.  Maximum number of file descriptors allowable on the system has been reached and a requests for an open cannot be satisfied until at least one has been closed.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOANO">
@@ -1407,8 +1368,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No buffer space available</i>.  An operation on a socket or pipe was not performed because the system lacked sufficient buffer space or because a queue was full.</summary
-        >
+          <i>No buffer space available</i>.  An operation on a socket or pipe was not performed because the system lacked sufficient buffer space or because a queue was full.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOCSI">
@@ -1466,8 +1426,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Operation not supported by device</i>.  An attempt was made to apply an inappropriate function to a device, for example, trying to read a write-only device such as a printer.</summary
-        >
+          <i>Operation not supported by device</i>.  An attempt was made to apply an inappropriate function to a device, for example, trying to read a write-only device such as a printer.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOENT">
@@ -1487,8 +1446,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No such file or directory</i>.  A component of a specified pathname did not exist, or the pathname was an empty string.</summary
-        >
+          <i>No such file or directory</i>.  A component of a specified pathname did not exist, or the pathname was an empty string.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOEXEC">
@@ -1508,8 +1466,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Exec format error</i>.  A request was made to execute a file that, although it has the appropriate permissions, was not in the format required for an executable file.</summary
-        >
+          <i>Exec format error</i>.  A request was made to execute a file that, although it has the appropriate permissions, was not in the format required for an executable file.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOLCK">
@@ -1529,8 +1486,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No locks available</i>.  A system-imposed limit on the number of simultaneous file locks was reached.</summary
-        >
+          <i>No locks available</i>.  A system-imposed limit on the number of simultaneous file locks was reached.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOLINK">
@@ -1550,8 +1506,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No locks available</i>.  A system-imposed limit on the number of simultaneous file locks was reached.</summary
-        >
+          <i>No locks available</i>.  A system-imposed limit on the number of simultaneous file locks was reached.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOMEDIUM">
@@ -1590,8 +1545,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Cannot allocate memory</i>.  The new process image required more memory than was allowed by the hardware or by system-imposed memory management constraints.  A lack of swap space is normally temporary; however, a lack of core is not.  Soft limits may be increased to their corresponding hard limits.</summary
-        >
+          <i>Cannot allocate memory</i>.  The new process image required more memory than was allowed by the hardware or by system-imposed memory management constraints.  A lack of swap space is normally temporary; however, a lack of core is not.  Soft limits may be increased to their corresponding hard limits.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOMSG">
@@ -1611,8 +1565,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No message of desired type</i>.  An IPC message queue does not contain a message of the desired type, or a message catalog does not contain the requested message.</summary
-        >
+          <i>No message of desired type</i>.  An IPC message queue does not contain a message of the desired type, or a message catalog does not contain the requested message.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENONET">
@@ -1672,8 +1625,7 @@
         <summary>
           <i>Prootocol not available</i>.  A bad option or level was specified in a
              <see cref="M:Mono.Unix.Native.Syscall.getsockopt" />(2) or 
-						 <see cref="M:Mono.Unix.Native.Syscall.setsockopt" />(2) call.</summary
-        >
+						 <see cref="M:Mono.Unix.Native.Syscall.setsockopt" />(2) call.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOSPC">
@@ -1695,8 +1647,7 @@
         <summary>
           <i>No space left on device</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.write" />(2) to an ordinary file, 
-				the creation of a directory or symbolic link, or the creation of a directory entry failed because no more disk blocks were available on the file system, or the allocation of an inode for a newly created file failed because no more inodes were available on the file system.</summary
-        >
+				the creation of a directory or symbolic link, or the creation of a directory entry failed because no more disk blocks were available on the file system, or the allocation of an inode for a newly created file failed because no more inodes were available on the file system.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOSR">
@@ -1754,8 +1705,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Function not implemented</i>.  Attempted a system call that is not available on this system.</summary
-        >
+          <i>Function not implemented</i>.  Attempted a system call that is not available on this system.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTBLK">
@@ -1775,8 +1725,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Block device required</i>.  A block device operation was attempted on a non-block device or file.</summary
-        >
+          <i>Block device required</i>.  A block device operation was attempted on a non-block device or file.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTCONN">
@@ -1796,8 +1745,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Socket is not connected</i>.  An request to send or receive data was disallowed because the socket was not connected and (when sending on a datagram socket) no address was supplied.</summary
-        >
+          <i>Socket is not connected</i>.  An request to send or receive data was disallowed because the socket was not connected and (when sending on a datagram socket) no address was supplied.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTDIR">
@@ -1817,8 +1765,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Not a directory</i>.  A component of the specified pathname existed, but it was not a directory, when a directory was expected.</summary
-        >
+          <i>Not a directory</i>.  A component of the specified pathname existed, but it was not a directory, when a directory was expected.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTEMPTY">
@@ -1838,8 +1785,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Directory not empty</i>.  A directory with entries other than ‘.’ and ‘..’ was supplied to a remove directory or rename call.</summary
-        >
+          <i>Directory not empty</i>.  A directory with entries other than ‘.’ and ‘..’ was supplied to a remove directory or rename call.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTNAM">
@@ -1899,8 +1845,7 @@
         <summary>
           <i>Inappropriate ioctl for device</i>.  A control function 
 				(see <see cref="M:Mono.Unix.Native.Syscall.ioctl" />(2)) 
-				was attempted for a file or special device for which the operation was inappropriate.</summary
-        >
+				was attempted for a file or special device for which the operation was inappropriate.</summary>
       </Docs>
     </Member>
     <Member MemberName="ENOTUNIQ">
@@ -1939,8 +1884,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Device not configured</i>.  Input or output on a special file referred to a device that did not exist, or made a request beyond the limits of the device.  This error may also occur when, for example, a tape drive is not online or no disk pack is loaded on a drive.</summary
-        >
+          <i>Device not configured</i>.  Input or output on a special file referred to a device that did not exist, or made a request beyond the limits of the device.  This error may also occur when, for example, a tape drive is not online or no disk pack is loaded on a drive.</summary>
       </Docs>
     </Member>
     <Member MemberName="EOPNOTSUPP">
@@ -1960,8 +1904,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Operation not supported</i>.  The attempted operation is not supported for the type of object referenced.  Usually this occurs when a file descriptor refers to a file or socket that cannot support this operation, for example, trying to accept a connection on a datagram socket.</summary
-        >
+          <i>Operation not supported</i>.  The attempted operation is not supported for the type of object referenced.  Usually this occurs when a file descriptor refers to a file or socket that cannot support this operation, for example, trying to accept a connection on a datagram socket.</summary>
       </Docs>
     </Member>
     <Member MemberName="EOVERFLOW">
@@ -1981,8 +1924,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Value too large to be stored in data type</i>.  A numerical result of the function was too large to be stored in the caller provided space.</summary
-        >
+          <i>Value too large to be stored in data type</i>.  A numerical result of the function was too large to be stored in the caller provided space.</summary>
       </Docs>
     </Member>
     <Member MemberName="EPERM">
@@ -2002,8 +1944,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Operation not permitted</i>.  An attempt was made to perform an operation limited to processes with appropriate privileges or to the owner of a file or other resources.</summary
-        >
+          <i>Operation not permitted</i>.  An attempt was made to perform an operation limited to processes with appropriate privileges or to the owner of a file or other resources.</summary>
       </Docs>
     </Member>
     <Member MemberName="EPFNOSUPPORT">
@@ -2023,8 +1964,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Protocol family not supported</i>.  The protocol family has not been configured into the system or no implementation for it exists.</summary
-        >
+          <i>Protocol family not supported</i>.  The protocol family has not been configured into the system or no implementation for it exists.</summary>
       </Docs>
     </Member>
     <Member MemberName="EPIPE">
@@ -2044,8 +1984,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Broken pipe</i>.  A write on a pipe, socket or FIFO for which there is no process to read the data.</summary
-        >
+          <i>Broken pipe</i>.  A write on a pipe, socket or FIFO for which there is no process to read the data.</summary>
       </Docs>
     </Member>
     <Member MemberName="EPROTO">
@@ -2084,8 +2023,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Protocol not supported</i>.  The protocol has not been configured into the system or no implementation for it exists.</summary
-        >
+          <i>Protocol not supported</i>.  The protocol has not been configured into the system or no implementation for it exists.</summary>
       </Docs>
     </Member>
     <Member MemberName="EPROTOTYPE">
@@ -2105,8 +2043,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Protocol wrong type for socket</i>.  A protocol was specified that does not support the semantics of the socket type requested.  For example, you cannot use the ARPA Internet UDP protocol with type SOCK_STREAM.</summary
-        >
+          <i>Protocol wrong type for socket</i>.  A protocol was specified that does not support the semantics of the socket type requested.  For example, you cannot use the ARPA Internet UDP protocol with type SOCK_STREAM.</summary>
       </Docs>
     </Member>
     <Member MemberName="ERANGE">
@@ -2126,8 +2063,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Result too large</i>.  A numerical result of the function was too large to fit in the available space (perhaps exceeded precision)</summary
-        >
+          <i>Result too large</i>.  A numerical result of the function was too large to fit in the available space (perhaps exceeded precision)</summary>
       </Docs>
     </Member>
     <Member MemberName="EREMCHG">
@@ -2223,8 +2159,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Read-only</i> file system.  An attempt was made to modify a file or directory on a file system that was read-only at the time.</summary
-        >
+          <i>Read-only</i> file system.  An attempt was made to modify a file or directory on a file system that was read-only at the time.</summary>
       </Docs>
     </Member>
     <Member MemberName="ESHUTDOWN">
@@ -2245,8 +2180,7 @@
       <Docs>
         <summary>
           <i>Cannot send after socket shutdown</i>.  A request to send data was disallowed because the socket had already been shut down with a previous 
-				<see cref="M:Mono.Unix.Native.Syscall.shutdown" />(2) call.</summary
-        >
+				<see cref="M:Mono.Unix.Native.Syscall.shutdown" />(2) call.</summary>
       </Docs>
     </Member>
     <Member MemberName="ESOCKTNOSUPPORT">
@@ -2266,8 +2200,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Socket type not supported</i>.  The support for the socket type has not been configured into the system or no implementation for it exists.</summary
-        >
+          <i>Socket type not supported</i>.  The support for the socket type has not been configured into the system or no implementation for it exists.</summary>
       </Docs>
     </Member>
     <Member MemberName="ESPIPE">
@@ -2289,8 +2222,7 @@
         <summary>
           <i>Illegal seek</i>.  An 
 				<see cref="M:Mono.Unix.Native.Syscall.lseek" />(2) system call 
-				was issued on a socket, pipe or FIFO.</summary
-        >
+				was issued on a socket, pipe or FIFO.</summary>
       </Docs>
     </Member>
     <Member MemberName="ESRCH">
@@ -2310,8 +2242,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>No such process</i>.  No process could be found corresponding to that specified by the given process ID.</summary
-        >
+          <i>No such process</i>.  No process could be found corresponding to that specified by the given process ID.</summary>
       </Docs>
     </Member>
     <Member MemberName="ESRMNT">
@@ -2350,8 +2281,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Stale NFS file handle</i>.  An attempt was made to access an open file (on an NFS file system) which is now unavailable as referenced by the file descriptor.  This may indicate the file was deleted on the NFS server or some other catastrophic event occurred.</summary
-        >
+          <i>Stale NFS file handle</i>.  An attempt was made to access an open file (on an NFS file system) which is now unavailable as referenced by the file descriptor.  This may indicate the file was deleted on the NFS server or some other catastrophic event occurred.</summary>
       </Docs>
     </Member>
     <Member MemberName="ESTRPIPE">
@@ -2412,8 +2342,7 @@
           <i>Operation timed out</i>.  A 
 				<see cref="M:Mono.Unix.Native.Syscall.connect" />(2) or 
 				<see cref="M:Mono.Unix.Native.Syscall.send" />(2) request failed because the
-        connected party did not properly respond after a period of time.  (The timeout period is dependent on the communication protocol.)</summary
-        >
+        connected party did not properly respond after a period of time.  (The timeout period is dependent on the communication protocol.)</summary>
       </Docs>
     </Member>
     <Member MemberName="ETOOMANYREFS">
@@ -2453,8 +2382,7 @@
       <Docs>
         <summary>
           <i>Text file busy</i>.  The new process was a pure procedure (shared text) file which was open for writing by another process, or while the pure procedure file was being executed an 
-				<see cref="M:Mono.Unix.Native.Syscall.open" />(2) call requested write access.</summary
-        >
+				<see cref="M:Mono.Unix.Native.Syscall.open" />(2) call requested write access.</summary>
       </Docs>
     </Member>
     <Member MemberName="EUCLEAN">
@@ -2550,8 +2478,7 @@
       </ReturnValue>
       <Docs>
         <summary>
-          <i>Cross-device link</i>.  A hard link to a file on another file system was attempted.</summary
-        >
+          <i>Cross-device link</i>.  A hard link to a file on another file system was attempted.</summary>
       </Docs>
     </Member>
     <Member MemberName="EXFULL">

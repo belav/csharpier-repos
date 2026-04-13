@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Care must be taken when caching and reusing security tokens that are returned from the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method is called.</para
-      >
+        >Care must be taken when caching and reusing security tokens that are returned from the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method is called.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -108,23 +106,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
         </returns>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param
-        >
+          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the state of the operation.</param
-        >
+          />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
       </Docs>
     </Member>
     <Member MemberName="BeginClose">
@@ -157,30 +152,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param
-        >
+          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the state of the operation.</param
-        >
+          />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
       </Docs>
     </Member>
     <Member MemberName="BeginGetTokenCore">
@@ -213,30 +204,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param
-        >
+          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the state of the operation.</param
-        >
+          />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
       </Docs>
     </Member>
     <Member MemberName="BeginOpen">
@@ -268,23 +255,20 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
         </returns>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param
-        >
+          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the state of the operation.</param
-        >
+          />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
       </Docs>
     </Member>
     <Member MemberName="BeginOpen">
@@ -317,30 +301,26 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para
-          >
+            >An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param
-        >
+          />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Object" /> that represents the state of the operation.</param
-        >
+          />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
       </Docs>
     </Member>
     <Member MemberName="CacheIssuedTokens">
@@ -411,8 +391,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
       </Docs>
     </Member>
     <Member MemberName="Closed">
@@ -520,8 +499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" /> class.</para
-          >
+            >Releases all resources used by the current instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -552,8 +530,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param
-        >
+          />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param>
       </Docs>
     </Member>
     <Member MemberName="EndGetTokenCore">
@@ -590,8 +567,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param
-        >
+          />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param>
       </Docs>
     </Member>
     <Member MemberName="EndOpen">
@@ -621,8 +597,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param
-        >
+          />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param>
       </Docs>
     </Member>
     <Member MemberName="Faulted">
@@ -666,8 +641,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Care must be taken when caching and reusing security tokens that are returned from the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method is called.</para
-          >
+            >Care must be taken when caching and reusing security tokens that are returned from the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method is called.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -676,16 +650,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.IdentityModel.Tokens.SecurityToken" /> that represents the token core.</para
-          >
+            >The <see cref="T:System.IdentityModel.Tokens.SecurityToken" /> that represents the token core.</para>
         </returns>
         <param name="timeout">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
       </Docs>
     </Member>
     <Member MemberName="IdentityVerifier">
@@ -893,8 +865,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message.</para
-          >
+            >The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -951,8 +922,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param
-        >
+          />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
       </Docs>
     </Member>
     <Member MemberName="Opened">
@@ -1012,8 +982,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
-          >
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

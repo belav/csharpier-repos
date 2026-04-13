@@ -43,8 +43,7 @@
     <example>
       <para
         >The following example demonstrates the features of the <see cref="T:System.Threading.Timer" />
-class.</para
-      >
+class.</para>
       <code lang="C#"
         >using System;
 using System.Threading;
@@ -112,26 +111,20 @@ class App {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see cref="T:System.Threading.TimerCallback" /> delegate to specify the method you want the <see cref="T:System.Threading.Timer" /> to execute. The timer delegate is specified when the timer is constructed, and cannot be changed. The method does not execute on the thread that created the timer; it executes on a <see cref="T:System.Threading.ThreadPool" /> thread supplied by the system.</para
-      >
+        >Use a <see cref="T:System.Threading.TimerCallback" /> delegate to specify the method you want the <see cref="T:System.Threading.Timer" /> to execute. The timer delegate is specified when the timer is constructed, and cannot be changed. The method does not execute on the thread that created the timer; it executes on a <see cref="T:System.Threading.ThreadPool" /> thread supplied by the system.</para>
       <para
-        >When you create a timer, you can specify an amount of time to wait before the first execution of the method (due time), and an amount of time to wait between subsequent executions (period). You can change these values, or disable the timer, using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-      >
+        >When you create a timer, you can specify an amount of time to wait before the first execution of the method (due time), and an amount of time to wait between subsequent executions (period). You can change these values, or disable the timer, using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
       <block subset="none" type="note">
         <para
-          >As long as you are using a <see cref="T:System.Threading.Timer" />, you must keep a reference to it. As with any managed object, a <see cref="T:System.Threading.Timer" /> is subject to garbage collection when there are no references to it. The fact that a <see cref="T:System.Threading.Timer" /> is still active does not prevent it from being collected.</para
-        >
+          >As long as you are using a <see cref="T:System.Threading.Timer" />, you must keep a reference to it. As with any managed object, a <see cref="T:System.Threading.Timer" /> is subject to garbage collection when there are no references to it. The fact that a <see cref="T:System.Threading.Timer" /> is still active does not prevent it from being collected.</para>
       </block>
       <para
-        >When a timer is no longer needed, use the <see cref="Overload:System.Threading.Timer.Dispose" /> method to free the resources held by the timer. Note that callbacks can occur after the <see cref="M:System.Threading.Timer.Dispose" /> method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload to wait until all callbacks have completed. </para
-      >
+        >When a timer is no longer needed, use the <see cref="Overload:System.Threading.Timer.Dispose" /> method to free the resources held by the timer. Note that callbacks can occur after the <see cref="M:System.Threading.Timer.Dispose" /> method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload to wait until all callbacks have completed. </para>
       <para
-        >The callback method executed by the timer should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The callback can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the callback, or if all thread pool threads are in use and the callback is queued multiple times.</para
-      >
+        >The callback method executed by the timer should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The callback can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the callback, or if all thread pool threads are in use and the callback is queued multiple times.</para>
       <block subset="none" type="note">
         <para>
-          <see cref="T:System.Threading.Timer" /> is a simple, lightweight timer that uses callback methods and is served by thread pool threads. It is not recommended for use with Windows Forms, because its callbacks do not occur on the user interface thread. <see cref="T:System.Windows.Forms.Timer" /> is a better choice for use with Windows Forms. For server-based timer functionality, you might consider using <see cref="T:System.Timers.Timer" />, which raises events and has additional features.</para
-        >
+          <see cref="T:System.Threading.Timer" /> is a simple, lightweight timer that uses callback methods and is served by thread pool threads. It is not recommended for use with Windows Forms, because its callbacks do not occur on the user interface thread. <see cref="T:System.Windows.Forms.Timer" /> is a better choice for use with Windows Forms. For server-based timer functionality, you might consider using <see cref="T:System.Timers.Timer" />, which raises events and has additional features.</para>
       </block>
     </remarks>
     <summary>
@@ -162,28 +155,23 @@ class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this constructor when you want to use the <see cref="T:System.Threading.Timer" /> object itself as the state object. After creating the timer, use the <see cref="Overload:System.Threading.Timer.Change" /> method to set the interval and due time.</para
-          >
+            >Call this constructor when you want to use the <see cref="T:System.Threading.Timer" /> object itself as the state object. After creating the timer, use the <see cref="Overload:System.Threading.Timer.Change" /> method to set the interval and due time.</para>
           <para
-            >This constructor specifies an infinite due time before the first callback and an infinite interval between callbacks, in order to prevent the first callback from occurring before the <see cref="T:System.Threading.Timer" /> object is assigned to the state object. </para
-          >
+            >This constructor specifies an infinite due time before the first callback and an infinite interval between callbacks, in order to prevent the first callback from occurring before the <see cref="T:System.Threading.Timer" /> object is assigned to the state object. </para>
           <para
-            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para
-          >
+            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Threading.Timer" /> class with an infinite period and an infinite due time, using the newly created <see cref="T:System.Threading.Timer" /> object as the state object. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Threading.Timer" /> class with an infinite period and an infinite due time, using the newly created <see cref="T:System.Threading.Timer" /> object as the state object. </para>
         </summary>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed.</param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -214,31 +202,24 @@ class App {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />. </exception
-        >
+          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />. </exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="callback" /> is a <see langword="null" /> reference.</exception
-        >
+          <paramref name="callback" /> is a <see langword="null" /> reference.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para
-          >
+            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para>
           <para>[Visual Basic]</para>
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
-            >
+              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para>
           </block>
           <para
-            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" /> and <paramref name="dueTime" /> is not <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" /> and <paramref name="dueTime" /> is not <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para
-          >
+            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -249,29 +230,25 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null. </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -300,23 +277,18 @@ class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para
-          >
+            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para>
           <para>[Visual Basic]</para>
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
-            >
+              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para>
           </block>
           <para
-            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" /> and <paramref name="dueTime" /> is not <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" /> and <paramref name="dueTime" /> is not <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para
-          >
+            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -327,29 +299,25 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null. </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -380,66 +348,54 @@ class App {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The number of milliseconds in the value of <paramref name="dueTime" /> or <paramref name="period" /> is negative and not equal to <see cref="F:System.Threading.Timeout.Infinite" />, or is greater than <see cref="F:System.Int32.MaxValue" />.</exception
-        >
+          >The number of milliseconds in the value of <paramref name="dueTime" /> or <paramref name="period" /> is negative and not equal to <see cref="F:System.Threading.Timeout.Infinite" />, or is greater than <see cref="F:System.Int32.MaxValue" />.</exception>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="callback" /> is a <see langword="null" /> reference.</exception
-        >
+          <paramref name="callback" /> is a <see langword="null" /> reference.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para
-          >
+            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para>
           <para>[Visual Basic]</para>
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
-            >
+              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para>
           </block>
           <para
-            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is negative one (-1) milliseconds, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is negative one (-1) milliseconds, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or negative one (-1) milliseconds and <paramref name="dueTime" /> is positive, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="period" /> is zero (0) or negative one (-1) milliseconds and <paramref name="dueTime" /> is positive, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para
-          >
+            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the Timer class, using <see cref="T:System.TimeSpan" /> values to measure time intervals.</para
-          >
+            >Initializes a new instance of the Timer class, using <see cref="T:System.TimeSpan" /> values to measure time intervals.</para>
         </summary>
         <param name="callback">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null. </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.TimeSpan" /> representing the amount of time to delay before the <paramref name="callback" /> parameter invokes its methods. Specify negative one (-1) milliseconds to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The <see cref="T:System.TimeSpan" /> representing the amount of time to delay before the <paramref name="callback" /> parameter invokes its methods. Specify negative one (-1) milliseconds to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the methods referenced by <paramref name="callback" />. Specify negative one (-1) milliseconds to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the methods referenced by <paramref name="callback" />. Specify negative one (-1) milliseconds to disable periodic signaling. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -473,23 +429,18 @@ class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para
-          >
+            >The delegate specified by the <paramref name="callback" /> parameter is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the <paramref name="period" /> time interval elapses.</para>
           <para>[Visual Basic]</para>
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para
-            >
+              >Visual Basic users can omit the <see cref="T:System.Threading.TimerCallback" /> constructor, and simply use the AddressOf operator when specifying the callback method. Visual Basic automatically calls the correct delegate constructor.</para>
           </block>
           <para
-            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), <paramref name="callback" /> is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is not invoked; the timer is disabled, but can be re-enabled by calling the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" /> and <paramref name="dueTime" /> is not <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para
-          >
+            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" /> and <paramref name="dueTime" /> is not <see cref="F:System.Threading.Timeout.Infinite" />, <paramref name="callback" /> is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled using the <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> method.</para>
           <para
-            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para
-          >
+            >The method specified for <paramref name="callback" /> should be reentrant, because it is called on <see cref="T:System.Threading.ThreadPool" /> threads. The method can be executed simultaneously on two thread pool threads if the timer interval is less than the time required to execute the method, or if all thread pool threads are in use and the method is queued multiple times.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -500,29 +451,25 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param
-        >
+          />A <see cref="T:System.Threading.TimerCallback" /> delegate representing a method to be executed. </param>
         <param name="state">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An object containing information to be used by the callback method, or null. </param
-        >
+          />An object containing information to be used by the callback method, or null. </param>
         <param name="dueTime">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param
-        >
+          />The amount of time to delay before <paramref name="callback" /> is invoked, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from starting. Specify zero (0) to start the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of <paramref name="callback" />, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param>
       </Docs>
     </Member>
     <Member MemberName="Change">
@@ -550,19 +497,15 @@ class App {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" /> .</exception
-        >
+          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" /> .</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para
-          >
+            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para>
           <para
-            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" />, and <paramref name="dueTime" /> is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="period" />.</para
-          >
+            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" />, and <paramref name="dueTime" /> is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="period" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -577,15 +520,13 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -612,14 +553,11 @@ class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para
-          >
+            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para>
           <para
-            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" />, and <paramref name="dueTime" /> is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="period" />.</para
-          >
+            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" />, and <paramref name="dueTime" /> is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="period" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -634,15 +572,13 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param>
       </Docs>
     </Member>
     <Member MemberName="Change">
@@ -673,25 +609,20 @@ class App {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" /> .</exception
-        >
+          <paramref name="dueTime" /> or <paramref name="period" /> is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" /> .</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para
-          >
+            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para>
           <para
-            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is negative one (-1) milliseconds, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is negative one (-1) milliseconds, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or negative one (-1) milliseconds, and <paramref name="dueTime" /> is positive, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a value greater than zero for <paramref name="period" />.</para
-          >
+            >If <paramref name="period" /> is zero (0) or negative one (-1) milliseconds, and <paramref name="dueTime" /> is positive, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a value greater than zero for <paramref name="period" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the start time and the interval between method invocations for a timer, using <see cref="T:System.TimeSpan" /> values to measure time intervals.</para
-          >
+            >Changes the start time and the interval between method invocations for a timer, using <see cref="T:System.TimeSpan" /> values to measure time intervals.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -702,15 +633,13 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.TimeSpan" /> representing the amount of time to delay before invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />A <see cref="T:System.TimeSpan" /> representing the amount of time to delay before invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed. Specify negative one (-1) milliseconds to disable periodic signaling. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -742,14 +671,11 @@ class App {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para
-          >
+            >The callback method is invoked once after <paramref name="dueTime" /> elapses, and thereafter each time the time interval specified by <paramref name="period" /> elapses.</para>
           <para
-            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para
-          >
+            >If <paramref name="dueTime" /> is zero (0), the callback method is invoked immediately. If <paramref name="dueTime" /> is <see cref="F:System.Threading.Timeout.Infinite" />, the callback method is never invoked; the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="dueTime" />.</para>
           <para
-            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" />, and <paramref name="dueTime" /> is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="period" />.</para
-          >
+            >If <paramref name="period" /> is zero (0) or <see cref="F:System.Threading.Timeout.Infinite" />, and <paramref name="dueTime" /> is not Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling <see cref="M:System.Threading.Timer.Change(System.Int32,System.Int32)" /> and specifying a positive value for <paramref name="period" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -764,15 +690,13 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param
-        >
+          />The amount of time to delay before the invoking the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to prevent the timer from restarting. Specify zero (0) to restart the timer immediately. </param>
         <param name="period">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param
-        >
+          />The time interval between invocations of the callback method specified when the <see cref="T:System.Threading.Timer" /> was constructed, in milliseconds. Specify <see cref="F:System.Threading.Timeout.Infinite" /> to disable periodic signaling. </param>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -801,21 +725,17 @@ class App {
           <para
             >Calling Dispose allows the resources used by the <see cref="T:System.Threading.Timer" /> to be reallocated for other purposes. For more information about Dispose, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
-                >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a>
+            </format>.</para>
           <block subset="none" type="note">
             <para
-              >Callbacks can occur after the <see cref="M:System.Threading.Timer.Dispose" /> method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload to wait until all callbacks have completed.</para
-            >
+              >Callbacks can occur after the <see cref="M:System.Threading.Timer.Dispose" /> method overload has been called, because the timer queues callbacks for execution by thread pool threads. You can use the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload to wait until all callbacks have completed.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of <see cref="T:System.Threading.Timer" />.</para
-          >
+            >Releases all resources used by the current instance of <see cref="T:System.Threading.Timer" />.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>
@@ -847,31 +767,25 @@ class App {
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="notifyObject" /> is <see langword="null" />.</exception
-        >
+          <paramref name="notifyObject" /> is <see langword="null" />.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Calling Dispose allows the resources used by the <see cref="T:System.Threading.Timer" /> to be reallocated for other purposes. For more information about Dispose, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
-                >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
-              >
-            </format>.</para
-          >
+                >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a>
+            </format>.</para>
           <para
-            >When this method completes, it signals the <see cref="T:System.Threading.WaitHandle" /> specified by the <paramref name="notifyObject" /> parameter. Use this overload of the <see cref="Overload:System.Threading.Timer.Dispose" /> method if you want to be able to block until you are certain that the timer has been disposed. The timer is not disposed until all currently queued callbacks have completed.</para
-          >
+            >When this method completes, it signals the <see cref="T:System.Threading.WaitHandle" /> specified by the <paramref name="notifyObject" /> parameter. Use this overload of the <see cref="Overload:System.Threading.Timer.Dispose" /> method if you want to be able to block until you are certain that the timer has been disposed. The timer is not disposed until all currently queued callbacks have completed.</para>
           <block subset="none" type="note">
             <para
-              >If the callback uses the <see cref="Overload:System.Threading.Timer.Change" /> method to set the <paramref name="dueTime" /> parameter to zero, a race condition can occur when the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload is called: If the timer queues a new callback before the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload detects that there are no callbacks queued, <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> continues to block; otherwise, the timer is disposed while the new callback is being queued, and an <see cref="T:System.ObjectDisposedException" /> is thrown when the new callback calls the <see cref="Overload:System.Threading.Timer.Change" /> method.</para
-            >
+              >If the callback uses the <see cref="Overload:System.Threading.Timer.Change" /> method to set the <paramref name="dueTime" /> parameter to zero, a race condition can occur when the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload is called: If the timer queues a new callback before the <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> method overload detects that there are no callbacks queued, <see cref="M:System.Threading.Timer.Dispose(System.Threading.WaitHandle)" /> continues to block; otherwise, the timer is disposed while the new callback is being queued, and an <see cref="T:System.ObjectDisposedException" /> is thrown when the new callback calls the <see cref="Overload:System.Threading.Timer.Change" /> method.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of <see cref="T:System.Threading.Timer" /> and signals when the timer has been disposed of.</para
-          >
+            >Releases all resources used by the current instance of <see cref="T:System.Threading.Timer" /> and signals when the timer has been disposed of.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -882,8 +796,7 @@ class App {
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Threading.WaitHandle" /> to be signaled when the Timer has been disposed of. </param
-        >
+          />The <see cref="T:System.Threading.WaitHandle" /> to be signaled when the Timer has been disposed of. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>

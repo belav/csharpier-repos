@@ -4,8 +4,7 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <!-- Test unsupported outside of windows (type equivalence) -->
     <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
-      >true</CLRTestTargetUnsupported
-    >
+      >true</CLRTestTargetUnsupported>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType />

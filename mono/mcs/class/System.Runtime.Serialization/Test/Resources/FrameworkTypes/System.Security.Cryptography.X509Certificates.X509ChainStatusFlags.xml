@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <X509ChainStatusFlags
   xmlns="http://schemas.datacontract.org/2004/07/System.Security.Cryptography.X509Certificates"
-  >NoError</X509ChainStatusFlags
->
+  >NoError</X509ChainStatusFlags>

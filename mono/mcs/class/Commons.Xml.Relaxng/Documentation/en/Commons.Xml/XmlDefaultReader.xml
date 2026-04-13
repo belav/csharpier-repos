@@ -12,9 +12,7 @@
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
       location="node:gtk-sharp/programming/threads"
-      >Gtk# Thread Programming</link
-    > for details.</ThreadSafetyStatement
-  >
+      >Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
   <Docs>
     <summary>An utility XmlReader implementation that accepts an XmlReader as its source. This class implements all the abstract methods just by calling the source XmlReader.</summary>
     <remarks>This class works like SAX's DefaultHandler</remarks>

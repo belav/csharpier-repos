@@ -37,8 +37,7 @@
       <para>
         <block subset="none" type="note"
           >This class provides the loaded assembly via the <see cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" />
-property.</block
-        >
+property.</block>
       </para>
     </remarks>
     <summary>
@@ -74,22 +73,19 @@ property.</block
         <remarks>
           <para
             >The <see cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" /> property is initialized using 
-<paramref name="loadedAssembly" />.</para
-          >
+<paramref name="loadedAssembly" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.AssemblyLoadEventArgs" /> class using the specified <see cref="T:System.Reflection.Assembly" />.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.AssemblyLoadEventArgs" /> class using the specified <see cref="T:System.Reflection.Assembly" />.</para>
         </summary>
         <param name="loadedAssembly">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance that represents the currently loaded assembly. </param
-        >
+          />An instance that represents the currently loaded assembly. </param>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
@@ -120,20 +116,17 @@ property.</block
         <value>
           <para
             > A <see cref="T:System.Reflection.Assembly" />
-representing the assembly that has been loaded.</para
-          >
+representing the assembly that has been loaded.</para>
         </value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property is set by the common language runtime when the <see cref="E:System.AppDomain.AssemblyLoad" /> event occurs.</para
-          >
+            >The value of this property is set by the common language runtime when the <see cref="E:System.AppDomain.AssemblyLoad" /> event occurs.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see cref="T:System.Reflection.Assembly" /> that represents the currently loaded assembly.</para
-          >
+            >Gets an <see cref="T:System.Reflection.Assembly" /> that represents the currently loaded assembly.</para>
         </summary>
       </Docs>
       <Excluded>0</Excluded>

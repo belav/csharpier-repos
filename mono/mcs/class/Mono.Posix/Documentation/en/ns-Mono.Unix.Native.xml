@@ -8,8 +8,7 @@
         which are accessible from the <see cref="T:Mono.Unix.Native.Syscall" /> 
         and <see cref="T:Mono.Unix.Native.Stdlib" /> classes, which are
         a low-level wrappers over ANSI C, POSIX and Unix system calls and library
-        functions.</para
-      >
+        functions.</para>
       <block subset="none" type="note">
         <para>Thread-safety wasn't handled in the original Unix API.  While
         some degree of thread-safety is provided from managed code, it is
@@ -26,8 +25,7 @@
         <c>Mono.Unix.Native.Stdlib</c> assumes that it is.  Only <i>obviously</i> 
         unsafe exports are actually synchronized from managed code, such as 
         <see cref="M:Mono.Unix.Native.Stdlib.tmpnam" /> and 
-        <see cref="M:Mono.Unix.Native.Stdlib.strerror" />.</para
-        >
+        <see cref="M:Mono.Unix.Native.Stdlib.strerror" />.</para>
       </block>
       <para>Documentation is based upon the FreeBSD man pages, which is under the 
       following copyright:</para>

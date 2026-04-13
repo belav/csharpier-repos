@@ -20,14 +20,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="E:System.Windows.Forms.WebBrowser.Navigating" /> event occurs before the <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document. You can handle this event to cancel navigation before it begins if certain conditions have not been met, for example, when the user has not completely filled out a form. To do this, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property of the <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" /> object passed to the event handler to true. You can also use this object to retrieve the location of the new document through the <see cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.Url" /> property. If the new document will be displayed in a Web page frame, you can retrieve the name of the frame through the <see cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.TargetFrameName" /> property.</para
-      >
+        >The <see cref="E:System.Windows.Forms.WebBrowser.Navigating" /> event occurs before the <see cref="T:System.Windows.Forms.WebBrowser" /> control navigates to a new document. You can handle this event to cancel navigation before it begins if certain conditions have not been met, for example, when the user has not completely filled out a form. To do this, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property of the <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" /> object passed to the event handler to true. You can also use this object to retrieve the location of the new document through the <see cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.Url" /> property. If the new document will be displayed in a Web page frame, you can retrieve the name of the frame through the <see cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.TargetFrameName" /> property.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see cref="E:System.Windows.Forms.WebBrowser.Navigating" /> event.</para
-      >
+        >Provides data for the <see cref="E:System.Windows.Forms.WebBrowser.Navigating" /> event.</para>
     </summary>
   </Docs>
   <Members>
@@ -47,23 +45,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" /> class.</para>
         </summary>
         <param name="url">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Uri" /> representing the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" /> control is navigating. </param
-        >
+          />A <see cref="T:System.Uri" /> representing the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" /> control is navigating. </param>
         <param name="targetFrameName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The name of the Web page frame in which the new document will be loaded. </param
-        >
+          />The name of the Web page frame in which the new document will be loaded. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" /> control is navigating.</para
-          >
+            >Gets the location of the document to which the <see cref="T:System.Windows.Forms.WebBrowser" /> control is navigating.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

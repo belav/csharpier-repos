@@ -22,14 +22,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.SettingElementCollection" /> object contains a collection of <see cref="T:System.Configuration.SettingElement" /> objects. A <see cref="T:System.Configuration.SettingElement" /> object is used to set the value of an element within the configuration.</para
-      >
+        >The <see cref="T:System.Configuration.SettingElementCollection" /> object contains a collection of <see cref="T:System.Configuration.SettingElement" /> objects. A <see cref="T:System.Configuration.SettingElement" /> object is used to set the value of an element within the configuration.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see cref="T:System.Configuration.SettingElement" /> objects. This class cannot be inherited.</para
-      >
+        >Contains a collection of <see cref="T:System.Configuration.SettingElement" /> objects. This class cannot be inherited.</para>
     </summary>
   </Docs>
   <Members>
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Configuration.SettingElementCollection" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingElementCollection" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -82,16 +79,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see cref="T:System.Configuration.SettingElement" /> object to the collection.</para
-          >
+            >Adds a <see cref="T:System.Configuration.SettingElement" /> object to the collection.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Configuration.SettingElement" /> object to add to the collection.</param
-        >
+          />The <see cref="T:System.Configuration.SettingElement" /> object to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Clear">
@@ -115,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see cref="T:System.Configuration.SettingElement" /> objects from the collection.</para
-          >
+            >Removes all <see cref="T:System.Configuration.SettingElement" /> objects from the collection.</para>
         </summary>
       </Docs>
     </Member>
@@ -216,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Configuration.SettingElement" /> object from the collection. </para
-          >
+            >Gets a <see cref="T:System.Configuration.SettingElement" /> object from the collection. </para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -228,8 +221,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A string value representing the <see cref="T:System.Configuration.SettingElement" /> object in the collection.</param
-        >
+          />A string value representing the <see cref="T:System.Configuration.SettingElement" /> object in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="GetElementKey">
@@ -286,16 +278,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see cref="T:System.Configuration.SettingElement" /> object from the collection.</para
-          >
+            >Removes a <see cref="T:System.Configuration.SettingElement" /> object from the collection.</para>
         </summary>
         <param name="element">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Configuration.SettingElement" /> object.</param
-        >
+          />A <see cref="T:System.Configuration.SettingElement" /> object.</param>
       </Docs>
     </Member>
   </Members>

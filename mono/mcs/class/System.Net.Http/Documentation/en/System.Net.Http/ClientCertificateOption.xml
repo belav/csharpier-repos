@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.Http.HttpClientHandler" /> will attempt to provide  all available client certificates  automatically.</para
-          >
+            >The <see cref="T:System.Net.Http.HttpClientHandler" /> will attempt to provide  all available client certificates  automatically.</para>
         </summary>
       </Docs>
     </Member>
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application manually provides the client certificates to the <see cref="T:System.Net.Http.WebRequestHandler" />. This value is the default. </para
-          >
+            >The application manually provides the client certificates to the <see cref="T:System.Net.Http.WebRequestHandler" />. This value is the default. </para>
         </summary>
       </Docs>
     </Member>

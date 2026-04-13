@@ -10,14 +10,11 @@
 
     <!-- gets the path like emsdk/python/3.7.4-2_64bit -->
     <_NodeToolsVersionedPath Condition="Exists($(_NodeToolsBasePath))"
-      >$([System.IO.Directory]::GetDirectories($(_NodeToolsBasePath)))</_NodeToolsVersionedPath
-    >
+      >$([System.IO.Directory]::GetDirectories($(_NodeToolsBasePath)))</_NodeToolsVersionedPath>
     <EmscriptenNodeToolsPath Condition="'$(_NodeToolsVersionedPath)' != ''"
-      >$(_NodeToolsVersionedPath)</EmscriptenNodeToolsPath
-    >
+      >$(_NodeToolsVersionedPath)</EmscriptenNodeToolsPath>
     <EmscriptenNodeToolsPath Condition="'$(EmscriptenNodeToolsPath)' != ''"
-      >$([MSBuild]::NormalizeDirectory($(EmscriptenNodeToolsPath)))</EmscriptenNodeToolsPath
-    >
+      >$([MSBuild]::NormalizeDirectory($(EmscriptenNodeToolsPath)))</EmscriptenNodeToolsPath>
 
     <_UsingEMSDK_PATH>true</_UsingEMSDK_PATH>
   </PropertyGroup>
@@ -26,19 +23,15 @@
   <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('linux'))">
     <_PythonToolsBasePath>$(EmscriptenSdkToolsPath)python</_PythonToolsBasePath>
     <_PythonToolsVersionedPath Condition="Exists($(_PythonToolsBasePath))"
-      >$([System.IO.Directory]::GetDirectories($(_PythonToolsBasePath)))</_PythonToolsVersionedPath
-    >
+      >$([System.IO.Directory]::GetDirectories($(_PythonToolsBasePath)))</_PythonToolsVersionedPath>
     <EmscriptenPythonToolsPath Condition="'$(_PythonToolsVersionedPath)' != ''"
-      >$(_PythonToolsVersionedPath)</EmscriptenPythonToolsPath
-    >
+      >$(_PythonToolsVersionedPath)</EmscriptenPythonToolsPath>
     <EmscriptenPythonToolsPath Condition="'$(EmscriptenPythonToolsPath)' != ''"
-      >$([MSBuild]::NormalizeDirectory($(EmscriptenPythonToolsPath)))</EmscriptenPythonToolsPath
-    >
+      >$([MSBuild]::NormalizeDirectory($(EmscriptenPythonToolsPath)))</EmscriptenPythonToolsPath>
 
     <_EMSDKMissingPaths
       Condition="'$(_EMSDKMissingPaths)' == '' and ('$(EmscriptenPythonToolsPath)' == '' or !Exists('$(EmscriptenPythonToolsPath)'))"
-      >%24(EmscriptenPythonToolsPath)=$(EmscriptenPythonToolsPath) </_EMSDKMissingPaths
-    >
+      >%24(EmscriptenPythonToolsPath)=$(EmscriptenPythonToolsPath) </_EMSDKMissingPaths>
   </PropertyGroup>
 
   <!-- Paths to be added to environment variable `PATH` -->

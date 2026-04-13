@@ -27,8 +27,7 @@
   </Interfaces>
   <Docs>
     <remarks
-      >This class represents an &lt;!ENTITY ... &gt; declaration node within a document type declaration node.  These nodes are children of <see cref="T:System.Xml.XmlDocumentType" /> nodes.</remarks
-    >
+      >This class represents an &lt;!ENTITY ... &gt; declaration node within a document type declaration node.  These nodes are children of <see cref="T:System.Xml.XmlDocumentType" /> nodes.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Represents an entity declaration, such as &lt;!ENTITY... &gt;.</para>
@@ -289,22 +288,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a duplicate of this node. Entity nodes cannot be cloned. Calling this method on an <see cref="T:System.Xml.XmlEntity" /> object throws an exception.</para
-          >
+            >Creates a duplicate of this node. Entity nodes cannot be cloned. Calling this method on an <see cref="T:System.Xml.XmlEntity" /> object throws an exception.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a copy of the <see cref="T:System.Xml.XmlNode" /> from which the method is called.</para
-          >
+            >Returns a copy of the <see cref="T:System.Xml.XmlNode" /> from which the method is called.</para>
         </returns>
         <param name="deep">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to recursively clone the subtree under the specified node; false to clone only the node itself.</param
-        >
+          />true to recursively clone the subtree under the specified node; false to clone only the node itself.</param>
       </Docs>
     </Member>
     <Member MemberName="InnerText">
@@ -590,16 +586,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlEntity nodes, this method has no effect.</para
-          >
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlEntity nodes, this method has no effect.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -631,16 +625,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlEntity nodes, this method has no effect.</para
-          >
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />. For XmlEntity nodes, this method has no effect.</para>
         </summary>
         <param name="w">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The XmlWriter to which you want to save. </param
-        >
+          />The XmlWriter to which you want to save. </param>
       </Docs>
     </Member>
   </Members>

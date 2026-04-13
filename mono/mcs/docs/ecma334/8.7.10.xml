@@ -16,6 +16,5 @@ class Employee
    ...  
 }  
 ]]>
-    </code_example>shows an Employee class with a static constructor that initializes a static field. </paragraph
-  >
+    </code_example>shows an Employee class with a static constructor that initializes a static field. </paragraph>
 </clause>

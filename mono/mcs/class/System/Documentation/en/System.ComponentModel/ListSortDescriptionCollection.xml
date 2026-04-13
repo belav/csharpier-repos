@@ -29,17 +29,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class is used by the <see cref="T:System.ComponentModel.IBindingListView" /> interface.</para
-      >
+        >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class is used by the <see cref="T:System.ComponentModel.IBindingListView" /> interface.</para>
       <para
-        >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed.</para
-      >
+        >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see cref="T:System.ComponentModel.ListSortDescription" /> objects.</para
-      >
+        >Represents a collection of <see cref="T:System.ComponentModel.ListSortDescription" /> objects.</para>
     </summary>
   </Docs>
   <Members>
@@ -60,14 +57,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed.</para
-          >
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -93,24 +88,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed.</para
-          >
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed.</para>
           <para>Example</para>
           <para />
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class with the specified array of <see cref="T:System.ComponentModel.ListSortDescription" /> objects.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class with the specified array of <see cref="T:System.ComponentModel.ListSortDescription" /> objects.</para>
         </summary>
         <param name="sorts">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array of <see cref="T:System.ComponentModel.ListSortDescription" /> objects to be contained in the collection.</param
-        >
+          />The array of <see cref="T:System.ComponentModel.ListSortDescription" /> objects to be contained in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -136,22 +128,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> contains a specific value.</para
-          >
+            >Determines if the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> contains a specific value.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see cref="T:System.Object" /> is found in the collection; otherwise, false. </para
-          >
+            >true if the <see cref="T:System.Object" /> is found in the collection; otherwise, false. </para>
         </returns>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -184,15 +173,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The destination array for the items copied from the collection.</param
-        >
+          />The destination array for the items copied from the collection.</param>
         <param name="index">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The index of the destination array at which copying begins.</param
-        >
+          />The index of the destination array at which copying begins.</param>
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -249,8 +236,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to locate in the collection.</param
-        >
+          />The <see cref="T:System.Object" /> to locate in the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="Item">
@@ -303,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns true, because once constructed, the collection is read-only. This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para
-          >
+            >This property always returns true, because once constructed, the collection is read-only. This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -334,11 +319,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation returns the current instance of the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />, because this collection, once constructed, does not allow public access to the underlying list.</para
-          >
+            >This implementation returns the current instance of the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" />, because this collection, once constructed, does not allow public access to the underlying list.</para>
           <para
-            >For more information on the <see cref="P:System.ComponentModel.ListSortDescriptionCollection.System#Collections#ICollection#SyncRoot" /> method, see the <see cref="P:System.Collections.ICollection.SyncRoot" /> property.</para
-          >
+            >For more information on the <see cref="P:System.ComponentModel.ListSortDescriptionCollection.System#Collections#ICollection#SyncRoot" /> method, see the <see cref="P:System.Collections.ICollection.SyncRoot" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -369,14 +352,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >Gets a <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para
-          >
+            >An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
         </returns>
       </Docs>
     </Member>
@@ -401,8 +382,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have an <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Add(System.Object)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, adding items to the collection is an invalid operation.</para
-          >
+            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have an <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Add(System.Object)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, adding items to the collection is an invalid operation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -417,8 +397,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to add to the collection.</param
-        >
+          />The item to add to the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Clear">
@@ -440,8 +419,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Clear" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, clearing items from the collection is an invalid operation.</para
-          >
+            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Clear" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, clearing items from the collection is an invalid operation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -471,8 +449,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Insert(System.Int32,System.Object)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, inserting items into the collection is an invalid operation.</para
-          >
+            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Insert(System.Int32,System.Object)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, inserting items into the collection is an invalid operation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -483,15 +460,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the <see cref="T:System.ComponentModel.ListSortDescription" />  to get or set in the collection</param
-        >
+          />The zero-based index of the <see cref="T:System.ComponentModel.ListSortDescription" />  to get or set in the collection</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to insert into the collection.</param
-        >
+          />The item to insert into the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -539,8 +514,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed. A collection that is read-only does not allow the addition, removal, or modification of elements after the collection is created.</para
-          >
+            >The <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> is read-only once constructed. A collection that is read-only does not allow the addition, removal, or modification of elements after the collection is created.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -596,8 +570,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Remove(System.Object)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, removing items from the collection is an invalid operation.</para
-          >
+            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#Remove(System.Object)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, removing items from the collection is an invalid operation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -608,8 +581,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The item to remove from the collection.</param
-        >
+          />The item to remove from the collection.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.RemoveAt">
@@ -633,8 +605,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#RemoveAt(System.Int32)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, removing items from the collection is an invalid operation.</para
-          >
+            >Because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class implements the <see cref="T:System.Collections.IList" /> interface, it must have a <see cref="M:System.ComponentModel.ListSortDescriptionCollection.System#Collections#IList#RemoveAt(System.Int32)" /> method. However, because the <see cref="T:System.ComponentModel.ListSortDescriptionCollection" /> class represents a read-only collection, removing items from the collection is an invalid operation.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -645,8 +616,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The zero-based index of the <see cref="T:System.ComponentModel.ListSortDescription" />  to remove from the collection</param
-        >
+          />The zero-based index of the <see cref="T:System.ComponentModel.ListSortDescription" />  to remove from the collection</param>
       </Docs>
     </Member>
   </Members>

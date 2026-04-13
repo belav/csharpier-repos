@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaType" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaType" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -80,8 +79,7 @@
           <para>The complexType is derived from the type specified by the base value. The base value must be a QName.</para>
           <block subset="none" type="note">
             <para
-              >The <see cref="P:System.Xml.Schema.XmlSchemaType.BaseSchemaType" /> property is obsolete and has been replaced by the <see cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" /> property.</para
-            >
+              >The <see cref="P:System.Xml.Schema.XmlSchemaType.BaseSchemaType" /> property is obsolete and has been replaced by the <see cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" /> property.</para>
           </block>
         </remarks>
         <summary>
@@ -118,8 +116,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" /> property always has a value, because all schema types have a base type. This value is set upon schema compilation, making it a part of the post-schema-compilation infoset.</para
-          >
+            >The <see cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" /> property always has a value, because all schema types have a base type. This value is set upon schema compilation, making it a part of the post-schema-compilation infoset.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -482,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the post-compilation value of the <see cref="P:System.Xml.Schema.XmlSchemaType.Final" /> property.</para
-          >
+            >Gets the post-compilation value of the <see cref="P:System.Xml.Schema.XmlSchemaType.Final" /> property.</para>
         </summary>
       </Docs>
     </Member>
@@ -513,22 +509,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type of the complex type specified.</para
-          >
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type of the complex type specified.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type.</para>
         </returns>
         <param name="typeCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Xml.Schema.XmlTypeCode" /> values representing the complex type.</param
-        >
+          />One of the <see cref="T:System.Xml.Schema.XmlTypeCode" /> values representing the complex type.</param>
       </Docs>
     </Member>
     <Member MemberName="GetBuiltInComplexType">
@@ -557,22 +550,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type of the complex type specified by qualified name.</para
-          >
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type of the complex type specified by qualified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchemaComplexType" /> that represents the built-in complex type.</para>
         </returns>
         <param name="qualifiedName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> of the complex type.</param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> of the complex type.</param>
       </Docs>
     </Member>
     <Member MemberName="GetBuiltInSimpleType">
@@ -604,22 +594,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type of the specified simple type.</para
-          >
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type of the specified simple type.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type.</para>
         </returns>
         <param name="typeCode">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Xml.Schema.XmlTypeCode" /> values representing the simple type.</param
-        >
+          />One of the <see cref="T:System.Xml.Schema.XmlTypeCode" /> values representing the simple type.</param>
       </Docs>
     </Member>
     <Member MemberName="GetBuiltInSimpleType">
@@ -651,22 +638,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type of the simple type that is specified by the qualified name.</para
-          >
+            >Returns an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type of the simple type that is specified by the qualified name.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type.</para
-          >
+            >The <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" /> that represents the built-in simple type.</para>
         </returns>
         <param name="qualifiedName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlQualifiedName" /> of the simple type.</param
-        >
+          />The <see cref="T:System.Xml.XmlQualifiedName" /> of the simple type.</param>
       </Docs>
     </Member>
     <Member MemberName="IsDerivedFrom">
@@ -707,22 +691,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The derived <see cref="T:System.Xml.Schema.XmlSchemaType" /> to test.</param
-        >
+          />The derived <see cref="T:System.Xml.Schema.XmlSchemaType" /> to test.</param>
         <param name="baseType">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The base <see cref="T:System.Xml.Schema.XmlSchemaType" /> to test the derived <see cref="T:System.Xml.Schema.XmlSchemaType" /> against.</param
-        >
+          />The base <see cref="T:System.Xml.Schema.XmlSchemaType" /> to test the derived <see cref="T:System.Xml.Schema.XmlSchemaType" /> against.</param>
         <param name="except">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />One of the <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" /> values representing a type derivation method to exclude from testing.</param
-        >
+          />One of the <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" /> values representing a type derivation method to exclude from testing.</param>
       </Docs>
     </Member>
     <Member MemberName="IsMixed">

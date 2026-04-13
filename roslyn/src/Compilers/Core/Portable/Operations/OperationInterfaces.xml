@@ -76,8 +76,7 @@
         <summary>Variable declaration in the statement.</summary>
         <remarks>
           In C#, this will always be a single declaration, with all variables in <see cref="IVariableDeclarationOperation.Declarators" />.
-        </remarks
-        >
+        </remarks>
       </Comments>
     </Property>
   </Node>
@@ -96,8 +95,7 @@
       <Comments>
         <summary>
           Locals declared within the switch operation with scope spanning across all <see cref="Cases" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Value" Type="IOperation">
@@ -227,8 +225,7 @@
           Locals declared within the loop Condition and are in scope throughout the <see cref="Condition" />,
           <see cref="ILoopOperation.Body" /> and <see cref="AtLoopBottom" />.
           They are considered to be declared per iteration.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Condition" Type="IOperation?">
@@ -283,8 +280,7 @@
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
-          <code>true</code> if arithmetic operations behind this loop are 'checked'.</summary
-        >
+          <code>true</code> if arithmetic operations behind this loop are 'checked'.</summary>
       </Comments>
     </Property>
     <Property Name="NextVariables" Type="ImmutableArray&lt;IOperation&gt;">
@@ -320,15 +316,13 @@
         <summary>
           True if the <see cref="Condition" /> is evaluated at start of each loop iteration.
           False if it is evaluated at the end of each loop iteration.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="ConditionIsUntil" Type="bool">
       <Comments>
         <summary
-          >True if the loop has 'Until' loop semantics and the loop is executed while <see cref="Condition" /> is false.</summary
-        >
+          >True if the loop has 'Until' loop semantics and the loop is executed while <see cref="Condition" /> is false.</summary>
       </Comments>
     </Property>
     <Property Name="IgnoredCondition" Type="IOperation?">
@@ -338,8 +332,7 @@
           For example, for VB 'Do While' or 'Do Until' loop with syntax errors where both the top and bottom conditions are provided.
           The top condition is preferred and exposed as <see cref="Condition" /> and the bottom condition is ignored and exposed by this property.
           This property should be null for all non-error cases.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -500,8 +493,7 @@
       <Comments>
         <summary>
           Locals declared within the <see cref="Resources" /> with scope spanning across this entire <see cref="IUsingOperation" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsAsynchronous" Type="bool">
@@ -515,8 +507,7 @@
     <Property Name="DisposeInfo" Type="DisposeOperationInfo" Internal="true">
       <Comments>
         <summary
-          >Information about the method that will be invoked to dispose the <see cref="Resources" /> when pattern based disposal is used.</summary
-        >
+          >Information about the method that will be invoked to dispose the <see cref="Resources" /> when pattern based disposal is used.</summary>
       </Comments>
     </Property>
   </Node>
@@ -650,8 +641,7 @@
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
           Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Conversion" Type="CommonConversion">
@@ -661,8 +651,7 @@
           If you need conversion information that is language specific, use either
           <see cref="T:Microsoft.CodeAnalysis.CSharp.CSharpExtensions.GetConversion(IConversionOperation)" /> or
           <see cref="T:Microsoft.CodeAnalysis.VisualBasic.VisualBasicExtensions.GetConversion(IConversionOperation)" />.
-        </remarks
-        >
+        </remarks>
       </Comments>
     </Property>
     <Property Name="IsTryCast" Type="bool">
@@ -670,8 +659,7 @@
         <summary>
           False if the conversion will fail with a <see cref="InvalidCastException" /> at runtime if the cast fails. This is true for C#'s
           <c>as</c> operator and for VB's <c>TryCast</c> operator.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
@@ -700,8 +688,7 @@
          (4) VB collection element initializer.
              Similar to the C# example, <code>New C() From {1, 2, 3}</code> will have 3 <see cref="IInvocationOperation" />
              nodes with 1, 2, and 3 as their arguments, respectively.
-        </para
-        >
+        </para>
       </summary>
     </Comments>
     <Property Name="TargetMethod" Type="IMethodSymbol">
@@ -714,8 +701,7 @@
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="TargetMethod" />.
           Null if <see cref="TargetMethod" /> is resolved statically, or is an instance method.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Instance" Type="IOperation?">
@@ -833,8 +819,7 @@
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="Member" />.
           Null if <see cref="Member" /> is resolved statically, or is an instance member.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </AbstractNode>
@@ -985,16 +970,14 @@
           operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see cref="System.Nullable{T}" /> versions of those
           value types.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
           <see langword="true" /> if overflow checking is performed for the arithmetic operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="OperatorMethod" Type="IMethodSymbol?">
@@ -1007,8 +990,7 @@
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
           Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1061,24 +1043,21 @@
           operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see cref="System.Nullable{T}" /> versions of those
           value types.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
           <see langword="true" /> if this is a 'checked' binary operator.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsCompareText" Type="bool">
       <Comments>
         <summary>
           <see langword="true" /> if the comparison is text based for string or object comparison in VB.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="OperatorMethod" Type="IMethodSymbol?">
@@ -1092,8 +1071,7 @@
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />
           or corresponding true/false operator, if any.
           Null if operators are resolved statically, or are not used.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="UnaryOperatorMethod" Type="IMethodSymbol?" Internal="true">
@@ -1134,16 +1112,14 @@
       <Comments>
         <summary>
           Operation to be executed if the <see cref="Condition" /> is true.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="WhenFalse" Type="IOperation?">
       <Comments>
         <summary>
           Operation to be executed if the <see cref="Condition" /> is false.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsRef" Type="bool">
@@ -1180,8 +1156,7 @@
       <Comments>
         <summary>
           Operation to be conditionally evaluated if <see cref="Value" /> evaluates to null/Nothing.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="ValueConversion" Type="CommonConversion">
@@ -1192,8 +1167,7 @@
           Identity if result type of the operation is the same as type of <see cref="Value" />.
           Otherwise, if type of <see cref="Value" /> is nullable, then conversion is applied to an
           unwrapped <see cref="Value" />, otherwise to the <see cref="Value" /> itself.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1436,8 +1410,7 @@
       <Comments>
         <summary>
           Conversion applied to <see cref="IAssignmentOperation.Target" /> before the operation occurs.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="OutConversion" Type="CommonConversion">
@@ -1445,8 +1418,7 @@
         <summary>
           Conversion applied to the result of the binary operation, before it is assigned back to
           <see cref="IAssignmentOperation.Target" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="OperatorKind" Type="BinaryOperatorKind">
@@ -1458,16 +1430,14 @@
       <Comments>
         <summary>
           <see langword="true" /> if this assignment contains a 'lifted' binary operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
           <see langword="true" /> if overflow checking is performed for the arithmetic operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="OperatorMethod" Type="IMethodSymbol?">
@@ -1480,8 +1450,7 @@
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
           Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1559,8 +1528,7 @@
       <Comments>
         <summary>
           Operation to be evaluated if <see cref="Operation" /> is non null.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1598,8 +1566,7 @@
       <Comments>
         <summary>
           Constituent parts of interpolated string, each of which is an <see cref="IInterpolatedStringContentOperation" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1620,8 +1587,7 @@
           Property initializers.
           Each initializer is an <see cref="ISimpleAssignmentOperation" />, with an <see cref="IPropertyReferenceOperation" />
           as the target whose Instance is an <see cref="IInstanceReferenceOperation" /> with <see cref="InstanceReferenceKind.ImplicitReceiver" /> kind.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1665,8 +1631,7 @@
       <Comments>
         <summary>
           Initialized member reference <see cref="IMemberReferenceOperation" /> or an invalid operation for error cases.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Initializer" Type="IObjectOrCollectionInitializerOperation">
@@ -1677,8 +1642,7 @@
   </Node>
   <Node Name="ICollectionElementInitializerOperation" Base="IOperation" SkipClassGeneration="true">
     <Obsolete Error="true"
-      >"ICollectionElementInitializerOperation has been replaced with " + nameof(IInvocationOperation) + " and " + nameof(IDynamicInvocationOperation)</Obsolete
-    >
+      >"ICollectionElementInitializerOperation has been replaced with " + nameof(IInvocationOperation) + " and " + nameof(IDynamicInvocationOperation)</Obsolete>
     <Comments>
       <summary>
         Obsolete interface that used to represent a collection element initializer. It has been replaced by
@@ -1686,8 +1650,7 @@
         <para>
         Current usage:
           None. This API has been obsoleted in favor of <see cref="IInvocationOperation" /> and <see cref="IDynamicInvocationOperation" />.
-        </para
-        >
+        </para>
       </summary>
     </Comments>
     <Property Name="AddMethod" Type="IMethodSymbol" />
@@ -1733,8 +1696,7 @@
           Natural type of the tuple, or null if tuple doesn't have a natural type.
           Natural type can be different from <see cref="IOperation.Type" /> depending on the
           conversion context, in which the tuple is used.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1790,8 +1752,7 @@
       <Comments>
         <summary>
           The containing type of the referenced member, if different from type of the <see cref="Instance" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -1810,8 +1771,7 @@
          (4) VB dynamic collection element initializer.
              Similar to the C# example, <code>New C() From {do1, do2, do3}</code> will generate 3 <see cref="IDynamicInvocationOperation" />
              nodes with do1, do2, and do3 as their arguments, respectively.
-        </para
-        >
+        </para>
       </summary>
     </Comments>
     <Property Name="Operation" Type="IOperation">
@@ -1994,8 +1954,7 @@
       <Comments>
         <summary>
           <see langword="true" /> if this is a postfix expression. <see langword="false" /> if this is a prefix expression.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsLifted" Type="bool">
@@ -2005,16 +1964,14 @@
           is an operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see cref="System.Nullable{T}" /> versions of those
           value types.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IsChecked" Type="bool">
       <Comments>
         <summary>
           <see langword="true" /> if overflow checking is performed for the arithmetic operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Target" Type="IOperation">
@@ -2032,8 +1989,7 @@
         <summary>
           Type parameter which runtime type will be used to resolve virtual invocation of the <see cref="OperatorMethod" />, if any.
           Null if <see cref="OperatorMethod" /> is resolved statically, or is null.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -2116,8 +2072,7 @@
       <Comments>
         <summary>
           Local declared in and scoped to the <see cref="Value" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Value" Type="IOperation">
@@ -2237,8 +2192,7 @@
           If this variable is in an <see cref="IVariableDeclarationOperation" />, the initializer may be located
           in the parent operation. Call <see cref="OperationExtensions.GetVariableInitializer(IVariableDeclaratorOperation)" />
           to check in all locations. It is only possible to have initializers in both locations in VB invalid code scenarios.
-        </remarks
-        >
+        </remarks>
       </Comments>
     </Property>
     <Property Name="IgnoredArguments" Type="ImmutableArray&lt;IOperation&gt;">
@@ -2269,8 +2223,7 @@
         be initializers in both locations except in invalid code scenarios.
         In C#, this node will never have an initializer.
         This corresponds to the VariableDeclarationSyntax in C#, and the VariableDeclaratorSyntax in Visual Basic.
-      </remarks
-      >
+      </remarks>
     </Comments>
     <Property Name="Declarators" Type="ImmutableArray&lt;IVariableDeclaratorOperation&gt;">
       <Comments>
@@ -2278,8 +2231,7 @@
         <remarks>
           All <see cref="IVariableDeclarationGroupOperation" /> will have at least 1 <see cref="IVariableDeclarationOperation" />,
           even if the declaration group only declares 1 variable.
-        </remarks
-        >
+        </remarks>
       </Comments>
     </Property>
     <Property Name="Initializer" Type="IVariableInitializerOperation?">
@@ -2369,8 +2321,7 @@
       <Comments>
         <summary>
           Locals declared by the <see cref="ExceptionDeclarationOrExpression" /> and/or <see cref="Filter" /> clause.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Filter" Type="IOperation?">
@@ -2420,8 +2371,7 @@
           nodes exposed by <see cref="Clauses" />, like <see cref="ISingleValueCaseClauseOperation.Value" />,
           etc.
           Never set for C# at the moment.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -2675,8 +2625,7 @@
       <Comments>
         <summary>
           The type explicitly specified, or null if it was inferred (e.g. using <code>var</code> in C#).
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="MatchesNull" Type="bool">
@@ -2841,8 +2790,7 @@
       <summary>
         Represents that an intermediate result is being captured.
         This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary
-      >
+      </summary>
     </Comments>
     <Property Name="Id" Type="CaptureId">
       <Comments>
@@ -2867,8 +2815,7 @@
         Represents a point of use of an intermediate result captured earlier.
         The fact of capturing the result is represented by <see cref="IFlowCaptureOperation" />.
         This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary
-      >
+      </summary>
     </Comments>
     <Property Name="Id" Type="CaptureId">
       <Comments>
@@ -2878,8 +2825,7 @@
     <Property Name="IsInitialization" Type="bool">
       <Comments>
         <summary
-          >True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code>out</code> parameter.</summary
-        >
+          >True if this reference to the capture initializes the capture. Used when the capture is being initialized by being passed as an <code>out</code> parameter.</summary>
       </Comments>
     </Property>
   </Node>
@@ -2898,8 +2844,7 @@
         for nullable types this checks if the <see cref="Operand" /> doesn’t have a value.
         The node is produced as part of a flow graph during rewrite of <see cref="ICoalesceOperation" />
         and <see cref="IConditionalAccessOperation" /> nodes.
-      </summary
-      >
+      </summary>
     </Comments>
     <Property Name="Operand" Type="IOperation">
       <Comments>
@@ -2918,8 +2863,7 @@
       <summary>
         Represents a exception instance passed by an execution environment to an exception filter or handler.
         This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary
-      >
+      </summary>
     </Comments>
   </Node>
   <Node
@@ -2935,8 +2879,7 @@
         If the semaphore operation returns true, the static local has not yet been initialized, and the initializer will be run. If it returns
         false, then the local has already been initialized, and the static local initializer region will be skipped.
         This node is produced only as part of a <see cref="ControlFlowGraph" />.
-      </summary
-      >
+      </summary>
     </Comments>
     <Property Name="Local" Type="ILocalSymbol">
       <Comments>
@@ -2960,8 +2903,7 @@
         </para>
         A <see cref="ControlFlowGraph" /> for the body of the anonymous function is available from
         the enclosing <see cref="ControlFlowGraph" />.
-      </summary
-      >
+      </summary>
     </Comments>
     <Property Name="Symbol" Type="IMethodSymbol">
       <Comments>
@@ -2984,8 +2926,7 @@
         <para>
         Current usage:
          (1) C# null-coalescing assignment operation <code>Target ??= Value</code>.
-        </para
-        >
+        </para>
       </summary>
     </Comments>
   </Node>
@@ -3022,8 +2963,7 @@
           operator that is defined to work on a value type, 'lifted' operators are
           created to work on the <see cref="System.Nullable{T}" /> versions of those
           value types.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Method" Type="IMethodSymbol?">
@@ -3096,8 +3036,7 @@
           The symbol, if any, used for the fetching values for subpatterns. This is either a <code>Deconstruct</code>
           method, the type <code>System.Runtime.CompilerServices.ITuple</code>, or null (for example, in
           error cases or when matching a tuple type).
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="DeconstructionSubpatterns" Type="ImmutableArray&lt;IPatternOperation&gt;">
@@ -3194,8 +3133,7 @@
         <summary>
           The member being matched in a property subpattern.  This can be a <see cref="IMemberReferenceOperation" />
           in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Pattern" Type="IPatternOperation">
@@ -3373,8 +3311,7 @@
     <Property Name="OperatorKind" Type="BinaryOperatorKind">
       <Comments>
         <summary
-          >Kind of binary pattern; either <see cref="BinaryOperatorKind.And" /> or <see cref="BinaryOperatorKind.Or" />.</summary
-        >
+          >Kind of binary pattern; either <see cref="BinaryOperatorKind.And" /> or <see cref="BinaryOperatorKind.Or" />.</summary>
       </Comments>
     </Property>
     <Property Name="LeftPattern" Type="IPatternOperation">
@@ -3402,8 +3339,7 @@
       <Comments>
         <summary>
           The type explicitly specified, or null if it was inferred (e.g. using <code>var</code> in C#).
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -3468,8 +3404,7 @@
         <summary>
           The construction of the interpolated string handler instance. This can be an <see cref="IObjectCreationOperation" /> for valid code, and
           <see cref="IDynamicObjectCreationOperation" /> or <see cref="IInvalidOperation" /> for invalid code.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="HandlerCreationHasSuccessParameter" Type="bool">
@@ -3477,8 +3412,7 @@
         <summary>
           True if the last parameter of <see cref="HandlerCreation" /> is an out <see langword="bool" /> parameter that will be checked before executing the code in
           <see cref="Content" />. False otherwise.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="HandlerAppendCallsReturnBool" Type="bool">
@@ -3486,16 +3420,14 @@
         <summary>
           True if the AppendLiteral or AppendFormatted calls in nested <see cref="IInterpolatedStringOperation.Parts" /> return <see langword="bool" />. When that is true, each part
           will be conditional on the return of the part before it, only being executed when the Append call returns true. False otherwise.
-        </summary
-        >
+        </summary>
         <remarks>
           when this is true and <see cref="HandlerCreationHasSuccessParameter" /> is true, then the first part in nested <see cref="IInterpolatedStringOperation.Parts" /> is conditionally
           run. If this is true and <see cref="HandlerCreationHasSuccessParameter" /> is false, then the first part is unconditionally run.
           <br />
           Just because this is true or false does not guarantee that all Append calls actually do return boolean values, as there could be dynamic calls or errors.
           It only governs what the compiler was expecting, based on the first calls it did see.
-        </remarks
-        >
+        </remarks>
       </Comments>
     </Property>
     <Property Name="Content" Type="IOperation">
@@ -3503,8 +3435,7 @@
         <summary>
           The interpolated string expression or addition operation that makes up the content of this string. This is either an <see cref="IInterpolatedStringOperation" />
           or an <see cref="IInterpolatedStringAdditionOperation" /> operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -3519,8 +3450,7 @@
         <summary>
           The interpolated string expression or addition operation on the left side of the operator. This is either an <see cref="IInterpolatedStringOperation" />
           or an <see cref="IInterpolatedStringAdditionOperation" /> operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Right" Type="IOperation">
@@ -3528,8 +3458,7 @@
         <summary>
           The interpolated string expression or addition operation on the right side of the operator. This is either an <see cref="IInterpolatedStringOperation" />
           or an <see cref="IInterpolatedStringAdditionOperation" /> operation.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -3559,8 +3488,7 @@
         <summary>
           If this interpolated string is subject to an interpolated string handler conversion, the construction of the interpolated string handler instance.
           This can be an <see cref="IInvocationOperation" />  or <see cref="IDynamicInvocationOperation" /> for valid code, and <see cref="IInvalidOperation" /> for invalid code.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
   </Node>
@@ -3575,8 +3503,7 @@
         <summary>
           The index of the argument of the method call, indexer, or object creation containing the interpolated string handler conversion this placeholder is referencing.
           -1 if <see cref="PlaceholderKind" /> is anything other than <see cref="InterpolatedStringArgumentPlaceholderKind.CallsiteArgument" />.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="PlaceholderKind" Type="InterpolatedStringArgumentPlaceholderKind">
@@ -3618,8 +3545,7 @@
         <summary>
           The <c>Length</c> or <c>Count</c> property that is used to fetch the length value.
           Returns <c>null</c> if no such property is found.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IndexerSymbol" Type="ISymbol?">
@@ -3627,8 +3553,7 @@
         <summary>
           The indexer that is used to fetch elements.
           Returns <c>null</c> for an array input.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Patterns" Type="ImmutableArray&lt;IPatternOperation&gt;">
@@ -3654,8 +3579,7 @@
       <Comments>
         <summary>
           The range indexer or the <c>Slice</c> method used to fetch the slice value.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="Pattern" Type="IPatternOperation?">
@@ -3695,8 +3619,7 @@
       <Comments>
         <summary>
           The <c>Length</c> or <c>Count</c> property that might be used to fetch the length value.
-        </summary
-        >
+        </summary>
       </Comments>
     </Property>
     <Property Name="IndexerSymbol" Type="ISymbol">
@@ -3737,8 +3660,7 @@
     <Property Name="Operation" Type="IOperation">
       <Comments>
         <summary
-          >The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.</summary
-        >
+          >The operation representing the attribute. This can be a <see cref="IObjectCreationOperation" /> in non-error cases, or an <see cref="IInvalidOperation" /> in error cases.</summary>
       </Comments>
     </Property>
   </Node>

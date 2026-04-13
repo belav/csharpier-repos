@@ -11,9 +11,7 @@ foreach (type identifier in expr) embedded-statement
       <list_item
         > The definite assignment state of v on the control flow transfer to <non_terminal
           where="15"
-          >embedded-statement</non_terminal
-        > or to the end point of stmt is the same as the state of v at the end of expr. </list_item
-      >
+          >embedded-statement</non_terminal> or to the end point of stmt is the same as the state of v at the end of expr. </list_item>
     </list>
   </paragraph>
 </clause>

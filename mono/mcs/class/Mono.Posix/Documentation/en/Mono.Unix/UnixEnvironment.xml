@@ -75,8 +75,7 @@
           <see cref="M:Mono.Unix.Native.Syscall.setsid" /> call.  This can be
           ignored, since it will be translated into an exception if it's an
           error anyway.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             This method creates a new session.  The calling process is the 
@@ -92,8 +91,7 @@
             process group ID of a process other than the calling process 
             matches the process ID of the calling process.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.setsid" />
       </Docs>
@@ -115,8 +113,7 @@
         <value>
           A <see cref="T:System.String" /> containing the current directory of
           the process.
-        </value
-        >
+        </value>
         <remarks>
           <para
             >The <paramref name="value" /> argument is permitted to specify
@@ -131,21 +128,18 @@
                 cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory"
                 qualify="true"
               />.
-          </block
-            >
+          </block>
           </para>
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">
           Permission to read or search a component of the current working
           directory was denied.
           [<see cref="F:Mono.Unix.Native.Errno.EACCESS" />]
-        </exception
-        >
+        </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           The current working directory has been unlinked.
           [<see cref="F:Mono.Unix.Native.Errno.ENOENT" />]
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.UnixDirectoryInfo.GetCurrentDirectory" />
         <altmember cref="M:Mono.Unix.UnixDirectoryInfo.SetCurrentDirectory" />
       </Docs>
@@ -173,8 +167,7 @@
         <value>
           A <see cref="T:Mono.Unix.UnixGroupInfo" /> containing information
           about the effective group of the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The 
@@ -182,8 +175,7 @@
             gives the process additional permissions during the execution of 
             <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
             mode processes.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixEnvironment.EffectiveUser" />
         <altmember cref="M:Mono.Unix.UnixEnvironment.RealGroup" />
@@ -208,8 +200,7 @@
         <value>
           A <see cref="T:System.Int64" /> containing nthe effective group ID
           of the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The 
@@ -217,8 +208,7 @@
             gives the process additional permissions during the execution of 
             <see cref="F:Mono.Unix.FileSpecialAttributes.SetGroupId" />
             mode processes.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixEnvironment.EffectiveUserId" />
         <altmember cref="M:Mono.Unix.UnixEnvironment.RealGroupId" />
@@ -249,8 +239,7 @@
         <value>
           A <see cref="T:Mono.Unix.UnixUserInfo" /> containing information
           about the effective user of the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The 
@@ -258,8 +247,7 @@
             the process additional permissions during execution of 
             <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
             mode processes.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixEnvironment.EffectiveGroup" />
         <altmember cref="M:Mono.Unix.UnixEnvironment.RealGroup" />
@@ -284,8 +272,7 @@
         <value>
           A <see cref="T:System.Int64" /> containing the effective user ID of
           the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The 
@@ -293,8 +280,7 @@
             the process additional permissions during execution of 
             <see cref="F:Mono.Unix.FileSpecialAttributes.SetUserId" />
             mode processes.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.UnixEnvironment.EffectiveGroupId" />
         <altmember cref="M:Mono.Unix.UnixEnvironment.RealGroupId" />
@@ -332,18 +318,15 @@
         <param name="name">
           A <see cref="T:Mono.Unix.Native.ConfstrName" /> value containing the
           configuration value to retrieve.
-        </param
-        >
+        </param>
         <summary>
           Retrieve the value of the configuration value 
           <paramref name="name" />.
-        </summary
-        >
+        </summary>
         <returns>
           A <see cref="T:System.String" /> containing the value of the
           configuration variable <paramref name="name" />.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
         <exception cref="System.ArgumentException">
           <para>
@@ -351,8 +334,7 @@
             <paramref name="name" />
             argument is invalid.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.confstr" />
       </Docs>
@@ -387,26 +369,22 @@
         <param name="name">
           A <see cref="T:Mono.Unix.Native.SysconfName" /> value containing the
           configurable system limit or option variable to lookup.
-        </param
-        >
+        </param>
         <summary>
           Retrieve the value of the configurable system limit or 
           option value <paramref name="name" />.
-        </summary
-        >
+        </summary>
         <returns>
           A <see cref="T:System.Int64" /> containing the value of the 
           configurable system limit or option value <paramref name="name" />.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             This method provides a way for applications to determine the 
             current value of a configurable system limit or option variable.  
             The <paramref name="name" /> argument specifies the system 
             variable to be queried.  
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="System.ArgumentException">
           <para>
@@ -414,8 +392,7 @@
             <paramref name="name" />
             argument is invalid.
             [<see cref="F:Mono.Unix.Native.Errno.EINVAL" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.sysconf" />
       </Docs>
@@ -444,8 +421,7 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixProcess" /> instance containing
           information about the parent process.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -470,8 +446,7 @@
         <returns>
           A <see cref="T:System.Int32" /> containing the process ID of the
           parent process.
-        </returns
-        >
+        </returns>
         <remarks></remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getppid" />
       </Docs>
@@ -497,8 +472,7 @@
         <returns>
           A <see cref="T:System.Int32" /> containing the process group ID of
           the current process.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             Process groups are used for distribution of signals, and by 
@@ -513,8 +487,7 @@
             <see cref="M:Mono.Unix.Native.Syscall.tcgetpgrp" />() and 
             <see cref="M:Mono.Unix.Native.Syscall.tcsetpgrp" />()
             calls are used to get/set the process group of the control terminal.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpgrp" />
       </Docs>
@@ -540,8 +513,7 @@
         <returns>
           A <see cref="T:System.Int64" /> array containing the group access
           list of the current process.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             The group access list is a list of groups which the current
@@ -554,8 +526,7 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" /> to see if
             group access applies, before using the  "other"
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getgroups" />
       </Docs>
@@ -584,8 +555,7 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixGroupInfo" /> array containing
           information about the group access list of the current process.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             The group access list is a list of groups which the current
@@ -598,8 +568,7 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" /> to see if
             group access applies, before using the  "other"
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getgroups" />
       </Docs>
@@ -625,8 +594,7 @@
         <returns>
           A <see cref="T:System.String" /> array containing all user shells on
           the system.
-        </returns
-        >
+        </returns>
         <remarks>
           <para>
             A user shell is defined by the system manager in the shells
@@ -634,8 +602,7 @@
             <c>/etc/shells</c>).  If the shells database is not available,
             then this returns an array containing the elements <c>/bin/sh</c>
             and <c>/bin/csh</c>.
-          </para
-          >
+          </para>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.setusershell" />
         <altmember cref="M:Mono.Unix.Native.Syscall.getusershell" />
@@ -659,14 +626,12 @@
         <value>
           A <see cref="T:System.String" /> containing the login name of the
           user executing the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This is identical to 
             <see cref="P:Mono.Unix.UnixEnvironment.UserName" />.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>
@@ -687,8 +652,7 @@
           running on.</summary>
         <value>
           A <see cref="T:System.String" /> containing the machine name.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             Only the super-user can change the machine name.
@@ -698,8 +662,7 @@
           <para>
             The caller tried to set the host name and was not the super-user.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.gethostname" />
         <altmember cref="M:Mono.Unix.Native.Syscall.sethostname" />
@@ -725,8 +688,7 @@
         <value>
           A <see cref="T:Mono.Unix.UnixGroupInfo" /> containing information
           about the real group of the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The real group is the group of the user who invoked the program.
@@ -755,8 +717,7 @@
         <value>
           A <see cref="T:System.Int64" /> containing the real group ID of the
           process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The real group ID is the group of the user who invoked the program.
@@ -788,8 +749,7 @@
         <value>
           A <see cref="T:Mono.Unix.UnixUserInfo" /> containing information
           about the real user of the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The real user is the user who invoked the program.
@@ -818,8 +778,7 @@
         <value>
           A <see cref="T:System.Int64" /> containing the real user ID of the
           process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             The real user ID is that of the user who invoked the program.
@@ -853,23 +812,20 @@
         <param name="inc">
           A <see cref="T:System.Int32" /> containing the value to add to the
           current process' <i>nice value</i>.
-        </param
-        >
+        </param>
         <summary>Subtraces <paramref name="inc" /> from the process' priority.</summary>
         <remarks>
           <para>
             The process' <i>nice value</i> is a value subtraced from the 
             process' priority.  The higher the value of 
             <paramref name="inc" />, the lower the priority of the process
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="T:Mono.Unix.UnixIOException">
           <paramref name="inc" /> is negative but the caller is not the
           super-user.
           [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-        </exception
-        >
+        </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.nice" />
       </Docs>
     </Member>
@@ -902,16 +858,14 @@
           <para>
             The target process is a session leader.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+          </para>
         </exception>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The target process is not the calling process or
             a child of the calling process.
             [<see cref="F:Mono.Unix.Native.Errno.ESRCH" />]
-          </para
-          >
+          </para>
           <para>-or-</para>
           <para>
             The requested process is a child of the calling process,
@@ -919,8 +873,7 @@
             <see cref="F:Mono.Unix.Native.Syscall.exec" />(3)
             operation.
             [<see cref="F:Mono.Unix.Native.Errno.EACCES" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="P:Mono.Unix.UnixProcess.ProcessGroupId" />
         <altmember cref="M:Mono.Unix.Native.Syscall.setpgrp" />
@@ -951,8 +904,7 @@
         <param name="list">
           A <see cref="T:System.Int64" /> array containing the
           new group access list.
-        </param
-        >
+        </param>
         <summary>
           Set the group access list of the current process.
         </summary>
@@ -971,15 +923,13 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" /> to see if
             group access applies, before using the  "other"
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="System.InvalidOperationException">
           <para>
             The caller is not the super-user.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.setgroups" />
       </Docs>
@@ -1009,8 +959,7 @@
         <param name="groups">
           A <see cref="T:Mono.Unix.UnixGroupInfo" /> array containing the
           new group access list.
-        </param
-        >
+        </param>
         <summary>
           Set the group access list of the current process.
         </summary>
@@ -1029,15 +978,13 @@
             <see cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroup" /> to see if
             group access applies, before using the  "other"
             <see cref="P:Mono.Unix.UnixFileSystemInfo.FileAccessPermissions" />.
-          </para
-          >
+          </para>
         </remarks>
         <exception cref="System.InvalidOperationException">
           <para>
             The caller is not the super-user.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para
-          >
+          </para>
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.setgroups" />
       </Docs>
@@ -1059,18 +1006,15 @@
         <value>
           A <see cref="T:System.String" /> containing the username of the user
           executing the process.
-        </value
-        >
+        </value>
         <remarks>
           <para>
             This is the username of the <i>real</i> user id.
-          </para
-          >
+          </para>
           <para>
             This is equivalent to calling
             <see cref="P:Mono.Unix.UnixEnvironment.RealUser" />.<see cref="P:Mono.Unix.UnixUserInfo.UserName" />.
-          </para
-          >
+          </para>
         </remarks>
       </Docs>
     </Member>

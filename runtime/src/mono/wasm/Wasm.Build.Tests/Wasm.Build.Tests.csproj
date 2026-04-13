@@ -8,8 +8,7 @@
     <EnableDefaultItems>true</EnableDefaultItems>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <DefineConstants Condition="'$(ContinuousIntegrationBuild)' != 'true'"
-      >TEST_DEBUG_CONFIG_ALSO</DefineConstants
-    >
+      >TEST_DEBUG_CONFIG_ALSO</DefineConstants>
     <!-- This project should not build against the live built .NETCoreApp targeting pack as it contributes to the build itself. -->
     <UseLocalTargetingRuntimePack>false</UseLocalTargetingRuntimePack>
 
@@ -20,12 +19,10 @@
     <!-- '/.dockerenv' - is to check if this is running in a codespace -->
     <InstallChromeForTests
       Condition="'$(InstallChromeForTests)' == '' and ('$(ContinuousIntegrationBuild)' == 'true' or Exists('/.dockerenv'))"
-      >true</InstallChromeForTests
-    >
+      >true</InstallChromeForTests>
     <InstallV8ForTests
       Condition="'$(InstallV8ForTests)' == '' and ('$(ContinuousIntegrationBuild)' == 'true' or Exists('/.dockerenv'))"
-      >true</InstallV8ForTests
-    >
+      >true</InstallV8ForTests>
 
     <!-- don't run any wasm build steps -->
     <IsBrowserWasmProject>false</IsBrowserWasmProject>
@@ -36,11 +33,9 @@
 
   <PropertyGroup>
     <RunScriptInputName Condition="'$(OS)' == 'Windows_NT'"
-      >RunScriptTemplate.cmd</RunScriptInputName
-    >
+      >RunScriptTemplate.cmd</RunScriptInputName>
     <RunScriptInputName Condition="'$(OS)' != 'Windows_NT'"
-      >RunScriptTemplate.sh</RunScriptInputName
-    >
+      >RunScriptTemplate.sh</RunScriptInputName>
 
     <RunScriptInputPath>$(MSBuildThisFileDirectory)data\$(RunScriptInputName)</RunScriptInputPath>
   </PropertyGroup>
@@ -122,20 +117,16 @@
 
     <PropertyGroup>
       <_XUnitTraitArg Condition="'$(TestUsingWorkloads)' == 'true'"
-        >-notrait category=no-workload</_XUnitTraitArg
-      >
+        >-notrait category=no-workload</_XUnitTraitArg>
       <_XUnitTraitArg Condition="'$(TestUsingWorkloads)' != 'true'"
-        >-trait category=no-workload</_XUnitTraitArg
-      >
+        >-trait category=no-workload</_XUnitTraitArg>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(ContinuousIntegrationBuild)' != 'true'">
       <_SdkPathForLocalTesting Condition="'$(TestUsingWorkloads)' == 'true'"
-        >$([System.IO.Path]::GetDirectoryName($(SdkWithWorkloadForTestingPath)))</_SdkPathForLocalTesting
-      >
+        >$([System.IO.Path]::GetDirectoryName($(SdkWithWorkloadForTestingPath)))</_SdkPathForLocalTesting>
       <_SdkPathForLocalTesting Condition="'$(TestUsingWorkloads)' != 'true'"
-        >$([System.IO.Path]::GetDirectoryName($(SdkWithNoWorkloadForTestingPath)))</_SdkPathForLocalTesting
-      >
+        >$([System.IO.Path]::GetDirectoryName($(SdkWithNoWorkloadForTestingPath)))</_SdkPathForLocalTesting>
 
       <_SdkPathForLocalTesting>$([System.IO.Path]::GetFilename($(_SdkPathForLocalTesting)))</_SdkPathForLocalTesting>
     </PropertyGroup>
@@ -253,49 +244,38 @@
 
     <PropertyGroup>
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
-        >dotnet exec xunit.console.dll $(AssemblyName).dll -xml %24XHARNESS_OUT/testResults.xml</RunScriptCommand
-      >
+        >dotnet exec xunit.console.dll $(AssemblyName).dll -xml %24XHARNESS_OUT/testResults.xml</RunScriptCommand>
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
-        >dotnet.exe exec xunit.console.dll $(AssemblyName).dll -xml %XHARNESS_OUT%\testResults.xml</RunScriptCommand
-      >
+        >dotnet.exe exec xunit.console.dll $(AssemblyName).dll -xml %XHARNESS_OUT%\testResults.xml</RunScriptCommand>
 
       <RunScriptCommand
         Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OS)' != 'Windows_NT'"
-        >$(RunScriptCommand) %24HELIX_XUNIT_ARGS</RunScriptCommand
-      >
+        >$(RunScriptCommand) %24HELIX_XUNIT_ARGS</RunScriptCommand>
       <RunScriptCommand
         Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OS)' == 'Windows_NT'"
-        >$(RunScriptCommand) %HELIX_XUNIT_ARGS%</RunScriptCommand
-      >
+        >$(RunScriptCommand) %HELIX_XUNIT_ARGS%</RunScriptCommand>
 
       <RunScriptCommand Condition="'$(ContinuousIntegrationBuild)' == 'true'"
-        >$(RunScriptCommand) -nocolor</RunScriptCommand
-      >
+        >$(RunScriptCommand) -nocolor</RunScriptCommand>
       <RunScriptCommand
         Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OS)' == 'Windows_NT'"
-        >$(RunScriptCommand) -parallel none</RunScriptCommand
-      >
+        >$(RunScriptCommand) -parallel none</RunScriptCommand>
       <RunScriptCommand>$(RunScriptCommand) -verbose</RunScriptCommand>
 
       <RunScriptCommand Condition="'$(XUnitMethodName)' != ''"
-        >$(RunScriptCommand) -method $(XUnitMethodName)</RunScriptCommand
-      >
+        >$(RunScriptCommand) -method $(XUnitMethodName)</RunScriptCommand>
       <RunScriptCommand Condition="'$(XUnitClassName)' != ''"
-        >$(RunScriptCommand) -class $(XUnitClassName)</RunScriptCommand
-      >
+        >$(RunScriptCommand) -class $(XUnitClassName)</RunScriptCommand>
       <RunScriptCommand Condition="'$(XUnitNamespace)' != ''"
-        >$(RunScriptCommand) -namespace $(XUnitNamespace)</RunScriptCommand
-      >
+        >$(RunScriptCommand) -namespace $(XUnitNamespace)</RunScriptCommand>
 
       <!-- this allows use of test attributes from dotnet.xunitextensions -->
       <RunScriptCommand>$(RunScriptCommand) -notrait category=IgnoreForCI -notrait category=failing</RunScriptCommand>
 
       <RunScriptCommand Condition="'$(OS)' == 'Windows_NT'"
-        >$(RunScriptCommand) %XUnitTraitArg%</RunScriptCommand
-      >
+        >$(RunScriptCommand) %XUnitTraitArg%</RunScriptCommand>
       <RunScriptCommand Condition="'$(OS)' != 'Windows_NT'"
-        >$(RunScriptCommand) %24XUnitTraitArg</RunScriptCommand
-      >
+        >$(RunScriptCommand) %24XUnitTraitArg</RunScriptCommand>
     </PropertyGroup>
   </Target>
 </Project>

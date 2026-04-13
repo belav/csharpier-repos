@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You do not create instances of this class; instances are returned by methods in the <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" /> class.</para
-      >
+        >You do not create instances of this class; instances are returned by methods in the <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" /> class.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,14 +44,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPAddressInformation" />.</para
-          >
+            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPAddressInformation" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPAddressInformation" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -107,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the Internet Protocol (IP) address is valid to appear in a Domain Name System (DNS) server database.</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the Internet Protocol (IP) address is valid to appear in a Domain Name System (DNS) server database.</para>
         </summary>
       </Docs>
     </Member>
@@ -133,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the Internet Protocol (IP) address is transient (a cluster address).</para
-          >
+            >Gets a <see cref="T:System.Boolean" /> value that indicates whether the Internet Protocol (IP) address is transient (a cluster address).</para>
         </summary>
       </Docs>
     </Member>

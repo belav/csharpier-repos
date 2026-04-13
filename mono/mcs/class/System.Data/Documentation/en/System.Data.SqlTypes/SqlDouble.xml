@@ -47,16 +47,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure using the supplied double parameter to set the new <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> property.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure using the supplied double parameter to set the new <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> property.</para>
         </summary>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A double whose value will be used for the new <see cref="T:System.Data.SqlTypes.SqlDouble" />. </param
-        >
+          />A double whose value will be used for the new <see cref="T:System.Data.SqlTypes.SqlDouble" />. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -81,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The addition operator computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para
-          >
+            >The addition operator computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -93,15 +90,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -128,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see cref="T:System.Data.SqlTypes.SqlDouble" /> instance to the supplied <see cref="T:System.Data.SqlTypes.SqlDouble" /> and returns an indication of their relative values.</para
-          >
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlDouble" /> instance to the supplied <see cref="T:System.Data.SqlTypes.SqlDouble" /> and returns an indication of their relative values.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -178,8 +172,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Data.SqlTypes.SqlDouble" /> to be compared. </param
-        >
+          />The <see cref="T:System.Data.SqlTypes.SqlDouble" /> to be compared. </param>
       </Docs>
     </Member>
     <Member MemberName="CompareTo">
@@ -196,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see cref="T:System.Data.SqlTypes.SqlDouble" /> instance to the supplied <see cref="T:System.Object" /> and returns an indication of their relative values.</para
-          >
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlDouble" /> instance to the supplied <see cref="T:System.Object" /> and returns an indication of their relative values.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,8 +238,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Object" /> to compare. </param
-        >
+          />The <see cref="T:System.Object" /> to compare. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -272,29 +263,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The division operator divides the first <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand by the second.</para
-          >
+            >The division operator divides the first <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand by the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure that contains the results of the division operation.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure that contains the results of the division operation.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -315,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the supplied object parameter to the <see cref="P:System.Data.SqlTypes.SqlDateTime.Value" /> property of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> object.</para
-          >
+            >Compares the supplied object parameter to the <see cref="P:System.Data.SqlTypes.SqlDateTime.Value" /> property of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> object.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -327,8 +313,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The object to be compared. </param
-        >
+          />The object to be compared. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -353,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison on two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are equal.</para
-          >
+            >Performs a logical comparison on two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -365,15 +349,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -392,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structre.</para
-          >
+            >Returns the hash code for this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structre.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -425,22 +406,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para
-          >
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string value that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para
-          >
+            >A string value that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para>
         </returns>
         <param name="schemaSet">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param
-        >
+          />An <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param>
       </Docs>
     </Member>
     <Member MemberName="GreaterThan">
@@ -461,29 +439,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -508,29 +482,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than or equal to the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than or equal to the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -550,14 +520,12 @@
           <para
             >For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a Boolean value that indicates whether this <see cref="T:System.Data.SqlTypes.SqlDouble" /> instance is null.</para
-          >
+            >Returns a Boolean value that indicates whether this <see cref="T:System.Data.SqlTypes.SqlDouble" /> instance is null.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -583,29 +551,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -630,29 +594,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than or equal to the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than or equal to the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -677,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant representing the maximum value for a <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para
-          >
+            >A constant representing the maximum value for a <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -704,8 +663,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant representing the minimum possible value of <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >A constant representing the minimum possible value of <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -731,29 +689,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The multiplication operator computes the product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para
-          >
+            >The multiplication operator computes the product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para
-          >
+            >The product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -778,29 +732,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are notequal.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are notequal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -823,14 +773,12 @@
           <para
             >Null functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
-            </format>.</para
-          >
+            </format>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see cref="T:System.DBNull" /> that can be assigned to this instance of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para
-          >
+            >Represents a <see cref="T:System.DBNull" /> that can be assigned to this instance of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -860,8 +808,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The addition operator computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para
-          >
+            >The addition operator computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -872,15 +819,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Division">
@@ -905,29 +850,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The division operator divides the first <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand by the second.</para
-          >
+            >The division operator divides the first <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand by the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure that contains the results of the division operation.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure that contains the results of the division operation.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -952,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison on two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are equal.</para
-          >
+            >Performs a logical comparison on two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -964,15 +904,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
@@ -1066,29 +1004,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThanOrEqual">
@@ -1113,29 +1047,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than or equal to the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is greater than or equal to the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -1344,29 +1274,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are not equal.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether they are not equal.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThan">
@@ -1391,29 +1317,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_LessThanOrEqual">
@@ -1438,29 +1360,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than or equal to the second.</para
-          >
+            >Compares two instances of <see cref="T:System.Data.SqlTypes.SqlDouble" /> to determine whether the first is less than or equal to the second.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlDouble" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Multiply">
@@ -1485,29 +1403,25 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The multiplication operator computes the product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para
-          >
+            >The multiplication operator computes the product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para
-          >
+            >The product of the two <see cref="T:System.Data.SqlTypes.SqlDouble" /> operands.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_Subtraction">
@@ -1532,8 +1446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The subtraction operator the second <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand from the first.</para
-          >
+            >The subtraction operator the second <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand from the first.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1544,15 +1457,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="op_UnaryNegation">
@@ -1576,22 +1487,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the negated value of the specified <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para
-          >
+            >Returns the negated value of the specified <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure that contains the negated value.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure that contains the negated value.</para>
         </returns>
         <param name="x">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -1611,22 +1519,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see cref="T:System.String" /> representation of a number to its double-precision floating point number equivalent.</para
-          >
+            >Converts the <see cref="T:System.String" /> representation of a number to its double-precision floating point number equivalent.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> that contains the value represented by the String.</para
-          >
+            >A <see cref="T:System.Data.SqlTypes.SqlDouble" /> that contains the value represented by the String.</para>
         </returns>
         <param name="s">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The String to be parsed. </param
-        >
+          />The String to be parsed. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1651,8 +1556,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The subtraction operator the second <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand from the first.</para
-          >
+            >The subtraction operator the second <see cref="T:System.Data.SqlTypes.SqlDouble" /> operand from the first.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1663,15 +1567,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
         <param name="y">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param
-        >
+          />A <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. </param>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1729,8 +1631,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlReader" />.</param
-        >
+          />A <see cref="T:System.Xml.XmlReader" />.</param>
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
@@ -1759,8 +1660,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Xml.XmlWriter" />.</param
-        >
+          />A <see cref="T:System.Xml.XmlWriter" />.</param>
       </Docs>
     </Member>
     <Member MemberName="ToSqlBoolean">
@@ -1778,14 +1678,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlBoolean" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlBoolean" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A SqlBoolean structure whose <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> is non-zero, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the <see cref="T:System.Data.SqlTypes.SqlDouble" /> is zero and <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" /> if the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure is <see cref="F:System.Data.SqlTypes.SqlDouble.Null" />.</para
-          >
+            >A SqlBoolean structure whose <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> is non-zero, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the <see cref="T:System.Data.SqlTypes.SqlDouble" /> is zero and <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" /> if the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure is <see cref="F:System.Data.SqlTypes.SqlDouble.Null" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1805,14 +1703,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlByte" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlByte" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A SqlByte structure whose Value equals the Value of this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para
-          >
+            >A SqlByte structure whose Value equals the Value of this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1835,8 +1731,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1860,14 +1755,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Data.SqlTypes.SqlInt16" /> structure whose Value equals the integer part of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's value.</para
-          >
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt16" /> structure whose Value equals the integer part of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's value.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1887,14 +1780,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Data.SqlTypes.SqlInt32" /> structure whose Value equals the integer part of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's value.</para
-          >
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt32" /> structure whose Value equals the integer part of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's value.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1914,14 +1805,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose Value equals the integer part of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's value.</para
-          >
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose Value equals the integer part of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure's value.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1941,14 +1830,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new SqlMoney structure whose <see cref="P:System.Data.SqlTypes.SqlMoney.Value" /> is equal to the value of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >A new SqlMoney structure whose <see cref="P:System.Data.SqlTypes.SqlMoney.Value" /> is equal to the value of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1971,14 +1858,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new SqlSingle structure whose <see cref="P:System.Data.SqlTypes.SqlSingle.Value" /> is equal to the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >A new SqlSingle structure whose <see cref="P:System.Data.SqlTypes.SqlSingle.Value" /> is equal to the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -2001,14 +1886,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlString" />.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to <see cref="T:System.Data.SqlTypes.SqlString" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A SqlString representing the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >A SqlString representing the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -2028,14 +1911,12 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to a string.</para
-          >
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure to a string.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representing the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para
-          >
+            >A string representing the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> of this <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -2055,8 +1936,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. This property is read-only.</para
-          >
+            >Gets the value of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure. This property is read-only.</para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2078,14 +1958,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Zero field is a constant for the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para
-          >
+            >The Zero field is a constant for the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a zero value that can be assigned to the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> property of an instance of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para
-          >
+            >Represents a zero value that can be assigned to the <see cref="P:System.Data.SqlTypes.SqlDouble.Value" /> property of an instance of the <see cref="T:System.Data.SqlTypes.SqlDouble" /> structure.</para>
         </summary>
       </Docs>
       <AssemblyInfo>

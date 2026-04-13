@@ -25,8 +25,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an abstract class that indigo1 derives from <see cref="T:System.Xml.XmlWriter" /> to do serialization and deserialization.</para
-      >
+        >Represents an abstract class that indigo1 derives from <see cref="T:System.Xml.XmlWriter" /> to do serialization and deserialization.</para>
     </summary>
   </Docs>
   <Members>
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Xml.XmlDictionaryWriter" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDictionaryWriter" /> class.</para>
         </summary>
       </Docs>
     </Member>
@@ -71,9 +69,7 @@
           <para
             >Returns true if and only if this derived class of <see cref="T:System.Xml.XmlDictionaryWriter" /> can canonicalize the XML content being written to it, according to the Exclusive XML Canonicalization rules as defined in <see
               cref="http://go.microsoft.com/fwlink/?LinkId=96655"
-              >Exclusive XML Canonicalization Version 1.0</see
-            >.</para
-          >
+              >Exclusive XML Canonicalization Version 1.0</see>.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -117,8 +112,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryWriter">
@@ -146,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -158,15 +151,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="dictionary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionary" /> to use as the shared dictionary.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionary" /> to use as the shared dictionary.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryWriter">
@@ -195,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -207,22 +197,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="dictionary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionary" /> to use as the shared dictionary.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionary" /> to use as the shared dictionary.</param>
         <param name="session">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlBinaryWriterSession" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlBinaryWriterSession" /> to use.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateBinaryWriter">
@@ -252,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes indigo2 binary XML format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -264,29 +250,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream from which to read.</param
-        >
+          />The stream from which to read.</param>
         <param name="dictionary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionary" /> to use as the shared dictionary.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionary" /> to use as the shared dictionary.</param>
         <param name="session">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlBinaryWriterSession" /> to use.</param
-        >
+          />The <see cref="T:System.Xml.XmlBinaryWriterSession" /> to use.</param>
         <param name="ownsStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the stream is closed by the writer when done; otherwise false.</param
-        >
+          />true to indicate that the stream is closed by the writer when done; otherwise false.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateDictionaryWriter">
@@ -313,8 +295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> from an existing <see cref="T:System.Xml.XmlWriter" />.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> from an existing <see cref="T:System.Xml.XmlWriter" />.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -325,8 +306,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An instance of <see cref="T:System.Xml.XmlWriter" />.</param
-        >
+          />An instance of <see cref="T:System.Xml.XmlWriter" />.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomWriter">
@@ -356,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -368,29 +347,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding of the stream.</param
-        >
+          />The character encoding of the stream.</param>
         <param name="maxSizeInBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes that are buffered in the writer.</param
-        >
+          />The maximum number of bytes that are buffered in the writer.</param>
         <param name="startInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />An attribute in the ContentType SOAP header.</param
-        >
+          />An attribute in the ContentType SOAP header.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateMtomWriter">
@@ -424,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes XML in the MTOM format.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes XML in the MTOM format.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -436,57 +410,49 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding of the stream.</param
-        >
+          />The character encoding of the stream.</param>
         <param name="maxSizeInBytes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The maximum number of bytes that are buffered in the writer.</param
-        >
+          />The maximum number of bytes that are buffered in the writer.</param>
         <param name="startInfo">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content-type of the MIME part that contains the Infoset.</param
-        >
+          />The content-type of the MIME part that contains the Infoset.</param>
         <param name="boundary">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The MIME boundary in the message.</param
-        >
+          />The MIME boundary in the message.</param>
         <param name="startUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The content-id URI of the MIME part that contains the Infoset.</param
-        >
+          />The content-id URI of the MIME part that contains the Infoset.</param>
         <param name="writeMessageHeaders">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to write message headers.</param
-        >
+          />true to write message headers.</param>
         <param name="ownsStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the stream is closed by the writer when done; otherwise false.</param
-        >
+          />true to indicate that the stream is closed by the writer when done; otherwise false.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextWriter">
@@ -516,8 +482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes text XML.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes text XML.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -528,8 +493,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextWriter">
@@ -560,8 +524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes text XML.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes text XML.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -572,15 +535,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding of the output.</param
-        >
+          />The character encoding of the output.</param>
       </Docs>
     </Member>
     <Member MemberName="CreateTextWriter">
@@ -609,8 +570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes text XML.</para
-          >
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryWriter" /> that writes text XML.</para>
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -621,22 +581,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="encoding">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The character encoding of the stream.</param
-        >
+          />The character encoding of the stream.</param>
         <param name="ownsStream">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the stream is closed by the writer when done; otherwise false.</param
-        >
+          />true to indicate that the stream is closed by the writer when done; otherwise false.</param>
       </Docs>
     </Member>
     <Member MemberName="EndCanonicalization">
@@ -661,8 +618,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented by a derived class, it stops the canonicalization started by the matching <see cref="M:System.Xml.XmlDictionaryWriter.StartCanonicalization(System.IO.Stream,System.Boolean,System.String[])" /> call.</para
-          >
+            >When implemented by a derived class, it stops the canonicalization started by the matching <see cref="M:System.Xml.XmlDictionaryWriter.StartCanonicalization(System.IO.Stream,System.Boolean,System.String[])" /> call.</para>
         </summary>
       </Docs>
     </Member>
@@ -701,22 +657,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The stream to write to.</param
-        >
+          />The stream to write to.</param>
         <param name="includeComments">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to include comments; otherwise, false.</param
-        >
+          />true to include comments; otherwise, false.</param>
         <param name="inclusivePrefixes">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefixes to be included.</param
-        >
+          />The prefixes to be included.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -755,36 +708,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the data.</param
-        >
+          />The array that contains the data.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -823,36 +771,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -891,36 +834,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -959,36 +897,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1027,36 +960,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1095,36 +1023,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1163,36 +1086,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1231,36 +1149,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1299,36 +1212,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1367,36 +1275,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1435,36 +1338,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1503,36 +1401,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1571,36 +1464,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1639,36 +1527,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1707,36 +1590,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1775,36 +1653,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1843,36 +1716,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1911,36 +1779,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -1979,36 +1842,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteArray">
@@ -2047,36 +1905,31 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="array">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The array that contains the nodes.</param
-        >
+          />The array that contains the nodes.</param>
         <param name="offset">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The starting index in the array.</param
-        >
+          />The starting index in the array.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttributeString">
@@ -2111,18 +1964,15 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute.</param
-        >
+          />The namespace URI of the attribute.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteAttributeString">
@@ -2158,25 +2008,21 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the attribute.</param
-        >
+          />The prefix of the attribute.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute.</param
-        >
+          />The namespace URI of the attribute.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementString">
@@ -2211,18 +2057,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The element content.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The element content.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteElementString">
@@ -2258,25 +2105,25 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the element.</param
-        >
+          />The prefix of the element.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The element content.</param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The element content.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNode">
@@ -2304,23 +2151,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the current XML node from an <see cref="T:System.Xml.XmlDictionaryReader" />.</para
-          >
+            >Writes the current XML node from an <see cref="T:System.Xml.XmlDictionaryReader" />.</para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReader" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReader" />.</param>
         <param name="defattr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to copy the default attributes from the XmlReader; otherwise, false.</param
-        >
+          />true to copy the default attributes from the XmlReader; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteNode">
@@ -2354,15 +2198,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlReader" />.</param
-        >
+          />The <see cref="T:System.Xml.XmlReader" />.</param>
         <param name="defattr">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to copy the default attributes from the <see cref="T:System.Xml.XmlReader" />; otherwise, false.</param
-        >
+          />true to copy the default attributes from the <see cref="T:System.Xml.XmlReader" />; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteQualifiedName">
@@ -2400,15 +2242,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the qualified name.</param
-        >
+          />The local name of the qualified name.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the qualified name.</param
-        >
+          />The namespace URI of the qualified name.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartAttribute">
@@ -2442,15 +2282,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute.</param
-        >
+          />The namespace URI of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartAttribute">
@@ -2485,22 +2323,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace prefix.</param
-        >
+          />The namespace prefix.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the attribute.</param
-        >
+          />The namespace URI of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -2534,15 +2369,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteStartElement">
@@ -2577,22 +2410,19 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix of the element.</param
-        >
+          />The prefix of the element.</param>
         <param name="localName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the element.</param
-        >
+          />The local name of the element.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace URI of the element.</param
-        >
+          />The namespace URI of the element.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteString">
@@ -2621,8 +2451,7 @@
           <para>Writes the given text content.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to write.</param
-        >
+          <attribution license="cc4" from="Microsoft" modified="false" />The text to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteTextNode">
@@ -2653,23 +2482,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the text node that an <see cref="T:System.Xml.XmlDictionaryReader" /> is currently positioned on.</para
-          >
+            >Writes the text node that an <see cref="T:System.Xml.XmlDictionaryReader" /> is currently positioned on.</para>
         </summary>
         <param name="reader">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryReader" /> to get the text value from.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryReader" /> to get the text value from.</param>
         <param name="isAttribute">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />true to indicate that the reader is positioned on an attribute value or element content; otherwise, false.</param
-        >
+          />true to indicate that the reader is positioned on an attribute value or element content; otherwise, false.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteValue">
@@ -2746,8 +2572,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The contents of the stream provided by the IStreamProvider are written as Base64 data, unless this method is overridden in a derived class.</para>
           <para
-            >For the asynchronous version of this method, see <see cref="M:System.Xml.XmlDictionaryWriter.WriteValueAsync(System.Xml.IStreamProvider)" />.</para
-          >
+            >For the asynchronous version of this method, see <see cref="M:System.Xml.XmlDictionaryWriter.WriteValueAsync(System.Xml.IStreamProvider)" />.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2758,8 +2583,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.IStreamProvider" /> value to write.</param
-        >
+          />The <see cref="T:System.Xml.IStreamProvider" /> value to write.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteValue">
@@ -2820,8 +2644,7 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Xml.XmlDictionaryString" /> value.</param
-        >
+          />The <see cref="T:System.Xml.XmlDictionaryString" /> value.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlAttribute">
@@ -2855,15 +2678,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the attribute.</param
-        >
+          />The value of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlAttribute">
@@ -2897,15 +2718,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The local name of the attribute.</param
-        >
+          />The local name of the attribute.</param>
         <param name="value">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The value of the attribute.</param
-        >
+          />The value of the attribute.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlnsAttribute">
@@ -2939,15 +2758,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix that is bound to the given namespace.</param
-        >
+          />The prefix that is bound to the given namespace.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to which the prefix is bound.</param
-        >
+          />The namespace to which the prefix is bound.</param>
       </Docs>
     </Member>
     <Member MemberName="WriteXmlnsAttribute">
@@ -2981,15 +2798,13 @@
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The prefix that is bound to the given namespace.</param
-        >
+          />The prefix that is bound to the given namespace.</param>
         <param name="namespaceUri">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The namespace to which the prefix is bound.</param
-        >
+          />The namespace to which the prefix is bound.</param>
       </Docs>
     </Member>
   </Members>

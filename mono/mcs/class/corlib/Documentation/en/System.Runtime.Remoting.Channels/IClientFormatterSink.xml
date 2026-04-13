@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Formatter sinks must implement both <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" /> and <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />. <see cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" /> combines these into one interface.</para
-      >
+        >Formatter sinks must implement both <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" /> and <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />. <see cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" /> combines these into one interface.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

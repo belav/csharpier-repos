@@ -34,8 +34,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The assembly title is a friendly name, which can include spaces. </para>
       <para
-        >In Windows Vista, the information specified for this attribute appears on the <ui>Details</ui> tab of the <ui>Windows File Properties</ui> dialog box for the assembly. The property name is <ui>File description</ui>. In Windows XP, this information appears on the <ui>Version</ui> tab of the <ui>Windows File Properties</ui> dialog box. </para
-      >
+        >In Windows Vista, the information specified for this attribute appears on the <ui>Details</ui> tab of the <ui>Windows File Properties</ui> dialog box for the assembly. The property name is <ui>File description</ui>. In Windows XP, this information appears on the <ui>Version</ui> tab of the <ui>Windows File Properties</ui> dialog box. </para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,18 +62,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In Windows Vista, the string specified for the <paramref name="title" /> parameter appears on the <ui>Details</ui> tab of the <ui>Windows File Properties</ui> dialog box for the assembly. The property name is <ui>File description</ui>. In Windows XP, this string appears on the <ui>Version</ui> tab of the <ui>Windows File Properties</ui> dialog box. </para
-          >
+            >In Windows Vista, the string specified for the <paramref name="title" /> parameter appears on the <ui>Details</ui> tab of the <ui>Windows File Properties</ui> dialog box for the assembly. The property name is <ui>File description</ui>. In Windows XP, this string appears on the <ui>Version</ui> tab of the <ui>Windows File Properties</ui> dialog box. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyTitleAttribute" /> class.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyTitleAttribute" /> class.</para>
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />The assembly title. </param
-        >
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The assembly title. </param>
       </Docs>
     </Member>
     <Member MemberName="Title">
@@ -94,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In Windows Vista, the value of the <see cref="P:System.Reflection.AssemblyTitleAttribute.Title" /> property appears on the <ui>Details</ui> tab of the <ui>Windows File Properties</ui> dialog box for the assembly. The property name is <ui>File description</ui>. In Windows XP, this property appears on the <ui>Version</ui> tab of the <ui>Windows File Properties</ui> dialog box. </para
-          >
+            >In Windows Vista, the value of the <see cref="P:System.Reflection.AssemblyTitleAttribute.Title" /> property appears on the <ui>Details</ui> tab of the <ui>Windows File Properties</ui> dialog box for the assembly. The property name is <ui>File description</ui>. In Windows XP, this property appears on the <ui>Version</ui> tab of the <ui>Windows File Properties</ui> dialog box. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

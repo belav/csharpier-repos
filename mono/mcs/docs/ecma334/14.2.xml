@@ -9,9 +9,7 @@
     </list>
   </paragraph>
   <paragraph
-    >The order of evaluation of operators in an expression is determined by the precedence and associativity of the operators (<hyperlink>14.2.1</hyperlink>). </paragraph
-  >
+    >The order of evaluation of operators in an expression is determined by the precedence and associativity of the operators (<hyperlink>14.2.1</hyperlink>). </paragraph>
   <paragraph
-    >The order in which operands in an expression are evaluated, is left to right. <example>[Example: For example, in F(i) + G(i++) * H(i), method F is called using the old value of i, then method G is called with the old value of i, and, finally, method H is called with the new value of i. This is separate from and unrelated to operator precedence. end example]</example> Certain operators can be overloaded. Operator overloading permits  user-defined operator implementations to be specified for operations where one or both of the operands are of a user-defined class or struct type (<hyperlink>14.2.2</hyperlink>). </paragraph
-  >
+    >The order in which operands in an expression are evaluated, is left to right. <example>[Example: For example, in F(i) + G(i++) * H(i), method F is called using the old value of i, then method G is called with the old value of i, and, finally, method H is called with the new value of i. This is separate from and unrelated to operator precedence. end example]</example> Certain operators can be overloaded. Operator overloading permits  user-defined operator implementations to be specified for operations where one or both of the operands are of a user-defined class or struct type (<hyperlink>14.2.2</hyperlink>). </paragraph>
 </clause>

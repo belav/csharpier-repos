@@ -19,11 +19,9 @@
     <BaseTypeName>System.ServiceModel.Configuration.StandardBindingCollectionElement&lt;System.ServiceModel.WSHttpBinding,System.ServiceModel.Configuration.WSHttpBindingElement&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="TStandardBinding"
-        >System.ServiceModel.WSHttpBinding</BaseTypeArgument
-      >
+        >System.ServiceModel.WSHttpBinding</BaseTypeArgument>
       <BaseTypeArgument TypeParamName="TBindingConfiguration"
-        >System.ServiceModel.Configuration.WSHttpBindingElement</BaseTypeArgument
-      >
+        >System.ServiceModel.Configuration.WSHttpBindingElement</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingCollectionElement" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSHttpBindingCollectionElement" /> class. </para>
         </summary>
       </Docs>
     </Member>

@@ -27,10 +27,8 @@
       <para
         >This class corresponds to the <format type="text/html">
           <a href="bedccaab-12a2-4511-8f67-e961f249aec6"
-            >ConnectionManagement Element (Network Settings)</a
-          >
-        </format> configuration element.</para
-      >
+            >ConnectionManagement Element (Network Settings)</a>
+        </format> configuration element.</para>
       <para>This class is used to access information about the number of simultaneous connections allowed between the local computer and a remote computer. </para>
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementSection" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ConnectionManagementSection" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -91,8 +88,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="T:System.Net.Configuration.ConnectionManagementElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.ConnectionManagementElement" /> for each connectionManagement element in the configuration file. </para
-          >
+            >The <see cref="T:System.Net.Configuration.ConnectionManagementElementCollection" /> returned by this property contains one <see cref="T:System.Net.Configuration.ConnectionManagementElement" /> for each connectionManagement element in the configuration file. </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.CodeDom.CodeChecksumPragma" /> class inherits from <see cref="T:System.CodeDom.CodeDirective" /> and can be contained in a <see cref="T:System.CodeDom.CodeDirectiveCollection" />. <see cref="T:System.CodeDom.CodeChecksumPragma" /> provides the unique identification of source files, including files that have been generated.</para
-      >
+        >The <see cref="T:System.CodeDom.CodeChecksumPragma" /> class inherits from <see cref="T:System.CodeDom.CodeDirective" /> and can be contained in a <see cref="T:System.CodeDom.CodeDirectiveCollection" />. <see cref="T:System.CodeDom.CodeChecksumPragma" /> provides the unique identification of source files, including files that have been generated.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeChecksumPragma" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeChecksumPragma" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -86,36 +84,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on the <paramref name="checksumAlgorithmId" /> parameter, see the <see cref="P:System.CodeDom.CodeChecksumPragma.ChecksumAlgorithmId" /> property.</para
-          >
+            >For more information on the <paramref name="checksumAlgorithmId" /> parameter, see the <see cref="P:System.CodeDom.CodeChecksumPragma.ChecksumAlgorithmId" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeChecksumPragma" /> class using a file name, a GUID representing the checksum algorithm, and a byte stream representing the checksum data.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeChecksumPragma" /> class using a file name, a GUID representing the checksum algorithm, and a byte stream representing the checksum data.</para>
         </summary>
         <param name="fileName">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The path to the checksum file.</param
-        >
+          />The path to the checksum file.</param>
         <param name="checksumAlgorithmId">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A <see cref="T:System.Guid" /> that identifies the checksum algorithm to use.</param
-        >
+          />A <see cref="T:System.Guid" /> that identifies the checksum algorithm to use.</param>
         <param name="checksumData">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />A byte array that contains the checksum data.</param
-        >
+          />A byte array that contains the checksum data.</param>
       </Docs>
     </Member>
     <Member MemberName="ChecksumAlgorithmId">
@@ -163,8 +156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.CodeDom.CodeChecksumPragma.ChecksumData" /> property contains data from the target file specified by the <see cref="P:System.CodeDom.CodeChecksumPragma.FileName" /> property.</para
-          >
+            >The <see cref="P:System.CodeDom.CodeChecksumPragma.ChecksumData" /> property contains data from the target file specified by the <see cref="P:System.CodeDom.CodeChecksumPragma.FileName" /> property.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -189,8 +181,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An example of a <see cref="P:System.CodeDom.CodeChecksumPragma.FileName" /> property value is "C:\Temp\Test\OuterLinePragma.txt".</para
-          >
+            >An example of a <see cref="P:System.CodeDom.CodeChecksumPragma.FileName" /> property value is "C:\Temp\Test\OuterLinePragma.txt".</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

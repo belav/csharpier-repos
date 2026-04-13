@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when an <see cref="T:System.Xml.XPath.XPathNavigator" /> is directed to examine the body of an unbuffered message.</para
-      >
+        >The exception that is thrown when an <see cref="T:System.Xml.XPath.XPathNavigator" /> is directed to examine the body of an unbuffered message.</para>
     </summary>
   </Docs>
   <Members>
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class. </para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class. </para>
         </summary>
       </Docs>
     </Member>
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class with a specified error message.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class with a specified error message.</para>
         </summary>
       </Docs>
     </Member>
@@ -99,23 +96,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class with data that specifies the source and destination of the stream and the information required to serialize the exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class with data that specifies the source and destination of the stream and the information required to serialize the exception.</para>
         </summary>
         <param name="info">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains all the data required to serialize the exception.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains all the data required to serialize the exception.</param>
         <param name="context">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the source and destination of the stream.</param
-        >
+          />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the source and destination of the stream.</param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -142,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class with a specified error message and the inner exception that caused the current exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.NavigatorInvalidBodyAccessException" /> class with a specified error message and the inner exception that caused the current exception.</para>
         </summary>
       </Docs>
     </Member>

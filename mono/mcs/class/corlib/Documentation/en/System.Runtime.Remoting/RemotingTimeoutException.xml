@@ -30,17 +30,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> is thrown when a remoting call does not complete in the specified timeout time.</para
-      >
+        >The <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> is thrown when a remoting call does not complete in the specified timeout time.</para>
       <para>
-        <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> uses the HRESULT COR_E_REMOTING, which has the value 0x8013150B.</para
-      >
+        <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> uses the HRESULT COR_E_REMOTING, which has the value 0x8013150B.</para>
       <para>
-        <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> uses the default <see cref="M:System.Object.Equals(System.Object)" /> implementation, which supports reference equality.</para
-      >
+        <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> uses the default <see cref="M:System.Object.Equals(System.Object)" /> implementation, which supports reference equality.</para>
       <para
-        >For a list of initial property values for an instance of <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />, see the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> constructors.</para
-      >
+        >For a list of initial property values for an instance of <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" />, see the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> constructors.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -66,8 +62,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> inherits from the <see cref="T:System.Exception" /> class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class: </para
-          >
+            <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> inherits from the <see cref="T:System.Exception" /> class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class: </para>
           <list type="table">
             <listheader>
               <item>
@@ -106,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class with default properties.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class with default properties.</para>
         </summary>
       </Docs>
     </Member>
@@ -131,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> inherits from the <see cref="T:System.Exception" /> class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class: </para
-          >
+            <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> inherits from the <see cref="T:System.Exception" /> class. The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class: </para>
           <list type="table">
             <listheader>
               <item>
@@ -169,16 +162,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class with a specified message.</para
-          >
+            >Initializes a new instance of <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class with a specified message.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The message that indicates the reason why the exception occurred. </param
-        >
+          />The message that indicates the reason why the exception occurred. </param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -205,11 +196,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception must include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para
-          >
+            >An exception that is thrown as a direct result of a previous exception must include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
           <para
-            >The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class: </para
-          >
+            >The following table shows initial property values for an instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class: </para>
           <list type="table">
             <listheader>
               <item>
@@ -246,23 +235,20 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
-          >
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.RemotingTimeoutException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</para>
         </summary>
         <param name="message">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The error message that explains the reason for the exception. </param
-        >
+          />The error message that explains the reason for the exception. </param>
         <param name="InnerException">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The exception that is the cause of the current exception. If the <paramref name="InnerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param
-        >
+          />The exception that is the cause of the current exception. If the <paramref name="InnerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception. </param>
       </Docs>
     </Member>
   </Members>

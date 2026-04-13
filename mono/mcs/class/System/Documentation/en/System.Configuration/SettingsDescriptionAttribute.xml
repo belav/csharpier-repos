@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see cref="T:System.Configuration.SettingsDescriptionAttribute" /> is intended to assist both design time tools and administrative run time tools in identifying and describing the associated configuration property.</para
-      >
+        >The <see cref="T:System.Configuration.SettingsDescriptionAttribute" /> is intended to assist both design time tools and administrative run time tools in identifying and describing the associated configuration property.</para>
       <para>This attribute is optional and can only be applied at the individual configuration property level.</para>
     </remarks>
     <summary>
@@ -62,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the description has a theoretical maximum length of the <see cref="T:System.String" /> class, whose length is represented by a <see cref="T:System.Int32" />, the following two practical considerations will limit the size of the <paramref name="description" /> parameter:</para
-          >
+            >Although the description has a theoretical maximum length of the <see cref="T:System.String" /> class, whose length is represented by a <see cref="T:System.Int32" />, the following two practical considerations will limit the size of the <paramref name="description" /> parameter:</para>
           <list type="bullet">
             <item>
               <para>Large text descriptions are difficult to display in a user interface (UI) and difficult for the user to read.</para>
@@ -76,16 +74,14 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see cref="T:System.Configuration.SettingsDescriptionAttribute" /> class.</para
-          >
+            >Initializes an instance of the <see cref="T:System.Configuration.SettingsDescriptionAttribute" /> class.</para>
         </summary>
         <param name="description">
           <attribution
             license="cc4"
             from="Microsoft"
             modified="false"
-          />The <see cref="T:System.String" /> used as descriptive text.</param
-        >
+          />The <see cref="T:System.String" /> used as descriptive text.</param>
       </Docs>
     </Member>
     <Member MemberName="Description">
@@ -105,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see cref="P:System.Configuration.SettingsDescriptionAttribute.Description" /> property is set by the <see cref="M:System.Configuration.SettingsDescriptionAttribute.#ctor(System.String)" /> constructor.</para
-          >
+            >The <see cref="P:System.Configuration.SettingsDescriptionAttribute.Description" /> property is set by the <see cref="M:System.Configuration.SettingsDescriptionAttribute.#ctor(System.String)" /> constructor.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
