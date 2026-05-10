@@ -3,46 +3,44 @@
 // and being used implicitly.
 //
 
-struct T {
-        int val;
-        void one () {
+struct T
+{
+    int val;
 
-		//
-		// First test: Pass this as an argument.
-		//
-                two (this);
-        }
+    void one()
+    {
+        //
+        // First test: Pass this as an argument.
+        //
+        two(this);
+    }
 
-        void two (T t)  {
-		this = t;
-        }
+    void two(T t)
+    {
+        this = t;
+    }
 
-        void three (ref T t) {
-                two (t);
-        }
+    void three(ref T t)
+    {
+        two(t);
+    }
 
+    public override int GetHashCode()
+    {
+        //
+        // Second test: do we correctly load this?
+        //
+        return val.GetHashCode();
+    }
 
-        public override int GetHashCode () {
-		//
-		// Second test: do we correctly load this?
-		//
-                return val.GetHashCode();
-        }
+    public static int Main()
+    {
+        T t = new T();
 
-        public static int Main() 	
-	{
-		T t = new T ();
+        t.one();
 
-		t.one ();
+        t.GetHashCode();
 
-		t.GetHashCode ();
-		
-		return 0;
-        }
+        return 0;
+    }
 }
-
-
-
-
-
-        

@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,43 +28,46 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery.Udp;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public abstract class DiscoveryEndpointProvider
-	{
-		internal static DiscoveryEndpointProvider CreateDefault ()
-		{
-			return new UdpDiscoveryEndpointProvider ();
-		}
+    public abstract class DiscoveryEndpointProvider
+    {
+        internal static DiscoveryEndpointProvider CreateDefault()
+        {
+            return new UdpDiscoveryEndpointProvider();
+        }
 
-		public abstract DiscoveryEndpoint GetDiscoveryEndpoint ();
-	}
+        public abstract DiscoveryEndpoint GetDiscoveryEndpoint();
+    }
 
-	internal class SimpleDiscoveryEndpointProvider : DiscoveryEndpointProvider
-	{
-		public SimpleDiscoveryEndpointProvider (DiscoveryEndpoint value)
-		{
-			this.value = value;
-		}
-		
-		DiscoveryEndpoint value;
-		
-		public override DiscoveryEndpoint GetDiscoveryEndpoint ()
-		{
-			return value;
-		}
-	}
+    internal class SimpleDiscoveryEndpointProvider : DiscoveryEndpointProvider
+    {
+        public SimpleDiscoveryEndpointProvider(DiscoveryEndpoint value)
+        {
+            this.value = value;
+        }
 
-	internal class UdpDiscoveryEndpointProvider : DiscoveryEndpointProvider
-	{
-		public override DiscoveryEndpoint GetDiscoveryEndpoint ()
-		{
-			var binding = new CustomBinding (new TextMessageEncodingBindingElement (), new UdpTransportBindingElement ());
-			// FIXME: Name might not be set here (but needs to be modified somewhere anyways).
-			return new UdpDiscoveryEndpoint () { Binding = binding };
-		}
-	}
+        DiscoveryEndpoint value;
+
+        public override DiscoveryEndpoint GetDiscoveryEndpoint()
+        {
+            return value;
+        }
+    }
+
+    internal class UdpDiscoveryEndpointProvider : DiscoveryEndpointProvider
+    {
+        public override DiscoveryEndpoint GetDiscoveryEndpoint()
+        {
+            var binding = new CustomBinding(
+                new TextMessageEncodingBindingElement(),
+                new UdpTransportBindingElement()
+            );
+            // FIXME: Name might not be set here (but needs to be modified somewhere anyways).
+            return new UdpDiscoveryEndpoint() { Binding = binding };
+        }
+    }
 }

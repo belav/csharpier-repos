@@ -60,8 +60,7 @@ public struct DbContextLease
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public bool IsActive
-        => _contextPool != null;
+    public bool IsActive => _contextPool != null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -83,8 +82,7 @@ public struct DbContextLease
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public ValueTask ContextDisposedAsync()
-        => IsStandalone ? ReleaseAsync() : default;
+    public ValueTask ContextDisposedAsync() => IsStandalone ? ReleaseAsync() : default;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -106,12 +104,13 @@ public struct DbContextLease
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public ValueTask ReleaseAsync()
-        => Release(out var pool, out var context)
-            ? pool.ReturnAsync(context)
-            : default;
+    public ValueTask ReleaseAsync() =>
+        Release(out var pool, out var context) ? pool.ReturnAsync(context) : default;
 
-    private bool Release([NotNullWhen(true)] out IDbContextPool? pool, [NotNullWhen(true)] out IDbContextPoolable? context)
+    private bool Release(
+        [NotNullWhen(true)] out IDbContextPool? pool,
+        [NotNullWhen(true)] out IDbContextPoolable? context
+    )
     {
         pool = _contextPool;
         context = Context;

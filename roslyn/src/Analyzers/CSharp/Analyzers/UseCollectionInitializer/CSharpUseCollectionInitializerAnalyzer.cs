@@ -11,39 +11,54 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer;
 
-internal sealed class CSharpUseCollectionInitializerAnalyzer : AbstractUseCollectionInitializerAnalyzer<
-    ExpressionSyntax,
-    StatementSyntax,
-    BaseObjectCreationExpressionSyntax,
-    MemberAccessExpressionSyntax,
-    InvocationExpressionSyntax,
-    ExpressionStatementSyntax,
-    LocalDeclarationStatementSyntax,
-    VariableDeclaratorSyntax,
-    CSharpUseCollectionInitializerAnalyzer>
+internal sealed class CSharpUseCollectionInitializerAnalyzer
+    : AbstractUseCollectionInitializerAnalyzer<
+        ExpressionSyntax,
+        StatementSyntax,
+        BaseObjectCreationExpressionSyntax,
+        MemberAccessExpressionSyntax,
+        InvocationExpressionSyntax,
+        ExpressionStatementSyntax,
+        LocalDeclarationStatementSyntax,
+        VariableDeclaratorSyntax,
+        CSharpUseCollectionInitializerAnalyzer
+    >
 {
-    protected override IUpdateExpressionSyntaxHelper<ExpressionSyntax, StatementSyntax> SyntaxHelper
-        => CSharpUpdateExpressionSyntaxHelper.Instance;
+    protected override IUpdateExpressionSyntaxHelper<
+        ExpressionSyntax,
+        StatementSyntax
+    > SyntaxHelper => CSharpUpdateExpressionSyntaxHelper.Instance;
 
-    protected override bool IsInitializerOfLocalDeclarationStatement(LocalDeclarationStatementSyntax localDeclarationStatement, BaseObjectCreationExpressionSyntax rootExpression, [NotNullWhen(true)] out VariableDeclaratorSyntax? variableDeclarator)
-        => CSharpObjectCreationHelpers.IsInitializerOfLocalDeclarationStatement(localDeclarationStatement, rootExpression, out variableDeclarator);
+    protected override bool IsInitializerOfLocalDeclarationStatement(
+        LocalDeclarationStatementSyntax localDeclarationStatement,
+        BaseObjectCreationExpressionSyntax rootExpression,
+        [NotNullWhen(true)] out VariableDeclaratorSyntax? variableDeclarator
+    ) =>
+        CSharpObjectCreationHelpers.IsInitializerOfLocalDeclarationStatement(
+            localDeclarationStatement,
+            rootExpression,
+            out variableDeclarator
+        );
 
-    protected override bool IsComplexElementInitializer(SyntaxNode expression)
-        => expression.IsKind(SyntaxKind.ComplexElementInitializerExpression);
+    protected override bool IsComplexElementInitializer(SyntaxNode expression) =>
+        expression.IsKind(SyntaxKind.ComplexElementInitializerExpression);
 
     protected override bool HasExistingInvalidInitializerForCollection()
     {
         // Can't convert to a collection expression if it already has an object-initializer.  Note, we do allow
         // conversion of empty `{ }` initializer.  So we only block if the expression count is more than zero.
-        return _objectCreationExpression.Initializer is InitializerExpressionSyntax
-        {
-            RawKind: (int)SyntaxKind.ObjectInitializerExpression,
-            Expressions.Count: > 0,
-        };
+        return _objectCreationExpression.Initializer
+            is InitializerExpressionSyntax
+            {
+                RawKind: (int)SyntaxKind.ObjectInitializerExpression,
+                Expressions.Count: > 0,
+            };
     }
 
     protected override bool ValidateMatchesForCollectionExpression(
-        ArrayBuilder<Match<StatementSyntax>> matches, CancellationToken cancellationToken)
+        ArrayBuilder<Match<StatementSyntax>> matches,
+        CancellationToken cancellationToken
+    )
     {
         // Constructor wasn't called with any arguments.  Nothing to validate.
         var argumentList = _objectCreationExpression.ArgumentList;
@@ -55,11 +70,14 @@ internal sealed class CSharpUseCollectionInitializerAnalyzer : AbstractUseCollec
             return false;
 
         // must be a single `int capacity` constructor.
-        if (this.SemanticModel.GetSymbolInfo(_objectCreationExpression, cancellationToken).Symbol is not IMethodSymbol
+        if (
+            this.SemanticModel.GetSymbolInfo(_objectCreationExpression, cancellationToken).Symbol
+            is not IMethodSymbol
             {
                 MethodKind: MethodKind.Constructor,
                 Parameters: [{ Type.SpecialType: SpecialType.System_Int32, Name: "capacity" }],
-            } constructor)
+            } constructor
+        )
         {
             return false;
         }
@@ -76,7 +94,10 @@ internal sealed class CSharpUseCollectionInitializerAnalyzer : AbstractUseCollec
         {
             switch (match.Statement)
             {
-                case ExpressionStatementSyntax { Expression: InvocationExpressionSyntax invocation } expressionStatement:
+                case ExpressionStatementSyntax
+                {
+                    Expression: InvocationExpressionSyntax invocation
+                } expressionStatement:
                     // x.AddRange(y).  Have to make sure we see y.Count in the capacity list.
                     // x.Add(y, z).  Increment the total number of elements by the arg count.
                     if (match.UseSpread)
@@ -154,7 +175,14 @@ internal sealed class CSharpUseCollectionInitializerAnalyzer : AbstractUseCollec
                 current = invocationExpression.Expression;
             }
 
-            if (current is not MemberAccessExpressionSyntax(SyntaxKind.SimpleMemberAccessExpression) { Name.Identifier.ValueText: "Length" or "Count" } memberAccess)
+            if (
+                current
+                is not MemberAccessExpressionSyntax
+                (SyntaxKind.SimpleMemberAccessExpression)
+                {
+                    Name.Identifier.ValueText: "Length" or "Count"
+                } memberAccess
+            )
                 return false;
 
             current = memberAccess.Expression;

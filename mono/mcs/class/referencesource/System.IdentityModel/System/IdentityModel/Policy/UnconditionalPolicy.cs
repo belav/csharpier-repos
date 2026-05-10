@@ -26,9 +26,7 @@ namespace System.IdentityModel.Policy
         bool disposed = false;
 
         public UnconditionalPolicy(ClaimSet issuance)
-            : this(issuance, SecurityUtils.MaxUtcDateTime)
-        {
-        }
+            : this(issuance, SecurityUtils.MaxUtcDateTime) { }
 
         public UnconditionalPolicy(ClaimSet issuance, DateTime expirationTime)
         {
@@ -52,13 +50,21 @@ namespace System.IdentityModel.Policy
             this.primaryIdentity = primaryIdentity;
         }
 
-        internal UnconditionalPolicy(IIdentity primaryIdentity, ClaimSet issuance, DateTime expirationTime)
+        internal UnconditionalPolicy(
+            IIdentity primaryIdentity,
+            ClaimSet issuance,
+            DateTime expirationTime
+        )
             : this(issuance, expirationTime)
         {
             this.primaryIdentity = primaryIdentity;
         }
 
-        internal UnconditionalPolicy(IIdentity primaryIdentity, ReadOnlyCollection<ClaimSet> issuances, DateTime expirationTime)
+        internal UnconditionalPolicy(
+            IIdentity primaryIdentity,
+            ReadOnlyCollection<ClaimSet> issuances,
+            DateTime expirationTime
+        )
             : this(issuances, expirationTime)
         {
             this.primaryIdentity = primaryIdentity;
@@ -67,20 +73,31 @@ namespace System.IdentityModel.Policy
         UnconditionalPolicy(UnconditionalPolicy from)
         {
             this.disposable = from.disposable;
-            this.primaryIdentity = from.disposable ? SecurityUtils.CloneIdentityIfNecessary(from.primaryIdentity) : from.primaryIdentity;
+            this.primaryIdentity = from.disposable
+                ? SecurityUtils.CloneIdentityIfNecessary(from.primaryIdentity)
+                : from.primaryIdentity;
             if (from.issuance != null)
             {
-                this.issuance = from.disposable ? SecurityUtils.CloneClaimSetIfNecessary(from.issuance) : from.issuance;
+                this.issuance = from.disposable
+                    ? SecurityUtils.CloneClaimSetIfNecessary(from.issuance)
+                    : from.issuance;
             }
             else
             {
-                this.issuances = from.disposable ? SecurityUtils.CloneClaimSetsIfNecessary(from.issuances) : from.issuances;
+                this.issuances = from.disposable
+                    ? SecurityUtils.CloneClaimSetsIfNecessary(from.issuances)
+                    : from.issuances;
             }
             this.issuer = from.issuer;
             this.expirationTime = from.expirationTime;
         }
 
-        void Initialize(ClaimSet issuer, ClaimSet issuance, ReadOnlyCollection<ClaimSet> issuances, DateTime expirationTime)
+        void Initialize(
+            ClaimSet issuer,
+            ClaimSet issuance,
+            ReadOnlyCollection<ClaimSet> issuances,
+            DateTime expirationTime
+        )
         {
             this.issuer = issuer;
             this.issuance = issuance;
@@ -109,7 +126,7 @@ namespace System.IdentityModel.Policy
             {
                 if (this.id == null)
                     this.id = SecurityUniqueId.Create();
-                return this.id.Value; 
+                return this.id.Value;
             }
         }
 
@@ -120,7 +137,7 @@ namespace System.IdentityModel.Policy
 
         internal IIdentity PrimaryIdentity
         {
-            get 
+            get
             {
                 ThrowIfDisposed();
                 if (this.primaryIdentity == null)
@@ -157,7 +174,7 @@ namespace System.IdentityModel.Policy
 
         internal ReadOnlyCollection<ClaimSet> Issuances
         {
-            get 
+            get
             {
                 ThrowIfDisposed();
                 if (this.issuances == null)
@@ -166,7 +183,7 @@ namespace System.IdentityModel.Policy
                     issuances.Add(issuance);
                     this.issuances = issuances.AsReadOnly();
                 }
-                return this.issuances; 
+                return this.issuances;
             }
         }
 
@@ -201,7 +218,9 @@ namespace System.IdentityModel.Policy
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
         }
 
@@ -224,7 +243,10 @@ namespace System.IdentityModel.Policy
             }
 
             // Preferably Non-Anonymous
-            if (this.PrimaryIdentity != null && this.PrimaryIdentity != SecurityUtils.AnonymousIdentity)
+            if (
+                this.PrimaryIdentity != null
+                && this.PrimaryIdentity != SecurityUtils.AnonymousIdentity
+            )
             {
                 IList<IIdentity> identities;
                 object obj;

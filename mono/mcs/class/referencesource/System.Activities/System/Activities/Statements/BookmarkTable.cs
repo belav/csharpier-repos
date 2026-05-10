@@ -5,13 +5,13 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     class BookmarkTable
     {
-        //Number of bookmarks used internally       
+        //Number of bookmarks used internally
         static int tableSize = Enum.GetValues(typeof(CompensationBookmarkName)).Length;
 
         Bookmark[] bookmarkTable;
@@ -23,14 +23,8 @@ namespace System.Activities.Statements
 
         public Bookmark this[CompensationBookmarkName bookmarkName]
         {
-            get 
-            {
-                return this.bookmarkTable[(int)bookmarkName];
-            }
-            set 
-            {
-                this.bookmarkTable[(int)bookmarkName] = value;
-            }
+            get { return this.bookmarkTable[(int)bookmarkName]; }
+            set { this.bookmarkTable[(int)bookmarkName] = value; }
         }
 
         [DataMember(Name = "bookmarkTable")]

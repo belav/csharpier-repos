@@ -18,13 +18,13 @@ public class LocallocTest
         ulong local2 = local1 + 1;
         int size = 0;
 #if LOCALLOC_SMALL
-		Int32* intArray1 = stackalloc Int32[1];
-		Int32* intArray2 = stackalloc Int32[1];
-		size = 1;
+        Int32* intArray1 = stackalloc Int32[1];
+        Int32* intArray2 = stackalloc Int32[1];
+        size = 1;
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		Int32* intArray2 = stackalloc Int32[0x1000];
-		size = 0x1000;
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
+        size = 0x1000;
 #else
         Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
         Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
@@ -47,7 +47,6 @@ public class LocallocTest
                 return 1;
             }
         }
-
 
         if (!Global.verifyStack("intArray1", intArray1, size, 1000))
         {

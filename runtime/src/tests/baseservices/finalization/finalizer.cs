@@ -35,7 +35,11 @@ public class Finalize : IFinalize
 public class Finalizer
 {
     public Finalizer() { }
-    ~Finalizer() { Console.WriteLine("In Finalizer"); }
+
+    ~Finalizer()
+    {
+        Console.WriteLine("In Finalizer");
+    }
 }
 
 public class FinalizerWrapperProtected
@@ -48,14 +52,22 @@ public class FinalizerWrapperProtected
     protected class FinalizerProtected
     {
         public FinalizerProtected() { }
-        ~FinalizerProtected() { Console.WriteLine("In FinalizerProtected"); }
+
+        ~FinalizerProtected()
+        {
+            Console.WriteLine("In FinalizerProtected");
+        }
     }
 }
 
 internal class FinalizerInternal
 {
     public FinalizerInternal() { }
-    ~FinalizerInternal() { Console.WriteLine("In FinalizerInternal"); }
+
+    ~FinalizerInternal()
+    {
+        Console.WriteLine("In FinalizerInternal");
+    }
 }
 
 public class FinalizerWrapperProtectedInternal
@@ -68,26 +80,40 @@ public class FinalizerWrapperProtectedInternal
     protected internal class FinalizerProtectedInternal
     {
         public FinalizerProtectedInternal() { }
-        ~FinalizerProtectedInternal() { Console.WriteLine("In FinalizerProtectedInternal"); }
+
+        ~FinalizerProtectedInternal()
+        {
+            Console.WriteLine("In FinalizerProtectedInternal");
+        }
     }
 }
+
 public class FinalizerWrapperPrivate
 {
     public FinalizerWrapperPrivate()
     {
         FinalizerPrivate fp = new FinalizerPrivate();
     }
+
     private class FinalizerPrivate
     {
         public FinalizerPrivate() { }
-        ~FinalizerPrivate() { Console.WriteLine("In FinalizerProtectedInternal"); }
+
+        ~FinalizerPrivate()
+        {
+            Console.WriteLine("In FinalizerProtectedInternal");
+        }
     }
 }
 
 public abstract class FinalizerBase
 {
     public FinalizerBase() { }
-    ~FinalizerBase() { Console.WriteLine("In FinalizerBase"); }
+
+    ~FinalizerBase()
+    {
+        Console.WriteLine("In FinalizerBase");
+    }
 }
 
 public class FinalizerAbstract : FinalizerBase
@@ -97,8 +123,9 @@ public class FinalizerAbstract : FinalizerBase
 
 public class FinalizerGeneric<T>
 {
-    public FinalizerGeneric(){}
-    ~FinalizerGeneric(){}
+    public FinalizerGeneric() { }
+
+    ~FinalizerGeneric() { }
 }
 
 public class FinalizerWrapperGeneric
@@ -111,6 +138,7 @@ public class FinalizerWrapperGeneric
     private class FinalizerPrivate<T>
     {
         public FinalizerPrivate() { }
+
         ~FinalizerPrivate() { }
     }
 }
@@ -141,7 +169,6 @@ public class Test
             RunFinalizerGeneric();
             RunFinalizerWrapperGeneric();
             RunGeneric();
-
         }
         catch (Exception e)
         {
@@ -157,36 +184,44 @@ public class Test
     {
         Finalizer f = new Finalizer();
     }
+
     private void RunFinalizerWrapperProtected()
     {
         FinalizerWrapperProtected f = new FinalizerWrapperProtected();
     }
+
     private void RunFinalizerInternal()
     {
         FinalizerInternal f = new FinalizerInternal();
     }
+
     private void RunFinalizerWrapperProtectedInternal()
     {
         FinalizerWrapperProtectedInternal f = new FinalizerWrapperProtectedInternal();
     }
+
     private void RunFinalizerWrapperPrivate()
     {
         FinalizerWrapperPrivate f = new FinalizerWrapperPrivate();
     }
+
     private void RunFinalizerAbstract()
     {
         FinalizerAbstract f = new FinalizerAbstract();
     }
+
     private void RunFinalizerGeneric()
     {
         FinalizerGeneric<int> f = new FinalizerGeneric<int>();
     }
+
     private void RunFinalizerWrapperGeneric()
     {
         FinalizerWrapperGeneric f = new FinalizerWrapperGeneric();
     }
+
     private void RunGeneric()
     {
-        Gen<Finalizer> gen = new Gen<Finalizer>();        
+        Gen<Finalizer> gen = new Gen<Finalizer>();
     }
 }

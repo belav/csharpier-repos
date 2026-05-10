@@ -24,18 +24,21 @@ namespace System.Web.Mvc
         public static readonly string ValidationMessageCssClassName = "field-validation-error";
         public static readonly string ValidationMessageValidCssClassName = "field-validation-valid";
         public static readonly string ValidationSummaryCssClassName = "validation-summary-errors";
-        public static readonly string ValidationSummaryValidCssClassName = "validation-summary-valid";
+        public static readonly string ValidationSummaryValidCssClassName =
+            "validation-summary-valid";
 
         private static readonly object _html5InputsModeKey = new object();
 
         private DynamicViewDataDictionary _dynamicViewDataDictionary;
 
         public HtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-            : this(viewContext, viewDataContainer, RouteTable.Routes)
-        {
-        }
+            : this(viewContext, viewDataContainer, RouteTable.Routes) { }
 
-        public HtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection)
+        public HtmlHelper(
+            ViewContext viewContext,
+            IViewDataContainer viewDataContainer,
+            RouteCollection routeCollection
+        )
         {
             if (viewContext == null)
             {
@@ -53,7 +56,13 @@ namespace System.Web.Mvc
             ViewContext = viewContext;
             ViewDataContainer = viewDataContainer;
             RouteCollection = routeCollection;
-            ClientValidationRuleFactory = (name, metadata) => ModelValidatorProviders.Providers.GetValidators(metadata ?? ModelMetadata.FromStringExpression(name, ViewData), ViewContext).SelectMany(v => v.GetClientValidationRules());
+            ClientValidationRuleFactory = (name, metadata) =>
+                ModelValidatorProviders
+                    .Providers.GetValidators(
+                        metadata ?? ModelMetadata.FromStringExpression(name, ViewData),
+                        ViewContext
+                    )
+                    .SelectMany(v => v.GetClientValidationRules());
         }
 
         public static bool ClientValidationEnabled
@@ -68,7 +77,11 @@ namespace System.Web.Mvc
             set { WebPages.Html.HtmlHelper.IdAttributeDotReplacement = value; }
         }
 
-        internal Func<string, ModelMetadata, IEnumerable<ModelClientValidationRule>> ClientValidationRuleFactory { get; set; }
+        internal Func<
+            string,
+            ModelMetadata,
+            IEnumerable<ModelClientValidationRule>
+        > ClientValidationRuleFactory { get; set; }
 
         public RouteCollection RouteCollection { get; private set; }
 
@@ -136,7 +149,7 @@ namespace System.Web.Mvc
         public IViewDataContainer ViewDataContainer { get; internal set; }
 
         /// <summary>
-        /// Creates a dictionary of HTML attributes from the input object, 
+        /// Creates a dictionary of HTML attributes from the input object,
         /// translating underscores to dashes.
         /// </summary>
         /// <example>
@@ -147,10 +160,16 @@ namespace System.Web.Mvc
         /// <returns>A dictionary that represents HTML attributes.</returns>
         public static RouteValueDictionary AnonymousObjectToHtmlAttributes(object htmlAttributes)
         {
-            return System.Web.WebPages.Html.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+            return System.Web.WebPages.Html.HtmlHelper.AnonymousObjectToHtmlAttributes(
+                htmlAttributes
+            );
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public MvcHtmlString AntiForgeryToken()
         {
             return new MvcHtmlString(AntiForgery.GetHtml().ToString());
@@ -164,7 +183,11 @@ namespace System.Web.Mvc
         /// The scope of this setting is for the current view alone. Sub views and parent views
         /// will default to <see cref="Mvc.Html5DateRenderingMode.CurrentCulture"/> unless explicitly set otherwise.
         /// </remarks>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "The usage of the property is as an instance property of the helper.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "The usage of the property is as an instance property of the helper."
+        )]
         public Html5DateRenderingMode Html5DateRenderingMode
         {
             get
@@ -176,50 +199,115 @@ namespace System.Web.Mvc
                 }
                 return default(Html5DateRenderingMode);
             }
-            set
-            {
-                ScopeStorage.CurrentScope[_html5InputsModeKey] = value;
-            }
+            set { ScopeStorage.CurrentScope[_html5InputsModeKey] = value; }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AdditionalDataProvider", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AntiForgeryConfig", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AntiForgeryToken", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "httpCookies", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Method is obsolete.")]
-        [Obsolete("This method is deprecated. Use the AntiForgeryToken() method instead. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.", error: true)]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AdditionalDataProvider",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AntiForgeryConfig",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AntiForgeryToken",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "httpCookies",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Method is obsolete."
+        )]
+        [Obsolete(
+            "This method is deprecated. Use the AntiForgeryToken() method instead. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.",
+            error: true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public MvcHtmlString AntiForgeryToken(string salt)
         {
             if (!String.IsNullOrEmpty(salt))
             {
-                throw new NotSupportedException("This method is deprecated. Use the AntiForgeryToken() method instead. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.");
+                throw new NotSupportedException(
+                    "This method is deprecated. Use the AntiForgeryToken() method instead. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property."
+                );
             }
 
             return AntiForgeryToken();
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AdditionalDataProvider", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AntiForgeryConfig", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "AntiForgeryToken", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "httpCookies", Justification = "API name.")]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Method is obsolete.")]
-        [Obsolete("This method is deprecated. Use the AntiForgeryToken() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.", error: true)]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AdditionalDataProvider",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AntiForgeryConfig",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "AntiForgeryToken",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA2204:Literals should be spelled correctly",
+            MessageId = "httpCookies",
+            Justification = "API name."
+        )]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Method is obsolete."
+        )]
+        [Obsolete(
+            "This method is deprecated. Use the AntiForgeryToken() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.",
+            error: true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public MvcHtmlString AntiForgeryToken(string salt, string domain, string path)
         {
-            if (!String.IsNullOrEmpty(salt) || !String.IsNullOrEmpty(domain) || !String.IsNullOrEmpty(path))
+            if (
+                !String.IsNullOrEmpty(salt)
+                || !String.IsNullOrEmpty(domain)
+                || !String.IsNullOrEmpty(path)
+            )
             {
-                throw new NotSupportedException("This method is deprecated. Use the AntiForgeryToken() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property.");
+                throw new NotSupportedException(
+                    "This method is deprecated. Use the AntiForgeryToken() method instead. To specify a custom domain for the generated cookie, use the <httpCookies> configuration element. To specify custom data to be embedded within the token, use the static AntiForgeryConfig.AdditionalDataProvider property."
+                );
             }
 
             return AntiForgeryToken();
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public string AttributeEncode(string value)
         {
-            return (!String.IsNullOrEmpty(value)) ? HttpUtility.HtmlAttributeEncode(value) : String.Empty;
+            return (!String.IsNullOrEmpty(value))
+                ? HttpUtility.HtmlAttributeEncode(value)
+                : String.Empty;
         }
 
         public string AttributeEncode(object value)
@@ -247,13 +335,21 @@ namespace System.Web.Mvc
             ViewContext.UnobtrusiveJavaScriptEnabled = enabled;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public string Encode(string value)
         {
             return (!String.IsNullOrEmpty(value)) ? HttpUtility.HtmlEncode(value) : String.Empty;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public string Encode(object value)
         {
             return value != null ? HttpUtility.HtmlEncode(value) : String.Empty;
@@ -269,7 +365,11 @@ namespace System.Web.Mvc
             return Convert.ToString(ViewData.Eval(key, format), CultureInfo.CurrentCulture);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public string FormatValue(object value, string format)
         {
             return ViewDataDictionary.FormatValueInternal(value, format);
@@ -280,9 +380,16 @@ namespace System.Web.Mvc
             return Convert.ToBoolean(ViewData.Eval(key), CultureInfo.InvariantCulture);
         }
 
-        internal static IView FindPartialView(ViewContext viewContext, string partialViewName, ViewEngineCollection viewEngineCollection)
+        internal static IView FindPartialView(
+            ViewContext viewContext,
+            string partialViewName,
+            ViewEngineCollection viewEngineCollection
+        )
         {
-            ViewEngineResult result = viewEngineCollection.FindPartialView(viewContext, partialViewName);
+            ViewEngineResult result = viewEngineCollection.FindPartialView(
+                viewContext,
+                partialViewName
+            );
             if (result.View != null)
             {
                 return result.View;
@@ -295,8 +402,14 @@ namespace System.Web.Mvc
                 locationsText.Append(location);
             }
 
-            throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                              MvcResources.Common_PartialViewNotFound, partialViewName, locationsText));
+            throw new InvalidOperationException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.Common_PartialViewNotFound,
+                    partialViewName,
+                    locationsText
+                )
+            );
         }
 
         public static string GenerateIdFromName(string name)
@@ -325,36 +438,157 @@ namespace System.Web.Mvc
             return TagBuilder.CreateSanitizedId(name, idAttributeDotReplacement);
         }
 
-        public static string GenerateLink(RequestContext requestContext, RouteCollection routeCollection, string linkText, string routeName, string actionName, string controllerName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+        public static string GenerateLink(
+            RequestContext requestContext,
+            RouteCollection routeCollection,
+            string linkText,
+            string routeName,
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return GenerateLink(requestContext, routeCollection, linkText, routeName, actionName, controllerName, null /* protocol */, null /* hostName */, null /* fragment */, routeValues, htmlAttributes);
+            return GenerateLink(
+                requestContext,
+                routeCollection,
+                linkText,
+                routeName,
+                actionName,
+                controllerName,
+                null /* protocol */
+                ,
+                null /* hostName */
+                ,
+                null /* fragment */
+                ,
+                routeValues,
+                htmlAttributes
+            );
         }
 
-        public static string GenerateLink(RequestContext requestContext, RouteCollection routeCollection, string linkText, string routeName, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+        public static string GenerateLink(
+            RequestContext requestContext,
+            RouteCollection routeCollection,
+            string linkText,
+            string routeName,
+            string actionName,
+            string controllerName,
+            string protocol,
+            string hostName,
+            string fragment,
+            RouteValueDictionary routeValues,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return GenerateLinkInternal(requestContext, routeCollection, linkText, routeName, actionName, controllerName, protocol, hostName, fragment, routeValues, htmlAttributes, true /* includeImplicitMvcValues */);
+            return GenerateLinkInternal(
+                requestContext,
+                routeCollection,
+                linkText,
+                routeName,
+                actionName,
+                controllerName,
+                protocol,
+                hostName,
+                fragment,
+                routeValues,
+                htmlAttributes,
+                true /* includeImplicitMvcValues */
+            );
         }
 
-        private static string GenerateLinkInternal(RequestContext requestContext, RouteCollection routeCollection, string linkText, string routeName, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes, bool includeImplicitMvcValues)
+        private static string GenerateLinkInternal(
+            RequestContext requestContext,
+            RouteCollection routeCollection,
+            string linkText,
+            string routeName,
+            string actionName,
+            string controllerName,
+            string protocol,
+            string hostName,
+            string fragment,
+            RouteValueDictionary routeValues,
+            IDictionary<string, object> htmlAttributes,
+            bool includeImplicitMvcValues
+        )
         {
-            string url = UrlHelper.GenerateUrl(routeName, actionName, controllerName, protocol, hostName, fragment, routeValues, routeCollection, requestContext, includeImplicitMvcValues);
+            string url = UrlHelper.GenerateUrl(
+                routeName,
+                actionName,
+                controllerName,
+                protocol,
+                hostName,
+                fragment,
+                routeValues,
+                routeCollection,
+                requestContext,
+                includeImplicitMvcValues
+            );
             TagBuilder tagBuilder = new TagBuilder("a")
             {
-                InnerHtml = (!String.IsNullOrEmpty(linkText)) ? HttpUtility.HtmlEncode(linkText) : String.Empty
+                InnerHtml =
+                    (!String.IsNullOrEmpty(linkText))
+                        ? HttpUtility.HtmlEncode(linkText)
+                        : String.Empty,
             };
             tagBuilder.MergeAttributes(htmlAttributes);
             tagBuilder.MergeAttribute("href", url);
             return tagBuilder.ToString(TagRenderMode.Normal);
         }
 
-        public static string GenerateRouteLink(RequestContext requestContext, RouteCollection routeCollection, string linkText, string routeName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+        public static string GenerateRouteLink(
+            RequestContext requestContext,
+            RouteCollection routeCollection,
+            string linkText,
+            string routeName,
+            RouteValueDictionary routeValues,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return GenerateRouteLink(requestContext, routeCollection, linkText, routeName, null /* protocol */, null /* hostName */, null /* fragment */, routeValues, htmlAttributes);
+            return GenerateRouteLink(
+                requestContext,
+                routeCollection,
+                linkText,
+                routeName,
+                null /* protocol */
+                ,
+                null /* hostName */
+                ,
+                null /* fragment */
+                ,
+                routeValues,
+                htmlAttributes
+            );
         }
 
-        public static string GenerateRouteLink(RequestContext requestContext, RouteCollection routeCollection, string linkText, string routeName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
+        public static string GenerateRouteLink(
+            RequestContext requestContext,
+            RouteCollection routeCollection,
+            string linkText,
+            string routeName,
+            string protocol,
+            string hostName,
+            string fragment,
+            RouteValueDictionary routeValues,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return GenerateLinkInternal(requestContext, routeCollection, linkText, routeName, null /* actionName */, null /* controllerName */, protocol, hostName, fragment, routeValues, htmlAttributes, false /* includeImplicitMvcValues */);
+            return GenerateLinkInternal(
+                requestContext,
+                routeCollection,
+                linkText,
+                routeName,
+                null /* actionName */
+                ,
+                null /* controllerName */
+                ,
+                protocol,
+                hostName,
+                fragment,
+                routeValues,
+                htmlAttributes,
+                false /* includeImplicitMvcValues */
+            );
         }
 
         public static string GetFormMethodString(FormMethod method)
@@ -396,7 +630,10 @@ namespace System.Web.Mvc
             {
                 if (modelState.Value != null)
                 {
-                    return modelState.Value.ConvertTo(destinationType, null /* culture */);
+                    return modelState.Value.ConvertTo(
+                        destinationType,
+                        null /* culture */
+                    );
                 }
             }
             return null;
@@ -410,7 +647,10 @@ namespace System.Web.Mvc
         // Only render attributes if unobtrusive client-side validation is enabled, and then only if we've
         // never rendered validation for a field with this name in this form. Also, if there's no form context,
         // then we can't render the attributes (we'd have no <form> to attach them to).
-        public IDictionary<string, object> GetUnobtrusiveValidationAttributes(string name, ModelMetadata metadata)
+        public IDictionary<string, object> GetUnobtrusiveValidationAttributes(
+            string name,
+            ModelMetadata metadata
+        )
         {
             Dictionary<string, object> results = new Dictionary<string, object>();
 
@@ -434,7 +674,10 @@ namespace System.Web.Mvc
 
             formContext.RenderedField(fullName, true);
 
-            IEnumerable<ModelClientValidationRule> clientRules = ClientValidationRuleFactory(name, metadata);
+            IEnumerable<ModelClientValidationRule> clientRules = ClientValidationRuleFactory(
+                name,
+                metadata
+            );
             UnobtrusiveValidationAttributesGenerator.GetValidationAttributes(clientRules, results);
 
             return results;
@@ -461,23 +704,35 @@ namespace System.Web.Mvc
                     httpMethod = "OPTIONS";
                     break;
                 default:
-                    throw new ArgumentException(MvcResources.HtmlHelper_InvalidHttpVerb, "httpVerb");
+                    throw new ArgumentException(
+                        MvcResources.HtmlHelper_InvalidHttpVerb,
+                        "httpVerb"
+                    );
             }
 
             return HttpMethodOverride(httpMethod);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public MvcHtmlString HttpMethodOverride(string httpMethod)
         {
             if (String.IsNullOrEmpty(httpMethod))
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "httpMethod");
             }
-            if (String.Equals(httpMethod, "GET", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(httpMethod, "POST", StringComparison.OrdinalIgnoreCase))
+            if (
+                String.Equals(httpMethod, "GET", StringComparison.OrdinalIgnoreCase)
+                || String.Equals(httpMethod, "POST", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                throw new ArgumentException(MvcResources.HtmlHelper_InvalidHttpMethod, "httpMethod");
+                throw new ArgumentException(
+                    MvcResources.HtmlHelper_InvalidHttpMethod,
+                    "httpMethod"
+                );
             }
 
             TagBuilder tagBuilder = new TagBuilder("input");
@@ -494,7 +749,11 @@ namespace System.Web.Mvc
         /// </summary>
         /// <param name="value">HTML markup string.</param>
         /// <returns>An IHtmlString that represents HTML markup.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public IHtmlString Raw(string value)
         {
             return new HtmlString(value);
@@ -506,13 +765,23 @@ namespace System.Web.Mvc
         /// </summary>
         /// <param name="value">object with string representation as HTML markup</param>
         /// <returns>An IHtmlString that represents HTML markup.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "For consistency, all helpers are instance methods.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "For consistency, all helpers are instance methods."
+        )]
         public IHtmlString Raw(object value)
         {
             return new HtmlString(value == null ? null : value.ToString());
         }
 
-        internal virtual void RenderPartialInternal(string partialViewName, ViewDataDictionary viewData, object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+        internal virtual void RenderPartialInternal(
+            string partialViewName,
+            ViewDataDictionary viewData,
+            object model,
+            TextWriter writer,
+            ViewEngineCollection viewEngineCollection
+        )
         {
             if (String.IsNullOrEmpty(partialViewName))
             {
@@ -544,7 +813,13 @@ namespace System.Web.Mvc
                 }
             }
 
-            ViewContext newViewContext = new ViewContext(ViewContext, ViewContext.View, newViewData, ViewContext.TempData, writer);
+            ViewContext newViewContext = new ViewContext(
+                ViewContext,
+                ViewContext.View,
+                newViewData,
+                ViewContext.TempData,
+                writer
+            );
             IView view = FindPartialView(newViewContext, partialViewName, viewEngineCollection);
             view.Render(newViewContext, writer);
         }
@@ -578,7 +853,7 @@ namespace System.Web.Mvc
         }
 
         /// <summary>
-        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated 
+        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated
         /// value to the dictionary. It will expose public properties from derived types as well. This is typically used
         /// with objects of an anonymous type.
         /// </summary>

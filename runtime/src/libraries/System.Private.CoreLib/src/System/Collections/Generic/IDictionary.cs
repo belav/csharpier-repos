@@ -14,23 +14,13 @@ namespace System.Collections.Generic
         // Interfaces are not serializable
         // The Item property provides methods to read and edit entries
         // in the Dictionary.
-        TValue this[TKey key]
-        {
-            get;
-            set;
-        }
+        TValue this[TKey key] { get; set; }
 
         // Returns a collections of the keys in this dictionary.
-        ICollection<TKey> Keys
-        {
-            get;
-        }
+        ICollection<TKey> Keys { get; }
 
         // Returns a collections of the values in this dictionary.
-        ICollection<TValue> Values
-        {
-            get;
-        }
+        ICollection<TValue> Values { get; }
 
         // Returns whether this dictionary contains a particular key.
         //

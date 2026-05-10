@@ -10,11 +10,12 @@ namespace System.ServiceProcess
     {
         public void RequestAdditionalTime(System.TimeSpan time) { }
     }
+
     public partial class ServiceController : System.ComponentModel.Component
     {
         public void Stop(bool stopDependentServices) { }
     }
-    public readonly partial struct SessionChangeDescription : System.IEquatable<System.ServiceProcess.SessionChangeDescription>
-    {
-    }
+
+    public readonly partial struct SessionChangeDescription
+        : System.IEquatable<System.ServiceProcess.SessionChangeDescription> { }
 }

@@ -16,6 +16,7 @@ internal static partial class Interop
             int dwMsgType,
             IntPtr hCryptProv,
             IntPtr pRecipientInfo,
-            IntPtr pStreamInfo);
+            IntPtr pStreamInfo
+        );
     }
 }

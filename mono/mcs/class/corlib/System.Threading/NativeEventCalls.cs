@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,7 +34,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using Microsoft.Win32.SafeHandles;
-
 #if !MOBILE
 using System.Security.AccessControl;
 using System.IO;
@@ -42,61 +41,93 @@ using System.IO;
 
 namespace System.Threading
 {
- 	internal static class NativeEventCalls
-	{
-		public unsafe static IntPtr CreateEvent_internal (bool manual, bool initial, string name, out int errorCode)
-		{
-			// FIXME check for embedded nuls in name
-			fixed (char *fixed_name = name)
-				return CreateEvent_icall (manual, initial, fixed_name, name?.Length ?? 0, out errorCode);
-		}
+    internal static class NativeEventCalls
+    {
+        public static unsafe IntPtr CreateEvent_internal(
+            bool manual,
+            bool initial,
+            string name,
+            out int errorCode
+        )
+        {
+            // FIXME check for embedded nuls in name
+            fixed (char* fixed_name = name)
+                return CreateEvent_icall(
+                    manual,
+                    initial,
+                    fixed_name,
+                    name?.Length ?? 0,
+                    out errorCode
+                );
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		private unsafe static extern IntPtr CreateEvent_icall (bool manual, bool initial, char *name, int name_length, out int errorCode);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern unsafe IntPtr CreateEvent_icall(
+            bool manual,
+            bool initial,
+            char* name,
+            int name_length,
+            out int errorCode
+        );
 
-		public static bool SetEvent (SafeWaitHandle handle)
-		{
-			bool release = false;
-			try {
-				handle.DangerousAddRef (ref release);
-				return SetEvent_internal (handle.DangerousGetHandle ());
-			} finally {
-				if (release)
-					handle.DangerousRelease ();
-			}
-		}
+        public static bool SetEvent(SafeWaitHandle handle)
+        {
+            bool release = false;
+            try
+            {
+                handle.DangerousAddRef(ref release);
+                return SetEvent_internal(handle.DangerousGetHandle());
+            }
+            finally
+            {
+                if (release)
+                    handle.DangerousRelease();
+            }
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		static extern bool SetEvent_internal(IntPtr handle);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern bool SetEvent_internal(IntPtr handle);
 
-		public static bool ResetEvent (SafeWaitHandle handle)
-		{
-			bool release = false;
-			try {
-				handle.DangerousAddRef (ref release);
-				return ResetEvent_internal (handle.DangerousGetHandle ());
-			} finally {
-				if (release)
-					handle.DangerousRelease ();
-			}
-		}
+        public static bool ResetEvent(SafeWaitHandle handle)
+        {
+            bool release = false;
+            try
+            {
+                handle.DangerousAddRef(ref release);
+                return ResetEvent_internal(handle.DangerousGetHandle());
+            }
+            finally
+            {
+                if (release)
+                    handle.DangerousRelease();
+            }
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		static extern bool ResetEvent_internal(IntPtr handle);
-	
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		public static extern void CloseEvent_internal (IntPtr handle);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern bool ResetEvent_internal(IntPtr handle);
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern void CloseEvent_internal(IntPtr handle);
 
 #if !MOBILE
-		public unsafe static IntPtr OpenEvent_internal (string name, EventWaitHandleRights rights, out int errorCode)
-		{
-			// FIXME check for embedded nuls in name
-			fixed (char *fixed_name = name)
-				return OpenEvent_icall (fixed_name, name?.Length ?? 0, rights, out errorCode);
-		}
+        public unsafe static IntPtr OpenEvent_internal(
+            string name,
+            EventWaitHandleRights rights,
+            out int errorCode
+        )
+        {
+            // FIXME check for embedded nuls in name
+            fixed (char* fixed_name = name)
+                return OpenEvent_icall(fixed_name, name?.Length ?? 0, rights, out errorCode);
+        }
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		private unsafe static extern IntPtr OpenEvent_icall (char *name, int name_length, EventWaitHandleRights rights, out int errorCode);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern unsafe IntPtr OpenEvent_icall(
+            char* name,
+            int name_length,
+            EventWaitHandleRights rights,
+            out int errorCode
+        );
 #endif
-	}
+    }
 }

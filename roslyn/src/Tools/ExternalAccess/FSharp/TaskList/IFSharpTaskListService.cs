@@ -10,6 +10,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.TaskList
 {
     internal interface IFSharpTaskListService
     {
-        Task<ImmutableArray<FSharpTaskListItem>> GetTaskListItemsAsync(Document document, ImmutableArray<FSharpTaskListDescriptor> descriptors, CancellationToken cancellationToken);
+        Task<ImmutableArray<FSharpTaskListItem>> GetTaskListItemsAsync(
+            Document document,
+            ImmutableArray<FSharpTaskListDescriptor> descriptors,
+            CancellationToken cancellationToken
+        );
     }
 }

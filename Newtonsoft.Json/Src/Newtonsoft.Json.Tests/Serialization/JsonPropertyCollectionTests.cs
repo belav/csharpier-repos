@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Tests.TestObjects;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -30,8 +32,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {
@@ -45,16 +45,25 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 OverriddenProperty = "OverriddenProperty",
                 PropertyA = "PropertyA",
-                PropertyB = "PropertyB"
+                PropertyB = "PropertyB",
             };
 
             var resolver = new DefaultContractResolver();
             var contract = (JsonObjectContract)resolver.ResolveContract(value.GetType());
 
             Assert.AreEqual(3, contract.Properties.Count);
-            Assert.IsTrue(contract.Properties.Contains("OverriddenProperty"), "Contract is missing property 'OverriddenProperty'");
-            Assert.IsTrue(contract.Properties.Contains("PropertyA"), "Contract is missing property 'PropertyA'");
-            Assert.IsTrue(contract.Properties.Contains("PropertyB"), "Contract is missing property 'PropertyB'");
+            Assert.IsTrue(
+                contract.Properties.Contains("OverriddenProperty"),
+                "Contract is missing property 'OverriddenProperty'"
+            );
+            Assert.IsTrue(
+                contract.Properties.Contains("PropertyA"),
+                "Contract is missing property 'PropertyA'"
+            );
+            Assert.IsTrue(
+                contract.Properties.Contains("PropertyB"),
+                "Contract is missing property 'PropertyB'"
+            );
         }
     }
 }

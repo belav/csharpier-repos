@@ -29,15 +29,15 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InertClassifierProvider()
-        {
-        }
+        public InertClassifierProvider() { }
 
-        public IClassifier GetClassifier(ITextBuffer textBuffer)
-            => new InertClassifier(textBuffer);
+        public IClassifier GetClassifier(ITextBuffer textBuffer) => new InertClassifier(textBuffer);
 
         internal static void CaptureExistingClassificationSpans(
-            IViewClassifierAggregatorService classifierAggregator, ITextView textView, ITextBuffer textBuffer)
+            IViewClassifierAggregatorService classifierAggregator,
+            ITextView textView,
+            ITextBuffer textBuffer
+        )
         {
             // No need to do this more than once.
             if (textBuffer.Properties.ContainsProperty(s_classificationsKey))
@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             var classifier = classifierAggregator.GetClassifier(textView);
             try
             {
-                var classifications = classifier.GetClassificationSpans(textBuffer.CurrentSnapshot.GetFullSpan());
+                var classifications = classifier.GetClassificationSpans(
+                    textBuffer.CurrentSnapshot.GetFullSpan()
+                );
                 textBuffer.Properties.AddProperty(s_classificationsKey, classifications);
             }
             finally

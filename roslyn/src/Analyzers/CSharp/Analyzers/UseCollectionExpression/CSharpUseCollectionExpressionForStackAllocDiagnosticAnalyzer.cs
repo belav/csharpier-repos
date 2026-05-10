@@ -16,10 +16,10 @@ internal sealed partial class CSharpUseCollectionExpressionForStackAllocDiagnost
     : AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer
 {
     public CSharpUseCollectionExpressionForStackAllocDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseCollectionExpressionForStackAllocDiagnosticId,
-               EnforceOnBuildValues.UseCollectionExpressionForStackAlloc)
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseCollectionExpressionForStackAllocDiagnosticId,
+            EnforceOnBuildValues.UseCollectionExpressionForStackAlloc
+        ) { }
 
     protected override bool IsSupported(Compilation compilation)
     {
@@ -30,8 +30,14 @@ internal sealed partial class CSharpUseCollectionExpressionForStackAllocDiagnost
 
     protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context)
     {
-        context.RegisterSyntaxNodeAction(AnalyzeExplicitStackAllocExpression, SyntaxKind.StackAllocArrayCreationExpression);
-        context.RegisterSyntaxNodeAction(AnalyzeImplicitStackAllocExpression, SyntaxKind.ImplicitStackAllocArrayCreationExpression);
+        context.RegisterSyntaxNodeAction(
+            AnalyzeExplicitStackAllocExpression,
+            SyntaxKind.StackAllocArrayCreationExpression
+        );
+        context.RegisterSyntaxNodeAction(
+            AnalyzeImplicitStackAllocExpression,
+            SyntaxKind.ImplicitStackAllocArrayCreationExpression
+        );
     }
 
     private void AnalyzeImplicitStackAllocExpression(SyntaxNodeAnalysisContext context)
@@ -46,31 +52,44 @@ internal sealed partial class CSharpUseCollectionExpressionForStackAllocDiagnost
         if (!option.Value || ShouldSkipAnalysis(context, option.Notification))
             return;
 
-        if (!UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
-                semanticModel, expression, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
+                semanticModel,
+                expression,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
         {
             return;
         }
 
         var locations = ImmutableArray.Create(expression.GetLocation());
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            expression.GetFirstToken().GetLocation(),
-            option.Notification,
-            additionalLocations: locations,
-            properties: null));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                expression.GetFirstToken().GetLocation(),
+                option.Notification,
+                additionalLocations: locations,
+                properties: null
+            )
+        );
 
         var additionalUnnecessaryLocations = ImmutableArray.Create(
-            syntaxTree.GetLocation(TextSpan.FromBounds(
-                expression.SpanStart,
-                expression.CloseBracketToken.Span.End)));
+            syntaxTree.GetLocation(
+                TextSpan.FromBounds(expression.SpanStart, expression.CloseBracketToken.Span.End)
+            )
+        );
 
-        context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-            UnnecessaryCodeDescriptor,
-            additionalUnnecessaryLocations[0],
-            NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
-            additionalLocations: locations,
-            additionalUnnecessaryLocations: additionalUnnecessaryLocations));
+        context.ReportDiagnostic(
+            DiagnosticHelper.CreateWithLocationTags(
+                UnnecessaryCodeDescriptor,
+                additionalUnnecessaryLocations[0],
+                NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
+                additionalLocations: locations,
+                additionalUnnecessaryLocations: additionalUnnecessaryLocations
+            )
+        );
     }
 
     private void AnalyzeExplicitStackAllocExpression(SyntaxNodeAnalysisContext context)
@@ -90,36 +109,45 @@ internal sealed partial class CSharpUseCollectionExpressionForStackAllocDiagnost
             return;
 
         var locations = ImmutableArray.Create(expression.GetLocation());
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            expression.GetFirstToken().GetLocation(),
-            option.Notification,
-            additionalLocations: locations,
-            properties: null));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                expression.GetFirstToken().GetLocation(),
+                option.Notification,
+                additionalLocations: locations,
+                properties: null
+            )
+        );
 
         var additionalUnnecessaryLocations = ImmutableArray.Create(
-            syntaxTree.GetLocation(TextSpan.FromBounds(
-                expression.SpanStart,
-                expression.Type.Span.End)));
+            syntaxTree.GetLocation(
+                TextSpan.FromBounds(expression.SpanStart, expression.Type.Span.End)
+            )
+        );
 
-        context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-            UnnecessaryCodeDescriptor,
-            additionalUnnecessaryLocations[0],
-            NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
-            additionalLocations: locations,
-            additionalUnnecessaryLocations: additionalUnnecessaryLocations));
+        context.ReportDiagnostic(
+            DiagnosticHelper.CreateWithLocationTags(
+                UnnecessaryCodeDescriptor,
+                additionalUnnecessaryLocations[0],
+                NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
+                additionalLocations: locations,
+                additionalUnnecessaryLocations: additionalUnnecessaryLocations
+            )
+        );
     }
 
     public static ImmutableArray<CollectionExpressionMatch<StatementSyntax>> TryGetMatches(
         SemanticModel semanticModel,
         StackAllocArrayCreationExpressionSyntax expression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         return UseCollectionExpressionHelpers.TryGetMatches(
             semanticModel,
             expression,
             static e => e.Type,
             static e => e.Initializer,
-            cancellationToken);
+            cancellationToken
+        );
     }
 }

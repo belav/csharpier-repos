@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using CilStrip.Mono.Cecil;
 using CilStrip.Mono.Cecil.Binary;
 using CilStrip.Mono.Cecil.Cil;
@@ -18,8 +18,14 @@ namespace AssemblyStripper
         {
             CustomAttributeRow row_left = (CustomAttributeRow)left;
             CustomAttributeRow row_right = (CustomAttributeRow)right;
-            var leftParentCodedIdx = Utilities.CompressMetadataToken(CodedIndex.HasCustomAttribute, row_left.Parent);
-            var rightParentCodedIdx = Utilities.CompressMetadataToken(CodedIndex.HasCustomAttribute, row_right.Parent);
+            var leftParentCodedIdx = Utilities.CompressMetadataToken(
+                CodedIndex.HasCustomAttribute,
+                row_left.Parent
+            );
+            var rightParentCodedIdx = Utilities.CompressMetadataToken(
+                CodedIndex.HasCustomAttribute,
+                row_right.Parent
+            );
             return leftParentCodedIdx.CompareTo(rightParentCodedIdx);
         }
     }
@@ -111,7 +117,10 @@ namespace AssemblyStripper
 
             PatchHeap(metadata_writer.StringWriter, original.MetadataRoot.Streams.StringsHeap);
             PatchHeap(metadata_writer.GuidWriter, original.MetadataRoot.Streams.GuidHeap);
-            PatchHeap(metadata_writer.UserStringWriter, original.MetadataRoot.Streams.UserStringsHeap);
+            PatchHeap(
+                metadata_writer.UserStringWriter,
+                original.MetadataRoot.Streams.UserStringsHeap
+            );
             PatchHeap(metadata_writer.BlobWriter, original.MetadataRoot.Streams.BlobHeap);
 
             if (assembly.EntryPoint != null)
@@ -143,13 +152,15 @@ namespace AssemblyStripper
 
                 MetadataToken methodToken = MetadataToken.FromMetadataRow(TokenType.Method, i);
 
-                MethodDefinition method = (MethodDefinition)assembly.MainModule.LookupByToken(methodToken);
+                MethodDefinition method = (MethodDefinition)
+                    assembly.MainModule.LookupByToken(methodToken);
 
                 if (method.HasBody)
                 {
-                    method_rva = method_rva != RVA.Zero
-                        ? method_rva
-                        : reflection_writer.CodeWriter.WriteMethodBody(method);
+                    method_rva =
+                        method_rva != RVA.Zero
+                            ? method_rva
+                            : reflection_writer.CodeWriter.WriteMethodBody(method);
 
                     methodRow.RVA = method_rva;
                 }
@@ -170,7 +181,8 @@ namespace AssemblyStripper
 
                 MetadataToken fieldToken = new MetadataToken(TokenType.Field, fieldRvaRow.Field);
 
-                FieldDefinition field = (FieldDefinition)assembly.MainModule.LookupByToken(fieldToken);
+                FieldDefinition field = (FieldDefinition)
+                    assembly.MainModule.LookupByToken(fieldToken);
 
                 fieldRvaRow.RVA = metadata_writer.GetDataCursor();
                 metadata_writer.AddData(field.InitialValue.Length + 3 & (~3));
@@ -180,7 +192,8 @@ namespace AssemblyStripper
 
         void PatchResources()
         {
-            ManifestResourceTable resourceTable = (ManifestResourceTable)stripped_tables[ManifestResourceTable.RId];
+            ManifestResourceTable resourceTable = (ManifestResourceTable)
+                stripped_tables[ManifestResourceTable.RId];
             if (resourceTable == null)
                 return;
 
@@ -197,7 +210,9 @@ namespace AssemblyStripper
                     if (er == null)
                         continue;
 
-                    if (resource.Name != original.MetadataRoot.Streams.StringsHeap[resourceRow.Name])
+                    if (
+                        resource.Name != original.MetadataRoot.Streams.StringsHeap[resourceRow.Name]
+                    )
                         continue;
 
                     resourceRow.Offset = metadata_writer.AddResource(er.Data);
@@ -205,14 +220,15 @@ namespace AssemblyStripper
             }
         }
 
-        // Types that are trimmed away also have their respective rows removed from the 
-        // custom attribute table. This introduces holes in their places, causing the table 
+        // Types that are trimmed away also have their respective rows removed from the
+        // custom attribute table. This introduces holes in their places, causing the table
         // to no longer be sorted by Parent, corrupting the assembly. Runtimes assume ordering
-        // and may fail to locate the attributes set for a particular type. This step sorts 
+        // and may fail to locate the attributes set for a particular type. This step sorts
         // the custom attribute table again.
         void SortCustomAttributes()
         {
-            CustomAttributeTable table = (CustomAttributeTable)stripped_tables[CustomAttributeTable.RId];
+            CustomAttributeTable table = (CustomAttributeTable)
+                stripped_tables[CustomAttributeTable.RId];
             if (table == null)
                 return;
 
@@ -226,7 +242,14 @@ namespace AssemblyStripper
 
         internal static void StripAssembly(AssemblyDefinition assembly, string file)
         {
-            using (FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (
+                FileStream fs = new FileStream(
+                    file,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.None
+                )
+            )
             {
                 new AssemblyStripper(assembly, new BinaryWriter(fs)).Strip();
             }

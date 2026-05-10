@@ -14,7 +14,10 @@ namespace Generators
 {
     public partial class EventSourceGenerator
     {
-        private static EventSourceClass? GetSemanticTargetForGeneration(GeneratorAttributeSyntaxContext context, CancellationToken cancellationToken)
+        private static EventSourceClass? GetSemanticTargetForGeneration(
+            GeneratorAttributeSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             const string EventSourceAttribute = "System.Diagnostics.Tracing.EventSourceAttribute";
 
@@ -34,8 +37,10 @@ namespace Generators
 
             foreach (AttributeData attribute in context.TargetSymbol.GetAttributes())
             {
-                if (attribute.AttributeClass?.Name != "EventSourceAttribute" ||
-                    attribute.AttributeClass.ToDisplayString() != EventSourceAttribute)
+                if (
+                    attribute.AttributeClass?.Name != "EventSourceAttribute"
+                    || attribute.AttributeClass.ToDisplayString() != EventSourceAttribute
+                )
                 {
                     continue;
                 }
@@ -100,8 +105,22 @@ namespace Generators
         {
             ReadOnlySpan<byte> namespaceBytes = new byte[] // rely on C# compiler optimization to remove byte[] allocation
             {
-                    0x48, 0x2C, 0x2D, 0xB2, 0xC3, 0x90, 0x47, 0xC8,
-                    0x87, 0xF8, 0x1A, 0x15, 0xBF, 0xC1, 0x30, 0xFB,
+                0x48,
+                0x2C,
+                0x2D,
+                0xB2,
+                0xC3,
+                0x90,
+                0x47,
+                0xC8,
+                0x87,
+                0xF8,
+                0x1A,
+                0x15,
+                0xBF,
+                0xC1,
+                0x30,
+                0xFB,
             };
 
             byte[] bytes = Encoding.BigEndianUnicode.GetBytes(name);
@@ -120,7 +139,7 @@ namespace Generators
 
             Array.Resize(ref bytes, 16);
 
-            bytes[7] = unchecked((byte)((bytes[7] & 0x0F) | 0x50));    // Set high 4 bits of octet 7 to 5, as per RFC 4122
+            bytes[7] = unchecked((byte)((bytes[7] & 0x0F) | 0x50)); // Set high 4 bits of octet 7 to 5, as per RFC 4122
             return new Guid(bytes);
         }
     }

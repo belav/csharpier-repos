@@ -46,7 +46,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsErrorsArgument_ShouldSetErrorsPropertyToEmptyEnumerable()
         {
-            var result = new CompositionResult<string>("Value", (IEnumerable<CompositionError>)null);
+            var result = new CompositionResult<string>(
+                "Value",
+                (IEnumerable<CompositionError>)null
+            );
 
             Assert.Empty(result.Errors);
         }
@@ -70,7 +73,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_EmptyAsErrorsArgument_ShouldSetErrorsPropertyToEmptyEnumerable()
         {
-            var result = new CompositionResult<string>("Value", Enumerable.Empty<CompositionError>());
+            var result = new CompositionResult<string>(
+                "Value",
+                Enumerable.Empty<CompositionError>()
+            );
 
             Assert.Empty(result.Errors);
         }
@@ -122,7 +128,7 @@ namespace System.ComponentModel.Composition
             Assert.True(result.Succeeded);
         }
 
-[Fact]
+        [Fact]
         public void Constructor2_ShouldSetSucceededPropertyToTrue()
         {
             var result = new CompositionResult<string>("Value");
@@ -149,7 +155,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_NullAsErrorsArgument_ShouldSetSucceededPropertyToTrue()
         {
-            var result = new CompositionResult<string>("Value", (IEnumerable<CompositionError>)null);
+            var result = new CompositionResult<string>(
+                "Value",
+                (IEnumerable<CompositionError>)null
+            );
 
             Assert.True(result.Succeeded);
         }
@@ -173,7 +182,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor5_EmptyAsErrorsArgument_ShouldSetSucceededPropertyToTrue()
         {
-            var result = new CompositionResult<string>("Value", Enumerable.Empty<CompositionError>());
+            var result = new CompositionResult<string>(
+                "Value",
+                Enumerable.Empty<CompositionError>()
+            );
 
             Assert.True(result.Succeeded);
         }
@@ -345,7 +357,10 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var result = CreateCompositionResult<object>(e, (IEnumerable<CompositionError>)null);
+                var result = CreateCompositionResult<object>(
+                    e,
+                    (IEnumerable<CompositionError>)null
+                );
 
                 Assert.Equal(e, result.Value);
             }
@@ -358,7 +373,10 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                var result = CreateCompositionResult<object>(e, Enumerable.Empty<CompositionError>());
+                var result = CreateCompositionResult<object>(
+                    e,
+                    Enumerable.Empty<CompositionError>()
+                );
 
                 Assert.Equal(e, result.Value);
             }
@@ -373,10 +391,13 @@ namespace System.ComponentModel.Composition
             {
                 var result = CreateCompositionResult<string>(errorId);
 
-                CompositionAssert.ThrowsError((ErrorId)errorId, () =>
-                {
-                    var value = result.Value;
-                });
+                CompositionAssert.ThrowsError(
+                    (ErrorId)errorId,
+                    () =>
+                    {
+                        var value = result.Value;
+                    }
+                );
             }
         }
 
@@ -389,10 +410,14 @@ namespace System.ComponentModel.Composition
             {
                 var result = CreateCompositionResult<string>(errorId, errorId);
 
-                CompositionAssert.ThrowsErrors((ErrorId)errorId, (ErrorId)errorId, () =>
-                {
-                    var value = result.Value;
-                });
+                CompositionAssert.ThrowsErrors(
+                    (ErrorId)errorId,
+                    (ErrorId)errorId,
+                    () =>
+                    {
+                        var value = result.Value;
+                    }
+                );
             }
         }
 
@@ -409,19 +434,27 @@ namespace System.ComponentModel.Composition
 
                 var result = CreateCompositionResult<string>(errorId1, errorId2);
 
-                CompositionAssert.ThrowsErrors((ErrorId)errorId1, (ErrorId)errorId2, () =>
-                {
-                    var value = result.Value;
-                });
+                CompositionAssert.ThrowsErrors(
+                    (ErrorId)errorId1,
+                    (ErrorId)errorId2,
+                    () =>
+                    {
+                        var value = result.Value;
+                    }
+                );
             }
         }
 
-        private CompositionResult<T> CreateCompositionResult<T>(params CompositionErrorId[] errorIds)
+        private CompositionResult<T> CreateCompositionResult<T>(
+            params CompositionErrorId[] errorIds
+        )
         {
-            return new CompositionResult<T>(errorIds.Select(id =>
-            {
-                return ErrorFactory.Create(id);
-            }));
+            return new CompositionResult<T>(
+                errorIds.Select(id =>
+                {
+                    return ErrorFactory.Create(id);
+                })
+            );
         }
 
         private CompositionResult<T> CreateCompositionResult<T>(int count)
@@ -438,7 +471,9 @@ namespace System.ComponentModel.Composition
             return CreateCompositionResult<T>(errors);
         }
 
-        private CompositionResult<T> CreateCompositionResult<T>(IEnumerable<CompositionError> errors)
+        private CompositionResult<T> CreateCompositionResult<T>(
+            IEnumerable<CompositionError> errors
+        )
         {
             return new CompositionResult<T>(errors);
         }
@@ -448,7 +483,10 @@ namespace System.ComponentModel.Composition
             return new CompositionResult<T>(value);
         }
 
-        private CompositionResult<T> CreateCompositionResult<T>(T value, IEnumerable<CompositionError> errors)
+        private CompositionResult<T> CreateCompositionResult<T>(
+            T value,
+            IEnumerable<CompositionError> errors
+        )
         {
             return new CompositionResult<T>(value, errors);
         }

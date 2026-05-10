@@ -6,10 +6,10 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using SourceGenerators;
 #if !ROSLYN4_4_OR_GREATER
 using Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 #endif
-using SourceGenerators;
 
 namespace System.Text.Json.SourceGeneration
 {
@@ -28,34 +28,58 @@ namespace System.Text.Json.SourceGeneration
 #if LAUNCH_DEBUGGER
             System.Diagnostics.Debugger.Launch();
 #endif
-            IncrementalValueProvider<KnownTypeSymbols> knownTypeSymbols = context.CompilationProvider
-                .Select((compilation, _) => new KnownTypeSymbols(compilation));
+            IncrementalValueProvider<KnownTypeSymbols> knownTypeSymbols =
+                context.CompilationProvider.Select(
+                    (compilation, _) => new KnownTypeSymbols(compilation)
+                );
 
-            IncrementalValuesProvider<(ContextGenerationSpec?, ImmutableEquatableArray<DiagnosticInfo>)> contextGenerationSpecs = context.SyntaxProvider
-                .ForAttributeWithMetadataName(
+            IncrementalValuesProvider<(
+                ContextGenerationSpec?,
+                ImmutableEquatableArray<DiagnosticInfo>
+            )> contextGenerationSpecs = context
+                .SyntaxProvider.ForAttributeWithMetadataName(
 #if !ROSLYN4_4_OR_GREATER
                     context,
 #endif
                     Parser.JsonSerializableAttributeFullName,
                     (node, _) => node is ClassDeclarationSyntax,
-                    (context, _) => (ContextClass: (ClassDeclarationSyntax)context.TargetNode, context.SemanticModel))
+                    (context, _) =>
+                        (
+                            ContextClass: (ClassDeclarationSyntax)context.TargetNode,
+                            context.SemanticModel
+                        )
+                )
                 .Combine(knownTypeSymbols)
-                .Select(static (tuple, cancellationToken) =>
-                {
-                    Parser parser = new(tuple.Right);
-                    ContextGenerationSpec? contextGenerationSpec = parser.ParseContextGenerationSpec(tuple.Left.ContextClass, tuple.Left.SemanticModel, cancellationToken);
-                    ImmutableEquatableArray<DiagnosticInfo> diagnostics = parser.Diagnostics.ToImmutableEquatableArray();
-                    return (contextGenerationSpec, diagnostics);
-                })
+                .Select(
+                    static (tuple, cancellationToken) =>
+                    {
+                        Parser parser = new(tuple.Right);
+                        ContextGenerationSpec? contextGenerationSpec =
+                            parser.ParseContextGenerationSpec(
+                                tuple.Left.ContextClass,
+                                tuple.Left.SemanticModel,
+                                cancellationToken
+                            );
+                        ImmutableEquatableArray<DiagnosticInfo> diagnostics =
+                            parser.Diagnostics.ToImmutableEquatableArray();
+                        return (contextGenerationSpec, diagnostics);
+                    }
+                )
 #if ROSLYN4_4_OR_GREATER
                 .WithTrackingName(SourceGenerationSpecTrackingName)
 #endif
-                ;
+            ;
 
             context.RegisterSourceOutput(contextGenerationSpecs, ReportDiagnosticsAndEmitSource);
         }
 
-        private void ReportDiagnosticsAndEmitSource(SourceProductionContext sourceProductionContext, (ContextGenerationSpec? ContextGenerationSpec, ImmutableEquatableArray<DiagnosticInfo> Diagnostics) input)
+        private void ReportDiagnosticsAndEmitSource(
+            SourceProductionContext sourceProductionContext,
+            (
+                ContextGenerationSpec? ContextGenerationSpec,
+                ImmutableEquatableArray<DiagnosticInfo> Diagnostics
+            ) input
+        )
         {
             // Report any diagnostics ahead of emitting.
             foreach (DiagnosticInfo diagnostic in input.Diagnostics)
@@ -82,11 +106,10 @@ namespace System.Text.Json.SourceGeneration
         {
             private readonly SourceProductionContext _context;
 
-            public Emitter(SourceProductionContext context)
-                => _context = context;
+            public Emitter(SourceProductionContext context) => _context = context;
 
-            private partial void AddSource(string hintName, SourceText sourceText)
-                => _context.AddSource(hintName, sourceText);
+            private partial void AddSource(string hintName, SourceText sourceText) =>
+                _context.AddSource(hintName, sourceText);
         }
     }
 }

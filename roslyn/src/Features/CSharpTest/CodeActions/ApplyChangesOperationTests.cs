@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions
 {
     public class ApplyChangesOperationTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new MyCodeRefactoringProvider((Func<Solution, Solution>)parameters.fixProviderData);
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new MyCodeRefactoringProvider((Func<Solution, Solution>)parameters.fixProviderData);
 
         private class MyCodeRefactoringProvider : CodeRefactoringProvider
         {
@@ -33,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions
 
             public sealed override Task ComputeRefactoringsAsync(CodeRefactoringContext context)
             {
-                var codeAction = new TestCodeAction(_changeSolution(context.Document.Project.Solution));
+                var codeAction = new TestCodeAction(
+                    _changeSolution(context.Document.Project.Solution)
+                );
                 context.RegisterRefactoring(codeAction);
                 return Task.CompletedTask;
             }
@@ -49,8 +53,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions
 
                 public override string Title => "Title";
 
-                protected override Task<Solution?> GetChangedSolutionAsync(IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
-                    => Task.FromResult<Solution?>(_changedSolution);
+                protected override Task<Solution?> GetChangedSolutionAsync(
+                    IProgress<CodeAnalysisProgress> progress,
+                    CancellationToken cancellationToken
+                ) => Task.FromResult<Solution?>(_changedSolution);
             }
         }
 
@@ -60,7 +66,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions
             // This should succeed as the code action is trying to edit a file that is not touched by the actual
             // workspace edit that already went in.
             await TestSuccessfulApplicationAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Program1.cs"">
 class Program1
@@ -76,14 +82,25 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
-                    return solution.WithDocumentText(document1.Id, SourceText.From("NewProgram1Content"));
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    return solution.WithDocumentText(
+                        document1.Id,
+                        SourceText.From("NewProgram1Content")
+                    );
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program2"));
-                    return solution.WithDocumentText(document2.Id, SourceText.From("NewProgram2Content"));
-                });
+                    var document2 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program2"));
+                    return solution.WithDocumentText(
+                        document2.Id,
+                        SourceText.From("NewProgram2Content")
+                    );
+                }
+            );
         }
 
         [WpfFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1419139")]
@@ -92,7 +109,7 @@ class Program2
             // This should succeed as the code action is trying to edit a file that is not touched by the actual
             // workspace edit that already went in.
             await TestSuccessfulApplicationAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Program1.cs"">
 class Program1
@@ -108,14 +125,22 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
-                    return solution.WithDocumentText(document1.Id, SourceText.From("NewProgram1Content"));
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    return solution.WithDocumentText(
+                        document1.Id,
+                        SourceText.From("NewProgram1Content")
+                    );
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program2"));
+                    var document2 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program2"));
                     return solution.RemoveDocument(document2.Id);
-                });
+                }
+            );
         }
 
         [WpfFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1419139")]
@@ -124,7 +149,7 @@ class Program2
             // This should fail as the code action is trying to edit a file that is was already edited by the actual
             // workspace edit that already went in.
             await TestFailureApplicationAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Program1.cs"">
 class Program1
@@ -140,14 +165,25 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
-                    return solution.WithDocumentText(document1.Id, SourceText.From("NewProgram1Content1"));
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    return solution.WithDocumentText(
+                        document1.Id,
+                        SourceText.From("NewProgram1Content1")
+                    );
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
-                    return solution.WithDocumentText(document1.Id, SourceText.From("NewProgram1Content2"));
-                });
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    return solution.WithDocumentText(
+                        document1.Id,
+                        SourceText.From("NewProgram1Content2")
+                    );
+                }
+            );
         }
 
         [WpfFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1419139")]
@@ -155,7 +191,7 @@ class Program2
         {
             // This should fail as the code action is trying to edit a file that is subsequently removed.
             await TestFailureApplicationAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Program1.cs"">
 class Program1
@@ -171,14 +207,22 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
-                    return solution.WithDocumentText(document1.Id, SourceText.From("NewProgram1Content1"));
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    return solution.WithDocumentText(
+                        document1.Id,
+                        SourceText.From("NewProgram1Content1")
+                    );
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
                     return solution.RemoveDocument(document1.Id);
-                });
+                }
+            );
         }
 
         [WpfFact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_queries/edit/1419139")]
@@ -187,7 +231,7 @@ class Program2
             // This should fail as we don't want to make non-text changes that may have undesirable results to the solution
             // given the intervening edits.
             await TestFailureApplicationAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Program1.cs"">
 class Program1
@@ -203,37 +247,58 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program1"));
+                    var document1 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program1"));
                     return solution.RemoveDocument(document1.Id);
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution.Projects.Single().Documents.Single(d => d.FilePath!.Contains("Program2"));
-                    return solution.WithDocumentText(document2.Id, SourceText.From("NewProgram1Content2"));
-                });
+                    var document2 = solution
+                        .Projects.Single()
+                        .Documents.Single(d => d.FilePath!.Contains("Program2"));
+                    return solution.WithDocumentText(
+                        document2.Id,
+                        SourceText.From("NewProgram1Content2")
+                    );
+                }
+            );
         }
 
         private async Task TestSuccessfulApplicationAsync(
             string workspaceXml,
             Func<Solution, Solution> codeActionTransform,
-            Func<Solution, Solution> intermediaryTransform)
+            Func<Solution, Solution> intermediaryTransform
+        )
         {
-            await TestApplicationAsync(workspaceXml, codeActionTransform, intermediaryTransform, success: true);
+            await TestApplicationAsync(
+                workspaceXml,
+                codeActionTransform,
+                intermediaryTransform,
+                success: true
+            );
         }
 
         private async Task TestFailureApplicationAsync(
             string workspaceXml,
             Func<Solution, Solution> codeActionTransform,
-            Func<Solution, Solution> intermediaryTransform)
+            Func<Solution, Solution> intermediaryTransform
+        )
         {
-            await TestApplicationAsync(workspaceXml, codeActionTransform, intermediaryTransform, success: false);
+            await TestApplicationAsync(
+                workspaceXml,
+                codeActionTransform,
+                intermediaryTransform,
+                success: false
+            );
         }
 
         private async Task TestApplicationAsync(
             string workspaceXml,
             Func<Solution, Solution> codeActionTransform,
             Func<Solution, Solution> intermediaryTransform,
-            bool success)
+            bool success
+        )
         {
             var parameters = new TestParameters(fixProviderData: codeActionTransform);
             using var workspace = CreateWorkspaceFromOptions(workspaceXml, parameters);
@@ -244,7 +309,12 @@ class Program2
             var provider = CreateCodeRefactoringProvider(workspace, parameters);
 
             var refactorings = new List<CodeAction>();
-            var context = new CodeRefactoringContext(document, new TextSpan(), refactorings.Add, CancellationToken.None);
+            var context = new CodeRefactoringContext(
+                document,
+                new TextSpan(),
+                refactorings.Add,
+                CancellationToken.None
+            );
 
             // Compute refactorings based on the original solution.
             await provider.ComputeRefactoringsAsync(context);
@@ -257,7 +327,12 @@ class Program2
             Assert.True(workspace.TryApplyChanges(changedSolution));
 
             // Now try to apply the refactoring, even though an intervening edit happened.
-            var result = await operation.TryApplyAsync(workspace, originalSolution, CodeAnalysisProgress.None, CancellationToken.None);
+            var result = await operation.TryApplyAsync(
+                workspace,
+                originalSolution,
+                CodeAnalysisProgress.None,
+                CancellationToken.None
+            );
 
             Assert.Equal(success, result);
         }

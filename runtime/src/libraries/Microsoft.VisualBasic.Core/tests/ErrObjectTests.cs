@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.VisualBasic.CompilerServices;
 using System;
+using Microsoft.VisualBasic.CompilerServices;
 using Xunit;
 
 namespace Microsoft.VisualBasic.Tests
@@ -51,7 +51,9 @@ namespace Microsoft.VisualBasic.Tests
             _ = Assert.Throws<Exception>(() => Information.Err().Raise(32768)).ToString();
 
             ProjectData.SetProjectError(new InvalidOperationException());
-            _ = Assert.Throws<Exception>(() => Information.Err().Raise(1, Description: "MyDescription")).ToString();
+            _ = Assert
+                .Throws<Exception>(() => Information.Err().Raise(1, Description: "MyDescription"))
+                .ToString();
         }
 
         [Fact]
@@ -69,7 +71,9 @@ namespace Microsoft.VisualBasic.Tests
             Assert.Null(Information.Err().Source);
 
             ProjectData.SetProjectError(new Exception() { Source = null });
-            _ = Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7, Source: "MySource2"));
+            _ = Assert.Throws<OutOfMemoryException>(() =>
+                Information.Err().Raise(7, Source: "MySource2")
+            );
             Assert.Equal("MySource2", Information.Err().Source);
         }
 
@@ -97,20 +101,49 @@ namespace Microsoft.VisualBasic.Tests
             ProjectData.ClearProjectError();
 
             ProjectData.SetProjectError(new ArgumentException());
-            Assert.Equal("#0", Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7)).HelpLink);
+            Assert.Equal(
+                "#0",
+                Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7)).HelpLink
+            );
 
             ProjectData.SetProjectError(new ArgumentException());
-            Assert.Equal("#3", Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7, HelpContext: 3)).HelpLink);
+            Assert.Equal(
+                "#3",
+                Assert
+                    .Throws<OutOfMemoryException>(() => Information.Err().Raise(7, HelpContext: 3))
+                    .HelpLink
+            );
 
             ProjectData.SetProjectError(new ArgumentException());
-            Assert.Equal("MyFile1#3", Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7, HelpFile: "MyFile1")).HelpLink);
+            Assert.Equal(
+                "MyFile1#3",
+                Assert
+                    .Throws<OutOfMemoryException>(() =>
+                        Information.Err().Raise(7, HelpFile: "MyFile1")
+                    )
+                    .HelpLink
+            );
 
             ProjectData.ClearProjectError();
             ProjectData.SetProjectError(new ArgumentException());
-            Assert.Equal("MyFile2#0", Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7, HelpFile: "MyFile2")).HelpLink);
+            Assert.Equal(
+                "MyFile2#0",
+                Assert
+                    .Throws<OutOfMemoryException>(() =>
+                        Information.Err().Raise(7, HelpFile: "MyFile2")
+                    )
+                    .HelpLink
+            );
 
             ProjectData.SetProjectError(new ArgumentException());
-            Assert.Equal("MyFile3#3", Assert.Throws<OutOfMemoryException>(() => Information.Err().Raise(7, HelpContext: 3, HelpFile: "MyFile3")).HelpLink);
+            Assert.Equal(
+                "MyFile3#3",
+                Assert
+                    .Throws<OutOfMemoryException>(() =>
+                        Information.Err().Raise(7, HelpContext: 3, HelpFile: "MyFile3")
+                    )
+                    .HelpLink
+            );
         }
 
         [Theory]

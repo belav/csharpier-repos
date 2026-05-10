@@ -37,7 +37,11 @@ public interface IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionAnnotatableBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionAnnotatableBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    IConventionAnnotatableBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -54,7 +58,8 @@ public interface IConventionAnnotatableBuilder
     IConventionAnnotatableBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether an annotation with the given name and value can be set from this configuration source.

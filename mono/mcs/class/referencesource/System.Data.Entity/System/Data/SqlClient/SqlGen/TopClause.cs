@@ -9,19 +9,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Metadata.Edm;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Data.SqlClient;
-using System.Data.Metadata.Edm;
-using System.Data.Common.CommandTrees;
 
 namespace System.Data.SqlClient.SqlGen
 {
     /// <summary>
-    /// TopClause represents the a TOP expression in a SqlSelectStatement. 
-    /// It has a count property, which indicates how many TOP rows should be selected and a 
+    /// TopClause represents the a TOP expression in a SqlSelectStatement.
+    /// It has a count property, which indicates how many TOP rows should be selected and a
     /// boolen WithTies property.
     /// </summary>
     class TopClause : ISqlFragment
@@ -72,7 +72,7 @@ namespace System.Data.SqlClient.SqlGen
         #region ISqlFragment Members
 
         /// <summary>
-        /// Write out the TOP part of sql select statement 
+        /// Write out the TOP part of sql select statement
         /// It basically writes TOP (X) [WITH TIES].
         /// The brackets around X are ommited for Sql8.
         /// </summary>

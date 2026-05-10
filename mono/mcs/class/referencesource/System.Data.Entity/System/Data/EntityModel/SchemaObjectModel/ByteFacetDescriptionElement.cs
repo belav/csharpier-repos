@@ -8,23 +8,24 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Metadata.Edm;
-using System.Xml;
 using System.Diagnostics;
+using System.Text;
+using System.Xml;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {
     internal sealed class ByteFacetDescriptionElement : FacetDescriptionElement
     {
         public ByteFacetDescriptionElement(TypeElement type, string name)
-        :base(type, name)
-        {
-        }
+            : base(type, name) { }
 
         public override EdmType FacetType
         {
-            get { return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Byte); }
+            get
+            {
+                return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind.Byte);
+            }
         }
 
         /////////////////////////////////////////////////////////////////////

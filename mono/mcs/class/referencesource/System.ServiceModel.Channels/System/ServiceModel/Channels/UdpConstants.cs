@@ -19,7 +19,8 @@ namespace System.ServiceModel.Channels
         public const string Scheme = "soap.udp";
         public const string TimeSpanZero = "00:00:00";
         public const string WsdlSoapUdpTransportUri = "http://schemas.microsoft.com/soap/udp";
-        public const string WsdlSoapUdpTransportNamespace = "http://schemas.microsoft.com/ws/06/2010/policy/soap/udp";
+        public const string WsdlSoapUdpTransportNamespace =
+            "http://schemas.microsoft.com/ws/06/2010/policy/soap/udp";
         public const string WsdlSoapUdpTransportPrefix = "sud";
         public const string RetransmissionEnabled = "RetransmissionEnabled";
 
@@ -38,16 +39,27 @@ namespace System.ServiceModel.Channels
             public const int MaxUnicastRetransmitCount = 0;
             public const int MaxMulticastRetransmitCount = 0;
             public const long DefaultMaxPendingMessagesTotalSize = 0;
-            public static readonly long MaxPendingMessagesTotalSize = 1024 * 1024 * Environment.ProcessorCount;  // 512 * 2K messages per processor
+            public static readonly long MaxPendingMessagesTotalSize =
+                1024 * 1024 * Environment.ProcessorCount; // 512 * 2K messages per processor
             public const long MaxReceivedMessageSize = SocketReceiveBufferSize;
             public const string MulticastInterfaceId = null;
             public const int SocketReceiveBufferSize = 64 * 1024;
             public const int TimeToLive = 1;
-            public static MessageEncoderFactory MessageEncoderFactory = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory();
+            public static MessageEncoderFactory MessageEncoderFactory =
+                new TextMessageEncodingBindingElement().CreateMessageEncoderFactory();
 
-            public static readonly TimeSpan DelayLowerBoundTimeSpan = TimeSpan.Parse(DelayLowerBound, CultureInfo.InvariantCulture);
-            public static readonly TimeSpan DelayUpperBoundTimeSpan = TimeSpan.Parse(DelayUpperBound, CultureInfo.InvariantCulture);
-            public static readonly TimeSpan MaxDelayPerRetransmissionTimeSpan = TimeSpan.Parse(MaxDelayPerRetransmission, CultureInfo.InvariantCulture);
+            public static readonly TimeSpan DelayLowerBoundTimeSpan = TimeSpan.Parse(
+                DelayLowerBound,
+                CultureInfo.InvariantCulture
+            );
+            public static readonly TimeSpan DelayUpperBoundTimeSpan = TimeSpan.Parse(
+                DelayUpperBound,
+                CultureInfo.InvariantCulture
+            );
+            public static readonly TimeSpan MaxDelayPerRetransmissionTimeSpan = TimeSpan.Parse(
+                MaxDelayPerRetransmission,
+                CultureInfo.InvariantCulture
+            );
         }
     }
 }

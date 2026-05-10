@@ -9,10 +9,17 @@ namespace System.Data.Odbc
     internal sealed class OdbcConnectionOpen : DbConnectionInternal
     {
         // Construct from a compiled connection string
-        internal OdbcConnectionOpen(OdbcConnection outerConnection, OdbcConnectionString connectionOptions)
+        internal OdbcConnectionOpen(
+            OdbcConnection outerConnection,
+            OdbcConnectionString connectionOptions
+        )
         {
             OdbcEnvironmentHandle environmentHandle = OdbcEnvironment.GetGlobalEnvironmentHandle();
-            outerConnection.ConnectionHandle = new OdbcConnectionHandle(outerConnection, connectionOptions, environmentHandle);
+            outerConnection.ConnectionHandle = new OdbcConnectionHandle(
+                outerConnection,
+                connectionOptions,
+                environmentHandle
+            );
         }
 
         internal OdbcConnection OuterConnection
@@ -38,9 +45,7 @@ namespace System.Data.Odbc
             }
         }
 
-        protected override void Activate()
-        {
-        }
+        protected override void Activate() { }
 
         public override DbTransaction BeginTransaction(IsolationLevel isolevel)
         {

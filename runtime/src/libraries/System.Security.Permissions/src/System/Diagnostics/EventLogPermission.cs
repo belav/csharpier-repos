@@ -6,14 +6,22 @@ using System.Security.Permissions;
 namespace System.Diagnostics
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class EventLogPermission : ResourcePermissionBase
     {
         public EventLogPermission() { }
+
         public EventLogPermission(EventLogPermissionAccess permissionAccess, string machineName) { }
+
         public EventLogPermission(EventLogPermissionEntry[] permissionAccessEntries) { }
+
         public EventLogPermission(PermissionState state) { }
+
         public EventLogPermissionEntryCollection PermissionEntries { get; }
     }
 }

@@ -24,8 +24,12 @@ namespace Microsoft.Web.WebPages.OAuth
         internal static IOpenAuthDataProvider OAuthDataProvider = new WebPagesOAuthDataProvider();
 
         // contains all registered authentication clients
-        private static readonly Dictionary<string, AuthenticationClientData> _authenticationClients =
-            new Dictionary<string, AuthenticationClientData>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<
+            string,
+            AuthenticationClientData
+        > _authenticationClients = new Dictionary<string, AuthenticationClientData>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         /// <summary>
         /// Gets a value indicating whether the current user is authenticated by an OAuth provider.
@@ -73,9 +77,18 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="appId">The app id.</param>
         /// <param name="appSecret">The app secret.</param>
         /// <param name="displayName">The display name of the client.</param>
-        public static void RegisterFacebookClient(string appId, string appSecret, string displayName)
+        public static void RegisterFacebookClient(
+            string appId,
+            string appSecret,
+            string displayName
+        )
         {
-            RegisterFacebookClient(appId, appSecret, displayName, extraData: new Dictionary<string, object>());
+            RegisterFacebookClient(
+                appId,
+                appSecret,
+                displayName,
+                extraData: new Dictionary<string, object>()
+            );
         }
 
         /// <summary>
@@ -85,7 +98,12 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="appSecret">The app secret.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag used to store extra data about this client</param>
-        public static void RegisterFacebookClient(string appId, string appSecret, string displayName, IDictionary<string, object> extraData)
+        public static void RegisterFacebookClient(
+            string appId,
+            string appSecret,
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             RegisterClient(new FacebookClient(appId, appSecret), displayName, extraData);
         }
@@ -106,9 +124,18 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="clientId">The client id.</param>
         /// <param name="clientSecret">The client secret.</param>
         /// <param name="displayName">The display name.</param>
-        public static void RegisterMicrosoftClient(string clientId, string clientSecret, string displayName)
+        public static void RegisterMicrosoftClient(
+            string clientId,
+            string clientSecret,
+            string displayName
+        )
         {
-            RegisterMicrosoftClient(clientId, clientSecret, displayName, new Dictionary<string, object>());
+            RegisterMicrosoftClient(
+                clientId,
+                clientSecret,
+                displayName,
+                new Dictionary<string, object>()
+            );
         }
 
         /// <summary>
@@ -118,7 +145,12 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="clientSecret">The client secret.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag used to store extra data about this client</param>
-        public static void RegisterMicrosoftClient(string clientId, string clientSecret, string displayName, IDictionary<string, object> extraData)
+        public static void RegisterMicrosoftClient(
+            string clientId,
+            string clientSecret,
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             RegisterClient(new MicrosoftClient(clientId, clientSecret), displayName, extraData);
         }
@@ -139,9 +171,18 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="consumerKey">The consumer key.</param>
         /// <param name="consumerSecret">The consumer secret.</param>
         /// <param name="displayName">The display name.</param>
-        public static void RegisterTwitterClient(string consumerKey, string consumerSecret, string displayName)
+        public static void RegisterTwitterClient(
+            string consumerKey,
+            string consumerSecret,
+            string displayName
+        )
         {
-            RegisterTwitterClient(consumerKey, consumerSecret, displayName, new Dictionary<string, object>());
+            RegisterTwitterClient(
+                consumerKey,
+                consumerSecret,
+                displayName,
+                new Dictionary<string, object>()
+            );
         }
 
         /// <summary>
@@ -151,7 +192,12 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="consumerSecret">The consumer secret.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag used to store extra data about this client</param>
-        public static void RegisterTwitterClient(string consumerKey, string consumerSecret, string displayName, IDictionary<string, object> extraData)
+        public static void RegisterTwitterClient(
+            string consumerKey,
+            string consumerSecret,
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             var twitterClient = new TwitterClient(consumerKey, consumerSecret);
             RegisterClient(twitterClient, displayName, extraData);
@@ -173,9 +219,18 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="consumerKey">The consumer key.</param>
         /// <param name="consumerSecret">The consumer secret.</param>
         /// <param name="displayName">The display name.</param>
-        public static void RegisterLinkedInClient(string consumerKey, string consumerSecret, string displayName)
+        public static void RegisterLinkedInClient(
+            string consumerKey,
+            string consumerSecret,
+            string displayName
+        )
         {
-            RegisterLinkedInClient(consumerKey, consumerSecret, displayName, new Dictionary<string, object>());
+            RegisterLinkedInClient(
+                consumerKey,
+                consumerSecret,
+                displayName,
+                new Dictionary<string, object>()
+            );
         }
 
         /// <summary>
@@ -185,7 +240,12 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="consumerSecret">The consumer secret.</param>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag used to store extra data about this client</param>
-        public static void RegisterLinkedInClient(string consumerKey, string consumerSecret, string displayName, IDictionary<string, object> extraData)
+        public static void RegisterLinkedInClient(
+            string consumerKey,
+            string consumerSecret,
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             var linkedInClient = new LinkedInClient(consumerKey, consumerSecret);
             RegisterClient(linkedInClient, displayName, extraData);
@@ -213,7 +273,10 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag.</param>
-        public static void RegisterGoogleClient(string displayName, IDictionary<string, object> extraData)
+        public static void RegisterGoogleClient(
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             RegisterClient(new GoogleOpenIdClient(), displayName, extraData);
         }
@@ -240,7 +303,10 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag.</param>
-        public static void RegisterYahooClient(string displayName, IDictionary<string, object> extraData)
+        public static void RegisterYahooClient(
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             RegisterClient(new YahooOpenIdClient(), displayName, extraData);
         }
@@ -262,7 +328,11 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="displayName">The display name.</param>
         /// <param name="extraData">The data bag used to store extra data about the specified client</param>
         [CLSCompliant(false)]
-        public static void RegisterClient(IAuthenticationClient client, string displayName, IDictionary<string, object> extraData)
+        public static void RegisterClient(
+            IAuthenticationClient client,
+            string displayName,
+            IDictionary<string, object> extraData
+        )
         {
             if (client == null)
             {
@@ -297,7 +367,12 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <param name="returnUrl">The return url after user is authenticated.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to allow relative app path, and support ~/")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to allow relative app path, and support ~/"
+        )]
         public static void RequestAuthentication(string provider, string returnUrl)
         {
             if (HttpContext.Current == null)
@@ -305,7 +380,11 @@ namespace Microsoft.Web.WebPages.OAuth
                 throw new InvalidOperationException(WebResources.HttpContextNotAvailable);
             }
 
-            RequestAuthenticationCore(new HttpContextWrapper(HttpContext.Current), provider, returnUrl);
+            RequestAuthenticationCore(
+                new HttpContextWrapper(HttpContext.Current),
+                provider,
+                returnUrl
+            );
         }
 
         /// <summary>
@@ -314,7 +393,11 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="context">The context.</param>
         /// <param name="provider">The provider.</param>
         /// <param name="returnUrl">The return URL.</param>
-        internal static void RequestAuthenticationCore(HttpContextBase context, string provider, string returnUrl)
+        internal static void RequestAuthenticationCore(
+            HttpContextBase context,
+            string provider,
+            string returnUrl
+        )
         {
             IAuthenticationClient client = GetOAuthClient(provider);
             var securityManager = new OpenAuthSecurityManager(context, client, OAuthDataProvider);
@@ -335,7 +418,12 @@ namespace Microsoft.Web.WebPages.OAuth
         /// </summary>
         /// <param name="returnUrl">The return URL which must match the one passed to RequestAuthentication earlier.</param>
         [CLSCompliant(false)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "We want to allow relative app path, and support ~/")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#",
+            Justification = "We want to allow relative app path, and support ~/"
+        )]
         public static AuthenticationResult VerifyAuthentication(string returnUrl)
         {
             if (HttpContext.Current == null)
@@ -346,8 +434,16 @@ namespace Microsoft.Web.WebPages.OAuth
             return VerifyAuthenticationCore(new HttpContextWrapper(HttpContext.Current), returnUrl);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "We want to allow relative app path, and support ~/")]
-        internal static AuthenticationResult VerifyAuthenticationCore(HttpContextBase context, string returnUrl)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "We want to allow relative app path, and support ~/"
+        )]
+        internal static AuthenticationResult VerifyAuthenticationCore(
+            HttpContextBase context,
+            string returnUrl
+        )
         {
             string providerName = OpenAuthSecurityManager.GetProviderName(context);
             if (String.IsNullOrEmpty(providerName))
@@ -358,7 +454,11 @@ namespace Microsoft.Web.WebPages.OAuth
             IAuthenticationClient client;
             if (TryGetOAuthClient(providerName, out client))
             {
-                var securityManager = new OpenAuthSecurityManager(context, client, OAuthDataProvider);
+                var securityManager = new OpenAuthSecurityManager(
+                    context,
+                    client,
+                    OAuthDataProvider
+                );
                 return securityManager.VerifyAuthentication(returnUrl);
             }
             else
@@ -377,18 +477,37 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <returns>
         ///   <c>true</c> if the login is successful.
         /// </returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification = "Login is used more consistently in ASP.Net")]
-        public static bool Login(string providerName, string providerUserId, bool createPersistentCookie)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1726:UsePreferredTerms",
+            MessageId = "Login",
+            Justification = "Login is used more consistently in ASP.Net"
+        )]
+        public static bool Login(
+            string providerName,
+            string providerUserId,
+            bool createPersistentCookie
+        )
         {
             if (HttpContext.Current == null)
             {
                 throw new InvalidOperationException(WebResources.HttpContextNotAvailable);
             }
 
-            return LoginCore(new HttpContextWrapper(HttpContext.Current), providerName, providerUserId, createPersistentCookie);
+            return LoginCore(
+                new HttpContextWrapper(HttpContext.Current),
+                providerName,
+                providerUserId,
+                createPersistentCookie
+            );
         }
 
-        internal static bool LoginCore(HttpContextBase context, string providerName, string providerUserId, bool createPersistentCookie)
+        internal static bool LoginCore(
+            HttpContextBase context,
+            string providerName,
+            string providerUserId,
+            bool createPersistentCookie
+        )
         {
             var provider = GetOAuthClient(providerName);
             var securityManager = new OpenAuthSecurityManager(context, provider, OAuthDataProvider);
@@ -406,7 +525,11 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="providerName">Name of the provider.</param>
         /// <param name="providerUserId">The provider user id.</param>
         /// <param name="userName">The user name.</param>
-        public static void CreateOrUpdateAccount(string providerName, string providerUserId, string userName)
+        public static void CreateOrUpdateAccount(
+            string providerName,
+            string providerUserId,
+            string userName
+        )
         {
             ExtendedMembershipProvider provider = VerifyProvider();
             provider.CreateOrUpdateOAuthAccount(providerName, providerUserId, userName);
@@ -432,12 +555,20 @@ namespace Microsoft.Web.WebPages.OAuth
             if (String.IsNullOrEmpty(userName))
             {
                 throw new ArgumentException(
-                    String.Format(CultureInfo.CurrentCulture, WebResources.Argument_Cannot_Be_Null_Or_Empty, "userName"),
-                    "userName");
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "userName"
+                    ),
+                    "userName"
+                );
             }
 
             ExtendedMembershipProvider provider = VerifyProvider();
-            return provider.GetAccountsForUser(userName).Select(p => new OAuthAccount(p.Provider, p.ProviderUserId)).ToList();
+            return provider
+                .GetAccountsForUser(userName)
+                .Select(p => new OAuthAccount(p.Provider, p.ProviderUserId))
+                .ToList();
         }
 
         /// <summary>
@@ -495,7 +626,10 @@ namespace Microsoft.Web.WebPages.OAuth
         /// <param name="providerName">Name of the provider.</param>
         /// <param name="clientData">The client data of the specified provider name.</param>
         /// <returns><c>true</c> if the client data is found for the specified provider name. Otherwise, <c>false</c></returns>
-        public static bool TryGetOAuthClientData(string providerName, out AuthenticationClientData clientData)
+        public static bool TryGetOAuthClientData(
+            string providerName,
+            out AuthenticationClientData clientData
+        )
         {
             if (providerName == null)
             {
@@ -569,22 +703,35 @@ namespace Microsoft.Web.WebPages.OAuth
         }
 
         /// <summary>
-        /// Deserializes a string obtained from <see cref="SerializeProviderUserId(string, string)"/> back into a 
+        /// Deserializes a string obtained from <see cref="SerializeProviderUserId(string, string)"/> back into a
         /// providerName/providerUserId pair.
         /// </summary>
         /// <param name="data">The input data.</param>
         /// <param name="providerName">Will contain the deserialized provider name.</param>
         /// <param name="providerUserId">Will contain the deserialized provider user id.</param>
         /// <returns><c>True</c> if successful.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#", Justification = "This design is acceptable")]
-        public static bool TryDeserializeProviderUserId(string data, out string providerName, out string providerUserId)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            MessageId = "1#",
+            Justification = "This design is acceptable"
+        )]
+        public static bool TryDeserializeProviderUserId(
+            string data,
+            out string providerName,
+            out string providerUserId
+        )
         {
             if (data == null)
             {
                 throw new ArgumentNullException("data");
             }
 
-            return ProviderUserIdSerializationHelper.UnprotectData(data, out providerName, out providerUserId);
+            return ProviderUserIdSerializationHelper.UnprotectData(
+                data,
+                out providerName,
+                out providerUserId
+            );
         }
     }
 }

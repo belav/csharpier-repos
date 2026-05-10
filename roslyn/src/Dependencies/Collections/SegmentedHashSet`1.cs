@@ -22,14 +22,15 @@ namespace Microsoft.CodeAnalysis.Collections
     [DebuggerDisplay("Count = {Count}")]
     internal class SegmentedHashSet<T> : ICollection<T>, ISet<T>, IReadOnlyCollection<T>
 #if NET5_0_OR_GREATER
-        , IReadOnlySet<T>
+            ,
+            IReadOnlySet<T>
 #endif
     {
         private const bool SupportsComparerDevirtualization
 #if NETCOREAPP
-            = true;
+        = true;
 #else
-            = false;
+        = false;
 #endif
 
         // This uses the same array-based implementation as Dictionary<TKey, TValue>.
@@ -54,6 +55,7 @@ namespace Microsoft.CodeAnalysis.Collections
         private int _freeList;
         private int _freeCount;
         private int _version;
+
 #if NETCOREAPP
         private readonly IEqualityComparer<T>? _comparer;
 #else
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         #region Constructors
 
-        public SegmentedHashSet() : this((IEqualityComparer<T>?)null) { }
+        public SegmentedHashSet()
+            : this((IEqualityComparer<T>?)null) { }
 
         public SegmentedHashSet(IEqualityComparer<T>? comparer)
         {
@@ -81,18 +84,24 @@ namespace Microsoft.CodeAnalysis.Collections
 #endif
         }
 
-        public SegmentedHashSet(int capacity) : this(capacity, null) { }
+        public SegmentedHashSet(int capacity)
+            : this(capacity, null) { }
 
-        public SegmentedHashSet(IEnumerable<T> collection) : this(collection, null) { }
+        public SegmentedHashSet(IEnumerable<T> collection)
+            : this(collection, null) { }
 
-        public SegmentedHashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer) : this(comparer)
+        public SegmentedHashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer)
+            : this(comparer)
         {
             if (collection == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.collection);
             }
 
-            if (collection is SegmentedHashSet<T> otherAsHashSet && EqualityComparersAreEqual(this, otherAsHashSet))
+            if (
+                collection is SegmentedHashSet<T> otherAsHashSet
+                && EqualityComparersAreEqual(this, otherAsHashSet)
+            )
             {
                 ConstructFrom(otherAsHashSet);
             }
@@ -118,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        public SegmentedHashSet(int capacity, IEqualityComparer<T>? comparer) : this(comparer)
+        public SegmentedHashSet(int capacity, IEqualityComparer<T>? comparer)
+            : this(comparer)
         {
             if (capacity < 0)
             {
@@ -222,7 +232,10 @@ namespace Microsoft.CodeAnalysis.Collections
                         while (i >= 0)
                         {
                             ref var entry = ref entries[i];
-                            if (entry._hashCode == hashCode && EqualityComparer<T>.Default.Equals(entry._value, item))
+                            if (
+                                entry._hashCode == hashCode
+                                && EqualityComparer<T>.Default.Equals(entry._value, item)
+                            )
                             {
                                 return i;
                             }
@@ -245,7 +258,10 @@ namespace Microsoft.CodeAnalysis.Collections
                         while (i >= 0)
                         {
                             ref var entry = ref entries[i];
-                            if (entry._hashCode == hashCode && defaultComparer.Equals(entry._value, item))
+                            if (
+                                entry._hashCode == hashCode
+                                && defaultComparer.Equals(entry._value, item)
+                            )
                             {
                                 return i;
                             }
@@ -291,7 +307,9 @@ namespace Microsoft.CodeAnalysis.Collections
         private ref int GetBucketRef(int hashCode)
         {
             var buckets = _buckets;
-            return ref buckets[(int)HashHelpers.FastMod((uint)hashCode, (uint)buckets.Length, _fastModMultiplier)];
+            return ref buckets[
+                (int)HashHelpers.FastMod((uint)hashCode, (uint)buckets.Length, _fastModMultiplier)
+            ];
         }
 
         public bool Remove(T item)
@@ -303,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
                 uint collisionCount = 0;
                 var last = -1;
-                var hashCode = item != null ? (_comparer?.GetHashCode(item) ?? item.GetHashCode()) : 0;
+                var hashCode =
+                    item != null ? (_comparer?.GetHashCode(item) ?? item.GetHashCode()) : 0;
 
                 ref var bucket = ref GetBucketRef(hashCode);
                 var i = bucket - 1; // Value in buckets is 1-based
@@ -312,7 +331,13 @@ namespace Microsoft.CodeAnalysis.Collections
                 {
                     ref var entry = ref entries[i];
 
-                    if (entry._hashCode == hashCode && (_comparer?.Equals(entry._value, item) ?? EqualityComparer<T>.Default.Equals(entry._value, item)))
+                    if (
+                        entry._hashCode == hashCode
+                        && (
+                            _comparer?.Equals(entry._value, item)
+                            ?? EqualityComparer<T>.Default.Equals(entry._value, item)
+                        )
+                    )
                     {
                         if (last < 0)
                         {
@@ -323,7 +348,10 @@ namespace Microsoft.CodeAnalysis.Collections
                             entries[last]._next = entry._next;
                         }
 
-                        Debug.Assert((StartOfFreeList - _freeList) < 0, "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646");
+                        Debug.Assert(
+                            (StartOfFreeList - _freeList) < 0,
+                            "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646"
+                        );
                         entry._next = StartOfFreeList - _freeList;
 
 #if NETCOREAPP
@@ -446,7 +474,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
                 // Faster if other is a hashset using same equality comparer; so check
                 // that other is a hashset using the same equality comparer.
-                if (other is SegmentedHashSet<T> otherAsSet && EqualityComparersAreEqual(this, otherAsSet))
+                if (
+                    other is SegmentedHashSet<T> otherAsSet
+                    && EqualityComparersAreEqual(this, otherAsSet)
+                )
                 {
                     IntersectWithHashSetWithSameComparer(otherAsSet);
                     return;
@@ -513,7 +544,10 @@ namespace Microsoft.CodeAnalysis.Collections
             // will fail. So first check if other is a hashset using the same equality comparer;
             // symmetric except is a lot faster and avoids bit array allocations if we can assume
             // uniqueness.
-            if (other is SegmentedHashSet<T> otherAsSet && EqualityComparersAreEqual(this, otherAsSet))
+            if (
+                other is SegmentedHashSet<T> otherAsSet
+                && EqualityComparersAreEqual(this, otherAsSet)
+            )
             {
                 SymmetricExceptWithUniqueHashSet(otherAsSet);
             }
@@ -542,7 +576,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             // Faster if other has unique elements according to this equality comparer; so check
             // that other is a hashset using the same equality comparer.
-            if (other is SegmentedHashSet<T> otherAsSet && EqualityComparersAreEqual(this, otherAsSet))
+            if (
+                other is SegmentedHashSet<T> otherAsSet
+                && EqualityComparersAreEqual(this, otherAsSet)
+            )
             {
                 // if this has more elements then it can't be a subset
                 if (Count > otherAsSet.Count)
@@ -555,7 +592,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 return IsSubsetOfHashSetWithSameComparer(otherAsSet);
             }
 
-            (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: false);
+            (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: false
+            );
             return uniqueCount == Count && unfoundCount >= 0;
         }
 
@@ -590,7 +630,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
 
                 // Faster if other is a hashset (and we're using same equality comparer).
-                if (other is SegmentedHashSet<T> otherAsSet && EqualityComparersAreEqual(this, otherAsSet))
+                if (
+                    other is SegmentedHashSet<T> otherAsSet
+                    && EqualityComparersAreEqual(this, otherAsSet)
+                )
                 {
                     if (Count >= otherAsSet.Count)
                     {
@@ -603,7 +646,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
             }
 
-            (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: false);
+            (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: false
+            );
             return uniqueCount == Count && unfoundCount > 0;
         }
 
@@ -633,9 +679,11 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
 
                 // Try to compare based on counts alone if other is a hashset with same equality comparer.
-                if (other is SegmentedHashSet<T> otherAsSet &&
-                    EqualityComparersAreEqual(this, otherAsSet) &&
-                    otherAsSet.Count > Count)
+                if (
+                    other is SegmentedHashSet<T> otherAsSet
+                    && EqualityComparersAreEqual(this, otherAsSet)
+                    && otherAsSet.Count > Count
+                )
                 {
                     return false;
                 }
@@ -670,7 +718,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
 
                 // Faster if other is a hashset with the same equality comparer
-                if (other is SegmentedHashSet<T> otherAsSet && EqualityComparersAreEqual(this, otherAsSet))
+                if (
+                    other is SegmentedHashSet<T> otherAsSet
+                    && EqualityComparersAreEqual(this, otherAsSet)
+                )
                 {
                     if (otherAsSet.Count >= Count)
                     {
@@ -683,7 +734,10 @@ namespace Microsoft.CodeAnalysis.Collections
             }
 
             // Couldn't fall out in the above cases; do it the long way
-            (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: true);
+            (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(
+                other,
+                returnIfUnfound: true
+            );
             return uniqueCount < Count && unfoundCount == 0;
         }
 
@@ -736,7 +790,10 @@ namespace Microsoft.CodeAnalysis.Collections
             }
 
             // Faster if other is a hashset and we're using same equality comparer.
-            if (other is SegmentedHashSet<T> otherAsSet && EqualityComparersAreEqual(this, otherAsSet))
+            if (
+                other is SegmentedHashSet<T> otherAsSet
+                && EqualityComparersAreEqual(this, otherAsSet)
+            )
             {
                 // Attempt to return early: since both contain unique elements, if they have
                 // different counts, then they can't be equal.
@@ -752,14 +809,19 @@ namespace Microsoft.CodeAnalysis.Collections
             else
             {
                 // If this count is 0 but other contains at least one element, they can't be equal.
-                if (Count == 0 &&
-                    other is ICollection<T> otherAsCollection &&
-                    otherAsCollection.Count > 0)
+                if (
+                    Count == 0
+                    && other is ICollection<T> otherAsCollection
+                    && otherAsCollection.Count > 0
+                )
                 {
                     return false;
                 }
 
-                (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(other, returnIfUnfound: true);
+                (var uniqueCount, var unfoundCount) = CheckUniqueAndUnfoundElements(
+                    other,
+                    returnIfUnfound: true
+                );
                 return uniqueCount == Count && unfoundCount == 0;
             }
         }
@@ -781,13 +843,21 @@ namespace Microsoft.CodeAnalysis.Collections
             // Check array index valid index into array.
             if (arrayIndex < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(arrayIndex),
+                    arrayIndex,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             // Also throw if count less than 0.
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), count, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    count,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             // Will the array, starting at arrayIndex, be able to hold elements? Note: not
@@ -844,10 +914,7 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <summary>Gets the <see cref="IEqualityComparer"/> object that is used to determine equality for the values in the set.</summary>
         public IEqualityComparer<T> Comparer
         {
-            get
-            {
-                return _comparer ?? EqualityComparer<T>.Default;
-            }
+            get { return _comparer ?? EqualityComparer<T>.Default; }
         }
 
         /// <summary>Ensures that this hash set can hold the specified number of elements without growing.</summary>
@@ -947,7 +1014,8 @@ namespace Microsoft.CodeAnalysis.Collections
         #region Helper methods
 
         /// <summary>Returns an <see cref="IEqualityComparer"/> object that can be used for equality testing of a <see cref="SegmentedHashSet{T}"/> object.</summary>
-        public static IEqualityComparer<SegmentedHashSet<T>> CreateSetComparer() => new SegmentedHashSetEqualityComparer<T>();
+        public static IEqualityComparer<SegmentedHashSet<T>> CreateSetComparer() =>
+            new SegmentedHashSetEqualityComparer<T>();
 
         /// <summary>
         /// Initializes buckets and slots arrays. Uses suggested capacity by finding next prime
@@ -1000,7 +1068,10 @@ namespace Microsoft.CodeAnalysis.Collections
                     while (i >= 0)
                     {
                         ref var entry = ref entries[i];
-                        if (entry._hashCode == hashCode && EqualityComparer<T>.Default.Equals(entry._value, value))
+                        if (
+                            entry._hashCode == hashCode
+                            && EqualityComparer<T>.Default.Equals(entry._value, value)
+                        )
                         {
                             location = i;
                             return false;
@@ -1023,7 +1094,10 @@ namespace Microsoft.CodeAnalysis.Collections
                     while (i >= 0)
                     {
                         ref var entry = ref entries[i];
-                        if (entry._hashCode == hashCode && defaultComparer.Equals(entry._value, value))
+                        if (
+                            entry._hashCode == hashCode
+                            && defaultComparer.Equals(entry._value, value)
+                        )
                         {
                             location = i;
                             return false;
@@ -1068,7 +1142,10 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 index = _freeList;
                 _freeCount--;
-                Debug.Assert((StartOfFreeList - entries[_freeList]._next) >= -1, "shouldn't overflow because `next` cannot underflow");
+                Debug.Assert(
+                    (StartOfFreeList - entries[_freeList]._next) >= -1,
+                    "shouldn't overflow because `next` cannot underflow"
+                );
                 _freeList = StartOfFreeList - entries[_freeList]._next;
             }
             else
@@ -1167,7 +1244,10 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         private unsafe void IntersectWithEnumerable(IEnumerable<T> other)
         {
-            Debug.Assert(_buckets.Length > 0, "_buckets shouldn't be empty; callers should check first");
+            Debug.Assert(
+                _buckets.Length > 0,
+                "_buckets shouldn't be empty; callers should check first"
+            );
 
             // Keep track of current last index; don't want to move past the end of our bit array
             // (could happen if another thread is modifying the collection).
@@ -1175,9 +1255,10 @@ namespace Microsoft.CodeAnalysis.Collections
             int intArrayLength = BitHelper.ToIntArrayLength(originalCount);
 
             Span<int> span = stackalloc int[StackAllocThreshold];
-            var bitHelper = intArrayLength <= StackAllocThreshold
-                ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
-                : new BitHelper(new int[intArrayLength], clear: false);
+            var bitHelper =
+                intArrayLength <= StackAllocThreshold
+                    ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             // Mark if contains: find index of in slots array and mark corresponding element in bit array.
             foreach (var item in other)
@@ -1243,14 +1324,16 @@ namespace Microsoft.CodeAnalysis.Collections
             int intArrayLength = BitHelper.ToIntArrayLength(originalCount);
 
             Span<int> itemsToRemoveSpan = stackalloc int[StackAllocThreshold / 2];
-            var itemsToRemove = intArrayLength <= StackAllocThreshold / 2
-                ? new BitHelper(itemsToRemoveSpan.Slice(0, intArrayLength), clear: true)
-                : new BitHelper(new int[intArrayLength], clear: false);
+            var itemsToRemove =
+                intArrayLength <= StackAllocThreshold / 2
+                    ? new BitHelper(itemsToRemoveSpan.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             Span<int> itemsAddedFromOtherSpan = stackalloc int[StackAllocThreshold / 2];
-            var itemsAddedFromOther = intArrayLength <= StackAllocThreshold / 2
-                ? new BitHelper(itemsAddedFromOtherSpan.Slice(0, intArrayLength), clear: true)
-                : new BitHelper(new int[intArrayLength], clear: false);
+            var itemsAddedFromOther =
+                intArrayLength <= StackAllocThreshold / 2
+                    ? new BitHelper(itemsAddedFromOtherSpan.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             foreach (var item in other)
             {
@@ -1309,7 +1392,10 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <param name="other"></param>
         /// <param name="returnIfUnfound">Allows us to finish faster for equals and proper superset
         /// because unfoundCount must be 0.</param>
-        private unsafe (int UniqueCount, int UnfoundCount) CheckUniqueAndUnfoundElements(IEnumerable<T> other, bool returnIfUnfound)
+        private unsafe (int UniqueCount, int UnfoundCount) CheckUniqueAndUnfoundElements(
+            IEnumerable<T> other,
+            bool returnIfUnfound
+        )
         {
             // Need special case in case this has no elements.
             if (_count == 0)
@@ -1324,15 +1410,19 @@ namespace Microsoft.CodeAnalysis.Collections
                 return (UniqueCount: 0, UnfoundCount: numElementsInOther);
             }
 
-            Debug.Assert((_buckets.Length > 0) && (_count > 0), "_buckets was empty but count greater than 0");
+            Debug.Assert(
+                (_buckets.Length > 0) && (_count > 0),
+                "_buckets was empty but count greater than 0"
+            );
 
             var originalCount = _count;
             int intArrayLength = BitHelper.ToIntArrayLength(originalCount);
 
             Span<int> span = stackalloc int[StackAllocThreshold];
-            var bitHelper = intArrayLength <= StackAllocThreshold
-                ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
-                : new BitHelper(new int[intArrayLength], clear: false);
+            var bitHelper =
+                intArrayLength <= StackAllocThreshold
+                    ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             var unfoundCount = 0; // count of items in other not found in this
             var uniqueFoundCount = 0; // count of unique items in other found in this
@@ -1367,13 +1457,17 @@ namespace Microsoft.CodeAnalysis.Collections
         /// speed up if it knows the other item has unique elements. I.e. if they're using
         /// different equality comparers, then uniqueness assumption between sets break.
         /// </summary>
-        internal static bool EqualityComparersAreEqual(SegmentedHashSet<T> set1, SegmentedHashSet<T> set2) => set1.Comparer.Equals(set2.Comparer);
+        internal static bool EqualityComparersAreEqual(
+            SegmentedHashSet<T> set1,
+            SegmentedHashSet<T> set2
+        ) => set1.Comparer.Equals(set2.Comparer);
 
         #endregion
 
         private struct Entry
         {
             public int _hashCode;
+
             /// <summary>
             /// 0-based index of next entry in chain: -1 means end of chain
             /// also encodes whether this entry _itself_ is part of the free list by changing sign and subtracting 3,

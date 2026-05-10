@@ -8,6 +8,6 @@ namespace System.Activities.DurableInstancing
     {
         NoRetry = 0,
         BasicRetry,
-        AggressiveRetry
+        AggressiveRetry,
     };
 }

@@ -22,13 +22,15 @@ namespace Microsoft.CodeAnalysis.Host
         {
             private readonly CompositionHost _compositionContext;
 
-            private MefHostExportProvider(CompositionHost compositionContext)
-                => _compositionContext = compositionContext;
+            private MefHostExportProvider(CompositionHost compositionContext) =>
+                _compositionContext = compositionContext;
 
             public static MefHostExportProvider Create(string languageName)
             {
                 var assemblies = CreateAssemblies(languageName);
-                var compositionConfiguration = new ContainerConfiguration().WithAssemblies(assemblies);
+                var compositionConfiguration = new ContainerConfiguration().WithAssemblies(
+                    assemblies
+                );
                 return new MefHostExportProvider(compositionConfiguration.CreateContainer());
             }
 
@@ -49,13 +51,19 @@ namespace Microsoft.CodeAnalysis.Host
                 }
 
                 return MefHostServices.DefaultAssemblies.Concat(
-                    MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames));
+                    MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames)
+                );
             }
 
-            IEnumerable<Lazy<TExtension>> IMefHostExportProvider.GetExports<TExtension>()
-                => _compositionContext.GetExports<TExtension>().Select(e => new Lazy<TExtension>(() => e));
+            IEnumerable<Lazy<TExtension>> IMefHostExportProvider.GetExports<TExtension>() =>
+                _compositionContext
+                    .GetExports<TExtension>()
+                    .Select(e => new Lazy<TExtension>(() => e));
 
-            IEnumerable<Lazy<TExtension, TMetadata>> IMefHostExportProvider.GetExports<TExtension, TMetadata>()
+            IEnumerable<Lazy<TExtension, TMetadata>> IMefHostExportProvider.GetExports<
+                TExtension,
+                TMetadata
+            >()
             {
                 var importer = new WithMetadataImporter<TExtension, TMetadata>();
                 _compositionContext.SatisfyImports(importer);

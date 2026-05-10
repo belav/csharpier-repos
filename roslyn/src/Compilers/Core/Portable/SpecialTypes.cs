@@ -98,46 +98,112 @@ namespace Microsoft.CodeAnalysis
                 s_typeIdToTypeCodeMap[i] = Microsoft.Cci.PrimitiveTypeCode.NotPrimitive;
             }
 
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Boolean] = Microsoft.Cci.PrimitiveTypeCode.Boolean;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Char] = Microsoft.Cci.PrimitiveTypeCode.Char;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Void] = Microsoft.Cci.PrimitiveTypeCode.Void;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_String] = Microsoft.Cci.PrimitiveTypeCode.String;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Int64] = Microsoft.Cci.PrimitiveTypeCode.Int64;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Int32] = Microsoft.Cci.PrimitiveTypeCode.Int32;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Int16] = Microsoft.Cci.PrimitiveTypeCode.Int16;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_SByte] = Microsoft.Cci.PrimitiveTypeCode.Int8;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_UInt64] = Microsoft.Cci.PrimitiveTypeCode.UInt64;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_UInt32] = Microsoft.Cci.PrimitiveTypeCode.UInt32;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_UInt16] = Microsoft.Cci.PrimitiveTypeCode.UInt16;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Byte] = Microsoft.Cci.PrimitiveTypeCode.UInt8;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Single] = Microsoft.Cci.PrimitiveTypeCode.Float32;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_Double] = Microsoft.Cci.PrimitiveTypeCode.Float64;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_IntPtr] = Microsoft.Cci.PrimitiveTypeCode.IntPtr;
-            s_typeIdToTypeCodeMap[(int)SpecialType.System_UIntPtr] = Microsoft.Cci.PrimitiveTypeCode.UIntPtr;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Boolean] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Boolean;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Char] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Char;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Void] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Void;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_String] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .String;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Int64] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Int64;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Int32] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Int32;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Int16] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Int16;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_SByte] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Int8;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_UInt64] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .UInt64;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_UInt32] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .UInt32;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_UInt16] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .UInt16;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Byte] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .UInt8;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Single] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Float32;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_Double] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .Float64;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_IntPtr] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .IntPtr;
+            s_typeIdToTypeCodeMap[(int)SpecialType.System_UIntPtr] = Microsoft
+                .Cci
+                .PrimitiveTypeCode
+                .UIntPtr;
 
-            s_typeCodeToTypeIdMap = new SpecialType[(int)Microsoft.Cci.PrimitiveTypeCode.Invalid + 1];
+            s_typeCodeToTypeIdMap = new SpecialType[
+                (int)Microsoft.Cci.PrimitiveTypeCode.Invalid + 1
+            ];
 
             for (i = 0; i < s_typeCodeToTypeIdMap.Length; i++)
             {
                 s_typeCodeToTypeIdMap[i] = SpecialType.None;
             }
 
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Boolean] = SpecialType.System_Boolean;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Char] = SpecialType.System_Char;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Void] = SpecialType.System_Void;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.String] = SpecialType.System_String;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int64] = SpecialType.System_Int64;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int32] = SpecialType.System_Int32;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int16] = SpecialType.System_Int16;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int8] = SpecialType.System_SByte;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt64] = SpecialType.System_UInt64;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt32] = SpecialType.System_UInt32;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt16] = SpecialType.System_UInt16;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt8] = SpecialType.System_Byte;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Float32] = SpecialType.System_Single;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Float64] = SpecialType.System_Double;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.IntPtr] = SpecialType.System_IntPtr;
-            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UIntPtr] = SpecialType.System_UIntPtr;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Boolean] =
+                SpecialType.System_Boolean;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Char] =
+                SpecialType.System_Char;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Void] =
+                SpecialType.System_Void;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.String] =
+                SpecialType.System_String;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int64] =
+                SpecialType.System_Int64;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int32] =
+                SpecialType.System_Int32;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int16] =
+                SpecialType.System_Int16;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Int8] =
+                SpecialType.System_SByte;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt64] =
+                SpecialType.System_UInt64;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt32] =
+                SpecialType.System_UInt32;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt16] =
+                SpecialType.System_UInt16;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UInt8] =
+                SpecialType.System_Byte;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Float32] =
+                SpecialType.System_Single;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.Float64] =
+                SpecialType.System_Double;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.IntPtr] =
+                SpecialType.System_IntPtr;
+            s_typeCodeToTypeIdMap[(int)Microsoft.Cci.PrimitiveTypeCode.UIntPtr] =
+                SpecialType.System_UIntPtr;
         }
 
         /// <summary>

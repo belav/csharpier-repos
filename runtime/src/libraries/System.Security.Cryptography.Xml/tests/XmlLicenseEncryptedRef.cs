@@ -34,9 +34,11 @@ namespace System.Security.Cryptography.Xml.Tests
             Assert.NotNull(encryptionMethod);
             Assert.NotNull(keyInfo);
             Assert.NotNull(toDecrypt);
-            Assert.True(encryptionMethod.KeyAlgorithm == EncryptedXml.XmlEncAES128Url
-                     || encryptionMethod.KeyAlgorithm == EncryptedXml.XmlEncAES192Url
-                     || encryptionMethod.KeyAlgorithm == EncryptedXml.XmlEncAES256Url);
+            Assert.True(
+                encryptionMethod.KeyAlgorithm == EncryptedXml.XmlEncAES128Url
+                    || encryptionMethod.KeyAlgorithm == EncryptedXml.XmlEncAES192Url
+                    || encryptionMethod.KeyAlgorithm == EncryptedXml.XmlEncAES256Url
+            );
 
             Assert.Equal(1, keyInfo.Count);
 
@@ -49,7 +51,10 @@ namespace System.Security.Cryptography.Xml.Tests
                     KeyInfoEncryptedKey encryptedKeyInfo = clause as KeyInfoEncryptedKey;
                     EncryptedKey encryptedKey = encryptedKeyInfo.EncryptedKey;
 
-                    Assert.Equal(EncryptedXml.XmlEncRSAOAEPUrl, encryptedKey.EncryptionMethod.KeyAlgorithm);
+                    Assert.Equal(
+                        EncryptedXml.XmlEncRSAOAEPUrl,
+                        encryptedKey.EncryptionMethod.KeyAlgorithm
+                    );
                     Assert.Equal(1, encryptedKey.KeyInfo.Count);
                     Assert.NotEqual(0, _asymmetricKeys.Count);
 
@@ -90,8 +95,7 @@ namespace System.Security.Cryptography.Xml.Tests
                         if (encryptedKeyValue == null)
                             throw new CryptographicException("MissingKeyCipher");
 
-                        decryptedKey = EncryptedXml.DecryptKey(encryptedKeyValue,
-                                                                     rsaKey, true);
+                        decryptedKey = EncryptedXml.DecryptKey(encryptedKeyValue, rsaKey, true);
                         break;
                     }
 
@@ -153,7 +157,13 @@ namespace System.Security.Cryptography.Xml.Tests
             return new MemoryStream(decryptedContent);
         }
 
-        internal static void Encrypt(Stream toEncrypt, RSA key, out KeyInfo keyInfo, out EncryptionMethod encryptionMethod, out CipherData cipherData)
+        internal static void Encrypt(
+            Stream toEncrypt,
+            RSA key,
+            out KeyInfo keyInfo,
+            out EncryptionMethod encryptionMethod,
+            out CipherData cipherData
+        )
         {
             using (Aes sessionKey = Aes.Create())
             {
@@ -166,9 +176,13 @@ namespace System.Security.Cryptography.Xml.Tests
                     new KeyInfoEncryptedKey(
                         encKey = new EncryptedKey()
                         {
-                            CipherData = new CipherData(EncryptedXml.EncryptKey(sessionKey.Key, key, useOAEP: true)),
-                            EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncRSAOAEPUrl)
-                        }));
+                            CipherData = new CipherData(
+                                EncryptedXml.EncryptKey(sessionKey.Key, key, useOAEP: true)
+                            ),
+                            EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncRSAOAEPUrl),
+                        }
+                    )
+                );
 
                 encKey.KeyInfo.AddClause(new RSAKeyValue(key));
 

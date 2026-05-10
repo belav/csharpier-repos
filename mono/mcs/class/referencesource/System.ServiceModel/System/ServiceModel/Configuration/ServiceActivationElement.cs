@@ -28,16 +28,36 @@ namespace System.ServiceModel.Configuration
             {
                 string relativeAddress = value as string;
                 // the size of relativeAddress cannot be smaller than 3 as it must have extension
-                if (string.IsNullOrEmpty(relativeAddress) || string.IsNullOrEmpty(relativeAddress.Trim()) || relativeAddress.Length < 3)
+                if (
+                    string.IsNullOrEmpty(relativeAddress)
+                    || string.IsNullOrEmpty(relativeAddress.Trim())
+                    || relativeAddress.Length < 3
+                )
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR.GetString(SR.Hosting_RelativeAddressFormatError, relativeAddress)));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(
+                            SR.GetString(SR.Hosting_RelativeAddressFormatError, relativeAddress)
+                        )
+                    );
                 }
 
                 //user gives an absolute address, throw, as we do not support absolute address
-                if (relativeAddress.StartsWith(PathSeparatorString, StringComparison.CurrentCultureIgnoreCase)
-                    || relativeAddress.StartsWith(ReversSlashString, StringComparison.CurrentCultureIgnoreCase))
+                if (
+                    relativeAddress.StartsWith(
+                        PathSeparatorString,
+                        StringComparison.CurrentCultureIgnoreCase
+                    )
+                    || relativeAddress.StartsWith(
+                        ReversSlashString,
+                        StringComparison.CurrentCultureIgnoreCase
+                    )
+                )
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR.GetString(SR.Hosting_NoAbsoluteRelativeAddress, relativeAddress)));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(
+                            SR.GetString(SR.Hosting_NoAbsoluteRelativeAddress, relativeAddress)
+                        )
+                    );
                 }
             }
         }
@@ -47,23 +67,20 @@ namespace System.ServiceModel.Configuration
         {
             public override ConfigurationValidatorBase ValidatorInstance
             {
-                get
-                {
-                    return new RelativeAddressValidator();
-                }
+                get { return new RelativeAddressValidator(); }
             }
         }
 
-        public ServiceActivationElement()
-        {
-        }
+        public ServiceActivationElement() { }
 
         public ServiceActivationElement(string relativeAddress)
             : this()
         {
             if (relativeAddress == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(ConfigurationStrings.RelativeAddress);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    ConfigurationStrings.RelativeAddress
+                );
             }
             this.RelativeAddress = relativeAddress;
         }
@@ -80,18 +97,21 @@ namespace System.ServiceModel.Configuration
             this.Factory = factory;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.RelativeAddress, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.RelativeAddress,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [RelativeAddressValidator()]
         public string RelativeAddress
         {
             get { return (string)base[ConfigurationStrings.RelativeAddress]; }
-            set
-            {
-                base[ConfigurationStrings.RelativeAddress] = value;
-            }
+            set { base[ConfigurationStrings.RelativeAddress] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Service, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Service,
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Service
         {
@@ -106,7 +126,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Factory, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Factory,
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Factory
         {

@@ -16,7 +16,10 @@ public sealed class SourceMemberAttribute : Attribute, IMemberConfigurationProvi
     public void ApplyConfiguration(IMemberConfigurationExpression memberConfigurationExpression)
     {
         var destinationMember = memberConfigurationExpression.DestinationMember;
-        if (destinationMember.Has<ValueConverterAttribute>() || destinationMember.Has<ValueResolverAttribute>())
+        if (
+            destinationMember.Has<ValueConverterAttribute>()
+            || destinationMember.Has<ValueResolverAttribute>()
+        )
         {
             return;
         }

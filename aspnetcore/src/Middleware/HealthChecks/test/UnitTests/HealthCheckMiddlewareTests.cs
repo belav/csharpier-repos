@@ -1035,8 +1035,8 @@ public class HealthCheckMiddlewareTests
     [Fact]
     public void HealthCheckOptions_ThrowsWhenAHealthStatusIsMissing()
     {
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => new HealthCheckOptions { ResultStatusCodes = new Dictionary<HealthStatus, int>() }
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new HealthCheckOptions { ResultStatusCodes = new Dictionary<HealthStatus, int>() }
         );
         Assert.Contains(
             $"{nameof(HealthStatus)}.{nameof(HealthStatus.Healthy)}",
@@ -1055,15 +1055,14 @@ public class HealthCheckMiddlewareTests
     [Fact]
     public void HealthCheckOptions_ThrowsWhenAHealthStatusIsMissing_MessageDoesNotContainDefinedStatus()
     {
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                new HealthCheckOptions
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new HealthCheckOptions
+            {
+                ResultStatusCodes = new Dictionary<HealthStatus, int>
                 {
-                    ResultStatusCodes = new Dictionary<HealthStatus, int>
-                    {
-                        [HealthStatus.Healthy] = 200,
-                    },
-                }
+                    [HealthStatus.Healthy] = 200,
+                },
+            }
         );
         Assert.DoesNotContain(
             $"{nameof(HealthStatus)}.{nameof(HealthStatus.Healthy)}",

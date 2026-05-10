@@ -11,20 +11,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullNFloatSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<float?>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<float?>)null).Average()
+            );
         }
 
         [Fact]
         public void NullNFloatSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<float?>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<float?>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullNFloatFunc()
         {
             Expression<Func<float?, float?>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<float?>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<float?>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -39,11 +48,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableFloatFromSelector()
         {
-            var source = new []
+            var source = new[]
             {
                 new { name = "Tim", num = (float?)5.5f },
                 new { name = "John", num = (float?)15.5f },
-                new { name = "Bob", num = default(float?) }
+                new { name = "Bob", num = default(float?) },
             };
             float? expected = 10.5f;
 
@@ -53,20 +62,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullIntSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).Average()
+            );
         }
 
         [Fact]
         public void NullIntSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullIntFunc()
         {
-            Expression<Func <int, int>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<int>().AsQueryable().Average(selector));
+            Expression<Func<int, int>> selector = null;
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<int>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -81,11 +99,11 @@ namespace System.Linq.Tests
         [Fact]
         public void MultipleIntFromSelector()
         {
-            var source = new []
+            var source = new[]
             {
-                new { name="Tim", num = 10 },
-                new { name="John", num = -10 },
-                new { name="Bob", num = 15 }
+                new { name = "Tim", num = 10 },
+                new { name = "John", num = -10 },
+                new { name = "Bob", num = 15 },
             };
             double expected = 5;
 
@@ -95,20 +113,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullNIntSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int?>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int?>)null).Average()
+            );
         }
 
         [Fact]
         public void NullNIntSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int?>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int?>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullNIntFunc()
         {
             Expression<Func<int?, int?>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<int?>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<int?>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -123,11 +150,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableIntFromSelector()
         {
-            var source = new []
+            var source = new[]
             {
-                new { name = "Tim", num  = (int?)10 },
-                new { name = "John", num =  default(int?) },
-                new { name = "Bob", num = (int?)10 }
+                new { name = "Tim", num = (int?)10 },
+                new { name = "John", num = default(int?) },
+                new { name = "Bob", num = (int?)10 },
             };
             double? expected = 10;
 
@@ -137,20 +164,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullLongSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<long>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<long>)null).Average()
+            );
         }
 
         [Fact]
         public void NullLongSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<long>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<long>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullLongFunc()
         {
             Expression<Func<long, long>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<long>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<long>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -165,11 +201,11 @@ namespace System.Linq.Tests
         [Fact]
         public void MultipleLongFromSelector()
         {
-            var source = new []
+            var source = new[]
             {
                 new { name = "Tim", num = 40L },
                 new { name = "John", num = 50L },
-                new { name = "Bob", num = 60L }
+                new { name = "Bob", num = 60L },
             };
             double expected = 50;
 
@@ -179,20 +215,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullNLongSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<long?>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<long?>)null).Average()
+            );
         }
 
         [Fact]
         public void NullNLongSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<long?>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<long?>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullNLongFunc()
         {
             Expression<Func<long?, long?>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<long?>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<long?>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -207,11 +252,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableLongFromSelector()
         {
-            var source = new []
+            var source = new[]
             {
                 new { name = "Tim", num = (long?)40L },
                 new { name = "John", num = default(long?) },
-                new { name = "Bob", num = (long?)30L }
+                new { name = "Bob", num = (long?)30L },
             };
             double? expected = 35;
 
@@ -221,22 +266,30 @@ namespace System.Linq.Tests
         [Fact]
         public void NullDoubleSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<double>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<double>)null).Average()
+            );
         }
 
         [Fact]
         public void NullDoubleSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<double>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<double>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullDoubleFunc()
         {
             Expression<Func<double, double>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<double>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<double>().AsQueryable().Average(selector)
+            );
         }
-
 
         [Fact]
         public void MultipleDoubleValues()
@@ -250,11 +303,11 @@ namespace System.Linq.Tests
         [Fact]
         public void MultipleDoubleFromSelector()
         {
-            var source = new []
+            var source = new[]
             {
-                new { name = "Tim", num = 5.5},
-                new { name = "John", num = 15.5},
-                new { name = "Bob", num = 3.0}
+                new { name = "Tim", num = 5.5 },
+                new { name = "John", num = 15.5 },
+                new { name = "Bob", num = 3.0 },
             };
             double expected = 8.0;
 
@@ -264,20 +317,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullNDoubleSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<double?>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<double?>)null).Average()
+            );
         }
 
         [Fact]
         public void NullNDoubleSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<double?>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<double?>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullNDoubleFunc()
         {
             Expression<Func<double?, double?>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<double?>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<double?>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -294,9 +356,9 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new{ name = "Tim", num = (double?)5.5 },
-                new{ name = "John", num = (double?)15.5 },
-                new{ name = "Bob", num = default(double?) }
+                new { name = "Tim", num = (double?)5.5 },
+                new { name = "John", num = (double?)15.5 },
+                new { name = "Bob", num = default(double?) },
             };
             double? expected = 10.5;
 
@@ -306,20 +368,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullDecimalSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<decimal>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<decimal>)null).Average()
+            );
         }
 
         [Fact]
         public void NullDecimalSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<decimal>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<decimal>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullDecimalFunc()
         {
             Expression<Func<decimal, decimal>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<decimal>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<decimal>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -336,9 +407,9 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new{ name = "Tim", num = 5.5m},
-                new{ name = "John", num = 15.5m},
-                new{ name = "Bob", num = 3.0m}
+                new { name = "Tim", num = 5.5m },
+                new { name = "John", num = 15.5m },
+                new { name = "Bob", num = 3.0m },
             };
             decimal expected = 8.0m;
 
@@ -348,20 +419,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullNDecimalSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<decimal?>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<decimal?>)null).Average()
+            );
         }
 
         [Fact]
         public void NullNDecimalSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<decimal?>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<decimal?>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullNDecimalFunc()
         {
             Expression<Func<decimal?, decimal?>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<decimal?>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<decimal?>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -378,9 +458,9 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new{ name = "Tim", num = (decimal?)5.5m},
-                new{ name = "John", num = (decimal?)15.5m},
-                new{ name = "Bob", num = (decimal?)null}
+                new { name = "Tim", num = (decimal?)5.5m },
+                new { name = "John", num = (decimal?)15.5m },
+                new { name = "Bob", num = (decimal?)null },
             };
             decimal? expected = 10.5m;
 
@@ -390,20 +470,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullFloatSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<float>)null).Average());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<float>)null).Average()
+            );
         }
 
         [Fact]
         public void NullFloatSourceWithFunc()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<float>)null).Average(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<float>)null).Average(i => i)
+            );
         }
 
         [Fact]
         public void NullFloatFunc()
         {
             Expression<Func<float, float>> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Empty<float>().AsQueryable().Average(selector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => Enumerable.Empty<float>().AsQueryable().Average(selector)
+            );
         }
 
         [Fact]
@@ -420,9 +509,9 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-                new{ name = "Tim", num = 5.5f},
-                new{ name = "John", num = 15.5f},
-                new{ name = "Bob", num = 3.0f}
+                new { name = "Tim", num = 5.5f },
+                new { name = "John", num = 15.5f },
+                new { name = "Bob", num = 3.0f },
             };
             float expected = 8.0f;
 
@@ -439,63 +528,81 @@ namespace System.Linq.Tests
         [Fact]
         public void Average2()
         {
-            var val = new int?[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new int?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average3()
         {
-            var val = new long[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new long[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average4()
         {
-            var val = new long?[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new long?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average5()
         {
-            var val = new float[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new float[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((float)1, val);
         }
 
         [Fact]
         public void Average6()
         {
-            var val = new float?[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new float?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((float)1, val);
         }
 
         [Fact]
         public void Average7()
         {
-            var val = new double[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new double[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average8()
         {
-            var val = new double?[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new double?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average9()
         {
-            var val = new decimal[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new decimal[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((decimal)1, val);
         }
 
         [Fact]
         public void Average10()
         {
-            var val = new decimal?[] { 0, 2, 1 }.AsQueryable().Average();
+            var val = new decimal?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average();
             Assert.Equal((decimal)1, val);
         }
 
@@ -509,63 +616,81 @@ namespace System.Linq.Tests
         [Fact]
         public void Average12()
         {
-            var val = new int?[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new int?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average13()
         {
-            var val = new long[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new long[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average14()
         {
-            var val = new long?[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new long?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average15()
         {
-            var val = new float[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new float[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((float)1, val);
         }
 
         [Fact]
         public void Average16()
         {
-            var val = new float?[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new float?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((float)1, val);
         }
 
         [Fact]
         public void Average17()
         {
-            var val = new double[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new double[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average18()
         {
-            var val = new double?[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new double?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((double)1, val);
         }
 
         [Fact]
         public void Average19()
         {
-            var val = new decimal[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new decimal[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((decimal)1, val);
         }
 
         [Fact]
         public void Average20()
         {
-            var val = new decimal?[] { 0, 2, 1 }.AsQueryable().Average(n => n);
+            var val = new decimal?[] { 0, 2, 1 }
+                .AsQueryable()
+                .Average(n => n);
             Assert.Equal((decimal)1, val);
         }
     }

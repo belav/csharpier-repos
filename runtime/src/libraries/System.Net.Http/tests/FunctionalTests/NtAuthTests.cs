@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -83,9 +82,7 @@ namespace System.Net.Http.Functional.Tests
                     BaseUrl = url;
                     return;
                 }
-                catch (HttpListenerException)
-                {
-                }
+                catch (HttpListenerException) { }
             }
 
             throw new Exception("Failed to locate a free port.");
@@ -95,7 +92,9 @@ namespace System.Net.Http.Functional.Tests
     public class NtAuthServers : IDisposable
     {
         public readonly NtAuthServer NtlmServer = new NtAuthServer(AuthenticationSchemes.Ntlm);
-        public readonly NtAuthServer NegotiateServer = new NtAuthServer(AuthenticationSchemes.Negotiate);
+        public readonly NtAuthServer NegotiateServer = new NtAuthServer(
+            AuthenticationSchemes.Negotiate
+        );
 
         public void Dispose()
         {
@@ -116,12 +115,19 @@ namespace System.Net.Http.Functional.Tests
         }
 
         [OuterLoop]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows), nameof(PlatformDetection.IsNotWindowsNanoServer))]    // HttpListener doesn't support nt auth on non-Windows platforms
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // HttpListener doesn't support nt auth on non-Windows platforms
         [InlineData(true, HttpStatusCode.OK)]
         [InlineData(true, HttpStatusCode.Unauthorized)]
         [InlineData(false, HttpStatusCode.OK)]
         [InlineData(false, HttpStatusCode.Unauthorized)]
-        public async Task GetAsync_NtAuthServer_ExpectedStatusCode(bool ntlm, HttpStatusCode expectedStatusCode)
+        public async Task GetAsync_NtAuthServer_ExpectedStatusCode(
+            bool ntlm,
+            HttpStatusCode expectedStatusCode
+        )
         {
             NtAuthServer server = ntlm ? _servers.NtlmServer : _servers.NegotiateServer;
 
@@ -130,7 +136,8 @@ namespace System.Net.Http.Functional.Tests
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(server.BaseUrl);
-                string path = expectedStatusCode == HttpStatusCode.Unauthorized ? server.NoAccessUrl : "";
+                string path =
+                    expectedStatusCode == HttpStatusCode.Unauthorized ? server.NoAccessUrl : "";
                 HttpResponseMessage response = await client.GetAsync(path);
 
                 Assert.Equal(expectedStatusCode, response.StatusCode);
@@ -138,14 +145,21 @@ namespace System.Net.Http.Functional.Tests
         }
 
         [OuterLoop]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows), nameof(PlatformDetection.IsNotWindowsNanoServer))]    // HttpListener doesn't support nt auth on non-Windows platforms
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // HttpListener doesn't support nt auth on non-Windows platforms
         [InlineData(true, 1023)]
         [InlineData(true, 1024)]
         [InlineData(true, 1025)]
         [InlineData(false, 1023)]
         [InlineData(false, 1024)]
         [InlineData(false, 1025)]
-        public async Task PostAsync_NtAuthServer_UseExpect100Header_Success(bool ntlm, int contentSize)
+        public async Task PostAsync_NtAuthServer_UseExpect100Header_Success(
+            bool ntlm,
+            int contentSize
+        )
         {
             NtAuthServer server = ntlm ? _servers.NtlmServer : _servers.NegotiateServer;
 
@@ -154,7 +168,9 @@ namespace System.Net.Http.Functional.Tests
             {
                 client.DefaultRequestHeaders.ExpectContinue = true;
                 var content = new StringContent(new string('A', contentSize));
-                using (HttpResponseMessage response = await client.PostAsync(server.BaseUrl, content))
+                using (
+                    HttpResponseMessage response = await client.PostAsync(server.BaseUrl, content)
+                )
                 {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }

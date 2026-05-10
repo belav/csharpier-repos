@@ -7,9 +7,9 @@ using System.Composition;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Shared.Utilities;
+using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host;
@@ -23,15 +23,15 @@ internal sealed class LegacyTemporaryStorageService : ITemporaryStorageService
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LegacyTemporaryStorageService()
-    {
-    }
+    public LegacyTemporaryStorageService() { }
 
-    public ITemporaryStreamStorage CreateTemporaryStreamStorage(CancellationToken cancellationToken = default)
-        => new StreamStorage();
+    public ITemporaryStreamStorage CreateTemporaryStreamStorage(
+        CancellationToken cancellationToken = default
+    ) => new StreamStorage();
 
-    public ITemporaryTextStorage CreateTemporaryTextStorage(CancellationToken cancellationToken = default)
-        => new TextStorage();
+    public ITemporaryTextStorage CreateTemporaryTextStorage(
+        CancellationToken cancellationToken = default
+    ) => new TextStorage();
 
     private sealed class StreamStorage : ITemporaryStreamStorage
     {
@@ -64,11 +64,16 @@ internal sealed class LegacyTemporaryStorageService : ITemporaryStorageService
             var existingValue = Interlocked.CompareExchange(ref _stream, newStream, null);
             if (existingValue is not null)
             {
-                throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                throw new InvalidOperationException(
+                    WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                );
             }
         }
 
-        public async Task WriteStreamAsync(Stream stream, CancellationToken cancellationToken = default)
+        public async Task WriteStreamAsync(
+            Stream stream,
+            CancellationToken cancellationToken = default
+        )
         {
             var newStream = new MemoryStream();
 #if NETCOREAPP
@@ -79,7 +84,9 @@ internal sealed class LegacyTemporaryStorageService : ITemporaryStorageService
             var existingValue = Interlocked.CompareExchange(ref _stream, newStream, null);
             if (existingValue is not null)
             {
-                throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                throw new InvalidOperationException(
+                    WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                );
             }
         }
     }
@@ -88,14 +95,13 @@ internal sealed class LegacyTemporaryStorageService : ITemporaryStorageService
     {
         private SourceText? _sourceText;
 
-        public void Dispose()
-            => _sourceText = null;
+        public void Dispose() => _sourceText = null;
 
-        public SourceText ReadText(CancellationToken cancellationToken = default)
-            => _sourceText ?? throw new InvalidOperationException();
+        public SourceText ReadText(CancellationToken cancellationToken = default) =>
+            _sourceText ?? throw new InvalidOperationException();
 
-        public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken = default)
-            => Task.FromResult(ReadText(cancellationToken));
+        public Task<SourceText> ReadTextAsync(CancellationToken cancellationToken = default) =>
+            Task.FromResult(ReadText(cancellationToken));
 
         public void WriteText(SourceText text, CancellationToken cancellationToken = default)
         {
@@ -105,7 +111,9 @@ internal sealed class LegacyTemporaryStorageService : ITemporaryStorageService
             var existingValue = Interlocked.CompareExchange(ref _sourceText, text, null);
             if (existingValue is not null)
             {
-                throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                throw new InvalidOperationException(
+                    WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                );
             }
         }
 

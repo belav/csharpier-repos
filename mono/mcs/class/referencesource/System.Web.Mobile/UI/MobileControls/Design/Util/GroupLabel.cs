@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="GroupLabel.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Util
@@ -12,17 +12,20 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System.Runtime.Serialization.Formatters;
     using System.Windows.Forms;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal sealed class GroupLabel : Label 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal sealed class GroupLabel : Label
     {
         /// <summary>
         ///    Creates a new GroupLabel
         /// </summary>
-        internal GroupLabel() : base() 
+        internal GroupLabel()
+            : base()
         {
             SetStyle(ControlStyles.UserPaint, true);
         }
@@ -30,7 +33,7 @@ namespace System.Web.UI.Design.MobileControls.Util
         /// <summary>
         ///    Custom UI is painted here
         /// </summary>
-        protected override void OnPaint(PaintEventArgs e) 
+        protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Rectangle r = ClientRectangle;
@@ -41,7 +44,7 @@ namespace System.Web.UI.Design.MobileControls.Util
             foreBrush.Dispose();
 
             int etchLeft = r.X;
-            if (text.Length != 0) 
+            if (text.Length != 0)
             {
                 Size sz = Size.Ceiling(g.MeasureString(text, Font));
                 etchLeft += 6 + sz.Width;

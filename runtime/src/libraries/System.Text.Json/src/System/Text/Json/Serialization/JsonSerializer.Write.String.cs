@@ -59,7 +59,8 @@ namespace System.Text.Json
         public static string Serialize(
             object? value,
             Type inputType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             ValidateInputType(value, inputType);
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, inputType);
@@ -152,11 +153,17 @@ namespace System.Text.Json
             return WriteStringAsObject(value, jsonTypeInfo);
         }
 
-        private static string WriteString<TValue>(in TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        private static string WriteString<TValue>(
+            in TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {
@@ -173,7 +180,10 @@ namespace System.Text.Json
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {

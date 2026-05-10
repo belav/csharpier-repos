@@ -11,7 +11,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 {
     internal class SchemaUtils
     {
-        internal static string SerializationNamespace = "http://schemas.microsoft.com/2003/10/Serialization/";
+        internal static string SerializationNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/";
         static XmlWriterSettings writerSettings = new XmlWriterSettings() { Indent = true };
 
         public static string OrderedContains(string expected, ref string actual)

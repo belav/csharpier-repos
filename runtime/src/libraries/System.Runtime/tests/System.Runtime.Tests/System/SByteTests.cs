@@ -100,17 +100,59 @@ namespace System.Tests
             {
                 foreach (string defaultSpecifier in new[] { "G", "G\0", "\0N222", "\0", "", "R" })
                 {
-                    yield return new object[] { sbyte.MinValue, defaultSpecifier, defaultFormat, "-128" };
-                    yield return new object[] { (sbyte)-123, defaultSpecifier, defaultFormat, "-123" };
+                    yield return new object[]
+                    {
+                        sbyte.MinValue,
+                        defaultSpecifier,
+                        defaultFormat,
+                        "-128",
+                    };
+                    yield return new object[]
+                    {
+                        (sbyte)-123,
+                        defaultSpecifier,
+                        defaultFormat,
+                        "-123",
+                    };
                     yield return new object[] { (sbyte)0, defaultSpecifier, defaultFormat, "0" };
-                    yield return new object[] { (sbyte)123, defaultSpecifier, defaultFormat, "123" };
-                    yield return new object[] { sbyte.MaxValue, defaultSpecifier, defaultFormat, "127" };
+                    yield return new object[]
+                    {
+                        (sbyte)123,
+                        defaultSpecifier,
+                        defaultFormat,
+                        "123",
+                    };
+                    yield return new object[]
+                    {
+                        sbyte.MaxValue,
+                        defaultSpecifier,
+                        defaultFormat,
+                        "127",
+                    };
                 }
 
                 yield return new object[] { (sbyte)123, "D", defaultFormat, "123" };
-                yield return new object[] { (sbyte)123, "D99", defaultFormat, "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123" };
-                yield return new object[] { (sbyte)123, "D99\09", defaultFormat, "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123" };
-                yield return new object[] { (sbyte)-123, "D99", defaultFormat, "-000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123" };
+                yield return new object[]
+                {
+                    (sbyte)123,
+                    "D99",
+                    defaultFormat,
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123",
+                };
+                yield return new object[]
+                {
+                    (sbyte)123,
+                    "D99\09",
+                    defaultFormat,
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123",
+                };
+                yield return new object[]
+                {
+                    (sbyte)-123,
+                    "D99",
+                    defaultFormat,
+                    "-000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123",
+                };
 
                 yield return new object[] { (sbyte)0, "x", defaultFormat, "0" };
                 yield return new object[] { (sbyte)0x24, "x", defaultFormat, "24" };
@@ -120,18 +162,72 @@ namespace System.Tests
                 yield return new object[] { (sbyte)0x24, "b", defaultFormat, "100100" };
                 yield return new object[] { (sbyte)-0x24, "b", defaultFormat, "11011100" };
 
-                yield return new object[] { (sbyte)24, "N", defaultFormat, string.Format("{0:N}", 24.00) };
+                yield return new object[]
+                {
+                    (sbyte)24,
+                    "N",
+                    defaultFormat,
+                    string.Format("{0:N}", 24.00),
+                };
             }
 
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
-            yield return new object[] { (sbyte)32, "C100", invariantFormat, "\u00A432.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (sbyte)32, "P100", invariantFormat, "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %" };
-            yield return new object[] { (sbyte)32, "D100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032" };
-            yield return new object[] { (sbyte)32, "E100", invariantFormat, "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001" };
-            yield return new object[] { (sbyte)32, "F100", invariantFormat, "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (sbyte)32, "N100", invariantFormat, "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (sbyte)32, "X100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020" };
-            yield return new object[] { (sbyte)32, "B100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000" };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "C100",
+                invariantFormat,
+                "\u00A432.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "P100",
+                invariantFormat,
+                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "D100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "E100",
+                invariantFormat,
+                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "F100",
+                invariantFormat,
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "N100",
+                invariantFormat,
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "X100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020",
+            };
+            yield return new object[]
+            {
+                (sbyte)32,
+                "B100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000",
+            };
 
             var customFormat = new NumberFormatInfo()
             {
@@ -143,7 +239,7 @@ namespace System.Tests
                 PercentSymbol = "@",
                 PercentGroupSeparator = ",",
                 PercentDecimalSeparator = ".",
-                PercentDecimalDigits = 5
+                PercentDecimalDigits = 5,
             };
             yield return new object[] { (sbyte)-24, "N", customFormat, "#24~00" };
             yield return new object[] { (sbyte)24, "N", customFormat, "24~00" };
@@ -154,7 +250,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ToString_TestData))]
-        public static void ToStringTest(sbyte i, string format, IFormatProvider provider, string expected)
+        public static void ToStringTest(
+            sbyte i,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             // Format is case insensitive
             string upperFormat = format.ToUpperInvariant();
@@ -218,14 +319,25 @@ namespace System.Tests
             yield return new object[] { "12", NumberStyles.HexNumber, emptyFormat, (sbyte)0x12 };
             yield return new object[] { "a", NumberStyles.HexNumber, null, (sbyte)0xa };
             yield return new object[] { "A", NumberStyles.HexNumber, null, (sbyte)0xa };
-            yield return new object[] { "10010", NumberStyles.BinaryNumber, emptyFormat, (sbyte)0b10010 };
+            yield return new object[]
+            {
+                "10010",
+                NumberStyles.BinaryNumber,
+                emptyFormat,
+                (sbyte)0b10010,
+            };
             yield return new object[] { "1010", NumberStyles.BinaryNumber, null, (sbyte)0b1010 };
             yield return new object[] { "$100", NumberStyles.Currency, customFormat, (sbyte)100 };
         }
 
         [Theory]
         [MemberData(nameof(Parse_Valid_TestData))]
-        public static void Parse_Valid(string value, NumberStyles style, IFormatProvider provider, sbyte expected)
+        public static void Parse_Valid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            sbyte expected
+        )
         {
             sbyte result;
 
@@ -268,19 +380,60 @@ namespace System.Tests
                 yield return widerTests;
             }
 
-            yield return new object[] { "-129", NumberStyles.Integer, null, typeof(OverflowException) }; // < min value
-            yield return new object[] { "128", NumberStyles.Integer, null, typeof(OverflowException) }; // > max value
+            yield return new object[]
+            {
+                "-129",
+                NumberStyles.Integer,
+                null,
+                typeof(OverflowException),
+            }; // < min value
+            yield return new object[]
+            {
+                "128",
+                NumberStyles.Integer,
+                null,
+                typeof(OverflowException),
+            }; // > max value
 
-            yield return new object[] { "111", NumberStyles.HexNumber, null, typeof(OverflowException) }; // Hex number < 0
-            yield return new object[] { "100", NumberStyles.HexNumber, null, typeof(OverflowException) }; // Hex number > max value
+            yield return new object[]
+            {
+                "111",
+                NumberStyles.HexNumber,
+                null,
+                typeof(OverflowException),
+            }; // Hex number < 0
+            yield return new object[]
+            {
+                "100",
+                NumberStyles.HexNumber,
+                null,
+                typeof(OverflowException),
+            }; // Hex number > max value
 
-            yield return new object[] { "111111111", NumberStyles.BinaryNumber, null, typeof(OverflowException) }; // Binary number < 0
-            yield return new object[] { "100000000", NumberStyles.BinaryNumber, null, typeof(OverflowException) }; // Binary number > max value
+            yield return new object[]
+            {
+                "111111111",
+                NumberStyles.BinaryNumber,
+                null,
+                typeof(OverflowException),
+            }; // Binary number < 0
+            yield return new object[]
+            {
+                "100000000",
+                NumberStyles.BinaryNumber,
+                null,
+                typeof(OverflowException),
+            }; // Binary number > max value
         }
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             sbyte result;
 
@@ -300,7 +453,10 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(sbyte.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(exceptionType, () => sbyte.Parse(value, style, new NumberFormatInfo()));
+                Assert.Throws(
+                    exceptionType,
+                    () => sbyte.Parse(value, style, new NumberFormatInfo())
+                );
             }
 
             // Default style
@@ -323,18 +479,32 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style)
         {
             sbyte result = 0;
-            AssertExtensions.Throws<ArgumentException>("style", () => sbyte.TryParse("1", style, null, out result));
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () => sbyte.TryParse("1", style, null, out result)
+            );
             Assert.Equal(default(sbyte), result);
 
             AssertExtensions.Throws<ArgumentException>("style", () => sbyte.Parse("1", style));
-            AssertExtensions.Throws<ArgumentException>("style", () => sbyte.Parse("1", style, null));
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () => sbyte.Parse("1", style, null)
+            );
         }
 
         public static IEnumerable<object[]> Parse_ValidWithOffsetCount_TestData()
         {
             foreach (object[] inputs in Parse_Valid_TestData())
             {
-                yield return new object[] { inputs[0], 0, ((string)inputs[0]).Length, inputs[1], inputs[2], inputs[3] };
+                yield return new object[]
+                {
+                    inputs[0],
+                    0,
+                    ((string)inputs[0]).Length,
+                    inputs[1],
+                    inputs[2],
+                    inputs[3],
+                };
             }
 
             yield return new object[] { "-123", 0, 2, NumberStyles.Integer, null, (sbyte)-1 };
@@ -343,13 +513,36 @@ namespace System.Tests
             yield return new object[] { "12", 1, 1, NumberStyles.HexNumber, null, (sbyte)0x2 };
             yield return new object[] { "10", 0, 1, NumberStyles.BinaryNumber, null, (sbyte)0b1 };
             yield return new object[] { "10", 1, 1, NumberStyles.BinaryNumber, null, (sbyte)0b0 };
-            yield return new object[] { "(123)", 1, 3, NumberStyles.AllowParentheses, null, (sbyte)123 };
-            yield return new object[] { "$100", 1, 1, NumberStyles.Currency, new NumberFormatInfo() { CurrencySymbol = "$" }, (sbyte)1 };
+            yield return new object[]
+            {
+                "(123)",
+                1,
+                3,
+                NumberStyles.AllowParentheses,
+                null,
+                (sbyte)123,
+            };
+            yield return new object[]
+            {
+                "$100",
+                1,
+                1,
+                NumberStyles.Currency,
+                new NumberFormatInfo() { CurrencySymbol = "$" },
+                (sbyte)1,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, sbyte expected)
+        public static void Parse_Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            sbyte expected
+        )
         {
             sbyte result;
 
@@ -368,7 +561,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
@@ -390,7 +588,14 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Utf8Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, sbyte expected)
+        public static void Parse_Utf8Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            sbyte expected
+        )
         {
             sbyte result;
             ReadOnlySpan<byte> valueUtf8 = Encoding.UTF8.GetBytes(value, offset, count);
@@ -410,7 +615,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Utf8Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Utf8Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
@@ -424,7 +634,10 @@ namespace System.Tests
                     Assert.Equal(0, result);
                 }
 
-                Assert.Throws(exceptionType, () => sbyte.Parse(Encoding.UTF8.GetBytes(value), style, provider));
+                Assert.Throws(
+                    exceptionType,
+                    () => sbyte.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                );
 
                 Assert.False(sbyte.TryParse(valueUtf8, style, provider, out result));
                 Assert.Equal(0, result);
@@ -433,7 +646,11 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ToString_TestData))]
-        public static void TryFormat(sbyte i, string format, IFormatProvider provider, string expected) =>
-            NumberFormatTestHelper.TryFormatNumberTest(i, format, provider, expected);
+        public static void TryFormat(
+            sbyte i,
+            string format,
+            IFormatProvider provider,
+            string expected
+        ) => NumberFormatTestHelper.TryFormatNumberTest(i, format, provider, expected);
     }
 }

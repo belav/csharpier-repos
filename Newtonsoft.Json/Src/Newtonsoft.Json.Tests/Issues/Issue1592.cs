@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            string json = @"{
+            string json =
+                @"{
 ""test customer's"": ""testing""
 }";
 

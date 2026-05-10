@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Apex
 {
     [Export(typeof(IApexAsynchronousOperationListenerProviderAccessor))]
     [Shared]
-    internal sealed class ApexAsynchronousOperationListenerProviderAccessor : IApexAsynchronousOperationListenerProviderAccessor
+    internal sealed class ApexAsynchronousOperationListenerProviderAccessor
+        : IApexAsynchronousOperationListenerProviderAccessor
     {
         private readonly AsynchronousOperationListenerProvider _implementation;
         private readonly Workspace? _workspace;
@@ -22,13 +23,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Apex
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ApexAsynchronousOperationListenerProviderAccessor(
             AsynchronousOperationListenerProvider implementation,
-            [Import(AllowDefault = true)] VisualStudioWorkspace? workspace)
+            [Import(AllowDefault = true)] VisualStudioWorkspace? workspace
+        )
         {
             _implementation = implementation;
             _workspace = workspace;
         }
 
-        public Task WaitAllAsync(string[]? featureNames = null, Action? eventProcessingAction = null, TimeSpan? timeout = null)
-            => _implementation.WaitAllAsync(_workspace, featureNames, eventProcessingAction, timeout);
+        public Task WaitAllAsync(
+            string[]? featureNames = null,
+            Action? eventProcessingAction = null,
+            TimeSpan? timeout = null
+        ) => _implementation.WaitAllAsync(_workspace, featureNames, eventProcessingAction, timeout);
     }
 }

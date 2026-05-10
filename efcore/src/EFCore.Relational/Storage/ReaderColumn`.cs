@@ -29,7 +29,8 @@ public class ReaderColumn<T> : ReaderColumn
         bool nullable,
         string? name,
         IPropertyBase? property,
-        Func<DbDataReader, int[], T> getFieldValue)
+        Func<DbDataReader, int[], T> getFieldValue
+    )
         : base(typeof(T), nullable, name, property)
     {
         GetFieldValue = getFieldValue;

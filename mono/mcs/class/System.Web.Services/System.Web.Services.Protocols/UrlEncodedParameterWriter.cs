@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.UrlEncodedParameterWriter.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,73 +30,75 @@
 //
 
 using System.IO;
-using System.Text;
-using System.Web.Services;
-using System.Web;
 using System.Reflection;
+using System.Text;
+using System.Web;
+using System.Web.Services;
 
-namespace System.Web.Services.Protocols {
-	public abstract class UrlEncodedParameterWriter : MimeParameterWriter {
+namespace System.Web.Services.Protocols
+{
+    public abstract class UrlEncodedParameterWriter : MimeParameterWriter
+    {
+        Encoding requestEncoding;
+        ParameterInfo[] parameters;
 
-		Encoding requestEncoding;
-		ParameterInfo[] parameters;
-		
-		#region Constructors
+        #region Constructors
 
-		protected UrlEncodedParameterWriter () 
-		{
-		}
-		
-		#endregion // Constructors
+        protected UrlEncodedParameterWriter() { }
 
-		#region Properties 
+        #endregion // Constructors
 
-		public override Encoding RequestEncoding {
-			get { return requestEncoding; }
-			set { requestEncoding = value; }
-		}
+        #region Properties
 
-		#endregion // Properties
+        public override Encoding RequestEncoding
+        {
+            get { return requestEncoding; }
+            set { requestEncoding = value; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		protected void Encode (TextWriter writer, object[] values)
-		{
-			for (int n=0; n<values.Length; n++)
-			{
-				if (n>0) writer.Write ("&");
-				Encode (writer, parameters[n].Name, values[n]);
-			}
-		}
+        #region Methods
 
-		protected void Encode (TextWriter writer, string name, object value)
-		{
-			if (requestEncoding != null)
-			{
-				writer.Write (HttpUtility.UrlEncode (name, requestEncoding));
-				writer.Write ("=");
-				writer.Write (HttpUtility.UrlEncode (ObjToString (value), requestEncoding));
-			}
-			else
-			{
-				writer.Write (HttpUtility.UrlEncode (name));
-				writer.Write ("=");
-				writer.Write (HttpUtility.UrlEncode (ObjToString (value)));
-			}
-				
-		}
+        protected void Encode(TextWriter writer, object[] values)
+        {
+            for (int n = 0; n < values.Length; n++)
+            {
+                if (n > 0)
+                    writer.Write("&");
+                Encode(writer, parameters[n].Name, values[n]);
+            }
+        }
 
-		public override object GetInitializer (LogicalMethodInfo methodInfo)
-		{
-			if (methodInfo.OutParameters.Length > 0) return null;
-			else return methodInfo.Parameters;
-		}
+        protected void Encode(TextWriter writer, string name, object value)
+        {
+            if (requestEncoding != null)
+            {
+                writer.Write(HttpUtility.UrlEncode(name, requestEncoding));
+                writer.Write("=");
+                writer.Write(HttpUtility.UrlEncode(ObjToString(value), requestEncoding));
+            }
+            else
+            {
+                writer.Write(HttpUtility.UrlEncode(name));
+                writer.Write("=");
+                writer.Write(HttpUtility.UrlEncode(ObjToString(value)));
+            }
+        }
 
-		public override void Initialize (object initializer)
-		{
-			parameters = (ParameterInfo[]) initializer;
-		}
+        public override object GetInitializer(LogicalMethodInfo methodInfo)
+        {
+            if (methodInfo.OutParameters.Length > 0)
+                return null;
+            else
+                return methodInfo.Parameters;
+        }
 
-		#endregion // Methods
-	}
+        public override void Initialize(object initializer)
+        {
+            parameters = (ParameterInfo[])initializer;
+        }
+
+        #endregion // Methods
+    }
 }

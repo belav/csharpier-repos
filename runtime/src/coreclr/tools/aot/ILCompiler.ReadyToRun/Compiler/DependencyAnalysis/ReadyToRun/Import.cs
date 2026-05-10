@@ -21,7 +21,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public Signature Signature => ImportSignature.Target;
 
-        public Import(ImportSectionNode tableNode, Signature importSignature, MethodDesc callingMethod = null)
+        public Import(
+            ImportSectionNode tableNode,
+            Signature importSignature,
+            MethodDesc callingMethod = null
+        )
         {
             Table = tableNode;
             CallingMethod = callingMethod;
@@ -44,7 +48,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public virtual bool EmitPrecode => Table.EmitPrecode;
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             // This needs to be an empty target pointer since it will be filled in with Module*
             // when loaded by CoreCLR
@@ -62,7 +70,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
-            return new DependencyListEntry[] { new DependencyListEntry(ImportSignature, "Signature for ready-to-run fixup import") };
+            return new DependencyListEntry[]
+            {
+                new DependencyListEntry(ImportSignature, "Signature for ready-to-run fixup import"),
+            };
         }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)

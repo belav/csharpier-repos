@@ -25,12 +25,13 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Utilities;
 using System.Reflection;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class ListOfIds<T> : JsonConverter where T : Bar, new()
+    public class ListOfIds<T> : JsonConverter
+        where T : Bar, new()
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -44,7 +45,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             writer.WriteEndArray();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             IList<T> list = new List<T>();
 
@@ -53,10 +59,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             {
                 long id = (long)reader.Value;
 
-                list.Add(new T
-                {
-                    Id = Convert.ToInt32(id)
-                });
+                list.Add(new T { Id = Convert.ToInt32(id) });
 
                 reader.Read();
             }
@@ -67,7 +70,10 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public override bool CanConvert(Type objectType)
         {
 #if DNXCORE50 && !(NETSTANDARD2_0 || NET6_0_OR_GREATER)
-            return Newtonsoft.Json.Utilities.TypeExtensions.IsAssignableFrom(typeof(IList<T>), objectType);
+            return Newtonsoft.Json.Utilities.TypeExtensions.IsAssignableFrom(
+                typeof(IList<T>),
+                objectType
+            );
 #else
             return typeof(IList<T>).IsAssignableFrom(objectType);
 #endif

@@ -12,8 +12,11 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
             GenericTypeParameterBuilder[] genericParameters = type.DefineGenericParameters("T");
-            genericParameters[0].SetGenericParameterAttributes(GenericParameterAttributes.SpecialConstraintMask);
-            GenericParameterAttributes gpa = genericParameters[0].DeclaringType.GetTypeInfo().GenericParameterAttributes;
+            genericParameters[0]
+                .SetGenericParameterAttributes(GenericParameterAttributes.SpecialConstraintMask);
+            GenericParameterAttributes gpa = genericParameters[0]
+                .DeclaringType.GetTypeInfo()
+                .GenericParameterAttributes;
             Assert.Equal(GenericParameterAttributes.None, gpa);
         }
     }

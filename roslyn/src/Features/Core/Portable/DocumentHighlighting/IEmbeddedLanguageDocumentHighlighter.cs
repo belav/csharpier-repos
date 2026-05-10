@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             SyntaxToken token,
             int position,
             HighlightingOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

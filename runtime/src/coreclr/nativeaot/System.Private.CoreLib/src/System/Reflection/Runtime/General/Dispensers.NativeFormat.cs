@@ -10,7 +10,6 @@ using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.PropertyInfos;
 using System.Reflection.Runtime.TypeInfos;
 using System.Reflection.Runtime.TypeInfos.NativeFormat;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core;
 using Internal.Reflection.Core.Execution;
@@ -30,10 +29,17 @@ namespace System.Reflection.Runtime.Assemblies
     //-----------------------------------------------------------------------------------------------------------
     internal partial class RuntimeAssemblyInfo
     {
-       static partial void GetNativeFormatRuntimeAssembly(AssemblyBindResult bindResult, ref RuntimeAssembly? runtimeAssembly)
+        static partial void GetNativeFormatRuntimeAssembly(
+            AssemblyBindResult bindResult,
+            ref RuntimeAssembly? runtimeAssembly
+        )
         {
             if (bindResult.Reader != null)
-                runtimeAssembly = NativeFormatRuntimeAssembly.GetRuntimeAssembly(bindResult.Reader, bindResult.ScopeDefinitionHandle, bindResult.OverflowScopes);
+                runtimeAssembly = NativeFormatRuntimeAssembly.GetRuntimeAssembly(
+                    bindResult.Reader,
+                    bindResult.ScopeDefinitionHandle,
+                    bindResult.OverflowScopes
+                );
         }
     }
 }
@@ -42,18 +48,34 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
 {
     internal sealed partial class NativeFormatRuntimeAssembly
     {
-        internal static RuntimeAssembly GetRuntimeAssembly(MetadataReader reader, ScopeDefinitionHandle scope, IEnumerable<QScopeDefinition> overflowScopes)
+        internal static RuntimeAssembly GetRuntimeAssembly(
+            MetadataReader reader,
+            ScopeDefinitionHandle scope,
+            IEnumerable<QScopeDefinition> overflowScopes
+        )
         {
-            return s_scopeToAssemblyDispenser.GetOrAdd(new RuntimeAssemblyKey(reader, scope, overflowScopes));
+            return s_scopeToAssemblyDispenser.GetOrAdd(
+                new RuntimeAssemblyKey(reader, scope, overflowScopes)
+            );
         }
 
-        private static readonly Dispenser<RuntimeAssemblyKey, RuntimeAssembly> s_scopeToAssemblyDispenser =
-            DispenserFactory.CreateDispenserV<RuntimeAssemblyKey, RuntimeAssembly>(
-                DispenserScenario.Scope_Assembly,
-                delegate (RuntimeAssemblyKey qScopeDefinition)
-                {
-                    return (RuntimeAssembly)new NativeFormat.NativeFormatRuntimeAssembly(qScopeDefinition.Reader, qScopeDefinition.Handle, qScopeDefinition.Overflows);
-                }
+        private static readonly Dispenser<
+            RuntimeAssemblyKey,
+            RuntimeAssembly
+        > s_scopeToAssemblyDispenser = DispenserFactory.CreateDispenserV<
+            RuntimeAssemblyKey,
+            RuntimeAssembly
+        >(
+            DispenserScenario.Scope_Assembly,
+            delegate(RuntimeAssemblyKey qScopeDefinition)
+            {
+                return (RuntimeAssembly)
+                    new NativeFormat.NativeFormatRuntimeAssembly(
+                        qScopeDefinition.Reader,
+                        qScopeDefinition.Handle,
+                        qScopeDefinition.Overflows
+                    );
+            }
         );
 
         //-----------------------------------------------------------------------------------------------------------
@@ -62,22 +84,32 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
         //-----------------------------------------------------------------------------------------------------------
         private struct RuntimeAssemblyKey : IEquatable<RuntimeAssemblyKey>
         {
-            public RuntimeAssemblyKey(MetadataReader reader, ScopeDefinitionHandle handle, IEnumerable<QScopeDefinition> overflows)
+            public RuntimeAssemblyKey(
+                MetadataReader reader,
+                ScopeDefinitionHandle handle,
+                IEnumerable<QScopeDefinition> overflows
+            )
             {
                 _reader = reader;
                 _handle = handle;
                 _overflows = overflows;
             }
 
-            public MetadataReader Reader { get { return _reader; } }
-            public ScopeDefinitionHandle Handle { get { return _handle; } }
-            public IEnumerable<QScopeDefinition> Overflows { get { return _overflows; } }
+            public MetadataReader Reader
+            {
+                get { return _reader; }
+            }
+            public ScopeDefinitionHandle Handle
+            {
+                get { return _handle; }
+            }
+            public IEnumerable<QScopeDefinition> Overflows
+            {
+                get { return _overflows; }
+            }
             public ScopeDefinition ScopeDefinition
             {
-                get
-                {
-                    return _handle.GetScopeDefinition(_reader);
-                }
+                get { return _handle.GetScopeDefinition(_reader); }
             }
 
             public override bool Equals(object obj)
@@ -86,7 +118,6 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                     return false;
                 return Equals(other);
             }
-
 
             public bool Equals(RuntimeAssemblyKey other)
             {
@@ -118,9 +149,19 @@ namespace System.Reflection.Runtime.FieldInfos.NativeFormat
     //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatRuntimeFieldInfo
     {
-        internal static RuntimeFieldInfo GetRuntimeFieldInfo(FieldHandle fieldHandle, NativeFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType)
+        internal static RuntimeFieldInfo GetRuntimeFieldInfo(
+            FieldHandle fieldHandle,
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        )
         {
-            return new NativeFormatRuntimeFieldInfo(fieldHandle, definingTypeInfo, contextTypeInfo, reflectedType).WithDebugName();
+            return new NativeFormatRuntimeFieldInfo(
+                fieldHandle,
+                definingTypeInfo,
+                contextTypeInfo,
+                reflectedType
+            ).WithDebugName();
         }
     }
 }
@@ -132,9 +173,19 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
     //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatRuntimePropertyInfo
     {
-        internal static RuntimePropertyInfo GetRuntimePropertyInfo(PropertyHandle propertyHandle, NativeFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType)
+        internal static RuntimePropertyInfo GetRuntimePropertyInfo(
+            PropertyHandle propertyHandle,
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        )
         {
-            return new NativeFormatRuntimePropertyInfo(propertyHandle, definingTypeInfo, contextTypeInfo, reflectedType).WithDebugName();
+            return new NativeFormatRuntimePropertyInfo(
+                propertyHandle,
+                definingTypeInfo,
+                contextTypeInfo,
+                reflectedType
+            ).WithDebugName();
         }
     }
 }
@@ -146,9 +197,19 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
     //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatRuntimeEventInfo
     {
-        internal static RuntimeEventInfo GetRuntimeEventInfo(EventHandle eventHandle, NativeFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo, RuntimeTypeInfo reflectedType)
+        internal static RuntimeEventInfo GetRuntimeEventInfo(
+            EventHandle eventHandle,
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo,
+            RuntimeTypeInfo reflectedType
+        )
         {
-            return new NativeFormatRuntimeEventInfo(eventHandle, definingTypeInfo, contextTypeInfo, reflectedType).WithDebugName();
+            return new NativeFormatRuntimeEventInfo(
+                eventHandle,
+                definingTypeInfo,
+                contextTypeInfo,
+                reflectedType
+            ).WithDebugName();
         }
     }
 }
@@ -175,9 +236,23 @@ namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
     //-----------------------------------------------------------------------------------------------------------
     internal sealed partial class NativeFormatMethodParameterInfo
     {
-        internal static NativeFormatMethodParameterInfo GetNativeFormatMethodParameterInfo(MethodBase member, MethodHandle methodHandle, int position, ParameterHandle parameterHandle, QSignatureTypeHandle qualifiedParameterType, TypeContext typeContext)
+        internal static NativeFormatMethodParameterInfo GetNativeFormatMethodParameterInfo(
+            MethodBase member,
+            MethodHandle methodHandle,
+            int position,
+            ParameterHandle parameterHandle,
+            QSignatureTypeHandle qualifiedParameterType,
+            TypeContext typeContext
+        )
         {
-            return new NativeFormatMethodParameterInfo(member, methodHandle, position, parameterHandle, qualifiedParameterType, typeContext);
+            return new NativeFormatMethodParameterInfo(
+                member,
+                methodHandle,
+                position,
+                parameterHandle,
+                qualifiedParameterType,
+                typeContext
+            );
         }
     }
 }
@@ -191,13 +266,19 @@ namespace System.Reflection.Runtime.CustomAttributes
     //-----------------------------------------------------------------------------------------------------------
     internal abstract partial class RuntimeCustomAttributeData
     {
-        internal static IEnumerable<CustomAttributeData> GetCustomAttributes(MetadataReader reader, CustomAttributeHandleCollection customAttributeHandles)
+        internal static IEnumerable<CustomAttributeData> GetCustomAttributes(
+            MetadataReader reader,
+            CustomAttributeHandleCollection customAttributeHandles
+        )
         {
             foreach (CustomAttributeHandle customAttributeHandle in customAttributeHandles)
                 yield return GetCustomAttributeData(reader, customAttributeHandle);
         }
 
-        private static NativeFormatCustomAttributeData GetCustomAttributeData(MetadataReader reader, CustomAttributeHandle customAttributeHandle)
+        private static NativeFormatCustomAttributeData GetCustomAttributeData(
+            MetadataReader reader,
+            CustomAttributeHandle customAttributeHandle
+        )
         {
             return new NativeFormatCustomAttributeData(reader, customAttributeHandle);
         }

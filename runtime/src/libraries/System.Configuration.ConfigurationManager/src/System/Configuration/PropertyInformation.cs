@@ -20,12 +20,9 @@ namespace System.Configuration
 
         private ConfigurationProperty Prop => _prop ??= _thisElement.Properties[Name];
 
-
         public string Name { get; }
 
-
         internal string ProvidedName => Prop.ProvidedName;
-
 
         public object Value
         {
@@ -39,33 +36,45 @@ namespace System.Configuration
         {
             get
             {
-                if (_thisElement.Values[Name] == null) return PropertyValueOrigin.Default;
-                return _thisElement.Values.IsInherited(Name) ? PropertyValueOrigin.Inherited : PropertyValueOrigin.SetHere;
+                if (_thisElement.Values[Name] == null)
+                    return PropertyValueOrigin.Default;
+                return _thisElement.Values.IsInherited(Name)
+                    ? PropertyValueOrigin.Inherited
+                    : PropertyValueOrigin.SetHere;
             }
         }
 
-        public bool IsModified => _thisElement.Values[Name] != null && _thisElement.Values.IsModified(Name);
+        public bool IsModified =>
+            _thisElement.Values[Name] != null && _thisElement.Values.IsModified(Name);
 
         public bool IsKey => Prop.IsKey;
 
         public bool IsRequired => Prop.IsRequired;
 
         public bool IsLocked =>
-            ((_thisElement.LockedAllExceptAttributesList != null) &&
-            !_thisElement.LockedAllExceptAttributesList.DefinedInParent(Name)) ||
-            ((_thisElement.LockedAttributesList != null) &&
-            (_thisElement.LockedAttributesList.DefinedInParent(Name) ||
-            _thisElement.LockedAttributesList.DefinedInParent(LockAll))) ||
-            (((_thisElement.ItemLocked & ConfigurationValueFlags.Locked) != 0) &&
-            ((_thisElement.ItemLocked & ConfigurationValueFlags.Inherited) != 0));
-
+            (
+                (_thisElement.LockedAllExceptAttributesList != null)
+                && !_thisElement.LockedAllExceptAttributesList.DefinedInParent(Name)
+            )
+            || (
+                (_thisElement.LockedAttributesList != null)
+                && (
+                    _thisElement.LockedAttributesList.DefinedInParent(Name)
+                    || _thisElement.LockedAttributesList.DefinedInParent(LockAll)
+                )
+            )
+            || (
+                ((_thisElement.ItemLocked & ConfigurationValueFlags.Locked) != 0)
+                && ((_thisElement.ItemLocked & ConfigurationValueFlags.Inherited) != 0)
+            );
 
         public string Source
         {
             get
             {
-                PropertySourceInfo psi = _thisElement.Values.GetSourceInfo(Name) ??
-                    _thisElement.Values.GetSourceInfo(string.Empty);
+                PropertySourceInfo psi =
+                    _thisElement.Values.GetSourceInfo(Name)
+                    ?? _thisElement.Values.GetSourceInfo(string.Empty);
                 return psi == null ? string.Empty : psi.FileName;
             }
         }
@@ -77,8 +86,9 @@ namespace System.Configuration
         {
             get
             {
-                PropertySourceInfo psi = _thisElement.Values.GetSourceInfo(Name) ??
-                    _thisElement.Values.GetSourceInfo(string.Empty);
+                PropertySourceInfo psi =
+                    _thisElement.Values.GetSourceInfo(Name)
+                    ?? _thisElement.Values.GetSourceInfo(string.Empty);
                 return psi?.LineNumber ?? 0;
             }
         }

@@ -30,7 +30,8 @@ public class RuntimeIndex : RuntimeAnnotatableBase, IIndex
         IReadOnlyList<RuntimeProperty> properties,
         RuntimeEntityType declaringEntityType,
         string? name,
-        bool unique)
+        bool unique
+    )
     {
         Properties = properties;
         Name = name;
@@ -68,8 +69,8 @@ public class RuntimeIndex : RuntimeAnnotatableBase, IIndex
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -78,10 +79,11 @@ public class RuntimeIndex : RuntimeAnnotatableBase, IIndex
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IIndex)this).ToDebugString(),
-            () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
     IReadOnlyList<IReadOnlyProperty> IReadOnlyIndex.Properties
@@ -120,7 +122,11 @@ public class RuntimeIndex : RuntimeAnnotatableBase, IIndex
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IDependentKeyValueFactory<TKey> IIndex.GetNullableValueFactory<TKey>()
-        => (IDependentKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-            ref _nullableValueFactory, this, static index => new CompositeValueFactory(index.Properties));
+    IDependentKeyValueFactory<TKey> IIndex.GetNullableValueFactory<TKey>() =>
+        (IDependentKeyValueFactory<TKey>)
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _nullableValueFactory,
+                this,
+                static index => new CompositeValueFactory(index.Properties)
+            );
 }

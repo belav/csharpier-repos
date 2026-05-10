@@ -13,20 +13,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.CodeRefactori
 {
     [Shared]
     [ExportWorkspaceService(typeof(ISymbolRenamedCodeActionOperationFactoryWorkspaceService))]
-    class OmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService : ISymbolRenamedCodeActionOperationFactoryWorkspaceService
+    class OmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService
+        : ISymbolRenamedCodeActionOperationFactoryWorkspaceService
     {
         private readonly IOmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService _service;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService(IOmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService service)
+        public OmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService(
+            IOmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService service
+        )
         {
             _service = service;
         }
 
-        public CodeActionOperation CreateSymbolRenamedOperation(ISymbol symbol, string newName, Solution startingSolution, Solution updatedSolution)
+        public CodeActionOperation CreateSymbolRenamedOperation(
+            ISymbol symbol,
+            string newName,
+            Solution startingSolution,
+            Solution updatedSolution
+        )
         {
-            return _service.CreateSymbolRenamedOperation(symbol, newName, startingSolution, updatedSolution);
+            return _service.CreateSymbolRenamedOperation(
+                symbol,
+                newName,
+                startingSolution,
+                updatedSolution
+            );
         }
     }
 }

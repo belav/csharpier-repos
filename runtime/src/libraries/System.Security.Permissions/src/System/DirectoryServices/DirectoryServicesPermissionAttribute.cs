@@ -6,15 +6,32 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices
 {
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct |
-        AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Event,
-        AllowMultiple = true, Inherited = false)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Event,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public class DirectoryServicesPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public DirectoryServicesPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public DirectoryServicesPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+
         public DirectoryServicesPermissionAccess PermissionAccess { get; set; }
         public string? Path { get; set; }
-        public override IPermission? CreatePermission() { return default(IPermission); }
+
+        public override IPermission? CreatePermission()
+        {
+            return default(IPermission);
+        }
     }
 }

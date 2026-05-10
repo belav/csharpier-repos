@@ -20,9 +20,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         internal IThreadingContext ThreadingContext => _threadingContext;
 
-        public ForegroundThreadAffinitizedObject(IThreadingContext threadingContext, bool assertIsForeground = false)
+        public ForegroundThreadAffinitizedObject(
+            IThreadingContext threadingContext,
+            bool assertIsForeground = false
+        )
         {
-            _threadingContext = threadingContext ?? throw new ArgumentNullException(nameof(threadingContext));
+            _threadingContext =
+                threadingContext ?? throw new ArgumentNullException(nameof(threadingContext));
 
             // ForegroundThreadAffinitizedObject might not necessarily be created on a foreground thread.
             // AssertIsForeground here only if the object must be created on a foreground thread.
@@ -35,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             }
         }
 
-        public bool IsForeground()
-            => _threadingContext.JoinableTaskContext.IsOnMainThread;
+        public bool IsForeground() => _threadingContext.JoinableTaskContext.IsOnMainThread;
 
         public void AssertIsForeground()
         {
@@ -45,21 +48,29 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
             // In debug, provide a lot more information so that we can track down unit test flakiness.
             // This is too expensive to do in retail as it creates way too many allocations.
-            Debug.Assert(currentThread == whenCreatedThread,
-                "When created thread id  : " + whenCreatedThread?.ManagedThreadId + "\r\n" +
-                "When created thread name: " + whenCreatedThread?.Name + "\r\n" +
-                "Current thread id       : " + currentThread?.ManagedThreadId + "\r\n" +
-                "Current thread name     : " + currentThread?.Name);
+            Debug.Assert(
+                currentThread == whenCreatedThread,
+                "When created thread id  : "
+                    + whenCreatedThread?.ManagedThreadId
+                    + "\r\n"
+                    + "When created thread name: "
+                    + whenCreatedThread?.Name
+                    + "\r\n"
+                    + "Current thread id       : "
+                    + currentThread?.ManagedThreadId
+                    + "\r\n"
+                    + "Current thread name     : "
+                    + currentThread?.Name
+            );
 
             // But, in retail, do the check as well, so that we can catch problems that happen in the wild.
             Contract.ThrowIfFalse(_threadingContext.JoinableTaskContext.IsOnMainThread);
         }
 
-        public void AssertIsBackground()
-            => Contract.ThrowIfTrue(IsForeground());
+        public void AssertIsBackground() => Contract.ThrowIfTrue(IsForeground());
 
         /// <summary>
-        /// A helpful marker method that can be used by deriving classes to indicate that a 
+        /// A helpful marker method that can be used by deriving classes to indicate that a
         /// method can be called from any thread and is not foreground or background affinitized.
         /// This is useful so that every method in deriving class can have some sort of marker
         /// on each method stating the threading constraints (FG-only/BG-only/Any-thread).
@@ -69,7 +80,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             // Does nothing.
         }
 
-        public Task InvokeBelowInputPriorityAsync(Action action, CancellationToken cancellationToken = default)
+        public Task InvokeBelowInputPriorityAsync(
+            Action action,
+            CancellationToken cancellationToken = default
+        )
         {
             if (IsForeground() && !IsInputPending())
             {
@@ -84,12 +98,15 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 return Task.Factory.SafeStartNewFromAsync(
                     async () =>
                     {
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                            cancellationToken
+                        );
 
                         action();
                     },
                     cancellationToken,
-                    TaskScheduler.Default);
+                    TaskScheduler.Default
+                );
             }
         }
 

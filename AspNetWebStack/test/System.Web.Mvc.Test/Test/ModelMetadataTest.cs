@@ -20,8 +20,19 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => new ModelMetadata(null /* provider */, null /* containerType */, null /* model */, typeof(object), null /* propertyName */),
-                "provider");
+                () =>
+                    new ModelMetadata(
+                        null /* provider */
+                        ,
+                        null /* containerType */
+                        ,
+                        null /* model */
+                        ,
+                        typeof(object),
+                        null /* propertyName */
+                    ),
+                "provider"
+            );
         }
 
         [Fact]
@@ -32,8 +43,19 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => new ModelMetadata(provider.Object, null /* containerType */, null /* model */, null /* modelType */, null /* propertyName */),
-                "modelType");
+                () =>
+                    new ModelMetadata(
+                        provider.Object,
+                        null /* containerType */
+                        ,
+                        null /* model */
+                        ,
+                        null /* modelType */
+                        ,
+                        null /* propertyName */
+                    ),
+                "modelType"
+            );
         }
 
         // Constructor
@@ -45,7 +67,13 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act
-            ModelMetadata metadata = new ModelMetadata(provider.Object, typeof(Exception), () => "model", typeof(string), "propertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                typeof(Exception),
+                () => "model",
+                typeof(string),
+                "propertyName"
+            );
 
             // Assert
             Assert.Equal(typeof(Exception), metadata.ContainerType);
@@ -74,9 +102,7 @@ namespace System.Web.Mvc.Test
 
         // IsComplexType
 
-        struct IsComplexTypeModel
-        {
-        }
+        struct IsComplexTypeModel { }
 
         [Fact]
         public void IsComplexTypeTests()
@@ -85,13 +111,51 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act & Assert
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(Object), null).IsComplexType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(string), null).IsComplexType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(IDisposable), null).IsComplexType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(Nullable<int>), null).IsComplexType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(int), null).IsComplexType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(IsComplexTypeModel), null).IsComplexType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(Nullable<IsComplexTypeModel>), null).IsComplexType);
+            Assert.True(
+                new ModelMetadata(provider.Object, null, null, typeof(Object), null).IsComplexType
+            );
+            Assert.False(
+                new ModelMetadata(provider.Object, null, null, typeof(string), null).IsComplexType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(IDisposable),
+                    null
+                ).IsComplexType
+            );
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<int>),
+                    null
+                ).IsComplexType
+            );
+            Assert.False(
+                new ModelMetadata(provider.Object, null, null, typeof(int), null).IsComplexType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(IsComplexTypeModel),
+                    null
+                ).IsComplexType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<IsComplexTypeModel>),
+                    null
+                ).IsComplexType
+            );
         }
 
         // IsNullableValueType
@@ -103,10 +167,42 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act & Assert
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(string), null).IsNullableValueType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(IDisposable), null).IsNullableValueType);
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(Nullable<int>), null).IsNullableValueType);
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(int), null).IsNullableValueType);
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(string),
+                    null
+                ).IsNullableValueType
+            );
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(IDisposable),
+                    null
+                ).IsNullableValueType
+            );
+            Assert.True(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<int>),
+                    null
+                ).IsNullableValueType
+            );
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(int),
+                    null
+                ).IsNullableValueType
+            );
         }
 
         // IsRequired
@@ -118,11 +214,27 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
 
             // Act & Assert
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(string), null).IsRequired); // Reference type not required
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(IDisposable), null).IsRequired); // Interface not required
-            Assert.False(new ModelMetadata(provider.Object, null, null, typeof(Nullable<int>), null).IsRequired); // Nullable value type not required
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(int), null).IsRequired); // Value type required
-            Assert.True(new ModelMetadata(provider.Object, null, null, typeof(DayOfWeek), null).IsRequired); // Enum (implicit value type) is required
+            Assert.False(
+                new ModelMetadata(provider.Object, null, null, typeof(string), null).IsRequired
+            ); // Reference type not required
+            Assert.False(
+                new ModelMetadata(provider.Object, null, null, typeof(IDisposable), null).IsRequired
+            ); // Interface not required
+            Assert.False(
+                new ModelMetadata(
+                    provider.Object,
+                    null,
+                    null,
+                    typeof(Nullable<int>),
+                    null
+                ).IsRequired
+            ); // Nullable value type not required
+            Assert.True(
+                new ModelMetadata(provider.Object, null, null, typeof(int), null).IsRequired
+            ); // Value type required
+            Assert.True(
+                new ModelMetadata(provider.Object, null, null, typeof(DayOfWeek), null).IsRequired
+            ); // Enum (implicit value type) is required
         }
 
         // Properties
@@ -134,8 +246,15 @@ namespace System.Web.Mvc.Test
             Type modelType = typeof(string);
             List<ModelMetadata> propertyMetadata = new List<ModelMetadata>();
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, modelType, null);
-            provider.Setup(p => p.GetMetadataForProperties(null, modelType))
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                modelType,
+                null
+            );
+            provider
+                .Setup(p => p.GetMetadataForProperties(null, modelType))
                 .Returns(propertyMetadata)
                 .Verifiable();
 
@@ -153,7 +272,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             string model = "String Value";
             Expression<Func<object, object>> accessor = _ => model;
-            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(accessor, new ViewDataDictionary<object>());
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(
+                accessor,
+                new ViewDataDictionary<object>()
+            );
 
             // Act
             IEnumerable<ModelMetadata> result = metadata.Properties;
@@ -174,8 +296,15 @@ namespace System.Web.Mvc.Test
                 new ModelMetadata(provider.Object, null, () => 2, typeof(int), null) { Order = 30 },
                 new ModelMetadata(provider.Object, null, () => 3, typeof(int), null) { Order = 10 },
             };
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, modelType, null);
-            provider.Setup(p => p.GetMetadataForProperties(null, modelType))
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                modelType,
+                null
+            );
+            provider
+                .Setup(p => p.GetMetadataForProperties(null, modelType))
                 .Returns(propertyMetadata)
                 .Verifiable();
 
@@ -194,7 +323,13 @@ namespace System.Web.Mvc.Test
         { // Dev10 Bug #923263
             // Arrange
             var provider = new DataAnnotationsModelMetadataProvider();
-            var metadata = new ModelMetadata(provider, null, () => new Class1(), typeof(Class1), null);
+            var metadata = new ModelMetadata(
+                provider,
+                null,
+                () => new Class1(),
+                typeof(Class1),
+                null
+            );
 
             // Act
             ModelMetadata[] originalProps = metadata.Properties.ToArray();
@@ -228,7 +363,16 @@ namespace System.Web.Mvc.Test
             // Arrange
             string nullText = "(null)";
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), null) { NullDisplayText = nullText };
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                null
+            )
+            {
+                NullDisplayText = nullText,
+            };
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -251,7 +395,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             SimpleDisplayTextModelWithToString model = new SimpleDisplayTextModelWithToString();
             EmptyModelMetadataProvider provider = new EmptyModelMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, null, () => model, typeof(SimpleDisplayTextModelWithToString), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                null,
+                () => model,
+                typeof(SimpleDisplayTextModelWithToString),
+                null
+            );
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -273,10 +423,16 @@ namespace System.Web.Mvc.Test
             // Arrange
             SimpleDisplayTextModelWithoutToString model = new SimpleDisplayTextModelWithoutToString
             {
-                FirstProperty = "First Property Value"
+                FirstProperty = "First Property Value",
             };
             EmptyModelMetadataProvider provider = new EmptyModelMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, null, () => model, typeof(SimpleDisplayTextModelWithoutToString), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                null,
+                () => model,
+                typeof(SimpleDisplayTextModelWithoutToString),
+                null
+            );
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -289,14 +445,28 @@ namespace System.Web.Mvc.Test
         public void SimpleDisplayTextReturnsFirstPropertyNullDisplayTextForNonNullModelWithNullDisplayColumnPropertyValue()
         {
             // Arrange
-            SimpleDisplayTextModelWithoutToString model = new SimpleDisplayTextModelWithoutToString();
+            SimpleDisplayTextModelWithoutToString model =
+                new SimpleDisplayTextModelWithoutToString();
             EmptyModelMetadataProvider propertyProvider = new EmptyModelMetadataProvider();
-            ModelMetadata propertyMetadata = propertyProvider.GetMetadataForProperty(() => model.FirstProperty, typeof(SimpleDisplayTextModelWithoutToString), "FirstProperty");
+            ModelMetadata propertyMetadata = propertyProvider.GetMetadataForProperty(
+                () => model.FirstProperty,
+                typeof(SimpleDisplayTextModelWithoutToString),
+                "FirstProperty"
+            );
             propertyMetadata.NullDisplayText = "Null Display Text";
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            provider.Setup(p => p.GetMetadataForProperties(model, typeof(SimpleDisplayTextModelWithoutToString)))
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperties(model, typeof(SimpleDisplayTextModelWithoutToString))
+                )
                 .Returns(new[] { propertyMetadata });
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, () => model, typeof(SimpleDisplayTextModelWithoutToString), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                () => model,
+                typeof(SimpleDisplayTextModelWithoutToString),
+                null
+            );
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -305,17 +475,22 @@ namespace System.Web.Mvc.Test
             Assert.Equal(propertyMetadata.NullDisplayText, result);
         }
 
-        private class SimpleDisplayTextModelWithNoProperties
-        {
-        }
+        private class SimpleDisplayTextModelWithNoProperties { }
 
         [Fact]
         public void SimpleDisplayTextReturnsEmptyStringForNonNullModelWithNoVisibleProperties()
         {
             // Arrange
-            SimpleDisplayTextModelWithNoProperties model = new SimpleDisplayTextModelWithNoProperties();
+            SimpleDisplayTextModelWithNoProperties model =
+                new SimpleDisplayTextModelWithNoProperties();
             EmptyModelMetadataProvider provider = new EmptyModelMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, null, () => model, typeof(SimpleDisplayTextModelWithNoProperties), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                null,
+                () => model,
+                typeof(SimpleDisplayTextModelWithNoProperties),
+                null
+            );
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -346,7 +521,13 @@ namespace System.Web.Mvc.Test
             string toStringText = "text from ToString()";
             ObjectWithToStringOverride model = new ObjectWithToStringOverride(toStringText);
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, () => model, typeof(ObjectWithToStringOverride), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                () => model,
+                typeof(ObjectWithToStringOverride),
+                null
+            );
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -362,7 +543,13 @@ namespace System.Web.Mvc.Test
             string toStringText = null;
             ObjectWithToStringOverride model = new ObjectWithToStringOverride(toStringText);
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, () => model, typeof(ObjectWithToStringOverride), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                () => model,
+                typeof(ObjectWithToStringOverride),
+                null
+            );
 
             // Act
             string result = metadata.SimpleDisplayText;
@@ -379,12 +566,14 @@ namespace System.Web.Mvc.Test
             // Null expression throws
             Assert.ThrowsArgumentNull(
                 () => ModelMetadata.FromStringExpression(null, new ViewDataDictionary()),
-                "expression");
+                "expression"
+            );
 
             // Null view data dictionary throws
             Assert.ThrowsArgumentNull(
                 () => ModelMetadata.FromStringExpression("expression", null),
-                "viewData");
+                "viewData"
+            );
         }
 
         [Fact]
@@ -392,12 +581,22 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                null
+            );
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData.ModelMetadata = metadata;
 
             // Act
-            ModelMetadata result = ModelMetadata.FromStringExpression(String.Empty, viewData, provider.Object);
+            ModelMetadata result = ModelMetadata.FromStringExpression(
+                String.Empty,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             Assert.Same(metadata, result);
@@ -409,12 +608,15 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             ViewDataDictionary viewData = new ViewDataDictionary();
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Null(accessor);
-                    Assert.Equal(typeof(string), type); // Don't know the type, must fall back on string
-                })
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Null(accessor);
+                        Assert.Equal(typeof(string), type); // Don't know the type, must fall back on string
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
@@ -432,12 +634,15 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = null;
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Null(accessor());
-                    Assert.Equal(typeof(string), type); // Don't know the type, must fall back on string
-                })
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Null(accessor());
+                        Assert.Equal(typeof(string), type); // Don't know the type, must fall back on string
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
@@ -456,12 +661,15 @@ namespace System.Web.Mvc.Test
             object model = new object();
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Same(model, accessor());
-                    Assert.Equal(typeof(object), type);
-                })
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Same(model, accessor());
+                        Assert.Equal(typeof(object), type);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
@@ -480,13 +688,22 @@ namespace System.Web.Mvc.Test
             DummyModelContainer model = new DummyModelContainer();
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Null(accessor());
-                    Assert.Equal(typeof(DummyModelContainer), type);
-                    Assert.Equal("Model", propertyName);
-                })
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Null(accessor());
+                        Assert.Equal(typeof(DummyModelContainer), type);
+                        Assert.Equal("Model", propertyName);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
@@ -505,13 +722,22 @@ namespace System.Web.Mvc.Test
             DummyModelContainer model = new DummyModelContainer { Model = new DummyContactModel() };
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Same(model.Model, accessor());
-                    Assert.Equal(typeof(DummyModelContainer), type);
-                    Assert.Equal("Model", propertyName);
-                })
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Same(model.Model, accessor());
+                        Assert.Equal(typeof(DummyModelContainer), type);
+                        Assert.Equal("Model", propertyName);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
@@ -530,14 +756,33 @@ namespace System.Web.Mvc.Test
             DummyModelContainer model = new DummyModelContainer { Model = new DummyContactModel() };
             ViewDataDictionary viewData = new ViewDataDictionary();
             viewData["Object"] = model;
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Returns<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    return new ModelMetadata(provider.Object, model.GetType(), accessor, type, propertyName);
-                });
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Returns<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        return new ModelMetadata(
+                            provider.Object,
+                            model.GetType(),
+                            accessor,
+                            type,
+                            propertyName
+                        );
+                    }
+                );
 
             // Act
-            ModelMetadata metadata = ModelMetadata.FromStringExpression("Object.Model", viewData, provider.Object);
+            ModelMetadata metadata = ModelMetadata.FromStringExpression(
+                "Object.Model",
+                viewData,
+                provider.Object
+            );
 
             // Assert
             Assert.Same(model, metadata.Container);
@@ -548,7 +793,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ViewDataDictionary viewData = new ViewDataDictionary();
-            viewData.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(DummyContactModel));
+            viewData.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                null,
+                typeof(DummyContactModel)
+            );
 
             // Act
             ModelMetadata result = ModelMetadata.FromStringExpression("NullableIntValue", viewData);
@@ -597,18 +845,29 @@ namespace System.Web.Mvc.Test
         {
             // Null expression throws
             Assert.ThrowsArgumentNull(
-                () => ModelMetadata.FromLambdaExpression<string, object>(null, new ViewDataDictionary<string>()),
-                "expression");
+                () =>
+                    ModelMetadata.FromLambdaExpression<string, object>(
+                        null,
+                        new ViewDataDictionary<string>()
+                    ),
+                "expression"
+            );
 
             // Null view data throws
             Assert.ThrowsArgumentNull(
                 () => ModelMetadata.FromLambdaExpression<string, object>(m => m, null),
-                "viewData");
+                "viewData"
+            );
 
             // Unsupported expression type throws
             Assert.Throws<InvalidOperationException>(
-                () => ModelMetadata.FromLambdaExpression<string, object>(m => new Object(), new ViewDataDictionary<string>()),
-                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.");
+                () =>
+                    ModelMetadata.FromLambdaExpression<string, object>(
+                        m => new Object(),
+                        new ViewDataDictionary<string>()
+                    ),
+                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions."
+            );
         }
 
         [Fact]
@@ -616,12 +875,22 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                null
+            );
             ViewDataDictionary<object> viewData = new ViewDataDictionary<object>();
             viewData.ModelMetadata = metadata;
 
             // Act
-            ModelMetadata result = ModelMetadata.FromLambdaExpression<object, object>(m => m, viewData, provider.Object);
+            ModelMetadata result = ModelMetadata.FromLambdaExpression<object, object>(
+                m => m,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             Assert.Same(metadata, result);
@@ -633,19 +902,33 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel { FirstName = "Test" };
-            ViewDataDictionary<DummyContactModel> viewData = new ViewDataDictionary<DummyContactModel>(model);
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Equal("Test", accessor());
-                    Assert.Equal(typeof(DummyContactModel), type);
-                    Assert.Equal("FirstName", propertyName);
-                })
+            ViewDataDictionary<DummyContactModel> viewData =
+                new ViewDataDictionary<DummyContactModel>(model);
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Equal("Test", accessor());
+                        Assert.Equal(typeof(DummyContactModel), type);
+                        Assert.Equal("FirstName", propertyName);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<DummyContactModel, string>(m => m.FirstName, viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<DummyContactModel, string>(
+                m => m.FirstName,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -658,18 +941,31 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel { FirstName = "Test" };
             ViewDataDictionary<object> viewData = new ViewDataDictionary<object>();
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Equal("Test", accessor());
-                    Assert.Equal(typeof(DummyContactModel), type);
-                    Assert.Equal("FirstName", propertyName);
-                })
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Equal("Test", accessor());
+                        Assert.Equal(typeof(DummyContactModel), type);
+                        Assert.Equal("FirstName", propertyName);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<object, string>(m => model.FirstName, viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<object, string>(
+                m => model.FirstName,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -681,18 +977,26 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel { IntField = 42 };
-            ViewDataDictionary<DummyContactModel> viewData = new ViewDataDictionary<DummyContactModel>(model);
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Equal(42, accessor());
-                    Assert.Equal(typeof(int), type);
-                })
+            ViewDataDictionary<DummyContactModel> viewData =
+                new ViewDataDictionary<DummyContactModel>(model);
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Equal(42, accessor());
+                        Assert.Equal(typeof(int), type);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<DummyContactModel, int>(m => m.IntField, viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<DummyContactModel, int>(
+                m => m.IntField,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -705,17 +1009,24 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel { IntField = 42 };
             ViewDataDictionary<object> viewData = new ViewDataDictionary<object>();
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Equal(42, accessor());
-                    Assert.Equal(typeof(int), type);
-                })
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Equal(42, accessor());
+                        Assert.Equal(typeof(int), type);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<object, int>(m => model.IntField, viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<object, int>(
+                m => model.IntField,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -728,17 +1039,24 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel();
             ViewDataDictionary<object> viewData = new ViewDataDictionary<object>();
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Same(model, accessor());
-                    Assert.Equal(typeof(DummyContactModel), type);
-                })
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Same(model, accessor());
+                        Assert.Equal(typeof(DummyContactModel), type);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<object, DummyContactModel>(m => model, viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<object, DummyContactModel>(
+                m => model,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -750,18 +1068,26 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel();
-            ViewDataDictionary<DummyContactModel> viewData = new ViewDataDictionary<DummyContactModel>(model);
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Equal("Indexed into 42", accessor());
-                    Assert.Equal(typeof(string), type);
-                })
+            ViewDataDictionary<DummyContactModel> viewData =
+                new ViewDataDictionary<DummyContactModel>(model);
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Equal("Indexed into 42", accessor());
+                        Assert.Equal(typeof(string), type);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<DummyContactModel, string>(m => m[42], viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<DummyContactModel, string>(
+                m => m[42],
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -772,19 +1098,30 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            DummyContactModel model = new DummyContactModel { Array = new[] { 4, 8, 15, 16, 23, 42 } };
-            ViewDataDictionary<DummyContactModel> viewData = new ViewDataDictionary<DummyContactModel>(model);
-            provider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
-                .Callback<Func<object>, Type>((accessor, type) =>
-                {
-                    Assert.Equal(16, accessor());
-                    Assert.Equal(typeof(int), type);
-                })
+            DummyContactModel model = new DummyContactModel
+            {
+                Array = new[] { 4, 8, 15, 16, 23, 42 },
+            };
+            ViewDataDictionary<DummyContactModel> viewData =
+                new ViewDataDictionary<DummyContactModel>(model);
+            provider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+                .Callback<Func<object>, Type>(
+                    (accessor, type) =>
+                    {
+                        Assert.Equal(16, accessor());
+                        Assert.Equal(typeof(int), type);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<DummyContactModel, int>(m => m.Array[3], viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<DummyContactModel, int>(
+                m => m.Array[3],
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -795,19 +1132,33 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ViewDataDictionary<DummyContactModel> viewData = new ViewDataDictionary<DummyContactModel>();
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Null(accessor());
-                    Assert.Equal(typeof(DummyContactModel), type);
-                    Assert.Equal("FirstName", propertyName);
-                })
+            ViewDataDictionary<DummyContactModel> viewData =
+                new ViewDataDictionary<DummyContactModel>();
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Null(accessor());
+                        Assert.Equal(typeof(DummyContactModel), type);
+                        Assert.Equal("FirstName", propertyName);
+                    }
+                )
                 .Returns(() => null)
                 .Verifiable();
 
             // Act
-            ModelMetadata.FromLambdaExpression<DummyContactModel, string>(m => m.FirstName, viewData, provider.Object);
+            ModelMetadata.FromLambdaExpression<DummyContactModel, string>(
+                m => m.FirstName,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -819,22 +1170,45 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DerivedModel derivedModel = new DerivedModel();
-            ViewDataDictionary<DerivedModel> viewData = new ViewDataDictionary<DerivedModel>(derivedModel);
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Null(accessor());
-                    Assert.Equal(derivedModel.GetType(), type);
-                    Assert.Equal("MyProperty", propertyName);
-                })
-                .Returns<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    return new ModelMetadata(provider.Object, derivedModel.GetType(), accessor, type, propertyName);
-                })
+            ViewDataDictionary<DerivedModel> viewData = new ViewDataDictionary<DerivedModel>(
+                derivedModel
+            );
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Null(accessor());
+                        Assert.Equal(derivedModel.GetType(), type);
+                        Assert.Equal("MyProperty", propertyName);
+                    }
+                )
+                .Returns<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        return new ModelMetadata(
+                            provider.Object,
+                            derivedModel.GetType(),
+                            accessor,
+                            type,
+                            propertyName
+                        );
+                    }
+                )
                 .Verifiable();
 
             // Act
-            ModelMetadata metadata = ModelMetadata.FromLambdaExpression<DerivedModel, string>(m => m.MyProperty, viewData, provider.Object);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression<DerivedModel, string>(
+                m => m.MyProperty,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -848,21 +1222,42 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DerivedModel derivedModel = new DerivedModel();
             ViewDataDictionary<DerivedModel> viewData = new ViewDataDictionary<DerivedModel>();
-            provider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
-                .Callback<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    Assert.Null(accessor());
-                    Assert.Equal(derivedModel.GetType(), type);
-                    Assert.Equal("MyProperty", propertyName);
-                })
-                .Returns<Func<object>, Type, string>((accessor, type, propertyName) =>
-                {
-                    return new ModelMetadata(provider.Object, derivedModel.GetType(), accessor, type, propertyName);
-                })
+            provider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Callback<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        Assert.Null(accessor());
+                        Assert.Equal(derivedModel.GetType(), type);
+                        Assert.Equal("MyProperty", propertyName);
+                    }
+                )
+                .Returns<Func<object>, Type, string>(
+                    (accessor, type, propertyName) =>
+                    {
+                        return new ModelMetadata(
+                            provider.Object,
+                            derivedModel.GetType(),
+                            accessor,
+                            type,
+                            propertyName
+                        );
+                    }
+                )
                 .Verifiable();
 
             // Act
-            ModelMetadata metadata = ModelMetadata.FromLambdaExpression<DerivedModel, string>(m => m.MyProperty, viewData, provider.Object);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression<DerivedModel, string>(
+                m => m.MyProperty,
+                viewData,
+                provider.Object
+            );
 
             // Assert
             provider.Verify();
@@ -891,7 +1286,16 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), "PropertyName") { DisplayName = "Display Name" };
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                "PropertyName"
+            )
+            {
+                DisplayName = "Display Name",
+            };
 
             // Act
             string result = metadata.GetDisplayName();
@@ -905,7 +1309,13 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), "PropertyName");
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                "PropertyName"
+            );
 
             // Act
             string result = metadata.GetDisplayName();
@@ -919,7 +1329,13 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, null, null, typeof(object), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(object),
+                null
+            );
 
             // Act
             string result = metadata.GetDisplayName();

@@ -23,17 +23,15 @@
 //	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
-
 // COMPLETE
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	public enum LinkBehavior 
-	{
-		SystemDefault 	= 0,
-		AlwaysUnderline = 1,
-		HoverUnderline 	= 2,
-		NeverUnderline 	= 3,		
-	}
+    public enum LinkBehavior
+    {
+        SystemDefault = 0,
+        AlwaysUnderline = 1,
+        HoverUnderline = 2,
+        NeverUnderline = 3,
+    }
 }
-

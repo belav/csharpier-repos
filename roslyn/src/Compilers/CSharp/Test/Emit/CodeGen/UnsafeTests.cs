@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact]
         public void AddressOfLocal_Unused()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M()
@@ -29,8 +30,14 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes);
-            compVerifier.VerifyIL("C.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  1
@@ -39,13 +46,15 @@ unsafe class C
   IL_0002:  pop
   IL_0003:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AddressOfLocal_Used()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M(int* param)
@@ -56,8 +65,14 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
-            compVerifier.VerifyIL("C.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -71,13 +86,15 @@ unsafe class C
   IL_0006:  call       ""void C.M(int*)""
   IL_000b:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67330")]
         public void Invocation_Pointer()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     void M(int* param)
@@ -97,13 +114,14 @@ class C
                 // (6,11): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         M(param);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "param").WithLocation(6, 11)
-                );
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67330")]
         public void Invocation_PointerArray()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     void M(int*[] param)
@@ -123,13 +141,14 @@ class C
                 // (6,11): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         M(param);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "param").WithLocation(6, 11)
-                );
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67330")]
         public void Invocation_PointerArray_Nested()
         {
-            var text = @"
+            var text =
+                @"
 class C<T>
 {
     void M(C<int*[]>[] param)
@@ -149,13 +168,14 @@ class C<T>
                 // (6,11): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         M(param);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "param").WithLocation(6, 11)
-                );
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67330")]
         public void ClassCreation_Pointer()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     C(int* param)
@@ -175,13 +195,14 @@ class C
                 // (6,15): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         new C(param);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "param").WithLocation(6, 15)
-                );
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67330")]
         public void ClassCreation_PointerArray()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     C(int*[] param)
@@ -201,13 +222,14 @@ class C
                 // (6,15): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         new C(param);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "param").WithLocation(6, 15)
-                );
+            );
         }
 
         [Fact]
         public void AddressOfParameter_Unused()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M(int x)
@@ -216,8 +238,14 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes);
-            compVerifier.VerifyIL("C.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Passes
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size        4 (0x4)
   .maxstack  1
@@ -225,13 +253,15 @@ unsafe class C
   IL_0002:  pop
   IL_0003:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AddressOfParameter_Used()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M(int x, int* param)
@@ -241,8 +271,14 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
-            compVerifier.VerifyIL("C.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  3
@@ -256,13 +292,15 @@ unsafe class C
   IL_0007:  call       ""void C.M(int, int*)""
   IL_000c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AddressOfStructField()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M()
@@ -288,8 +326,14 @@ struct S2
     public int x;
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
-            compVerifier.VerifyIL("C.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       38 (0x26)
   .maxstack  5
@@ -317,13 +361,15 @@ struct S2
   IL_0020:  call       ""void C.Goo(S1, S1*, S2*, int*)""
   IL_0025:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void AddressOfSuppressOptimization()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void M()
@@ -335,8 +381,14 @@ unsafe class C
     static void Goo(int* p) { }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
-            compVerifier.VerifyIL("C.M", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -348,7 +400,8 @@ unsafe class C
   IL_0006:  call       ""void C.Goo(int*)""
   IL_000b:  ret
 }
-");
+"
+            );
         }
 
         #endregion AddressOf tests
@@ -358,7 +411,8 @@ unsafe class C
         [Fact]
         public void DereferenceLocal()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void Main()
@@ -369,10 +423,17 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "123", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "123",
+                verify: Verification.Fails
+            );
 
             // NOTE: p is optimized away, but & and * aren't.
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  1
@@ -385,13 +446,15 @@ unsafe class C
   IL_0007:  call       ""void System.Console.WriteLine(int)""
   IL_000c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void DereferenceParameter()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void Main()
@@ -406,9 +469,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "456", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "456",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Dereference", @"
+            compVerifier.VerifyIL(
+                "C.Dereference",
+                @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -416,13 +486,15 @@ unsafe class C
   IL_0001:  ldind.i8
   IL_0002:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void DereferenceWrite()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void Main()
@@ -434,10 +506,17 @@ unsafe class C
     }
 }
 ";
-            var compVerifierOptimized = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "2", verify: Verification.Fails);
+            var compVerifierOptimized = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "2",
+                verify: Verification.Fails
+            );
 
             // NOTE: p is optimized away, but & and * aren't.
-            compVerifierOptimized.VerifyIL("C.Main", @"
+            compVerifierOptimized.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       14 (0xe)
   .maxstack  2
@@ -452,10 +531,18 @@ unsafe class C
   IL_0008:  call       ""void System.Console.WriteLine(int)""
   IL_000d:  ret
 }
-");
-            var compVerifierUnoptimized = CompileAndVerify(text, options: TestOptions.UnsafeDebugExe, expectedOutput: "2", verify: Verification.Fails);
+"
+            );
+            var compVerifierUnoptimized = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: "2",
+                verify: Verification.Fails
+            );
 
-            compVerifierUnoptimized.VerifyIL("C.Main", @"
+            compVerifierUnoptimized.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -475,13 +562,15 @@ unsafe class C
   IL_0010:  nop
   IL_0011:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void DereferenceStruct()
         {
-            var text = @"
+            var text =
+                @"
 unsafe struct S
 {
     S* p;
@@ -497,9 +586,16 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "1", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "1",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -520,13 +616,15 @@ unsafe struct S
   IL_001d:  call       ""void System.Console.WriteLine(int)""
   IL_0022:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void DereferenceSwap()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -549,10 +647,17 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"Before: 2 7
-After: 7 2", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"Before: 2 7
+After: 7 2",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Swap", @"
+            compVerifier.VerifyIL(
+                "C.Swap",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -569,13 +674,15 @@ After: 7 2", verify: Verification.Fails);
   IL_0009:  stind.i1
   IL_000a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void DereferenceIsLValue1()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -596,9 +703,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"ab", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"ab",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -614,13 +728,15 @@ unsafe class C
   IL_0012:  call       ""void System.Console.Write(char)""
   IL_0017:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void DereferenceIsLValue2()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -644,9 +760,16 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"12", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"12",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -665,7 +788,8 @@ unsafe struct S
   IL_0021:  call       ""void System.Console.Write(int)""
   IL_0026:  ret
 }
-");
+"
+            );
         }
 
         #endregion Dereference tests
@@ -675,7 +799,8 @@ unsafe struct S
         [Fact]
         public void PointerMemberAccessRead()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -691,9 +816,16 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"3", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"3",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -707,11 +839,19 @@ unsafe struct S
   IL_0010:  call       ""void System.Console.Write(int)""
   IL_0015:  ret
 }
-");
+"
+            );
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"3", verify: Verification.Fails);
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"3",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -725,13 +865,15 @@ unsafe struct S
   IL_0010:  call       ""void System.Console.Write(int)""
   IL_0015:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PointerMemberAccessWrite()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -749,9 +891,16 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"34", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"34",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -771,11 +920,19 @@ unsafe struct S
   IL_0022:  call       ""void System.Console.Write(int)""
   IL_0027:  ret
 }
-");
+"
+            );
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"34", verify: Verification.Fails);
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"34",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -795,13 +952,15 @@ unsafe struct S
   IL_0022:  call       ""void System.Console.Write(int)""
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PointerMemberAccessInvoke()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -824,9 +983,16 @@ static class Extensions
     public static void M(this S s, int x, int y) { Console.Write(3); }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"123", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"123",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  3
@@ -844,11 +1010,19 @@ static class Extensions
   IL_0017:  call       ""void Extensions.M(S, int, int)""
   IL_001c:  ret
 }
-");
+"
+            );
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"123", verify: Verification.Fails);
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"123",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  3
@@ -866,13 +1040,15 @@ static class Extensions
   IL_0017:  call       ""void Extensions.M(S, int, int)""
   IL_001c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PointerMemberAccessInvoke001()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -900,9 +1076,16 @@ static class Extensions
     public static void M(this S s, int x, int y) { Console.Write(3); }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"123", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"123",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Test(ref S*)", @"
+            compVerifier.VerifyIL(
+                "S.Test(ref S*)",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  3
@@ -921,11 +1104,19 @@ static class Extensions
   IL_0018:  call       ""void Extensions.M(S, int, int)""
   IL_001d:  ret
 }
-");
+"
+            );
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"123", verify: Verification.Fails);
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"123",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Test(ref S*)", @"
+            compVerifier.VerifyIL(
+                "S.Test(ref S*)",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  3
@@ -944,13 +1135,15 @@ static class Extensions
   IL_0018:  call       ""void Extensions.M(S, int, int)""
   IL_001d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PointerMemberAccessMutate()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -967,9 +1160,16 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"34", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"34",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  4
@@ -1003,11 +1203,19 @@ unsafe struct S
   IL_002b:  call       ""void System.Console.Write(int)""
   IL_0030:  ret
 }
-");
+"
+            );
 
-            compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"34", verify: Verification.Fails);
+            compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"34",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  4
@@ -1041,7 +1249,8 @@ unsafe struct S
   IL_002b:  call       ""void System.Console.Write(int)""
   IL_0030:  ret
 }
-");
+"
+            );
         }
 
         #endregion Pointer member access tests
@@ -1051,7 +1260,8 @@ unsafe struct S
         [Fact]
         public void PointerElementAccessCheckedAndUnchecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -1081,11 +1291,17 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails
+            );
 
             // The conversions differ from dev10 in the same way as for numeric addition.
             // Note that, unlike for numeric addition, the add operation is never checked.
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size      170 (0xaa)
   .maxstack  4
@@ -1183,13 +1399,15 @@ unsafe struct S
   IL_00a8:  stloc.0
   IL_00a9:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PointerElementAccessWrite()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -1201,9 +1419,15 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("S.Main", @"
+            compVerifier.VerifyIL(
+                "S.Main",
+                @"
 {
   // Code size        9 (0x9)
   .maxstack  2
@@ -1218,13 +1442,15 @@ unsafe struct S
   IL_0007:  stind.i4
   IL_0008:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void PointerElementAccessMutate()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -1245,16 +1471,22 @@ unsafe struct S
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"
 1
 0
--1", verify: Verification.Fails);
+-1",
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void PointerElementAccessNested()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1274,13 +1506,19 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "210", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "210",
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void PointerElementAccessZero()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1294,7 +1532,15 @@ unsafe class C
 }
 ";
             // NOTE: no pointer arithmetic - just dereference p.
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "1", verify: Verification.Fails).VerifyIL("C.Main", @"
+            var compVerifier = CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "1",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1307,7 +1553,8 @@ unsafe class C
   IL_0006:  call       ""void System.Console.WriteLine(int)""
   IL_000b:  ret
 }
-");
+"
+                );
         }
 
         #endregion Pointer element access tests
@@ -1317,7 +1564,8 @@ unsafe class C
         [Fact]
         public void FixedStatementField()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1335,9 +1583,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"1", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"1",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  3
@@ -1357,13 +1612,15 @@ unsafe class C
   IL_0018:  call       ""void System.Console.WriteLine(int)""
   IL_001d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementThis()
         {
-            var text = @"
+            var text =
+                @"
 public class Program
 {
     public static void Main()
@@ -1393,9 +1650,16 @@ public class Program
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"123", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"123",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("Program.S1.Test()", @"
+            compVerifier.VerifyIL(
+                "Program.S1.Test()",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -1423,14 +1687,16 @@ public class Program
   IL_001c:  stloc.1
   IL_001d:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(22306, "https://github.com/dotnet/roslyn/issues/22306")]
         [Fact]
         public void FixedStatementMultipleFields()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1451,9 +1717,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"12", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"12",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  4
@@ -1490,14 +1763,16 @@ unsafe class C
   IL_0033:  call       ""void System.Console.Write(int)""
   IL_0038:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(22306, "https://github.com/dotnet/roslyn/issues/22306")]
         [Fact]
         public void FixedStatementMultipleMethods()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1521,9 +1796,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"12", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"12",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       58 (0x3a)
   .maxstack  4
@@ -1561,7 +1843,8 @@ unsafe class C
   IL_0034:  call       ""void System.Console.Write(int)""
   IL_0039:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(546866, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546866")]
@@ -1569,7 +1852,7 @@ unsafe class C
         public void FixedStatementProperty()
         {
             var text =
-@"class C
+                @"class C
 {
     string P { get { return null; } }
     char[] Q { get { return null; } }
@@ -1583,9 +1866,14 @@ unsafe class C
         }
     }
 }";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
-            compVerifier.VerifyIL("C.M(C)",
-@"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.M(C)",
+                @"
 {
   // Code size       55 (0x37)
   .maxstack  2
@@ -1629,13 +1917,15 @@ unsafe class C
   IL_0035:  stloc.3
   IL_0036:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementMultipleOptimized()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1656,9 +1946,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"12", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"12",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  4
@@ -1695,13 +1992,15 @@ unsafe class C
   IL_0033:  call       ""void System.Console.Write(int)""
   IL_0038:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementReferenceParameter()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -1722,9 +2021,16 @@ class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"a", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"a",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.M", @"
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       11 (0xb)
   .maxstack  2
@@ -1740,13 +2046,15 @@ class C
   IL_0009:  stloc.0
   IL_000a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementReferenceParameterDebug()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -1767,9 +2075,16 @@ class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeDebugExe, expectedOutput: @"a", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: @"a",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.M", @"
+            compVerifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  2
@@ -1791,13 +2106,15 @@ class C
   IL_000e:  stloc.1
   IL_000f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementStringLiteral()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1811,9 +2128,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeDebugExe, expectedOutput: @"h", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: @"h",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -1841,13 +2165,16 @@ unsafe class C
   IL_0020:  stloc.1
  -IL_0021:  ret
 }
-", sequencePoints: "C.Main");
+",
+                sequencePoints: "C.Main"
+            );
         }
 
         [Fact]
         public void FixedStatementStringVariable()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1868,9 +2195,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeDebugExe, expectedOutput: @"hTrue", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: @"hTrue",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       72 (0x48)
   .maxstack  2
@@ -1926,13 +2260,16 @@ unsafe class C
   IL_0045:  stloc.s    V_4
  -IL_0047:  ret
 }
-", sequencePoints: "C.Main");
+",
+                sequencePoints: "C.Main"
+            );
         }
 
         [Fact]
         public void FixedStatementStringVariableOptimized()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -1953,10 +2290,17 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"hTrue", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"hTrue",
+                verify: Verification.Fails
+            );
 
             // Null checks and branches are much simpler, but string temps are NOT optimized away.
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       58 (0x3a)
   .maxstack  2
@@ -1999,13 +2343,15 @@ unsafe class C
   IL_0038:  stloc.1
   IL_0039:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementOneDimensionalArray()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -2024,9 +2370,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"01", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"01",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  3
@@ -2067,13 +2420,15 @@ unsafe class C
   IL_003b:  call       ""void System.Console.Write(int)""
   IL_0040:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementOneDimensionalArrayOptimized()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -2092,9 +2447,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"01", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"01",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  3
@@ -2135,13 +2497,15 @@ unsafe class C
   IL_003b:  call       ""void System.Console.Write(int)""
   IL_0040:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementMultiDimensionalArrayOptimized()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -2160,9 +2524,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"01", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"01",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       79 (0x4f)
   .maxstack  4
@@ -2205,13 +2576,15 @@ unsafe class C
   IL_0049:  call       ""void System.Console.Write(int)""
   IL_004e:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementMixed()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -2231,9 +2604,16 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"970104", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"970104",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       99 (0x63)
   .maxstack  2
@@ -2296,13 +2676,15 @@ unsafe class C
   IL_0060:  stloc.s    V_5
   IL_0062:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedStatementInTryOfTryFinally()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void nop() { }
@@ -2322,8 +2704,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       32 (0x20)
   .maxstack  2
@@ -2360,13 +2748,15 @@ unsafe class C
   }
   IL_001f:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInTryOfTryCatch()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2384,8 +2774,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       31 (0x1f)
   .maxstack  2
@@ -2423,13 +2819,15 @@ unsafe class C
   }
   IL_001e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFinally()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2447,8 +2845,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -2477,13 +2881,15 @@ unsafe class C
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInCatchOfTryCatch()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void nop() { }
@@ -2503,9 +2909,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test",
-@"{
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"{
   // Code size       34 (0x22)
   .maxstack  2
   .locals init (char* V_0, //p
@@ -2535,13 +2946,15 @@ unsafe class C
     IL_001f:  leave.s    IL_0021
   }
   IL_0021:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void FixedStatementInCatchOfTryCatchFinally()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void nop() { }
@@ -2564,8 +2977,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       36 (0x24)
   .maxstack  2
@@ -2604,13 +3023,15 @@ unsafe class C
   }
   IL_0023:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFixed_NoBranch()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2625,8 +3046,14 @@ unsafe class C
 }
 ";
             // Neither inner nor outer has finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       45 (0x2d)
   .maxstack  2
@@ -2662,13 +3089,15 @@ unsafe class C
   IL_002b:  stloc.1
   IL_002c:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFixed_InnerBranch()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2685,8 +3114,14 @@ unsafe class C
 }
 ";
             // Inner and outer both have finally blocks.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       50 (0x32)
   .maxstack  2
@@ -2738,13 +3173,15 @@ unsafe class C
   }
   IL_0031:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFixed_OuterBranch()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2761,8 +3198,14 @@ unsafe class C
 }
 ";
             // Outer has finally, inner does not.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       48 (0x30)
   .maxstack  2
@@ -2806,13 +3249,15 @@ unsafe class C
   }
   IL_002f:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFixed_Nesting()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2845,8 +3290,14 @@ unsafe class C
             //   1) nothing blows up with triple-nesting, and
             //   2) none of the fixed statements has a try-finally.
             // CONSIDER: Shorter test that performs the same checks.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size      187 (0xbb)
   .maxstack  2
@@ -2953,13 +3404,15 @@ unsafe class C
   IL_00b9:  stloc.1
   IL_00ba:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInUsing()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -2975,8 +3428,14 @@ unsafe class C
 ";
             // CONSIDER: This is sort of silly since the using is optimized away.
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3005,13 +3464,15 @@ unsafe class C
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInLock()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3026,8 +3487,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally (matches dev11, but not clear why).
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       47 (0x2f)
   .maxstack  2
@@ -3069,13 +3536,15 @@ unsafe class C
   }
   IL_002e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInForEach_NoDispose()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test(int[] array)
@@ -3091,8 +3560,14 @@ unsafe class C
 ";
             // Cleanup in finally.
             // CONSIDER: dev11 is smarter and skips the try-finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       46 (0x2e)
   .maxstack  2
@@ -3141,13 +3616,15 @@ unsafe class C
   IL_002b:  blt.s      IL_0006
   IL_002d:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInForEach_Dispose()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test(Enumerable e)
@@ -3175,8 +3652,14 @@ class Enumerator : System.IDisposable
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       62 (0x3e)
   .maxstack  2
@@ -3228,13 +3711,15 @@ class Enumerator : System.IDisposable
   }
   IL_003d:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInLambda1()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3255,8 +3740,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.<>c.<Test>b__0_0()", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.<>c.<Test>b__0_0()",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3284,13 +3775,15 @@ unsafe class C
     IL_0018:  endfinally
   }
   IL_0019:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void FixedStatementInLambda2()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3311,8 +3804,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.<>c.<Test>b__0_0()", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.<>c.<Test>b__0_0()",
+                    @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -3333,13 +3832,15 @@ unsafe class C
   IL_0015:  stloc.1
   IL_0016:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInLambda3()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3356,8 +3857,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.<>c.<Test>b__0_0()", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.<>c.<Test>b__0_0()",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3386,13 +3893,15 @@ unsafe class C
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFieldInitializer1()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     System.Action a = () =>
@@ -3410,8 +3919,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.<>c.<.ctor>b__1_0()", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.<>c.<.ctor>b__1_0()",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3440,13 +3955,15 @@ unsafe class C
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementInFieldInitializer2()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     System.Action a = () =>
@@ -3460,8 +3977,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.<>c.<.ctor>b__1_0()", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.<>c.<.ctor>b__1_0()",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3490,13 +4013,15 @@ unsafe class C
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_LoopBreak()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3512,8 +4037,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -3543,13 +4074,15 @@ unsafe class C
   }
   IL_001a:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_LoopContinue()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3566,8 +4099,14 @@ unsafe class C
 ";
             // Cleanup in finally.
             // CONSIDER: dev11 doesn't have a finally here, but that seems incorrect.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3596,13 +4135,15 @@ unsafe class C
     IL_0019:  endfinally
   }
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_SwitchBreak()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3619,8 +4160,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -3650,13 +4197,15 @@ unsafe class C
   }
   IL_001a:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_SwitchGoto()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3673,8 +4222,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3703,13 +4258,15 @@ unsafe class C
     IL_0019:  endfinally
   }
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_BackwardGoto()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3723,8 +4280,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3753,13 +4316,15 @@ unsafe class C
     IL_0019:  endfinally
   }
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_ForwardGoto()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3773,8 +4338,14 @@ unsafe class C
 }
 ";
             // Cleanup in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  2
@@ -3803,13 +4374,15 @@ unsafe class C
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_Throw()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3822,8 +4395,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -3843,13 +4422,15 @@ unsafe class C
   IL_0014:  ldnull
   IL_0015:  throw
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithBranchOut_Return()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3862,8 +4443,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -3882,13 +4469,15 @@ unsafe class C
   IL_0013:  stloc.0
   IL_0014:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithNoBranchOut_Loop()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3903,8 +4492,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       36 (0x24)
   .maxstack  2
@@ -3936,13 +4531,15 @@ unsafe class C
   IL_0022:  stloc.1
   IL_0023:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithNoBranchOut_InternalGoto()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -3961,8 +4558,14 @@ unsafe class C
             //      branches out or not.  We should be conservative and assume that
             //      it does.
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -3983,13 +4586,15 @@ unsafe class C
   IL_0015:  stloc.1
   IL_0016:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithNoBranchOut_Switch()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -4025,8 +4630,14 @@ unsafe class C
 }
 ";
             // Cleanup not in finally.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size      103 (0x67)
   .maxstack  2
@@ -4076,13 +4687,15 @@ unsafe class C
   IL_0065:  stloc.1
   IL_0066:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void FixedStatementWithParenthesizedStringExpression()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void Test()
@@ -4092,8 +4705,14 @@ unsafe class C
         }
     }
 }";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).
-                VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -4114,7 +4733,8 @@ unsafe class C
   IL_0015:  stloc.1
   IL_0016:  ret
 }
-");
+"
+                );
         }
 
         #endregion Fixed statement tests
@@ -4124,7 +4744,8 @@ unsafe class C
         [Fact]
         public void SimpleCaseOfCustomFixed()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4154,9 +4775,16 @@ static class FixableExt
 
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"2", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"2",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -4181,13 +4809,15 @@ static class FixableExt
   IL_001f:  stloc.0
   IL_0020:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void SimpleCaseOfCustomFixedExt()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4214,9 +4844,16 @@ static class FixableExt
 
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"2", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"2",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -4241,13 +4878,15 @@ static class FixableExt
   IL_001f:  stloc.0
   IL_0020:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void SimpleCaseOfCustomFixed_oldVersion()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4269,19 +4908,26 @@ unsafe class C
 }
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe, parseOptions: TestOptions.Regular7_2);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                parseOptions: TestOptions.Regular7_2
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS8320: Feature 'extensible fixed statement' is not available in C# 7.2. Please use language version 7.3 or greater.
                 //         fixed (int* p = new Fixable())
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "new Fixable()").WithArguments("extensible fixed statement", "7.3").WithLocation(6, 25)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "new Fixable()")
+                    .WithArguments("extensible fixed statement", "7.3")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
         public void SimpleCaseOfCustomFixedNull()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4302,9 +4948,16 @@ unsafe class C
 
 }";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"0", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"0",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -4326,13 +4979,15 @@ unsafe class C
   IL_0018:  stloc.0
   IL_0019:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void SimpleCaseOfCustomFixedStruct()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4353,9 +5008,16 @@ unsafe class C
 
 }";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"2", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"2",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -4377,13 +5039,15 @@ unsafe class C
   IL_001b:  stloc.0
   IL_001c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedStructNullable()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4415,9 +5079,16 @@ public static class FixableExt
 
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"2", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"2",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -4449,13 +5120,15 @@ public static class FixableExt
   IL_002f:  stloc.1
   IL_0030:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedStructNullableErr()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4479,19 +5152,23 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (8,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = f)
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "f").WithLocation(8, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedErrAmbiguous()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4531,28 +5208,42 @@ public static class FixableExt1
 }
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS0121: The call is ambiguous between the following methods or properties: 'FixableExt.GetPinnableReference(in Fixable)' and 'FixableExt1.GetPinnableReference(in Fixable)'
                 //         fixed (int* p = new Fixable(1))
-                Diagnostic(ErrorCode.ERR_AmbigCall, "new Fixable(1)").WithArguments("FixableExt.GetPinnableReference(in Fixable)", "FixableExt1.GetPinnableReference(in Fixable)").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "new Fixable(1)")
+                    .WithArguments(
+                        "FixableExt.GetPinnableReference(in Fixable)",
+                        "FixableExt1.GetPinnableReference(in Fixable)"
+                    )
+                    .WithLocation(6, 25),
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25),
                 // (12,25): error CS0121: The call is ambiguous between the following methods or properties: 'FixableExt.GetPinnableReference(in Fixable)' and 'FixableExt1.GetPinnableReference(in Fixable)'
                 //         fixed (int* p = f)
-                Diagnostic(ErrorCode.ERR_AmbigCall, "f").WithArguments("FixableExt.GetPinnableReference(in Fixable)", "FixableExt1.GetPinnableReference(in Fixable)").WithLocation(12, 25),
+                Diagnostic(ErrorCode.ERR_AmbigCall, "f")
+                    .WithArguments(
+                        "FixableExt.GetPinnableReference(in Fixable)",
+                        "FixableExt1.GetPinnableReference(in Fixable)"
+                    )
+                    .WithLocation(12, 25),
                 // (12,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = f)
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "f").WithLocation(12, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedErrDynamic()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4578,19 +5269,24 @@ public static class FixableExt
 }
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = (dynamic)(new Fixable(1)))
-                Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "(dynamic)(new Fixable(1))").WithLocation(6, 25)
-                );
+                Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "(dynamic)(new Fixable(1))")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
         public void CustomFixedErrBad()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4616,19 +5312,25 @@ public static class FixableExt
 }
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,26): error CS0246: The type or namespace name 'HocusPocus' could not be found (are you missing a using directive or an assembly reference?)
                 //         fixed (int* p = (HocusPocus)(new Fixable(1)))
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "HocusPocus").WithArguments("HocusPocus").WithLocation(6, 26)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "HocusPocus")
+                    .WithArguments("HocusPocus")
+                    .WithLocation(6, 26)
+            );
         }
 
         [Fact]
         public void SimpleCaseOfCustomFixedGeneric()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -4655,9 +5357,16 @@ static class FixAllExt
 }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"20", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"20",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Test<T>(T)", @"
+            compVerifier.VerifyIL(
+                "C.Test<T>(T)",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -4692,13 +5401,15 @@ static class FixAllExt
   IL_002f:  stloc.1
   IL_0030:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedStructSideeffects()
         {
-            var text = @"
+            var text =
+                @"
     unsafe class C
     {
         public static void Main()
@@ -4729,9 +5440,16 @@ static class FixAllExt
     }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"5456");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"5456"
+            );
 
-            compVerifier.VerifyIL("C.Test(ref FixableStruct)", @"
+            compVerifier.VerifyIL(
+                "C.Test(ref FixableStruct)",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -4750,13 +5468,15 @@ static class FixAllExt
   IL_0013:  stloc.0
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedClassSideeffects()
         {
-            var text = @"
+            var text =
+                @"
     using System;
     unsafe class C
     {
@@ -4789,16 +5509,25 @@ static class FixAllExt
     }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"5456");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"5456"
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (14,29): warning CS0612: 'FixableClass.GetPinnableReference()' is obsolete
                 //             fixed (int* p = arg)
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "arg").WithArguments("FixableClass.GetPinnableReference()").WithLocation(14, 29)
-                );
+                Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "arg")
+                    .WithArguments("FixableClass.GetPinnableReference()")
+                    .WithLocation(14, 29)
+            );
 
             // note that defensive copy is created
-            compVerifier.VerifyIL("C.Test(ref FixableClass)", @"
+            compVerifier.VerifyIL(
+                "C.Test(ref FixableClass)",
+                @"
 {
   // Code size       30 (0x1e)
   .maxstack  2
@@ -4824,13 +5553,15 @@ static class FixAllExt
   IL_001c:  stloc.0
   IL_001d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedGenericSideeffects()
         {
-            var text = @"
+            var text =
+                @"
     unsafe class C
     {
         public static void Main()
@@ -4881,10 +5612,17 @@ static class FixAllExt
     }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"2123
-5456");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"2123
+5456"
+            );
 
-            compVerifier.VerifyIL("C.Test<T>(ref T)", @"
+            compVerifier.VerifyIL(
+                "C.Test<T>(ref T)",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -4920,13 +5658,15 @@ static class FixAllExt
   IL_003e:  stloc.0
   IL_003f:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedGenericRefExtension()
         {
-            var text = @"
+            var text =
+                @"
     unsafe class C
     {
         public static void Main()
@@ -4970,9 +5710,16 @@ static class FixAllExt
     }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"5456");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"5456"
+            );
 
-            compVerifier.VerifyIL("C.Test<T>(ref T)", @"
+            compVerifier.VerifyIL(
+                "C.Test<T>(ref T)",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -4991,13 +5738,15 @@ static class FixAllExt
   IL_0013:  stloc.0
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedStructInExtension()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5030,9 +5779,16 @@ public static class FixableExt
 
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"23", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"23",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       61 (0x3d)
   .maxstack  3
@@ -5074,13 +5830,15 @@ public static class FixableExt
   IL_003b:  stloc.1
   IL_003c:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedStructRefExtension()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5108,9 +5866,16 @@ public static class FixableExt
 
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"3", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"3",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Main", @"
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  3
@@ -5136,13 +5901,15 @@ public static class FixableExt
   IL_001f:  stloc.1
   IL_0020:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedStructRefExtensionErr()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5169,7 +5936,10 @@ public static class FixableExt
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS1510: A ref or out value must be an assignable variable
@@ -5178,13 +5948,14 @@ public static class FixableExt
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr01()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5211,19 +5982,23 @@ public static class FixableExt
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS8385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr01_oldVersion()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5250,19 +6025,24 @@ public static class FixableExt
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe, parseOptions: TestOptions.Regular7_2);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                parseOptions: TestOptions.Regular7_2
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr02()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5286,7 +6066,10 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
@@ -5294,14 +6077,17 @@ public struct Fixable
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25),
                 // (6,25): error CS0176: Member 'Fixable.GetPinnableReference()' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         fixed (int* p = new Fixable(1))
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "new Fixable(1)").WithArguments("Fixable.GetPinnableReference()").WithLocation(6, 25)
-                );
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "new Fixable(1)")
+                    .WithArguments("Fixable.GetPinnableReference()")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr03()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5322,22 +6108,28 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS1955: Non-invocable member 'Fixable.GetPinnableReference' cannot be used like a method.
                 //         fixed (int* p = new Fixable(1))
-                Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "new Fixable(1)").WithArguments("Fixable.GetPinnableReference").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "new Fixable(1)")
+                    .WithArguments("Fixable.GetPinnableReference")
+                    .WithLocation(6, 25),
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr04()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5358,22 +6150,28 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS0411: The type arguments for method 'Fixable.GetPinnableReference<T>()' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         fixed (int* p = new Fixable(1))
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "new Fixable(1)").WithArguments("Fixable.GetPinnableReference<T>()").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "new Fixable(1)")
+                    .WithArguments("Fixable.GetPinnableReference<T>()")
+                    .WithLocation(6, 25),
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr05_Obsolete()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -5397,22 +6195,32 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (8,25): error CS0619: 'Fixable.GetPinnableReference()' is obsolete: 'hi'
                 //         fixed (int* p = new Fixable(1))
-                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "new Fixable(1)").WithArguments("Fixable.GetPinnableReference()", "hi").WithLocation(8, 25)
-                );
+                Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "new Fixable(1)")
+                    .WithArguments("Fixable.GetPinnableReference()", "hi")
+                    .WithLocation(8, 25)
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr06_UseSite()
         {
             var missing_cs = "public struct Missing { }";
-            var missing = CreateCompilationWithMscorlib45(missing_cs, options: TestOptions.DebugDll, assemblyName: "missing");
+            var missing = CreateCompilationWithMscorlib45(
+                missing_cs,
+                options: TestOptions.DebugDll,
+                assemblyName: "missing"
+            );
 
-            var lib_cs = @"
+            var lib_cs =
+                @"
 public struct Fixable
 {
     public Fixable(int arg){}
@@ -5421,10 +6229,14 @@ public struct Fixable
 }
 ";
 
-            var lib = CreateCompilationWithMscorlib45(lib_cs, references: new[] { missing.EmitToImageReference() }, options: TestOptions.DebugDll);
+            var lib = CreateCompilationWithMscorlib45(
+                lib_cs,
+                references: new[] { missing.EmitToImageReference() },
+                options: TestOptions.DebugDll
+            );
 
             var source =
-@"
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5436,21 +6248,31 @@ unsafe class C
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(source, references: new[] { lib.EmitToImageReference() }, options: TestOptions.UnsafeDebugDll);
+            var comp = CreateCompilationWithMscorlib45(
+                source,
+                references: new[] { lib.EmitToImageReference() },
+                options: TestOptions.UnsafeDebugDll
+            );
             comp.VerifyDiagnostics(
                 // (6,26): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         fixed (void* p = new Fixable(1))
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "new Fixable(1)").WithArguments("Missing", "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "new Fixable(1)")
+                    .WithArguments(
+                        "Missing",
+                        "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(6, 26),
                 // (6,26): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (void* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 26)
-                );
+            );
         }
 
         [Fact]
         public void CustomFixedStructVariousErr07_Optional()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5471,22 +6293,28 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): warning CS0280: 'Fixable' does not implement the 'fixed' pattern. 'Fixable.GetPinnableReference(int)' has the wrong signature.
                 //         fixed (int* p = new Fixable(1))
-                Diagnostic(ErrorCode.WRN_PatternBadSignature, "new Fixable(1)").WithArguments("Fixable", "fixed", "Fixable.GetPinnableReference(int)").WithLocation(6, 25),
+                Diagnostic(ErrorCode.WRN_PatternBadSignature, "new Fixable(1)")
+                    .WithArguments("Fixable", "fixed", "Fixable.GetPinnableReference(int)")
+                    .WithLocation(6, 25),
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable(1))
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable(1)").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         public void FixStringMissingAllHelpers()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5500,19 +6328,27 @@ unsafe class C
 ";
 
             var comp = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
-            comp.MakeMemberMissing(WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__get_OffsetToStringData);
+            comp.MakeMemberMissing(
+                WellKnownMember.System_Runtime_CompilerServices_RuntimeHelpers__get_OffsetToStringData
+            );
 
             comp.VerifyEmitDiagnostics(
                 // (6,26): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.get_OffsetToStringData'
                 //         fixed (char* p = string.Empty)
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "string.Empty").WithArguments("System.Runtime.CompilerServices.RuntimeHelpers", "get_OffsetToStringData").WithLocation(6, 26)
-                );
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "string.Empty")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.RuntimeHelpers",
+                        "get_OffsetToStringData"
+                    )
+                    .WithLocation(6, 26)
+            );
         }
 
         [Fact]
         public void FixStringArrayExtensionHelpersIgnored()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5536,9 +6372,16 @@ public static class FixableExt
 }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"");
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @""
+            );
 
-            compVerifier.VerifyIL("C.Main()", @"
+            compVerifier.VerifyIL(
+                "C.Main()",
+                @"
 {
   // Code size       60 (0x3c)
   .maxstack  2
@@ -5587,13 +6430,15 @@ public static class FixableExt
   IL_003a:  stloc.3
   IL_003b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void CustomFixedDelegateErr()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5616,20 +6461,24 @@ public struct Fixable
 
 ";
 
-            var compVerifier = CreateCompilationWithMscorlib46(text, options: TestOptions.UnsafeReleaseExe);
+            var compVerifier = CreateCompilationWithMscorlib46(
+                text,
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,25): error CS9385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new Fixable())
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new Fixable()").WithLocation(6, 25)
-                );
+            );
         }
 
         [Fact]
         [WorkItem("https://github.com/dotnet/roslyn/issues/66167")]
         public void Issue66167_01()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5663,9 +6512,16 @@ static class FixAllExt
 }
 ";
 
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"00", verify: Verification.Fails);
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"00",
+                verify: Verification.Fails
+            );
 
-            compVerifier.VerifyIL("C.Test<T>(T)", @"
+            compVerifier.VerifyIL(
+                "C.Test<T>(T)",
+                @"
 {
   // Code size       49 (0x31)
   .maxstack  2
@@ -5700,9 +6556,12 @@ static class FixAllExt
   IL_002f:  stloc.1
   IL_0030:  ret
 }
-");
+"
+            );
 
-            compVerifier.VerifyIL("C.Test2(int?)", @"
+            compVerifier.VerifyIL(
+                "C.Test2(int?)",
+                @"
 {
   // Code size       46 (0x2e)
   .maxstack  2
@@ -5739,14 +6598,16 @@ static class FixAllExt
   IL_002c:  stloc.1
   IL_002d:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         [WorkItem("https://github.com/dotnet/roslyn/issues/66167")]
         public void Issue66167_02()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     public static void Main()
@@ -5795,17 +6656,31 @@ static class FixAllExt
             comp.VerifyDiagnostics(
                 // (10,25): error CS1929: 'S1?' does not contain a definition for 'GetPinnableReference' and the best extension method overload 'FixAllExt.GetPinnableReference(S2)' requires a receiver of type 'S2'
                 //         fixed (int* p = new S1?())
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "new S1?()").WithArguments("S1?", "GetPinnableReference", "FixAllExt.GetPinnableReference(S2)", "S2").WithLocation(10, 25),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "new S1?()")
+                    .WithArguments(
+                        "S1?",
+                        "GetPinnableReference",
+                        "FixAllExt.GetPinnableReference(S2)",
+                        "S2"
+                    )
+                    .WithLocation(10, 25),
                 // (10,25): error CS8385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new S1?())
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new S1?()").WithLocation(10, 25),
                 // (18,25): error CS1929: 'S2?' does not contain a definition for 'GetPinnableReference' and the best extension method overload 'FixAllExt.GetPinnableReference(S2)' requires a receiver of type 'S2'
                 //         fixed (int* p = new S2?())
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "new S2?()").WithArguments("S2?", "GetPinnableReference", "FixAllExt.GetPinnableReference(S2)", "S2").WithLocation(18, 25),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "new S2?()")
+                    .WithArguments(
+                        "S2?",
+                        "GetPinnableReference",
+                        "FixAllExt.GetPinnableReference(S2)",
+                        "S2"
+                    )
+                    .WithLocation(18, 25),
                 // (18,25): error CS8385: The given expression cannot be used in a fixed statement
                 //         fixed (int* p = new S2?())
                 Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "new S2?()").WithLocation(18, 25)
-                );
+            );
         }
 
         #endregion Custom fixed statement tests
@@ -5815,7 +6690,8 @@ static class FixAllExt
         [Fact]
         public void ConvertNullToPointer()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -5835,7 +6711,8 @@ unsafe class C
 }}
 ";
 
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  2
@@ -5862,17 +6739,31 @@ unsafe class C
   IL_001e:  ret
 }
 ";
-            var expectedOutput = @"False
+            var expectedOutput =
+                @"False
 True";
 
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL);
         }
 
         [Fact]
         public void ConvertPointerToPointerOrVoid()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -5891,7 +6782,8 @@ unsafe class C
     }}
 }}
 ";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       19 (0x13)
   .maxstack  1
@@ -5916,14 +6808,27 @@ unsafe class C
 ";
             var expectedOutput = @"a";
 
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL);
         }
 
         [Fact]
         public void ConvertPointerToNumericUnchecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -5953,7 +6858,14 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       65 (0x41)
   .maxstack  1
@@ -6007,13 +6919,15 @@ unsafe class C
   IL_003e:  starg.s    V_10
   IL_0040:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void ConvertPointerToNumericChecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -6043,7 +6957,14 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       65 (0x41)
   .maxstack  1
@@ -6097,13 +7018,15 @@ unsafe class C
   IL_003e:  starg.s    V_10
   IL_0040:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void ConvertNumericToPointerUnchecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -6133,7 +7056,14 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.FailsPEVerify).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.FailsPEVerify
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       79 (0x4f)
   .maxstack  1
@@ -6187,13 +7117,15 @@ unsafe class C
   IL_004c:  starg.s    V_2
   IL_004e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void ConvertNumericToPointerChecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -6223,7 +7155,14 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.FailsPEVerify).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.FailsPEVerify
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       79 (0x4f)
   .maxstack  1
@@ -6277,13 +7216,15 @@ unsafe class C
   IL_004c:  starg.s    V_2
   IL_004e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void ConvertClassToPointerUDC()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -6333,7 +7274,8 @@ unsafe class Implicit
     }}
 }}
 ";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  1
@@ -6364,14 +7306,25 @@ unsafe class Implicit
   IL_0042:  ret
 }
 ";
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.M", expectedIL);
         }
 
         [Fact]
         public void ConvertIntPtrToPointer()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -6396,7 +7349,8 @@ unsafe class C
 }}
 ";
             // Nothing special here - just more UDCs.
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       67 (0x43)
   .maxstack  1
@@ -6427,14 +7381,25 @@ unsafe class C
   IL_0042:  ret
 }
 ";
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.M", expectedIL);
         }
 
         [Fact]
         public void FixedStatementConversion()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -6458,7 +7423,8 @@ unsafe class C
 }}
 ";
             // NB: "pinned System.IntPtr&" (which ildasm displays as "pinned native int&"), not void.
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size      112 (0x70)
   .maxstack  2
@@ -6534,14 +7500,27 @@ unsafe class C
 }
 ";
             var expectedOutput = @"970104";
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeDebugExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL, sequencePoints: "C.Main");
-            CompileAndVerify(string.Format(template, "checked  "), options: TestOptions.UnsafeDebugExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL, sequencePoints: "C.Main");
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeDebugExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL, sequencePoints: "C.Main");
+            CompileAndVerify(
+                    string.Format(template, "checked  "),
+                    options: TestOptions.UnsafeDebugExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL, sequencePoints: "C.Main");
         }
 
         [Fact]
         public void FixedStatementVoidPointerPointer()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -6564,7 +7543,8 @@ unsafe class C
 }}
 ";
             // NB: "pinned void*&", as in Dev10.
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  3
@@ -6591,14 +7571,27 @@ unsafe class C
 }
 ";
             var expectedOutput = @"a";
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("C.Main", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL("C.Main", expectedIL);
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void PointerArrayConversion()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 
 unsafe class C
@@ -6616,7 +7609,8 @@ unsafe class C
     }}
 }}
 ";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -6633,14 +7627,25 @@ unsafe class C
   IL_0016:  ret
 }
 ";
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes).VerifyIL("C.M", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes).VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Passes
+                )
+                .VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Passes
+                )
+                .VerifyIL("C.M", expectedIL);
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void PointerArrayConversionRuntimeError()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void Main()
@@ -6661,13 +7666,19 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerifyException<NotSupportedException>(text, "Type is not supported.", allowUnsafe: true, verify: Verification.Fails);
+            CompileAndVerifyException<NotSupportedException>(
+                text,
+                "Type is not supported.",
+                allowUnsafe: true,
+                verify: Verification.Fails
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void PointerArrayEnumerableConversion()
         {
-            var template = @"
+            var template =
+                @"
 using System.Collections;
 
 unsafe class C
@@ -6685,7 +7696,8 @@ unsafe class C
     }}
 }}
 ";
-            var expectedIL = @"
+            var expectedIL =
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  1
@@ -6702,14 +7714,25 @@ unsafe class C
   IL_0016:  ret
 }
 ";
-            CompileAndVerify(string.Format(template, "unchecked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes).VerifyIL("C.M", expectedIL);
-            CompileAndVerify(string.Format(template, "checked"), options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes).VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "unchecked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Passes
+                )
+                .VerifyIL("C.M", expectedIL);
+            CompileAndVerify(
+                    string.Format(template, "checked"),
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Passes
+                )
+                .VerifyIL("C.M", expectedIL);
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void PointerArrayEnumerableConversionRuntimeError()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void Main()
@@ -6732,13 +7755,19 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerifyException<NotSupportedException>(text, "Type is not supported.", allowUnsafe: true, verify: Verification.Fails);
+            CompileAndVerifyException<NotSupportedException>(
+                text,
+                "Type is not supported.",
+                allowUnsafe: true,
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void PointerArrayForeachSingle()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -6757,7 +7786,15 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "12", verify: Verification.Fails).VerifyIL("C.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "12",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       41 (0x29)
   .maxstack  4
@@ -6795,13 +7832,15 @@ unsafe class C
   IL_0026:  blt.s      IL_0015
   IL_0028:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void PointerArrayForeachMultiple()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -6820,7 +7859,15 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "1234", verify: Verification.FailsPEVerify).VerifyIL("C.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "1234",
+                    verify: Verification.FailsPEVerify
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size      120 (0x78)
   .maxstack  5
@@ -6897,13 +7944,15 @@ unsafe class C
   IL_0075:  ble.s      IL_004a
   IL_0077:  ret
 }
-");
+"
+                );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void PointerArrayForeachEnumerable()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 
@@ -6933,7 +7982,12 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerifyException<NotSupportedException>(text, "Type is not supported.", allowUnsafe: true, verify: Verification.Fails);
+            CompileAndVerifyException<NotSupportedException>(
+                text,
+                "Type is not supported.",
+                allowUnsafe: true,
+                verify: Verification.Fails
+            );
         }
 
         #endregion Pointer conversion tests
@@ -6943,7 +7997,8 @@ unsafe class C
         [Fact]
         public void SizeOfConstant()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C
@@ -6981,7 +8036,15 @@ class C
 1
 16
 ".Trim();
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Passes).VerifyIL("C.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Passes
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       80 (0x50)
   .maxstack  1
@@ -7013,13 +8076,15 @@ class C
   IL_004a:  call       ""void System.Console.WriteLine(int)""
   IL_004f:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void SizeOfNonConstant()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -7068,7 +8133,15 @@ class Outer
 ".Trim();
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Passes).VerifyIL("C.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Passes
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       45 (0x2d)
   .maxstack  1
@@ -7082,13 +8155,15 @@ class Outer
   IL_0027:  call       ""void System.Console.WriteLine(int)""
   IL_002c:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void SizeOfEnum()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -7110,7 +8185,15 @@ enum E3 : long { A }
 1
 8
 ".Trim();
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Passes).VerifyIL("C.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Passes
+                )
+                .VerifyIL(
+                    "C.Main",
+                    @"
 {
   // Code size       19 (0x13)
   .maxstack  1
@@ -7122,7 +8205,8 @@ enum E3 : long { A }
   IL_000d:  call       ""void System.Console.WriteLine(int)""
   IL_0012:  ret
 }
-");
+"
+                );
         }
 
         #endregion sizeof tests
@@ -7132,7 +8216,8 @@ enum E3 : long { A }
         [Fact]
         public void NumericAdditionChecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7153,7 +8238,14 @@ unsafe struct S
 ";
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       59 (0x3b)
   .maxstack  3
@@ -7191,13 +8283,15 @@ unsafe struct S
   IL_0039:  pop
   IL_003a:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void NumericAdditionUnchecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7218,7 +8312,14 @@ unsafe struct S
 ";
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       59 (0x3b)
   .maxstack  3
@@ -7256,13 +8357,15 @@ unsafe struct S
   IL_0039:  pop
   IL_003a:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void NumericSubtractionChecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7283,7 +8386,14 @@ unsafe struct S
 ";
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       59 (0x3b)
   .maxstack  3
@@ -7321,13 +8431,15 @@ unsafe struct S
   IL_0039:  pop
   IL_003a:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void NumericSubtractionUnchecked()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7348,7 +8460,14 @@ unsafe struct S
 ";
 
             // Dev10 has conv.u after IL_000d and conv.i8 in place of conv.u8 at IL_0017.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       59 (0x3b)
   .maxstack  3
@@ -7386,14 +8505,16 @@ unsafe struct S
   IL_0039:  pop
   IL_003a:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(546750, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546750")]
         [Fact]
         public void NumericAdditionUnchecked_SizeOne()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -7418,7 +8539,10 @@ unsafe class C
 ";
             // NOTE: even when not optimized.
             // NOTE: additional conversions applied to constants of type int and uint.
-            CompileAndVerify(text, options: TestOptions.UnsafeDebugDll, verify: Verification.Fails).VerifyIL("C.Test", @"
+            CompileAndVerify(text, options: TestOptions.UnsafeDebugDll, verify: Verification.Fails)
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       50 (0x32)
   .maxstack  2
@@ -7473,7 +8597,8 @@ unsafe class C
   IL_0030:  nop
   IL_0031:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(18871, "https://github.com/dotnet/roslyn/issues/18871")]
@@ -7481,7 +8606,8 @@ unsafe class C
         [Fact]
         public void NumericAdditionChecked_SizeOne()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -7526,9 +8652,15 @@ unsafe class C
             // NOTE: even when not optimized.
             // NOTE: additional conversions applied to constants of type int and uint.
             // NOTE: identical to unchecked except "add" becomes "add.ovf.un".
-            var comp = CompileAndVerify(text, options: TestOptions.UnsafeDebugDll, verify: Verification.Fails);
+            var comp = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugDll,
+                verify: Verification.Fails
+            );
 
-            comp.VerifyIL("C.Test", @"
+            comp.VerifyIL(
+                "C.Test",
+                @"
 {
   // Code size       57 (0x39)
   .maxstack  2
@@ -7588,9 +8720,12 @@ unsafe class C
   IL_0036:  stloc.1
   IL_0037:  nop
   IL_0038:  ret
-}");
+}"
+            );
 
-            comp.VerifyIL("C.Test1", @"
+            comp.VerifyIL(
+                "C.Test1",
+                @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -7650,13 +8785,15 @@ unsafe class C
   IL_0035:  stloc.1
   IL_0036:  nop
   IL_0037:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void CheckedSignExtend()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7694,9 +8831,17 @@ unsafe struct S
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"2147483651
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: @"2147483651
 overflow
-2", verify: Verification.Fails).VerifyIL("S.Main", @"
+2",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       67 (0x43)
   .maxstack  2
@@ -7745,13 +8890,15 @@ overflow
   }
   IL_0042:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Increment()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7780,7 +8927,15 @@ unsafe struct S
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "4", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "4",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       47 (0x2f)
   .maxstack  2
@@ -7809,13 +8964,15 @@ unsafe struct S
   IL_0029:  call       ""void System.Console.WriteLine(int)""
   IL_002e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void Decrement()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7844,7 +9001,15 @@ unsafe struct S
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "4", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "4",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       47 (0x2f)
   .maxstack  2
@@ -7873,13 +9038,15 @@ unsafe struct S
   IL_0029:  call       ""void System.Console.WriteLine(int)""
   IL_002e:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void IncrementProperty()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7903,7 +9070,15 @@ unsafe struct S
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "I0", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "I0",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       74 (0x4a)
   .maxstack  3
@@ -7938,13 +9113,15 @@ unsafe struct S
   IL_0044:  call       ""void System.Console.Write(int)""
   IL_0049:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void CompoundAssignment()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -7971,7 +9148,15 @@ unsafe struct S
 }
 ";
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "8", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "8",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size      103 (0x67)
   .maxstack  3
@@ -8036,13 +9221,15 @@ unsafe struct S
   IL_0061:  call       ""void System.Console.WriteLine(int)""
   IL_0066:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void CompoundAssignProperty()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -8078,7 +9265,15 @@ unsafe struct S
                 expectedOutput = @"I8";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: expectedOutput,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       78 (0x4e)
   .maxstack  5
@@ -8117,13 +9312,15 @@ unsafe struct S
   IL_0048:  call       ""void System.Console.Write(int)""
   IL_004d:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void PointerSubtraction_EmptyStruct()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -8145,7 +9342,15 @@ unsafe struct S
 ";
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "44", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "44",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -8173,13 +9378,15 @@ unsafe struct S
   IL_0021:  call       ""void System.Console.Write(long)""
   IL_0026:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void PointerSubtraction_NonEmptyStruct()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -8203,7 +9410,15 @@ unsafe struct S
 ";
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "11", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "11",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       39 (0x27)
   .maxstack  2
@@ -8231,13 +9446,15 @@ unsafe struct S
   IL_0021:  call       ""void System.Console.Write(long)""
   IL_0026:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void PointerSubtraction_ConstantSize()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -8259,7 +9476,15 @@ unsafe struct S
 ";
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "11", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "11",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       29 (0x1d)
   .maxstack  2
@@ -8287,13 +9512,15 @@ unsafe struct S
   IL_0017:  call       ""void System.Console.Write(long)""
   IL_001c:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void PointerSubtraction_IntegerDivision()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -8318,7 +9545,15 @@ unsafe struct S
 ";
 
             // NOTE: don't use checked subtraction or division in either case (matches dev10).
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "01", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "01",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size       43 (0x2b)
   .maxstack  2
@@ -8350,14 +9585,16 @@ unsafe struct S
   IL_0025:  call       ""void System.Console.Write(long)""
   IL_002a:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(544155, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544155")]
         [Fact]
         public void SubtractPointerTypes()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class PointerArithmetic
@@ -8373,7 +9610,12 @@ class PointerArithmetic
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "2", verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "2",
+                verify: Verification.Fails
+            );
         }
 
         #endregion Pointer arithmetic tests
@@ -8384,7 +9626,8 @@ class PointerArithmetic
         // 1 - pointed at type name (e.g. "S")
         // 2 - operator (e.g. "+")
         // 3 - checked/unchecked
-        private const string CheckedNumericHelperTemplate = @"
+        private const string CheckedNumericHelperTemplate =
+            @"
 unsafe static class Helper
 {{
     public static void {0}Int({1}* p, int num, string description)
@@ -8457,7 +9700,8 @@ unsafe static class Helper
 }}
 ";
 
-        private const string SizedStructs = @"
+        private const string SizedStructs =
+            @"
 //sizeof SXX is 2 ^ XX
 struct S00 { }
 struct S01 { S00 a, b; }
@@ -8494,7 +9738,8 @@ struct S27 { S26 a, b; }
 ";
 
         // 0 - pointed-at type
-        private const string PositiveNumericAdditionCasesTemplate = @"
+        private const string PositiveNumericAdditionCasesTemplate =
+            @"
             Helper.AddInt(({0}*)0, int.MaxValue, ""0 + int.MaxValue"");
             Helper.AddInt(({0}*)1, int.MaxValue, ""1 + int.MaxValue"");
             Helper.AddInt(({0}*)int.MaxValue, 0, ""int.MaxValue + 0"");
@@ -8583,7 +9828,8 @@ struct S27 { S26 a, b; }
 ";
 
         // 0 - pointed-at type
-        private const string NegativeNumericAdditionCasesTemplate = @"
+        private const string NegativeNumericAdditionCasesTemplate =
+            @"
             Helper.AddInt(({0}*)0, -1, ""0 + (-1)"");
             Helper.AddInt(({0}*)0, int.MinValue, ""0 + int.MinValue"");
             //Helper.AddInt(({0}*)0, long.MinValue, ""0 + long.MinValue"");
@@ -8596,7 +9842,8 @@ struct S27 { S26 a, b; }
 ";
 
         // 0 - pointed-at type
-        private const string PositiveNumericSubtractionCasesTemplate = @"
+        private const string PositiveNumericSubtractionCasesTemplate =
+            @"
             Helper.SubInt(({0}*)0, 1, ""0 - 1"");
             Helper.SubInt(({0}*)0, int.MaxValue, ""0 - int.MaxValue"");
             //Helper.SubInt(({0}*)0, uint.MaxValue, ""0 - uint.MaxValue"");
@@ -8629,7 +9876,8 @@ struct S27 { S26 a, b; }
 ";
 
         // 0 - pointed-at type
-        private const string NegativeNumericSubtractionCasesTemplate = @"
+        private const string NegativeNumericSubtractionCasesTemplate =
+            @"
             Helper.SubInt(({0}*)0, -1, ""0 - -1"");
             Helper.SubInt(({0}*)0, int.MinValue, ""0 - int.MinValue"");
             Helper.SubInt(({0}*)0, -1 * int.MaxValue, ""0 - -int.MaxValue"");
@@ -8647,9 +9895,16 @@ struct S27 { S26 a, b; }
             //Helper.SubLong(({0}*)0, -1L * long.MinValue, ""0 - -long.MinValue"");
 ";
 
-        private static string MakeNumericOverflowTest(string casesTemplate, string pointedAtType, string operationName, string @operator, string checkedness)
+        private static string MakeNumericOverflowTest(
+            string casesTemplate,
+            string pointedAtType,
+            string operationName,
+            string @operator,
+            string checkedness
+        )
         {
-            const string mainClassTemplate = @"
+            const string mainClassTemplate =
+                @"
 using System;
 
 unsafe class C
@@ -8667,24 +9922,39 @@ unsafe class C
 
 {3}
 ";
-            return string.Format(mainClassTemplate,
+            return string.Format(
+                mainClassTemplate,
                 checkedness,
                 string.Format(casesTemplate, pointedAtType),
-                string.Format(CheckedNumericHelperTemplate, operationName, pointedAtType, @operator, checkedness),
-                SizedStructs);
+                string.Format(
+                    CheckedNumericHelperTemplate,
+                    operationName,
+                    pointedAtType,
+                    @operator,
+                    checkedness
+                ),
+                SizedStructs
+            );
         }
 
         // Positive numbers, size = 1
         [Fact]
         public void CheckedNumericAdditionOverflow1()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericAdditionCasesTemplate, "S00", "Add", "+", "checked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericAdditionCasesTemplate,
+                "S00",
+                "Add",
+                "+",
+                "checked"
+            );
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 2147483647)
 AddInt: No exception at 1 + int.MaxValue (value = 2147483648)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -8728,7 +9998,8 @@ AddULong: Exception at 1 + ulong.MaxValue
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 2147483647)
 AddInt: No exception at 1 + int.MaxValue (value = 2147483648)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -8771,21 +10042,33 @@ AddULong: Exception at 1 + ulong.MaxValue
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Positive numbers, size = 4
         [Fact]
         public void CheckedNumericAdditionOverflow2()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericAdditionCasesTemplate, "S02", "Add", "+", "checked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericAdditionCasesTemplate,
+                "S02",
+                "Add",
+                "+",
+                "checked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: Exception at 0 + int.MaxValue
 AddInt: Exception at 1 + int.MaxValue
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -8829,7 +10112,8 @@ AddULong: Exception at 1 + ulong.MaxValue
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 8589934588)
 AddInt: No exception at 1 + int.MaxValue (value = 8589934589)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -8872,21 +10156,33 @@ AddULong: Exception at 1 + ulong.MaxValue
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Negative numbers, size = 1
         [Fact]
         public void CheckedNumericAdditionOverflow3()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericAdditionCasesTemplate, "S00", "Add", "+", "checked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericAdditionCasesTemplate,
+                "S00",
+                "Add",
+                "+",
+                "checked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 4294967295)
 AddInt: No exception at 0 + int.MinValue (value = 2147483648)
 
@@ -8897,7 +10193,8 @@ AddLong: No exception at 0 + long.MinValue (value = 0)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 18446744073709551615)
 AddInt: No exception at 0 + int.MinValue (value = 18446744071562067968)
 
@@ -8907,21 +10204,33 @@ AddLong: No exception at 0 + long.MinValue (value = 9223372036854775808)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: expectedOutput);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: expectedOutput
+            );
         }
 
         // Negative numbers, size = 4
         [Fact]
         public void CheckedNumericAdditionOverflow4()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericAdditionCasesTemplate, "S02", "Add", "+", "checked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericAdditionCasesTemplate,
+                "S02",
+                "Add",
+                "+",
+                "checked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 4294967292)
 AddInt: Exception at 0 + int.MinValue
 
@@ -8932,7 +10241,8 @@ AddLong: Exception at 0 + long.MinValue
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 18446744073709551612)
 AddInt: No exception at 0 + int.MinValue (value = 18446744065119617024)
 
@@ -8942,16 +10252,31 @@ AddLong: Exception at 0 + long.MinValue
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Positive numbers, size = 1
         [Fact]
         public void CheckedNumericSubtractionOverflow1()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericSubtractionCasesTemplate, "S00", "Sub", "-", "checked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericSubtractionCasesTemplate,
+                "S00",
+                "Sub",
+                "-",
+                "checked"
+            );
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 SubInt: Exception at 0 - 1
 SubInt: Exception at 0 - int.MaxValue
 
@@ -8969,16 +10294,27 @@ SubULong: Exception at 0 - int.MaxValue
 SubULong: Exception at 0 - uint.MaxValue
 SubULong: Exception at 0 - long.MaxValue
 SubULong: Exception at 0 - ulong.MaxValue
-");
+"
+            );
         }
 
         // Positive numbers, size = 4
         [Fact]
         public void CheckedNumericSubtractionOverflow2()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericSubtractionCasesTemplate, "S02", "Sub", "-", "checked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericSubtractionCasesTemplate,
+                "S02",
+                "Sub",
+                "-",
+                "checked"
+            );
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 SubInt: Exception at 0 - 1
 SubInt: Exception at 0 - int.MaxValue
 
@@ -8996,20 +10332,28 @@ SubULong: Exception at 0 - int.MaxValue
 SubULong: Exception at 0 - uint.MaxValue
 SubULong: Exception at 0 - long.MaxValue
 SubULong: Exception at 0 - ulong.MaxValue
-");
+"
+            );
         }
 
         // Negative numbers, size = 1
         [Fact]
         public void CheckedNumericSubtractionOverflow3()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericSubtractionCasesTemplate, "S00", "Sub", "-", "checked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericSubtractionCasesTemplate,
+                "S00",
+                "Sub",
+                "-",
+                "checked"
+            );
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: Exception at 0 - -1
 SubInt: Exception at 0 - int.MinValue
 SubInt: Exception at 0 - -int.MaxValue
@@ -9026,7 +10370,8 @@ SubLong: Exception at 0 - -int.MinValue
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: Exception at 0 - -1
 SubInt: Exception at 0 - int.MinValue
 SubInt: Exception at 0 - -int.MaxValue
@@ -9042,21 +10387,33 @@ SubLong: Exception at 0 - -int.MinValue
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Negative numbers, size = 4
         [Fact]
         public void CheckedNumericSubtractionOverflow4()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericSubtractionCasesTemplate, "S02", "Sub", "-", "checked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericSubtractionCasesTemplate,
+                "S02",
+                "Sub",
+                "-",
+                "checked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: Exception at 0 - -1
 SubInt: Exception at 0 - int.MinValue
 SubInt: Exception at 0 - -int.MaxValue
@@ -9073,7 +10430,8 @@ SubLong: No exception at 0 - -int.MinValue (value = 0)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: Exception at 0 - -1
 SubInt: Exception at 0 - int.MinValue
 SubInt: Exception at 0 - -int.MaxValue
@@ -9089,13 +10447,19 @@ SubLong: Exception at 0 - -int.MinValue
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void CheckedNumericSubtractionQuirk()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -9119,16 +10483,22 @@ unsafe struct S
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Passes, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Passes,
+                expectedOutput: @"
 No exception from addition
 Exception from subtraction
-");
+"
+            );
         }
 
         [Fact]
         public void CheckedNumericAdditionQuirk()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -9157,25 +10527,33 @@ unsafe struct S
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 No exception for pointer + int
 Exception for int + pointer
 ";
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 No exception for pointer + int
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Passes);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Passes
+            );
         }
 
         [Fact]
         public void CheckedPointerSubtractionQuirk()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -9207,13 +10585,19 @@ unsafe struct S
                 expectedOutput = @"-4294967295-4294967295";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         [Fact]
         public void CheckedPointerElementAccessQuirk()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -9248,11 +10632,16 @@ unsafe struct S
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 12
 No exception for element access
 Exception for add-then-dereference
-");
+"
+            );
         }
 
         #endregion Checked pointer arithmetic overflow tests
@@ -9263,14 +10652,21 @@ Exception for add-then-dereference
         [Fact]
         public void UncheckedNumericAdditionOverflow1()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericAdditionCasesTemplate, "S00", "Add", "+", "unchecked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericAdditionCasesTemplate,
+                "S00",
+                "Add",
+                "+",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 2147483647)
 AddInt: No exception at 1 + int.MaxValue (value = 2147483648)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -9314,7 +10710,8 @@ AddULong: No exception at 1 + ulong.MaxValue (value = 0)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 2147483647)
 AddInt: No exception at 1 + int.MaxValue (value = 2147483648)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -9357,21 +10754,33 @@ AddULong: No exception at 1 + ulong.MaxValue (value = 0)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Positive numbers, size = 4
         [Fact]
         public void UncheckedNumericAdditionOverflow2()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericAdditionCasesTemplate, "S02", "Add", "+", "unchecked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericAdditionCasesTemplate,
+                "S02",
+                "Add",
+                "+",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 4294967292)
 AddInt: No exception at 1 + int.MaxValue (value = 4294967293)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -9415,7 +10824,8 @@ AddULong: No exception at 1 + ulong.MaxValue (value = 4294967293)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + int.MaxValue (value = 8589934588)
 AddInt: No exception at 1 + int.MaxValue (value = 8589934589)
 AddInt: No exception at int.MaxValue + 0 (value = 2147483647)
@@ -9458,21 +10868,33 @@ AddULong: No exception at 1 + ulong.MaxValue (value = 18446744073709551613)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Negative numbers, size = 1
         [Fact]
         public void UncheckedNumericAdditionOverflow3()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericAdditionCasesTemplate, "S00", "Add", "+", "unchecked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericAdditionCasesTemplate,
+                "S00",
+                "Add",
+                "+",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 4294967295)
 AddInt: No exception at 0 + int.MinValue (value = 2147483648)
 
@@ -9483,7 +10905,8 @@ AddLong: No exception at 0 + long.MinValue (value = 0)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 18446744073709551615)
 AddInt: No exception at 0 + int.MinValue (value = 18446744071562067968)
 
@@ -9493,21 +10916,33 @@ AddLong: No exception at 0 + long.MinValue (value = 9223372036854775808)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Negative numbers, size = 4
         [Fact]
         public void UncheckedNumericAdditionOverflow4()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericAdditionCasesTemplate, "S02", "Add", "+", "unchecked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericAdditionCasesTemplate,
+                "S02",
+                "Add",
+                "+",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 4294967292)
 AddInt: No exception at 0 + int.MinValue (value = 0)
 
@@ -9518,7 +10953,8 @@ AddLong: No exception at 0 + long.MinValue (value = 0)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 AddInt: No exception at 0 + (-1) (value = 18446744073709551612)
 AddInt: No exception at 0 + int.MinValue (value = 18446744065119617024)
 
@@ -9528,21 +10964,33 @@ AddLong: No exception at 0 + long.MinValue (value = 0)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Positive numbers, size = 1
         [Fact]
         public void UncheckedNumericSubtractionOverflow1()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericSubtractionCasesTemplate, "S00", "Sub", "-", "unchecked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericSubtractionCasesTemplate,
+                "S00",
+                "Sub",
+                "-",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - 1 (value = 4294967295)
 SubInt: No exception at 0 - int.MaxValue (value = 2147483649)
 
@@ -9564,7 +11012,8 @@ SubULong: No exception at 0 - ulong.MaxValue (value = 1)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - 1 (value = 18446744073709551615)
 SubInt: No exception at 0 - int.MaxValue (value = 18446744071562067969)
 
@@ -9585,21 +11034,33 @@ SubULong: No exception at 0 - ulong.MaxValue (value = 1)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Positive numbers, size = 4
         [Fact]
         public void UncheckedNumericSubtractionOverflow2()
         {
-            var text = MakeNumericOverflowTest(PositiveNumericSubtractionCasesTemplate, "S02", "Sub", "-", "unchecked");
+            var text = MakeNumericOverflowTest(
+                PositiveNumericSubtractionCasesTemplate,
+                "S02",
+                "Sub",
+                "-",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - 1 (value = 4294967292)
 SubInt: No exception at 0 - int.MaxValue (value = 4)
 
@@ -9621,7 +11082,8 @@ SubULong: No exception at 0 - ulong.MaxValue (value = 4)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - 1 (value = 18446744073709551612)
 SubInt: No exception at 0 - int.MaxValue (value = 18446744065119617028)
 
@@ -9642,21 +11104,33 @@ SubULong: No exception at 0 - ulong.MaxValue (value = 4)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Negative numbers, size = 1
         [Fact]
         public void UncheckedNumericSubtractionOverflow3()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericSubtractionCasesTemplate, "S00", "Sub", "-", "unchecked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericSubtractionCasesTemplate,
+                "S00",
+                "Sub",
+                "-",
+                "unchecked"
+            );
 
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - -1 (value = 1)
 SubInt: No exception at 0 - int.MinValue (value = 2147483648)
 SubInt: No exception at 0 - -int.MaxValue (value = 2147483647)
@@ -9673,7 +11147,8 @@ SubLong: No exception at 0 - -int.MinValue (value = 2147483648)
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - -1 (value = 1)
 SubInt: No exception at 0 - int.MinValue (value = 2147483648)
 SubInt: No exception at 0 - -int.MaxValue (value = 2147483647)
@@ -9689,20 +11164,32 @@ SubLong: No exception at 0 - -int.MinValue (value = 18446744071562067968)
 ";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         // Negative numbers, size = 4
         [Fact]
         public void UncheckedNumericSubtractionOverflow4()
         {
-            var text = MakeNumericOverflowTest(NegativeNumericSubtractionCasesTemplate, "S02", "Sub", "-", "unchecked");
+            var text = MakeNumericOverflowTest(
+                NegativeNumericSubtractionCasesTemplate,
+                "S02",
+                "Sub",
+                "-",
+                "unchecked"
+            );
             bool isx86 = (IntPtr.Size == 4);
             string expectedOutput;
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - -1 (value = 4)
 SubInt: No exception at 0 - int.MinValue (value = 0)
 SubInt: No exception at 0 - -int.MaxValue (value = 4294967292)
@@ -9718,7 +11205,8 @@ SubLong: No exception at 0 - -int.MinValue (value = 0)";
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 SubInt: No exception at 0 - -1 (value = 4)
 SubInt: No exception at 0 - int.MinValue (value = 8589934592)
 SubInt: No exception at 0 - -int.MaxValue (value = 8589934588)
@@ -9733,7 +11221,12 @@ SubLong: No exception at 0 - -ulong.MaxValue (value = 18446744073709551612)
 SubLong: No exception at 0 - -int.MinValue (value = 18446744065119617024)";
             }
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.Fails
+            );
         }
 
         #endregion Unchecked pointer arithmetic overflow tests
@@ -9743,7 +11236,8 @@ SubLong: No exception at 0 - -int.MinValue (value = 18446744065119617024)";
         [Fact]
         public void PointerComparisonSameType()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S
@@ -9781,7 +11275,15 @@ unsafe struct S
 }
 ";
             // NOTE: all comparisons unsigned.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "011010011010", verify: Verification.Fails).VerifyIL("S.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "011010011010",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "S.Main",
+                    @"
 {
   // Code size      133 (0x85)
   .maxstack  2
@@ -9855,13 +11357,15 @@ unsafe struct S
   IL_007f:  call       ""void S.Write(bool)""
   IL_0084:  ret
 }
-");
+"
+                );
         }
 
         [Fact, WorkItem(49639, "https://github.com/dotnet/roslyn/issues/49639")]
         public void CompareToNullWithNestedUnconstrainedTypeParameter()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                @"
 using System;
 unsafe
 {
@@ -9877,13 +11381,19 @@ unsafe
 }
 
 struct S<T> {}
-", options: TestOptions.UnsafeReleaseExe, expectedOutput: @"
+",
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"
 True
 True
 False
-False", verify: Verification.Skipped);
+False",
+                verify: Verification.Skipped
+            );
 
-            verifier.VerifyIL("Program.<<Main>$>g__test|0_0<T>(S<T>*)", @"
+            verifier.VerifyIL(
+                "Program.<<Main>$>g__test|0_0<T>(S<T>*)",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -9899,13 +11409,15 @@ False", verify: Verification.Skipped);
   IL_000f:  call       ""void System.Console.WriteLine(bool)""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(49639, "https://github.com/dotnet/roslyn/issues/49639")]
         public void CompareToNullWithPointerToUnmanagedTypeParameter()
         {
-            var verifier = CompileAndVerify(@"
+            var verifier = CompileAndVerify(
+                @"
 using System;
 unsafe
 {
@@ -9919,13 +11431,19 @@ unsafe
         Console.WriteLine(t is null);
     }
 }
-", options: TestOptions.UnsafeReleaseExe, expectedOutput: @"
+",
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"
 True
 True
 False
-False", verify: Verification.Skipped);
+False",
+                verify: Verification.Skipped
+            );
 
-            verifier.VerifyIL("Program.<<Main>$>g__test|0_0<T>(T*)", @"
+            verifier.VerifyIL(
+                "Program.<<Main>$>g__test|0_0<T>(T*)",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -9941,7 +11459,8 @@ False", verify: Verification.Skipped);
   IL_000f:  call       ""void System.Console.WriteLine(bool)""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Theory]
@@ -9952,7 +11471,8 @@ False", verify: Verification.Skipped);
         [InlineData("delegate*<T>")]
         public void CompareToNullInPatternOutsideUnsafe(string pointerType)
         {
-            var comp = CreateCompilation($@"
+            var comp = CreateCompilation(
+                $@"
 var c = default(S<int>);
 _ = c.Field is null;
 unsafe struct S<T> where T : unmanaged
@@ -9960,7 +11480,9 @@ unsafe struct S<T> where T : unmanaged
 #pragma warning disable CS0649 // Field is unassigned
     public {pointerType} Field;
 }}
-", options: TestOptions.UnsafeReleaseExe);
+",
+                options: TestOptions.UnsafeReleaseExe
+            );
 
             comp.VerifyDiagnostics(
                 // (3,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -9976,7 +11498,8 @@ unsafe struct S<T> where T : unmanaged
         [Fact]
         public void SimpleStackAlloc()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M()
@@ -10010,7 +11533,14 @@ unsafe class C
 }
 ";
             // NOTE: conversion is always unchecked, multiplication is always checked.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       47 (0x2f)
   .maxstack  2
@@ -10045,14 +11575,15 @@ unsafe class C
   IL_0029:  call       ""void C.Use(char*)""
   IL_002e:  ret
 }
-");
-
+"
+                );
         }
 
         [Fact]
         public void StackAllocConversion()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M()
@@ -10067,7 +11598,14 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       16 (0x10)
   .maxstack  1
@@ -10083,13 +11621,15 @@ unsafe class C
   IL_000e:  pop
   IL_000f:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void StackAllocConversionZero()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     void M()
@@ -10104,7 +11644,14 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.FailsPEVerify).VerifyIL("C.M", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.FailsPEVerify
+                )
+                .VerifyIL(
+                    "C.M",
+                    @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -10118,13 +11665,15 @@ unsafe class C
   IL_000a:  pop
   IL_000b:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void StackAllocSpecExample() //Section 18.8
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -10150,16 +11699,22 @@ unsafe class C
 	}
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"123
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"123
 -456
-");
+"
+            );
         }
 
         // See MethodToClassRewriter.VisitAssignmentOperator for an explanation.
         [Fact]
         public void StackAllocIntoHoistedLocal1()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -10191,11 +11746,17 @@ unsafe class C
     }
 }
 ";
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails);
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails
+            );
 
             // Note that the stackalloc for p is written into a temp *before* the receiver (i.e. "this")
             // for C.<>c__DisplayClass0.p is pushed onto the stack.
-            verifier.VerifyIL("C.Main", @"
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -10216,10 +11777,13 @@ unsafe class C
   IL_0016:  call       ""void C.Use(int*)""
   IL_001b:  ret
 }
-");
+"
+            );
 
             // Check that the same thing works inside a lambda.
-            verifier.VerifyIL("C.<>c__DisplayClass0_0.<Main>b__0", @"
+            verifier.VerifyIL(
+                "C.<>c__DisplayClass0_0.<Main>b__0",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -10243,7 +11807,8 @@ unsafe class C
   IL_001d:  call       ""void C.Use(int*)""
   IL_0022:  ret
 }
-");
+"
+            );
         }
 
         // See MethodToClassRewriter.VisitAssignmentOperator for an explanation.
@@ -10251,7 +11816,8 @@ unsafe class C
         public void StackAllocIntoHoistedLocal2()
         {
             // From native bug #59454 (in DevDiv collection)
-            var text = @"
+            var text =
+                @"
 unsafe class T 
 { 
     delegate int D(); 
@@ -10264,7 +11830,15 @@ unsafe class T
     } 
 } 
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "0", verify: Verification.Fails).VerifyIL("T.Main", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "0",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "T.Main",
+                    @"
 {
   // Code size       41 (0x29)
   .maxstack  2
@@ -10286,8 +11860,17 @@ unsafe class T
   IL_0023:  call       ""void System.Console.WriteLine(int)""
   IL_0028:  ret
 }
-");
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "0", verify: Verification.Fails).VerifyIL("T.Main", @"
+"
+                );
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "0",
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "T.Main",
+                    @"
 {
   // Code size       41 (0x29)
   .maxstack  2
@@ -10309,7 +11892,8 @@ unsafe class T
   IL_0023:  call       ""void System.Console.WriteLine(int)""
   IL_0028:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
@@ -10317,7 +11901,8 @@ unsafe class T
         {
             // This is from C# Legacy test where it uses Perl script to call ildasm and check 'mul.ovf' emitted
             // $Roslyn\Main\LegacyTest\CSharp\Source\csharp\Source\Conformance\unsafecode\stackalloc\regr001.cs
-            var text = @"// <Title>Should checked affect stackalloc?</Title>
+            var text =
+                @"// <Title>Should checked affect stackalloc?</Title>
 // <Description>
 // The lower level localloc MSIL instruction takes an unsigned native int as input; however the higher level 
 // stackalloc uses only 32-bits. The example shows the operation overflowing the 32-bit multiply which leads to 
@@ -10337,8 +11922,14 @@ public class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails);
-            compVerifier.VerifyIL("C.Main", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       13 (0xd)
   .maxstack  2
@@ -10351,7 +11942,8 @@ public class C
   IL_000b:  conv.i4
   IL_000c:  ret
 }
-");
+"
+            );
         }
 
         #endregion stackalloc tests
@@ -10361,7 +11953,8 @@ public class C
         [Fact]
         public void BubbleSort()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -10412,17 +12005,23 @@ unsafe class C
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 1
 1, 2
 1, 2, 3
-1, 2, 3, 4");
+1, 2, 3, 4"
+            );
         }
 
         [Fact]
         public void BigStructs()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     static void Main()
@@ -10454,14 +12053,16 @@ unsafe class C
 
             if (isx86)
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 No overflow from (S15*)0 + sizeof(S15)
 Overflow from (S15*)0 + sizeof(S16)
 Overflow from (S16*)0 + sizeof(S15)";
             }
             else
             {
-                expectedOutput = @"
+                expectedOutput =
+                    @"
 No overflow from (S15*)0 + sizeof(S15)
 No overflow from (S15*)0 + sizeof(S16)
 No overflow from (S16*)0 + sizeof(S15)";
@@ -10470,13 +12071,19 @@ No overflow from (S16*)0 + sizeof(S15)";
             // [ : C+<>c__DisplayClass0_0::<Main>b__0][mdToken=0x6000005][offset 0x00000012][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
             // [ : C+<> c__DisplayClass0_0::< Main > b__1][mdToken= 0x6000006][offset 0x00000012][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
             // [ : C +<> c__DisplayClass0_0::< Main > b__2][mdToken = 0x6000007][offset 0x00000012][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: expectedOutput, verify: Verification.FailsPEVerify);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: expectedOutput,
+                verify: Verification.FailsPEVerify
+            );
         }
 
         [Fact]
         public void LambdaConversion()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Program
@@ -10494,13 +12101,19 @@ unsafe delegate void F1(int* x);
 delegate void F2(int x);
 ";
 
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: @"2", verify: Verification.Passes);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"2",
+                verify: Verification.Passes
+            );
         }
 
         [Fact]
         public void LambdaConversion_PointerArray()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class C<T> { }
@@ -10588,7 +12201,7 @@ class D
                 // (18,48): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var lam4 = (C<delegate*<void>[]> a) => a; // 4
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a").WithLocation(18, 48)
-                );
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67330")]
@@ -10647,13 +12260,14 @@ class D
                 // (23,23): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         return (a) => a; // 4
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "a").WithLocation(23, 23)
-                );
+            );
         }
 
         [Fact]
         public void LocalVariableReuse()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {
     int this[string s] { get { return 0; } set { } }
@@ -10681,7 +12295,14 @@ unsafe class C
             // NOTE: one pinned string temp and one unpinned string temp.
             // That is, pinned temps are reused in by other pinned temps
             // but not by unpinned temps and vice versa.
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyIL("C.Test", @"
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       99 (0x63)
   .maxstack  4
@@ -10738,14 +12359,16 @@ unsafe class C
   IL_0060:  ldnull
   IL_0061:  stloc.2
   IL_0062:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(544229, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544229")]
         [Fact]
         public void UnsafeTypeAsAttributeArgument()
         {
-            var template = @"
+            var template =
+                @"
 using System;
  
 namespace System
@@ -10765,12 +12388,42 @@ class A : Attribute
     }}
 }}
 ";
-            CompileAndVerify(string.Format(template, "int"), options: TestOptions.UnsafeReleaseExe, expectedOutput: @"True", verify: Verification.Passes);
-            CompileAndVerify(string.Format(template, "int*"), options: TestOptions.UnsafeReleaseExe, expectedOutput: @"True", verify: Verification.Passes);
-            CompileAndVerify(string.Format(template, "int**"), options: TestOptions.UnsafeReleaseExe, expectedOutput: @"True", verify: Verification.Passes);
-            CompileAndVerify(string.Format(template, "int[]"), options: TestOptions.UnsafeReleaseExe, expectedOutput: @"True", verify: Verification.Passes);
-            CompileAndVerify(string.Format(template, "int[][]"), options: TestOptions.UnsafeReleaseExe, expectedOutput: @"True", verify: Verification.Passes);
-            CompileAndVerify(string.Format(template, "int*[]"), options: TestOptions.UnsafeReleaseExe, expectedOutput: @"True", verify: Verification.Passes);
+            CompileAndVerify(
+                string.Format(template, "int"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"True",
+                verify: Verification.Passes
+            );
+            CompileAndVerify(
+                string.Format(template, "int*"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"True",
+                verify: Verification.Passes
+            );
+            CompileAndVerify(
+                string.Format(template, "int**"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"True",
+                verify: Verification.Passes
+            );
+            CompileAndVerify(
+                string.Format(template, "int[]"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"True",
+                verify: Verification.Passes
+            );
+            CompileAndVerify(
+                string.Format(template, "int[][]"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"True",
+                verify: Verification.Passes
+            );
+            CompileAndVerify(
+                string.Format(template, "int*[]"),
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: @"True",
+                verify: Verification.Passes
+            );
         }
 
         #endregion Functional tests
@@ -10782,7 +12435,7 @@ class A : Attribute
         public void MixedSafeAndUnsafeFields()
         {
             var text =
-@"struct Perf_Contexts
+                @"struct Perf_Contexts
 {
     int data;
     private int SuppressUnused(int x) { data = x; return data; }
@@ -10804,64 +12457,87 @@ public class Test
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.FailsPEVerify with
-            {
-                PEVerifyMessage = """
-                    [ : ChannelServices::.cctor][offset 0x0000000C][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
-                    [ : ChannelServices::GetPrivateContextsPerfCounters][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
-                    """,
-            }).VerifyDiagnostics();
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    verify: Verification.FailsPEVerify with
+                    {
+                        PEVerifyMessage = """
+                        [ : ChannelServices::.cctor][offset 0x0000000C][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
+                        [ : ChannelServices::GetPrivateContextsPerfCounters][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
+                        """,
+                    }
+                )
+                .VerifyDiagnostics();
         }
 
         [WorkItem(545026, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545026")]
         [Fact]
         public void SafeFieldBeforeUnsafeField()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     int x = 1;
     unsafe int* p = (int*)2;
 }
 ";
-            var c = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.FailsPEVerify with
-            {
-                PEVerifyMessage = "[ : C::.ctor][offset 0x0000000A][found Native Int][expected unmanaged pointer] Unexpected type on the stack."
-            });
+            var c = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.FailsPEVerify with
+                {
+                    PEVerifyMessage =
+                        "[ : C::.ctor][offset 0x0000000A][found Native Int][expected unmanaged pointer] Unexpected type on the stack.",
+                }
+            );
 
             c.VerifyDiagnostics(
                 // (4,9): warning CS0414: The field 'C.x' is assigned but its value is never used
                 //     int x = 1;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "x").WithArguments("C.x"));
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "x").WithArguments("C.x")
+            );
         }
 
         [WorkItem(545026, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545026")]
         [Fact]
         public void SafeFieldAfterUnsafeField()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     unsafe int* p = (int*)2;
     int x = 1;
 }
 ";
-            var c = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.FailsPEVerify with
-            {
-                PEVerifyMessage = "[ : C::.ctor][offset 0x00000003][found Native Int][expected unmanaged pointer] Unexpected type on the stack."
-            });
+            var c = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll,
+                verify: Verification.FailsPEVerify with
+                {
+                    PEVerifyMessage =
+                        "[ : C::.ctor][offset 0x00000003][found Native Int][expected unmanaged pointer] Unexpected type on the stack.",
+                }
+            );
 
             c.VerifyDiagnostics(
                 // (5,9): warning CS0414: The field 'C.x' is assigned but its value is never used
                 //     int x = 1;
-                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "x").WithArguments("C.x"));
+                Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "x").WithArguments("C.x")
+            );
         }
 
-        [WorkItem(545026, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545026"), WorkItem(598170, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/598170")]
+        [
+            WorkItem(545026, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545026"),
+            WorkItem(598170, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/598170")
+        ]
         [Fact]
         public void FixedPassByRef()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     unsafe static int printAddress(out int* pI)
@@ -10907,13 +12583,19 @@ unsafe struct S
                 Diagnostic(ErrorCode.ERR_RefLvalueExpected, "s.i"),
                 // (25,45): error CS1510: A ref or out argument must be an assignable variable
                 //             retval = Test.printAddress1(ref s.i);
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "s.i"));
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "s.i")
+            );
         }
 
-        [Fact, WorkItem(545293, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545293"), WorkItem(881188, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/881188")]
+        [
+            Fact,
+            WorkItem(545293, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545293"),
+            WorkItem(881188, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/881188")
+        ]
         public void EmptyAndFixedBufferStructIsInitialized()
         {
-            var text = @"
+            var text =
+                @"
 public struct EmptyStruct { }
 unsafe public struct FixedStruct { fixed char c[10]; }
 
@@ -10924,20 +12606,34 @@ public struct OuterStruct
     override public string ToString() { return (ES.ToString() + FS.ToString()); }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Passes).VerifyDiagnostics(
-                // (8,17): warning CS0649: Field 'OuterStruct.FS' is never assigned to, and will always have its default value 
-                //     FixedStruct FS;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "FS").WithArguments("OuterStruct.FS", "").WithLocation(8, 17),
-                // (7,17): warning CS0649: Field 'OuterStruct.ES' is never assigned to, and will always have its default value 
-                //     EmptyStruct ES;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "ES").WithArguments("OuterStruct.ES", "").WithLocation(7, 17)
+            CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Passes
+                )
+                .VerifyDiagnostics(
+                    // (8,17): warning CS0649: Field 'OuterStruct.FS' is never assigned to, and will always have its default value
+                    //     FixedStruct FS;
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "FS")
+                        .WithArguments("OuterStruct.FS", "")
+                        .WithLocation(8, 17),
+                    // (7,17): warning CS0649: Field 'OuterStruct.ES' is never assigned to, and will always have its default value
+                    //     EmptyStruct ES;
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "ES")
+                        .WithArguments("OuterStruct.ES", "")
+                        .WithLocation(7, 17)
                 );
         }
 
-        [Fact, WorkItem(545296, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545296"), WorkItem(545999, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545999")]
+        [
+            Fact,
+            WorkItem(545296, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545296"),
+            WorkItem(545999, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545999")
+        ]
         public void FixedBufferAndStatementWithFixedArrayElementAsInitializer()
         {
-            var text = @"
+            var text =
+                @"
 unsafe public struct FixedStruct 
 {
     fixed int i[1];
@@ -10947,9 +12643,16 @@ unsafe public struct FixedStruct
     }
 }
 ";
-            var comp = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll, verify: Verification.Fails).VerifyDiagnostics();
+            var comp = CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseDll,
+                    verify: Verification.Fails
+                )
+                .VerifyDiagnostics();
 
-            comp.VerifyIL("FixedStruct.ToString", @"
+            comp.VerifyIL(
+                "FixedStruct.ToString",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -10963,13 +12666,15 @@ unsafe public struct FixedStruct
   IL_000e:  call       ""string char.ToString()""
   IL_0013:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FixedBufferAndStatementWithFixedArrayElementAsInitializerExe()
         {
-            var text = @"
+            var text =
+                @"
     class Program
     {
         unsafe static void Main(string[] args)
@@ -11000,9 +12705,17 @@ unsafe public struct FixedStruct
             }
         }
     }";
-            var comp = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "ABC", verify: Verification.Fails).VerifyDiagnostics();
+            var comp = CompileAndVerify(
+                    text,
+                    options: TestOptions.UnsafeReleaseExe,
+                    expectedOutput: "ABC",
+                    verify: Verification.Fails
+                )
+                .VerifyDiagnostics();
 
-            comp.VerifyIL("FixedStruct.ToString", @"
+            comp.VerifyIL(
+                "FixedStruct.ToString",
+                @"
 {
   // Code size       45 (0x2d)
   .maxstack  3
@@ -11029,13 +12742,15 @@ unsafe public struct FixedStruct
   IL_0027:  call       ""string char.ToString()""
   IL_002c:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(545299, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545299")]
         public void FixedStatementInlambda()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Diagnostics;
 using System.Collections;
@@ -11067,13 +12782,19 @@ class A
     }
 }
 ";
-            CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "b", verify: Verification.Fails);
+            CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "b",
+                verify: Verification.Fails
+            );
         }
 
         [Fact, WorkItem(546865, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546865")]
         public void DontStackScheduleLocalPerformingPointerConversion()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S1
@@ -11111,10 +12832,17 @@ unsafe class Test
 }
 ";
 
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "hello", verify: Verification.Fails);
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "hello",
+                verify: Verification.Fails
+            );
 
             // Note that the pointer local is not scheduled on the stack.
-            verifier.VerifyIL("Test.Test1", @"
+            verifier.VerifyIL(
+                "Test.Test1",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -11127,10 +12855,13 @@ unsafe class Test
   IL_0009:  newobj     ""string..ctor(char*)""
   IL_000e:  call       ""void System.Console.WriteLine(string)""
   IL_0013:  ret
-}");
+}"
+            );
 
             // All locals retained.
-            verifier.VerifyIL("Test.Test2", @"
+            verifier.VerifyIL(
+                "Test.Test2",
+                @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -11147,13 +12878,15 @@ unsafe class Test
   IL_0007:  ldloc.2
   IL_0008:  conv.u8
   IL_0009:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(546807, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546807")]
         public void PointerMemberAccessReadonlyField()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -11180,12 +12913,19 @@ unsafe class Test
 }
 ";
 
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 True
-True");
+True"
+            );
 
             // NOTE: ldobj before ldfld S1.X, but not before ldfld S1.Y.
-            verifier.VerifyIL("Test.Main", @"
+            verifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -11215,13 +12955,15 @@ True");
   IL_003a:  call       ""void System.Console.WriteLine(bool)""
   IL_003f:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(546807, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546807")]
         public void PointerMemberAccessCall()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -11260,12 +13002,19 @@ unsafe class Test
 }
 ";
 
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, verify: Verification.Fails, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Fails,
+                expectedOutput: @"
 2
-2");
+2"
+            );
 
             // NOTE: ldobj before extension call, but not before instance call.
-            verifier.VerifyIL("Test.Main", @"
+            verifier.VerifyIL(
+                "Test.Main",
+                @"
 {
   // Code size       59 (0x3b)
   .maxstack  3
@@ -11290,13 +13039,15 @@ unsafe class Test
   IL_0030:  ldobj      ""S1""
   IL_0035:  call       ""void Extensions.Extension(S1)""
   IL_003a:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(531327, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531327")]
         public void PointerParameter()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe struct S1
@@ -11312,13 +13063,18 @@ namespace N
 }
 ";
 
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll.WithConcurrentBuild(false), verify: Verification.Passes);
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll.WithConcurrentBuild(false),
+                verify: Verification.Passes
+            );
         }
 
         [Fact, WorkItem(531327, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531327")]
         public void PointerReturn()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 namespace N
@@ -11336,13 +13092,18 @@ unsafe struct S1
 
 ";
 
-            var verifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseDll.WithConcurrentBuild(false), verify: Verification.FailsPEVerify);
+            var verifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseDll.WithConcurrentBuild(false),
+                verify: Verification.FailsPEVerify
+            );
         }
 
         [Fact, WorkItem(748530, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/748530")]
         public void Repro748530()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class A
 {
     public unsafe struct ListNode
@@ -11362,7 +13123,8 @@ unsafe class A
         [Fact]
         public void UnsafeMathConv()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -11376,8 +13138,15 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "F6543210", verify: Verification.Fails);
-            compVerifier.VerifyIL("C.Main", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "F6543210",
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       36 (0x24)
   .maxstack  2
@@ -11401,14 +13170,16 @@ unsafe class C
   IL_001e:  call       ""void System.Console.WriteLine(string, object)""
   IL_0023:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(682584, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/682584")]
         [Fact]
         public void UnsafeMathConv001()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -11422,8 +13193,15 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "F6543210", verify: Verification.Fails);
-            compVerifier.VerifyIL("C.Main", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "F6543210",
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  3
@@ -11451,14 +13229,16 @@ unsafe class C
   IL_0022:  call       ""void System.Console.WriteLine(string, object)""
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(682584, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/682584")]
         [Fact]
         public void UnsafeMathConv002()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -11471,8 +13251,15 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "F6543210", verify: Verification.Fails);
-            compVerifier.VerifyIL("C.Main", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "F6543210",
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -11493,14 +13280,16 @@ unsafe class C
   IL_001c:  call       ""void System.Console.WriteLine(string, object)""
   IL_0021:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(682584, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/682584")]
         [Fact]
         public void UnsafeMathConv002a()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 unsafe class C
@@ -11513,8 +13302,15 @@ unsafe class C
     }
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "F654320F", verify: Verification.Fails);
-            compVerifier.VerifyIL("C.Main", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "F654320F",
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -11534,14 +13330,16 @@ unsafe class C
   IL_001b:  call       ""void System.Console.WriteLine(string, object)""
   IL_0020:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(857598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/857598")]
         [Fact]
         public void VoidToNullable()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 {    
 	public int? x = (int?)(void*)0;
@@ -11556,8 +13354,15 @@ class c1
 	}
 }
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "0", verify: Verification.Passes);
-            compVerifier.VerifyIL("C..ctor", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "0",
+                verify: Verification.Passes
+            );
+            compVerifier.VerifyIL(
+                "C..ctor",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -11571,14 +13376,16 @@ class c1
   IL_000f:  call       ""object..ctor()""
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(907771, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/907771")]
         [Fact]
         public void UnsafeBeforeReturn001()
         {
-            var text = @"
+            var text =
+                @"
 
 using System;
  
@@ -11610,8 +13417,15 @@ public unsafe class C
 }
 
 ";
-            var compVerifier = CompileAndVerify(text, options: TestOptions.UnsafeReleaseExe, expectedOutput: "System.Byte[]", verify: Verification.Fails);
-            compVerifier.VerifyIL("C.ToManagedByteArray", @"
+            var compVerifier = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "System.Byte[]",
+                verify: Verification.Fails
+            );
+            compVerifier.VerifyIL(
+                "C.ToManagedByteArray",
+                @"
 {
   // Code size       42 (0x2a)
   .maxstack  3
@@ -11644,14 +13458,16 @@ public unsafe class C
   IL_0028:  stloc.1
   IL_0029:  ret
 }
-");
+"
+            );
         }
 
         [WorkItem(907771, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/907771")]
         [Fact]
         public void UnsafeBeforeReturn002()
         {
-            var text = @"
+            var text =
+                @"
 
 using System;
  
@@ -11683,8 +13499,15 @@ public unsafe class C
 }
 
 ";
-            var v = CompileAndVerify(text, options: TestOptions.UnsafeDebugExe, expectedOutput: "System.Byte[]", verify: Verification.Fails);
-            v.VerifyIL("C.ToManagedByteArray", @"
+            var v = CompileAndVerify(
+                text,
+                options: TestOptions.UnsafeDebugExe,
+                expectedOutput: "System.Byte[]",
+                verify: Verification.Fails
+            );
+            v.VerifyIL(
+                "C.ToManagedByteArray",
+                @"
 {
   // Code size       64 (0x40)
   .maxstack  2
@@ -11735,18 +13558,20 @@ public unsafe class C
  -IL_003e:  ldloc.1
   IL_003f:  ret
 }
-", sequencePoints: "C.ToManagedByteArray");
+",
+                sequencePoints: "C.ToManagedByteArray"
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void SystemIntPtrInSignature_BreakingChange()
         {
-            // NOTE: the IL is intentionally not compliant with ECMA spec 
-            //       in particular Metadata spec II.23.2.16 (Short form signatures) says that 
+            // NOTE: the IL is intentionally not compliant with ECMA spec
+            //       in particular Metadata spec II.23.2.16 (Short form signatures) says that
             //       [mscorlib]System.IntPtr   is not supposed to be used in metadata
             //       and short-version   'native int' is supposed to be used instead.
             var ilSource =
-@"
+                @"
 .class public AddressHelper{
     .method public hidebysig static valuetype [mscorlib]System.IntPtr AddressOf<T>(!!0& t){
         ldarg 0
@@ -11756,7 +13581,7 @@ public unsafe class C
 }
 ";
             var csharpSource =
-@"
+                @"
     class Program
     {
         static void Main(string[] args)
@@ -11769,10 +13594,13 @@ public unsafe class C
 ";
             var cscomp = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource);
 
-            var expected = new[] {
+            var expected = new[]
+            {
                 // (7,35): error CS0570: 'AddressHelper.AddressOf<T>(?)' is not supported by the language
                 //             var i = AddressHelper.AddressOf(ref s);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "AddressOf").WithArguments("AddressHelper.AddressOf<T>(?)").WithLocation(7, 35)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "AddressOf")
+                    .WithArguments("AddressHelper.AddressOf<T>(?)")
+                    .WithLocation(7, 35),
             };
 
             cscomp.VerifyDiagnostics(expected);
@@ -11782,7 +13610,7 @@ public unsafe class C
         public void SystemIntPtrInSignature_BreakingChange_001()
         {
             var ilSource =
-@"
+                @"
 .class public AddressHelper{
     .method public hidebysig static native int AddressOf<T>(!!0& t){
         ldc.i4.5
@@ -11792,7 +13620,7 @@ public unsafe class C
 }
 ";
             var csharpSource =
-@"
+                @"
     class Program
     {
         static void Main(string[] args)
@@ -11803,7 +13631,12 @@ public unsafe class C
         }
     }
 ";
-            var compilation = CreateCompilationWithILAndMscorlib40(csharpSource, ilSource, targetFramework: TargetFramework.Mscorlib40, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                csharpSource,
+                ilSource,
+                targetFramework: TargetFramework.Mscorlib40,
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics();
 
@@ -11813,7 +13646,8 @@ public unsafe class C
         [Fact, WorkItem(7550, "https://github.com/dotnet/roslyn/issues/7550")]
         public void EnsureNullPointerIsPoppedIfUnused()
         {
-            string source = @"
+            string source =
+                @"
 public class A
 {
     public unsafe byte* Ptr;
@@ -11829,13 +13663,19 @@ public class A
     }
 }
 ";
-            CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, expectedOutput: "OK", verify: Verification.Passes);
+            CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "OK",
+                verify: Verification.Passes
+            );
         }
 
         [Fact, WorkItem(40768, "https://github.com/dotnet/roslyn/issues/40768")]
         public void DoesNotEmitArrayDotEmptyForEmptyPointerArrayParams()
         {
-            var source = @"
+            var source =
+                @"
 
 using System;
 
@@ -11854,8 +13694,15 @@ public static class Program
             // PEVerify:
             // [ : Program::Main][mdToken= 0x6000001][offset 0x00000001] Unmanaged pointers are not a verifiable type.
             // [ : Program::Main][mdToken = 0x6000001][offset 0x00000001] Unable to resolve token.
-            var comp = CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, expectedOutput: "0", verify: Verification.FailsPEVerify);
-            comp.VerifyIL("Program.Main", @"
+            var comp = CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "0",
+                verify: Verification.FailsPEVerify
+            );
+            comp.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -11864,13 +13711,15 @@ public static class Program
   IL_0006:  call       ""int Program.Test(params int*[])""
   IL_000b:  call       ""void System.Console.WriteLine(int)""
   IL_0010:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void DoesEmitArrayDotEmptyForEmptyPointerArrayArrayParams()
         {
-            var source = @"
+            var source =
+                @"
 
 using System;
 
@@ -11886,8 +13735,14 @@ public static class Program
        return types.Length;
    }
 }";
-            var comp = CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, expectedOutput: "0");
-            comp.VerifyIL("Program.Main", @"
+            var comp = CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                expectedOutput: "0"
+            );
+            comp.VerifyIL(
+                "Program.Main",
+                @"
 {
   // Code size       16 (0x10)
   .maxstack  1
@@ -11895,7 +13750,8 @@ public static class Program
   IL_0005:  call       ""int Program.Test(params int*[][])""
   IL_000a:  call       ""void System.Console.WriteLine(int)""
   IL_000f:  ret
-}");
+}"
+            );
         }
 
         #endregion

@@ -22,12 +22,18 @@ namespace System.Web.WebPages.Test
                 // Call a second time to ensure multiple calls do not cause issues
                 PreApplicationStartCode.Start();
 
-                Assert.False(RouteTable.Routes.RouteExistingFiles, "We should not be setting RouteExistingFiles");
+                Assert.False(
+                    RouteTable.Routes.RouteExistingFiles,
+                    "We should not be setting RouteExistingFiles"
+                );
                 Assert.Empty(RouteTable.Routes);
 
                 Assert.False(PageParser.EnableLongStringsAsResources);
 
-                string formsAuthLoginUrl = (string)typeof(FormsAuthentication).GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                string formsAuthLoginUrl = (string)
+                    typeof(FormsAuthentication)
+                        .GetField("_LoginUrl", BindingFlags.Static | BindingFlags.NonPublic)
+                        .GetValue(null);
                 Assert.Null(formsAuthLoginUrl);
             });
         }

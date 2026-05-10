@@ -7,14 +7,11 @@ using Xunit;
 
 namespace test
 {
-
     public class LargeArray114
     {
-
         [Fact]
         public static void TestEntryPoint()
         {
-
             System.String[] array = new System.String[114];
             array[0] = "string0000";
             array[1] = array[0] + "string0001";

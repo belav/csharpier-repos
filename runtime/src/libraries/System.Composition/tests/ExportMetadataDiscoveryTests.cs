@@ -17,13 +17,19 @@ namespace System.Composition.UnitTests
         [MetadataAttribute]
         public class ExportWithNameFooAttribute : ExportAttribute
         {
-            public string Name { get { return "Foo"; } }
+            public string Name
+            {
+                get { return "Foo"; }
+            }
         }
 
         [MetadataAttribute]
         public class NameFooAttribute : Attribute
         {
-            public string Name { get { return "Foo"; } }
+            public string Name
+            {
+                get { return "Foo"; }
+            }
         }
 
         [ExportWithNameFoo]
@@ -38,16 +44,29 @@ namespace System.Composition.UnitTests
         [ExportWithNameFoo, Export, ExportMetadata("Priority", 10)]
         public class MultipleExportsOneNamedAndBothPrioritized { }
 
-        public class Named {[DefaultValue(null)] public string Name { get; set; } }
+        public class Named
+        {
+            [DefaultValue(null)]
+            public string Name { get; set; }
+        }
 
-        public class MultiValuedName { public string[] Name { get; set; } }
+        public class MultiValuedName
+        {
+            public string[] Name { get; set; }
+        }
 
-        public class Prioritized {[DefaultValue(0)] public int Priority { get; set; } }
+        public class Prioritized
+        {
+            [DefaultValue(0)]
+            public int Priority { get; set; }
+        }
 
-        [Export,
-         ExportMetadata("Name", "A"),
-         ExportMetadata("Name", "B"),
-         ExportMetadata("Name", "B")]
+        [
+            Export,
+            ExportMetadata("Name", "A"),
+            ExportMetadata("Name", "B"),
+            ExportMetadata("Name", "B")
+        ]
         public class MultipleNames { }
 
         [Fact]
@@ -115,7 +134,10 @@ namespace System.Composition.UnitTests
         [Fact]
         public void MultipleExportsCanBeRetrievedWhenANonDefaultConstructorExists()
         {
-            var c = CreateContainer(typeof(ConstructorImported), typeof(MultipleExportsNonDefaultConstructor));
+            var c = CreateContainer(
+                typeof(ConstructorImported),
+                typeof(MultipleExportsNonDefaultConstructor)
+            );
             c.GetExport<MultipleExportsNonDefaultConstructor>("A");
             c.GetExport<MultipleExportsNonDefaultConstructor>("B");
         }

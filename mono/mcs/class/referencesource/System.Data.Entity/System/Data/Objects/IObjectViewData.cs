@@ -98,7 +98,7 @@ namespace System.Data.Objects
         /// </summary>
         /// <param name="item">
         /// Item to be added.
-        /// The value of this parameter will never be null, 
+        /// The value of this parameter will never be null,
         /// and the item is guaranteed to not already exist in the binding list.
         /// </param>
         /// <param name="isAddNew">
@@ -109,7 +109,7 @@ namespace System.Data.Objects
         /// Index of added item in the binding list.
         /// </returns>
         /// <remarks>
-        /// If <paramref name="isAddNew"/> is true, 
+        /// If <paramref name="isAddNew"/> is true,
         /// the item should only be added to the list returned by the List property, and not any underlying collection.
         /// Otherwise, the item should be added to the binding list as well as any underlying collection.
         /// </remarks>
@@ -119,7 +119,7 @@ namespace System.Data.Objects
         /// Add the item in the binding list at the specified index to any underlying collection.
         /// </summary>
         /// <param name="index">
-        /// Index of the item in the binding list. 
+        /// Index of the item in the binding list.
         /// The index is guaranteed to be valid for the binding list.
         /// </param>
         void CommitItemAt(int index);
@@ -145,7 +145,7 @@ namespace System.Data.Objects
         /// <b>True</b> if item was removed from list; otherwise <b>false</b> if item was not present in the binding list.
         /// </returns>
         /// <remarks>
-        /// If <paramref name="isCancelNew"/> is true, 
+        /// If <paramref name="isCancelNew"/> is true,
         /// the item should only be removed from the binding list, and not any underlying collection.
         /// Otherwise, the item should be removed from the binding list as well as any underlying collection.
         /// </remarks>
@@ -171,6 +171,10 @@ namespace System.Data.Objects
         /// and the listener.UnregisterEntityEvents method should be called for items removed from the binding list.
         /// Other methods of the ObjectViewListener should not be used.
         /// </remarks>
-        ListChangedEventArgs OnCollectionChanged(object sender, CollectionChangeEventArgs e, ObjectViewListener listener);
+        ListChangedEventArgs OnCollectionChanged(
+            object sender,
+            CollectionChangeEventArgs e,
+            ObjectViewListener listener
+        );
     }
 }

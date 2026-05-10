@@ -34,7 +34,7 @@ namespace System.ServiceModel.Activities
                 }
 
                 // requestFormatter is null if we have an untyped message situation
-                if (this.responseFormatter == null) 
+                if (this.responseFormatter == null)
                 {
                     return this.internalReceive;
                 }
@@ -49,12 +49,8 @@ namespace System.ServiceModel.Activities
                         Body = new Sequence
                         {
                             Variables = { response },
-                            Activities =
-                                {
-                                    this.internalReceive,
-                                    this.responseFormatter,
-                                }
-                        }
+                            Activities = { this.internalReceive, this.responseFormatter },
+                        },
                     };
                 }
             };
@@ -62,36 +58,21 @@ namespace System.ServiceModel.Activities
 
         // the content to receive (either message or parameters-based) declared by the user
         [DefaultValue(null)]
-        public ReceiveContent Content
-        {
-            get;
-            set;
-        }
+        public ReceiveContent Content { get; set; }
 
         // Internally, we should always use InternalContent since this property may have default content that we added
         internal ReceiveContent InternalContent
         {
-            get
-            {
-                return this.Content ?? ReceiveContent.DefaultReceiveContent;
-            }
+            get { return this.Content ?? ReceiveContent.DefaultReceiveContent; }
         }
 
         [DefaultValue(null)]
-        public string Action
-        {
-            get;
-            set;
-        }
+        public string Action { get; set; }
 
         // Reference to the Send activity that is responsible for sending the Request part of the
         // request/reply pattern. This cannot be null.
         [DefaultValue(null)]
-        public Send Request
-        {
-            get;
-            set;
-        }
+        public Send Request { get; set; }
 
         // Additional correlations allow situations where a "session" involves multiple
         // messages between two workflow instances.
@@ -118,8 +99,13 @@ namespace System.ServiceModel.Activities
                 // Need to validate Send.ServiceContractName and Send.OperationName here so that we can proceed with contract inference
                 if (this.Request.ServiceContractName == null)
                 {
-                    string errorOperationName = ContractValidationHelper.GetErrorMessageOperationName(this.Request.OperationName);
-                    metadata.AddValidationError(SR.MissingServiceContractName(this.Request.DisplayName, errorOperationName));
+                    string errorOperationName =
+                        ContractValidationHelper.GetErrorMessageOperationName(
+                            this.Request.OperationName
+                        );
+                    metadata.AddValidationError(
+                        SR.MissingServiceContractName(this.Request.DisplayName, errorOperationName)
+                    );
                 }
                 if (string.IsNullOrEmpty(this.Request.OperationName))
                 {
@@ -128,8 +114,14 @@ namespace System.ServiceModel.Activities
             }
 
             // validate Correlation Initializers
-            MessagingActivityHelper.ValidateCorrelationInitializer(metadata, this.correlationInitializers, true, this.DisplayName, (this.Request != null ? this.Request.OperationName : String.Empty));
-            
+            MessagingActivityHelper.ValidateCorrelationInitializer(
+                metadata,
+                this.correlationInitializers,
+                true,
+                this.DisplayName,
+                (this.Request != null ? this.Request.OperationName : String.Empty)
+            );
+
             // Validate Content
             string operationName = this.Request != null ? this.Request.OperationName : null;
             this.InternalContent.CacheMetadata(metadata, this, operationName);
@@ -140,7 +132,11 @@ namespace System.ServiceModel.Activities
                 {
                     CorrelationInitializer initializer = this.correlationInitializers[i];
                     initializer.ArgumentName = Constants.Parameter + i;
-                    RuntimeArgument initializerArgument = new RuntimeArgument(initializer.ArgumentName, Constants.CorrelationHandleType, ArgumentDirection.In);
+                    RuntimeArgument initializerArgument = new RuntimeArgument(
+                        initializer.ArgumentName,
+                        Constants.CorrelationHandleType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(initializer.CorrelationHandle, initializerArgument);
                     metadata.AddArgument(initializerArgument);
                 }
@@ -153,34 +149,55 @@ namespace System.ServiceModel.Activities
                 InArgument<CorrelationHandle> requestReplyHandleFromSend = GetReplyHandleFromSend();
                 if (requestReplyHandleFromSend != null)
                 {
-                    InArgument<CorrelationHandle> resultCorrelatesWith = MessagingActivityHelper.CreateReplyCorrelatesWith(requestReplyHandleFromSend);
+                    InArgument<CorrelationHandle> resultCorrelatesWith =
+                        MessagingActivityHelper.CreateReplyCorrelatesWith(
+                            requestReplyHandleFromSend
+                        );
 
-                    RuntimeArgument resultCorrelatesWithArgument = new RuntimeArgument("ResultCorrelatesWith", Constants.CorrelationHandleType, ArgumentDirection.In);
+                    RuntimeArgument resultCorrelatesWithArgument = new RuntimeArgument(
+                        "ResultCorrelatesWith",
+                        Constants.CorrelationHandleType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(resultCorrelatesWith, resultCorrelatesWithArgument);
                     metadata.AddArgument(resultCorrelatesWithArgument);
 
-                    this.internalReceive.CorrelatesWith = (InArgument<CorrelationHandle>)InArgument.CreateReference(resultCorrelatesWith, "ResultCorrelatesWith");
+                    this.internalReceive.CorrelatesWith =
+                        (InArgument<CorrelationHandle>)
+                            InArgument.CreateReference(
+                                resultCorrelatesWith,
+                                "ResultCorrelatesWith"
+                            );
                 }
 
-                this.InternalContent.ConfigureInternalReceiveReply(this.internalReceive, out this.responseFormatter);
+                this.InternalContent.ConfigureInternalReceiveReply(
+                    this.internalReceive,
+                    out this.responseFormatter
+                );
 
-                if (this.InternalContent is ReceiveMessageContent
-                    && MessageBuilder.IsMessageContract(((ReceiveMessageContent)this.InternalContent).InternalDeclaredMessageType))
+                if (
+                    this.InternalContent is ReceiveMessageContent
+                    && MessageBuilder.IsMessageContract(
+                        ((ReceiveMessageContent)this.InternalContent).InternalDeclaredMessageType
+                    )
+                )
                 {
                     this.Request.OperationUsesMessageContract = true;
                 }
 
-                OperationDescription operation = ContractInferenceHelper.CreateTwoWayOperationDescription(this.Request, this);
+                OperationDescription operation =
+                    ContractInferenceHelper.CreateTwoWayOperationDescription(this.Request, this);
                 this.Request.OperationDescription = operation;
 
                 if (this.responseFormatter != null)
                 {
-                    IClientMessageFormatter formatter = ClientOperationFormatterProvider.GetFormatterFromRuntime(operation);
+                    IClientMessageFormatter formatter =
+                        ClientOperationFormatterProvider.GetFormatterFromRuntime(operation);
 
                     this.Request.SetFormatter(formatter);
                     this.responseFormatter.Formatter = formatter;
 
-                    // 
+                    //
                     int index = 0;
                     Type[] faultTypes = new Type[operation.KnownTypes.Count];
                     foreach (Type type in operation.KnownTypes)
@@ -195,14 +212,20 @@ namespace System.ServiceModel.Activities
                 // Add CorrelationQuery to the Send->ReplyCorrelation, we validate that the same query is not added multiple times
                 if (this.correlationInitializers != null && this.correlationInitializers.Count > 0)
                 {
-                    Collection<CorrelationQuery> internalCorrelationQueryCollection = ContractInferenceHelper.CreateClientCorrelationQueries(null, this.correlationInitializers,
-                        this.Action, this.Request.ServiceContractName, this.Request.OperationName, true);
+                    Collection<CorrelationQuery> internalCorrelationQueryCollection =
+                        ContractInferenceHelper.CreateClientCorrelationQueries(
+                            null,
+                            this.correlationInitializers,
+                            this.Action,
+                            this.Request.ServiceContractName,
+                            this.Request.OperationName,
+                            true
+                        );
 
                     foreach (CorrelationQuery query in internalCorrelationQueryCollection)
                     {
                         this.Request.SetReplyCorrelationQuery(query);
                     }
-                    
                 }
             }
             else
@@ -221,7 +244,7 @@ namespace System.ServiceModel.Activities
             {
                 IsOneWay = false,
                 IsReceiveReply = true,
-                OwnerDisplayName = this.DisplayName
+                OwnerDisplayName = this.DisplayName,
             };
 
             if (this.correlationInitializers != null)
@@ -248,15 +271,19 @@ namespace System.ServiceModel.Activities
                 // If user has set AdditionalCorrelations, then we need to first look for requestReply Handle there
                 foreach (CorrelationInitializer correlation in this.Request.CorrelationInitializers)
                 {
-                    RequestReplyCorrelationInitializer requestReplyCorrelation = correlation as RequestReplyCorrelationInitializer;
+                    RequestReplyCorrelationInitializer requestReplyCorrelation =
+                        correlation as RequestReplyCorrelationInitializer;
 
-                    if (requestReplyCorrelation != null && requestReplyCorrelation.CorrelationHandle != null)
+                    if (
+                        requestReplyCorrelation != null
+                        && requestReplyCorrelation.CorrelationHandle != null
+                    )
                     {
                         return requestReplyCorrelation.CorrelationHandle;
                     }
                 }
             }
-            
+
             return null;
         }
     }

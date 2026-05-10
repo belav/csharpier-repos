@@ -12,14 +12,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class SyntaxTokenExtensions
     {
-        public static bool TryParseGenericName(this SyntaxToken genericIdentifier, CancellationToken cancellationToken, [NotNullWhen(true)] out GenericNameSyntax? genericName)
+        public static bool TryParseGenericName(
+            this SyntaxToken genericIdentifier,
+            CancellationToken cancellationToken,
+            [NotNullWhen(true)] out GenericNameSyntax? genericName
+        )
         {
-            if (genericIdentifier.GetNextToken(includeSkipped: true).Kind() == SyntaxKind.LessThanToken)
+            if (
+                genericIdentifier.GetNextToken(includeSkipped: true).Kind()
+                == SyntaxKind.LessThanToken
+            )
             {
                 var lastToken = genericIdentifier.FindLastTokenOfPartialGenericName();
 
                 var syntaxTree = genericIdentifier.SyntaxTree!;
-                var name = SyntaxFactory.ParseName(syntaxTree.GetText(cancellationToken).ToString(TextSpan.FromBounds(genericIdentifier.SpanStart, lastToken.Span.End)));
+                var name = SyntaxFactory.ParseName(
+                    syntaxTree
+                        .GetText(cancellationToken)
+                        .ToString(
+                            TextSpan.FromBounds(genericIdentifier.SpanStart, lastToken.Span.End)
+                        )
+                );
 
                 genericName = name as GenericNameSyntax;
                 return genericName != null;
@@ -36,7 +49,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// the "&amp;"</param>
         /// <returns>The last token in the name</returns>
         /// <remarks>This is related to the code in <see cref="SyntaxTreeExtensions.IsInPartiallyWrittenGeneric(SyntaxTree, int, CancellationToken)"/></remarks>
-        public static SyntaxToken FindLastTokenOfPartialGenericName(this SyntaxToken genericIdentifier)
+        public static SyntaxToken FindLastTokenOfPartialGenericName(
+            this SyntaxToken genericIdentifier
+        )
         {
             Contract.ThrowIfFalse(genericIdentifier.Kind() == SyntaxKind.IdentifierToken);
 
@@ -83,10 +98,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         stack++;
                         break;
 
-                    case SyntaxKind.AsteriskToken:      // for int*
-                    case SyntaxKind.QuestionToken:      // for int?
-                    case SyntaxKind.ColonToken:         // for global::  (so we don't dismiss help as you type the first :)
-                    case SyntaxKind.ColonColonToken:    // for global::
+                    case SyntaxKind.AsteriskToken: // for int*
+                    case SyntaxKind.QuestionToken: // for int?
+                    case SyntaxKind.ColonToken: // for global::  (so we don't dismiss help as you type the first :)
+                    case SyntaxKind.ColonColonToken: // for global::
                     case SyntaxKind.CloseBracketToken:
                     case SyntaxKind.OpenBracketToken:
                     case SyntaxKind.DotToken:
@@ -118,8 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         // anything else and we're sunk. Go back to the token before.
                         return token.GetPreviousToken(includeSkipped: true);
                 }
-            }
-            while (true);
+            } while (true);
         }
     }
 }

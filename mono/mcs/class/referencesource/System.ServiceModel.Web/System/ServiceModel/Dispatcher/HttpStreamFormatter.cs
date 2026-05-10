@@ -7,16 +7,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Net;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
     using System.Xml;
-    using System.Runtime.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.IO;
-    using System.Collections.Specialized;
-    using System.Net;
 
     class HttpStreamFormatter : IDispatchMessageFormatter, IClientMessageFormatter
     {
@@ -45,7 +45,11 @@ namespace System.ServiceModel.Dispatcher
             parameters[0] = GetStreamFromMessage(message, true);
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
             Message message = CreateMessageFromStream(result);
             if (result == null)
@@ -75,17 +79,28 @@ namespace System.ServiceModel.Dispatcher
             Message result;
             if (data == null)
             {
-                result = Message.CreateMessage(MessageVersion.None, (string) null);
+                result = Message.CreateMessage(MessageVersion.None, (string)null);
             }
             else
             {
                 Stream streamData = data as Stream;
                 if (streamData == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR2.GetString(SR2.ParameterIsNotStreamType, data.GetType(), this.operationName, this.contractName, this.contractNs)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR2.GetString(
+                                SR2.ParameterIsNotStreamType,
+                                data.GetType(),
+                                this.operationName,
+                                this.contractName,
+                                this.contractNs
+                            )
+                        )
+                    );
                 }
                 result = ByteStreamMessage.CreateMessage(streamData);
-                result.Properties[WebBodyFormatMessageProperty.Name] = WebBodyFormatMessageProperty.RawProperty;
+                result.Properties[WebBodyFormatMessageProperty.Name] =
+                    WebBodyFormatMessageProperty.RawProperty;
             }
             return result;
         }
@@ -104,15 +119,41 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.MessageFormatPropertyNotFound, this.operationName, this.contractName, this.contractNs)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.MessageFormatPropertyNotFound,
+                                this.operationName,
+                                this.contractName,
+                                this.contractNs
+                            )
+                        )
+                    );
                 }
             }
             if (formatProperty.Format != WebContentFormat.Raw)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.InvalidHttpMessageFormat, this.operationName, this.contractName, this.contractNs, formatProperty.Format, WebContentFormat.Raw)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.InvalidHttpMessageFormat,
+                            this.operationName,
+                            this.contractName,
+                            this.contractNs,
+                            formatProperty.Format,
+                            WebContentFormat.Raw
+                        )
+                    )
+                );
             }
-            return new StreamFormatter.MessageBodyStream(message, null, null, HttpStreamMessage.StreamElementName, string.Empty, isRequest);
+            return new StreamFormatter.MessageBodyStream(
+                message,
+                null,
+                null,
+                HttpStreamMessage.StreamElementName,
+                string.Empty,
+                isRequest
+            );
         }
     }
 }
-

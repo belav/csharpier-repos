@@ -17,19 +17,25 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             private readonly char[] _containerSplitCharacters;
 
             public ContainerPatternMatcher(
-                string[] patternParts, char[] containerSplitCharacters,
+                string[] patternParts,
+                char[] containerSplitCharacters,
                 bool includeMatchedSpans,
                 CultureInfo? culture,
-                bool allowFuzzyMatching = false)
+                bool allowFuzzyMatching = false
+            )
                 : base(includeMatchedSpans, culture, allowFuzzyMatching)
             {
                 _containerSplitCharacters = containerSplitCharacters;
 
                 _patternSegments = patternParts
-                    .Select(text => new PatternSegment(text.Trim(), allowFuzzyMatching: allowFuzzyMatching))
+                    .Select(text => new PatternSegment(
+                        text.Trim(),
+                        allowFuzzyMatching: allowFuzzyMatching
+                    ))
                     .ToArray();
 
-                _invalidPattern = _patternSegments.Length == 0 || _patternSegments.Any(s => s.IsInvalid);
+                _invalidPattern =
+                    _patternSegments.Length == 0 || _patternSegments.Any(s => s.IsInvalid);
             }
 
             public override void Dispose()
@@ -42,18 +48,25 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 }
             }
 
-            public override bool AddMatches(string? container, ref TemporaryArray<PatternMatch> matches)
+            public override bool AddMatches(
+                string? container,
+                ref TemporaryArray<PatternMatch> matches
+            )
             {
                 if (SkipMatch(container))
                 {
                     return false;
                 }
 
-                return AddMatches(container, ref matches, fuzzyMatch: false) ||
-                       AddMatches(container, ref matches, fuzzyMatch: true);
+                return AddMatches(container, ref matches, fuzzyMatch: false)
+                    || AddMatches(container, ref matches, fuzzyMatch: true);
             }
 
-            private bool AddMatches(string container, ref TemporaryArray<PatternMatch> matches, bool fuzzyMatch)
+            private bool AddMatches(
+                string container,
+                ref TemporaryArray<PatternMatch> matches,
+                bool fuzzyMatch
+            )
             {
                 if (fuzzyMatch && !_allowFuzzyMatching)
                 {
@@ -62,7 +75,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
                 using var tempContainerMatches = TemporaryArray<PatternMatch>.Empty;
 
-                var containerParts = container.Split(_containerSplitCharacters, StringSplitOptions.RemoveEmptyEntries);
+                var containerParts = container.Split(
+                    _containerSplitCharacters,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
 
                 var relevantDotSeparatedSegmentLength = _patternSegments.Length;
                 if (_patternSegments.Length > containerParts.Length)
@@ -75,12 +91,21 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 // So far so good.  Now break up the container for the candidate and check if all
                 // the dotted parts match up correctly.
 
-                for (int i = _patternSegments.Length - 1, j = containerParts.Length - 1;
-                        i >= 0;
-                        i--, j--)
+                for (
+                    int i = _patternSegments.Length - 1, j = containerParts.Length - 1;
+                    i >= 0;
+                    i--, j--
+                )
                 {
                     var containerName = containerParts[j];
-                    if (!MatchPatternSegment(containerName, ref _patternSegments[i], ref tempContainerMatches.AsRef(), fuzzyMatch))
+                    if (
+                        !MatchPatternSegment(
+                            containerName,
+                            ref _patternSegments[i],
+                            ref tempContainerMatches.AsRef(),
+                            fuzzyMatch
+                        )
+                    )
                     {
                         // This container didn't match the pattern piece.  So there's no match at all.
                         return false;

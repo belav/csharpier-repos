@@ -39,7 +39,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedAddNullableDecimalTest(bool useInterpreter)
         {
-            decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal?[] values = new decimal?[]
+            {
+                null,
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -52,7 +60,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedAddNullableDoubleTest(bool useInterpreter)
         {
-            double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double?[] values = new double?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -65,7 +85,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedAddNullableFloatTest(bool useInterpreter)
         {
-            float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float?[] values = new float?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -171,7 +203,13 @@ namespace System.Linq.Expressions.Tests
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
-                Number?[] values = new Number?[] { null, new Number(0), new Number(1), Number.MaxValue };
+                Number?[] values = new Number?[]
+                {
+                    null,
+                    new Number(0),
+                    new Number(1),
+                    Number.MaxValue,
+                };
                 for (int i = 0; i < values.Length; i++)
                 {
                     for (int j = 0; j < values.Length; j++)
@@ -252,12 +290,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableByte(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableByte")));
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableByte")
+                )
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)(a + b)), f());
@@ -265,12 +306,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableChar(char? a, char? b, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(char?)),
-                        Expression.Constant(b, typeof(char?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableChar")));
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(char?)),
+                    Expression.Constant(b, typeof(char?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableChar")
+                )
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)(a + b)), f());
@@ -278,12 +322,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableDecimal")));
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableDecimal")
+                )
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal? expected = null;
@@ -302,12 +349,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableDouble(double? a, double? b, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableDouble")));
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableDouble")
+                )
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a + b, f());
@@ -315,12 +365,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableFloat(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableFloat")));
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableFloat")
+                )
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a + b, f());
@@ -328,12 +381,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableInt(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableInt")));
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?)),
+                    typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableInt")
+                )
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a + b), f());
@@ -341,12 +395,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableLong(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableLong")));
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableLong")
+                )
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a + b), f());
@@ -354,12 +411,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableSByte")));
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableSByte")
+                )
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)(a + b)), f());
@@ -367,12 +427,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableShort(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableShort")));
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableShort")
+                )
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)(a + b)), f());
@@ -380,12 +443,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableUInt(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableUInt")));
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableUInt")
+                )
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a + b), f());
@@ -393,12 +459,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableULong(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableULong")));
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableULong")
+                )
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a + b), f());
@@ -406,12 +475,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableUShort(ushort? a, ushort? b, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?)),
-                        typeof(LiftedAddNullableTests).GetTypeInfo().GetDeclaredMethod("AddNullableUShort")));
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?)),
+                    typeof(LiftedAddNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("AddNullableUShort")
+                )
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)(a + b)), f());
@@ -419,11 +491,12 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyAddNullableNumber(Number? a, Number? b, bool useInterpreter)
         {
-            Expression<Func<Number?>> e =
-                Expression.Lambda<Func<Number?>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(Number?)),
-                        Expression.Constant(b, typeof(Number?))));
+            Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(Number?)),
+                    Expression.Constant(b, typeof(Number?))
+                )
+            );
             Assert.Equal(typeof(Number?), e.Body.Type);
             Func<Number?> f = e.Compile(useInterpreter);
 

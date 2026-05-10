@@ -8,7 +8,8 @@ namespace JitTest_muldiv_unsigned_cs
 {
     public class Test
     {
-        private static ulong s_A,s_B;
+        private static ulong s_A,
+            s_B;
 
         private static void testNumbers(ulong a, ulong b)
         {

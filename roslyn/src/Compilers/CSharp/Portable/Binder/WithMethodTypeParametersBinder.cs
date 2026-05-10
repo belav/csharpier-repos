@@ -28,10 +28,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override Symbol ContainingMemberOrLambda
         {
-            get
-            {
-                return _methodSymbol;
-            }
+            get { return _methodSymbol; }
         }
 
         protected override MultiDictionary<string, TypeParameterSymbol> TypeParameterMap
@@ -57,11 +54,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return LookupOptions.NamespaceAliasesOnly | LookupOptions.MustNotBeMethodTypeParameter;
+                return LookupOptions.NamespaceAliasesOnly
+                    | LookupOptions.MustNotBeMethodTypeParameter;
             }
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             if (CanConsiderTypeParameters(options))
             {

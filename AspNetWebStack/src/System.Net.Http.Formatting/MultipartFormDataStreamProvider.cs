@@ -76,8 +76,11 @@ namespace System.Net.Http
         {
             // This method predates support for cancellation, and we need to make sure it is always invoked when
             // ExecutePostProcessingAsync is called for compatability.
-            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(Contents, FormData,
-                _cancellationToken);
+            return MultipartFormDataStreamProviderHelper.ReadFormDataAsync(
+                Contents,
+                FormData,
+                _cancellationToken
+            );
         }
 
         /// <summary>

@@ -11,12 +11,18 @@ namespace System.Formats.Asn1
 {
     internal static class AsnCharacterStringEncodings
     {
-        private static readonly UTF8Encoding s_utf8Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly UTF8Encoding s_utf8Encoding = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
         private static readonly BMPEncoding s_bmpEncoding = new BMPEncoding();
         private static readonly IA5Encoding s_ia5Encoding = new IA5Encoding();
-        private static readonly VisibleStringEncoding s_visibleStringEncoding = new VisibleStringEncoding();
-        private static readonly NumericStringEncoding s_numericStringEncoding = new NumericStringEncoding();
-        private static readonly PrintableStringEncoding s_printableStringEncoding = new PrintableStringEncoding();
+        private static readonly VisibleStringEncoding s_visibleStringEncoding =
+            new VisibleStringEncoding();
+        private static readonly NumericStringEncoding s_numericStringEncoding =
+            new NumericStringEncoding();
+        private static readonly PrintableStringEncoding s_printableStringEncoding =
+            new PrintableStringEncoding();
         private static readonly T61Encoding s_t61Encoding = new T61Encoding();
 
         internal static Encoding GetEncoding(UniversalTagNumber encodingType) =>
@@ -29,7 +35,11 @@ namespace System.Formats.Asn1
                 UniversalTagNumber.VisibleString => s_visibleStringEncoding,
                 UniversalTagNumber.BMPString => s_bmpEncoding,
                 UniversalTagNumber.T61String => s_t61Encoding,
-                _ => throw new ArgumentOutOfRangeException(nameof(encodingType), encodingType, null),
+                _ => throw new ArgumentOutOfRangeException(
+                    nameof(encodingType),
+                    encodingType,
+                    null
+                ),
             };
 
         internal static int GetByteCount(this Encoding encoding, ReadOnlySpan<char> str)
@@ -49,7 +59,11 @@ namespace System.Formats.Asn1
             }
         }
 
-        internal static int GetBytes(this Encoding encoding, ReadOnlySpan<char> chars, Span<byte> bytes)
+        internal static int GetBytes(
+            this Encoding encoding,
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes
+        )
         {
             if (chars.IsEmpty)
             {
@@ -77,9 +91,7 @@ namespace System.Formats.Asn1
     internal abstract class SpanBasedEncoding : Encoding
     {
         protected SpanBasedEncoding()
-            : base(0, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback)
-        {
-        }
+            : base(0, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback) { }
 
         protected abstract int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, bool write);
         protected abstract int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars, bool write);
@@ -101,19 +113,26 @@ namespace System.Formats.Asn1
 
         public
 #if NETCOREAPP || NETSTANDARD2_1
-            override
+        override
 #endif
         int GetByteCount(ReadOnlySpan<char> chars)
         {
             return GetBytes(chars, Span<byte>.Empty, write: false);
         }
 
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             return GetBytes(
                 new ReadOnlySpan<char>(chars, charIndex, charCount),
                 new Span<byte>(bytes, byteIndex, bytes.Length - byteIndex),
-                write: true);
+                write: true
+            );
         }
 
         public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
@@ -121,7 +140,8 @@ namespace System.Formats.Asn1
             return GetBytes(
                 new ReadOnlySpan<char>(chars, charCount),
                 new Span<byte>(bytes, byteCount),
-                write: true);
+                write: true
+            );
         }
 
         public override int GetCharCount(byte[] bytes, int index, int count)
@@ -136,19 +156,26 @@ namespace System.Formats.Asn1
 
         public
 #if NETCOREAPP || NETSTANDARD2_1
-            override
+        override
 #endif
         int GetCharCount(ReadOnlySpan<byte> bytes)
         {
             return GetChars(bytes, Span<char>.Empty, write: false);
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             return GetChars(
                 new ReadOnlySpan<byte>(bytes, byteIndex, byteCount),
                 new Span<char>(chars, charIndex, chars.Length - charIndex),
-                write: true);
+                write: true
+            );
         }
 
         public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
@@ -156,7 +183,8 @@ namespace System.Formats.Asn1
             return GetChars(
                 new ReadOnlySpan<byte>(bytes, byteCount),
                 new Span<char>(chars, charCount),
-                write: true);
+                write: true
+            );
         }
     }
 
@@ -171,21 +199,17 @@ namespace System.Formats.Asn1
         //
         // The net result is all of 7-bit ASCII
         internal IA5Encoding()
-            : base(0x00, 0x7F)
-        {
-        }
+            : base(0x00, 0x7F) { }
     }
 
-    internal sealed  class VisibleStringEncoding : RestrictedAsciiStringEncoding
+    internal sealed class VisibleStringEncoding : RestrictedAsciiStringEncoding
     {
         // T-REC-X.680-201508 sec 41, Table 8.
         // ISO International Register of Coded Character Sets to be used with Escape Sequences 006
         //   is ASCII 0x21 - 0x7E
         // Space is ASCII 0x20.
         internal VisibleStringEncoding()
-            : base(0x20, 0x7E)
-        {
-        }
+            : base(0x20, 0x7E) { }
     }
 
     internal sealed class NumericStringEncoding : RestrictedAsciiStringEncoding
@@ -193,18 +217,14 @@ namespace System.Formats.Asn1
         // T-REC-X.680-201508 sec 41.2 (Table 9)
         // 0, 1, ... 9 + space
         internal NumericStringEncoding()
-            : base("0123456789 ")
-        {
-        }
+            : base("0123456789 ") { }
     }
 
     internal sealed class PrintableStringEncoding : RestrictedAsciiStringEncoding
     {
         // T-REC-X.680-201508 sec 41.4
         internal PrintableStringEncoding()
-            : base("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '()+,-./:=?")
-        {
-        }
+            : base("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 '()+,-./:=?") { }
     }
 
     internal abstract class RestrictedAsciiStringEncoding : SpanBasedEncoding
@@ -292,9 +312,7 @@ namespace System.Formats.Asn1
 
                 if ((uint)b >= (uint)_isAllowed.Length || !_isAllowed[b])
                 {
-                    DecoderFallback.CreateFallbackBuffer().Fallback(
-                        new[] { b },
-                        i);
+                    DecoderFallback.CreateFallbackBuffer().Fallback(new[] { b }, i);
 
                     Debug.Fail("Fallback should have thrown");
                     throw new InvalidOperationException();
@@ -362,9 +380,9 @@ namespace System.Formats.Asn1
 
             if (bytes.Length % 2 != 0)
             {
-                DecoderFallback.CreateFallbackBuffer().Fallback(
-                    bytes.Slice(bytes.Length - 1).ToArray(),
-                    bytes.Length - 1);
+                DecoderFallback
+                    .CreateFallbackBuffer()
+                    .Fallback(bytes.Slice(bytes.Length - 1).ToArray(), bytes.Length - 1);
 
                 Debug.Fail("Fallback should have thrown");
                 throw new InvalidOperationException();
@@ -378,9 +396,7 @@ namespace System.Formats.Asn1
 
                 if (char.IsSurrogate(c))
                 {
-                    DecoderFallback.CreateFallbackBuffer().Fallback(
-                        bytes.Slice(i, 2).ToArray(),
-                        i);
+                    DecoderFallback.CreateFallbackBuffer().Fallback(bytes.Slice(i, 2).ToArray(), i);
 
                     Debug.Fail("Fallback should have thrown");
                     throw new InvalidOperationException();
@@ -417,7 +433,10 @@ namespace System.Formats.Asn1
     /// </summary>
     internal sealed class T61Encoding : Encoding
     {
-        private static readonly UTF8Encoding s_utf8Encoding = new UTF8Encoding(false, throwOnInvalidBytes: true);
+        private static readonly UTF8Encoding s_utf8Encoding = new UTF8Encoding(
+            false,
+            throwOnInvalidBytes: true
+        );
         private static readonly Encoding s_latin1Encoding = GetEncoding("iso-8859-1");
 
         public override int GetByteCount(char[] chars, int index, int count)
@@ -442,7 +461,13 @@ namespace System.Formats.Asn1
         }
 #endif
 
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             return s_utf8Encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
         }
@@ -490,7 +515,13 @@ namespace System.Formats.Asn1
         }
 #endif
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             try
             {

@@ -27,7 +27,11 @@ namespace Microsoft.Web.Mvc.Test
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             DateTime rawValue = new DateTime(2001, 1, 2);
-            ElementalValueProvider valueProvider = new ElementalValueProvider("foo", rawValue, culture);
+            ElementalValueProvider valueProvider = new ElementalValueProvider(
+                "foo",
+                rawValue,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("bar");
@@ -42,7 +46,11 @@ namespace Microsoft.Web.Mvc.Test
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
             DateTime rawValue = new DateTime(2001, 1, 2);
-            ElementalValueProvider valueProvider = new ElementalValueProvider("foo", rawValue, culture);
+            ElementalValueProvider valueProvider = new ElementalValueProvider(
+                "foo",
+                rawValue,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("FOO");

@@ -18,13 +18,10 @@ namespace System
     {
 #pragma warning disable IDE0060
         //Constructors
-        public AttributeUsageAttribute(AttributeTargets validOn)
-        {
-        }
+        public AttributeUsageAttribute(AttributeTargets validOn) { }
 
         public AttributeUsageAttribute(AttributeTargets validOn, bool allowMultiple, bool inherited)
-        {
-        }
+        { }
 #pragma warning restore IDE0060
 
         //Properties.

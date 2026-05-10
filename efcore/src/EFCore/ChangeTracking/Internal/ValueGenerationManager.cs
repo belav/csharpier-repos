@@ -26,7 +26,8 @@ public class ValueGenerationManager : IValueGenerationManager
         IValueGeneratorSelector valueGeneratorSelector,
         IKeyPropagator keyPropagator,
         IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-        ILoggingOptions loggingOptions)
+        ILoggingOptions loggingOptions
+    )
     {
         _valueGeneratorSelector = valueGeneratorSelector;
         _keyPropagator = keyPropagator;
@@ -45,8 +46,7 @@ public class ValueGenerationManager : IValueGenerationManager
         InternalEntityEntry? chosenPrincipal = null;
         foreach (var property in entry.EntityType.GetForeignKeyProperties())
         {
-            if (!entry.IsUnknown(property)
-                && entry.HasExplicitValue(property))
+            if (!entry.IsUnknown(property) && entry.HasExplicitValue(property))
             {
                 continue;
             }
@@ -64,7 +64,10 @@ public class ValueGenerationManager : IValueGenerationManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual async Task<InternalEntityEntry?> PropagateAsync(InternalEntityEntry entry, CancellationToken cancellationToken)
+    public virtual async Task<InternalEntityEntry?> PropagateAsync(
+        InternalEntityEntry entry,
+        CancellationToken cancellationToken
+    )
     {
         InternalEntityEntry? chosenPrincipal = null;
         foreach (var property in entry.EntityType.GetForeignKeyProperties())
@@ -74,7 +77,9 @@ public class ValueGenerationManager : IValueGenerationManager
                 continue;
             }
 
-            var principalEntry = await _keyPropagator.PropagateValueAsync(entry, property, cancellationToken).ConfigureAwait(false);
+            var principalEntry = await _keyPropagator
+                .PropagateValueAsync(entry, property, cancellationToken)
+                .ConfigureAwait(false);
             chosenPrincipal ??= principalEntry;
         }
 
@@ -96,9 +101,7 @@ public class ValueGenerationManager : IValueGenerationManager
         //TODO: Handle complex properties
         foreach (var property in entry.EntityType.GetValueGeneratingProperties())
         {
-            if (entry.HasExplicitValue(property)
-                || (!includePrimaryKey
-                    && property.IsPrimaryKey()))
+            if (entry.HasExplicitValue(property) || (!includePrimaryKey && property.IsPrimaryKey()))
             {
                 continue;
             }
@@ -127,7 +130,12 @@ public class ValueGenerationManager : IValueGenerationManager
         return hasStableValues && !hasNonStableValues;
     }
 
-    private void Log(InternalEntityEntry entry, IProperty property, object? generatedValue, bool temporary)
+    private void Log(
+        InternalEntityEntry entry,
+        IProperty property,
+        object? generatedValue,
+        bool temporary
+    )
     {
         if (_loggingOptions.IsSensitiveDataLoggingEnabled)
         {
@@ -148,22 +156,23 @@ public class ValueGenerationManager : IValueGenerationManager
     public virtual async Task<bool> GenerateAsync(
         InternalEntityEntry entry,
         bool includePrimaryKey = true,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var entityEntry = new EntityEntry(entry);
         var hasStableValues = false;
         var hasNonStableValues = false;
         foreach (var property in entry.EntityType.GetValueGeneratingProperties())
         {
-            if (entry.HasExplicitValue(property)
-                || (!includePrimaryKey
-                    && property.IsPrimaryKey()))
+            if (entry.HasExplicitValue(property) || (!includePrimaryKey && property.IsPrimaryKey()))
             {
                 continue;
             }
 
             var valueGenerator = GetValueGenerator(property);
-            var generatedValue = await valueGenerator.NextAsync(entityEntry, cancellationToken).ConfigureAwait(false);
+            var generatedValue = await valueGenerator
+                .NextAsync(entityEntry, cancellationToken)
+                .ConfigureAwait(false);
             var temporary = valueGenerator.GeneratesTemporaryValues;
 
             if (valueGenerator.GeneratesStableValues)
@@ -177,11 +186,7 @@ public class ValueGenerationManager : IValueGenerationManager
 
             Log(entry, property, generatedValue, temporary);
 
-            SetGeneratedValue(
-                entry,
-                property,
-                generatedValue,
-                temporary);
+            SetGeneratedValue(entry, property, generatedValue, temporary);
 
             MarkKeyUnknown(entry, includePrimaryKey, property, valueGenerator);
         }
@@ -189,10 +194,15 @@ public class ValueGenerationManager : IValueGenerationManager
         return hasStableValues && !hasNonStableValues;
     }
 
-    private ValueGenerator GetValueGenerator(IProperty property)
-        => _valueGeneratorSelector.Select(property, property.DeclaringType);
+    private ValueGenerator GetValueGenerator(IProperty property) =>
+        _valueGeneratorSelector.Select(property, property.DeclaringType);
 
-    private static void SetGeneratedValue(InternalEntityEntry entry, IProperty property, object? generatedValue, bool isTemporary)
+    private static void SetGeneratedValue(
+        InternalEntityEntry entry,
+        IProperty property,
+        object? generatedValue,
+        bool isTemporary
+    )
     {
         if (generatedValue != null)
         {
@@ -211,13 +221,16 @@ public class ValueGenerationManager : IValueGenerationManager
         InternalEntityEntry entry,
         bool includePrimaryKey,
         IProperty property,
-        ValueGenerator valueGenerator)
+        ValueGenerator valueGenerator
+    )
     {
-        if (includePrimaryKey
+        if (
+            includePrimaryKey
             && property.IsKey()
             && property.IsShadowProperty()
             && !property.IsForeignKey()
-            && !valueGenerator.GeneratesStableValues)
+            && !valueGenerator.GeneratesStableValues
+        )
         {
             entry.MarkUnknown(property);
         }

@@ -28,80 +28,81 @@ using System.IO.Packaging;
 
 namespace zipsharp
 {
-	class UnzipReadStream : Stream
-	{
-		long length;
-		
-		UnzipArchive Archive { get; set; }
+    class UnzipReadStream : Stream
+    {
+        long length;
 
-		public override bool CanRead {
-			get { return true; }
-		}
-		
-		public override bool CanSeek {
-			get { return false; }
-		}
+        UnzipArchive Archive { get; set; }
 
-		public override bool CanWrite {
-			get { return false; }
-		}
+        public override bool CanRead
+        {
+            get { return true; }
+        }
 
-		public override bool CanTimeout {
-			get { return false; }
-		}
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
 
-		public CompressionOption CompressionLevel {
-			get; set;
-		}
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
 
-		public override long Length {
-			get {
-				return length;
-			}
-		}
+        public override bool CanTimeout
+        {
+            get { return false; }
+        }
 
-		public override long Position {
-			get { return NativeUnzip.CurrentFilePosition (Archive.Handle); }
-			set { throw new NotSupportedException (); }
-		}
-		
-		public UnzipReadStream (UnzipArchive archive, CompressionOption compressionLevel)
-		{
-			Archive = archive;
-			Archive.FileActive = true;
-			CompressionLevel = compressionLevel;
-			length = NativeVersion.Use32Bit ? NativeUnzip.CurrentFileLength32 (Archive.Handle) : NativeUnzip.CurrentFileLength64 (Archive.Handle);
-		}
+        public CompressionOption CompressionLevel { get; set; }
 
-		public override void Close()
-		{
-			Archive.FileActive = false;
-			NativeUnzip.CloseCurrentFile (Archive.Handle);
-		}
+        public override long Length
+        {
+            get { return length; }
+        }
 
-		public override void Flush()
-		{
-			
-		}
- 
-		public override int Read(byte[] buffer, int offset, int count)
-		{
-			return NativeUnzip.Read (Archive.Handle, buffer, offset, count);
-		}
+        public override long Position
+        {
+            get { return NativeUnzip.CurrentFilePosition(Archive.Handle); }
+            set { throw new NotSupportedException(); }
+        }
 
-		public override long Seek(long offset, SeekOrigin origin)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		public override void SetLength(long value)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		public override void Write(byte[] buffer, int offset, int count)
-		{
-			throw new NotSupportedException ();
-		}
-	}
+        public UnzipReadStream(UnzipArchive archive, CompressionOption compressionLevel)
+        {
+            Archive = archive;
+            Archive.FileActive = true;
+            CompressionLevel = compressionLevel;
+            length = NativeVersion.Use32Bit
+                ? NativeUnzip.CurrentFileLength32(Archive.Handle)
+                : NativeUnzip.CurrentFileLength64(Archive.Handle);
+        }
+
+        public override void Close()
+        {
+            Archive.FileActive = false;
+            NativeUnzip.CloseCurrentFile(Archive.Handle);
+        }
+
+        public override void Flush() { }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return NativeUnzip.Read(Archive.Handle, buffer, offset, count);
+        }
+
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override void SetLength(long value)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            throw new NotSupportedException();
+        }
+    }
 }

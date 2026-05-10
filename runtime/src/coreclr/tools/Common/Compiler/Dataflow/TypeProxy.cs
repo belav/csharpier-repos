@@ -23,7 +23,9 @@ namespace ILLink.Shared.TypeSystemProxy
             if (!typeDef.HasInstantiation)
                 return ImmutableArray<GenericParameterProxy>.Empty;
 
-            var builder = ImmutableArray.CreateBuilder<GenericParameterProxy>(typeDef.Instantiation.Length);
+            var builder = ImmutableArray.CreateBuilder<GenericParameterProxy>(
+                typeDef.Instantiation.Length
+            );
             foreach (var genericParameter in typeDef.Instantiation)
             {
                 builder.Add(new GenericParameterProxy((GenericParameterDesc)genericParameter));
@@ -34,9 +36,15 @@ namespace ILLink.Shared.TypeSystemProxy
 
         public TypeDesc Type { get; }
 
-        public string Name { get => Type is MetadataType metadataType ? metadataType.Name : string.Empty; }
+        public string Name
+        {
+            get => Type is MetadataType metadataType ? metadataType.Name : string.Empty;
+        }
 
-        public string? Namespace { get => Type is MetadataType metadataType ? metadataType.Namespace : null; }
+        public string? Namespace
+        {
+            get => Type is MetadataType metadataType ? metadataType.Namespace : null;
+        }
 
         public bool IsTypeOf(string @namespace, string name) => Type.IsTypeOf(@namespace, name);
 

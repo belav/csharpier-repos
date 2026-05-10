@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             object parent,
             ProjectId projectId,
-            ImmutableArray<INamedTypeSymbol> typeSymbols)
+            ImmutableArray<INamedTypeSymbol> typeSymbols
+        )
         {
             var collection = new ExternalTypeCollection(state, parent, projectId, typeSymbols);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
@@ -30,7 +31,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         private readonly ProjectId _projectId;
         private readonly ImmutableArray<INamedTypeSymbol> _typeSymbols;
 
-        private ExternalTypeCollection(CodeModelState state, object parent, ProjectId projectId, ImmutableArray<INamedTypeSymbol> typeSymbols)
+        private ExternalTypeCollection(
+            CodeModelState state,
+            object parent,
+            ProjectId projectId,
+            ImmutableArray<INamedTypeSymbol> typeSymbols
+        )
             : base(state, parent)
         {
             _projectId = projectId;
@@ -41,7 +47,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
         {
             if (index < _typeSymbols.Length)
             {
-                element = this.State.CodeModelService.CreateCodeType(this.State, _projectId, _typeSymbols[index]);
+                element = this.State.CodeModelService.CreateCodeType(
+                    this.State,
+                    _projectId,
+                    _typeSymbols[index]
+                );
                 return true;
             }
 
@@ -55,7 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
             if (index >= 0 && index < _typeSymbols.Length)
             {
-                element = this.State.CodeModelService.CreateCodeType(this.State, _projectId, _typeSymbols[index]);
+                element = this.State.CodeModelService.CreateCodeType(
+                    this.State,
+                    _projectId,
+                    _typeSymbols[index]
+                );
                 return true;
             }
 

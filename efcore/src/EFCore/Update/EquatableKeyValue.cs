@@ -23,21 +23,20 @@ public sealed class EquatableKeyValue<TKey>
     public EquatableKeyValue(
         IAnnotatable metadata,
         TKey? keyValue,
-        IEqualityComparer<TKey> keyComparer)
+        IEqualityComparer<TKey> keyComparer
+    )
     {
         _metadata = metadata;
         _keyValue = keyValue;
         _keyComparer = keyComparer;
     }
 
-    private bool Equals(EquatableKeyValue<TKey> other)
-        => other._metadata == _metadata
-            && _keyComparer.Equals(_keyValue, other._keyValue);
+    private bool Equals(EquatableKeyValue<TKey> other) =>
+        other._metadata == _metadata && _keyComparer.Equals(_keyValue, other._keyValue);
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => ReferenceEquals(this, obj)
-            || (obj is EquatableKeyValue<TKey> other && Equals(other));
+    public override bool Equals(object? obj) =>
+        ReferenceEquals(this, obj) || (obj is EquatableKeyValue<TKey> other && Equals(other));
 
     /// <inheritdoc />
     public override int GetHashCode()

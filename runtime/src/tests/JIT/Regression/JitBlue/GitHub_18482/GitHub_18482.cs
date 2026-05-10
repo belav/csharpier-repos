@@ -18,7 +18,7 @@ public class Test_GitHub_18482
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int foo(SequentialStruct s)
     {
-        if ((s.f0 != 100) || (s.f1 != 1) || ((int) s.f2 != 10) || ((int)s.f3 != 42))
+        if ((s.f0 != 100) || (s.f1 != 1) || ((int)s.f2 != 10) || ((int)s.f3 != 42))
         {
             Console.WriteLine(s.f0);
             Console.WriteLine(s.f1);

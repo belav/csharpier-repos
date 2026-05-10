@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DebuggerDisplayItemInfo value,
             DebuggerDisplayItemInfo simpleValue,
             DebuggerDisplayItemInfo typeName,
-            bool hasFavoritesInfo)
+            bool hasFavoritesInfo
+        )
             : this(targetType)
         {
             Name = name;
@@ -43,11 +44,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             m_hasFavoritesInfo = hasFavoritesInfo;
         }
 
-        public bool HasValues { get { return (Name != null || TypeName != null || m_value != null); } }
+        public bool HasValues
+        {
+            get { return (Name != null || TypeName != null || m_value != null); }
+        }
 
         public DebuggerDisplayItemInfo GetValue(DkmInspectionContext inspectionContext)
         {
-            if (m_simpleValue != null && (inspectionContext.EvaluationFlags & DkmEvaluationFlags.UseSimpleDisplayString) == DkmEvaluationFlags.UseSimpleDisplayString)
+            if (
+                m_simpleValue != null
+                && (inspectionContext.EvaluationFlags & DkmEvaluationFlags.UseSimpleDisplayString)
+                    == DkmEvaluationFlags.UseSimpleDisplayString
+            )
             {
                 return m_simpleValue;
             }
@@ -63,8 +71,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             if (favoritesInfo.DisplayString != null)
             {
                 value = new DebuggerDisplayItemInfo(favoritesInfo.DisplayString, m_targetType);
-                simpleValue = favoritesInfo.SimpleDisplayString != null ?
-                    new DebuggerDisplayItemInfo(favoritesInfo.SimpleDisplayString, m_targetType) : null;
+                simpleValue =
+                    favoritesInfo.SimpleDisplayString != null
+                        ? new DebuggerDisplayItemInfo(
+                            favoritesInfo.SimpleDisplayString,
+                            m_targetType
+                        )
+                        : null;
             }
 
             return new DebuggerDisplayInfo(
@@ -73,10 +86,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 value: value,
                 simpleValue: simpleValue,
                 typeName: TypeName,
-                hasFavoritesInfo: true);
+                hasFavoritesInfo: true
+            );
         }
 
-        public DebuggerDisplayInfo WithDebuggerDisplayAttribute(DkmClrDebuggerDisplayAttribute attribute, DkmClrType attributeTarget)
+        public DebuggerDisplayInfo WithDebuggerDisplayAttribute(
+            DkmClrDebuggerDisplayAttribute attribute,
+            DkmClrType attributeTarget
+        )
         {
             var name = Name;
             var value = m_value;
@@ -106,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 value: value,
                 simpleValue: simpleValue,
                 typeName: typeName,
-                hasFavoritesInfo: m_hasFavoritesInfo);
+                hasFavoritesInfo: m_hasFavoritesInfo
+            );
         }
     }
 

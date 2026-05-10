@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,75 +27,81 @@
 //
 using System;
 using System.Collections.ObjectModel;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {
-	public class SamlSecurityToken : SecurityToken
-	{
-		[MonoTODO]
-		protected SamlSecurityToken ()
-		{
-			throw new NotImplementedException ();
-		}
+    public class SamlSecurityToken : SecurityToken
+    {
+        [MonoTODO]
+        protected SamlSecurityToken()
+        {
+            throw new NotImplementedException();
+        }
 
-		public SamlSecurityToken (SamlAssertion assertion)
-		{
-			this.assertion = assertion;
-			Initialize (assertion);
-		}
+        public SamlSecurityToken(SamlAssertion assertion)
+        {
+            this.assertion = assertion;
+            Initialize(assertion);
+        }
 
-		SamlAssertion assertion;
+        SamlAssertion assertion;
 
-		public SamlAssertion Assertion {
-			get { return assertion; }
-		}
+        public SamlAssertion Assertion
+        {
+            get { return assertion; }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidFrom {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override DateTime ValidFrom
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override DateTime ValidTo {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override DateTime ValidTo
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override string Id {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override string Id
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override ReadOnlyCollection<SecurityKey> SecurityKeys {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override ReadOnlyCollection<SecurityKey> SecurityKeys
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override bool CanCreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool CanCreateKeyIdentifierClause<T>()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override T CreateKeyIdentifierClause<T> ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override T CreateKeyIdentifierClause<T>()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override bool MatchesKeyIdentifierClause (
-			SecurityKeyIdentifierClause keyIdentifierClause)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		protected void Initialize (SamlAssertion assertion)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected void Initialize(SamlAssertion assertion)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

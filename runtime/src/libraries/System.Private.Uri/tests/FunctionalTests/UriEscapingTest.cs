@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Tests;
 using System.Text;
-
 using Xunit;
 
 namespace System.PrivateUri.Tests
@@ -15,7 +14,8 @@ namespace System.PrivateUri.Tests
     /// </summary>
     public class UriEscapingTest
     {
-        private const string AlphaNumeric = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string AlphaNumeric =
+            "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string RFC2396Unreserved = AlphaNumeric + "-_.!~*'()";
         private const string RFC2396Reserved = @";/:@&=+$,?";
         private const string RFC3986Unreserved = AlphaNumeric + "-._~";
@@ -93,10 +93,11 @@ namespace System.PrivateUri.Tests
         {
             string output = Uri.EscapeDataString(GB18030CertificationString1);
             Assert.Equal(
-                 @"%E6%95%B0%E6%8D%AE%20eq" +
-                "%20%27%F0%A0%80%80%F0%A0%80%81%F0%A0%80%82%F0%A0%80%83%F0%AA%9B%91" +
-                "%F0%AA%9B%92%F0%AA%9B%93%F0%AA%9B%94%F0%AA%9B%95%F0%AA%9B%96%27",
-                output);
+                @"%E6%95%B0%E6%8D%AE%20eq"
+                    + "%20%27%F0%A0%80%80%F0%A0%80%81%F0%A0%80%82%F0%A0%80%83%F0%AA%9B%91"
+                    + "%F0%AA%9B%92%F0%AA%9B%93%F0%AA%9B%94%F0%AA%9B%95%F0%AA%9B%96%27",
+                output
+            );
 
             using (new ThreadCultureChange("zh-cn"))
             {
@@ -110,8 +111,16 @@ namespace System.PrivateUri.Tests
             // as well as lengths longer than the max Uri length of ushort.MaxValue.
             foreach (int length in new[] { 1, 0xFFF0, 0xFFF1, ushort.MaxValue + 10 })
             {
-                yield return new object[] { new string('s', length), string.Concat(Enumerable.Repeat("s", length)) };
-                yield return new object[] { new string('/', length), string.Concat(Enumerable.Repeat("%2F", length)) };
+                yield return new object[]
+                {
+                    new string('s', length),
+                    string.Concat(Enumerable.Repeat("s", length)),
+                };
+                yield return new object[]
+                {
+                    new string('/', length),
+                    string.Concat(Enumerable.Repeat("%2F", length)),
+                };
             }
         }
 
@@ -304,8 +313,16 @@ namespace System.PrivateUri.Tests
             // as well as lengths longer than the max Uri length of ushort.MaxValue.
             foreach (int length in new[] { 1, 0xFFF0, 0xFFF1, ushort.MaxValue + 10 })
             {
-                yield return new object[] { new string('s', length), string.Concat(Enumerable.Repeat("s", length)) };
-                yield return new object[] { new string('<', length), string.Concat(Enumerable.Repeat("%3C", length)) };
+                yield return new object[]
+                {
+                    new string('s', length),
+                    string.Concat(Enumerable.Repeat("s", length)),
+                };
+                yield return new object[]
+                {
+                    new string('<', length),
+                    string.Concat(Enumerable.Repeat("%3C", length)),
+                };
             }
         }
 
@@ -323,8 +340,15 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriAbsoluteEscaping_AlphaNumeric_NoEscaping()
         {
-            string input = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + AlphaNumeric
-                + "?" + AlphaNumeric + "#" + AlphaNumeric;
+            string input =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + AlphaNumeric
+                + "?"
+                + AlphaNumeric
+                + "#"
+                + AlphaNumeric;
             Uri testUri = new Uri(input);
             Assert.Equal(input, testUri.AbsoluteUri);
         }
@@ -333,10 +357,24 @@ namespace System.PrivateUri.Tests
         public void UriAbsoluteUnEscaping_AlphaNumericEscapedIriOn_UnEscaping()
         {
             string escapedAlphaNum = Escape(AlphaNumeric);
-            string input = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + escapedAlphaNum
-                + "?" + escapedAlphaNum + "#" + escapedAlphaNum;
-            string expectedOutput = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + AlphaNumeric
-                + "?" + AlphaNumeric + "#" + AlphaNumeric;
+            string input =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + escapedAlphaNum
+                + "?"
+                + escapedAlphaNum
+                + "#"
+                + escapedAlphaNum;
+            string expectedOutput =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + AlphaNumeric
+                + "?"
+                + AlphaNumeric
+                + "#"
+                + AlphaNumeric;
             Uri testUri = new Uri(input);
             Assert.Equal(expectedOutput, testUri.AbsoluteUri);
         }
@@ -344,8 +382,15 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriAbsoluteEscaping_RFC2396Unreserved_NoEscaping()
         {
-            string input = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + RFC2396Unreserved
-                + "?" + RFC2396Unreserved + "#" + RFC2396Unreserved;
+            string input =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + RFC2396Unreserved
+                + "?"
+                + RFC2396Unreserved
+                + "#"
+                + RFC2396Unreserved;
             Uri testUri = new Uri(input);
             Assert.Equal(input, testUri.AbsoluteUri);
         }
@@ -354,10 +399,24 @@ namespace System.PrivateUri.Tests
         public void UriAbsoluteUnEscaping_RFC3986UnreservedEscaped_AllUnescaped()
         {
             string escaped = Escape(RFC3986Unreserved);
-            string input = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + escaped
-                + "?" + escaped + "#" + escaped;
-            string expectedOutput = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + RFC3986Unreserved
-                + "?" + RFC3986Unreserved + "#" + RFC3986Unreserved;
+            string input =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + escaped
+                + "?"
+                + escaped
+                + "#"
+                + escaped;
+            string expectedOutput =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + RFC3986Unreserved
+                + "?"
+                + RFC3986Unreserved
+                + "#"
+                + RFC3986Unreserved;
 
             Uri testUri = new Uri(input);
             Assert.Equal(expectedOutput, testUri.AbsoluteUri);
@@ -366,8 +425,8 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriAbsoluteEscaping_RFC2396Reserved_NoEscaping()
         {
-            string input = "http://host/" + RFC2396Reserved
-                + "?" + RFC2396Reserved + "#" + RFC2396Reserved;
+            string input =
+                "http://host/" + RFC2396Reserved + "?" + RFC2396Reserved + "#" + RFC2396Reserved;
             Uri testUri = new Uri(input);
             Assert.Equal(input, testUri.AbsoluteUri);
         }
@@ -385,8 +444,15 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriAbsoluteEscaping_RFC3986Unreserved_NoEscaping()
         {
-            string input = "http://" + AlphaNumeric.ToLowerInvariant() + "/" + RFC3986Unreserved
-                + "?" + RFC3986Unreserved + "#" + RFC3986Unreserved;
+            string input =
+                "http://"
+                + AlphaNumeric.ToLowerInvariant()
+                + "/"
+                + RFC3986Unreserved
+                + "?"
+                + RFC3986Unreserved
+                + "#"
+                + RFC3986Unreserved;
             Uri testUri = new Uri(input);
             Assert.Equal(input, testUri.AbsoluteUri);
         }
@@ -394,8 +460,8 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriAbsoluteEscaping_RFC3986Reserved_NothingEscaped()
         {
-            string input = "http://host/" + RFC3986Reserved
-                + "?" + RFC3986Reserved + "#" + RFC3986Reserved;
+            string input =
+                "http://host/" + RFC3986Reserved + "?" + RFC3986Reserved + "#" + RFC3986Reserved;
 
             Uri testUri = new Uri(input);
             Assert.Equal(input, testUri.AbsoluteUri);
@@ -422,7 +488,8 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriAbsoluteEscaping_FullIPv6Uri_NothingEscaped()
         {
-            string input = "http://[0000:0000:0000:0000:0000:0000:0000:0001]:90/path/path[]?query[]#fragment[]#";
+            string input =
+                "http://[0000:0000:0000:0000:0000:0000:0000:0001]:90/path/path[]?query[]#fragment[]#";
             Uri output = new Uri(input);
             Assert.Equal("http://[::1]:90/path/path[]?query[]#fragment[]#", output.AbsoluteUri);
         }
@@ -431,15 +498,19 @@ namespace System.PrivateUri.Tests
         public void UriAbsoluteEscaping_SurrogatePair_LocaleIndependent()
         {
             string uriString = "http://contosotest.conto.soco.ntosoco.com/surrgtest()?$filter=";
-            string expectedString = uriString + "%E6%95%B0%E6%8D%AE%20eq%20%27%F0%A0%80%80%F0%A0%80%81%F0%A0%80%82%F0%A0%80%83%F0" +
-                                                "%AA%9B%91%F0%AA%9B%92%F0%AA%9B%93%F0%AA%9B%94%F0%AA%9B%95%F0%AA%9B%96%27";
+            string expectedString =
+                uriString
+                + "%E6%95%B0%E6%8D%AE%20eq%20%27%F0%A0%80%80%F0%A0%80%81%F0%A0%80%82%F0%A0%80%83%F0"
+                + "%AA%9B%91%F0%AA%9B%92%F0%AA%9B%93%F0%AA%9B%94%F0%AA%9B%95%F0%AA%9B%96%27";
 
             Uri uri = new Uri(uriString + Uri.EscapeDataString(GB18030CertificationString1));
             Assert.Equal(expectedString, uri.AbsoluteUri);
 
             using (new ThreadCultureChange("zh-cn"))
             {
-                Uri uriZhCn = new Uri(uriString + Uri.EscapeDataString(GB18030CertificationString1));
+                Uri uriZhCn = new Uri(
+                    uriString + Uri.EscapeDataString(GB18030CertificationString1)
+                );
                 Assert.Equal(uri.AbsoluteUri, uriZhCn.AbsoluteUri); // Same normalized result expected in different locales.
             }
         }
@@ -448,7 +519,8 @@ namespace System.PrivateUri.Tests
         public void UriAbsoluteEscaping_EscapeBufferRealloc()
         {
             string strUriRoot = "http://host";
-            string strUriQuery = @"/x?=srch_type=\uFFFD\uFFFD\uFFFD&sop=and&stx=\uFFFD\uFFFD\uFFFD\uDB8F\uDCB5\uFFFD\u20\uFFFD\uFFFD";
+            string strUriQuery =
+                @"/x?=srch_type=\uFFFD\uFFFD\uFFFD&sop=and&stx=\uFFFD\uFFFD\uFFFD\uDB8F\uDCB5\uFFFD\u20\uFFFD\uFFFD";
 
             Uri uriRoot = new Uri(strUriRoot);
 
@@ -457,13 +529,9 @@ namespace System.PrivateUri.Tests
             Uri uriRelative = new Uri(strUriQuery, UriKind.Relative);
             Uri uriCtor3 = new Uri(uriRoot, uriRelative);
 
-            Assert.Equal(
-                uriCtor1.AbsoluteUri,
-                uriCtor2.AbsoluteUri); // Uri(string) is not producing the same AbsoluteUri result as Uri(Uri, string).
+            Assert.Equal(uriCtor1.AbsoluteUri, uriCtor2.AbsoluteUri); // Uri(string) is not producing the same AbsoluteUri result as Uri(Uri, string).
 
-            Assert.Equal(
-                uriCtor1.AbsoluteUri,
-                uriCtor3.AbsoluteUri); // Uri(string) is not producing the same result as Uri(Uri, Uri).
+            Assert.Equal(uriCtor1.AbsoluteUri, uriCtor3.AbsoluteUri); // Uri(string) is not producing the same result as Uri(Uri, Uri).
         }
 
         #endregion AbsoluteUri escaping
@@ -587,7 +655,8 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriUnescapeInvalid_Regex_LeftAlone()
         {
-            string input = @"(https?://)?(([\w!~*'().&;;=+$%-]+: )?[\w!~*'().&;;=+$%-]+@)?(([0-9]{1,3}\.){3}[0-9]"
+            string input =
+                @"(https?://)?(([\w!~*'().&;;=+$%-]+: )?[\w!~*'().&;;=+$%-]+@)?(([0-9]{1,3}\.){3}[0-9]"
                 + @"{1,3}|([\w!~*'()-]+\.)*([\w^-][\w-]{0,61})?[\w]\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\w!~*'()."
                 + @";?:@&;;=+$,%#-]+)+/*)";
             string output = Uri.UnescapeDataString(input);
@@ -724,10 +793,25 @@ namespace System.PrivateUri.Tests
 
         #region Helpers
 
-        private static readonly char[] s_hexUpperChars = {
-                                   '0', '1', '2', '3', '4', '5', '6', '7',
-                                   '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
-                                   };
+        private static readonly char[] s_hexUpperChars =
+        {
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+        };
 
         // Percent encode every character
         private static string Escape(string input)

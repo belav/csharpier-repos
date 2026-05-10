@@ -1,40 +1,45 @@
 //------------------------------------------------------------------------------
 // <copyright file="MimeReturn.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Description {
-
+namespace System.Web.Services.Description
+{
+    using System;
+    using System.CodeDom;
+    using System.Collections;
+    using System.Reflection;
     using System.Web.Services;
     using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Collections;
-    using System;
-    using System.Reflection;
-    using System.CodeDom;
+    using System.Xml.Serialization;
 
-    internal class MimeReturn {
+    internal class MimeReturn
+    {
         string typeName;
         Type readerType;
         CodeAttributeDeclarationCollection attrs;
 
-        internal string TypeName {
+        internal string TypeName
+        {
             get { return typeName == null ? string.Empty : typeName; }
             set { typeName = value; }
         }
 
-        internal Type ReaderType {
+        internal Type ReaderType
+        {
             get { return readerType; }
             set { readerType = value; }
         }
 
-        internal CodeAttributeDeclarationCollection Attributes {
-            get { 
+        internal CodeAttributeDeclarationCollection Attributes
+        {
+            get
+            {
                 if (attrs == null)
                     attrs = new CodeAttributeDeclarationCollection();
-                return attrs; 
+                return attrs;
             }
         }
     }

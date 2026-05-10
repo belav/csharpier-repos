@@ -5,8 +5,13 @@ namespace System.Configuration
 {
     internal sealed class DefinitionUpdate : Update
     {
-        internal DefinitionUpdate(string configKey, bool moved, string updatedXml, SectionRecord sectionRecord) :
-            base(configKey, moved, updatedXml)
+        internal DefinitionUpdate(
+            string configKey,
+            bool moved,
+            string updatedXml,
+            SectionRecord sectionRecord
+        )
+            : base(configKey, moved, updatedXml)
         {
             SectionRecord = sectionRecord;
         }

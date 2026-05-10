@@ -6,8 +6,8 @@
 
 using System;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 
@@ -34,8 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             _elements = elementsBuilder.ToImmutableAndFree();
         }
 
-        public CodeElementSnapshot(ImmutableArray<EnvDTE.CodeElement> elements)
-            => _elements = elements;
+        public CodeElementSnapshot(ImmutableArray<EnvDTE.CodeElement> elements) =>
+            _elements = elements;
 
         public override int Count
         {

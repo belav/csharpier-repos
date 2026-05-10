@@ -5,7 +5,10 @@ using System.Diagnostics;
 
 namespace System.Runtime.Versioning
 {
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Constructor, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Constructor,
+        Inherited = false
+    )]
     [Conditional("RESOURCE_ANNOTATION_WORK")]
     public sealed class ResourceConsumptionAttribute : Attribute
     {
@@ -18,7 +21,10 @@ namespace System.Runtime.Versioning
             ConsumptionScope = resourceScope;
         }
 
-        public ResourceConsumptionAttribute(ResourceScope resourceScope, ResourceScope consumptionScope)
+        public ResourceConsumptionAttribute(
+            ResourceScope resourceScope,
+            ResourceScope consumptionScope
+        )
         {
             ResourceScope = resourceScope;
             ConsumptionScope = consumptionScope;

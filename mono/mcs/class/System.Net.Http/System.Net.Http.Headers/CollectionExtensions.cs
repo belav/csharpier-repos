@@ -32,69 +32,80 @@ using System.Text;
 
 namespace System.Net.Http.Headers
 {
-	static class CollectionExtensions
-	{
-		public static bool SequenceEqual<TSource> (this List<TSource> first, List<TSource> second)
-		{
-			if (first == null)
-				return second == null || second.Count == 0;
+    static class CollectionExtensions
+    {
+        public static bool SequenceEqual<TSource>(this List<TSource> first, List<TSource> second)
+        {
+            if (first == null)
+                return second == null || second.Count == 0;
 
-			if (second == null)
-				return first == null || first.Count == 0;
+            if (second == null)
+                return first == null || first.Count == 0;
 
-			return Enumerable.SequenceEqual (first, second);
-		}
+            return Enumerable.SequenceEqual(first, second);
+        }
 
-		public static void SetValue (this List<NameValueHeaderValue> parameters, string key, string value)
-		{
-			for (int i = 0; i < parameters.Count; ++i) {
-				var entry = parameters[i];
-				if (!string.Equals (entry.Name, key, StringComparison.OrdinalIgnoreCase))
-					continue;
+        public static void SetValue(
+            this List<NameValueHeaderValue> parameters,
+            string key,
+            string value
+        )
+        {
+            for (int i = 0; i < parameters.Count; ++i)
+            {
+                var entry = parameters[i];
+                if (!string.Equals(entry.Name, key, StringComparison.OrdinalIgnoreCase))
+                    continue;
 
-				if (value == null) {
-					parameters.RemoveAt (i);
-				} else {
-					parameters[i].Value = value;
-				}
+                if (value == null)
+                {
+                    parameters.RemoveAt(i);
+                }
+                else
+                {
+                    parameters[i].Value = value;
+                }
 
-				return;
-			}
+                return;
+            }
 
-			if (!string.IsNullOrEmpty (value))
-				parameters.Add (new NameValueHeaderValue (key, value));
-		}
+            if (!string.IsNullOrEmpty(value))
+                parameters.Add(new NameValueHeaderValue(key, value));
+        }
 
-		public static string ToString<T> (this List<T> list)
-		{
-			if (list == null || list.Count == 0)
-				return null;
+        public static string ToString<T>(this List<T> list)
+        {
+            if (list == null || list.Count == 0)
+                return null;
 
-			const string separator = "; ";
+            const string separator = "; ";
 
-			var sb = new StringBuilder ();
-			for (int i = 0; i < list.Count; ++i) {
-				sb.Append (separator);
-				sb.Append (list [i]);
-			}
+            var sb = new StringBuilder();
+            for (int i = 0; i < list.Count; ++i)
+            {
+                sb.Append(separator);
+                sb.Append(list[i]);
+            }
 
-			return sb.ToString ();
-		}
+            return sb.ToString();
+        }
 
-		public static void ToStringBuilder<T> (this List<T> list, StringBuilder sb)
-		{
-			if (list == null || list.Count == 0)
-				return;
+        public static void ToStringBuilder<T>(this List<T> list, StringBuilder sb)
+        {
+            if (list == null || list.Count == 0)
+                return;
 
-			const string separator = ", ";
+            const string separator = ", ";
 
-			for (int i = 0; i < list.Count; ++i) {
-				if (i > 0) {
-					sb.Append (separator);
-				}
+            for (int i = 0; i < list.Count; ++i)
+            {
+                if (i > 0)
+                {
+                    sb.Append(separator);
+                }
 
-				sb.Append (list[i]);
-			}
-		}
-	}
+                sb.Append(list[i]);
+            }
+        }
+    }
 }

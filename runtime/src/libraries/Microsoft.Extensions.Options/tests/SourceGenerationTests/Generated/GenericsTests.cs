@@ -12,16 +12,9 @@ public class GenericsTests
     [Fact]
     public void Invalid()
     {
-        var secondModel = new SecondModel
-        {
-            P4 = "1234",
-        };
+        var secondModel = new SecondModel { P4 = "1234" };
 
-        var firstModel = new FirstModel<int>
-        {
-            P1 = "1234",
-            P3 = secondModel,
-        };
+        var firstModel = new FirstModel<int> { P1 = "1234", P3 = secondModel };
 
         var validator = new FirstValidator<int>();
         var vr = validator.Validate("Generics", firstModel);
@@ -32,16 +25,9 @@ public class GenericsTests
     [Fact]
     public void Valid()
     {
-        var secondModel = new SecondModel
-        {
-            P4 = "12345",
-        };
+        var secondModel = new SecondModel { P4 = "12345" };
 
-        var firstModel = new FirstModel<int>
-        {
-            P1 = "12345",
-            P3 = secondModel,
-        };
+        var firstModel = new FirstModel<int> { P1 = "12345", P3 = secondModel };
 
         var validator = new FirstValidator<int>();
         Assert.Equal(ValidateOptionsResult.Success, validator.Validate("Generics", firstModel));

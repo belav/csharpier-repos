@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when there is an attempt to divide an integral or <see cref="decimal"/> value by zero.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class DivideByZeroException : ArithmeticException
     {
         public DivideByZeroException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_DIVIDEBYZERO;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected DivideByZeroException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected DivideByZeroException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

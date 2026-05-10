@@ -12,9 +12,15 @@ namespace System.Text.Json.Serialization.Tests
     {
         [Theory]
         [MemberData(nameof(GetCustomKeysAndExpectedPropertyNameEncodings))]
-        public static void CustomKeyConverter_Serialization<TKey>(TKey key, string expectedKeyEncoding)
+        public static void CustomKeyConverter_Serialization<TKey>(
+            TKey key,
+            string expectedKeyEncoding
+        )
         {
-            var options = new JsonSerializerOptions { Converters = { new EmbeddedJsonKeyConverter<TKey>() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new EmbeddedJsonKeyConverter<TKey>() },
+            };
             var value = new Dictionary<TKey, byte> { [key] = 42 };
 
             string expectedJson = $"{{\"{expectedKeyEncoding}\":42}}";
@@ -25,12 +31,21 @@ namespace System.Text.Json.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(GetCustomKeysAndExpectedPropertyNameEncodings))]
-        public static void CustomKeyConverter_Deserialization<TKey>(TKey key, string expectedKeyEncoding)
+        public static void CustomKeyConverter_Deserialization<TKey>(
+            TKey key,
+            string expectedKeyEncoding
+        )
         {
-            var options = new JsonSerializerOptions { Converters = { new EmbeddedJsonKeyConverter<TKey>() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new EmbeddedJsonKeyConverter<TKey>() },
+            };
 
             string json = $"{{\"{expectedKeyEncoding}\":42}}";
-            var deserializedValue = JsonSerializer.Deserialize<Dictionary<TKey, byte>>(json, options);
+            var deserializedValue = JsonSerializer.Deserialize<Dictionary<TKey, byte>>(
+                json,
+                options
+            );
 
             Assert.Equal(1, deserializedValue.Count);
             Assert.Equal(key, deserializedValue.Keys.First());
@@ -44,13 +59,21 @@ namespace System.Text.Json.Serialization.Tests
             yield return Wrap(new KeyValuePair<string, bool>("x", false));
             yield return Wrap(new int[] { 1, 2, 3 });
 
-            static object[] Wrap<TKey>(TKey key) => new object[] { key, JavaScriptEncoder.Default.Encode(JsonSerializer.Serialize(key)) };
+            static object[] Wrap<TKey>(TKey key) =>
+                new object[]
+                {
+                    key,
+                    JavaScriptEncoder.Default.Encode(JsonSerializer.Serialize(key)),
+                };
         }
 
         [Fact]
         public static void ExtensionDataProperty_Serialization_IgnoreCustomStringKeyConverter()
         {
-            var options = new JsonSerializerOptions { Converters = { new EmbeddedJsonKeyConverter<string>() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new EmbeddedJsonKeyConverter<string>() },
+            };
             var value = new PocoWithExtensionDataProperty();
 
             string expectedJson = @"{""key"":42}";
@@ -62,63 +85,116 @@ namespace System.Text.Json.Serialization.Tests
         public class PocoWithExtensionDataProperty
         {
             [JsonExtensionData]
-            public Dictionary<string, object> Data { get; set; } = new Dictionary<string, object> { ["key"] = 42 };
+            public Dictionary<string, object> Data { get; set; } =
+                new Dictionary<string, object> { ["key"] = 42 };
         }
 
         [Theory]
         [InlineData(InvalidCustomKeyConverter.InvalidOperationType.DoNothing)]
         [InlineData(InvalidCustomKeyConverter.InvalidOperationType.HandleEntireParentObject)]
         [InlineData(InvalidCustomKeyConverter.InvalidOperationType.HandleEntireProperty)]
-        public static void InvalidCustomKeyConverter_Serialization(InvalidCustomKeyConverter.InvalidOperationType invalidOperationType)
+        public static void InvalidCustomKeyConverter_Serialization(
+            InvalidCustomKeyConverter.InvalidOperationType invalidOperationType
+        )
         {
-            var options = new JsonSerializerOptions { Converters = { new InvalidCustomKeyConverter { OperationType = invalidOperationType } } };
+            var options = new JsonSerializerOptions
+            {
+                Converters =
+                {
+                    new InvalidCustomKeyConverter { OperationType = invalidOperationType },
+                },
+            };
             var value = new Dictionary<string, int> { ["key"] = 42 };
 
             Assert.Throws<JsonException>(() => JsonSerializer.Serialize(value, options));
         }
 
         [Theory]
-        [InlineData(InvalidCustomKeyConverter.InvalidOperationType.HandleEntireParentObject, typeof(JsonException))]
-        [InlineData(InvalidCustomKeyConverter.InvalidOperationType.HandleEntireProperty, typeof(JsonException))]
-        [InlineData(InvalidCustomKeyConverter.InvalidOperationType.ReturnNull, typeof(ArgumentNullException))]
-        public static void InvalidCustomKeyConverter_Deserialization(InvalidCustomKeyConverter.InvalidOperationType invalidOperationType, Type exceptionType)
+        [InlineData(
+            InvalidCustomKeyConverter.InvalidOperationType.HandleEntireParentObject,
+            typeof(JsonException)
+        )]
+        [InlineData(
+            InvalidCustomKeyConverter.InvalidOperationType.HandleEntireProperty,
+            typeof(JsonException)
+        )]
+        [InlineData(
+            InvalidCustomKeyConverter.InvalidOperationType.ReturnNull,
+            typeof(ArgumentNullException)
+        )]
+        public static void InvalidCustomKeyConverter_Deserialization(
+            InvalidCustomKeyConverter.InvalidOperationType invalidOperationType,
+            Type exceptionType
+        )
         {
-            var options = new JsonSerializerOptions { Converters = { new InvalidCustomKeyConverter { OperationType = invalidOperationType } } };
+            var options = new JsonSerializerOptions
+            {
+                Converters =
+                {
+                    new InvalidCustomKeyConverter { OperationType = invalidOperationType },
+                },
+            };
             string json = @"{""key1"" : 1, ""key2"" : 2 }";
 
-            Assert.Throws(exceptionType, () => JsonSerializer.Deserialize<Dictionary<string, int>>(json, options));
+            Assert.Throws(
+                exceptionType,
+                () => JsonSerializer.Deserialize<Dictionary<string, int>>(json, options)
+            );
         }
 
         public class EmbeddedJsonKeyConverter<T> : JsonConverter<T>
         {
-            public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions _)
-                => throw new NotSupportedException();
+            public override T Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions _
+            ) => throw new NotSupportedException();
 
-            public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions _)
-                => throw new NotSupportedException();
+            public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions _) =>
+                throw new NotSupportedException();
 
-            public override void WriteAsPropertyName(Utf8JsonWriter writer, T value, JsonSerializerOptions _)
-                => writer.WritePropertyName(JsonSerializer.Serialize(value));
+            public override void WriteAsPropertyName(
+                Utf8JsonWriter writer,
+                T value,
+                JsonSerializerOptions _
+            ) => writer.WritePropertyName(JsonSerializer.Serialize(value));
 
-            public override T ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions _)
-                => JsonSerializer.Deserialize<T>(reader.GetString());
+            public override T ReadAsPropertyName(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions _
+            ) => JsonSerializer.Deserialize<T>(reader.GetString());
         }
 
         public class InvalidCustomKeyConverter : JsonConverter<string>
         {
             public enum InvalidOperationType
             {
-                DoNothing, HandleEntireProperty, HandleEntireParentObject, ReturnNull
+                DoNothing,
+                HandleEntireProperty,
+                HandleEntireParentObject,
+                ReturnNull,
             }
 
             public InvalidOperationType OperationType { get; init; }
 
-            public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                => throw new NotSupportedException();
-            public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
-                => throw new NotSupportedException();
+            public override string Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => throw new NotSupportedException();
 
-            public override void WriteAsPropertyName(Utf8JsonWriter writer, string value, JsonSerializerOptions _)
+            public override void Write(
+                Utf8JsonWriter writer,
+                string value,
+                JsonSerializerOptions options
+            ) => throw new NotSupportedException();
+
+            public override void WriteAsPropertyName(
+                Utf8JsonWriter writer,
+                string value,
+                JsonSerializerOptions _
+            )
             {
                 switch (OperationType)
                 {
@@ -136,7 +212,11 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            public override string ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions _)
+            public override string ReadAsPropertyName(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions _
+            )
             {
                 switch (OperationType)
                 {

@@ -34,7 +34,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         public partial void M5(string v);
 
         // Test auto-generated EventId
-        [LoggerMessage(EventName = "My Event Name", Level = LogLevel.Information, Message = "M6 - {p1}")]
+        [LoggerMessage(
+            EventName = "My Event Name",
+            Level = LogLevel.Information,
+            Message = "M6 - {p1}"
+        )]
         public partial void M6(string p1);
 
         [LoggerMessage(Level = LogLevel.Warning, Message = "M7 - {p1}")]

@@ -39,8 +39,12 @@ namespace System.ServiceModel.Channels
         Func<Uri, int> onDuplicatedViaCallback;
         static readonly Version ProtocolVersion = new Version(3, 0, 0, 0);
 
-        internal SharedConnectionListener(BaseUriWithWildcard baseAddress, int queueId, Guid token,
-            Func<Uri, int> onDuplicatedViaCallback)
+        internal SharedConnectionListener(
+            BaseUriWithWildcard baseAddress,
+            int queueId,
+            Guid token,
+            Func<Uri, int> onDuplicatedViaCallback
+        )
         {
             this.baseAddress = baseAddress;
             this.queueId = queueId;
@@ -58,10 +62,7 @@ namespace System.ServiceModel.Channels
 
         object ThisLock
         {
-            get
-            {
-                return this.syncRoot;
-            }
+            get { return this.syncRoot; }
         }
 
         void IConnectionListener.Listen()
@@ -71,8 +72,14 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult IConnectionListener.BeginAccept(AsyncCallback callback, object state)
         {
-            Fx.Assert(connectionQueue != null, "The connectionQueue should not be null when BeginAccept is called.");
-            Debug.Print("SharedConnectionListener.BeginAccept() connectionQueue.PendingCount: " + connectionQueue.PendingCount);
+            Fx.Assert(
+                connectionQueue != null,
+                "The connectionQueue should not be null when BeginAccept is called."
+            );
+            Debug.Print(
+                "SharedConnectionListener.BeginAccept() connectionQueue.PendingCount: "
+                    + connectionQueue.PendingCount
+            );
             return connectionQueue.BeginDequeue(TimeSpan.MaxValue, callback, state);
         }
 
@@ -82,7 +89,11 @@ namespace System.ServiceModel.Channels
             Stop(false, timeout);
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The call to System.ServiceProcess.TimeoutException (defined in a non-aptca assembly) is safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The call to System.ServiceProcess.TimeoutException (defined in a non-aptca assembly) is safe."
+        )]
         // Stop the proxy but do not close to let existing connections to be drained.
         public void Stop(bool aborting, TimeSpan timeout)
         {
@@ -90,8 +101,10 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             lock (ThisLock)
             {
-                if (this.state == CommunicationState.Closing ||
-                    this.state == CommunicationState.Closed)
+                if (
+                    this.state == CommunicationState.Closing
+                    || this.state == CommunicationState.Closed
+                )
                 {
                     return;
                 }
@@ -111,7 +124,10 @@ namespace System.ServiceModel.Channels
                     if (!this.reconnectEvent.WaitOne(timeoutHelper.RemainingTime()))
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnClose, timeoutHelper.OriginalTimeout)));
+                            new TimeoutException(
+                                SR.GetString(SR.TimeoutOnClose, timeoutHelper.OriginalTimeout)
+                            )
+                        );
                     }
                 }
                 success = true;
@@ -141,8 +157,10 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                Fx.Assert(this.state == CommunicationState.Closing,
-                    "The Stop method must be called first before calling Close.");
+                Fx.Assert(
+                    this.state == CommunicationState.Closing,
+                    "The Stop method must be called first before calling Close."
+                );
 
                 this.state = CommunicationState.Closed;
             }
@@ -186,20 +204,26 @@ namespace System.ServiceModel.Channels
 
         static string GetServiceName(bool isTcp)
         {
-            return isTcp ? ListenerConstants.TcpPortSharingServiceName : ListenerConstants.NamedPipeActivationServiceName;
+            return isTcp
+                ? ListenerConstants.TcpPortSharingServiceName
+                : ListenerConstants.NamedPipeActivationServiceName;
         }
 
         IConnection IConnectionListener.EndAccept(IAsyncResult result)
         {
             lock (ThisLock)
             {
-                if (this.state != CommunicationState.Opening &&
-                    this.state != CommunicationState.Opened)
+                if (
+                    this.state != CommunicationState.Opening
+                    && this.state != CommunicationState.Opened
+                )
                 {
                     return null;
                 }
 
-                DuplicateConnectionAsyncResult duplicateAsyncResult = connectionQueue.EndDequeue(result);
+                DuplicateConnectionAsyncResult duplicateAsyncResult = connectionQueue.EndDequeue(
+                    result
+                );
                 Fx.Assert(duplicateAsyncResult != null, "EndAccept: EndDequeue returned null.");
 
                 // Finish the duplication.
@@ -213,8 +237,10 @@ namespace System.ServiceModel.Channels
         {
             lock (ThisLock)
             {
-                if (this.state == CommunicationState.Closing ||
-                    this.state == CommunicationState.Closed)
+                if (
+                    this.state == CommunicationState.Closing
+                    || this.state == CommunicationState.Closed
+                )
                 {
                     return;
                 }
@@ -256,7 +282,10 @@ namespace System.ServiceModel.Channels
 
             lock (ThisLock)
             {
-                if (this.state == CommunicationState.Created || this.state == CommunicationState.Opening)
+                if (
+                    this.state == CommunicationState.Created
+                    || this.state == CommunicationState.Opening
+                )
                 {
                     this.state = CommunicationState.Opened;
                 }
@@ -265,8 +294,11 @@ namespace System.ServiceModel.Channels
 
         void ReconnectCallback(object state)
         {
-            BackoffTimeoutHelper backoffHelper =
-                new BackoffTimeoutHelper(TimeSpan.MaxValue, TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(30));
+            BackoffTimeoutHelper backoffHelper = new BackoffTimeoutHelper(
+                TimeSpan.MaxValue,
+                TimeSpan.FromMinutes(5),
+                TimeSpan.FromSeconds(30)
+            );
 
             // Looping until we can connect or when it's closed.
             while (this.state == CommunicationState.Opening)
@@ -327,7 +359,7 @@ namespace System.ServiceModel.Channels
             bool closed;
             bool opened;
             ConnectionBufferPool connectionBufferPool;
-            ThreadNeutralSemaphore validateUriCallThrottle; 
+            ThreadNeutralSemaphore validateUriCallThrottle;
 
             public SharedListenerProxy(SharedConnectionListener parent)
             {
@@ -342,7 +374,13 @@ namespace System.ServiceModel.Channels
                 this.readerWriterLock = new ReaderWriterLockSlim();
 
                 //Workaround: Named Pipe stops responding if we push too many requests off to it concurrently.
-                this.validateUriCallThrottle = new ThreadNeutralSemaphore(MaxPendingValidateUriRouteCallsPerProcessor * Environment.ProcessorCount, () => { return null; });
+                this.validateUriCallThrottle = new ThreadNeutralSemaphore(
+                    MaxPendingValidateUriRouteCallsPerProcessor * Environment.ProcessorCount,
+                    () =>
+                    {
+                        return null;
+                    }
+                );
             }
 
             public void Open(bool isReconnecting)
@@ -358,8 +396,11 @@ namespace System.ServiceModel.Channels
                 this.listenerEndPoint = HandleServiceStart(isReconnecting);
                 if (string.IsNullOrEmpty(listenerEndPoint))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                        SR.GetString(SR.Sharing_EmptyListenerEndpoint, this.serviceName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(SR.Sharing_EmptyListenerEndpoint, this.serviceName)
+                        )
+                    );
                 }
 
                 // Check it again after possible backoff
@@ -382,13 +423,33 @@ namespace System.ServiceModel.Channels
                         CreateControlProxy();
 
                         EventWaitHandleSecurity handleSecurity = new EventWaitHandleSecurity();
-                        handleSecurity.AddAccessRule(new EventWaitHandleAccessRule(listenerUniqueSid, EventWaitHandleRights.Modify, AccessControlType.Allow));
+                        handleSecurity.AddAccessRule(
+                            new EventWaitHandleAccessRule(
+                                listenerUniqueSid,
+                                EventWaitHandleRights.Modify,
+                                AccessControlType.Allow
+                            )
+                        );
 
                         bool createdNew;
-                        securityEvent = new EventWaitHandle(false, EventResetMode.ManualReset, ListenerConstants.GlobalPrefix + this.securityEventName, out createdNew, handleSecurity);
+                        securityEvent = new EventWaitHandle(
+                            false,
+                            EventResetMode.ManualReset,
+                            ListenerConstants.GlobalPrefix + this.securityEventName,
+                            out createdNew,
+                            handleSecurity
+                        );
                         if (!createdNew)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceSecurityFailed))));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerServiceSecurityFailed)
+                                    )
+                                )
+                            );
                         }
 
                         Register();
@@ -396,12 +457,24 @@ namespace System.ServiceModel.Channels
                         bool signalled = securityEvent.WaitOne(0, false);
                         if (!signalled)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceSecurityFailed))));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerServiceSecurityFailed)
+                                    )
+                                )
+                            );
                         }
 
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PortSharingListening, SR.GetString(SR.TraceCodePortSharingListening));
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
+                                TraceCode.PortSharingListening,
+                                SR.GetString(SR.TraceCodePortSharingListening)
+                            );
                         }
 
                         this.opened = true;
@@ -459,7 +532,11 @@ namespace System.ServiceModel.Channels
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PortSharingClosed, SR.GetString(SR.TraceCodePortSharingClosed));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.PortSharingClosed,
+                        SR.GetString(SR.TraceCodePortSharingClosed)
+                    );
                 }
             }
 
@@ -486,7 +563,10 @@ namespace System.ServiceModel.Channels
                                 throw;
                             }
 
-                            DiagnosticUtility.TraceHandledException(exception, TraceEventType.Error);
+                            DiagnosticUtility.TraceHandledException(
+                                exception,
+                                TraceEventType.Error
+                            );
                         }
                     }
 
@@ -513,7 +593,10 @@ namespace System.ServiceModel.Channels
                                 throw;
                             }
 
-                            DiagnosticUtility.TraceHandledException(exception, TraceEventType.Error);
+                            DiagnosticUtility.TraceHandledException(
+                                exception,
+                                TraceEventType.Error
+                            );
                         }
                     }
 
@@ -550,11 +633,26 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         listenerUniqueSid = Utility.GetWindowsServiceSid(serviceName);
-                        Debug.Print("SharedListenerProxy.LookupListenerSid() listenerUniqueSid: " + listenerUniqueSid);
+                        Debug.Print(
+                            "SharedListenerProxy.LookupListenerSid() listenerUniqueSid: "
+                                + listenerUniqueSid
+                        );
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceSidLookupFailure, exception.NativeErrorCode)), exception));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
+                                    SR.GetString(
+                                        SR.SharedManagerServiceSidLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                 }
                 else
@@ -563,20 +661,49 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         listenerPid = Utility.GetPidForService(serviceName);
-                        Debug.Print("SharedListenerProxy.LookupListenerSid() listenerPid: " + listenerPid);
+                        Debug.Print(
+                            "SharedListenerProxy.LookupListenerSid() listenerPid: " + listenerPid
+                        );
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceLookupFailure, exception.NativeErrorCode)), exception));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
+                                    SR.GetString(
+                                        SR.SharedManagerServiceLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                     try
                     {
                         listenerUserSid = Utility.GetUserSidForPid(listenerPid);
-                        Debug.Print("SharedListenerProxy.LookupListenerSid() listenerUserSid: " + listenerUserSid);
+                        Debug.Print(
+                            "SharedListenerProxy.LookupListenerSid() listenerUserSid: "
+                                + listenerUserSid
+                        );
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerUserSidLookupFailure, exception.NativeErrorCode)), exception));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
+                                    SR.GetString(
+                                        SR.SharedManagerUserSidLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                     try
                     {
@@ -584,26 +711,49 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Win32Exception exception)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerLogonSidLookupFailure, exception.NativeErrorCode)), exception));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
+                                    SR.GetString(
+                                        SR.SharedManagerLogonSidLookupFailure,
+                                        exception.NativeErrorCode
+                                    )
+                                ),
+                                exception
+                            )
+                        );
                     }
                 }
 
-                Debug.Print("SharedListenerProxy.LookupListenerSid() listenerUniqueSid: " + listenerUniqueSid);
+                Debug.Print(
+                    "SharedListenerProxy.LookupListenerSid() listenerUniqueSid: "
+                        + listenerUniqueSid
+                );
             }
 
             void CreateControlProxy()
             {
-                EndpointAddress epa = new EndpointAddress(Utility.FormatListenerEndpoint(this.serviceName,
-                    this.listenerEndPoint));
+                EndpointAddress epa = new EndpointAddress(
+                    Utility.FormatListenerEndpoint(this.serviceName, this.listenerEndPoint)
+                );
 
-                NamedPipeTransportBindingElement namedPipeBindingElement = new NamedPipeTransportBindingElement();
+                NamedPipeTransportBindingElement namedPipeBindingElement =
+                    new NamedPipeTransportBindingElement();
                 CustomBinding customBinding = new CustomBinding(namedPipeBindingElement);
                 InstanceContext instanceContext = new InstanceContext(null, this, false);
 
-                ChannelFactory<IConnectionRegisterAsync> registerChannelFactory = new DuplexChannelFactory<IConnectionRegisterAsync>(instanceContext,
-                    customBinding, epa);
+                ChannelFactory<IConnectionRegisterAsync> registerChannelFactory =
+                    new DuplexChannelFactory<IConnectionRegisterAsync>(
+                        instanceContext,
+                        customBinding,
+                        epa
+                    );
 
-                registerChannelFactory.Endpoint.Behaviors.Add(new SharedListenerProxyBehavior(this));
+                registerChannelFactory.Endpoint.Behaviors.Add(
+                    new SharedListenerProxyBehavior(this)
+                );
 
                 IConnectionRegister connectionRegister = registerChannelFactory.CreateChannel();
                 this.channelFactory = registerChannelFactory;
@@ -613,8 +763,10 @@ namespace System.ServiceModel.Channels
             void Register()
             {
                 if (TD.SharedListenerProxyRegisterStartIsEnabled())
-                {                    
-                    TD.SharedListenerProxyRegisterStart((this.baseAddress != null) ? this.baseAddress.ToString() : String.Empty);
+                {
+                    TD.SharedListenerProxyRegisterStart(
+                        (this.baseAddress != null) ? this.baseAddress.ToString() : String.Empty
+                    );
                 }
 
                 // Tactical fix for CTP. CTP will only ship with the 3.0 port sharing service enabled.
@@ -626,8 +778,16 @@ namespace System.ServiceModel.Channels
 
                 HandleAllowDupHandlePermission(myPid);
 
-                ListenerExceptionStatus status = ((IConnectionRegister)this.controlSessionWithListener).Register(
-                        version, myPid, this.baseAddress, this.queueId, this.token, this.securityEventName);
+                ListenerExceptionStatus status = (
+                    (IConnectionRegister)this.controlSessionWithListener
+                ).Register(
+                    version,
+                    myPid,
+                    this.baseAddress,
+                    this.queueId,
+                    this.token,
+                    this.securityEventName
+                );
 
                 Debug.Print("SharedListenerProxy.Register() Register returned status: " + status);
                 if (status != ListenerExceptionStatus.Success)
@@ -640,11 +800,35 @@ namespace System.ServiceModel.Channels
                     switch (status)
                     {
                         case ListenerExceptionStatus.ConflictingRegistration:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAlreadyInUseException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerConflictingRegistration))));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new AddressAlreadyInUseException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerConflictingRegistration)
+                                    )
+                                )
+                            );
                         case ListenerExceptionStatus.FailedToListen:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAlreadyInUseException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerFailedToListen))));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new AddressAlreadyInUseException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString(SR.SharedManagerFailedToListen)
+                                    )
+                                )
+                            );
                         default:
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString("SharedManager" + status))));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationException(
+                                    SR.GetString(
+                                        SR.SharedManagerBase,
+                                        serviceName,
+                                        SR.GetString("SharedManager" + status)
+                                    )
+                                )
+                            );
                     }
                 }
                 else
@@ -659,8 +843,15 @@ namespace System.ServiceModel.Channels
             void HandleAllowDupHandlePermission(int myPid)
             {
                 Debug.Print("SharedListenerProxy.HandleAllowDupHandlePermission() myPid: " + myPid);
-                bool notNecessary = !OSEnvironmentHelper.IsVistaOrGreater && listenerUserSid.Equals(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null));
-                Debug.Print("SharedListenerProxy.HandleAllowDupHandlePermission() notNecessary(ServiceRunningAsLocalSystem): " + notNecessary);
+                bool notNecessary =
+                    !OSEnvironmentHelper.IsVistaOrGreater
+                    && listenerUserSid.Equals(
+                        new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+                    );
+                Debug.Print(
+                    "SharedListenerProxy.HandleAllowDupHandlePermission() notNecessary(ServiceRunningAsLocalSystem): "
+                        + notNecessary
+                );
                 if (notNecessary)
                 {
                     return;
@@ -673,12 +864,33 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerCurrentUserSidLookupFailure, exception.NativeErrorCode)), exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SharedManagerBase,
+                                serviceName,
+                                SR.GetString(
+                                    SR.SharedManagerCurrentUserSidLookupFailure,
+                                    exception.NativeErrorCode
+                                )
+                            ),
+                            exception
+                        )
+                    );
                 }
 
-                Debug.Print("SharedListenerProxy.HandleAllowDupHandlePermission() myPid: " + myPid + " myUserSid: " + myUserSid.Value);
-                notNecessary = !OSEnvironmentHelper.IsVistaOrGreater && myUserSid.Equals(listenerUserSid);
-                Debug.Print("SharedListenerProxy.HandleAllowDupHandlePermission() notNecessary(RunningUnderTheSameAccount): " + notNecessary);
+                Debug.Print(
+                    "SharedListenerProxy.HandleAllowDupHandlePermission() myPid: "
+                        + myPid
+                        + " myUserSid: "
+                        + myUserSid.Value
+                );
+                notNecessary =
+                    !OSEnvironmentHelper.IsVistaOrGreater && myUserSid.Equals(listenerUserSid);
+                Debug.Print(
+                    "SharedListenerProxy.HandleAllowDupHandlePermission() notNecessary(RunningUnderTheSameAccount): "
+                        + notNecessary
+                );
                 if (notNecessary)
                 {
                     return;
@@ -690,32 +902,67 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase,
-                        serviceName, SR.GetString(SR.SharedManagerAllowDupHandleFailed, listenerUniqueSid.Value)), exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SharedManagerBase,
+                                serviceName,
+                                SR.GetString(
+                                    SR.SharedManagerAllowDupHandleFailed,
+                                    listenerUniqueSid.Value
+                                )
+                            ),
+                            exception
+                        )
+                    );
                 }
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PortSharingDupHandleGranted,
-                        SR.GetString(SR.TraceCodePortSharingDupHandleGranted, serviceName, listenerUniqueSid.Value));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.PortSharingDupHandleGranted,
+                        SR.GetString(
+                            SR.TraceCodePortSharingDupHandleGranted,
+                            serviceName,
+                            listenerUniqueSid.Value
+                        )
+                    );
                 }
             }
 
-            IConnection BuildDuplicatedNamedPipeConnection(NamedPipeDuplicateContext duplicateContext, int connectionBufferSize)
+            IConnection BuildDuplicatedNamedPipeConnection(
+                NamedPipeDuplicateContext duplicateContext,
+                int connectionBufferSize
+            )
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.PortSharingDuplicatedPipe, SR.GetString(SR.TraceCodePortSharingDuplicatedPipe));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.PortSharingDuplicatedPipe,
+                        SR.GetString(SR.TraceCodePortSharingDuplicatedPipe)
+                    );
                 }
 
                 PipeHandle duplicated = new PipeHandle(duplicateContext.Handle);
-                PipeConnection pipeConnection = new PipeConnection(duplicated, connectionBufferSize, false, true);
+                PipeConnection pipeConnection = new PipeConnection(
+                    duplicated,
+                    connectionBufferSize,
+                    false,
+                    true
+                );
 
-                return new NamedPipeValidatingConnection(new PreReadConnection(pipeConnection, duplicateContext.ReadData),
-                    this);
+                return new NamedPipeValidatingConnection(
+                    new PreReadConnection(pipeConnection, duplicateContext.ReadData),
+                    this
+                );
             }
 
-            ConnectionBufferPool EnsureConnectionBufferPool(int connectionBufferSize, bool alreadyHoldingLock)
+            ConnectionBufferPool EnsureConnectionBufferPool(
+                int connectionBufferSize,
+                bool alreadyHoldingLock
+            )
             {
                 if (alreadyHoldingLock)
                 {
@@ -733,7 +980,10 @@ namespace System.ServiceModel.Channels
             // Don't call directly. Call EnsureConnectionBufferPool instead.
             ConnectionBufferPool EnsureConnectionBufferPoolCore(int connectionBufferSize)
             {
-                if (this.connectionBufferPool != null && (connectionBufferSize == this.connectionBufferPool.BufferSize))
+                if (
+                    this.connectionBufferPool != null
+                    && (connectionBufferSize == this.connectionBufferPool.BufferSize)
+                )
                 {
                     return this.connectionBufferPool;
                 }
@@ -744,30 +994,57 @@ namespace System.ServiceModel.Channels
                 return this.connectionBufferPool;
             }
 
-            IConnection BuildDuplicatedTcpConnection(TcpDuplicateContext duplicateContext, int connectionBufferSize, bool alreadyHoldingLock)
+            IConnection BuildDuplicatedTcpConnection(
+                TcpDuplicateContext duplicateContext,
+                int connectionBufferSize,
+                bool alreadyHoldingLock
+            )
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.PortSharingDuplicatedSocket,
-                        SR.GetString(SR.TraceCodePortSharingDuplicatedSocket));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.PortSharingDuplicatedSocket,
+                        SR.GetString(SR.TraceCodePortSharingDuplicatedSocket)
+                    );
                 }
                 if (TD.PortSharingDuplicatedSocketIsEnabled())
                 {
-                    EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(OperationContext.Current.IncomingMessage);
-                    TD.PortSharingDuplicatedSocket(eventTraceActivity, (duplicateContext.Via != null) ? duplicateContext.Via.ToString() : string.Empty);
+                    EventTraceActivity eventTraceActivity =
+                        EventTraceActivityHelper.TryExtractActivity(
+                            OperationContext.Current.IncomingMessage
+                        );
+                    TD.PortSharingDuplicatedSocket(
+                        eventTraceActivity,
+                        (duplicateContext.Via != null)
+                            ? duplicateContext.Via.ToString()
+                            : string.Empty
+                    );
                 }
 
                 Socket socket = new Socket(duplicateContext.SocketInformation);
-                SocketConnection socketConnection = new SocketConnection(socket, EnsureConnectionBufferPool(connectionBufferSize, alreadyHoldingLock), true);
+                SocketConnection socketConnection = new SocketConnection(
+                    socket,
+                    EnsureConnectionBufferPool(connectionBufferSize, alreadyHoldingLock),
+                    true
+                );
 
-                return new TcpValidatingConnection(new PreReadConnection(socketConnection, duplicateContext.ReadData),
-                    this);
+                return new TcpValidatingConnection(
+                    new PreReadConnection(socketConnection, duplicateContext.ReadData),
+                    this
+                );
             }
 
-            IAsyncResult BeginValidateUriRoute(Uri uri, IPAddress address, int port, AsyncCallback callback, object state)
+            IAsyncResult BeginValidateUriRoute(
+                Uri uri,
+                IPAddress address,
+                int port,
+                AsyncCallback callback,
+                object state
+            )
             {
                 //readerWriterLock is taken inside of async result and check for "closed" stte occurs within that lock
-                return new ValidateUriRouteAsyncResult(this, uri, address, port, callback, state);                
+                return new ValidateUriRouteAsyncResult(this, uri, address, port, callback, state);
             }
 
             bool EndValidateUriRoute(IAsyncResult result)
@@ -804,8 +1081,15 @@ namespace System.ServiceModel.Channels
                 IPAddress address;
                 int port;
                 bool enteredThrottle;
-                
-                public ValidateUriRouteAsyncResult(SharedListenerProxy proxy, Uri uri, IPAddress address, int port, AsyncCallback callback, object state)
+
+                public ValidateUriRouteAsyncResult(
+                    SharedListenerProxy proxy,
+                    Uri uri,
+                    IPAddress address,
+                    int port,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.proxy = proxy;
@@ -816,7 +1100,7 @@ namespace System.ServiceModel.Channels
                     bool isValidUriRoute = false;
                     bool completeSelf = false;
                     Exception completionException = null;
-                    
+
                     try
                     {
                         completeSelf = BeginEnterThrottle(out isValidUriRoute);
@@ -866,8 +1150,13 @@ namespace System.ServiceModel.Channels
                         onEnterThrottle = new FastAsyncCallback(OnEnterThrottle);
                     }
 
-                    
-                    if (this.proxy.validateUriCallThrottle.EnterAsync(TimeSpan.MaxValue, onEnterThrottle, this))
+                    if (
+                        this.proxy.validateUriCallThrottle.EnterAsync(
+                            TimeSpan.MaxValue,
+                            onEnterThrottle,
+                            this
+                        )
+                    )
                     {
                         this.enteredThrottle = true;
                         return BeginValidateUriRoute(out isValidUriRoute);
@@ -879,10 +1168,12 @@ namespace System.ServiceModel.Channels
                 bool BeginValidateUriRoute(out bool isValidUriRoute)
                 {
                     isValidUriRoute = false;
-                    
+
                     if (onValidateUriRoute == null)
                     {
-                        onValidateUriRoute = Fx.ThunkCallback(new AsyncCallback(OnValidateUriRoute));
+                        onValidateUriRoute = Fx.ThunkCallback(
+                            new AsyncCallback(OnValidateUriRoute)
+                        );
                     }
 
                     using (LockHelper.TakeReaderLock(this.proxy.readerWriterLock))
@@ -892,7 +1183,9 @@ namespace System.ServiceModel.Channels
                             return true;
                         }
 
-                        IAsyncResult asyncResult = ((IConnectionRegisterAsync)this.proxy.controlSessionWithListener).BeginValidateUriRoute(uri, address, port, onValidateUriRoute, this);
+                        IAsyncResult asyncResult = (
+                            (IConnectionRegisterAsync)this.proxy.controlSessionWithListener
+                        ).BeginValidateUriRoute(uri, address, port, onValidateUriRoute, this);
 
                         if (asyncResult.CompletedSynchronously)
                         {
@@ -942,7 +1235,8 @@ namespace System.ServiceModel.Channels
                     bool completeSelf;
                     bool isValidUriRoute;
                     Exception completionException = null;
-                    ValidateUriRouteAsyncResult thisPtr = (ValidateUriRouteAsyncResult)result.AsyncState;
+                    ValidateUriRouteAsyncResult thisPtr = (ValidateUriRouteAsyncResult)
+                        result.AsyncState;
 
                     try
                     {
@@ -971,17 +1265,18 @@ namespace System.ServiceModel.Channels
 
                 bool HandleValidateUriRoute(IAsyncResult result, out bool isValidUriRoute)
                 {
-                    isValidUriRoute = ((IConnectionRegisterAsync)this.proxy.controlSessionWithListener).EndValidateUriRoute(result);
+                    isValidUriRoute = (
+                        (IConnectionRegisterAsync)this.proxy.controlSessionWithListener
+                    ).EndValidateUriRoute(result);
                     return true;
                 }
 
                 //Traces the exception if handled...
                 static bool ShouldHandleException(Exception exception)
                 {
-                    bool shouldHandleException = false;                    
+                    bool shouldHandleException = false;
 
-                    if (exception is CommunicationException ||
-                        exception is TimeoutException)
+                    if (exception is CommunicationException || exception is TimeoutException)
                     {
                         shouldHandleException = true;
 
@@ -991,12 +1286,19 @@ namespace System.ServiceModel.Channels
                     return shouldHandleException;
                 }
 
-                void Complete(bool completedSynchronously, bool isValidUriRoute, Exception completionException)
+                void Complete(
+                    bool completedSynchronously,
+                    bool isValidUriRoute,
+                    Exception completionException
+                )
                 {
                     Cleanup();
                     if (completionException != null)
                     {
-                        Fx.Assert(!isValidUriRoute, "isValidUriRoute should always be false when completing with an exception");
+                        Fx.Assert(
+                            !isValidUriRoute,
+                            "isValidUriRoute should always be false when completing with an exception"
+                        );
                         base.Complete(completedSynchronously, completionException);
                     }
                     else
@@ -1011,14 +1313,21 @@ namespace System.ServiceModel.Channels
                 SharedListenerProxy listenerProxy;
                 bool initialValidation;
 
-                public NamedPipeValidatingConnection(IConnection connection, SharedListenerProxy listenerProxy)
+                public NamedPipeValidatingConnection(
+                    IConnection connection,
+                    SharedListenerProxy listenerProxy
+                )
                     : base(connection)
                 {
                     this.listenerProxy = listenerProxy;
                     this.initialValidation = true;
                 }
 
-                public override IAsyncResult BeginValidate(Uri uri, AsyncCallback callback, object state)
+                public override IAsyncResult BeginValidate(
+                    Uri uri,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     if (this.initialValidation) // optimization for first usage
                     {
@@ -1047,7 +1356,10 @@ namespace System.ServiceModel.Channels
                 SharedListenerProxy listenerProxy;
                 bool initialValidation;
 
-                public TcpValidatingConnection(IConnection connection, SharedListenerProxy listenerProxy)
+                public TcpValidatingConnection(
+                    IConnection connection,
+                    SharedListenerProxy listenerProxy
+                )
                     : base(connection)
                 {
                     this.listenerProxy = listenerProxy;
@@ -1058,7 +1370,11 @@ namespace System.ServiceModel.Channels
                     this.initialValidation = true;
                 }
 
-                public override IAsyncResult BeginValidate(Uri uri, AsyncCallback callback, object state)
+                public override IAsyncResult BeginValidate(
+                    Uri uri,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     if (this.initialValidation) // optimization for first usage
                     {
@@ -1066,7 +1382,13 @@ namespace System.ServiceModel.Channels
                         return new CompletedAsyncResult<bool>(true, callback, state);
                     }
 
-                    return this.listenerProxy.BeginValidateUriRoute(uri, this.ipAddress, this.port, callback, state);
+                    return this.listenerProxy.BeginValidateUriRoute(
+                        uri,
+                        this.ipAddress,
+                        this.port,
+                        callback,
+                        state
+                    );
                 }
 
                 public override bool EndValidate(IAsyncResult result)
@@ -1091,8 +1413,16 @@ namespace System.ServiceModel.Channels
 
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SharedManagerServiceEndpointNotExist,
-                            SR.GetString(SR.TraceCodeSharedManagerServiceEndpointNotExist, serviceName), null, null);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.SharedManagerServiceEndpointNotExist,
+                            SR.GetString(
+                                SR.TraceCodeSharedManagerServiceEndpointNotExist,
+                                serviceName
+                            ),
+                            null,
+                            null
+                        );
                     }
 
                     return false;
@@ -1100,7 +1430,9 @@ namespace System.ServiceModel.Channels
                 catch (Win32Exception exception)
                 {
                     // Wrap unexpected Win32Exception.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WrapEndpointReadingException(exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WrapEndpointReadingException(exception)
+                    );
                 }
             }
 
@@ -1109,27 +1441,45 @@ namespace System.ServiceModel.Channels
                 string message;
                 if (exception.NativeErrorCode == UnsafeNativeMethods.ERROR_FILE_NOT_FOUND)
                 {
-                    message = SR.GetString(SR.SharedEndpointReadNotFound, this.baseAddress.BaseAddress.ToString(),
-                        this.serviceName);
+                    message = SR.GetString(
+                        SR.SharedEndpointReadNotFound,
+                        this.baseAddress.BaseAddress.ToString(),
+                        this.serviceName
+                    );
                 }
                 else if (exception.NativeErrorCode == UnsafeNativeMethods.ERROR_ACCESS_DENIED)
                 {
-                    message = SR.GetString(SR.SharedEndpointReadDenied, this.baseAddress.BaseAddress.ToString());
+                    message = SR.GetString(
+                        SR.SharedEndpointReadDenied,
+                        this.baseAddress.BaseAddress.ToString()
+                    );
                 }
                 else
                 {
-                    message = SR.GetString(SR.SharedManagerBase,
-                        serviceName, SR.GetString(SR.SharedManagerServiceEndpointReadFailure, exception.NativeErrorCode));
+                    message = SR.GetString(
+                        SR.SharedManagerBase,
+                        serviceName,
+                        SR.GetString(
+                            SR.SharedManagerServiceEndpointReadFailure,
+                            exception.NativeErrorCode
+                        )
+                    );
                 }
 
                 return new CommunicationException(message, exception);
             }
 
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "ServiceController has demands for ServiceControllerPermission.")]
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+                Justification = "ServiceController has demands for ServiceControllerPermission."
+            )]
             string HandleServiceStart(bool isReconnecting)
             {
                 string listenerEndpoint = null;
-                string sharedMemoryName = isTcp ? ListenerConstants.TcpSharedMemoryName : ListenerConstants.NamedPipeSharedMemoryName;
+                string sharedMemoryName = isTcp
+                    ? ListenerConstants.TcpSharedMemoryName
+                    : ListenerConstants.NamedPipeSharedMemoryName;
                 serviceName = SharedConnectionListener.GetServiceName(isTcp);
 
                 // Try to read the endpoint only if not reconnecting.
@@ -1145,7 +1495,12 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     ServiceControllerStatus serviceStatus = service.Status;
-                    Debug.Print("ListenerServiceHelper.HandleServiceStart() service serviceName: " + serviceName + " is in status serviceStatus: " + serviceStatus);
+                    Debug.Print(
+                        "ListenerServiceHelper.HandleServiceStart() service serviceName: "
+                            + serviceName
+                            + " is in status serviceStatus: "
+                            + serviceStatus
+                    );
                     if (isReconnecting)
                     {
                         if (serviceStatus == ServiceControllerStatus.Running)
@@ -1161,12 +1516,25 @@ namespace System.ServiceModel.Channels
                             }
                             catch (Win32Exception exception)
                             {
-                                Debug.Print("ListenerServiceHelper.HandleServiceStart() failed when reading the shared memory sharedMemoryName: " + sharedMemoryName + " exception: " + exception);
-                                DiagnosticUtility.TraceHandledException(exception, TraceEventType.Warning);
+                                Debug.Print(
+                                    "ListenerServiceHelper.HandleServiceStart() failed when reading the shared memory sharedMemoryName: "
+                                        + sharedMemoryName
+                                        + " exception: "
+                                        + exception
+                                );
+                                DiagnosticUtility.TraceHandledException(
+                                    exception,
+                                    TraceEventType.Warning
+                                );
                             }
 
                             // Wait for the service to exit the running state
-                            serviceStatus = ExitServiceStatus(service, 50, 50, ServiceControllerStatus.Running);
+                            serviceStatus = ExitServiceStatus(
+                                service,
+                                50,
+                                50,
+                                ServiceControllerStatus.Running
+                            );
                         }
                     }
 
@@ -1180,22 +1548,64 @@ namespace System.ServiceModel.Channels
                             }
                             catch (InvalidOperationException exception)
                             {
-                                Win32Exception win32Exception = exception.InnerException as Win32Exception;
+                                Win32Exception win32Exception =
+                                    exception.InnerException as Win32Exception;
                                 if (win32Exception != null)
                                 {
-                                    if (win32Exception.NativeErrorCode == UnsafeNativeMethods.ERROR_SERVICE_DISABLED)
+                                    if (
+                                        win32Exception.NativeErrorCode
+                                        == UnsafeNativeMethods.ERROR_SERVICE_DISABLED
+                                    )
                                     {
                                         // service is disabled in the SCM, be specific
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceStartFailureDisabled, serviceName)), exception));
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                            new CommunicationException(
+                                                SR.GetString(
+                                                    SR.SharedManagerBase,
+                                                    serviceName,
+                                                    SR.GetString(
+                                                        SR.SharedManagerServiceStartFailureDisabled,
+                                                        serviceName
+                                                    )
+                                                ),
+                                                exception
+                                            )
+                                        );
                                     }
-                                    else if (win32Exception.NativeErrorCode != UnsafeNativeMethods.ERROR_SERVICE_ALREADY_RUNNING)
+                                    else if (
+                                        win32Exception.NativeErrorCode
+                                        != UnsafeNativeMethods.ERROR_SERVICE_ALREADY_RUNNING
+                                    )
                                     {
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceStartFailure, win32Exception.NativeErrorCode)), exception));
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                            new CommunicationException(
+                                                SR.GetString(
+                                                    SR.SharedManagerBase,
+                                                    serviceName,
+                                                    SR.GetString(
+                                                        SR.SharedManagerServiceStartFailure,
+                                                        win32Exception.NativeErrorCode
+                                                    )
+                                                ),
+                                                exception
+                                            )
+                                        );
                                     }
                                 }
                                 else
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceStartFailureNoError)), exception));
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new CommunicationException(
+                                            SR.GetString(
+                                                SR.SharedManagerBase,
+                                                serviceName,
+                                                SR.GetString(
+                                                    SR.SharedManagerServiceStartFailureNoError
+                                                )
+                                            ),
+                                            exception
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -1213,18 +1623,40 @@ namespace System.ServiceModel.Channels
 
                         service.Refresh();
                         serviceStatus = service.Status;
-                        Debug.Print("ListenerServiceHelper.HandleServiceStart() service serviceName: " + serviceName + " is in status serviceStatus: " + serviceStatus);
+                        Debug.Print(
+                            "ListenerServiceHelper.HandleServiceStart() service serviceName: "
+                                + serviceName
+                                + " is in status serviceStatus: "
+                                + serviceStatus
+                        );
                         if (serviceStatus == ServiceControllerStatus.StartPending)
                         {
-                            serviceStatus = ExitServiceStatus(service, 50, 50, ServiceControllerStatus.StartPending);
+                            serviceStatus = ExitServiceStatus(
+                                service,
+                                50,
+                                50,
+                                ServiceControllerStatus.StartPending
+                            );
                         }
                     }
 
-                    Debug.Print("ListenerServiceHelper.HandleServiceStart() final, service serviceName: " + serviceName + " is in status serviceStatus: " + serviceStatus);
+                    Debug.Print(
+                        "ListenerServiceHelper.HandleServiceStart() final, service serviceName: "
+                            + serviceName
+                            + " is in status serviceStatus: "
+                            + serviceStatus
+                    );
                     if (serviceStatus != ServiceControllerStatus.Running)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(
-                            SR.SharedManagerBase, serviceName, SR.GetString(SR.SharedManagerServiceStartFailureNoError))));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SharedManagerBase,
+                                    serviceName,
+                                    SR.GetString(SR.SharedManagerServiceStartFailureNoError)
+                                )
+                            )
+                        );
                     }
                 }
                 finally
@@ -1238,19 +1670,45 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Win32Exception exception)
                 {
-                    Debug.Print("ListenerServiceHelper.HandleServiceStart() final, failed when reading the shared memory sharedMemoryName: " + sharedMemoryName + " exception: " + exception);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WrapEndpointReadingException(exception));
+                    Debug.Print(
+                        "ListenerServiceHelper.HandleServiceStart() final, failed when reading the shared memory sharedMemoryName: "
+                            + sharedMemoryName
+                            + " exception: "
+                            + exception
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WrapEndpointReadingException(exception)
+                    );
                 }
             }
 
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The ServiceController.Status property demands ServiceControllerPermission.")]
-            ServiceControllerStatus ExitServiceStatus(ServiceController service, int pollMin, int pollMax, ServiceControllerStatus status)
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+                Justification = "The ServiceController.Status property demands ServiceControllerPermission."
+            )]
+            ServiceControllerStatus ExitServiceStatus(
+                ServiceController service,
+                int pollMin,
+                int pollMax,
+                ServiceControllerStatus status
+            )
             {
-                Debug.Print("ListenerServiceHelper.ExitServiceStatus() pollMin: " + pollMin + " pollMax: " + pollMax + " exit serviceStatus: " + status);
+                Debug.Print(
+                    "ListenerServiceHelper.ExitServiceStatus() pollMin: "
+                        + pollMin
+                        + " pollMax: "
+                        + pollMax
+                        + " exit serviceStatus: "
+                        + status
+                );
                 int poll = pollMin;
-                BackoffTimeoutHelper backoffHelper =
-                    new BackoffTimeoutHelper(TimeSpan.MaxValue, TimeSpan.FromMilliseconds(pollMax), TimeSpan.FromMilliseconds(pollMin));
-                for (;;)
+                BackoffTimeoutHelper backoffHelper = new BackoffTimeoutHelper(
+                    TimeSpan.MaxValue,
+                    TimeSpan.FromMilliseconds(pollMax),
+                    TimeSpan.FromMilliseconds(pollMin)
+                );
+                for (; ; )
                 {
                     if (this.closed)
                     {
@@ -1278,8 +1736,13 @@ namespace System.ServiceModel.Channels
                     }
 
                     // return fault and close connection
-                    InitialServerConnectionReader.SendFault(connection, faultCode, drainBuffer,
-                        ListenerConstants.SharedSendTimeout, ListenerConstants.SharedMaxDrainSize);
+                    InitialServerConnectionReader.SendFault(
+                        connection,
+                        faultCode,
+                        drainBuffer,
+                        ListenerConstants.SharedSendTimeout,
+                        ListenerConstants.SharedMaxDrainSize
+                    );
                 }
                 catch (Exception exception)
                 {
@@ -1333,7 +1796,11 @@ namespace System.ServiceModel.Channels
                                 faultCode = FramingEncodingString.EndpointNotFoundFault;
                             }
 
-                            IConnection connection = BuildConnectionFromData(duplicateContext, ConnectionOrientedTransportDefaults.ConnectionBufferSize, true);
+                            IConnection connection = BuildConnectionFromData(
+                                duplicateContext,
+                                ConnectionOrientedTransportDefaults.ConnectionBufferSize,
+                                true
+                            );
                             if (faultCode != null)
                             {
                                 SendFault(connection, faultCode);
@@ -1356,19 +1823,34 @@ namespace System.ServiceModel.Channels
                 return true;
             }
 
-            IConnection BuildConnectionFromData(DuplicateContext duplicateContext, int connectionBufferSize, bool alreadyHoldingLock)
+            IConnection BuildConnectionFromData(
+                DuplicateContext duplicateContext,
+                int connectionBufferSize,
+                bool alreadyHoldingLock
+            )
             {
                 if (isTcp)
                 {
-                    return BuildDuplicatedTcpConnection((TcpDuplicateContext)duplicateContext, connectionBufferSize, alreadyHoldingLock);
+                    return BuildDuplicatedTcpConnection(
+                        (TcpDuplicateContext)duplicateContext,
+                        connectionBufferSize,
+                        alreadyHoldingLock
+                    );
                 }
                 else
                 {
-                    return BuildDuplicatedNamedPipeConnection((NamedPipeDuplicateContext)duplicateContext, connectionBufferSize);
+                    return BuildDuplicatedNamedPipeConnection(
+                        (NamedPipeDuplicateContext)duplicateContext,
+                        connectionBufferSize
+                    );
                 }
             }
 
-            IAsyncResult IConnectionDuplicator.BeginDuplicate(DuplicateContext duplicateContext, AsyncCallback callback, object state)
+            IAsyncResult IConnectionDuplicator.BeginDuplicate(
+                DuplicateContext duplicateContext,
+                AsyncCallback callback,
+                object state
+            )
             {
                 try
                 {
@@ -1378,8 +1860,11 @@ namespace System.ServiceModel.Channels
                         return new DuplicateConnectionAsyncResult(callback, state);
                     }
 
-                    result = new DuplicateConnectionAsyncResult(BuildConnectionFromData(duplicateContext,
-                        this.connectionBufferSize, false), callback, state);
+                    result = new DuplicateConnectionAsyncResult(
+                        BuildConnectionFromData(duplicateContext, this.connectionBufferSize, false),
+                        callback,
+                        state
+                    );
 
                     parent.OnConnectionAvailable(result);
 
@@ -1439,10 +1924,21 @@ namespace System.ServiceModel.Channels
                 }
 
                 public void Validate(ServiceEndpoint serviceEndpoint) { }
-                public void AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters) { }
-                public void ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher) { }
 
-                public void ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
+                public void AddBindingParameters(
+                    ServiceEndpoint serviceEndpoint,
+                    BindingParameterCollection bindingParameters
+                ) { }
+
+                public void ApplyDispatchBehavior(
+                    ServiceEndpoint serviceEndpoint,
+                    EndpointDispatcher endpointDispatcher
+                ) { }
+
+                public void ApplyClientBehavior(
+                    ServiceEndpoint serviceEndpoint,
+                    ClientRuntime behavior
+                )
                 {
                     behavior.DispatchRuntime.InputSessionShutdownHandlers.Add(this.proxy);
                 }
@@ -1452,7 +1948,12 @@ namespace System.ServiceModel.Channels
         class DuplicateConnectionAsyncResult : AsyncResult
         {
             IConnection connection;
-            public DuplicateConnectionAsyncResult(IConnection connection, AsyncCallback callback, object state)
+
+            public DuplicateConnectionAsyncResult(
+                IConnection connection,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.connection = connection;
@@ -1466,10 +1967,7 @@ namespace System.ServiceModel.Channels
 
             public IConnection Connection
             {
-                get
-                {
-                    return this.connection;
-                }
+                get { return this.connection; }
             }
 
             public void CompleteOperation()
@@ -1490,7 +1988,10 @@ namespace System.ServiceModel.Channels
         static AllowHelper singleton;
         static Dictionary<string, RegistrationRefCount> processWideRefCount;
         static object thisLock = new object();
-        static object ThisLock { get { return thisLock; } }
+        static object ThisLock
+        {
+            get { return thisLock; }
+        }
 
         public override object InitializeLifetimeService()
         {
@@ -1522,16 +2023,26 @@ namespace System.ServiceModel.Channels
                     Guid riid = new Guid("CB2F6722-AB3A-11D2-9C40-00C04FA30A3E");
                     ListenerUnsafeNativeMethods.ICorRuntimeHost corRuntimeHost;
 
-                    corRuntimeHost = (ListenerUnsafeNativeMethods.ICorRuntimeHost)System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeInterfaceAsObject(rclsid, riid);
+                    corRuntimeHost = (ListenerUnsafeNativeMethods.ICorRuntimeHost)
+                        System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeInterfaceAsObject(
+                            rclsid,
+                            riid
+                        );
 
                     object defaultDomainAsObject;
                     corRuntimeHost.GetDefaultDomain(out defaultDomainAsObject);
                     AppDomain defaultDomain = (AppDomain)defaultDomainAsObject;
                     if (!defaultDomain.IsDefaultAppDomain())
                     {
-                        throw Fx.AssertAndThrowFatal("AllowHelper..ctor() GetDefaultDomain did not return the default domain!");
+                        throw Fx.AssertAndThrowFatal(
+                            "AllowHelper..ctor() GetDefaultDomain did not return the default domain!"
+                        );
                     }
-                    singleton = defaultDomain.CreateInstanceAndUnwrap(Assembly.GetExecutingAssembly().FullName, typeof(AllowHelper).FullName) as AllowHelper;
+                    singleton =
+                        defaultDomain.CreateInstanceAndUnwrap(
+                            Assembly.GetExecutingAssembly().FullName,
+                            typeof(AllowHelper).FullName
+                        ) as AllowHelper;
                 }
             }
         }
@@ -1584,7 +2095,10 @@ namespace System.ServiceModel.Channels
             {
                 if (refCount == 0)
                 {
-                    Utility.AddRightGrantedToAccount(new SecurityIdentifier(grantedSid), ListenerUnsafeNativeMethods.PROCESS_DUP_HANDLE);
+                    Utility.AddRightGrantedToAccount(
+                        new SecurityIdentifier(grantedSid),
+                        ListenerUnsafeNativeMethods.PROCESS_DUP_HANDLE
+                    );
                     processWideRefCount.Add(grantedSid, this);
                 }
 
@@ -1596,7 +2110,10 @@ namespace System.ServiceModel.Channels
                 refCount--;
                 if (refCount == 0)
                 {
-                    Utility.RemoveRightGrantedToAccount(new SecurityIdentifier(grantedSid), ListenerUnsafeNativeMethods.PROCESS_DUP_HANDLE);
+                    Utility.RemoveRightGrantedToAccount(
+                        new SecurityIdentifier(grantedSid),
+                        ListenerUnsafeNativeMethods.PROCESS_DUP_HANDLE
+                    );
                     processWideRefCount.Remove(grantedSid);
                 }
             }

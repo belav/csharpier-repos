@@ -20,8 +20,11 @@ namespace Microsoft.CodeAnalysis.Wrapping
         public readonly SyntaxTriviaList NewRightLeadingTrivia;
 
         private Edit(
-            SyntaxToken left, SyntaxTriviaList newLeftTrailingTrivia,
-            SyntaxToken right, SyntaxTriviaList newRightLeadingTrivia)
+            SyntaxToken left,
+            SyntaxTriviaList newLeftTrailingTrivia,
+            SyntaxToken right,
+            SyntaxTriviaList newRightLeadingTrivia
+        )
         {
             if (left.Span.End > right.Span.Start)
                 throw new InvalidEditException(left, right);
@@ -51,26 +54,40 @@ namespace Microsoft.CodeAnalysis.Wrapping
         /// <summary>
         /// Create the Edit representing the deletion of all trivia between left and right.
         /// </summary>
-        public static Edit DeleteBetween(SyntaxNodeOrToken left, SyntaxNodeOrToken right)
-            => UpdateBetween(left, default, default(SyntaxTriviaList), right);
+        public static Edit DeleteBetween(SyntaxNodeOrToken left, SyntaxNodeOrToken right) =>
+            UpdateBetween(left, default, default(SyntaxTriviaList), right);
 
         public static Edit UpdateBetween(
-            SyntaxNodeOrToken left, SyntaxTriviaList leftTrailingTrivia,
-            SyntaxTrivia rightLeadingTrivia, SyntaxNodeOrToken right)
+            SyntaxNodeOrToken left,
+            SyntaxTriviaList leftTrailingTrivia,
+            SyntaxTrivia rightLeadingTrivia,
+            SyntaxNodeOrToken right
+        )
         {
-            return UpdateBetween(left, leftTrailingTrivia, new SyntaxTriviaList(rightLeadingTrivia), right);
+            return UpdateBetween(
+                left,
+                leftTrailingTrivia,
+                new SyntaxTriviaList(rightLeadingTrivia),
+                right
+            );
         }
 
         public static Edit UpdateBetween(
-            SyntaxNodeOrToken left, SyntaxTriviaList leftTrailingTrivia,
-            SyntaxTriviaList rightLeadingTrivia, SyntaxNodeOrToken right)
+            SyntaxNodeOrToken left,
+            SyntaxTriviaList leftTrailingTrivia,
+            SyntaxTriviaList rightLeadingTrivia,
+            SyntaxNodeOrToken right
+        )
         {
             var leftLastToken = left.IsToken ? left.AsToken() : left.AsNode()!.GetLastToken();
             var rightFirstToken = right.IsToken ? right.AsToken() : right.AsNode()!.GetFirstToken();
             return new Edit(leftLastToken, leftTrailingTrivia, rightFirstToken, rightLeadingTrivia);
         }
 
-        private sealed class InvalidEditException(SyntaxToken left, SyntaxToken right) : Exception($"Left token had an end '{left.Span.End}' past the start of right token '{right.Span.Start}'")
+        private sealed class InvalidEditException(SyntaxToken left, SyntaxToken right)
+            : Exception(
+                $"Left token had an end '{left.Span.End}' past the start of right token '{right.Span.Start}'"
+            )
         {
             // Used for analyzing dumps
 #pragma warning disable IDE0052 // Remove unread private members

@@ -3,11 +3,10 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public abstract class TPHInheritanceBulkUpdatesTestBase<TFixture> : InheritanceBulkUpdatesTestBase<TFixture>
+public abstract class TPHInheritanceBulkUpdatesTestBase<TFixture>
+    : InheritanceBulkUpdatesTestBase<TFixture>
     where TFixture : InheritanceBulkUpdatesFixtureBase, new()
 {
     protected TPHInheritanceBulkUpdatesTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 }

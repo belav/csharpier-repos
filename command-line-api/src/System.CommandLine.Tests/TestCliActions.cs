@@ -34,7 +34,10 @@ public class AsynchronousTestAction : AsynchronousCliAction
         Terminating = terminating;
     }
 
-    public override Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default)
+    public override Task<int> InvokeAsync(
+        ParseResult parseResult,
+        CancellationToken cancellationToken = default
+    )
     {
         _invoke(parseResult);
         return Task.FromResult(0);

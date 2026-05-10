@@ -11,8 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x1 in new int[] { 1, 6, 0, -1, 3 }
-                    select x1;
+            var q = from x1 in new int[] { 1, 6, 0, -1, 3 } select x1;
 
             Assert.Equal(q.OrderDescending(), q.OrderDescending());
         }
@@ -20,11 +19,25 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x1 in new[] { "!@#$%^", "C", "AAA", "", null, "Calling Twice", "SoS", string.Empty }
-                    where !string.IsNullOrEmpty(x1)
-                    select x1;
+            var q =
+                from x1 in new[]
+                {
+                    "!@#$%^",
+                    "C",
+                    "AAA",
+                    "",
+                    null,
+                    "Calling Twice",
+                    "SoS",
+                    string.Empty,
+                }
+                where !string.IsNullOrEmpty(x1)
+                select x1;
 
-            Assert.Equal(q.OrderDescending().ThenBy(f => f.Replace("C", "")), q.OrderDescending().ThenBy(f => f.Replace("C", "")));
+            Assert.Equal(
+                q.OrderDescending().ThenBy(f => f.Replace("C", "")),
+                q.OrderDescending().ThenBy(f => f.Replace("C", ""))
+            );
         }
 
         [Fact]
@@ -55,14 +68,8 @@ namespace System.Linq.Tests
         [Fact]
         public void KeySelectorCalled()
         {
-            var source = new[]
-            {
-                90, 45, 0, 99
-            };
-            var expected = new[]
-            {
-                99, 90, 45, 0
-            };
+            var source = new[] { 90, 45, 0, 99 };
+            var expected = new[] { 99, 90, 45, 0 };
 
             Assert.Equal(expected, source.OrderDescending(null));
         }
@@ -82,7 +89,10 @@ namespace System.Linq.Tests
             string[] source = { "Prakash", "Alpha", "DAN", "dan", "Prakash" };
             string[] expected = { "Prakash", "Prakash", "DAN", "dan", "Alpha" };
 
-            Assert.Equal(expected, source.RunOnce().OrderDescending(StringComparer.OrdinalIgnoreCase));
+            Assert.Equal(
+                expected,
+                source.RunOnce().OrderDescending(StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
@@ -106,14 +116,8 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderedDescendingToArray()
         {
-            var source = new[]
-            {
-                5, 9, 6, 7, 8, 5, 20
-            };
-            var expected = new[]
-            {
-                20, 9, 8, 7, 6, 5, 5
-            };
+            var source = new[] { 5, 9, 6, 7, 8, 5, 20 };
+            var expected = new[] { 20, 9, 8, 7, 6, 5, 5 };
 
             Assert.Equal(expected, source.OrderDescending().ToArray());
         }
@@ -127,14 +131,8 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderedDescendingToList()
         {
-            var source = new[]
-            {
-                5, 9, 6, 7, 8, 5, 20
-            };
-            var expected = new[]
-            {
-                20, 9, 8, 7, 6, 5, 5
-            };
+            var source = new[] { 5, 9, 6, 7, 8, 5, 20 };
+            var expected = new[] { 20, 9, 8, 7, 6, 5, 5 };
 
             Assert.Equal(expected, source.OrderDescending().ToList());
         }
@@ -148,14 +146,8 @@ namespace System.Linq.Tests
         [Fact]
         public void SameKeysVerifySortStable()
         {
-            var source = new[]
-            {
-                90, 45, 0, 99
-            };
-            var expected = new[]
-            {
-                99, 90, 45, 0
-            };
+            var source = new[] { 90, 45, 0, 99 };
+            var expected = new[] { 99, 90, 45, 0 };
 
             Assert.Equal(expected, source.OrderDescending());
         }
@@ -187,7 +179,10 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.OrderDescending());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.OrderDescending()
+            );
         }
 
         [Fact]

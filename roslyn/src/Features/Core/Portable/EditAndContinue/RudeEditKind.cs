@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         VarianceUpdate = 7,
         FieldKindUpdate = 8,
         TypeUpdate = 9,
+
         //ConstraintKindUpdate = 10,
         InitializerUpdate = 11,
         FixedSizeFieldUpdate = 12,
@@ -30,16 +31,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         BaseTypeOrInterfaceUpdate = 14,
         TypeKindUpdate = 15,
         AccessorKindUpdate = 16,
+
         //MethodKindUpdate = 17,
         DeclareLibraryUpdate = 18,
         DeclareAliasUpdate = 19,
         Renamed = 20,
         Insert = 21,
+
         // InsertNonPrivate = 22,
         InsertVirtual = 23,
         InsertOverridable = 24,
         InsertExtern = 25,
         InsertOperator = 26,
+
         // InsertNonPublicConstructor = 27,
         // InsertGenericMethod = 28,
         InsertDllImport = 29,
@@ -47,11 +51,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         InsertIntoClassWithLayout = 31,
         Move = 32,
         Delete = 33,
+
         // MethodBodyAdd = 34,
         // MethodBodyDelete = 35,
         GenericMethodUpdate = 36,
+
         // GenericMethodTriviaUpdate = 37,
         GenericTypeUpdate = 38,
+
         // GenericTypeTriviaUpdate = 39,
         // GenericTypeInitializerUpdate = 40,
         // PartialTypeInitializerUpdate = 41,
@@ -97,6 +104,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         UpdatingStateMachineMethodMissingAttribute = 75,
 
         SwitchBetweenLambdaAndLocalFunction = 76,
+
         //RefStruct = 77,
         //ReadOnlyStruct = 78,
         //ReadOnlyReferences = 79,
@@ -106,6 +114,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         InsertMethodWithExplicitInterfaceSpecifier = 81,
         InsertIntoInterface = 82,
         InsertLocalFunctionIntoInterfaceMethod = 83,
+
         //SwitchExpressionUpdate = 84,
         ChangingFromAsynchronousToSynchronous = 85,
         ChangingStateMachineShape = 86,
@@ -116,6 +125,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         MemberBodyInternalError = 88,
         SourceFileTooBig = 89,
         MemberBodyTooBig = 90,
+
         // InsertIntoGenericType = 91,
 
         //ImplementRecordParameterAsReadOnly = 92,

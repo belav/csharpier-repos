@@ -7,9 +7,11 @@ namespace System.Reflection
     public enum AssemblyNameFlags
     {
         None = 0x0000,
+
         // Flag used to indicate that an assembly ref contains the full public key, not the compressed token.
         // Must match afPublicKey in CorHdr.h.
         PublicKey = 0x0001,
+
         // ProcArchMask              = 0x00F0,     // Bits describing the processor architecture
         // Accessible via AssemblyName.ProcessorArchitecture
         EnableJITcompileOptimizer = 0x4000,

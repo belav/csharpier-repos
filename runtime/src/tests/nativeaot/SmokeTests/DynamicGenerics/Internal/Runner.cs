@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading.Tasks;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace CoreFXTestLibrary.Internal
 {
@@ -18,7 +18,8 @@ namespace CoreFXTestLibrary.Internal
         public static bool RunTests(TestInfo[] allTests, String[] args)
         {
             bool result = true;
-            if (processArgs(allTests, args) == false) return false;
+            if (processArgs(allTests, args) == false)
+                return false;
 
             TestInfo[] failedTests = new TestInfo[allTests.Length];
             int numFailed = 0;
@@ -122,7 +123,10 @@ namespace CoreFXTestLibrary.Internal
                         Assert.Fail(
                             "Test did not throw expected exception: {0}. {1}",
                             t.ExpectsException.ExceptionType.ToString(),
-                            t.ExpectsException.Description != null ? t.ExpectsException.Description : "");
+                            t.ExpectsException.Description != null
+                                ? t.ExpectsException.Description
+                                : ""
+                        );
                     }
                 }
                 catch (Exception ex)
@@ -133,7 +137,11 @@ namespace CoreFXTestLibrary.Internal
                     }
                     else
                     {
-                        if (!t.ExpectsException.ExceptionType.GetTypeInfo().IsAssignableFrom(ex.GetType().GetTypeInfo()))
+                        if (
+                            !t
+                                .ExpectsException.ExceptionType.GetTypeInfo()
+                                .IsAssignableFrom(ex.GetType().GetTypeInfo())
+                        )
                         {
                             throw;
                         }
@@ -176,8 +184,7 @@ namespace CoreFXTestLibrary.Internal
                 });
             }
 
-
-            // Does not catch Exception because we want to fail fast and generate a dump 
+            // Does not catch Exception because we want to fail fast and generate a dump
             // file when an unexpected exception is encountered. (Except for ExpectedException cases.)
 
             Logger.LogInformation("---- Test {0} ---------------", passed ? "PASSED" : "FAILED");
@@ -193,7 +200,12 @@ namespace CoreFXTestLibrary.Internal
 
         public static void PrintResults()
         {
-            Logger.LogInformation("Finished running {0} tests. PASSED: {1}.  FAILED: {2}", NumTests, NumPassedTests, NumFailedTests);
+            Logger.LogInformation(
+                "Finished running {0} tests. PASSED: {1}.  FAILED: {2}",
+                NumTests,
+                NumPassedTests,
+                NumFailedTests
+            );
         }
 
         public static int NumFailedTests
@@ -220,7 +232,8 @@ namespace CoreFXTestLibrary.Internal
             {
                 if (a.StartsWith("/") || a.StartsWith("-"))
                 {
-                    if (a.Length == 1) throw new ArgumentException("Invalid Parameter:" + a);
+                    if (a.Length == 1)
+                        throw new ArgumentException("Invalid Parameter:" + a);
                     String val = a.Substring(1);
                     switch (val.ToLower())
                     {
@@ -252,7 +265,10 @@ namespace CoreFXTestLibrary.Internal
                 {
                     // Must process these after we process the executeAll tests.
                 }
-                else if (a.Length != 0 && (Char.IsLetterOrDigit(a[0]) || a[0] == '.' || a[0] == ' '))
+                else if (
+                    a.Length != 0
+                    && (Char.IsLetterOrDigit(a[0]) || a[0] == '.' || a[0] == ' ')
+                )
                 {
                     executeAll = false;
                     executeNonIgnored = false;
@@ -268,7 +284,10 @@ namespace CoreFXTestLibrary.Internal
                         else
                         {
                             // If the name doesn't match exactly, check to see if it ends with the name
-                            if (String.Equals(t.Name, a, StringComparison.OrdinalIgnoreCase) || t.Name.EndsWith("." + a, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                String.Equals(t.Name, a, StringComparison.OrdinalIgnoreCase)
+                                || t.Name.EndsWith("." + a, StringComparison.OrdinalIgnoreCase)
+                            )
                             {
                                 t.ShouldExecute = true;
                             }
@@ -293,7 +312,8 @@ namespace CoreFXTestLibrary.Internal
             {
                 for (int i = 0; i < tests.Length; i++)
                 {
-                    if (tests[i].IsIgnored == false) tests[i].ShouldExecute = true;
+                    if (tests[i].IsIgnored == false)
+                        tests[i].ShouldExecute = true;
                 }
             }
 
@@ -318,12 +338,18 @@ namespace CoreFXTestLibrary.Internal
         private static void printHelp(TestInfo[] tests)
         {
             Logger.LogInformation("Syntax:  EXEname [testname1 testname2 ...]");
-            Logger.LogInformation("If no args are given, will run all tests (EXCLUDING the ignored tests. Otherwise,"
-                + " will only run tests with the input test names. Comparison of test names is case-insensitive.");
+            Logger.LogInformation(
+                "If no args are given, will run all tests (EXCLUDING the ignored tests. Otherwise,"
+                    + " will only run tests with the input test names. Comparison of test names is case-insensitive."
+            );
             Logger.LogInformation("Switches: ");
             Logger.LogInformation("/?, /help                Display help message.");
-            Logger.LogInformation("/a, /all                 Run all tests, including ignored tests.");
-            Logger.LogInformation("/l, /list                Display the test names but don't run them.");
+            Logger.LogInformation(
+                "/a, /all                 Run all tests, including ignored tests."
+            );
+            Logger.LogInformation(
+                "/l, /list                Display the test names but don't run them."
+            );
             Logger.LogInformation("");
             Logger.LogInformation("Test Methods");
             foreach (var test in tests)
@@ -333,7 +359,9 @@ namespace CoreFXTestLibrary.Internal
                     Logger.LogInformation("   - " + test.Name);
                 }
             }
-            Logger.LogInformation("Ignored Test Methods: (To run, use /a or /all or specify test name)");
+            Logger.LogInformation(
+                "Ignored Test Methods: (To run, use /a or /all or specify test name)"
+            );
             foreach (var test in tests)
             {
                 if (test.IsIgnored == true)

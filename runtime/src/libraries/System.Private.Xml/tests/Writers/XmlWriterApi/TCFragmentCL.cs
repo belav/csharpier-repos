@@ -81,10 +81,16 @@ namespace System.Xml.XmlWriterApiTests
         {
             XmlWriter w = utils.CreateWriter(ConformanceLevel.Fragment);
             int i = 1;
-            w.WriteValue(i); w.WriteValue(i); w.WriteValue(i); w.WriteValue(i);
+            w.WriteValue(i);
+            w.WriteValue(i);
+            w.WriteValue(i);
+            w.WriteValue(i);
             w.WriteStartElement("Root");
             w.WriteEndElement();
-            w.WriteValue(i); w.WriteValue(i); w.WriteValue(i); w.WriteValue(i);
+            w.WriteValue(i);
+            w.WriteValue(i);
+            w.WriteValue(i);
+            w.WriteValue(i);
             w.Dispose();
             Assert.True(utils.CompareReader("1111<Root />1111"));
         }

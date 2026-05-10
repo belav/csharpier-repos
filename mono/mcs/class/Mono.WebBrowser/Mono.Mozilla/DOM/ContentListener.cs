@@ -30,92 +30,106 @@ using Mono.WebBrowser;
 
 namespace Mono.Mozilla.DOM
 {
-	internal class ContentListener : nsIURIContentListener
-	{
-		WebBrowser owner;
-		
-		public ContentListener (WebBrowser instance) {
-			owner = instance;
-			
-		}
-			
-		EventHandlerList events;
-		public EventHandlerList Events {
-			get { 
-				if (events == null)
-					events = new EventHandlerList ();
-				return events;
-			}
-		}
-		
-		public void AddHandler (NavigationRequestedEventHandler value) {
-			if (Events[WebBrowser.NavigationRequestedEvent] == null) {
-				if (owner.Navigation != null) {
-					nsIWebBrowser browser = (nsIWebBrowser) owner.navigation.navigation;
-					browser.setParentURIContentListener (this);
-				}
-			}
-			Events.AddHandler (WebBrowser.NavigationRequestedEvent, value);
-		}
-		
-		public void RemoveHandler (NavigationRequestedEventHandler value) {
-			Events.RemoveHandler (WebBrowser.NavigationRequestedEvent, value);
-		}
-		
-		bool nsIURIContentListener.onStartURIOpen (nsIURI aURI)
-		{
-			NavigationRequestedEventHandler eh = (NavigationRequestedEventHandler) (Events[WebBrowser.NavigationRequestedEvent]);
-			if (eh != null) {
-				AsciiString uri = new Mono.Mozilla.AsciiString ("");
-				aURI.getSpec (uri.Handle);
-				NavigationRequestedEventArgs args = new NavigationRequestedEventArgs (uri.ToString ());
-				eh (this, args);
-				return args.Cancel;
-				
-			}
-			return true;
-		}
+    internal class ContentListener : nsIURIContentListener
+    {
+        WebBrowser owner;
 
-		bool nsIURIContentListener.doContent (string aContentType,
-				 bool aIsContentPreferred,
-				 nsIRequest aRequest,
-				out nsIStreamListener aContentHandler)
-		{
-			aContentHandler = null;
-			return true;
-		}
+        public ContentListener(WebBrowser instance)
+        {
+            owner = instance;
+        }
 
-		bool nsIURIContentListener.isPreferred (string aContentType,
-				ref string aDesiredContentType)
-		{
-			return true;
-		}
+        EventHandlerList events;
+        public EventHandlerList Events
+        {
+            get
+            {
+                if (events == null)
+                    events = new EventHandlerList();
+                return events;
+            }
+        }
 
-		bool nsIURIContentListener.canHandleContent (string aContentType,
-				 bool aIsContentPreferred,
-				ref string aDesiredContentType)
-		{
-			return true;
-		}
+        public void AddHandler(NavigationRequestedEventHandler value)
+        {
+            if (Events[WebBrowser.NavigationRequestedEvent] == null)
+            {
+                if (owner.Navigation != null)
+                {
+                    nsIWebBrowser browser = (nsIWebBrowser)owner.navigation.navigation;
+                    browser.setParentURIContentListener(this);
+                }
+            }
+            Events.AddHandler(WebBrowser.NavigationRequestedEvent, value);
+        }
 
-		[return: MarshalAs (UnmanagedType.Interface)] IntPtr nsIURIContentListener.getLoadCookie ()
-		{
-			return IntPtr.Zero;
-		}
+        public void RemoveHandler(NavigationRequestedEventHandler value)
+        {
+            Events.RemoveHandler(WebBrowser.NavigationRequestedEvent, value);
+        }
 
-		void nsIURIContentListener.setLoadCookie ([MarshalAs (UnmanagedType.Interface)] IntPtr value)
-		{
-			return;
-		}
+        bool nsIURIContentListener.onStartURIOpen(nsIURI aURI)
+        {
+            NavigationRequestedEventHandler eh = (NavigationRequestedEventHandler)(
+                Events[WebBrowser.NavigationRequestedEvent]
+            );
+            if (eh != null)
+            {
+                AsciiString uri = new Mono.Mozilla.AsciiString("");
+                aURI.getSpec(uri.Handle);
+                NavigationRequestedEventArgs args = new NavigationRequestedEventArgs(
+                    uri.ToString()
+                );
+                eh(this, args);
+                return args.Cancel;
+            }
+            return true;
+        }
 
-		nsIURIContentListener nsIURIContentListener.getParentContentListener ()
-		{
-			return null;
-		}
+        bool nsIURIContentListener.doContent(
+            string aContentType,
+            bool aIsContentPreferred,
+            nsIRequest aRequest,
+            out nsIStreamListener aContentHandler
+        )
+        {
+            aContentHandler = null;
+            return true;
+        }
 
-		void nsIURIContentListener.setParentContentListener (nsIURIContentListener value)
-		{
-			return;
-		}
-	}
+        bool nsIURIContentListener.isPreferred(string aContentType, ref string aDesiredContentType)
+        {
+            return true;
+        }
+
+        bool nsIURIContentListener.canHandleContent(
+            string aContentType,
+            bool aIsContentPreferred,
+            ref string aDesiredContentType
+        )
+        {
+            return true;
+        }
+
+        [return: MarshalAs(UnmanagedType.Interface)]
+        IntPtr nsIURIContentListener.getLoadCookie()
+        {
+            return IntPtr.Zero;
+        }
+
+        void nsIURIContentListener.setLoadCookie([MarshalAs(UnmanagedType.Interface)] IntPtr value)
+        {
+            return;
+        }
+
+        nsIURIContentListener nsIURIContentListener.getParentContentListener()
+        {
+            return null;
+        }
+
+        void nsIURIContentListener.setParentContentListener(nsIURIContentListener value)
+        {
+            return;
+        }
+    }
 }

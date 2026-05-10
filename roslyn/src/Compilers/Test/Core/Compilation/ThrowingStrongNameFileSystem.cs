@@ -15,7 +15,8 @@ namespace Roslyn.Test.Utilities
 {
     internal sealed class ThrowingStrongNameFileSystem : StrongNameFileSystem
     {
-        internal static new readonly ThrowingStrongNameFileSystem Instance = new ThrowingStrongNameFileSystem();
+        internal static new readonly ThrowingStrongNameFileSystem Instance =
+            new ThrowingStrongNameFileSystem();
 
         internal override bool FileExists(string fullPath) => throw new IOException();
 

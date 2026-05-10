@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,38 +26,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TemplateBuilderCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            TemplateBuilder tb = new TemplateBuilder();
+            tb.Text = "mono";
+            Assert.AreEqual("mono", tb.Text, "Text");
+            tb.InstantiateIn(new Control());
+            tb.Init(new PageParser(), new ControlBuilder(), null, null, null, null);
+            Assert.IsFalse(tb.NeedsTagInnerText(), "NeedsTagInnerText");
+            tb.SetTagInnerText("mono");
+            Assert.IsNotNull(tb.BuildObject(), "BuildObject");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TemplateBuilderCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TemplateBuilder tb = new TemplateBuilder ();
-			tb.Text = "mono";
-			Assert.AreEqual ("mono", tb.Text, "Text");
-			tb.InstantiateIn (new Control ());
-			tb.Init (new PageParser (), new ControlBuilder (), null, null, null, null);
-			Assert.IsFalse (tb.NeedsTagInnerText (), "NeedsTagInnerText");
-			tb.SetTagInnerText ("mono");
-			Assert.IsNotNull (tb.BuildObject (), "BuildObject");
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (TemplateBuilder); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(TemplateBuilder); }
+        }
+    }
 }

@@ -13,7 +13,8 @@ public class Program
     [Fact]
     public static int TestEntryPoint()
     {
-        var attr = (MySpecialAttribute)Attribute.GetCustomAttribute(typeof (Program), typeof(MySpecialAttribute), false);
+        var attr = (MySpecialAttribute)
+            Attribute.GetCustomAttribute(typeof(Program), typeof(MySpecialAttribute), false);
         if (attr == null)
             return 101;
         if (attr.Type == null)
@@ -26,8 +27,12 @@ public class Program
 
 public class MySpecialAttribute : Attribute
 {
-    public Type Type {get; private set; }
-    public MySpecialAttribute(Type t) { Type = t; }
+    public Type Type { get; private set; }
+
+    public MySpecialAttribute(Type t)
+    {
+        Type = t;
+    }
 }
 
-public class MeineTüre {}
+public class MeineTüre { }

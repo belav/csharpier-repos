@@ -30,55 +30,54 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class Table_Rows
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.Table Table1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class Table_Rows : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.Table Table1;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			base.GHTActiveSubTestId = 2;
-			base.GHTSubTestBegin("Table Rows Collection - Get");
-			try 
-			{
-				base.GHTSubTestAddResult("Table1.Rows.Count=" + Table1.Rows.Count);
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
 
-			base.GHTTestEnd();
-		}
-	}
+            base.GHTActiveSubTestId = 2;
+            base.GHTSubTestBegin("Table Rows Collection - Get");
+            try
+            {
+                base.GHTSubTestAddResult("Table1.Rows.Count=" + Table1.Rows.Count);
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
+
+            base.GHTTestEnd();
+        }
+    }
 }

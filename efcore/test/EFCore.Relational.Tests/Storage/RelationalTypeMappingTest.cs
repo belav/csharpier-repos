@@ -11,9 +11,7 @@ public abstract class RelationalTypeMappingTest
     protected class FakeValueConverter<TModel, TProvider> : ValueConverter<TModel, TProvider>
     {
         public FakeValueConverter()
-            : base(_ => (TProvider)(object)_, _ => (TModel)(object)_)
-        {
-        }
+            : base(_ => (TProvider)(object)_, _ => (TModel)(object)_) { }
 
         public override Type ModelClrType { get; } = typeof(TModel);
         public override Type ProviderClrType { get; } = typeof(TProvider);
@@ -22,24 +20,25 @@ public abstract class RelationalTypeMappingTest
     protected class FakeValueComparer<T> : ValueComparer<T>
     {
         public FakeValueComparer()
-            : base(false)
-        {
-        }
+            : base(false) { }
 
         public override Type Type { get; } = typeof(T);
     }
 
-    public static ValueConverter CreateConverter(Type modelType)
-        => (ValueConverter)Activator.CreateInstance(
-            typeof(FakeValueConverter<,>).MakeGenericType(modelType, typeof(object)));
+    public static ValueConverter CreateConverter(Type modelType) =>
+        (ValueConverter)
+            Activator.CreateInstance(
+                typeof(FakeValueConverter<,>).MakeGenericType(modelType, typeof(object))
+            );
 
-    public static ValueConverter CreateConverter(Type modelType, Type providerType)
-        => (ValueConverter)Activator.CreateInstance(
-            typeof(FakeValueConverter<,>).MakeGenericType(modelType, providerType));
+    public static ValueConverter CreateConverter(Type modelType, Type providerType) =>
+        (ValueConverter)
+            Activator.CreateInstance(
+                typeof(FakeValueConverter<,>).MakeGenericType(modelType, providerType)
+            );
 
-    public static ValueComparer CreateComparer(Type type)
-        => (ValueComparer)Activator.CreateInstance(
-            typeof(FakeValueComparer<>).MakeGenericType(type));
+    public static ValueComparer CreateComparer(Type type) =>
+        (ValueComparer)Activator.CreateInstance(typeof(FakeValueComparer<>).MakeGenericType(type));
 
     [ConditionalTheory]
     [InlineData(typeof(BoolTypeMapping), typeof(bool))]
@@ -61,13 +60,15 @@ public abstract class RelationalTypeMappingTest
     [InlineData(typeof(UShortTypeMapping), typeof(ushort))]
     public virtual void Create_and_clone_with_converter(Type mappingType, Type type)
     {
-        var mapping = (RelationalTypeMapping)Activator.CreateInstance(
-            mappingType,
-            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
-            null,
-            new[] { FakeTypeMapping.CreateParameters(type) },
-            null,
-            null);
+        var mapping = (RelationalTypeMapping)
+            Activator.CreateInstance(
+                mappingType,
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
+                null,
+                new[] { FakeTypeMapping.CreateParameters(type) },
+                null,
+                null
+            );
 
         AssertClone(type, mapping);
     }
@@ -107,28 +108,34 @@ public abstract class RelationalTypeMappingTest
     }
 
     [ConditionalFact]
-    public virtual void Create_and_clone_sized_mappings_with_converter()
-        => ConversionCloneTest(typeof(ByteArrayTypeMapping), typeof(byte[]));
+    public virtual void Create_and_clone_sized_mappings_with_converter() =>
+        ConversionCloneTest(typeof(ByteArrayTypeMapping), typeof(byte[]));
 
     protected virtual void ConversionCloneTest(
         Type mappingType,
         Type type,
-        params object[] additionalArgs)
+        params object[] additionalArgs
+    )
     {
-        var mapping = (RelationalTypeMapping)Activator.CreateInstance(
-            mappingType,
-            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
-            null,
-            new[]
-            {
-                FakeTypeMapping.CreateParameters(
-                    type,
-                    size: 33,
-                    fixedLength: true,
-                    storeTypePostfix: StoreTypePostfix.Size)
-            }.Concat(additionalArgs).ToArray(),
-            null,
-            null);
+        var mapping = (RelationalTypeMapping)
+            Activator.CreateInstance(
+                mappingType,
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
+                null,
+                new[]
+                {
+                    FakeTypeMapping.CreateParameters(
+                        type,
+                        size: 33,
+                        fixedLength: true,
+                        storeTypePostfix: StoreTypePostfix.Size
+                    ),
+                }
+                    .Concat(additionalArgs)
+                    .ToArray(),
+                null,
+                null
+            );
 
         var clone = mapping.WithStoreTypeAndSize("<clone>", 66);
 
@@ -170,29 +177,35 @@ public abstract class RelationalTypeMappingTest
     }
 
     [ConditionalFact]
-    public virtual void Create_and_clone_unicode_sized_mappings_with_converter()
-        => UnicodeConversionCloneTest(typeof(StringTypeMapping), typeof(string));
+    public virtual void Create_and_clone_unicode_sized_mappings_with_converter() =>
+        UnicodeConversionCloneTest(typeof(StringTypeMapping), typeof(string));
 
     protected virtual void UnicodeConversionCloneTest(
         Type mappingType,
         Type type,
-        params object[] additionalArgs)
+        params object[] additionalArgs
+    )
     {
-        var mapping = (RelationalTypeMapping)Activator.CreateInstance(
-            mappingType,
-            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
-            null,
-            new[]
-            {
-                FakeTypeMapping.CreateParameters(
-                    type,
-                    size: 33,
-                    unicode: false,
-                    fixedLength: true,
-                    storeTypePostfix: StoreTypePostfix.Size)
-            }.Concat(additionalArgs).ToArray(),
-            null,
-            null);
+        var mapping = (RelationalTypeMapping)
+            Activator.CreateInstance(
+                mappingType,
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.CreateInstance,
+                null,
+                new[]
+                {
+                    FakeTypeMapping.CreateParameters(
+                        type,
+                        size: 33,
+                        unicode: false,
+                        fixedLength: true,
+                        storeTypePostfix: StoreTypePostfix.Size
+                    ),
+                }
+                    .Concat(additionalArgs)
+                    .ToArray(),
+                null,
+                null
+            );
 
         var clone = mapping.WithStoreTypeAndSize("<clone>", 66);
 
@@ -240,45 +253,49 @@ public abstract class RelationalTypeMappingTest
     protected class FakeTypeMapping : RelationalTypeMapping
     {
         private FakeTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         public FakeTypeMapping()
-            : base("storeType", typeof(object))
-        {
-        }
+            : base("storeType", typeof(object)) { }
 
         public static object CreateParameters(
             Type type,
             int? size = null,
             bool unicode = false,
             bool fixedLength = false,
-            StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale)
-            => new RelationalTypeMappingParameters(
+            StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale
+        ) =>
+            new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(
                     type,
                     CreateConverter(type),
                     CreateComparer(type),
                     CreateComparer(type),
-                    CreateComparer(typeof(object))),
+                    CreateComparer(typeof(object))
+                ),
                 "<original>",
                 storeTypePostfix,
                 System.Data.DbType.VarNumeric,
                 size: size,
                 unicode: unicode,
-                fixedLength: fixedLength);
+                fixedLength: fixedLength
+            );
 
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new FakeTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new FakeTypeMapping(parameters);
     }
 
     [ConditionalFact]
     public void Can_create_simple_parameter()
     {
         using var command = CreateTestCommand();
-        var parameter = new IntTypeMapping("int")
-            .CreateParameter(command, "Name", 17, nullable: false);
+        var parameter = new IntTypeMapping("int").CreateParameter(
+            command,
+            "Name",
+            17,
+            nullable: false
+        );
 
         Assert.Equal(ParameterDirection.Input, parameter.Direction);
         Assert.Equal("Name", parameter.ParameterName);
@@ -291,8 +308,12 @@ public abstract class RelationalTypeMappingTest
     public void Can_create_simple_nullable_parameter()
     {
         using var command = CreateTestCommand();
-        var parameter = new IntTypeMapping("int")
-            .CreateParameter(command, "Name", 17, nullable: true);
+        var parameter = new IntTypeMapping("int").CreateParameter(
+            command,
+            "Name",
+            17,
+            nullable: true
+        );
 
         Assert.Equal(ParameterDirection.Input, parameter.Direction);
         Assert.Equal("Name", parameter.ParameterName);
@@ -305,8 +326,12 @@ public abstract class RelationalTypeMappingTest
     public void Can_create_simple_parameter_with_DbType()
     {
         using var command = CreateTestCommand();
-        var parameter = new IntTypeMapping("int", DbType.Int32)
-            .CreateParameter(command, "Name", 17, nullable: false);
+        var parameter = new IntTypeMapping("int", DbType.Int32).CreateParameter(
+            command,
+            "Name",
+            17,
+            nullable: false
+        );
 
         Assert.Equal(ParameterDirection.Input, parameter.Direction);
         Assert.Equal("Name", parameter.ParameterName);
@@ -319,8 +344,12 @@ public abstract class RelationalTypeMappingTest
     public void Can_create_simple_nullable_parameter_with_DbType()
     {
         using var command = CreateTestCommand();
-        var parameter = new IntTypeMapping("int", DbType.Int32)
-            .CreateParameter(command, "Name", 17, nullable: true);
+        var parameter = new IntTypeMapping("int", DbType.Int32).CreateParameter(
+            command,
+            "Name",
+            17,
+            nullable: true
+        );
 
         Assert.Equal(ParameterDirection.Input, parameter.Direction);
         Assert.Equal("Name", parameter.ParameterName);
@@ -335,8 +364,12 @@ public abstract class RelationalTypeMappingTest
     public void Can_create_required_string_parameter()
     {
         using var command = CreateTestCommand();
-        var parameter = new StringTypeMapping("nvarchar(23)", DbType.String, unicode: true, size: 23)
-            .CreateParameter(command, "Name", "Value", nullable: false);
+        var parameter = new StringTypeMapping(
+            "nvarchar(23)",
+            DbType.String,
+            unicode: true,
+            size: 23
+        ).CreateParameter(command, "Name", "Value", nullable: false);
 
         Assert.Equal(ParameterDirection.Input, parameter.Direction);
         Assert.Equal("Name", parameter.ParameterName);
@@ -350,8 +383,12 @@ public abstract class RelationalTypeMappingTest
     public void Can_create_string_parameter()
     {
         using var command = CreateTestCommand();
-        var parameter = new StringTypeMapping("nvarchar(23)", DbType.String, unicode: true, size: 23)
-            .CreateParameter(command, "Name", "Value", nullable: true);
+        var parameter = new StringTypeMapping(
+            "nvarchar(23)",
+            DbType.String,
+            unicode: true,
+            size: 23
+        ).CreateParameter(command, "Name", "Value", nullable: true);
 
         Assert.Equal(ParameterDirection.Input, parameter.Direction);
         Assert.Equal("Name", parameter.ParameterName);
@@ -364,8 +401,8 @@ public abstract class RelationalTypeMappingTest
     protected virtual void Test_GenerateSqlLiteral_helper(
         RelationalTypeMapping typeMapping,
         object value,
-        string literalValue)
-        => Assert.Equal(literalValue, typeMapping.GenerateSqlLiteral(value));
+        string literalValue
+    ) => Assert.Equal(literalValue, typeMapping.GenerateSqlLiteral(value));
 
     [ConditionalFact]
     public virtual void Bool_literal_generated_correctly()
@@ -377,8 +414,12 @@ public abstract class RelationalTypeMappingTest
     }
 
     [ConditionalFact]
-    public virtual void ByteArray_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(new ByteArrayTypeMapping("byte[]"), new byte[] { 0xDA, 0x7A }, "X'DA7A'");
+    public virtual void ByteArray_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
+            new ByteArrayTypeMapping("byte[]"),
+            new byte[] { 0xDA, 0x7A },
+            "X'DA7A'"
+        );
 
     [ConditionalFact]
     public virtual void Byte_literal_generated_correctly()
@@ -397,25 +438,28 @@ public abstract class RelationalTypeMappingTest
     }
 
     [ConditionalFact]
-    public virtual void DateTimeOffset_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(
+    public virtual void DateTimeOffset_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
             new DateTimeOffsetTypeMapping("DateTimeOffset"),
             new DateTimeOffset(2015, 3, 12, 13, 36, 37, 371, new TimeSpan(-7, 0, 0)),
-            "TIMESTAMP '2015-03-12 13:36:37.3710000-07:00'");
+            "TIMESTAMP '2015-03-12 13:36:37.3710000-07:00'"
+        );
 
     [ConditionalFact]
-    public virtual void DateTime_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(
+    public virtual void DateTime_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
             new DateTimeTypeMapping("DateTime"),
             new DateTime(2015, 3, 12, 13, 36, 37, 371, DateTimeKind.Utc),
-            "TIMESTAMP '2015-03-12 13:36:37.3710000'");
+            "TIMESTAMP '2015-03-12 13:36:37.3710000'"
+        );
 
     [ConditionalFact]
-    public virtual void DateOnly_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(
+    public virtual void DateOnly_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
             new DateOnlyTypeMapping("DateOnly"),
             new DateOnly(2015, 3, 12),
-            "DATE '2015-03-12'");
+            "DATE '2015-03-12'"
+        );
 
     [ConditionalFact]
     public virtual void TimeOnly_literal_generated_correctly()
@@ -423,8 +467,16 @@ public abstract class RelationalTypeMappingTest
         var typeMapping = new TimeOnlyTypeMapping("TimeOnly");
 
         Test_GenerateSqlLiteral_helper(typeMapping, new TimeOnly(13, 10, 15), "TIME '13:10:15'");
-        Test_GenerateSqlLiteral_helper(typeMapping, new TimeOnly(13, 10, 15, 120), "TIME '13:10:15.12'");
-        Test_GenerateSqlLiteral_helper(typeMapping, new TimeOnly(13, 10, 15, 120, 20), "TIME '13:10:15.12002'");
+        Test_GenerateSqlLiteral_helper(
+            typeMapping,
+            new TimeOnly(13, 10, 15, 120),
+            "TIME '13:10:15.12'"
+        );
+        Test_GenerateSqlLiteral_helper(
+            typeMapping,
+            new TimeOnly(13, 10, 15, 120, 20),
+            "TIME '13:10:15.12002'"
+        );
     }
 
     [ConditionalFact]
@@ -432,8 +484,16 @@ public abstract class RelationalTypeMappingTest
     {
         var typeMapping = new DecimalTypeMapping("decimal", DbType.Decimal);
 
-        Test_GenerateSqlLiteral_helper(typeMapping, decimal.MinValue, "-79228162514264337593543950335.0");
-        Test_GenerateSqlLiteral_helper(typeMapping, decimal.MaxValue, "79228162514264337593543950335.0");
+        Test_GenerateSqlLiteral_helper(
+            typeMapping,
+            decimal.MinValue,
+            "-79228162514264337593543950335.0"
+        );
+        Test_GenerateSqlLiteral_helper(
+            typeMapping,
+            decimal.MaxValue,
+            "79228162514264337593543950335.0"
+        );
     }
 
     [ConditionalFact]
@@ -461,11 +521,12 @@ public abstract class RelationalTypeMappingTest
     }
 
     [ConditionalFact]
-    public virtual void Guid_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(
+    public virtual void Guid_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
             new GuidTypeMapping("guid"),
             new Guid("c6f43a9e-91e1-45ef-a320-832ea23b7292"),
-            "'c6f43a9e-91e1-45ef-a320-832ea23b7292'");
+            "'c6f43a9e-91e1-45ef-a320-832ea23b7292'"
+        );
 
     [ConditionalFact]
     public virtual void NullableInt_literal_generated_correctly()
@@ -513,12 +574,20 @@ public abstract class RelationalTypeMappingTest
     }
 
     [ConditionalFact]
-    public virtual void String_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(new StringTypeMapping("string", DbType.String), "Text", "'Text'");
+    public virtual void String_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
+            new StringTypeMapping("string", DbType.String),
+            "Text",
+            "'Text'"
+        );
 
     [ConditionalFact]
-    public virtual void Timespan_literal_generated_correctly()
-        => Test_GenerateSqlLiteral_helper(new TimeSpanTypeMapping("time"), new TimeSpan(0, 7, 14, 30, 123), "'07:14:30.1230000'");
+    public virtual void Timespan_literal_generated_correctly() =>
+        Test_GenerateSqlLiteral_helper(
+            new TimeSpanTypeMapping("time"),
+            new TimeSpan(0, 7, 14, 30, 123),
+            "'07:14:30.1230000'"
+        );
 
     [ConditionalFact]
     public virtual void UInt_literal_generated_correctly()
@@ -580,9 +649,15 @@ public abstract class RelationalTypeMappingTest
         Assert.False(typeMapping.Comparer.Equals(same1, different));
         Assert.True(typeMapping.Comparer.Equals(same1, same2));
 
-        var parameters = new[] { Expression.Parameter(typeof(DateTimeOffset)), Expression.Parameter(typeof(DateTimeOffset)) };
+        var parameters = new[]
+        {
+            Expression.Parameter(typeof(DateTimeOffset)),
+            Expression.Parameter(typeof(DateTimeOffset)),
+        };
         var equalsBody = typeMapping.Comparer.ExtractEqualsBody(parameters[0], parameters[1]);
-        var equalsComparer = Expression.Lambda<Func<DateTimeOffset, DateTimeOffset, bool>>(equalsBody, parameters).Compile();
+        var equalsComparer = Expression
+            .Lambda<Func<DateTimeOffset, DateTimeOffset, bool>>(equalsBody, parameters)
+            .Compile();
 
         Assert.False(equalsComparer(same1, different));
         Assert.True(equalsComparer(same1, same2));
@@ -594,15 +669,14 @@ public abstract class RelationalTypeMappingTest
         using var context = new FruityContext(ContextOptions);
         Assert.Same(
             context.Model.FindEntityType(typeof(Banana)).FindProperty("Id").GetTypeMapping(),
-            context.Model.FindEntityType(typeof(Kiwi)).FindProperty("BananaId").GetTypeMapping());
+            context.Model.FindEntityType(typeof(Kiwi)).FindProperty("BananaId").GetTypeMapping()
+        );
     }
 
     private class FruityContext : DbContext
     {
         public FruityContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Banana> Bananas { get; set; }
         public DbSet<Kiwi> Kiwi { get; set; }
@@ -614,16 +688,21 @@ public abstract class RelationalTypeMappingTest
         using var context = new MismatchedFruityContext(ContextOptions);
         Assert.Equal(
             typeof(short),
-            context.Model.FindEntityType(typeof(Banana)).FindProperty("Id").GetTypeMapping().Converter.ProviderClrType);
-        Assert.Null(context.Model.FindEntityType(typeof(Kiwi)).FindProperty("Id").GetTypeMapping().Converter);
+            context
+                .Model.FindEntityType(typeof(Banana))
+                .FindProperty("Id")
+                .GetTypeMapping()
+                .Converter.ProviderClrType
+        );
+        Assert.Null(
+            context.Model.FindEntityType(typeof(Kiwi)).FindProperty("Id").GetTypeMapping().Converter
+        );
     }
 
     private class MismatchedFruityContext : FruityContext
     {
         public MismatchedFruityContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -631,7 +710,11 @@ public abstract class RelationalTypeMappingTest
 
             modelBuilder.Entity<Banana>().Property(e => e.Id).HasConversion<short>();
             modelBuilder.Entity<Kiwi>().Property(e => e.Id).HasConversion<int>();
-            modelBuilder.Entity<Kiwi>().HasOne(e => e.Banana).WithMany(e => e.Kiwis).HasForeignKey(e => e.Id);
+            modelBuilder
+                .Entity<Kiwi>()
+                .HasOne(e => e.Banana)
+                .WithMany(e => e.Kiwis)
+                .HasForeignKey(e => e.Id);
         }
     }
 

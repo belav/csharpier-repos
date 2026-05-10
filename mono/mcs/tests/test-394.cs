@@ -5,85 +5,80 @@
 
 using System;
 
- public class A {
-	 protected string name;
-	 
-	 public A (string name)
-	 {
-		 this.name = "A::" + name;
-	 }
+public class A
+{
+    protected string name;
 
-	 public A ()
-	 {
-	 }
+    public A(string name)
+    {
+        this.name = "A::" + name;
+    }
 
-	 public string Name {
-		 get {
-			 return name;
-		 }
-	 }
- }
+    public A() { }
 
- public class B : A {
-	 public B (string name)
-	 {
-		 this.name = "B::" + name;
-	 }
+    public string Name
+    {
+        get { return name; }
+    }
+}
 
-	 public B ()
-	 {
-	 }
- }
+public class B : A
+{
+    public B(string name)
+    {
+        this.name = "B::" + name;
+    }
 
- public class C : B {
-	 string value;
+    public B() { }
+}
 
-	 public C (string name, string value)
-	 {
-		 this.name = "C::" + name;
-		 this.value = value;
-	 }
+public class C : B
+{
+    string value;
 
-	 public string Value {
-		 get {
-			 return value;
-		 }
-	 }
- }
+    public C(string name, string value)
+    {
+        this.name = "C::" + name;
+        this.value = value;
+    }
 
- public class Tester {
+    public string Value
+    {
+        get { return value; }
+    }
+}
 
-	 delegate string MethodHandler (C c);
+public class Tester
+{
+    delegate string MethodHandler(C c);
 
-	 static string MethodSampleA (A value)
-	 {
-		 return value.Name;
-	 }
+    static string MethodSampleA(A value)
+    {
+        return value.Name;
+    }
 
-	 static string MethodSampleB (B value)
-	 {
-		 return value.Name;
-	 }
+    static string MethodSampleB(B value)
+    {
+        return value.Name;
+    }
 
-	 static string MethodSampleC (C value)
-	 {
-		 return value.Name + " " + value.Value;
-	 }
+    static string MethodSampleC(C value)
+    {
+        return value.Name + " " + value.Value;
+    }
 
-	 public static void Main ()
-	 {
-		 MethodHandler da = MethodSampleA;
-		 MethodHandler db = MethodSampleB;
-		 MethodHandler dc = MethodSampleC;
+    public static void Main()
+    {
+        MethodHandler da = MethodSampleA;
+        MethodHandler db = MethodSampleB;
+        MethodHandler dc = MethodSampleC;
 
-		 C a = new C ("Hello", "hello");
-		 C b = new C ("World", "world");
-		 C c = new C ("!", "!!!");
+        C a = new C("Hello", "hello");
+        C b = new C("World", "world");
+        C c = new C("!", "!!!");
 
-		 Console.WriteLine (da (a));
-		 Console.WriteLine (db (b));
-		 Console.WriteLine (dc (c));
-	 }
-	
- }
-
+        Console.WriteLine(da(a));
+        Console.WriteLine(db(b));
+        Console.WriteLine(dc(c));
+    }
+}

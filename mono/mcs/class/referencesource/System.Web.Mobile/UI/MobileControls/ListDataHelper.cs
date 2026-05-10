@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListDataHelper.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Collections;
@@ -15,7 +15,9 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class ListDataHelper
     {
         private IListControl _parent;
@@ -28,13 +30,15 @@ namespace System.Web.UI.MobileControls
         private String _dataValueField;
         private bool _bindFromFields;
 
-        internal /*public*/ ListDataHelper(IListControl parent, StateBag parentViewState)
+        internal /*public*/
+        ListDataHelper(IListControl parent, StateBag parentViewState)
         {
             _parent = parent;
             _parentViewState = parentViewState;
         }
 
-        internal /*public*/ MobileListItemCollection Items
+        internal /*public*/
+        MobileListItemCollection Items
         {
             get
             {
@@ -49,74 +53,68 @@ namespace System.Web.UI.MobileControls
                 return _items;
             }
         }
-        
-        internal /*public*/ bool HasItems()
+
+        internal /*public*/
+        bool HasItems()
         {
             return _items != null;
         }
 
-        internal /*public*/ Object DataSource 
+        internal /*public*/
+        Object DataSource
         {
-            get 
-            {
-                return _dataSource;
-            }
-
-            set 
+            get { return _dataSource; }
+            set
             {
                 _dataSource = value;
                 _resolvedDataSource = null;
             }
         }
 
-        internal /*public*/ String DataMember
+        internal /*public*/
+        String DataMember
         {
-            get 
+            get
             {
                 String s = (String)_parentViewState["DataMember"];
                 return s == null ? String.Empty : s;
             }
-
-            set 
-            {
-                _parentViewState["DataMember"] = value;
-            }
+            set { _parentViewState["DataMember"] = value; }
         }
 
-        internal /*public*/ String DataTextField 
+        internal /*public*/
+        String DataTextField
         {
-            get 
+            get
             {
                 String s = (String)_parentViewState["DataTextField"];
                 return (s != null) ? s : String.Empty;
             }
-            set 
-            {
-                _parentViewState["DataTextField"] = value;
-            }
+            set { _parentViewState["DataTextField"] = value; }
         }
 
-        internal /*public*/ String DataValueField 
+        internal /*public*/
+        String DataValueField
         {
-            get 
+            get
             {
                 String s = (String)_parentViewState["DataValueField"];
                 return (s != null) ? s : String.Empty;
             }
-            set 
-            {
-                _parentViewState["DataValueField"] = value;
-            }
+            set { _parentViewState["DataValueField"] = value; }
         }
 
-        internal /*public*/ IEnumerable ResolvedDataSource
+        internal /*public*/
+        IEnumerable ResolvedDataSource
         {
             get
             {
                 if (_resolvedDataSource == null)
                 {
-                    _resolvedDataSource = 
-                        DataSourceHelper.GetResolvedDataSource(DataSource, DataMember);
+                    _resolvedDataSource = DataSourceHelper.GetResolvedDataSource(
+                        DataSource,
+                        DataMember
+                    );
                 }
                 return _resolvedDataSource;
             }
@@ -158,9 +156,10 @@ namespace System.Web.UI.MobileControls
         }
         */
 
-        internal /*public*/ void CreateItems(IEnumerable dataSource) 
+        internal /*public*/
+        void CreateItems(IEnumerable dataSource)
         {
-            Debug.Assert (dataSource != null);
+            Debug.Assert(dataSource != null);
             Items.Clear();
             _dataTextField = DataTextField;
             _dataValueField = DataValueField;
@@ -169,7 +168,7 @@ namespace System.Web.UI.MobileControls
             {
                 MobileListItem listItem = CreateItem(dataItem);
 
-                if (listItem != null) 
+                if (listItem != null)
                 {
                     AddItem(listItem);
                 }
@@ -209,7 +208,8 @@ namespace System.Web.UI.MobileControls
             return listItem;
         }
 
-        internal /*public*/ void AddItem(MobileListItem item)
+        internal /*public*/
+        void AddItem(MobileListItem item)
         {
             MobileListItemCollection items = Items;
             items.Add(item);

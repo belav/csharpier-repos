@@ -1,20 +1,19 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
+using System;
+using Microsoft;
 #if !SILVERLIGHT
 
 using System.Collections.Generic;
@@ -28,15 +27,31 @@ using System.Security;
 using System.Security.Permissions;
 
 #if CODEPLEX_40
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "System.Dynamic")]
+[assembly: SuppressMessage(
+    "Microsoft.Design",
+    "CA1020:AvoidNamespacesWithFewTypes",
+    Scope = "namespace",
+    Target = "System.Dynamic"
+)]
+
+
 #else
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Microsoft.Scripting")]
+[assembly: SuppressMessage(
+    "Microsoft.Design",
+    "CA1020:AvoidNamespacesWithFewTypes",
+    Scope = "namespace",
+    Target = "Microsoft.Scripting"
+)]
+
+
 #endif
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
 
     /// <summary>
@@ -47,14 +62,15 @@ namespace Microsoft.Scripting {
 #else
     internal
 #endif
-    static class ComBinder {
-
+    static class ComBinder
+    {
         /// <summary>
         /// Determines if an object is a COM object.
         /// </summary>
         /// <param name="value">The object to test.</param>
         /// <returns>true if the object is a COM object, false otherwise.</returns>
-        public static bool IsComObject(object value) {
+        public static bool IsComObject(object value)
+        {
             return ComObject.IsComObject(value);
         }
 
@@ -71,11 +87,18 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryBindGetMember(GetMemberBinder binder, DynamicMetaObject instance, out DynamicMetaObject result, bool delayInvocation) {
+        public static bool TryBindGetMember(
+            GetMemberBinder binder,
+            DynamicMetaObject instance,
+            out DynamicMetaObject result,
+            bool delayInvocation
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
 
-            if (TryGetMetaObject(ref instance)) {
+            if (TryGetMetaObject(ref instance))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
@@ -84,14 +107,17 @@ namespace Microsoft.Scripting {
 
                 var comGetMember = new ComGetMemberBinder(binder, delayInvocation);
                 result = instance.BindGetMember(comGetMember);
-                if (result.Expression.Type.IsValueType) {
+                if (result.Expression.Type.IsValueType)
+                {
                     result = new DynamicMetaObject(
                         Expression.Convert(result.Expression, typeof(object)),
                         result.Restrictions
                     );
                 }
                 return true;
-            } else {
+            }
+            else
+            {
                 result = null;
                 return false;
             }
@@ -104,7 +130,12 @@ namespace Microsoft.Scripting {
         /// <param name="instance">The target of the dynamic operation. </param>
         /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
-        public static bool TryBindGetMember(GetMemberBinder binder, DynamicMetaObject instance, out DynamicMetaObject result) {
+        public static bool TryBindGetMember(
+            GetMemberBinder binder,
+            DynamicMetaObject instance,
+            out DynamicMetaObject result
+        )
+        {
             return TryBindGetMember(binder, instance, out result, false);
         }
 
@@ -121,12 +152,19 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryBindSetMember(SetMemberBinder binder, DynamicMetaObject instance, DynamicMetaObject value, out DynamicMetaObject result) {
+        public static bool TryBindSetMember(
+            SetMemberBinder binder,
+            DynamicMetaObject instance,
+            DynamicMetaObject value,
+            out DynamicMetaObject result
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
             ContractUtils.RequiresNotNull(value, "value");
 
-            if (TryGetMetaObject(ref instance)) {
+            if (TryGetMetaObject(ref instance))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
@@ -135,7 +173,9 @@ namespace Microsoft.Scripting {
 
                 result = instance.BindSetMember(binder, value);
                 return true;
-            } else {
+            }
+            else
+            {
                 result = null;
                 return false;
             }
@@ -143,7 +183,7 @@ namespace Microsoft.Scripting {
 
         /// <summary>
         /// Tries to perform binding of the dynamic invoke operation.
-        /// </summary>    
+        /// </summary>
         /// <param name="binder">An instance of the <see cref="InvokeBinder"/> that represents the details of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
         /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the invoke member operation.</param>
@@ -154,12 +194,19 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryBindInvoke(InvokeBinder binder, DynamicMetaObject instance, DynamicMetaObject[] args, out DynamicMetaObject result) {
+        public static bool TryBindInvoke(
+            InvokeBinder binder,
+            DynamicMetaObject instance,
+            DynamicMetaObject[] args,
+            out DynamicMetaObject result
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
             ContractUtils.RequiresNotNull(args, "args");
-            
-            if (TryGetMetaObject(ref instance)) {
+
+            if (TryGetMetaObject(ref instance))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
@@ -168,7 +215,9 @@ namespace Microsoft.Scripting {
 
                 result = instance.BindInvoke(binder, args);
                 return true;
-            } else {
+            }
+            else
+            {
                 result = null;
                 return false;
             }
@@ -187,12 +236,19 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryBindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject instance, DynamicMetaObject[] args, out DynamicMetaObject result) {
+        public static bool TryBindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject instance,
+            DynamicMetaObject[] args,
+            out DynamicMetaObject result
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
             ContractUtils.RequiresNotNull(args, "args");
 
-            if (TryGetMetaObject(ref instance)) {
+            if (TryGetMetaObject(ref instance))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
@@ -201,7 +257,9 @@ namespace Microsoft.Scripting {
 
                 result = instance.BindInvokeMember(binder, args);
                 return true;
-            } else {
+            }
+            else
+            {
                 result = null;
                 return false;
             }
@@ -220,12 +278,19 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryBindGetIndex(GetIndexBinder binder, DynamicMetaObject instance, DynamicMetaObject[] args, out DynamicMetaObject result) {
+        public static bool TryBindGetIndex(
+            GetIndexBinder binder,
+            DynamicMetaObject instance,
+            DynamicMetaObject[] args,
+            out DynamicMetaObject result
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
             ContractUtils.RequiresNotNull(args, "args");
 
-            if (TryGetMetaObject(ref instance)) {
+            if (TryGetMetaObject(ref instance))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
@@ -234,7 +299,9 @@ namespace Microsoft.Scripting {
 
                 result = instance.BindGetIndex(binder, args);
                 return true;
-            } else {
+            }
+            else
+            {
                 result = null;
                 return false;
             }
@@ -254,13 +321,21 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryBindSetIndex(SetIndexBinder binder, DynamicMetaObject instance, DynamicMetaObject[] args, DynamicMetaObject value, out DynamicMetaObject result) {
+        public static bool TryBindSetIndex(
+            SetIndexBinder binder,
+            DynamicMetaObject instance,
+            DynamicMetaObject[] args,
+            DynamicMetaObject value,
+            out DynamicMetaObject result
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
             ContractUtils.RequiresNotNull(args, "args");
             ContractUtils.RequiresNotNull(value, "value");
 
-            if (TryGetMetaObject(ref instance)) {
+            if (TryGetMetaObject(ref instance))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
@@ -269,7 +344,9 @@ namespace Microsoft.Scripting {
 
                 result = instance.BindSetIndex(binder, args, value);
                 return true;
-            } else {
+            }
+            else
+            {
                 result = null;
                 return false;
             }
@@ -287,28 +364,36 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static bool TryConvert(ConvertBinder binder, DynamicMetaObject instance, out DynamicMetaObject result) {
+        public static bool TryConvert(
+            ConvertBinder binder,
+            DynamicMetaObject instance,
+            out DynamicMetaObject result
+        )
+        {
             ContractUtils.RequiresNotNull(binder, "binder");
             ContractUtils.RequiresNotNull(instance, "instance");
 
-            if (IsComObject(instance.Value)) {
+            if (IsComObject(instance.Value))
+            {
                 //
                 // Demand Full Trust to proceed with the binding.
                 //
 
-                new PermissionSet(PermissionState.Unrestricted).Demand(); 
+                new PermissionSet(PermissionState.Unrestricted).Demand();
 
-                // Converting a COM object to any interface is always considered possible - it will result in 
+                // Converting a COM object to any interface is always considered possible - it will result in
                 // a QueryInterface at runtime
-                if (binder.Type.IsInterface) {
+                if (binder.Type.IsInterface)
+                {
                     result = new DynamicMetaObject(
-                        Expression.Convert(
-                            instance.Expression,
-                            binder.Type
-                        ),
+                        Expression.Convert(instance.Expression, binder.Type),
                         BindingRestrictions.GetExpressionRestriction(
                             Expression.Call(
-                                typeof(ComObject).GetMethod("IsComObject", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic),
+                                typeof(ComObject).GetMethod(
+                                    "IsComObject",
+                                    System.Reflection.BindingFlags.Static
+                                        | System.Reflection.BindingFlags.NonPublic
+                                ),
                                 Helpers.Convert(instance.Expression, typeof(object))
                             )
                         )
@@ -332,7 +417,8 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        public static IEnumerable<string> GetDynamicMemberNames(object value) {
+        public static IEnumerable<string> GetDynamicMemberNames(object value)
+        {
             ContractUtils.RequiresNotNull(value, "value");
             ContractUtils.Requires(IsComObject(value), "value", Strings.ComObjectExpected);
 
@@ -340,7 +426,7 @@ namespace Microsoft.Scripting {
             // Demand Full Trust to proceed with the binding.
             //
 
-            new PermissionSet(PermissionState.Unrestricted).Demand(); 
+            new PermissionSet(PermissionState.Unrestricted).Demand();
 
             return ComObject.ObjectToComObject(value).GetMemberNames(false);
         }
@@ -357,7 +443,8 @@ namespace Microsoft.Scripting {
         [SecuritySafeCritical]
 #endif
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static IList<string> GetDynamicDataMemberNames(object value) {
+        internal static IList<string> GetDynamicDataMemberNames(object value)
+        {
             ContractUtils.RequiresNotNull(value, "value");
             ContractUtils.Requires(IsComObject(value), "value", Strings.ComObjectExpected);
 
@@ -365,7 +452,7 @@ namespace Microsoft.Scripting {
             // Demand Full Trust to proceed with the binding.
             //
 
-            new PermissionSet(PermissionState.Unrestricted).Demand(); 
+            new PermissionSet(PermissionState.Unrestricted).Demand();
 
             return ComObject.ObjectToComObject(value).GetMemberNames(true);
         }
@@ -384,7 +471,11 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        internal static IList<KeyValuePair<string, object>> GetDynamicDataMembers(object value, IEnumerable<string> names) {
+        internal static IList<KeyValuePair<string, object>> GetDynamicDataMembers(
+            object value,
+            IEnumerable<string> names
+        )
+        {
             ContractUtils.RequiresNotNull(value, "value");
             ContractUtils.Requires(IsComObject(value), "value", Strings.ComObjectExpected);
 
@@ -397,15 +488,22 @@ namespace Microsoft.Scripting {
             return ComObject.ObjectToComObject(value).GetMembers(names);
         }
 
-        private static bool TryGetMetaObject(ref DynamicMetaObject instance) {
+        private static bool TryGetMetaObject(ref DynamicMetaObject instance)
+        {
             // If we're already a COM MO don't make a new one
             // (we do this to prevent recursion if we call Fallback from COM)
-            if (instance is ComUnwrappedMetaObject) {
+            if (instance is ComUnwrappedMetaObject)
+            {
                 return false;
             }
 
-            if (IsComObject(instance.Value)) {
-                instance = new ComMetaObject(instance.Expression, instance.Restrictions, instance.Value);
+            if (IsComObject(instance.Value))
+            {
+                instance = new ComMetaObject(
+                    instance.Expression,
+                    instance.Restrictions,
+                    instance.Value
+                );
                 return true;
             }
 
@@ -415,29 +513,37 @@ namespace Microsoft.Scripting {
         /// <summary>
         /// Special binder that indicates special semantics for COM GetMember operation.
         /// </summary>
-        internal class ComGetMemberBinder : GetMemberBinder {
+        internal class ComGetMemberBinder : GetMemberBinder
+        {
             private readonly GetMemberBinder _originalBinder;
             internal bool _CanReturnCallables;
 
-            internal ComGetMemberBinder(GetMemberBinder originalBinder, bool CanReturnCallables) :
-                base(originalBinder.Name, originalBinder.IgnoreCase) {
+            internal ComGetMemberBinder(GetMemberBinder originalBinder, bool CanReturnCallables)
+                : base(originalBinder.Name, originalBinder.IgnoreCase)
+            {
                 _originalBinder = originalBinder;
                 _CanReturnCallables = CanReturnCallables;
             }
 
-            public override DynamicMetaObject FallbackGetMember(DynamicMetaObject target, DynamicMetaObject errorSuggestion) {
+            public override DynamicMetaObject FallbackGetMember(
+                DynamicMetaObject target,
+                DynamicMetaObject errorSuggestion
+            )
+            {
                 return _originalBinder.FallbackGetMember(target, errorSuggestion);
             }
 
-            public override int GetHashCode() {
+            public override int GetHashCode()
+            {
                 return _originalBinder.GetHashCode() ^ (_CanReturnCallables ? 1 : 0);
             }
 
-            public override bool Equals(object obj) {
+            public override bool Equals(object obj)
+            {
                 ComGetMemberBinder other = obj as ComGetMemberBinder;
-                return other != null &&
-                    _CanReturnCallables == other._CanReturnCallables &&
-                    _originalBinder.Equals(other._originalBinder);
+                return other != null
+                    && _CanReturnCallables == other._CanReturnCallables
+                    && _originalBinder.Equals(other._originalBinder);
             }
         }
     }

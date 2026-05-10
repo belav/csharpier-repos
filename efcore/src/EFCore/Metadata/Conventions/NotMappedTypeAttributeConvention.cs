@@ -18,9 +18,7 @@ public class NotMappedTypeAttributeConvention : TypeAttributeConventionBase<NotM
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public NotMappedTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an entity type is added to the model if it has an attribute.
@@ -31,9 +29,15 @@ public class NotMappedTypeAttributeConvention : TypeAttributeConventionBase<NotM
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         NotMappedAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
-        if (entityTypeBuilder.ModelBuilder.Ignore(entityTypeBuilder.Metadata.Name, fromDataAnnotation: true) != null)
+        if (
+            entityTypeBuilder.ModelBuilder.Ignore(
+                entityTypeBuilder.Metadata.Name,
+                fromDataAnnotation: true
+            ) != null
+        )
         {
             context.StopProcessing();
         }

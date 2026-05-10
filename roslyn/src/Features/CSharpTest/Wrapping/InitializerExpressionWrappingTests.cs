@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
     [Trait(Traits.Feature, Traits.Features.CodeActionsWrapping)]
     public class InitializerExpressionWrappingTests : AbstractWrappingTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpWrappingCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpWrappingCodeRefactoringProvider();
 
         [Fact]
         public async Task TestNoWrappingSuggestions()
@@ -27,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         var test = new[] [||]{ 1 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/59624")]
@@ -40,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         var test = new[] [||]{ 1, };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -108,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/59624")]
@@ -142,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -183,7 +190,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -244,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -278,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -319,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         var test = new[] { "the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -361,7 +372,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -403,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -438,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -473,7 +487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -515,7 +530,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -557,7 +573,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         };
                      }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -593,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         0, 1, 2, 3, 4, 5, 6, 7, 8, 9
                     };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -629,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         0, 1, 2, 3, 4, 5, 6, 7, 8, 9
                     };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -665,7 +684,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         0, 1, 2, 3, 4, 5, 6, 7, 8, 9
                     });
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -701,7 +721,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         0, 1, 2, 3, 4, 5, 6, 7, 8, 9
                     });
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -714,7 +735,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         var test = new[] [||] 1, 2 };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -728,7 +750,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63732")]
@@ -741,7 +764,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         var test = new[] [||]{ 1, 2 ;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

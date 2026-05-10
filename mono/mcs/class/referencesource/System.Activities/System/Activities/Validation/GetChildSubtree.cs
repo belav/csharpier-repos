@@ -6,21 +6,15 @@ namespace System.Activities.Validation
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime;   
+    using System.Runtime;
 
-    public sealed class GetChildSubtree : CodeActivity<IEnumerable<Activity>> 
+    public sealed class GetChildSubtree : CodeActivity<IEnumerable<Activity>>
     {
         public GetChildSubtree()
-            : base()
-        {
-        }
+            : base() { }
 
-        public InArgument<ValidationContext> ValidationContext
-        {
-            get;
-            set;
-        }
-        
+        public InArgument<ValidationContext> ValidationContext { get; set; }
+
         protected override IEnumerable<Activity> Execute(CodeActivityContext context)
         {
             Fx.Assert(this.ValidationContext != null, "ValidationContext must not be null");

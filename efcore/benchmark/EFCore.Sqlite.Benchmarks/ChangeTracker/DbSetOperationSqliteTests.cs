@@ -11,13 +11,13 @@ public class DbSetOperationSqliteTests : DbSetOperationTests
 {
     public class AddDataVariations : AddDataVariationsBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqliteFixture("Perf_ChangeTracker_DbSetOperation");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqliteFixture("Perf_ChangeTracker_DbSetOperation");
     }
 
     public class ExistingDataVariations : ExistingDataVariationsBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqliteFixture("Perf_ChangeTracker_DbSetOperation");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqliteFixture("Perf_ChangeTracker_DbSetOperation");
     }
 }

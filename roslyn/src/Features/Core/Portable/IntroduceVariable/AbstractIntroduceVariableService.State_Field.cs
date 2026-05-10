@@ -11,12 +11,18 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.IntroduceVariable
 {
-    internal partial class AbstractIntroduceVariableService<TService, TExpressionSyntax, TTypeSyntax, TTypeDeclarationSyntax, TQueryExpressionSyntax, TNameSyntax>
+    internal partial class AbstractIntroduceVariableService<
+        TService,
+        TExpressionSyntax,
+        TTypeSyntax,
+        TTypeDeclarationSyntax,
+        TQueryExpressionSyntax,
+        TNameSyntax
+    >
     {
         private partial class State
         {
-            private bool IsInFieldContext(
-                CancellationToken cancellationToken)
+            private bool IsInFieldContext(CancellationToken cancellationToken)
             {
                 // Note: if we're in a lambda that has a block body, then we don't ever get here
                 // because of the early check for IsInBlockContext.

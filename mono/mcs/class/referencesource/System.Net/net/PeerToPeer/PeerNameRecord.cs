@@ -1,18 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="PeerNameRecord.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Net;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Net;
+    using System.Text;
+
     [Serializable]
     public class PeerNameRecord : ISerializable
     {
@@ -23,30 +24,40 @@ namespace System.Net.PeerToPeer
         private IPEndPointCollection m_EndPointCollection = new IPEndPointCollection();
         private string m_Comment;
         private byte[] m_Data;
-        
 
         /// <summary>
-        /// Constructor to enable serialization 
+        /// Constructor to enable serialization
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
         protected PeerNameRecord(SerializationInfo info, StreamingContext context)
         {
             m_Comment = info.GetString("_Comment");
             m_Data = info.GetValue("_Data", typeof(byte[])) as byte[];
-            m_EndPointCollection = info.GetValue("_EndpointList", typeof(IPEndPointCollection)) as IPEndPointCollection;
-            m_PeerName  = info.GetValue("_PeerName", typeof(PeerName)) as PeerName;
-
+            m_EndPointCollection =
+                info.GetValue("_EndpointList", typeof(IPEndPointCollection))
+                as IPEndPointCollection;
+            m_PeerName = info.GetValue("_PeerName", typeof(PeerName)) as PeerName;
         }
-
 
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="GetObjectData(SerializationInfo, StreamingContext):Void" />
         // </SecurityKernel>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.Net.dll is still using pre-v4 security model and needs this demand")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.Net.dll is still using pre-v4 security model and needs this demand"
+        )]
         [System.Security.SecurityCritical]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter, SerializationFormatter = true)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             GetObjectData(info, context);
@@ -66,9 +77,7 @@ namespace System.Net.PeerToPeer
             info.AddValue("_Data", m_Data);
         }
 
-        public PeerNameRecord()
-        {
-        }
+        public PeerNameRecord() { }
 
         /*
         public PeerNameRecord(PeerName peerName)
@@ -99,64 +108,55 @@ namespace System.Net.PeerToPeer
 
         public PeerName PeerName
         {
-            get
-            {
-                return m_PeerName;
-            }
-            set
-            {
-                m_PeerName = value;
-
-            }
+            get { return m_PeerName; }
+            set { m_PeerName = value; }
         }
 
         public IPEndPointCollection EndPointCollection
         {
-            get
-            {
-                return m_EndPointCollection;
-            }
+            get { return m_EndPointCollection; }
         }
 
         public string Comment
         {
-            get
-            {
-                return m_Comment;
-            }
+            get { return m_Comment; }
             set
             {
                 //--------------------------------------------------------------------
                 //We don't allow null or empty comments since they are not very useful
                 //--------------------------------------------------------------------
                 if (value == null)
-                    throw new ArgumentNullException("Comment", SR.GetString(SR.Pnrp_CommentCantBeNull));
+                    throw new ArgumentNullException(
+                        "Comment",
+                        SR.GetString(SR.Pnrp_CommentCantBeNull)
+                    );
 
-                if(value.Length <= 0)
+                if (value.Length <= 0)
                     throw new ArgumentException(SR.GetString(SR.Pnrp_CommentCantBeNull), "Comment");
 
                 if (value.Length > MAX_COMMENT_SIZE)
-                    throw new ArgumentException(SR.GetString(SR.Pnrp_CommentMaxLengthExceeded, MAX_COMMENT_SIZE));
+                    throw new ArgumentException(
+                        SR.GetString(SR.Pnrp_CommentMaxLengthExceeded, MAX_COMMENT_SIZE)
+                    );
 
                 m_Comment = value;
             }
         }
         public byte[] Data
         {
-            get
-            {
-                return m_Data;
-            }
+            get { return m_Data; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("Data", SR.GetString(SR.Pnrp_DataCantBeNull));
 
                 if (value.Length <= 0)
-                    throw new ArgumentException(SR.GetString(SR.Pnrp_DataCantBeNull), "Data");                       
+                    throw new ArgumentException(SR.GetString(SR.Pnrp_DataCantBeNull), "Data");
 
-                if(value.Length > MAX_DATA_SIZE)
-                    throw new ArgumentException(SR.GetString(SR.Pnrp_DataLengthExceeded, MAX_DATA_SIZE));
+                if (value.Length > MAX_DATA_SIZE)
+                    throw new ArgumentException(
+                        SR.GetString(SR.Pnrp_DataLengthExceeded, MAX_DATA_SIZE)
+                    );
 
                 m_Data = value;
             }
@@ -164,33 +164,71 @@ namespace System.Net.PeerToPeer
 
         internal void TracePeerNameRecord()
         {
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Contents of the PeerNameRecord");
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tPeerName: {0}", PeerName);
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tComment: {0}", Comment);
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Contents of the PeerNameRecord"
+            );
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "\tPeerName: {0}",
+                PeerName
+            );
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "\tComment: {0}",
+                Comment
+            );
             if (EndPointCollection != null && EndPointCollection.Count != 0)
             {
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tThe EndPointList is ");
-                foreach(IPEndPoint ipe in EndPointCollection)
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "\tThe EndPointList is "
+                );
+                foreach (IPEndPoint ipe in EndPointCollection)
                 {
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\t\tIPEndPoint is {0}", ipe);
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "\t\tIPEndPoint is {0}",
+                        ipe
+                    );
                 }
             }
             else
             {
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tThe EndPointList is empty or null");
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "\tThe EndPointList is empty or null"
+                );
             }
             if (Data != null)
             {
                 if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Verbose))
                 {
-                    Logging.DumpData(Logging.P2PTraceSource, TraceEventType.Verbose, Logging.P2PTraceSource.MaxDataSize, Data, 0, Data.Length);
+                    Logging.DumpData(
+                        Logging.P2PTraceSource,
+                        TraceEventType.Verbose,
+                        Logging.P2PTraceSource.MaxDataSize,
+                        Data,
+                        0,
+                        Data.Length
+                    );
                 }
                 else
                 {
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "\tCustom data length {0}", Data.Length);
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "\tCustom data length {0}",
+                        Data.Length
+                    );
                 }
             }
         }
     }
 }
-

@@ -28,7 +28,7 @@ namespace System.Net.Sockets
         IPv6NoNextHeader = 59, // IPv6NoNextHeader
         IPv6DestinationOptions = 60, // IPv6DestinationOptions
         ND = 77, // UNOFFICIAL net disk proto
-        Raw = 255,  // raw IP packet
+        Raw = 255, // raw IP packet
 
         Unspecified = 0,
         Ipx = 1000,

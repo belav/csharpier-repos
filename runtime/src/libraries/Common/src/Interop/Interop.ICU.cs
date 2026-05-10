@@ -12,18 +12,40 @@ internal static partial class Interop
         [LibraryImport(Libraries.GlobalizationNative, EntryPoint = "GlobalizationNative_LoadICU")]
         internal static partial int LoadICU();
 
-        internal static void InitICUFunctions(IntPtr icuuc, IntPtr icuin, ReadOnlySpan<char> version, ReadOnlySpan<char> suffix)
+        internal static void InitICUFunctions(
+            IntPtr icuuc,
+            IntPtr icuin,
+            ReadOnlySpan<char> version,
+            ReadOnlySpan<char> suffix
+        )
         {
             Debug.Assert(icuuc != IntPtr.Zero);
             Debug.Assert(icuin != IntPtr.Zero);
 
-            InitICUFunctions(icuuc, icuin, version.ToString(), suffix.Length > 0 ? suffix.ToString() : null);
+            InitICUFunctions(
+                icuuc,
+                icuin,
+                version.ToString(),
+                suffix.Length > 0 ? suffix.ToString() : null
+            );
         }
 
-        [LibraryImport(Libraries.GlobalizationNative, EntryPoint = "GlobalizationNative_InitICUFunctions", StringMarshalling = StringMarshalling.Utf8)]
-        internal static partial void InitICUFunctions(IntPtr icuuc, IntPtr icuin, string version, string? suffix);
+        [LibraryImport(
+            Libraries.GlobalizationNative,
+            EntryPoint = "GlobalizationNative_InitICUFunctions",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
+        internal static partial void InitICUFunctions(
+            IntPtr icuuc,
+            IntPtr icuin,
+            string version,
+            string? suffix
+        );
 
-        [LibraryImport(Libraries.GlobalizationNative, EntryPoint = "GlobalizationNative_GetICUVersion")]
+        [LibraryImport(
+            Libraries.GlobalizationNative,
+            EntryPoint = "GlobalizationNative_GetICUVersion"
+        )]
         internal static partial int GetICUVersion();
     }
 }

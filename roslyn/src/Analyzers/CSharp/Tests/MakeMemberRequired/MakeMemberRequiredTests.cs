@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpMakeMemberRequiredCodeFixProvider>;
+        CSharpMakeMemberRequiredCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeMemberRequired)]
     public sealed class MakeMemberRequiredTests
@@ -124,8 +125,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         [WorkItem("https://github.com/dotnet/roslyn/issues/68478")]
         public async Task SimpleSetPropertyMissingRequiredAttribute()
         {
-            var code =
-                """
+            var code = """
                 #nullable enable
                 class MyClass
                 {
@@ -162,7 +162,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -195,7 +195,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public string {|CS8618:MyProperty|} { get; }
@@ -207,19 +207,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestEffectivePropertyAccessibilityWhereShouldProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string propertyAccessibility)
+        public async Task TestEffectivePropertyAccessibilityWhereShouldProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string propertyAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{outerClassAccessibility}} class C
                     {
                         {{containingTypeAccessibility}} class MyClass
@@ -230,7 +234,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     """,
                 FixedCode = $$"""
                     #nullable enable
-                
+
                     {{outerClassAccessibility}} class C
                     {
                         {{containingTypeAccessibility}} class MyClass
@@ -240,19 +244,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestEffectivePropertyAccessibilityWhereShouldNotProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string propertyAccessibility)
+        public async Task TestEffectivePropertyAccessibilityWhereShouldNotProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string propertyAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{outerClassAccessibility}} class C
                     {
                         {{containingTypeAccessibility}} class MyClass
@@ -262,19 +270,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestSetAccessorAccessibilityWhereShouldProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestSetAccessorAccessibilityWhereShouldProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{containingTypeAccessibility}} class MyClass
                     {
                         public string {|CS8618:MyProperty|} { get; {{setAccessorAccessibility}} set; }
@@ -282,45 +293,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     """,
                 FixedCode = $$"""
                     #nullable enable
-                
+
                     {{containingTypeAccessibility}} class MyClass
                     {
                         public required string MyProperty { get; {{setAccessorAccessibility}} set; }
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestSetAccessorAccessibilityWhereShouldNotProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestSetAccessorAccessibilityWhereShouldNotProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{containingTypeAccessibility}} class MyClass
                     {
                         public string {|CS8618:MyProperty|} { get; {{setAccessorAccessibility}} set; }
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestInitAccessorAccessibilityWhereShouldProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestInitAccessorAccessibilityWhereShouldProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{containingTypeAccessibility}} class MyClass
                     {
                         public string {|CS8618:MyProperty|} { get; {{setAccessorAccessibility}} init; }
@@ -328,33 +345,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     """,
                 FixedCode = $$"""
                     #nullable enable
-                
+
                     {{containingTypeAccessibility}} class MyClass
                     {
                         public required string MyProperty { get; {{setAccessorAccessibility}} init; }
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(AccessorAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestInitAccessorAccessibilityWhereShouldNotProvideFix(string containingTypeAccessibility, string setAccessorAccessibility)
+        public async Task TestInitAccessorAccessibilityWhereShouldNotProvideFix(
+            string containingTypeAccessibility,
+            string setAccessorAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{containingTypeAccessibility}} class MyClass
                     {
                         public string {|CS8618:MyProperty|} { get; {{setAccessorAccessibility}} init; }
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -365,7 +385,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
             {
                 TestCode = """
                     #nullable enable
-                
+
                     class MyClass
                     {
                         public string {|CS8618:_myField|};
@@ -373,26 +393,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     """,
                 FixedCode = """
                     #nullable enable
-                
+
                     class MyClass
                     {
                         public required string _myField;
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldProvideFix))]
-        public async Task TestEffectiveFieldAccessibilityWhereShouldProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string fieldAccessibility)
+        public async Task TestEffectiveFieldAccessibilityWhereShouldProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string fieldAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{outerClassAccessibility}} class C
                     {
                         {{containingTypeAccessibility}} class MyClass
@@ -403,7 +427,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     """,
                 FixedCode = $$"""
                     #nullable enable
-                
+
                     {{outerClassAccessibility}} class C
                     {
                         {{containingTypeAccessibility}} class MyClass
@@ -413,19 +437,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
         [Theory]
         [MemberData(nameof(MemberAccessibilityModifierCombinationsWhereShouldNotProvideFix))]
-        public async Task TestEffectiveFieldAccessibilityWhereShouldNotProvideFix(string outerClassAccessibility, string containingTypeAccessibility, string fieldAccessibility)
+        public async Task TestEffectiveFieldAccessibilityWhereShouldNotProvideFix(
+            string outerClassAccessibility,
+            string containingTypeAccessibility,
+            string fieldAccessibility
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = $$"""
                     #nullable enable
-                
+
                     {{outerClassAccessibility}} class C
                     {
                         {{containingTypeAccessibility}} class MyClass
@@ -435,7 +463,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -444,7 +472,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public string {|CS8618:MyProperty|} { get; set; }
@@ -456,7 +484,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp10,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -465,7 +493,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public string MyProperty { get; set; }
@@ -478,7 +506,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -487,7 +515,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
         {
             var code = """
                 #nullable enable
-                
+
                 class MyClass
                 {
                     public event System.EventHandler {|CS8618:MyEvent|};
@@ -499,7 +527,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -525,7 +553,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -551,7 +579,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -575,7 +603,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -599,7 +627,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -625,7 +653,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
 
@@ -649,7 +677,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.MakeMemberRequired
                     }
                     """,
                 LanguageVersion = LanguageVersion.CSharp11,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net70
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
             }.RunAsync();
         }
     }

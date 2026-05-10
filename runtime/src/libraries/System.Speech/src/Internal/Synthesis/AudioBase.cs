@@ -17,9 +17,7 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Create an instance of AudioBase.
         /// </summary>
-        internal AudioBase()
-        {
-        }
+        internal AudioBase() { }
 
         #endregion
 
@@ -140,7 +138,9 @@ namespace System.Speech.Internal.Synthesis
 
                         if (wfx == null)
                         {
-                            throw new FormatException(SR.Get(SRID.NotValidAudioFile, audio._uri.ToString()));
+                            throw new FormatException(
+                                SR.Get(SRID.NotValidAudioFile, audio._uri.ToString())
+                            );
                         }
 
                         Begin(wfx);
@@ -162,7 +162,10 @@ namespace System.Speech.Internal.Synthesis
                                 // Is this the WAVE data?
                                 if (dataHdr._id == DATA_MARKER)
                                 {
-                                    byte[] ab = Helpers.ReadStreamToByteArray(audio._stream, dataHdr._len);
+                                    byte[] ab = Helpers.ReadStreamToByteArray(
+                                        audio._stream,
+                                        dataHdr._len
+                                    );
                                     Play(ab);
                                 }
                                 else
@@ -228,7 +231,12 @@ namespace System.Speech.Internal.Synthesis
             return wfx;
         }
 
-        internal static void WriteWaveHeader(Stream stream, WAVEFORMATEX waveEx, long position, int cData)
+        internal static void WriteWaveHeader(
+            Stream stream,
+            WAVEFORMATEX waveEx,
+            long position,
+            int cData
+        )
         {
             RIFFHDR riff = new(0);
             BLOCKHDR block = new(0);
@@ -236,7 +244,7 @@ namespace System.Speech.Internal.Synthesis
 
             int cRiff = Marshal.SizeOf<RIFFHDR>();
             int cBlock = Marshal.SizeOf<BLOCKHDR>();
-            int cWaveEx = waveEx.Length;// Marshal.SizeOf (waveEx); // The CLR automatically pad the waveEx structure to dword boundary. Force 16.
+            int cWaveEx = waveEx.Length; // Marshal.SizeOf (waveEx); // The CLR automatically pad the waveEx structure to dword boundary. Force 16.
             int cDataHdr = Marshal.SizeOf<DATAHDR>();
 
             int total = cRiff + cBlock + cWaveEx + cDataHdr;
@@ -247,7 +255,11 @@ namespace System.Speech.Internal.Synthesis
                 try
                 {
                     // Write the RIFF section
-                    riff._len = total + cData - 8/* - cRiff*/; // for the "WAVE" 4 characters
+                    riff._len =
+                        total
+                        + cData
+                        - 8 /* - cRiff*/
+                    ; // for the "WAVE" 4 characters
                     bw.Write(riff._id);
                     bw.Write(riff._len);
                     bw.Write(riff._type);
@@ -284,21 +296,21 @@ namespace System.Speech.Internal.Synthesis
 
         internal abstract TimeSpan Duration { get; }
 
-        internal virtual long Position { get { return 0; } }
+        internal virtual long Position
+        {
+            get { return 0; }
+        }
 
         internal virtual bool IsAborted
         {
-            get
-            {
-                return _aborted;
-            }
-            set
-            {
-                _aborted = false;
-            }
+            get { return _aborted; }
+            set { _aborted = false; }
         }
 
-        internal virtual byte[] WaveFormat { get { return null; } }
+        internal virtual byte[] WaveFormat
+        {
+            get { return null; }
+        }
 
         #endregion
 
@@ -319,8 +331,8 @@ namespace System.Speech.Internal.Synthesis
         private struct RIFFHDR
         {
             internal uint _id;
-            internal int _len;             /* file length less header */
-            internal uint _type;            /* should be "WAVE" */
+            internal int _len; /* file length less header */
+            internal uint _type; /* should be "WAVE" */
 
             internal RIFFHDR(int length)
             {
@@ -333,8 +345,8 @@ namespace System.Speech.Internal.Synthesis
         [StructLayout(LayoutKind.Sequential)]
         private struct BLOCKHDR
         {
-            internal uint _id;              /* should be "fmt " or "data" */
-            internal int _len;             /* block size less header */
+            internal uint _id; /* should be "fmt " or "data" */
+            internal int _len; /* block size less header */
 
             internal BLOCKHDR(int length)
             {
@@ -346,8 +358,8 @@ namespace System.Speech.Internal.Synthesis
         [StructLayout(LayoutKind.Sequential)]
         private struct DATAHDR
         {
-            internal uint _id;              /* should be "fmt " or "data" */
-            internal int _len;              /* block size less header */
+            internal uint _id; /* should be "fmt " or "data" */
+            internal int _len; /* block size less header */
 
             internal DATAHDR(int length)
             {
@@ -364,7 +376,6 @@ namespace System.Speech.Internal.Synthesis
     [System.Runtime.InteropServices.TypeLibTypeAttribute(16)]
     internal struct WAVEFORMATEX
     {
-
         internal short wFormatTag;
         internal short nChannels;
         internal int nSamplesPerSec;
@@ -394,7 +405,11 @@ namespace System.Speech.Internal.Synthesis
             return wfx;
         }
 
-        internal static void AvgBytesPerSec(byte[] waveHeader, out int avgBytesPerSec, out int nBlockAlign)
+        internal static void AvgBytesPerSec(
+            byte[] waveHeader,
+            out int avgBytesPerSec,
+            out int nBlockAlign
+        )
         {
             // Hardcode the value of the size for the structure element
             // as the C# compiler pads the structure to the closest 4 or 8 bytes
@@ -443,10 +458,7 @@ namespace System.Speech.Internal.Synthesis
 
         internal int Length
         {
-            get
-            {
-                return 18 + cbSize;
-            }
+            get { return 18 + cbSize; }
         }
     }
 

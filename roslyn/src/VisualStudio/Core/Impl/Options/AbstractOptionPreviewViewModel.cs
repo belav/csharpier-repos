@@ -32,7 +32,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
-    internal abstract class AbstractOptionPreviewViewModel : AbstractNotifyPropertyChanged, IDisposable
+    internal abstract class AbstractOptionPreviewViewModel
+        : AbstractNotifyPropertyChanged,
+            IDisposable
     {
         private readonly IComponentModel _componentModel;
         private IWpfTextViewHost _textViewHost;
@@ -49,7 +51,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public OptionStore OptionStore { get; set; }
 
-        protected AbstractOptionPreviewViewModel(OptionStore optionStore, IServiceProvider serviceProvider, string language)
+        protected AbstractOptionPreviewViewModel(
+            OptionStore optionStore,
+            IServiceProvider serviceProvider,
+            string language
+        )
         {
             this.OptionStore = optionStore;
             this.Items = new List<object>();
@@ -60,12 +66,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _contentTypeRegistryService = _componentModel.GetService<IContentTypeRegistryService>();
             _textBufferFactoryService = _componentModel.GetService<ITextBufferFactoryService>();
             _textEditorFactoryService = _componentModel.GetService<ITextEditorFactoryService>();
-            _projectionBufferFactory = _componentModel.GetService<IProjectionBufferFactoryService>();
+            _projectionBufferFactory =
+                _componentModel.GetService<IProjectionBufferFactoryService>();
             _editorOptions = _componentModel.GetService<IEditorOptionsFactoryService>();
 
             this.Language = language;
 
-            _contentType = _contentTypeRegistryService.GetContentType(ContentTypeNames.CSharpContentType);
+            _contentType = _contentTypeRegistryService.GetContentType(
+                ContentTypeNames.CSharpContentType
+            );
         }
 
         public void SetOptionAndUpdatePreview<T>(T value, IOption2 option, string preview)
@@ -76,7 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 // The value provided is either an ICodeStyleOption OR the underlying ICodeStyleOption.Value
                 if (value is ICodeStyleOption newCodeStyleOption)
                 {
-                    actualValue = codeStyleOption.WithValue(newCodeStyleOption.Value).WithNotification(newCodeStyleOption.Notification);
+                    actualValue = codeStyleOption
+                        .WithValue(newCodeStyleOption.Value)
+                        .WithNotification(newCodeStyleOption.Notification);
                 }
                 else
                 {
@@ -95,11 +106,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public IWpfTextViewHost TextViewHost
         {
-            get
-            {
-                return _textViewHost;
-            }
-
+            get { return _textViewHost; }
             private set
             {
                 // make sure we close previous view.
@@ -113,47 +120,67 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public void UpdatePreview(string text)
         {
-            var service = VisualStudioMefHostServices.Create(_componentModel.GetService<ExportProvider>());
+            var service = VisualStudioMefHostServices.Create(
+                _componentModel.GetService<ExportProvider>()
+            );
             var workspace = new PreviewWorkspace(service);
             var fileName = "project." + (Language == "C#" ? "csproj" : "vbproj");
             var project = workspace.CurrentSolution.AddProject(fileName, "assembly.dll", Language);
 
             // use the mscorlib, system, and system.core that are loaded in the current process.
-            string[] references =
-                [
-                    "mscorlib",
-                    "System",
-                    "System.Core"
-                ];
+            string[] references = ["mscorlib", "System", "System.Core"];
 
             var metadataService = workspace.Services.GetService<IMetadataService>();
 
-            var referenceAssemblies = Thread.GetDomain().GetAssemblies()
-                .Where(x => references.Contains(x.GetName(true).Name, StringComparer.OrdinalIgnoreCase))
-                .Select(a => metadataService.GetReference(a.Location, MetadataReferenceProperties.Assembly));
+            var referenceAssemblies = Thread
+                .GetDomain()
+                .GetAssemblies()
+                .Where(x =>
+                    references.Contains(x.GetName(true).Name, StringComparer.OrdinalIgnoreCase)
+                )
+                .Select(a =>
+                    metadataService.GetReference(a.Location, MetadataReferenceProperties.Assembly)
+                );
 
             project = project.WithMetadataReferences(referenceAssemblies);
 
             var document = project.AddDocument("document", SourceText.From(text, Encoding.UTF8));
-            var fallbackFormattingOptions = OptionStore.GlobalOptions.GetSyntaxFormattingOptions(document.Project.Services);
+            var fallbackFormattingOptions = OptionStore.GlobalOptions.GetSyntaxFormattingOptions(
+                document.Project.Services
+            );
             var formattingService = document.GetRequiredLanguageService<ISyntaxFormattingService>();
-            var formattingOptions = formattingService.GetFormattingOptions(OptionStore, fallbackFormattingOptions);
-            var formatted = Formatter.FormatAsync(document, formattingOptions, CancellationToken.None).WaitAndGetResult(CancellationToken.None);
+            var formattingOptions = formattingService.GetFormattingOptions(
+                OptionStore,
+                fallbackFormattingOptions
+            );
+            var formatted = Formatter
+                .FormatAsync(document, formattingOptions, CancellationToken.None)
+                .WaitAndGetResult(CancellationToken.None);
 
-            var textBuffer = _textBufferFactoryService.CreateTextBuffer(formatted.GetTextSynchronously(CancellationToken.None).ToString(), _contentType);
+            var textBuffer = _textBufferFactoryService.CreateTextBuffer(
+                formatted.GetTextSynchronously(CancellationToken.None).ToString(),
+                _contentType
+            );
 
             var container = textBuffer.AsTextContainer();
 
-            var projection = _projectionBufferFactory.CreateProjectionBufferWithoutIndentation(_contentTypeRegistryService,
+            var projection = _projectionBufferFactory.CreateProjectionBufferWithoutIndentation(
+                _contentTypeRegistryService,
                 _editorOptions.CreateOptions(),
                 textBuffer.CurrentSnapshot,
                 separator: "",
-                exposedLineSpans: GetExposedLineSpans(textBuffer.CurrentSnapshot).ToArray());
+                exposedLineSpans: GetExposedLineSpans(textBuffer.CurrentSnapshot).ToArray()
+            );
 
-            var textView = _textEditorFactoryService.CreateTextView(projection,
-              _textEditorFactoryService.CreateTextViewRoleSet(PredefinedTextViewRoles.Interactive));
+            var textView = _textEditorFactoryService.CreateTextView(
+                projection,
+                _textEditorFactoryService.CreateTextViewRoleSet(PredefinedTextViewRoles.Interactive)
+            );
 
-            this.TextViewHost = _textEditorFactoryService.CreateTextViewHost(textView, setFocus: false);
+            this.TextViewHost = _textEditorFactoryService.CreateTextViewHost(
+                textView,
+                setFocus: false
+            );
 
             workspace.TryApplyChanges(document.Project.Solution);
             workspace.OpenDocument(document.Id, container);
@@ -204,32 +231,54 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        private void UpdateDocument(string text)
-            => UpdatePreview(text);
+        private void UpdateDocument(string text) => UpdatePreview(text);
 
         protected void AddParenthesesOption(
             OptionStore optionStore,
             PerLanguageOption2<CodeStyleOption2<ParenthesesPreference>> languageOption,
-            string title, string[] examples, bool defaultAddForClarity)
+            string title,
+            string[] examples,
+            bool defaultAddForClarity
+        )
         {
             var preferences = new List<ParenthesesPreference>();
             var codeStylePreferences = new List<CodeStylePreference>();
 
             preferences.Add(ParenthesesPreference.AlwaysForClarity);
-            codeStylePreferences.Add(new CodeStylePreference(ServicesVSResources.Always_for_clarity, isChecked: defaultAddForClarity));
+            codeStylePreferences.Add(
+                new CodeStylePreference(
+                    ServicesVSResources.Always_for_clarity,
+                    isChecked: defaultAddForClarity
+                )
+            );
 
             preferences.Add(ParenthesesPreference.NeverIfUnnecessary);
-            codeStylePreferences.Add(new CodeStylePreference(
-                ServicesVSResources.Never_if_unnecessary,
-                isChecked: !defaultAddForClarity));
+            codeStylePreferences.Add(
+                new CodeStylePreference(
+                    ServicesVSResources.Never_if_unnecessary,
+                    isChecked: !defaultAddForClarity
+                )
+            );
 
-            CodeStyleItems.Add(new EnumCodeStyleOptionViewModel<ParenthesesPreference>(
-                languageOption, title, preferences.ToArray(),
-                examples, this, optionStore, ServicesVSResources.Parentheses_preferences_colon,
-                codeStylePreferences));
+            CodeStyleItems.Add(
+                new EnumCodeStyleOptionViewModel<ParenthesesPreference>(
+                    languageOption,
+                    title,
+                    preferences.ToArray(),
+                    examples,
+                    this,
+                    optionStore,
+                    ServicesVSResources.Parentheses_preferences_colon,
+                    codeStylePreferences
+                )
+            );
         }
 
-        protected void AddUnusedParameterOption(OptionStore optionStore, string title, string[] examples)
+        protected void AddUnusedParameterOption(
+            OptionStore optionStore,
+            string title,
+            string[] examples
+        )
         {
             var unusedParameterPreferences = new List<CodeStylePreference>
             {
@@ -240,14 +289,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             var enumValues = new[]
             {
                 UnusedParametersPreference.NonPublicMethods,
-                UnusedParametersPreference.AllMethods
+                UnusedParametersPreference.AllMethods,
             };
 
-            CodeStyleItems.Add(new EnumCodeStyleOptionViewModel<UnusedParametersPreference>(
-                CodeStyleOptions2.UnusedParameters,
-                ServicesVSResources.Avoid_unused_parameters, enumValues,
-                examples, this, optionStore, title,
-                unusedParameterPreferences));
+            CodeStyleItems.Add(
+                new EnumCodeStyleOptionViewModel<UnusedParametersPreference>(
+                    CodeStyleOptions2.UnusedParameters,
+                    ServicesVSResources.Avoid_unused_parameters,
+                    enumValues,
+                    examples,
+                    this,
+                    optionStore,
+                    title,
+                    unusedParameterPreferences
+                )
+            );
         }
     }
 }

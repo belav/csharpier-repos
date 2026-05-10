@@ -49,8 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             }
         }
 
-        public string[] GetValueDescriptions()
-            => _mapping.Keys.ToArray();
+        public string[] GetValueDescriptions() => _mapping.Keys.ToArray();
 
         public int GetValueIndex()
         {

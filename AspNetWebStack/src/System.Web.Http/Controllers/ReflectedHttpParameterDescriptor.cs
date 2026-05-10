@@ -11,7 +11,10 @@ namespace System.Web.Http.Controllers
     {
         private ParameterInfo _parameterInfo;
 
-        public ReflectedHttpParameterDescriptor(HttpActionDescriptor actionDescriptor, ParameterInfo parameterInfo)
+        public ReflectedHttpParameterDescriptor(
+            HttpActionDescriptor actionDescriptor,
+            ParameterInfo parameterInfo
+        )
             : base(actionDescriptor)
         {
             if (parameterInfo == null)
@@ -26,9 +29,7 @@ namespace System.Web.Http.Controllers
         /// Initializes a new instance of the <see cref="ReflectedHttpParameterDescriptor"/> class.
         /// </summary>
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
-        public ReflectedHttpParameterDescriptor()
-        {
-        }
+        public ReflectedHttpParameterDescriptor() { }
 
         public override object DefaultValue
         {
@@ -82,7 +83,9 @@ namespace System.Web.Http.Controllers
 
         public override Collection<TAttribute> GetCustomAttributes<TAttribute>()
         {
-            return new Collection<TAttribute>((TAttribute[])ParameterInfo.GetCustomAttributes(typeof(TAttribute), inherit: false)); 
+            return new Collection<TAttribute>(
+                (TAttribute[])ParameterInfo.GetCustomAttributes(typeof(TAttribute), inherit: false)
+            );
         }
     }
 }

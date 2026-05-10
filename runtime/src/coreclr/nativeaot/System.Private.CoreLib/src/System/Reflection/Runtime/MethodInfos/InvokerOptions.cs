@@ -7,6 +7,6 @@ namespace System.Reflection.Runtime.MethodInfos
     internal enum InvokerOptions
     {
         None = 0x00000000,
-        AllowNullThis = 0x00000001,     // Don't raise an exception if the "thisObject" parameter to Invoker is null.
+        AllowNullThis = 0x00000001, // Don't raise an exception if the "thisObject" parameter to Invoker is null.
     }
 }

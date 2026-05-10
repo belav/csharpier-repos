@@ -5,12 +5,15 @@
 //csc /target:library Unavailable.cs
 
 public class UnavailableClass { }
+
 public class UnavailableClass<T> { }
 
 public struct UnavailableStruct { }
+
 public struct UnavailableStruct<T> { }
 
 public interface UnavailableInterface { }
+
 public interface UnavailableInterface<T> { }
 
 public delegate void UnavailableDelegate();

@@ -10,21 +10,46 @@ namespace System.Reflection.TypeLoading.Ecma
     //
     // Main TypeProvider interface for System.Reflection.Metadata.
     //
-    internal sealed partial class EcmaModule : ISignatureTypeProvider<RoType, TypeContext>, ICustomAttributeTypeProvider<RoType>
+    internal sealed partial class EcmaModule
+        : ISignatureTypeProvider<RoType, TypeContext>,
+            ICustomAttributeTypeProvider<RoType>
     {
         //
         // ISignatureTypeProvider
         //
 
-        public RoType GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind) => handle.ResolveTypeDef(this);
-        public RoType GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind) => handle.ResolveTypeRef(this);
-        public RoType GetTypeFromSpecification(MetadataReader reader, TypeContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind) => handle.ResolveTypeSpec(this, genericContext);
+        public RoType GetTypeFromDefinition(
+            MetadataReader reader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind
+        ) => handle.ResolveTypeDef(this);
+
+        public RoType GetTypeFromReference(
+            MetadataReader reader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind
+        ) => handle.ResolveTypeRef(this);
+
+        public RoType GetTypeFromSpecification(
+            MetadataReader reader,
+            TypeContext genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind
+        ) => handle.ResolveTypeSpec(this, genericContext);
 
         public RoType GetSZArrayType(RoType elementType) => elementType.GetUniqueArrayType();
-        public RoType GetArrayType(RoType elementType, ArrayShape shape) => elementType.GetUniqueArrayType(shape.Rank);
+
+        public RoType GetArrayType(RoType elementType, ArrayShape shape) =>
+            elementType.GetUniqueArrayType(shape.Rank);
+
         public RoType GetByReferenceType(RoType elementType) => elementType.GetUniqueByRefType();
+
         public RoType GetPointerType(RoType elementType) => elementType.GetUniquePointerType();
-        public RoType GetGenericInstantiation(RoType genericType, ImmutableArray<RoType> typeArguments)
+
+        public RoType GetGenericInstantiation(
+            RoType genericType,
+            ImmutableArray<RoType> typeArguments
+        )
         {
             if (!(genericType is RoDefinitionType roDefinitionType))
                 throw new BadImageFormatException(); // TypeSpec tried to instantiate a non-definition type as a generic type.
@@ -32,10 +57,21 @@ namespace System.Reflection.TypeLoading.Ecma
             return roDefinitionType.GetUniqueConstructedGenericType(typeArguments.ToArray());
         }
 
-        public RoType GetGenericTypeParameter(TypeContext genericContext, int index) => genericContext.GetGenericTypeArgumentOrNull(index) ?? throw new BadImageFormatException(SR.Format(SR.GenericTypeParamIndexOutOfRange, index));
-        public RoType GetGenericMethodParameter(TypeContext genericContext, int index) => genericContext.GetGenericMethodArgumentOrNull(index) ?? throw new BadImageFormatException(SR.Format(SR.GenericMethodParamIndexOutOfRange, index));
+        public RoType GetGenericTypeParameter(TypeContext genericContext, int index) =>
+            genericContext.GetGenericTypeArgumentOrNull(index)
+            ?? throw new BadImageFormatException(
+                SR.Format(SR.GenericTypeParamIndexOutOfRange, index)
+            );
 
-        public RoType GetFunctionPointerType(MethodSignature<RoType> signature) => new RoFunctionPointerType(this, signature);
+        public RoType GetGenericMethodParameter(TypeContext genericContext, int index) =>
+            genericContext.GetGenericMethodArgumentOrNull(index)
+            ?? throw new BadImageFormatException(
+                SR.Format(SR.GenericMethodParamIndexOutOfRange, index)
+            );
+
+        public RoType GetFunctionPointerType(MethodSignature<RoType> signature) =>
+            new RoFunctionPointerType(this, signature);
+
         public RoType GetModifiedType(RoType modifier, RoType unmodifiedType, bool isRequired)
         {
             RoModifiedType? modifiedType = unmodifiedType as RoModifiedType;
@@ -55,14 +91,18 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public RoType GetPinnedType(RoType elementType) => elementType;
 
-        public RoType GetPrimitiveType(PrimitiveTypeCode typeCode) => Loader.GetCoreType(typeCode.ToCoreType());
+        public RoType GetPrimitiveType(PrimitiveTypeCode typeCode) =>
+            Loader.GetCoreType(typeCode.ToCoreType());
 
         //
         // ICustomAttributeTypeProvider
         //
         public RoType GetSystemType() => Loader.GetCoreType(CoreType.Type);
+
         public bool IsSystemType(RoType type) => type == Loader.TryGetCoreType(CoreType.Type);
-        public PrimitiveTypeCode GetUnderlyingEnumType(RoType type) => type.GetEnumUnderlyingPrimitiveTypeCode(Loader);
+
+        public PrimitiveTypeCode GetUnderlyingEnumType(RoType type) =>
+            type.GetEnumUnderlyingPrimitiveTypeCode(Loader);
 
         public RoType GetTypeFromSerializedName(string? name)
         {
@@ -71,7 +111,12 @@ namespace System.Reflection.TypeLoading.Ecma
             // module in which the custom attribute metadata was found.)
             if (name == null)
                 return null!; // This gets hit if the custom attribute passes "(Type)null"
-            return Helpers.LoadTypeFromAssemblyQualifiedName(name, GetRoAssembly(), ignoreCase: false, throwOnError: true)!;
+            return Helpers.LoadTypeFromAssemblyQualifiedName(
+                name,
+                GetRoAssembly(),
+                ignoreCase: false,
+                throwOnError: true
+            )!;
         }
     }
 }

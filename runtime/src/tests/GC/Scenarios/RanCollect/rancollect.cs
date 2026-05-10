@@ -15,13 +15,15 @@
 /*  arguments, you can get handreds of GC condition.
 /****************************************************************************/
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
+
     //using System.Collections.Generic;
 
     internal class RanCollect
     {
-        public static int Main(String [] Args)
+        public static int Main(String[] Args)
         {
             int iRep = 0;
             int iObj = 0;
@@ -31,13 +33,15 @@ namespace DefaultNamespace {
 
             if (Args.Length == 4)
             {
-                if (!Int32.TryParse( Args[0], out iRep) ||
-                    !Int32.TryParse( Args[1], out iObj) ||
-                    !Int32.TryParse( Args[2], out iBigSize ) ||
-                    !Int32.TryParse( Args[3], out iSeed ) )
-                    {
-                        return 1;
-                    }
+                if (
+                    !Int32.TryParse(Args[0], out iRep)
+                    || !Int32.TryParse(Args[1], out iObj)
+                    || !Int32.TryParse(Args[2], out iBigSize)
+                    || !Int32.TryParse(Args[3], out iSeed)
+                )
+                {
+                    return 1;
+                }
             }
             else
             {
@@ -47,7 +51,7 @@ namespace DefaultNamespace {
                 iSeed = 49;
             }
 
-            if(iObj <= 10)
+            if (iObj <= 10)
             {
                 Console.WriteLine("the second argument must be larger than 10.");
                 return 1;
@@ -64,7 +68,7 @@ namespace DefaultNamespace {
 
             RanCollect Mv_Obj = new RanCollect();
 
-            if(Mv_Obj.runTest(iRep, iObj, iBigSize, iSeed))
+            if (Mv_Obj.runTest(iRep, iObj, iBigSize, iSeed))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -74,39 +78,37 @@ namespace DefaultNamespace {
             return 1;
         }
 
-
         public virtual bool runTest(int iRep, int iObj, int iBigSize, int iSeed)
         {
-
-            ArrayList L_ArrList1 = new ArrayList();  //whose node is big double link object (DoubLinkBig).
-            ArrayList L_ArrList2 = new ArrayList();   //whose node is MinNode .
-            Queue L_Queue = new Queue();    //Whose node is DLRanBigNode.
+            ArrayList L_ArrList1 = new ArrayList(); //whose node is big double link object (DoubLinkBig).
+            ArrayList L_ArrList2 = new ArrayList(); //whose node is MinNode .
+            Queue L_Queue = new Queue(); //Whose node is DLRanBigNode.
             Random r = new Random(iSeed);
 
-            int num = r.Next (10, iObj-1);
+            int num = r.Next(10, iObj - 1);
             int delnum;
-            Object [] L_Vart = null;
+            Object[] L_Vart = null;
 
             Console.Write(num);
-            Console.WriteLine (" number's elements in collection objects");
-            for(int i=0; i<iRep;i++)
+            Console.WriteLine(" number's elements in collection objects");
+            for (int i = 0; i < iRep; i++)
             {
                 /*allocate memory*/
                 L_Vart = new Object[num];
 
-                for(int j=0; j<num; j++)
+                for (int j = 0; j < num; j++)
                 {
-                    int Size= r.Next(3, num); //the size of nodes.
+                    int Size = r.Next(3, num); //the size of nodes.
                     /*L_ArrList1 element's size is from 0 to iBigSize*iBigSize*10*4KB*/
                     L_ArrList1.Add(new DoubLinkBig(r.Next(iBigSize)));
 
                     /*L_ArrList2 element's size is Size number bytes;*/
-                    L_ArrList2.Add( new MinNode(Size));
+                    L_ArrList2.Add(new MinNode(Size));
 
                     /*L_Queue element's size is from 0 to 1M*/
                     L_Queue.Enqueue(new DLRanBigNode(250, null, null));
 
-                    if(j%6==0)
+                    if (j % 6 == 0)
                     {
                         L_Vart[j] = (new DLRanBigNode(250, null, null));
                     }
@@ -120,43 +122,53 @@ namespace DefaultNamespace {
 
                 /*start to make leak*/
 
-                if(r.Next(1, iRep)/3 == 0 || num < iObj/8)  //learn all the nodes
+                if (r.Next(1, iRep) / 3 == 0 || num < iObj / 8) //learn all the nodes
                 {
-                    num = r.Next(10, iObj-1);
+                    num = r.Next(10, iObj - 1);
 
-                    L_ArrList1 = new ArrayList();  //whose node is big double link object (DoubLinkBig).
-                    L_ArrList2 = new ArrayList();   //whose node is MinNode .
-                    L_Queue = new Queue();  //Whose node is DLRanBigNode.
-                    Console.WriteLine("all objects were deleted at the end of loop {0}",i);
-                    Console.WriteLine ("{0} number's elements in every collection objects in loop {1}", num, (i+1));
+                    L_ArrList1 = new ArrayList(); //whose node is big double link object (DoubLinkBig).
+                    L_ArrList2 = new ArrayList(); //whose node is MinNode .
+                    L_Queue = new Queue(); //Whose node is DLRanBigNode.
+                    Console.WriteLine("all objects were deleted at the end of loop {0}", i);
+                    Console.WriteLine(
+                        "{0} number's elements in every collection objects in loop {1}",
+                        num,
+                        (i + 1)
+                    );
                 }
                 else
                 {
-                    if (L_ArrList2.Count <=1)
+                    if (L_ArrList2.Count <= 1)
                     {
                         delnum = 1;
                     }
                     else
                     {
-                        delnum = r.Next (1, L_ArrList2.Count);  //going to delete delnum nodes
+                        delnum = r.Next(1, L_ArrList2.Count); //going to delete delnum nodes
                     }
 
-                    if (delnum > (L_ArrList2.Count*3/4))
+                    if (delnum > (L_ArrList2.Count * 3 / 4))
                     {
-                        delnum = L_ArrList2.Count/2;
+                        delnum = L_ArrList2.Count / 2;
                     }
-                    num = L_ArrList2.Count - delnum;   //going to add num nodes
+                    num = L_ArrList2.Count - delnum; //going to add num nodes
 
-                    for(int j=0; j<delnum; j++)
+                    for (int j = 0; j < delnum; j++)
                     {
                         L_ArrList2.RemoveAt(0);
                         L_Queue.Dequeue();
                     }
-                    Console.WriteLine("{0} were deleted in each collections at the end of loop {1}", delnum, i);
-                    Console.WriteLine ("{0} elements in each collection objects in loop ", num*2, (i+1));
-
+                    Console.WriteLine(
+                        "{0} were deleted in each collections at the end of loop {1}",
+                        delnum,
+                        i
+                    );
+                    Console.WriteLine(
+                        "{0} elements in each collection objects in loop ",
+                        num * 2,
+                        (i + 1)
+                    );
                 }
-
             }
 
             return true;
@@ -167,6 +179,7 @@ namespace DefaultNamespace {
     {
         internal DLRanBigNode[] Mv_DLink;
         internal int NodeNum;
+
         public DoubLinkBig(int Num)
         {
             NodeNum = Num;
@@ -189,7 +202,6 @@ namespace DefaultNamespace {
                 Mv_DLink[i] = new DLRanBigNode(Num * 10, Mv_DLink[i - 1], Mv_DLink[i + 1]);
             }
             Mv_DLink[Num - 1] = new DLRanBigNode(Num * 10, Mv_DLink[Num - 2], Mv_DLink[0]);
-
         }
 
         public virtual int GetNodeNum()
@@ -202,7 +214,6 @@ namespace DefaultNamespace {
     {
         public MinNode(int size)
         {
-
             byte[] obj = new byte[size];
 
             if (size > 0)
@@ -213,7 +224,6 @@ namespace DefaultNamespace {
                     obj[size - 1] = (byte)11;
                 }
             }
-
         }
     }
 
@@ -237,7 +247,6 @@ namespace DefaultNamespace {
         }
     }
 
-
     //Queue implemented as a circular array
     class Queue
     {
@@ -251,22 +260,21 @@ namespace DefaultNamespace {
         {
             m_Array = new Object[m_Capacity];
         }
+
         public Queue(int capacity)
         {
             m_Capacity = capacity;
             m_Array = new Object[m_Capacity];
         }
+
         public int Count
         {
-            get
-            {
-                return m_Size;
-            }
+            get { return m_Size; }
         }
-       
+
         public void Enqueue(Object obj)
         {
-            if(m_Size >= m_Capacity) //array full; increase capacity
+            if (m_Size >= m_Capacity) //array full; increase capacity
             {
                 int newCapacity = m_Capacity * 2;
                 Object[] newArray = new Object[newCapacity];
@@ -275,16 +283,16 @@ namespace DefaultNamespace {
                 for (int i = 0; i < m_Size; i++)
                 {
                     newArray[0] = m_Array[current];
-                    current = (current+1) % m_Capacity;
+                    current = (current + 1) % m_Capacity;
                 }
                 m_Array = newArray;
                 m_First = 0;
                 m_Last = m_Size - 1;
                 m_Capacity = newCapacity;
             }
-           
+
             m_Last++;
-            if(m_Last == m_Capacity) //wrap around 
+            if (m_Last == m_Capacity) //wrap around
                 m_Last = m_Last % m_Capacity;
             m_Array[m_Last] = obj;
             m_Size++;
@@ -297,7 +305,7 @@ namespace DefaultNamespace {
 
             Object returnObject = m_Array[m_First];
             m_Array[m_First] = null;
-            m_First = (m_First+1) % m_Capacity;
+            m_First = (m_First + 1) % m_Capacity;
             m_Size--;
             return returnObject;
         }
@@ -313,6 +321,7 @@ namespace DefaultNamespace {
         {
             m_Array = new Object[m_Capacity];
         }
+
         public ArrayList(int capacity)
         {
             m_Capacity = capacity;
@@ -321,24 +330,17 @@ namespace DefaultNamespace {
 
         public int Count
         {
-            get
-            {
-                return m_Size;
-            }
+            get { return m_Size; }
         }
 
         public int Capacity
         {
-            get
-            {
-                return m_Capacity;
-            }
+            get { return m_Capacity; }
         }
 
         //Add an Object; returns the array index at which the object was added;
         public int Add(Object obj)
         {
-
             if (m_Size >= m_Capacity) //increase capacity
             {
                 int newCapacity = m_Capacity * 2;
@@ -351,11 +353,9 @@ namespace DefaultNamespace {
                 m_Capacity = newCapacity;
             }
 
-           
             m_Array[m_Size] = obj;
             m_Size++;
             return (m_Size - 1);
-       
         }
 
         public void RemoveAt(int position)
@@ -366,7 +366,7 @@ namespace DefaultNamespace {
             m_Array[position] = null;
 
             //shift elements to fill the empty slot
-            for (int i = position; i < m_Size-1; i++)
+            for (int i = position; i < m_Size - 1; i++)
             {
                 m_Array[i] = m_Array[i + 1];
             }

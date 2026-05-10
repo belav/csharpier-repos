@@ -42,11 +42,13 @@ namespace System.Configuration
             IInternalConfigRecord configRecord = null;
             if (DoesSectionOnlyUseMachineConfig(sectionName))
             {
-                if (_isMachineConfigInited) configRecord = _machineConfigRecord;
+                if (_isMachineConfigInited)
+                    configRecord = _machineConfigRecord;
             }
             else
             {
-                if (_isUserConfigInited) configRecord = _completeConfigRecord;
+                if (_isUserConfigInited)
+                    configRecord = _completeConfigRecord;
             }
 
             // Call GetSection(), or return null if no configuration is yet available.
@@ -57,7 +59,8 @@ namespace System.Configuration
         {
             PrepareClientConfigSystem(sectionName);
 
-            if (_isMachineConfigInited) _machineConfigRecord.RefreshSection(sectionName);
+            if (_isMachineConfigInited)
+                _machineConfigRecord.RefreshSection(sectionName);
         }
 
         // Supports user config
@@ -67,8 +70,11 @@ namespace System.Configuration
         // and thus lead to deadlock if appropriate measures are not taken.
         private bool IsSectionUsedInInit(string configKey)
         {
-            return (configKey == SystemDiagnosticsConfigKey) ||
-                (_isAppConfigHttp && configKey.StartsWith(SystemNetGroupKey, StringComparison.Ordinal));
+            return (configKey == SystemDiagnosticsConfigKey)
+                || (
+                    _isAppConfigHttp
+                    && configKey.StartsWith(SystemNetGroupKey, StringComparison.Ordinal)
+                );
         }
 
         // Return true if the section should only use the machine configuration and not use the
@@ -76,7 +82,8 @@ namespace System.Configuration
         // file for the application is downloaded via http using System.Net.WebClient.
         private bool DoesSectionOnlyUseMachineConfig(string configKey)
         {
-            return _isAppConfigHttp && configKey.StartsWith(SystemNetGroupKey, StringComparison.Ordinal);
+            return _isAppConfigHttp
+                && configKey.StartsWith(SystemNetGroupKey, StringComparison.Ordinal);
         }
 
         // Ensure that initialization has completed, while handling re-entrancy issues
@@ -110,14 +117,16 @@ namespace System.Configuration
                 }
             }
 
-            if (!doInit) return;
+            if (!doInit)
+                return;
             try
             {
                 try
                 {
                     // Initialize machine configuration.
                     _machineConfigRecord = _configRoot.GetConfigRecord(
-                        ClientConfigurationHost.MachineConfigPath);
+                        ClientConfigurationHost.MachineConfigPath
+                    );
 
                     _machineConfigRecord.ThrowIfInitErrors();
 
@@ -159,8 +168,10 @@ namespace System.Configuration
                 }
                 catch (Exception e)
                 {
-                    _initError =
-                        new ConfigurationErrorsException(SR.Config_client_config_init_error, e);
+                    _initError = new ConfigurationErrorsException(
+                        SR.Config_client_config_init_error,
+                        e
+                    );
                     throw _initError;
                 }
             }
@@ -195,10 +206,12 @@ namespace System.Configuration
         private void PrepareClientConfigSystem(string sectionName)
         {
             // Ensure the configuration system is inited for this section.
-            if (!_isUserConfigInited) EnsureInit(sectionName);
+            if (!_isUserConfigInited)
+                EnsureInit(sectionName);
 
             // If an error occurred during initialization, throw it.
-            if (_initError != null) throw _initError;
+            if (_initError != null)
+                throw _initError;
         }
 
         // If config has been removed because initialization was not complete,
@@ -209,13 +222,18 @@ namespace System.Configuration
         {
             try
             {
-                IInternalConfigRecord newConfigRecord = _configRoot.GetConfigRecord(_completeConfigRecord.ConfigPath);
+                IInternalConfigRecord newConfigRecord = _configRoot.GetConfigRecord(
+                    _completeConfigRecord.ConfigPath
+                );
                 _completeConfigRecord = newConfigRecord;
                 _completeConfigRecord.ThrowIfInitErrors();
             }
             catch (Exception ex)
             {
-                _initError = new ConfigurationErrorsException(SR.Config_client_config_init_error, ex);
+                _initError = new ConfigurationErrorsException(
+                    SR.Config_client_config_init_error,
+                    ex
+                );
                 ConfigurationManager.SetInitError(_initError);
                 throw _initError;
             }

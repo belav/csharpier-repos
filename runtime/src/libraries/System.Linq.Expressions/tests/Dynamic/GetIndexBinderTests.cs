@@ -13,12 +13,13 @@ namespace System.Dynamic.Tests
         private class MinimumOverrideGetIndexBinder : GetIndexBinder
         {
             public MinimumOverrideGetIndexBinder(CallInfo callInfo)
-                : base(callInfo)
-            {
-            }
+                : base(callInfo) { }
 
             public override DynamicMetaObject FallbackGetIndex(
-                DynamicMetaObject target, DynamicMetaObject[] indexes, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject[] indexes,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
@@ -27,7 +28,7 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ArrayIndexing()
         {
-            dynamic d = new [] {0, 1, 2, 3};
+            dynamic d = new[] { 0, 1, 2, 3 };
             for (int i = 0; i != 4; ++i)
             {
                 Assert.Equal(i, d[i]);
@@ -37,7 +38,7 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ListIndexing()
         {
-            dynamic d = new List<int> {0, 1, 2, 3};
+            dynamic d = new List<int> { 0, 1, 2, 3 };
             for (int i = 0; i != 4; ++i)
             {
                 Assert.Equal(i, d[i]);
@@ -47,12 +48,18 @@ namespace System.Dynamic.Tests
         [Fact]
         public void MultiDimensionalIndexing()
         {
-            dynamic d = new[,] {{0, 1, 2, 3}, {1, 2, 3, 4}, {2, 3, 4, 5}, {3, 4, 5, 6}};
+            dynamic d = new[,]
+            {
+                { 0, 1, 2, 3 },
+                { 1, 2, 3, 4 },
+                { 2, 3, 4, 5 },
+                { 3, 4, 5, 6 },
+            };
             for (int i = 0; i != 4; ++i)
             {
                 for (int j = 0; j != 4; ++j)
                 {
-                    Assert.Equal(i + j, d[i,j]);
+                    Assert.Equal(i + j, d[i, j]);
                 }
             }
         }
@@ -67,30 +74,39 @@ namespace System.Dynamic.Tests
         [Fact]
         public void TooFewIndices()
         {
-            dynamic d = new[,] { { 0, 1, 2, 3 }, { 1, 2, 3, 4 }, { 2, 3, 4, 5 }, { 3, 4, 5, 6 } };
+            dynamic d = new[,]
+            {
+                { 0, 1, 2, 3 },
+                { 1, 2, 3, 4 },
+                { 2, 3, 4, 5 },
+                { 3, 4, 5, 6 },
+            };
             Assert.Throws<RuntimeBinderException>(() => d[2]);
         }
 
         [Fact]
         public void TooManyIndices()
         {
-            dynamic d = new[] {0, 1, 2, 3};
+            dynamic d = new[] { 0, 1, 2, 3 };
             Assert.Throws<RuntimeBinderException>(() => d[1, 3]);
         }
 
         [Fact]
         public void IndexErrorIsNotBindingError()
         {
-            dynamic d = new[] {0, 1, 2, 3};
+            dynamic d = new[] { 0, 1, 2, 3 };
             Assert.Throws<IndexOutOfRangeException>(() => d[9]);
-            d = new List<int> {0, 1, 2, 3};
+            d = new List<int> { 0, 1, 2, 3 };
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => d[9]);
         }
 
         [Fact]
         public void NullCallInfo()
         {
-            AssertExtensions.Throws<ArgumentNullException>("callInfo", () => new MinimumOverrideGetIndexBinder(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "callInfo",
+                () => new MinimumOverrideGetIndexBinder(null)
+            );
         }
 
         [Fact]
@@ -103,22 +119,34 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ReturnTypeObject()
         {
-            Assert.Equal(typeof(object), new MinimumOverrideGetIndexBinder(new CallInfo(0)).ReturnType);
+            Assert.Equal(
+                typeof(object),
+                new MinimumOverrideGetIndexBinder(new CallInfo(0)).ReturnType
+            );
         }
 
         [Fact]
         public void NullTarget()
         {
             var binder = new MinimumOverrideGetIndexBinder(new CallInfo(0));
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("target", () => binder.Bind(null, new[] {arg}));
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => binder.Bind(null, new[] { arg })
+            );
         }
 
         [Fact]
         public void NullArgs()
         {
             var binder = new MinimumOverrideGetIndexBinder(new CallInfo(0));
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             AssertExtensions.Throws<ArgumentNullException>("args", () => binder.Bind(target, null));
         }
 
@@ -126,9 +154,18 @@ namespace System.Dynamic.Tests
         public void NullArg()
         {
             var binder = new MinimumOverrideGetIndexBinder(new CallInfo(0));
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("args[1]", () => binder.Bind(target, new [] {arg, null, arg}));
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "args[1]",
+                () => binder.Bind(target, new[] { arg, null, arg })
+            );
         }
     }
 }

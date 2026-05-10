@@ -22,8 +22,13 @@ namespace System.Web.Mvc.Test
 
             controllerContext.RouteData.Values["conflictingKey"] = 43;
 
-            DictionaryValueProvider<object> explictValueDictionary = new DictionaryValueProvider<object>(new RouteValueDictionary { { conflictingKey, 42 } }, CultureInfo.InvariantCulture);
-            controllerContext.RouteData.Values[ChildActionValueProvider.ChildActionValuesKey] = explictValueDictionary;
+            DictionaryValueProvider<object> explictValueDictionary =
+                new DictionaryValueProvider<object>(
+                    new RouteValueDictionary { { conflictingKey, 42 } },
+                    CultureInfo.InvariantCulture
+                );
+            controllerContext.RouteData.Values[ChildActionValueProvider.ChildActionValuesKey] =
+                explictValueDictionary;
 
             // Act
             IValueProvider valueProvider = factory.GetValueProvider(controllerContext);
@@ -68,8 +73,13 @@ namespace System.Web.Mvc.Test
             controllerContext.RouteData = new RouteData();
             controllerContext.RouteData.Values["forty-two"] = 42;
 
-            DictionaryValueProvider<object> explictValueDictionary = new DictionaryValueProvider<object>(new RouteValueDictionary { { "forty-three", 42 } }, CultureInfo.CurrentUICulture);
-            controllerContext.RouteData.Values[ChildActionValueProvider.ChildActionValuesKey] = explictValueDictionary;
+            DictionaryValueProvider<object> explictValueDictionary =
+                new DictionaryValueProvider<object>(
+                    new RouteValueDictionary { { "forty-three", 42 } },
+                    CultureInfo.CurrentUICulture
+                );
+            controllerContext.RouteData.Values[ChildActionValueProvider.ChildActionValuesKey] =
+                explictValueDictionary;
 
             // Act
             IValueProvider valueProvider = factory.GetValueProvider(controllerContext);
@@ -89,7 +99,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { factory.GetValueProvider(null); }, "controllerContext");
+                delegate
+                {
+                    factory.GetValueProvider(null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

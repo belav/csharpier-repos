@@ -32,12 +32,12 @@ namespace System.Data
     {
         #region Private Fields
         /// <summary>
-        /// error message description. 
+        /// error message description.
         /// </summary>
         private string _errorDescription;
 
         /// <summary>
-        /// information about the context where the error occurred 
+        /// information about the context where the error occurred
         /// </summary>
         private string _errorContext;
 
@@ -85,7 +85,10 @@ namespace System.Data
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        private EntitySqlException(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        private EntitySqlException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
             : base(serializationInfo, streamingContext)
         {
             HResult = HResults.InvalidQuery;
@@ -100,34 +103,68 @@ namespace System.Data
         /// <summary>
         /// Initializes a new instance EntityException with an ErrorContext instance and a given error message.
         /// </summary>
-        internal static EntitySqlException Create(ErrorContext errCtx, string errorMessage, Exception innerException)
+        internal static EntitySqlException Create(
+            ErrorContext errCtx,
+            string errorMessage,
+            Exception innerException
+        )
         {
-            return EntitySqlException.Create(errCtx.CommandText, errorMessage, errCtx.InputPosition, errCtx.ErrorContextInfo, errCtx.UseContextInfoAsResourceIdentifier, innerException);
+            return EntitySqlException.Create(
+                errCtx.CommandText,
+                errorMessage,
+                errCtx.InputPosition,
+                errCtx.ErrorContextInfo,
+                errCtx.UseContextInfoAsResourceIdentifier,
+                innerException
+            );
         }
 
         /// <summary>
         /// Initializes a new instance EntityException with contextual information to allow detailed error feedback.
         /// </summary>
-        internal static EntitySqlException Create(string commandText,
-                                                  string errorDescription,
-                                                  int errorPosition,
-                                                  string errorContextInfo,
-                                                  bool loadErrorContextInfoFromResource,
-                                                  Exception innerException)
+        internal static EntitySqlException Create(
+            string commandText,
+            string errorDescription,
+            int errorPosition,
+            string errorContextInfo,
+            bool loadErrorContextInfoFromResource,
+            Exception innerException
+        )
         {
             int line;
             int column;
-            string errorContext = FormatErrorContext(commandText, errorPosition, errorContextInfo, loadErrorContextInfoFromResource, out line, out column);
+            string errorContext = FormatErrorContext(
+                commandText,
+                errorPosition,
+                errorContextInfo,
+                loadErrorContextInfoFromResource,
+                out line,
+                out column
+            );
 
             string errorMessage = FormatQueryError(errorDescription, errorContext);
 
-            return new EntitySqlException(errorMessage, errorDescription, errorContext, line, column, innerException);
+            return new EntitySqlException(
+                errorMessage,
+                errorDescription,
+                errorContext,
+                line,
+                column,
+                innerException
+            );
         }
 
         /// <summary>
         /// core constructor
         /// </summary>
-        private EntitySqlException(string message, string errorDescription, string errorContext, int line, int column, Exception innerException)
+        private EntitySqlException(
+            string message,
+            string errorDescription,
+            string errorContext,
+            int line,
+            int column,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             _errorDescription = errorDescription;
@@ -146,10 +183,7 @@ namespace System.Data
         /// </summary>
         public string ErrorDescription
         {
-            get
-            {
-                return _errorDescription ?? String.Empty;
-            }
+            get { return _errorDescription ?? String.Empty; }
         }
 
         /// <summary>
@@ -157,10 +191,7 @@ namespace System.Data
         /// </summary>
         public string ErrorContext
         {
-            get
-            {
-                return _errorContext ?? String.Empty;
-            }
+            get { return _errorContext ?? String.Empty; }
         }
 
         /// <summary>
@@ -185,7 +216,14 @@ namespace System.Data
         {
             int lineNumber = 0;
             int colNumber = 0;
-            return FormatErrorContext(commandText, position, EntityRes.GenericSyntaxError, true, out lineNumber, out colNumber);
+            return FormatErrorContext(
+                commandText,
+                position,
+                EntityRes.GenericSyntaxError,
+                true,
+                out lineNumber,
+                out colNumber
+            );
         }
 
         /// <summary>
@@ -198,14 +236,20 @@ namespace System.Data
             string errorContextInfo,
             bool loadErrorContextInfoFromResource,
             out int lineNumber,
-            out int columnNumber)
+            out int columnNumber
+        )
         {
             Debug.Assert(errorPosition > -1, "position in input stream cannot be < 0");
-            Debug.Assert(errorPosition <= commandText.Length, "position in input stream cannot be greater than query text size");
+            Debug.Assert(
+                errorPosition <= commandText.Length,
+                "position in input stream cannot be greater than query text size"
+            );
 
             if (loadErrorContextInfoFromResource)
             {
-                errorContextInfo = !String.IsNullOrEmpty(errorContextInfo) ? EntityRes.GetString(errorContextInfo) : String.Empty;
+                errorContextInfo = !String.IsNullOrEmpty(errorContextInfo)
+                    ? EntityRes.GetString(errorContextInfo)
+                    : String.Empty;
             }
 
             //
@@ -231,9 +275,12 @@ namespace System.Data
             // Compute line and column
             //
             string[] queryLines = commandText.Split(new char[] { '\n' }, StringSplitOptions.None);
-            for (lineNumber = 0, columnNumber = errorPosition;
-                 lineNumber < queryLines.Length && columnNumber > queryLines[lineNumber].Length;
-                 columnNumber -= (queryLines[lineNumber].Length + 1), ++lineNumber) ;
+            for (
+                lineNumber = 0, columnNumber = errorPosition;
+                lineNumber < queryLines.Length && columnNumber > queryLines[lineNumber].Length;
+                columnNumber -= (queryLines[lineNumber].Length + 1), ++lineNumber
+            )
+                ;
 
             ++lineNumber; // switch lineNum and colNum to 1-based indexes
             ++columnNumber;
@@ -249,12 +296,14 @@ namespace System.Data
 
             if (errorPosition >= 0)
             {
-                sb.AppendFormat(CultureInfo.CurrentCulture,
-                                "{0} {1}, {2} {3}",
-                                System.Data.Entity.Strings.LocalizedLine,
-                                lineNumber,
-                                System.Data.Entity.Strings.LocalizedColumn,
-                                columnNumber);
+                sb.AppendFormat(
+                    CultureInfo.CurrentCulture,
+                    "{0} {1}, {2} {3}",
+                    System.Data.Entity.Strings.LocalizedLine,
+                    lineNumber,
+                    System.Data.Entity.Strings.LocalizedColumn,
+                    columnNumber
+                );
             }
 
             return sb.ToString();
@@ -272,7 +321,12 @@ namespace System.Data
             sb.Append(errorMessage);
             if (!String.IsNullOrEmpty(errorContext))
             {
-                sb.AppendFormat(CultureInfo.CurrentCulture, " {0} {1}", System.Data.Entity.Strings.LocalizedNear, errorContext);
+                sb.AppendFormat(
+                    CultureInfo.CurrentCulture,
+                    " {0} {1}",
+                    System.Data.Entity.Strings.LocalizedNear,
+                    errorContext
+                );
             }
 
             return sb.Append(".").ToString();

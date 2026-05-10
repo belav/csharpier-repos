@@ -9,13 +9,18 @@ using Xunit.Abstractions;
 namespace System.Xml.XslCompiledTransformApiTests
 {
     //[TestCase(Name = "TemporaryFiles", Desc = "This testcase tests the Temporary Files property on XslCompiledTransform")]
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class TempFiles : XsltApiTestCaseBase2
     {
         private XslCompiledTransform _xsl = null;
 
         private ITestOutputHelper _output;
-        public TempFiles(ITestOutputHelper output) : base(output)
+
+        public TempFiles(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -26,9 +31,12 @@ namespace System.Xml.XslCompiledTransformApiTests
         {
             string childFile = Path.Combine(Directory.GetCurrentDirectory(), "child.xsl");
 
-            string parentString = "<?xml version=\"1.0\"?>"
+            string parentString =
+                "<?xml version=\"1.0\"?>"
                 + "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">"
-                + "<xsl:import href=\"" + childFile + "\"/>"
+                + "<xsl:import href=\""
+                + childFile
+                + "\"/>"
                 + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\" indent=\"yes\"/>"
                 + "<xsl:template match=\"book[@style='autobiography']\">"
                 + "<SPAN style=\"color=blue\">From B<xsl:value-of select=\"name()\"/> : <xsl:value-of select=\"title\"/>"
@@ -39,7 +47,8 @@ namespace System.Xml.XslCompiledTransformApiTests
                 + "</xsl:template>"
                 + "</xsl:stylesheet>";
 
-            string childString = "<?xml version=\"1.0\"?>"
+            string childString =
+                "<?xml version=\"1.0\"?>"
                 + "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">"
                 + "<xsl:output method=\"xml\" omit-xml-declaration=\"yes\" indent=\"yes\"/>"
                 + "<xsl:template match=\"book[@style='autobiography']\">"
@@ -54,10 +63,14 @@ namespace System.Xml.XslCompiledTransformApiTests
             try
             {
                 // create a xsl file in current directory on some drive, this is included in XSL above
-                StreamWriter file = new StreamWriter(new FileStream(childFile, FileMode.Create, FileAccess.Write));
+                StreamWriter file = new StreamWriter(
+                    new FileStream(childFile, FileMode.Create, FileAccess.Write)
+                );
                 file.WriteLine(childString);
                 file.Dispose();
-                StreamWriter parentFile = new StreamWriter(new FileStream("parent.xsl", FileMode.Create, FileAccess.Write));
+                StreamWriter parentFile = new StreamWriter(
+                    new FileStream("parent.xsl", FileMode.Create, FileAccess.Write)
+                );
                 parentFile.WriteLine(parentString);
                 parentFile.Dispose();
             }
@@ -92,7 +105,11 @@ namespace System.Xml.XslCompiledTransformApiTests
                 XslCompiledTransform xslt = new XslCompiledTransform();
                 xslt.Load(FullFilePath("bug469775.xsl"));
                 Stream res = new MemoryStream();
-                xslt.Transform(new XmlTextReader(FullFilePath("bug469775.xml")), (XsltArgumentList)null, res);
+                xslt.Transform(
+                    new XmlTextReader(FullFilePath("bug469775.xml")),
+                    (XsltArgumentList)null,
+                    res
+                );
                 _output.WriteLine(res.ToString());
             }
             catch (System.Xml.XmlException)
@@ -108,7 +125,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         {
             try
             {
-                string xsl = "<root xmlns:ns=\"testing\">"
+                string xsl =
+                    "<root xmlns:ns=\"testing\">"
                     + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
                     + "<xsl:template match=\"/\">"
                     + "<xsl:value-of select=\"ns:test\" />"

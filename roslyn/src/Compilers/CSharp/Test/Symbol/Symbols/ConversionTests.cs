@@ -21,53 +21,78 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         public void Test1()
         {
             var mscorlibRef = TestMetadata.Net40.mscorlib;
-            var compilation = CSharpCompilation.Create("Test", references: new MetadataReference[] { mscorlibRef });
+            var compilation = CSharpCompilation.Create(
+                "Test",
+                references: new MetadataReference[] { mscorlibRef }
+            );
             var sys = compilation.GlobalNamespace.ChildNamespace("System");
-            Conversions c = new BuckStopsHereBinder(compilation, associatedFileIdentifier: null).Conversions;
+            Conversions c = new BuckStopsHereBinder(
+                compilation,
+                associatedFileIdentifier: null
+            ).Conversions;
             var types = new TypeSymbol[]
             {
-            sys.ChildType("Object"),
-            sys.ChildType("String"),
-            sys.ChildType("Array"),
-            sys.ChildType("Int64"),
-            sys.ChildType("UInt64"),
-            sys.ChildType("Int32"),
-            sys.ChildType("UInt32"),
-            sys.ChildType("Int16"),
-            sys.ChildType("UInt16"),
-            sys.ChildType("SByte"),
-            sys.ChildType("Byte"),
-            sys.ChildType("Double"),
-            sys.ChildType("Single"),
-            sys.ChildType("Decimal"),
-            sys.ChildType("Char"),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Int64")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("UInt64")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Int32")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("UInt32")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Int16")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("UInt16")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("SByte")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Byte")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Double")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Single")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Decimal")),
-            sys.ChildType("Nullable", 1).Construct(sys.ChildType("Char")),
-            sys.ChildType("Exception"),
-            sys.ChildNamespace("Collections").ChildType("IEnumerable"),
-            sys.ChildNamespace("Collections").ChildNamespace("Generic").ChildType("IEnumerable", 1).Construct(sys.ChildType("Object")),
-            sys.ChildNamespace("Collections").ChildNamespace("Generic").ChildType("IEnumerable", 1).Construct(sys.ChildType("String")),
-            sys.ChildNamespace("Collections").ChildNamespace("Generic").ChildType("IEnumerable", 1).Construct(sys.ChildType("Char")),
-            compilation.CreateArrayTypeSymbol(sys.ChildType("String")),
-            compilation.CreateArrayTypeSymbol(sys.ChildType("Object")),
-            sys.ChildNamespace("Collections").ChildNamespace("Generic").ChildType("IList", 1).Construct(sys.ChildType("String")),
-            sys.ChildNamespace("Collections").ChildNamespace("Generic").ChildType("IList", 1).Construct(sys.ChildType("Object")),
-            sys.ChildType("ArgumentException"),
-            sys.ChildType("Delegate"),
-            sys.ChildType("Func", 2).Construct(sys.ChildType("Exception"), sys.ChildType("Exception")),
-            sys.ChildType("Func", 2).Construct(sys.ChildType("ArgumentException"), sys.ChildType("Object")),
-            sys.ChildNamespace("Runtime").ChildNamespace("Serialization").ChildType("ISerializable"),
-            sys.ChildType("IComparable", 0),
+                sys.ChildType("Object"),
+                sys.ChildType("String"),
+                sys.ChildType("Array"),
+                sys.ChildType("Int64"),
+                sys.ChildType("UInt64"),
+                sys.ChildType("Int32"),
+                sys.ChildType("UInt32"),
+                sys.ChildType("Int16"),
+                sys.ChildType("UInt16"),
+                sys.ChildType("SByte"),
+                sys.ChildType("Byte"),
+                sys.ChildType("Double"),
+                sys.ChildType("Single"),
+                sys.ChildType("Decimal"),
+                sys.ChildType("Char"),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Int64")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("UInt64")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Int32")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("UInt32")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Int16")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("UInt16")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("SByte")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Byte")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Double")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Single")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Decimal")),
+                sys.ChildType("Nullable", 1).Construct(sys.ChildType("Char")),
+                sys.ChildType("Exception"),
+                sys.ChildNamespace("Collections").ChildType("IEnumerable"),
+                sys.ChildNamespace("Collections")
+                    .ChildNamespace("Generic")
+                    .ChildType("IEnumerable", 1)
+                    .Construct(sys.ChildType("Object")),
+                sys.ChildNamespace("Collections")
+                    .ChildNamespace("Generic")
+                    .ChildType("IEnumerable", 1)
+                    .Construct(sys.ChildType("String")),
+                sys.ChildNamespace("Collections")
+                    .ChildNamespace("Generic")
+                    .ChildType("IEnumerable", 1)
+                    .Construct(sys.ChildType("Char")),
+                compilation.CreateArrayTypeSymbol(sys.ChildType("String")),
+                compilation.CreateArrayTypeSymbol(sys.ChildType("Object")),
+                sys.ChildNamespace("Collections")
+                    .ChildNamespace("Generic")
+                    .ChildType("IList", 1)
+                    .Construct(sys.ChildType("String")),
+                sys.ChildNamespace("Collections")
+                    .ChildNamespace("Generic")
+                    .ChildType("IList", 1)
+                    .Construct(sys.ChildType("Object")),
+                sys.ChildType("ArgumentException"),
+                sys.ChildType("Delegate"),
+                sys.ChildType("Func", 2)
+                    .Construct(sys.ChildType("Exception"), sys.ChildType("Exception")),
+                sys.ChildType("Func", 2)
+                    .Construct(sys.ChildType("ArgumentException"), sys.ChildType("Object")),
+                sys.ChildNamespace("Runtime")
+                    .ChildNamespace("Serialization")
+                    .ChildType("ISerializable"),
+                sys.ChildType("IComparable", 0),
             };
 
             const ConversionKind Non = ConversionKind.NoConversion;
@@ -84,90 +109,1896 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             ConversionKind[,] conversions =
             {
                 // from   obj  str  arr  i64  u64  i32  u32  i16  u16  i08  u08  r64  r32  dec  chr ni64 nu64 ni32 nu32 ni16 nu16  ni8  nu8 nr64 nr32  ndc  nch  exc  ien  ieo  ies  iec  ars  aro  ils  ilo  aex  del  fee  fao  ser  cmp
-                // to:    
-                /*obj*/ { Idn, Irf, Irf, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Irf },
+                // to:
+                /*obj*/{
+                    Idn,
+                    Irf,
+                    Irf,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                },
                 /*str*/
-                        { Xrf, Idn, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Non, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf },
+                {
+                    Xrf,
+                    Idn,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                },
                 /*arr*/
-                        { Xrf, Non, Idn, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Xrf, Irf, Irf, Xrf, Xrf, Non, Non, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Idn,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Irf,
+                    Irf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*i64*/
-                        { Ubx, Non, Non, Idn, Xnm, Inm, Inm, Inm, Inm, Inm, Inm, Xnm, Xnm, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*u64*/
-                        { Ubx, Non, Non, Xnm, Idn, Xnm, Inm, Xnm, Inm, Xnm, Inm, Xnm, Xnm, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Xnm,
+                    Inm,
+                    Xnm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*i32*/
-                        { Ubx, Non, Non, Xnm, Xnm, Idn, Xnm, Inm, Inm, Inm, Inm, Xnm, Xnm, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*u32*/
-                        { Ubx, Non, Non, Xnm, Xnm, Xnm, Idn, Xnm, Inm, Xnm, Inm, Xnm, Xnm, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Xnm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*i16*/
-                        { Ubx, Non, Non, Xnm, Xnm, Xnm, Xnm, Idn, Xnm, Inm, Inm, Xnm, Xnm, Xnm, Xnm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*u16*/
-                        { Ubx, Non, Non, Xnm, Xnm, Xnm, Xnm, Xnm, Idn, Xnm, Inm, Xnm, Xnm, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*i08*/
-                        { Ubx, Non, Non, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Idn, Xnm, Xnm, Xnm, Xnm, Xnm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*u08*/
-                        { Ubx, Non, Non, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Idn, Xnm, Xnm, Xnm, Xnm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*r64*/
-                        { Ubx, Non, Non, Inm, Inm, Inm, Inm, Inm, Inm, Inm, Inm, Idn, Inm, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Idn,
+                    Inm,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*r32*/
-                        { Ubx, Non, Non, Inm, Inm, Inm, Inm, Inm, Inm, Inm, Inm, Xnm, Idn, Xnm, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Xnm,
+                    Idn,
+                    Xnm,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*dec*/
-                        { Ubx, Non, Non, Inm, Inm, Inm, Inm, Inm, Inm, Inm, Inm, Xnm, Xnm, Idn, Inm, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Inm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Inm,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*chr*/
-                        { Ubx, Non, Non, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Xnm, Idn, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Xnm,
+                    Idn,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*ni64*/
-                        { Ubx, Non, Non, Inl, Xnl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Xnl, Xnl, Inl, Idn, Xnl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Xnl, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nu64*/
-                        { Ubx, Non, Non, Xnl, Inl, Xnl, Inl, Xnl, Inl, Xnl, Inl, Xnl, Xnl, Xnl, Inl, Xnl, Idn, Xnl, Inl, Xnl, Inl, Xnl, Inl, Xnl, Xnl, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*ni32*/
-                        { Ubx, Non, Non, Xnl, Xnl, Inl, Xnl, Inl, Inl, Inl, Inl, Xnl, Xnl, Xnl, Inl, Xnl, Xnl, Idn, Xnl, Inl, Inl, Inl, Inl, Xnl, Xnl, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nu32*/
-                        { Ubx, Non, Non, Xnl, Xnl, Xnl, Inl, Xnl, Inl, Xnl, Inl, Xnl, Xnl, Xnl, Inl, Xnl, Xnl, Xnl, Idn, Xnl, Inl, Xnl, Inl, Xnl, Xnl, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*ni16*/
-                        { Ubx, Non, Non, Xnl, Xnl, Xnl, Xnl, Inl, Xnl, Inl, Inl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Idn, Xnl, Inl, Inl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nu16*/
-                        { Ubx, Non, Non, Xnl, Xnl, Xnl, Xnl, Xnl, Inl, Xnl, Inl, Xnl, Xnl, Xnl, Inl, Xnl, Xnl, Xnl, Xnl, Xnl, Idn, Xnl, Inl, Xnl, Xnl, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*ni8*/
-                        { Ubx, Non, Non, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Inl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Idn, Xnl, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nu8*/
-                        { Ubx, Non, Non, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Inl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Idn, Xnl, Xnl, Xnl, Xnl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nr64*/
-                        { Ubx, Non, Non, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Idn, Inl, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Idn,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nr32*/
-                        { Ubx, Non, Non, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Inl, Xnl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Idn, Xnl, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Idn,
+                    Xnl,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*ndc*/
-                        { Ubx, Non, Non, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Xnl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Inl, Xnl, Xnl, Idn, Inl, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Inl,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*nch*/
-                        { Ubx, Non, Non, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Inl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Xnl, Idn, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Ubx },
+                {
+                    Ubx,
+                    Non,
+                    Non,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Inl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Xnl,
+                    Idn,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Ubx,
+                },
                 /*exc*/
-                        { Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Idn, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf, Irf, Non, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Idn,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Irf,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*ien*/
-                        { Xrf, Irf, Irf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Idn, Irf, Irf, Irf, Irf, Irf, Irf, Irf, Xrf, Xrf, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Irf,
+                    Irf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Idn,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*ieo*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Idn, Irf, Xrf, Irf, Irf, Irf, Irf, Xrf, Xrf, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Idn,
+                    Irf,
+                    Xrf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*ies*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Idn, Xrf, Irf, Xrf, Irf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Idn,
+                    Xrf,
+                    Irf,
+                    Xrf,
+                    Irf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*iec*/
-                        { Xrf, Irf, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Xrf, Idn, Non, Non, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Irf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Idn,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*ars*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Non, Idn, Xrf, Xrf, Xrf, Non, Non, Non, Non, Non, Non },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Idn,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                },
                 /*aro*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Non, Irf, Idn, Xrf, Xrf, Non, Non, Non, Non, Non, Non },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Irf,
+                    Idn,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                },
                 /*ils*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Xrf, Xrf, Irf, Xrf, Idn, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Irf,
+                    Xrf,
+                    Idn,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*ilo*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Xrf, Xrf, Irf, Irf, Xrf, Idn, Xrf, Xrf, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Irf,
+                    Irf,
+                    Xrf,
+                    Idn,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*aex*/
-                        { Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf, Idn, Non, Non, Non, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Idn,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                },
                 /*del*/
-                        { Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf, Non, Idn, Irf, Irf, Xrf, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Idn,
+                    Irf,
+                    Irf,
+                    Xrf,
+                    Xrf,
+                },
                 /*fee*/
-                        { Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Idn, Xrf, Xrf, Non },
+                {
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Idn,
+                    Xrf,
+                    Xrf,
+                    Non,
+                },
                 /*fao*/
-                        { Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Xrf, Irf, Idn, Xrf, Non },
+                {
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Xrf,
+                    Irf,
+                    Idn,
+                    Xrf,
+                    Non,
+                },
                 /*ser*/
-                        { Xrf, Non, Xrf, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Non, Irf, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf, Irf, Irf, Irf, Irf, Idn, Xrf },
+                {
+                    Xrf,
+                    Non,
+                    Xrf,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Non,
+                    Irf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Irf,
+                    Idn,
+                    Xrf,
+                },
                 /*cmp*/
-                        { Xrf, Irf, Xrf, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Box, Xrf, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Xrf, Xrf, Xrf, Non, Non, Xrf, Idn },
+                {
+                    Xrf,
+                    Irf,
+                    Xrf,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Box,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Xrf,
+                    Non,
+                    Non,
+                    Xrf,
+                    Idn,
+                },
             };
 
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
@@ -177,12 +2008,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                 for (int j = 0; j < types.Length; ++j)
                 {
                     var kind = conversions[i, j];
-                    var result = c.ClassifyConversionFromType(types[j], types[i], ref useSiteDiagnostics);
+                    var result = c.ClassifyConversionFromType(
+                        types[j],
+                        types[i],
+                        ref useSiteDiagnostics
+                    );
                     //Assert.Equal doesn't allow a string explanation, so provide one this way.
                     if (kind != result.Kind)
                     {
-                        var result2 = c.ClassifyConversionFromType(types[j], types[i], ref useSiteDiagnostics); // set breakpoint here if this test is failing...
-                        Assert.True(false, string.Format("Expected {0} but got {1} when converting {2} -> {3}", kind, result, types[j], types[i]));
+                        var result2 = c.ClassifyConversionFromType(
+                            types[j],
+                            types[i],
+                            ref useSiteDiagnostics
+                        ); // set breakpoint here if this test is failing...
+                        Assert.True(
+                            false,
+                            string.Format(
+                                "Expected {0} but got {1} when converting {2} -> {3}",
+                                kind,
+                                result,
+                                types[j],
+                                types[i]
+                            )
+                        );
                     }
                 }
             }
@@ -198,7 +2046,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [Fact]
         public void TestIsSameTypeIgnoringDynamic()
         {
-            string code = @" 
+            string code =
+                @" 
 class O<T>
 {
     public class I<U,V>
@@ -222,7 +2071,11 @@ class X {
 }
 ";
             var mscorlibRef = TestMetadata.Net40.mscorlib;
-            var compilation = CSharpCompilation.Create("Test", new[] { Parse(code) }, new[] { mscorlibRef });
+            var compilation = CSharpCompilation.Create(
+                "Test",
+                new[] { Parse(code) },
+                new[] { mscorlibRef }
+            );
             var global = compilation.GlobalNamespace;
 
             var classX = global.ChildType("X");
@@ -286,7 +2139,8 @@ class X {
         [Fact]
         public void TestConversionsWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     int[] a;
@@ -295,32 +2149,66 @@ class C
 
             var ilAssemblyReference = TestReferences.SymbolsTests.CustomModifiers.Modifiers.dll;
 
-            var compilation = CreateCompilation(text, new MetadataReference[] { ilAssemblyReference });
+            var compilation = CreateCompilation(
+                text,
+                new MetadataReference[] { ilAssemblyReference }
+            );
             compilation.VerifyDiagnostics(
                 // (4,11): warning CS0169: The field 'C.a' is never used
                 //     int[] a;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "a").WithArguments("C.a")
-                );
+            );
 
             var classC = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var typeIntArray = classC.GetMember<FieldSymbol>("a").Type;
 
             var interfaceI3 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
-            var typeIntArrayWithCustomModifiers = interfaceI3.GetMember<MethodSymbol>("M1").Parameters.Single().Type;
+            var typeIntArrayWithCustomModifiers = interfaceI3
+                .GetMember<MethodSymbol>("M1")
+                .Parameters.Single()
+                .Type;
 
-            Assert.True(typeIntArrayWithCustomModifiers.HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds: false));
+            Assert.True(
+                typeIntArrayWithCustomModifiers.HasCustomModifiers(
+                    flagNonDefaultArraySizesOrLowerBounds: false
+                )
+            );
 
-            var conv = new BuckStopsHereBinder(compilation, associatedFileIdentifier: null).Conversions;
+            var conv = new BuckStopsHereBinder(
+                compilation,
+                associatedFileIdentifier: null
+            ).Conversions;
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
 
             // no custom modifiers to custom modifiers
-            Assert.Equal(ConversionKind.Identity, conv.ClassifyConversionFromType(typeIntArray, typeIntArrayWithCustomModifiers, ref useSiteDiagnostics).Kind);
+            Assert.Equal(
+                ConversionKind.Identity,
+                conv.ClassifyConversionFromType(
+                    typeIntArray,
+                    typeIntArrayWithCustomModifiers,
+                    ref useSiteDiagnostics
+                ).Kind
+            );
 
             // custom modifiers to no custom modifiers
-            Assert.Equal(ConversionKind.Identity, conv.ClassifyConversionFromType(typeIntArrayWithCustomModifiers, typeIntArray, ref useSiteDiagnostics).Kind);
+            Assert.Equal(
+                ConversionKind.Identity,
+                conv.ClassifyConversionFromType(
+                    typeIntArrayWithCustomModifiers,
+                    typeIntArray,
+                    ref useSiteDiagnostics
+                ).Kind
+            );
 
             // custom modifiers to custom modifiers
-            Assert.Equal(ConversionKind.Identity, conv.ClassifyConversionFromType(typeIntArrayWithCustomModifiers, typeIntArrayWithCustomModifiers, ref useSiteDiagnostics).Kind);
+            Assert.Equal(
+                ConversionKind.Identity,
+                conv.ClassifyConversionFromType(
+                    typeIntArrayWithCustomModifiers,
+                    typeIntArrayWithCustomModifiers,
+                    ref useSiteDiagnostics
+                ).Kind
+            );
         }
 
         [WorkItem(529056, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529056")]
@@ -328,7 +2216,8 @@ class C
         [Fact()]
         public void TestConversion_ParenthesizedExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class Program
@@ -345,14 +2234,23 @@ public class Program
 ";
             var comp = (Compilation)CreateCompilation(source);
             var tuple = GetBindingNodeAndModel<ExpressionSyntax>(comp);
-            Assert.Equal(ConversionKind.Identity, tuple.Item2.ClassifyConversion(tuple.Item1, comp.GetSpecialType(SpecialType.System_Boolean)).Kind);
+            Assert.Equal(
+                ConversionKind.Identity,
+                tuple
+                    .Item2.ClassifyConversion(
+                        tuple.Item1,
+                        comp.GetSpecialType(SpecialType.System_Boolean)
+                    )
+                    .Kind
+            );
         }
 
         [WorkItem(544571, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544571")]
         [Fact]
         public void TestClassifyConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -381,28 +2279,38 @@ class Program
     }
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(source);
-            var compilation = (Compilation)CSharpCompilation.Create("MyCompilation")
-                .AddReferences(MscorlibRef)
-                .AddSyntaxTrees(tree);
+            var compilation = (Compilation)
+                CSharpCompilation
+                    .Create("MyCompilation")
+                    .AddReferences(MscorlibRef)
+                    .AddSyntaxTrees(tree);
 
             var model = compilation.GetSemanticModel(tree);
 
             // Get VariableDeclaratorSyntax corresponding to variable 'ii' above.
-            var variableDeclarator = (VariableDeclaratorSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("ii", StringComparison.Ordinal)).Parent;
+            var variableDeclarator = (VariableDeclaratorSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(source.IndexOf("ii", StringComparison.Ordinal))
+                    .Parent;
 
             // Get TypeSymbol corresponding to above VariableDeclaratorSyntax.
-            ITypeSymbol targetType = ((ILocalSymbol)model.GetDeclaredSymbol(variableDeclarator)).Type;
+            ITypeSymbol targetType = (
+                (ILocalSymbol)model.GetDeclaredSymbol(variableDeclarator)
+            ).Type;
 
             // Perform ClassifyConversion for expressions from within the above SyntaxTree.
-            var sourceExpression1 = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("jj)", StringComparison.Ordinal)).Parent;
+            var sourceExpression1 = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(source.IndexOf("jj)", StringComparison.Ordinal))
+                    .Parent;
             Conversion conversion = model.ClassifyConversion(sourceExpression1, targetType);
             Assert.True(conversion.IsImplicit);
             Assert.True(conversion.IsNumeric);
 
-            var sourceExpression2 = (ExpressionSyntax)tree.GetCompilationUnitRoot()
-                .FindToken(source.IndexOf("ss)", StringComparison.Ordinal)).Parent;
+            var sourceExpression2 = (ExpressionSyntax)
+                tree.GetCompilationUnitRoot()
+                    .FindToken(source.IndexOf("ss)", StringComparison.Ordinal))
+                    .Parent;
             conversion = model.ClassifyConversion(sourceExpression2, targetType);
             Assert.False(conversion.Exists);
 
@@ -428,7 +2336,8 @@ class Program
         [Fact]
         public void VarianceRelationFail()
         {
-            var source = @"
+            var source =
+                @"
 delegate void Covariant<out T>(int argument);
 
 class B { }
@@ -452,7 +2361,8 @@ class Program
         [Fact]
         public void EnumFromZero()
         {
-            var source = @"
+            var source =
+                @"
 enum Enum { e1, e2 };
 
 class Program
@@ -472,7 +2382,8 @@ class Program
         [Fact]
         public void IdentityConversionInvolvingDynamic()
         {
-            var source = @"
+            var source =
+                @"
 interface I1<T> { }
 interface I2<T, U> { }
 
@@ -493,7 +2404,8 @@ class Program
         [Fact]
         public void WrongDirectionVarianceValueType()
         {
-            var source = @"
+            var source =
+                @"
 interface I<out T> { }
 
 struct S : I<object>
@@ -518,7 +2430,8 @@ class Program
         [Fact]
         public void CastInterfaceToNonimplementingSealed()
         {
-            var source = @"
+            var source =
+                @"
 interface I1 {}
 
 sealed class C1 {}
@@ -544,7 +2457,8 @@ public class Driver
             // the conversion from 0 to E? as an implicit enumeration conversion,
             // not as a nullable conversion.
 
-            var source = @"
+            var source =
+                @"
 class Program
 {
     enum E { None }
@@ -562,7 +2476,8 @@ class Program
         [Fact]
         public void TestMethodGroupConversionWithOptionalParameter()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void goo(int x = 0) //overload resolution picks this method, but the parameter count doesn't match
@@ -571,10 +2486,13 @@ class C
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,27): error CS0123: No overload for 'goo' matches delegate 'System.Action'
-                //         System.Action a = goo;
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "goo").WithArguments("goo", "System.Action"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,27): error CS0123: No overload for 'goo' matches delegate 'System.Action'
+                    //         System.Action a = goo;
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "goo")
+                        .WithArguments("goo", "System.Action")
+                );
         }
 
         [WorkItem(543119, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543119")]
@@ -582,7 +2500,7 @@ class C
         public void TestConversion_IntToNullableShort()
         {
             var source =
-@"namespace Test
+                @"namespace Test
 {
     public class Program
     {
@@ -601,7 +2519,7 @@ class C
         public void TestConversion_IntToByte()
         {
             var source =
-@"
+                @"
 class Program
 {
     public static void Main()
@@ -617,7 +2535,8 @@ class Program
         [Fact]
         public void AmbiguousImplicitConversion()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator A(B b)
@@ -642,15 +2561,24 @@ class Test
         A a = b;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b").WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                        .WithArguments(
+                            "B.implicit operator A(B)",
+                            "A.implicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [Fact]
         public void AmbiguousImplicitConversionAsExplicit()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator A(B b)
@@ -675,15 +2603,24 @@ class Test
         A a = (A)b;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b").WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
+                        .WithArguments(
+                            "B.implicit operator A(B)",
+                            "A.implicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [Fact]
         public void AmbiguousImplicitConversionGeneric()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator A(B<A> b)
@@ -708,15 +2645,24 @@ class C
         A a = b;
      }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (23,15): error CS0457: Ambiguous user defined conversions 'B<A>.implicit operator A(B<A>)' and 'A.implicit operator A(B<A>)' when converting from 'B<A>' to 'A'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b").WithArguments("B<A>.implicit operator A(B<A>)", "A.implicit operator A(B<A>)", "B<A>", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B<A>.implicit operator A(B<A>)' and 'A.implicit operator A(B<A>)' when converting from 'B<A>' to 'A'
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                        .WithArguments(
+                            "B<A>.implicit operator A(B<A>)",
+                            "A.implicit operator A(B<A>)",
+                            "B<A>",
+                            "A"
+                        )
+                );
         }
 
         [Fact]
         public void AmbiguousExplicitConversion()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public explicit operator A(B b)
@@ -741,15 +2687,24 @@ class Test
         A a = (A)b;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.explicit operator A(B)' when converting from 'B' to 'A'
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b").WithArguments("B.explicit operator A(B)", "A.explicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.explicit operator A(B)' when converting from 'B' to 'A'
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
+                        .WithArguments(
+                            "B.explicit operator A(B)",
+                            "A.explicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [Fact]
         public void AmbiguousExplicitConversionAsImplicit()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public explicit operator A(B b)
@@ -774,15 +2729,18 @@ class Test
         A a = b;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (23,15): error CS0266: Cannot implicitly convert type 'B' to 'A'. An explicit conversion exists (are you missing a cast?)
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (23,15): error CS0266: Cannot implicitly convert type 'B' to 'A'. An explicit conversion exists (are you missing a cast?)
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("B", "A")
+                );
         }
 
         [Fact]
         public void AmbiguousImplicitExplicitConversionAsImplicit()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator A(B b)
@@ -814,7 +2772,8 @@ class Test
         [Fact]
         public void AmbiguousImplicitExplicitConversionAsExplicit()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator A(B b)
@@ -839,16 +2798,25 @@ class Test
         A a = (A)b;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                //         A a = (A)b;
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b").WithArguments("B.explicit operator A(B)", "A.implicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    //         A a = (A)b;
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
+                        .WithArguments(
+                            "B.explicit operator A(B)",
+                            "A.implicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [Fact]
         public void NoImplicitConversionsDefaultParameter_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void Goo(float x = 0.0)
@@ -856,17 +2824,21 @@ class C
 
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (4,20): error CS1750: A value of type 'double' cannot be used as a default parameter because there are no standard conversions to type 'float'
-                //     void Goo(float x = 0.0)
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x").WithArguments("double", "float").WithLocation(4, 20)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,20): error CS1750: A value of type 'double' cannot be used as a default parameter because there are no standard conversions to type 'float'
+                    //     void Goo(float x = 0.0)
+                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                        .WithArguments("double", "float")
+                        .WithLocation(4, 20)
                 );
         }
 
         [Fact]
         public void NoUserDefinedConversionsDefaultParameter1()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator int(A a)
@@ -882,15 +2854,19 @@ class C
 
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (12,18): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'int'
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x").WithArguments("A", "int"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (12,18): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'int'
+                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                        .WithArguments("A", "int")
+                );
         }
 
         [Fact]
         public void NoUserDefinedConversionsDefaultParameter2()
         {
-            var source = @"
+            var source =
+                @"
 public class A
 {
     static public implicit operator A(int i)
@@ -906,15 +2882,19 @@ class C
 
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (12,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'A'
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x").WithArguments("int", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (12,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'A'
+                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                        .WithArguments("int", "A")
+                );
         }
 
         [Fact]
         public void NoUserDefinedConversionsDefaultParameter3()
         {
-            var source = @"
+            var source =
+                @"
 class Base { }
 class Derived : Base { }
 
@@ -933,15 +2913,19 @@ class C
 
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (15,19): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'Base'
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "b").WithArguments("A", "Base"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (15,19): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'Base'
+                    Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "b")
+                        .WithArguments("A", "Base")
+                );
         }
 
         [Fact]
         public void NoUserDefinedConversionsIs()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public sealed class A
@@ -971,17 +2955,20 @@ class C
         Console.WriteLine(b is A);
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (27,27): warning CS0184: The given expression is never of the provided ('B') type
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "a is B").WithArguments("B"),
-                // (28,27): warning CS0184: The given expression is never of the provided ('A') type
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "b is A").WithArguments("A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (27,27): warning CS0184: The given expression is never of the provided ('B') type
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "a is B").WithArguments("B"),
+                    // (28,27): warning CS0184: The given expression is never of the provided ('A') type
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "b is A").WithArguments("A")
+                );
         }
 
         [Fact]
         public void NoUserDefinedConversionsAs()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public sealed class A
@@ -1011,17 +2998,22 @@ class C
         Console.WriteLine(b as A);
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (27,27): error CS0039: Cannot convert type 'A' to 'B' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
-                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "a as B").WithArguments("A", "B"),
-                // (28,27): error CS0039: Cannot convert type 'B' to 'A' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
-                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "b as A").WithArguments("B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (27,27): error CS0039: Cannot convert type 'A' to 'B' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                    Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "a as B")
+                        .WithArguments("A", "B"),
+                    // (28,27): error CS0039: Cannot convert type 'B' to 'A' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                    Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "b as A")
+                        .WithArguments("B", "A")
+                );
         }
 
         [Fact]
         public void NoUserDefinedConversionsThrow()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -1037,16 +3029,19 @@ class Convertible
         throw null;
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics(
-                // (6,15): error CS0155: The type caught or thrown must be derived from System.Exception
-                Diagnostic(ErrorCode.ERR_BadExceptionType, "new Convertible()"));
+            CreateCompilation(source, parseOptions: TestOptions.Regular7_3)
+                .VerifyDiagnostics(
+                    // (6,15): error CS0155: The type caught or thrown must be derived from System.Exception
+                    Diagnostic(ErrorCode.ERR_BadExceptionType, "new Convertible()")
+                );
             CreateCompilation(source).VerifyDiagnostics();
         }
 
         [Fact]
         public void NoUserDefinedConversionsCatch1()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -1067,15 +3062,18 @@ class Convertible
         throw null;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,15): error CS0155: The type caught or thrown must be derived from System.Exception
-                Diagnostic(ErrorCode.ERR_BadExceptionType, "Convertible"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,15): error CS0155: The type caught or thrown must be derived from System.Exception
+                    Diagnostic(ErrorCode.ERR_BadExceptionType, "Convertible")
+                );
         }
 
         [Fact]
         public void NoUserDefinedConversionsCatch2()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -1110,7 +3108,8 @@ class Exception2 : System.Exception
         [Fact]
         public void NoUserDefinedConversionsCaseLabel1()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -1129,17 +3128,21 @@ class Convertible
         return 0;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,18): error CS9133: A constant value of type 'int' is expected
-                //             case default(Convertible): return;
-                Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "default(Convertible)").WithArguments("int").WithLocation(8, 18)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,18): error CS9133: A constant value of type 'int' is expected
+                    //             case default(Convertible): return;
+                    Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "default(Convertible)")
+                        .WithArguments("int")
+                        .WithLocation(8, 18)
                 );
         }
 
         [Fact]
         public void NoUserDefinedConversionsCaseLabel2()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -1159,17 +3162,21 @@ class Convertible
         return 0;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,18): error CS9133: A constant value of type 'int' is expected
-                //             case c: return;
-                Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "c").WithArguments("int").WithLocation(9, 18)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,18): error CS9133: A constant value of type 'int' is expected
+                    //             case c: return;
+                    Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "c")
+                        .WithArguments("int")
+                        .WithLocation(9, 18)
                 );
         }
 
         [Fact]
         public void NoUserDefinedConversionsUsing()
         {
-            var il = @"
+            var il =
+                @"
 .class public sequential ansi sealed beforefieldinit ConvertibleToIDisposable
        extends [mscorlib]System.ValueType
 {
@@ -1183,7 +3190,8 @@ class Convertible
 }
 ";
 
-            var csharp = @"
+            var csharp =
+                @"
 class C
 {
     static void Main()
@@ -1193,9 +3201,15 @@ class C
         }
     }
 }";
-            CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics(
-                // (6,16): error CS1674: 'ConvertibleToIDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var d = new ConvertibleToIDisposable()").WithArguments("ConvertibleToIDisposable"));
+            CreateCompilationWithILAndMscorlib40(csharp, il)
+                .VerifyDiagnostics(
+                    // (6,16): error CS1674: 'ConvertibleToIDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    Diagnostic(
+                            ErrorCode.ERR_NoConvToIDisp,
+                            "var d = new ConvertibleToIDisposable()"
+                        )
+                        .WithArguments("ConvertibleToIDisposable")
+                );
         }
 
         [WorkItem(11221, "DevDiv_Projects/Roslyn")]
@@ -1203,7 +3217,7 @@ class C
         public void OverflowInImplicitConversion()
         {
             var source =
-@"class C
+                @"class C
 {
     public static explicit operator C(byte x)
     {
@@ -1215,10 +3229,12 @@ class C
         var b = (C)1000M;
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (10,17): error CS0031: Constant value '1000M' cannot be converted to a 'byte'
-                //         var b = (C)1000M;
-                Diagnostic(ErrorCode.ERR_ConstOutOfRange, "1000M").WithArguments("1000M", "byte")
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (10,17): error CS0031: Constant value '1000M' cannot be converted to a 'byte'
+                    //         var b = (C)1000M;
+                    Diagnostic(ErrorCode.ERR_ConstOutOfRange, "1000M")
+                        .WithArguments("1000M", "byte")
                 );
         }
 
@@ -1226,7 +3242,8 @@ class C
         [Fact()]
         public void AmbiguousConversions()
         {
-            var source = @"
+            var source =
+                @"
 // Tests conversions of generic constructed types - both open and closed.
 using System;
 
@@ -1431,83 +3448,173 @@ public class Test {
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-    // (126,12): error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
-    //         F0(h1a);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "h1a").WithArguments("H1<A>.implicit operator G1<A>(H1<A>)", "H0.implicit operator G0(H0)", "H1<A>", "G0"),
-    // (129,12): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G0'
-    //         F0(hs2ab);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab").WithArguments("HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)", "H1<B>.implicit operator G1<B>(H1<B>)", "HS2<A, B>", "G0"),
-    // (132,12): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G0'
-    //         F0(hs3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc").WithArguments("HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)", "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)", "HS3<A, B, C>", "G0"),
-    // (135,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         F1(h1a);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Test.F1<R>(G1<R>)"),
-    // (138,15): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G1<B>'
-    //         F1<B>(hs2ab);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab").WithArguments("HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)", "H1<B>.implicit operator G1<B>(H1<B>)", "HS2<A, B>", "G1<B>"),
-    // (141,15): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G1<C>'
-    //         F1<C>(hs3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc").WithArguments("HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)", "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)", "HS3<A, B, C>", "G1<C>"),
-    // (144,9): error CS0411: The type arguments for method 'Test.FS2<R, S>(GS2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FS2(hs2ab);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS2").WithArguments("Test.FS2<R, S>(GS2<R, S>)"),
-    // (147,18): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'GS2<B, C>'
-    //         FS2<B,C>(hs3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc").WithArguments("HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)", "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)", "HS3<A, B, C>", "GS2<B, C>"),
-    // (150,9): error CS0411: The type arguments for method 'Test.FS3<R, S, T>(GS3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FS3(hs3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS3").WithArguments("Test.FS3<R, S, T>(GS3<R, S, T>)"),
-    // (155,12): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G0'
-    //         F0(hc2ab);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab").WithArguments("HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)", "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)", "HC2<A, B>", "G0"),
-    // (158,12): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G0'
-    //         F0(hc3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc").WithArguments("HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)", "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)", "HC3<A, B, C>", "G0"),
-    // (161,19): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G1<G1<B>>'
-    //         F1<G1<B>>(hc2ab);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab").WithArguments("HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)", "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)", "HC2<A, B>", "G1<G1<B>>"),
-    // (164,30): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G1<G1<GC2<A, G1<B>>>>'
-    //         F1<G1<GC2<A,G1<B>>>>(hc3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc").WithArguments("HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)", "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)", "HC3<A, B, C>", "G1<G1<GC2<A, G1<B>>>>"),
-    // (167,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FC2(hc2ab);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2").WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-    // (170,33): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'GC2<G1<C>, GC2<A, G1<B>>>'
-    //         FC2<G1<C>,GC2<A,G1<B>>>(hc3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc").WithArguments("HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)", "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)", "HC3<A, B, C>", "GC2<G1<C>, GC2<A, G1<B>>>"),
-    // (173,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FC3(hc3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3").WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)"),
-    // (178,12): error CS0457: Ambiguous user defined conversions 'HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)' and 'H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)' when converting from 'HH2<A, B>' to 'G0'
-    //         F0(hh2ab);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh2ab").WithArguments("HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)", "H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)", "HH2<A, B>", "G0"),
-    // (181,12): error CS0457: Ambiguous user defined conversions 'HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)' and 'HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)' when converting from 'HH3<A, B, C>' to 'G0'
-    //         F0(hh3abc);
-    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh3abc").WithArguments("HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)", "HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)", "HH3<A, B, C>", "G0"),
-    // (184,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         F1(hh2ab);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Test.F1<R>(G1<R>)"),
-    // (187,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         F1(hh3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Test.F1<R>(G1<R>)"),
-    // (190,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         F1(hh3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1").WithArguments("Test.F1<R>(G1<R>)"),
-    // (193,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FC2(hh2ab);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2").WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-    // (196,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FC2(hh3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2").WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-    // (199,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FC2(hh3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2").WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-    // (202,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-    //         FC3(hh3abc);
-    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3").WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)")
-
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (126,12): error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
+                    //         F0(h1a);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "h1a")
+                        .WithArguments(
+                            "H1<A>.implicit operator G1<A>(H1<A>)",
+                            "H0.implicit operator G0(H0)",
+                            "H1<A>",
+                            "G0"
+                        ),
+                    // (129,12): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G0'
+                    //         F0(hs2ab);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
+                        .WithArguments(
+                            "HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)",
+                            "H1<B>.implicit operator G1<B>(H1<B>)",
+                            "HS2<A, B>",
+                            "G0"
+                        ),
+                    // (132,12): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G0'
+                    //         F0(hs3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
+                        .WithArguments(
+                            "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
+                            "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
+                            "HS3<A, B, C>",
+                            "G0"
+                        ),
+                    // (135,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         F1(h1a);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                        .WithArguments("Test.F1<R>(G1<R>)"),
+                    // (138,15): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G1<B>'
+                    //         F1<B>(hs2ab);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
+                        .WithArguments(
+                            "HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)",
+                            "H1<B>.implicit operator G1<B>(H1<B>)",
+                            "HS2<A, B>",
+                            "G1<B>"
+                        ),
+                    // (141,15): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G1<C>'
+                    //         F1<C>(hs3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
+                        .WithArguments(
+                            "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
+                            "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
+                            "HS3<A, B, C>",
+                            "G1<C>"
+                        ),
+                    // (144,9): error CS0411: The type arguments for method 'Test.FS2<R, S>(GS2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FS2(hs2ab);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS2")
+                        .WithArguments("Test.FS2<R, S>(GS2<R, S>)"),
+                    // (147,18): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'GS2<B, C>'
+                    //         FS2<B,C>(hs3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
+                        .WithArguments(
+                            "HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)",
+                            "HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)",
+                            "HS3<A, B, C>",
+                            "GS2<B, C>"
+                        ),
+                    // (150,9): error CS0411: The type arguments for method 'Test.FS3<R, S, T>(GS3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FS3(hs3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS3")
+                        .WithArguments("Test.FS3<R, S, T>(GS3<R, S, T>)"),
+                    // (155,12): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G0'
+                    //         F0(hc2ab);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
+                        .WithArguments(
+                            "HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)",
+                            "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)",
+                            "HC2<A, B>",
+                            "G0"
+                        ),
+                    // (158,12): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G0'
+                    //         F0(hc3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
+                        .WithArguments(
+                            "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
+                            "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
+                            "HC3<A, B, C>",
+                            "G0"
+                        ),
+                    // (161,19): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G1<G1<B>>'
+                    //         F1<G1<B>>(hc2ab);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
+                        .WithArguments(
+                            "HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)",
+                            "H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)",
+                            "HC2<A, B>",
+                            "G1<G1<B>>"
+                        ),
+                    // (164,30): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G1<G1<GC2<A, G1<B>>>>'
+                    //         F1<G1<GC2<A,G1<B>>>>(hc3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
+                        .WithArguments(
+                            "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
+                            "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
+                            "HC3<A, B, C>",
+                            "G1<G1<GC2<A, G1<B>>>>"
+                        ),
+                    // (167,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FC2(hc2ab);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                    // (170,33): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'GC2<G1<C>, GC2<A, G1<B>>>'
+                    //         FC2<G1<C>,GC2<A,G1<B>>>(hc3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
+                        .WithArguments(
+                            "HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)",
+                            "HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)",
+                            "HC3<A, B, C>",
+                            "GC2<G1<C>, GC2<A, G1<B>>>"
+                        ),
+                    // (173,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FC3(hc3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
+                        .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)"),
+                    // (178,12): error CS0457: Ambiguous user defined conversions 'HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)' and 'H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)' when converting from 'HH2<A, B>' to 'G0'
+                    //         F0(hh2ab);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh2ab")
+                        .WithArguments(
+                            "HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)",
+                            "H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)",
+                            "HH2<A, B>",
+                            "G0"
+                        ),
+                    // (181,12): error CS0457: Ambiguous user defined conversions 'HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)' and 'HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)' when converting from 'HH3<A, B, C>' to 'G0'
+                    //         F0(hh3abc);
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh3abc")
+                        .WithArguments(
+                            "HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)",
+                            "HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)",
+                            "HH3<A, B, C>",
+                            "G0"
+                        ),
+                    // (184,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         F1(hh2ab);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                        .WithArguments("Test.F1<R>(G1<R>)"),
+                    // (187,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         F1(hh3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                        .WithArguments("Test.F1<R>(G1<R>)"),
+                    // (190,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         F1(hh3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
+                        .WithArguments("Test.F1<R>(G1<R>)"),
+                    // (193,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FC2(hh2ab);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                    // (196,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FC2(hh3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                    // (199,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FC2(hh3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
+                        .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
+                    // (202,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         FC3(hh3abc);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
+                        .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)")
                 //Dev10
                 //error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
                 //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HS2<A,B>' to 'G0'
@@ -1541,7 +3648,8 @@ public class Test {
         [ClrOnlyFact]
         public void NullableIntToStructViaDecimal()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public struct S
@@ -1641,7 +3749,8 @@ public struct S
         [WorkItem(18446, "https://github.com/dotnet/roslyn/issues/18446")]
         public void CheckedConversionsInExpressionTrees()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq.Expressions;
 
@@ -1675,22 +3784,29 @@ namespace ExpressionTest
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(compilation, expectedOutput: @"
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 (c1, c2) => (Convert(c1) + c2)
 (c1, c2) => (Convert(c1) + c2)
 (c1, c2) => (Convert(c1) + c2)
 (c1, c2) => (c1 + Convert(c2))
 (c1, c2) => (c1 + Convert(c2))
 (c1, c2) => (c1 + Convert(c2))
-");
+"
+            );
         }
 
         [WorkItem(647055, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/647055")]
         [Fact]
         public void AmbiguousImplicitExplicitUserDefined()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     void Test(int[] a)
@@ -1712,38 +3828,73 @@ class C<T>
             comp.VerifyDiagnostics(
                 // (6,21): error CS0457: Ambiguous user defined conversions 'C<int>.explicit operator C<int>(int)' and 'C<int>.implicit operator C<int>(int)' when converting from 'int' to 'C<int>'
                 //         C<int> x1 = (C<int>)1; // Expression to type
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(C<int>)1").WithArguments("C<int>.explicit operator C<int>(int)", "C<int>.implicit operator C<int>(int)", "int", "C<int>"),
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(C<int>)1")
+                    .WithArguments(
+                        "C<int>.explicit operator C<int>(int)",
+                        "C<int>.implicit operator C<int>(int)",
+                        "int",
+                        "C<int>"
+                    ),
                 // (8,9): error CS0457: Ambiguous user defined conversions 'C<int>.explicit operator C<int>(int)' and 'C<int>.implicit operator C<int>(int)' when converting from 'int' to 'C<int>'
                 //         foreach (C<int> x2 in a) { } // Type to type
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "foreach").WithArguments("C<int>.explicit operator C<int>(int)", "C<int>.implicit operator C<int>(int)", "int", "C<int>"));
+                Diagnostic(ErrorCode.ERR_AmbigUDConv, "foreach")
+                    .WithArguments(
+                        "C<int>.explicit operator C<int>(int)",
+                        "C<int>.implicit operator C<int>(int)",
+                        "int",
+                        "C<int>"
+                    )
+            );
 
-            var destinationType = comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C").Construct(comp.GetSpecialType(SpecialType.System_Int32));
-            var conversionSymbols = destinationType.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind == MethodKind.Conversion);
+            var destinationType = comp
+                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                .Construct(comp.GetSpecialType(SpecialType.System_Int32));
+            var conversionSymbols = destinationType
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Where(m => m.MethodKind == MethodKind.Conversion);
             Assert.Equal(2, conversionSymbols.Count());
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var castSyntax = tree.GetRoot().DescendantNodes().OfType<CastExpressionSyntax>().Single();
+            var castSyntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<CastExpressionSyntax>()
+                .Single();
 
             var castInfo = model.GetSymbolInfo(castSyntax);
             Assert.Null(castInfo.Symbol);
             Assert.Equal(CandidateReason.OverloadResolutionFailure, castInfo.CandidateReason);
             AssertEx.SetEqual(castInfo.CandidateSymbols, conversionSymbols);
 
-            var forEachSyntax = tree.GetRoot().DescendantNodes().OfType<ForEachStatementSyntax>().Single();
+            var forEachSyntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ForEachStatementSyntax>()
+                .Single();
             var memberModel = ((CSharpSemanticModel)model).GetMemberModel(forEachSyntax);
-            var boundForEach = memberModel.GetBoundNodes(forEachSyntax).ToArray().OfType<BoundForEachStatement>().Single();
-            var elementConversion = BoundNode.GetConversion(boundForEach.ElementConversion, boundForEach.ElementPlaceholder);
+            var boundForEach = memberModel
+                .GetBoundNodes(forEachSyntax)
+                .ToArray()
+                .OfType<BoundForEachStatement>()
+                .Single();
+            var elementConversion = BoundNode.GetConversion(
+                boundForEach.ElementConversion,
+                boundForEach.ElementPlaceholder
+            );
             Assert.Equal(LookupResultKind.OverloadResolutionFailure, elementConversion.ResultKind);
-            AssertEx.SetEqual(elementConversion.OriginalUserDefinedConversions.GetPublicSymbols(), conversionSymbols);
+            AssertEx.SetEqual(
+                elementConversion.OriginalUserDefinedConversions.GetPublicSymbols(),
+                conversionSymbols
+            );
         }
 
         [WorkItem(715207, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/715207")]
         [ClrOnlyFact]
         public void LiftingReturnTypeOfExplicitUserDefinedConversion()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     char? Test(object o)
@@ -1757,7 +3908,10 @@ struct BigInteger
     public static explicit operator ushort(BigInteger b) { return 0; }
 }";
 
-            CompileAndVerify(source).VerifyIL("C.Test", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C.Test",
+                    @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -1767,14 +3921,16 @@ struct BigInteger
   IL_000b:  newobj     ""char?..ctor(char)""
   IL_0010:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(737732, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/737732")]
         [Fact]
         public void ConsiderSourceExpressionWhenDeterminingBestUserDefinedConversion()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static explicit operator C(double d) { return null; }
@@ -1800,7 +3956,10 @@ public class Test
             Assert.Equal(SymbolKind.Method, symbol.Kind);
             var method = (IMethodSymbol)symbol;
             Assert.Equal(MethodKind.Conversion, method.MethodKind);
-            Assert.Equal(comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C"), method.ContainingType);
+            Assert.Equal(
+                comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C"),
+                method.ContainingType
+            );
             Assert.Equal(SpecialType.System_Byte, method.Parameters.Single().Type.SpecialType);
         }
 
@@ -1808,7 +3967,8 @@ public class Test
         [Fact]
         public void Repro737732()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public struct C
@@ -1834,7 +3994,10 @@ public struct C
             Assert.Equal(SymbolKind.Method, symbol.Kind);
             var method = (IMethodSymbol)symbol;
             Assert.Equal(MethodKind.Conversion, method.MethodKind);
-            Assert.Equal(comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C"), method.ContainingType);
+            Assert.Equal(
+                comp.GlobalNamespace.GetMember<INamedTypeSymbol>("C"),
+                method.ContainingType
+            );
             Assert.Equal(SpecialType.System_Byte, method.Parameters.Single().Type.SpecialType);
         }
 
@@ -1842,7 +4005,8 @@ public struct C
         [ClrOnlyFact]
         public void MethodGroupConversion_ContravarianceAndDynamic()
         {
-            var source = @"
+            var source =
+                @"
 delegate void In<in T>(T t);
 
 public class C
@@ -1865,7 +4029,8 @@ public class C
         [Fact]
         public void MethodGroupConversion_CovarianceAndDynamic()
         {
-            var source = @"
+            var source =
+                @"
 delegate T Out<out T>();
 
 public class C
@@ -1885,10 +4050,15 @@ public class C
             // The return type of F isn't considered until the delegate compatibility check,
             // which happens AFTER determining that the method group conversion exists.  As
             // a result, both methods are considered applicable and the "wrong" one is chosen.
-            CreateCompilationWithMscorlib40AndSystemCore(source, parseOptions: TestOptions.WithoutImprovedOverloadCandidates).VerifyDiagnostics(
-                // (8,11): error CS0407: 'dynamic C.F()' has the wrong return type
-                //         M(F);
-                Diagnostic(ErrorCode.ERR_BadRetType, "F").WithArguments("C.F()", "dynamic"));
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    source,
+                    parseOptions: TestOptions.WithoutImprovedOverloadCandidates
+                )
+                .VerifyDiagnostics(
+                    // (8,11): error CS0407: 'dynamic C.F()' has the wrong return type
+                    //         M(F);
+                    Diagnostic(ErrorCode.ERR_BadRetType, "F").WithArguments("C.F()", "dynamic")
+                );
             // However, we later added a feature that takes the return type into account.
             CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics();
         }
@@ -1897,7 +4067,8 @@ public class C
         [Fact]
         public void ConversionsFromExpressions()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public enum E
@@ -1991,23 +4162,34 @@ public class Test
             // NOTE: It's pretty wacky that some of these implicit UDCs can only be applied via explicit (cast) conversions,
             // but that's the native behavior.  We need to replicate it for back-compat, but most of the strangeness will
             // not be spec'd.
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics(
-                // (46,20): error CS1660: Cannot convert lambda expression to type 'Q' because it is not a delegate type
-                //             q = () => 1; //CS1660
-                Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>").WithArguments("lambda expression", "Q").WithLocation(46, 20),
-                // (53,17): error CS0428: Cannot convert method group 'F' to non-delegate type 'Q'. Did you intend to invoke the method?
-                //             q = F; //CS0428
-                Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F").WithArguments("F", "Q").WithLocation(53, 17),
-                // (60,17): error CS0029: Cannot implicitly convert type 'int' to 'R'
-                //             r = 0; //CS0029
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "0").WithArguments("int", "R").WithLocation(60, 17));
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    source,
+                    options: TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics(
+                    // (46,20): error CS1660: Cannot convert lambda expression to type 'Q' because it is not a delegate type
+                    //             q = () => 1; //CS1660
+                    Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
+                        .WithArguments("lambda expression", "Q")
+                        .WithLocation(46, 20),
+                    // (53,17): error CS0428: Cannot convert method group 'F' to non-delegate type 'Q'. Did you intend to invoke the method?
+                    //             q = F; //CS0428
+                    Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F")
+                        .WithArguments("F", "Q")
+                        .WithLocation(53, 17),
+                    // (60,17): error CS0029: Cannot implicitly convert type 'int' to 'R'
+                    //             r = 0; //CS0029
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "0")
+                        .WithArguments("int", "R")
+                        .WithLocation(60, 17)
+                );
         }
 
         [Fact]
         public void BoxingConversionsForThisArgument()
         {
             var source =
-@"static class E
+                @"static class E
 {
     internal static void F(this object o)
     {
@@ -2027,19 +4209,22 @@ class C
             var comp = CreateCompilationWithMscorlib40AndSystemCore(
                 source,
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef },
-                options: TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(comp, expectedOutput:
-@"1
+                options: TestOptions.ReleaseExe
+            );
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: @"1
 c
 s
-(1, (2, 3))");
+(1, (2, 3))"
+            );
         }
 
         [Fact]
         public void SkipNumericConversionsForThisArgument()
         {
             var source =
-@"static class E
+                @"static class E
 {
     internal static void F(this long l) { }
     internal static void G(this (long, long) t) { }
@@ -2059,21 +4244,29 @@ class C
         t.H();
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             comp.VerifyDiagnostics(
                 // (14,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method overload 'E.F(long)' requires a receiver of type 'long'
                 //         i.F();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "i").WithArguments("int", "F", "E.F(long)", "long").WithLocation(14, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "i")
+                    .WithArguments("int", "F", "E.F(long)", "long")
+                    .WithLocation(14, 9),
                 // (16,9): error CS1929: '(int, int)' does not contain a definition for 'G' and the best extension method overload 'E.G((long, long))' requires a receiver of type '(long, long)'
                 //         t.G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "t").WithArguments("(int, int)", "G", "E.G((long, long))", "(long, long)").WithLocation(16, 9));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "t")
+                    .WithArguments("(int, int)", "G", "E.G((long, long))", "(long, long)")
+                    .WithLocation(16, 9)
+            );
         }
 
         [Fact]
         public void SkipNullableConversionsForThisArgument()
         {
             var source =
-@"static class E
+                @"static class E
 {
     internal static void F(this int? i) { }
     internal static void G(this (int, int)? t) { }
@@ -2094,21 +4287,29 @@ class C
         (((int, int)?)t).G();
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             comp.VerifyDiagnostics(
                 // (13,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method overload 'E.F(int?)' requires a receiver of type 'int?'
                 //         i.F();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "i").WithArguments("int", "F", "E.F(int?)", "int?").WithLocation(13, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "i")
+                    .WithArguments("int", "F", "E.F(int?)", "int?")
+                    .WithLocation(13, 9),
                 // (17,9): error CS1929: '(int, int)' does not contain a definition for 'G' and the best extension method overload 'E.G((int, int)?)' requires a receiver of type '(int, int)?'
                 //         t.G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "t").WithArguments("(int, int)", "G", "E.G((int, int)?)", "(int, int)?").WithLocation(17, 9));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "t")
+                    .WithArguments("(int, int)", "G", "E.G((int, int)?)", "(int, int)?")
+                    .WithLocation(17, 9)
+            );
         }
 
         [Fact]
         public void SkipEnumerationConversionsForThisArgument()
         {
             var source =
-@"enum E
+                @"enum E
 {
 }
 static class C
@@ -2135,27 +4336,39 @@ static class C
         (e, (E?)e).H();
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             comp.VerifyDiagnostics(
                 // (15,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method overload 'C.F(E)' requires a receiver of type 'E'
                 //         0.F();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0").WithArguments("int", "F", "C.F(E)", "E").WithLocation(15, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
+                    .WithArguments("int", "F", "C.F(E)", "E")
+                    .WithLocation(15, 9),
                 // (17,9): error CS1929: 'E' does not contain a definition for 'G' and the best extension method overload 'C.G(E?)' requires a receiver of type 'E?'
                 //         e.G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "e").WithArguments("E", "G", "C.G(E?)", "E?").WithLocation(17, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "e")
+                    .WithArguments("E", "G", "C.G(E?)", "E?")
+                    .WithLocation(17, 9),
                 // (21,9): error CS1929: 'int' does not contain a definition for 'G' and the best extension method overload 'C.G(E?)' requires a receiver of type 'E?'
                 //         0.G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0").WithArguments("int", "G", "C.G(E?)", "E?").WithLocation(21, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
+                    .WithArguments("int", "G", "C.G(E?)", "E?")
+                    .WithLocation(21, 9),
                 // (23,9): error CS1929: '(E, E)' does not contain a definition for 'H' and the best extension method overload 'C.H((E, E?))' requires a receiver of type '(E, E?)'
                 //         (e, e).H();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(e, e)").WithArguments("(E, E)", "H", "C.H((E, E?))", "(E, E?)").WithLocation(23, 9));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(e, e)")
+                    .WithArguments("(E, E)", "H", "C.H((E, E?))", "(E, E?)")
+                    .WithLocation(23, 9)
+            );
         }
 
         [Fact]
         public void SkipConstantExpressionConversionsForThisArgument()
         {
             var source =
-@"static class C
+                @"static class C
 {
     static void S08(this sbyte arg) { }
     static void S16(this short arg) { }
@@ -2189,39 +4402,59 @@ static class C
         10L.U64();
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             comp.VerifyDiagnostics(
                 // (21,9): error CS1929: 'int' does not contain a definition for 'S08' and the best extension method overload 'C.S08(sbyte)' requires a receiver of type 'sbyte'
                 //         1.S08();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "1").WithArguments("int", "S08", "C.S08(sbyte)", "sbyte").WithLocation(21, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "1")
+                    .WithArguments("int", "S08", "C.S08(sbyte)", "sbyte")
+                    .WithLocation(21, 9),
                 // (22,9): error CS1929: 'int' does not contain a definition for 'S16' and the best extension method overload 'C.S16(short)' requires a receiver of type 'short'
                 //         2.S16();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "2").WithArguments("int", "S16", "C.S16(short)", "short").WithLocation(22, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "2")
+                    .WithArguments("int", "S16", "C.S16(short)", "short")
+                    .WithLocation(22, 9),
                 // (24,9): error CS1929: 'int' does not contain a definition for 'S64' and the best extension method overload 'C.S64(long)' requires a receiver of type 'long'
                 //         4.S64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "4").WithArguments("int", "S64", "C.S64(long)", "long").WithLocation(24, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "4")
+                    .WithArguments("int", "S64", "C.S64(long)", "long")
+                    .WithLocation(24, 9),
                 // (25,9): error CS1929: 'int' does not contain a definition for 'U08' and the best extension method overload 'C.U08(byte)' requires a receiver of type 'byte'
                 //         5.U08();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "5").WithArguments("int", "U08", "C.U08(byte)", "byte").WithLocation(25, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "5")
+                    .WithArguments("int", "U08", "C.U08(byte)", "byte")
+                    .WithLocation(25, 9),
                 // (26,9): error CS1929: 'int' does not contain a definition for 'U16' and the best extension method overload 'C.U16(ushort)' requires a receiver of type 'ushort'
                 //         6.U16();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "6").WithArguments("int", "U16", "C.U16(ushort)", "ushort").WithLocation(26, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "6")
+                    .WithArguments("int", "U16", "C.U16(ushort)", "ushort")
+                    .WithLocation(26, 9),
                 // (27,9): error CS1929: 'int' does not contain a definition for 'U32' and the best extension method overload 'C.U32(uint)' requires a receiver of type 'uint'
                 //         7.U32();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "7").WithArguments("int", "U32", "C.U32(uint)", "uint").WithLocation(27, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "7")
+                    .WithArguments("int", "U32", "C.U32(uint)", "uint")
+                    .WithLocation(27, 9),
                 // (28,9): error CS1929: 'int' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong)' requires a receiver of type 'ulong'
                 //         8.U64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "8").WithArguments("int", "U64", "C.U64(ulong)", "ulong").WithLocation(28, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "8")
+                    .WithArguments("int", "U64", "C.U64(ulong)", "ulong")
+                    .WithLocation(28, 9),
                 // (32,9): error CS1929: 'long' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong)' requires a receiver of type 'ulong'
                 //         10L.U64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "10L").WithArguments("long", "U64", "C.U64(ulong)", "ulong").WithLocation(32, 9));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "10L")
+                    .WithArguments("long", "U64", "C.U64(ulong)", "ulong")
+                    .WithLocation(32, 9)
+            );
         }
 
         [Fact]
         public void SkipConstantExpressionNullableConversionsForThisArgument()
         {
             var source =
-@"static class C
+                @"static class C
 {
     static void S08(this sbyte? arg) { }
     static void S16(this short? arg) { }
@@ -2255,46 +4488,73 @@ static class C
         10L.U64();
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             comp.VerifyDiagnostics(
                 // (21,9): error CS1929: 'int' does not contain a definition for 'S08' and the best extension method overload 'C.S08(sbyte?)' requires a receiver of type 'sbyte?'
                 //         1.S08();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "1").WithArguments("int", "S08", "C.S08(sbyte?)", "sbyte?").WithLocation(21, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "1")
+                    .WithArguments("int", "S08", "C.S08(sbyte?)", "sbyte?")
+                    .WithLocation(21, 9),
                 // (22,9): error CS1929: 'int' does not contain a definition for 'S16' and the best extension method overload 'C.S16(short?)' requires a receiver of type 'short?'
                 //         2.S16();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "2").WithArguments("int", "S16", "C.S16(short?)", "short?").WithLocation(22, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "2")
+                    .WithArguments("int", "S16", "C.S16(short?)", "short?")
+                    .WithLocation(22, 9),
                 // (23,9): error CS1929: 'int' does not contain a definition for 'S32' and the best extension method overload 'C.S32(int?)' requires a receiver of type 'int?'
                 //         3.S32();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "3").WithArguments("int", "S32", "C.S32(int?)", "int?").WithLocation(23, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "3")
+                    .WithArguments("int", "S32", "C.S32(int?)", "int?")
+                    .WithLocation(23, 9),
                 // (24,9): error CS1929: 'int' does not contain a definition for 'S64' and the best extension method overload 'C.S64(long?)' requires a receiver of type 'long?'
                 //         4.S64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "4").WithArguments("int", "S64", "C.S64(long?)", "long?").WithLocation(24, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "4")
+                    .WithArguments("int", "S64", "C.S64(long?)", "long?")
+                    .WithLocation(24, 9),
                 // (25,9): error CS1929: 'int' does not contain a definition for 'U08' and the best extension method overload 'C.U08(byte?)' requires a receiver of type 'byte?'
                 //         5.U08();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "5").WithArguments("int", "U08", "C.U08(byte?)", "byte?").WithLocation(25, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "5")
+                    .WithArguments("int", "U08", "C.U08(byte?)", "byte?")
+                    .WithLocation(25, 9),
                 // (26,9): error CS1929: 'int' does not contain a definition for 'U16' and the best extension method overload 'C.U16(ushort?)' requires a receiver of type 'ushort?'
                 //         6.U16();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "6").WithArguments("int", "U16", "C.U16(ushort?)", "ushort?").WithLocation(26, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "6")
+                    .WithArguments("int", "U16", "C.U16(ushort?)", "ushort?")
+                    .WithLocation(26, 9),
                 // (27,9): error CS1929: 'int' does not contain a definition for 'U32' and the best extension method overload 'C.U32(uint?)' requires a receiver of type 'uint?'
                 //         7.U32();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "7").WithArguments("int", "U32", "C.U32(uint?)", "uint?").WithLocation(27, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "7")
+                    .WithArguments("int", "U32", "C.U32(uint?)", "uint?")
+                    .WithLocation(27, 9),
                 // (28,9): error CS1929: 'int' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong?)' requires a receiver of type 'ulong?'
                 //         8.U64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "8").WithArguments("int", "U64", "C.U64(ulong?)", "ulong?").WithLocation(28, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "8")
+                    .WithArguments("int", "U64", "C.U64(ulong?)", "ulong?")
+                    .WithLocation(28, 9),
                 // (31,9): error CS1929: 'long' does not contain a definition for 'S64' and the best extension method overload 'C.S64(long?)' requires a receiver of type 'long?'
                 //         9L.S64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "9L").WithArguments("long", "S64", "C.S64(long?)", "long?").WithLocation(31, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "9L")
+                    .WithArguments("long", "S64", "C.S64(long?)", "long?")
+                    .WithLocation(31, 9),
                 // (32,9): error CS1929: 'long' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong?)' requires a receiver of type 'ulong?'
                 //         10L.U64();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "10L").WithArguments("long", "U64", "C.U64(ulong?)", "ulong?").WithLocation(32, 9));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "10L")
+                    .WithArguments("long", "U64", "C.U64(ulong?)", "ulong?")
+                    .WithLocation(32, 9)
+            );
         }
 
         [Fact]
-        [WorkItem(434957, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=434957")]
+        [WorkItem(
+            434957,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=434957"
+        )]
         public void SkipUserDefinedConversionsForThisArgument()
         {
             var source =
-@"class A
+                @"class A
 {
     public static implicit operator B(A a) => null;
     public static implicit operator S(A a) => default(S);
@@ -2328,21 +4588,29 @@ class C
             comp.VerifyDiagnostics(
                 // (24,9): error CS1929: 'A' does not contain a definition for 'F' and the best extension method overload 'E.F(B)' requires a receiver of type 'B'
                 //         a.F();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a").WithArguments("A", "F", "E.F(B)", "B"),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a")
+                    .WithArguments("A", "F", "E.F(B)", "B"),
                 // (26,9): error CS1929: 'S' does not contain a definition for 'G' and the best extension method overload 'E.G(S?)' requires a receiver of type 'S?'
                 //         s.G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "s").WithArguments("S", "G", "E.G(S?)", "S?").WithLocation(26, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "s")
+                    .WithArguments("S", "G", "E.G(S?)", "S?")
+                    .WithLocation(26, 9),
                 // (28,9): error CS1929: 'A' does not contain a definition for 'G' and the best extension method overload 'E.G(S?)' requires a receiver of type 'S?'
                 //         a.G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a").WithArguments("A", "G", "E.G(S?)", "S?"));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a")
+                    .WithArguments("A", "G", "E.G(S?)", "S?")
+            );
         }
 
         [Fact]
-        [WorkItem(434957, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=434957")]
+        [WorkItem(
+            434957,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=434957"
+        )]
         public void SkipUserDefinedConversionsForThisArgument_TupleElements()
         {
             var source =
-@"class A
+                @"class A
 {
     public static implicit operator B(A a) => null;
     public static implicit operator S(A a) => default(S);
@@ -2374,17 +4642,27 @@ class C
         (s, s).H();
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef });
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+            );
             comp.VerifyDiagnostics(
                 // (26,9): error CS1929: '(A, B)' does not contain a definition for 'F' and the best extension method overload 'E.F((B, B))' requires a receiver of type '(B, B)'
                 //         (a, b).F();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(a, b)").WithArguments("(A, B)", "F", "E.F((B, B))", "(B, B)").WithLocation(26, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(a, b)")
+                    .WithArguments("(A, B)", "F", "E.F((B, B))", "(B, B)")
+                    .WithLocation(26, 9),
                 // (28,9): error CS1929: '(B, A)' does not contain a definition for 'G' and the best extension method overload 'E.G((B, B)?)' requires a receiver of type '(B, B)?'
                 //         (b, a).G();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(b, a)").WithArguments("(B, A)", "G", "E.G((B, B)?)", "(B, B)?").WithLocation(28, 9),
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(b, a)")
+                    .WithArguments("(B, A)", "G", "E.G((B, B)?)", "(B, B)?")
+                    .WithLocation(28, 9),
                 // (30,9): error CS1929: '(S, S)' does not contain a definition for 'H' and the best extension method overload 'E.H((S, S?))' requires a receiver of type '(S, S?)'
                 //         (s, s).H();
-                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(s, s)").WithArguments("(S, S)", "H", "E.H((S, S?))", "(S, S?)").WithLocation(30, 9));
+                Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(s, s)")
+                    .WithArguments("(S, S)", "H", "E.H((S, S?))", "(S, S?)")
+                    .WithLocation(30, 9)
+            );
         }
 
         #endregion

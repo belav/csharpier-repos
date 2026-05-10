@@ -11,6 +11,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// diagnostics are computed.
         /// </summary>
         SolutionCrawlerPush,
+
         /// <summary>
         /// Lsp pull diagnostics.  Diagnostics are computed on demand when requested.
         /// </summary>

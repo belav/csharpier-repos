@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,14 +31,14 @@ using System;
 
 namespace System.Messaging
 {
-	[Serializable]
-	public enum HashAlgorithm
-	{
-		Mac = 32773,
-		Md2 = 32769,
-		Md4 = 32770,
-		Md5 = 32771,
-		None = 0,
-		Sha = 32772
-	}
+    [Serializable]
+    public enum HashAlgorithm
+    {
+        Mac = 32773,
+        Md2 = 32769,
+        Md4 = 32770,
+        Md5 = 32771,
+        None = 0,
+        Sha = 32772,
+    }
 }

@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,35 +26,35 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("9eb2c150-1d56-11d3-8221-0060083a0bcf")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMBarProp
+    {
+        #region nsIDOMBarProp
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getVisible(out bool ret);
 
-	[Guid ("9eb2c150-1d56-11d3-8221-0060083a0bcf")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMBarProp {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setVisible(bool value);
 
-#region nsIDOMBarProp
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getVisible ( out bool ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setVisible ( bool value);
-
-#endregion
-	}
-
-
-	internal class nsDOMBarProp {
-		public static nsIDOMBarProp GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMBarProp obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMBarProp).GUID, obj);
-			return o as nsIDOMBarProp;
-		}
-	}
+    internal class nsDOMBarProp
+    {
+        public static nsIDOMBarProp GetProxy(Mono.WebBrowser.IWebBrowser control, nsIDOMBarProp obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMBarProp).GUID, obj);
+            return o as nsIDOMBarProp;
+        }
+    }
 }

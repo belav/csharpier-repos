@@ -15,23 +15,24 @@ namespace System.Web.Mvc
         /// Constructs a new instance of the JQuery form ValueProvider
         /// </summary>
         /// <param name="controllerContext">The context on which the ValueProvider operates.</param>
-        public JQueryFormValueProvider(
-                    ControllerContext controllerContext)
-                : this(controllerContext,
-                        new UnvalidatedRequestValuesWrapper(
-                                controllerContext.HttpContext.Request.Unvalidated))
-        {
-        }
+        public JQueryFormValueProvider(ControllerContext controllerContext)
+            : this(
+                controllerContext,
+                new UnvalidatedRequestValuesWrapper(
+                    controllerContext.HttpContext.Request.Unvalidated
+                )
+            ) { }
 
         // For unit testing
         internal JQueryFormValueProvider(
-                        ControllerContext controllerContext,
-                        IUnvalidatedRequestValues unvalidatedValues)
-            : base(controllerContext.HttpContext.Request.Form, 
-                        unvalidatedValues.Form,
-                        CultureInfo.CurrentCulture,
-                        jQueryToMvcRequestNormalizationRequired: true)
-        {
-        }
+            ControllerContext controllerContext,
+            IUnvalidatedRequestValues unvalidatedValues
+        )
+            : base(
+                controllerContext.HttpContext.Request.Form,
+                unvalidatedValues.Form,
+                CultureInfo.CurrentCulture,
+                jQueryToMvcRequestNormalizationRequired: true
+            ) { }
     }
 }

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 #if TARGET_WINDOWS
 using Internal.Win32;
 #endif
@@ -12,7 +11,8 @@ namespace System.Globalization
     public partial class JapaneseCalendar : Calendar
     {
 #if TARGET_WINDOWS
-        private const string JapaneseErasHive = @"System\CurrentControlSet\Control\Nls\Calendars\Japanese\Eras";
+        private const string JapaneseErasHive =
+            @"System\CurrentControlSet\Control\Nls\Calendars\Japanese\Eras";
 
         // We know about 4 built-in eras, however users may add additional era(s) from the
         // registry, by adding values to HKLM\SYSTEM\CurrentControlSet\Control\Nls\Calendars\Japanese\Eras
@@ -43,7 +43,8 @@ namespace System.Globalization
                 using (RegistryKey? key = Registry.LocalMachine.OpenSubKey(JapaneseErasHive))
                 {
                     // Abort if we didn't find anything
-                    if (key == null) return null;
+                    if (key == null)
+                        return null;
 
                     // Look up the values in our reg key
                     string[] valueNames = key.GetValueNames();
@@ -55,10 +56,14 @@ namespace System.Globalization
                         for (int i = 0; i < valueNames.Length; i++)
                         {
                             // See if the era is a valid date
-                            EraInfo? era = GetEraFromValue(valueNames[i], key.GetValue(valueNames[i])?.ToString());
+                            EraInfo? era = GetEraFromValue(
+                                valueNames[i],
+                                key.GetValue(valueNames[i])?.ToString()
+                            );
 
                             // continue if not valid
-                            if (era == null) continue;
+                            if (era == null)
+                                continue;
 
                             // Remember we found one.
                             registryEraRanges[iFoundEras] = era;
@@ -87,7 +92,8 @@ namespace System.Globalization
             // If we didn't have valid eras, then fail
             // should have at least 4 eras
             //
-            if (iFoundEras < 4) return null;
+            if (iFoundEras < 4)
+                return null;
 
             //
             // Now we have eras, clean them up.
@@ -108,12 +114,14 @@ namespace System.Globalization
                 if (i == 0)
                 {
                     // First range is 'til the end of the calendar
-                    registryEraRanges[0].maxEraYear = GregorianCalendar.MaxYear - registryEraRanges[0].yearOffset;
+                    registryEraRanges[0].maxEraYear =
+                        GregorianCalendar.MaxYear - registryEraRanges[0].yearOffset;
                 }
                 else
                 {
                     // Rest are until the next era (remember most recent era is first in array)
-                    registryEraRanges[i].maxEraYear = registryEraRanges[i - 1].yearOffset + 1 - registryEraRanges[i].yearOffset;
+                    registryEraRanges[i].maxEraYear =
+                        registryEraRanges[i - 1].yearOffset + 1 - registryEraRanges[i].yearOffset;
                 }
             }
 
@@ -161,20 +169,38 @@ namespace System.Globalization
         private static EraInfo? GetEraFromValue(string? value, string? data)
         {
             // Need inputs
-            if (value == null || data == null) return null;
+            if (value == null || data == null)
+                return null;
 
             //
             // Get Date
             //
             // Need exactly 10 characters in name for date
             // yyyy.mm.dd although the . can be any character
-            if (value.Length != 10) return null;
-
+            if (value.Length != 10)
+                return null;
 
             ReadOnlySpan<char> valueSpan = value.AsSpan();
-            if (!int.TryParse(valueSpan.Slice(0, 4), NumberStyles.None, NumberFormatInfo.InvariantInfo, out int year) ||
-                !int.TryParse(valueSpan.Slice(5, 2), NumberStyles.None, NumberFormatInfo.InvariantInfo, out int month) ||
-                !int.TryParse(valueSpan.Slice(8, 2), NumberStyles.None, NumberFormatInfo.InvariantInfo, out int day))
+            if (
+                !int.TryParse(
+                    valueSpan.Slice(0, 4),
+                    NumberStyles.None,
+                    NumberFormatInfo.InvariantInfo,
+                    out int year
+                )
+                || !int.TryParse(
+                    valueSpan.Slice(5, 2),
+                    NumberStyles.None,
+                    NumberFormatInfo.InvariantInfo,
+                    out int month
+                )
+                || !int.TryParse(
+                    valueSpan.Slice(8, 2),
+                    NumberStyles.None,
+                    NumberFormatInfo.InvariantInfo,
+                    out int day
+                )
+            )
             {
                 // Couldn't convert integer, fail
                 return null;
@@ -199,13 +225,28 @@ namespace System.Globalization
                 ReadOnlySpan<char> abbreviatedEnglishEraName = dataSpan[names[3]];
 
                 // Each part should have data in it
-                if (!eraName.IsEmpty && !abbreviatedEraName.IsEmpty && !englishEraName.IsEmpty && !abbreviatedEnglishEraName.IsEmpty)
+                if (
+                    !eraName.IsEmpty
+                    && !abbreviatedEraName.IsEmpty
+                    && !englishEraName.IsEmpty
+                    && !abbreviatedEnglishEraName.IsEmpty
+                )
                 {
                     // Now we have an era we can build
                     // Note that the era # and max era year need cleaned up after sorting
                     // Don't use the full English Era Name (names[2])
-                    return new EraInfo(0, year, month, day, year - 1, 1, 0,
-                                       eraName.ToString(), abbreviatedEraName.ToString(), abbreviatedEnglishEraName.ToString());
+                    return new EraInfo(
+                        0,
+                        year,
+                        month,
+                        day,
+                        year - 1,
+                        1,
+                        0,
+                        eraName.ToString(),
+                        abbreviatedEraName.ToString(),
+                        abbreviatedEnglishEraName.ToString()
+                    );
                 }
             }
 

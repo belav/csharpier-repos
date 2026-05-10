@@ -29,7 +29,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         private readonly NameContainer _nameContainer;
 
-        public PublicParameterizedConstructorRequiringConverterWithParameterAttributeTestClass([JsonConverter(typeof(NameContainerConverter))] NameContainer nameParameter)
+        public PublicParameterizedConstructorRequiringConverterWithParameterAttributeTestClass(
+            [JsonConverter(typeof(NameContainerConverter))] NameContainer nameParameter
+        )
         {
             _nameContainer = nameParameter;
         }

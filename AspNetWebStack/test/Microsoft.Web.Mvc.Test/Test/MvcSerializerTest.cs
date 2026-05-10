@@ -18,8 +18,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Exception exception = Assert.Throws<SerializationException>(
-                delegate { MvcSerializer.Deserialize("This is a corrupted value.", machineKey); },
-                @"Deserialization failed. Verify that the data is being deserialized using the same SerializationMode with which it was serialized. Otherwise see the inner exception.");
+                delegate
+                {
+                    MvcSerializer.Deserialize("This is a corrupted value.", machineKey);
+                },
+                @"Deserialization failed. Verify that the data is being deserialized using the same SerializationMode with which it was serialized. Otherwise see the inner exception."
+            );
 
             Assert.NotNull(exception.InnerException);
         }
@@ -32,7 +36,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { serializer.Deserialize(""); }, "serializedValue");
+                delegate
+                {
+                    serializer.Deserialize("");
+                },
+                "serializedValue"
+            );
         }
 
         [Fact]
@@ -43,7 +52,12 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { serializer.Deserialize(null); }, "serializedValue");
+                delegate
+                {
+                    serializer.Deserialize(null);
+                },
+                "serializedValue"
+            );
         }
 
         [Fact]
@@ -56,7 +70,10 @@ namespace Microsoft.Web.Mvc.Test
             string serializedValue = MvcSerializer.Serialize(null, machineKey);
 
             // Assert
-            Assert.Equal(@"Microsoft.Web.Mvc.MvcSerializer.v1-dwdhbnlUeXBlLgNuaWyGCQF6M2h0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vMjAwMy8xMC9TZXJpYWxpemF0aW9uLwkBaSlodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZQE=", serializedValue);
+            Assert.Equal(
+                @"Microsoft.Web.Mvc.MvcSerializer.v1-dwdhbnlUeXBlLgNuaWyGCQF6M2h0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vMjAwMy8xMC9TZXJpYWxpemF0aW9uLwkBaSlodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZQE=",
+                serializedValue
+            );
         }
 
         [Fact]
@@ -87,7 +104,6 @@ namespace Microsoft.Web.Mvc.Test
                     throw new Exception("Corrupted data.");
                 }
                 return Convert.FromBase64String(protectedData);
-
             }
 
             public string Protect(byte[] userData, params string[] purposes)

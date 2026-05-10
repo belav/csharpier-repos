@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     [CompilerTrait(CompilerFeature.Tuples)]
     public class DeconstructionTests : ParsingTests
     {
-        public DeconstructionTests(ITestOutputHelper output) : base(output) { }
+        public DeconstructionTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
@@ -38,14 +39,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         public void ParenExpression()
         {
             // `(id) .` starts with a parenthesized expression
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (x).ToString();
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -112,14 +116,17 @@ class C
         {
             // `(T id, ...) id` starts with a tuple type
 
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (Int32 a, Int64 b) x;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -190,14 +197,17 @@ class C
         {
             // `(T, ...) id` starts with a type
 
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (Int32, Int64) x;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -266,14 +276,17 @@ class C
         {
             // (T, ...) [] is a type
 
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (Int32, Int64)[] x;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -354,14 +367,17 @@ class C
         {
             // (E, ...) followed by ., +, -, etc. starts with a tuple literal/expression
 
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (Int32, Int64).Goo();
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -438,14 +454,17 @@ class C
         public void DeconstructionAssignment()
         {
             // (E, ...) = is a deconstruction-assignment
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (x, y) = goo;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -513,14 +532,17 @@ class C
         [Fact]
         public void SimpleDeclaration()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         for(Int32 x = goo; ; ) { }
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -589,14 +611,17 @@ class C
         public void NestedDeconstructionAssignment()
         {
             // (E, ...) = is a deconstruction-assignment
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (x, (y, z)) = goo;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -681,14 +706,17 @@ class C
         public void DeconstructionDeclaration()
         {
             // `(T id, ...) = ...` is a deconstruction-declaration
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (Int32 a, Int64 b) = goo;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -771,14 +799,17 @@ class C
         public void NestedDeconstructionDeclaration()
         {
             // `(T id, (...)) = ...` is a deconstruction-declaration
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         ((Int32 a, Int64 b), Int32 c) = goo;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -884,14 +915,17 @@ class C
         public void VarDeconstructionDeclaration()
         {
             // `var (id, ...) = ...` is a deconstruction-declaration
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         var (a, b) = goo;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -961,14 +995,17 @@ class C
         public void VarNestedDeconstructionDeclaration()
         {
             // `var ((id, ...), ...) = ...` is a deconstruction-declaration
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
         class C
         {
             void Goo()
             {
                 var ((a, b), c) = goo;
             }
-        }", options: TestOptions.Regular.WithTuplesFeature());
+        }",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1048,14 +1085,17 @@ class C
         public void VarMethodCall()
         {
             // `var(...);` is a method call
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         var(a, b);
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1122,14 +1162,17 @@ class C
         [Fact]
         public void MixedDeconstructionVariables()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (Int32 x, var (y, z)) = goo;
     }
-}", options: TestOptions.Regular.WithTuplesFeature());
+}",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1221,14 +1264,17 @@ class C
         [Fact]
         public void DeconstructionFor()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
         class C
         {
             void Goo()
             {
                 for ((Int32 x, Int64 y) = goo; ; ) { }
             }
-        }", options: TestOptions.Regular.WithTuplesFeature());
+        }",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1319,14 +1365,17 @@ class C
         [Fact]
         public void VarDeconstructionFor()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
         class C
         {
             void Goo()
             {
                 for (var (x, y) = goo; ; ) { }
             }
-        }", options: TestOptions.Regular.WithTuplesFeature());
+        }",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1404,14 +1453,16 @@ class C
         [Fact]
         public void DeconstructionForeach()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
         class C
         {
             void Goo()
             {
                 foreach ((int x, var y) in goo) { }
             }
-        }");
+        }"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1497,14 +1548,17 @@ class C
         [Fact]
         public void VarDeconstructionForeach()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
         class C
         {
             void Goo()
             {
                 foreach (var (x, y) in goo) { }
             }
-        }", options: TestOptions.Regular.WithTuplesFeature());
+        }",
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1653,7 +1707,10 @@ class C
         [Fact]
         public void DeconstructionForEachInScript()
         {
-            var tree = UsingTree(@" foreach ((int x, int y) in new[] { (1, 2) }) { }; ", options: TestOptions.Script);
+            var tree = UsingTree(
+                @" foreach ((int x, int y) in new[] { (1, 2) }) { }; ",
+                options: TestOptions.Script
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1752,14 +1809,16 @@ class C
         [Fact]
         public void DeconstructionDeclarationWithDiscard()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void Goo()
     {
         (int _, var _, var (_, _), _) = e;
     }
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1875,7 +1934,11 @@ class C
         public void TupleArray()
         {
             var text = "(T, T)[] id;";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             Assert.Equal(SyntaxKind.LocalDeclarationStatement, statement.Kind());
@@ -1888,7 +1951,11 @@ class C
         public void ParenthesizedExpression()
         {
             var text = "(x).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             Assert.Equal(SyntaxKind.ExpressionStatement, statement.Kind());
@@ -1900,7 +1967,11 @@ class C
         public void TupleLiteralStatement()
         {
             var text = "(x, x).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             Assert.Equal(SyntaxKind.ExpressionStatement, statement.Kind());
@@ -1912,7 +1983,11 @@ class C
         public void Statement4()
         {
             var text = "((x)).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             Assert.Equal(SyntaxKind.ExpressionStatement, statement.Kind());
@@ -1924,7 +1999,11 @@ class C
         public void Statement5()
         {
             var text = "((x, y) = M()).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             Assert.Equal(SyntaxKind.ExpressionStatement, statement.Kind());
@@ -1941,7 +2020,11 @@ class C
         public void CastWithTupleType()
         {
             var text = "(((x, y))z).Goo();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             Assert.Equal(SyntaxKind.ExpressionStatement, statement.Kind());
@@ -1958,7 +2041,11 @@ class C
         public void NotACast()
         {
             var text = "((Int32.MaxValue, Int32.MaxValue)).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             var expression = ((ExpressionStatementSyntax)statement).Expression;
@@ -1972,7 +2059,11 @@ class C
         public void AlsoNotACast()
         {
             var text = "((x, y)).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             var expression = ((ExpressionStatementSyntax)statement).Expression;
@@ -1986,7 +2077,11 @@ class C
         public void StillNotACast()
         {
             var text = "((((x, y)))).ToString();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             var expression = ((ExpressionStatementSyntax)statement).Expression;
@@ -2002,7 +2097,11 @@ class C
         public void LambdaInExpressionStatement()
         {
             var text = "(a) => a;"; // syntax ok
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             var expression = ((ExpressionStatementSyntax)statement).Expression;
@@ -2013,7 +2112,11 @@ class C
         public void LambdaWithBodyInExpressionStatement()
         {
             var text = "(a, b) => { };"; // syntax ok
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
 
             var expression = ((ExpressionStatementSyntax)statement).Expression;
@@ -2024,7 +2127,11 @@ class C
         public void InvalidStatement()
         {
             var text = "(x, y)? = M();"; // error
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.True(statement.HasErrors);
         }
 
@@ -2033,7 +2140,11 @@ class C
         public void ConfusedForWithDeconstruction()
         {
             var text = "for ((int x, var (y, z)) in goo) { }";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
 
             // This expectation is wrong. We should expect a foreach statement (because the 'in' keyword is there)
             Assert.True(statement.Kind() == SyntaxKind.ForStatement);
@@ -2043,7 +2154,11 @@ class C
         public void NullableTuple()
         {
             var text = "(x, y)? z = M();";
-            var statement = SyntaxFactory.ParseStatement(text, offset: 0, options: TestOptions.Regular.WithTuplesFeature());
+            var statement = SyntaxFactory.ParseStatement(
+                text,
+                offset: 0,
+                options: TestOptions.Regular.WithTuplesFeature()
+            );
             Assert.False(statement.HasErrors);
             var declaration = ((LocalDeclarationStatementSyntax)statement).Declaration;
             var nullable = (NullableTypeSyntax)declaration.Type;
@@ -2054,7 +2169,7 @@ class C
         public void BadTupleElementTypeInDeconstruction01()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -2071,10 +2186,12 @@ namespace System
         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,18): error CS8136: Deconstruction 'var (...)' form disallows a specific type for 'var'.
-                //         int (x1, x2) = (1, 2);
-                Diagnostic(ErrorCode.ERR_DeconstructionVarFormDisallowsSpecificType, "(x1, x2)").WithLocation(6, 13)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,18): error CS8136: Deconstruction 'var (...)' form disallows a specific type for 'var'.
+                    //         int (x1, x2) = (1, 2);
+                    Diagnostic(ErrorCode.ERR_DeconstructionVarFormDisallowsSpecificType, "(x1, x2)")
+                        .WithLocation(6, 13)
                 );
         }
 
@@ -2082,7 +2199,7 @@ namespace System
         public void MixedDeclarationAndAssignmentInTupleDeconstruct()
         {
             var source =
-@"
+                @"
 class C
 {
     int x2, x3;
@@ -2108,7 +2225,7 @@ namespace System
         public void MixedDeclarationAndAssignmentInTupleDeconstructCSharp9()
         {
             var source =
-@"
+                @"
 class C
 {
     int x2, x3;
@@ -2127,20 +2244,32 @@ namespace System
         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (7,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not available in C# 9.0. Please use language version 10.0 or greater.
-                //         (int x1, x2) = (1, 2);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "(int x1, x2) = (1, 2)").WithArguments("Mixed declarations and expressions in deconstruction", "10.0").WithLocation(7, 9),
-                // (8,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not available in C# 9.0. Please use language version 10.0 or greater.
-                //         (x3, int x4) = (1, 2);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "(x3, int x4) = (1, 2)").WithArguments("Mixed declarations and expressions in deconstruction", "10.0").WithLocation(8, 9));
+            CreateCompilation(source, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (7,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    //         (int x1, x2) = (1, 2);
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "(int x1, x2) = (1, 2)")
+                        .WithArguments(
+                            "Mixed declarations and expressions in deconstruction",
+                            "10.0"
+                        )
+                        .WithLocation(7, 9),
+                    // (8,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    //         (x3, int x4) = (1, 2);
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "(x3, int x4) = (1, 2)")
+                        .WithArguments(
+                            "Mixed declarations and expressions in deconstruction",
+                            "10.0"
+                        )
+                        .WithLocation(8, 9)
+                );
         }
 
         [Fact, WorkItem(12803, "https://github.com/dotnet/roslyn/issues/12803")]
         public void SwapAssignmentShouldNotBeParsedAsDeconstructionDeclaration()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(ref int x, ref int y)
@@ -2157,15 +2286,14 @@ namespace System
         public ValueTuple(T1 item1, T2 item2) { this.Item1 = item1; this.Item2 = item2; }
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                );
+            CreateCompilation(source).VerifyDiagnostics();
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue()
         {
             var source =
-@"
+                @"
 class C
 {
     void M()
@@ -2182,7 +2310,7 @@ class C
         public void NoDeconstructionAsLvalue_1()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(string e)
@@ -2190,26 +2318,35 @@ class C
         var(x, y) += e;            // error 1
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,9): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         var(x, y) += e;            // error 1
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 9),
-                // (6,9): error CS0103: The name 'var' does not exist in the current context
-                //         var(x, y) += e;            // error 1
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 9),
-                // (6,13): error CS0103: The name 'x' does not exist in the current context
-                //         var(x, y) += e;            // error 1
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 13),
-                // (6,16): error CS0103: The name 'y' does not exist in the current context
-                //         var(x, y) += e;            // error 1
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 16));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,9): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         var(x, y) += e;            // error 1
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 9),
+                    // (6,9): error CS0103: The name 'var' does not exist in the current context
+                    //         var(x, y) += e;            // error 1
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 9),
+                    // (6,13): error CS0103: The name 'x' does not exist in the current context
+                    //         var(x, y) += e;            // error 1
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 13),
+                    // (6,16): error CS0103: The name 'y' does not exist in the current context
+                    //         var(x, y) += e;            // error 1
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 16)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_2()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(string e)
@@ -2217,26 +2354,35 @@ class C
         var(x, y)++;               // error 2
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,9): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         var(x, y)++;               // error 2
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 9),
-                // (6,9): error CS0103: The name 'var' does not exist in the current context
-                //         var(x, y)++;               // error 2
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 9),
-                // (6,13): error CS0103: The name 'x' does not exist in the current context
-                //         var(x, y)++;               // error 2
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 13),
-                // (6,16): error CS0103: The name 'y' does not exist in the current context
-                //         var(x, y)++;               // error 2
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 16));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,9): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         var(x, y)++;               // error 2
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 9),
+                    // (6,9): error CS0103: The name 'var' does not exist in the current context
+                    //         var(x, y)++;               // error 2
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 9),
+                    // (6,13): error CS0103: The name 'x' does not exist in the current context
+                    //         var(x, y)++;               // error 2
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 13),
+                    // (6,16): error CS0103: The name 'y' does not exist in the current context
+                    //         var(x, y)++;               // error 2
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 16)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_3()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(string e)
@@ -2244,26 +2390,35 @@ class C
         ++var(x, y);               // error 3
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,11): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         ++var(x, y);               // error 3
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 11),
-                // (6,11): error CS0103: The name 'var' does not exist in the current context
-                //         ++var(x, y);               // error 3
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 11),
-                // (6,15): error CS0103: The name 'x' does not exist in the current context
-                //         ++var(x, y);               // error 3
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 15),
-                // (6,18): error CS0103: The name 'y' does not exist in the current context
-                //         ++var(x, y);               // error 3
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 18));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,11): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         ++var(x, y);               // error 3
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 11),
+                    // (6,11): error CS0103: The name 'var' does not exist in the current context
+                    //         ++var(x, y);               // error 3
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 11),
+                    // (6,15): error CS0103: The name 'x' does not exist in the current context
+                    //         ++var(x, y);               // error 3
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 15),
+                    // (6,18): error CS0103: The name 'y' does not exist in the current context
+                    //         ++var(x, y);               // error 3
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 18)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_4()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(string e)
@@ -2273,26 +2428,35 @@ class C
 
     void X(out object x) { x = null; }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,15): error CS0103: The name 'var' does not exist in the current context
-                //         X(out var(x, y));          // error 4
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 15),
-                // (6,19): error CS0103: The name 'x' does not exist in the current context
-                //         X(out var(x, y));          // error 4
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 19),
-                // (6,22): error CS0103: The name 'y' does not exist in the current context
-                //         X(out var(x, y));          // error 4
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 22),
-                // (6,15): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         X(out var(x, y));          // error 4
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 15));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,15): error CS0103: The name 'var' does not exist in the current context
+                    //         X(out var(x, y));          // error 4
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 15),
+                    // (6,19): error CS0103: The name 'x' does not exist in the current context
+                    //         X(out var(x, y));          // error 4
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 19),
+                    // (6,22): error CS0103: The name 'y' does not exist in the current context
+                    //         X(out var(x, y));          // error 4
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 22),
+                    // (6,15): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         X(out var(x, y));          // error 4
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 15)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_5()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(string e)
@@ -2302,26 +2466,35 @@ class C
 
     void X(ref object x) { x = null; }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,15): error CS0103: The name 'var' does not exist in the current context
-                //         X(ref var(x, y));          // error 5
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 15),
-                // (6,19): error CS0103: The name 'x' does not exist in the current context
-                //         X(ref var(x, y));          // error 5
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 19),
-                // (6,22): error CS0103: The name 'y' does not exist in the current context
-                //         X(ref var(x, y));          // error 5
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 22),
-                // (6,15): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         X(ref var(x, y));          // error 5
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 15));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,15): error CS0103: The name 'var' does not exist in the current context
+                    //         X(ref var(x, y));          // error 5
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 15),
+                    // (6,19): error CS0103: The name 'x' does not exist in the current context
+                    //         X(ref var(x, y));          // error 5
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 19),
+                    // (6,22): error CS0103: The name 'y' does not exist in the current context
+                    //         X(ref var(x, y));          // error 5
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 22),
+                    // (6,15): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         X(ref var(x, y));          // error 5
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 15)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_6()
         {
             var source =
-@"
+                @"
 class C
 {
     ref object M(string e)
@@ -2329,26 +2502,35 @@ class C
         return ref var(x, y);      // error 6
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,20): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         return ref var(x, y);      // error 6
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 20),
-                // (6,20): error CS0103: The name 'var' does not exist in the current context
-                //         return ref var(x, y);      // error 6
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 20),
-                // (6,24): error CS0103: The name 'x' does not exist in the current context
-                //         return ref var(x, y);      // error 6
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 24),
-                // (6,27): error CS0103: The name 'y' does not exist in the current context
-                //         return ref var(x, y);      // error 6
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 27));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,20): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         return ref var(x, y);      // error 6
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 20),
+                    // (6,20): error CS0103: The name 'var' does not exist in the current context
+                    //         return ref var(x, y);      // error 6
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 20),
+                    // (6,24): error CS0103: The name 'x' does not exist in the current context
+                    //         return ref var(x, y);      // error 6
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 24),
+                    // (6,27): error CS0103: The name 'y' does not exist in the current context
+                    //         return ref var(x, y);      // error 6
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 27)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_7()
         {
             var source =
-@"
+                @"
 class C
 {
     void M(string e)
@@ -2356,26 +2538,35 @@ class C
         ref int x = ref var(x, y); // error 7
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,25): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         ref int x = ref var(x, y); // error 7
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)").WithLocation(6, 25),
-                // (6,25): error CS0103: The name 'var' does not exist in the current context
-                //         ref int x = ref var(x, y); // error 7
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 25),
-                // (6,32): error CS0103: The name 'y' does not exist in the current context
-                //         ref int x = ref var(x, y); // error 7
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y").WithArguments("y").WithLocation(6, 32),
-                // (6,29): error CS0165: Use of unassigned local variable 'x'
-                //         ref int x = ref var(x, y); // error 7
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x").WithLocation(6, 29));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,25): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         ref int x = ref var(x, y); // error 7
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(x, y)")
+                        .WithLocation(6, 25),
+                    // (6,25): error CS0103: The name 'var' does not exist in the current context
+                    //         ref int x = ref var(x, y); // error 7
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 25),
+                    // (6,32): error CS0103: The name 'y' does not exist in the current context
+                    //         ref int x = ref var(x, y); // error 7
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 32),
+                    // (6,29): error CS0165: Use of unassigned local variable 'x'
+                    //         ref int x = ref var(x, y); // error 7
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 29)
+                );
         }
 
         [Fact]
         public void NoDeconstructionAsLvalue_8()
         {
             var source =
-@"
+                @"
 class C
 {
     void object M(string e)
@@ -2383,22 +2574,33 @@ class C
         var (x, 1) = e;            // error 8
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (4,10): error CS1519: Invalid token 'object' in class, record, struct, or interface member declaration
-                //     void object M(string e)
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "object").WithArguments("object").WithLocation(4, 10),
-                // (6,9): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
-                //         var (x, 1) = e;            // error 8
-                Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var (x, 1)").WithLocation(6, 9),
-                // (6,9): error CS0103: The name 'var' does not exist in the current context
-                //         var (x, 1) = e;            // error 8
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "var").WithArguments("var").WithLocation(6, 9),
-                // (6,14): error CS0103: The name 'x' does not exist in the current context
-                //         var (x, 1) = e;            // error 8
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x").WithArguments("x").WithLocation(6, 14),
-                // (4,17): error CS0161: 'C.M(string)': not all code paths return a value
-                //     void object M(string e)
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "M").WithArguments("C.M(string)").WithLocation(4, 17));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,10): error CS1519: Invalid token 'object' in class, record, struct, or interface member declaration
+                    //     void object M(string e)
+                    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "object")
+                        .WithArguments("object")
+                        .WithLocation(4, 10),
+                    // (6,9): error CS8199: The syntax 'var (...)' as an lvalue is reserved.
+                    //         var (x, 1) = e;            // error 8
+                    Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var (x, 1)")
+                        .WithLocation(6, 9),
+                    // (6,9): error CS0103: The name 'var' does not exist in the current context
+                    //         var (x, 1) = e;            // error 8
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
+                        .WithArguments("var")
+                        .WithLocation(6, 9),
+                    // (6,14): error CS0103: The name 'x' does not exist in the current context
+                    //         var (x, 1) = e;            // error 8
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 14),
+                    // (4,17): error CS0161: 'C.M(string)': not all code paths return a value
+                    //     void object M(string e)
+                    Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
+                        .WithArguments("C.M(string)")
+                        .WithLocation(4, 17)
+                );
         }
 
         [Fact]
@@ -3130,11 +3332,12 @@ class C
         [Fact]
         public void BadTypeForDeconstruct_04()
         {
-            UsingStatement(@"var[] (x, y) = e;",
+            UsingStatement(
+                @"var[] (x, y) = e;",
                 // (1,5): error CS0443: Syntax error; value expected
                 // var[] (x, y) = e;
                 Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 5)
-                );
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.SimpleAssignmentExpression);
@@ -3242,14 +3445,17 @@ class C
         [Fact]
         public void BadTypeForDeconstruct_06()
         {
-            UsingStatement(@"var? (x, y) = e;",
+            UsingStatement(
+                @"var? (x, y) = e;",
                 // (1,16): error CS1003: Syntax error, ':' expected
                 // var? (x, y) = e;
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(1, 16),
                 // (1,16): error CS1525: Invalid expression term ';'
                 // var? (x, y) = e;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(1, 16)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(1, 16)
+            );
             N(SyntaxKind.ExpressionStatement);
             {
                 N(SyntaxKind.ConditionalExpression);
@@ -3359,7 +3565,8 @@ class C
         [Fact, WorkItem(15934, "https://github.com/dotnet/roslyn/issues/15934")]
         public void PointerTypeInDeconstruction()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M()
@@ -3378,11 +3585,14 @@ class C
     }
 }
 ";
-            UsingTree(source,
+            UsingTree(
+                source,
                 // (7,10): error CS1525: Invalid expression term 'int'
                 //         (int* x1, int y1) = e;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(7, 10)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(7, 10)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -3478,7 +3688,9 @@ class C
                                                         N(SyntaxKind.OpenBracketToken);
                                                         N(SyntaxKind.OmittedArraySizeExpression);
                                                         {
-                                                            N(SyntaxKind.OmittedArraySizeExpressionToken);
+                                                            N(
+                                                                SyntaxKind.OmittedArraySizeExpressionToken
+                                                            );
                                                         }
                                                         N(SyntaxKind.CloseBracketToken);
                                                     }
@@ -3540,7 +3752,9 @@ class C
                                                         N(SyntaxKind.OpenBracketToken);
                                                         N(SyntaxKind.OmittedArraySizeExpression);
                                                         {
-                                                            N(SyntaxKind.OmittedArraySizeExpressionToken);
+                                                            N(
+                                                                SyntaxKind.OmittedArraySizeExpressionToken
+                                                            );
                                                         }
                                                         N(SyntaxKind.CloseBracketToken);
                                                     }

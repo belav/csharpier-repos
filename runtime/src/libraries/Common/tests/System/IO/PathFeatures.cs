@@ -12,7 +12,7 @@ namespace System.IO
         {
             Uninitialized,
             True,
-            False
+            False,
         }
 
         // Note that this class is using APIs that allow it to run on all platforms (including Core 5.0)
@@ -68,7 +68,11 @@ namespace System.IO
             {
                 // Not particularly elegant
                 if (s_onCore == State.Uninitialized)
-                    s_onCore = typeof(object).GetTypeInfo().Assembly.GetName().Name == "System.Private.CoreLib" ? State.True : State.False;
+                    s_onCore =
+                        typeof(object).GetTypeInfo().Assembly.GetName().Name
+                        == "System.Private.CoreLib"
+                            ? State.True
+                            : State.False;
 
                 return s_onCore == State.True;
             }

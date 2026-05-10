@@ -1,33 +1,38 @@
 //------------------------------------------------------------------------------
 // <copyright file="XsltDebugger.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">sdub</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Xsl.XsltOld.Debugger {
-    using Res = System.Xml.Utils.Res;
+namespace System.Xml.Xsl.XsltOld.Debugger
+{
     using System;
     using System.Xml;
     using System.Xml.XPath;
-    
-    internal interface IStackFrame {
-        XPathNavigator    Instruction     { get; }
-        XPathNodeIterator NodeSet         { get; }
+    using Res = System.Xml.Utils.Res;
+
+    internal interface IStackFrame
+    {
+        XPathNavigator Instruction { get; }
+        XPathNodeIterator NodeSet { get; }
+
         // Variables:
-        int               GetVariablesCount();
-        XPathNavigator    GetVariable(int varIndex);
-        object            GetVariableValue(int varIndex);
+        int GetVariablesCount();
+        XPathNavigator GetVariable(int varIndex);
+        object GetVariableValue(int varIndex);
     }
 
-    internal interface IXsltProcessor {
-        int         StackDepth { get; }
+    internal interface IXsltProcessor
+    {
+        int StackDepth { get; }
         IStackFrame GetStackFrame(int depth);
     }
 
-    internal interface IXsltDebugger {
+    internal interface IXsltDebugger
+    {
         string GetBuiltInTemplatesUri();
-        void   OnInstructionCompile(XPathNavigator styleSheetNavigator);
-        void   OnInstructionExecute(IXsltProcessor xsltProcessor);
+        void OnInstructionCompile(XPathNavigator styleSheetNavigator);
+        void OnInstructionExecute(IXsltProcessor xsltProcessor);
     }
 }

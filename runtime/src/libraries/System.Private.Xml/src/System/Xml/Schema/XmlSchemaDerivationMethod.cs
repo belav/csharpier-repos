@@ -32,6 +32,6 @@ namespace System.Xml.Schema
         All = 0x00FF,
 
         [XmlIgnore]
-        None = 0x0100
+        None = 0x0100,
     }
 }

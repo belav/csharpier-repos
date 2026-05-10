@@ -9,22 +9,22 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed class ConversionSignatureComparer : IEqualityComparer<SourceUserDefinedConversionSymbol>
+    internal sealed class ConversionSignatureComparer
+        : IEqualityComparer<SourceUserDefinedConversionSymbol>
     {
-        private static readonly ConversionSignatureComparer s_comparer = new ConversionSignatureComparer();
+        private static readonly ConversionSignatureComparer s_comparer =
+            new ConversionSignatureComparer();
         public static ConversionSignatureComparer Comparer
         {
-            get
-            {
-                return s_comparer;
-            }
+            get { return s_comparer; }
         }
 
-        private ConversionSignatureComparer()
-        {
-        }
+        private ConversionSignatureComparer() { }
 
-        public bool Equals(SourceUserDefinedConversionSymbol member1, SourceUserDefinedConversionSymbol member2)
+        public bool Equals(
+            SourceUserDefinedConversionSymbol member1,
+            SourceUserDefinedConversionSymbol member2
+        )
         {
             if (ReferenceEquals(member1, member2))
             {
@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // SPEC: The signature of a conversion operator consists of the source type and the
             // SPEC: target type. The implicit or explicit classification of a conversion operator
-            // SPEC: is not part of the operator's signature. 
+            // SPEC: is not part of the operator's signature.
 
             // We might be in an error recovery situation in which there are too many or too
             // few formal parameters declared. If we are, just say that they are unequal.
@@ -48,9 +48,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            return member1.ReturnType.Equals(member2.ReturnType, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes)
-                && member1.ParameterTypesWithAnnotations[0].Equals(member2.ParameterTypesWithAnnotations[0], TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes)
-                && (member1.Name == WellKnownMemberNames.ImplicitConversionName || member2.Name == WellKnownMemberNames.ImplicitConversionName || member1.Name == member2.Name);
+            return member1.ReturnType.Equals(
+                    member2.ReturnType,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+                && member1
+                    .ParameterTypesWithAnnotations[0]
+                    .Equals(
+                        member2.ParameterTypesWithAnnotations[0],
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
+                && (
+                    member1.Name == WellKnownMemberNames.ImplicitConversionName
+                    || member2.Name == WellKnownMemberNames.ImplicitConversionName
+                    || member1.Name == member2.Name
+                );
         }
 
         public int GetHashCode(SourceUserDefinedConversionSymbol member)

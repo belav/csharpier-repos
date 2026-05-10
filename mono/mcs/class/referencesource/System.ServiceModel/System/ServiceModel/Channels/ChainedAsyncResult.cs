@@ -8,7 +8,11 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
 
-    internal delegate IAsyncResult ChainedBeginHandler(TimeSpan timeout, AsyncCallback asyncCallback, object state);
+    internal delegate IAsyncResult ChainedBeginHandler(
+        TimeSpan timeout,
+        AsyncCallback asyncCallback,
+        object state
+    );
     internal delegate void ChainedEndHandler(IAsyncResult result);
 
     class ChainedAsyncResult : AsyncResult
@@ -26,14 +30,27 @@ namespace System.ServiceModel.Channels
             this.timeoutHelper = new TimeoutHelper(timeout);
         }
 
-        public ChainedAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, ChainedBeginHandler begin1, ChainedEndHandler end1, ChainedBeginHandler begin2, ChainedEndHandler end2)
+        public ChainedAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            ChainedBeginHandler begin1,
+            ChainedEndHandler end1,
+            ChainedBeginHandler begin2,
+            ChainedEndHandler end2
+        )
             : base(callback, state)
         {
             this.timeoutHelper = new TimeoutHelper(timeout);
             Begin(begin1, end1, begin2, end2);
         }
 
-        protected void Begin(ChainedBeginHandler begin1, ChainedEndHandler end1, ChainedBeginHandler begin2, ChainedEndHandler end2)
+        protected void Begin(
+            ChainedBeginHandler begin1,
+            ChainedEndHandler end1,
+            ChainedBeginHandler begin2,
+            ChainedEndHandler end2
+        )
         {
             this.end1 = end1;
             this.begin2 = begin2;
@@ -130,7 +147,14 @@ namespace System.ServiceModel.Channels
     {
         IList<ICommunicationObject> collection;
 
-        public ChainedCloseAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, ChainedBeginHandler begin1, ChainedEndHandler end1, IList<ICommunicationObject> collection)
+        public ChainedCloseAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            ChainedBeginHandler begin1,
+            ChainedEndHandler end1,
+            IList<ICommunicationObject> collection
+        )
             : base(timeout, callback, state)
         {
             this.collection = collection;
@@ -138,7 +162,14 @@ namespace System.ServiceModel.Channels
             Begin(BeginClose, EndClose, begin1, end1);
         }
 
-        public ChainedCloseAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, ChainedBeginHandler begin1, ChainedEndHandler end1, params ICommunicationObject[] objs)
+        public ChainedCloseAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            ChainedBeginHandler begin1,
+            ChainedEndHandler end1,
+            params ICommunicationObject[] objs
+        )
             : base(timeout, callback, state)
         {
             collection = new List<ICommunicationObject>();
@@ -165,7 +196,14 @@ namespace System.ServiceModel.Channels
     {
         IList<ICommunicationObject> collection;
 
-        public ChainedOpenAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, ChainedBeginHandler begin1, ChainedEndHandler end1, IList<ICommunicationObject> collection)
+        public ChainedOpenAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            ChainedBeginHandler begin1,
+            ChainedEndHandler end1,
+            IList<ICommunicationObject> collection
+        )
             : base(timeout, callback, state)
         {
             this.collection = collection;
@@ -173,7 +211,14 @@ namespace System.ServiceModel.Channels
             Begin(begin1, end1, BeginOpen, EndOpen);
         }
 
-        public ChainedOpenAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, ChainedBeginHandler begin1, ChainedEndHandler end1, params ICommunicationObject[] objs)
+        public ChainedOpenAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            ChainedBeginHandler begin1,
+            ChainedEndHandler end1,
+            params ICommunicationObject[] objs
+        )
             : base(timeout, callback, state)
         {
             collection = new List<ICommunicationObject>();

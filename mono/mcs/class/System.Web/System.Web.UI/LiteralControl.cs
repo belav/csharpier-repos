@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,46 +31,49 @@
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [ToolboxItem(false)]
+    public class LiteralControl : Control, ITextControl
+    {
+        string _text;
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ToolboxItem(false)]
-        public class LiteralControl : Control, ITextControl
+        public LiteralControl()
         {
-                string _text;
-
-			public LiteralControl ()
-			{
-				EnableViewState = false;
-				AutoID = false;
-
-			}
-
-			public LiteralControl (string text)
-				: this ()
-			{
-				Text = text;
-			}
-
-                public virtual string Text {
-                        get { return _text; }
-                        set {
-                                _text = (value == null) ? String.Empty : value;
-                        }
-                }
-
-		protected internal override void Render (HtmlTextWriter output)
-                {
-                        output.Write (_text);
-                }
-
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new EmptyControlCollection (this);
-		}
+            EnableViewState = false;
+            AutoID = false;
         }
-}
 
+        public LiteralControl(string text)
+            : this()
+        {
+            Text = text;
+        }
+
+        public virtual string Text
+        {
+            get { return _text; }
+            set { _text = (value == null) ? String.Empty : value; }
+        }
+
+        protected internal override void Render(HtmlTextWriter output)
+        {
+            output.Write(_text);
+        }
+
+        protected override ControlCollection CreateControlCollection()
+        {
+            return new EmptyControlCollection(this);
+        }
+    }
+}

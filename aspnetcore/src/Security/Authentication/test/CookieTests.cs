@@ -360,8 +360,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         var options = services
             .BuildServiceProvider()
             .GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>();
-        Assert.Throws<OptionsValidationException>(
-            () => options.Get(CookieAuthenticationDefaults.AuthenticationScheme)
+        Assert.Throws<OptionsValidationException>(() =>
+            options.Get(CookieAuthenticationDefaults.AuthenticationScheme)
         );
     }
 
@@ -378,8 +378,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         );
         using var server = host.GetTestServer();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await SendAsync(server, "http://example.com/testpath")
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await SendAsync(server, "http://example.com/testpath")
         );
     }
 
@@ -396,8 +396,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         );
 
         using var server = host.GetTestServer();
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await SendAsync(server, "http://example.com/testpath")
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await SendAsync(server, "http://example.com/testpath")
         );
     }
 
@@ -1696,11 +1696,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                         app.UseAuthentication();
                         app.Run(async context =>
                         {
-                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                () =>
-                                    context.ChallengeAsync(
-                                        CookieAuthenticationDefaults.AuthenticationScheme
-                                    )
+                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                context.ChallengeAsync(
+                                    CookieAuthenticationDefaults.AuthenticationScheme
+                                )
                             );
                         });
                     })

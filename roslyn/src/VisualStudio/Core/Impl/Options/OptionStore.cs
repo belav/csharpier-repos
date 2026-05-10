@@ -50,8 +50,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _updatedValues = ImmutableDictionary<OptionKey2, object?>.Empty;
         }
 
-        public ImmutableArray<(OptionKey2 key, object? oldValue, object? newValue)> GetChangedOptions()
-            => _updatedValues.SelectAsArray(entry => (entry.Key, _globalValues[entry.Key], entry.Value));
+        public ImmutableArray<(
+            OptionKey2 key,
+            object? oldValue,
+            object? newValue
+        )> GetChangedOptions() =>
+            _updatedValues.SelectAsArray(entry =>
+                (entry.Key, _globalValues[entry.Key], entry.Value)
+            );
 
         bool IOptionsReader.TryGetOption<T>(OptionKey2 optionKey, out T value)
         {
@@ -59,11 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return true;
         }
 
-        public T GetOption<T>(Option2<T> option)
-            => (T)GetOption(new OptionKey2(option))!;
+        public T GetOption<T>(Option2<T> option) => (T)GetOption(new OptionKey2(option))!;
 
-        public T GetOption<T>(PerLanguageOption2<T> option, string language)
-            => (T)GetOption(new OptionKey2(option, language))!;
+        public T GetOption<T>(PerLanguageOption2<T> option, string language) =>
+            (T)GetOption(new OptionKey2(option, language))!;
 
         public T GetOption<T>(IOption2 option, string? language)
         {
@@ -88,11 +93,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return value;
         }
 
-        public void SetOption<T>(Option2<T> option, T value)
-            => SetOption(new OptionKey2(option), value);
+        public void SetOption<T>(Option2<T> option, T value) =>
+            SetOption(new OptionKey2(option), value);
 
-        public void SetOption<T>(PerLanguageOption2<T> option, string language, T value)
-            => SetOption(new OptionKey2(option, language), value);
+        public void SetOption<T>(PerLanguageOption2<T> option, string language, T value) =>
+            SetOption(new OptionKey2(option, language), value);
 
         public void SetOption(IOption2 option, string? language, object? value)
         {

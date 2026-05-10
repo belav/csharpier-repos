@@ -11,27 +11,20 @@ using System.Runtime.InteropServices;
 
 public class Test_expandheap
 {
-
-
-
     public static int Main()
     {
         Console.WriteLine("First Alloc");
-        GCUtil.Alloc(1024*1024*4, 30);
+        GCUtil.Alloc(1024 * 1024 * 4, 30);
         GCUtil.FreeNonPins();
         GC.Collect();
 
         Console.WriteLine("Second Alloc");
-        GCUtil.Alloc(1024*1024*4, 50);
+        GCUtil.Alloc(1024 * 1024 * 4, 50);
         GCUtil.FreeNonPins();
         GC.Collect();
         GCUtil.FreePins();
 
         Console.WriteLine("Test passed");
         return 100;
-
     }
-
-   
-
 }

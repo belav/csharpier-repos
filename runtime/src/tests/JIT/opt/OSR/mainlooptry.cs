@@ -8,22 +8,22 @@ using Xunit;
 
 public class MainLoopTry
 {
-   [Fact]
-   public static int TestEntryPoint()
-   {
-       Console.WriteLine($"starting sum");
-       int result = 0;
-       try 
-       {
-           for (int i = 0; i < 1_000_000; i++)
-           {
-               result += i;
-           }
-       }
-       finally
-       {
-           Console.WriteLine($"done, sum is {result}");
-       }
-       return result == 1783293664 ? 100 : -1;
-   }  
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        Console.WriteLine($"starting sum");
+        int result = 0;
+        try
+        {
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                result += i;
+            }
+        }
+        finally
+        {
+            Console.WriteLine($"done, sum is {result}");
+        }
+        return result == 1783293664 ? 100 : -1;
+    }
 }

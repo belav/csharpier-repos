@@ -36,11 +36,14 @@ public class SqliteDateOnlyMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (method.DeclaringType == typeof(DateOnly)
+        if (
+            method.DeclaringType == typeof(DateOnly)
             && method.Name == nameof(DateOnly.FromDateTime)
-            && arguments.Count == 1)
+            && arguments.Count == 1
+        )
         {
             return _sqlExpressionFactory.Date(method.ReturnType, arguments[0]);
         }

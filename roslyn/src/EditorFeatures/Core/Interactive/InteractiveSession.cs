@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         #region State only accessible by queued tasks
 
         // Use to serialize InteractiveHost process initialization and code execution.
-        // The process may restart any time and we need to react to that by clearing 
-        // the current solution and setting up the first submission project. 
+        // The process may restart any time and we need to react to that by clearing
+        // the current solution and setting up the first submission project.
         // At the same time a code submission might be in progress.
         // If we left these operations run in parallel we might get into a state
         // inconsistent with the state of the host.
@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             ITextDocumentFactoryService documentFactory,
             EditorOptionsService editorOptionsService,
             InteractiveEvaluatorLanguageInfoProvider languageInfo,
-            string initialWorkingDirectory)
+            string initialWorkingDirectory
+        )
         {
             _workspace = workspace;
             _threadingContext = threadingContext;
@@ -100,9 +101,15 @@ namespace Microsoft.CodeAnalysis.Interactive
             _sourceSearchPaths = ImmutableArray<string>.Empty;
             _workingDirectory = initialWorkingDirectory;
 
-            _hostDirectory = Path.Combine(Path.GetDirectoryName(typeof(InteractiveSession).Assembly.Location)!, "InteractiveHost");
+            _hostDirectory = Path.Combine(
+                Path.GetDirectoryName(typeof(InteractiveSession).Assembly.Location)!,
+                "InteractiveHost"
+            );
 
-            Host = new InteractiveHost(languageInfo.ReplServiceProviderType, initialWorkingDirectory);
+            Host = new InteractiveHost(
+                languageInfo.ReplServiceProviderType,
+                initialWorkingDirectory
+            );
             Host.ProcessInitialized += ProcessInitialized;
         }
 
@@ -117,32 +124,40 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// <summary>
         /// Invoked by <see cref="InteractiveHost"/> when a new process initialization completes.
         /// </summary>
-        private void ProcessInitialized(InteractiveHostPlatformInfo platformInfo, InteractiveHostOptions options, RemoteExecutionResult result)
+        private void ProcessInitialized(
+            InteractiveHostPlatformInfo platformInfo,
+            InteractiveHostOptions options,
+            RemoteExecutionResult result
+        )
         {
             Contract.ThrowIfFalse(result.InitializationResult != null);
 
-            _ = _taskQueue.ScheduleTask(nameof(ProcessInitialized), () =>
-            {
-                _workspace.ResetSolution();
-
-                _currentSubmissionProjectId = null;
-                _lastSuccessfulSubmissionProjectId = null;
-
-                // update host state:
-                _platformInfo = platformInfo;
-                _initializationResult = result.InitializationResult;
-                _hostOptions = options;
-                UpdatePathsNoLock(result);
-
-                // Create submission projects for buffers that were added by the Interactive Window 
-                // before the process initialization completed.
-                foreach (var (buffer, languageName) in _pendingBuffers)
+            _ = _taskQueue.ScheduleTask(
+                nameof(ProcessInitialized),
+                () =>
                 {
-                    AddSubmissionProjectNoLock(buffer, languageName);
-                }
+                    _workspace.ResetSolution();
 
-                _pendingBuffers.Clear();
-            }, _shutdownCancellationSource.Token);
+                    _currentSubmissionProjectId = null;
+                    _lastSuccessfulSubmissionProjectId = null;
+
+                    // update host state:
+                    _platformInfo = platformInfo;
+                    _initializationResult = result.InitializationResult;
+                    _hostOptions = options;
+                    UpdatePathsNoLock(result);
+
+                    // Create submission projects for buffers that were added by the Interactive Window
+                    // before the process initialization completed.
+                    foreach (var (buffer, languageName) in _pendingBuffers)
+                    {
+                        AddSubmissionProjectNoLock(buffer, languageName);
+                    }
+
+                    _pendingBuffers.Clear();
+                },
+                _shutdownCancellationSource.Token
+            );
         }
 
         /// <summary>
@@ -153,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             _taskQueue.ScheduleTask(
                 nameof(AddSubmissionProject),
                 () => AddSubmissionProjectNoLock(submissionBuffer, _languageInfo.LanguageName),
-                _shutdownCancellationSource.Token);
+                _shutdownCancellationSource.Token
+            );
         }
 
         private void AddSubmissionProjectNoLock(ITextBuffer submissionBuffer, string languageName)
@@ -173,8 +189,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             {
                 Debug.Assert(_lastSuccessfulSubmissionProjectId == null);
 
-                // The Interactive Window may have added the first language buffer before 
-                // the host initialization has completed. Do not create a submission project 
+                // The Interactive Window may have added the first language buffer before
+                // the host initialization has completed. Do not create a submission project
                 // for the buffer in such case. It will be created when the initialization completes.
                 if (initResult == null)
                 {
@@ -185,15 +201,25 @@ namespace Microsoft.CodeAnalysis.Interactive
                 imports = initResult.Imports.ToImmutableArrayOrEmpty();
 
                 var metadataService = _workspace.Services.GetRequiredService<IMetadataService>();
-                references = initResult.MetadataReferencePaths.ToImmutableArrayOrEmpty().SelectAsArray(
-                    (path, metadataService) => (MetadataReference)metadataService.GetReference(path, MetadataReferenceProperties.Assembly),
-                    metadataService);
+                references = initResult
+                    .MetadataReferencePaths.ToImmutableArrayOrEmpty()
+                    .SelectAsArray(
+                        (path, metadataService) =>
+                            (MetadataReference)
+                                metadataService.GetReference(
+                                    path,
+                                    MetadataReferenceProperties.Assembly
+                                ),
+                        metadataService
+                    );
 
                 // if a script was specified in .rps file insert a project with a document that represents it:
                 initializationScriptPath = initResult!.ScriptPath;
                 if (initializationScriptPath != null)
                 {
-                    initializationScriptProjectId = ProjectId.CreateNewId(CreateNewSubmissionName());
+                    initializationScriptProjectId = ProjectId.CreateNewId(
+                        CreateNewSubmissionName()
+                    );
 
                     _lastSuccessfulSubmissionProjectId = initializationScriptProjectId;
 
@@ -208,7 +234,10 @@ namespace Microsoft.CodeAnalysis.Interactive
             var newSubmissionProjectName = CreateNewSubmissionName();
             var newSubmissionText = submissionBuffer.CurrentSnapshot.AsText();
             _currentSubmissionProjectId = ProjectId.CreateNewId(newSubmissionProjectName);
-            var newSubmissionDocumentId = DocumentId.CreateNewId(_currentSubmissionProjectId, newSubmissionProjectName);
+            var newSubmissionDocumentId = DocumentId.CreateNewId(
+                _currentSubmissionProjectId,
+                newSubmissionProjectName
+            );
 
             // If the _initializationResult is not null we must also have the host options.
             RoslynDebug.AssertNotNull(_hostOptions);
@@ -217,44 +246,79 @@ namespace Microsoft.CodeAnalysis.Interactive
             RoslynDebug.AssertNotNull(hostPathDirectory);
 
             // Create a file path for the submission located in the interactive host directory.
-            var newSubmissionFilePath = Path.Combine(hostPathDirectory, $"Submission{SubmissionCount}{_languageInfo.Extension}");
+            var newSubmissionFilePath = Path.Combine(
+                hostPathDirectory,
+                $"Submission{SubmissionCount}{_languageInfo.Extension}"
+            );
 
             // Associate the path with both the editor document and our roslyn document so LSP can make requests on it.
             _textDocumentFactoryService.TryGetTextDocument(submissionBuffer, out var textDocument);
             textDocument.Rename(newSubmissionFilePath);
 
             // Chain projects to the the last submission that successfully executed.
-            _workspace.SetCurrentSolution(solution =>
-            {
-                if (initializationScriptProjectId != null)
+            _workspace.SetCurrentSolution(
+                solution =>
                 {
-                    RoslynDebug.AssertNotNull(initializationScriptPath);
+                    if (initializationScriptProjectId != null)
+                    {
+                        RoslynDebug.AssertNotNull(initializationScriptPath);
 
-                    var initProject = CreateSubmissionProjectNoLock(solution, initializationScriptProjectId, previousSubmissionProjectId: null, languageName, initializationScriptImports, initializationScriptReferences);
-                    solution = initProject.Solution.AddDocument(
-                        DocumentId.CreateNewId(initializationScriptProjectId, debugName: initializationScriptPath),
-                        Path.GetFileName(initializationScriptPath),
-                        new WorkspaceFileTextLoader(solution.Services, initializationScriptPath, defaultEncoding: null));
-                }
+                        var initProject = CreateSubmissionProjectNoLock(
+                            solution,
+                            initializationScriptProjectId,
+                            previousSubmissionProjectId: null,
+                            languageName,
+                            initializationScriptImports,
+                            initializationScriptReferences
+                        );
+                        solution = initProject.Solution.AddDocument(
+                            DocumentId.CreateNewId(
+                                initializationScriptProjectId,
+                                debugName: initializationScriptPath
+                            ),
+                            Path.GetFileName(initializationScriptPath),
+                            new WorkspaceFileTextLoader(
+                                solution.Services,
+                                initializationScriptPath,
+                                defaultEncoding: null
+                            )
+                        );
+                    }
 
-                var newSubmissionProject = CreateSubmissionProjectNoLock(solution, _currentSubmissionProjectId, _lastSuccessfulSubmissionProjectId, languageName, imports, references);
-                solution = newSubmissionProject.Solution.AddDocument(
-                    newSubmissionDocumentId,
-                    newSubmissionProjectName,
-                    newSubmissionText,
-                    filePath: newSubmissionFilePath);
+                    var newSubmissionProject = CreateSubmissionProjectNoLock(
+                        solution,
+                        _currentSubmissionProjectId,
+                        _lastSuccessfulSubmissionProjectId,
+                        languageName,
+                        imports,
+                        references
+                    );
+                    solution = newSubmissionProject.Solution.AddDocument(
+                        newSubmissionDocumentId,
+                        newSubmissionProjectName,
+                        newSubmissionText,
+                        filePath: newSubmissionFilePath
+                    );
 
-                return solution;
-            }, WorkspaceChangeKind.SolutionChanged);
+                    return solution;
+                },
+                WorkspaceChangeKind.SolutionChanged
+            );
 
             // opening document will start workspace listening to changes in this text container
             _workspace.OpenDocument(newSubmissionDocumentId, submissionBuffer.AsTextContainer());
         }
 
-        private string CreateNewSubmissionName()
-            => "Submission#" + SubmissionCount++;
+        private string CreateNewSubmissionName() => "Submission#" + SubmissionCount++;
 
-        private Project CreateSubmissionProjectNoLock(Solution solution, ProjectId newSubmissionProjectId, ProjectId? previousSubmissionProjectId, string languageName, ImmutableArray<string> imports, ImmutableArray<MetadataReference> references)
+        private Project CreateSubmissionProjectNoLock(
+            Solution solution,
+            ProjectId newSubmissionProjectId,
+            ProjectId? previousSubmissionProjectId,
+            string languageName,
+            ImmutableArray<string> imports,
+            ImmutableArray<MetadataReference> references
+        )
         {
             var name = newSubmissionProjectId.DebugName;
             RoslynDebug.AssertNotNull(name);
@@ -262,20 +326,36 @@ namespace Microsoft.CodeAnalysis.Interactive
             CompilationOptions compilationOptions;
             if (previousSubmissionProjectId != null)
             {
-                compilationOptions = solution.GetRequiredProject(previousSubmissionProjectId).CompilationOptions!;
+                compilationOptions = solution
+                    .GetRequiredProject(previousSubmissionProjectId)
+                    .CompilationOptions!;
 
-                var metadataResolver = (RuntimeMetadataReferenceResolver)compilationOptions.MetadataReferenceResolver!;
-                if (metadataResolver.PathResolver.BaseDirectory != _workingDirectory ||
-                    !metadataResolver.PathResolver.SearchPaths.SequenceEqual(_referenceSearchPaths))
+                var metadataResolver = (RuntimeMetadataReferenceResolver)
+                    compilationOptions.MetadataReferenceResolver!;
+                if (
+                    metadataResolver.PathResolver.BaseDirectory != _workingDirectory
+                    || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(
+                        _referenceSearchPaths
+                    )
+                )
                 {
-                    compilationOptions = compilationOptions.WithMetadataReferenceResolver(metadataResolver.WithRelativePathResolver(new RelativePathResolver(_referenceSearchPaths, _workingDirectory)));
+                    compilationOptions = compilationOptions.WithMetadataReferenceResolver(
+                        metadataResolver.WithRelativePathResolver(
+                            new RelativePathResolver(_referenceSearchPaths, _workingDirectory)
+                        )
+                    );
                 }
 
-                var sourceResolver = (SourceFileResolver)compilationOptions.SourceReferenceResolver!;
-                if (sourceResolver.BaseDirectory != _workingDirectory ||
-                    !sourceResolver.SearchPaths.SequenceEqual(_sourceSearchPaths))
+                var sourceResolver = (SourceFileResolver)
+                    compilationOptions.SourceReferenceResolver!;
+                if (
+                    sourceResolver.BaseDirectory != _workingDirectory
+                    || !sourceResolver.SearchPaths.SequenceEqual(_sourceSearchPaths)
+                )
                 {
-                    compilationOptions = compilationOptions.WithSourceReferenceResolver(CreateSourceReferenceResolver(sourceResolver.SearchPaths, _workingDirectory));
+                    compilationOptions = compilationOptions.WithSourceReferenceResolver(
+                        CreateSourceReferenceResolver(sourceResolver.SearchPaths, _workingDirectory)
+                    );
                 }
             }
             else
@@ -283,9 +363,15 @@ namespace Microsoft.CodeAnalysis.Interactive
                 var metadataService = _workspace.Services.GetRequiredService<IMetadataService>();
                 compilationOptions = _languageInfo.GetSubmissionCompilationOptions(
                     name,
-                    CreateMetadataReferenceResolver(metadataService, _platformInfo, _referenceSearchPaths, _workingDirectory),
+                    CreateMetadataReferenceResolver(
+                        metadataService,
+                        _platformInfo,
+                        _referenceSearchPaths,
+                        _workingDirectory
+                    ),
                     CreateSourceReferenceResolver(_sourceSearchPaths, _workingDirectory),
-                    imports);
+                    imports
+                );
             }
 
             solution = solution.AddProject(
@@ -298,17 +384,23 @@ namespace Microsoft.CodeAnalysis.Interactive
                         language: languageName,
                         compilationOutputFilePaths: default,
                         checksumAlgorithm: SourceHashAlgorithms.Default,
-                        isSubmission: true),
+                        isSubmission: true
+                    ),
                     compilationOptions: compilationOptions,
                     parseOptions: _languageInfo.ParseOptions,
                     documents: null,
                     projectReferences: null,
                     metadataReferences: references,
-                    hostObjectType: typeof(InteractiveScriptGlobals)));
+                    hostObjectType: typeof(InteractiveScriptGlobals)
+                )
+            );
 
             if (previousSubmissionProjectId != null)
             {
-                solution = solution.AddProjectReference(newSubmissionProjectId, new ProjectReference(previousSubmissionProjectId));
+                solution = solution.AddProjectReference(
+                    newSubmissionProjectId,
+                    new ProjectReference(previousSubmissionProjectId)
+                );
             }
 
             return solution.GetRequiredProject(newSubmissionProjectId);
@@ -320,19 +412,23 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// </summary>
         internal Task<bool> ExecuteCodeAsync(string text)
         {
-            return _taskQueue.ScheduleTask(nameof(ExecuteCodeAsync), async () =>
-            {
-                var result = await Host.ExecuteAsync(text).ConfigureAwait(false);
-                if (result.Success)
+            return _taskQueue.ScheduleTask(
+                nameof(ExecuteCodeAsync),
+                async () =>
                 {
-                    _lastSuccessfulSubmissionProjectId = _currentSubmissionProjectId;
+                    var result = await Host.ExecuteAsync(text).ConfigureAwait(false);
+                    if (result.Success)
+                    {
+                        _lastSuccessfulSubmissionProjectId = _currentSubmissionProjectId;
 
-                    // update local search paths - remote paths has already been updated
-                    UpdatePathsNoLock(result);
-                }
+                        // update local search paths - remote paths has already been updated
+                        UpdatePathsNoLock(result);
+                    }
 
-                return result.Success;
-            }, _shutdownCancellationSource.Token);
+                    return result.Success;
+                },
+                _shutdownCancellationSource.Token
+            );
         }
 
         internal async Task<bool> ResetAsync(InteractiveHostOptions options)
@@ -345,7 +441,7 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 var result = await Host.ResetAsync(options).ConfigureAwait(false);
 
-                // Note: Not calling UpdatePathsNoLock here. The paths will be updated by ProcessInitialized 
+                // Note: Not calling UpdatePathsNoLock here. The paths will be updated by ProcessInitialized
                 // which is executed once the new host process finishes its initialization.
 
                 return result.Success;
@@ -356,34 +452,62 @@ namespace Microsoft.CodeAnalysis.Interactive
             }
         }
 
-        public InteractiveHostOptions GetHostOptions(bool initialize, InteractiveHostPlatform? platform)
-            => InteractiveHostOptions.CreateFromDirectory(
+        public InteractiveHostOptions GetHostOptions(
+            bool initialize,
+            InteractiveHostPlatform? platform
+        ) =>
+            InteractiveHostOptions.CreateFromDirectory(
                 _hostDirectory,
                 initialize ? _languageInfo.InteractiveResponseFileName : null,
                 CultureInfo.CurrentCulture,
                 CultureInfo.CurrentUICulture,
-                 platform ?? Host.OptionsOpt?.Platform ?? InteractiveHost.DefaultPlatform);
+                platform ?? Host.OptionsOpt?.Platform ?? InteractiveHost.DefaultPlatform
+            );
 
-        private static RuntimeMetadataReferenceResolver CreateMetadataReferenceResolver(IMetadataService metadataService, InteractiveHostPlatformInfo platformInfo, ImmutableArray<string> searchPaths, string baseDirectory)
+        private static RuntimeMetadataReferenceResolver CreateMetadataReferenceResolver(
+            IMetadataService metadataService,
+            InteractiveHostPlatformInfo platformInfo,
+            ImmutableArray<string> searchPaths,
+            string baseDirectory
+        )
         {
             return new RuntimeMetadataReferenceResolver(
                 searchPaths,
                 baseDirectory,
-                gacFileResolver: platformInfo.HasGlobalAssemblyCache ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture) : null,
+                gacFileResolver: platformInfo.HasGlobalAssemblyCache
+                    ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
+                    : null,
                 platformAssemblyPaths: platformInfo.PlatformAssemblyPaths,
-                fileReferenceProvider: (path, properties) => metadataService.GetReference(path, properties));
+                fileReferenceProvider: (path, properties) =>
+                    metadataService.GetReference(path, properties)
+            );
         }
 
-        private static SourceReferenceResolver CreateSourceReferenceResolver(ImmutableArray<string> searchPaths, string baseDirectory)
-            => new SourceFileResolver(searchPaths, baseDirectory);
+        private static SourceReferenceResolver CreateSourceReferenceResolver(
+            ImmutableArray<string> searchPaths,
+            string baseDirectory
+        ) => new SourceFileResolver(searchPaths, baseDirectory);
 
-        public Task SetPathsAsync(ImmutableArray<string> referenceSearchPaths, ImmutableArray<string> sourceSearchPaths, string workingDirectory)
+        public Task SetPathsAsync(
+            ImmutableArray<string> referenceSearchPaths,
+            ImmutableArray<string> sourceSearchPaths,
+            string workingDirectory
+        )
         {
-            return _taskQueue.ScheduleTask(nameof(ExecuteCodeAsync), async () =>
-            {
-                var result = await Host.SetPathsAsync(referenceSearchPaths, sourceSearchPaths, workingDirectory).ConfigureAwait(false);
-                UpdatePathsNoLock(result);
-            }, _shutdownCancellationSource.Token);
+            return _taskQueue.ScheduleTask(
+                nameof(ExecuteCodeAsync),
+                async () =>
+                {
+                    var result = await Host.SetPathsAsync(
+                            referenceSearchPaths,
+                            sourceSearchPaths,
+                            workingDirectory
+                        )
+                        .ConfigureAwait(false);
+                    UpdatePathsNoLock(result);
+                },
+                _shutdownCancellationSource.Token
+            );
         }
 
         private void UpdatePathsNoLock(RemoteExecutionResult result)

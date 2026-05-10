@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.Options
     /// Interface used to validate options.
     /// </summary>
     /// <typeparam name="TOptions">The options type to validate.</typeparam>
-    public interface IValidateOptions<TOptions> where TOptions : class
+    public interface IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Validates a specific named options instance (or all when name is null).

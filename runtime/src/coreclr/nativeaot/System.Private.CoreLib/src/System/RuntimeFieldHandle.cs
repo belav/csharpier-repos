@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-
 using Internal.Runtime.Augments;
 
 namespace System
@@ -39,11 +38,21 @@ namespace System
             if (_value == IntPtr.Zero || handle._value == IntPtr.Zero)
                 return false;
 
-            string fieldName1, fieldName2;
-            RuntimeTypeHandle declaringType1, declaringType2;
+            string fieldName1,
+                fieldName2;
+            RuntimeTypeHandle declaringType1,
+                declaringType2;
 
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(this, out declaringType1, out fieldName1);
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(handle, out declaringType2, out fieldName2);
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(
+                this,
+                out declaringType1,
+                out fieldName1
+            );
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(
+                handle,
+                out declaringType2,
+                out fieldName2
+            );
 
             return declaringType1.Equals(declaringType2) && fieldName1 == fieldName2;
         }
@@ -61,7 +70,11 @@ namespace System
 
             string fieldName;
             RuntimeTypeHandle declaringType;
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(this, out declaringType, out fieldName);
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(
+                this,
+                out declaringType,
+                out fieldName
+            );
 
             int hashcode = declaringType.GetHashCode();
             return (hashcode + _rotl(hashcode, 13)) ^ fieldName.GetHashCode();
@@ -81,7 +94,11 @@ namespace System
             return !left.Equals(right);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

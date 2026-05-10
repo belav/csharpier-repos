@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     internal partial class ILBuilder
     {
-        public void EmitNumericConversion(Microsoft.Cci.PrimitiveTypeCode fromPredefTypeKind, Microsoft.Cci.PrimitiveTypeCode toPredefTypeKind, bool @checked)
+        public void EmitNumericConversion(
+            Microsoft.Cci.PrimitiveTypeCode fromPredefTypeKind,
+            Microsoft.Cci.PrimitiveTypeCode toPredefTypeKind,
+            bool @checked
+        )
         {
             bool fromUnsigned = fromPredefTypeKind.IsUnsigned();
 
@@ -24,7 +28,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_i1_un : ILOpCode.Conv_ovf_i1);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_i1_un : ILOpCode.Conv_ovf_i1
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_i1);
                             break;
@@ -38,7 +44,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_u1_un : ILOpCode.Conv_ovf_u1);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_u1_un : ILOpCode.Conv_ovf_u1
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_u1);
                             break;
@@ -54,7 +62,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_i2_un : ILOpCode.Conv_ovf_i2);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_i2_un : ILOpCode.Conv_ovf_i2
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_i2);
                             break;
@@ -71,7 +81,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_u2_un : ILOpCode.Conv_ovf_u2);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_u2_un : ILOpCode.Conv_ovf_u2
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_u2);
                             break;
@@ -94,7 +106,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP in unchecked
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_i4_un : ILOpCode.Conv_ovf_i4);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_i4_un : ILOpCode.Conv_ovf_i4
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_i4);
                             break;
@@ -117,7 +131,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP in unchecked
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_u4_un : ILOpCode.Conv_ovf_u4);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_u4_un : ILOpCode.Conv_ovf_u4
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_u4);
                             break;
@@ -156,7 +172,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break; // NOP
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_i_un : ILOpCode.Conv_ovf_i);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_i_un : ILOpCode.Conv_ovf_i
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_i);
                             break;
@@ -187,7 +205,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             break;
                         default:
                             if (@checked)
-                                this.EmitOpCode(fromUnsigned ? ILOpCode.Conv_ovf_u_un : ILOpCode.Conv_ovf_u);
+                                this.EmitOpCode(
+                                    fromUnsigned ? ILOpCode.Conv_ovf_u_un : ILOpCode.Conv_ovf_u
+                                );
                             else
                                 this.EmitOpCode(ILOpCode.Conv_u);
                             break;

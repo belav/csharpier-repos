@@ -10,10 +10,18 @@ namespace System.Reflection.TypeLoading
         // On NetCore, call the real thing.
 
         public static bool IsSignatureType(this Type type) => type.IsSignatureType;
+
         public static bool IsSZArray(this Type type) => type.IsSZArray;
+
         public static bool IsVariableBoundArray(this Type type) => type.IsVariableBoundArray;
-        public static bool IsGenericMethodParameter(this Type type) => type.IsGenericMethodParameter;
-        public static Type MakeSignatureGenericType(this Type genericTypeDefinition, Type[] typeArguments) => Type.MakeGenericSignatureType(genericTypeDefinition, typeArguments);
+
+        public static bool IsGenericMethodParameter(this Type type) =>
+            type.IsGenericMethodParameter;
+
+        public static Type MakeSignatureGenericType(
+            this Type genericTypeDefinition,
+            Type[] typeArguments
+        ) => Type.MakeGenericSignatureType(genericTypeDefinition, typeArguments);
     }
 
     /// <summary>
@@ -22,7 +30,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class LeveledTypeInfo : TypeInfo
     {
-        protected LeveledTypeInfo() : base() { }
+        protected LeveledTypeInfo()
+            : base() { }
 
         public abstract bool IsFunctionPointer { get; }
         public abstract bool IsUnmanagedFunctionPointer { get; }
@@ -33,21 +42,13 @@ namespace System.Reflection.TypeLoading
         public abstract Type[] GetRequiredCustomModifiers();
     }
 
-    internal abstract class LeveledAssembly : Assembly
-    {
-    }
+    internal abstract class LeveledAssembly : Assembly { }
 
-    internal abstract class LeveledConstructorInfo : ConstructorInfo
-    {
-    }
+    internal abstract class LeveledConstructorInfo : ConstructorInfo { }
 
-    internal abstract class LeveledMethodInfo : MethodInfo
-    {
-    }
+    internal abstract class LeveledMethodInfo : MethodInfo { }
 
-    internal abstract class LeveledEventInfo : EventInfo
-    {
-    }
+    internal abstract class LeveledEventInfo : EventInfo { }
 
     internal abstract class LeveledFieldInfo : FieldInfo
     {
@@ -64,7 +65,5 @@ namespace System.Reflection.TypeLoading
         public abstract Type GetModifiedPropertyType();
     }
 
-    internal abstract class LeveledCustomAttributeData : CustomAttributeData
-    {
-    }
+    internal abstract class LeveledCustomAttributeData : CustomAttributeData { }
 }

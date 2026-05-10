@@ -128,11 +128,26 @@ namespace System.Text.RegularExpressions.Tests
         public static void ICollectionOfT_CopyTo_Invalid()
         {
             ICollection<Capture> collection = CreateCollection();
-            AssertExtensions.Throws<ArgumentNullException>("array", () => collection.CopyTo((Capture[])null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("arrayIndex", () => collection.CopyTo(new Capture[1], -1));
-            AssertExtensions.Throws<ArgumentException>(null, () => collection.CopyTo(new Capture[1], 0));
-            AssertExtensions.Throws<ArgumentException>(null, () => collection.CopyTo(new Capture[1], 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("arrayIndex", () => collection.CopyTo(new Capture[1], 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => collection.CopyTo((Capture[])null, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "arrayIndex",
+                () => collection.CopyTo(new Capture[1], -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => collection.CopyTo(new Capture[1], 0)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => collection.CopyTo(new Capture[1], 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "arrayIndex",
+                () => collection.CopyTo(new Capture[1], 2)
+            );
         }
 
         [Fact]
@@ -167,8 +182,13 @@ namespace System.Text.RegularExpressions.Tests
         {
             CaptureCollection col = CreateCollection();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(col);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                col
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             Capture[] items = itemProperty.GetValue(info.Instance) as Capture[];
             Assert.Equal(col, items);
         }
@@ -176,7 +196,12 @@ namespace System.Text.RegularExpressions.Tests
         [Fact]
         public static void DebuggerAttributeTests_Null()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() => DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(CaptureCollection), null));
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                    typeof(CaptureCollection),
+                    null
+                )
+            );
             Assert.IsType<ArgumentNullException>(ex.InnerException);
         }
     }

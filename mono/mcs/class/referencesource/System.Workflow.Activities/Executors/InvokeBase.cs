@@ -1,18 +1,20 @@
 using System;
-using System.Reflection;
 using System.Collections;
 using System.Diagnostics;
-using System.Workflow.ComponentModel;
-using System.Workflow.Runtime;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using System.Workflow.ComponentModel;
+using System.Workflow.Runtime;
 
 namespace System.Workflow.Activities
 {
     internal static class InvokeHelper
     {
-        internal static void InitializeParameters(MethodInfo methodBase, WorkflowParameterBindingCollection parameterBindings)
+        internal static void InitializeParameters(
+            MethodInfo methodBase,
+            WorkflowParameterBindingCollection parameterBindings
+        )
         {
             ParameterInfo[] parameters = methodBase.GetParameters();
             foreach (ParameterInfo parameter in parameters)
@@ -28,7 +30,10 @@ namespace System.Workflow.Activities
             }
         }
 
-        internal static object[] GetParameters(MethodBase methodBase, WorkflowParameterBindingCollection parameterBindings)
+        internal static object[] GetParameters(
+            MethodBase methodBase,
+            WorkflowParameterBindingCollection parameterBindings
+        )
         {
             ParameterInfo[] formalParameters = methodBase.GetParameters();
             object[] actualParameters = new object[formalParameters.Length];
@@ -46,7 +51,11 @@ namespace System.Workflow.Activities
             return actualParameters;
         }
 
-        internal static object[] GetParameters(MethodBase methodBase, WorkflowParameterBindingCollection parameterBindings, out ParameterModifier[] parameterModifiers)
+        internal static object[] GetParameters(
+            MethodBase methodBase,
+            WorkflowParameterBindingCollection parameterBindings,
+            out ParameterModifier[] parameterModifiers
+        )
         {
             ParameterInfo[] formalParameters = methodBase.GetParameters();
             object[] actualParameters = new object[formalParameters.Length];
@@ -75,7 +84,11 @@ namespace System.Workflow.Activities
 
                     if (formatter == null)
                         formatter = new BinaryFormatter();
-                    actualParameters[index] = CloneOutboundValue(binding.Value, formatter, formalParameter.Name);
+                    actualParameters[index] = CloneOutboundValue(
+                        binding.Value,
+                        formatter,
+                        formalParameter.Name
+                    );
                 }
                 index++;
             }
@@ -84,7 +97,11 @@ namespace System.Workflow.Activities
             return actualParameters;
         }
 
-        internal static object CloneOutboundValue(object source, BinaryFormatter formatter, string name)
+        internal static object CloneOutboundValue(
+            object source,
+            BinaryFormatter formatter,
+            string name
+        )
         {
             if (source == null || source.GetType().IsValueType)
                 return source;
@@ -100,14 +117,21 @@ namespace System.Workflow.Activities
             }
             catch (SerializationException e)
             {
-                throw new InvalidOperationException(SR.GetString(SR.Error_CallExternalMethodArgsSerializationException, name), e);
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_CallExternalMethodArgsSerializationException, name),
+                    e
+                );
             }
             stream.Position = 0;
             object cloned = formatter.Deserialize(stream);
             return cloned;
         }
 
-        internal static void SaveOutRefParameters(object[] actualParameters, MethodBase methodBase, WorkflowParameterBindingCollection parameterBindings)
+        internal static void SaveOutRefParameters(
+            object[] actualParameters,
+            MethodBase methodBase,
+            WorkflowParameterBindingCollection parameterBindings
+        )
         {
             int index = 0;
             BinaryFormatter formatter = null;
@@ -115,13 +139,20 @@ namespace System.Workflow.Activities
             {
                 if (parameterBindings.Contains(formalParameter.Name))
                 {
-                    if (formalParameter.ParameterType.IsByRef || (formalParameter.IsIn && formalParameter.IsOut))
+                    if (
+                        formalParameter.ParameterType.IsByRef
+                        || (formalParameter.IsIn && formalParameter.IsOut)
+                    )
                     {
                         WorkflowParameterBinding binding = parameterBindings[formalParameter.Name];
 
                         if (formatter == null)
                             formatter = new BinaryFormatter();
-                        binding.Value = CloneOutboundValue(actualParameters[index], formatter, formalParameter.Name);
+                        binding.Value = CloneOutboundValue(
+                            actualParameters[index],
+                            formatter,
+                            formalParameter.Name
+                        );
                     }
                 }
                 index++;

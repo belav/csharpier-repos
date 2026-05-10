@@ -15,7 +15,12 @@ namespace Microsoft.CodeAnalysis.NavigationBar
     internal interface IRemoteNavigationBarItemService
     {
         ValueTask<ImmutableArray<SerializableNavigationBarItem>> GetItemsAsync(
-            Checksum solutionChecksum, DocumentId documentId, bool supportsCodeGeneration, bool forceFrozenPartialSemanticsForCrossProcessOperations, CancellationToken cancellationToken);
+            Checksum solutionChecksum,
+            DocumentId documentId,
+            bool supportsCodeGeneration,
+            bool forceFrozenPartialSemanticsForCrossProcessOperations,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
@@ -26,14 +31,19 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         [DataMember(Order = 1)]
         public readonly string Text;
+
         [DataMember(Order = 2)]
         public readonly Glyph Glyph;
+
         [DataMember(Order = 3)]
         public readonly bool Bolded;
+
         [DataMember(Order = 4)]
         public readonly bool Grayed;
+
         [DataMember(Order = 5)]
         public readonly int Indent;
+
         [DataMember(Order = 6)]
         public readonly ImmutableArray<SerializableNavigationBarItem> ChildItems;
 
@@ -41,8 +51,10 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         [DataMember(Order = 7)]
         public readonly string? Name;
+
         [DataMember(Order = 8)]
         public readonly bool IsObsolete;
+
         [DataMember(Order = 9)]
         public readonly SymbolItemLocation? Location;
 
@@ -55,6 +67,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
 
         [DataMember(Order = 11)]
         public readonly string? ContainerName;
+
         [DataMember(Order = 12)]
         public readonly SymbolKey? EventSymbolKey;
 
@@ -77,7 +90,8 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             SymbolKey? destinationTypeSymbolKey,
             string? containerName,
             SymbolKey? eventSymbolKey,
-            SymbolKey? methodToReplicateSymbolKey)
+            SymbolKey? methodToReplicateSymbolKey
+        )
         {
             Kind = kind;
             Text = text;
@@ -95,37 +109,193 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             MethodToReplicateSymbolKey = methodToReplicateSymbolKey;
         }
 
-        public RoslynNavigationBarItem Rehydrate()
-            => this.Kind switch
+        public RoslynNavigationBarItem Rehydrate() =>
+            this.Kind switch
             {
-                RoslynNavigationBarItemKind.Symbol => new SymbolItem(Name!, Text, Glyph, IsObsolete, Location!.Value, ChildItems.SelectAsArray(i => i.Rehydrate()), Indent, Bolded),
-                RoslynNavigationBarItemKind.GenerateDefaultConstructor => new GenerateDefaultConstructor(Text, DestinationTypeSymbolKey!.Value),
-                RoslynNavigationBarItemKind.GenerateEventHandler => new GenerateEventHandler(Text, Glyph, ContainerName!, EventSymbolKey!.Value, DestinationTypeSymbolKey!.Value),
-                RoslynNavigationBarItemKind.GenerateFinalizer => new GenerateFinalizer(Text, DestinationTypeSymbolKey!.Value),
-                RoslynNavigationBarItemKind.GenerateMethod => new GenerateMethod(Text, Glyph, DestinationTypeSymbolKey!.Value, MethodToReplicateSymbolKey!.Value),
-                RoslynNavigationBarItemKind.Actionless => new ActionlessItem(Text, Glyph, ChildItems.SelectAsArray(v => v.Rehydrate()), Indent, Bolded, Grayed),
+                RoslynNavigationBarItemKind.Symbol => new SymbolItem(
+                    Name!,
+                    Text,
+                    Glyph,
+                    IsObsolete,
+                    Location!.Value,
+                    ChildItems.SelectAsArray(i => i.Rehydrate()),
+                    Indent,
+                    Bolded
+                ),
+                RoslynNavigationBarItemKind.GenerateDefaultConstructor =>
+                    new GenerateDefaultConstructor(Text, DestinationTypeSymbolKey!.Value),
+                RoslynNavigationBarItemKind.GenerateEventHandler => new GenerateEventHandler(
+                    Text,
+                    Glyph,
+                    ContainerName!,
+                    EventSymbolKey!.Value,
+                    DestinationTypeSymbolKey!.Value
+                ),
+                RoslynNavigationBarItemKind.GenerateFinalizer => new GenerateFinalizer(
+                    Text,
+                    DestinationTypeSymbolKey!.Value
+                ),
+                RoslynNavigationBarItemKind.GenerateMethod => new GenerateMethod(
+                    Text,
+                    Glyph,
+                    DestinationTypeSymbolKey!.Value,
+                    MethodToReplicateSymbolKey!.Value
+                ),
+                RoslynNavigationBarItemKind.Actionless => new ActionlessItem(
+                    Text,
+                    Glyph,
+                    ChildItems.SelectAsArray(v => v.Rehydrate()),
+                    Indent,
+                    Bolded,
+                    Grayed
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(this.Kind),
             };
 
-        public static ImmutableArray<SerializableNavigationBarItem> Dehydrate(ImmutableArray<RoslynNavigationBarItem> values)
-            => values.SelectAsArray(v => v.Dehydrate());
+        public static ImmutableArray<SerializableNavigationBarItem> Dehydrate(
+            ImmutableArray<RoslynNavigationBarItem> values
+        ) => values.SelectAsArray(v => v.Dehydrate());
 
-        public static SerializableNavigationBarItem ActionlessItem(string text, Glyph glyph, ImmutableArray<SerializableNavigationBarItem> childItems = default, int indent = 0, bool bolded = false, bool grayed = false)
-            => new(RoslynNavigationBarItemKind.Actionless, text, glyph, bolded, grayed, indent, childItems, null, false, null, null, null, null, null);
+        public static SerializableNavigationBarItem ActionlessItem(
+            string text,
+            Glyph glyph,
+            ImmutableArray<SerializableNavigationBarItem> childItems = default,
+            int indent = 0,
+            bool bolded = false,
+            bool grayed = false
+        ) =>
+            new(
+                RoslynNavigationBarItemKind.Actionless,
+                text,
+                glyph,
+                bolded,
+                grayed,
+                indent,
+                childItems,
+                null,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
 
-        public static SerializableNavigationBarItem SymbolItem(string text, Glyph glyph, string name, bool isObsolete, SymbolItemLocation location, ImmutableArray<SerializableNavigationBarItem> childItems = default, int indent = 0, bool bolded = false, bool grayed = false)
-            => new(RoslynNavigationBarItemKind.Symbol, text, glyph, bolded, grayed, indent, childItems, name, isObsolete, location, null, null, null, null);
+        public static SerializableNavigationBarItem SymbolItem(
+            string text,
+            Glyph glyph,
+            string name,
+            bool isObsolete,
+            SymbolItemLocation location,
+            ImmutableArray<SerializableNavigationBarItem> childItems = default,
+            int indent = 0,
+            bool bolded = false,
+            bool grayed = false
+        ) =>
+            new(
+                RoslynNavigationBarItemKind.Symbol,
+                text,
+                glyph,
+                bolded,
+                grayed,
+                indent,
+                childItems,
+                name,
+                isObsolete,
+                location,
+                null,
+                null,
+                null,
+                null
+            );
 
-        public static SerializableNavigationBarItem GenerateFinalizer(string text, SymbolKey destinationTypeSymbolKey)
-            => new(RoslynNavigationBarItemKind.GenerateFinalizer, text, Glyph.MethodProtected, bolded: false, grayed: false, indent: 0, default, null, false, null, destinationTypeSymbolKey, null, null, null);
+        public static SerializableNavigationBarItem GenerateFinalizer(
+            string text,
+            SymbolKey destinationTypeSymbolKey
+        ) =>
+            new(
+                RoslynNavigationBarItemKind.GenerateFinalizer,
+                text,
+                Glyph.MethodProtected,
+                bolded: false,
+                grayed: false,
+                indent: 0,
+                default,
+                null,
+                false,
+                null,
+                destinationTypeSymbolKey,
+                null,
+                null,
+                null
+            );
 
-        public static SerializableNavigationBarItem GenerateEventHandler(string eventName, Glyph glyph, string containerName, SymbolKey eventSymbolKey, SymbolKey destinationTypeSymbolKey)
-            => new(RoslynNavigationBarItemKind.GenerateEventHandler, eventName, glyph, bolded: false, grayed: false, indent: 0, default, null, false, null, destinationTypeSymbolKey, containerName, eventSymbolKey, null);
+        public static SerializableNavigationBarItem GenerateEventHandler(
+            string eventName,
+            Glyph glyph,
+            string containerName,
+            SymbolKey eventSymbolKey,
+            SymbolKey destinationTypeSymbolKey
+        ) =>
+            new(
+                RoslynNavigationBarItemKind.GenerateEventHandler,
+                eventName,
+                glyph,
+                bolded: false,
+                grayed: false,
+                indent: 0,
+                default,
+                null,
+                false,
+                null,
+                destinationTypeSymbolKey,
+                containerName,
+                eventSymbolKey,
+                null
+            );
 
-        public static SerializableNavigationBarItem GenerateMethod(string text, Glyph glyph, SymbolKey destinationTypeSymbolId, SymbolKey methodToReplicateSymbolId)
-            => new(RoslynNavigationBarItemKind.GenerateMethod, text, glyph, bolded: false, grayed: false, indent: 0, default, null, false, null, destinationTypeSymbolId, null, null, methodToReplicateSymbolId);
+        public static SerializableNavigationBarItem GenerateMethod(
+            string text,
+            Glyph glyph,
+            SymbolKey destinationTypeSymbolId,
+            SymbolKey methodToReplicateSymbolId
+        ) =>
+            new(
+                RoslynNavigationBarItemKind.GenerateMethod,
+                text,
+                glyph,
+                bolded: false,
+                grayed: false,
+                indent: 0,
+                default,
+                null,
+                false,
+                null,
+                destinationTypeSymbolId,
+                null,
+                null,
+                methodToReplicateSymbolId
+            );
 
-        public static SerializableNavigationBarItem GenerateDefaultConstructor(string text, SymbolKey destinationTypeSymbolKey)
-            => new(RoslynNavigationBarItemKind.GenerateDefaultConstructor, text, Glyph.MethodPublic, bolded: false, grayed: false, indent: 0, default, null, false, null, destinationTypeSymbolKey, null, null, null);
+        public static SerializableNavigationBarItem GenerateDefaultConstructor(
+            string text,
+            SymbolKey destinationTypeSymbolKey
+        ) =>
+            new(
+                RoslynNavigationBarItemKind.GenerateDefaultConstructor,
+                text,
+                Glyph.MethodPublic,
+                bolded: false,
+                grayed: false,
+                indent: 0,
+                default,
+                null,
+                false,
+                null,
+                destinationTypeSymbolKey,
+                null,
+                null,
+                null
+            );
     }
 }

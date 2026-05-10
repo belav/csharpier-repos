@@ -8,17 +8,19 @@ namespace System.Composition
     /// <summary>
     ///     Specifies that a property, field, or parameter imports a particular export.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter,
-                    AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Parameter,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public class ImportAttribute : Attribute
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportAttribute"/> class, importing the
         ///     export without a contract name.
         /// </summary>
-        public ImportAttribute() : this(null)
-        {
-        }
+        public ImportAttribute()
+            : this(null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportAttribute"/> class, importing the

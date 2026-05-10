@@ -50,6 +50,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -71,8 +72,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface007.integeregererface007
 {
@@ -99,6 +98,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -116,8 +116,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface008.integeregererface008
 {
@@ -144,6 +142,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -161,8 +160,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface009.integeregererface009
 {
@@ -189,6 +186,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -206,8 +204,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface010.integeregererface010
 {
@@ -234,6 +230,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -251,8 +248,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface011.integeregererface011
 {
@@ -281,6 +276,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -298,8 +294,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface012.integeregererface012
 {
@@ -328,6 +322,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -345,8 +340,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface013.integeregererface013
 {
@@ -375,6 +368,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -392,8 +386,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface014.integeregererface014
 {
@@ -422,6 +414,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -439,8 +432,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface015.integeregererface015
 {
@@ -468,6 +459,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -485,8 +477,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integeregererfaces.integeregererface016.integeregererface016
 {
@@ -514,6 +504,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.integereger
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

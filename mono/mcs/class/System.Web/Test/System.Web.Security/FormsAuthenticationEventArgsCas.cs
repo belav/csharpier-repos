@@ -1,5 +1,5 @@
 //
-// FormsAuthenticationEventArgsCas.cs 
+// FormsAuthenticationEventArgsCas.cs
 //	- CAS unit tests for System.Web.Security.FormsAuthenticationEventArgs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
@@ -36,61 +34,66 @@ using System.Security.Permissions;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.Security {
+namespace MonoCasTests.System.Web.Security
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class FormsAuthenticationEventArgsCas : AspNetHostingMinimal
+    {
+        private HttpContext context;
+        private FormsAuthenticationEventArgs faea;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class FormsAuthenticationEventArgsCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            context = new HttpContext(null);
+            faea = new FormsAuthenticationEventArgs(context);
+        }
 
-		private HttpContext context;
-		private FormsAuthenticationEventArgs faea;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void All_Get_Deny_Unrestricted()
+        {
+            Assert.IsNotNull(faea.Context, "Context");
+            Assert.IsNull(faea.User, "User");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			context = new HttpContext (null);
-			faea = new FormsAuthenticationEventArgs (context);
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, ControlPrincipal = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void User_Set_Deny_ControlPrincipal()
+        {
+            faea.User = new GenericPrincipal(new GenericIdentity("me"), null);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void All_Get_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (faea.Context, "Context");
-			Assert.IsNull (faea.User, "User");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, ControlPrincipal = true)]
+        public void User_Set_PermitOnly_ControlPrincipal()
+        {
+            Assert.IsNull(faea.Context.User, "Context.User-before");
+            Assert.IsNull(faea.User, "User-before");
+            faea.User = new GenericPrincipal(new GenericIdentity("me"), null);
+            Assert.IsNull(faea.Context.User, "Context.User-after");
+            Assert.IsNotNull(faea.User, "User-after");
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, ControlPrincipal = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void User_Set_Deny_ControlPrincipal ()
-		{
-			faea.User = new GenericPrincipal (new GenericIdentity ("me"), null);
-		}
+        // LinkDemand
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, ControlPrincipal = true)]
-		public void User_Set_PermitOnly_ControlPrincipal ()
-		{
-			Assert.IsNull (faea.Context.User, "Context.User-before");
-			Assert.IsNull (faea.User, "User-before");
-			faea.User = new GenericPrincipal (new GenericIdentity ("me"), null);
-			Assert.IsNull (faea.Context.User, "Context.User-after");
-			Assert.IsNotNull (faea.User, "User-after");
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(HttpContext) });
+            Assert.IsNotNull(ci, ".ctor(HttpContext)");
+            return ci.Invoke(new object[1] { context });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
-			Assert.IsNotNull (ci, ".ctor(HttpContext)");
-			return ci.Invoke (new object[1] { context });
-		}
-
-		public override Type Type {
-			get { return typeof (DefaultAuthenticationEventArgs); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(DefaultAuthenticationEventArgs); }
+        }
+    }
 }

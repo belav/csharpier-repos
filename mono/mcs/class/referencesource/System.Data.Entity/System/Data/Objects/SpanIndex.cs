@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common;
+using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
-using System.Data.Common.CommandTrees;
+using System.Diagnostics;
 
 namespace System.Data.Objects.Internal
 {
@@ -31,7 +31,9 @@ namespace System.Data.Objects.Internal
         sealed private class RowTypeEqualityComparer : IEqualityComparer<RowType>
         {
             private RowTypeEqualityComparer() { }
-            internal static readonly RowTypeEqualityComparer Instance = new RowTypeEqualityComparer();
+
+            internal static readonly RowTypeEqualityComparer Instance =
+                new RowTypeEqualityComparer();
 
             #region IEqualityComparer<RowType> Members
 
@@ -63,15 +65,16 @@ namespace System.Data.Objects.Internal
         // to the query being rewritten
         private Dictionary<RowType, TypeUsage> _rowMap;
 
-        internal SpanIndex()
-        {
-        }
+        internal SpanIndex() { }
 
         internal void AddSpannedRowType(RowType spannedRowType, TypeUsage originalRowType)
         {
             Debug.Assert(spannedRowType != null, "Spanned RowType cannot be null");
             Debug.Assert(originalRowType != null, "Original RowType cannot be null");
-            Debug.Assert(originalRowType.EdmType.BuiltInTypeKind == BuiltInTypeKind.RowType, "Original RowType must be a RowType");
+            Debug.Assert(
+                originalRowType.EdmType.BuiltInTypeKind == BuiltInTypeKind.RowType,
+                "Original RowType must be a RowType"
+            );
 
             if (null == _rowMap)
             {
@@ -109,7 +112,9 @@ namespace System.Data.Objects.Internal
 
             if (null == _spanMap)
             {
-                _spanMap = new Dictionary<RowType, Dictionary<int, AssociationEndMember>>(RowTypeEqualityComparer.Instance);
+                _spanMap = new Dictionary<RowType, Dictionary<int, AssociationEndMember>>(
+                    RowTypeEqualityComparer.Instance
+                );
             }
 
             _spanMap[rowType] = columnMap;

@@ -44,7 +44,9 @@ namespace Roslyn.Test.Utilities
 
                 moduleContents.Position = 0;
 
-                using (var metadata = ModuleMetadata.CreateFromStream(moduleContents, leaveOpen: true))
+                using (
+                    var metadata = ModuleMetadata.CreateFromStream(moduleContents, leaveOpen: true)
+                )
                 {
                     var metadataReader = metadata.MetadataReader;
                     var peReader = metadata.Module.PEReaderOpt;
@@ -81,7 +83,11 @@ namespace Roslyn.Test.Utilities
                     byte[] buffer = GetBlobBuffer(peImage.GetBlobs().Single());
 
                     uint expectedChecksum = peHeaders.PEHeader.CheckSum;
-                    Blob checksumBlob = MakeBlob(buffer, peHeaders.PEHeaderStartOffset + ChecksumOffset, sizeof(uint));
+                    Blob checksumBlob = MakeBlob(
+                        buffer,
+                        peHeaders.PEHeaderStartOffset + ChecksumOffset,
+                        sizeof(uint)
+                    );
 
                     if (expectedChecksum != PeWriter.CalculateChecksum(peImage, checksumBlob))
                     {
@@ -89,24 +95,52 @@ namespace Roslyn.Test.Utilities
                     }
 
                     int snSize = snDirectory.Size;
-                    byte[] hash = ComputeSigningHash(peImage, peHeaders, checksumBlob, snOffset, snSize);
+                    byte[] hash = ComputeSigningHash(
+                        peImage,
+                        peHeaders,
+                        checksumBlob,
+                        snOffset,
+                        snSize
+                    );
 
-                    ImmutableArray<byte> publicKeyBlob = metadataReader.GetBlobContent(metadataReader.GetAssemblyDefinition().PublicKey);
+                    ImmutableArray<byte> publicKeyBlob = metadataReader.GetBlobContent(
+                        metadataReader.GetAssemblyDefinition().PublicKey
+                    );
                     // RSA parameters start after the public key offset
-                    byte[] publicKeyParams = new byte[publicKeyBlob.Length - CryptoBlobParser.s_publicKeyHeaderSize];
-                    publicKeyBlob.CopyTo(CryptoBlobParser.s_publicKeyHeaderSize, publicKeyParams, 0, publicKeyParams.Length);
-                    var snKey = CryptoBlobParser.ToRSAParameters(publicKeyParams.AsSpan(), includePrivateParameters: false);
+                    byte[] publicKeyParams = new byte[
+                        publicKeyBlob.Length - CryptoBlobParser.s_publicKeyHeaderSize
+                    ];
+                    publicKeyBlob.CopyTo(
+                        CryptoBlobParser.s_publicKeyHeaderSize,
+                        publicKeyParams,
+                        0,
+                        publicKeyParams.Length
+                    );
+                    var snKey = CryptoBlobParser.ToRSAParameters(
+                        publicKeyParams.AsSpan(),
+                        includePrivateParameters: false
+                    );
 
                     using (var rsa = RSA.Create())
                     {
                         rsa.ImportParameters(snKey);
-                        var reversedSignature = peReader.GetSectionData(snDirectory.RelativeVirtualAddress).GetContent(0, snSize).ToArray();
+                        var reversedSignature = peReader
+                            .GetSectionData(snDirectory.RelativeVirtualAddress)
+                            .GetContent(0, snSize)
+                            .ToArray();
 
                         // Unknown why the signature is reversed, but this matches the behavior of the CLR
                         // signing implementation.
                         Array.Reverse(reversedSignature);
 
-                        if (!rsa.VerifyHash(hash, reversedSignature, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1))
+                        if (
+                            !rsa.VerifyHash(
+                                hash,
+                                reversedSignature,
+                                HashAlgorithmName.SHA1,
+                                RSASignaturePadding.Pkcs1
+                            )
+                        )
                         {
                             return false;
                         }
@@ -126,12 +160,14 @@ namespace Roslyn.Test.Utilities
             PEHeaders peHeaders,
             Blob checksumBlob,
             int strongNameOffset,
-            int strongNameSize)
+            int strongNameSize
+        )
         {
             const int SectionHeaderSize = 40;
 
             bool is32bit = peHeaders.PEHeader.Magic == PEMagic.PE32;
-            int peHeadersSize = peHeaders.PEHeaderStartOffset
+            int peHeadersSize =
+                peHeaders.PEHeaderStartOffset
                 + PEHeaderSize(is32bit)
                 + SectionHeaderSize * peHeaders.SectionHeaders.Length;
 
@@ -156,8 +192,10 @@ namespace Roslyn.Test.Utilities
                     int sectionOffset = sectionHeader.PointerToRawData;
                     int sectionSize = sectionHeader.SizeOfRawData;
 
-                    if ((strongNameOffset + strongNameSize) < sectionOffset ||
-                        strongNameOffset >= (sectionOffset + sectionSize))
+                    if (
+                        (strongNameOffset + strongNameSize) < sectionOffset
+                        || strongNameOffset >= (sectionOffset + sectionSize)
+                    )
                     {
                         // No signature overlap, hash the whole section
                         hash.AppendData(buffer, sectionOffset, sectionSize);
@@ -167,7 +205,11 @@ namespace Roslyn.Test.Utilities
                         // There is overlap. Hash both sides of signature
                         hash.AppendData(buffer, sectionOffset, strongNameOffset - sectionOffset);
                         var strongNameEndOffset = strongNameOffset + strongNameSize;
-                        hash.AppendData(buffer, strongNameEndOffset, sectionSize - (strongNameEndOffset - sectionOffset));
+                        hash.AppendData(
+                            buffer,
+                            strongNameEndOffset,
+                            sectionSize - (strongNameEndOffset - sectionOffset)
+                        );
                     }
                 }
 
@@ -179,16 +221,17 @@ namespace Roslyn.Test.Utilities
         {
             return peHeaders.PEHeaderStartOffset
                 + ChecksumOffset
-                + sizeof(int)                                  // Checksum
-                + sizeof(short)                                // Subsystem
-                + sizeof(short)                                // DllCharacteristics
-                + 4 * (is32bit ? sizeof(int) : sizeof(long))   // SizeOfStackReserve, SizeOfStackCommit, SizeOfHeapReserve, SizeOfHeapCommit
-                + sizeof(int)                                  // LoaderFlags
-                + sizeof(int)                                  // NumberOfRvaAndSizes
-                + 4 * sizeof(long);                            // directory entries before Authenticode
+                + sizeof(int) // Checksum
+                + sizeof(short) // Subsystem
+                + sizeof(short) // DllCharacteristics
+                + 4 * (is32bit ? sizeof(int) : sizeof(long)) // SizeOfStackReserve, SizeOfStackCommit, SizeOfHeapReserve, SizeOfHeapCommit
+                + sizeof(int) // LoaderFlags
+                + sizeof(int) // NumberOfRvaAndSizes
+                + 4 * sizeof(long); // directory entries before Authenticode
         }
 
         private static MethodInfo s_peheaderSizeMethod;
+
         private static int PEHeaderSize(bool is32Bit)
         {
             if (s_peheaderSizeMethod == null)
@@ -197,50 +240,57 @@ namespace Roslyn.Test.Utilities
                     ref s_peheaderSizeMethod,
                     typeof(PEHeader).GetMethod(
                         "Size",
-                        BindingFlags.Static | BindingFlags.NonPublic),
-                    null);
+                        BindingFlags.Static | BindingFlags.NonPublic
+                    ),
+                    null
+                );
             }
 
             return (int)s_peheaderSizeMethod.Invoke(null, new object[] { is32Bit });
         }
 
         private static ConstructorInfo s_blobCtor;
+
         private static Blob MakeBlob(byte[] buffer, int offset, int size)
         {
             if (s_blobCtor == null)
             {
                 Interlocked.CompareExchange(
                     ref s_blobCtor,
-                    typeof(Blob).GetConstructors(
-                        BindingFlags.NonPublic | BindingFlags.Instance).Single(),
-                    null);
+                    typeof(Blob)
+                        .GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
+                        .Single(),
+                    null
+                );
             }
 
             return (Blob)s_blobCtor.Invoke(new object[] { buffer, offset, size });
         }
 
         private static FieldInfo s_bufferField;
+
         private static byte[] GetBlobBuffer(Blob blob)
         {
             if (s_bufferField == null)
             {
                 Interlocked.CompareExchange(
                     ref s_bufferField,
-                    typeof(Blob).GetField(
-                        "Buffer",
-                        BindingFlags.NonPublic | BindingFlags.Instance),
-                    null);
+                    typeof(Blob).GetField("Buffer", BindingFlags.NonPublic | BindingFlags.Instance),
+                    null
+                );
             }
 
             return (byte[])s_bufferField.GetValue(blob);
         }
 
         private static MethodInfo s_getContentToSignMethod;
+
         private static IEnumerable<Blob> GetContentToSign(
             BlobBuilder peImage,
             int peHeadersSize,
             int peHeaderAlignment,
-            Blob strongNameSignatureFixup)
+            Blob strongNameSignatureFixup
+        )
         {
             if (s_getContentToSignMethod == null)
             {
@@ -248,17 +298,23 @@ namespace Roslyn.Test.Utilities
                     ref s_getContentToSignMethod,
                     typeof(PEBuilder).GetMethod(
                         "GetContentToSign",
-                        BindingFlags.Static | BindingFlags.NonPublic),
-                    null);
+                        BindingFlags.Static | BindingFlags.NonPublic
+                    ),
+                    null
+                );
             }
 
-            return (IEnumerable<Blob>)s_getContentToSignMethod.Invoke(null, new object[]
-            {
-                peImage,
-                peHeadersSize,
-                peHeaderAlignment,
-                strongNameSignatureFixup
-            });
+            return (IEnumerable<Blob>)
+                s_getContentToSignMethod.Invoke(
+                    null,
+                    new object[]
+                    {
+                        peImage,
+                        peHeadersSize,
+                        peHeaderAlignment,
+                        strongNameSignatureFixup,
+                    }
+                );
         }
 
         public static unsafe string GetMethodIL(this ImmutableArray<byte> ilArray)
@@ -285,7 +341,11 @@ namespace Roslyn.Test.Utilities
 
                     if (methodIL == null)
                     {
-                        result.AppendFormat("<invalid byte 0x{0:X2} at offset {1}>", ilArray[offset], offset);
+                        result.AppendFormat(
+                            "<invalid byte 0x{0:X2} at offset {1}>",
+                            ilArray[offset],
+                            offset
+                        );
                         offset++;
                     }
                     else
@@ -295,7 +355,8 @@ namespace Roslyn.Test.Utilities
                             methodIL.MaxStack,
                             methodIL.GetILContent(),
                             ImmutableArray.Create<ILVisualizer.LocalInfo>(),
-                            ImmutableArray.Create<ILVisualizer.HandlerSpan>());
+                            ImmutableArray.Create<ILVisualizer.HandlerSpan>()
+                        );
 
                         offset += methodIL.Size;
                     }
@@ -325,32 +386,46 @@ namespace Roslyn.Test.Utilities
         /// Returns "method" element with a specified token.
         /// <see cref="PdbToXmlOptions.IncludeTokens"/> must be set to include "token" attributes in "method" elements.
         /// </summary>
-        public static XElement GetMethodElement(XElement document, int methodToken)
-            => (from e in document.DescendantsAndSelf()
+        public static XElement GetMethodElement(XElement document, int methodToken) =>
+            (
+                from e in document.DescendantsAndSelf()
                 where e.Name == "method"
                 let xmlTokenValue = e.Attribute("token")?.Value
-                where xmlTokenValue != null &&
-                      xmlTokenValue.StartsWith("0x") &&
-                      Convert.ToInt32(xmlTokenValue[2..], 16) == methodToken
-                select e).SingleOrDefault();
+                where
+                    xmlTokenValue != null
+                    && xmlTokenValue.StartsWith("0x")
+                    && Convert.ToInt32(xmlTokenValue[2..], 16) == methodToken
+                select e
+            ).SingleOrDefault();
 
-        public static ImmutableDictionary<string, string> GetDocumentIdToPathMap(XElement document)
-            => document
-                .Descendants().Where(e => e.Name == "files").Single()
-                .Descendants().ToImmutableDictionary(e => e.Attribute("id").Value, e => e.Attribute("name").Value);
+        public static ImmutableDictionary<string, string> GetDocumentIdToPathMap(
+            XElement document
+        ) =>
+            document
+                .Descendants()
+                .Where(e => e.Name == "files")
+                .Single()
+                .Descendants()
+                .ToImmutableDictionary(
+                    e => e.Attribute("id").Value,
+                    e => e.Attribute("name").Value
+                );
 
         public static Dictionary<int, string> GetSequencePointMarkers(XElement methodXml)
         {
             var result = new Dictionary<int, string>();
 
-            void add(int key, string value)
-                => result[key] = result.TryGetValue(key, out var existing) ? existing + value : value;
+            void add(int key, string value) =>
+                result[key] = result.TryGetValue(key, out var existing) ? existing + value : value;
 
             foreach (var e in methodXml.Descendants())
             {
                 if (e.Name == "entry" && e.Parent.Name == "sequencePoints")
                 {
-                    add(Convert.ToInt32(e.Attribute("offset").Value, 16), (e.Attribute("hidden")?.Value == "true") ? "~" : "-");
+                    add(
+                        Convert.ToInt32(e.Attribute("offset").Value, 16),
+                        (e.Attribute("hidden")?.Value == "true") ? "~" : "-"
+                    );
                 }
             }
 
@@ -370,12 +445,17 @@ namespace Roslyn.Test.Utilities
             return result;
         }
 
-        public static Dictionary<int, string> GetSequencePointMarkers(XElement methodXml, Func<string, SourceText> getSource)
+        public static Dictionary<int, string> GetSequencePointMarkers(
+            XElement methodXml,
+            Func<string, SourceText> getSource
+        )
         {
             var result = new Dictionary<int, string>();
 
-            void add(int key, string value)
-                => result[key] = result.TryGetValue(key, out var existing) ? existing + ", " + value : "// " + value;
+            void add(int key, string value) =>
+                result[key] = result.TryGetValue(key, out var existing)
+                    ? existing + ", " + value
+                    : "// " + value;
 
             foreach (var e in methodXml.Descendants())
             {
@@ -397,7 +477,10 @@ namespace Roslyn.Test.Utilities
                     var documentId = e.Attribute("document").Value;
                     var source = getSource(documentId);
 
-                    add(Convert.ToInt32(e.Attribute("offset").Value, 16), "sequence point: " + SnippetFromSpan(source, e));
+                    add(
+                        Convert.ToInt32(e.Attribute("offset").Value, 16),
+                        "sequence point: " + SnippetFromSpan(source, e)
+                    );
                 }
             }
 
@@ -416,7 +499,10 @@ namespace Roslyn.Test.Utilities
             var endLine = Convert.ToInt32(sequencePointXml.Attribute("endLine").Value) - 1;
             var endColumn = Convert.ToInt32(sequencePointXml.Attribute("endColumn").Value) - 1;
 
-            var lineSpan = new LinePositionSpan(new LinePosition(startLine, startColumn), new LinePosition(endLine, endColumn));
+            var lineSpan = new LinePositionSpan(
+                new LinePosition(startLine, startColumn),
+                new LinePosition(endLine, endColumn)
+            );
             var span = text.Lines.GetTextSpan(lineSpan);
             var subtext = text.GetSubText(span);
 
@@ -425,11 +511,13 @@ namespace Roslyn.Test.Utilities
                 return subtext.ToString();
             }
 
-            static string TruncateStart(string text, int maxLength)
-                => (text.Length < maxLength) ? text : text[..maxLength];
+            static string TruncateStart(string text, int maxLength) =>
+                (text.Length < maxLength) ? text : text[..maxLength];
 
-            static string TruncateEnd(string text, int maxLength)
-                => (text.Length < maxLength) ? text : text.Substring(text.Length - maxLength - 1, maxLength);
+            static string TruncateEnd(string text, int maxLength) =>
+                (text.Length < maxLength)
+                    ? text
+                    : text.Substring(text.Length - maxLength - 1, maxLength);
 
             var start = subtext.Lines[0].ToString();
             var end = subtext.Lines[^1].ToString();

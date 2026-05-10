@@ -12,7 +12,11 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     // ConditionalExpression fingerprint class
     // Expression of form (test) ? ifTrue : ifFalse
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class ConditionalExpressionFingerprint : ExpressionFingerprint
     {
         public ConditionalExpressionFingerprint(ExpressionType nodeType, Type type)
@@ -25,8 +29,7 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         public override bool Equals(object obj)
         {
             ConditionalExpressionFingerprint other = obj as ConditionalExpressionFingerprint;
-            return (other != null)
-                   && this.Equals(other);
+            return (other != null) && this.Equals(other);
         }
     }
 }

@@ -17,196 +17,284 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void SubscriptionReceivesNewGlobalMetersAndInstruments()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                var publishedTcs = new TaskCompletionSource<Instrument>();
-                var completedTcs = new TaskCompletionSource<Instrument>();
-                var measurementTcs = new TaskCompletionSource<int>();
-
-                var fakeListener = new FakeMetricListener();
-                fakeListener.OnPublished = (instrument) =>
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    Assert.Null(instrument.Meter.Scope); // Global
-                    publishedTcs.TrySetResult(instrument);
-                    return (true, null);
-                };
-                fakeListener.OnCompleted = (instrument, state) =>
-                {
-                    completedTcs.TrySetResult(instrument);
-                };
-                fakeListener.OnMeasurement = (instrument, measurement, tags, state) =>
-                {
-                    measurementTcs.TrySetResult((int)measurement);
-                };
+                    var publishedTcs = new TaskCompletionSource<Instrument>();
+                    var completedTcs = new TaskCompletionSource<Instrument>();
+                    var measurementTcs = new TaskCompletionSource<int>();
 
-                var subscription = new ListenerSubscription(fakeListener, new FakeMeterFactory());
-                Assert.Null(fakeListener.Source);
+                    var fakeListener = new FakeMetricListener();
+                    fakeListener.OnPublished = (instrument) =>
+                    {
+                        Assert.Null(instrument.Meter.Scope); // Global
+                        publishedTcs.TrySetResult(instrument);
+                        return (true, null);
+                    };
+                    fakeListener.OnCompleted = (instrument, state) =>
+                    {
+                        completedTcs.TrySetResult(instrument);
+                    };
+                    fakeListener.OnMeasurement = (instrument, measurement, tags, state) =>
+                    {
+                        measurementTcs.TrySetResult((int)measurement);
+                    };
 
-                subscription.Initialize();
-                Assert.Same(subscription, fakeListener.Source);
+                    var subscription = new ListenerSubscription(
+                        fakeListener,
+                        new FakeMeterFactory()
+                    );
+                    Assert.Null(fakeListener.Source);
 
-                // No rules yet, so we shouldn't get any notifications.
-                var meter = new Meter("TestMeter");
-                var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
-                counter.Add(1);
+                    subscription.Initialize();
+                    Assert.Same(subscription, fakeListener.Source);
 
-                Assert.False(publishedTcs.Task.IsCompleted);
-                Assert.False(measurementTcs.Task.IsCompleted);
+                    // No rules yet, so we shouldn't get any notifications.
+                    var meter = new Meter("TestMeter");
+                    var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
+                    counter.Add(1);
 
-                // Add a rule that matches the counter.
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Global, enable: true) });
+                    Assert.False(publishedTcs.Task.IsCompleted);
+                    Assert.False(measurementTcs.Task.IsCompleted);
 
-                Assert.True(publishedTcs.Task.IsCompleted);
+                    // Add a rule that matches the counter.
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Global,
+                                enable: true
+                            ),
+                        }
+                    );
 
-                counter.Add(2);
-                Assert.True(measurementTcs.Task.IsCompleted);
-                Assert.Equal(2, measurementTcs.Task.Result);
+                    Assert.True(publishedTcs.Task.IsCompleted);
 
-                Assert.False(completedTcs.Task.IsCompleted);
+                    counter.Add(2);
+                    Assert.True(measurementTcs.Task.IsCompleted);
+                    Assert.Equal(2, measurementTcs.Task.Result);
 
-                // Disable
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Global, enable: false) });
+                    Assert.False(completedTcs.Task.IsCompleted);
 
-                Assert.True(completedTcs.Task.IsCompleted);
+                    // Disable
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Global,
+                                enable: false
+                            ),
+                        }
+                    );
 
-            }).Dispose();
+                    Assert.True(completedTcs.Task.IsCompleted);
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void SubscriptionReceivesNewLocalMetersAndInstruments()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                var publishedTcs = new TaskCompletionSource<Instrument>();
-                var completedTcs = new TaskCompletionSource<Instrument>();
-                var measurementTcs = new TaskCompletionSource<int>();
-
-                using var services = new ServiceCollection().AddMetrics().BuildServiceProvider();
-                var factory = services.GetRequiredService<IMeterFactory>();
-
-                var fakeListener = new FakeMetricListener();
-                fakeListener.OnPublished = (instrument) =>
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    Assert.Equal(factory, instrument.Meter.Scope); // Local
-                    publishedTcs.TrySetResult(instrument);
-                    return (true, null);
-                };
-                fakeListener.OnCompleted = (instrument, state) =>
-                {
-                    completedTcs.TrySetResult(instrument);
-                };
-                fakeListener.OnMeasurement = (instrument, measurement, tags, state) =>
-                {
-                    measurementTcs.TrySetResult((int)measurement);
-                };
+                    var publishedTcs = new TaskCompletionSource<Instrument>();
+                    var completedTcs = new TaskCompletionSource<Instrument>();
+                    var measurementTcs = new TaskCompletionSource<int>();
 
-                var subscription = new ListenerSubscription(fakeListener, factory);
-                Assert.Null(fakeListener.Source);
+                    using var services = new ServiceCollection()
+                        .AddMetrics()
+                        .BuildServiceProvider();
+                    var factory = services.GetRequiredService<IMeterFactory>();
 
-                subscription.Initialize();
-                Assert.Same(subscription, fakeListener.Source);
+                    var fakeListener = new FakeMetricListener();
+                    fakeListener.OnPublished = (instrument) =>
+                    {
+                        Assert.Equal(factory, instrument.Meter.Scope); // Local
+                        publishedTcs.TrySetResult(instrument);
+                        return (true, null);
+                    };
+                    fakeListener.OnCompleted = (instrument, state) =>
+                    {
+                        completedTcs.TrySetResult(instrument);
+                    };
+                    fakeListener.OnMeasurement = (instrument, measurement, tags, state) =>
+                    {
+                        measurementTcs.TrySetResult((int)measurement);
+                    };
 
-                // No rules yet, so we shouldn't get any notifications.
-                var meter = factory.Create("TestMeter");
-                var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
-                counter.Add(1);
+                    var subscription = new ListenerSubscription(fakeListener, factory);
+                    Assert.Null(fakeListener.Source);
 
-                Assert.False(publishedTcs.Task.IsCompleted);
-                Assert.False(measurementTcs.Task.IsCompleted);
+                    subscription.Initialize();
+                    Assert.Same(subscription, fakeListener.Source);
 
-                // Add a rule that matches the counter.
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Local, enable: true) });
+                    // No rules yet, so we shouldn't get any notifications.
+                    var meter = factory.Create("TestMeter");
+                    var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
+                    counter.Add(1);
 
-                Assert.True(publishedTcs.Task.IsCompleted);
+                    Assert.False(publishedTcs.Task.IsCompleted);
+                    Assert.False(measurementTcs.Task.IsCompleted);
 
-                counter.Add(2);
-                Assert.True(measurementTcs.Task.IsCompleted);
-                Assert.Equal(2, measurementTcs.Task.Result);
+                    // Add a rule that matches the counter.
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Local,
+                                enable: true
+                            ),
+                        }
+                    );
 
-                Assert.False(completedTcs.Task.IsCompleted);
+                    Assert.True(publishedTcs.Task.IsCompleted);
 
-                // Disable
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Local, enable: false) });
+                    counter.Add(2);
+                    Assert.True(measurementTcs.Task.IsCompleted);
+                    Assert.Equal(2, measurementTcs.Task.Result);
 
-                Assert.True(completedTcs.Task.IsCompleted);
+                    Assert.False(completedTcs.Task.IsCompleted);
 
-            }).Dispose();
+                    // Disable
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Local,
+                                enable: false
+                            ),
+                        }
+                    );
+
+                    Assert.True(completedTcs.Task.IsCompleted);
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void RuleCanBeTurnedOffAndOnAgain()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                var publishCalled = 0;
-                var onCompletedCalled = 0;
-                var measurements = new List<int>();
-
-                using var services = new ServiceCollection().AddMetrics().BuildServiceProvider();
-                var factory = services.GetRequiredService<IMeterFactory>();
-
-                var fakeListener = new FakeMetricListener();
-                fakeListener.OnPublished = (instrument) =>
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    publishCalled++;
-                    Assert.Equal(factory, instrument.Meter.Scope); // Local
-                    return (true, fakeListener);
-                };
-                fakeListener.OnCompleted = (instrument, state) =>
-                {
-                    onCompletedCalled++;
-                    Assert.Equal(fakeListener, state);
-                };
-                fakeListener.OnMeasurement = (instrument, measurement, tags, state) =>
-                {
-                    measurements.Add((int)measurement);
-                    Assert.Equal(fakeListener, state);
-                };
+                    var publishCalled = 0;
+                    var onCompletedCalled = 0;
+                    var measurements = new List<int>();
 
-                var subscription = new ListenerSubscription(fakeListener, factory);
-                Assert.Null(fakeListener.Source);
+                    using var services = new ServiceCollection()
+                        .AddMetrics()
+                        .BuildServiceProvider();
+                    var factory = services.GetRequiredService<IMeterFactory>();
 
-                subscription.Initialize();
-                Assert.Same(subscription, fakeListener.Source);
+                    var fakeListener = new FakeMetricListener();
+                    fakeListener.OnPublished = (instrument) =>
+                    {
+                        publishCalled++;
+                        Assert.Equal(factory, instrument.Meter.Scope); // Local
+                        return (true, fakeListener);
+                    };
+                    fakeListener.OnCompleted = (instrument, state) =>
+                    {
+                        onCompletedCalled++;
+                        Assert.Equal(fakeListener, state);
+                    };
+                    fakeListener.OnMeasurement = (instrument, measurement, tags, state) =>
+                    {
+                        measurements.Add((int)measurement);
+                        Assert.Equal(fakeListener, state);
+                    };
 
-                // No rules yet, so we shouldn't get any notifications.
-                var meter = factory.Create("TestMeter");
-                var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
-                counter.Add(1);
+                    var subscription = new ListenerSubscription(fakeListener, factory);
+                    Assert.Null(fakeListener.Source);
 
-                Assert.Equal(0, measurements.Count);
-                Assert.Equal(0, publishCalled);
-                Assert.Equal(0, onCompletedCalled);
+                    subscription.Initialize();
+                    Assert.Same(subscription, fakeListener.Source);
 
-                // Add a rule that matches the counter.
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Local, enable: true) });
+                    // No rules yet, so we shouldn't get any notifications.
+                    var meter = factory.Create("TestMeter");
+                    var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
+                    counter.Add(1);
 
-                Assert.Equal(1, publishCalled);
+                    Assert.Equal(0, measurements.Count);
+                    Assert.Equal(0, publishCalled);
+                    Assert.Equal(0, onCompletedCalled);
 
-                counter.Add(2);
-                Assert.Equal(1, measurements.Count);
-                Assert.Equal(2, measurements[0]);
-                Assert.Equal(0, onCompletedCalled);
+                    // Add a rule that matches the counter.
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Local,
+                                enable: true
+                            ),
+                        }
+                    );
 
-                // Disable
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Local, enable: false) });
+                    Assert.Equal(1, publishCalled);
 
-                Assert.Equal(1, onCompletedCalled);
-                counter.Add(3);
-                // Not received
-                Assert.Equal(1, measurements.Count);
+                    counter.Add(2);
+                    Assert.Equal(1, measurements.Count);
+                    Assert.Equal(2, measurements[0]);
+                    Assert.Equal(0, onCompletedCalled);
 
-                // Re-enable
-                subscription.UpdateRules(new[] { new InstrumentRule("TestMeter", "counter", null, MeterScope.Local, enable: true) });
-                Assert.Equal(2, publishCalled);
+                    // Disable
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Local,
+                                enable: false
+                            ),
+                        }
+                    );
 
-                counter.Add(4);
-                Assert.Equal(2, measurements.Count);
-                Assert.Equal(4, measurements[1]);
+                    Assert.Equal(1, onCompletedCalled);
+                    counter.Add(3);
+                    // Not received
+                    Assert.Equal(1, measurements.Count);
 
-                services.Dispose();
-                Assert.Equal(2, onCompletedCalled);
-            }).Dispose();
+                    // Re-enable
+                    subscription.UpdateRules(
+                        new[]
+                        {
+                            new InstrumentRule(
+                                "TestMeter",
+                                "counter",
+                                null,
+                                MeterScope.Local,
+                                enable: true
+                            ),
+                        }
+                    );
+                    Assert.Equal(2, publishCalled);
+
+                    counter.Add(4);
+                    Assert.Equal(2, measurements.Count);
+                    Assert.Equal(4, measurements[1]);
+
+                    services.Dispose();
+                    Assert.Equal(2, onCompletedCalled);
+                })
+                .Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -235,12 +323,27 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         [InlineData("lonG.sillY.meteR.namE", "instrumenTnamE", "listeneRnamE")]
         public void RuleMatchesTest(string meterName, string instrumentName, string listenerName)
         {
-            RemoteExecutor.Invoke((string m, string i, string l) => {
-                var rule = new InstrumentRule(m, i, l, MeterScope.Global, enable: true);
-                var meter = new Meter("Long.Silly.Meter.Name");
-                var instrument = meter.CreateCounter<int>("InstrumentName");
-                Assert.True(ListenerSubscription.RuleMatches(rule, instrument, "ListenerName", new FakeMeterFactory()));
-            }, meterName, instrumentName, listenerName).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    (string m, string i, string l) =>
+                    {
+                        var rule = new InstrumentRule(m, i, l, MeterScope.Global, enable: true);
+                        var meter = new Meter("Long.Silly.Meter.Name");
+                        var instrument = meter.CreateCounter<int>("InstrumentName");
+                        Assert.True(
+                            ListenerSubscription.RuleMatches(
+                                rule,
+                                instrument,
+                                "ListenerName",
+                                new FakeMeterFactory()
+                            )
+                        );
+                    },
+                    meterName,
+                    instrumentName,
+                    listenerName
+                )
+                .Dispose();
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -256,25 +359,60 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         [InlineData("wrongMeter", "", "ListenerName")]
         [InlineData("", "wrongInstrument", "")]
         [InlineData("", "", "wrongListener")]
-        public void RuleMatchesNegativeTest(string meterName, string instrumentName, string listenerName)
+        public void RuleMatchesNegativeTest(
+            string meterName,
+            string instrumentName,
+            string listenerName
+        )
         {
-            RemoteExecutor.Invoke((string m, string i, string l) => {
-                var rule = new InstrumentRule(m, i, l, MeterScope.Global, enable: true);
-                var meter = new Meter("Long.Silly.Meter.Name");
-                var instrument = meter.CreateCounter<int>("InstrumentName");
-                Assert.False(ListenerSubscription.RuleMatches(rule, instrument, "ListenerName", new FakeMeterFactory()));
-            }, meterName, instrumentName, listenerName).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    (string m, string i, string l) =>
+                    {
+                        var rule = new InstrumentRule(m, i, l, MeterScope.Global, enable: true);
+                        var meter = new Meter("Long.Silly.Meter.Name");
+                        var instrument = meter.CreateCounter<int>("InstrumentName");
+                        Assert.False(
+                            ListenerSubscription.RuleMatches(
+                                rule,
+                                instrument,
+                                "ListenerName",
+                                new FakeMeterFactory()
+                            )
+                        );
+                    },
+                    meterName,
+                    instrumentName,
+                    listenerName
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void MultipleWildcardsThrows()
         {
-            RemoteExecutor.Invoke(() => {
-                var rule = new InstrumentRule("*.*", null, null, MeterScope.Global, enable: true);
-                var meter = new Meter("Long.Silly.Meter.Name");
-                var instrument = meter.CreateCounter<int>("InstrumentName");
-                Assert.Throws< InvalidOperationException>(() => ListenerSubscription.RuleMatches(rule, instrument, "ListenerName", new FakeMeterFactory()));
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    var rule = new InstrumentRule(
+                        "*.*",
+                        null,
+                        null,
+                        MeterScope.Global,
+                        enable: true
+                    );
+                    var meter = new Meter("Long.Silly.Meter.Name");
+                    var instrument = meter.CreateCounter<int>("InstrumentName");
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ListenerSubscription.RuleMatches(
+                            rule,
+                            instrument,
+                            "ListenerName",
+                            new FakeMeterFactory()
+                        )
+                    );
+                })
+                .Dispose();
         }
 
         [Theory]
@@ -289,100 +427,258 @@ namespace Microsoft.Extensions.Diagnostics.Tests
             }
         }
 
-        public static IEnumerable<object[]> IsMoreSpecificTestData() => new object[][]
-        {
-            // Anything is better than null
-            new object[] { new InstrumentRule(null, null, null, MeterScope.Global, true), null, false },
-
-            // Any field is better than empty
-            new object[] { new InstrumentRule("meterName", null, null, MeterScope.Global, true),
-                new InstrumentRule(null, null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
-                new InstrumentRule(null, null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule(null, null, null, MeterScope.Global, true), false },
-
-            // Listener > Meter > Instrument
-            new object[] { new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule("meterName", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule(null, "instrumentName", "listenerName", MeterScope.Global, true),
-                new InstrumentRule("meterName", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", null, null, MeterScope.Global, true),
-                new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true), false },
-
-            // Multiple fields are better than one.
-            new object[] { new InstrumentRule("meterName", "instrumentName", null, MeterScope.Global, true),
-                new InstrumentRule("meterName", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule("meterName", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", "instrumentName", "listenerName", MeterScope.Global, true),
-                new InstrumentRule("meterName", null, null, MeterScope.Global, true), false },
-
-            new object[] { new InstrumentRule("meterName", "instrumentName", null, MeterScope.Global, true),
-                new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", "instrumentName", "listenerName", MeterScope.Global, true),
-                new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true), false },
-
-            // Except Listener wins regardless
-            new object[] { new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule("meterName", "instrumentName", null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", null, "listenerName", MeterScope.Global, true),
-                new InstrumentRule(null, null, "listenerName", MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName", "instrumentName", "listenerName", MeterScope.Global, true),
-                new InstrumentRule(null, null, "listenerName", MeterScope.Global, true), false },
-
-            // Longer Meter Name is better
-            new object[] { new InstrumentRule("meterName", null, null, MeterScope.Global, true),
-                new InstrumentRule("*", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meterName.*", null, null, MeterScope.Global, true),
-                new InstrumentRule("meterName", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meter.Name", null, null, MeterScope.Global, true),
-                new InstrumentRule("meter", null, null, MeterScope.Global, true), false },
-            new object[] { new InstrumentRule("meter.Name", null, null, MeterScope.Global, true),
-                new InstrumentRule("meter.*", null, null, MeterScope.Global, true), false },
-
-            // Scopes: Local > Global+Local, Global > Global+Local
-            new object[] { new InstrumentRule(null, null, null, MeterScope.Local, true),
-                new InstrumentRule(null, null, null, MeterScope.Global | MeterScope.Local, true), true },
-            new object[] { new InstrumentRule(null, null, null, MeterScope.Global, true),
-                new InstrumentRule(null, null, null, MeterScope.Global | MeterScope.Local, true), false },
-        };
+        public static IEnumerable<object[]> IsMoreSpecificTestData() =>
+            new object[][]
+            {
+                // Anything is better than null
+                new object[]
+                {
+                    new InstrumentRule(null, null, null, MeterScope.Global, true),
+                    null,
+                    false,
+                },
+                // Any field is better than empty
+                new object[]
+                {
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    new InstrumentRule(null, null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
+                    new InstrumentRule(null, null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule(null, null, null, MeterScope.Global, true),
+                    false,
+                },
+                // Listener > Meter > Instrument
+                new object[]
+                {
+                    new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(
+                        null,
+                        "instrumentName",
+                        "listenerName",
+                        MeterScope.Global,
+                        true
+                    ),
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
+                    false,
+                },
+                // Multiple fields are better than one.
+                new object[]
+                {
+                    new InstrumentRule(
+                        "meterName",
+                        "instrumentName",
+                        null,
+                        MeterScope.Global,
+                        true
+                    ),
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meterName", null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(
+                        "meterName",
+                        "instrumentName",
+                        "listenerName",
+                        MeterScope.Global,
+                        true
+                    ),
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(
+                        "meterName",
+                        "instrumentName",
+                        null,
+                        MeterScope.Global,
+                        true
+                    ),
+                    new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meterName", null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(
+                        "meterName",
+                        "instrumentName",
+                        "listenerName",
+                        MeterScope.Global,
+                        true
+                    ),
+                    new InstrumentRule(null, "instrumentName", null, MeterScope.Global, true),
+                    false,
+                },
+                // Except Listener wins regardless
+                new object[]
+                {
+                    new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule(
+                        "meterName",
+                        "instrumentName",
+                        null,
+                        MeterScope.Global,
+                        true
+                    ),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meterName", null, "listenerName", MeterScope.Global, true),
+                    new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule(
+                        "meterName",
+                        "instrumentName",
+                        "listenerName",
+                        MeterScope.Global,
+                        true
+                    ),
+                    new InstrumentRule(null, null, "listenerName", MeterScope.Global, true),
+                    false,
+                },
+                // Longer Meter Name is better
+                new object[]
+                {
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    new InstrumentRule("*", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meterName.*", null, null, MeterScope.Global, true),
+                    new InstrumentRule("meterName", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meter.Name", null, null, MeterScope.Global, true),
+                    new InstrumentRule("meter", null, null, MeterScope.Global, true),
+                    false,
+                },
+                new object[]
+                {
+                    new InstrumentRule("meter.Name", null, null, MeterScope.Global, true),
+                    new InstrumentRule("meter.*", null, null, MeterScope.Global, true),
+                    false,
+                },
+                // Scopes: Local > Global+Local, Global > Global+Local
+                new object[]
+                {
+                    new InstrumentRule(null, null, null, MeterScope.Local, true),
+                    new InstrumentRule(
+                        null,
+                        null,
+                        null,
+                        MeterScope.Global | MeterScope.Local,
+                        true
+                    ),
+                    true,
+                },
+                new object[]
+                {
+                    new InstrumentRule(null, null, null, MeterScope.Global, true),
+                    new InstrumentRule(
+                        null,
+                        null,
+                        null,
+                        MeterScope.Global | MeterScope.Local,
+                        true
+                    ),
+                    false,
+                },
+            };
 
         [Fact]
         public void EqualMatchRulesTakeLastTest()
         {
             var emptyTrue = new InstrumentRule(null, null, null, MeterScope.Global, true);
             var emptyFalse = new InstrumentRule(null, null, null, MeterScope.Global, false);
-            Assert.True(ListenerSubscription.IsMoreSpecific(emptyFalse, emptyTrue, isLocalScope: false));
-            Assert.True(ListenerSubscription.IsMoreSpecific(emptyTrue, emptyFalse, isLocalScope: false));
+            Assert.True(
+                ListenerSubscription.IsMoreSpecific(emptyFalse, emptyTrue, isLocalScope: false)
+            );
+            Assert.True(
+                ListenerSubscription.IsMoreSpecific(emptyTrue, emptyFalse, isLocalScope: false)
+            );
         }
 
-        public delegate void FakeMeasurementCallback(Instrument instrument, object measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state);
+        public delegate void FakeMeasurementCallback(
+            Instrument instrument,
+            object measurement,
+            ReadOnlySpan<KeyValuePair<string, object?>> tags,
+            object? state
+        );
+
         private class FakeMetricListener : IMetricsListener
         {
             public string Name => "FakeListener";
 
-            public Func<Instrument, (bool, object?)> OnPublished { get; set; } = (_) => (true, null);
+            public Func<Instrument, (bool, object?)> OnPublished { get; set; } =
+                (_) => (true, null);
             public Action<Instrument, object?> OnCompleted { get; set; } = (_, _) => { };
             public IObservableInstrumentsSource? Source { get; set; }
             public FakeMeasurementCallback OnMeasurement { get; set; }
 
-            public MeasurementHandlers GetMeasurementHandlers() => new MeasurementHandlers
-            {
-                ByteHandler = CallOnMeasurement,
-                ShortHandler = CallOnMeasurement,
-                IntHandler = CallOnMeasurement,
-                LongHandler = CallOnMeasurement,
-                FloatHandler = CallOnMeasurement,
-                DoubleHandler = CallOnMeasurement,
-                DecimalHandler = CallOnMeasurement,
-            };
+            public MeasurementHandlers GetMeasurementHandlers() =>
+                new MeasurementHandlers
+                {
+                    ByteHandler = CallOnMeasurement,
+                    ShortHandler = CallOnMeasurement,
+                    IntHandler = CallOnMeasurement,
+                    LongHandler = CallOnMeasurement,
+                    FloatHandler = CallOnMeasurement,
+                    DoubleHandler = CallOnMeasurement,
+                    DecimalHandler = CallOnMeasurement,
+                };
 
-            private void CallOnMeasurement<T>(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state)
+            private void CallOnMeasurement<T>(
+                Instrument instrument,
+                T measurement,
+                ReadOnlySpan<KeyValuePair<string, object?>> tags,
+                object? state
+            )
             {
                 OnMeasurement(instrument, measurement, tags, state);
             }
@@ -393,13 +689,16 @@ namespace Microsoft.Extensions.Diagnostics.Tests
                 return published;
             }
 
-            public void MeasurementsCompleted(Instrument instrument, object? userState) => OnCompleted(instrument, userState);
+            public void MeasurementsCompleted(Instrument instrument, object? userState) =>
+                OnCompleted(instrument, userState);
+
             public void Initialize(IObservableInstrumentsSource source) => Source = source;
         }
 
         private class FakeMeterFactory : IMeterFactory
         {
             public Meter Create(MeterOptions options) => throw new NotImplementedException();
+
             public void Dispose() => throw new NotImplementedException();
         }
     }

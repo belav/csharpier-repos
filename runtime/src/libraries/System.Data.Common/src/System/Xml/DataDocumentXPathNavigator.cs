@@ -12,7 +12,7 @@ namespace System.Xml
     internal sealed class DataDocumentXPathNavigator : XPathNavigator, IHasXmlNode
     {
         private readonly XPathNodePointer _curNode; //pointer to remember the current node position
-        private XmlDataDocument _doc;     //pointer to remember the root -- can only be XmlDataDocument for DataDocumentXPathNavigator
+        private XmlDataDocument _doc; //pointer to remember the root -- can only be XmlDataDocument for DataDocumentXPathNavigator
         private readonly XPathNodePointer _temp;
 
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
@@ -31,8 +31,11 @@ namespace System.Xml
             _doc = other._doc;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XPathNavigator Clone() => new DataDocumentXPathNavigator(this);
 
         internal XPathNodePointer CurNode => _curNode;
@@ -51,12 +54,17 @@ namespace System.Xml
 
         public override string Value
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "This whole class is unsafe. Constructors are marked as such."
+            )]
             get
             {
                 XPathNodeType xnt = _curNode.NodeType;
-                return xnt == XPathNodeType.Element || xnt == XPathNodeType.Root ? _curNode.InnerText : _curNode.Value!;
+                return xnt == XPathNodeType.Element || xnt == XPathNodeType.Root
+                    ? _curNode.InnerText
+                    : _curNode.Value!;
             }
         }
 
@@ -71,8 +79,11 @@ namespace System.Xml
         // Attributes
         public override bool HasAttributes => _curNode.AttributeCount > 0;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override string GetAttribute(string localName, string namespaceURI)
         {
             if (_curNode.NodeType != XPathNodeType.Element)
@@ -84,52 +95,62 @@ namespace System.Xml
             return _temp.MoveToAttribute(localName, namespaceURI) ? _temp.Value! : string.Empty;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override string GetNamespace(string name) => _curNode.GetNamespace(name);
 
         public override bool MoveToNamespace(string name) =>
-            _curNode.NodeType != XPathNodeType.Element ?
-                false : _curNode.MoveToNamespace(name);
+            _curNode.NodeType != XPathNodeType.Element ? false : _curNode.MoveToNamespace(name);
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override bool MoveToFirstNamespace(XPathNamespaceScope namespaceScope) =>
-            _curNode.NodeType != XPathNodeType.Element ?
-                false : _curNode.MoveToFirstNamespace(namespaceScope);
+            _curNode.NodeType != XPathNodeType.Element
+                ? false
+                : _curNode.MoveToFirstNamespace(namespaceScope);
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope) =>
-            _curNode.NodeType != XPathNodeType.Namespace ?
-                false : _curNode.MoveToNextNamespace(namespaceScope);
+            _curNode.NodeType != XPathNodeType.Namespace
+                ? false
+                : _curNode.MoveToNextNamespace(namespaceScope);
 
         public override bool MoveToAttribute(string localName, string namespaceURI) =>
-            _curNode.NodeType != XPathNodeType.Element ?
-                false : //other type of nodes can't have attributes
+            _curNode.NodeType != XPathNodeType.Element
+                ? false
+                : //other type of nodes can't have attributes
                 _curNode.MoveToAttribute(localName, namespaceURI);
 
         public override bool MoveToFirstAttribute() =>
-            _curNode.NodeType != XPathNodeType.Element ?
-                false : //other type of nodes can't have attributes
+            _curNode.NodeType != XPathNodeType.Element
+                ? false
+                : //other type of nodes can't have attributes
                 _curNode.MoveToNextAttribute(true);
 
         public override bool MoveToNextAttribute() =>
-            _curNode.NodeType != XPathNodeType.Attribute ?
-                false : _curNode.MoveToNextAttribute(false);
+            _curNode.NodeType != XPathNodeType.Attribute
+                ? false
+                : _curNode.MoveToNextAttribute(false);
 
         // Tree
         public override bool MoveToNext() =>
-            _curNode.NodeType == XPathNodeType.Attribute ?
-                false : _curNode.MoveToNextSibling();
+            _curNode.NodeType == XPathNodeType.Attribute ? false : _curNode.MoveToNextSibling();
 
         public override bool MoveToPrevious() =>
-            _curNode.NodeType == XPathNodeType.Attribute ?
-                false : _curNode.MoveToPreviousSibling();
+            _curNode.NodeType == XPathNodeType.Attribute ? false : _curNode.MoveToPreviousSibling();
 
         public override bool MoveToFirst() =>
-            _curNode.NodeType == XPathNodeType.Attribute ?
-                false : _curNode.MoveToFirst();
+            _curNode.NodeType == XPathNodeType.Attribute ? false : _curNode.MoveToFirst();
 
         public override bool HasChildren => _curNode.HasChildren;
 
@@ -143,7 +164,8 @@ namespace System.Xml
         {
             if (other != null)
             {
-                DataDocumentXPathNavigator? otherDataDocXPathNav = other as DataDocumentXPathNavigator;
+                DataDocumentXPathNavigator? otherDataDocXPathNav =
+                    other as DataDocumentXPathNavigator;
                 if (otherDataDocXPathNav != null && _curNode.MoveTo(otherDataDocXPathNav.CurNode))
                 {
                     _doc = _curNode.Document;
@@ -160,9 +182,13 @@ namespace System.Xml
         {
             if (other != null)
             {
-                DataDocumentXPathNavigator? otherDataDocXPathNav = other as DataDocumentXPathNavigator;
-                if (otherDataDocXPathNav != null &&
-                    _doc == otherDataDocXPathNav.Document && _curNode.IsSamePosition(otherDataDocXPathNav.CurNode))
+                DataDocumentXPathNavigator? otherDataDocXPathNav =
+                    other as DataDocumentXPathNavigator;
+                if (
+                    otherDataDocXPathNav != null
+                    && _doc == otherDataDocXPathNav.Document
+                    && _curNode.IsSamePosition(otherDataDocXPathNav.CurNode)
+                )
                 {
                     return true;
                 }
@@ -172,12 +198,18 @@ namespace System.Xml
 
         //the function is only called for XPathNodeList enumerate nodes and
         // shouldn't be promoted to frequently use because it will cause foliation
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         XmlNode IHasXmlNode.GetNode() => _curNode.Node!;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XmlNodeOrder ComparePosition(XPathNavigator? other)
         {
             if (other == null)
@@ -187,9 +219,9 @@ namespace System.Xml
 
             DataDocumentXPathNavigator? otherDataDocXPathNav = other as DataDocumentXPathNavigator;
 
-            return otherDataDocXPathNav == null || otherDataDocXPathNav.Document != _doc ?
-                XmlNodeOrder.Unknown :
-                _curNode.ComparePosition(otherDataDocXPathNav.CurNode);
+            return otherDataDocXPathNav == null || otherDataDocXPathNav.Document != _doc
+                ? XmlNodeOrder.Unknown
+                : _curNode.ComparePosition(otherDataDocXPathNav.CurNode);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace System.Web.Helpers
         /// <param name="selectionFieldName">Query string field name for selected row number.</param>
         /// <param name="sortFieldName">Query string field name for sort column.</param>
         /// <param name="sortDirectionFieldName">Query string field name for sort direction.</param>
-#if CODE_COVERAGE 
+#if CODE_COVERAGE
         [ExcludeFromCodeCoverage]
 #endif
         public WebGrid(
@@ -77,10 +77,22 @@ namespace System.Web.Helpers
             string pageFieldName = null,
             string selectionFieldName = null,
             string sortFieldName = null,
-            string sortDirectionFieldName = null)
-            : this(new HttpContextWrapper(Web.HttpContext.Current), defaultSort: defaultSort, rowsPerPage: rowsPerPage, canPage: canPage,
-                   canSort: canSort, ajaxUpdateContainerId: ajaxUpdateContainerId, ajaxUpdateCallback: ajaxUpdateCallback, fieldNamePrefix: fieldNamePrefix, pageFieldName: pageFieldName,
-                   selectionFieldName: selectionFieldName, sortFieldName: sortFieldName, sortDirectionFieldName: sortDirectionFieldName)
+            string sortDirectionFieldName = null
+        )
+            : this(
+                new HttpContextWrapper(Web.HttpContext.Current),
+                defaultSort: defaultSort,
+                rowsPerPage: rowsPerPage,
+                canPage: canPage,
+                canSort: canSort,
+                ajaxUpdateContainerId: ajaxUpdateContainerId,
+                ajaxUpdateCallback: ajaxUpdateCallback,
+                fieldNamePrefix: fieldNamePrefix,
+                pageFieldName: pageFieldName,
+                selectionFieldName: selectionFieldName,
+                sortFieldName: sortFieldName,
+                sortDirectionFieldName: sortDirectionFieldName
+            )
         {
             if (source != null)
             {
@@ -101,14 +113,21 @@ namespace System.Web.Helpers
             string pageFieldName = null,
             string selectionFieldName = null,
             string sortFieldName = null,
-            string sortDirectionFieldName = null)
+            string sortDirectionFieldName = null
+        )
         {
             Debug.Assert(context != null);
 
             if (rowsPerPage < 1)
             {
-                throw new ArgumentOutOfRangeException("rowsPerPage", String.Format(CultureInfo.CurrentCulture,
-                                                                                   CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 1));
+                throw new ArgumentOutOfRangeException(
+                    "rowsPerPage",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        1
+                    )
+                );
             }
 
             _context = context;
@@ -211,7 +230,11 @@ namespace System.Web.Helpers
                 if (!_pageIndexSet)
                 {
                     int page;
-                    if (!_canPage || !Int32.TryParse(QueryString[PageFieldName], out page) || (page < 1))
+                    if (
+                        !_canPage
+                        || !Int32.TryParse(QueryString[PageFieldName], out page)
+                        || (page < 1)
+                    )
                     {
                         page = 1;
                     }
@@ -230,7 +253,9 @@ namespace System.Web.Helpers
             {
                 if (!_canPage)
                 {
-                    throw new NotSupportedException(HelpersResources.WebGrid_NotSupportedIfPagingIsDisabled);
+                    throw new NotSupportedException(
+                        HelpersResources.WebGrid_NotSupportedIfPagingIsDisabled
+                    );
                 }
 
                 if (!_dataSourceBound)
@@ -238,8 +263,14 @@ namespace System.Web.Helpers
                     // Allow the user to specify arbitrary non-negative values before data binding
                     if (value < 0)
                     {
-                        throw new ArgumentOutOfRangeException("value", String.Format(CultureInfo.CurrentCulture,
-                                                                                     CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                                0
+                            )
+                        );
                     }
                     else
                     {
@@ -252,8 +283,15 @@ namespace System.Web.Helpers
                     // Once data bound, perform bounds check on the PageIndex. Also ensure the data source has not been materialized.
                     if ((value < 0) || (value >= PageCount))
                     {
-                        throw new ArgumentOutOfRangeException("value", String.Format(CultureInfo.CurrentCulture,
-                                                                                     CommonResources.Argument_Must_Be_Between, 0, (PageCount - 1)));
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                CommonResources.Argument_Must_Be_Between,
+                                0,
+                                (PageCount - 1)
+                            )
+                        );
                     }
                     else if (value != _pageIndex)
                     {
@@ -308,7 +346,11 @@ namespace System.Web.Helpers
                     // row count) is less than both SelectedIndex and RowsPerPage. This scenario should only
                     // happen if someone manually modifies the query string.
                     // If paging isn't enabled, this getter isn't doing a upper bounds check on the value.
-                    if ((!Int32.TryParse(QueryString[SelectionFieldName], out row)) || (row < 1) || (_canPage && (row > RowsPerPage)))
+                    if (
+                        (!Int32.TryParse(QueryString[SelectionFieldName], out row))
+                        || (row < 1)
+                        || (_canPage && (row > RowsPerPage))
+                    )
                     {
                         row = 0;
                     }
@@ -374,8 +416,13 @@ namespace System.Web.Helpers
                     string sortDirection = QueryString[SortDirectionFieldName];
                     if (sortDirection != null)
                     {
-                        if (sortDirection.Equals("DESC", StringComparison.OrdinalIgnoreCase) ||
-                            sortDirection.Equals("DESCENDING", StringComparison.OrdinalIgnoreCase))
+                        if (
+                            sortDirection.Equals("DESC", StringComparison.OrdinalIgnoreCase)
+                            || sortDirection.Equals(
+                                "DESCENDING",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             _sortDirection = SortDirection.Descending;
                         }
@@ -448,7 +495,10 @@ namespace System.Web.Helpers
             {
                 return sourceType.GetElementType();
             }
-            Type elementType = sourceType.GetInterfaces().Select(GetGenericEnumerableType).FirstOrDefault(t => t != null);
+            Type elementType = sourceType
+                .GetInterfaces()
+                .Select(GetGenericEnumerableType)
+                .FirstOrDefault(t => t != null);
 
             Debug.Assert(elementType != null);
             return elementType;
@@ -457,14 +507,22 @@ namespace System.Web.Helpers
         private static Type GetGenericEnumerableType(Type type)
         {
             Type enumerableType = typeof(IEnumerable<>);
-            if (type.IsGenericType && enumerableType.IsAssignableFrom(type.GetGenericTypeDefinition()))
+            if (
+                type.IsGenericType
+                && enumerableType.IsAssignableFrom(type.GetGenericTypeDefinition())
+            )
             {
                 return type.GetGenericArguments()[0];
             }
             return null;
         }
 
-        public WebGrid Bind(IEnumerable<dynamic> source, IEnumerable<string> columnNames = null, bool autoSortAndPage = true, int rowCount = -1)
+        public WebGrid Bind(
+            IEnumerable<dynamic> source,
+            IEnumerable<string> columnNames = null,
+            bool autoSortAndPage = true,
+            int rowCount = -1
+        )
         {
             if (_dataSourceBound)
             {
@@ -476,23 +534,41 @@ namespace System.Web.Helpers
             }
             if (!autoSortAndPage && _canPage && rowCount == -1)
             {
-                throw new ArgumentException(HelpersResources.WebGrid_RowCountNotSpecified, "rowCount");
+                throw new ArgumentException(
+                    HelpersResources.WebGrid_RowCountNotSpecified,
+                    "rowCount"
+                );
             }
 
             _elementType = GetElementType(source);
             if (_columnNames == null)
             {
-                _columnNames = columnNames ?? GetDefaultColumnNames(source, elementType: _elementType);
+                _columnNames =
+                    columnNames ?? GetDefaultColumnNames(source, elementType: _elementType);
             }
 
             if (!autoSortAndPage)
             {
-                _dataSource = new PreComputedGridDataSource(grid: this, values: source, totalRows: rowCount);
+                _dataSource = new PreComputedGridDataSource(
+                    grid: this,
+                    values: source,
+                    totalRows: rowCount
+                );
             }
             else
             {
-                WebGridDataSource dataSource = new WebGridDataSource(grid: this, values: source, elementType: _elementType, canPage: _canPage, canSort: _canSort);
-                dataSource.DefaultSort = new SortInfo { SortColumn = _defaultSort, SortDirection = SortDirection.Ascending };
+                WebGridDataSource dataSource = new WebGridDataSource(
+                    grid: this,
+                    values: source,
+                    elementType: _elementType,
+                    canPage: _canPage,
+                    canSort: _canSort
+                );
+                dataSource.DefaultSort = new SortInfo
+                {
+                    SortColumn = _defaultSort,
+                    SortDirection = SortDirection.Ascending,
+                };
                 dataSource.RowsPerPage = _rowsPerPage;
                 _dataSource = dataSource;
             }
@@ -502,19 +578,38 @@ namespace System.Web.Helpers
         }
 
         // todo: add templating from file support
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Non-static for syntax, and in case we want to check column existence.")]
-        public WebGridColumn Column(string columnName = null, string header = null, Func<dynamic, object> format = null, string style = null,
-                                    bool canSort = true)
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Non-static for syntax, and in case we want to check column existence."
+        )]
+        public WebGridColumn Column(
+            string columnName = null,
+            string header = null,
+            Func<dynamic, object> format = null,
+            string style = null,
+            bool canSort = true
+        )
         {
             if (String.IsNullOrEmpty(columnName))
             {
                 if (format == null)
                 {
-                    throw new ArgumentException(HelpersResources.WebGrid_ColumnNameOrFormatRequired, "columnName");
+                    throw new ArgumentException(
+                        HelpersResources.WebGrid_ColumnNameOrFormatRequired,
+                        "columnName"
+                    );
                 }
             }
 
-            return new WebGridColumn { ColumnName = columnName, Header = header, Format = format, Style = style, CanSort = canSort };
+            return new WebGridColumn
+            {
+                ColumnName = columnName,
+                Header = header,
+                Format = format,
+                Style = style,
+                CanSort = canSort,
+            };
         }
 
         // Should we keep this no-op API for improved WebGrid syntax? Alternatives are:
@@ -524,7 +619,11 @@ namespace System.Web.Helpers
         // 2. columns: new[] {
         //        grid.Column(...), grid.Column(...)
         //    }
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Review: No-op API for syntax simplification?")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Review: No-op API for syntax simplification?"
+        )]
         public WebGridColumn[] Columns(params WebGridColumn[] columnSet)
         {
             return columnSet;
@@ -532,10 +631,18 @@ namespace System.Web.Helpers
 
         public IHtmlString GetContainerUpdateScript(string path)
         {
-            var script = String.Format(CultureInfo.InvariantCulture, AjaxUpdateScript,
-                                       HttpUtility.JavaScriptStringEncode(path, addDoubleQuotes: true),
-                                       HttpUtility.JavaScriptStringEncode('#' + AjaxUpdateContainerId, addDoubleQuotes: true),
-                                       !String.IsNullOrEmpty(AjaxUpdateCallback) ? ',' + HttpUtility.JavaScriptStringEncode(AjaxUpdateCallback) : String.Empty);
+            var script = String.Format(
+                CultureInfo.InvariantCulture,
+                AjaxUpdateScript,
+                HttpUtility.JavaScriptStringEncode(path, addDoubleQuotes: true),
+                HttpUtility.JavaScriptStringEncode(
+                    '#' + AjaxUpdateContainerId,
+                    addDoubleQuotes: true
+                ),
+                !String.IsNullOrEmpty(AjaxUpdateCallback)
+                    ? ',' + HttpUtility.JavaScriptStringEncode(AjaxUpdateCallback)
+                    : String.Empty
+            );
 
             return new HtmlString(HttpUtility.HtmlAttributeEncode(script));
         }
@@ -581,30 +688,66 @@ namespace System.Web.Helpers
             string nextText = null,
             string lastText = null,
             int numericLinksCount = 5,
-            object htmlAttributes = null)
+            object htmlAttributes = null
+        )
         {
             Func<dynamic, object> footer = null;
             if (_canPage && (PageCount > 1))
             {
-                footer = item => Pager(mode, firstText, previousText, nextText, lastText, numericLinksCount, explicitlyCalled: false);
+                footer = item =>
+                    Pager(
+                        mode,
+                        firstText,
+                        previousText,
+                        nextText,
+                        lastText,
+                        numericLinksCount,
+                        explicitlyCalled: false
+                    );
             }
 
-            return Table(tableStyle, headerStyle, footerStyle, rowStyle, alternatingRowStyle, selectedRowStyle, caption, displayHeader,
-                         fillEmptyRows, emptyRowCellValue, columns, exclusions, footer: footer,
-                         htmlAttributes: htmlAttributes);
+            return Table(
+                tableStyle,
+                headerStyle,
+                footerStyle,
+                rowStyle,
+                alternatingRowStyle,
+                selectedRowStyle,
+                caption,
+                displayHeader,
+                fillEmptyRows,
+                emptyRowCellValue,
+                columns,
+                exclusions,
+                footer: footer,
+                htmlAttributes: htmlAttributes
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "Strings are easier for Plan9 developer to work with")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Strings are easier for Plan9 developer to work with"
+        )]
         public string GetPageUrl(int pageIndex)
         {
             if (!_canPage)
             {
-                throw new NotSupportedException(HelpersResources.WebGrid_NotSupportedIfPagingIsDisabled);
+                throw new NotSupportedException(
+                    HelpersResources.WebGrid_NotSupportedIfPagingIsDisabled
+                );
             }
             if ((pageIndex < 0) || (pageIndex >= PageCount))
             {
-                throw new ArgumentOutOfRangeException("pageIndex", String.Format(CultureInfo.CurrentCulture,
-                                                                                 CommonResources.Argument_Must_Be_Between, 0, (PageCount - 1)));
+                throw new ArgumentOutOfRangeException(
+                    "pageIndex",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_Between,
+                        0,
+                        (PageCount - 1)
+                    )
+                );
             }
 
             NameValueCollection queryString = new NameValueCollection(1);
@@ -612,16 +755,25 @@ namespace System.Web.Helpers
             return GetPath(queryString, SelectionFieldName);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "Strings are easier for Plan9 developer to work with")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1055:UriReturnValuesShouldNotBeStrings",
+            Justification = "Strings are easier for Plan9 developer to work with"
+        )]
         public string GetSortUrl(string column)
         {
             if (!_canSort)
             {
-                throw new NotSupportedException(HelpersResources.WebGrid_NotSupportedIfSortingIsDisabled);
+                throw new NotSupportedException(
+                    HelpersResources.WebGrid_NotSupportedIfSortingIsDisabled
+                );
             }
             if (String.IsNullOrEmpty(column))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "column");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "column"
+                );
             }
 
             var sort = SortColumn;
@@ -655,9 +807,18 @@ namespace System.Web.Helpers
             string previousText = null,
             string nextText = null,
             string lastText = null,
-            int numericLinksCount = 5)
+            int numericLinksCount = 5
+        )
         {
-            return Pager(mode, firstText, previousText, nextText, lastText, numericLinksCount, explicitlyCalled: true);
+            return Pager(
+                mode,
+                firstText,
+                previousText,
+                nextText,
+                lastText,
+                numericLinksCount,
+                explicitlyCalled: true
+            );
         }
 
         /// <param name="mode">Modes for pager rendering.</param>
@@ -677,40 +838,82 @@ namespace System.Web.Helpers
             string nextText,
             string lastText,
             int numericLinksCount,
-            bool explicitlyCalled)
+            bool explicitlyCalled
+        )
         {
             if (!_canPage)
             {
-                throw new NotSupportedException(HelpersResources.WebGrid_NotSupportedIfPagingIsDisabled);
+                throw new NotSupportedException(
+                    HelpersResources.WebGrid_NotSupportedIfPagingIsDisabled
+                );
             }
             if (!ModeEnabled(mode, WebGridPagerModes.FirstLast) && (firstText != null))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                          HelpersResources.WebGrid_PagerModeMustBeEnabled, "FirstLast"), "firstText");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.WebGrid_PagerModeMustBeEnabled,
+                        "FirstLast"
+                    ),
+                    "firstText"
+                );
             }
             if (!ModeEnabled(mode, WebGridPagerModes.NextPrevious) && (previousText != null))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                          HelpersResources.WebGrid_PagerModeMustBeEnabled, "NextPrevious"), "previousText");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.WebGrid_PagerModeMustBeEnabled,
+                        "NextPrevious"
+                    ),
+                    "previousText"
+                );
             }
             if (!ModeEnabled(mode, WebGridPagerModes.NextPrevious) && (nextText != null))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                          HelpersResources.WebGrid_PagerModeMustBeEnabled, "NextPrevious"), "nextText");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.WebGrid_PagerModeMustBeEnabled,
+                        "NextPrevious"
+                    ),
+                    "nextText"
+                );
             }
             if (!ModeEnabled(mode, WebGridPagerModes.FirstLast) && (lastText != null))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture,
-                                                          HelpersResources.WebGrid_PagerModeMustBeEnabled, "FirstLast"), "lastText");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.WebGrid_PagerModeMustBeEnabled,
+                        "FirstLast"
+                    ),
+                    "lastText"
+                );
             }
             if (numericLinksCount < 0)
             {
-                throw new ArgumentOutOfRangeException("numericLinksCount",
-                                                      String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                throw new ArgumentOutOfRangeException(
+                    "numericLinksCount",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
 
-            return WebGridRenderer.Pager(this, HttpContext, mode: mode, firstText: firstText, previousText: previousText, nextText: nextText, lastText: lastText,
-                                         numericLinksCount: numericLinksCount, renderAjaxContainer: explicitlyCalled);
+            return WebGridRenderer.Pager(
+                this,
+                HttpContext,
+                mode: mode,
+                firstText: firstText,
+                previousText: previousText,
+                nextText: nextText,
+                lastText: lastText,
+                numericLinksCount: numericLinksCount,
+                renderAjaxContainer: explicitlyCalled
+            );
         }
 
         /// <summary>
@@ -744,18 +947,19 @@ namespace System.Web.Helpers
             IEnumerable<WebGridColumn> columns = null,
             IEnumerable<string> exclusions = null,
             Func<dynamic, object> footer = null,
-            object htmlAttributes = null)
+            object htmlAttributes = null
+        )
         {
             if (columns == null)
             {
                 columns = GetDefaultColumns(exclusions);
             }
-            // In order of precedence, the parameters that affect the visibility of columns in WebGrid - 
-            // (1) "columns" argument of this method 
-            // (2) "exclusion" argument of this method 
-            // (3) "columnNames" argument of the constructor. 
-            // At the time of binding we can verify if a simple property specified in the query string is a column that would be visible to the user. 
-            // However, for complex properties or if either of (1) or (2) arguments are specified, we can only verify at this point. 
+            // In order of precedence, the parameters that affect the visibility of columns in WebGrid -
+            // (1) "columns" argument of this method
+            // (2) "exclusion" argument of this method
+            // (3) "columnNames" argument of the constructor.
+            // At the time of binding we can verify if a simple property specified in the query string is a column that would be visible to the user.
+            // However, for complex properties or if either of (1) or (2) arguments are specified, we can only verify at this point.
             EnsureColumnIsSortable(columns);
 
             if (emptyRowCellValue == null)
@@ -763,9 +967,24 @@ namespace System.Web.Helpers
                 emptyRowCellValue = "&nbsp;";
             }
 
-            return WebGridRenderer.Table(this, HttpContext, tableStyle: tableStyle, headerStyle: headerStyle, footerStyle: footerStyle, rowStyle: rowStyle,
-                                         alternatingRowStyle: alternatingRowStyle, selectedRowStyle: selectedRowStyle, caption: caption, displayHeader: displayHeader, fillEmptyRows: fillEmptyRows,
-                                         emptyRowCellValue: emptyRowCellValue, columns: columns, exclusions: exclusions, footer: footer, htmlAttributes: htmlAttributes);
+            return WebGridRenderer.Table(
+                this,
+                HttpContext,
+                tableStyle: tableStyle,
+                headerStyle: headerStyle,
+                footerStyle: footerStyle,
+                rowStyle: rowStyle,
+                alternatingRowStyle: alternatingRowStyle,
+                selectedRowStyle: selectedRowStyle,
+                caption: caption,
+                displayHeader: displayHeader,
+                fillEmptyRows: fillEmptyRows,
+                emptyRowCellValue: emptyRowCellValue,
+                columns: columns,
+                exclusions: exclusions,
+                footer: footer,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -782,8 +1001,15 @@ namespace System.Web.Helpers
         ///     .AddSorter("Manager.Name", (Employee x) => (x == null || x.Manager == null) ? null : x.Manager.Name);
         /// </code>
         /// </example>
-        [SuppressMessage("Microsoft.Design", "CA1006", Justification = "This design make sense, and is a reasonable user experience for users of the helpers")]
-        public WebGrid AddSorter<TElement, TProperty>(string columnName, Expression<Func<TElement, TProperty>> keySelector)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006",
+            Justification = "This design make sense, and is a reasonable user experience for users of the helpers"
+        )]
+        public WebGrid AddSorter<TElement, TProperty>(
+            string columnName,
+            Expression<Func<TElement, TProperty>> keySelector
+        )
         {
             CustomSorters[columnName] = keySelector;
             return this;
@@ -794,12 +1020,25 @@ namespace System.Web.Helpers
         {
             // Fix for bug 941102
             // The ValidateSortColumn can validate a few regular cases for sorting and reset those values to default. However, for sort columns that are complex expressions,
-            // or if the user specifies a subset of columns in the GetHtml method (via columns / exclusions), the method is ineffective. 
+            // or if the user specifies a subset of columns in the GetHtml method (via columns / exclusions), the method is ineffective.
             // Review: Should this method not throw if the data was not explicitly sorted and paged by the user
-            if (_canSort && !_sortColumnExplicitlySet && !String.IsNullOrEmpty(SortColumn) && !StringComparer.OrdinalIgnoreCase.Equals(_defaultSort, SortColumn)
-                && !columns.Select(c => c.ColumnName).Contains(SortColumn, StringComparer.OrdinalIgnoreCase))
+            if (
+                _canSort
+                && !_sortColumnExplicitlySet
+                && !String.IsNullOrEmpty(SortColumn)
+                && !StringComparer.OrdinalIgnoreCase.Equals(_defaultSort, SortColumn)
+                && !columns
+                    .Select(c => c.ColumnName)
+                    .Contains(SortColumn, StringComparer.OrdinalIgnoreCase)
+            )
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, HelpersResources.WebGrid_ColumnNotFound, SortColumn));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        HelpersResources.WebGrid_ColumnNotFound,
+                        SortColumn
+                    )
+                );
             }
         }
 
@@ -810,8 +1049,13 @@ namespace System.Web.Helpers
             {
                 return result;
             }
-            throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                              HelpersResources.WebGrid_ColumnNotFound, name));
+            throw new InvalidOperationException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    HelpersResources.WebGrid_ColumnNotFound,
+                    name
+                )
+            );
         }
 
         // review: make sure this is ordered
@@ -831,7 +1075,10 @@ namespace System.Web.Helpers
                 }
                 else
                 {
-                    temp.Set(SelectionFieldName, (SelectedIndex + 1L).ToString(CultureInfo.CurrentCulture));
+                    temp.Set(
+                        SelectionFieldName,
+                        (SelectedIndex + 1L).ToString(CultureInfo.CurrentCulture)
+                    );
                 }
             }
             if (temp.AllKeys.Contains(SortFieldName))
@@ -895,7 +1142,9 @@ namespace System.Web.Helpers
         {
             if (_dataSourceMaterialized)
             {
-                throw new InvalidOperationException(HelpersResources.WebGrid_PropertySetterNotSupportedAfterDataBound);
+                throw new InvalidOperationException(
+                    HelpersResources.WebGrid_PropertySetterNotSupportedAfterDataBound
+                );
             }
         }
 
@@ -918,13 +1167,16 @@ namespace System.Web.Helpers
             // Navigation columns that contain '.' will be validated during the Sort operation
             // Validate other properties up-front and ignore any bad columns passed via the query string
             return _sortColumnExplicitlySet
-                   || String.IsNullOrEmpty(value)
-                   || StringComparer.OrdinalIgnoreCase.Equals(_defaultSort, value)
-                   || ColumnNames.Contains(value, StringComparer.OrdinalIgnoreCase)
-                   || value.Contains('.');
+                || String.IsNullOrEmpty(value)
+                || StringComparer.OrdinalIgnoreCase.Equals(_defaultSort, value)
+                || ColumnNames.Contains(value, StringComparer.OrdinalIgnoreCase)
+                || value.Contains('.');
         }
 
-        private static IEnumerable<string> GetDefaultColumnNames(IEnumerable<dynamic> source, Type elementType)
+        private static IEnumerable<string> GetDefaultColumnNames(
+            IEnumerable<dynamic> source,
+            Type elementType
+        )
         {
             var dynObj = source.FirstOrDefault() as IDynamicMetaObjectProvider;
             if (dynObj != null)
@@ -933,9 +1185,13 @@ namespace System.Web.Helpers
             }
             else
             {
-                return (from p in elementType.GetProperties()
-                        where IsBindableType(p.PropertyType) && (p.GetIndexParameters().Length == 0)
-                        select p.Name).OrderBy(n => n, StringComparer.OrdinalIgnoreCase).ToArray();
+                return (
+                    from p in elementType.GetProperties()
+                    where IsBindableType(p.PropertyType) && (p.GetIndexParameters().Length == 0)
+                    select p.Name
+                )
+                    .OrderBy(n => n, StringComparer.OrdinalIgnoreCase)
+                    .ToArray();
             }
         }
 
@@ -946,8 +1202,10 @@ namespace System.Web.Helpers
             {
                 names = names.Except(exclusions);
             }
-            return (from n in names
-                    select new WebGridColumn { ColumnName = n, CanSort = true }).ToArray();
+            return (
+                from n in names
+                select new WebGridColumn { ColumnName = n, CanSort = true }
+            ).ToArray();
         }
 
         // see: DataBoundControlHelper.IsBindableType
@@ -960,13 +1218,15 @@ namespace System.Web.Helpers
             {
                 type = underlyingType;
             }
-            return (type.IsPrimitive ||
-                    type.Equals(typeof(string)) ||
-                    type.Equals(typeof(DateTime)) ||
-                    type.Equals(typeof(Decimal)) ||
-                    type.Equals(typeof(Guid)) ||
-                    type.Equals(typeof(DateTimeOffset)) ||
-                    type.Equals(typeof(TimeSpan)));
+            return (
+                type.IsPrimitive
+                || type.Equals(typeof(string))
+                || type.Equals(typeof(DateTime))
+                || type.Equals(typeof(Decimal))
+                || type.Equals(typeof(Guid))
+                || type.Equals(typeof(DateTimeOffset))
+                || type.Equals(typeof(TimeSpan))
+            );
         }
 
         private static bool ModeEnabled(WebGridPagerModes mode, WebGridPagerModes modeCheck)

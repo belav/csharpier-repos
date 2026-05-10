@@ -19,6 +19,7 @@ internal static partial class Interop
             out System.Net.WebSockets.WebSocketProtocolComponent.Action action,
             out BufferType bufferType,
             out IntPtr applicationContext,
-            out IntPtr actionContext);
+            out IntPtr actionContext
+        );
     }
 }

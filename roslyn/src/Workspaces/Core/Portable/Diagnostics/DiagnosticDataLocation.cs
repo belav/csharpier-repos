@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public DiagnosticDataLocation(
             FileLinePositionSpan unmappedFileSpan,
             DocumentId? documentId,
-            FileLinePositionSpan mappedFileSpan)
+            FileLinePositionSpan mappedFileSpan
+        )
             : this(unmappedFileSpan, documentId, mappedFileSpan, forceMappedPath: false)
         {
             // This constructor is used for deserialization, so the arguments must have the same exact order and type
@@ -48,16 +49,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public DiagnosticDataLocation(
             FileLinePositionSpan unmappedFileSpan,
-            DocumentId? documentId = null)
-            : this(unmappedFileSpan, documentId, null, forceMappedPath: false)
-        {
-        }
+            DocumentId? documentId = null
+        )
+            : this(unmappedFileSpan, documentId, null, forceMappedPath: false) { }
 
         private DiagnosticDataLocation(
             FileLinePositionSpan unmappedFileSpan,
             DocumentId? documentId,
             FileLinePositionSpan? mappedFileSpan,
-            bool forceMappedPath)
+            bool forceMappedPath
+        )
         {
             Contract.ThrowIfNull(unmappedFileSpan.Path);
 
@@ -67,10 +68,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // If we were passed in a mapped span use it with the original span to determine the true final mapped
             // location. If forceMappedSpan is true, then this is a test which is explicitly making a mapped span that
             // it wants us to not mess with.  In that case, just hold onto that value directly.
-            if (mappedFileSpan is { } mappedSpan &&
-                (mappedSpan.HasMappedPath || forceMappedPath))
+            if (mappedFileSpan is { } mappedSpan && (mappedSpan.HasMappedPath || forceMappedPath))
             {
-                MappedFileSpan = new FileLinePositionSpan(GetNormalizedFilePath(unmappedFileSpan.Path, mappedSpan.Path), mappedSpan.Span);
+                MappedFileSpan = new FileLinePositionSpan(
+                    GetNormalizedFilePath(unmappedFileSpan.Path, mappedSpan.Path),
+                    mappedSpan.Span
+                );
             }
             else
             {
@@ -84,7 +87,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (RoslynString.IsNullOrEmpty(mapped))
                     return original;
 
-                var combined = PathUtilities.CombinePaths(PathUtilities.GetDirectoryName(original), mapped);
+                var combined = PathUtilities.CombinePaths(
+                    PathUtilities.GetDirectoryName(original),
+                    mapped
+                );
                 try
                 {
                     return Path.GetFullPath(combined);
@@ -101,11 +107,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// cref="UnmappedFileSpan"/> and <see cref="MappedFileSpan"/> corresponding to the respection locations of
         /// <paramref name="newSourceSpan"/> within <paramref name="tree"/>.
         /// </summary>
-        public DiagnosticDataLocation WithSpan(TextSpan newSourceSpan, SyntaxTree tree)
-            => new(
-                tree.GetLineSpan(newSourceSpan),
-                DocumentId,
-                tree.GetMappedLineSpan(newSourceSpan));
+        public DiagnosticDataLocation WithSpan(TextSpan newSourceSpan, SyntaxTree tree) =>
+            new(tree.GetLineSpan(newSourceSpan), DocumentId, tree.GetMappedLineSpan(newSourceSpan));
 
         public static class TestAccessor
         {
@@ -113,9 +116,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 FileLinePositionSpan originalFileSpan,
                 DocumentId? documentId,
                 FileLinePositionSpan mappedFileSpan,
-                bool forceMappedPath)
+                bool forceMappedPath
+            )
             {
-                return new DiagnosticDataLocation(originalFileSpan, documentId, mappedFileSpan, forceMappedPath);
+                return new DiagnosticDataLocation(
+                    originalFileSpan,
+                    documentId,
+                    mappedFileSpan,
+                    forceMappedPath
+                );
             }
         }
     }

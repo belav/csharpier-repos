@@ -14,24 +14,24 @@ namespace Moq.Tests.Linq
             [Fact]
             public void WhenQueryingDirect_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<Bar>(x => x.NonVirtualValue == "bar")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<Bar>(x => x.NonVirtualValue == "bar")
                 );
             }
 
             [Fact]
             public void WhenQueryingOnFluent_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<Foo>(x => x.VirtualBar.NonVirtualValue == "bar")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<Foo>(x => x.VirtualBar.NonVirtualValue == "bar")
                 );
             }
 
             [Fact]
             public void WhenQueryingOnIntermediateFluentReadonly_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<Foo>(x => x.NonVirtualBar.VirtualValue == "bar")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<Foo>(x => x.NonVirtualBar.VirtualValue == "bar")
                 );
             }
 
@@ -62,16 +62,16 @@ namespace Moq.Tests.Linq
             [Fact]
             public void WhenQueryingOnFluent_ThenThrowsArgumentException()
             {
-                Assert.Throws<ArgumentException>(
-                    () => Mock.Of<Foo>(x => x.VirtualBar.FieldValue == "bar")
+                Assert.Throws<ArgumentException>(() =>
+                    Mock.Of<Foo>(x => x.VirtualBar.FieldValue == "bar")
                 );
             }
 
             [Fact]
             public void WhenIntermediateFluentReadonly_ThenThrowsArgumentException()
             {
-                Assert.Throws<ArgumentException>(
-                    () => Mock.Of<Foo>(x => x.Bar.VirtualValue == "bar")
+                Assert.Throws<ArgumentException>(() =>
+                    Mock.Of<Foo>(x => x.Bar.VirtualValue == "bar")
                 );
             }
 
@@ -94,24 +94,24 @@ namespace Moq.Tests.Linq
             [Fact]
             public void WhenQueryingDirect_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<Bar>(x => x.NonVirtual() == "foo")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<Bar>(x => x.NonVirtual() == "foo")
                 );
             }
 
             [Fact]
             public void WhenQueryingOnFluent_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<Foo>(x => x.Virtual().NonVirtual() == "foo")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<Foo>(x => x.Virtual().NonVirtual() == "foo")
                 );
             }
 
             [Fact]
             public void WhenQueryingOnIntermediateFluentNonVirtual_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<Foo>(x => x.NonVirtual().Virtual() == "foo")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<Foo>(x => x.NonVirtual().Virtual() == "foo")
                 );
             }
 
@@ -159,8 +159,8 @@ namespace Moq.Tests.Linq
             [Fact]
             public void WhenQueryingAll_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mocks.Of<IFoo>().All(x => x.Value == "Foo")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mocks.Of<IFoo>().All(x => x.Value == "Foo")
                 );
             }
 
@@ -215,8 +215,8 @@ namespace Moq.Tests.Linq
             [Fact]
             public void WhenCombiningWithOrRatherThanLogicalAnd_ThenThrowsNotSupportedException()
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Mock.Of<IFoo>(x => x.Count == 5 || x.Value == "foo")
+                Assert.Throws<NotSupportedException>(() =>
+                    Mock.Of<IFoo>(x => x.Count == 5 || x.Value == "foo")
                 );
             }
 

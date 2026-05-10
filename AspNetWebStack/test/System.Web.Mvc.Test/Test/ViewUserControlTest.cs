@@ -56,7 +56,9 @@ namespace System.Web.Mvc.Test
             ViewContext vc = mockViewContext.Object;
 
             Mock<ViewPage> mockViewPage = new Mock<ViewPage>();
-            mockViewPage.Setup(vp => vp.RenderView(vc)).Callback(() => vc.HttpContext.Response.ContentType = "newContentType");
+            mockViewPage
+                .Setup(vp => vp.RenderView(vc))
+                .Callback(() => vc.HttpContext.Response.ContentType = "newContentType");
 
             // Act
             vc.HttpContext.Response.ContentType = "oldContentType";
@@ -127,8 +129,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { vuc.ViewData.Model = 50; },
-                "The model item passed into the dictionary is of type 'System.Int32', but this dictionary requires a model item of type 'System.String'.");
+                delegate
+                {
+                    vuc.ViewData.Model = 50;
+                },
+                "The model item passed into the dictionary is of type 'System.Int32', but this dictionary requires a model item of type 'System.String'."
+            );
         }
 
         [Fact]
@@ -138,8 +144,12 @@ namespace System.Web.Mvc.Test
             vuc.AppRelativeVirtualPath = "~/Foo.ascx";
 
             Assert.Throws<InvalidOperationException>(
-                delegate { var foo = vuc.ViewData["Foo"]; },
-                "The ViewUserControl '~/Foo.ascx' cannot find an IViewDataContainer object. The ViewUserControl must be inside a ViewPage, a ViewMasterPage, or another ViewUserControl.");
+                delegate
+                {
+                    var foo = vuc.ViewData["Foo"];
+                },
+                "The ViewUserControl '~/Foo.ascx' cannot find an IViewDataContainer object. The ViewUserControl must be inside a ViewPage, a ViewMasterPage, or another ViewUserControl."
+            );
         }
 
         [Fact]
@@ -152,8 +162,12 @@ namespace System.Web.Mvc.Test
             vuc.AppRelativeVirtualPath = "~/Foo.ascx";
 
             Assert.Throws<InvalidOperationException>(
-                delegate { var foo = vuc.ViewData["Foo"]; },
-                "The ViewUserControl '~/Foo.ascx' cannot find an IViewDataContainer object. The ViewUserControl must be inside a ViewPage, a ViewMasterPage, or another ViewUserControl.");
+                delegate
+                {
+                    var foo = vuc.ViewData["Foo"];
+                },
+                "The ViewUserControl '~/Foo.ascx' cannot find an IViewDataContainer object. The ViewUserControl must be inside a ViewPage, a ViewMasterPage, or another ViewUserControl."
+            );
         }
 
         [Fact]
@@ -164,7 +178,11 @@ namespace System.Web.Mvc.Test
             p.Controls.Add(new Control());
             ViewUserControl vuc = new ViewUserControl();
             p.Controls[0].Controls.Add(vuc);
-            p.ViewData = new ViewDataDictionary { { "FirstName", "Joe" }, { "LastName", "Schmoe" } };
+            p.ViewData = new ViewDataDictionary
+            {
+                { "FirstName", "Joe" },
+                { "LastName", "Schmoe" },
+            };
 
             // Act
             object firstName = vuc.ViewData.Eval("FirstName");
@@ -183,7 +201,7 @@ namespace System.Web.Mvc.Test
             {
                 { "Foo", "FooParent" },
                 { "Bar", "BarParent" },
-                { "Child", new object() }
+                { "Child", new object() },
             };
 
             ViewPage p = new ViewPage();
@@ -212,12 +230,8 @@ namespace System.Web.Mvc.Test
                 { "Bar", "BarParent" },
                 {
                     "Child",
-                    new ViewDataDictionary()
-                    {
-                        { "Foo", "FooChild" },
-                        { "Bar", "BarChild" }
-                    }
-                    }
+                    new ViewDataDictionary() { { "Foo", "FooChild" }, { "Bar", "BarChild" } }
+                },
             };
 
             ViewPage p = new ViewPage();
@@ -248,7 +262,11 @@ namespace System.Web.Mvc.Test
             ViewUserControl vuc = new ViewUserControl();
             outerVuc.Controls[0].Controls.Add(vuc);
 
-            p.ViewData = new ViewDataDictionary { { "FirstName", "Joe" }, { "LastName", "Schmoe" } };
+            p.ViewData = new ViewDataDictionary
+            {
+                { "FirstName", "Joe" },
+                { "LastName", "Schmoe" },
+            };
 
             // Act
             object firstName = vuc.ViewData.Eval("FirstName");
@@ -271,8 +289,16 @@ namespace System.Web.Mvc.Test
             ViewUserControl vuc = new ViewUserControl() { ViewDataKey = "SubData" };
             outerVuc.Controls[0].Controls.Add(vuc);
 
-            p.ViewData = new ViewDataDictionary { { "FirstName", "Joe" }, { "LastName", "Schmoe" } };
-            p.ViewData["SubData"] = new ViewDataDictionary { { "FirstName", "SubJoe" }, { "LastName", "SubSchmoe" } };
+            p.ViewData = new ViewDataDictionary
+            {
+                { "FirstName", "Joe" },
+                { "LastName", "Schmoe" },
+            };
+            p.ViewData["SubData"] = new ViewDataDictionary
+            {
+                { "FirstName", "SubJoe" },
+                { "LastName", "SubSchmoe" },
+            };
 
             // Act
             object firstName = vuc.ViewData.Eval("FirstName");
@@ -295,8 +321,16 @@ namespace System.Web.Mvc.Test
             ViewUserControl vuc = new ViewUserControl();
             outerVuc.Controls[0].Controls.Add(vuc);
 
-            p.ViewData = new ViewDataDictionary { { "FirstName", "Joe" }, { "LastName", "Schmoe" } };
-            p.ViewData["SubData"] = new ViewDataDictionary { { "FirstName", "SubJoe" }, { "LastName", "SubSchmoe" } };
+            p.ViewData = new ViewDataDictionary
+            {
+                { "FirstName", "Joe" },
+                { "LastName", "Schmoe" },
+            };
+            p.ViewData["SubData"] = new ViewDataDictionary
+            {
+                { "FirstName", "SubJoe" },
+                { "LastName", "SubSchmoe" },
+            };
 
             // Act
             object firstName = vuc.ViewData.Eval("FirstName");
@@ -310,7 +344,12 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void ViewDataKeyProperty()
         {
-            MemberHelper.TestStringProperty(new ViewUserControl(), "ViewDataKey", String.Empty, testDefaultValueAttribute: true);
+            MemberHelper.TestStringProperty(
+                new ViewUserControl(),
+                "ViewDataKey",
+                String.Empty,
+                testDefaultValueAttribute: true
+            );
         }
 
         [Fact]
@@ -321,15 +360,22 @@ namespace System.Web.Mvc.Test
             p.ViewData = new ViewDataDictionary();
             p.ViewData["Foo"] = new DummyViewData { MyInt = 123, MyString = "Whatever" };
 
-            MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>() { ViewDataKey = "FOO" };
+            MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>()
+            {
+                ViewDataKey = "FOO",
+            };
             vuc.AppRelativeVirtualPath = "~/Foo.aspx";
             p.Controls.Add(new Control());
             p.Controls[0].Controls.Add(vuc);
 
             // Act
             Assert.Throws<InvalidOperationException>(
-                delegate { var foo = vuc.ViewData.Model.IntProp; },
-                @"The model item passed into the dictionary is of type 'System.Web.Mvc.Test.ViewUserControlTest+DummyViewData', but this dictionary requires a model item of type 'System.Web.Mvc.Test.ViewUserControlTest+MyViewData'.");
+                delegate
+                {
+                    var foo = vuc.ViewData.Model.IntProp;
+                },
+                @"The model item passed into the dictionary is of type 'System.Web.Mvc.Test.ViewUserControlTest+DummyViewData', but this dictionary requires a model item of type 'System.Web.Mvc.Test.ViewUserControlTest+MyViewData'."
+            );
         }
 
         [Fact]
@@ -338,7 +384,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ViewPage p = new ViewPage();
             p.Controls.Add(new Control());
-            MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>() { ViewDataKey = "FOO" };
+            MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>()
+            {
+                ViewDataKey = "FOO",
+            };
             p.Controls[0].Controls.Add(vuc);
             p.ViewData = new ViewDataDictionary();
             p.ViewData["Foo"] = new MyViewData { IntProp = 123, StringProp = "miao" };
@@ -380,8 +429,12 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { HtmlHelper foo = vuc.Html; },
-                "A ViewUserControl can be used only in pages that derive from ViewPage or ViewPage<TModel>.");
+                delegate
+                {
+                    HtmlHelper foo = vuc.Html;
+                },
+                "A ViewUserControl can be used only in pages that derive from ViewPage or ViewPage<TModel>."
+            );
         }
 
         [Fact]
@@ -391,7 +444,10 @@ namespace System.Web.Mvc.Test
             ViewUserControl vuc = new ViewUserControl();
             ViewPage containerPage = new ViewPage();
             containerPage.Controls.Add(vuc);
-            RequestContext rc = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext rc = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
             UrlHelper urlHelper = new UrlHelper(rc);
             containerPage.Url = urlHelper;
 
@@ -409,8 +465,12 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { UrlHelper foo = vuc.Url; },
-                "A ViewUserControl can be used only in pages that derive from ViewPage or ViewPage<TModel>.");
+                delegate
+                {
+                    UrlHelper foo = vuc.Url;
+                },
+                "A ViewUserControl can be used only in pages that derive from ViewPage or ViewPage<TModel>."
+            );
         }
 
         [Fact]
@@ -418,7 +478,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             MockViewUserControl vuc = new MockViewUserControl();
-            MockViewUserControlContainerPage containerPage = new MockViewUserControlContainerPage(vuc);
+            MockViewUserControlContainerPage containerPage = new MockViewUserControlContainerPage(
+                vuc
+            );
             bool triggered = false;
             HtmlTextWriter writer = new HtmlTextWriter(TextWriter.Null);
             containerPage.RenderCallback = delegate()
@@ -444,8 +506,12 @@ namespace System.Web.Mvc.Test
 
             // Act
             Assert.Throws<InvalidOperationException>(
-                delegate { HtmlTextWriter writer = vuc.Writer; },
-                "A ViewUserControl can be used only in pages that derive from ViewPage or ViewPage<TModel>.");
+                delegate
+                {
+                    HtmlTextWriter writer = vuc.Writer;
+                },
+                "A ViewUserControl can be used only in pages that derive from ViewPage or ViewPage<TModel>."
+            );
         }
 
         [Fact]
@@ -519,13 +585,9 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private sealed class MockViewUserControl : ViewUserControl
-        {
-        }
+        private sealed class MockViewUserControl : ViewUserControl { }
 
-        private sealed class MockViewUserControl<TViewData> : ViewUserControl<TViewData>
-        {
-        }
+        private sealed class MockViewUserControl<TViewData> : ViewUserControl<TViewData> { }
 
         private sealed class MyViewData
         {
@@ -533,8 +595,6 @@ namespace System.Web.Mvc.Test
             public string StringProp { get; set; }
         }
 
-        private sealed class FooModel
-        {
-        }
+        private sealed class FooModel { }
     }
 }

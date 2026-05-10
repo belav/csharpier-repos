@@ -43,7 +43,10 @@ namespace Microsoft.Extensions.Caching.Memory
         /// </summary>
         /// <param name="optionsAccessor">The options of the cache.</param>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
-        public MemoryCache(IOptions<MemoryCacheOptions> optionsAccessor, ILoggerFactory loggerFactory)
+        public MemoryCache(
+            IOptions<MemoryCacheOptions> optionsAccessor,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(optionsAccessor);
             ThrowHelper.ThrowIfNull(loggerFactory);
@@ -105,7 +108,13 @@ namespace Microsoft.Extensions.Caching.Memory
 
             if (_options.HasSizeLimit && entry.Size < 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.CacheEntryHasEmptySize, nameof(entry.Size), nameof(_options.SizeLimit)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.CacheEntryHasEmptySize,
+                        nameof(entry.Size),
+                        nameof(_options.SizeLimit)
+                    )
+                );
             }
 
             DateTime utcNow = UtcNow;
@@ -312,7 +321,7 @@ namespace Microsoft.Extensions.Caching.Memory
                     TotalMisses = sumTotal.miss,
                     TotalHits = sumTotal.hit,
                     CurrentEntryCount = Count,
-                    CurrentEstimatedSize = _options.SizeLimit.HasValue ? Size : null
+                    CurrentEstimatedSize = _options.SizeLimit.HasValue ? Size : null,
                 };
             }
 
@@ -339,8 +348,13 @@ namespace Microsoft.Extensions.Caching.Memory
             void ScheduleTask(DateTime utcNow)
             {
                 _lastExpirationScan = utcNow;
-                Task.Factory.StartNew(state => ((MemoryCache)state!).ScanForExpiredItems(), this,
-                    CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                Task.Factory.StartNew(
+                    state => ((MemoryCache)state!).ScanForExpiredItems(),
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -449,7 +463,11 @@ namespace Microsoft.Extensions.Caching.Memory
                     return true;
                 }
 
-                long original = Interlocked.CompareExchange(ref coherentState._cacheSize, newSize, sizeRead);
+                long original = Interlocked.CompareExchange(
+                    ref coherentState._cacheSize,
+                    newSize,
+                    sizeRead
+                );
                 if (sizeRead == original)
                 {
                     return false;
@@ -483,12 +501,14 @@ namespace Microsoft.Extensions.Caching.Memory
                 long lowWatermark = sizeLimit - (long)(sizeLimit * _options.CompactionPercentage);
                 if (currentSize > lowWatermark)
                 {
-                     Compact(currentSize - (long)lowWatermark, entry => entry.Size, coherentState);
+                    Compact(currentSize - (long)lowWatermark, entry => entry.Size, coherentState);
                 }
             }
 
             if (_logger.IsEnabled(LogLevel.Debug))
-                _logger.LogDebug($"Overcapacity compaction executed. New size {coherentState.Size}");
+                _logger.LogDebug(
+                    $"Overcapacity compaction executed. New size {coherentState.Size}"
+                );
         }
 
         /// Remove at least the given percentage (0.10 for 10%) of the total entries (or estimated memory?), according to the following policy:
@@ -505,7 +525,11 @@ namespace Microsoft.Extensions.Caching.Memory
             Compact(removalCountTarget, _ => 1, coherentState);
         }
 
-        private void Compact(long removalSizeTarget, Func<CacheEntry, long> computeEntrySize, CoherentState coherentState)
+        private void Compact(
+            long removalSizeTarget,
+            Func<CacheEntry, long> computeEntrySize,
+            CoherentState coherentState
+        )
         {
             var entriesToRemove = new List<CacheEntry>();
             // cache LastAccessed outside of the CacheEntry so it is stable during compaction
@@ -545,9 +569,27 @@ namespace Microsoft.Extensions.Caching.Memory
                 }
             }
 
-            ExpirePriorityBucket(ref removedSize, removalSizeTarget, computeEntrySize, entriesToRemove, lowPriEntries);
-            ExpirePriorityBucket(ref removedSize, removalSizeTarget, computeEntrySize, entriesToRemove, normalPriEntries);
-            ExpirePriorityBucket(ref removedSize, removalSizeTarget, computeEntrySize, entriesToRemove, highPriEntries);
+            ExpirePriorityBucket(
+                ref removedSize,
+                removalSizeTarget,
+                computeEntrySize,
+                entriesToRemove,
+                lowPriEntries
+            );
+            ExpirePriorityBucket(
+                ref removedSize,
+                removalSizeTarget,
+                computeEntrySize,
+                entriesToRemove,
+                normalPriEntries
+            );
+            ExpirePriorityBucket(
+                ref removedSize,
+                removalSizeTarget,
+                computeEntrySize,
+                entriesToRemove,
+                highPriEntries
+            );
 
             foreach (CacheEntry entry in entriesToRemove)
             {
@@ -559,7 +601,13 @@ namespace Microsoft.Extensions.Caching.Memory
             // ?. Items with the soonest absolute expiration.
             // ?. Items with the soonest sliding expiration.
             // ?. Larger objects - estimated by object graph size, inaccurate.
-            static void ExpirePriorityBucket(ref long removedSize, long removalSizeTarget, Func<CacheEntry, long> computeEntrySize, List<CacheEntry> entriesToRemove, List<(CacheEntry Entry, DateTimeOffset LastAccessed)> priorityEntries)
+            static void ExpirePriorityBucket(
+                ref long removedSize,
+                long removalSizeTarget,
+                Func<CacheEntry, long> computeEntrySize,
+                List<CacheEntry> entriesToRemove,
+                List<(CacheEntry Entry, DateTimeOffset LastAccessed)> priorityEntries
+            )
             {
                 // Do we meet our quota by just removing expired entries?
                 if (removalSizeTarget <= removedSize)
@@ -645,7 +693,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// </summary>
         private sealed class CoherentState
         {
-            internal ConcurrentDictionary<object, CacheEntry> _entries = new ConcurrentDictionary<object, CacheEntry>();
+            internal ConcurrentDictionary<object, CacheEntry> _entries =
+                new ConcurrentDictionary<object, CacheEntry>();
             internal long _cacheSize;
 
             private ICollection<KeyValuePair<object, CacheEntry>> EntriesCollection => _entries;
@@ -656,7 +705,9 @@ namespace Microsoft.Extensions.Caching.Memory
 
             internal void RemoveEntry(CacheEntry entry, MemoryCacheOptions options)
             {
-                if (EntriesCollection.Remove(new KeyValuePair<object, CacheEntry>(entry.Key, entry)))
+                if (
+                    EntriesCollection.Remove(new KeyValuePair<object, CacheEntry>(entry.Key, entry))
+                )
                 {
                     if (options.SizeLimit.HasValue)
                     {

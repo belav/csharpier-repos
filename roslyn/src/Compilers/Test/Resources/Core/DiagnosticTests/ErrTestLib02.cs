@@ -11,13 +11,28 @@ namespace NS
 
     public class Ref
     {
-        public static A GetA() { return new A(); }
+        public static A GetA()
+        {
+            return new A();
+        }
+
         // for CS1682 - nested
-        public static A.B GetB() { return null; }
+        public static A.B GetB()
+        {
+            return null;
+        }
+
         // for CS1684
-        public static C GetC() { return null; }
+        public static C GetC()
+        {
+            return null;
+        }
+
         // for CS1714
-        public static E<int> GetE() { return null; }
+        public static E<int> GetE()
+        {
+            return null;
+        }
     }
 }
 

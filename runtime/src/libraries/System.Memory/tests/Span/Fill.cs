@@ -90,14 +90,18 @@ namespace System.SpanTests
         [Fact]
         public static void FillValueTypeWithReferences()
         {
-            TestValueTypeWithReference[] actual = {
+            TestValueTypeWithReference[] actual =
+            {
                 new TestValueTypeWithReference() { I = 1, S = "a" },
                 new TestValueTypeWithReference() { I = 2, S = "b" },
-                new TestValueTypeWithReference() { I = 3, S = "c" } };
-            TestValueTypeWithReference[] expected = {
+                new TestValueTypeWithReference() { I = 3, S = "c" },
+            };
+            TestValueTypeWithReference[] expected =
+            {
                 new TestValueTypeWithReference() { I = 5, S = "d" },
                 new TestValueTypeWithReference() { I = 5, S = "d" },
-                new TestValueTypeWithReference() { I = 5, S = "d" } };
+                new TestValueTypeWithReference() { I = 5, S = "d" },
+            };
 
             var span = new Span<TestValueTypeWithReference>(actual);
             span.Fill(new TestValueTypeWithReference() { I = 5, S = "d" });
@@ -119,7 +123,8 @@ namespace System.SpanTests
             catch (OutOfMemoryException)
             {
                 Console.WriteLine(
-                    $"Span.Fill test {nameof(FillNativeBytes)} skipped due to {nameof(OutOfMemoryException)}.");
+                    $"Span.Fill test {nameof(FillNativeBytes)} skipped due to {nameof(OutOfMemoryException)}."
+                );
                 return;
             }
 
@@ -172,10 +177,21 @@ namespace System.SpanTests
             RunTest<decimal>(1.0m); // 128-bit struct
             RunTest<Guid>(new Guid("29e07627-2481-4f43-8fbf-09cf21180239")); // 128-bit struct
             RunTest<My96BitStruct>(new(0x11111111, 0x22222222, 0x33333333)); // 96-bit struct, no SIMD
-            RunTest<My256BitStruct>(new(0x1111111111111111, 0x2222222222222222, 0x3333333333333333, 0x4444444444444444));
-            RunTest<My512BitStruct>(new(
-                0x1111111111111111, 0x2222222222222222, 0x3333333333333333, 0x4444444444444444,
-                0x5555555555555555, 0x6666666666666666, 0x7777777777777777, 0x8888888888888888)); // 512-bit struct, no SIMD
+            RunTest<My256BitStruct>(
+                new(0x1111111111111111, 0x2222222222222222, 0x3333333333333333, 0x4444444444444444)
+            );
+            RunTest<My512BitStruct>(
+                new(
+                    0x1111111111111111,
+                    0x2222222222222222,
+                    0x3333333333333333,
+                    0x4444444444444444,
+                    0x5555555555555555,
+                    0x6666666666666666,
+                    0x7777777777777777,
+                    0x8888888888888888
+                )
+            ); // 512-bit struct, no SIMD
             RunTest<MyRefContainingStruct>(new("Hello world!")); // struct contains refs, no SIMD
 
             static void RunTest<T>(T value)
@@ -226,7 +242,16 @@ namespace System.SpanTests
 
         private readonly struct My512BitStruct
         {
-            public My512BitStruct(ulong data0, ulong data1, ulong data2, ulong data3, ulong data4, ulong data5, ulong data6, ulong data7)
+            public My512BitStruct(
+                ulong data0,
+                ulong data1,
+                ulong data2,
+                ulong data3,
+                ulong data4,
+                ulong data5,
+                ulong data6,
+                ulong data7
+            )
             {
                 Data0 = data0;
                 Data1 = data1;

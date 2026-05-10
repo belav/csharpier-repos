@@ -1,11 +1,13 @@
-﻿using System.Web.UI.WebControls;
-using System.Security.Permissions;
+﻿using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// Interface implemented by the object that drives field template. Typically, this is the DynamicControl.
     /// </summary>
-    public interface IFieldTemplateHost {
+    public interface IFieldTemplateHost
+    {
         /// <summary>
         /// The MetaColumn for which the field template is needed
         /// </summary>

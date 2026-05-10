@@ -14,7 +14,10 @@ namespace System.Linq.Tests
             string[] source = { "Prakash", "Alpha", "DAN", "dan", "Prakash" };
             string[] expected = { "Prakash", "Prakash", "DAN", "dan", "Alpha" };
 
-            Assert.Equal(expected, source.AsQueryable().OrderDescending(StringComparer.OrdinalIgnoreCase));
+            Assert.Equal(
+                expected,
+                source.AsQueryable().OrderDescending(StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
@@ -30,14 +33,20 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.OrderDescending());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.OrderDescending()
+            );
         }
 
         [Fact]
         public void NullSourceComparer()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.OrderDescending(Comparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.OrderDescending(Comparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -50,7 +59,10 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderDescending2()
         {
-            var count = new[] { 0, 1, 2 }.AsQueryable().OrderDescending(Comparer<int>.Default).Count();
+            var count = new[] { 0, 1, 2 }
+                .AsQueryable()
+                .OrderDescending(Comparer<int>.Default)
+                .Count();
             Assert.Equal(3, count);
         }
     }

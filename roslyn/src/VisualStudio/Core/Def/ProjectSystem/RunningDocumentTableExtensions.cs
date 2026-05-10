@@ -16,9 +16,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     /// </summary>
     internal static class RunningDocumentTableExtensions
     {
-        public static bool TryGetBufferFromMoniker(this IVsRunningDocumentTable4 runningDocumentTable,
+        public static bool TryGetBufferFromMoniker(
+            this IVsRunningDocumentTable4 runningDocumentTable,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
-            string moniker, [NotNullWhen(true)] out ITextBuffer? textBuffer)
+            string moniker,
+            [NotNullWhen(true)] out ITextBuffer? textBuffer
+        )
         {
             textBuffer = null;
             if (!runningDocumentTable.IsFileOpen(moniker))
@@ -32,14 +35,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return false;
             }
 
-            return TryGetBuffer(runningDocumentTable, editorAdaptersFactoryService, cookie, out textBuffer);
+            return TryGetBuffer(
+                runningDocumentTable,
+                editorAdaptersFactoryService,
+                cookie,
+                out textBuffer
+            );
         }
 
-        public static bool IsFileOpen(this IVsRunningDocumentTable4 runningDocumentTable, string fileName)
-            => runningDocumentTable.IsMonikerValid(fileName);
+        public static bool IsFileOpen(
+            this IVsRunningDocumentTable4 runningDocumentTable,
+            string fileName
+        ) => runningDocumentTable.IsMonikerValid(fileName);
 
-        public static bool TryGetBuffer(this IVsRunningDocumentTable4 runningDocumentTable, IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
-            uint docCookie, [NotNullWhen(true)] out ITextBuffer? textBuffer)
+        public static bool TryGetBuffer(
+            this IVsRunningDocumentTable4 runningDocumentTable,
+            IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
+            uint docCookie,
+            [NotNullWhen(true)] out ITextBuffer? textBuffer
+        )
         {
             textBuffer = null;
 

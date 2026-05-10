@@ -11,12 +11,16 @@ namespace System.Threading.Tasks
     {
         /// <summary>A cached Task{Boolean}.Result == true.</summary>
         internal static readonly Task<bool> s_trueTask = CreateCacheableTask(result: true);
+
         /// <summary>A cached Task{Boolean}.Result == false.</summary>
         internal static readonly Task<bool> s_falseTask = CreateCacheableTask(result: false);
+
         /// <summary>The cache of Task{Int32}.</summary>
         internal static readonly Task<int>[] s_int32Tasks = CreateInt32Tasks();
+
         /// <summary>The minimum value, inclusive, for which we want a cached task.</summary>
         internal const int InclusiveInt32Min = -1;
+
         /// <summary>The maximum value, exclusive, for which we want a cached task.</summary>
         internal const int ExclusiveInt32Max = 9;
 
@@ -25,7 +29,12 @@ namespace System.Threading.Tasks
         /// <param name="result">The result for the task.</param>
         /// <returns>The cacheable task.</returns>
         internal static Task<TResult> CreateCacheableTask<TResult>(TResult? result) =>
-            new Task<TResult>(false, result, (TaskCreationOptions)InternalTaskOptions.DoNotDispose, default);
+            new Task<TResult>(
+                false,
+                result,
+                (TaskCreationOptions)InternalTaskOptions.DoNotDispose,
+                default
+            );
 
         /// <summary>Creates an array of cached tasks for the values in the range [INCLUSIVE_MIN,EXCLUSIVE_MAX).</summary>
         private static Task<int>[] CreateInt32Tasks()

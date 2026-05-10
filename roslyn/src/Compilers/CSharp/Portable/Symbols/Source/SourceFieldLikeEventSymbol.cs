@@ -24,9 +24,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly SynthesizedEventAccessorSymbol _addMethod;
         private readonly SynthesizedEventAccessorSymbol _removeMethod;
 
-        internal SourceFieldLikeEventSymbol(SourceMemberContainerTypeSymbol containingType, Binder binder, SyntaxTokenList modifiers, VariableDeclaratorSyntax declaratorSyntax, BindingDiagnosticBag diagnostics)
-            : base(containingType, declaratorSyntax, modifiers, isFieldLike: true, interfaceSpecifierSyntaxOpt: null,
-                   nameTokenSyntax: declaratorSyntax.Identifier, diagnostics: diagnostics)
+        internal SourceFieldLikeEventSymbol(
+            SourceMemberContainerTypeSymbol containingType,
+            Binder binder,
+            SyntaxTokenList modifiers,
+            VariableDeclaratorSyntax declaratorSyntax,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                declaratorSyntax,
+                modifiers,
+                isFieldLike: true,
+                interfaceSpecifierSyntaxOpt: null,
+                nameTokenSyntax: declaratorSyntax.Identifier,
+                diagnostics: diagnostics
+            )
         {
             Debug.Assert(declaratorSyntax.Parent is object);
 
@@ -39,11 +52,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // The runtime will not treat the accessors of this event as overrides or implementations
             // of those of another event unless both the signatures and the custom modifiers match.
             // Hence, in the case of overrides and *explicit* implementations (not possible for field-like
-            // events), we need to copy the custom modifiers that are in the signatures of the 
-            // overridden/implemented event accessors. (From source, we know that there can only be one 
-            // overridden/implemented event, so there are no conflicts.)  This is unnecessary for implicit 
-            // implementations because, if the custom modifiers don't match, we'll insert bridge methods 
-            // for the accessors (explicit implementations that delegate to the implicit implementations) 
+            // events), we need to copy the custom modifiers that are in the signatures of the
+            // overridden/implemented event accessors. (From source, we know that there can only be one
+            // overridden/implemented event, so there are no conflicts.)  This is unnecessary for implicit
+            // implementations because, if the custom modifiers don't match, we'll insert bridge methods
+            // for the accessors (explicit implementations that delegate to the implicit implementations)
             // with the correct custom modifiers (see SourceMemberContainerTypeSymbol.SynthesizeInterfaceMemberImplementation).
 
             // If this event is an override, we may need to copy custom modifiers from
@@ -66,15 +79,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (inInterfaceType && !this.IsStatic)
                 {
-                    diagnostics.Add(ErrorCode.ERR_InterfaceEventInitializer, this.GetFirstLocation(), this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_InterfaceEventInitializer,
+                        this.GetFirstLocation(),
+                        this
+                    );
                 }
                 else if (this.IsAbstract)
                 {
-                    diagnostics.Add(ErrorCode.ERR_AbstractEventInitializer, this.GetFirstLocation(), this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_AbstractEventInitializer,
+                        this.GetFirstLocation(),
+                        this
+                    );
                 }
                 else if (this.IsExtern)
                 {
-                    diagnostics.Add(ErrorCode.ERR_ExternEventInitializer, this.GetFirstLocation(), this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_ExternEventInitializer,
+                        this.GetFirstLocation(),
+                        this
+                    );
                 }
             }
 
@@ -97,24 +122,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (!ContainingAssembly.RuntimeSupportsStaticAbstractMembersInInterfaces)
                     {
-                        diagnostics.Add(ErrorCode.ERR_RuntimeDoesNotSupportStaticAbstractMembersInInterfaces, this.GetFirstLocation());
+                        diagnostics.Add(
+                            ErrorCode.ERR_RuntimeDoesNotSupportStaticAbstractMembersInInterfaces,
+                            this.GetFirstLocation()
+                        );
                     }
                 }
                 else if (this.IsExtern || this.IsStatic)
                 {
                     if (!ContainingAssembly.RuntimeSupportsDefaultInterfaceImplementation)
                     {
-                        diagnostics.Add(ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation, this.GetFirstLocation());
+                        diagnostics.Add(
+                            ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
+                            this.GetFirstLocation()
+                        );
                     }
                 }
                 else if (!this.IsAbstract)
                 {
-                    diagnostics.Add(ErrorCode.ERR_EventNeedsBothAccessors, this.GetFirstLocation(), this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_EventNeedsBothAccessors,
+                        this.GetFirstLocation(),
+                        this
+                    );
                 }
             }
 
-            _addMethod = new SynthesizedEventAccessorSymbol(this, isAdder: true, isExpressionBodied: false);
-            _removeMethod = new SynthesizedEventAccessorSymbol(this, isAdder: false, isExpressionBodied: false);
+            _addMethod = new SynthesizedEventAccessorSymbol(
+                this,
+                isAdder: true,
+                isExpressionBodied: false
+            );
+            _removeMethod = new SynthesizedEventAccessorSymbol(
+                this,
+                isAdder: false,
+                isExpressionBodied: false
+            );
 
             if (declarationSyntax.Variables[0] == declaratorSyntax)
             {
@@ -162,9 +205,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return (object?)AssociatedEventField != null ?
-                    AttributeLocation.Event | AttributeLocation.Method | AttributeLocation.Field :
-                    AttributeLocation.Event | AttributeLocation.Method;
+                return (object?)AssociatedEventField != null
+                    ? AttributeLocation.Event | AttributeLocation.Method | AttributeLocation.Field
+                    : AttributeLocation.Event | AttributeLocation.Method;
             }
         }
 
@@ -173,15 +216,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ImmutableArray<EventSymbol>.Empty; }
         }
 
-        private SourceEventFieldSymbol MakeAssociatedField(VariableDeclaratorSyntax declaratorSyntax)
+        private SourceEventFieldSymbol MakeAssociatedField(
+            VariableDeclaratorSyntax declaratorSyntax
+        )
         {
-            var field = new SourceEventFieldSymbol(this, declaratorSyntax, BindingDiagnosticBag.Discarded);
+            var field = new SourceEventFieldSymbol(
+                this,
+                declaratorSyntax,
+                BindingDiagnosticBag.Discarded
+            );
 
             Debug.Assert(field.Name == _name);
             return field;
         }
 
-        internal override void ForceComplete(SourceLocation? locationOpt, CancellationToken cancellationToken)
+        internal override void ForceComplete(
+            SourceLocation? locationOpt,
+            CancellationToken cancellationToken
+        )
         {
             if ((object?)this.AssociatedField != null)
             {

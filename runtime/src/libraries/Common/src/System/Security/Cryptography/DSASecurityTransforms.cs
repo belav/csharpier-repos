@@ -15,9 +15,7 @@ namespace System.Security.Cryptography
             private bool _disposed;
 
             public DSASecurityTransforms()
-                : this(1024)
-            {
-            }
+                : this(1024) { }
 
             public DSASecurityTransforms(int keySize)
             {
@@ -29,25 +27,22 @@ namespace System.Security.Cryptography
                 SetKey(SecKeyPair.PublicOnly(publicKey));
             }
 
-            internal DSASecurityTransforms(SafeSecKeyRefHandle publicKey, SafeSecKeyRefHandle privateKey)
+            internal DSASecurityTransforms(
+                SafeSecKeyRefHandle publicKey,
+                SafeSecKeyRefHandle privateKey
+            )
             {
                 SetKey(SecKeyPair.PublicPrivatePair(publicKey, privateKey));
             }
 
             public override KeySizes[] LegalKeySizes
             {
-                get
-                {
-                    return new[] { new KeySizes(minSize: 512, maxSize: 1024, skipSize: 64) };
-                }
+                get { return new[] { new KeySizes(minSize: 512, maxSize: 1024, skipSize: 64) }; }
             }
 
             public override int KeySize
             {
-                get
-                {
-                    return base.KeySize;
-                }
+                get { return base.KeySize; }
                 set
                 {
                     if (KeySize == value)
@@ -81,13 +76,15 @@ namespace System.Security.Cryptography
                     keys.PrivateKey,
                     rgbHash,
                     Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA);
+                    Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA
+                );
 
                 // Since the AppleCrypto implementation is limited to FIPS 186-2, signature field sizes
                 // are always 160 bits / 20 bytes (the size of SHA-1, and the only legal length for Q).
                 byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                     derFormatSignature.AsSpan(0, derFormatSignature.Length),
-                    fieldSizeBits: SHA1.HashSizeInBits);
+                    fieldSizeBits: SHA1.HashSizeInBits
+                );
 
                 return ieeeFormatSignature;
             }
@@ -100,27 +97,44 @@ namespace System.Security.Cryptography
                 return VerifySignature((ReadOnlySpan<byte>)hash, (ReadOnlySpan<byte>)signature);
             }
 
-            public override bool VerifySignature(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature)
+            public override bool VerifySignature(
+                ReadOnlySpan<byte> hash,
+                ReadOnlySpan<byte> signature
+            )
             {
-                byte[] derFormatSignature = AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature);
+                byte[] derFormatSignature = AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(
+                    signature
+                );
 
                 return Interop.AppleCrypto.VerifySignature(
                     GetKeys().PublicKey,
                     hash,
                     derFormatSignature,
                     Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA);
+                    Interop.AppleCrypto.PAL_SignatureAlgorithm.DSA
+                );
             }
 
-            protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+            protected override byte[] HashData(
+                byte[] data,
+                int offset,
+                int count,
+                HashAlgorithmName hashAlgorithm
+            )
             {
                 if (hashAlgorithm != HashAlgorithmName.SHA1)
                 {
                     // Matching DSACryptoServiceProvider's "I only understand SHA-1/FIPS 186-2" exception
-                    throw new CryptographicException(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name);
+                    throw new CryptographicException(
+                        SR.Cryptography_UnknownHashAlgorithm,
+                        hashAlgorithm.Name
+                    );
                 }
 
-                return CryptographicOperations.HashData(hashAlgorithm, new ReadOnlySpan<byte>(data, offset, count));
+                return CryptographicOperations.HashData(
+                    hashAlgorithm,
+                    new ReadOnlySpan<byte>(data, offset, count)
+                );
             }
 
             protected override void Dispose(bool disposing)

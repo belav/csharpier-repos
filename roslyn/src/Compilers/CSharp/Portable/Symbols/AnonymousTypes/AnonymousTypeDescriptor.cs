@@ -21,10 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public readonly ImmutableArray<AnonymousTypeField> Fields;
 
         /// <summary>
-        /// Anonymous type descriptor Key 
-        /// 
-        /// The key is to be used to separate anonymous type templates in an anonymous type symbol cache. 
-        /// The type descriptors with the same keys are supposed to map to 'the same' anonymous type 
+        /// Anonymous type descriptor Key
+        ///
+        /// The key is to be used to separate anonymous type templates in an anonymous type symbol cache.
+        /// The type descriptors with the same keys are supposed to map to 'the same' anonymous type
         /// template in terms of the same generic type being used for their implementation.
         /// </summary>
         public readonly string Key;
@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return Fields.SequenceEqual(
                 other.Fields,
                 comparison,
-                static (x, y, comparison) => AnonymousTypeField.Equals(x, y, comparison));
+                static (x, y, comparison) => AnonymousTypeField.Equals(x, y, comparison)
+            );
         }
 
         /// <summary>
@@ -86,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override bool Equals(object? obj)
         {
-            return obj is AnonymousTypeDescriptor && this.Equals((AnonymousTypeDescriptor)obj, TypeCompareKind.ConsiderEverything);
+            return obj is AnonymousTypeDescriptor
+                && this.Equals((AnonymousTypeDescriptor)obj, TypeCompareKind.ConsiderEverything);
         }
 
         public override int GetHashCode()
@@ -95,15 +97,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Creates a new anonymous type descriptor based on 'this' one, 
+        /// Creates a new anonymous type descriptor based on 'this' one,
         /// but having field types passed as an argument.
         /// </summary>
-        internal AnonymousTypeDescriptor WithNewFieldsTypes(ImmutableArray<TypeWithAnnotations> newFieldTypes)
+        internal AnonymousTypeDescriptor WithNewFieldsTypes(
+            ImmutableArray<TypeWithAnnotations> newFieldTypes
+        )
         {
             Debug.Assert(!newFieldTypes.IsDefault);
             Debug.Assert(newFieldTypes.Length == this.Fields.Length);
 
-            var newFields = Fields.ZipAsArray(newFieldTypes, static (field, type) => field.WithType(type));
+            var newFields = Fields.ZipAsArray(
+                newFieldTypes,
+                static (field, type) => field.WithType(type)
+            );
             return new AnonymousTypeDescriptor(newFields, this.Location);
         }
 

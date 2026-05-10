@@ -10,12 +10,16 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
     using System.Xml;
 
-    [ConfigurationCollection(typeof(XmlElementElement), AddItemName = ConfigurationStrings.XmlElement, CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed class XmlElementElementCollection : ServiceModelConfigurationElementCollection<XmlElementElement>
+    [ConfigurationCollection(
+        typeof(XmlElementElement),
+        AddItemName = ConfigurationStrings.XmlElement,
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed class XmlElementElementCollection
+        : ServiceModelConfigurationElementCollection<XmlElementElement>
     {
         public XmlElementElementCollection()
-            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.XmlElement)
-        { }
+            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.XmlElement) { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -27,13 +31,15 @@ namespace System.ServiceModel.Configuration
             return ((XmlElementElement)element).XmlElement.OuterXml;
         }
 
-        protected override void Unmerge(ConfigurationElement sourceElement,
-                                                 ConfigurationElement parentElement,
-                                                 ConfigurationSaveMode saveMode)
+        protected override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             if (sourceElement != null)
             {
-                // Just copy from parent to here-- 
+                // Just copy from parent to here--
                 XmlElementElementCollection source = (XmlElementElementCollection)sourceElement;
                 XmlElementElementCollection parent = (XmlElementElementCollection)parentElement;
                 for (int i = 0; i < source.Count; ++i)
@@ -49,7 +55,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        protected override bool OnDeserializeUnrecognizedElement(string elementName, System.Xml.XmlReader reader)
+        protected override bool OnDeserializeUnrecognizedElement(
+            string elementName,
+            System.Xml.XmlReader reader
+        )
         {
             XmlDocument doc = new XmlDocument();
             this.Add(new XmlElementElement((XmlElement)doc.ReadNode(reader)));
@@ -57,5 +66,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

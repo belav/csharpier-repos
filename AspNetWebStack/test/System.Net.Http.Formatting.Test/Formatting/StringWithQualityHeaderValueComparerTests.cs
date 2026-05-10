@@ -81,7 +81,7 @@ namespace System.Net.Http.Formatting
                             "text;q=1.0",
                             "*;q=0.4",
                             "text;q=0.6",
-                        }, 
+                        },
                         new string[]
                         {
                             "text",
@@ -96,7 +96,7 @@ namespace System.Net.Http.Formatting
                             "*;q=0.4",
                             "text;q=0",
                         }
-                    }
+                    },
                 };
             }
         }
@@ -104,8 +104,10 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void StaticComparerReturnsSameInstance()
         {
-            StringWithQualityHeaderValueComparer comparer1 = StringWithQualityHeaderValueComparer.QualityComparer;
-            StringWithQualityHeaderValueComparer comparer2 = StringWithQualityHeaderValueComparer.QualityComparer;
+            StringWithQualityHeaderValueComparer comparer1 =
+                StringWithQualityHeaderValueComparer.QualityComparer;
+            StringWithQualityHeaderValueComparer comparer2 =
+                StringWithQualityHeaderValueComparer.QualityComparer;
 
             Assert.NotNull(comparer1);
             Assert.Same(comparer1, comparer2);
@@ -113,34 +115,58 @@ namespace System.Net.Http.Formatting
 
         [Theory]
         [PropertyData("EqualValues")]
-        public void ComparerReturnsZeroForEqualValues(string stringWithQuality1, string stringWithQuality2)
+        public void ComparerReturnsZeroForEqualValues(
+            string stringWithQuality1,
+            string stringWithQuality2
+        )
         {
             // Arrange
-            StringWithQualityHeaderValueComparer comparer = StringWithQualityHeaderValueComparer.QualityComparer;
+            StringWithQualityHeaderValueComparer comparer =
+                StringWithQualityHeaderValueComparer.QualityComparer;
 
             // Act
-            StringWithQualityHeaderValue stringWithQualityHeaderValue1 = StringWithQualityHeaderValue.Parse(stringWithQuality1);
-            StringWithQualityHeaderValue stringWithQualityHeaderValue2 = StringWithQualityHeaderValue.Parse(stringWithQuality2);
+            StringWithQualityHeaderValue stringWithQualityHeaderValue1 =
+                StringWithQualityHeaderValue.Parse(stringWithQuality1);
+            StringWithQualityHeaderValue stringWithQualityHeaderValue2 =
+                StringWithQualityHeaderValue.Parse(stringWithQuality2);
 
             // Assert
-            Assert.Equal(0, comparer.Compare(stringWithQualityHeaderValue1, stringWithQualityHeaderValue2));
-            Assert.Equal(0, comparer.Compare(stringWithQualityHeaderValue2, stringWithQualityHeaderValue1));
+            Assert.Equal(
+                0,
+                comparer.Compare(stringWithQualityHeaderValue1, stringWithQualityHeaderValue2)
+            );
+            Assert.Equal(
+                0,
+                comparer.Compare(stringWithQualityHeaderValue2, stringWithQualityHeaderValue1)
+            );
         }
 
         [Theory]
         [PropertyData("NonEqualValues")]
-        public void ComparerReturnsNonZeroForNonEqualValues(string stringWithQuality1, string stringWithQuality2)
+        public void ComparerReturnsNonZeroForNonEqualValues(
+            string stringWithQuality1,
+            string stringWithQuality2
+        )
         {
             // Arrange
-            StringWithQualityHeaderValueComparer comparer = StringWithQualityHeaderValueComparer.QualityComparer;
+            StringWithQualityHeaderValueComparer comparer =
+                StringWithQualityHeaderValueComparer.QualityComparer;
 
             // Act
-            StringWithQualityHeaderValue stringWithQualityHeaderValue1 = StringWithQualityHeaderValue.Parse(stringWithQuality1);
-            StringWithQualityHeaderValue stringWithQualityHeaderValue2 = StringWithQualityHeaderValue.Parse(stringWithQuality2);
+            StringWithQualityHeaderValue stringWithQualityHeaderValue1 =
+                StringWithQualityHeaderValue.Parse(stringWithQuality1);
+            StringWithQualityHeaderValue stringWithQualityHeaderValue2 =
+                StringWithQualityHeaderValue.Parse(stringWithQuality2);
 
             // Assert
-            Assert.Equal(-1, comparer.Compare(stringWithQualityHeaderValue1, stringWithQualityHeaderValue2));
-            Assert.Equal(1, comparer.Compare(stringWithQualityHeaderValue2, stringWithQualityHeaderValue1));
+            Assert.Equal(
+                -1,
+                comparer.Compare(stringWithQualityHeaderValue1, stringWithQualityHeaderValue2)
+            );
+            Assert.Equal(
+                1,
+                comparer.Compare(stringWithQualityHeaderValue2, stringWithQualityHeaderValue1)
+            );
         }
 
         [Theory]
@@ -148,14 +174,20 @@ namespace System.Net.Http.Formatting
         public void ComparerSortsListCorrectly(string[] unsorted, string[] expectedSorted)
         {
             // Arrange
-            IEnumerable<StringWithQualityHeaderValue> unsortedValues =
-                unsorted.Select(u => StringWithQualityHeaderValue.Parse(u));
+            IEnumerable<StringWithQualityHeaderValue> unsortedValues = unsorted.Select(u =>
+                StringWithQualityHeaderValue.Parse(u)
+            );
 
-            IEnumerable<StringWithQualityHeaderValue> expectedSortedValues =
-                expectedSorted.Select(u => StringWithQualityHeaderValue.Parse(u));
+            IEnumerable<StringWithQualityHeaderValue> expectedSortedValues = expectedSorted.Select(
+                u => StringWithQualityHeaderValue.Parse(u)
+            );
 
             // Act
-            IEnumerable<StringWithQualityHeaderValue> actualSorted = unsortedValues.OrderByDescending(m => m, StringWithQualityHeaderValueComparer.QualityComparer);
+            IEnumerable<StringWithQualityHeaderValue> actualSorted =
+                unsortedValues.OrderByDescending(
+                    m => m,
+                    StringWithQualityHeaderValueComparer.QualityComparer
+                );
 
             // Assert
             Assert.True(expectedSortedValues.SequenceEqual(actualSorted));

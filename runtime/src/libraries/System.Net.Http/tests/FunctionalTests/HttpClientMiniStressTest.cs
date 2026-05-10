@@ -17,7 +17,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public sealed class SocketsHttpHandler_HttpClientMiniStress_NoVersion : HttpClientMiniStress
     {
-        public SocketsHttpHandler_HttpClientMiniStress_NoVersion(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpClientMiniStress_NoVersion(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
@@ -35,56 +36,86 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(HttpClientHandlerTestBase), nameof(IsQuicSupported))]
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http3 : HttpClientMiniStress
     {
-        public SocketsHttpHandler_HttpClientMiniStress_Http3(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpClientMiniStress_Http3(ITestOutputHelper output)
+            : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version30;
     }
 
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http2 : HttpClientMiniStress
     {
-        public SocketsHttpHandler_HttpClientMiniStress_Http2(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpClientMiniStress_Http2(ITestOutputHelper output)
+            : base(output) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 
     public sealed class SocketsHttpHandler_HttpClientMiniStress_Http11 : HttpClientMiniStress
     {
-        public SocketsHttpHandler_HttpClientMiniStress_Http11(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpClientMiniStress_Http11(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
         [MemberData(nameof(PostStressOptions))]
         public async Task ManyClients_ManyPosts_Async(int numRequests, int dop, int numBytes)
         {
-            (List<HttpHeaderData> headers, string content) = CreateResponse("abcdefghijklmnopqrstuvwxyz");
-            await ForCountAsync(numRequests, dop, async i =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            (List<HttpHeaderData> headers, string content) = CreateResponse(
+                "abcdefghijklmnopqrstuvwxyz"
+            );
+            await ForCountAsync(
+                numRequests,
+                dop,
+                async i =>
                 {
-                    await CreateServerAndPostAsync(client, numBytes, headers, content);
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        await CreateServerAndPostAsync(client, numBytes, headers, content);
+                    }
                 }
-            });
+            );
         }
 
-        private async Task CreateServerAndPostAsync(HttpClient client, int numBytes, List<HttpHeaderData> headers, string content)
+        private async Task CreateServerAndPostAsync(
+            HttpClient client,
+            int numBytes,
+            List<HttpHeaderData> headers,
+            string content
+        )
         {
-            string responseText = "HTTP/1.1 200 OK\r\n" + string.Join("\r\n", headers.Select(h => h.Name + ": " + h.Value)) + "\r\n\r\n" + content;
+            string responseText =
+                "HTTP/1.1 200 OK\r\n"
+                + string.Join("\r\n", headers.Select(h => h.Name + ": " + h.Value))
+                + "\r\n\r\n"
+                + content;
 
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                var content = new ByteArrayContent(new byte[numBytes]);
-                Task<HttpResponseMessage> postAsync = client.PostAsync(url, content);
-
-                await server.AcceptConnectionAsync(async connection =>
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    byte[] postData = new byte[numBytes];
-                    while (!string.IsNullOrEmpty(await connection.ReadLineAsync().ConfigureAwait(false))) ;
-                    Assert.Equal(numBytes, await connection.ReadBlockAsync(postData, 0, numBytes));
+                    var content = new ByteArrayContent(new byte[numBytes]);
+                    Task<HttpResponseMessage> postAsync = client.PostAsync(url, content);
 
-                    await connection.WriteStringAsync(responseText).ConfigureAwait(false);
-                    connection.Socket.Shutdown(SocketShutdown.Send);
-                });
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        byte[] postData = new byte[numBytes];
+                        while (
+                            !string.IsNullOrEmpty(
+                                await connection.ReadLineAsync().ConfigureAwait(false)
+                            )
+                        )
+                            ;
+                        Assert.Equal(
+                            numBytes,
+                            await connection.ReadBlockAsync(postData, 0, numBytes)
+                        );
 
-                (await postAsync.ConfigureAwait(false)).Dispose();
-            });
+                        await connection.WriteStringAsync(responseText).ConfigureAwait(false);
+                        connection.Socket.Shutdown(SocketShutdown.Send);
+                    });
+
+                    (await postAsync.ConfigureAwait(false)).Dispose();
+                }
+            );
         }
     }
 
@@ -92,7 +123,8 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Security is not supported on Browser")]
     public abstract class HttpClientMiniStress : HttpClientHandlerTestBase
     {
-        public HttpClientMiniStress(ITestOutputHelper output) : base(output) { }
+        public HttpClientMiniStress(ITestOutputHelper output)
+            : base(output) { }
 
         protected override HttpClient CreateHttpClient() =>
             CreateHttpClient(CreateSocketsHttpHandler(allowAllCertificates: true));
@@ -100,43 +132,81 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
         [MemberData(nameof(GetStressOptions))]
-        public void SingleClient_ManyGets_Sync(int numRequests, int dop, HttpCompletionOption completionOption)
+        public void SingleClient_ManyGets_Sync(
+            int numRequests,
+            int dop,
+            HttpCompletionOption completionOption
+        )
         {
             (List<HttpHeaderData> headers, string content) = CreateResponse("abcd");
             using (HttpClient client = CreateHttpClient())
             {
-                Parallel.For(0, numRequests, new ParallelOptions { MaxDegreeOfParallelism = dop, TaskScheduler = new ThreadPerTaskScheduler() }, _ =>
-                {
-                    CreateServerAndGet(client, completionOption, headers, content);
-                });
+                Parallel.For(
+                    0,
+                    numRequests,
+                    new ParallelOptions
+                    {
+                        MaxDegreeOfParallelism = dop,
+                        TaskScheduler = new ThreadPerTaskScheduler(),
+                    },
+                    _ =>
+                    {
+                        CreateServerAndGet(client, completionOption, headers, content);
+                    }
+                );
             }
         }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
         [MemberData(nameof(GetStressOptions))]
-        public async Task SingleClient_ManyGets_Async(int numRequests, int dop, HttpCompletionOption completionOption)
+        public async Task SingleClient_ManyGets_Async(
+            int numRequests,
+            int dop,
+            HttpCompletionOption completionOption
+        )
         {
-            (List<HttpHeaderData> headers, string content) = CreateResponse("abcdefghijklmnopqrstuvwxyz");
+            (List<HttpHeaderData> headers, string content) = CreateResponse(
+                "abcdefghijklmnopqrstuvwxyz"
+            );
             using (HttpClient client = CreateHttpClient())
             {
-                await ForCountAsync(numRequests, dop, i => CreateServerAndGetAsync(client, completionOption, headers, content));
+                await ForCountAsync(
+                    numRequests,
+                    dop,
+                    i => CreateServerAndGetAsync(client, completionOption, headers, content)
+                );
             }
         }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
         [MemberData(nameof(GetStressOptions))]
-        public void ManyClients_ManyGets(int numRequests, int dop, HttpCompletionOption completionOption)
+        public void ManyClients_ManyGets(
+            int numRequests,
+            int dop,
+            HttpCompletionOption completionOption
+        )
         {
-            (List<HttpHeaderData> headers, string content) = CreateResponse("abcdefghijklmnopqrstuvwxyz");
-            Parallel.For(0, numRequests, new ParallelOptions { MaxDegreeOfParallelism = dop, TaskScheduler = new ThreadPerTaskScheduler() }, _ =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            (List<HttpHeaderData> headers, string content) = CreateResponse(
+                "abcdefghijklmnopqrstuvwxyz"
+            );
+            Parallel.For(
+                0,
+                numRequests,
+                new ParallelOptions
                 {
-                    CreateServerAndGet(client, completionOption, headers, content);
+                    MaxDegreeOfParallelism = dop,
+                    TaskScheduler = new ThreadPerTaskScheduler(),
+                },
+                _ =>
+                {
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        CreateServerAndGet(client, completionOption, headers, content);
+                    }
                 }
-            });
+            );
         }
 
         [ConditionalTheory(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
@@ -144,101 +214,150 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(5000)]
         public async Task MakeAndFaultManyRequests(int numRequests)
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    client.Timeout = Timeout.InfiniteTimeSpan;
-
-                    Task<string>[] tasks =
-                        (from i in Enumerable.Range(0, numRequests)
-                         select client.GetStringAsync(url))
-                         .ToArray();
-
-                    Assert.All(tasks, t =>
-                        Assert.True(t.IsFaulted || t.Status == TaskStatus.WaitingForActivation, $"Unexpected status {t.Status}"));
-
-                    server.Dispose();
-
-                    foreach (Task<string> task in tasks)
+                    using (HttpClient client = CreateHttpClient())
                     {
-                        await Assert.ThrowsAnyAsync<HttpRequestException>(() => task);
+                        client.Timeout = Timeout.InfiniteTimeSpan;
+
+                        Task<string>[] tasks = (
+                            from i in Enumerable.Range(0, numRequests)
+                            select client.GetStringAsync(url)
+                        ).ToArray();
+
+                        Assert.All(
+                            tasks,
+                            t =>
+                                Assert.True(
+                                    t.IsFaulted || t.Status == TaskStatus.WaitingForActivation,
+                                    $"Unexpected status {t.Status}"
+                                )
+                        );
+
+                        server.Dispose();
+
+                        foreach (Task<string> task in tasks)
+                        {
+                            await Assert.ThrowsAnyAsync<HttpRequestException>(() => task);
+                        }
                     }
-                }
-            }, new LoopbackServer.Options { ListenBacklog = numRequests });
+                },
+                new LoopbackServer.Options { ListenBacklog = numRequests }
+            );
         }
 
         public static IEnumerable<object[]> GetStressOptions()
         {
             foreach (int numRequests in new[] { 5000 }) // number of requests
-                foreach (int dop in new[] { 1, 32 }) // number of threads
-                    foreach (var completionoption in new[] { HttpCompletionOption.ResponseContentRead, HttpCompletionOption.ResponseHeadersRead })
-                        yield return new object[] { numRequests, dop, completionoption };
-        }
-
-        private void CreateServerAndGet(HttpClient client, HttpCompletionOption completionOption, List<HttpHeaderData> headers, string content)
-        {
-            LoopbackServerFactory.CreateServerAsync((server, url) =>
-            {
-                Task<HttpResponseMessage> getAsync = client.GetAsync(url, completionOption);
-
-                new Task[] {
-                    getAsync,
-                    server.HandleRequestAsync(HttpStatusCode.OK, headers, content)
-                }.WhenAllOrAnyFailed().GetAwaiter().GetResult();
-
-                getAsync.Result.Dispose();
-                return Task.CompletedTask;
-            }).GetAwaiter().GetResult();
-        }
-
-        private async Task CreateServerAndGetAsync(HttpClient client, HttpCompletionOption completionOption, List<HttpHeaderData> headers, string content)
-        {
-            await LoopbackServerFactory.CreateServerAsync(async (server, url) =>
-            {
-                Task<HttpResponseMessage> getAsync = client.GetAsync(url, completionOption);
-
-                await new Task[]
+            foreach (int dop in new[] { 1, 32 }) // number of threads
+            foreach (
+                var completionoption in new[]
                 {
-                    getAsync,
-                    server.HandleRequestAsync(HttpStatusCode.OK, headers, content),
-                }.WhenAllOrAnyFailed().ConfigureAwait(false);
+                    HttpCompletionOption.ResponseContentRead,
+                    HttpCompletionOption.ResponseHeadersRead,
+                }
+            )
+                yield return new object[] { numRequests, dop, completionoption };
+        }
 
-                getAsync.Result.Dispose();
-            });
+        private void CreateServerAndGet(
+            HttpClient client,
+            HttpCompletionOption completionOption,
+            List<HttpHeaderData> headers,
+            string content
+        )
+        {
+            LoopbackServerFactory
+                .CreateServerAsync(
+                    (server, url) =>
+                    {
+                        Task<HttpResponseMessage> getAsync = client.GetAsync(url, completionOption);
+
+                        new Task[]
+                        {
+                            getAsync,
+                            server.HandleRequestAsync(HttpStatusCode.OK, headers, content),
+                        }
+                            .WhenAllOrAnyFailed()
+                            .GetAwaiter()
+                            .GetResult();
+
+                        getAsync.Result.Dispose();
+                        return Task.CompletedTask;
+                    }
+                )
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        private async Task CreateServerAndGetAsync(
+            HttpClient client,
+            HttpCompletionOption completionOption,
+            List<HttpHeaderData> headers,
+            string content
+        )
+        {
+            await LoopbackServerFactory.CreateServerAsync(
+                async (server, url) =>
+                {
+                    Task<HttpResponseMessage> getAsync = client.GetAsync(url, completionOption);
+
+                    await new Task[]
+                    {
+                        getAsync,
+                        server.HandleRequestAsync(HttpStatusCode.OK, headers, content),
+                    }
+                        .WhenAllOrAnyFailed()
+                        .ConfigureAwait(false);
+
+                    getAsync.Result.Dispose();
+                }
+            );
         }
 
         public static IEnumerable<object[]> PostStressOptions()
         {
             foreach (int numRequests in new[] { 5000 }) // number of requests
-                foreach (int dop in new[] { 1, 32 }) // number of threads
-                    foreach (int numBytes in new[] { 0, 100 }) // number of bytes to post
-                        yield return new object[] { numRequests, dop, numBytes };
+            foreach (int dop in new[] { 1, 32 }) // number of threads
+            foreach (int numBytes in new[] { 0, 100 }) // number of bytes to post
+                yield return new object[] { numRequests, dop, numBytes };
         }
 
         [ConditionalFact(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
         [OuterLoop]
         public async Task UnreadResponseMessage_Collectible()
         {
-            await LoopbackServerFactory.CreateServerAsync(async (server, url) =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await LoopbackServerFactory.CreateServerAsync(
+                async (server, url) =>
                 {
-                    Func<Task<WeakReference>> getAsync = () => client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead).ContinueWith(t => new WeakReference(t.Result));
-                    Task<WeakReference> wrt = getAsync();
-
-                    await server.HandleRequestAsync(content: new string('a', 16 * 1024));
-
-                    WeakReference wr = wrt.GetAwaiter().GetResult();
-                    Assert.True(SpinWait.SpinUntil(() =>
+                    using (HttpClient client = CreateHttpClient())
                     {
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                        GC.Collect();
-                        return !wr.IsAlive;
-                    }, 10 * 1000), "Response object should have been collected");
+                        Func<Task<WeakReference>> getAsync = () =>
+                            client
+                                .GetAsync(url, HttpCompletionOption.ResponseHeadersRead)
+                                .ContinueWith(t => new WeakReference(t.Result));
+                        Task<WeakReference> wrt = getAsync();
+
+                        await server.HandleRequestAsync(content: new string('a', 16 * 1024));
+
+                        WeakReference wr = wrt.GetAwaiter().GetResult();
+                        Assert.True(
+                            SpinWait.SpinUntil(
+                                () =>
+                                {
+                                    GC.Collect();
+                                    GC.WaitForPendingFinalizers();
+                                    GC.Collect();
+                                    return !wr.IsAlive;
+                                },
+                                10 * 1000
+                            ),
+                            "Response object should have been collected"
+                        );
+                    }
                 }
-            });
+            );
         }
 
         protected (List<HttpHeaderData> Headers, string Content) CreateResponse(string asciiBody)
@@ -255,27 +374,51 @@ namespace System.Net.Http.Functional.Tests
         {
             var sched = new ThreadPerTaskScheduler();
             int nextAvailableIndex = 0;
-            return Task.WhenAll(Enumerable.Range(0, dop).Select(_ => Task.Factory.StartNew(async delegate
-            {
-                int index;
-                while ((index = Interlocked.Increment(ref nextAvailableIndex) - 1) < count)
-                {
-                    try { await bodyAsync(index); }
-                    catch
-                    {
-                        Volatile.Write(ref nextAvailableIndex, count); // avoid any further iterations
-                        throw;
-                    }
-                }
-            }, CancellationToken.None, TaskCreationOptions.None, sched).Unwrap()));
+            return Task.WhenAll(
+                Enumerable
+                    .Range(0, dop)
+                    .Select(_ =>
+                        Task.Factory.StartNew(
+                                async delegate
+                                {
+                                    int index;
+                                    while (
+                                        (index = Interlocked.Increment(ref nextAvailableIndex) - 1)
+                                        < count
+                                    )
+                                    {
+                                        try
+                                        {
+                                            await bodyAsync(index);
+                                        }
+                                        catch
+                                        {
+                                            Volatile.Write(ref nextAvailableIndex, count); // avoid any further iterations
+                                            throw;
+                                        }
+                                    }
+                                },
+                                CancellationToken.None,
+                                TaskCreationOptions.None,
+                                sched
+                            )
+                            .Unwrap()
+                    )
+            );
         }
 
         private sealed class ThreadPerTaskScheduler : TaskScheduler
         {
             protected override void QueueTask(Task task) =>
-                Task.Factory.StartNew(() => TryExecuteTask(task), CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                Task.Factory.StartNew(
+                    () => TryExecuteTask(task),
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
 
-            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) => TryExecuteTask(task);
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
+                TryExecuteTask(task);
 
             protected override IEnumerable<Task> GetScheduledTasks() => null;
         }

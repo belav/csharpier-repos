@@ -17,16 +17,18 @@ namespace System.Linq
     /// that an operation will result in zero elements.
     /// </remarks>
     [DebuggerDisplay("Count = 0")]
-    internal sealed class EmptyPartition<TElement> : IPartition<TElement>, IEnumerator<TElement>, IList<TElement>, IReadOnlyList<TElement>
+    internal sealed class EmptyPartition<TElement>
+        : IPartition<TElement>,
+            IEnumerator<TElement>,
+            IList<TElement>,
+            IReadOnlyList<TElement>
     {
         /// <summary>
         /// A cached, immutable instance of an empty enumerable.
         /// </summary>
         public static readonly IPartition<TElement> Instance = new EmptyPartition<TElement>();
 
-        private EmptyPartition()
-        {
-        }
+        private EmptyPartition() { }
 
         public IEnumerator<TElement> GetEnumerator() => this;
 
@@ -34,10 +36,14 @@ namespace System.Linq
 
         public bool MoveNext() => false;
 
-        [ExcludeFromCodeCoverage(Justification = "Shouldn't be called, and as undefined can return or throw anything anyway")]
+        [ExcludeFromCodeCoverage(
+            Justification = "Shouldn't be called, and as undefined can return or throw anything anyway"
+        )]
         public TElement Current => default!;
 
-        [ExcludeFromCodeCoverage(Justification = "Shouldn't be called, and as undefined can return or throw anything anyway")]
+        [ExcludeFromCodeCoverage(
+            Justification = "Shouldn't be called, and as undefined can return or throw anything anyway"
+        )]
         object IEnumerator.Current => default!;
 
         void IEnumerator.Reset()
@@ -99,9 +105,15 @@ namespace System.Linq
         public bool IsReadOnly => true;
 
         void ICollection<TElement>.Add(TElement item) => ThrowHelper.ThrowNotSupportedException();
+
         void ICollection<TElement>.Clear() => ThrowHelper.ThrowNotSupportedException();
-        void IList<TElement>.Insert(int index, TElement item) => ThrowHelper.ThrowNotSupportedException();
-        bool ICollection<TElement>.Remove(TElement item) => ThrowHelper.ThrowNotSupportedException_Boolean();
+
+        void IList<TElement>.Insert(int index, TElement item) =>
+            ThrowHelper.ThrowNotSupportedException();
+
+        bool ICollection<TElement>.Remove(TElement item) =>
+            ThrowHelper.ThrowNotSupportedException_Boolean();
+
         void IList<TElement>.RemoveAt(int index) => ThrowHelper.ThrowNotSupportedException();
     }
 
@@ -111,21 +123,28 @@ namespace System.Linq
         private readonly int _minIndexInclusive;
         private readonly int _maxIndexInclusive;
 
-        public OrderedPartition(OrderedEnumerable<TElement> source, int minIdxInclusive, int maxIdxInclusive)
+        public OrderedPartition(
+            OrderedEnumerable<TElement> source,
+            int minIdxInclusive,
+            int maxIdxInclusive
+        )
         {
             _source = source;
             _minIndexInclusive = minIdxInclusive;
             _maxIndexInclusive = maxIdxInclusive;
         }
 
-        public IEnumerator<TElement> GetEnumerator() => _source.GetEnumerator(_minIndexInclusive, _maxIndexInclusive);
+        public IEnumerator<TElement> GetEnumerator() =>
+            _source.GetEnumerator(_minIndexInclusive, _maxIndexInclusive);
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IPartition<TElement> Skip(int count)
         {
             int minIndex = unchecked(_minIndexInclusive + count);
-            return unchecked((uint)minIndex > (uint)_maxIndexInclusive) ? EmptyPartition<TElement>.Instance : new OrderedPartition<TElement>(_source, minIndex, _maxIndexInclusive);
+            return unchecked((uint)minIndex > (uint)_maxIndexInclusive)
+                ? EmptyPartition<TElement>.Instance
+                : new OrderedPartition<TElement>(_source, minIndex, _maxIndexInclusive);
         }
 
         public IPartition<TElement> Take(int count)
@@ -150,7 +169,8 @@ namespace System.Linq
             return default;
         }
 
-        public TElement? TryGetFirst(out bool found) => _source.TryGetElementAt(_minIndexInclusive, out found);
+        public TElement? TryGetFirst(out bool found) =>
+            _source.TryGetElementAt(_minIndexInclusive, out found);
 
         public TElement? TryGetLast(out bool found) =>
             _source.TryGetLast(_minIndexInclusive, _maxIndexInclusive, out found);
@@ -159,7 +179,8 @@ namespace System.Linq
 
         public List<TElement> ToList() => _source.ToList(_minIndexInclusive, _maxIndexInclusive);
 
-        public int GetCount(bool onlyIfCheap) => _source.GetCount(_minIndexInclusive, _maxIndexInclusive, onlyIfCheap);
+        public int GetCount(bool onlyIfCheap) =>
+            _source.GetCount(_minIndexInclusive, _maxIndexInclusive, onlyIfCheap);
     }
 
     public static partial class Enumerable
@@ -169,13 +190,21 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TSource">The type of the source list.</typeparam>
         [DebuggerDisplay("Count = {Count}")]
-        private sealed class ListPartition<TSource> : Iterator<TSource>, IPartition<TSource>, IList<TSource>, IReadOnlyList<TSource>
+        private sealed class ListPartition<TSource>
+            : Iterator<TSource>,
+                IPartition<TSource>,
+                IList<TSource>,
+                IReadOnlyList<TSource>
         {
             private readonly IList<TSource> _source;
             private readonly int _minIndexInclusive;
             private readonly int _maxIndexInclusive;
 
-            public ListPartition(IList<TSource> source, int minIndexInclusive, int maxIndexInclusive)
+            public ListPartition(
+                IList<TSource> source,
+                int minIndexInclusive,
+                int maxIndexInclusive
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(minIndexInclusive >= 0);
@@ -194,7 +223,12 @@ namespace System.Linq
                 // Having a separate field for the index would be more readable. However, we save it
                 // into _state with a bias to minimize field size of the iterator.
                 int index = _state - 1;
-                if (unchecked((uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive) && index < _source.Count - _minIndexInclusive))
+                if (
+                    unchecked(
+                        (uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive)
+                        && index < _source.Count - _minIndexInclusive
+                    )
+                )
                 {
                     _current = _source[_minIndexInclusive + index];
                     ++_state;
@@ -206,23 +240,37 @@ namespace System.Linq
             }
 
             public override IEnumerable<TResult> Select<TResult>(Func<TSource, TResult> selector) =>
-                new SelectListPartitionIterator<TSource, TResult>(_source, selector, _minIndexInclusive, _maxIndexInclusive);
+                new SelectListPartitionIterator<TSource, TResult>(
+                    _source,
+                    selector,
+                    _minIndexInclusive,
+                    _maxIndexInclusive
+                );
 
             public IPartition<TSource> Skip(int count)
             {
                 int minIndex = _minIndexInclusive + count;
-                return (uint)minIndex > (uint)_maxIndexInclusive ? EmptyPartition<TSource>.Instance : new ListPartition<TSource>(_source, minIndex, _maxIndexInclusive);
+                return (uint)minIndex > (uint)_maxIndexInclusive
+                    ? EmptyPartition<TSource>.Instance
+                    : new ListPartition<TSource>(_source, minIndex, _maxIndexInclusive);
             }
 
             public IPartition<TSource> Take(int count)
             {
                 int maxIndex = unchecked(_minIndexInclusive + count - 1);
-                return unchecked((uint)maxIndex >= (uint)_maxIndexInclusive) ? this : new ListPartition<TSource>(_source, _minIndexInclusive, maxIndex);
+                return unchecked((uint)maxIndex >= (uint)_maxIndexInclusive)
+                    ? this
+                    : new ListPartition<TSource>(_source, _minIndexInclusive, maxIndex);
             }
 
             public TSource? TryGetElementAt(int index, out bool found)
             {
-                if (unchecked((uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive) && index < _source.Count - _minIndexInclusive))
+                if (
+                    unchecked(
+                        (uint)index <= (uint)(_maxIndexInclusive - _minIndexInclusive)
+                        && index < _source.Count - _minIndexInclusive
+                    )
+                )
                 {
                     found = true;
                     return _source[_minIndexInclusive + index];
@@ -302,7 +350,11 @@ namespace System.Linq
             public void CopyTo(TSource[] array, int arrayIndex) =>
                 Fill(_source, array.AsSpan(arrayIndex, Count), _minIndexInclusive);
 
-            private static void Fill(IList<TSource> source, Span<TSource> destination, int sourceIndex)
+            private static void Fill(
+                IList<TSource> source,
+                Span<TSource> destination,
+                int sourceIndex
+            )
             {
                 for (int i = 0; i < destination.Length; i++, sourceIndex++)
                 {
@@ -345,9 +397,15 @@ namespace System.Linq
             public bool IsReadOnly => true;
 
             void ICollection<TSource>.Add(TSource item) => ThrowHelper.ThrowNotSupportedException();
+
             void ICollection<TSource>.Clear() => ThrowHelper.ThrowNotSupportedException();
-            void IList<TSource>.Insert(int index, TSource item) => ThrowHelper.ThrowNotSupportedException();
-            bool ICollection<TSource>.Remove(TSource item) => ThrowHelper.ThrowNotSupportedException_Boolean();
+
+            void IList<TSource>.Insert(int index, TSource item) =>
+                ThrowHelper.ThrowNotSupportedException();
+
+            bool ICollection<TSource>.Remove(TSource item) =>
+                ThrowHelper.ThrowNotSupportedException_Boolean();
+
             void IList<TSource>.RemoveAt(int index) => ThrowHelper.ThrowNotSupportedException();
         }
 
@@ -360,19 +418,31 @@ namespace System.Linq
             private readonly IEnumerable<TSource> _source;
             private readonly int _minIndexInclusive;
             private readonly int _maxIndexInclusive; // -1 if we want everything past _minIndexInclusive.
-                                                     // If this is -1, it's impossible to set a limit on the count.
+
+            // If this is -1, it's impossible to set a limit on the count.
             private IEnumerator<TSource>? _enumerator;
 
-            internal EnumerablePartition(IEnumerable<TSource> source, int minIndexInclusive, int maxIndexInclusive)
+            internal EnumerablePartition(
+                IEnumerable<TSource> source,
+                int minIndexInclusive,
+                int maxIndexInclusive
+            )
             {
                 Debug.Assert(source != null);
-                Debug.Assert(!(source is IList<TSource>), $"The caller needs to check for {nameof(IList<TSource>)}.");
+                Debug.Assert(
+                    !(source is IList<TSource>),
+                    $"The caller needs to check for {nameof(IList<TSource>)}."
+                );
                 Debug.Assert(minIndexInclusive >= 0);
                 Debug.Assert(maxIndexInclusive >= -1);
                 // Note that although maxIndexInclusive can't grow, it can still be int.MaxValue.
                 // We support partitioning enumerables with > 2B elements. For example, e.Skip(1).Take(int.MaxValue) should work.
                 // But if it is int.MaxValue, then minIndexInclusive must != 0. Otherwise, our count may overflow.
-                Debug.Assert(maxIndexInclusive == -1 || (maxIndexInclusive - minIndexInclusive < int.MaxValue), $"{nameof(Limit)} will overflow!");
+                Debug.Assert(
+                    maxIndexInclusive == -1
+                        || (maxIndexInclusive - minIndexInclusive < int.MaxValue),
+                    $"{nameof(Limit)} will overflow!"
+                );
                 Debug.Assert(maxIndexInclusive == -1 || minIndexInclusive <= maxIndexInclusive);
 
                 _source = source;
@@ -426,10 +496,12 @@ namespace System.Linq
                     // in an int because if that is true, then _minIndexInclusive must > 0.
 
                     uint count = SkipAndCount((uint)_maxIndexInclusive + 1, en);
-                    Debug.Assert(count != (uint)int.MaxValue + 1 || _minIndexInclusive > 0, "Our return value will be incorrect.");
+                    Debug.Assert(
+                        count != (uint)int.MaxValue + 1 || _minIndexInclusive > 0,
+                        "Our return value will be incorrect."
+                    );
                     return Math.Max((int)count - _minIndexInclusive, 0);
                 }
-
             }
 
             public override bool MoveNext()
@@ -506,7 +578,10 @@ namespace System.Linq
                     return EmptyPartition<TSource>.Instance;
                 }
 
-                Debug.Assert(minIndex >= 0, $"We should have taken care of all cases when {nameof(minIndex)} overflows.");
+                Debug.Assert(
+                    minIndex >= 0,
+                    $"We should have taken care of all cases when {nameof(minIndex)} overflows."
+                );
                 return new EnumerablePartition<TSource>(_source, minIndex, _maxIndexInclusive);
             }
 
@@ -534,7 +609,10 @@ namespace System.Linq
                     return this;
                 }
 
-                Debug.Assert(maxIndex >= 0, $"We should have taken care of all cases when {nameof(maxIndex)} overflows.");
+                Debug.Assert(
+                    maxIndex >= 0,
+                    $"We should have taken care of all cases when {nameof(maxIndex)} overflows."
+                );
                 return new EnumerablePartition<TSource>(_source, _minIndexInclusive, maxIndex);
             }
 
@@ -545,7 +623,10 @@ namespace System.Linq
                 {
                     using (IEnumerator<TSource> en = _source.GetEnumerator())
                     {
-                        Debug.Assert(_minIndexInclusive + index >= 0, $"Adding {nameof(index)} caused {nameof(_minIndexInclusive)} to overflow.");
+                        Debug.Assert(
+                            _minIndexInclusive + index >= 0,
+                            $"Adding {nameof(index)} caused {nameof(_minIndexInclusive)} to overflow."
+                        );
 
                         if (SkipBefore(_minIndexInclusive + index, en) && en.MoveNext())
                         {
@@ -588,8 +669,7 @@ namespace System.Linq
                         {
                             remaining--;
                             result = en.Current;
-                        }
-                        while (remaining >= comparand && en.MoveNext());
+                        } while (remaining >= comparand && en.MoveNext());
 
                         found = true;
                         return result;
@@ -616,8 +696,7 @@ namespace System.Linq
                         {
                             remaining--;
                             builder.Add(en.Current);
-                        }
-                        while (remaining >= comparand && en.MoveNext());
+                        } while (remaining >= comparand && en.MoveNext());
 
                         return builder.ToArray();
                     }
@@ -641,17 +720,18 @@ namespace System.Linq
                         {
                             remaining--;
                             list.Add(en.Current);
-                        }
-                        while (remaining >= comparand && en.MoveNext());
+                        } while (remaining >= comparand && en.MoveNext());
                     }
                 }
 
                 return list;
             }
 
-            private bool SkipBeforeFirst(IEnumerator<TSource> en) => SkipBefore(_minIndexInclusive, en);
+            private bool SkipBeforeFirst(IEnumerator<TSource> en) =>
+                SkipBefore(_minIndexInclusive, en);
 
-            private static bool SkipBefore(int index, IEnumerator<TSource> en) => SkipAndCount(index, en) == index;
+            private static bool SkipBefore(int index, IEnumerator<TSource> en) =>
+                SkipAndCount(index, en) == index;
 
             private static int SkipAndCount(int index, IEnumerator<TSource> en)
             {

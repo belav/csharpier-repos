@@ -10,7 +10,6 @@ namespace System.Data.ProviderBase
 {
     internal sealed class FieldNameLookup
     { // V1.2.3300
-
         // hashtable stores the index into the _fieldNames, match via case-sensitive
         private Hashtable? _fieldNameLookup;
 
@@ -24,7 +23,6 @@ namespace System.Data.ProviderBase
 
         public FieldNameLookup(IDataRecord reader, int defaultLocaleID)
         { // V1.2.3300
-
             int length = reader.FieldCount;
             string[] fieldNames = new string[length];
             for (int i = 0; i < length; ++i)

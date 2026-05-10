@@ -19,10 +19,18 @@ namespace System.Net.NetworkInformation
         private static bool NeedsConnect => false;
         private static bool SupportsDualMode => false;
 
-        private static PingReply SendPingCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
-            => SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options);
+        private static PingReply SendPingCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        ) => SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options);
 
-        private Task<PingReply> SendPingAsyncCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
-            => SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options);
+        private Task<PingReply> SendPingAsyncCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        ) => SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options);
     }
 }

@@ -6,13 +6,16 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
+namespace System.Web.UI.WebControls.Adapters
+{
     using System.Web.UI.WebControls;
 
-    public class WmlXmlAdapter : XmlAdapter {
-
-        protected internal override void Render(HtmlTextWriter writer) {
-            if (((WmlTextWriter)writer).AnalyzeMode) {
+    public class WmlXmlAdapter : XmlAdapter
+    {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            if (((WmlTextWriter)writer).AnalyzeMode)
+            {
                 return;
             }
             HtmlTextWriter w = new HtmlTextWriter(writer);
@@ -22,4 +25,3 @@ namespace System.Web.UI.WebControls.Adapters {
 }
 
 #endif
-

@@ -21,14 +21,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.MoveToNamespace
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestMoveToNamespaceOptionsService()
-        {
-        }
+        public TestMoveToNamespaceOptionsService() { }
 
-        public MoveToNamespaceOptionsResult GetChangeNamespaceOptions(string defaultNamespace, ImmutableArray<string> availableNamespaces, ISyntaxFacts syntaxFactsService)
-            => OptionsResult;
+        public MoveToNamespaceOptionsResult GetChangeNamespaceOptions(
+            string defaultNamespace,
+            ImmutableArray<string> availableNamespaces,
+            ISyntaxFacts syntaxFactsService
+        ) => OptionsResult;
 
-        internal void SetOptions(MoveToNamespaceOptionsResult moveToNamespaceOptions)
-            => OptionsResult = moveToNamespaceOptions;
+        internal void SetOptions(MoveToNamespaceOptionsResult moveToNamespaceOptions) =>
+            OptionsResult = moveToNamespaceOptions;
     }
 }

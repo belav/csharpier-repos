@@ -27,58 +27,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Collections;
-
-
+using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
+    internal class SplitContainerDesigner : ParentControlDesigner
+    {
+        public SplitContainerDesigner() { }
 
-	internal class SplitContainerDesigner : ParentControlDesigner
-	{
+        public override void Initialize(IComponent component)
+        {
+            base.Initialize(component);
+            SplitContainer container = (SplitContainer)component;
+            base.EnableDesignMode(container.Panel1, "Panel1");
+            base.EnableDesignMode(container.Panel2, "Panel2");
+        }
 
-		public SplitContainerDesigner ()
-		{
-		}
+        public override ControlDesigner InternalControlDesigner(int internalControlIndex)
+        {
+            switch (internalControlIndex)
+            {
+                case 0:
+                    return GetDesigner(((SplitContainer)this.Control).Panel1);
+                case 1:
+                    return GetDesigner(((SplitContainer)this.Control).Panel2);
+            }
+            return null;
+        }
 
-		public override void Initialize (IComponent component)
-		{
-			base.Initialize (component);
-			SplitContainer container = (SplitContainer) component;
-			base.EnableDesignMode (container.Panel1, "Panel1");
-			base.EnableDesignMode (container.Panel2, "Panel2");
-		}
+        private ControlDesigner GetDesigner(IComponent component)
+        {
+            IDesignerHost host = this.GetService(typeof(IDesignerHost)) as IDesignerHost;
+            if (host != null)
+                return host.GetDesigner(component) as ControlDesigner;
+            else
+                return null;
+        }
 
-		public override ControlDesigner InternalControlDesigner (int internalControlIndex)
-		{
-			switch (internalControlIndex) {
-				case 0:
-					return GetDesigner (((SplitContainer)this.Control).Panel1);
-				case 1:
-					return GetDesigner (((SplitContainer)this.Control).Panel2);
-			}
-			return null;
-		}
-
-		private ControlDesigner GetDesigner (IComponent component)
-		{
-			IDesignerHost host = this.GetService (typeof (IDesignerHost)) as IDesignerHost;
-			if (host != null)
-				return host.GetDesigner (component) as ControlDesigner;
-			else
-				return null;
-		}
-
-		public override int NumberOfInternalControlDesigners ()
-		{
-			return 2;
-		}
-	}
+        public override int NumberOfInternalControlDesigners()
+        {
+            return 2;
+        }
+    }
 }

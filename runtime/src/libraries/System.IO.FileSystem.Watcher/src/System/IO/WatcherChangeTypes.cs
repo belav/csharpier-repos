@@ -13,22 +13,26 @@ namespace System.IO
         ///    The creation of a file or folder.
         /// </devdoc>
         Created = 1,
+
         /// <devdoc>
         ///    The deletion of a file or folder.
         /// </devdoc>
         Deleted = 2,
+
         /// <devdoc>
         ///    The change of a file or folder.
         /// </devdoc>
         Changed = 4,
+
         /// <devdoc>
         ///    The renaming of a file or folder.
         /// </devdoc>
         Renamed = 8,
+
         // all of the above
         /// <devdoc>
         ///    [To be supplied.]
         /// </devdoc>
-        All = Created | Deleted | Changed | Renamed
+        All = Created | Deleted | Changed | Renamed,
     }
 }

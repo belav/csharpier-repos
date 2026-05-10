@@ -19,12 +19,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static readonly CSharpTypeInferenceService Instance = new();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839")]
-        public CSharpTypeInferenceService()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
+        )]
+        public CSharpTypeInferenceService() { }
 
-        protected override AbstractTypeInferrer CreateTypeInferrer(SemanticModel semanticModel, CancellationToken cancellationToken)
-            => new TypeInferrer(semanticModel, cancellationToken);
+        protected override AbstractTypeInferrer CreateTypeInferrer(
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) => new TypeInferrer(semanticModel, cancellationToken);
     }
 }

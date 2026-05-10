@@ -19,7 +19,11 @@ namespace Microsoft.Win32.RegistryTests
 
             // Should throw if key length above 255 characters
             const int maxValueNameLength = 255;
-            AssertExtensions.Throws<ArgumentException>("name", null, () => TestRegistryKey.CreateSubKey(new string('a', maxValueNameLength + 1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => TestRegistryKey.CreateSubKey(new string('a', maxValueNameLength + 1))
+            );
 
             // Should throw if RegistryKey is readonly
             const string name = "FooBar";
@@ -59,7 +63,7 @@ namespace Microsoft.Win32.RegistryTests
             using RegistryKey opened = TestRegistryKey.OpenSubKey(TestRegistryKeyName);
             Assert.NotNull(opened);
 
-            Assert.Equal(expected: 1, actual:TestRegistryKey.SubKeyCount);
+            Assert.Equal(expected: 1, actual: TestRegistryKey.SubKeyCount);
         }
 
         [Fact]
@@ -125,12 +129,24 @@ namespace Microsoft.Win32.RegistryTests
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void CreateSubKey_KeyExists_OpensKeyWithFixedUpName(string expected, string subKeyName) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () => TestRegistryKey.CreateSubKey(subKeyName));
+        public void CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
+                expected,
+                () => TestRegistryKey.CreateSubKey(subKeyName)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(string expected, string subKeyName) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () => TestRegistryKey.CreateSubKey(subKeyName));
+        public void CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
+                expected,
+                () => TestRegistryKey.CreateSubKey(subKeyName)
+            );
     }
 }

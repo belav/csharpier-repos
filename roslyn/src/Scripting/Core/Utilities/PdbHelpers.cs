@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.Scripting
         public static DebugInformationFormat GetPlatformSpecificDebugInformationFormat()
         {
             // for CoreCLR & Mono, use PortablePdb
-            if (CoreClrShim.AssemblyLoadContext.Type != null || Type.GetType("Mono.Runtime") != null)
+            if (
+                CoreClrShim.AssemblyLoadContext.Type != null
+                || Type.GetType("Mono.Runtime") != null
+            )
             {
                 return DebugInformationFormat.PortablePdb;
             }

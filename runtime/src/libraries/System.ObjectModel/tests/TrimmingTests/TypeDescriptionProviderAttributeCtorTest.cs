@@ -14,7 +14,9 @@ class Program
     /// </summary>
     static int Main(string[] args)
     {
-        TypeDescriptionProviderAttribute attr = new TypeDescriptionProviderAttribute("Program+MyTypeDescriptionProvider");
+        TypeDescriptionProviderAttribute attr = new TypeDescriptionProviderAttribute(
+            "Program+MyTypeDescriptionProvider"
+        );
         if (!RunTest(attr))
         {
             return -1;
@@ -35,7 +37,8 @@ class Program
 
         if (providerType != null && typeof(TypeDescriptionProvider).IsAssignableFrom(providerType))
         {
-            TypeDescriptionProvider provider = (TypeDescriptionProvider)Activator.CreateInstance(providerType);
+            TypeDescriptionProvider provider = (TypeDescriptionProvider)
+                Activator.CreateInstance(providerType);
             if (provider == null)
             {
                 return false;

@@ -19,7 +19,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadPrimitiveOctetStringBytes_Fails(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -41,7 +42,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadPrimitiveOctetStringBytes_Success(
             AsnEncodingRules ruleSet,
             int expectedLength,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -63,14 +65,16 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadPrimitiveOctetStringBytes_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
+            );
         }
 
         [Fact]
@@ -90,11 +94,13 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> contents)
+            );
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadOctetString(new byte[input.Length], out _));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadOctetString(new byte[input.Length], out _)
+            );
 
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString());
         }
@@ -129,9 +135,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             // Check that it is, in fact, the same memory. No copies with this API.
             Assert.True(
-                Unsafe.AreSame(
-                    ref MemoryMarshal.GetReference(contents.Span),
-                    ref input[4]));
+                Unsafe.AreSame(ref MemoryMarshal.GetReference(contents.Span), ref input[4])
+            );
         }
 
         [Theory]
@@ -139,21 +144,13 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData(AsnEncodingRules.BER, "040207FF")]
         [InlineData(AsnEncodingRules.CER, "04020780")]
         [InlineData(AsnEncodingRules.DER, "04020780")]
-        [InlineData(
-            AsnEncodingRules.BER,
-            "2480" +
-              "2480" +
-                "0000" +
-              "04020000" +
-              "0000")]
+        [InlineData(AsnEncodingRules.BER, "2480" + "2480" + "0000" + "04020000" + "0000")]
         public static void TryReadOctetStringBytes_Fails(AsnEncodingRules ruleSet, string inputHex)
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            bool didRead = reader.TryReadOctetString(
-                Span<byte>.Empty,
-                out int bytesWritten);
+            bool didRead = reader.TryReadOctetString(Span<byte>.Empty, out int bytesWritten);
 
             Assert.False(didRead, "reader.TryReadOctetString");
             Assert.Equal(0, bytesWritten);
@@ -167,46 +164,39 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData(AsnEncodingRules.BER, "24800000", "")]
         [InlineData(AsnEncodingRules.BER, "2400", "")]
         [InlineData(AsnEncodingRules.BER, "2400" + "0500", "")]
+        [InlineData(AsnEncodingRules.BER, "2480" + "2480" + "0000" + "04020005" + "0000", "0005")]
         [InlineData(
             AsnEncodingRules.BER,
-            "2480" +
-              "2480" +
-                "0000" +
-              "04020005" +
-              "0000",
-            "0005")]
-        [InlineData(
-            AsnEncodingRules.BER,
-            "2480" +
-              "2406" +
-                "0401FA" +
-                "0401CE" +
-              "2480" +
-                "2480" +
-                  "2480" +
-                    "0402F00D" +
-                    "0000" +
-                  "0000" +
-                "04020001" +
-                "0000" +
-              "0403000203" +
-              "040203FF" +
-              "2480" +
-                "0000" +
-              "0000",
-            "FACEF00D000100020303FF")]
+            "2480"
+                + "2406"
+                + "0401FA"
+                + "0401CE"
+                + "2480"
+                + "2480"
+                + "2480"
+                + "0402F00D"
+                + "0000"
+                + "0000"
+                + "04020001"
+                + "0000"
+                + "0403000203"
+                + "040203FF"
+                + "2480"
+                + "0000"
+                + "0000",
+            "FACEF00D000100020303FF"
+        )]
         public static void TryReadOctetStringBytes_Success(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedHex)
+            string expectedHex
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             byte[] output = new byte[expectedHex.Length / 2];
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            bool didRead = reader.TryReadOctetString(
-                output,
-                out int bytesWritten);
+            bool didRead = reader.TryReadOctetString(output, out int bytesWritten);
 
             Assert.True(didRead, "reader.TryReadOctetString");
             Assert.Equal(expectedHex, output.AsSpan(0, bytesWritten).ByteArrayToHex());
@@ -218,30 +208,28 @@ namespace System.Formats.Asn1.Tests.Reader
 
         private static void TryReadOctetStringBytes_Throws_Helper(
             AsnEncodingRules ruleSet,
-            byte[] input)
+            byte[] input
+        )
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadOctetString(
-                        Span<byte>.Empty,
-                        out int bytesWritten);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadOctetString(Span<byte>.Empty, out int bytesWritten);
+            });
         }
 
         private static void ReadOctetStringBytes_Throws_Helper(
             AsnEncodingRules ruleSet,
-            byte[] input)
+            byte[] input
+        )
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.ReadOctetString();
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.ReadOctetString();
+            });
         }
 
         [Theory]
@@ -258,7 +246,11 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Nested boolean", AsnEncodingRules.BER, "2403010100")]
         [InlineData("Nested boolean (indef)", AsnEncodingRules.BER, "24800101000000")]
         [InlineData("Nested boolean (indef)", AsnEncodingRules.CER, "24800101000000")]
-        [InlineData("Nested constructed form", AsnEncodingRules.CER, "2480" + "2480" + "04010" + "000000000")]
+        [InlineData(
+            "Nested constructed form",
+            AsnEncodingRules.CER,
+            "2480" + "2480" + "04010" + "000000000"
+        )]
         [InlineData("No terminator", AsnEncodingRules.BER, "2480" + "04020000" + "")]
         [InlineData("No terminator", AsnEncodingRules.CER, "2480" + "04020000" + "")]
         [InlineData("No content", AsnEncodingRules.BER, "2480")]
@@ -266,7 +258,11 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("No nested content", AsnEncodingRules.CER, "24800000")]
         [InlineData("Nested value too long", AsnEncodingRules.BER, "2480040A00")]
         [InlineData("Nested value too long - constructed", AsnEncodingRules.BER, "2480240A00")]
-        [InlineData("Nested value too long - simple", AsnEncodingRules.BER, "2403" + "04050000000000")]
+        [InlineData(
+            "Nested value too long - simple",
+            AsnEncodingRules.BER,
+            "2403" + "04050000000000"
+        )]
         [InlineData("Constructed Null", AsnEncodingRules.BER, "248020000000")]
         [InlineData("Constructed Null", AsnEncodingRules.CER, "248020000000")]
         [InlineData("NonEmpty Null", AsnEncodingRules.BER, "2480000100")]
@@ -276,7 +272,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadOctetStringBytes_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -378,16 +375,12 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            bool success = reader.TryReadOctetString(
-                output,
-                out int bytesWritten);
+            bool success = reader.TryReadOctetString(output, out int bytesWritten);
 
             Assert.True(success, "reader.TryReadOctetString");
             Assert.Equal(1000, bytesWritten);
 
-            Assert.Equal(
-                input.AsSpan(4).ByteArrayToHex(),
-                output.ByteArrayToHex());
+            Assert.Equal(input.AsSpan(4).ByteArrayToHex(), output.ByteArrayToHex());
 
             reader = new AsnReader(input, AsnEncodingRules.CER);
             byte[] output2 = reader.ReadOctetString();
@@ -449,16 +442,12 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            bool success = reader.TryReadOctetString(
-                output,
-                out int bytesWritten);
+            bool success = reader.TryReadOctetString(output, out int bytesWritten);
 
             Assert.True(success, "reader.TryReadOctetString");
             Assert.Equal(1001, bytesWritten);
 
-            Assert.Equal(
-                expected.ByteArrayToHex(),
-                output.ByteArrayToHex());
+            Assert.Equal(expected.ByteArrayToHex(), output.ByteArrayToHex());
 
             reader = new AsnReader(input, AsnEncodingRules.CER);
             byte[] output2 = reader.ReadOctetString();
@@ -476,12 +465,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadPrimitiveOctetString(out _, Asn1Tag.Null));
+                () => reader.TryReadPrimitiveOctetString(out _, Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadPrimitiveOctetString(out _, new Asn1Tag(TagClass.ContextSpecific, 0)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveOctetString(out _, new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -506,13 +497,16 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadPrimitiveOctetString(out _, Asn1Tag.Null));
+                () => reader.TryReadPrimitiveOctetString(out _, Asn1Tag.Null)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadOctetString(output, out _, Asn1Tag.Null));
+                () => reader.TryReadOctetString(output, out _, Asn1Tag.Null)
+            );
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadOctetString(Asn1Tag.Null));
+                () => reader.ReadOctetString(Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
@@ -521,17 +515,27 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString());
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(() => reader.TryReadPrimitiveOctetString(out _, wrongTag1));
-            Assert.Throws<AsnContentException>(() => reader.TryReadOctetString(output, out _, wrongTag1));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveOctetString(out _, wrongTag1)
+            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadOctetString(output, out _, wrongTag1)
+            );
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString(wrongTag1));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(() => reader.TryReadPrimitiveOctetString(out _, wrongTag2));
-            Assert.Throws<AsnContentException>(() => reader.TryReadOctetString(output, out _, wrongTag2));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveOctetString(out _, wrongTag2)
+            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadOctetString(output, out _, wrongTag2)
+            );
             Assert.Throws<AsnContentException>(() => reader.ReadOctetString(wrongTag2));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
-            Assert.True(reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> value, correctTag));
+            Assert.True(
+                reader.TryReadPrimitiveOctetString(out ReadOnlyMemory<byte> value, correctTag)
+            );
             Assert.Equal("0080", value.ByteArrayToHex());
             Assert.False(reader.HasData, "HasData after reading value");
 
@@ -559,7 +563,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
+            int tagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -567,7 +572,9 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(
                 reader.TryReadPrimitiveOctetString(
                     out ReadOnlyMemory<byte> val1,
-                    new Asn1Tag(tagClass, tagValue, true)));
+                    new Asn1Tag(tagClass, tagValue, true)
+                )
+            );
 
             Assert.False(reader.HasData);
 
@@ -576,7 +583,9 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(
                 reader.TryReadPrimitiveOctetString(
                     out ReadOnlyMemory<byte> val2,
-                    new Asn1Tag(tagClass, tagValue, false)));
+                    new Asn1Tag(tagClass, tagValue, false)
+                )
+            );
 
             Assert.False(reader.HasData);
 

@@ -73,6 +73,7 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         {
             return element0.CompareTo(element1) <= 0;
         }
+
         public override int GetHashCode()
         {
             return Token ^ ((int)Version);

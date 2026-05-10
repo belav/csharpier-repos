@@ -13,11 +13,10 @@ namespace System.Text
     internal sealed class EncoderLatin1BestFitFallback : EncoderFallback
     {
         // Provides access to the singleton instance of this fallback mechanism
-        internal static readonly EncoderLatin1BestFitFallback SingletonInstance = new EncoderLatin1BestFitFallback();
+        internal static readonly EncoderLatin1BestFitFallback SingletonInstance =
+            new EncoderLatin1BestFitFallback();
 
-        private EncoderLatin1BestFitFallback()
-        {
-        }
+        private EncoderLatin1BestFitFallback() { }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer() =>
             new EncoderLatin1BestFitFallbackBuffer();
@@ -39,7 +38,10 @@ namespace System.Text
             // If we had a buffer already we're being recursive, throw, it's probably at the suspect
             // character in our array.
             // Shouldn't be able to get here for all of our code pages, table would have to be messed up.
-            Debug.Assert(_iCount < 1, $"[EncoderLatin1BestFitFallbackBuffer.Fallback(non surrogate)] Fallback char {(int)_cBestFit:X4} caused recursive fallback");
+            Debug.Assert(
+                _iCount < 1,
+                $"[EncoderLatin1BestFitFallbackBuffer.Fallback(non surrogate)] Fallback char {(int)_cBestFit:X4} caused recursive fallback"
+            );
 
             _iCount = _iSize = 1;
             _cBestFit = TryBestFit(charUnknown);
@@ -53,19 +55,24 @@ namespace System.Text
         {
             // Double check input surrogate pair
             if (!char.IsHighSurrogate(charUnknownHigh))
-                throw new ArgumentOutOfRangeException(nameof(charUnknownHigh),
-                    SR.Format(SR.ArgumentOutOfRange_Range,
-                    0xD800, 0xDBFF));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charUnknownHigh),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 0xD800, 0xDBFF)
+                );
 
             if (!char.IsLowSurrogate(charUnknownLow))
-                throw new ArgumentOutOfRangeException(nameof(charUnknownLow),
-                    SR.Format(SR.ArgumentOutOfRange_Range,
-                    0xDC00, 0xDFFF));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charUnknownLow),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 0xDC00, 0xDFFF)
+                );
 
             // If we had a buffer already we're being recursive, throw, it's probably at the suspect
             // character in our array.  0 is processing last character, < 0 is not falling back
             // Shouldn't be able to get here, table would have to be messed up.
-            Debug.Assert(_iCount < 1, $"[EncoderLatin1BestFitFallbackBuffer.Fallback(surrogate)] Fallback char {(int)_cBestFit:X4} caused recursive fallback");
+            Debug.Assert(
+                _iCount < 1,
+                $"[EncoderLatin1BestFitFallbackBuffer.Fallback(surrogate)] Fallback char {(int)_cBestFit:X4} caused recursive fallback"
+            );
 
             // Go ahead and get our fallback, surrogates don't have best fit
             _cBestFit = '?';
@@ -139,8 +146,10 @@ namespace System.Text
                 if (cTest == cUnknown)
                 {
                     // We found it
-                    Debug.Assert(index + 1 < ArrayCharBestFit.Length,
-                        "[EncoderLatin1BestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array");
+                    Debug.Assert(
+                        index + 1 < ArrayCharBestFit.Length,
+                        "[EncoderLatin1BestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array"
+                    );
                     return ArrayCharBestFit[index + 1];
                 }
                 else if (cTest < cUnknown)
@@ -160,8 +169,10 @@ namespace System.Text
                 if (ArrayCharBestFit[index] == cUnknown)
                 {
                     // We found it
-                    Debug.Assert(index + 1 < ArrayCharBestFit.Length,
-                        "[EncoderLatin1BestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array");
+                    Debug.Assert(
+                        index + 1 < ArrayCharBestFit.Length,
+                        "[EncoderLatin1BestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array"
+                    );
                     return ArrayCharBestFit[index + 1];
                 }
             }

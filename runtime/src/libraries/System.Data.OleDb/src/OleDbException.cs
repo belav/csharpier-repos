@@ -15,19 +15,28 @@ namespace System.Data.OleDb
     {
         private readonly OleDbErrorCollection oledbErrors;
 
-        internal OleDbException(string? message, OleDbHResult errorCode, Exception? inner) : base(message, inner)
+        internal OleDbException(string? message, OleDbHResult errorCode, Exception? inner)
+            : base(message, inner)
         {
             HResult = (int)errorCode;
             this.oledbErrors = new OleDbErrorCollection(null);
         }
 
-        internal OleDbException(OleDbException previous, Exception? inner) : base(previous.Message, inner)
+        internal OleDbException(OleDbException previous, Exception? inner)
+            : base(previous.Message, inner)
         {
             HResult = previous.ErrorCode;
             this.oledbErrors = previous.oledbErrors;
         }
 
-        private OleDbException(string? message, Exception? inner, string? source, OleDbHResult errorCode, OleDbErrorCollection errors) : base(message, inner)
+        private OleDbException(
+            string? message,
+            Exception? inner,
+            string? source,
+            OleDbHResult errorCode,
+            OleDbErrorCollection errors
+        )
+            : base(message, inner)
         {
             Debug.Assert(null != errors, "OleDbException without OleDbErrorCollection");
             Source = source;
@@ -36,7 +45,11 @@ namespace System.Data.OleDb
         }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public override void GetObjectData(SerializationInfo si, StreamingContext context)
@@ -50,22 +63,20 @@ namespace System.Data.OleDb
         [TypeConverter(typeof(ErrorCodeConverter))]
         public override int ErrorCode
         {
-            get
-            {
-                return base.ErrorCode;
-            }
+            get { return base.ErrorCode; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public OleDbErrorCollection Errors
         {
-            get
-            {
-                return this.oledbErrors ?? new OleDbErrorCollection(null);
-            }
+            get { return this.oledbErrors ?? new OleDbErrorCollection(null); }
         }
 
-        internal static OleDbException CreateException(UnsafeNativeMethods.IErrorInfo errorInfo, OleDbHResult errorCode, Exception? inner)
+        internal static OleDbException CreateException(
+            UnsafeNativeMethods.IErrorInfo errorInfo,
+            OleDbHResult errorCode,
+            Exception? inner
+        )
         {
             OleDbErrorCollection errors = new OleDbErrorCollection(errorInfo);
             errorInfo.GetDescription(out string? message);
@@ -115,7 +126,13 @@ namespace System.Data.OleDb
                     builder.Append(exception.Message);
                     builder.Append(Environment.NewLine);
                 }
-                return new OleDbException(builder.ToString(), null, exceptions[0].Source, (OleDbHResult)exceptions[0].ErrorCode, errors);
+                return new OleDbException(
+                    builder.ToString(),
+                    null,
+                    exceptions[0].Source,
+                    (OleDbHResult)exceptions[0].ErrorCode,
+                    errors
+                );
             }
             else
             {
@@ -126,11 +143,14 @@ namespace System.Data.OleDb
         internal sealed class ErrorCodeConverter : Int32Converter
         {
             // converter classes should have public ctor
-            public ErrorCodeConverter()
-            {
-            }
+            public ErrorCodeConverter() { }
 
-            public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+            public override object? ConvertTo(
+                ITypeDescriptorContext? context,
+                CultureInfo? culture,
+                object? value,
+                Type destinationType
+            )
             {
                 if (destinationType == null)
                 {

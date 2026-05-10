@@ -12,10 +12,10 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Interop.Analyzers;
 using Xunit;
 using static Microsoft.Interop.Analyzers.ConvertToSourceGeneratedInteropFixer;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer,
-    Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer>;
+    Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer
+>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -43,9 +43,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial int {|CS8795:Method|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -80,9 +78,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial int {|CS8795:Method2|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -115,9 +111,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial int {|CS8795:Method2|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -146,9 +140,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial string {|CS8795:Method2|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -195,9 +187,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial int {|CS8795:Method4|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -220,9 +210,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial int {|CS8795:Method1|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Theory]
@@ -230,7 +218,10 @@ namespace LibraryImportGenerator.UnitTests
         [InlineData(CallingConvention.StdCall, typeof(CallConvStdcall))]
         [InlineData(CallingConvention.ThisCall, typeof(CallConvThiscall))]
         [InlineData(CallingConvention.FastCall, typeof(CallConvFastcall))]
-        public async Task ReplaceableCallingConvention(CallingConvention callConv, Type callConvType)
+        public async Task ReplaceableCallingConvention(
+            CallingConvention callConv,
+            Type callConvType
+        )
         {
             string source = $$"""
                 using System.Runtime.InteropServices;
@@ -250,9 +241,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial int {|CS8795:Method1|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -275,15 +264,16 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial string {|CS8795:Method|}(out int ret);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [InlineData(CharSet.Ansi, 'A')]
         [InlineData(CharSet.Unicode, 'W')]
         [Theory]
-        public async Task ExactSpelling_False_NoAutoCharSet_Provides_No_Suffix_And_Suffix_Fix(CharSet charSet, char suffix)
+        public async Task ExactSpelling_False_NoAutoCharSet_Provides_No_Suffix_And_Suffix_Fix(
+            CharSet charSet,
+            char suffix
+        )
         {
             string source = $$"""
                 using System.Runtime.InteropServices;
@@ -301,7 +291,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceNoSuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
             string fixedSourceWithSuffix = $$"""
                 using System.Runtime.InteropServices;
                 partial class Test
@@ -310,7 +304,17 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithSuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String(suffix.ToString()) } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithSuffix,
+                new Dictionary<string, Option>
+                {
+                    {
+                        ConvertToLibraryImportFixer.SelectedSuffixOption,
+                        new Option.String(suffix.ToString())
+                    },
+                }
+            );
         }
 
         [Fact]
@@ -334,7 +338,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceNoSuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
             string fixedSourceWithASuffix = """
 
                 using System.Runtime.InteropServices;
@@ -344,7 +352,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
             string fixedSourceWithWSuffix = """
 
                 using System.Runtime.InteropServices;
@@ -354,7 +369,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithWSuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithWSuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") },
+                }
+            );
         }
 
         [Fact]
@@ -378,7 +400,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceNoSuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
             string fixedSourceWithASuffix = """
 
                 using System.Runtime.InteropServices;
@@ -388,7 +414,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [Fact]
@@ -414,7 +447,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [Fact]
@@ -438,7 +478,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [Fact]
@@ -464,7 +511,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [Fact]
@@ -488,13 +542,23 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [InlineData(CharSet.Ansi, 'A')]
         [InlineData(CharSet.Unicode, 'W')]
         [Theory]
-        public async Task SuffixPresent_ExactSpelling_False_NoAutoCharSet_Provides_No_Suffix_And_Suffix_Fix(CharSet charSet, char suffix)
+        public async Task SuffixPresent_ExactSpelling_False_NoAutoCharSet_Provides_No_Suffix_And_Suffix_Fix(
+            CharSet charSet,
+            char suffix
+        )
         {
             string source = $$"""
                 using System.Runtime.InteropServices;
@@ -512,7 +576,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceNoSuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -536,7 +604,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceNoSuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
             string fixedSourceWithASuffix = """
 
                 using System.Runtime.InteropServices;
@@ -546,7 +618,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [Fact]
@@ -570,7 +649,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceNoSuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
             string fixedSourceWithASuffix = """
 
                 using System.Runtime.InteropServices;
@@ -580,7 +663,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") },
+                }
+            );
         }
 
         [Fact]
@@ -604,7 +694,14 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithNoAdditionalSuffix, new Dictionary<string, Option> { { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") } });
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithNoAdditionalSuffix,
+                new Dictionary<string, Option>
+                {
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
+                }
+            );
         }
 
         [Fact]
@@ -630,7 +727,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -654,7 +755,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:MethodA|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -680,7 +785,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:Method|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -704,7 +813,11 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial void {|CS8795:MethodA|}();
                 }
                 """;
-            await VerifyCodeFixAsync(source, fixedSourceWithASuffix, ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -747,9 +860,7 @@ namespace LibraryImportGenerator.UnitTests
                     }
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -812,9 +923,7 @@ namespace LibraryImportGenerator.UnitTests
                     }
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
@@ -838,9 +947,7 @@ namespace LibraryImportGenerator.UnitTests
                     public static partial bool {|CS8795:Method|}([MarshalAs(UnmanagedType.Bool)] bool b);
                 }
                 """;
-            await VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCodeFixAsync(source, fixedSource);
         }
 
         // There's not a good way today to add a unit test for any changes to project settings from a code fix.
@@ -868,7 +975,8 @@ namespace LibraryImportGenerator.UnitTests
             await VerifyCodeFixNoUnsafeAsync(
                 source,
                 fixedSource,
-                new Dictionary<string, Option> { { Option.AllowUnsafe, new Option.Bool(true) } });
+                new Dictionary<string, Option> { { Option.AllowUnsafe, new Option.Bool(true) } }
+            );
         }
 
         [Fact]
@@ -908,7 +1016,8 @@ namespace LibraryImportGenerator.UnitTests
             await VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                ImmutableDictionary<string, Option>.Empty);
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -946,15 +1055,16 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
             // Verify that we don't update this signature with the "no additional work required" action.
-            await VerifyCodeFixAsync(
-                source,
-                source,
-                ImmutableDictionary<string, Option>.Empty);
+            await VerifyCodeFixAsync(source, source, ImmutableDictionary<string, Option>.Empty);
 
             await VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                new Dictionary<string, Option> { { Option.MayRequireAdditionalWork, new Option.Bool(true) } });
+                new Dictionary<string, Option>
+                {
+                    { Option.MayRequireAdditionalWork, new Option.Bool(true) },
+                }
+            );
         }
 
         [Fact]
@@ -1015,7 +1125,8 @@ namespace LibraryImportGenerator.UnitTests
             await VerifyCodeFixAsync(
                 source,
                 blittableOnlyFixedSource,
-                ImmutableDictionary<string, Option>.Empty);
+                ImmutableDictionary<string, Option>.Empty
+            );
         }
 
         [Fact]
@@ -1105,21 +1216,25 @@ namespace LibraryImportGenerator.UnitTests
                 source,
                 nonBlittableOnlyFixedSource,
                 allFixedSource,
-                new Dictionary<string, Option> { { Option.MayRequireAdditionalWork, new Option.Bool(true) } });
+                new Dictionary<string, Option>
+                {
+                    { Option.MayRequireAdditionalWork, new Option.Bool(true) },
+                }
+            );
         }
 
         [Fact]
         public async Task BestFitMappingExplicitFalse()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [DllImport("DoesNotExist", BestFitMapping = false)]
-                    public static extern void [|Method|]();
-                }
+                 using System.Runtime.InteropServices;
+                 partial class Test
+                 {
+                     [DllImport("DoesNotExist", BestFitMapping = false)]
+                     public static extern void [|Method|]();
+                 }
 
-               """;
+                """;
 
             string fixedSource = """
                  using System.Runtime.InteropServices;
@@ -1138,14 +1253,14 @@ namespace LibraryImportGenerator.UnitTests
         public async Task ThrowOnUnmappableCharExplicitFalse()
         {
             string source = """
-                using System.Runtime.InteropServices;
-                partial class Test
-                {
-                    [DllImport("DoesNotExist", ThrowOnUnmappableChar = false)]
-                    public static extern void [|Method|]();
-                }
+                 using System.Runtime.InteropServices;
+                 partial class Test
+                 {
+                     [DllImport("DoesNotExist", ThrowOnUnmappableChar = false)]
+                     public static extern void [|Method|]();
+                 }
 
-               """;
+                """;
 
             string fixedSource = """
                  using System.Runtime.InteropServices;
@@ -1162,22 +1277,25 @@ namespace LibraryImportGenerator.UnitTests
 
         private static async Task VerifyCodeFixAsync(string source, string fixedSource)
         {
-            var test = new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = fixedSource,
-            };
+            var test = new VerifyCS.Test { TestCode = source, FixedCode = fixedSource };
 
             await test.RunAsync();
         }
 
-        private static async Task VerifyCodeFixAsync(string source, string fixedSource, IDictionary<string, Option> options)
+        private static async Task VerifyCodeFixAsync(
+            string source,
+            string fixedSource,
+            IDictionary<string, Option> options
+        )
         {
             var test = new VerifyCS.Test
             {
                 TestCode = source,
                 FixedCode = fixedSource,
-                CodeActionEquivalenceKey = Option.CreateEquivalenceKeyFromOptions(ConvertToLibraryImportKey, options.ToImmutableDictionary()),
+                CodeActionEquivalenceKey = Option.CreateEquivalenceKeyFromOptions(
+                    ConvertToLibraryImportKey,
+                    options.ToImmutableDictionary()
+                ),
             };
 
             test.FixedState.MarkupHandling = Microsoft.CodeAnalysis.Testing.MarkupMode.Allow;
@@ -1185,14 +1303,22 @@ namespace LibraryImportGenerator.UnitTests
             await test.RunAsync();
         }
 
-        private static async Task VerifyCodeFixAsync(string source, string fixedSource, string batchFixedSource, IDictionary<string, Option> options)
+        private static async Task VerifyCodeFixAsync(
+            string source,
+            string fixedSource,
+            string batchFixedSource,
+            IDictionary<string, Option> options
+        )
         {
             var test = new VerifyCS.Test
             {
                 TestCode = source,
                 FixedCode = fixedSource,
                 BatchFixedCode = batchFixedSource,
-                CodeActionEquivalenceKey = Option.CreateEquivalenceKeyFromOptions(ConvertToLibraryImportKey, options.ToImmutableDictionary()),
+                CodeActionEquivalenceKey = Option.CreateEquivalenceKeyFromOptions(
+                    ConvertToLibraryImportKey,
+                    options.ToImmutableDictionary()
+                ),
             };
 
             test.FixedState.MarkupHandling = Microsoft.CodeAnalysis.Testing.MarkupMode.Allow;
@@ -1200,13 +1326,20 @@ namespace LibraryImportGenerator.UnitTests
             await test.RunAsync();
         }
 
-        private static async Task VerifyCodeFixNoUnsafeAsync(string source, string fixedSource, IDictionary<string, Option> options)
+        private static async Task VerifyCodeFixNoUnsafeAsync(
+            string source,
+            string fixedSource,
+            IDictionary<string, Option> options
+        )
         {
             var test = new TestNoUnsafe
             {
                 TestCode = source,
                 FixedCode = fixedSource,
-                CodeActionEquivalenceKey = Option.CreateEquivalenceKeyFromOptions(ConvertToLibraryImportKey, options.ToImmutableDictionary()),
+                CodeActionEquivalenceKey = Option.CreateEquivalenceKeyFromOptions(
+                    ConvertToLibraryImportKey,
+                    options.ToImmutableDictionary()
+                ),
             };
 
             await test.RunAsync();
@@ -1214,7 +1347,8 @@ namespace LibraryImportGenerator.UnitTests
 
         class TestNoUnsafe : VerifyCS.Test
         {
-            protected override CompilationOptions CreateCompilationOptions() => ((CSharpCompilationOptions)base.CreateCompilationOptions()).WithAllowUnsafe(false);
+            protected override CompilationOptions CreateCompilationOptions() =>
+                ((CSharpCompilationOptions)base.CreateCompilationOptions()).WithAllowUnsafe(false);
         }
     }
 }

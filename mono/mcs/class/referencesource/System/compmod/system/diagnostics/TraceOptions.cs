@@ -4,16 +4,17 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-
+namespace System.Diagnostics
+{
     [Flags]
-    public enum TraceOptions {
-        None =             0,
+    public enum TraceOptions
+    {
+        None = 0,
         LogicalOperationStack = 0x01,
-        DateTime=       0x02,
-        Timestamp=      0x04,
-        ProcessId=      0x08,
-        ThreadId=       0x10,
-        Callstack=      0x20,
+        DateTime = 0x02,
+        Timestamp = 0x04,
+        ProcessId = 0x08,
+        ThreadId = 0x10,
+        Callstack = 0x20,
     }
 }

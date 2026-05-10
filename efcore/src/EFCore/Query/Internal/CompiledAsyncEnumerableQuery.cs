@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase<TContext, IAsyncEnumerable<TResult>>
+public class CompiledAsyncEnumerableQuery<TContext, TResult>
+    : CompiledQueryBase<TContext, IAsyncEnumerable<TResult>>
     where TContext : DbContext
 {
     /// <summary>
@@ -19,9 +20,7 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public CompiledAsyncEnumerableQuery(LambdaExpression queryExpression)
-        : base(queryExpression)
-    {
-    }
+        : base(queryExpression) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,9 +28,7 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute(
-        TContext context)
-        => ExecuteCore(context);
+    public virtual IAsyncEnumerable<TResult> Execute(TContext context) => ExecuteCore(context);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,10 +36,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1>(
-        TContext context,
-        TParam1 param1)
-        => ExecuteCore(context, param1);
+    public virtual IAsyncEnumerable<TResult> Execute<TParam1>(TContext context, TParam1 param1) =>
+        ExecuteCore(context, param1);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,8 +48,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2>(
         TContext context,
         TParam1 param1,
-        TParam2 param2)
-        => ExecuteCore(context, param1, param2);
+        TParam2 param2
+    ) => ExecuteCore(context, param1, param2);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,8 +61,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TContext context,
         TParam1 param1,
         TParam2 param2,
-        TParam3 param3)
-        => ExecuteCore(context, param1, param2, param3);
+        TParam3 param3
+    ) => ExecuteCore(context, param1, param2, param3);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,8 +75,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam1 param1,
         TParam2 param2,
         TParam3 param3,
-        TParam4 param4)
-        => ExecuteCore(context, param1, param2, param3, param4);
+        TParam4 param4
+    ) => ExecuteCore(context, param1, param2, param3, param4);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +90,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam2 param2,
         TParam3 param3,
         TParam4 param4,
-        TParam5 param5)
-        => ExecuteCore(context, param1, param2, param3, param4, param5);
+        TParam5 param5
+    ) => ExecuteCore(context, param1, param2, param3, param4, param5);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,15 +99,22 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
         TParam3 param3,
         TParam4 param4,
         TParam5 param5,
-        TParam6 param6)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6);
+        TParam6 param6
+    ) => ExecuteCore(context, param1, param2, param3, param4, param5, param6);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,7 +122,15 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -128,8 +138,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam4 param4,
         TParam5 param5,
         TParam6 param6,
-        TParam7 param7)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7);
+        TParam7 param7
+    ) => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,7 +147,16 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -146,8 +165,8 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam5 param5,
         TParam6 param6,
         TParam7 param7,
-        TParam8 param8)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8);
+        TParam8 param8
+    ) => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -155,7 +174,17 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -165,8 +194,20 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam6 param6,
         TParam7 param7,
         TParam8 param8,
-        TParam9 param9)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8, param9);
+        TParam9 param9
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -174,8 +215,18 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9,
-        TParam10>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9,
+        TParam10
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -186,8 +237,21 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam7 param7,
         TParam8 param8,
         TParam9 param9,
-        TParam10 param10)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
+        TParam10 param10
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9,
+            param10
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -195,8 +259,19 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9,
-        TParam10, TParam11>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9,
+        TParam10,
+        TParam11
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -208,8 +283,22 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam8 param8,
         TParam9 param9,
         TParam10 param10,
-        TParam11 param11)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
+        TParam11 param11
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9,
+            param10,
+            param11
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -217,8 +306,20 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9,
-        TParam10, TParam11, TParam12>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9,
+        TParam10,
+        TParam11,
+        TParam12
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -231,8 +332,23 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam9 param9,
         TParam10 param10,
         TParam11 param11,
-        TParam12 param12)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
+        TParam12 param12
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9,
+            param10,
+            param11,
+            param12
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -240,8 +356,21 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9,
-        TParam10, TParam11, TParam12, TParam13>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9,
+        TParam10,
+        TParam11,
+        TParam12,
+        TParam13
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -255,8 +384,24 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam10 param10,
         TParam11 param11,
         TParam12 param12,
-        TParam13 param13)
-        => ExecuteCore(context, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
+        TParam13 param13
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9,
+            param10,
+            param11,
+            param12,
+            param13
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -264,8 +409,22 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9,
-        TParam10, TParam11, TParam12, TParam13, TParam14>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9,
+        TParam10,
+        TParam11,
+        TParam12,
+        TParam13,
+        TParam14
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -280,9 +439,25 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam11 param11,
         TParam12 param12,
         TParam13 param13,
-        TParam14 param14)
-        => ExecuteCore(
-            context, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
+        TParam14 param14
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9,
+            param10,
+            param11,
+            param12,
+            param13,
+            param14
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -290,8 +465,23 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerable<TResult> Execute<TParam1, TParam2, TParam3, TParam4, TParam5, TParam6, TParam7, TParam8, TParam9,
-        TParam10, TParam11, TParam12, TParam13, TParam14, TParam15>(
+    public virtual IAsyncEnumerable<TResult> Execute<
+        TParam1,
+        TParam2,
+        TParam3,
+        TParam4,
+        TParam5,
+        TParam6,
+        TParam7,
+        TParam8,
+        TParam9,
+        TParam10,
+        TParam11,
+        TParam12,
+        TParam13,
+        TParam14,
+        TParam15
+    >(
         TContext context,
         TParam1 param1,
         TParam2 param2,
@@ -307,14 +497,30 @@ public class CompiledAsyncEnumerableQuery<TContext, TResult> : CompiledQueryBase
         TParam12 param12,
         TParam13 param13,
         TParam14 param14,
-        TParam15 param15)
-        => ExecuteCore(
-            context, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14,
-            param15);
+        TParam15 param15
+    ) =>
+        ExecuteCore(
+            context,
+            param1,
+            param2,
+            param3,
+            param4,
+            param5,
+            param6,
+            param7,
+            param8,
+            param9,
+            param10,
+            param11,
+            param12,
+            param13,
+            param14,
+            param15
+        );
 
     /// <inheritdoc />
     protected override Func<QueryContext, IAsyncEnumerable<TResult>> CreateCompiledQuery(
         IQueryCompiler queryCompiler,
-        Expression expression)
-        => queryCompiler.CreateCompiledAsyncQuery<IAsyncEnumerable<TResult>>(expression);
+        Expression expression
+    ) => queryCompiler.CreateCompiledAsyncQuery<IAsyncEnumerable<TResult>>(expression);
 }

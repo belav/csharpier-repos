@@ -12,7 +12,10 @@ namespace System.Globalization.Tests
         [InlineData(GregorianCalendarTypes.TransliteratedFrench + 1)]
         public void Ctor_InvalidType_ThrowsArgumentOutOfRangeException(GregorianCalendarTypes type)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("type", () => new GregorianCalendar(type));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "type",
+                () => new GregorianCalendar(type)
+            );
         }
     }
 
@@ -46,10 +49,16 @@ namespace System.Globalization.Tests
         [Theory]
         [InlineData(GregorianCalendarTypes.Localized - 1)]
         [InlineData(GregorianCalendarTypes.TransliteratedFrench + 1)]
-        public void CalendarType_SetInvalidValue_ThrowsArgumentOutOfRangeException(GregorianCalendarTypes type)
+        public void CalendarType_SetInvalidValue_ThrowsArgumentOutOfRangeException(
+            GregorianCalendarTypes type
+        )
         {
             GregorianCalendar calendar = ((GregorianCalendar)Calendar);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "m_type", () => calendar.CalendarType = type);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "m_type",
+                () => calendar.CalendarType = type
+            );
         }
     }
 
@@ -72,17 +81,20 @@ namespace System.Globalization.Tests
 
     public class GregorianCalendarMiddleEastFrenchTests : GregorianCalendarTestBase
     {
-        public override GregorianCalendarTypes CalendarType => GregorianCalendarTypes.MiddleEastFrench;
+        public override GregorianCalendarTypes CalendarType =>
+            GregorianCalendarTypes.MiddleEastFrench;
     }
 
     public class GregorianCalendarTransliteratedEnglishTests : GregorianCalendarTestBase
     {
-        public override GregorianCalendarTypes CalendarType => GregorianCalendarTypes.TransliteratedEnglish;
+        public override GregorianCalendarTypes CalendarType =>
+            GregorianCalendarTypes.TransliteratedEnglish;
     }
 
     public class GregorianCalendarTransliteratedFrenchTests : GregorianCalendarTestBase
     {
-        public override GregorianCalendarTypes CalendarType => GregorianCalendarTypes.TransliteratedFrench;
+        public override GregorianCalendarTypes CalendarType =>
+            GregorianCalendarTypes.TransliteratedFrench;
     }
 
     public class GregorianCalendarUSEnglishTests : GregorianCalendarTestBase

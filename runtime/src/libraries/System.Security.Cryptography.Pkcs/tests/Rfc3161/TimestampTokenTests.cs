@@ -43,14 +43,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static void TestParseDocument(
             ReadOnlyMemory<byte> tokenBytes,
             TimestampTokenTestData testData,
-            int? expectedBytesRead)
+            int? expectedBytesRead
+        )
         {
             int bytesRead;
             Rfc3161TimestampToken token;
 
             Assert.True(
                 Rfc3161TimestampToken.TryDecode(tokenBytes, out token, out bytesRead),
-                "Rfc3161TimestampToken.TryDecode");
+                "Rfc3161TimestampToken.TryDecode"
+            );
 
             if (expectedBytesRead != null)
             {
@@ -66,7 +68,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(
                 testData.TokenInfoBytes.ByteArrayToHex(),
-                signedCms.ContentInfo.Content.ByteArrayToHex());
+                signedCms.ContentInfo.Content.ByteArrayToHex()
+            );
 
             if (testData.EmbeddedSigningCertificate != null)
             {
@@ -74,7 +77,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                 Assert.Equal(
                     testData.EmbeddedSigningCertificate.Value.ByteArrayToHex(),
-                    signedCms.SignerInfos[0].Certificate.RawData.ByteArrayToHex());
+                    signedCms.SignerInfos[0].Certificate.RawData.ByteArrayToHex()
+                );
 
                 // Assert.NoThrow
                 signedCms.CheckSignature(true);
@@ -85,21 +89,24 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                 using (var signerCert = new X509Certificate2(testData.ExternalCertificateBytes))
                 {
-                    if (!SignatureSupport.SupportsRsaSha1Signatures &&
-                        signedCms.SignerInfos[0].SignatureAlgorithm.Value == Oids.Rsa &&
-                        signedCms.SignerInfos[0].DigestAlgorithm.Value == Oids.Sha1)
+                    if (
+                        !SignatureSupport.SupportsRsaSha1Signatures
+                        && signedCms.SignerInfos[0].SignatureAlgorithm.Value == Oids.Rsa
+                        && signedCms.SignerInfos[0].DigestAlgorithm.Value == Oids.Sha1
+                    )
                     {
-                        Assert.ThrowsAny<CryptographicException>(() => signedCms.CheckSignature(
-                            new X509Certificate2Collection(signerCert),
-                            true));
+                        Assert.ThrowsAny<CryptographicException>(() =>
+                            signedCms.CheckSignature(
+                                new X509Certificate2Collection(signerCert),
+                                true
+                            )
+                        );
                         return;
                     }
                     else
                     {
                         // Assert.NoThrow
-                        signedCms.CheckSignature(
-                            new X509Certificate2Collection(signerCert),
-                            true);
+                        signedCms.CheckSignature(new X509Certificate2Collection(signerCert), true);
                     }
                 }
             }
@@ -112,7 +119,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             {
                 Assert.True(
                     token.VerifySignatureForData(messageContentSpan, out returnedCert),
-                    "token.VerifySignatureForData(correct)");
+                    "token.VerifySignatureForData(correct)"
+                );
 
                 Assert.NotNull(returnedCert);
                 Assert.Equal(signedCms.SignerInfos[0].Certificate, returnedCert);
@@ -126,13 +134,15 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                 Assert.False(
                     token.VerifySignatureForData(messageContentSpan, out returnedCert),
-                    "token.VerifySignatureForData(correct, no cert)");
+                    "token.VerifySignatureForData(correct, no cert)"
+                );
 
                 Assert.Null(returnedCert);
 
                 Assert.True(
                     token.VerifySignatureForData(messageContentSpan, out returnedCert, candidates),
-                    "token.VerifySignatureForData(correct, certs)");
+                    "token.VerifySignatureForData(correct, certs)"
+                );
 
                 Assert.NotNull(returnedCert);
                 Assert.Equal(candidates[0], returnedCert);
@@ -141,33 +151,62 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509Certificate2 previousCert = returnedCert;
 
             Assert.False(
-                token.VerifySignatureForData(messageContentSpan.Slice(1), out returnedCert, candidates),
-                "token.VerifySignatureForData(incorrect)");
+                token.VerifySignatureForData(
+                    messageContentSpan.Slice(1),
+                    out returnedCert,
+                    candidates
+                ),
+                "token.VerifySignatureForData(incorrect)"
+            );
 
             Assert.Null(returnedCert);
 
             byte[] messageHash = testData.HashBytes.ToArray();
 
             Assert.False(
-                token.VerifySignatureForHash(messageHash, HashAlgorithmName.MD5, out returnedCert, candidates),
-                "token.VerifyHash(correct, MD5)");
+                token.VerifySignatureForHash(
+                    messageHash,
+                    HashAlgorithmName.MD5,
+                    out returnedCert,
+                    candidates
+                ),
+                "token.VerifyHash(correct, MD5)"
+            );
             Assert.Null(returnedCert);
 
             Assert.False(
-                token.VerifySignatureForHash(messageHash, new Oid(Oids.Md5), out returnedCert, candidates),
-                "token.VerifyHash(correct, Oid(MD5))");
+                token.VerifySignatureForHash(
+                    messageHash,
+                    new Oid(Oids.Md5),
+                    out returnedCert,
+                    candidates
+                ),
+                "token.VerifyHash(correct, Oid(MD5))"
+            );
             Assert.Null(returnedCert);
 
             Assert.True(
-                token.VerifySignatureForHash(messageHash, new Oid(testData.HashAlgorithmId), out returnedCert, candidates),
-                "token.VerifyHash(correct, Oid(algId))");
+                token.VerifySignatureForHash(
+                    messageHash,
+                    new Oid(testData.HashAlgorithmId),
+                    out returnedCert,
+                    candidates
+                ),
+                "token.VerifyHash(correct, Oid(algId))"
+            );
             Assert.NotNull(returnedCert);
             Assert.Equal(previousCert, returnedCert);
 
             messageHash[0] ^= 0xFF;
             Assert.False(
-                token.VerifySignatureForHash(messageHash, new Oid(testData.HashAlgorithmId), out returnedCert, candidates),
-                "token.VerifyHash(incorrect, Oid(algId))");
+                token.VerifySignatureForHash(
+                    messageHash,
+                    new Oid(testData.HashAlgorithmId),
+                    out returnedCert,
+                    candidates
+                ),
+                "token.VerifyHash(incorrect, Oid(algId))"
+            );
             Assert.Null(returnedCert);
         }
 
@@ -178,8 +217,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 Rfc3161TimestampToken.TryDecode(
                     SignedDocuments.RsaPkcs1OneSignerIssuerAndSerialNumber,
                     out Rfc3161TimestampToken token,
-                    out int bytesRead),
-                "Rfc3161TimestampToken.TryDecode");
+                    out int bytesRead
+                ),
+                "Rfc3161TimestampToken.TryDecode"
+            );
 
             Assert.Equal(0, bytesRead);
             Assert.Null(token);
@@ -192,8 +233,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 Rfc3161TimestampToken.TryDecode(
                     ReadOnlyMemory<byte>.Empty,
                     out Rfc3161TimestampToken token,
-                    out int bytesRead),
-                "Rfc3161TimestampToken.TryDecode");
+                    out int bytesRead
+                ),
+                "Rfc3161TimestampToken.TryDecode"
+            );
 
             Assert.Equal(0, bytesRead);
             Assert.Null(token);
@@ -202,20 +245,23 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void TryDecode_Fails_EnvelopedCms()
         {
-            byte[] encodedMessage =
-            ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
-             + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004818013"
-             + "dc0eb2984a445d04a1f6246b8fe41f1d24507548d449d454d5bb5e0638d75ed101bf78c0155a5d208eb746755fbccbc86923"
-             + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
-             + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
-             + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9").HexToByteArray();
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+                + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004818013"
+                + "dc0eb2984a445d04a1f6246b8fe41f1d24507548d449d454d5bb5e0638d75ed101bf78c0155a5d208eb746755fbccbc86923"
+                + "8443760a9ae94770d6373e0197be23a6a891f0c522ca96b3e8008bf23547474b7e24e7f32e8134df3862d84f4dea2470548e"
+                + "c774dd74f149a56cdd966e141122900d00ad9d10ea1848541294a1302b06092a864886f70d010701301406082a864886f70d"
+                + "030704089c8119f6cf6b174c8008bcea3a10d0737eb9"
+            ).HexToByteArray();
 
             Assert.False(
                 Rfc3161TimestampToken.TryDecode(
                     encodedMessage,
                     out Rfc3161TimestampToken token,
-                    out int bytesRead),
-                "Rfc3161TimestampToken.TryDecode");
+                    out int bytesRead
+                ),
+                "Rfc3161TimestampToken.TryDecode"
+            );
 
             Assert.Equal(0, bytesRead);
             Assert.Null(token);
@@ -226,21 +272,29 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             ContentInfo contentInfo = new ContentInfo(
                 new Oid(Oids.TstInfo, Oids.TstInfo),
-                new byte[] { 1 });
+                new byte[] { 1 }
+            );
 
             SignedCms cms = new SignedCms(contentInfo);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransferCapi1.TryGetCertificateWithPrivateKey()
+            )
             {
-                cms.ComputeSignature(new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert));
+                cms.ComputeSignature(
+                    new CmsSigner(SubjectIdentifierType.IssuerAndSerialNumber, cert)
+                );
             }
 
             Assert.False(
                 Rfc3161TimestampToken.TryDecode(
                     cms.Encode(),
                     out Rfc3161TimestampToken token,
-                    out int bytesRead),
-                "Rfc3161TimestampToken.TryDecode");
+                    out int bytesRead
+                ),
+                "Rfc3161TimestampToken.TryDecode"
+            );
 
             Assert.Equal(0, bytesRead);
             Assert.Null(token);
@@ -251,14 +305,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [InlineData(X509IncludeOption.None, SigningCertificateOption.ValidHashNoName)]
         [InlineData(X509IncludeOption.WholeChain, SigningCertificateOption.ValidHashWithName)]
         [InlineData(X509IncludeOption.None, SigningCertificateOption.ValidHashWithName)]
-        public static void MatchV1(X509IncludeOption includeOption, SigningCertificateOption v1Option)
+        public static void MatchV1(
+            X509IncludeOption includeOption,
+            SigningCertificateOption v1Option
+        )
         {
             CustomBuild_CertMatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 v1Option,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -271,30 +329,36 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 SigningCertificateOption.InvalidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
-            SubjectIdentifierType.SubjectKeyIdentifier)]
+            SubjectIdentifierType.SubjectKeyIdentifier
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithInvalidName,
-            SubjectIdentifierType.SubjectKeyIdentifier)]
+            SubjectIdentifierType.SubjectKeyIdentifier
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
-            SubjectIdentifierType.IssuerAndSerialNumber)]
+            SubjectIdentifierType.IssuerAndSerialNumber
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithInvalidName,
-            SubjectIdentifierType.IssuerAndSerialNumber)]
+            SubjectIdentifierType.IssuerAndSerialNumber
+        )]
         public static void CertMismatchIssuerAndSerialV1(
             X509IncludeOption includeOption,
             SigningCertificateOption v1Option,
-            SubjectIdentifierType identifierType)
+            SubjectIdentifierType identifierType
+        )
         {
             CustomBuild_CertMismatch(
                 Certificates.ValidLookingTsaCert,
@@ -302,54 +366,47 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 v1Option,
                 SigningCertificateOption.Omit,
                 includeOption: includeOption,
-                identifierType: identifierType);
+                identifierType: identifierType
+            );
         }
 
         [Theory]
-        [InlineData(
-            X509IncludeOption.WholeChain,
-            SigningCertificateOption.ValidHashNoName,
-            null)]
-        [InlineData(
-            X509IncludeOption.None,
-            SigningCertificateOption.ValidHashNoName,
-            null)]
+        [InlineData(X509IncludeOption.WholeChain, SigningCertificateOption.ValidHashNoName, null)]
+        [InlineData(X509IncludeOption.None, SigningCertificateOption.ValidHashNoName, null)]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
-            "MD5")]
-        [InlineData(
-            X509IncludeOption.None,
-            SigningCertificateOption.ValidHashWithName,
-            "MD5")]
+            "MD5"
+        )]
+        [InlineData(X509IncludeOption.None, SigningCertificateOption.ValidHashWithName, "MD5")]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
-            "SHA1")]
-        [InlineData(
-            X509IncludeOption.None,
-            SigningCertificateOption.ValidHashWithName,
-            "SHA1")]
+            "SHA1"
+        )]
+        [InlineData(X509IncludeOption.None, SigningCertificateOption.ValidHashWithName, "SHA1")]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
-            "SHA384")]
-        [InlineData(
-            X509IncludeOption.None,
-            SigningCertificateOption.ValidHashWithName,
-            "SHA384")]
+            "SHA384"
+        )]
+        [InlineData(X509IncludeOption.None, SigningCertificateOption.ValidHashWithName, "SHA384")]
         public static void MatchV2(
             X509IncludeOption includeOption,
             SigningCertificateOption v2Option,
-            string hashAlgName)
+            string hashAlgName
+        )
         {
             CustomBuild_CertMatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 SigningCertificateOption.Omit,
                 v2Option,
-                hashAlgName == null ? default(HashAlgorithmName) : new HashAlgorithmName(hashAlgName),
-                includeOption);
+                hashAlgName == null
+                    ? default(HashAlgorithmName)
+                    : new HashAlgorithmName(hashAlgName),
+                includeOption
+            );
         }
 
         [Theory]
@@ -368,8 +425,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 SigningCertificateOption.Omit,
                 SigningCertificateOption.InvalidHashNoName,
-                hashAlgName == null ? default(HashAlgorithmName) : new HashAlgorithmName(hashAlgName),
-                includeOption: includeOption);
+                hashAlgName == null
+                    ? default(HashAlgorithmName)
+                    : new HashAlgorithmName(hashAlgName),
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -377,56 +437,68 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.SubjectKeyIdentifier,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.SubjectKeyIdentifier,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.SubjectKeyIdentifier,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.SubjectKeyIdentifier,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithInvalidName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            "SHA384")]
+            "SHA384"
+        )]
         public static void CertMismatchIssuerAndSerialV2(
             X509IncludeOption includeOption,
             SigningCertificateOption v2Option,
             SubjectIdentifierType identifierType,
-            string hashAlgName)
+            string hashAlgName
+        )
         {
             CustomBuild_CertMismatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 SigningCertificateOption.Omit,
                 v2Option,
-                hashAlgName == null ? default(HashAlgorithmName) : new HashAlgorithmName(hashAlgName),
+                hashAlgName == null
+                    ? default(HashAlgorithmName)
+                    : new HashAlgorithmName(hashAlgName),
                 includeOption: includeOption,
-                identifierType: identifierType);
+                identifierType: identifierType
+            );
         }
 
         [Theory]
@@ -434,95 +506,115 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashNoName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashNoName,
-            "SHA512")]
+            "SHA512"
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashNoName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashNoName,
-            "SHA512")]
+            "SHA512"
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashWithName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashWithName,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashWithName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashNoName,
             SigningCertificateOption.ValidHashWithName,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashNoName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashNoName,
-            "SHA512")]
+            "SHA512"
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashNoName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashNoName,
-            "SHA512")]
+            "SHA512"
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashWithName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashWithName,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashWithName,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.ValidHashWithName,
-            "SHA384")]
+            "SHA384"
+        )]
         public static void CertMatchV1AndV2(
             X509IncludeOption includeOption,
             SigningCertificateOption v1Option,
             SigningCertificateOption v2Option,
-            string hashAlgName)
+            string hashAlgName
+        )
         {
             CustomBuild_CertMatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 v1Option,
                 v2Option,
-                hashAlgName == null ? default(HashAlgorithmName) : new HashAlgorithmName(hashAlgName),
-                includeOption);
+                hashAlgName == null
+                    ? default(HashAlgorithmName)
+                    : new HashAlgorithmName(hashAlgName),
+                includeOption
+            );
         }
 
         [Theory]
@@ -531,46 +623,55 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SigningCertificateOption.InvalidHashNoName,
             SigningCertificateOption.ValidHashWithName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidSerial,
             SigningCertificateOption.ValidHashWithName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            "SHA384")]
+            "SHA384"
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.ValidHashWithInvalidName,
             SigningCertificateOption.InvalidHashNoName,
             SubjectIdentifierType.SubjectKeyIdentifier,
-            null)]
+            null
+        )]
         [InlineData(
             X509IncludeOption.None,
             SigningCertificateOption.ValidHashWithName,
             SigningCertificateOption.InvalidHashNoName,
             SubjectIdentifierType.SubjectKeyIdentifier,
-            "SHA512")]
+            "SHA512"
+        )]
         [InlineData(
             X509IncludeOption.WholeChain,
             SigningCertificateOption.InvalidHashWithInvalidSerial,
             SigningCertificateOption.ValidHashNoName,
             SubjectIdentifierType.IssuerAndSerialNumber,
-            null)]
+            null
+        )]
         public static void CertMismatchV1OrV2(
             X509IncludeOption includeOption,
             SigningCertificateOption v1Option,
             SigningCertificateOption v2Option,
             SubjectIdentifierType identifierType,
-            string hashAlgName)
+            string hashAlgName
+        )
         {
             CustomBuild_CertMismatch(
                 Certificates.ValidLookingTsaCert,
                 new DateTimeOffset(2018, 1, 10, 17, 21, 11, 802, TimeSpan.Zero),
                 v1Option,
                 v2Option,
-                hashAlgName == null ? default(HashAlgorithmName) : new HashAlgorithmName(hashAlgName),
+                hashAlgName == null
+                    ? default(HashAlgorithmName)
+                    : new HashAlgorithmName(hashAlgName),
                 includeOption: includeOption,
-                identifierType: identifierType);
+                identifierType: identifierType
+            );
         }
 
         [Theory]
@@ -591,7 +692,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 referenceTime,
                 SigningCertificateOption.ValidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -612,7 +714,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 referenceTime,
                 SigningCertificateOption.ValidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -635,7 +738,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 referenceTime,
                 SigningCertificateOption.ValidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -657,7 +761,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 // Make sure we're validating that "early success" doesn't happen.
                 Assert.Contains(
                     Oids.TimeStampingPurpose,
-                    ekuExts[0].EnhancedKeyUsages.OfType<Oid>().Select(o => o.Value));
+                    ekuExts[0].EnhancedKeyUsages.OfType<Oid>().Select(o => o.Value)
+                );
             }
 
             CustomBuild_CertMismatch(
@@ -665,7 +770,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 referenceTime,
                 SigningCertificateOption.ValidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -691,7 +797,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 referenceTime,
                 SigningCertificateOption.ValidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         [Theory]
@@ -712,7 +819,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 referenceTime,
                 SigningCertificateOption.ValidHashNoName,
                 SigningCertificateOption.Omit,
-                includeOption: includeOption);
+                includeOption: includeOption
+            );
         }
 
         private static void CustomBuild_CertMatch(
@@ -722,7 +830,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SigningCertificateOption v2Option,
             HashAlgorithmName v2AlgorithmName = default,
             X509IncludeOption includeOption = default,
-            SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber)
+            SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber
+        )
         {
             byte[] tokenBytes = BuildCustomToken(
                 loader,
@@ -731,7 +840,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 v2Option,
                 v2AlgorithmName,
                 includeOption,
-                identifierType);
+                identifierType
+            );
 
             Rfc3161TimestampToken token;
             Assert.True(Rfc3161TimestampToken.TryDecode(tokenBytes, out token, out int bytesRead));
@@ -748,7 +858,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
                         token.TokenInfo.GetMessageHash().Span,
                         token.TokenInfo.HashAlgorithmId,
                         out X509Certificate2 signer,
-                        new X509Certificate2Collection(cert)));
+                        new X509Certificate2Collection(cert)
+                    )
+                );
 
                 Assert.Equal(cert, signer);
             }
@@ -761,7 +873,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SigningCertificateOption v2Option,
             HashAlgorithmName v2AlgorithmName = default,
             X509IncludeOption includeOption = default,
-            SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber)
+            SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber
+        )
         {
             byte[] tokenBytes = BuildCustomToken(
                 loader,
@@ -770,7 +883,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 v2Option,
                 v2AlgorithmName,
                 includeOption,
-                identifierType);
+                identifierType
+            );
 
             Rfc3161TimestampToken token;
 
@@ -803,7 +917,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             if (willParse)
             {
-                Assert.True(Rfc3161TimestampToken.TryDecode(tokenBytes, out token, out int bytesRead));
+                Assert.True(
+                    Rfc3161TimestampToken.TryDecode(tokenBytes, out token, out int bytesRead)
+                );
                 Assert.NotNull(token);
                 Assert.Equal(tokenBytes.Length, bytesRead);
 
@@ -814,14 +930,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             token.TokenInfo.GetMessageHash().Span,
                             token.TokenInfo.HashAlgorithmId,
                             out X509Certificate2 signer,
-                            new X509Certificate2Collection(cert)));
+                            new X509Certificate2Collection(cert)
+                        )
+                    );
 
                     Assert.Null(signer);
                 }
             }
             else
             {
-                Assert.False(Rfc3161TimestampToken.TryDecode(tokenBytes, out token, out int bytesRead));
+                Assert.False(
+                    Rfc3161TimestampToken.TryDecode(tokenBytes, out token, out int bytesRead)
+                );
 
                 Assert.Null(token);
                 Assert.Equal(0, bytesRead);
@@ -833,9 +953,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             DateTimeOffset timestamp,
             SigningCertificateOption v1Option,
             SigningCertificateOption v2Option,
-            HashAlgorithmName v2DigestAlg=default,
-            X509IncludeOption includeOption=X509IncludeOption.ExcludeRoot,
-            SubjectIdentifierType identifierType=SubjectIdentifierType.IssuerAndSerialNumber)
+            HashAlgorithmName v2DigestAlg = default,
+            X509IncludeOption includeOption = X509IncludeOption.ExcludeRoot,
+            SubjectIdentifierType identifierType = SubjectIdentifierType.IssuerAndSerialNumber
+        )
         {
             long accuracyMicroSeconds = (long)(TimeSpan.FromMinutes(1).TotalMilliseconds * 1000);
 
@@ -852,21 +973,31 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 serialNumber,
                 timestamp,
                 accuracyMicroSeconds,
-                isOrdering: true);
+                isOrdering: true
+            );
 
-            ContentInfo contentInfo = new ContentInfo(new Oid(Oids.TstInfo, Oids.TstInfo), info.Encode());
+            ContentInfo contentInfo = new ContentInfo(
+                new Oid(Oids.TstInfo, Oids.TstInfo),
+                info.Encode()
+            );
             SignedCms cms = new SignedCms(contentInfo);
 
             using (X509Certificate2 tsaCert = cert.TryGetCertificateWithPrivateKey())
             {
                 CmsSigner signer = new CmsSigner(identifierType, tsaCert)
                 {
-                    IncludeOption = includeOption
+                    IncludeOption = includeOption,
                 };
 
                 if (v1Option != SigningCertificateOption.Omit)
                 {
-                    ExpandOption(v1Option, out bool validHash, out bool skipIssuerSerial, out bool validName, out bool validSerial);
+                    ExpandOption(
+                        v1Option,
+                        out bool validHash,
+                        out bool skipIssuerSerial,
+                        out bool validName,
+                        out bool validSerial
+                    );
 
                     // simple SigningCertificate
                     byte[] signingCertificateV1Bytes =
@@ -881,7 +1012,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                             0,
                             signingCertificateV1Bytes,
                             signingCertificateV1Bytes.Length - hash.Length,
-                            hash.Length);
+                            hash.Length
+                        );
                     }
 
                     if (!skipIssuerSerial)
@@ -894,11 +1026,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                         Assert.InRange(signingCertificateV1Bytes[1], 0, 127);
 
-                        signingCertificateV1Bytes = signingCertificateV1Bytes.Concat(footer).ToArray();
+                        signingCertificateV1Bytes = signingCertificateV1Bytes
+                            .Concat(footer)
+                            .ToArray();
                     }
 
                     signer.SignedAttributes.Add(
-                        new AsnEncodedData("1.2.840.113549.1.9.16.2.12", signingCertificateV1Bytes));
+                        new AsnEncodedData("1.2.840.113549.1.9.16.2.12", signingCertificateV1Bytes)
+                    );
                 }
 
                 if (v2Option != SigningCertificateOption.Omit)
@@ -939,7 +1074,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                     hashBytes = tsaCert.GetCertHash(v2DigestAlg);
 
-                    ExpandOption(v2Option, out bool validHash, out bool skipIssuerSerial, out bool validName, out bool validSerial);
+                    ExpandOption(
+                        v2Option,
+                        out bool validHash,
+                        out bool skipIssuerSerial,
+                        out bool validName,
+                        out bool validSerial
+                    );
 
                     if (!validHash)
                     {
@@ -948,11 +1089,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
                     if (!skipIssuerSerial)
                     {
-                        issuerNameBytes = BuildIssuerAndSerialNumber(tsaCert, validName, validSerial);
+                        issuerNameBytes = BuildIssuerAndSerialNumber(
+                            tsaCert,
+                            validName,
+                            validSerial
+                        );
                     }
 
                     // hashBytes hasn't been wrapped in an OCTET STRING yet, so add 2 more.
-                    int payloadSize = algBytes.Length + hashBytes.Length + issuerNameBytes.Length + 2;
+                    int payloadSize =
+                        algBytes.Length + hashBytes.Length + issuerNameBytes.Length + 2;
                     Assert.InRange(payloadSize, 0, 123);
 
                     attrBytes = new byte[payloadSize + 6];
@@ -983,7 +1129,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     Buffer.BlockCopy(issuerNameBytes, 0, attrBytes, index, issuerNameBytes.Length);
 
                     signer.SignedAttributes.Add(
-                        new AsnEncodedData("1.2.840.113549.1.9.16.2.47", attrBytes));
+                        new AsnEncodedData("1.2.840.113549.1.9.16.2.47", attrBytes)
+                    );
                 }
 
                 cms.ComputeSignature(signer);
@@ -992,7 +1139,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
             return cms.Encode();
         }
 
-        private static byte[] BuildIssuerAndSerialNumber(X509Certificate2 tsaCert, bool validName, bool validSerial)
+        private static byte[] BuildIssuerAndSerialNumber(
+            X509Certificate2 tsaCert,
+            bool validName,
+            bool validSerial
+        )
         {
             byte[] issuerNameBytes;
 
@@ -1021,7 +1172,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             if (issuerNameBytes.Length + serialBytes.Length > 80)
             {
                 throw new NotSupportedException(
-                    "Issuer name and serial length are bigger than this code can handle");
+                    "Issuer name and serial length are bigger than this code can handle"
+                );
             }
 
             // SEQUENCE
@@ -1031,7 +1183,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
             //   INTEGER
             //     [SerialNumber, big endian]
 
-            byte[] issuerAndSerialNumber = new byte[issuerNameBytes.Length + serialBytes.Length + 8];
+            byte[] issuerAndSerialNumber = new byte[
+                issuerNameBytes.Length + serialBytes.Length + 8
+            ];
             issuerAndSerialNumber[0] = 0x30;
             issuerAndSerialNumber[1] = (byte)(issuerAndSerialNumber.Length - 2);
 
@@ -1044,7 +1198,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             issuerAndSerialNumber[issuerNameBytes.Length + 6] = 0x02;
             issuerAndSerialNumber[issuerNameBytes.Length + 7] = (byte)serialBytes.Length;
-            Buffer.BlockCopy(serialBytes, 0, issuerAndSerialNumber, issuerNameBytes.Length + 8, serialBytes.Length);
+            Buffer.BlockCopy(
+                serialBytes,
+                0,
+                issuerAndSerialNumber,
+                issuerNameBytes.Length + 8,
+                serialBytes.Length
+            );
 
             return issuerAndSerialNumber;
         }
@@ -1054,15 +1214,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
             out bool validHash,
             out bool skipIssuerSerial,
             out bool validName,
-            out bool validSerial)
+            out bool validSerial
+        )
         {
             Assert.NotEqual(SigningCertificateOption.Omit, option);
 
             validHash = option < SigningCertificateOption.InvalidHashNoName;
 
             skipIssuerSerial =
-                option == SigningCertificateOption.ValidHashNoName ||
-                option == SigningCertificateOption.InvalidHashNoName;
+                option == SigningCertificateOption.ValidHashNoName
+                || option == SigningCertificateOption.InvalidHashNoName;
 
             if (skipIssuerSerial)
             {
@@ -1071,16 +1232,16 @@ namespace System.Security.Cryptography.Pkcs.Tests
             else
             {
                 validName =
-                    option == SigningCertificateOption.ValidHashWithName ||
-                    option == SigningCertificateOption.InvalidHashWithName ||
-                    option == SigningCertificateOption.ValidHashWithInvalidSerial ||
-                    option == SigningCertificateOption.InvalidHashWithInvalidSerial;
+                    option == SigningCertificateOption.ValidHashWithName
+                    || option == SigningCertificateOption.InvalidHashWithName
+                    || option == SigningCertificateOption.ValidHashWithInvalidSerial
+                    || option == SigningCertificateOption.InvalidHashWithInvalidSerial;
 
                 validSerial =
-                    option == SigningCertificateOption.ValidHashWithName ||
-                    option == SigningCertificateOption.InvalidHashWithName ||
-                    option == SigningCertificateOption.ValidHashWithInvalidName ||
-                    option == SigningCertificateOption.InvalidHashWithInvalidName;
+                    option == SigningCertificateOption.ValidHashWithName
+                    || option == SigningCertificateOption.InvalidHashWithName
+                    || option == SigningCertificateOption.ValidHashWithInvalidName
+                    || option == SigningCertificateOption.InvalidHashWithInvalidName;
             }
         }
 

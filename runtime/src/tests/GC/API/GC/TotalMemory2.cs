@@ -28,7 +28,6 @@ public class Test_TotalMemory2
 
         GC.KeepAlive(array2);
 
-
         if ((before < after) && (memnew > memold))
         {
             Console.WriteLine("Test for GC.TotalMemory passed!");
@@ -41,4 +40,3 @@ public class Test_TotalMemory2
         }
     }
 }
-

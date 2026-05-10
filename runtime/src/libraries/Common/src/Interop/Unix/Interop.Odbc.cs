@@ -16,7 +16,12 @@ internal static partial class Interop
     {
         internal static string GetNativeLibraryName()
         {
-            if (OperatingSystem.IsMacOS() || OperatingSystem.IsIOS() || OperatingSystem.IsTvOS() || OperatingSystem.IsWatchOS())
+            if (
+                OperatingSystem.IsMacOS()
+                || OperatingSystem.IsIOS()
+                || OperatingSystem.IsTvOS()
+                || OperatingSystem.IsWatchOS()
+            )
             {
                 return "libodbc.2.dylib";
             }
@@ -25,14 +30,17 @@ internal static partial class Interop
 
         static Odbc()
         {
-            NativeLibrary.SetDllImportResolver(Assembly.GetExecutingAssembly(), (libraryName, assembly, searchPath) =>
-            {
-                if (libraryName == Libraries.Odbc32)
+            NativeLibrary.SetDllImportResolver(
+                Assembly.GetExecutingAssembly(),
+                (libraryName, assembly, searchPath) =>
                 {
-                    return NativeLibrary.Load(GetNativeLibraryName(), assembly, default);
+                    if (libraryName == Libraries.Odbc32)
+                    {
+                        return NativeLibrary.Load(GetNativeLibraryName(), assembly, default);
+                    }
+                    return default;
                 }
-                return default;
-            });
+            );
         }
     }
 }

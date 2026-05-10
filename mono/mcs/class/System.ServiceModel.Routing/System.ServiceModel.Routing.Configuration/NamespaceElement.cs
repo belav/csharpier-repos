@@ -10,18 +10,30 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Routing.Configuration
 {
-	public class NamespaceElement : ConfigurationElement
-	{
-		[ConfigurationProperty ("namespace", DefaultValue = null, Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Namespace {
-			get { return (string) base ["namespace"]; }
-			set { base ["namespace"] = value; }
-		}
+    public class NamespaceElement : ConfigurationElement
+    {
+        [ConfigurationProperty(
+            "namespace",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Namespace
+        {
+            get { return (string)base["namespace"]; }
+            set { base["namespace"] = value; }
+        }
 
-		[ConfigurationProperty ("prefix", DefaultValue = null, Options = ConfigurationPropertyOptions.None | ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Prefix {
-			get { return (string) base ["prefix"]; }
-			set { base ["prefix"] = value; }
-		}
-	}
+        [ConfigurationProperty(
+            "prefix",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.None
+                | ConfigurationPropertyOptions.IsRequired
+                | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Prefix
+        {
+            get { return (string)base["prefix"]; }
+            set { base["prefix"] = value; }
+        }
+    }
 }

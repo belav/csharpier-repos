@@ -12,9 +12,7 @@ namespace System.Reflection.Emit
         [ThreadStatic]
         private static bool t_allowDynamicCode;
 
-        protected AssemblyBuilder()
-        {
-        }
+        protected AssemblyBuilder() { }
 
         public ModuleBuilder DefineDynamicModule(string name)
         {
@@ -42,7 +40,10 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        protected abstract void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute);
+        protected abstract void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        );
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
@@ -51,9 +52,14 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(customBuilder.Ctor, customBuilder.Data);
         }
 
-        [Obsolete("Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location instead.", DiagnosticId = "SYSLIB0012", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+        [Obsolete(
+            "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location instead.",
+            DiagnosticId = "SYSLIB0012",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
-        public override string? CodeBase => throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
+        public override string? CodeBase =>
+            throw new NotSupportedException(SR.NotSupported_DynamicAssembly);
         public override string Location => string.Empty;
         public override MethodInfo? EntryPoint => null;
         public override bool IsDynamic => true;

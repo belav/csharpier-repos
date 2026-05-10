@@ -9,34 +9,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-
+using Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
-
 using Xunit;
-using Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     // Unit tests for programs that use the Windows.winmd file.
-    // 
-    // Checks to see that types are forwarded correctly, that 
+    //
+    // Checks to see that types are forwarded correctly, that
     // metadata files are loaded as they should, etc.
     public class WinMdMetadataTests : CSharpTestBase
     {
         /// <summary>
         /// Make sure that the members of a function are forwarded to their appropriate types.
         /// We do this by checking that the first parameter of
-        /// Windows.UI.Text.ITextRange.SetPoint(Point p...) gets forwarded to the 
+        /// Windows.UI.Text.ITextRange.SetPoint(Point p...) gets forwarded to the
         /// System.Runtime.WindowsRuntime assembly.
-        /// </summary> 
+        /// </summary>
         [Fact]
         public void FunctionSignatureForwarded()
         {
@@ -58,7 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// Make sure that a delegate defined in Windows.winmd has a public constructor
         /// (by default, all delegates in Windows.winmd have a private constructor).
-        /// </summary> 
+        /// </summary>
         [Fact]
         public void DelegateConstructorMarkedPublic()
         {
@@ -134,17 +131,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var blk = clas.GetMembers("Black").Single();
             //The windows.winmd module points to a Windows.UI.Color which should be modified to belong
             //to System.Runtime.WindowsRuntime
-            Assert.Equal("System.Runtime.WindowsRuntime.dll", ((PENamedTypeSymbol)((((PropertySymbol)(blk)).GetMethod).ReturnType)).ContainingModule.ToString());
+            Assert.Equal(
+                "System.Runtime.WindowsRuntime.dll",
+                (
+                    (PENamedTypeSymbol)((((PropertySymbol)(blk)).GetMethod).ReturnType)
+                ).ContainingModule.ToString()
+            );
         }
 
         /// <summary>
         /// Ensure that a simple program that uses projected types can compile
         /// and run.
         /// </summary>
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         public void WinMdColorTest()
         {
-            var text = @"using Windows.UI;
+            var text =
+                @"using Windows.UI;
                              using Windows.Foundation;
                          
                              public class A{
@@ -155,7 +161,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                                 }
                              };";
 
-            CompileAndVerify(text, WinRtRefs, targetFramework: TargetFramework.Empty, expectedOutput: "#FF000000");
+            CompileAndVerify(
+                text,
+                WinRtRefs,
+                targetFramework: TargetFramework.Empty,
+                expectedOutput: "#FF000000"
+            );
         }
 
         /// <summary>
@@ -177,9 +188,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var puint = clas.GetMembers("ParseUInt").Single();
 
             // The return type of ParseUInt should be Nullable<ulong>, not IReference<ulong>
-            Assert.Equal("ulong?",
-                ((Microsoft.CodeAnalysis.CSharp.Symbols.ConstructedNamedTypeSymbol)
-                (((Microsoft.CodeAnalysis.CSharp.Symbols.MethodSymbol)puint).ReturnType)).ToString());
+            Assert.Equal(
+                "ulong?",
+                (
+                    (Microsoft.CodeAnalysis.CSharp.Symbols.ConstructedNamedTypeSymbol)(
+                        ((Microsoft.CodeAnalysis.CSharp.Symbols.MethodSymbol)puint).ReturnType
+                    )
+                ).ToString()
+            );
         }
 
         /// <summary>
@@ -189,7 +205,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void WinMdIReferenceINullableTest()
         {
             var source =
-@"using System;
+                @"using System;
 using Windows.Globalization.NumberFormatting;
 
 public class C
@@ -203,8 +219,7 @@ public class C
         Console.WriteLine(result);
     }
 }";
-            var verifier = this.CompileAndVerifyOnWin8Only(source,
-                expectedOutput: "10\r\n0");
+            var verifier = this.CompileAndVerifyOnWin8Only(source, expectedOutput: "10\r\n0");
             verifier.VerifyDiagnostics();
         }
 
@@ -212,7 +227,7 @@ public class C
         public void WinMdAssemblyQualifiedType()
         {
             var source =
-@"using System;
+                @"using System;
 
 [MyAttribute(typeof(C1))]
 public class C
@@ -231,18 +246,29 @@ public class MyAttribute : System.Attribute
 ";
             CompileAndVerify(
                 source,
-                WinRtRefs.Concat(new[] { AssemblyMetadata.CreateFromImage(TestResources.WinRt.W1).GetReference() }),
+                WinRtRefs.Concat(
+                    new[]
+                    {
+                        AssemblyMetadata.CreateFromImage(TestResources.WinRt.W1).GetReference(),
+                    }
+                ),
                 targetFramework: TargetFramework.Empty,
                 symbolValidator: m =>
-            {
-                var module = (PEModuleSymbol)m;
-                var c = (PENamedTypeSymbol)module.GlobalNamespace.GetTypeMember("C");
-                var attributeHandle = module.Module.MetadataReader.GetCustomAttributes(c.Handle).Single();
-                string value;
-                module.Module.TryExtractStringValueFromAttribute(attributeHandle, out value);
+                {
+                    var module = (PEModuleSymbol)m;
+                    var c = (PENamedTypeSymbol)module.GlobalNamespace.GetTypeMember("C");
+                    var attributeHandle = module
+                        .Module.MetadataReader.GetCustomAttributes(c.Handle)
+                        .Single();
+                    string value;
+                    module.Module.TryExtractStringValueFromAttribute(attributeHandle, out value);
 
-                Assert.Equal("C1, W, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime", value);
-            });
+                    Assert.Equal(
+                        "C1, W, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime",
+                        value
+                    );
+                }
+            );
         }
     }
 }

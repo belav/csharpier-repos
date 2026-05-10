@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System.ComponentModel;
 using System.DirectoryServices.AccountManagement;
 using System.Runtime.InteropServices;
@@ -9,6 +8,7 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Win32.SafeHandles;
 using Xunit;
 
 namespace System.IO.Pipes.Tests
@@ -31,7 +31,12 @@ namespace System.IO.Pipes.Tests
             using (var principalCtx = new PrincipalContext(ContextType.Machine))
             {
                 bool needToCreate = false;
-                using (var foundUserPrincipal = UserPrincipal.FindByIdentity(principalCtx, TestAccountName))
+                using (
+                    var foundUserPrincipal = UserPrincipal.FindByIdentity(
+                        principalCtx,
+                        TestAccountName
+                    )
+                )
                 {
                     if (foundUserPrincipal == null)
                     {
@@ -63,10 +68,22 @@ namespace System.IO.Pipes.Tests
             const int LOGON32_PROVIDER_DEFAULT = 0;
             const int LOGON32_LOGON_INTERACTIVE = 2;
 
-            if (!LogonUser(TestAccountName, ".", testAccountPassword, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out _testAccountTokenHandle))
+            if (
+                !LogonUser(
+                    TestAccountName,
+                    ".",
+                    testAccountPassword,
+                    LOGON32_LOGON_INTERACTIVE,
+                    LOGON32_PROVIDER_DEFAULT,
+                    out _testAccountTokenHandle
+                )
+            )
             {
                 _testAccountTokenHandle = null;
-                throw new Exception($"Failed to get SafeAccessTokenHandle for test account {TestAccountName}", new Win32Exception());
+                throw new Exception(
+                    $"Failed to get SafeAccessTokenHandle for test account {TestAccountName}",
+                    new Win32Exception()
+                );
             }
         }
 
@@ -82,7 +99,9 @@ namespace System.IO.Pipes.Tests
             using (var userPrincipal = UserPrincipal.FindByIdentity(principalCtx, TestAccountName))
             {
                 if (userPrincipal == null)
-                    throw new Exception($"Failed to get user principal to delete test account {TestAccountName}");
+                    throw new Exception(
+                        $"Failed to get user principal to delete test account {TestAccountName}"
+                    );
 
                 try
                 {
@@ -100,19 +119,33 @@ namespace System.IO.Pipes.Tests
         {
             using (WindowsIdentity serverIdentity = WindowsIdentity.GetCurrent())
             {
-                WindowsIdentity.RunImpersonated(_testAccountTokenHandle, () =>
-                {
-                    using WindowsIdentity clientIdentity = WindowsIdentity.GetCurrent();
-                    Assert.NotEqual(serverIdentity.Name, clientIdentity.Name);
-                    Assert.False(new WindowsPrincipal(clientIdentity).IsInRole(WindowsBuiltInRole.Administrator));
+                WindowsIdentity.RunImpersonated(
+                    _testAccountTokenHandle,
+                    () =>
+                    {
+                        using WindowsIdentity clientIdentity = WindowsIdentity.GetCurrent();
+                        Assert.NotEqual(serverIdentity.Name, clientIdentity.Name);
+                        Assert.False(
+                            new WindowsPrincipal(clientIdentity).IsInRole(
+                                WindowsBuiltInRole.Administrator
+                            )
+                        );
 
-                    action();
-                });
+                        action();
+                    }
+                );
             }
         }
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern bool LogonUser(string userName, string domain, string password, int logonType, int logonProvider, out SafeAccessTokenHandle safeAccessTokenHandle);
+        private static extern bool LogonUser(
+            string userName,
+            string domain,
+            string password,
+            int logonType,
+            int logonProvider,
+            out SafeAccessTokenHandle safeAccessTokenHandle
+        );
     }
 
     /// <summary>
@@ -121,7 +154,8 @@ namespace System.IO.Pipes.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
     public class NamedPipeTest_CurrentUserOnly_Windows : IClassFixture<TestAccountImpersonator>
     {
-        public static bool IsSupportedWindowsVersionAndPrivilegedProcess => PlatformDetection.IsPrivilegedProcess
+        public static bool IsSupportedWindowsVersionAndPrivilegedProcess =>
+            PlatformDetection.IsPrivilegedProcess
             && PlatformDetection.IsWindows
             && !PlatformDetection.IsWindows7
             && !PlatformDetection.IsWindowsNanoServer
@@ -129,7 +163,9 @@ namespace System.IO.Pipes.Tests
 
         private TestAccountImpersonator _testAccountImpersonator;
 
-        public NamedPipeTest_CurrentUserOnly_Windows(TestAccountImpersonator testAccountImpersonator)
+        public NamedPipeTest_CurrentUserOnly_Windows(
+            TestAccountImpersonator testAccountImpersonator
+        )
         {
             _testAccountImpersonator = testAccountImpersonator;
         }
@@ -142,7 +178,13 @@ namespace System.IO.Pipes.Tests
             bool invalidClientShouldStop = false;
             bool invalidClientIsRunning = false;
 
-            using var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly);
+            using var server = new NamedPipeServerStream(
+                name,
+                PipeDirection.InOut,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly
+            );
             Task serverWait = server.WaitForConnectionAsync();
 
             Task invalidClient = Task.Run(() =>
@@ -152,7 +194,12 @@ namespace System.IO.Pipes.Tests
                 {
                     while (!Volatile.Read(ref invalidClientShouldStop))
                     {
-                        using var client = new NamedPipeClientStream(".", name, PipeDirection.In, PipeOptions.Asynchronous);
+                        using var client = new NamedPipeClientStream(
+                            ".",
+                            name,
+                            PipeDirection.In,
+                            PipeOptions.Asynchronous
+                        );
                         Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
                         Volatile.Write(ref invalidClientIsRunning, true);
                     }
@@ -160,10 +207,16 @@ namespace System.IO.Pipes.Tests
             });
 
             Assert.False(serverWait.IsCompleted);
-            while (!Volatile.Read(ref invalidClientIsRunning)) ; // Wait until the invalid client starts running.
+            while (!Volatile.Read(ref invalidClientIsRunning))
+                ; // Wait until the invalid client starts running.
 
             // valid client tries to connect and succeeds.
-            using var client = new NamedPipeClientStream(".", name, PipeDirection.In, PipeOptions.Asynchronous);
+            using var client = new NamedPipeClientStream(
+                ".",
+                name,
+                PipeDirection.In,
+                PipeOptions.Asynchronous
+            );
             client.Connect();
             await serverWait;
             Volatile.Write(ref invalidClientShouldStop, true);
@@ -178,23 +231,45 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.CurrentUserOnly, PipeDirection.In)]
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.CurrentUserOnly, PipeDirection.InOut)]
         public void Connection_UnderDifferentUsers_BehavesAsExpected(
-            PipeOptions serverPipeOptions, PipeOptions clientPipeOptions, PipeDirection clientDirection)
+            PipeOptions serverPipeOptions,
+            PipeOptions clientPipeOptions,
+            PipeDirection clientDirection
+        )
         {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
             using (var cts = new CancellationTokenSource())
-            using (var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, serverPipeOptions | PipeOptions.Asynchronous))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    serverPipeOptions | PipeOptions.Asynchronous
+                )
+            )
             {
                 Task serverTask = server.WaitForConnectionAsync(cts.Token);
 
                 _testAccountImpersonator.RunImpersonated(() =>
                 {
-                    using (var client = new NamedPipeClientStream(".", name, clientDirection, clientPipeOptions))
+                    using (
+                        var client = new NamedPipeClientStream(
+                            ".",
+                            name,
+                            clientDirection,
+                            clientPipeOptions
+                        )
+                    )
                     {
                         Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
                     }
                 });
 
-                if (serverPipeOptions == PipeOptions.None && clientPipeOptions == PipeOptions.CurrentUserOnly && clientDirection == PipeDirection.In)
+                if (
+                    serverPipeOptions == PipeOptions.None
+                    && clientPipeOptions == PipeOptions.CurrentUserOnly
+                    && clientDirection == PipeDirection.In
+                )
                 {
                     // When CurrentUserOnly is only on client side and asks for ReadOnly access, the connection is not rejected
                     // but we get the UnauthorizedAccessException on the client regardless.
@@ -205,7 +280,9 @@ namespace System.IO.Pipes.Tests
                 {
                     // Server is expected to not have received any request.
                     cts.Cancel();
-                    AggregateException ex = Assert.Throws<AggregateException>(() => serverTask.Wait(10_000));
+                    AggregateException ex = Assert.Throws<AggregateException>(() =>
+                        serverTask.Wait(10_000)
+                    );
                     Assert.IsType<TaskCanceledException>(ex.InnerException);
                 }
             }
@@ -217,8 +294,15 @@ namespace System.IO.Pipes.Tests
         public void Allow_Connection_UnderDifferentUsers_ForClientReading(bool useTimeSpan)
         {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
-            using (var server = new NamedPipeServerStream(
-                       name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.Asynchronous
+                )
+            )
             {
                 Task serverTask = server.WaitForConnectionAsync(CancellationToken.None);
 

@@ -4,14 +4,20 @@ namespace System.Workflow.ComponentModel.Compiler
     using System.Reflection;
 
     #region PropertyValidationContext
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class PropertyValidationContext
     {
         private string propertyName = string.Empty;
         private object propertyOwner = null;
         private object propertyInfo = null;
 
-        public PropertyValidationContext(object propertyOwner, PropertyInfo propertyInfo, string propertyName)
+        public PropertyValidationContext(
+            object propertyOwner,
+            PropertyInfo propertyInfo,
+            string propertyName
+        )
         {
             if (propertyName == null)
                 throw new ArgumentNullException("propertyName");
@@ -23,7 +29,10 @@ namespace System.Workflow.ComponentModel.Compiler
             this.propertyInfo = propertyInfo;
         }
 
-        public PropertyValidationContext(object propertyOwner, DependencyProperty dependencyProperty)
+        public PropertyValidationContext(
+            object propertyOwner,
+            DependencyProperty dependencyProperty
+        )
         {
             if (propertyOwner == null)
                 throw new ArgumentNullException("propertyOwner");
@@ -45,18 +54,12 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public object PropertyOwner
         {
-            get
-            {
-                return this.propertyOwner;
-            }
+            get { return this.propertyOwner; }
         }
 
         public object Property
         {
-            get
-            {
-                return this.propertyInfo;
-            }
+            get { return this.propertyInfo; }
         }
     }
     #endregion

@@ -28,13 +28,26 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         public EmbeddedLanguageMetadata(IDictionary<string, object> data)
             : base(data)
         {
-            this.Identifiers = ((IReadOnlyDictionary<string, object>)data).GetEnumerableMetadata<string>(nameof(Identifiers)).WhereNotNull();
-            this.Languages = ((IReadOnlyDictionary<string, object>)data).GetEnumerableMetadata<string>(nameof(Languages)).WhereNotNull();
-            this.SupportsUnannotatedAPIs = data.GetValueOrDefault(nameof(SupportsUnannotatedAPIs)) is bool b ? b : false;
+            this.Identifiers = ((IReadOnlyDictionary<string, object>)data)
+                .GetEnumerableMetadata<string>(nameof(Identifiers))
+                .WhereNotNull();
+            this.Languages = ((IReadOnlyDictionary<string, object>)data)
+                .GetEnumerableMetadata<string>(nameof(Languages))
+                .WhereNotNull();
+            this.SupportsUnannotatedAPIs = data.GetValueOrDefault(nameof(SupportsUnannotatedAPIs))
+                is bool b
+                ? b
+                : false;
         }
 
         public EmbeddedLanguageMetadata(
-            string name, IEnumerable<string> languages, IEnumerable<string> after, IEnumerable<string> before, IEnumerable<string> identifiers, bool supportsUnannotatedAPIs)
+            string name,
+            IEnumerable<string> languages,
+            IEnumerable<string> after,
+            IEnumerable<string> before,
+            IEnumerable<string> identifiers,
+            bool supportsUnannotatedAPIs
+        )
             : base(name, after, before)
         {
             this.Identifiers = identifiers;

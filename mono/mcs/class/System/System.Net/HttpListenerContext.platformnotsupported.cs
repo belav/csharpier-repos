@@ -26,49 +26,66 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Net.WebSockets;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using System.Net.WebSockets;
 
-namespace System.Net {
-	public sealed class HttpListenerContext {
-		const string EXCEPTION_MESSAGE = "System.Net.HttpListenerContext is not supported on the current platform.";
+namespace System.Net
+{
+    public sealed class HttpListenerContext
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.HttpListenerContext is not supported on the current platform.";
 
-		HttpListenerContext ()
-		{
-		}
+        HttpListenerContext() { }
 
-		public HttpListenerRequest Request {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public HttpListenerRequest Request
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public HttpListenerResponse Response {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public HttpListenerResponse Response
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public IPrincipal User {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public IPrincipal User
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+
 #if SECURITY_DEP
-		public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync (string subProtocol)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(string subProtocol)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync (string subProtocol, TimeSpan keepAliveInterval)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string subProtocol,
+            TimeSpan keepAliveInterval
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync (string subProtocol, int receiveBufferSize, TimeSpan keepAliveInterval)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string subProtocol,
+            int receiveBufferSize,
+            TimeSpan keepAliveInterval
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync (string subProtocol, int receiveBufferSize, TimeSpan keepAliveInterval, ArraySegment<byte> internalBuffer)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public Task<HttpListenerWebSocketContext> AcceptWebSocketAsync(
+            string subProtocol,
+            int receiveBufferSize,
+            TimeSpan keepAliveInterval,
+            ArraySegment<byte> internalBuffer
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 #endif
-	}
+    }
 }

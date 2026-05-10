@@ -15,7 +15,10 @@ namespace System.Net.NetworkInformation
             _mtu = mtu;
         }
 
-        public override int Mtu { get { return _mtu; } }
+        public override int Mtu
+        {
+            get { return _mtu; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]

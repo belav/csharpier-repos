@@ -15,11 +15,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// merge provided spans to each distinct group of spans in ascending order
         /// </summary>
-        public static IEnumerable<TextSpan> ToNormalizedSpans(this IEnumerable<TextSpan> spans)
-            => new NormalizedTextSpanCollection(spans);
+        public static IEnumerable<TextSpan> ToNormalizedSpans(this IEnumerable<TextSpan> spans) =>
+            new NormalizedTextSpanCollection(spans);
 
-        public static ImmutableArray<TextSpan> ToNormalizedSpans(this ImmutableArray<TextSpan> spans)
-            => new NormalizedTextSpanCollection(spans).ToImmutableArray();
+        public static ImmutableArray<TextSpan> ToNormalizedSpans(
+            this ImmutableArray<TextSpan> spans
+        ) => new NormalizedTextSpanCollection(spans).ToImmutableArray();
 
         public static TextSpan Collapse(this IEnumerable<TextSpan> spans)
         {
@@ -51,13 +52,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Returns true if the span encompasses the specified node or token and is contained within its trivia.
         /// </summary>
-        public static bool IsAround(this TextSpan span, SyntaxNodeOrToken node) => IsAround(span, node, node);
+        public static bool IsAround(this TextSpan span, SyntaxNodeOrToken node) =>
+            IsAround(span, node, node);
 
         /// <summary>
         /// Returns true if the span encompasses a span between the specified nodes or tokens
         /// and is contained within trivia around them.
         /// </summary>
-        public static bool IsAround(this TextSpan span, SyntaxNodeOrToken startNode, SyntaxNodeOrToken endNode)
+        public static bool IsAround(
+            this TextSpan span,
+            SyntaxNodeOrToken startNode,
+            SyntaxNodeOrToken endNode
+        )
         {
             var innerSpan = TextSpan.FromBounds(startNode.Span.Start, endNode.Span.End);
             var outerSpan = TextSpan.FromBounds(startNode.FullSpan.Start, endNode.FullSpan.End);
@@ -85,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 yield return TextSpan.FromBounds(endSegmentStart, span.End);
         }
 
-        public static IEnumerable<TextSpan> Subtract(this IEnumerable<TextSpan> spans, TextSpan except)
-            => spans.SelectMany(span => span.Subtract(except));
+        public static IEnumerable<TextSpan> Subtract(
+            this IEnumerable<TextSpan> spans,
+            TextSpan except
+        ) => spans.SelectMany(span => span.Subtract(except));
     }
 }

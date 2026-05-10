@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
             _viewModel = viewModel;
         }
 
-        private void ValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => _viewModel.SelectionChanged(ValueComboBox.SelectedIndex);
+        private void ValueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
+            _viewModel.SelectionChanged(ValueComboBox.SelectedIndex);
     }
 }

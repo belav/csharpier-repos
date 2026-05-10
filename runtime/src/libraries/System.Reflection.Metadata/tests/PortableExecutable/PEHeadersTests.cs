@@ -19,22 +19,64 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.Equal(8, SectionHeader.NameSize);
             Assert.Equal(40, SectionHeader.Size);
 
-            Assert.Equal(128 + 4 + 20 + 224, new PEHeaderBuilder(Machine.I386).ComputeSizeOfPEHeaders(0));
-            Assert.Equal(128 + 4 + 20 + 224 + 16, new PEHeaderBuilder(Machine.Amd64).ComputeSizeOfPEHeaders(0));
-            Assert.Equal(128 + 4 + 20 + 224 + 16 + 40 * 1, new PEHeaderBuilder(Machine.Amd64).ComputeSizeOfPEHeaders(1));
-            Assert.Equal(128 + 4 + 20 + 224 + 16 + 40 * 2, new PEHeaderBuilder(Machine.Amd64).ComputeSizeOfPEHeaders(2));
-            Assert.Equal(128 + 4 + 20 + 224 + 16, new PEHeaderBuilder(Machine.Arm64).ComputeSizeOfPEHeaders(0));
-            Assert.Equal(128 + 4 + 20 + 224 + 16 + 40 * 1, new PEHeaderBuilder(Machine.Arm64).ComputeSizeOfPEHeaders(1));
-            Assert.Equal(128 + 4 + 20 + 224 + 16 + 40 * 2, new PEHeaderBuilder(Machine.Arm64).ComputeSizeOfPEHeaders(2));
+            Assert.Equal(
+                128 + 4 + 20 + 224,
+                new PEHeaderBuilder(Machine.I386).ComputeSizeOfPEHeaders(0)
+            );
+            Assert.Equal(
+                128 + 4 + 20 + 224 + 16,
+                new PEHeaderBuilder(Machine.Amd64).ComputeSizeOfPEHeaders(0)
+            );
+            Assert.Equal(
+                128 + 4 + 20 + 224 + 16 + 40 * 1,
+                new PEHeaderBuilder(Machine.Amd64).ComputeSizeOfPEHeaders(1)
+            );
+            Assert.Equal(
+                128 + 4 + 20 + 224 + 16 + 40 * 2,
+                new PEHeaderBuilder(Machine.Amd64).ComputeSizeOfPEHeaders(2)
+            );
+            Assert.Equal(
+                128 + 4 + 20 + 224 + 16,
+                new PEHeaderBuilder(Machine.Arm64).ComputeSizeOfPEHeaders(0)
+            );
+            Assert.Equal(
+                128 + 4 + 20 + 224 + 16 + 40 * 1,
+                new PEHeaderBuilder(Machine.Arm64).ComputeSizeOfPEHeaders(1)
+            );
+            Assert.Equal(
+                128 + 4 + 20 + 224 + 16 + 40 * 2,
+                new PEHeaderBuilder(Machine.Arm64).ComputeSizeOfPEHeaders(2)
+            );
         }
 
         [Fact]
         public void Ctor_Streams()
         {
-            AssertExtensions.Throws<ArgumentException>("peStream", () => new PEHeaders(new CustomAccessMemoryStream(canRead: false, canSeek: false, canWrite: false)));
-            AssertExtensions.Throws<ArgumentException>("peStream", () => new PEHeaders(new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)));
+            AssertExtensions.Throws<ArgumentException>(
+                "peStream",
+                () =>
+                    new PEHeaders(
+                        new CustomAccessMemoryStream(
+                            canRead: false,
+                            canSeek: false,
+                            canWrite: false
+                        )
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "peStream",
+                () =>
+                    new PEHeaders(
+                        new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
+                    )
+            );
 
-            var s = new CustomAccessMemoryStream(canRead: true, canSeek: true, canWrite: false, buffer: Misc.Members);
+            var s = new CustomAccessMemoryStream(
+                canRead: true,
+                canSeek: true,
+                canWrite: false,
+                buffer: Misc.Members
+            );
 
             s.Position = 0;
             new PEHeaders(s);
@@ -60,12 +102,17 @@ namespace System.Reflection.PortableExecutable.Tests
         public void Sections()
         {
             var peHeaders = new PEReader(SynthesizedPeImages.Image1).PEHeaders;
-            AssertEx.Equal(new[]
-            {
-                ".s1 offset=0x200 rva=0x200 size=512",
-                ".s2 offset=0x400 rva=0x400 size=512",
-                ".s3 offset=0x600 rva=0x600 size=512"
-            }, peHeaders.SectionHeaders.Select(h => $"{h.Name} offset=0x{h.PointerToRawData:x3} rva=0x{h.VirtualAddress:x3} size={h.SizeOfRawData}"));
+            AssertEx.Equal(
+                new[]
+                {
+                    ".s1 offset=0x200 rva=0x200 size=512",
+                    ".s2 offset=0x400 rva=0x400 size=512",
+                    ".s3 offset=0x600 rva=0x600 size=512",
+                },
+                peHeaders.SectionHeaders.Select(h =>
+                    $"{h.Name} offset=0x{h.PointerToRawData:x3} rva=0x{h.VirtualAddress:x3} size={h.SizeOfRawData}"
+                )
+            );
         }
 
         [Fact]
@@ -98,10 +145,14 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.False(peHeaders.TryGetDirectoryOffset(new DirectoryEntry(0, 10), out dirOffset));
             Assert.Equal(-1, dirOffset);
 
-            Assert.True(peHeaders.TryGetDirectoryOffset(new DirectoryEntry(0x600, 0x300), out dirOffset));
+            Assert.True(
+                peHeaders.TryGetDirectoryOffset(new DirectoryEntry(0x600, 0x300), out dirOffset)
+            );
             Assert.Equal(0x600, dirOffset);
 
-            Assert.False(peHeaders.TryGetDirectoryOffset(new DirectoryEntry(0x1000, 10), out dirOffset));
+            Assert.False(
+                peHeaders.TryGetDirectoryOffset(new DirectoryEntry(0x1000, 10), out dirOffset)
+            );
             Assert.Equal(-1, dirOffset);
         }
     }

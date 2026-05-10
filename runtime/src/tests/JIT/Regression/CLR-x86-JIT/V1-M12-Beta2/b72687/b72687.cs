@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public unsafe class CSE2
 {
     public static int sa = 2;

@@ -15,9 +15,11 @@ internal static class SolutionCrawlerOptionsAccessor
         set => SolutionCrawlerOptionsStorage.LowMemoryForcedMinimalBackgroundAnalysis = value;
     }
 
-    public static PerLanguageOption2<BackgroundAnalysisScope> BackgroundAnalysisScopeOption
-        => SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption;
+    public static PerLanguageOption2<BackgroundAnalysisScope> BackgroundAnalysisScopeOption =>
+        SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption;
 
-    public static BackgroundAnalysisScope GetBackgroundAnalysisScope(IGlobalOptionService globalOptions, string language)
-        => SolutionCrawlerOptionsStorage.GetBackgroundAnalysisScope(globalOptions, language);
+    public static BackgroundAnalysisScope GetBackgroundAnalysisScope(
+        IGlobalOptionService globalOptions,
+        string language
+    ) => SolutionCrawlerOptionsStorage.GetBackgroundAnalysisScope(globalOptions, language);
 }

@@ -35,18 +35,12 @@ namespace System.Runtime.Collections
 
         public int Count
         {
-            get
-            {
-                return this.privateDictionary.Count;
-            }
+            get { return this.privateDictionary.Count; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public TValue this[TKey key]
@@ -64,7 +58,9 @@ namespace System.Runtime.Collections
                 }
                 else
                 {
-                    throw Fx.Exception.AsError(new KeyNotFoundException(InternalSR.KeyNotFoundInDictionary));
+                    throw Fx.Exception.AsError(
+                        new KeyNotFoundException(InternalSR.KeyNotFoundInDictionary)
+                    );
                 }
             }
             set
@@ -83,7 +79,7 @@ namespace System.Runtime.Collections
             get
             {
                 List<TKey> keys = new List<TKey>(this.privateDictionary.Count);
-                
+
                 foreach (TKey key in this.privateDictionary.Keys)
                 {
                     keys.Add(key);
@@ -170,7 +166,11 @@ namespace System.Runtime.Collections
                 throw Fx.Exception.AsError(new ArgumentOutOfRangeException("arrayIndex"));
             }
 
-            if (array.Rank > 1 || arrayIndex >= array.Length || array.Length - arrayIndex < this.privateDictionary.Count)
+            if (
+                array.Rank > 1
+                || arrayIndex >= array.Length
+                || array.Length - arrayIndex < this.privateDictionary.Count
+            )
             {
                 throw Fx.Exception.Argument("array", InternalSR.BadCopyToArray);
             }
@@ -262,26 +262,17 @@ namespace System.Runtime.Collections
 
         bool IDictionary.IsFixedSize
         {
-            get
-            {
-                return ((IDictionary)this.privateDictionary).IsFixedSize;
-            }
+            get { return ((IDictionary)this.privateDictionary).IsFixedSize; }
         }
 
         bool IDictionary.IsReadOnly
         {
-            get
-            {
-                return this.privateDictionary.IsReadOnly;
-            }
+            get { return this.privateDictionary.IsReadOnly; }
         }
 
         ICollection IDictionary.Keys
         {
-            get
-            {
-                return this.privateDictionary.Keys;
-            }
+            get { return this.privateDictionary.Keys; }
         }
 
         void IDictionary.Remove(object key)
@@ -291,22 +282,13 @@ namespace System.Runtime.Collections
 
         ICollection IDictionary.Values
         {
-            get
-            {
-                return this.privateDictionary.Values;
-            }
+            get { return this.privateDictionary.Values; }
         }
 
         object IDictionary.this[object key]
         {
-            get
-            {
-                return this.privateDictionary[key];
-            }
-            set
-            {
-                this.privateDictionary[key] = value;
-            }
+            get { return this.privateDictionary[key]; }
+            set { this.privateDictionary[key] = value; }
         }
 
         void ICollection.CopyTo(Array array, int index)
@@ -316,27 +298,17 @@ namespace System.Runtime.Collections
 
         int ICollection.Count
         {
-            get
-            {
-                return this.privateDictionary.Count;
-            }
+            get { return this.privateDictionary.Count; }
         }
 
         bool ICollection.IsSynchronized
         {
-            get
-            {
-                return ((ICollection)this.privateDictionary).IsSynchronized;
-            }
+            get { return ((ICollection)this.privateDictionary).IsSynchronized; }
         }
 
         object ICollection.SyncRoot
         {
-            get
-            {
-                return ((ICollection)this.privateDictionary).SyncRoot;
-            }
+            get { return ((ICollection)this.privateDictionary).SyncRoot; }
         }
-
     }
 }

@@ -28,8 +28,8 @@ public interface IFunctionColumn : IColumnBase
     /// </summary>
     /// <param name="entityType">An entity type.</param>
     /// <returns>The property mapping or <see langword="null" /> if not found.</returns>
-    new IFunctionColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType)
-        => (IFunctionColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
+    new IFunctionColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType) =>
+        (IFunctionColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
 
     /// <summary>
     ///     <para>

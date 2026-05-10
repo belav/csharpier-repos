@@ -10,11 +10,11 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
 
     [ConfigurationCollection(typeof(IssuedTokenClientBehaviorsElement))]
-    public sealed class IssuedTokenClientBehaviorsElementCollection : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>
+    public sealed class IssuedTokenClientBehaviorsElementCollection
+        : ServiceModelConfigurationElementCollection<IssuedTokenClientBehaviorsElement>
     {
         public IssuedTokenClientBehaviorsElementCollection()
-            : base()
-        { }
+            : base() { }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
@@ -22,10 +22,9 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
-            IssuedTokenClientBehaviorsElement behaviorElement = (IssuedTokenClientBehaviorsElement)element;
+            IssuedTokenClientBehaviorsElement behaviorElement =
+                (IssuedTokenClientBehaviorsElement)element;
             return behaviorElement.IssuerAddress;
         }
     }
 }
-
-

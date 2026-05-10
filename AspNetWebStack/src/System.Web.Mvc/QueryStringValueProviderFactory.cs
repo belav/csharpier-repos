@@ -10,14 +10,16 @@ namespace System.Web.Mvc
         private readonly UnvalidatedRequestValuesAccessor _unvalidatedValuesAccessor;
 
         public QueryStringValueProviderFactory()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         // For unit testing
-        internal QueryStringValueProviderFactory(UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor)
+        internal QueryStringValueProviderFactory(
+            UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor
+        )
         {
-            _unvalidatedValuesAccessor = unvalidatedValuesAccessor ?? (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));
+            _unvalidatedValuesAccessor =
+                unvalidatedValuesAccessor
+                ?? (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));
         }
 
         public override IValueProvider GetValueProvider(ControllerContext controllerContext)
@@ -27,7 +29,10 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("controllerContext");
             }
 
-            return new QueryStringValueProvider(controllerContext, _unvalidatedValuesAccessor(controllerContext));
+            return new QueryStringValueProvider(
+                controllerContext,
+                _unvalidatedValuesAccessor(controllerContext)
+            );
         }
     }
 }

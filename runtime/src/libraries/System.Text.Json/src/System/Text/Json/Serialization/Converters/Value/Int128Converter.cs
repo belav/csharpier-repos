@@ -16,7 +16,11 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override Int128 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Int128 Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.Number)
             {
@@ -26,7 +30,11 @@ namespace System.Text.Json.Serialization.Converters
             return ReadCore(ref reader);
         }
 
-        public override void Write(Utf8JsonWriter writer, Int128 value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            Int128 value,
+            JsonSerializerOptions options
+        )
         {
             WriteCore(writer, value);
         }
@@ -37,14 +45,16 @@ namespace System.Text.Json.Serialization.Converters
 
 #if NET8_0_OR_GREATER
             byte[]? rentedBuffer = null;
-            Span<byte> buffer = bufferLength <= JsonConstants.StackallocByteThreshold
-                ? stackalloc byte[JsonConstants.StackallocByteThreshold]
-                : (rentedBuffer = ArrayPool<byte>.Shared.Rent(bufferLength));
+            Span<byte> buffer =
+                bufferLength <= JsonConstants.StackallocByteThreshold
+                    ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                    : (rentedBuffer = ArrayPool<byte>.Shared.Rent(bufferLength));
 #else
             char[]? rentedBuffer = null;
-            Span<char> buffer = bufferLength <= JsonConstants.StackallocCharThreshold
-                ? stackalloc char[JsonConstants.StackallocCharThreshold]
-                : (rentedBuffer = ArrayPool<char>.Shared.Rent(bufferLength));
+            Span<char> buffer =
+                bufferLength <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (rentedBuffer = ArrayPool<char>.Shared.Rent(bufferLength));
 #endif
 
             int written = reader.CopyValue(buffer);
@@ -76,13 +86,22 @@ namespace System.Text.Json.Serialization.Converters
             writer.WriteRawValue(buffer.Slice(0, written));
         }
 
-        internal override Int128 ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override Int128 ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             return ReadCore(ref reader);
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, Int128 value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            Int128 value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
 #if NET8_0_OR_GREATER
             Span<byte> buffer = stackalloc byte[MaxFormatLength];
@@ -93,10 +112,16 @@ namespace System.Text.Json.Serialization.Converters
             writer.WritePropertyName(buffer);
         }
 
-        internal override Int128 ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling, JsonSerializerOptions options)
+        internal override Int128 ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling,
+            JsonSerializerOptions options
+        )
         {
-            if (reader.TokenType == JsonTokenType.String &&
-                (JsonNumberHandling.AllowReadingFromString & handling) != 0)
+            if (
+                reader.TokenType == JsonTokenType.String
+                && (JsonNumberHandling.AllowReadingFromString & handling) != 0
+            )
             {
                 return ReadCore(ref reader);
             }
@@ -104,7 +129,11 @@ namespace System.Text.Json.Serialization.Converters
             return Read(ref reader, Type, options);
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, Int128 value, JsonNumberHandling handling)
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            Int128 value,
+            JsonNumberHandling handling
+        )
         {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
@@ -148,7 +177,11 @@ namespace System.Text.Json.Serialization.Converters
 #endif
             Int128 value, out int written)
         {
-            bool formattedSuccessfully = value.TryFormat(destination, out written, provider: CultureInfo.InvariantCulture);
+            bool formattedSuccessfully = value.TryFormat(
+                destination,
+                out written,
+                provider: CultureInfo.InvariantCulture
+            );
             Debug.Assert(formattedSuccessfully);
         }
     }

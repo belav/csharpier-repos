@@ -25,6 +25,7 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             FormatOptions options,
             ILogger logger,
             List<FormattedFile> formattedFiles,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

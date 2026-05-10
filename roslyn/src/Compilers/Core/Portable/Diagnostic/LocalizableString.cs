@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis
         public event EventHandler<Exception>? OnException;
 
         /// <summary>
-        /// Formats the value of the current instance using the optionally specified format. 
+        /// Formats the value of the current instance using the optionally specified format.
         /// </summary>
         public string ToString(IFormatProvider? formatProvider)
         {

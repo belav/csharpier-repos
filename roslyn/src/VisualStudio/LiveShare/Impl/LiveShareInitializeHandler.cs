@@ -14,7 +14,8 @@ using Microsoft.VisualStudio.LiveShare.LanguageServices;
 
 namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Shims
 {
-    internal class LiveShareInitializeHandler : ILspRequestHandler<InitializeParams, InitializeResult, Solution>
+    internal class LiveShareInitializeHandler
+        : ILspRequestHandler<InitializeParams, InitializeResult, Solution>
     {
         private static readonly InitializeResult s_initializeResult = new InitializeResult
         {
@@ -23,11 +24,14 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Shims
                 CodeActionProvider = false,
                 ReferencesProvider = true,
                 RenameProvider = false,
-            }
+            },
         };
 
-        public Task<InitializeResult> HandleAsync(InitializeParams param, RequestContext<Solution> requestContext, CancellationToken cancellationToken)
-            => Task.FromResult(s_initializeResult);
+        public Task<InitializeResult> HandleAsync(
+            InitializeParams param,
+            RequestContext<Solution> requestContext,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(s_initializeResult);
     }
 
     [ExportLspRequestHandler(LiveShareConstants.RoslynContractName, Methods.InitializeName)]
@@ -36,9 +40,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Shims
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RoslynInitializeHandlerShim()
-        {
-        }
+        public RoslynInitializeHandlerShim() { }
     }
 
     [ExportLspRequestHandler(LiveShareConstants.CSharpContractName, Methods.InitializeName)]
@@ -46,9 +48,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Shims
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpInitializeHandlerShim()
-        {
-        }
+        public CSharpInitializeHandlerShim() { }
     }
 
     [ExportLspRequestHandler(LiveShareConstants.VisualBasicContractName, Methods.InitializeName)]
@@ -56,8 +56,6 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Shims
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualBasicInitializeHandlerShim()
-        {
-        }
+        public VisualBasicInitializeHandlerShim() { }
     }
 }

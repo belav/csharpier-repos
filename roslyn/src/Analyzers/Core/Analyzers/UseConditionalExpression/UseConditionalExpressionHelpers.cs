@@ -17,8 +17,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             ImmutableDictionary<string, string?>.Empty.Add(CanSimplifyName, CanSimplifyName);
 
         public static bool CanConvert(
-            ISyntaxFacts syntaxFacts, IConditionalOperation ifOperation,
-            IOperation whenTrue, IOperation whenFalse)
+            ISyntaxFacts syntaxFacts,
+            IConditionalOperation ifOperation,
+            IOperation whenTrue,
+            IOperation whenFalse
+        )
         {
             // Will likely not work as intended if the if directive spans any preprocessor directives. So
             // do not offer for now.  Note: we pass in both the node for the ifOperation and the
@@ -29,7 +32,7 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             //  #if DEBUG
             //  if (check)
             //      return 3;
-            //  #endif  
+            //  #endif
             //  return 2;
             //  ```
             //
@@ -42,8 +45,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             // User may have comments on the when-true/when-false statements.  These statements can
             // be very important. Often they indicate why the true/false branches are important in
             // the first place.  We don't have any place to put these, so we don't offer here.
-            if (HasRegularComments(syntaxFacts, whenTrue.Syntax) ||
-                HasRegularComments(syntaxFacts, whenFalse.Syntax))
+            if (
+                HasRegularComments(syntaxFacts, whenTrue.Syntax)
+                || HasRegularComments(syntaxFacts, whenFalse.Syntax)
+            )
             {
                 return false;
             }
@@ -56,16 +61,19 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         /// support both <c>if (expr) { statement }</c> and <c>if (expr) statement</c>
         /// </summary>
         [return: NotNullIfNotNull(nameof(statement))]
-        public static IOperation? UnwrapSingleStatementBlock(IOperation? statement)
-            => statement is IBlockOperation { Operations: [var operationInBlock] }
+        public static IOperation? UnwrapSingleStatementBlock(IOperation? statement) =>
+            statement is IBlockOperation { Operations: [var operationInBlock] }
                 ? operationInBlock
                 : statement;
 
-        public static bool HasRegularComments(ISyntaxFacts syntaxFacts, SyntaxNode syntax)
-            => HasRegularCommentTrivia(syntaxFacts, syntax.GetLeadingTrivia()) ||
-               HasRegularCommentTrivia(syntaxFacts, syntax.GetTrailingTrivia());
+        public static bool HasRegularComments(ISyntaxFacts syntaxFacts, SyntaxNode syntax) =>
+            HasRegularCommentTrivia(syntaxFacts, syntax.GetLeadingTrivia())
+            || HasRegularCommentTrivia(syntaxFacts, syntax.GetTrailingTrivia());
 
-        public static bool HasRegularCommentTrivia(ISyntaxFacts syntaxFacts, SyntaxTriviaList triviaList)
+        public static bool HasRegularCommentTrivia(
+            ISyntaxFacts syntaxFacts,
+            SyntaxTriviaList triviaList
+        )
         {
             foreach (var trivia in triviaList)
             {
@@ -77,8 +85,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         }
 
         public static bool HasInconvertibleThrowStatement(
-            ISyntaxFacts syntaxFacts, bool isRef,
-            IThrowOperation? trueThrow, IThrowOperation? falseThrow)
+            ISyntaxFacts syntaxFacts,
+            bool isRef,
+            IThrowOperation? trueThrow,
+            IThrowOperation? falseThrow
+        )
         {
             // Can't convert to `x ? throw ... : throw ...` as there's no best common type between the two (even when
             // throwing the same exception type).
@@ -101,10 +112,16 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             return false;
         }
 
-        public static bool IsBooleanLiteral(IOperation trueValue, bool val)
-            => trueValue is ILiteralOperation { ConstantValue: { HasValue: true, Value: bool value } } && value == val;
+        public static bool IsBooleanLiteral(IOperation trueValue, bool val) =>
+            trueValue is ILiteralOperation { ConstantValue: { HasValue: true, Value: bool value } }
+            && value == val;
 
-        public static bool CanSimplify(IOperation trueValue, IOperation falseValue, bool isRef, out bool negate)
+        public static bool CanSimplify(
+            IOperation trueValue,
+            IOperation falseValue,
+            bool isRef,
+            out bool negate
+        )
         {
             // If we are going to generate "expr ? true : false" then just generate "expr"
             // instead.

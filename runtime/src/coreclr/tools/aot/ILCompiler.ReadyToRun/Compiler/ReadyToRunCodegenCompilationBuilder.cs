@@ -41,7 +41,8 @@ namespace ILCompiler
         private bool _hotColdSplitting;
         private CompositeImageSettings _compositeImageSettings;
         private ulong _imageBase;
-        private NodeFactoryOptimizationFlags _nodeFactoryOptimizationFlags = new NodeFactoryOptimizationFlags();
+        private NodeFactoryOptimizationFlags _nodeFactoryOptimizationFlags =
+            new NodeFactoryOptimizationFlags();
         private int _genericCycleDetectionDepthCutoff = -1;
         private int _genericCycleDetectionBreadthCutoff = -1;
 
@@ -50,14 +51,17 @@ namespace ILCompiler
 
         // These need to provide reasonable defaults so that the user can optionally skip
         // calling the Use/Configure methods and still get something reasonable back.
-        private KeyValuePair<string, string>[] _ryujitOptions = Array.Empty<KeyValuePair<string, string>>();
+        private KeyValuePair<string, string>[] _ryujitOptions = Array.Empty<
+            KeyValuePair<string, string>
+        >();
         private ILProvider _ilProvider;
 
         public ReadyToRunCodegenCompilationBuilder(
             CompilerTypeSystemContext context,
             ReadyToRunCompilationModuleGroupBase group,
             IEnumerable<string> inputFiles,
-            string compositeRootPath)
+            string compositeRootPath
+        )
             : base(context, group, new NativeAotNameMangler())
         {
             _ilProvider = new ReadyToRunILProvider(group);
@@ -118,7 +122,10 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder FileLayoutAlgorithms(ReadyToRunMethodLayoutAlgorithm r2rMethodLayoutAlgorithm, ReadyToRunFileLayoutAlgorithm r2rFileLayoutAlgorithm)
+        public ReadyToRunCodegenCompilationBuilder FileLayoutAlgorithms(
+            ReadyToRunMethodLayoutAlgorithm r2rMethodLayoutAlgorithm,
+            ReadyToRunFileLayoutAlgorithm r2rFileLayoutAlgorithm
+        )
         {
             _r2rMethodLayoutAlgorithm = r2rMethodLayoutAlgorithm;
             _r2rFileLayoutAlgorithm = r2rFileLayoutAlgorithm;
@@ -144,7 +151,11 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UsePerfMapFile(bool generatePerfMapFile, string perfMapPath, int perfMapFormatVersion)
+        public ReadyToRunCodegenCompilationBuilder UsePerfMapFile(
+            bool generatePerfMapFile,
+            string perfMapPath,
+            int perfMapFormatVersion
+        )
         {
             _generatePerfMapFile = generatePerfMapFile;
             _perfMapPath = perfMapPath;
@@ -158,13 +169,17 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UsePrintReproInstructions(Func<MethodDesc, string> printReproInstructions)
+        public ReadyToRunCodegenCompilationBuilder UsePrintReproInstructions(
+            Func<MethodDesc, string> printReproInstructions
+        )
         {
             _printReproInstructions = printReproInstructions;
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseInstructionSetSupport(InstructionSetSupport instructionSetSupport)
+        public ReadyToRunCodegenCompilationBuilder UseInstructionSetSupport(
+            InstructionSetSupport instructionSetSupport
+        )
         {
             _instructionSetSupport = instructionSetSupport;
             return this;
@@ -176,13 +191,17 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseCustomPESectionAlignment(int customPESectionAlignment)
+        public ReadyToRunCodegenCompilationBuilder UseCustomPESectionAlignment(
+            int customPESectionAlignment
+        )
         {
             _customPESectionAlignment = customPESectionAlignment;
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseVerifyTypeAndFieldLayout(bool verifyTypeAndFieldLayout)
+        public ReadyToRunCodegenCompilationBuilder UseVerifyTypeAndFieldLayout(
+            bool verifyTypeAndFieldLayout
+        )
         {
             _verifyTypeAndFieldLayout = verifyTypeAndFieldLayout;
             return this;
@@ -194,7 +213,9 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseCompositeImageSettings(CompositeImageSettings compositeImageSettings)
+        public ReadyToRunCodegenCompilationBuilder UseCompositeImageSettings(
+            CompositeImageSettings compositeImageSettings
+        )
         {
             _compositeImageSettings = compositeImageSettings;
             return this;
@@ -206,13 +227,18 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseNodeFactoryOptimizationFlags(NodeFactoryOptimizationFlags flags)
+        public ReadyToRunCodegenCompilationBuilder UseNodeFactoryOptimizationFlags(
+            NodeFactoryOptimizationFlags flags
+        )
         {
             _nodeFactoryOptimizationFlags = flags;
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseGenericCycleDetection(int depthCutoff, int breadthCutoff)
+        public ReadyToRunCodegenCompilationBuilder UseGenericCycleDetection(
+            int depthCutoff,
+            int breadthCutoff
+        )
         {
             _genericCycleDetectionDepthCutoff = depthCutoff;
             _genericCycleDetectionBreadthCutoff = breadthCutoff;
@@ -223,36 +249,52 @@ namespace ILCompiler
         {
             // TODO: only copy COR headers for single-assembly build and for composite build with embedded MSIL
             IEnumerable<EcmaModule> inputModules = _compilationGroup.CompilationModuleSet;
-            EcmaModule singleModule = _compilationGroup.IsCompositeBuildMode ? null : inputModules.First();
+            EcmaModule singleModule = _compilationGroup.IsCompositeBuildMode
+                ? null
+                : inputModules.First();
             CopiedCorHeaderNode corHeaderNode = new CopiedCorHeaderNode(singleModule);
             // TODO: proper support for multiple input files
-            DebugDirectoryNode debugDirectoryNode = new DebugDirectoryNode(singleModule, _outputFile, _generatePdbFile, _generatePerfMapFile);
+            DebugDirectoryNode debugDirectoryNode = new DebugDirectoryNode(
+                singleModule,
+                _outputFile,
+                _generatePdbFile,
+                _generatePerfMapFile
+            );
 
             // Produce a ResourceData where the IBC PROFILE_DATA entry has been filtered out
             // TODO: proper support for multiple input files
-            ResourceData win32Resources = new ResourceData(inputModules.First(), (object type, object name, ushort language) =>
-            {
-                if (!(type is string) || !(name is string))
+            ResourceData win32Resources = new ResourceData(
+                inputModules.First(),
+                (object type, object name, ushort language) =>
+                {
+                    if (!(type is string) || !(name is string))
+                        return true;
+                    if (language != 0)
+                        return true;
+
+                    string typeString = (string)type;
+                    string nameString = (string)name;
+
+                    if ((typeString == "IBC") && (nameString == "PROFILE_DATA"))
+                        return false;
+
                     return true;
-                if (language != 0)
-                    return true;
-
-                string typeString = (string)type;
-                string nameString = (string)name;
-
-                if ((typeString == "IBC") && (nameString == "PROFILE_DATA"))
-                    return false;
-
-                return true;
-            });
+                }
+            );
 
             ReadyToRunFlags flags = ReadyToRunFlags.READYTORUN_FLAG_NonSharedPInvokeStubs;
             if (inputModules.All(module => module.IsPlatformNeutral))
             {
                 flags |= ReadyToRunFlags.READYTORUN_FLAG_PlatformNeutralSource;
             }
-            bool automaticTypeValidation = _nodeFactoryOptimizationFlags.TypeValidation == TypeValidationRule.Automatic || _nodeFactoryOptimizationFlags.TypeValidation == TypeValidationRule.AutomaticWithLogging;
-            if (_nodeFactoryOptimizationFlags.TypeValidation == TypeValidationRule.SkipTypeValidation)
+            bool automaticTypeValidation =
+                _nodeFactoryOptimizationFlags.TypeValidation == TypeValidationRule.Automatic
+                || _nodeFactoryOptimizationFlags.TypeValidation
+                    == TypeValidationRule.AutomaticWithLogging;
+            if (
+                _nodeFactoryOptimizationFlags.TypeValidation
+                == TypeValidationRule.SkipTypeValidation
+            )
             {
                 flags |= ReadyToRunFlags.READYTORUN_FLAG_SkipTypeValidation;
             }
@@ -272,15 +314,18 @@ namespace ILCompiler
                 automaticTypeValidation ? singleModule : null,
                 genericCycleDepthCutoff: _genericCycleDetectionDepthCutoff,
                 genericCycleBreadthCutoff: _genericCycleDetectionBreadthCutoff
-                );
+            );
 
             factory.CompositeImageSettings = _compositeImageSettings;
 
-            IComparer<DependencyNodeCore<NodeFactory>> comparer = new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance);
+            IComparer<DependencyNodeCore<NodeFactory>> comparer =
+                new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance);
             DependencyAnalyzerBase<NodeFactory> graph = CreateDependencyGraph(factory, comparer);
 
-            
-            List<CorJitFlag> corJitFlags = new List<CorJitFlag> { CorJitFlag.CORJIT_FLAG_DEBUG_INFO };
+            List<CorJitFlag> corJitFlags = new List<CorJitFlag>
+            {
+                CorJitFlag.CORJIT_FLAG_DEBUG_INFO,
+            };
             if (_hotColdSplitting)
             {
                 corJitFlags.Add(CorJitFlag.CORJIT_FLAG_PROCSPLIT);
@@ -314,7 +359,12 @@ namespace ILCompiler
 
             if (!_isJitInitialized)
             {
-                JitConfigProvider.Initialize(_context.Target, corJitFlags, _ryujitOptions, _jitPath);
+                JitConfigProvider.Initialize(
+                    _context.Target,
+                    corJitFlags,
+                    _ryujitOptions,
+                    _jitPath
+                );
                 _isJitInitialized = true;
             }
 
@@ -343,7 +393,8 @@ namespace ILCompiler
                 _r2rMethodLayoutAlgorithm,
                 _r2rFileLayoutAlgorithm,
                 _customPESectionAlignment,
-                _verifyTypeAndFieldLayout);
+                _verifyTypeAndFieldLayout
+            );
         }
     }
 }

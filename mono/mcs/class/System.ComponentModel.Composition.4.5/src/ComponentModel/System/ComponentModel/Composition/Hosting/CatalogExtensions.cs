@@ -15,8 +15,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// Creates a <see cref="CompositionService"/>.
         /// </summary>
         /// <param name="catalog">The catalog.</param>
-        /// <returns>The newly created <see cref="CompositionService"/> 
-        public static CompositionService CreateCompositionService(this ComposablePartCatalog composablePartCatalog)
+        /// <returns>The newly created <see cref="CompositionService"/>
+        public static CompositionService CreateCompositionService(
+            this ComposablePartCatalog composablePartCatalog
+        )
         {
             Requires.NotNull(composablePartCatalog, "composablePartCatalog");
 

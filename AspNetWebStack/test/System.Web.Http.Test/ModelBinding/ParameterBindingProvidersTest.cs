@@ -16,7 +16,7 @@ namespace System.Web.Http.ModelBinding
         {
             ParameterBindingRulesCollection pb = new ParameterBindingRulesCollection();
 
-            // Knowing that it's a collection means we have known behavior around 
+            // Knowing that it's a collection means we have known behavior around
             // the collection methods (like insert, add, clear, etc).
             Assert.True(pb is Collection<Func<HttpParameterDescriptor, HttpParameterBinding>>);
         }
@@ -31,7 +31,7 @@ namespace System.Web.Http.ModelBinding
             // Act
             HttpParameterBinding binding = pb.LookupBinding(parameter);
 
-            // Assert. 
+            // Assert.
             Assert.Null(binding);
         }
 
@@ -49,10 +49,15 @@ namespace System.Web.Http.ModelBinding
 
             // Act
             HttpParameterBinding b1 = pb.LookupBinding(CreateParameterDescriptor(null, "first"));
-            HttpParameterBinding b2 = pb.LookupBinding(CreateParameterDescriptor(typeof(string), "none"));
-            HttpParameterBinding b3 = pb.LookupBinding(CreateParameterDescriptor(typeof(int), "first"));
-            HttpParameterBinding b4 = pb.LookupBinding(CreateParameterDescriptor(typeof(int), "last"));
-
+            HttpParameterBinding b2 = pb.LookupBinding(
+                CreateParameterDescriptor(typeof(string), "none")
+            );
+            HttpParameterBinding b3 = pb.LookupBinding(
+                CreateParameterDescriptor(typeof(int), "first")
+            );
+            HttpParameterBinding b4 = pb.LookupBinding(
+                CreateParameterDescriptor(typeof(int), "last")
+            );
 
             // Assert
             Assert.Equal(mockBinding1, b1);
@@ -70,8 +75,12 @@ namespace System.Web.Http.ModelBinding
             pb.Add(typeof(string), param => mockBinding);
 
             // Act
-            HttpParameterBinding b1 = pb.LookupBinding(CreateParameterDescriptor(typeof(string), "first"));
-            HttpParameterBinding b2 = pb.LookupBinding(CreateParameterDescriptor(typeof(int), "first"));
+            HttpParameterBinding b1 = pb.LookupBinding(
+                CreateParameterDescriptor(typeof(string), "first")
+            );
+            HttpParameterBinding b2 = pb.LookupBinding(
+                CreateParameterDescriptor(typeof(int), "first")
+            );
 
             // Assert
             Assert.Equal(mockBinding, b1);
@@ -84,11 +93,26 @@ namespace System.Web.Http.ModelBinding
             ParameterBindingRulesCollection pb = new ParameterBindingRulesCollection();
             HttpParameterBinding mockBinding = new EmptyParameterBinding();
 
-            pb.Add(typeof(string), param => { throw new InvalidOperationException("shouldn't be called"); });
-            pb.Insert(0, typeof(string), param => { throw new InvalidOperationException("shouldn't be called"); });
+            pb.Add(
+                typeof(string),
+                param =>
+                {
+                    throw new InvalidOperationException("shouldn't be called");
+                }
+            );
+            pb.Insert(
+                0,
+                typeof(string),
+                param =>
+                {
+                    throw new InvalidOperationException("shouldn't be called");
+                }
+            );
 
             // Act
-            HttpParameterBinding b2 = pb.LookupBinding(CreateParameterDescriptor(typeof(int), "first"));
+            HttpParameterBinding b2 = pb.LookupBinding(
+                CreateParameterDescriptor(typeof(int), "first")
+            );
 
             // Assert - made it through the action without throwing.
         }
@@ -101,33 +125,41 @@ namespace System.Web.Http.ModelBinding
             HttpParameterBinding mockBinding2 = new EmptyParameterBinding();
             HttpParameterBinding mockBinding3 = new EmptyParameterBinding();
 
-            // Act, test insertion            
+            // Act, test insertion
             pb.Add(typeof(string), param => mockBinding2);
             pb.Add(typeof(int), param => mockBinding2);
             pb.Insert(0, typeof(string), param => mockBinding1);
             pb.Insert(2, typeof(int), param => mockBinding3); // goes in middle
 
             // Assert via lookups
-            Assert.Equal(mockBinding1, pb.LookupBinding(CreateParameterDescriptor(typeof(string), "first")));
-            Assert.Equal(mockBinding3, pb.LookupBinding(CreateParameterDescriptor(typeof(int), "first")));            
+            Assert.Equal(
+                mockBinding1,
+                pb.LookupBinding(CreateParameterDescriptor(typeof(string), "first"))
+            );
+            Assert.Equal(
+                mockBinding3,
+                pb.LookupBinding(CreateParameterDescriptor(typeof(int), "first"))
+            );
         }
 
-        // For unit testing purposes, just create a unique binding objet. 
+        // For unit testing purposes, just create a unique binding objet.
         // We'll just compare object reference identity to determine if binds give the expected binding back.
         // ParameterDescriptor is ignored.
         private class EmptyParameterBinding : HttpParameterBinding
         {
             public EmptyParameterBinding()
-                : base(CreateParameterDescriptor(typeof(object), "dummy"))
-            { 
-            }
+                : base(CreateParameterDescriptor(typeof(object), "dummy")) { }
 
-            public override Threading.Tasks.Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, Threading.CancellationToken cancellationToken)
+            public override Threading.Tasks.Task ExecuteBindingAsync(
+                ModelMetadataProvider metadataProvider,
+                HttpActionContext actionContext,
+                Threading.CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
         }
-        
+
         private static HttpParameterDescriptor CreateParameterDescriptor(Type type, string name)
         {
             Mock<HttpParameterDescriptor> mock = new Mock<HttpParameterDescriptor>();

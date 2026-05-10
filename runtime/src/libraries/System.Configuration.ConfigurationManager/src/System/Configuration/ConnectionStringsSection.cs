@@ -6,16 +6,21 @@ namespace System.Configuration
     public sealed class ConnectionStringsSection : ConfigurationSection
     {
         private static readonly ConfigurationProperty s_propConnectionStrings =
-            new ConfigurationProperty(null, typeof(ConnectionStringSettingsCollection), null,
-                ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                null,
+                typeof(ConnectionStringSettingsCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection { s_propConnectionStrings };
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection { s_propConnectionStrings };
 
         protected internal override ConfigurationPropertyCollection Properties => s_properties;
 
         [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public ConnectionStringSettingsCollection ConnectionStrings
-            => (ConnectionStringSettingsCollection)base[s_propConnectionStrings];
+        public ConnectionStringSettingsCollection ConnectionStrings =>
+            (ConnectionStringSettingsCollection)base[s_propConnectionStrings];
 
         protected internal override object GetRuntimeObject()
         {

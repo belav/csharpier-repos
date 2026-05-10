@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,34 +30,34 @@
 
 namespace System.Management
 {
-	public class WqlObjectQuery : ObjectQuery
-	{
-		[MonoTODO]
-		public WqlObjectQuery ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public WqlObjectQuery (string query)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		// Properties
-		
-		[MonoTODO]
-		public override string QueryLanguage {
-			get { throw new NotImplementedException (); }
-		}
+    public class WqlObjectQuery : ObjectQuery
+    {
+        [MonoTODO]
+        public WqlObjectQuery()
+        {
+            throw new NotImplementedException();
+        }
 
-		// Methods
-		
-		[MonoTODO]
-		public override object Clone ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public WqlObjectQuery(string query)
+        {
+            throw new NotImplementedException();
+        }
+
+        // Properties
+
+        [MonoTODO]
+        public override string QueryLanguage
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        // Methods
+
+        [MonoTODO]
+        public override object Clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

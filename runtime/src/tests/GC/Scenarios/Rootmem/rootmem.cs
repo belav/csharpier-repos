@@ -7,36 +7,34 @@
 /* Coverage:    Root.Alloc(), Root.Free(), Root.Get()
 /*******************************************************************/
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     internal class RootMem
     {
-        internal long [] l;
-        internal static GCHandle [] root;
+        internal long[] l;
+        internal static GCHandle[] root;
         internal static int n;
 
-
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void AllocRoot()
-        {
-        }
+        public static void AllocRoot() { }
 
         public static int Main()
         {
             int iSize = 1000;
-            Object [] arVar = new Object[iSize];
+            Object[] arVar = new Object[iSize];
             root = new GCHandle[iSize];
             RootMem rm_obj;
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
 
-            for( n=0; n< iSize; n++ )
+            for (n = 0; n < iSize; n++)
             {
-                 rm_obj = new RootMem( n );
-                 root[n] = GCHandle.Alloc(rm_obj );
+                rm_obj = new RootMem(n);
+                root[n] = GCHandle.Alloc(rm_obj);
             }
 
             GC.Collect();
@@ -44,14 +42,14 @@ namespace DefaultNamespace {
             GC.Collect();
 
             Object v;
-            for( int i=0; i< iSize; i++)
+            for (int i = 0; i < iSize; i++)
             {
-                v = ( root[i]) ;
+                v = (root[i]);
             }
 
             GC.Collect();
 
-            for( int i=0; i<iSize; i++ )
+            for (int i = 0; i < iSize; i++)
             {
                 root[i].Free();
             }
@@ -62,12 +60,12 @@ namespace DefaultNamespace {
 
             try
             {
-                for( int i=0; i<iSize; i++ )
+                for (int i = 0; i < iSize; i++)
                 {
-                    arVar[i]= ( root[i].Target  );
+                    arVar[i] = (root[i].Target);
                 }
             }
-            catch(System.InvalidOperationException)
+            catch (System.InvalidOperationException)
             {
                 //expected exception is throw after gchandles were free
                 Console.WriteLine("test Passed");
@@ -78,18 +76,16 @@ namespace DefaultNamespace {
             return 1;
         }
 
-        public RootMem( int i )
+        public RootMem(int i)
         {
-            if( i> 0)
+            if (i > 0)
             {
                 l = new long[i];
                 l[0] = 0;
-                l[i-1] = i;
+                l[i - 1] = i;
             }
         }
 
-        ~RootMem()
-        {
-        }
+        ~RootMem() { }
     }
 }

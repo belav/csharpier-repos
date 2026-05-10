@@ -14,26 +14,24 @@ namespace System.Net.Test.Common
     {
         public static partial class Certificates
         {
-            private static readonly X509KeyUsageExtension s_eeKeyUsage =
-            new X509KeyUsageExtension(
-                X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DataEncipherment,
-                critical: false);
+            private static readonly X509KeyUsageExtension s_eeKeyUsage = new X509KeyUsageExtension(
+                X509KeyUsageFlags.DigitalSignature
+                    | X509KeyUsageFlags.KeyEncipherment
+                    | X509KeyUsageFlags.DataEncipherment,
+                critical: false
+            );
 
             private static readonly X509EnhancedKeyUsageExtension s_tlsServerEku =
                 new X509EnhancedKeyUsageExtension(
-                    new OidCollection
-                    {
-                    new Oid("1.3.6.1.5.5.7.3.1", null)
-                    },
-                    false);
+                    new OidCollection { new Oid("1.3.6.1.5.5.7.3.1", null) },
+                    false
+                );
 
             private static readonly X509EnhancedKeyUsageExtension s_tlsClientEku =
                 new X509EnhancedKeyUsageExtension(
-                    new OidCollection
-                    {
-                    new Oid("1.3.6.1.5.5.7.3.2", null)
-                    },
-                    false);
+                    new OidCollection { new Oid("1.3.6.1.5.5.7.3.2", null) },
+                    false
+                );
 
             private static readonly X509BasicConstraintsExtension s_eeConstraints =
                 new X509BasicConstraintsExtension(false, false, 0, false);
@@ -42,18 +40,23 @@ namespace System.Net.Test.Common
             private static X509Certificate2Collection s_dynamicCaCertificates;
             private static object certLock = new object();
 
-     
             // These Get* methods make a copy of the certificates so that consumers own the lifetime of the
             // certificates handed back.  Consumers are expected to dispose of their certs when done with them.
 
-            public static X509Certificate2 GetDynamicServerCerttificate(X509Certificate2Collection? chainCertificates)
+            public static X509Certificate2 GetDynamicServerCerttificate(
+                X509Certificate2Collection? chainCertificates
+            )
             {
                 lock (certLock)
                 {
                     if (s_dynamicServerCertificate == null)
                     {
                         CleanupCertificates();
-                        (s_dynamicServerCertificate, s_dynamicCaCertificates) = GenerateCertificates("localhost", nameof(Configuration) + nameof(Certificates));
+                        (s_dynamicServerCertificate, s_dynamicCaCertificates) =
+                            GenerateCertificates(
+                                "localhost",
+                                nameof(Configuration) + nameof(Certificates)
+                            );
                     }
 
                     chainCertificates?.AddRange(s_dynamicCaCertificates);
@@ -61,7 +64,10 @@ namespace System.Net.Test.Common
                 }
             }
 
-            public static void CleanupCertificates([CallerMemberName] string? testName = null, StoreName storeName = StoreName.CertificateAuthority)
+            public static void CleanupCertificates(
+                [CallerMemberName] string? testName = null,
+                StoreName storeName = StoreName.CertificateAuthority
+            )
             {
                 string caName = $"O={testName}";
                 try
@@ -79,7 +85,8 @@ namespace System.Net.Test.Common
                         }
                     }
                 }
-                catch { };
+                catch { }
+                ;
 
                 try
                 {
@@ -96,7 +103,8 @@ namespace System.Net.Test.Common
                         }
                     }
                 }
-                catch { };
+                catch { }
+                ;
             }
 
             private static X509ExtensionCollection BuildTlsServerCertExtensions(string serverName)
@@ -104,7 +112,10 @@ namespace System.Net.Test.Common
                 return BuildTlsCertExtensions(serverName, true);
             }
 
-            private static X509ExtensionCollection BuildTlsCertExtensions(string targetName, bool serverCertificate)
+            private static X509ExtensionCollection BuildTlsCertExtensions(
+                string targetName,
+                bool serverCertificate
+            )
             {
                 X509ExtensionCollection extensions = new X509ExtensionCollection();
 
@@ -120,7 +131,15 @@ namespace System.Net.Test.Common
                 return extensions;
             }
 
-            public static (X509Certificate2 certificate, X509Certificate2Collection) GenerateCertificates(string targetName, [CallerMemberName] string? testName = null, bool longChain = false, bool serverCertificate = true)
+            public static (
+                X509Certificate2 certificate,
+                X509Certificate2Collection
+            ) GenerateCertificates(
+                string targetName,
+                [CallerMemberName] string? testName = null,
+                bool longChain = false,
+                bool serverCertificate = true
+            )
             {
                 const int keySize = 2048;
                 if (PlatformDetection.IsWindows && testName != null)
@@ -129,7 +148,10 @@ namespace System.Net.Test.Common
                 }
 
                 X509Certificate2Collection chain = new X509Certificate2Collection();
-                X509ExtensionCollection extensions = BuildTlsCertExtensions(targetName, serverCertificate);
+                X509ExtensionCollection extensions = BuildTlsCertExtensions(
+                    targetName,
+                    serverCertificate
+                );
 
                 CertificateAuthority.BuildPrivatePki(
                     PkiOptions.IssuerRevocationViaCrl,
@@ -141,7 +163,8 @@ namespace System.Net.Test.Common
                     subjectName: targetName,
                     testName: testName,
                     keySize: keySize,
-                    extensions: extensions);
+                    extensions: extensions
+                );
 
                 // Walk the intermediates backwards so we build the chain collection as
                 // Issuer3
@@ -170,7 +193,6 @@ namespace System.Net.Test.Common
 
                 return (endEntity, chain);
             }
-
         }
     }
 }

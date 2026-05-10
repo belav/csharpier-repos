@@ -26,14 +26,14 @@
 
 using System;
 using System.Data.Common;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace System.Data.SqlTypes {
-
+namespace System.Data.SqlTypes
+{
     /// <devdoc>
     ///    <para>
     ///       Represents an 8-bit unsigned integer to be stored in
@@ -41,19 +41,19 @@ namespace System.Data.SqlTypes {
     ///    </para>
     /// </devdoc>
     [Serializable]
-
     [StructLayout(LayoutKind.Sequential)]
     [XmlSchemaProvider("GetXsdType")]
-    public struct SqlByte : INullable, IComparable, IXmlSerializable {
+    public struct SqlByte : INullable, IComparable, IXmlSerializable
+    {
+        private bool m_fNotNull; // false if null
+        private byte m_value;
 
-        private bool    m_fNotNull; // false if null
-        private byte    m_value;
-
-        private const int x_iBitNotByteMax    = ~0xff;
+        private const int x_iBitNotByteMax = ~0xff;
 
         // constructor
         // construct a Null
-        private SqlByte(bool fNull) {
+        private SqlByte(bool fNull)
+        {
             m_fNotNull = false;
             m_value = 0;
         }
@@ -61,7 +61,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SqlByte(byte value) {
+        public SqlByte(byte value)
+        {
             m_value = value;
             m_fNotNull = true;
         }
@@ -70,16 +71,19 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsNull {
-            get { return !m_fNotNull;}
+        public bool IsNull
+        {
+            get { return !m_fNotNull; }
         }
 
         // property: Value
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public byte Value {
-            get {
+        public byte Value
+        {
+            get
+            {
                 if (m_fNotNull)
                     return m_value;
                 else
@@ -91,7 +95,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static implicit operator SqlByte(byte x) {
+        public static implicit operator SqlByte(byte x)
+        {
             return new SqlByte(x);
         }
 
@@ -99,24 +104,27 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator byte(SqlByte x) {
+        public static explicit operator byte(SqlByte x)
+        {
             return x.Value;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override String ToString() {
+        public override String ToString()
+        {
             return IsNull ? SQLResource.NullString : m_value.ToString((IFormatProvider)null);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte Parse(String s) {
+        public static SqlByte Parse(String s)
+        {
             if (s == SQLResource.NullString)
                 return SqlByte.Null;
-            else 
+            else
                 return new SqlByte(Byte.Parse(s, (IFormatProvider)null));
         }
 
@@ -124,10 +132,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator ~(SqlByte x) {
+        public static SqlByte operator ~(SqlByte x)
+        {
             return x.IsNull ? Null : new SqlByte((byte)~x.m_value);
         }
-
 
         // Binary operators
 
@@ -135,7 +143,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator +(SqlByte x, SqlByte y) {
+        public static SqlByte operator +(SqlByte x, SqlByte y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -149,7 +158,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator -(SqlByte x, SqlByte y) {
+        public static SqlByte operator -(SqlByte x, SqlByte y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -163,7 +173,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator *(SqlByte x, SqlByte y) {
+        public static SqlByte operator *(SqlByte x, SqlByte y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
@@ -177,11 +188,13 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator /(SqlByte x, SqlByte y) {
+        public static SqlByte operator /(SqlByte x, SqlByte y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
-            if (y.m_value != 0) {
+            if (y.m_value != 0)
+            {
                 return new SqlByte((byte)(x.m_value / y.m_value));
             }
             else
@@ -191,11 +204,13 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator %(SqlByte x, SqlByte y) {
+        public static SqlByte operator %(SqlByte x, SqlByte y)
+        {
             if (x.IsNull || y.IsNull)
                 return Null;
 
-            if (y.m_value != 0) {
+            if (y.m_value != 0)
+            {
                 return new SqlByte((byte)(x.m_value % y.m_value));
             }
             else
@@ -206,25 +221,26 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator &(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlByte((byte)(x.m_value & y.m_value));
+        public static SqlByte operator &(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlByte((byte)(x.m_value & y.m_value));
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator |(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlByte((byte)(x.m_value | y.m_value));
+        public static SqlByte operator |(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlByte((byte)(x.m_value | y.m_value));
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlByte operator ^(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? Null : new SqlByte((byte)(x.m_value ^ y.m_value));
+        public static SqlByte operator ^(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull) ? Null : new SqlByte((byte)(x.m_value ^ y.m_value));
         }
-
-
 
         // Implicit conversions
 
@@ -232,10 +248,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlBoolean x) {
+        public static explicit operator SqlByte(SqlBoolean x)
+        {
             return x.IsNull ? Null : new SqlByte((byte)(x.ByteValue));
         }
-
 
         // Explicit conversions
 
@@ -243,7 +259,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlMoney x) {
+        public static explicit operator SqlByte(SqlMoney x)
+        {
             return x.IsNull ? Null : new SqlByte(checked((byte)x.ToInt32()));
         }
 
@@ -251,7 +268,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlInt16 x) {
+        public static explicit operator SqlByte(SqlInt16 x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -265,7 +283,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlInt32 x) {
+        public static explicit operator SqlByte(SqlInt32 x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -279,7 +298,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlInt64 x) {
+        public static explicit operator SqlByte(SqlInt64 x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -293,7 +313,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlSingle x) {
+        public static explicit operator SqlByte(SqlSingle x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -307,7 +328,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlDouble x) {
+        public static explicit operator SqlByte(SqlDouble x)
+        {
             if (x.IsNull)
                 return Null;
 
@@ -321,8 +343,9 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlDecimal x) {
-            return(SqlByte)(SqlInt32)x;
+        public static explicit operator SqlByte(SqlDecimal x)
+        {
+            return (SqlByte)(SqlInt32)x;
         }
 
         // Implicit conversion from SqlString to SqlByte
@@ -330,7 +353,8 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static explicit operator SqlByte(SqlString x) {
+        public static explicit operator SqlByte(SqlString x)
+        {
             return x.IsNull ? Null : new SqlByte(Byte.Parse(x.Value, (IFormatProvider)null));
         }
 
@@ -338,43 +362,55 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator==(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value == y.m_value);
+        public static SqlBoolean operator ==(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator!=(SqlByte x, SqlByte y) {
-            return ! (x == y);
+        public static SqlBoolean operator !=(SqlByte x, SqlByte y)
+        {
+            return !(x == y);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
+        public static SqlBoolean operator <(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value < y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
+        public static SqlBoolean operator >(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value > y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator<=(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value <= y.m_value);
+        public static SqlBoolean operator <=(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static SqlBoolean operator>=(SqlByte x, SqlByte y) {
-            return(x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.m_value >= y.m_value);
+        public static SqlBoolean operator >=(SqlByte x, SqlByte y)
+        {
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------
@@ -382,123 +418,146 @@ namespace System.Data.SqlTypes {
         //--------------------------------------------------
 
         // Alternative method for operator ~
-        public static SqlByte OnesComplement(SqlByte x) {
+        public static SqlByte OnesComplement(SqlByte x)
+        {
             return ~x;
         }
 
         // Alternative method for operator +
-        public static SqlByte Add(SqlByte x, SqlByte y) {
+        public static SqlByte Add(SqlByte x, SqlByte y)
+        {
             return x + y;
         }
 
         // Alternative method for operator -
-        public static SqlByte Subtract(SqlByte x, SqlByte y) {
+        public static SqlByte Subtract(SqlByte x, SqlByte y)
+        {
             return x - y;
         }
 
         // Alternative method for operator *
-        public static SqlByte Multiply(SqlByte x, SqlByte y) {
+        public static SqlByte Multiply(SqlByte x, SqlByte y)
+        {
             return x * y;
         }
 
         // Alternative method for operator /
-        public static SqlByte Divide(SqlByte x, SqlByte y) {
+        public static SqlByte Divide(SqlByte x, SqlByte y)
+        {
             return x / y;
         }
 
         // Alternative method for operator %
-        public static SqlByte Mod(SqlByte x, SqlByte y) {
+        public static SqlByte Mod(SqlByte x, SqlByte y)
+        {
             return x % y;
         }
-        
-        public static SqlByte Modulus(SqlByte x, SqlByte y) {
+
+        public static SqlByte Modulus(SqlByte x, SqlByte y)
+        {
             return x % y;
         }
 
         // Alternative method for operator &
-        public static SqlByte BitwiseAnd(SqlByte x, SqlByte y) {
+        public static SqlByte BitwiseAnd(SqlByte x, SqlByte y)
+        {
             return x & y;
         }
 
         // Alternative method for operator |
-        public static SqlByte BitwiseOr(SqlByte x, SqlByte y) {
+        public static SqlByte BitwiseOr(SqlByte x, SqlByte y)
+        {
             return x | y;
         }
 
         // Alternative method for operator ^
-        public static SqlByte Xor(SqlByte x, SqlByte y) {
+        public static SqlByte Xor(SqlByte x, SqlByte y)
+        {
             return x ^ y;
         }
 
         // Alternative method for operator ==
-        public static SqlBoolean Equals(SqlByte x, SqlByte y) {
+        public static SqlBoolean Equals(SqlByte x, SqlByte y)
+        {
             return (x == y);
         }
 
         // Alternative method for operator !=
-        public static SqlBoolean NotEquals(SqlByte x, SqlByte y) {
+        public static SqlBoolean NotEquals(SqlByte x, SqlByte y)
+        {
             return (x != y);
         }
 
         // Alternative method for operator <
-        public static SqlBoolean LessThan(SqlByte x, SqlByte y) {
+        public static SqlBoolean LessThan(SqlByte x, SqlByte y)
+        {
             return (x < y);
         }
 
         // Alternative method for operator >
-        public static SqlBoolean GreaterThan(SqlByte x, SqlByte y) {
+        public static SqlBoolean GreaterThan(SqlByte x, SqlByte y)
+        {
             return (x > y);
         }
 
         // Alternative method for operator <=
-        public static SqlBoolean LessThanOrEqual(SqlByte x, SqlByte y) {
+        public static SqlBoolean LessThanOrEqual(SqlByte x, SqlByte y)
+        {
             return (x <= y);
         }
 
         // Alternative method for operator >=
-        public static SqlBoolean GreaterThanOrEqual(SqlByte x, SqlByte y) {
+        public static SqlBoolean GreaterThanOrEqual(SqlByte x, SqlByte y)
+        {
             return (x >= y);
         }
 
         // Alternative method for conversions.
 
-        public SqlBoolean ToSqlBoolean() {
+        public SqlBoolean ToSqlBoolean()
+        {
             return (SqlBoolean)this;
         }
 
-        public SqlDouble ToSqlDouble() {
+        public SqlDouble ToSqlDouble()
+        {
             return (SqlDouble)this;
         }
 
-        public SqlInt16 ToSqlInt16() {
+        public SqlInt16 ToSqlInt16()
+        {
             return (SqlInt16)this;
         }
 
-        public SqlInt32 ToSqlInt32() {
+        public SqlInt32 ToSqlInt32()
+        {
             return (SqlInt32)this;
         }
 
-        public SqlInt64 ToSqlInt64() {
+        public SqlInt64 ToSqlInt64()
+        {
             return (SqlInt64)this;
         }
 
-        public SqlMoney ToSqlMoney() {
+        public SqlMoney ToSqlMoney()
+        {
             return (SqlMoney)this;
         }
 
-        public SqlDecimal ToSqlDecimal() {
+        public SqlDecimal ToSqlDecimal()
+        {
             return (SqlDecimal)this;
         }
 
-        public SqlSingle ToSqlSingle() {
+        public SqlSingle ToSqlSingle()
+        {
             return (SqlSingle)this;
         }
 
-        public SqlString ToSqlString() {
+        public SqlString ToSqlString()
+        {
             return (SqlString)this;
         }
-
-
 
         // IComparable
         // Compares this object to another object, returning an integer that
@@ -510,8 +569,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int CompareTo(Object value) {
-            if (value is SqlByte) {
+        public int CompareTo(Object value)
+        {
+            if (value is SqlByte)
+            {
                 SqlByte i = (SqlByte)value;
 
                 return CompareTo(i);
@@ -519,16 +580,19 @@ namespace System.Data.SqlTypes {
             throw ADP.WrongType(value.GetType(), typeof(SqlByte));
         }
 
-        public int CompareTo(SqlByte value) {
+        public int CompareTo(SqlByte value)
+        {
             // If both Null, consider them equal.
             // Otherwise, Null is less than anything.
             if (IsNull)
-                return value.IsNull ? 0  : -1;
+                return value.IsNull ? 0 : -1;
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -536,8 +600,10 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool Equals(Object value) {
-            if (!(value is SqlByte)) {
+        public override bool Equals(Object value)
+        {
+            if (!(value is SqlByte))
+            {
                 return false;
             }
 
@@ -553,26 +619,33 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return IsNull ? 0 : Value.GetHashCode();
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        XmlSchema IXmlSerializable.GetSchema() { return null; }
+        XmlSchema IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.ReadXml(XmlReader reader) {
+        void IXmlSerializable.ReadXml(XmlReader reader)
+        {
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
-            if (isNull != null && XmlConvert.ToBoolean(isNull)) {
+            if (isNull != null && XmlConvert.ToBoolean(isNull))
+            {
                 // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
                 reader.ReadElementString();
                 m_fNotNull = false;
             }
-            else {
+            else
+            {
                 m_value = XmlConvert.ToByte(reader.ReadElementString());
                 m_fNotNull = true;
             }
@@ -581,11 +654,14 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IXmlSerializable.WriteXml(XmlWriter writer) {
-            if (IsNull) {
+        void IXmlSerializable.WriteXml(XmlWriter writer)
+        {
+            if (IsNull)
+            {
                 writer.WriteAttributeString("xsi", "nil", XmlSchema.InstanceNamespace, "true");
             }
-            else {
+            else
+            {
                 writer.WriteString(XmlConvert.ToString(m_value));
             }
         }
@@ -593,27 +669,29 @@ namespace System.Data.SqlTypes {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet) {
+        public static XmlQualifiedName GetXsdType(XmlSchemaSet schemaSet)
+        {
             return new XmlQualifiedName("unsignedByte", XmlSchema.Namespace);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly SqlByte Null     = new SqlByte(true);
+        public static readonly SqlByte Null = new SqlByte(true);
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly SqlByte Zero     = new SqlByte(0);
+        public static readonly SqlByte Zero = new SqlByte(0);
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public static readonly SqlByte MinValue = new SqlByte(Byte.MinValue);
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public static readonly SqlByte MaxValue = new SqlByte(Byte.MaxValue);
-
     } // SqlByte
-
 } // namespace System

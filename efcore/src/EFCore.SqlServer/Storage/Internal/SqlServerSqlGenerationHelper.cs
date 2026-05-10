@@ -21,9 +21,7 @@ public class SqlServerSqlGenerationHelper : RelationalSqlGenerationHelper
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerSqlGenerationHelper(RelationalSqlGenerationHelperDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +29,7 @@ public class SqlServerSqlGenerationHelper : RelationalSqlGenerationHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string BatchTerminator
-        => "GO" + Environment.NewLine + Environment.NewLine;
+    public override string BatchTerminator => "GO" + Environment.NewLine + Environment.NewLine;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +37,7 @@ public class SqlServerSqlGenerationHelper : RelationalSqlGenerationHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string StartTransactionStatement
-        => "BEGIN TRANSACTION" + StatementTerminator;
+    public override string StartTransactionStatement => "BEGIN TRANSACTION" + StatementTerminator;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +45,7 @@ public class SqlServerSqlGenerationHelper : RelationalSqlGenerationHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string EscapeIdentifier(string identifier)
-        => identifier.Replace("]", "]]");
+    public override string EscapeIdentifier(string identifier) => identifier.Replace("]", "]]");
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,8 +66,8 @@ public class SqlServerSqlGenerationHelper : RelationalSqlGenerationHelper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string DelimitIdentifier(string identifier)
-        => $"[{EscapeIdentifier(identifier)}]"; // Interpolation okay; strings
+    public override string DelimitIdentifier(string identifier) =>
+        $"[{EscapeIdentifier(identifier)}]"; // Interpolation okay; strings
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -92,22 +87,22 @@ public class SqlServerSqlGenerationHelper : RelationalSqlGenerationHelper
     /// </summary>
     /// <param name="name">The name of the savepoint to be created.</param>
     /// <returns>An SQL string to create the savepoint.</returns>
-    public override string GenerateCreateSavepointStatement(string name)
-        => "SAVE TRANSACTION " + DelimitIdentifier(name) + StatementTerminator;
+    public override string GenerateCreateSavepointStatement(string name) =>
+        "SAVE TRANSACTION " + DelimitIdentifier(name) + StatementTerminator;
 
     /// <summary>
     ///     Generates an SQL statement which rolls back to a savepoint with the given name.
     /// </summary>
     /// <param name="name">The name of the savepoint to be rolled back to.</param>
     /// <returns>An SQL string to roll back the savepoint.</returns>
-    public override string GenerateRollbackToSavepointStatement(string name)
-        => "ROLLBACK TRANSACTION " + DelimitIdentifier(name) + StatementTerminator;
+    public override string GenerateRollbackToSavepointStatement(string name) =>
+        "ROLLBACK TRANSACTION " + DelimitIdentifier(name) + StatementTerminator;
 
     /// <summary>
     ///     Generates an SQL statement which releases a savepoint with the given name.
     /// </summary>
     /// <param name="name">The name of the savepoint to be released.</param>
     /// <returns>An SQL string to release the savepoint.</returns>
-    public override string GenerateReleaseSavepointStatement(string name)
-        => throw new NotSupportedException(SqlServerStrings.NoSavepointRelease);
+    public override string GenerateReleaseSavepointStatement(string name) =>
+        throw new NotSupportedException(SqlServerStrings.NoSavepointRelease);
 }

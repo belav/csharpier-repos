@@ -18,38 +18,57 @@ namespace Microsoft.CodeAnalysis.Workspaces
 {
     internal abstract class AbstractTextBufferVisibilityTracker<
         TTextView,
-        TVisibilityChangedCallback> : ITextBufferVisibilityTracker
+        TVisibilityChangedCallback
+    > : ITextBufferVisibilityTracker
         where TTextView : ITextView
         where TVisibilityChangedCallback : System.Delegate
     {
         private readonly ITextBufferAssociatedViewService _associatedViewService;
         private readonly IThreadingContext _threadingContext;
 
-        private readonly Dictionary<ITextBuffer, VisibleTrackerData> _subjectBufferToCallbacks = new();
+        private readonly Dictionary<ITextBuffer, VisibleTrackerData> _subjectBufferToCallbacks =
+            new();
 
         protected AbstractTextBufferVisibilityTracker(
             ITextBufferAssociatedViewService associatedViewService,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _associatedViewService = associatedViewService;
             _threadingContext = threadingContext;
 
-            associatedViewService.SubjectBuffersConnected += AssociatedViewService_SubjectBuffersConnected;
-            associatedViewService.SubjectBuffersDisconnected += AssociatedViewService_SubjectBuffersDisconnected;
+            associatedViewService.SubjectBuffersConnected +=
+                AssociatedViewService_SubjectBuffersConnected;
+            associatedViewService.SubjectBuffersDisconnected +=
+                AssociatedViewService_SubjectBuffersDisconnected;
         }
 
         protected abstract bool IsVisible(TTextView view);
-        protected abstract TVisibilityChangedCallback GetVisiblityChangeCallback(VisibleTrackerData visibleTrackerData);
-        protected abstract void AddVisibilityChangedCallback(TTextView view, TVisibilityChangedCallback visibilityChangedCallback);
-        protected abstract void RemoveVisibilityChangedCallback(TTextView view, TVisibilityChangedCallback visibilityChangedCallback);
+        protected abstract TVisibilityChangedCallback GetVisiblityChangeCallback(
+            VisibleTrackerData visibleTrackerData
+        );
+        protected abstract void AddVisibilityChangedCallback(
+            TTextView view,
+            TVisibilityChangedCallback visibilityChangedCallback
+        );
+        protected abstract void RemoveVisibilityChangedCallback(
+            TTextView view,
+            TVisibilityChangedCallback visibilityChangedCallback
+        );
 
-        private void AssociatedViewService_SubjectBuffersConnected(object? sender, SubjectBuffersConnectedEventArgs e)
+        private void AssociatedViewService_SubjectBuffersConnected(
+            object? sender,
+            SubjectBuffersConnectedEventArgs e
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             UpdateAllAssociatedViews(e.SubjectBuffers);
         }
 
-        private void AssociatedViewService_SubjectBuffersDisconnected(object? sender, SubjectBuffersConnectedEventArgs e)
+        private void AssociatedViewService_SubjectBuffersDisconnected(
+            object? sender,
+            SubjectBuffersConnectedEventArgs e
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             UpdateAllAssociatedViews(e.SubjectBuffers);
@@ -70,7 +89,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var views = _associatedViewService.GetAssociatedTextViews(subjectBuffer).ToImmutableArrayOrEmpty();
+            var views = _associatedViewService
+                .GetAssociatedTextViews(subjectBuffer)
+                .ToImmutableArrayOrEmpty();
 
             // If we don't have any views at all, then assume the buffer is visible.
             if (views.Length == 0)
@@ -103,7 +124,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
             _threadingContext.ThrowIfNotOnUIThread();
 
             // Both of these methods must succeed.  Otherwise we're somehow unregistering something we don't know about.
-            Contract.ThrowIfFalse(_subjectBufferToCallbacks.TryGetValue(subjectBuffer, out var data));
+            Contract.ThrowIfFalse(
+                _subjectBufferToCallbacks.TryGetValue(subjectBuffer, out var data)
+            );
             Contract.ThrowIfFalse(data.Callbacks.Contains(callback));
             data.RemoveCallback(callback);
 
@@ -116,12 +139,19 @@ namespace Microsoft.CodeAnalysis.Workspaces
             }
         }
 
-        public TestAccessor GetTestAccessor()
-            => new(this);
+        public TestAccessor GetTestAccessor() => new(this);
 
-        public readonly struct TestAccessor(AbstractTextBufferVisibilityTracker<TTextView, TVisibilityChangedCallback> visibilityTracker)
+        public readonly struct TestAccessor(
+            AbstractTextBufferVisibilityTracker<
+                TTextView,
+                TVisibilityChangedCallback
+            > visibilityTracker
+        )
         {
-            private readonly AbstractTextBufferVisibilityTracker<TTextView, TVisibilityChangedCallback> _visibilityTracker = visibilityTracker;
+            private readonly AbstractTextBufferVisibilityTracker<
+                TTextView,
+                TVisibilityChangedCallback
+            > _visibilityTracker = visibilityTracker;
 
             public void TriggerCallbacks(ITextBuffer subjectBuffer)
             {
@@ -134,7 +164,10 @@ namespace Microsoft.CodeAnalysis.Workspaces
         {
             public readonly HashSet<ITextView> TextViews = new();
 
-            private readonly AbstractTextBufferVisibilityTracker<TTextView, TVisibilityChangedCallback> _tracker;
+            private readonly AbstractTextBufferVisibilityTracker<
+                TTextView,
+                TVisibilityChangedCallback
+            > _tracker;
             private readonly ITextBuffer _subjectBuffer;
             private readonly TVisibilityChangedCallback _visibilityChangedCallback;
 
@@ -142,11 +175,13 @@ namespace Microsoft.CodeAnalysis.Workspaces
             /// The callbacks that want to be notified when our <see cref="TextViews"/> change visibility.  Stored as an
             /// <see cref="ImmutableHashSet{T}"/> so we can enumerate it safely without it changing underneath us.
             /// </summary>
-            public ImmutableHashSet<Action> Callbacks { get; private set; } = ImmutableHashSet<Action>.Empty;
+            public ImmutableHashSet<Action> Callbacks { get; private set; } =
+                ImmutableHashSet<Action>.Empty;
 
             public VisibleTrackerData(
                 AbstractTextBufferVisibilityTracker<TTextView, TVisibilityChangedCallback> tracker,
-                ITextBuffer subjectBuffer)
+                ITextBuffer subjectBuffer
+            )
             {
                 _tracker = tracker;
                 _subjectBuffer = subjectBuffer;
@@ -185,7 +220,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
                 _tracker._threadingContext.ThrowIfNotOnUIThread();
 
                 // Update us to whatever the currently associated text views are for this buffer.
-                UpdateTextViews(_tracker._associatedViewService.GetAssociatedTextViews(_subjectBuffer));
+                UpdateTextViews(
+                    _tracker._associatedViewService.GetAssociatedTextViews(_subjectBuffer)
+                );
             }
 
             private void UpdateTextViews(IEnumerable<ITextView> associatedTextViews)
@@ -197,14 +234,20 @@ namespace Microsoft.CodeAnalysis.Workspaces
                 foreach (var removedView in removedViews)
                 {
                     if (removedView is TTextView genericView)
-                        _tracker.RemoveVisibilityChangedCallback(genericView, _visibilityChangedCallback);
+                        _tracker.RemoveVisibilityChangedCallback(
+                            genericView,
+                            _visibilityChangedCallback
+                        );
                 }
 
                 // Connect to hearing about visbility changes for any views we are associated with.
                 foreach (var addedView in addedViews)
                 {
                     if (addedView is TTextView genericView)
-                        _tracker.AddVisibilityChangedCallback(genericView, _visibilityChangedCallback);
+                        _tracker.AddVisibilityChangedCallback(
+                            genericView,
+                            _visibilityChangedCallback
+                        );
                 }
 
                 TextViews.Clear();

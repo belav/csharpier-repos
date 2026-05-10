@@ -11,16 +11,16 @@ public class FullRangeComparisonTest
 {
     // Class for testing side effects promotion
     public class SideEffects
-    { 
+    {
         public byte B;
-    } 
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MinValue_RHSConst_Byte(byte b) => b >= 0;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MinValue_RHSConst_Short(short s) => s >= short.MinValue;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MinValue_RHSConst_Int(int i) => i >= int.MinValue;
 
@@ -32,15 +32,16 @@ public class FullRangeComparisonTest
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MaxValue_RHSConst_Short(short s) => s <= short.MaxValue;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MaxValue_RHSConst_Int(int i) => i <= int.MaxValue;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MaxValue_RHSConst_Long(long l) => l <= long.MaxValue;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool EqualsOrLessThan_MaxValue_RHSConst_UShort(ushort us) => us <= ushort.MaxValue;
+    public static bool EqualsOrLessThan_MaxValue_RHSConst_UShort(ushort us) =>
+        us <= ushort.MaxValue;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MaxValue_RHSConst_UInt(uint ui) => ui <= uint.MaxValue;
@@ -50,12 +51,13 @@ public class FullRangeComparisonTest
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MinValue_LHSConst_Byte(byte b) => 0 <= b;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MinValue_LHSConst_Short(short i) => short.MinValue <= i;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MinValue_LHSConst_Int(int i) => int.MinValue <= i;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrLessThan_MinValue_LHSConst_Long(long l) => long.MinValue <= l;
 
@@ -64,32 +66,36 @@ public class FullRangeComparisonTest
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MaxValue_LHSConst_Short(short s) => short.MaxValue >= s;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MaxValue_LHSConst_Int(int i) => int.MaxValue >= i;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool EqualsOrGreaterThan_MaxValue_LHSConst_Long(long l) => long.MaxValue >= l;
-    
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(SideEffects c) => c.B <= 255;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal static void consume<T>(T a1, T a2) {}
+    public static bool EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(SideEffects c) =>
+        c.B <= 255;
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    internal static void consume<T>(T a1, T a2) { }
 
     /* If conditions that are consumed. */
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [Theory]
     [InlineData(10, 11)]
-    public static void Eq_byte_consume(byte a1, byte a2) {
+    public static void Eq_byte_consume(byte a1, byte a2)
+    {
         // ARM64-FULL-LINE:      cmp {{w[0-9]+}}, {{w[0-9]+}}
         // ARM64-FULL-LINE-NEXT: csel {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{eq|ne}}
         //
         // X64-FULL-LINE:        cmov{{ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 == a2) { a1 = 10; }
+        if (a1 == a2)
+        {
+            a1 = 10;
+        }
         consume<byte>(a1, a2);
     }
 
@@ -103,7 +109,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 != a2) { a1 = 11; }
+        if (a1 != a2)
+        {
+            a1 = 11;
+        }
         consume<short>(a1, a2);
     }
 
@@ -117,7 +126,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{l|ge}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 < a2) { a1 = 12; }
+        if (a1 < a2)
+        {
+            a1 = 12;
+        }
         consume<int>(a1, a2);
     }
 
@@ -131,7 +143,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{le|g}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 <= a2) { a1 = 13; }
+        if (a1 <= a2)
+        {
+            a1 = 13;
+        }
         consume<long>(a1, a2);
     }
 
@@ -145,7 +160,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{g|le}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 > a2) { a1 = 14; }
+        if (a1 > a2)
+        {
+            a1 = 14;
+        }
         consume<ushort>(a1, a2);
     }
 
@@ -159,7 +177,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{ae|b}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 >= a2) { a1 = 15; }
+        if (a1 >= a2)
+        {
+            a1 = 15;
+        }
         consume<uint>(a1, a2);
     }
 
@@ -173,7 +194,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{e|ne}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 == a2) { a1 = 16; }
+        if (a1 == a2)
+        {
+            a1 = 16;
+        }
         consume<ulong>(a1, a2);
     }
 
@@ -188,7 +212,10 @@ public class FullRangeComparisonTest
         // X64-FULL-LINE:        cmov{{p|np|ne|e}} {{[a-z0-9]+}}, {{.*}}
         // X64-FULL-LINE-NEXT:   cmov{{p|np|ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (f1 != f2) { a1 = 17; }
+        if (f1 != f2)
+        {
+            a1 = 17;
+        }
         consume<float>(a1, a2);
     }
 
@@ -202,7 +229,10 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{be|a}} {{[a-z0-9]+}}, {{.*}}
 
-        if (f1 < f2) { a1 = 18; }
+        if (f1 < f2)
+        {
+            a1 = 18;
+        }
         consume<double>(a1, a2);
     }
 
@@ -217,7 +247,10 @@ public class FullRangeComparisonTest
         // X64-FULL-LINE:        cmov{{p|np|ne|e}} {{[a-z0-9]+}}, {{.*}}
         // X64-FULL-LINE-NEXT:   cmov{{p|np|ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (f1 == f2) { a1 = 18; }
+        if (f1 == f2)
+        {
+            a1 = 18;
+        }
         consume<double>(a1, a2);
     }
 
@@ -232,7 +265,10 @@ public class FullRangeComparisonTest
         // X64-FULL-LINE:        cmov{{p|np|ne|e}} {{[a-z0-9]+}}, {{.*}}
         // X64-FULL-LINE-NEXT:   cmov{{p|np|ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (f1 != f2) { a1 = 18; }
+        if (f1 != f2)
+        {
+            a1 = 18;
+        }
         consume<double>(a1, a2);
     }
 
@@ -248,7 +284,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 != a2) { a1 = 10; } else { a1 = 100; }
+        if (a1 != a2)
+        {
+            a1 = 10;
+        }
+        else
+        {
+            a1 = 100;
+        }
         consume<byte>(a1, a2);
     }
 
@@ -262,7 +305,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{l|ge}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 < a2) { a1 = 11; } else { a1 = 101; }
+        if (a1 < a2)
+        {
+            a1 = 11;
+        }
+        else
+        {
+            a1 = 101;
+        }
         consume<short>(a1, a2);
     }
 
@@ -276,7 +326,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{le|g}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 <= a2) { a1 = 12; } else { a1 = 102; }
+        if (a1 <= a2)
+        {
+            a1 = 12;
+        }
+        else
+        {
+            a1 = 102;
+        }
         consume<int>(a1, a2);
     }
 
@@ -290,7 +347,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{g|le}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 > a2) { a1 = 13; } else { a1 = 103; }
+        if (a1 > a2)
+        {
+            a1 = 13;
+        }
+        else
+        {
+            a1 = 103;
+        }
         consume<long>(a1, a2);
     }
 
@@ -304,7 +368,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{ge|l}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 >= a2) { a1 = 14; } else { a1 = 104; }
+        if (a1 >= a2)
+        {
+            a1 = 14;
+        }
+        else
+        {
+            a1 = 104;
+        }
         consume<ushort>(a1, a2);
     }
 
@@ -318,7 +389,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{e|ne}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 == a2) { a1 = 15; } else { a1 = 105; }
+        if (a1 == a2)
+        {
+            a1 = 15;
+        }
+        else
+        {
+            a1 = 105;
+        }
         consume<uint>(a1, a2);
     }
 
@@ -332,7 +410,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{ne|e}} {{[a-z0-9]+}}, {{.*}}
 
-        if (a1 != a2) { a1 = 16; } else { a1 = 106; }
+        if (a1 != a2)
+        {
+            a1 = 16;
+        }
+        else
+        {
+            a1 = 106;
+        }
         consume<ulong>(a1, a2);
     }
 
@@ -346,7 +431,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{be|a}} {{[a-z0-9]+}}, {{.*}}
 
-        if (f1 < f2) { a1 = 17; } else { a1 = 107; }
+        if (f1 < f2)
+        {
+            a1 = 17;
+        }
+        else
+        {
+            a1 = 107;
+        }
         consume<float>(a1, a2);
     }
 
@@ -360,7 +452,14 @@ public class FullRangeComparisonTest
         //
         // X64-FULL-LINE:        cmov{{b|ae}} {{[a-z0-9]+}}, {{.*}}
 
-        if (f1 <= f2) { a1 = 18; } else { a1 = 108; }
+        if (f1 <= f2)
+        {
+            a1 = 18;
+        }
+        else
+        {
+            a1 = 108;
+        }
         consume<double>(a1, a2);
     }
 
@@ -465,7 +564,6 @@ public class FullRangeComparisonTest
         return (a1 > a2) ? 18 : 108;
     }
 
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -473,106 +571,139 @@ public class FullRangeComparisonTest
         // RHS Const Optimization
         if (!EqualsOrGreaterThan_MinValue_RHSConst_Byte(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Byte(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Byte(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrGreaterThan_MinValue_RHSConst_Short(-10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Short(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Short(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrGreaterThan_MinValue_RHSConst_Int(-10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Int(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Int(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrGreaterThan_MinValue_RHSConst_Long(-10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Long(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MinValue_RHSConst_Long(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MaxValue_RHSConst_Byte(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Byte(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Byte(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MaxValue_RHSConst_Short(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Short(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Short(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MaxValue_RHSConst_Int(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Int(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Int(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MaxValue_RHSConst_Long(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Long(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_Long(10) failed"
+            );
             return 101;
         }
 
         // LHS Const Optimization
         if (!EqualsOrLessThan_MinValue_LHSConst_Byte(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MinValue_LHSConst_Byte(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MinValue_LHSConst_Byte(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MinValue_LHSConst_Int(-10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MinValue_LHSConst_Int(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MinValue_LHSConst_Int(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MinValue_LHSConst_Long(-10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MinValue_LHSConst_Long(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MinValue_LHSConst_Long(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrGreaterThan_MaxValue_LHSConst_Byte(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_Byte(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_Byte(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrGreaterThan_MaxValue_LHSConst_Int(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_Int(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_Int(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrGreaterThan_MaxValue_LHSConst_Long(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_Long(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_Long(10) failed"
+            );
             return 101;
         }
-
 
         // Unsigned values
         if (!EqualsOrLessThan_MaxValue_RHSConst_UShort(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_UShort(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_UShort(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MaxValue_RHSConst_UInt(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_UInt(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_UInt(10) failed"
+            );
             return 101;
         }
 
         if (!EqualsOrLessThan_MaxValue_RHSConst_ULong(10))
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_ULong(10) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrLessThan_MaxValue_RHSConst_ULong(10) failed"
+            );
             return 101;
         }
 
@@ -580,20 +711,21 @@ public class FullRangeComparisonTest
         try
         {
             EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(null);
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(null) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(null) failed"
+            );
             return 101;
         }
-        catch (NullReferenceException ex)
-        {
-
-        }
+        catch (NullReferenceException ex) { }
         catch (Exception ex)
         {
-            Console.WriteLine("FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(null) failed");
+            Console.WriteLine(
+                "FullRangeComparisonTest:EqualsOrGreaterThan_MaxValue_LHSConst_SideEffects(null) failed"
+            );
             return 101;
         }
 
-        if (Lt_else_byte_return(10,11) != 10)
+        if (Lt_else_byte_return(10, 11) != 10)
         {
             Console.WriteLine("FullRangeComparisonTest:Lt_else_byte_return() failed");
             return 101;

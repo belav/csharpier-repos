@@ -4,14 +4,17 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Runtime;
     using System.Configuration;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(FaultPropagationQueryElement),
+    [ConfigurationCollection(
+        typeof(FaultPropagationQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.FaultPropagationQuery)]
-    public class FaultPropagationQueryElementCollection : TrackingConfigurationCollection<FaultPropagationQueryElement>
+        AddItemName = TrackingConfigurationStrings.FaultPropagationQuery
+    )]
+    public class FaultPropagationQueryElementCollection
+        : TrackingConfigurationCollection<FaultPropagationQueryElement>
     {
         protected override string ElementName
         {

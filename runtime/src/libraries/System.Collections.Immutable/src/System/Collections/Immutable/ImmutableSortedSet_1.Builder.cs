@@ -28,7 +28,11 @@ namespace System.Collections.Immutable
         /// </remarks>
         [DebuggerDisplay("Count = {Count}")]
         [DebuggerTypeProxy(typeof(ImmutableSortedSetBuilderDebuggerProxy<>))]
-        public sealed class Builder : ISortKeyCollection<T>, IReadOnlyCollection<T>, ISet<T>, ICollection
+        public sealed class Builder
+            : ISortKeyCollection<T>,
+                IReadOnlyCollection<T>,
+                ISet<T>,
+                ICollection
         {
             /// <summary>
             /// The root of the binary tree that stores the collection.  Contents are typically not entirely frozen.
@@ -141,11 +145,7 @@ namespace System.Collections.Immutable
             /// </remarks>
             public IComparer<T> KeyComparer
             {
-                get
-                {
-                    return _comparer;
-                }
-
+                get { return _comparer; }
                 set
                 {
                     Requires.NotNull(value, nameof(value));
@@ -179,11 +179,7 @@ namespace System.Collections.Immutable
             /// </summary>
             private Node Root
             {
-                get
-                {
-                    return _root;
-                }
-
+                get { return _root; }
                 set
                 {
                     // We *always* increment the version number because some mutations
@@ -511,7 +507,11 @@ namespace System.Collections.Immutable
                 {
                     if (_syncRoot == null)
                     {
-                        Threading.Interlocked.CompareExchange<object?>(ref _syncRoot, new object(), null);
+                        Threading.Interlocked.CompareExchange<object?>(
+                            ref _syncRoot,
+                            new object(),
+                            null
+                        );
                     }
 
                     return _syncRoot;

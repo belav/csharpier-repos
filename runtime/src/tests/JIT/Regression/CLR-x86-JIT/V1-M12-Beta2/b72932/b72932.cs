@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public unsafe class testout1
 {
     public struct VT

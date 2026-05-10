@@ -76,7 +76,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         PT_G_IREADONLYCOLLECTION,
         PT_FUNC,
         PT_COUNT,
-        PT_VOID,             // (special case)
+        PT_VOID, // (special case)
 
         PT_UNDEFINEDINDEX = 0xffffffff,
     }

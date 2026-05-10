@@ -53,7 +53,11 @@ namespace System.Globalization
         {
             if (era != CurrentEra && era != JulianEra)
             {
-                throw new ArgumentOutOfRangeException(nameof(era), era, SR.ArgumentOutOfRange_InvalidEraValue);
+                throw new ArgumentOutOfRangeException(
+                    nameof(era),
+                    era,
+                    SR.ArgumentOutOfRange_InvalidEraValue
+                );
             }
         }
 
@@ -65,7 +69,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(year),
                     year,
-                    SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxYear));
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, MaxYear)
+                );
             }
         }
 
@@ -91,19 +96,25 @@ namespace System.Globalization
                 // The minimum supported Julia date is Julian 0001/01/03.
                 if (day < 3)
                 {
-                    throw new ArgumentOutOfRangeException(null, SR.ArgumentOutOfRange_BadYearMonthDay);
+                    throw new ArgumentOutOfRangeException(
+                        null,
+                        SR.ArgumentOutOfRange_BadYearMonthDay
+                    );
                 }
             }
 
             bool isLeapYear = (year % 4) == 0;
-            ReadOnlySpan<int> days = isLeapYear ? GregorianCalendar.DaysToMonth366 : GregorianCalendar.DaysToMonth365;
+            ReadOnlySpan<int> days = isLeapYear
+                ? GregorianCalendar.DaysToMonth366
+                : GregorianCalendar.DaysToMonth365;
             int monthDays = days[month] - days[month - 1];
             if (day < 1 || day > monthDays)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(day),
                     day,
-                    SR.Format(SR.ArgumentOutOfRange_Range, 1, monthDays));
+                    SR.Format(SR.ArgumentOutOfRange_Range, 1, monthDays)
+                );
             }
         }
 
@@ -125,7 +136,8 @@ namespace System.Globalization
             // y1 = number of whole years within 4-year period
             int y1 = n / JulianDaysPerYear;
             // Last year has an extra day, so decrement result if 4
-            if (y1 == 4) y1 = 3;
+            if (y1 == 4)
+                y1 = 3;
             // If year was requested, compute and return it
             if (part == DatePartYear)
             {
@@ -143,7 +155,9 @@ namespace System.Globalization
             // Leap year calculation looks different from IsLeapYear since y1, y4,
             // and y100 are relative to year 1, not year 0
             bool leapYear = (y1 == 3);
-            ReadOnlySpan<int> days = leapYear ? GregorianCalendar.DaysToMonth366 : GregorianCalendar.DaysToMonth365;
+            ReadOnlySpan<int> days = leapYear
+                ? GregorianCalendar.DaysToMonth366
+                : GregorianCalendar.DaysToMonth365;
             // All months have less than 32 days, so n >> 5 is a good conservative
             // estimate for the month
             int m = (n >> 5) + 1;
@@ -168,7 +182,10 @@ namespace System.Globalization
         /// </summary>
         internal static long DateToTicks(int year, int month, int day)
         {
-            ReadOnlySpan<int> days = (year % 4 == 0) ? GregorianCalendar.DaysToMonth366 : GregorianCalendar.DaysToMonth365;
+            ReadOnlySpan<int> days =
+                (year % 4 == 0)
+                    ? GregorianCalendar.DaysToMonth366
+                    : GregorianCalendar.DaysToMonth365;
             int y = year - 1;
             int n = y * 365 + y / 4 + days[month - 1] + day - 1;
             // Gregorian 1/1/0001 is Julian 1/3/0001. n * TicksPerDay is the ticks in JulianCalendar.
@@ -184,7 +201,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(months),
                     months,
-                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000));
+                    SR.Format(SR.ArgumentOutOfRange_Range, -120000, 120000)
+                );
             }
 
             int y = GetDatePart(time.Ticks, DatePartYear);
@@ -202,7 +220,10 @@ namespace System.Globalization
                 y += (i - 11) / 12;
             }
 
-            ReadOnlySpan<int> daysArray = (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)) ? GregorianCalendar.DaysToMonth366 : GregorianCalendar.DaysToMonth365;
+            ReadOnlySpan<int> daysArray =
+                (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0))
+                    ? GregorianCalendar.DaysToMonth366
+                    : GregorianCalendar.DaysToMonth365;
             int days = daysArray[m] - daysArray[m - 1];
             if (d > days)
             {
@@ -235,7 +256,10 @@ namespace System.Globalization
         {
             CheckYearEraRange(year, era);
             CheckMonthRange(month);
-            ReadOnlySpan<int> days = (year % 4 == 0) ? GregorianCalendar.DaysToMonth366 : GregorianCalendar.DaysToMonth365;
+            ReadOnlySpan<int> days =
+                (year % 4 == 0)
+                    ? GregorianCalendar.DaysToMonth366
+                    : GregorianCalendar.DaysToMonth365;
             return days[month] - days[month - 1];
         }
 
@@ -298,7 +322,16 @@ namespace System.Globalization
             return year % 4 == 0;
         }
 
-        public override DateTime ToDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond, int era)
+        public override DateTime ToDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int millisecond,
+            int era
+        )
         {
             CheckYearEraRange(year, era);
             CheckMonthRange(month);
@@ -308,15 +341,22 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecond),
                     millisecond,
-                    SR.Format(SR.ArgumentOutOfRange_Range, 0, MillisPerSecond - 1));
+                    SR.Format(SR.ArgumentOutOfRange_Range, 0, MillisPerSecond - 1)
+                );
             }
 
             if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || second < 0 || second >= 60)
             {
-                throw new ArgumentOutOfRangeException(null, SR.ArgumentOutOfRange_BadHourMinuteSecond);
+                throw new ArgumentOutOfRangeException(
+                    null,
+                    SR.ArgumentOutOfRange_BadHourMinuteSecond
+                );
             }
 
-            return new DateTime(DateToTicks(year, month, day) + (new TimeSpan(0, hour, minute, second, millisecond)).Ticks);
+            return new DateTime(
+                DateToTicks(year, month, day)
+                    + (new TimeSpan(0, hour, minute, second, millisecond)).Ticks
+            );
         }
 
         public override int TwoDigitYearMax
@@ -330,7 +370,8 @@ namespace System.Globalization
                     throw new ArgumentOutOfRangeException(
                         nameof(value),
                         value,
-                        SR.Format(SR.ArgumentOutOfRange_Range, 99, MaxYear));
+                        SR.Format(SR.ArgumentOutOfRange_Range, 99, MaxYear)
+                    );
                 }
 
                 _twoDigitYearMax = value;
@@ -345,7 +386,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(
                     nameof(year),
                     year,
-                    SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, MaxYear));
+                    SR.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, MaxYear)
+                );
             }
 
             return base.ToFourDigitYear(year);

@@ -22,8 +22,10 @@ namespace System.IO.Hashing
 
                 for (int i = 0; i < longLength; i += sizeof(ulong))
                 {
-                    crc = ArmCrc.Arm64.ComputeCrc32(crc,
-                        Unsafe.ReadUnaligned<ulong>(ref Unsafe.Add(ref ptr, i)));
+                    crc = ArmCrc.Arm64.ComputeCrc32(
+                        crc,
+                        Unsafe.ReadUnaligned<ulong>(ref Unsafe.Add(ref ptr, i))
+                    );
                 }
 
                 source = source.Slice(longLength);
@@ -50,8 +52,10 @@ namespace System.IO.Hashing
 
                 for (int i = 0; i < intLength; i += sizeof(uint))
                 {
-                    crc = ArmCrc.ComputeCrc32(crc,
-                        Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref ptr, i)));
+                    crc = ArmCrc.ComputeCrc32(
+                        crc,
+                        Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref ptr, i))
+                    );
                 }
 
                 source = source.Slice(intLength);

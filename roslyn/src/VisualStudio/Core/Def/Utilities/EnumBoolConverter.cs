@@ -13,15 +13,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 {
     /// <summary>
     /// Converter for bool properties from an enum value.
-    /// Usage: 
+    /// Usage:
     ///   BoolProperty="{Binding EnumProperty, Converter={StaticResource converter}, ConverterParameter={x:Static namespace:Enum.Value}}"
     /// </summary>
     internal class EnumBoolConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value?.Equals(parameter) ?? DependencyProperty.UnsetValue;
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => value?.Equals(parameter) ?? DependencyProperty.UnsetValue;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => value?.Equals(true) == true ? parameter : Binding.DoNothing;
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => value?.Equals(true) == true ? parameter : Binding.DoNothing;
     }
 }

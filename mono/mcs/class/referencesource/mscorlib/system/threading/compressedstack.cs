@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -16,35 +16,37 @@
 
 namespace System.Threading
 {
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
+    using System.Threading;
 #if FEATURE_CORRUPTING_EXCEPTIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Reflection;
-    using System.Collections;    
-    using System.Threading;    
-    using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
 
-
-    internal struct CompressedStackSwitcher: IDisposable 
+    internal struct CompressedStackSwitcher : IDisposable
     {
         internal CompressedStack curr_CS;
         internal CompressedStack prev_CS;
         internal IntPtr prev_ADStack;
 
-        
         public override bool Equals(Object obj)
         {
             if (obj == null || !(obj is CompressedStackSwitcher))
                 return false;
             CompressedStackSwitcher sw = (CompressedStackSwitcher)obj;
-            return (this.curr_CS == sw.curr_CS && this.prev_CS == sw.prev_CS && this.prev_ADStack == sw.prev_ADStack);
+            return (
+                this.curr_CS == sw.curr_CS
+                && this.prev_CS == sw.prev_CS
+                && this.prev_ADStack == sw.prev_ADStack
+            );
         }
 
         public override int GetHashCode()
@@ -52,12 +54,12 @@ namespace System.Threading
             return ToString().GetHashCode();
         }
 
-        public static bool operator ==(CompressedStackSwitcher c1, CompressedStackSwitcher c2) 
+        public static bool operator ==(CompressedStackSwitcher c1, CompressedStackSwitcher c2)
         {
             return c1.Equals(c2);
         }
 
-        public static bool operator !=(CompressedStackSwitcher c1, CompressedStackSwitcher c2) 
+        public static bool operator !=(CompressedStackSwitcher c1, CompressedStackSwitcher c2)
         {
             return !c1.Equals(c2);
         }
@@ -68,10 +70,10 @@ namespace System.Threading
             Undo();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #if FEATURE_CORRUPTING_EXCEPTIONS
-        [HandleProcessCorruptedStateExceptions] // 
+        [HandleProcessCorruptedStateExceptions] //
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
         internal bool UndoNoThrow()
         {
@@ -86,8 +88,7 @@ namespace System.Threading
             return true;
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public void Undo()
         {
@@ -103,103 +104,86 @@ namespace System.Threading
         }
     }
 
-     [System.Security.SecurityCritical]  // auto-generated
-     internal class SafeCompressedStackHandle : SafeHandle
-     {
-        public SafeCompressedStackHandle() : base(IntPtr.Zero, true)
-        {       
-        }
+    [System.Security.SecurityCritical] // auto-generated
+    internal class SafeCompressedStackHandle : SafeHandle
+    {
+        public SafeCompressedStackHandle()
+            : base(IntPtr.Zero, true) { }
 
-        public override bool IsInvalid {
+        public override bool IsInvalid
+        {
             [System.Security.SecurityCritical]
             get { return handle == IntPtr.Zero; }
         }
 
         [System.Security.SecurityCritical]
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             CompressedStack.DestroyDelayedCompressedStack(handle);
             handle = IntPtr.Zero;
             return true;
         }
-     }   
+    }
 
-
-
-     [Serializable]
-    public sealed class CompressedStack:ISerializable
+    [Serializable]
+    public sealed class CompressedStack : ISerializable
     {
-
         private volatile PermissionListSet m_pls;
+
         [System.Security.SecurityCritical] // auto-generated
         private volatile SafeCompressedStackHandle m_csHandle;
         private bool m_canSkipEvaluation = false;
 
         internal bool CanSkipEvaluation
         {
-            get
-            {
-                return m_canSkipEvaluation;
-            }
-            private set
-            {
-                m_canSkipEvaluation = value;
-            }
+            get { return m_canSkipEvaluation; }
+            private set { m_canSkipEvaluation = value; }
         }
 
         internal PermissionListSet PLS
         {
-            get
-            {
-                return m_pls;
-            }
+            get { return m_pls; }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal CompressedStack( SafeCompressedStackHandle csHandle )
+        [System.Security.SecurityCritical] // auto-generated
+        internal CompressedStack(SafeCompressedStackHandle csHandle)
         {
-            m_csHandle = csHandle;            
+            m_csHandle = csHandle;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private CompressedStack(SafeCompressedStackHandle csHandle, PermissionListSet pls)
         {
             this.m_csHandle = csHandle;
             this.m_pls = pls;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info==null) 
+            if (info == null)
                 throw new ArgumentNullException("info");
             Contract.EndContractBlock();
             CompleteConstruction(null);
             info.AddValue("PLS", this.m_pls);
         }
 
-        private CompressedStack(SerializationInfo info, StreamingContext context) 
+        private CompressedStack(SerializationInfo info, StreamingContext context)
         {
             this.m_pls = (PermissionListSet)info.GetValue("PLS", typeof(PermissionListSet));
         }
 
         internal SafeCompressedStackHandle CompressedStackHandle
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get
-            {
-                return m_csHandle;
-            }
-            [System.Security.SecurityCritical]  // auto-generated
+            get { return m_csHandle; }
+            [System.Security.SecurityCritical] // auto-generated
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            private set
-            {
-                m_csHandle = value;
-            }
+            private set { m_csHandle = value; }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public static CompressedStack GetCompressedStack()
         {
@@ -208,7 +192,7 @@ namespace System.Threading
             return CompressedStack.GetCompressedStack(ref stackMark);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static CompressedStack GetCompressedStack(ref StackCrawlMark stackMark)
         {
             CompressedStack cs;
@@ -229,7 +213,7 @@ namespace System.Threading
             {
                 // regular stackwalking case
                 // We want this to complete without ThreadAborts - if we're in a multiple AD callstack and an intermediate AD gets unloaded,
-                // preventing TAs here prevents a race condition where a SafeCompressedStackHandle is created to a DCS belonging to an AD that's 
+                // preventing TAs here prevents a race condition where a SafeCompressedStackHandle is created to a DCS belonging to an AD that's
                 // gone away
                 cs = new CompressedStack(null);
                 RuntimeHelpers.PrepareConstrainedRegions();
@@ -239,9 +223,11 @@ namespace System.Threading
                 }
                 finally
                 {
-                    
                     cs.CompressedStackHandle = GetDelayedCompressedStack(ref stackMark, true);
-                    if (cs.CompressedStackHandle != null && IsImmediateCompletionCandidate(cs.CompressedStackHandle, out innerCS))
+                    if (
+                        cs.CompressedStackHandle != null
+                        && IsImmediateCompletionCandidate(cs.CompressedStackHandle, out innerCS)
+                    )
                     {
                         try
                         {
@@ -257,7 +243,7 @@ namespace System.Threading
             return cs;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public static CompressedStack Capture()
         {
@@ -269,14 +255,20 @@ namespace System.Threading
         // continue past the call to CompressedStack.Run.  If you change the signature to this method, or
         // provide an alternate way to do a CompressedStack.Run make sure to update
         // SecurityStackWalk::IsSpecialRunFrame in the VM to search for the new method.
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [DynamicSecurityMethodAttribute()]
-        public static void Run(CompressedStack compressedStack, ContextCallback callback, Object state)
+        public static void Run(
+            CompressedStack compressedStack,
+            ContextCallback callback,
+            Object state
+        )
         {
-            
-            if (compressedStack == null )
+            if (compressedStack == null)
             {
-                throw new ArgumentException(Environment.GetResourceString("Arg_NamedParamNull"),"compressedStack");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_NamedParamNull"),
+                    "compressedStack"
+                );
             }
             Contract.EndContractBlock();
             if (cleanupCode == null)
@@ -284,17 +276,22 @@ namespace System.Threading
                 tryCode = new RuntimeHelpers.TryCode(runTryCode);
                 cleanupCode = new RuntimeHelpers.CleanupCode(runFinallyCode);
             }
-            
-            CompressedStackRunData runData = new CompressedStackRunData(compressedStack, callback, state);
+
+            CompressedStackRunData runData = new CompressedStackRunData(
+                compressedStack,
+                callback,
+                state
+            );
             RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(tryCode, cleanupCode, runData);
         }
-            
+
         internal class CompressedStackRunData
         {
             internal CompressedStack cs;
             internal ContextCallback callBack;
             internal Object state;
             internal CompressedStackSwitcher cssw;
+
             internal CompressedStackRunData(CompressedStack cs, ContextCallback cb, Object state)
             {
                 this.cs = cs;
@@ -303,32 +300,34 @@ namespace System.Threading
                 this.cssw = new CompressedStackSwitcher();
             }
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        static internal void runTryCode(Object userData)
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void runTryCode(Object userData)
         {
-            CompressedStackRunData rData = (CompressedStackRunData) userData;
+            CompressedStackRunData rData = (CompressedStackRunData)userData;
             rData.cssw = SetCompressedStack(rData.cs, GetCompressedStackThread());
             rData.callBack(rData.state);
-
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [PrePrepareMethod]
-        static internal void runFinallyCode(Object userData, bool exceptionThrown)
+        internal static void runFinallyCode(Object userData, bool exceptionThrown)
         {
-            CompressedStackRunData rData = (CompressedStackRunData) userData;
+            CompressedStackRunData rData = (CompressedStackRunData)userData;
             rData.cssw.Undo();
         }
 
-        static internal volatile RuntimeHelpers.TryCode tryCode;
-        static internal volatile RuntimeHelpers.CleanupCode cleanupCode;
+        internal static volatile RuntimeHelpers.TryCode tryCode;
+        internal static volatile RuntimeHelpers.CleanupCode cleanupCode;
 
-        
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #if FEATURE_CORRUPTING_EXCEPTIONS
-        [HandleProcessCorruptedStateExceptions] // 
+        [HandleProcessCorruptedStateExceptions] //
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-        internal static CompressedStackSwitcher SetCompressedStack(CompressedStack cs, CompressedStack prevCS)
+        internal static CompressedStackSwitcher SetCompressedStack(
+            CompressedStack cs,
+            CompressedStack prevCS
+        )
         {
             CompressedStackSwitcher cssw = new CompressedStackSwitcher();
             RuntimeHelpers.PrepareConstrainedRegions();
@@ -347,7 +346,7 @@ namespace System.Threading
                     SetCompressedStackThread(cs);
                     cssw.prev_CS = prevCS;
                     cssw.curr_CS = cs;
-                    cssw.prev_ADStack = SetAppDomainStack(cs);                
+                    cssw.prev_ADStack = SetAppDomainStack(cs);
                 }
             }
             catch
@@ -357,25 +356,25 @@ namespace System.Threading
             }
             return cssw;
         }
-        
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ComVisible(false)]
         public CompressedStack CreateCopy()
         {
             return new CompressedStack(this.m_csHandle, this.m_pls);
         }
-                
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal static IntPtr SetAppDomainStack(CompressedStack cs)
         {
             //Update the AD Stack on the thread and return the previous AD Stack
-            return Thread.CurrentThread.SetAppDomainStack((cs == null ? null:cs.CompressedStackHandle)); 
+            return Thread.CurrentThread.SetAppDomainStack(
+                (cs == null ? null : cs.CompressedStackHandle)
+            );
         }
 
-        
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal static void RestoreAppDomainStack(IntPtr appDomainStack)
         {
@@ -406,10 +405,13 @@ namespace System.Threading
                 }
             }
         }
-        
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal bool CheckDemand(CodeAccessPermission demand, PermissionToken permToken, RuntimeMethodHandleInternal rmh)
+        [System.Security.SecurityCritical] // auto-generated
+        internal bool CheckDemand(
+            CodeAccessPermission demand,
+            PermissionToken permToken,
+            RuntimeMethodHandleInternal rmh
+        )
         {
             CompleteConstruction(null);
 
@@ -422,8 +424,12 @@ namespace System.Threading
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal bool CheckDemandNoHalt(CodeAccessPermission demand, PermissionToken permToken, RuntimeMethodHandleInternal rmh)
+        [System.Security.SecurityCritical] // auto-generated
+        internal bool CheckDemandNoHalt(
+            CodeAccessPermission demand,
+            PermissionToken permToken,
+            RuntimeMethodHandleInternal rmh
+        )
         {
             CompleteConstruction(null);
 
@@ -435,8 +441,8 @@ namespace System.Threading
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal bool CheckSetDemand(PermissionSet pset , RuntimeMethodHandleInternal rmh)
+        [System.Security.SecurityCritical] // auto-generated
+        internal bool CheckSetDemand(PermissionSet pset, RuntimeMethodHandleInternal rmh)
         {
             CompleteConstruction(null);
 
@@ -446,8 +452,12 @@ namespace System.Threading
                 return PLS.CheckSetDemand(pset, rmh);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal bool CheckSetDemandWithModificationNoHalt(PermissionSet pset, out PermissionSet alteredDemandSet, RuntimeMethodHandleInternal rmh)
+        [System.Security.SecurityCritical] // auto-generated
+        internal bool CheckSetDemandWithModificationNoHalt(
+            PermissionSet pset,
+            out PermissionSet alteredDemandSet,
+            RuntimeMethodHandleInternal rmh
+        )
         {
             alteredDemandSet = null;
             CompleteConstruction(null);
@@ -464,7 +474,7 @@ namespace System.Threading
         /// </summary>
         /// <param name="flags">set of flags to check (See PermissionType)</param>
         /// <param name="grantSet">alternate permission set to check</param>
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void DemandFlagsOrGrantSet(int flags, PermissionSet grantSet)
         {
             CompleteConstruction(null);
@@ -474,16 +484,21 @@ namespace System.Threading
             PLS.DemandFlagsOrGrantSet(flags, grantSet);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void GetZoneAndOrigin(ArrayList zoneList, ArrayList originList, PermissionToken zoneToken, PermissionToken originToken)
+        [System.Security.SecurityCritical] // auto-generated
+        internal void GetZoneAndOrigin(
+            ArrayList zoneList,
+            ArrayList originList,
+            PermissionToken zoneToken,
+            PermissionToken originToken
+        )
         {
             CompleteConstruction(null);
             if (PLS != null)
-                PLS.GetZoneAndOrigin(zoneList,originList,zoneToken,originToken);
+                PLS.GetZoneAndOrigin(zoneList, originList, zoneToken, originToken);
             return;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         internal void CompleteConstruction(CompressedStack innerCS)
         {
@@ -496,47 +511,53 @@ namespace System.Threading
                     m_pls = pls;
             }
         }
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        internal extern static SafeCompressedStackHandle GetDelayedCompressedStack(ref StackCrawlMark stackMark,
-                                                                                   bool walkStack);
+        internal static extern SafeCompressedStackHandle GetDelayedCompressedStack(
+            ref StackCrawlMark stackMark,
+            bool walkStack
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void DestroyDelayedCompressedStack( IntPtr unmanagedCompressedStack );
-       
-    [System.Security.SecurityCritical]  // auto-generated
-    [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]       
-        internal extern static void DestroyDCSList( SafeCompressedStackHandle compressedStack );
-        
+        internal static extern void DestroyDelayedCompressedStack(IntPtr unmanagedCompressedStack);
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int GetDCSCount(SafeCompressedStackHandle compressedStack);
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static bool IsImmediateCompletionCandidate(SafeCompressedStackHandle compressedStack, out CompressedStack innerCS);
+        internal static extern void DestroyDCSList(SafeCompressedStackHandle compressedStack);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static DomainCompressedStack GetDomainCompressedStack(SafeCompressedStackHandle compressedStack, int index);
+        internal static extern int GetDCSCount(SafeCompressedStackHandle compressedStack);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void GetHomogeneousPLS(PermissionListSet hgPLS);
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        internal static extern bool IsImmediateCompletionCandidate(
+            SafeCompressedStackHandle compressedStack,
+            out CompressedStack innerCS
+        );
 
-        
+        [System.Security.SecurityCritical] // auto-generated
+        [ResourceExposure(ResourceScope.None)]
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern DomainCompressedStack GetDomainCompressedStack(
+            SafeCompressedStackHandle compressedStack,
+            int index
+        );
+
+        [System.Security.SecurityCritical] // auto-generated
+        [ResourceExposure(ResourceScope.None)]
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern void GetHomogeneousPLS(PermissionListSet hgPLS);
     }
 
     //**********************************************************
@@ -547,60 +568,65 @@ namespace System.Threading
     {
         // Managed equivalent of DomainCompressedStack - used to perform demand evaluation
         private PermissionListSet m_pls;
+
         // Did we terminate construction on this DCS and therefore, should we terminate construction on the rest of the CS?
         private bool m_bHaltConstruction;
 
-
         // CompresedStack interacts with this class purely through the three properties marked internal
         // Zone, Origin, AGRList.
-        internal PermissionListSet PLS 
+        internal PermissionListSet PLS
         {
-            get
-            {
-                 return m_pls;
-            }
+            get { return m_pls; }
         }
 
-        internal bool ConstructionHalted 
+        internal bool ConstructionHalted
         {
-            get
-            {
-                 return m_bHaltConstruction;
-            }
+            get { return m_bHaltConstruction; }
         }
-
-
 
         // Called from the VM only.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static DomainCompressedStack CreateManagedObject(IntPtr unmanagedDCS)
         {
             DomainCompressedStack newDCS = new DomainCompressedStack();
-            newDCS.m_pls = PermissionListSet.CreateCompressedState(unmanagedDCS, out newDCS.m_bHaltConstruction);
+            newDCS.m_pls = PermissionListSet.CreateCompressedState(
+                unmanagedDCS,
+                out newDCS.m_bHaltConstruction
+            );
             // return the created object
             return newDCS;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static int GetDescCount(IntPtr dcs);
-        
-        [System.Security.SecurityCritical]  // auto-generated
+        internal static extern int GetDescCount(IntPtr dcs);
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void GetDomainPermissionSets(IntPtr dcs, out PermissionSet granted, out PermissionSet refused);
+        internal static extern void GetDomainPermissionSets(
+            IntPtr dcs,
+            out PermissionSet granted,
+            out PermissionSet refused
+        );
 
         // returns true if the descriptor is a FrameSecurityDescriptor
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool GetDescriptorInfo(IntPtr dcs, int index, out PermissionSet granted, out PermissionSet refused, out Assembly assembly, out FrameSecurityDescriptor fsd);
+        internal static extern bool GetDescriptorInfo(
+            IntPtr dcs,
+            int index,
+            out PermissionSet granted,
+            out PermissionSet refused,
+            out Assembly assembly,
+            out FrameSecurityDescriptor fsd
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static bool IgnoreDomain(IntPtr dcs);
-    }      
-    
+        internal static extern bool IgnoreDomain(IntPtr dcs);
+    }
 }

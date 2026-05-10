@@ -8,21 +8,11 @@ namespace System.Activities.Hosting
 
     abstract class WorkflowInstanceExtensionProvider
     {
-        protected WorkflowInstanceExtensionProvider()
-        {
-        }
+        protected WorkflowInstanceExtensionProvider() { }
 
-        public Type Type
-        {
-            get;
-            protected set;
-        }
+        public Type Type { get; protected set; }
 
-        protected bool GeneratedTypeMatchesDeclaredType
-        {
-            get;
-            set;
-        }
+        protected bool GeneratedTypeMatchesDeclaredType { get; set; }
 
         public abstract object ProvideValue();
 
@@ -66,7 +56,10 @@ namespace System.Activities.Hosting
             T value = this.providerFunction();
             if (!this.hasGeneratedValue)
             {
-                base.GeneratedTypeMatchesDeclaredType = object.ReferenceEquals(value.GetType(), this.Type);
+                base.GeneratedTypeMatchesDeclaredType = object.ReferenceEquals(
+                    value.GetType(),
+                    this.Type
+                );
                 this.hasGeneratedValue = true;
             }
 

@@ -27,9 +27,7 @@ namespace Microsoft.Web.Mvc.Resources
         /// </summary>
         /// <param name="data"></param>
         public DataContractJsonActionResult(object data)
-            : this(data, new ContentType("application/json"))
-        {
-        }
+            : this(data, new ContentType("application/json")) { }
 
         public DataContractJsonActionResult(object data, ContentType contentType)
         {
@@ -58,13 +56,25 @@ namespace Microsoft.Web.Mvc.Resources
                 }
                 catch (ArgumentException)
                 {
-                    throw new HttpException((int)HttpStatusCode.NotAcceptable, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedFormat, this.ContentType));
+                    throw new HttpException(
+                        (int)HttpStatusCode.NotAcceptable,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.Resources_UnsupportedFormat,
+                            this.ContentType
+                        )
+                    );
                 }
             }
             DataContractJsonSerializer dcs = new DataContractJsonSerializer(this.Data.GetType());
             this.ContentType.CharSet = encoding.HeaderName;
             context.HttpContext.Response.ContentType = this.ContentType.ToString();
-            using (XmlWriter writer = JsonReaderWriterFactory.CreateJsonWriter(context.HttpContext.Response.OutputStream, encoding))
+            using (
+                XmlWriter writer = JsonReaderWriterFactory.CreateJsonWriter(
+                    context.HttpContext.Response.OutputStream,
+                    encoding
+                )
+            )
             {
                 dcs.WriteObject(writer, this.Data);
                 writer.Flush();

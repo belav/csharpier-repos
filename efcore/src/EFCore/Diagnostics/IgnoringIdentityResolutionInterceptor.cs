@@ -20,7 +20,6 @@ public class IgnoringIdentityResolutionInterceptor : IIdentityResolutionIntercep
     public virtual void UpdateTrackedInstance(
         IdentityResolutionInterceptionData interceptionData,
         EntityEntry existingEntry,
-        object newEntity)
-    {
-    }
+        object newEntity
+    ) { }
 }

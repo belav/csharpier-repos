@@ -9,10 +9,11 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 public class InMemoryDatabaseProviderTest
 {
     [ConditionalFact]
-    public void Returns_appropriate_name()
-        => Assert.Equal(
+    public void Returns_appropriate_name() =>
+        Assert.Equal(
             typeof(InMemoryDatabase).Assembly.GetName().Name,
-            new DatabaseProvider<InMemoryOptionsExtension>(new DatabaseProviderDependencies()).Name);
+            new DatabaseProvider<InMemoryOptionsExtension>(new DatabaseProviderDependencies()).Name
+        );
 
     [ConditionalFact]
     public void Is_configured_when_configuration_contains_associated_extension()
@@ -21,7 +22,10 @@ public class InMemoryDatabaseProviderTest
         optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
         Assert.True(
-            new DatabaseProvider<InMemoryOptionsExtension>(new DatabaseProviderDependencies()).IsConfigured(optionsBuilder.Options));
+            new DatabaseProvider<InMemoryOptionsExtension>(
+                new DatabaseProviderDependencies()
+            ).IsConfigured(optionsBuilder.Options)
+        );
     }
 
     [ConditionalFact]
@@ -30,6 +34,9 @@ public class InMemoryDatabaseProviderTest
         var optionsBuilder = new DbContextOptionsBuilder();
 
         Assert.False(
-            new DatabaseProvider<InMemoryOptionsExtension>(new DatabaseProviderDependencies()).IsConfigured(optionsBuilder.Options));
+            new DatabaseProvider<InMemoryOptionsExtension>(
+                new DatabaseProviderDependencies()
+            ).IsConfigured(optionsBuilder.Options)
+        );
     }
 }

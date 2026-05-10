@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,70 +29,83 @@
 //
 using System.Net.Sockets;
 
-namespace System.Net.NetworkInformation {
-	class LinuxUnicastIPAddressInformation : UnicastIPAddressInformation
-	{
-		IPAddress address;
-		IPAddress ipv4Mask;
+namespace System.Net.NetworkInformation
+{
+    class LinuxUnicastIPAddressInformation : UnicastIPAddressInformation
+    {
+        IPAddress address;
+        IPAddress ipv4Mask;
 
-		public LinuxUnicastIPAddressInformation (IPAddress address)
-		{
-			this.address = address;
-		}
+        public LinuxUnicastIPAddressInformation(IPAddress address)
+        {
+            this.address = address;
+        }
 
-		public override IPAddress Address {
-			get { return address; }
-		}
+        public override IPAddress Address
+        {
+            get { return address; }
+        }
 
-		public override bool IsDnsEligible {
-			get {
-				byte[] addressBytes = address.GetAddressBytes ();
-				return !(addressBytes[0] == 169 && addressBytes[1] == 254);
-			}
-		}
+        public override bool IsDnsEligible
+        {
+            get
+            {
+                byte[] addressBytes = address.GetAddressBytes();
+                return !(addressBytes[0] == 169 && addressBytes[1] == 254);
+            }
+        }
 
-		[MonoTODO("Always returns false")]
-		public override bool IsTransient {
-			get { return false; }
-		}
+        [MonoTODO("Always returns false")]
+        public override bool IsTransient
+        {
+            get { return false; }
+        }
 
-		// UnicastIPAddressInformation members
+        // UnicastIPAddressInformation members
 
-		public override long AddressPreferredLifetime {
-			get { throw new NotImplementedException (); }
-		}
+        public override long AddressPreferredLifetime
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override long AddressValidLifetime {
-			get { throw new NotImplementedException (); }
-		}
+        public override long AddressValidLifetime
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override long DhcpLeaseLifetime {
-			get { throw new NotImplementedException (); }
-		}
+        public override long DhcpLeaseLifetime
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override DuplicateAddressDetectionState DuplicateAddressDetectionState {
-			get { throw new NotImplementedException (); }
-		}
+        public override DuplicateAddressDetectionState DuplicateAddressDetectionState
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override IPAddress IPv4Mask {
-			get {
-				// The IPv6 equivilant (for .net compatibility)
-				if (Address.AddressFamily != AddressFamily.InterNetwork)
-					return IPAddress.Any;
+        public override IPAddress IPv4Mask
+        {
+            get
+            {
+                // The IPv6 equivilant (for .net compatibility)
+                if (Address.AddressFamily != AddressFamily.InterNetwork)
+                    return IPAddress.Any;
 
-				if (ipv4Mask == null)
-					ipv4Mask = SystemNetworkInterface.GetNetMask (address);
+                if (ipv4Mask == null)
+                    ipv4Mask = SystemNetworkInterface.GetNetMask(address);
 
-				return ipv4Mask;
-			}
-		}
+                return ipv4Mask;
+            }
+        }
 
-		public override PrefixOrigin PrefixOrigin {
-			get { throw new NotImplementedException (); }
-		}
+        public override PrefixOrigin PrefixOrigin
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override SuffixOrigin SuffixOrigin {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        public override SuffixOrigin SuffixOrigin
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

@@ -15,10 +15,7 @@ namespace System.Xml
 
         internal XmlReader CoreReader
         {
-            get
-            {
-                return _coreReader;
-            }
+            get { return _coreReader; }
         }
 
         public static XmlAsyncCheckReader CreateAsyncCheckWrapper(XmlReader reader)
@@ -277,7 +274,10 @@ namespace System.Xml
             return _coreReader.ReadContentAsString();
         }
 
-        public override object ReadContentAs(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public override object ReadContentAs(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             CheckAsync();
             return _coreReader.ReadContentAs(returnType, namespaceResolver);
@@ -397,16 +397,29 @@ namespace System.Xml
             return _coreReader.ReadElementContentAsString(localName, namespaceURI);
         }
 
-        public override object ReadElementContentAs(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override object ReadElementContentAs(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             CheckAsync();
             return _coreReader.ReadElementContentAs(returnType, namespaceResolver);
         }
 
-        public override object ReadElementContentAs(Type returnType, IXmlNamespaceResolver namespaceResolver, string localName, string namespaceURI)
+        public override object ReadElementContentAs(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver,
+            string localName,
+            string namespaceURI
+        )
         {
             CheckAsync();
-            return _coreReader.ReadElementContentAs(returnType, namespaceResolver, localName, namespaceURI);
+            return _coreReader.ReadElementContentAs(
+                returnType,
+                namespaceResolver,
+                localName,
+                namespaceURI
+            );
         }
 
         public override int AttributeCount
@@ -800,7 +813,10 @@ namespace System.Xml
             return task;
         }
 
-        public override Task<object> ReadContentAsAsync(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public override Task<object> ReadContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             CheckAsync();
             var task = _coreReader.ReadContentAsAsync(returnType, namespaceResolver);
@@ -824,7 +840,10 @@ namespace System.Xml
             return task;
         }
 
-        public override Task<object> ReadElementContentAsAsync(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override Task<object> ReadElementContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             CheckAsync();
             var task = _coreReader.ReadElementContentAsAsync(returnType, namespaceResolver);
@@ -856,7 +875,11 @@ namespace System.Xml
             return task;
         }
 
-        public override Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public override Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             CheckAsync();
             var task = _coreReader.ReadElementContentAsBase64Async(buffer, index, count);
@@ -872,7 +895,11 @@ namespace System.Xml
             return task;
         }
 
-        public override Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             CheckAsync();
             var task = _coreReader.ReadElementContentAsBinHexAsync(buffer, index, count);
@@ -925,7 +952,9 @@ namespace System.Xml
         }
 
         #region IXmlNamespaceResolver members
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return _readerAsIXmlNamespaceResolver.GetNamespacesInScope(scope);
         }
@@ -960,23 +989,19 @@ namespace System.Xml
 
         public virtual int LineNumber
         {
-            get
-            {
-                return _readerAsIXmlLineInfo.LineNumber;
-            }
+            get { return _readerAsIXmlLineInfo.LineNumber; }
         }
 
         public virtual int LinePosition
         {
-            get
-            {
-                return _readerAsIXmlLineInfo.LinePosition;
-            }
+            get { return _readerAsIXmlLineInfo.LinePosition; }
         }
         #endregion
     }
 
-    internal class XmlAsyncCheckReaderWithLineInfoNS : XmlAsyncCheckReaderWithLineInfo, IXmlNamespaceResolver
+    internal class XmlAsyncCheckReaderWithLineInfoNS
+        : XmlAsyncCheckReaderWithLineInfo,
+            IXmlNamespaceResolver
     {
         private readonly IXmlNamespaceResolver _readerAsIXmlNamespaceResolver;
 
@@ -987,7 +1012,9 @@ namespace System.Xml
         }
 
         #region IXmlNamespaceResolver members
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
             return _readerAsIXmlNamespaceResolver.GetNamespacesInScope(scope);
         }
@@ -1004,7 +1031,9 @@ namespace System.Xml
         #endregion
     }
 
-    internal sealed class XmlAsyncCheckReaderWithLineInfoNSSchema : XmlAsyncCheckReaderWithLineInfoNS, IXmlSchemaInfo
+    internal sealed class XmlAsyncCheckReaderWithLineInfoNSSchema
+        : XmlAsyncCheckReaderWithLineInfoNS,
+            IXmlSchemaInfo
     {
         private readonly IXmlSchemaInfo _readerAsIXmlSchemaInfo;
 
@@ -1018,58 +1047,37 @@ namespace System.Xml
 
         XmlSchemaValidity IXmlSchemaInfo.Validity
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.Validity;
-            }
+            get { return _readerAsIXmlSchemaInfo.Validity; }
         }
 
         bool IXmlSchemaInfo.IsDefault
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.IsDefault;
-            }
+            get { return _readerAsIXmlSchemaInfo.IsDefault; }
         }
 
         bool IXmlSchemaInfo.IsNil
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.IsNil;
-            }
+            get { return _readerAsIXmlSchemaInfo.IsNil; }
         }
 
         XmlSchemaSimpleType? IXmlSchemaInfo.MemberType
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.MemberType;
-            }
+            get { return _readerAsIXmlSchemaInfo.MemberType; }
         }
 
         XmlSchemaType? IXmlSchemaInfo.SchemaType
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.SchemaType;
-            }
+            get { return _readerAsIXmlSchemaInfo.SchemaType; }
         }
 
         XmlSchemaElement? IXmlSchemaInfo.SchemaElement
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.SchemaElement;
-            }
+            get { return _readerAsIXmlSchemaInfo.SchemaElement; }
         }
 
         XmlSchemaAttribute? IXmlSchemaInfo.SchemaAttribute
         {
-            get
-            {
-                return _readerAsIXmlSchemaInfo.SchemaAttribute;
-            }
+            get { return _readerAsIXmlSchemaInfo.SchemaAttribute; }
         }
         #endregion
     }

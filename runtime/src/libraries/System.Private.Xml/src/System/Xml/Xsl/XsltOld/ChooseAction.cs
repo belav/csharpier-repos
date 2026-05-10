@@ -45,7 +45,9 @@ namespace System.Xml.Xsl.XsltOld
                                 {
                                     throw XsltException.Create(SR.Xslt_WhenAfterOtherwise);
                                 }
-                                action = compiler.CreateIfAction(IfAction.ConditionType.ConditionWhen);
+                                action = compiler.CreateIfAction(
+                                    IfAction.ConditionType.ConditionWhen
+                                );
                                 when = true;
                             }
                             else if (Ref.Equal(name, input.Atoms.Otherwise))
@@ -54,7 +56,9 @@ namespace System.Xml.Xsl.XsltOld
                                 {
                                     throw XsltException.Create(SR.Xslt_DupOtherwise);
                                 }
-                                action = compiler.CreateIfAction(IfAction.ConditionType.ConditionOtherwise);
+                                action = compiler.CreateIfAction(
+                                    IfAction.ConditionType.ConditionOtherwise
+                                );
                                 otherwise = true;
                             }
                             else
@@ -79,8 +83,7 @@ namespace System.Xml.Xsl.XsltOld
                     default:
                         throw XsltException.Create(SR.Xslt_InvalidContents, "choose");
                 }
-            }
-            while (compiler.Advance());
+            } while (compiler.Advance());
             if (!when)
             {
                 throw XsltException.Create(SR.Xslt_NoWhen);

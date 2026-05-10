@@ -1,12 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlCalendarAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -14,15 +17,12 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
-using System.Collections;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -33,9 +33,17 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlCalendarAdapter : WmlControlAdapter
     {
         private SelectionList _selectList;
@@ -82,10 +90,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.Control"]/*' />
         protected new Calendar Control
         {
-            get
-            {
-                return (Calendar)base.Control;
-            }
+            get { return (Calendar)base.Control; }
         }
 
         /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.OnInit"]/*' />
@@ -125,7 +130,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
             // Create the list of months, including [Next] and [Prev] links
             _monthList = new List();
-            _monthList.DataMember = Convert.ToString(_monthsToDisplay + 2, CultureInfo.InvariantCulture);
+            _monthList.DataMember = Convert.ToString(
+                _monthsToDisplay + 2,
+                CultureInfo.InvariantCulture
+            );
             listCommandEventHandler = new ListCommandEventHandler(this.MonthListEventHandler);
             InitList(_monthList, listCommandEventHandler);
 
@@ -163,11 +171,12 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (controlId != null && controlId.Length != 0)
                 {
                     List list = Page.FindControl(controlId) as List;
-                    if (list != null &&
-                        Control.Controls.Contains(list))
+                    if (list != null && Control.Controls.Contains(list))
                     {
                         DataBindListWithEmptyValues(
-                            list, Convert.ToInt32(list.DataMember, CultureInfo.InvariantCulture));
+                            list,
+                            Convert.ToInt32(list.DataMember, CultureInfo.InvariantCulture)
+                        );
                     }
                 }
             }
@@ -189,14 +198,18 @@ namespace System.Web.UI.MobileControls.Adapters
                     Triplet triplet = (Triplet)state;
                     base.LoadAdapterState(triplet.First);
                     _chooseOption = (int)triplet.Second;
-                    Control.VisibleDate = new DateTime(Int64.Parse((String)triplet.Third, CultureInfo.InvariantCulture));
+                    Control.VisibleDate = new DateTime(
+                        Int64.Parse((String)triplet.Third, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (state is Object[])
                 {
                     Object[] viewState = (Object[])state;
                     base.LoadAdapterState(viewState[0]);
                     _chooseOption = (int)viewState[1];
-                    Control.VisibleDate = new DateTime(Int64.Parse((String)viewState[2], CultureInfo.InvariantCulture));
+                    Control.VisibleDate = new DateTime(
+                        Int64.Parse((String)viewState[2], CultureInfo.InvariantCulture)
+                    );
                     _eraCount = (int)viewState[3];
 
                     if (SecondaryUIMode == TypeDate)
@@ -221,9 +234,10 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             DateTime visibleDate = Control.VisibleDate;
 
-            bool saveVisibleDate = visibleDate != DateTime.MinValue &&
-                                        DateTime.Compare(visibleDate, DateTime.Today) != 0 && 
-                                        !IsViewStateEnabled();
+            bool saveVisibleDate =
+                visibleDate != DateTime.MinValue
+                && DateTime.Compare(visibleDate, DateTime.Today) != 0
+                && !IsViewStateEnabled();
             Object baseState = base.SaveAdapterState();
 
             if (baseState == null && !saveVisibleDate && _eraCount == 0)
@@ -237,21 +251,27 @@ namespace System.Web.UI.MobileControls.Adapters
                     return null;
                 }
             }
-            
             else if (!saveVisibleDate && _eraCount == 0)
             {
                 return new Pair(baseState, _chooseOption);
             }
             else if (_eraCount == 0)
             {
-                return new Triplet(baseState, _chooseOption, visibleDate.Ticks.ToString(CultureInfo.InvariantCulture));
+                return new Triplet(
+                    baseState,
+                    _chooseOption,
+                    visibleDate.Ticks.ToString(CultureInfo.InvariantCulture)
+                );
             }
             else
             {
-                return new Object[] { baseState,
-                                      _chooseOption,
-                                      visibleDate.Ticks.ToString(CultureInfo.InvariantCulture),
-                                      _eraCount };
+                return new Object[]
+                {
+                    baseState,
+                    _chooseOption,
+                    visibleDate.Ticks.ToString(CultureInfo.InvariantCulture),
+                    _eraCount,
+                };
             }
         }
 
@@ -267,7 +287,7 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 DateTimeFormatInfo currentInfo = DateTimeFormatInfo.CurrentInfo;
 
-                int [] ints = currentInfo.Calendar.Eras;
+                int[] ints = currentInfo.Calendar.Eras;
 
                 if (ints.Length > 1)
                 {
@@ -281,8 +301,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     }
                     else
                     {
-                        currentEra =
-                            currentInfo.Calendar.GetEra(Control.VisibleDate);
+                        currentEra = currentInfo.Calendar.GetEra(Control.VisibleDate);
                     }
 
                     // Clear the placeholder item list if created in LoadAdapterState
@@ -323,7 +342,9 @@ namespace System.Web.UI.MobileControls.Adapters
             ArrayList arr;
             DateTime tempDate;
             DateTimeFormatInfo currentDateTimeInfo = DateTimeFormatInfo.CurrentInfo;
-            String abbreviatedMonthDayPattern = AbbreviateMonthPattern(currentDateTimeInfo.MonthDayPattern);
+            String abbreviatedMonthDayPattern = AbbreviateMonthPattern(
+                currentDateTimeInfo.MonthDayPattern
+            );
             _threadCalendar = currentDateTimeInfo.Calendar;
 
             // RendersWmlSelectsAsMenuCards is true means the list control will be
@@ -332,7 +353,7 @@ namespace System.Web.UI.MobileControls.Adapters
             bool addBreakBeforeListControl = Device.RendersWmlSelectsAsMenuCards;
 
             writer.EnterStyle(Style);
-            
+
             Debug.Assert(NotSecondaryUI == NotSecondaryUIInit);
             switch (SecondaryUIMode)
             {
@@ -344,25 +365,33 @@ namespace System.Web.UI.MobileControls.Adapters
                     }
 
                     // Link to input option selection screen
-                    RenderPostBackEvent(writer,
-                                        OptionPrompt.ToString(CultureInfo.InvariantCulture),
-                                        GetDefaultLabel(GoLabel),
-                                        true,
-                                        promptText,
-                                        true);
+                    RenderPostBackEvent(
+                        writer,
+                        OptionPrompt.ToString(CultureInfo.InvariantCulture),
+                        GetDefaultLabel(GoLabel),
+                        true,
+                        promptText,
+                        true
+                    );
                     break;
 
                 // Render the first secondary page that provides differnt
                 // options to select a date.
                 case OptionPrompt:
-                    writer.RenderText(SR.GetString(SR.CalendarAdapterOptionPrompt),
-                                      !addBreakBeforeListControl);
+                    writer.RenderText(
+                        SR.GetString(SR.CalendarAdapterOptionPrompt),
+                        !addBreakBeforeListControl
+                    );
 
                     arr = new ArrayList();
 
                     // Option to select the default date
-                    arr.Add(Control.VisibleDate.ToString(
-                        currentDateTimeInfo.ShortDatePattern, CultureInfo.CurrentCulture));
+                    arr.Add(
+                        Control.VisibleDate.ToString(
+                            currentDateTimeInfo.ShortDatePattern,
+                            CultureInfo.CurrentCulture
+                        )
+                    );
 
                     // Option to another page that can enter a date by typing
                     arr.Add(SR.GetString(SR.CalendarAdapterOptionType));
@@ -373,8 +402,10 @@ namespace System.Web.UI.MobileControls.Adapters
                     // SelectionMode.
                     arr.Add(SR.GetString(SR.CalendarAdapterOptionChooseDate));
 
-                    if (Control.SelectionMode == CalendarSelectionMode.DayWeek ||
-                        Control.SelectionMode == CalendarSelectionMode.DayWeekMonth)
+                    if (
+                        Control.SelectionMode == CalendarSelectionMode.DayWeek
+                        || Control.SelectionMode == CalendarSelectionMode.DayWeekMonth
+                    )
                     {
                         arr.Add(SR.GetString(SR.CalendarAdapterOptionChooseWeek));
 
@@ -415,31 +446,42 @@ namespace System.Web.UI.MobileControls.Adapters
                     _textBox.Numeric = true;
                     _textBox.Size = numericDateFormat.Length;
                     _textBox.MaxLength = numericDateFormat.Length;
-                    _textBox.Text = Control.VisibleDate.ToString(numericDateFormat, CultureInfo.InvariantCulture);
+                    _textBox.Text = Control.VisibleDate.ToString(
+                        numericDateFormat,
+                        CultureInfo.InvariantCulture
+                    );
                     _textBox.Visible = true;
                     _textBox.RenderControl(writer);
 
                     String okLabel = GetDefaultLabel(OKLabel);
 
                     // accept softkey for sending the textbox value back to the server
-                    RenderPostBackEvent(writer, 
-                                        TypeDateDone.ToString(CultureInfo.InvariantCulture),
-                                        okLabel,
-                                        true,
-                                        okLabel,
-                                        true,
-                                        WmlPostFieldType.Raw);
+                    RenderPostBackEvent(
+                        writer,
+                        TypeDateDone.ToString(CultureInfo.InvariantCulture),
+                        okLabel,
+                        true,
+                        okLabel,
+                        true,
+                        WmlPostFieldType.Raw
+                    );
                     break;
 
                 // Render a paged list for choosing a month
                 case ChooseMonth:
                 {
-                    String displayText = String.Format(CultureInfo.CurrentCulture, "{0}:", SR.GetString(SR.CalendarAdapterOptionChooseMonth));
+                    String displayText = String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}:",
+                        SR.GetString(SR.CalendarAdapterOptionChooseMonth)
+                    );
                     writer.RenderText(displayText, !addBreakBeforeListControl);
 
                     tempDate = Control.VisibleDate;
 
-                    String abbreviatedYearMonthPattern = AbbreviateMonthPattern(currentDateTimeInfo.YearMonthPattern);
+                    String abbreviatedYearMonthPattern = AbbreviateMonthPattern(
+                        currentDateTimeInfo.YearMonthPattern
+                    );
 
                     // This is to be consistent with ASP.NET Calendar control
                     // on handling YearMonthPattern:
@@ -449,14 +491,21 @@ namespace System.Web.UI.MobileControls.Adapters
                     int indexComma = abbreviatedYearMonthPattern.IndexOf(',');
                     if (indexComma >= 0)
                     {
-                        abbreviatedYearMonthPattern =
-                            abbreviatedYearMonthPattern.Remove(indexComma, 1);
+                        abbreviatedYearMonthPattern = abbreviatedYearMonthPattern.Remove(
+                            indexComma,
+                            1
+                        );
                     }
 
                     arr = new ArrayList();
                     for (int i = 0; i < _monthsToDisplay; i++)
                     {
-                        arr.Add(tempDate.ToString(abbreviatedYearMonthPattern, CultureInfo.CurrentCulture));
+                        arr.Add(
+                            tempDate.ToString(
+                                abbreviatedYearMonthPattern,
+                                CultureInfo.CurrentCulture
+                            )
+                        );
                         tempDate = _threadCalendar.AddMonths(tempDate, 1);
                     }
                     arr.Add(GetDefaultLabel(NextLabel));
@@ -470,9 +519,12 @@ namespace System.Web.UI.MobileControls.Adapters
                 case ChooseWeek:
                 {
                     String monthFormat = (GetNumericDateFormat()[0] == 'y') ? "yyyy/M" : "M/yyyy";
-                    String displayText = String.Format(CultureInfo.CurrentCulture, "{0} ({1}):",
-                                                       SR.GetString(SR.CalendarAdapterOptionChooseWeek),
-                                                       Control.VisibleDate.ToString(monthFormat, CultureInfo.CurrentCulture));
+                    String displayText = String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0} ({1}):",
+                        SR.GetString(SR.CalendarAdapterOptionChooseWeek),
+                        Control.VisibleDate.ToString(monthFormat, CultureInfo.CurrentCulture)
+                    );
                     writer.RenderText(displayText, !addBreakBeforeListControl);
 
                     // List weeks of days of the selected month.  May include
@@ -490,10 +542,16 @@ namespace System.Web.UI.MobileControls.Adapters
                     String weekDisplay;
                     for (int i = 0; i < 6; i++)
                     {
-                        weekDisplay = tempDate.ToString(abbreviatedMonthDayPattern, CultureInfo.CurrentCulture);
+                        weekDisplay = tempDate.ToString(
+                            abbreviatedMonthDayPattern,
+                            CultureInfo.CurrentCulture
+                        );
                         weekDisplay += DaySeparator;
                         tempDate = _threadCalendar.AddDays(tempDate, 6);
-                        weekDisplay += tempDate.ToString(abbreviatedMonthDayPattern, CultureInfo.CurrentCulture);
+                        weekDisplay += tempDate.ToString(
+                            abbreviatedMonthDayPattern,
+                            CultureInfo.CurrentCulture
+                        );
                         arr.Add(weekDisplay);
                         tempDate = _threadCalendar.AddDays(tempDate, 1);
                     }
@@ -505,7 +563,11 @@ namespace System.Web.UI.MobileControls.Adapters
                 // render a list of the dates in the week.
                 case ChooseDay:
                 {
-                    String displayText = String.Format(CultureInfo.CurrentCulture, "{0}:", SR.GetString(SR.CalendarAdapterOptionChooseDate));
+                    String displayText = String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0}:",
+                        SR.GetString(SR.CalendarAdapterOptionChooseDate)
+                    );
                     writer.RenderText(displayText, !addBreakBeforeListControl);
 
                     tempDate = Control.VisibleDate;
@@ -518,7 +580,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
                     for (int i = 0; i < 7; i++)
                     {
-                        date = tempDate.ToString(abbreviatedMonthDayPattern, CultureInfo.CurrentCulture);
+                        date = tempDate.ToString(
+                            abbreviatedMonthDayPattern,
+                            CultureInfo.CurrentCulture
+                        );
 
                         if (Control.ShowDayHeader)
                         {
@@ -572,52 +637,51 @@ namespace System.Web.UI.MobileControls.Adapters
             Debug.Assert(NotSecondaryUI == NotSecondaryUIInit);
             switch (SecondaryUIMode)
             {
-            case DefaultDateDone:
-                SelectRange(Control.VisibleDate, Control.VisibleDate);
-                goto case Done;
+                case DefaultDateDone:
+                    SelectRange(Control.VisibleDate, Control.VisibleDate);
+                    goto case Done;
 
-            case TypeDateDone:
-                try
-                {
-                    String dateText = _textBox.Text;
-                    String dateFormat = GetNumericDateFormat();
-                    DateTimeFormatInfo currentInfo = DateTimeFormatInfo.CurrentInfo;
-                    int eraIndex = _selectList.SelectedIndex;
-
-                    if (eraIndex >= 0 &&
-                        eraIndex < currentInfo.Calendar.Eras.Length)
+                case TypeDateDone:
+                    try
                     {
-                        dateText += currentInfo.GetEraName(currentInfo.Calendar.Eras[eraIndex]);
-                        dateFormat += "gg";
+                        String dateText = _textBox.Text;
+                        String dateFormat = GetNumericDateFormat();
+                        DateTimeFormatInfo currentInfo = DateTimeFormatInfo.CurrentInfo;
+                        int eraIndex = _selectList.SelectedIndex;
+
+                        if (eraIndex >= 0 && eraIndex < currentInfo.Calendar.Eras.Length)
+                        {
+                            dateText += currentInfo.GetEraName(currentInfo.Calendar.Eras[eraIndex]);
+                            dateFormat += "gg";
+                        }
+
+                        DateTime dateTime = DateTime.ParseExact(dateText, dateFormat, null);
+                        SelectRange(dateTime, dateTime);
+                        Control.VisibleDate = dateTime;
                     }
+                    catch
+                    {
+                        _textBoxErrorMessage = SR.GetString(SR.CalendarAdapterTextBoxErrorMessage);
+                        SecondaryUIMode = TypeDate;
+                        break;
+                    }
+                    goto case Done;
 
-                    DateTime dateTime = DateTime.ParseExact(dateText, dateFormat, null);
-                    SelectRange(dateTime, dateTime);
-                    Control.VisibleDate = dateTime;
-                }
-                catch
-                {
-                    _textBoxErrorMessage = SR.GetString(SR.CalendarAdapterTextBoxErrorMessage);
-                    SecondaryUIMode = TypeDate;
+                case Done:
+                    // Set the secondary exit code and raise the selection event for
+                    // web page developer to manipulate the selected date.
+                    ExitSecondaryUIMode();
+                    _chooseOption = FirstPrompt;
                     break;
-                }
-                goto case Done;
 
-            case Done:
-                // Set the secondary exit code and raise the selection event for
-                // web page developer to manipulate the selected date.
-                ExitSecondaryUIMode();
-                _chooseOption = FirstPrompt;
-                break;
+                case DateOption:
+                case WeekOption:
+                case MonthOption:
+                    _chooseOption = SecondaryUIMode; // save in the ViewState
 
-            case DateOption:
-            case WeekOption:
-            case MonthOption:
-                _chooseOption = SecondaryUIMode;  // save in the ViewState
-
-                // In all 3 cases, continue to the UI that chooses a month
-                SecondaryUIMode = ChooseMonth;
-                break;
+                    // In all 3 cases, continue to the UI that chooses a month
+                    SecondaryUIMode = ChooseMonth;
+                    break;
             }
 
             return true;
@@ -644,8 +708,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         // A helper function to initialize and add a child list control
-        private void InitList(List list,
-                              ListCommandEventHandler eventHandler)
+        private void InitList(List list, ListCommandEventHandler eventHandler)
         {
             list.Visible = false;
             list.ItemCommand += eventHandler;
@@ -666,9 +729,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
         // A helper function to do the common code for DataBind and
         // RenderChildren.
-        private void DataBindAndRender(WmlMobileTextWriter writer,
-                                       List list,
-                                       ArrayList arr)
+        private void DataBindAndRender(WmlMobileTextWriter writer, List list, ArrayList arr)
         {
             list.DataSource = arr;
             list.DataBind();
@@ -693,15 +754,15 @@ namespace System.Web.UI.MobileControls.Adapters
         private String GetAbbreviatedDayName(DateTime dateTime)
         {
             return DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(
-                        _threadCalendar.GetDayOfWeek(dateTime));
+                _threadCalendar.GetDayOfWeek(dateTime)
+            );
         }
 
         private String GetEra(DateTime dateTime)
         {
             // We shouldn't need to display the era for the common Gregorian
             // Calendar
-            if (DateTimeFormatInfo.CurrentInfo.Calendar.GetType() ==
-                typeof(GregorianCalendar))
+            if (DateTimeFormatInfo.CurrentInfo.Calendar.GetType() == typeof(GregorianCalendar))
             {
                 return String.Empty;
             }
@@ -711,13 +772,11 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        private static readonly char[] formatChars =
-                                            new char[] { 'M', 'd', 'y' };
+        private static readonly char[] formatChars = new char[] { 'M', 'd', 'y' };
 
         private String GetNumericDateFormat()
         {
-            String shortDatePattern =
-                DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
+            String shortDatePattern = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
 
             // Guess on what short date pattern should be used
             int i = shortDatePattern.IndexOfAny(formatChars);
@@ -745,13 +804,13 @@ namespace System.Web.UI.MobileControls.Adapters
 
             switch (firstFormatChar)
             {
-            case 'M':
-            default:
-                return "MMdd" + yearPattern;
-            case 'd':
-                return "ddMM" + yearPattern;
-            case 'y':
-                return yearPattern + "MMdd";
+                case 'M':
+                default:
+                    return "MMdd" + yearPattern;
+                case 'd':
+                    return "ddMM" + yearPattern;
+                case 'y':
+                    return yearPattern + "MMdd";
             }
         }
 
@@ -763,8 +822,9 @@ namespace System.Web.UI.MobileControls.Adapters
         private DateTime EffectiveVisibleDate(DateTime visibleDate)
         {
             return _threadCalendar.AddDays(
-                        visibleDate,
-                        -(_threadCalendar.GetDayOfMonth(visibleDate) - 1));
+                visibleDate,
+                -(_threadCalendar.GetDayOfMonth(visibleDate) - 1)
+            );
         }
 
         // Return the beginning date of a calendar that includes the
@@ -773,8 +833,7 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             DateTime firstDayOfMonth = EffectiveVisibleDate(visibleDate);
             int daysFromLastMonth =
-                ((int)_threadCalendar.GetDayOfWeek(firstDayOfMonth)) -
-                NumericFirstDayOfWeek();
+                ((int)_threadCalendar.GetDayOfWeek(firstDayOfMonth)) - NumericFirstDayOfWeek();
 
             // Always display at least one day from the previous month
             if (daysFromLastMonth <= 0)
@@ -787,9 +846,9 @@ namespace System.Web.UI.MobileControls.Adapters
         private int NumericFirstDayOfWeek()
         {
             // Used globalized value by default
-            return(Control.FirstDayOfWeek == FirstDayOfWeek.Default) 
-            ? (int) DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek
-            : (int) Control.FirstDayOfWeek;
+            return (Control.FirstDayOfWeek == FirstDayOfWeek.Default)
+                ? (int)DateTimeFormatInfo.CurrentInfo.FirstDayOfWeek
+                : (int)Control.FirstDayOfWeek;
         }
 
         /////////////////////////////////////////////////////////////////////
@@ -802,7 +861,13 @@ namespace System.Web.UI.MobileControls.Adapters
         ////////////////////////////////////////////////////////////////////////
 
         private static readonly int[] Options =
-            {DefaultDateDone, TypeDate, DateOption, WeekOption, MonthOption};
+        {
+            DefaultDateDone,
+            TypeDate,
+            DateOption,
+            WeekOption,
+            MonthOption,
+        };
 
         private void OptionListEventHandler(Object source, ListCommandEventArgs e)
         {
@@ -818,22 +883,27 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 // Next was selected
                 Control.VisibleDate = _threadCalendar.AddMonths(
-                                        Control.VisibleDate, _monthsToDisplay);
+                    Control.VisibleDate,
+                    _monthsToDisplay
+                );
                 SecondaryUIMode = ChooseMonth;
             }
             else if (e.ListItem.Index == _monthsToDisplay + 1)
             {
                 // Prev was selected
                 Control.VisibleDate = _threadCalendar.AddMonths(
-                                        Control.VisibleDate, -_monthsToDisplay);
+                    Control.VisibleDate,
+                    -_monthsToDisplay
+                );
                 SecondaryUIMode = ChooseMonth;
             }
             else
             {
                 // A month was selected
                 Control.VisibleDate = _threadCalendar.AddMonths(
-                                        Control.VisibleDate,
-                                        e.ListItem.Index);
+                    Control.VisibleDate,
+                    e.ListItem.Index
+                );
 
                 if (_chooseOption == MonthOption)
                 {
@@ -898,9 +968,11 @@ namespace System.Web.UI.MobileControls.Adapters
             // these checks will determine this because the colleciton is sorted
             TimeSpan ts = dateTo - dateFrom;
             SelectedDatesCollection selectedDates = Control.SelectedDates;
-            if (selectedDates.Count != ts.Days + 1 
+            if (
+                selectedDates.Count != ts.Days + 1
                 || selectedDates[0] != dateFrom
-                || selectedDates[selectedDates.Count - 1] != dateTo)
+                || selectedDates[selectedDates.Count - 1] != dateTo
+            )
             {
                 selectedDates.SelectRange(dateFrom, dateTo);
                 Control.RaiseSelectionChangedEvent();

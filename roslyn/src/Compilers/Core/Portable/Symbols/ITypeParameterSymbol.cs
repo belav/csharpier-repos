@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis
         int Ordinal { get; }
 
         /// <summary>
-        /// The variance annotation, if any, of the type parameter declaration. Type parameters may be 
+        /// The variance annotation, if any, of the type parameter declaration. Type parameters may be
         /// declared as covariant (<c>out</c>), contravariant (<c>in</c>), or neither.
         /// </summary>
         VarianceKind Variance { get; }

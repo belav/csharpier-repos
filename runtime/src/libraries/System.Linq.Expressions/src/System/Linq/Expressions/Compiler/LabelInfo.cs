@@ -137,13 +137,11 @@ namespace System.Linq.Expressions.Compiler
                     // found it, jump is valid!
                     return;
                 }
-                if (j.Kind == LabelScopeKind.Finally ||
-                    j.Kind == LabelScopeKind.Filter)
+                if (j.Kind == LabelScopeKind.Finally || j.Kind == LabelScopeKind.Filter)
                 {
                     break;
                 }
-                if (j.Kind == LabelScopeKind.Try ||
-                    j.Kind == LabelScopeKind.Catch)
+                if (j.Kind == LabelScopeKind.Try || j.Kind == LabelScopeKind.Catch)
                 {
                     _opCode = OpCodes.Leave;
                 }
@@ -178,8 +176,7 @@ namespace System.Linq.Expressions.Compiler
                 {
                     throw Error.ControlCannotLeaveFilterTest();
                 }
-                if (j.Kind == LabelScopeKind.Try ||
-                    j.Kind == LabelScopeKind.Catch)
+                if (j.Kind == LabelScopeKind.Try || j.Kind == LabelScopeKind.Catch)
                 {
                     _opCode = OpCodes.Leave;
                 }
@@ -354,7 +351,6 @@ namespace System.Linq.Expressions.Compiler
                 return false;
             }
         }
-
 
         internal bool ContainsTarget(LabelTarget target)
         {

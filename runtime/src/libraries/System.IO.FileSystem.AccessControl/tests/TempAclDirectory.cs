@@ -18,16 +18,25 @@ namespace System.IO
         internal readonly List<DirectoryInfo> CreatedSubdirectories = new();
         internal readonly List<FileInfo> CreatedSubfiles = new();
 
-        public TempAclDirectory([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
-            : base(IO.Path.Combine(IO.Path.GetTempPath(), PathGenerator.GenerateTestFileName(null, memberName, lineNumber)))
-        {
-        }
+        public TempAclDirectory(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        )
+            : base(
+                IO.Path.Combine(
+                    IO.Path.GetTempPath(),
+                    PathGenerator.GenerateTestFileName(null, memberName, lineNumber)
+                )
+            ) { }
 
         /// <summary>
         /// the returned path can be used both as directory and as file name
         /// </summary>
-        public string GenerateSubItemPath([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
-            => IO.Path.Combine(Path, PathGenerator.GenerateTestFileName(null, memberName, lineNumber));
+        public string GenerateSubItemPath(
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) =>
+            IO.Path.Combine(Path, PathGenerator.GenerateTestFileName(null, memberName, lineNumber));
 
         protected override void DeleteDirectory()
         {
@@ -47,7 +56,9 @@ namespace System.IO
                 ResetFullControlToDirectory(rootDirInfo);
                 rootDirInfo.Delete(recursive: true);
             }
-            catch { /* Do not throw because we call this on finalize */ }
+            catch
+            { /* Do not throw because we call this on finalize */
+            }
         }
 
         private void ResetFullControlToDirectory(DirectoryInfo dirInfo)
@@ -55,12 +66,21 @@ namespace System.IO
             try
             {
                 var identity = new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null);
-                var accessRule = new FileSystemAccessRule(identity, FileSystemRights.FullControl, AccessControlType.Allow);
-                var security = new DirectorySecurity(dirInfo.FullName, AccessControlSections.Access);
+                var accessRule = new FileSystemAccessRule(
+                    identity,
+                    FileSystemRights.FullControl,
+                    AccessControlType.Allow
+                );
+                var security = new DirectorySecurity(
+                    dirInfo.FullName,
+                    AccessControlSections.Access
+                );
                 security.AddAccessRule(accessRule);
                 dirInfo.SetAccessControl(security);
             }
-            catch { /* Skip silently if dir does not exist */ }
+            catch
+            { /* Skip silently if dir does not exist */
+            }
         }
 
         private void ResetFullControlToFile(FileInfo fileInfo)
@@ -68,12 +88,18 @@ namespace System.IO
             try
             {
                 var identity = new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null);
-                var accessRule = new FileSystemAccessRule(identity, FileSystemRights.FullControl, AccessControlType.Allow);
+                var accessRule = new FileSystemAccessRule(
+                    identity,
+                    FileSystemRights.FullControl,
+                    AccessControlType.Allow
+                );
                 var security = new FileSecurity(fileInfo.FullName, AccessControlSections.Access);
                 security.AddAccessRule(accessRule);
                 fileInfo.SetAccessControl(security);
             }
-            catch { /* Skip silently if file does not exist */ }
+            catch
+            { /* Skip silently if file does not exist */
+            }
         }
     }
 }

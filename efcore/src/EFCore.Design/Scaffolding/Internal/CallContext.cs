@@ -7,6 +7,5 @@ namespace System.Runtime.Remoting.Messaging;
 
 internal sealed class CallContext
 {
-    public static object? LogicalGetData(string name)
-        => null;
+    public static object? LogicalGetData(string name) => null;
 }

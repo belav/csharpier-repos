@@ -17,9 +17,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Workspaces
     public class WorkspacesDesktop : WorkspaceBase
     {
         public WorkspacesDesktop()
-            : base(WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+            : base(WellKnownProjectTemplates.ClassLibrary) { }
 
         [IdeFact]
         public override async Task MetadataReference()
@@ -29,4 +27,3 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Workspaces
         }
     }
 }
-

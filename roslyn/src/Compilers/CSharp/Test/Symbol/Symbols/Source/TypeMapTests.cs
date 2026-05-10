@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestMap1()
         {
             var text =
-@"
+                @"
 public class Box<T> {}
 public class A<T> {
   public class TBox : Box<T> {}
@@ -89,19 +89,25 @@ public class Top : A<E> { // base is A<E>
         /// </summary>
         /// <param name="typeArguments">the type arguments that will replace the type parameters, starting with those for enclosing types</param>
         /// <returns></returns>
-        private static NamedTypeSymbol DeepConstruct(NamedTypeSymbol type, ImmutableArray<TypeSymbol> typeArguments)
+        private static NamedTypeSymbol DeepConstruct(
+            NamedTypeSymbol type,
+            ImmutableArray<TypeSymbol> typeArguments
+        )
         {
             Assert.True(type.IsDefinition);
             var allTypeParameters = ArrayBuilder<TypeParameterSymbol>.GetInstance();
             type.GetAllTypeParameters(allTypeParameters);
-            return new TypeMap(allTypeParameters.ToImmutableAndFree(), typeArguments.SelectAsArray(t => TypeWithAnnotations.Create(t))).SubstituteNamedType(type);
+            return new TypeMap(
+                allTypeParameters.ToImmutableAndFree(),
+                typeArguments.SelectAsArray(t => TypeWithAnnotations.Create(t))
+            ).SubstituteNamedType(type);
         }
 
         [Fact]
         public void ConstructedError()
         {
             var text =
-@"
+                @"
 class C
 {
     NonExistentType<int> field;
@@ -120,7 +126,8 @@ class C
         [Fact]
         public void Generics4()
         {
-            string source = @"
+            string source =
+                @"
 class C1<C1T1, C1T2>
 {
     public class C2<C2T1, C2T2>
@@ -145,23 +152,38 @@ class C1<C1T1, C1T2>
             var c1OfByteChar_c2 = (NamedTypeSymbol)(c1OfByteChar.GetMembers()[0]);
             var c1OfByteChar_c2OfIntInt = c1OfByteChar_c2.Construct(_int, _int);
 
-            Assert.Equal("C1<System.Byte, System.Char>.C2<System.Int32, System.Int32>", c1OfByteChar_c2OfIntInt.ToTestDisplayString());
+            Assert.Equal(
+                "C1<System.Byte, System.Char>.C2<System.Int32, System.Int32>",
+                c1OfByteChar_c2OfIntInt.ToTestDisplayString()
+            );
 
-            var c1OfByteChar_c2OfIntInt_c3 = (NamedTypeSymbol)(c1OfByteChar_c2OfIntInt.GetMembers()[0]);
-            var c1OfByteChar_c2OfIntInt_c3OfIntByte = c1OfByteChar_c2OfIntInt_c3.Construct(_int, _byte);
+            var c1OfByteChar_c2OfIntInt_c3 = (NamedTypeSymbol)(
+                c1OfByteChar_c2OfIntInt.GetMembers()[0]
+            );
+            var c1OfByteChar_c2OfIntInt_c3OfIntByte = c1OfByteChar_c2OfIntInt_c3.Construct(
+                _int,
+                _byte
+            );
 
-            Assert.Equal("C1<System.Byte, System.Char>.C2<System.Int32, System.Int32>.C3<System.Int32, System.Byte>", c1OfByteChar_c2OfIntInt_c3OfIntByte.ToTestDisplayString());
+            Assert.Equal(
+                "C1<System.Byte, System.Char>.C2<System.Int32, System.Int32>.C3<System.Int32, System.Byte>",
+                c1OfByteChar_c2OfIntInt_c3OfIntByte.ToTestDisplayString()
+            );
 
             var v1 = c1OfByteChar_c2OfIntInt_c3OfIntByte.GetMembers().OfType<FieldSymbol>().First();
             var type = v1.TypeWithAnnotations;
 
-            Assert.Equal("C1<System.Int32, System.Byte>.C2<System.Byte, System.Byte>.C3<System.Char, System.Byte>", type.Type.ToTestDisplayString());
+            Assert.Equal(
+                "C1<System.Int32, System.Byte>.C2<System.Byte, System.Byte>.C3<System.Char, System.Byte>",
+                type.Type.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void Generics5()
         {
-            string source = @"
+            string source =
+                @"
 class C1<C1T1, C1T2>
 {
     public class C2<C2T1, C2T2>

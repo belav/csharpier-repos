@@ -8,7 +8,11 @@ namespace System.Security.Cryptography
 {
     internal static class NetStandardShims
     {
-        internal static unsafe int GetBytes(this Encoding encoding, ReadOnlySpan<char> str, Span<byte> destination)
+        internal static unsafe int GetBytes(
+            this Encoding encoding,
+            ReadOnlySpan<char> str,
+            Span<byte> destination
+        )
         {
             if (str.IsEmpty)
             {

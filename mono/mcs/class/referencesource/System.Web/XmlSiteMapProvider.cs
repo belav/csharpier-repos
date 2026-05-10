@@ -10,8 +10,8 @@
  * Copyright (c) 2002 Microsoft Corporation
  */
 
-namespace System.Web {
-
+namespace System.Web
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -34,8 +34,8 @@ namespace System.Web {
 
     // XmlMapProvider that generates sitemap tree from xml files
 
-    public class XmlSiteMapProvider : StaticSiteMapProvider, IDisposable {
-
+    public class XmlSiteMapProvider : StaticSiteMapProvider, IDisposable
+    {
         private string _filename;
         private VirtualPath _virtualPath;
         private VirtualPath _normalizedVirtualPath;
@@ -59,20 +59,24 @@ namespace System.Web {
         // table containing mappings from child providers to their root nodes.
         private Hashtable _childProviderTable;
 
+        public XmlSiteMapProvider() { }
 
-        public XmlSiteMapProvider() {
-        }
-
-        private ArrayList ChildProviderList {
-            get {
+        private ArrayList ChildProviderList
+        {
+            get
+            {
                 ArrayList returnList = _childProviderList;
-                if (returnList == null) {
-                    lock (_lock) {
-                        if (_childProviderList == null) {
+                if (returnList == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_childProviderList == null)
+                        {
                             returnList = ArrayList.ReadOnly(new ArrayList(ChildProviderTable.Keys));
                             _childProviderList = returnList;
                         }
-                        else {
+                        else
+                        {
                             returnList = _childProviderList;
                         }
                     }
@@ -82,11 +86,16 @@ namespace System.Web {
             }
         }
 
-        private Hashtable ChildProviderTable {
-            get {
-                if (_childProviderTable == null) {
-                    lock (_lock) {
-                        if (_childProviderTable == null) {
+        private Hashtable ChildProviderTable
+        {
+            get
+            {
+                if (_childProviderTable == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_childProviderTable == null)
+                        {
                             _childProviderTable = new Hashtable();
                         }
                     }
@@ -96,119 +105,163 @@ namespace System.Web {
             }
         }
 
-
-        public override SiteMapNode RootNode {
-            get {
+        public override SiteMapNode RootNode
+        {
+            get
+            {
                 BuildSiteMap();
                 SiteMapNode node = ReturnNodeIfAccessible(_siteMapNode);
                 return ApplyModifierIfExists(node);
             }
         }
 
-        public override SiteMapNode CurrentNode {
-            get {
-                return ApplyModifierIfExists(base.CurrentNode);
-            }
+        public override SiteMapNode CurrentNode
+        {
+            get { return ApplyModifierIfExists(base.CurrentNode); }
         }
 
-        public override SiteMapNode GetParentNode(SiteMapNode node) {
+        public override SiteMapNode GetParentNode(SiteMapNode node)
+        {
             SiteMapNode parentNode = base.GetParentNode(node);
             return ApplyModifierIfExists(parentNode);
         }
 
-        public override SiteMapNodeCollection GetChildNodes(SiteMapNode node) {
+        public override SiteMapNodeCollection GetChildNodes(SiteMapNode node)
+        {
             SiteMapNodeCollection subNodes = base.GetChildNodes(node);
             HttpContext context = HttpContext.Current;
 
             // Do nothing if the modifier doesn't apply
-            if (context == null || !context.Response.UsePathModifier || subNodes.Count == 0) {
+            if (context == null || !context.Response.UsePathModifier || subNodes.Count == 0)
+            {
                 return subNodes;
             }
 
             // Apply the modifier to the children nodes
             SiteMapNodeCollection resultNodes = new SiteMapNodeCollection(subNodes.Count);
-        
-            foreach (SiteMapNode n in subNodes) {
+
+            foreach (SiteMapNode n in subNodes)
+            {
                 resultNodes.Add(ApplyModifierIfExists(n));
             }
 
             return resultNodes;
         }
 
-        protected internal override void AddNode(SiteMapNode node, SiteMapNode parentNode) {
-            if (node == null) {
+        protected internal override void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        {
+            if (node == null)
+            {
                 throw new ArgumentNullException("node");
             }
 
-            if (parentNode == null) {
+            if (parentNode == null)
+            {
                 throw new ArgumentNullException("parentNode");
             }
 
             SiteMapProvider ownerProvider = node.Provider;
             SiteMapProvider parentOwnerProvider = parentNode.Provider;
 
-            if (ownerProvider != this) {
-                throw new ArgumentException(SR.GetString(SR.XmlSiteMapProvider_cannot_add_node, node.ToString()), "node");
+            if (ownerProvider != this)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.XmlSiteMapProvider_cannot_add_node, node.ToString()),
+                    "node"
+                );
             }
 
-            if (parentOwnerProvider != this) {
-                throw new ArgumentException(SR.GetString(SR.XmlSiteMapProvider_cannot_add_node, parentNode.ToString()), "parentNode");
+            if (parentOwnerProvider != this)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.XmlSiteMapProvider_cannot_add_node, parentNode.ToString()),
+                    "parentNode"
+                );
             }
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 // First remove it from its current location.
                 RemoveNode(node);
                 AddNodeInternal(node, parentNode, null);
             }
         }
 
-        private void AddNodeInternal(SiteMapNode node, SiteMapNode parentNode, XmlNode xmlNode) {
-            lock (_lock) {
+        private void AddNodeInternal(SiteMapNode node, SiteMapNode parentNode, XmlNode xmlNode)
+        {
+            lock (_lock)
+            {
                 String url = node.Url;
                 String key = node.Key;
 
                 bool isValidUrl = false;
 
                 // Only add the node to the url table if it's a static node.
-                if (!String.IsNullOrEmpty(url)) {
-                    if (UrlTable[url] != null) {
-                        if (xmlNode != null) {
+                if (!String.IsNullOrEmpty(url))
+                {
+                    if (UrlTable[url] != null)
+                    {
+                        if (xmlNode != null)
+                        {
                             throw new ConfigurationErrorsException(
-                                SR.GetString(SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Url, url),
-                                xmlNode);
+                                SR.GetString(
+                                    SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Url,
+                                    url
+                                ),
+                                xmlNode
+                            );
                         }
-                        else {
-                            throw new InvalidOperationException(SR.GetString(
-                                SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Url, url));
+                        else
+                        {
+                            throw new InvalidOperationException(
+                                SR.GetString(
+                                    SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Url,
+                                    url
+                                )
+                            );
                         }
                     }
 
                     isValidUrl = true;
                 }
 
-                if (KeyTable.Contains(key)) {
-                    if (xmlNode != null) {
+                if (KeyTable.Contains(key))
+                {
+                    if (xmlNode != null)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Key, key),
-                            xmlNode);
+                            SR.GetString(
+                                SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Key,
+                                key
+                            ),
+                            xmlNode
+                        );
                     }
-                    else {
+                    else
+                    {
                         throw new InvalidOperationException(
-                           SR.GetString(SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Key, key));
+                            SR.GetString(
+                                SR.XmlSiteMapProvider_Multiple_Nodes_With_Identical_Key,
+                                key
+                            )
+                        );
                     }
                 }
 
-                if (isValidUrl) {
+                if (isValidUrl)
+                {
                     UrlTable[url] = node;
                 }
 
                 KeyTable[key] = node;
 
                 // Add the new node into parentNode collection
-                if (parentNode != null) {
+                if (parentNode != null)
+                {
                     ParentNodeTable[node] = parentNode;
 
-                    if (ChildNodeCollectionTable[parentNode] == null) {
+                    if (ChildNodeCollectionTable[parentNode] == null)
+                    {
                         ChildNodeCollectionTable[parentNode] = new SiteMapNodeCollection();
                     }
 
@@ -217,36 +270,52 @@ namespace System.Web {
             }
         }
 
-        protected virtual void AddProvider(string providerName, SiteMapNode parentNode) {
-            if (parentNode == null) {
+        protected virtual void AddProvider(string providerName, SiteMapNode parentNode)
+        {
+            if (parentNode == null)
+            {
                 throw new ArgumentNullException("parentNode");
             }
 
-            if (parentNode.Provider != this) {
-                throw new ArgumentException(SR.GetString(SR.XmlSiteMapProvider_cannot_add_node, parentNode.ToString()), "parentNode");
+            if (parentNode.Provider != this)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.XmlSiteMapProvider_cannot_add_node, parentNode.ToString()),
+                    "parentNode"
+                );
             }
 
             SiteMapNode node = GetNodeFromProvider(providerName);
             AddNodeInternal(node, parentNode, null);
         }
 
-
-        [SuppressMessage("Microsoft.Security", "MSEC1205:DoNotAllowDtdOnXmlTextReader", Justification = "Legacy code that trusts our developer-controlled input.")]
-        [SuppressMessage("Microsoft.Security.Xml", "CA3054:DoNotAllowDtdOnXmlTextReader", Justification = "Legacy code that trusts our developer-controlled input.")]
-        public override SiteMapNode BuildSiteMap() {
-
+        [SuppressMessage(
+            "Microsoft.Security",
+            "MSEC1205:DoNotAllowDtdOnXmlTextReader",
+            Justification = "Legacy code that trusts our developer-controlled input."
+        )]
+        [SuppressMessage(
+            "Microsoft.Security.Xml",
+            "CA3054:DoNotAllowDtdOnXmlTextReader",
+            Justification = "Legacy code that trusts our developer-controlled input."
+        )]
+        public override SiteMapNode BuildSiteMap()
+        {
             SiteMapNode tempNode = _siteMapNode;
 
             // If siteMap is already constructed, simply returns it.
             // Child providers will only be updated when the parent providers need to access them.
-            if (tempNode != null) {
+            if (tempNode != null)
+            {
                 return tempNode;
             }
 
             XmlDocument document = GetConfigDocument();
 
-            lock (_lock) {
-                if (_siteMapNode != null) {
+            lock (_lock)
+            {
+                if (_siteMapNode != null)
+                {
                     return _siteMapNode;
                 }
 
@@ -255,31 +324,51 @@ namespace System.Web {
                 // Need to check if the sitemap file exists before opening it.
                 CheckSiteMapFileExists();
 
-                try {
-                    using (Stream stream = _normalizedVirtualPath.OpenFile()) {
+                try
+                {
+                    using (Stream stream = _normalizedVirtualPath.OpenFile())
+                    {
                         XmlReader reader = new XmlTextReader(stream);
                         document.Load(reader);
                     }
                 }
-                catch (XmlException e) {
+                catch (XmlException e)
+                {
                     string sourceFile = _virtualPath.VirtualPathString;
                     string physicalDir = _normalizedVirtualPath.MapPathInternal();
-                    if (physicalDir != null && HttpRuntime.HasPathDiscoveryPermission(physicalDir)) {
+                    if (physicalDir != null && HttpRuntime.HasPathDiscoveryPermission(physicalDir))
+                    {
                         sourceFile = physicalDir;
                     }
 
                     throw new ConfigurationErrorsException(
-                                            SR.GetString(SR.XmlSiteMapProvider_Error_loading_Config_file, _virtualPath, e.Message),
-                                            e, sourceFile, e.LineNumber);
+                        SR.GetString(
+                            SR.XmlSiteMapProvider_Error_loading_Config_file,
+                            _virtualPath,
+                            e.Message
+                        ),
+                        e,
+                        sourceFile,
+                        e.LineNumber
+                    );
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     throw new ConfigurationErrorsException(
-                        SR.GetString(SR.XmlSiteMapProvider_Error_loading_Config_file, _virtualPath, e.Message), e);
+                        SR.GetString(
+                            SR.XmlSiteMapProvider_Error_loading_Config_file,
+                            _virtualPath,
+                            e.Message
+                        ),
+                        e
+                    );
                 }
 
                 XmlNode node = null;
-                foreach (XmlNode siteMapMode in document.ChildNodes) {
-                    if (String.Equals(siteMapMode.Name, "siteMap", StringComparison.Ordinal)) {
+                foreach (XmlNode siteMapMode in document.ChildNodes)
+                {
+                    if (String.Equals(siteMapMode.Name, "siteMap", StringComparison.Ordinal))
+                    {
                         node = siteMapMode;
                         break;
                     }
@@ -288,35 +377,50 @@ namespace System.Web {
                 if (node == null)
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.XmlSiteMapProvider_Top_Element_Must_Be_SiteMap),
-                        document);
+                        document
+                    );
 
                 bool enableLocalization = false;
-                HandlerBase.GetAndRemoveBooleanAttribute(node, "enableLocalization", ref enableLocalization);
+                HandlerBase.GetAndRemoveBooleanAttribute(
+                    node,
+                    "enableLocalization",
+                    ref enableLocalization
+                );
                 EnableLocalization = enableLocalization;
 
                 XmlNode topElement = null;
-                foreach (XmlNode subNode in node.ChildNodes) {
-                    if (subNode.NodeType == XmlNodeType.Element) {
-                        if (!_siteMapNodeName.Equals(subNode.Name)) {
+                foreach (XmlNode subNode in node.ChildNodes)
+                {
+                    if (subNode.NodeType == XmlNodeType.Element)
+                    {
+                        if (!_siteMapNodeName.Equals(subNode.Name))
+                        {
                             throw new ConfigurationErrorsException(
                                 SR.GetString(SR.XmlSiteMapProvider_Only_SiteMapNode_Allowed),
-                                subNode);
+                                subNode
+                            );
                         }
 
-                        if (topElement != null) {
+                        if (topElement != null)
+                        {
                             throw new ConfigurationErrorsException(
-                                SR.GetString(SR.XmlSiteMapProvider_Only_One_SiteMapNode_Required_At_Top),
-                                subNode);
+                                SR.GetString(
+                                    SR.XmlSiteMapProvider_Only_One_SiteMapNode_Required_At_Top
+                                ),
+                                subNode
+                            );
                         }
 
                         topElement = subNode;
                     }
                 }
 
-                if (topElement == null) {
+                if (topElement == null)
+                {
                     throw new ConfigurationErrorsException(
-                         SR.GetString(SR.XmlSiteMapProvider_Only_One_SiteMapNode_Required_At_Top),
-                         node);
+                        SR.GetString(SR.XmlSiteMapProvider_Only_One_SiteMapNode_Required_At_Top),
+                        node
+                    );
                 }
 
                 Queue queue = new Queue(50);
@@ -331,16 +435,20 @@ namespace System.Web {
             }
         }
 
-        private void CheckSiteMapFileExists() {
-            if (!System.Web.UI.Util.VirtualFileExistsWithAssert(_normalizedVirtualPath)) {
+        private void CheckSiteMapFileExists()
+        {
+            if (!System.Web.UI.Util.VirtualFileExistsWithAssert(_normalizedVirtualPath))
+            {
                 throw new InvalidOperationException(
-                    SR.GetString(SR.XmlSiteMapProvider_FileName_does_not_exist, _virtualPath));
+                    SR.GetString(SR.XmlSiteMapProvider_FileName_does_not_exist, _virtualPath)
+                );
             }
         }
 
-
-        protected override void Clear() {
-            lock (_lock) {
+        protected override void Clear()
+        {
+            lock (_lock)
+            {
                 ChildProviderTable.Clear();
                 _siteMapNode = null;
                 _childProviderList = null;
@@ -350,11 +458,13 @@ namespace System.Web {
         }
 
         // helper method to convert an XmlNode to a SiteMapNode
-        private SiteMapNode ConvertFromXmlNode(Queue queue) {
-
+        private SiteMapNode ConvertFromXmlNode(Queue queue)
+        {
             SiteMapNode rootNode = null;
-            while (true) {
-                if (queue.Count == 0) {
+            while (true)
+            {
+                if (queue.Count == 0)
+                {
                     return rootNode;
                 }
 
@@ -363,90 +473,125 @@ namespace System.Web {
 
                 SiteMapNode node = null;
 
-                if (!_siteMapNodeName.Equals(xmlNode.Name)) {
+                if (!_siteMapNodeName.Equals(xmlNode.Name))
+                {
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.XmlSiteMapProvider_Only_SiteMapNode_Allowed),
-                        xmlNode);
+                        xmlNode
+                    );
                 }
 
                 string providerName = null;
-                HandlerBase.GetAndRemoveNonEmptyStringAttribute(xmlNode, _providerAttribute, ref providerName);
+                HandlerBase.GetAndRemoveNonEmptyStringAttribute(
+                    xmlNode,
+                    _providerAttribute,
+                    ref providerName
+                );
 
                 // If the siteMapNode references another provider
-                if (providerName != null) {
+                if (providerName != null)
+                {
                     node = GetNodeFromProvider(providerName);
 
                     // No other attributes or child nodes are allowed on a provider node.
                     HandlerBase.CheckForUnrecognizedAttributes(xmlNode);
                     HandlerBase.CheckForNonCommentChildNodes(xmlNode);
                 }
-                else {
+                else
+                {
                     string siteMapFile = null;
-                    HandlerBase.GetAndRemoveNonEmptyStringAttribute(xmlNode, _siteMapFileAttribute, ref siteMapFile);
+                    HandlerBase.GetAndRemoveNonEmptyStringAttribute(
+                        xmlNode,
+                        _siteMapFileAttribute,
+                        ref siteMapFile
+                    );
 
-                    if (siteMapFile != null) {
+                    if (siteMapFile != null)
+                    {
                         node = GetNodeFromSiteMapFile(xmlNode, VirtualPath.Create(siteMapFile));
                     }
-                    else {
+                    else
+                    {
                         node = GetNodeFromXmlNode(xmlNode, queue);
                     }
                 }
 
                 AddNodeInternal(node, parentNode, xmlNode);
 
-                if (rootNode == null) {
+                if (rootNode == null)
+                {
                     rootNode = node;
                 }
             }
         }
 
-        protected virtual void Dispose(bool disposing) {
-            if (_handler != null) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_handler != null)
+            {
                 Debug.Assert(_filename != null);
                 HttpRuntime.FileChangesMonitor.StopMonitoringFile(_filename, _handler);
             }
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        private void EnsureChildSiteMapProviderUpToDate(SiteMapProvider childProvider) {
+        private void EnsureChildSiteMapProviderUpToDate(SiteMapProvider childProvider)
+        {
             SiteMapNode oldNode = (SiteMapNode)ChildProviderTable[childProvider];
 
             SiteMapNode newNode = childProvider.GetRootNodeCore();
-            if (newNode == null) {
-                throw new ProviderException(SR.GetString(SR.XmlSiteMapProvider_invalid_sitemapnode_returned, childProvider.Name));
+            if (newNode == null)
+            {
+                throw new ProviderException(
+                    SR.GetString(
+                        SR.XmlSiteMapProvider_invalid_sitemapnode_returned,
+                        childProvider.Name
+                    )
+                );
             }
 
             // child providers have been updated.
-            if (!oldNode.Equals(newNode)) {
-
+            if (!oldNode.Equals(newNode))
+            {
                 // If the child provider table has been updated, simply return null.
                 // This will happen when the current provider's sitemap file is changed or Clear() is called;
-                if (oldNode == null) {
+                if (oldNode == null)
+                {
                     return;
                 }
 
-                lock (_lock) {
+                lock (_lock)
+                {
                     oldNode = (SiteMapNode)ChildProviderTable[childProvider];
                     // If the child provider table has been updated, simply return null. See above.
-                    if (oldNode == null) {
+                    if (oldNode == null)
+                    {
                         return;
                     }
 
                     newNode = childProvider.GetRootNodeCore();
-                    if (newNode == null) {
-                        throw new ProviderException(SR.GetString(SR.XmlSiteMapProvider_invalid_sitemapnode_returned, childProvider.Name));
+                    if (newNode == null)
+                    {
+                        throw new ProviderException(
+                            SR.GetString(
+                                SR.XmlSiteMapProvider_invalid_sitemapnode_returned,
+                                childProvider.Name
+                            )
+                        );
                     }
 
-                    if (!oldNode.Equals(newNode)) {
-
+                    if (!oldNode.Equals(newNode))
+                    {
                         // If the current provider does not contain any nodes but one child provider
                         // ie. _siteMapNode == oldNode
                         // the oldNode needs to be removed from Url table and the new node will be added.
-                        if (_siteMapNode.Equals(oldNode)) {
+                        if (_siteMapNode.Equals(oldNode))
+                        {
                             UrlTable.Remove(oldNode.Url);
                             KeyTable.Remove(oldNode.Key);
 
@@ -461,17 +606,21 @@ namespace System.Web {
 
                         // parent is null when the provider does not contain any static nodes, ie.
                         // it only contains definition to include one child provider.
-                        if (parent != null) {
+                        if (parent != null)
+                        {
                             // Update the child nodes table
-                            SiteMapNodeCollection list = (SiteMapNodeCollection)ChildNodeCollectionTable[parent];
+                            SiteMapNodeCollection list = (SiteMapNodeCollection)
+                                ChildNodeCollectionTable[parent];
 
                             // Add the newNode to where the oldNode is within parent node's collection.
                             int index = list.IndexOf(oldNode);
-                            if (index != -1) {
+                            if (index != -1)
+                            {
                                 list.Remove(oldNode);
                                 list.Insert(index, newNode);
                             }
-                            else {
+                            else
+                            {
                                 list.Add(newNode);
                             }
 
@@ -486,10 +635,12 @@ namespace System.Web {
                             UrlTable.Add(newNode.Url, newNode);
                             KeyTable.Add(newNode.Key, newNode);
                         }
-                        else {
+                        else
+                        {
                             // Notify the parent provider to update its child provider collection.
                             XmlSiteMapProvider provider = ParentProvider as XmlSiteMapProvider;
-                            if (provider != null) {
+                            if (provider != null)
+                            {
                                 provider.EnsureChildSiteMapProviderUpToDate(this);
                             }
                         }
@@ -504,16 +655,20 @@ namespace System.Web {
 
         // Returns sitemap node; Search recursively in child providers if not found.
 
-        public override SiteMapNode FindSiteMapNode(string rawUrl) {
+        public override SiteMapNode FindSiteMapNode(string rawUrl)
+        {
             SiteMapNode node = base.FindSiteMapNode(rawUrl);
 
-            if (node == null) {
-                foreach(SiteMapProvider provider in ChildProviderList) {
+            if (node == null)
+            {
+                foreach (SiteMapProvider provider in ChildProviderList)
+                {
                     // First make sure the child provider is up-to-date.
                     EnsureChildSiteMapProviderUpToDate(provider);
 
                     node = provider.FindSiteMapNode(rawUrl);
-                    if (node != null) {
+                    if (node != null)
+                    {
                         return node;
                     }
                 }
@@ -523,16 +678,20 @@ namespace System.Web {
         }
 
         // Returns sitemap node; Search recursively in child providers if not found.
-        public override SiteMapNode FindSiteMapNodeFromKey(string key) {
+        public override SiteMapNode FindSiteMapNodeFromKey(string key)
+        {
             SiteMapNode node = base.FindSiteMapNodeFromKey(key);
 
-            if (node == null) {
-                foreach (SiteMapProvider provider in ChildProviderList) {
+            if (node == null)
+            {
+                foreach (SiteMapProvider provider in ChildProviderList)
+                {
                     // First make sure the child provider is up-to-date.
                     EnsureChildSiteMapProviderUpToDate(provider);
 
                     node = provider.FindSiteMapNodeFromKey(key);
-                    if (node != null) {
+                    if (node != null)
+                    {
                         return node;
                     }
                 }
@@ -541,24 +700,36 @@ namespace System.Web {
             return node;
         }
 
-        private XmlDocument GetConfigDocument() {
+        private XmlDocument GetConfigDocument()
+        {
             if (_document != null)
                 return _document;
 
-            if (!_initialized) {
+            if (!_initialized)
+            {
                 throw new InvalidOperationException(
-                    SR.GetString(SR.XmlSiteMapProvider_Not_Initialized));
+                    SR.GetString(SR.XmlSiteMapProvider_Not_Initialized)
+                );
             }
 
             // Do the error checking here
-            if (_virtualPath == null) {
+            if (_virtualPath == null)
+            {
                 throw new ArgumentException(
-                    SR.GetString(SR.XmlSiteMapProvider_missing_siteMapFile, _siteMapFileAttribute));
+                    SR.GetString(SR.XmlSiteMapProvider_missing_siteMapFile, _siteMapFileAttribute)
+                );
             }
 
-            if (!_virtualPath.Extension.Equals(_xmlSiteMapFileExtension, StringComparison.OrdinalIgnoreCase)) {
+            if (
+                !_virtualPath.Extension.Equals(
+                    _xmlSiteMapFileExtension,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
+            {
                 throw new InvalidOperationException(
-                    SR.GetString(SR.XmlSiteMapProvider_Invalid_Extension, _virtualPath));
+                    SR.GetString(SR.XmlSiteMapProvider_Invalid_Extension, _virtualPath)
+                );
             }
 
             _normalizedVirtualPath = _virtualPath.CombineWithAppRoot();
@@ -569,14 +740,22 @@ namespace System.Web {
 
             _parentSiteMapFileCollection = new StringCollection();
             XmlSiteMapProvider xmlParentProvider = ParentProvider as XmlSiteMapProvider;
-            if (xmlParentProvider != null && xmlParentProvider._parentSiteMapFileCollection != null) {
-                if (xmlParentProvider._parentSiteMapFileCollection.Contains(_normalizedVirtualPath.VirtualPathString)) {
+            if (xmlParentProvider != null && xmlParentProvider._parentSiteMapFileCollection != null)
+            {
+                if (
+                    xmlParentProvider._parentSiteMapFileCollection.Contains(
+                        _normalizedVirtualPath.VirtualPathString
+                    )
+                )
+                {
                     throw new InvalidOperationException(
-                        SR.GetString(SR.XmlSiteMapProvider_FileName_already_in_use, _virtualPath));
+                        SR.GetString(SR.XmlSiteMapProvider_FileName_already_in_use, _virtualPath)
+                    );
                 }
 
                 // Copy the sitemapfiles in used from parent provider to current provider.
-                foreach (string filename in xmlParentProvider._parentSiteMapFileCollection) {
+                foreach (string filename in xmlParentProvider._parentSiteMapFileCollection)
+                {
                     _parentSiteMapFileCollection.Add(filename);
                 }
             }
@@ -586,7 +765,8 @@ namespace System.Web {
 
             _filename = HostingEnvironment.MapPathInternal(_normalizedVirtualPath);
 
-            if (!String.IsNullOrEmpty(_filename)) {
+            if (!String.IsNullOrEmpty(_filename))
+            {
                 _handler = new FileChangeEventHandler(this.OnConfigFileChange);
                 HttpRuntime.FileChangesMonitor.StartMonitoringFile(_filename, _handler);
                 ResourceKey = (new FileInfo(_filename)).Name;
@@ -597,17 +777,21 @@ namespace System.Web {
             return _document;
         }
 
-        private SiteMapNode GetNodeFromProvider(string providerName) {
+        private SiteMapNode GetNodeFromProvider(string providerName)
+        {
             SiteMapProvider provider = GetProviderFromName(providerName);
             SiteMapNode node = null;
 
             // Check infinite recursive sitemap files
-            if (provider is XmlSiteMapProvider) {
+            if (provider is XmlSiteMapProvider)
+            {
                 XmlSiteMapProvider xmlProvider = (XmlSiteMapProvider)provider;
 
                 StringCollection parentSiteMapFileCollection = new StringCollection();
-                if (_parentSiteMapFileCollection != null) {
-                    foreach (string filename in _parentSiteMapFileCollection) {
+                if (_parentSiteMapFileCollection != null)
+                {
+                    foreach (string filename in _parentSiteMapFileCollection)
+                    {
                         parentSiteMapFileCollection.Add(filename);
                     }
                 }
@@ -616,17 +800,32 @@ namespace System.Web {
                 xmlProvider.BuildSiteMap();
 
                 parentSiteMapFileCollection.Add(_normalizedVirtualPath.VirtualPathString);
-                if (parentSiteMapFileCollection.Contains(VirtualPath.GetVirtualPathString(xmlProvider._normalizedVirtualPath))) {
-                    throw new InvalidOperationException(SR.GetString(SR.XmlSiteMapProvider_FileName_already_in_use, xmlProvider._virtualPath));
+                if (
+                    parentSiteMapFileCollection.Contains(
+                        VirtualPath.GetVirtualPathString(xmlProvider._normalizedVirtualPath)
+                    )
+                )
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.XmlSiteMapProvider_FileName_already_in_use,
+                            xmlProvider._virtualPath
+                        )
+                    );
                 }
 
                 xmlProvider._parentSiteMapFileCollection = parentSiteMapFileCollection;
             }
 
             node = provider.GetRootNodeCore();
-            if (node == null) {
+            if (node == null)
+            {
                 throw new InvalidOperationException(
-                    SR.GetString(SR.XmlSiteMapProvider_invalid_GetRootNodeCore, ((ProviderBase)provider).Name));
+                    SR.GetString(
+                        SR.XmlSiteMapProvider_invalid_GetRootNodeCore,
+                        ((ProviderBase)provider).Name
+                    )
+                );
             }
 
             ChildProviderTable.Add(provider, node);
@@ -637,13 +836,17 @@ namespace System.Web {
             return node;
         }
 
-        private SiteMapNode GetNodeFromSiteMapFile(XmlNode xmlNode, VirtualPath siteMapFile) {
-
+        private SiteMapNode GetNodeFromSiteMapFile(XmlNode xmlNode, VirtualPath siteMapFile)
+        {
             SiteMapNode node = null;
 
             // For external sitemap files, its secuity setting is inherited from parent provider
             bool secuityTrimmingEnabled = SecurityTrimmingEnabled;
-            HandlerBase.GetAndRemoveBooleanAttribute(xmlNode, _securityTrimmingEnabledAttrName, ref secuityTrimmingEnabled);
+            HandlerBase.GetAndRemoveBooleanAttribute(
+                xmlNode,
+                _securityTrimmingEnabledAttrName,
+                ref secuityTrimmingEnabled
+            );
 
             // No other attributes or non-comment nodes are allowed on a siteMapFile node
             HandlerBase.CheckForUnrecognizedAttributes(xmlNode);
@@ -666,36 +869,60 @@ namespace System.Web {
             return node;
         }
 
-        private void HandleResourceAttribute(XmlNode xmlNode, ref NameValueCollection collection, 
-            string attrName, ref string text, bool allowImplicitResource) {
-            if (String.IsNullOrEmpty(text)) {
+        private void HandleResourceAttribute(
+            XmlNode xmlNode,
+            ref NameValueCollection collection,
+            string attrName,
+            ref string text,
+            bool allowImplicitResource
+        )
+        {
+            if (String.IsNullOrEmpty(text))
+            {
                 return;
             }
 
             string resourceKey = null;
             string temp = text.TrimStart(new char[] { ' ' });
 
-            if (temp != null && temp.Length > _resourcePrefixLength) {
-                if (temp.ToLower(CultureInfo.InvariantCulture).StartsWith(_resourcePrefix, StringComparison.Ordinal)) {
-                    if (!allowImplicitResource) {
+            if (temp != null && temp.Length > _resourcePrefixLength)
+            {
+                if (
+                    temp.ToLower(CultureInfo.InvariantCulture)
+                        .StartsWith(_resourcePrefix, StringComparison.Ordinal)
+                )
+                {
+                    if (!allowImplicitResource)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.XmlSiteMapProvider_multiple_resource_definition, attrName), xmlNode);
+                            SR.GetString(
+                                SR.XmlSiteMapProvider_multiple_resource_definition,
+                                attrName
+                            ),
+                            xmlNode
+                        );
                     }
 
                     resourceKey = temp.Substring(_resourcePrefixLength + 1);
 
-                    if (resourceKey.Length == 0) {
+                    if (resourceKey.Length == 0)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.XmlSiteMapProvider_resourceKey_cannot_be_empty), xmlNode);
+                            SR.GetString(SR.XmlSiteMapProvider_resourceKey_cannot_be_empty),
+                            xmlNode
+                        );
                     }
 
                     // Retrieve className from attribute
                     string className = null;
                     string key = null;
                     int index = resourceKey.IndexOf(_resourceKeySeparator);
-                    if (index == -1) {
+                    if (index == -1)
+                    {
                         throw new ConfigurationErrorsException(
-                            SR.GetString(SR.XmlSiteMapProvider_invalid_resource_key, resourceKey), xmlNode);
+                            SR.GetString(SR.XmlSiteMapProvider_invalid_resource_key, resourceKey),
+                            xmlNode
+                        );
                     }
 
                     className = resourceKey.Substring(0, index);
@@ -703,15 +930,18 @@ namespace System.Web {
 
                     // Retrieve resource key and default value from attribute
                     int defaultIndex = key.IndexOf(_resourceKeySeparator);
-                    if (defaultIndex != -1) {
+                    if (defaultIndex != -1)
+                    {
                         text = key.Substring(defaultIndex + 1);
                         key = key.Substring(0, defaultIndex);
                     }
-                    else {
+                    else
+                    {
                         text = null;
                     }
 
-                    if (collection == null) {
+                    if (collection == null)
+                    {
                         collection = new NameValueCollection();
                     }
 
@@ -721,10 +951,15 @@ namespace System.Web {
             }
         }
 
-        private SiteMapNode GetNodeFromXmlNode(XmlNode xmlNode, Queue queue) {
+        private SiteMapNode GetNodeFromXmlNode(XmlNode xmlNode, Queue queue)
+        {
             SiteMapNode node = null;
             // static nodes
-            string title = null, url = null, description = null, roles = null, resourceKey = null;
+            string title = null,
+                url = null,
+                description = null,
+                roles = null,
+                resourceKey = null;
 
             // Url attribute is NOT required for a xml node.
             HandlerBase.GetAndRemoveStringAttribute(xmlNode, "url", ref url);
@@ -734,8 +969,11 @@ namespace System.Web {
             HandlerBase.GetAndRemoveStringAttribute(xmlNode, "resourceKey", ref resourceKey);
 
             // Do not add the resourceKey if the resource is not valid.
-            if (!String.IsNullOrEmpty(resourceKey) && 
-                !ValidateResource(ResourceKey, resourceKey + ".title")) {
+            if (
+                !String.IsNullOrEmpty(resourceKey)
+                && !ValidateResource(ResourceKey, resourceKey + ".title")
+            )
+            {
                 resourceKey = null;
             }
 
@@ -743,23 +981,41 @@ namespace System.Web {
 
             NameValueCollection resourceKeyCollection = null;
             bool allowImplicitResourceAttribute = String.IsNullOrEmpty(resourceKey);
-            HandleResourceAttribute(xmlNode, ref resourceKeyCollection, 
-                "title", ref title, allowImplicitResourceAttribute);
-            HandleResourceAttribute(xmlNode, ref resourceKeyCollection, 
-                "description", ref description, allowImplicitResourceAttribute);
+            HandleResourceAttribute(
+                xmlNode,
+                ref resourceKeyCollection,
+                "title",
+                ref title,
+                allowImplicitResourceAttribute
+            );
+            HandleResourceAttribute(
+                xmlNode,
+                ref resourceKeyCollection,
+                "description",
+                ref description,
+                allowImplicitResourceAttribute
+            );
 
             ArrayList roleList = new ArrayList();
-            if (roles != null) {
+            if (roles != null)
+            {
                 int foundIndex = roles.IndexOf('?');
-                if (foundIndex != -1) {
+                if (foundIndex != -1)
+                {
                     throw new ConfigurationErrorsException(
-                        SR.GetString(SR.Auth_rule_names_cant_contain_char,
-                        roles[foundIndex].ToString(CultureInfo.InvariantCulture)), xmlNode);
+                        SR.GetString(
+                            SR.Auth_rule_names_cant_contain_char,
+                            roles[foundIndex].ToString(CultureInfo.InvariantCulture)
+                        ),
+                        xmlNode
+                    );
                 }
 
-                foreach (string role in roles.Split(_seperators)) {
+                foreach (string role in roles.Split(_seperators))
+                {
                     string trimmedRole = role.Trim();
-                    if (trimmedRole.Length > 0) {
+                    if (trimmedRole.Length > 0)
+                    {
                         roleList.Add(trimmedRole);
                     }
                 }
@@ -769,43 +1025,68 @@ namespace System.Web {
             String key = null;
 
             // Make urls absolute.
-            if (!String.IsNullOrEmpty(url)) {
+            if (!String.IsNullOrEmpty(url))
+            {
                 // URL needs to be trimmed. VSWhidbey 411041
                 url = url.Trim();
 
-                if (!UrlPath.IsAbsolutePhysicalPath(url)) {
-                    if (UrlPath.IsRelativeUrl(url)) {
+                if (!UrlPath.IsAbsolutePhysicalPath(url))
+                {
+                    if (UrlPath.IsRelativeUrl(url))
+                    {
                         url = UrlPath.Combine(HttpRuntime.AppDomainAppVirtualPathString, url);
                     }
                 }
 
                 // VSWhidbey 418056, Reject any suspicious or mal-formed Urls.
                 string decodedUrl = HttpUtility.UrlDecode(url);
-                if (!String.Equals(url, decodedUrl, StringComparison.Ordinal)) {
+                if (!String.Equals(url, decodedUrl, StringComparison.Ordinal))
+                {
                     throw new ConfigurationErrorsException(
-                        SR.GetString(SR.Property_Had_Malformed_Url, "url", url), xmlNode);
+                        SR.GetString(SR.Property_Had_Malformed_Url, "url", url),
+                        xmlNode
+                    );
                 }
 
                 key = url.ToLowerInvariant();
             }
-            else {
+            else
+            {
                 key = Guid.NewGuid().ToString();
             }
 
             // attribute collection does not contain pre-defined properties like title, url, etc.
             ReadOnlyNameValueCollection attributeCollection = new ReadOnlyNameValueCollection();
             attributeCollection.SetReadOnly(false);
-            foreach (XmlAttribute attribute in xmlNode.Attributes) {
+            foreach (XmlAttribute attribute in xmlNode.Attributes)
+            {
                 string value = attribute.Value;
-                HandleResourceAttribute(xmlNode, ref resourceKeyCollection, attribute.Name, ref value, allowImplicitResourceAttribute);
+                HandleResourceAttribute(
+                    xmlNode,
+                    ref resourceKeyCollection,
+                    attribute.Name,
+                    ref value,
+                    allowImplicitResourceAttribute
+                );
                 attributeCollection[attribute.Name] = value;
             }
             attributeCollection.SetReadOnly(true);
 
-            node = new SiteMapNode(this, key, url, title, description, roleList, attributeCollection, resourceKeyCollection, resourceKey);
+            node = new SiteMapNode(
+                this,
+                key,
+                url,
+                title,
+                description,
+                roleList,
+                attributeCollection,
+                resourceKeyCollection,
+                resourceKey
+            );
             node.ReadOnly = true;
 
-            foreach (XmlNode subNode in xmlNode.ChildNodes) {
+            foreach (XmlNode subNode in xmlNode.ChildNodes)
+            {
                 if (subNode.NodeType != XmlNodeType.Element)
                     continue;
 
@@ -816,96 +1097,128 @@ namespace System.Web {
             return node;
         }
 
-        private SiteMapProvider GetProviderFromName(string providerName) {
+        private SiteMapProvider GetProviderFromName(string providerName)
+        {
             Debug.Assert(providerName != null);
 
             SiteMapProvider provider = SiteMap.Providers[providerName];
-            if (provider == null) {
+            if (provider == null)
+            {
                 throw new ProviderException(SR.GetString(SR.Provider_Not_Found, providerName));
             }
 
             return provider;
         }
 
-        protected internal override SiteMapNode GetRootNodeCore() {
+        protected internal override SiteMapNode GetRootNodeCore()
+        {
             BuildSiteMap();
             return _siteMapNode;
         }
 
-
-        public override void Initialize(string name, NameValueCollection attributes) {
-            if (_initialized) {
+        public override void Initialize(string name, NameValueCollection attributes)
+        {
+            if (_initialized)
+            {
                 throw new InvalidOperationException(
-                    SR.GetString(SR.XmlSiteMapProvider_Cannot_Be_Inited_Twice));
+                    SR.GetString(SR.XmlSiteMapProvider_Cannot_Be_Inited_Twice)
+                );
             }
 
-            if (attributes != null) {
-                if (string.IsNullOrEmpty(attributes["description"])) {
+            if (attributes != null)
+            {
+                if (string.IsNullOrEmpty(attributes["description"]))
+                {
                     attributes.Remove("description");
                     attributes.Add("description", SR.GetString(SR.XmlSiteMapProvider_Description));
                 }
 
                 string siteMapFile = null;
-                ProviderUtil.GetAndRemoveStringAttribute(attributes, _siteMapFileAttribute, name, ref siteMapFile);
+                ProviderUtil.GetAndRemoveStringAttribute(
+                    attributes,
+                    _siteMapFileAttribute,
+                    name,
+                    ref siteMapFile
+                );
                 _virtualPath = VirtualPath.CreateAllowNull(siteMapFile);
             }
 
             base.Initialize(name, attributes);
 
-            if (attributes != null) {
+            if (attributes != null)
+            {
                 ProviderUtil.CheckUnrecognizedAttributes(attributes, name);
             }
 
             _initialized = true;
         }
 
-        private void Initialize(VirtualPath virtualPath, bool secuityTrimmingEnabled) {
+        private void Initialize(VirtualPath virtualPath, bool secuityTrimmingEnabled)
+        {
             NameValueCollection coll = new NameValueCollection();
             coll.Add(_siteMapFileAttribute, virtualPath.VirtualPathString);
-            coll.Add(_securityTrimmingEnabledAttrName, System.Web.UI.Util.GetStringFromBool(secuityTrimmingEnabled));
+            coll.Add(
+                _securityTrimmingEnabledAttrName,
+                System.Web.UI.Util.GetStringFromBool(secuityTrimmingEnabled)
+            );
 
             // Use the siteMapFile virtual path as the provider name
             Initialize(virtualPath.VirtualPathString, coll);
         }
 
-        private void OnConfigFileChange(Object sender, FileChangeEvent e) {
+        private void OnConfigFileChange(Object sender, FileChangeEvent e)
+        {
             // Notifiy the parent for the change.
             XmlSiteMapProvider parentProvider = ParentProvider as XmlSiteMapProvider;
-            if (parentProvider != null) {
+            if (parentProvider != null)
+            {
                 parentProvider.OnConfigFileChange(sender, e);
             }
 
             Clear();
         }
 
-        protected internal override void RemoveNode(SiteMapNode node) {
-            if (node == null) {
+        protected internal override void RemoveNode(SiteMapNode node)
+        {
+            if (node == null)
+            {
                 throw new ArgumentNullException("node");
             }
 
             SiteMapProvider ownerProvider = node.Provider;
 
-            if (ownerProvider != this) {
-
+            if (ownerProvider != this)
+            {
                 // Only nodes defined in this provider tree can be removed.
                 SiteMapProvider parentProvider = ownerProvider.ParentProvider;
-                while (parentProvider != this) {
-                    if (parentProvider == null) {
+                while (parentProvider != this)
+                {
+                    if (parentProvider == null)
+                    {
                         // Cannot remove nodes defined in other providers
                         throw new InvalidOperationException(
-                            SR.GetString(SR.XmlSiteMapProvider_cannot_remove_node, node.ToString(), 
-                            this.Name, ownerProvider.Name));
+                            SR.GetString(
+                                SR.XmlSiteMapProvider_cannot_remove_node,
+                                node.ToString(),
+                                this.Name,
+                                ownerProvider.Name
+                            )
+                        );
                     }
 
                     parentProvider = parentProvider.ParentProvider;
                 }
             }
 
-            if (node.Equals(ownerProvider.GetRootNodeCore())) {
-                throw new InvalidOperationException(SR.GetString(SR.SiteMapProvider_cannot_remove_root_node));
+            if (node.Equals(ownerProvider.GetRootNodeCore()))
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.SiteMapProvider_cannot_remove_root_node)
+                );
             }
 
-            if (ownerProvider != this) {
+            if (ownerProvider != this)
+            {
                 // Remove node from the owner provider.
                 ownerProvider.RemoveNode(node);
             }
@@ -913,17 +1226,27 @@ namespace System.Web {
             base.RemoveNode(node);
         }
 
-        protected virtual void RemoveProvider(string providerName) {
-            if (providerName == null) {
+        protected virtual void RemoveProvider(string providerName)
+        {
+            if (providerName == null)
+            {
                 throw new ArgumentNullException("providerName");
             }
 
-            lock (_lock) {
+            lock (_lock)
+            {
                 SiteMapProvider provider = GetProviderFromName(providerName);
                 SiteMapNode rootNode = (SiteMapNode)ChildProviderTable[provider];
 
-                if (rootNode == null) {
-                    throw new InvalidOperationException(SR.GetString(SR.XmlSiteMapProvider_cannot_find_provider, provider.Name, this.Name));
+                if (rootNode == null)
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.XmlSiteMapProvider_cannot_find_provider,
+                            provider.Name,
+                            this.Name
+                        )
+                    );
                 }
 
                 provider.ParentProvider = null;
@@ -934,13 +1257,16 @@ namespace System.Web {
             }
         }
 
-        // VSWhidbey: 493981 Helper method to check if the valid resource type exists. 
+        // VSWhidbey: 493981 Helper method to check if the valid resource type exists.
         // Note that this only returns false if the classKey cannot be found, regardless of resourceKey.
-        private bool ValidateResource(string classKey, string resourceKey) {
-            try {
+        private bool ValidateResource(string classKey, string resourceKey)
+        {
+            try
+            {
                 HttpContext.GetGlobalResourceObject(classKey, resourceKey);
             }
-            catch (MissingManifestResourceException) {
+            catch (MissingManifestResourceException)
+            {
                 return false;
             }
 
@@ -949,28 +1275,32 @@ namespace System.Web {
 
         // Dev10# 923217 - SiteMapProvider URL Table Invalid Using Cookieless
         // Don't keep the modifier inside the links table. Apply the modifier as approriate on demand
-        private static SiteMapNode ApplyModifierIfExists(SiteMapNode node) {
+        private static SiteMapNode ApplyModifierIfExists(SiteMapNode node)
+        {
             HttpContext context = HttpContext.Current;
 
             // Do nothing if the modifier doesn't apply
-            if (node == null || context == null || !context.Response.UsePathModifier) {
+            if (node == null || context == null || !context.Response.UsePathModifier)
+            {
                 return node;
             }
 
             // Set Url with the modifier applied
             SiteMapNode resultNode = node.Clone();
             resultNode.Url = context.Response.ApplyAppPathModifier(node.Url);
- 
+
             return resultNode;
         }
 
-        private class ReadOnlyNameValueCollection : NameValueCollection {
-
-            public ReadOnlyNameValueCollection() {
+        private class ReadOnlyNameValueCollection : NameValueCollection
+        {
+            public ReadOnlyNameValueCollection()
+            {
                 IsReadOnly = true;
             }
 
-            internal void SetReadOnly(bool isReadonly) {
+            internal void SetReadOnly(bool isReadonly)
+            {
                 IsReadOnly = isReadonly;
             }
         }

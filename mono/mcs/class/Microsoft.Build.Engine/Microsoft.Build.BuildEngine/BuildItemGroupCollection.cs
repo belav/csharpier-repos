@@ -28,68 +28,69 @@
 using System;
 using System.Collections;
 
-namespace Microsoft.Build.BuildEngine {
-	public class BuildItemGroupCollection :	ICollection, IEnumerable {
-			
-		GroupingCollection	groupingCollection;
-		
-		BuildItemGroupCollection ()
-		{
-			groupingCollection = new GroupingCollection (null);
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    public class BuildItemGroupCollection : ICollection, IEnumerable
+    {
+        GroupingCollection groupingCollection;
 
-		internal BuildItemGroupCollection (GroupingCollection groupingCollection)
-		{
-			this.groupingCollection = groupingCollection;
-		}
+        BuildItemGroupCollection()
+        {
+            groupingCollection = new GroupingCollection(null);
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			if (array == null)
-				throw new ArgumentNullException ("array");
-			if (index < 0)
-				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-			if (array.Rank > 1)
-				throw new ArgumentException ("array is multidimensional");
-			if ((array.Length > 0) && (index >= array.Length))
-				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-			if (index + this.Count > array.Length)
-				throw new IndexOutOfRangeException ("Not enough room from index to end of array for this BuildItemGroupCollection");
-		
-			IEnumerator it = GetEnumerator ();
-			int i = index;
-			while (it.MoveNext ()) {
-				array.SetValue(it.Current, i++);
-			}
-		}
+        internal BuildItemGroupCollection(GroupingCollection groupingCollection)
+        {
+            this.groupingCollection = groupingCollection;
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return groupingCollection.GetItemGroupEnumerator ();
-		}
-		
-		internal void Add (BuildItemGroup buildItemGroup)
-		{
-			buildItemGroup.GroupingCollection = this.groupingCollection;
-			groupingCollection.Add (buildItemGroup);
-		}
+        public void CopyTo(Array array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException("array");
+            if (index < 0)
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
+            if (array.Rank > 1)
+                throw new ArgumentException("array is multidimensional");
+            if ((array.Length > 0) && (index >= array.Length))
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
+            if (index + this.Count > array.Length)
+                throw new IndexOutOfRangeException(
+                    "Not enough room from index to end of array for this BuildItemGroupCollection"
+                );
 
-		public int Count {
-			get {
-				return groupingCollection.ItemGroups;
-			}
-		}
+            IEnumerator it = GetEnumerator();
+            int i = index;
+            while (it.MoveNext())
+            {
+                array.SetValue(it.Current, i++);
+            }
+        }
 
-		public bool IsSynchronized {
-			get {
-				return false;
-			}
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return groupingCollection.GetItemGroupEnumerator();
+        }
 
-		public object SyncRoot {
-			get {
-				return this;
-			}
-		}
-	}
+        internal void Add(BuildItemGroup buildItemGroup)
+        {
+            buildItemGroup.GroupingCollection = this.groupingCollection;
+            groupingCollection.Add(buildItemGroup);
+        }
+
+        public int Count
+        {
+            get { return groupingCollection.ItemGroups; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+    }
 }

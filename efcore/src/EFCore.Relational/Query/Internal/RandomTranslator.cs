@@ -13,8 +13,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class RandomTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo MethodInfo =
-        typeof(DbFunctionsExtensions).GetRuntimeMethod(nameof(DbFunctionsExtensions.Random), new[] { typeof(DbFunctions) })!;
+    private static readonly MethodInfo MethodInfo = typeof(DbFunctionsExtensions).GetRuntimeMethod(
+        nameof(DbFunctionsExtensions.Random),
+        new[] { typeof(DbFunctions) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -39,13 +41,15 @@ public class RandomTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => MethodInfo.Equals(method)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        MethodInfo.Equals(method)
             ? _sqlExpressionFactory.Function(
                 "RAND",
                 Enumerable.Empty<SqlExpression>(),
                 nullable: false,
                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                method.ReturnType)
+                method.ReturnType
+            )
             : null;
 }

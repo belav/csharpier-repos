@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,47 +34,47 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class ModuleElement : ConfigurationElement
-	{
-		#region Fields
+    public sealed class ModuleElement : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty typeProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static ModuleElement ()
-		{
-			typeProp = new ConfigurationProperty ("type", typeof (string), null);
-			properties = new ConfigurationPropertyCollection ();
+        static ModuleElement()
+        {
+            typeProp = new ConfigurationProperty("type", typeof(string), null);
+            properties = new ConfigurationPropertyCollection();
 
-			properties.Add (typeProp);
-		}
+            properties.Add(typeProp);
+        }
 
-		public ModuleElement ()
-		{
-		}
+        public ModuleElement() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("type")]
-		public string Type {
-			get { return (string) base [typeProp]; }
-			set { base [typeProp] = value; }
-		}
+        [ConfigurationProperty("type")]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
+            set { base[typeProp] = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

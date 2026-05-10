@@ -21,10 +21,16 @@ namespace System.Text.Json.SourceGeneration.Tests.NETStandard
         [Fact]
         public void RoundTripNETStandardDefinedSourceGenType()
         {
-            MyPoco expected = new MyPoco() { Value = "Hello from NETStandard type."};
+            MyPoco expected = new MyPoco() { Value = "Hello from NETStandard type." };
 
-            string json = JsonSerializer.Serialize(expected, NETStandardSerializerContext.Default.MyPoco);
-            MyPoco actual = JsonSerializer.Deserialize(json, NETStandardSerializerContext.Default.MyPoco);
+            string json = JsonSerializer.Serialize(
+                expected,
+                NETStandardSerializerContext.Default.MyPoco
+            );
+            MyPoco actual = JsonSerializer.Deserialize(
+                json,
+                NETStandardSerializerContext.Default.MyPoco
+            );
             Assert.Equal(expected.Value, actual.Value);
         }
     }

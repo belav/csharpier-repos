@@ -24,14 +24,14 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Utilities;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using Newtonsoft.Json.Utilities;
-using System.Collections;
 
 namespace Newtonsoft.Json.Linq
 {
@@ -39,7 +39,8 @@ namespace Newtonsoft.Json.Linq
     /// Represents a collection of <see cref="JToken"/> objects.
     /// </summary>
     /// <typeparam name="T">The type of token.</typeparam>
-    public readonly struct JEnumerable<T> : IJEnumerable<T>, IEquatable<JEnumerable<T>> where T : JToken
+    public readonly struct JEnumerable<T> : IJEnumerable<T>, IEquatable<JEnumerable<T>>
+        where T : JToken
     {
         /// <summary>
         /// An empty collection of <see cref="JToken"/> objects.
@@ -125,7 +126,7 @@ namespace Newtonsoft.Json.Linq
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {

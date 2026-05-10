@@ -17,8 +17,9 @@ namespace System.Web.Http.Routing
         /// <param name="constraintResolver">The inline constraint resolver.</param>
         /// <returns>A set of route entries for the controller.</returns>
         IReadOnlyList<RouteEntry> GetDirectRoutes(
-            HttpControllerDescriptor controllerDescriptor, 
+            HttpControllerDescriptor controllerDescriptor,
             IReadOnlyList<HttpActionDescriptor> actionDescriptors,
-            IInlineConstraintResolver constraintResolver);
+            IInlineConstraintResolver constraintResolver
+        );
     }
 }

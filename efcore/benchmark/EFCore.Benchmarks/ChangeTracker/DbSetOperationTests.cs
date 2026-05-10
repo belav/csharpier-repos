@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders;
 #pragma warning disable CA1034 // Nested types should not be visible
 
 namespace Microsoft.EntityFrameworkCore.Benchmarks.ChangeTracker;
+
 #pragma warning disable CA1052 // Static holder types should be Static or NotInheritable
 public class DbSetOperationTests
 #pragma warning restore CA1052 // Static holder types should be Static or NotInheritable
@@ -41,15 +42,13 @@ public class DbSetOperationTests
         }
 
         [IterationCleanup]
-        public virtual void CleanupContext()
-            => _context.Dispose();
+        public virtual void CleanupContext() => _context.Dispose();
     }
 
     public abstract class AddDataVariationsBase : DbSetOperationBase
     {
         [IterationSetup]
-        public override void InitializeContext()
-            => base.InitializeContext();
+        public override void InitializeContext() => base.InitializeContext();
 
         [Benchmark]
         public virtual void Add()
@@ -61,8 +60,7 @@ public class DbSetOperationTests
         }
 
         [Benchmark]
-        public virtual void AddRange()
-            => _context.Customers.AddRange(_customersWithoutPk);
+        public virtual void AddRange() => _context.Customers.AddRange(_customersWithoutPk);
 
         [Benchmark]
         public virtual void Attach()
@@ -74,8 +72,7 @@ public class DbSetOperationTests
         }
 
         [Benchmark]
-        public virtual void AttachRange()
-            => _context.Customers.AttachRange(_customersWithPk);
+        public virtual void AttachRange() => _context.Customers.AttachRange(_customersWithPk);
     }
 
     public abstract class ExistingDataVariationsBase : DbSetOperationBase
@@ -97,8 +94,7 @@ public class DbSetOperationTests
         }
 
         [Benchmark]
-        public virtual void RemoveRange()
-            => _context.Customers.RemoveRange(_customersWithPk);
+        public virtual void RemoveRange() => _context.Customers.RemoveRange(_customersWithPk);
 
         [Benchmark]
         public virtual void Update()
@@ -110,7 +106,6 @@ public class DbSetOperationTests
         }
 
         [Benchmark]
-        public virtual void UpdateRange()
-            => _context.Customers.UpdateRange(_customersWithPk);
+        public virtual void UpdateRange() => _context.Customers.UpdateRange(_customersWithPk);
     }
 }

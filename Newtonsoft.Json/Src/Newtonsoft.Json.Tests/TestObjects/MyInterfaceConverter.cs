@@ -41,7 +41,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         private readonly List<IMyInterface> _writers = new List<IMyInterface>
         {
             new ConsoleWriter(),
-            new TraceWriter()
+            new TraceWriter(),
         };
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
@@ -54,7 +54,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value == null)
             {
@@ -64,8 +68,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return (from w in _writers where w.Name == value.ToString() select w).FirstOrDefault();
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value,
-            Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value == null)
             {

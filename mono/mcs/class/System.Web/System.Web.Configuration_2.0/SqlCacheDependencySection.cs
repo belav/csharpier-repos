@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,69 +31,78 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class SqlCacheDependencySection : ConfigurationSection
+    {
+        static ConfigurationProperty databasesProp;
+        static ConfigurationProperty enabledProp;
+        static ConfigurationProperty pollTimeProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static ConfigurationElementProperty elementProperty;
 
-	public sealed class SqlCacheDependencySection : ConfigurationSection
-	{
-		static ConfigurationProperty databasesProp;
-		static ConfigurationProperty enabledProp;
-		static ConfigurationProperty pollTimeProp;
-		static ConfigurationPropertyCollection properties;
+        static SqlCacheDependencySection()
+        {
+            databasesProp = new ConfigurationProperty(
+                "databases",
+                typeof(SqlCacheDependencyDatabaseCollection),
+                null,
+                null,
+                null,
+                ConfigurationPropertyOptions.None
+            );
+            enabledProp = new ConfigurationProperty("enabled", typeof(bool), true);
+            pollTimeProp = new ConfigurationProperty("pollTime", typeof(int), 60000);
+            properties = new ConfigurationPropertyCollection();
 
-		static ConfigurationElementProperty elementProperty;
+            properties.Add(databasesProp);
+            properties.Add(enabledProp);
+            properties.Add(pollTimeProp);
 
-		static SqlCacheDependencySection ()
-		{
-			databasesProp = new ConfigurationProperty ("databases", typeof (SqlCacheDependencyDatabaseCollection), null,
-								   null, null, ConfigurationPropertyOptions.None);
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-			pollTimeProp = new ConfigurationProperty ("pollTime", typeof (int), 60000);
-			properties = new ConfigurationPropertyCollection ();
+            elementProperty = new ConfigurationElementProperty(
+                new CallbackValidator(typeof(SqlCacheDependencySection), ValidateElement)
+            );
+        }
 
-			properties.Add (databasesProp);
-			properties.Add (enabledProp);
-			properties.Add (pollTimeProp);
+        static void ValidateElement(object o)
+        {
+            /* XXX do some sort of element validation here? */
+        }
 
-			elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (SqlCacheDependencySection), ValidateElement));
-		}
+        protected internal override ConfigurationElementProperty ElementProperty
+        {
+            get { return elementProperty; }
+        }
 
-		static void ValidateElement (object o)
-		{
-			/* XXX do some sort of element validation here? */
-		}
+        protected override void PostDeserialize()
+        {
+            base.PostDeserialize();
+        }
 
-		protected internal override ConfigurationElementProperty ElementProperty {
-			get { return elementProperty; }
-		}
+        [ConfigurationProperty("databases")]
+        public SqlCacheDependencyDatabaseCollection Databases
+        {
+            get { return (SqlCacheDependencyDatabaseCollection)base[databasesProp]; }
+        }
 
-		protected override void PostDeserialize ()
-		{
-			base.PostDeserialize ();
-		}
+        [ConfigurationProperty("enabled", DefaultValue = "True")]
+        public bool Enabled
+        {
+            get { return (bool)base[enabledProp]; }
+            set { base[enabledProp] = value; }
+        }
 
-		[ConfigurationProperty ("databases")]
-		public SqlCacheDependencyDatabaseCollection Databases {
-			get { return (SqlCacheDependencyDatabaseCollection) base [databasesProp];}
-		}
+        [ConfigurationProperty("pollTime", DefaultValue = "60000")]
+        public int PollTime
+        {
+            get { return (int)base[pollTimeProp]; }
+            set { base[pollTimeProp] = value; }
+        }
 
-		[ConfigurationProperty ("enabled", DefaultValue = "True")]
-		public bool Enabled {
-			get { return (bool) base [enabledProp];}
-			set { base[enabledProp] = value; }
-		}
-
-		[ConfigurationProperty ("pollTime", DefaultValue = "60000")]
-		public int PollTime {
-			get { return (int) base [pollTimeProp];}
-			set { base[pollTimeProp] = value; }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

@@ -7,7 +7,9 @@ namespace System.Net
 {
     internal abstract partial class NegotiateAuthenticationPal
     {
-        public static NegotiateAuthenticationPal Create(NegotiateAuthenticationClientOptions clientOptions)
+        public static NegotiateAuthenticationPal Create(
+            NegotiateAuthenticationClientOptions clientOptions
+        )
         {
             switch (clientOptions.Package)
             {
@@ -22,7 +24,9 @@ namespace System.Net
             }
         }
 
-        public static NegotiateAuthenticationPal Create(NegotiateAuthenticationServerOptions serverOptions)
+        public static NegotiateAuthenticationPal Create(
+            NegotiateAuthenticationServerOptions serverOptions
+        )
         {
             return new UnsupportedNegotiateAuthenticationPal(serverOptions);
         }

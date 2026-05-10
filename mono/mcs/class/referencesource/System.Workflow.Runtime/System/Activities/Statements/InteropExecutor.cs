@@ -56,47 +56,43 @@ namespace System.Activities.Statements
 
         [DataMember(EmitDefaultValue = false)]
         int atomicActivityContextId;
+
         [DataMember(EmitDefaultValue = false)]
         int internalCurrentActivityContextId;
+
         [DataMember(EmitDefaultValue = false)]
         string atomicActivityName;
+
         [DataMember(EmitDefaultValue = false)]
         string internalCurrentActivityName;
 
         Exception lastExceptionThrown;
         bool abortTransaction;
 
-        public InteropExecutor(Guid instanceId, Activity rootActivity, IList<PropertyInfo> outputProperties, Activity activityDefinition)
+        public InteropExecutor(
+            Guid instanceId,
+            Activity rootActivity,
+            IList<PropertyInfo> outputProperties,
+            Activity activityDefinition
+        )
         {
             this.PrivateInitialize(rootActivity, instanceId, outputProperties, activityDefinition);
         }
 
         public Activity CurrentActivity
         {
-            get
-            {
-                return this.currentActivity;
-            }
-            set
-            {
-                this.currentActivity = value;
-            }
+            get { return this.currentActivity; }
+            set { this.currentActivity = value; }
         }
 
         public IDictionary<string, object> Outputs
         {
-            get
-            {
-                return this.outputs;
-            }
+            get { return this.outputs; }
         }
 
         public IEnumerable<IComparable> Queues
         {
-            get
-            {
-                return this.workflowQueuingService.QueueNames;
-            }
+            get { return this.workflowQueuingService.QueueNames; }
         }
 
         public Dictionary<System.Activities.Bookmark, IComparable> BookmarkQueueMap
@@ -105,48 +101,33 @@ namespace System.Activities.Statements
             {
                 if (this.bookmarkQueueMap == null)
                 {
-                    this.bookmarkQueueMap = new Dictionary<System.Activities.Bookmark, IComparable>();
+                    this.bookmarkQueueMap =
+                        new Dictionary<System.Activities.Bookmark, IComparable>();
                 }
                 return this.bookmarkQueueMap;
             }
         }
 
-        public InteropEnvironment ServiceProvider
-        {
-            get;
-            set;
-        }
+        public InteropEnvironment ServiceProvider { get; set; }
 
         public Activity CurrentAtomicActivity
         {
-            get
-            {
-                return this.currentAtomicActivity;
-            }
+            get { return this.currentAtomicActivity; }
         }
 
         public Guid InstanceID
         {
-            get
-            {
-                return this.instanceId;
-            }
+            get { return this.instanceId; }
         }
 
         public bool IsDynamicallyUpdated
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public Activity RootActivity
         {
-            get
-            {
-                return this.rootActivity;
-            }
+            get { return this.rootActivity; }
         }
 
         TimerEventSubscriptionCollection TimerQueue
@@ -155,24 +136,30 @@ namespace System.Activities.Statements
             {
                 if (this.timerQueue == null)
                 {
-                    this.timerQueue = (TimerEventSubscriptionCollection)this.rootActivity.GetValue(TimerEventSubscriptionCollection.TimerCollectionProperty);
-                    Debug.Assert(this.timerQueue != null, "TimerEventSubscriptionCollection on root activity should never be null, but it was");
+                    this.timerQueue = (TimerEventSubscriptionCollection)
+                        this.rootActivity.GetValue(
+                            TimerEventSubscriptionCollection.TimerCollectionProperty
+                        );
+                    Debug.Assert(
+                        this.timerQueue != null,
+                        "TimerEventSubscriptionCollection on root activity should never be null, but it was"
+                    );
                 }
                 return this.timerQueue;
             }
             set
             {
                 this.timerQueue = value;
-                this.rootActivity.SetValue(TimerEventSubscriptionCollection.TimerCollectionProperty, this.timerQueue);
+                this.rootActivity.SetValue(
+                    TimerEventSubscriptionCollection.TimerCollectionProperty,
+                    this.timerQueue
+                );
             }
         }
 
         public WaitCallback ProcessTimersCallback
         {
-            get
-            {
-                return new WaitCallback(this.ProcessTimers);
-            }
+            get { return new WaitCallback(this.ProcessTimers); }
         }
 
         public WorkBatchCollection BatchCollection
@@ -182,26 +169,14 @@ namespace System.Activities.Statements
 
         public bool TrackingEnabled
         {
-            get
-            {
-                return this.trackingEnabled;
-            }
-            set
-            {
-                this.trackingEnabled = value;
-            }
+            get { return this.trackingEnabled; }
+            set { this.trackingEnabled = value; }
         }
 
         public bool HasCheckedForTrackingParticipant
         {
-            get
-            {
-                return this.hasCheckedForTrackingParticipant;
-            }
-            set
-            {
-                this.hasCheckedForTrackingParticipant = value;
-            }
+            get { return this.hasCheckedForTrackingParticipant; }
+            set { this.hasCheckedForTrackingParticipant = value; }
         }
 
         public ActivityExecutionStatus EnqueueEvent(IComparable queueName, object item)
@@ -236,10 +211,20 @@ namespace System.Activities.Statements
 
             if (transaction != null && this.currentAtomicActivity != null)
             {
-                TransactionalProperties transactionalProperties = (TransactionalProperties)this.currentAtomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
-                Debug.Assert(transactionalProperties != null, "The current atomic activity is missing transactional properties");
+                TransactionalProperties transactionalProperties = (TransactionalProperties)
+                    this.currentAtomicActivity.GetValue(
+                        WorkflowExecutor.TransactionalPropertiesProperty
+                    );
+                Debug.Assert(
+                    transactionalProperties != null,
+                    "The current atomic activity is missing transactional properties"
+                );
                 transactionalProperties.Transaction = transaction;
-                transactionalProperties.TransactionScope = new System.Transactions.TransactionScope(transactionalProperties.Transaction, TimeSpan.Zero, EnterpriseServicesInteropOption.Full);
+                transactionalProperties.TransactionScope = new System.Transactions.TransactionScope(
+                    transactionalProperties.Transaction,
+                    TimeSpan.Zero,
+                    EnterpriseServicesInteropOption.Full
+                );
             }
         }
 
@@ -254,8 +239,14 @@ namespace System.Activities.Statements
 
                 if (this.currentAtomicActivity != null)
                 {
-                    TransactionalProperties transactionalProperties = (TransactionalProperties)this.currentAtomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
-                    Debug.Assert(transactionalProperties != null, "The current atomic activity is missing transactional properties");
+                    TransactionalProperties transactionalProperties = (TransactionalProperties)
+                        this.currentAtomicActivity.GetValue(
+                            WorkflowExecutor.TransactionalPropertiesProperty
+                        );
+                    Debug.Assert(
+                        transactionalProperties != null,
+                        "The current atomic activity is missing transactional properties"
+                    );
                     transactionalProperties.Transaction = null;
                     if (transactionalProperties.TransactionScope != null)
                     {
@@ -272,9 +263,15 @@ namespace System.Activities.Statements
             }
         }
 
-        public bool CheckAndProcessTransactionAborted(TransactionalProperties transactionalProperties)
+        public bool CheckAndProcessTransactionAborted(
+            TransactionalProperties transactionalProperties
+        )
         {
-            if (transactionalProperties.Transaction != null && transactionalProperties.Transaction.TransactionInformation.Status != TransactionStatus.Aborted)
+            if (
+                transactionalProperties.Transaction != null
+                && transactionalProperties.Transaction.TransactionInformation.Status
+                    != TransactionStatus.Aborted
+            )
             {
                 return false;
             }
@@ -307,7 +304,12 @@ namespace System.Activities.Statements
 
         public ActivityExecutionStatus Execute()
         {
-            using (ActivityExecutionContext activityExecutionContext = new ActivityExecutionContext(this.rootActivity, true))
+            using (
+                ActivityExecutionContext activityExecutionContext = new ActivityExecutionContext(
+                    this.rootActivity,
+                    true
+                )
+            )
             {
                 activityExecutionContext.ExecuteActivity(this.rootActivity);
             }
@@ -317,9 +319,13 @@ namespace System.Activities.Statements
 
         public ActivityExecutionStatus Cancel()
         {
-            using (ActivityExecutionContext activityExecutionContext = new ActivityExecutionContext(this.rootActivity, true))
+            using (
+                ActivityExecutionContext activityExecutionContext = new ActivityExecutionContext(
+                    this.rootActivity,
+                    true
+                )
+            )
             {
-
                 if (this.rootActivity.ExecutionStatus == ActivityExecutionStatus.Executing)
                 {
                     activityExecutionContext.CancelActivity(this.rootActivity);
@@ -329,17 +335,29 @@ namespace System.Activities.Statements
             return TranslateExecutionStatus();
         }
 
-        public void Initialize(Activity definition, IDictionary<string, object> inputs, bool hasNameCollision)
+        public void Initialize(
+            Activity definition,
+            IDictionary<string, object> inputs,
+            bool hasNameCollision
+        )
         {
-            this.rootActivity.SetValue(Activity.ActivityExecutionContextInfoProperty,
-                new ActivityExecutionContextInfo(this.rootActivity.QualifiedName, this.GetNewContextActivityId(), instanceId, -1));
+            this.rootActivity.SetValue(
+                Activity.ActivityExecutionContextInfoProperty,
+                new ActivityExecutionContextInfo(
+                    this.rootActivity.QualifiedName,
+                    this.GetNewContextActivityId(),
+                    instanceId,
+                    -1
+                )
+            );
             this.rootActivity.SetValue(Activity.ActivityContextGuidProperty, instanceId);
 
             SetInputParameters(definition, this.rootActivity, inputs, hasNameCollision);
 
             ((IDependencyObjectAccessor)this.rootActivity).InitializeActivatingInstanceForRuntime(
                 null,
-                this);
+                this
+            );
 
             this.rootActivity.FixUpMetaProperties(definition);
 
@@ -351,7 +369,12 @@ namespace System.Activities.Statements
                 {
                     RegisterContextActivity(this.rootActivity);
 
-                    using (ActivityExecutionContext executionContext = new ActivityExecutionContext(this.rootActivity, true))
+                    using (
+                        ActivityExecutionContext executionContext = new ActivityExecutionContext(
+                            this.rootActivity,
+                            true
+                        )
+                    )
                     {
                         executionContext.InitializeActivity(this.rootActivity);
                     }
@@ -363,14 +386,16 @@ namespace System.Activities.Statements
         {
             if (this.rootActivity == null)
             {
-                this.Reload(
-                    activity.ComponentModelActivity,
-                    activity.OutputPropertyDefinitions);
+                this.Reload(activity.ComponentModelActivity, activity.OutputPropertyDefinitions);
             }
         }
 
         [OnSerializing]
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "required signature for serialization")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            Justification = "required signature for serialization"
+        )]
         void OnSerializing(StreamingContext context)
         {
             // If the Interop activity is serialized twice without a EnsureReload call in between, then the root activity is null.
@@ -424,7 +449,9 @@ namespace System.Activities.Statements
                 ((IDependencyObjectAccessor)dynamicActivity).InitializeInstanceForRuntime(this);
                 this.RegisterContextActivity(dynamicActivity);
 
-                IList<Activity> nestedDynamicActivities = (IList<Activity>)dynamicActivity.GetValue(Activity.ActiveExecutionContextsProperty);
+                IList<Activity> nestedDynamicActivities =
+                    (IList<Activity>)
+                        dynamicActivity.GetValue(Activity.ActiveExecutionContextsProperty);
                 if (nestedDynamicActivities != null)
                 {
                     foreach (Activity nestedDynamicActivity in nestedDynamicActivities)
@@ -436,18 +463,29 @@ namespace System.Activities.Statements
 
             if (!string.IsNullOrEmpty(this.internalCurrentActivityName))
             {
-                this.internalCurrentActivity = this.GetContextActivityForId(this.internalCurrentActivityContextId).GetActivityByName(this.internalCurrentActivityName);
+                this.internalCurrentActivity = this.GetContextActivityForId(
+                        this.internalCurrentActivityContextId
+                    )
+                    .GetActivityByName(this.internalCurrentActivityName);
             }
 
             if (!string.IsNullOrEmpty(this.atomicActivityName))
             {
-                this.currentAtomicActivity = this.GetContextActivityForId(this.atomicActivityContextId).GetActivityByName(this.atomicActivityName);
+                this.currentAtomicActivity = this.GetContextActivityForId(
+                        this.atomicActivityContextId
+                    )
+                    .GetActivityByName(this.atomicActivityName);
             }
 
             this.TimerQueue.Executor = this;
         }
 
-        void PrivateInitialize(Activity rootActivity, Guid instanceId, IList<PropertyInfo> outputProperties, Activity workflowDefinition)
+        void PrivateInitialize(
+            Activity rootActivity,
+            Guid instanceId,
+            IList<PropertyInfo> outputProperties,
+            Activity workflowDefinition
+        )
         {
             this.instanceId = instanceId;
             this.rootActivity = rootActivity;
@@ -457,11 +495,19 @@ namespace System.Activities.Statements
             this.outputProperties = outputProperties;
             this.resourceManager = new VolatileResourceManager();
 
-            this.rootActivity.SetValue(System.Workflow.ComponentModel.Activity.WorkflowDefinitionProperty, workflowDefinition);
+            this.rootActivity.SetValue(
+                System.Workflow.ComponentModel.Activity.WorkflowDefinitionProperty,
+                workflowDefinition
+            );
             this.rootActivity.SetValue(WorkflowExecutor.WorkflowExecutorProperty, this);
         }
 
-        static void SetInputParameters(Activity definition, Activity rootActivity, IDictionary<string, object> inputs, bool hasNameCollision)
+        static void SetInputParameters(
+            Activity definition,
+            Activity rootActivity,
+            IDictionary<string, object> inputs,
+            bool hasNameCollision
+        )
         {
             if (inputs != null)
             {
@@ -472,7 +518,10 @@ namespace System.Activities.Statements
                     //If there was a naming collision, we renamed the InArguments and need to strip "In" from the end of the property name
                     if (hasNameCollision)
                     {
-                        string truncatedName = input.Key.Substring(0, input.Key.Length - suffixLength);
+                        string truncatedName = input.Key.Substring(
+                            0,
+                            input.Key.Length - suffixLength
+                        );
                         propertyInfo = definition.GetType().GetProperty(truncatedName);
                     }
                     else
@@ -491,10 +540,16 @@ namespace System.Activities.Statements
         {
             if (this.abortTransaction)
             {
-                WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 1127,
-                    string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropExceptionTraceMessage,
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Information,
+                    1127,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.InteropExceptionTraceMessage,
                         this.ServiceProvider.Activity.DisplayName,
-                        this.lastExceptionThrown.ToString()));
+                        this.lastExceptionThrown.ToString()
+                    )
+                );
                 throw this.lastExceptionThrown;
             }
 
@@ -510,16 +565,25 @@ namespace System.Activities.Statements
                         //We renamed the OutArgument half of the pair. Don't attempt to populate if there is no Get method.
                         if (property.CanRead && (property.GetGetMethod() != null))
                         {
-                            this.outputs.Add(property.Name + Interop.OutArgumentSuffix, property.GetValue(this.rootActivity, null));
+                            this.outputs.Add(
+                                property.Name + Interop.OutArgumentSuffix,
+                                property.GetValue(this.rootActivity, null)
+                            );
                         }
                     }
                 }
                 if (this.outstandingException != null)
                 {
-                    WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 1127,
-                        string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropExceptionTraceMessage,
+                    WorkflowTrace.Runtime.TraceEvent(
+                        TraceEventType.Information,
+                        1127,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.InteropExceptionTraceMessage,
                             this.ServiceProvider.Activity.DisplayName,
-                            this.outstandingException.ToString()));
+                            this.outstandingException.ToString()
+                        )
+                    );
                     throw this.outstandingException;
                 }
             }
@@ -544,7 +608,10 @@ namespace System.Activities.Statements
 
             if (activity.ExecutionStatus == ActivityExecutionStatus.Closed)
             {
-                if (!(activity is ICompensatableActivity) || ((activity is ICompensatableActivity) && activity.CanUninitializeNow))
+                if (
+                    !(activity is ICompensatableActivity)
+                    || ((activity is ICompensatableActivity) && activity.CanUninitializeNow)
+                )
                 {
                     CorrelationTokenCollection.UninitializeCorrelationTokens(activity);
                 }
@@ -553,11 +620,13 @@ namespace System.Activities.Statements
 
         public void CheckpointInstanceState(Activity atomicActivity)
         {
-            // Note that the WF4 runtime does not create checkpoints.  If the transaction aborts, the workflow aborts.  
+            // Note that the WF4 runtime does not create checkpoints.  If the transaction aborts, the workflow aborts.
             // We are following the WF4 behavior and not creating a checkpoint.
 
             TransactionOptions tranOpts = new TransactionOptions();
-            WorkflowTransactionOptions atomicTxn = TransactedContextFilter.GetTransactionOptions(atomicActivity);
+            WorkflowTransactionOptions atomicTxn = TransactedContextFilter.GetTransactionOptions(
+                atomicActivity
+            );
 
             tranOpts.IsolationLevel = atomicTxn.IsolationLevel;
             if (tranOpts.IsolationLevel == IsolationLevel.Unspecified)
@@ -568,7 +637,10 @@ namespace System.Activities.Statements
             tranOpts.Timeout = atomicTxn.TimeoutDuration;
 
             TransactionalProperties transactionProperties = new TransactionalProperties();
-            atomicActivity.SetValue(WorkflowExecutor.TransactionalPropertiesProperty, transactionProperties);
+            atomicActivity.SetValue(
+                WorkflowExecutor.TransactionalPropertiesProperty,
+                transactionProperties
+            );
             this.ServiceProvider.CreateTransaction(tranOpts);
             this.currentAtomicActivity = atomicActivity;
             this.scheduler.Pause();
@@ -613,19 +685,45 @@ namespace System.Activities.Statements
             return ((IServiceProvider)this.ServiceProvider).GetService(serviceType);
         }
 
-        public Activity LoadContextActivity(ActivityExecutionContextInfo contextInfo, Activity outerContextActivity)
+        public Activity LoadContextActivity(
+            ActivityExecutionContextInfo contextInfo,
+            Activity outerContextActivity
+        )
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
-        public void OnAfterDynamicChange(bool updateSucceeded, System.Collections.Generic.IList<WorkflowChangeAction> changes)
+        public void OnAfterDynamicChange(
+            bool updateSucceeded,
+            System.Collections.Generic.IList<WorkflowChangeAction> changes
+        )
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
-        public bool OnBeforeDynamicChange(System.Collections.Generic.IList<WorkflowChangeAction> changes)
+        public bool OnBeforeDynamicChange(
+            System.Collections.Generic.IList<WorkflowChangeAction> changes
+        )
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
         public void PersistInstanceState(Activity activity)
@@ -648,7 +746,8 @@ namespace System.Activities.Statements
             else
             {
                 TransactionalProperties transactionalProperties = null;
-                transactionalProperties = (TransactionalProperties)activity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
+                transactionalProperties = (TransactionalProperties)
+                    activity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
                 if (this.CheckAndProcessTransactionAborted(transactionalProperties))
                 {
                     return;
@@ -671,7 +770,7 @@ namespace System.Activities.Statements
 
         public void RaiseActivityExecuting(Activity activity)
         {
-            // No tracking needed since no tracking was done here in V1               
+            // No tracking needed since no tracking was done here in V1
         }
 
         public void RaiseException(Exception e, Activity activity, string responsibleActivity)
@@ -679,20 +778,21 @@ namespace System.Activities.Statements
             // No tracking needed
             using (SetCurrentActivity(activity))
             {
-                using (ActivityExecutionContext executionContext = new ActivityExecutionContext(activity, true))
+                using (
+                    ActivityExecutionContext executionContext = new ActivityExecutionContext(
+                        activity,
+                        true
+                    )
+                )
                 {
                     executionContext.FaultActivity(e);
                 }
             }
         }
 
-        public void RaiseHandlerInvoked()
-        {
-        }
+        public void RaiseHandlerInvoked() { }
 
-        public void RaiseHandlerInvoking(Delegate delegateHandler)
-        {
-        }
+        public void RaiseHandlerInvoking(Delegate delegateHandler) { }
 
         void ProcessTimers(object ignored)
         {
@@ -709,21 +809,34 @@ namespace System.Activities.Statements
 
         static int ContextId(Activity activity)
         {
-            return ((ActivityExecutionContextInfo)ContextActivity(activity).GetValue(Activity.ActivityExecutionContextInfoProperty)).ContextId;
+            return (
+                (ActivityExecutionContextInfo)
+                    ContextActivity(activity)
+                        .GetValue(Activity.ActivityExecutionContextInfoProperty)
+            ).ContextId;
         }
 
         static Activity ContextActivity(Activity activity)
         {
             Activity contextActivity = activity;
 
-            while (contextActivity != null && contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty) == null)
+            while (
+                contextActivity != null
+                && contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty) == null
+            )
             {
                 contextActivity = contextActivity.Parent;
             }
             return contextActivity;
         }
 
-        public void RequestRevertToCheckpointState(Activity currentActivity, EventHandler<EventArgs> callbackHandler, EventArgs callbackData, bool suspendOnRevert, string suspendReason)
+        public void RequestRevertToCheckpointState(
+            Activity currentActivity,
+            EventHandler<EventArgs> callbackHandler,
+            EventArgs callbackData,
+            bool suspendOnRevert,
+            string suspendReason
+        )
         {
             if (this.lastExceptionThrown != null)
             {
@@ -737,18 +850,38 @@ namespace System.Activities.Statements
 
         bool IWorkflowCoreRuntime.Resume()
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
         public void SaveContextActivity(Activity contextActivity)
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters",
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
             Justification = @"The transacted parameter represents items that should not be processed if the ambient transction rolls back.
-            Since the Interop activity just aborts the workflow on rollback, this parameter is not applicable here.")]
-        public void ScheduleItem(SchedulableItem item, bool isInAtomicTransaction, bool transacted, bool queueInTransaction)
+            Since the Interop activity just aborts the workflow on rollback, this parameter is not applicable here."
+        )]
+        public void ScheduleItem(
+            SchedulableItem item,
+            bool isInAtomicTransaction,
+            bool transacted,
+            bool queueInTransaction
+        )
         {
             if (queueInTransaction)
             {
@@ -774,7 +907,8 @@ namespace System.Activities.Statements
                 return;
             }
 
-            TransactionalProperties transactionalProperties = (TransactionalProperties)atomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
+            TransactionalProperties transactionalProperties = (TransactionalProperties)
+                atomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
             if (transactionalProperties != null)
             {
                 lock (transactionalProperties)
@@ -794,7 +928,8 @@ namespace System.Activities.Statements
         void ScheduleDelayedItems(Activity atomicActivity)
         {
             List<SchedulableItem> items = null;
-            TransactionalProperties transactionalProperties = (TransactionalProperties)atomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
+            TransactionalProperties transactionalProperties = (TransactionalProperties)
+                atomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
 
             if (transactionalProperties == null)
             {
@@ -828,12 +963,24 @@ namespace System.Activities.Statements
 
         public Guid StartWorkflow(Type workflowType, Dictionary<string, object> namedArgumentValues)
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
         public bool SuspendInstance(string suspendDescription)
         {
-            throw new NotImplementedException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropNonSupportedBehavior, this.ServiceProvider.Activity.DisplayName));
+            throw new NotImplementedException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    ExecutionStringManager.InteropNonSupportedBehavior,
+                    this.ServiceProvider.Activity.DisplayName
+                )
+            );
         }
 
         public void TerminateInstance(Exception e)
@@ -846,7 +993,12 @@ namespace System.Activities.Statements
             // Forward to 4.0 tracking mechanism, AEC.Track
             if (this.trackingEnabled)
             {
-                this.ServiceProvider.TrackData(this.CurrentActivity, this.eventCounter++, key, data);
+                this.ServiceProvider.TrackData(
+                    this.CurrentActivity,
+                    this.eventCounter++,
+                    key,
+                    data
+                );
             }
         }
 
@@ -866,12 +1018,18 @@ namespace System.Activities.Statements
         {
             [ThreadStatic]
             static Activity definitionActivity;
-            static ActivityResolveEventHandler activityResolveEventHandler = new ActivityResolveEventHandler(OnActivityResolve);
+            static ActivityResolveEventHandler activityResolveEventHandler =
+                new ActivityResolveEventHandler(OnActivityResolve);
 
-            [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "This is a bogus validation; registration to event cannot be done using field initializers")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1810:InitializeReferenceTypeStaticFieldsInline",
+                Justification = "This is a bogus validation; registration to event cannot be done using field initializers"
+            )]
             static ActivityDefinitionResolution()
             {
-                Activity.ActivityResolve += ActivityDefinitionResolution.activityResolveEventHandler;
+                Activity.ActivityResolve +=
+                    ActivityDefinitionResolution.activityResolveEventHandler;
             }
 
             public ActivityDefinitionResolution(Activity definitionActivity)
@@ -895,11 +1053,15 @@ namespace System.Activities.Statements
             InteropExecutor activityExecutor;
             Activity oldCurrentActivity = null;
 
-            internal ResetCurrentActivity(InteropExecutor activityExecutor, Activity oldCurrentActivity)
+            internal ResetCurrentActivity(
+                InteropExecutor activityExecutor,
+                Activity oldCurrentActivity
+            )
             {
                 this.activityExecutor = activityExecutor;
                 this.oldCurrentActivity = oldCurrentActivity;
             }
+
             void IDisposable.Dispose()
             {
                 this.activityExecutor.CurrentActivity = oldCurrentActivity;
@@ -909,10 +1071,20 @@ namespace System.Activities.Statements
         class Scheduler
         {
             // State to be persisted for the scheduler
-            internal static DependencyProperty SchedulerQueueProperty = DependencyProperty.RegisterAttached("SchedulerQueue", typeof(Queue<SchedulableItem>), typeof(Scheduler));
-            internal static DependencyProperty AtomicActivityQueueProperty = DependencyProperty.RegisterAttached("AtomicActivityQueue", typeof(Queue<SchedulableItem>), typeof(Scheduler));
+            internal static DependencyProperty SchedulerQueueProperty =
+                DependencyProperty.RegisterAttached(
+                    "SchedulerQueue",
+                    typeof(Queue<SchedulableItem>),
+                    typeof(Scheduler)
+                );
+            internal static DependencyProperty AtomicActivityQueueProperty =
+                DependencyProperty.RegisterAttached(
+                    "AtomicActivityQueue",
+                    typeof(Queue<SchedulableItem>),
+                    typeof(Scheduler)
+                );
 
-            // The atomic activity queue contains items related to the currently executing atomic activity.  
+            // The atomic activity queue contains items related to the currently executing atomic activity.
             // While the atomic activity is executing, execution of the items that are not in the atomic context is deferred until the atomic activity completes.
             // We need two queues to separate the items associated with the atomic activity from the other items.
             Queue<SchedulableItem> schedulerQueue;
@@ -924,24 +1096,36 @@ namespace System.Activities.Statements
             public Scheduler(InteropExecutor owner)
             {
                 this.owner = owner;
-                this.schedulerQueue = (Queue<SchedulableItem>)owner.RootActivity.GetValue(Scheduler.SchedulerQueueProperty);
+                this.schedulerQueue =
+                    (Queue<SchedulableItem>)
+                        owner.RootActivity.GetValue(Scheduler.SchedulerQueueProperty);
                 if (this.schedulerQueue == null)
                 {
                     this.schedulerQueue = new Queue<SchedulableItem>();
-                    owner.RootActivity.SetValue(Scheduler.SchedulerQueueProperty, this.schedulerQueue);
+                    owner.RootActivity.SetValue(
+                        Scheduler.SchedulerQueueProperty,
+                        this.schedulerQueue
+                    );
                 }
 
-                this.atomicActivityQueue = (Queue<SchedulableItem>)owner.RootActivity.GetValue(Scheduler.AtomicActivityQueueProperty);
+                this.atomicActivityQueue =
+                    (Queue<SchedulableItem>)
+                        owner.RootActivity.GetValue(Scheduler.AtomicActivityQueueProperty);
                 if (this.atomicActivityQueue == null)
                 {
                     this.atomicActivityQueue = new Queue<SchedulableItem>();
-                    owner.RootActivity.SetValue(Scheduler.AtomicActivityQueueProperty, this.atomicActivityQueue);
+                    owner.RootActivity.SetValue(
+                        Scheduler.AtomicActivityQueueProperty,
+                        this.atomicActivityQueue
+                    );
                 }
             }
 
             public void ScheduleItem(SchedulableItem item, bool isInAtomicTransaction)
             {
-                Queue<SchedulableItem> queue = isInAtomicTransaction ? this.atomicActivityQueue : this.schedulerQueue;
+                Queue<SchedulableItem> queue = isInAtomicTransaction
+                    ? this.atomicActivityQueue
+                    : this.schedulerQueue;
                 queue.Enqueue(item);
             }
 
@@ -964,8 +1148,7 @@ namespace System.Activities.Statements
                         item = this.atomicActivityQueue.Dequeue();
                     }
                     // The execution of the items in the scheduler queue is deferred until the atomic activity completes.
-                    else if (owner.CurrentAtomicActivity == null &&
-                        this.schedulerQueue.Count > 0)
+                    else if (owner.CurrentAtomicActivity == null && this.schedulerQueue.Count > 0)
                     {
                         item = schedulerQueue.Dequeue();
                     }
@@ -974,13 +1157,18 @@ namespace System.Activities.Statements
                         break;
                     }
 
-                    Activity itemActivity = owner.GetContextActivityForId(item.ContextId).GetActivityByName(item.ActivityId);
+                    Activity itemActivity = owner
+                        .GetContextActivityForId(item.ContextId)
+                        .GetActivityByName(item.ActivityId);
                     Activity atomicActivity;
                     TransactionalProperties transactionalProperties = null;
 
                     if (owner.IsActivityInAtomicContext(itemActivity, out atomicActivity))
                     {
-                        transactionalProperties = (TransactionalProperties)atomicActivity.GetValue(WorkflowExecutor.TransactionalPropertiesProperty);
+                        transactionalProperties = (TransactionalProperties)
+                            atomicActivity.GetValue(
+                                WorkflowExecutor.TransactionalPropertiesProperty
+                            );
 
                         // If we've aborted for any reason stop now!
                         if (owner.CheckAndProcessTransactionAborted(transactionalProperties))
@@ -1002,12 +1190,12 @@ namespace System.Activities.Statements
 
                         if (transactionalProperties != null)
                         {
-                            transactionalProperties.TransactionState = TransactionProcessState.AbortProcessed;
+                            transactionalProperties.TransactionState =
+                                TransactionProcessState.AbortProcessed;
                             owner.lastExceptionThrown = e;
                         }
 
                         owner.RaiseException(e, itemActivity, null);
-
                     }
                 }
             }
@@ -1023,11 +1211,19 @@ namespace System.Activities.Statements
                 this.executor = executor;
             }
 
-            public void ScheduleTimer(WaitCallback callback, Guid workflowInstanceId, DateTime whenUtc, Guid timerId)
+            public void ScheduleTimer(
+                WaitCallback callback,
+                Guid workflowInstanceId,
+                DateTime whenUtc,
+                Guid timerId
+            )
             {
                 if (timerId == Guid.Empty)
                 {
-                    throw new ArgumentException(ExecutionStringManager.InteropTimerIdCantBeEmpty, "timerId");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InteropTimerIdCantBeEmpty,
+                        "timerId"
+                    );
                 }
 
                 TimeSpan timerDuration = whenUtc - DateTime.UtcNow;
@@ -1044,7 +1240,10 @@ namespace System.Activities.Statements
             {
                 if (timerId == Guid.Empty)
                 {
-                    throw new ArgumentException(ExecutionStringManager.InteropTimerIdCantBeEmpty, "timerId");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InteropTimerIdCantBeEmpty,
+                        "timerId"
+                    );
                 }
 
                 GetTimerExtension().CancelTimer(new Bookmark(timerId.ToString()));
@@ -1052,10 +1251,13 @@ namespace System.Activities.Statements
 
             TimerExtension GetTimerExtension()
             {
-                TimerExtension timerExtension = this.executor.GetService(typeof(TimerExtension)) as TimerExtension;
+                TimerExtension timerExtension =
+                    this.executor.GetService(typeof(TimerExtension)) as TimerExtension;
                 if (timerExtension == null)
                 {
-                    throw new InvalidOperationException(ExecutionStringManager.InteropCantFindTimerExtension);
+                    throw new InvalidOperationException(
+                        ExecutionStringManager.InteropCantFindTimerExtension
+                    );
                 }
 
                 return timerExtension;

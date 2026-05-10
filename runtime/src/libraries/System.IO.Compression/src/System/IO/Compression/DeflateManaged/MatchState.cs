@@ -7,6 +7,6 @@ namespace System.IO.Compression
     {
         HasSymbol = 1,
         HasMatch = 2,
-        HasSymbolAndMatch = 3
+        HasSymbolAndMatch = 3,
     }
 }

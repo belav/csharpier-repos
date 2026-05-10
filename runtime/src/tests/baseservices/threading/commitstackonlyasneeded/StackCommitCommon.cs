@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 
 namespace StackCommitTest
@@ -13,7 +13,9 @@ namespace StackCommitTest
     {
 #pragma warning disable 618
         [DllImport("kernel32.dll")]
-        public static extern void GetSystemInfo([MarshalAs(UnmanagedType.Struct)] ref SYSTEM_INFO lpSystemInfo);
+        public static extern void GetSystemInfo(
+            [MarshalAs(UnmanagedType.Struct)] ref SYSTEM_INFO lpSystemInfo
+        );
 #pragma warning restore 618
 
         [StructLayout(LayoutKind.Sequential)]
@@ -36,14 +38,20 @@ namespace StackCommitTest
         {
             [FieldOffset(0)]
             internal uint dwOemId;
+
             [FieldOffset(0)]
             internal ushort wProcessorArchitecture;
+
             [FieldOffset(2)]
             internal ushort wReserved;
         }
 
         [DllImport("kernel32")]
-        public static extern IntPtr VirtualQuery(void* address, ref MEMORY_BASIC_INFORMATION buffer, IntPtr length);
+        public static extern IntPtr VirtualQuery(
+            void* address,
+            ref MEMORY_BASIC_INFORMATION buffer,
+            IntPtr length
+        );
 
         public struct MEMORY_BASIC_INFORMATION
         {
@@ -64,12 +72,10 @@ namespace StackCommitTest
             MEM_FREE = 0x10000,
         }
 
-
         public const int PAGE_GUARD = 0x100;
-
     }
 
-    unsafe public static class Utility
+    public static unsafe class Utility
     {
         public static Int64 PageSize { get; private set; }
 
@@ -85,7 +91,11 @@ namespace StackCommitTest
         public static void GetStackExtents(out byte* stackBase, out long stackSize)
         {
             WinApi.MEMORY_BASIC_INFORMATION info = new WinApi.MEMORY_BASIC_INFORMATION();
-            WinApi.VirtualQuery(&info, ref info, new IntPtr(sizeof(WinApi.MEMORY_BASIC_INFORMATION)));
+            WinApi.VirtualQuery(
+                &info,
+                ref info,
+                new IntPtr(sizeof(WinApi.MEMORY_BASIC_INFORMATION))
+            );
             stackBase = info.AllocationBase;
             stackSize = (info.BaseAddress - info.AllocationBase) + info.RegionSize.ToInt64();
         }
@@ -96,13 +106,18 @@ namespace StackCommitTest
             long stackSize;
             GetStackExtents(out stackBase, out stackSize);
 
-            List<WinApi.MEMORY_BASIC_INFORMATION> result = new List<WinApi.MEMORY_BASIC_INFORMATION>();
+            List<WinApi.MEMORY_BASIC_INFORMATION> result =
+                new List<WinApi.MEMORY_BASIC_INFORMATION>();
 
             byte* current = stackBase;
             while (current < stackBase + stackSize)
             {
                 WinApi.MEMORY_BASIC_INFORMATION info = new WinApi.MEMORY_BASIC_INFORMATION();
-                WinApi.VirtualQuery(current, ref info, new IntPtr(sizeof(WinApi.MEMORY_BASIC_INFORMATION)));
+                WinApi.VirtualQuery(
+                    current,
+                    ref info,
+                    new IntPtr(sizeof(WinApi.MEMORY_BASIC_INFORMATION))
+                );
                 result.Add(info);
                 current = info.BaseAddress + info.RegionSize.ToInt64();
             }
@@ -111,8 +126,11 @@ namespace StackCommitTest
             return result;
         }
 
-
-        public static bool ValidateStack(string threadName, bool shouldBePreCommitted, Int32 expectedStackSize)
+        public static bool ValidateStack(
+            string threadName,
+            bool shouldBePreCommitted,
+            Int32 expectedStackSize
+        )
         {
             bool result = true;
 
@@ -120,7 +138,12 @@ namespace StackCommitTest
             long stackSize;
             GetStackExtents(out stackBase, out stackSize);
 
-            Console.WriteLine("{2} -- Base: {0:x}, Size: {1}kb", new IntPtr(stackBase).ToInt64(), stackSize / 1024, threadName);
+            Console.WriteLine(
+                "{2} -- Base: {0:x}, Size: {1}kb",
+                new IntPtr(stackBase).ToInt64(),
+                stackSize / 1024,
+                threadName
+            );
 
             //
             // Start at the highest addresses, which should be committed (because that's where we're currently running).
@@ -154,7 +177,12 @@ namespace StackCommitTest
                         {
                             // If we pre-commit the stack, the last 1 or 2 pages are left "reserved" (they are the "hard guard region")
                             // ??? How to decide whether it is 1 or 2 pages?
-                            if ((info.BaseAddress != stackBase || info.RegionSize.ToInt64() > PageSize))
+                            if (
+                                (
+                                    info.BaseAddress != stackBase
+                                    || info.RegionSize.ToInt64() > PageSize
+                                )
+                            )
                             {
                                 result = false;
                                 regionType = "<---- should be pre-committed";
@@ -177,7 +205,8 @@ namespace StackCommitTest
                     new IntPtr(info.BaseAddress + info.RegionSize.ToInt64()).ToInt64(),
                     info.RegionSize.ToInt64() / 1024,
                     info.State,
-                    regionType);
+                    regionType
+                );
             }
 
             if (!foundGuardRegion)
@@ -191,21 +220,34 @@ namespace StackCommitTest
             {
                 result = false;
 
-                Console.WriteLine("Stack size is not as expected: actual -- {0}, expected -- {1}", stackSize, expectedStackSize);
+                Console.WriteLine(
+                    "Stack size is not as expected: actual -- {0}, expected -- {1}",
+                    stackSize,
+                    expectedStackSize
+                );
             }
 
             Console.WriteLine();
             return result;
         }
 
-        static private bool RunTestItem(string threadName, bool shouldBePreCommitted, Int32 expectedThreadSize, Action<Action> runOnThread)
+        private static bool RunTestItem(
+            string threadName,
+            bool shouldBePreCommitted,
+            Int32 expectedThreadSize,
+            Action<Action> runOnThread
+        )
         {
             bool result = false;
             ManualResetEventSlim mre = new ManualResetEventSlim();
 
             runOnThread(() =>
             {
-                result = Utility.ValidateStack(threadName, shouldBePreCommitted, expectedThreadSize);
+                result = Utility.ValidateStack(
+                    threadName,
+                    shouldBePreCommitted,
+                    expectedThreadSize
+                );
                 mre.Set();
             });
 
@@ -213,13 +255,26 @@ namespace StackCommitTest
             return result;
         }
 
-        static public bool RunTest(bool shouldBePreCommitted)
+        public static bool RunTest(bool shouldBePreCommitted)
         {
-            if (RunTestItem("Main", shouldBePreCommitted, -1, action => action()) &
-                RunTestItem("ThreadPool", shouldBePreCommitted, -1, action => ThreadPool.QueueUserWorkItem(state => action())) &
-                RunTestItem("new Thread()", shouldBePreCommitted, -1, action => new Thread(() => action()).Start()) &
+            if (
+                RunTestItem("Main", shouldBePreCommitted, -1, action => action())
+                & RunTestItem(
+                    "ThreadPool",
+                    shouldBePreCommitted,
+                    -1,
+                    action => ThreadPool.QueueUserWorkItem(state => action())
+                )
+                & RunTestItem(
+                    "new Thread()",
+                    shouldBePreCommitted,
+                    -1,
+                    action => new Thread(() => action()).Start()
+                )
+                &
                 //RunTestItem("new Thread(512kb)", true, 512 * 1024, action => new Thread(() => action(), 512 * 1024).Start()) &
-                RunTestItem("Finalizer", shouldBePreCommitted, -1, action => Finalizer.Run(action)))
+                RunTestItem("Finalizer", shouldBePreCommitted, -1, action => Finalizer.Run(action))
+            )
             {
                 return true;
             }
@@ -231,8 +286,16 @@ namespace StackCommitTest
     public class Finalizer
     {
         Action m_action;
-        private Finalizer(Action action) { m_action = action; }
-        ~Finalizer() { m_action(); }
+
+        private Finalizer(Action action)
+        {
+            m_action = action;
+        }
+
+        ~Finalizer()
+        {
+            m_action();
+        }
 
         public static void Run(Action action)
         {
@@ -245,7 +308,9 @@ namespace StackCommitTest
             GC.WaitForPendingFinalizers();
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void CreateUnreferencedObject(Action action)
         {
             new Finalizer(action);

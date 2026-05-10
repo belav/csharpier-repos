@@ -1,4 +1,3 @@
-
 using System;
 
 namespace System.Net.NetworkInformation
@@ -7,29 +6,27 @@ namespace System.Net.NetworkInformation
     public abstract class IPv4InterfaceProperties
     {
         /// Gets a bool value that indicates whether an interface uses Windows Internet Name Service (WINS).
-        public abstract bool UsesWins{get;}
+        public abstract bool UsesWins { get; }
 
         /// Gets a bool value that indicates whether the interface is configured to use a dynamic host configuration protocol (DHCP) server to obtain an IP address.
-        public abstract bool IsDhcpEnabled{get;}
-
+        public abstract bool IsDhcpEnabled { get; }
 
         /// Gets a bool value that indicates whether this interface has an automatic private IP addressing (APIPA) address.
-        public abstract bool IsAutomaticPrivateAddressingActive{get;}
+        public abstract bool IsAutomaticPrivateAddressingActive { get; }
 
         /// Gets a bool value that indicates whether this interface has automatic private IP addressing (APIPA) enabled.
-        public abstract bool IsAutomaticPrivateAddressingEnabled{get;}
-        
+        public abstract bool IsAutomaticPrivateAddressingEnabled { get; }
+
         /// Gets the interface index for the Internet Protocol (IP) address.
-        public abstract int Index{get;}
+        public abstract int Index { get; }
 
         /// Gets a bool value that indicates whether this interface can route packets.
-        public abstract bool IsForwardingEnabled{get;}
-        
+        public abstract bool IsForwardingEnabled { get; }
+
         /// Gets the maximum transmission unit (MTU) for this network interface.
-        public abstract int Mtu{get;}
+        public abstract int Mtu { get; }
 
         /// Gets the interface metric
-       // public abstract int Metric{get;}
+        // public abstract int Metric{get;}
     }
- }
-
+}

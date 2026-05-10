@@ -14,11 +14,19 @@ namespace System.Activities.Runtime
     class DelegateCompletionCallbackWrapper : CompletionCallbackWrapper
     {
         static readonly Type callbackType = typeof(DelegateCompletionCallback);
-        static readonly Type[] callbackParameterTypes = new Type[] { typeof(NativeActivityContext), typeof(ActivityInstance), typeof(IDictionary<string, object>) };
+        static readonly Type[] callbackParameterTypes = new Type[]
+        {
+            typeof(NativeActivityContext),
+            typeof(ActivityInstance),
+            typeof(IDictionary<string, object>),
+        };
 
         Dictionary<string, object> results;
 
-        public DelegateCompletionCallbackWrapper(DelegateCompletionCallback callback, ActivityInstance owningInstance)
+        public DelegateCompletionCallbackWrapper(
+            DelegateCompletionCallback callback,
+            ActivityInstance owningInstance
+        )
             : base(callback, owningInstance)
         {
             this.NeedsToGatherOutputs = true;
@@ -35,7 +43,10 @@ namespace System.Activities.Runtime
         {
             if (completedInstance.Activity.HandlerOf != null)
             {
-                IList<RuntimeDelegateArgument> runtimeArguments = completedInstance.Activity.HandlerOf.RuntimeDelegateArguments;
+                IList<RuntimeDelegateArgument> runtimeArguments = completedInstance
+                    .Activity
+                    .HandlerOf
+                    .RuntimeDelegateArguments;
                 LocationEnvironment environment = completedInstance.Environment;
 
                 for (int i = 0; i < runtimeArguments.Count; i++)
@@ -46,7 +57,9 @@ namespace System.Activities.Runtime
                     {
                         if (ArgumentDirectionHelper.IsOut(runtimeArgument.Direction))
                         {
-                            Location parameterLocation = environment.GetSpecificLocation(runtimeArgument.BoundArgument.Id);
+                            Location parameterLocation = environment.GetSpecificLocation(
+                                runtimeArgument.BoundArgument.Id
+                            );
 
                             if (parameterLocation != null)
                             {
@@ -63,13 +76,19 @@ namespace System.Activities.Runtime
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling EnsureCallback",
-            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling EnsureCallback",
+            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT."
+        )]
         [SecuritySafeCritical]
-        protected internal override void Invoke(NativeActivityContext context, ActivityInstance completedInstance)
+        protected internal override void Invoke(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        )
         {
             EnsureCallback(callbackType, callbackParameterTypes);
-            DelegateCompletionCallback completionCallback = (DelegateCompletionCallback)this.Callback;
+            DelegateCompletionCallback completionCallback = (DelegateCompletionCallback)
+                this.Callback;
 
             IDictionary<string, object> returnValue = this.results;
 
@@ -80,6 +99,5 @@ namespace System.Activities.Runtime
 
             completionCallback(context, completedInstance, returnValue);
         }
-
     }
 }

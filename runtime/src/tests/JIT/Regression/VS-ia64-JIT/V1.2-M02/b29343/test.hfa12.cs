@@ -7,13 +7,22 @@ using Xunit;
 
 namespace JitTest.HFA
 {
-
     public class TestCase
     {
-
         public struct HFA12
         {
-            public float f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12;//, f13, f14, f15;
+            public float f1,
+                f2,
+                f3,
+                f4,
+                f5,
+                f6,
+                f7,
+                f8,
+                f9,
+                f10,
+                f11,
+                f12; //, f13, f14, f15;
         }
 
         internal static void Init(out HFA12 hfa)
@@ -31,7 +40,6 @@ namespace JitTest.HFA
             hfa.f11 = 11;
             hfa.f12 = 12;
         }
-
 
         internal static void Print0(HFA12 hfa)
         {
@@ -66,7 +74,6 @@ namespace JitTest.HFA
             System.Console.WriteLine("f11 = {0}", hfa.f11);
             System.Console.WriteLine("f12 = {0}", hfa.f12);
         }
-
 
         [Fact]
         public static void TestEntryPoint()

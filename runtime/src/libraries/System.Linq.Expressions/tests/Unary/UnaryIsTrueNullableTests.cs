@@ -25,14 +25,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIsTrueNullableBool(bool? value, bool useInterpreter)
         {
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.IsTrue(Expression.Constant(value, typeof(bool?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.IsTrue(Expression.Constant(value, typeof(bool?))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
             Assert.Equal((bool?)(value == default(bool?) ? default(bool?) : value == true), f());
         }
-
 
         #endregion
     }

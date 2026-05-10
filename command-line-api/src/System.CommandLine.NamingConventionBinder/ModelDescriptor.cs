@@ -15,9 +15,7 @@ namespace System.CommandLine.NamingConventionBinder;
 public class ModelDescriptor
 {
     private const BindingFlags CommonBindingFlags =
-        BindingFlags.IgnoreCase
-        | BindingFlags.Public
-        | BindingFlags.Instance;
+        BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance;
 
     private static readonly ConcurrentDictionary<Type, ModelDescriptor> _modelDescriptors = new();
 
@@ -27,28 +25,27 @@ public class ModelDescriptor
     /// <param name="modelType">The type of the model.</param>
     protected ModelDescriptor(Type modelType)
     {
-        ModelType = modelType ??
-                    throw new ArgumentNullException(nameof(modelType));
+        ModelType = modelType ?? throw new ArgumentNullException(nameof(modelType));
     }
 
     /// <summary>
     /// Descriptors for the constructors for <see cref="ModelType"/>
     /// </summary>
     public IReadOnlyList<ConstructorDescriptor> ConstructorDescriptors =>
-        _constructorDescriptors ??=
-            ModelType.GetConstructors(CommonBindingFlags)
-                     .Select(i => new ConstructorDescriptor(i, this))
-                     .ToList();
+        _constructorDescriptors ??= ModelType
+            .GetConstructors(CommonBindingFlags)
+            .Select(i => new ConstructorDescriptor(i, this))
+            .ToList();
 
     /// <summary>
     /// Descriptors for the properties of <see cref="ModelType"/>.
     /// </summary>
     public IReadOnlyList<IValueDescriptor> PropertyDescriptors =>
-        _propertyDescriptors ??=
-            ModelType.GetProperties(CommonBindingFlags)
-                     .Where(p => p.CanWrite && p.SetMethod?.IsPublic == true)
-                     .Select(i => new PropertyDescriptor(i, this))
-                     .ToList();
+        _propertyDescriptors ??= ModelType
+            .GetProperties(CommonBindingFlags)
+            .Where(p => p.CanWrite && p.SetMethod?.IsPublic == true)
+            .Select(i => new PropertyDescriptor(i, this))
+            .ToList();
 
     /// <summary>
     /// The type that the model binder can bind instances of.
@@ -64,9 +61,7 @@ public class ModelDescriptor
     /// <typeparam name="T">The type that the model binder can bind instances of.</typeparam>
     /// <returns>A <see cref="ModelBinder"/> for type <typeparamref name="T"/>.</returns>
     public static ModelDescriptor FromType<T>() =>
-        _modelDescriptors.GetOrAdd(
-            typeof(T),
-            _ => new ModelDescriptor(typeof(T)));
+        _modelDescriptors.GetOrAdd(typeof(T), _ => new ModelDescriptor(typeof(T)));
 
     /// <summary>
     /// Creates a model binder for the specified type.
@@ -74,7 +69,5 @@ public class ModelDescriptor
     /// <param name="type">The type that the model binder can bind instances of.</param>
     /// <returns>A <see cref="ModelBinder"/> for the specified type.</returns>
     public static ModelDescriptor FromType(Type type) =>
-        _modelDescriptors.GetOrAdd(
-            type,
-            _ => new ModelDescriptor(type));
+        _modelDescriptors.GetOrAdd(type, _ => new ModelDescriptor(type));
 }

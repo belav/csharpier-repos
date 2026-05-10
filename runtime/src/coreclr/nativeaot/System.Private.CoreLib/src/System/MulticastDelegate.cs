@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-
 using Internal.Runtime.CompilerServices;
 
 namespace System
@@ -19,16 +18,17 @@ namespace System
         //    compiler generated code (This must match the constructor
         //    in Delegate
         [RequiresUnreferencedCode("The target method might be removed")]
-        protected MulticastDelegate(object target, string method) : base(target, method)
-        {
-        }
+        protected MulticastDelegate(object target, string method)
+            : base(target, method) { }
 
         // This constructor is called from a class to generate a
         // delegate based upon a static method name and the Type object
         // for the class defining the method.
-        protected MulticastDelegate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method) : base(target, method)
-        {
-        }
+        protected MulticastDelegate(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method
+        )
+            : base(target, method) { }
 
         private bool InvocationListEquals(MulticastDelegate d)
         {
@@ -59,7 +59,10 @@ namespace System
             // Since this is a MulticastDelegate and we know
             // the types are the same, obj should also be a
             // MulticastDelegate
-            Debug.Assert(obj is MulticastDelegate, "Shouldn't have failed here since we already checked the types are the same!");
+            Debug.Assert(
+                obj is MulticastDelegate,
+                "Shouldn't have failed here since we already checked the types are the same!"
+            );
             var d = Unsafe.As<MulticastDelegate>(obj);
 
             // there are 2 kind of delegate kinds for comparison
@@ -73,9 +76,16 @@ namespace System
             }
             else
             {
-                if (!object.ReferenceEquals(m_helperObject, d.m_helperObject) ||
-                    (!FunctionPointerOps.Compare(m_extraFunctionPointerOrData, d.m_extraFunctionPointerOrData)) ||
-                    (!FunctionPointerOps.Compare(m_functionPointer, d.m_functionPointer)))
+                if (
+                    !object.ReferenceEquals(m_helperObject, d.m_helperObject)
+                    || (
+                        !FunctionPointerOps.Compare(
+                            m_extraFunctionPointerOrData,
+                            d.m_extraFunctionPointerOrData
+                        )
+                    )
+                    || (!FunctionPointerOps.Compare(m_functionPointer, d.m_functionPointer))
+                )
                 {
                     return false;
                 }
@@ -138,10 +148,15 @@ namespace System
             return ReferenceEquals(d2, d1) ? false : !d2.Equals(d1);
         }
 
-        private MulticastDelegate NewMulticastDelegate(Delegate[] invocationList, int invocationCount, bool thisIsMultiCastAlready = false)
+        private MulticastDelegate NewMulticastDelegate(
+            Delegate[] invocationList,
+            int invocationCount,
+            bool thisIsMultiCastAlready = false
+        )
         {
             // First, allocate a new multicast delegate just like this one, i.e. same type as the this object
-            MulticastDelegate result = (MulticastDelegate)RuntimeImports.RhNewObject(this.GetEETypePtr());
+            MulticastDelegate result = (MulticastDelegate)
+                RuntimeImports.RhNewObject(this.GetEETypePtr());
 
             // Performance optimization - if this already points to a true multicast delegate,
             // copy _methodPtr and _methodPtrAux fields rather than calling into the EE to get them
@@ -162,7 +177,11 @@ namespace System
 
         private static bool TrySetSlot(Delegate[] a, int index, Delegate o)
         {
-            if (a[index] == null && System.Threading.Interlocked.CompareExchange<Delegate>(ref a[index], o, null) == null)
+            if (
+                a[index] == null
+                && System.Threading.Interlocked.CompareExchange<Delegate>(ref a[index], o, null)
+                    == null
+            )
                 return true;
 
             // The slot may be already set because we have added and removed the same method before.
@@ -172,17 +191,18 @@ namespace System
                 MulticastDelegate d = (MulticastDelegate)o;
                 MulticastDelegate dd = (MulticastDelegate)a[index];
 
-                if (object.ReferenceEquals(dd.m_firstParameter, d.m_firstParameter) &&
-                    object.ReferenceEquals(dd.m_helperObject, d.m_helperObject) &&
-                    dd.m_extraFunctionPointerOrData == d.m_extraFunctionPointerOrData &&
-                    dd.m_functionPointer == d.m_functionPointer)
+                if (
+                    object.ReferenceEquals(dd.m_firstParameter, d.m_firstParameter)
+                    && object.ReferenceEquals(dd.m_helperObject, d.m_helperObject)
+                    && dd.m_extraFunctionPointerOrData == d.m_extraFunctionPointerOrData
+                    && dd.m_functionPointer == d.m_functionPointer
+                )
                 {
                     return true;
                 }
             }
             return false;
         }
-
 
         // This method will combine this delegate with the passed delegate
         //  to form a new delegate.
@@ -276,7 +296,12 @@ namespace System
             }
         }
 
-        private Delegate[] DeleteFromInvocationList(Delegate[] invocationList, int invocationCount, int deleteIndex, int deleteCount)
+        private Delegate[] DeleteFromInvocationList(
+            Delegate[] invocationList,
+            int invocationCount,
+            int deleteIndex,
+            int deleteCount
+        )
         {
             Delegate[] thisInvocationList = (Delegate[])m_helperObject;
             int allocCount = thisInvocationList.Length;
@@ -330,7 +355,7 @@ namespace System
                 else
                 {
                     int invocationCount = (int)m_extraFunctionPointerOrData;
-                    for (int i = invocationCount; --i >= 0;)
+                    for (int i = invocationCount; --i >= 0; )
                     {
                         if (v.Equals(invocationList[i]))
                         {
@@ -341,7 +366,12 @@ namespace System
                             }
                             else
                             {
-                                Delegate[] list = DeleteFromInvocationList(invocationList, invocationCount, i, 1);
+                                Delegate[] list = DeleteFromInvocationList(
+                                    invocationList,
+                                    invocationCount,
+                                    i,
+                                    1
+                                );
                                 return NewMulticastDelegate(list, invocationCount - 1, true);
                             }
                         }
@@ -357,7 +387,14 @@ namespace System
                     int vInvocationCount = (int)v.m_extraFunctionPointerOrData;
                     for (int i = invocationCount - vInvocationCount; i >= 0; i--)
                     {
-                        if (EqualInvocationLists(invocationList, v.m_helperObject as Delegate[], i, vInvocationCount))
+                        if (
+                            EqualInvocationLists(
+                                invocationList,
+                                v.m_helperObject as Delegate[],
+                                i,
+                                vInvocationCount
+                            )
+                        )
                         {
                             if (invocationCount - vInvocationCount == 0)
                             {
@@ -371,8 +408,17 @@ namespace System
                             }
                             else
                             {
-                                Delegate[] list = DeleteFromInvocationList(invocationList, invocationCount, i, vInvocationCount);
-                                return NewMulticastDelegate(list, invocationCount - vInvocationCount, true);
+                                Delegate[] list = DeleteFromInvocationList(
+                                    invocationList,
+                                    invocationCount,
+                                    i,
+                                    vInvocationCount
+                                );
+                                return NewMulticastDelegate(
+                                    list,
+                                    invocationCount - vInvocationCount,
+                                    true
+                                );
                             }
                         }
                     }
@@ -409,7 +455,11 @@ namespace System
             return base.GetMethodImpl();
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

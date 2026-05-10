@@ -14,9 +14,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             ImmutableArray<TSymbol> symbols,
             ISymbolDisplayService symbolDisplayService,
             SemanticModel semanticModel,
-            int position)
-            where TSymbol : ISymbol
-            => Shared.Extensions.ISymbolExtensions2.Sort(symbols, semanticModel, position);
+            int position
+        )
+            where TSymbol : ISymbol =>
+            Shared.Extensions.ISymbolExtensions2.Sort(symbols, semanticModel, position);
 #pragma warning restore IDE0060 // Remove unused parameter
     }
 }

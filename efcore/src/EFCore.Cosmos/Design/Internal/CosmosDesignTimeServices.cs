@@ -3,7 +3,9 @@
 
 using Microsoft.EntityFrameworkCore.Design.Internal;
 
-[assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.Cosmos.Design.Internal.CosmosDesignTimeServices")]
+[assembly: DesignTimeProviderServices(
+    "Microsoft.EntityFrameworkCore.Cosmos.Design.Internal.CosmosDesignTimeServices"
+)]
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Design.Internal;
 
@@ -26,7 +28,10 @@ public class CosmosDesignTimeServices : IDesignTimeServices
         serviceCollection.AddEntityFrameworkCosmos();
 #pragma warning disable EF1001 // Internal EF Core API usage.
         new EntityFrameworkDesignServicesBuilder(serviceCollection)
-            .TryAdd<ICSharpRuntimeAnnotationCodeGenerator, CosmosCSharpRuntimeAnnotationCodeGenerator>()
+            .TryAdd<
+                ICSharpRuntimeAnnotationCodeGenerator,
+                CosmosCSharpRuntimeAnnotationCodeGenerator
+            >()
 #pragma warning restore EF1001 // Internal EF Core API usage.
             .TryAddCoreServices();
     }

@@ -10,9 +10,13 @@ namespace Microsoft.CodeAnalysis.CodeActions
     /// <summary>
     /// A code action operation for requesting a document be opened in the host environment.
     /// </summary>
-    public sealed class OpenDocumentOperation(DocumentId documentId, bool activateIfAlreadyOpen = false) : CodeActionOperation
+    public sealed class OpenDocumentOperation(
+        DocumentId documentId,
+        bool activateIfAlreadyOpen = false
+    ) : CodeActionOperation
     {
-        private readonly DocumentId _documentId = documentId ?? throw new ArgumentNullException(nameof(documentId));
+        private readonly DocumentId _documentId =
+            documentId ?? throw new ArgumentNullException(nameof(documentId));
 
         public DocumentId DocumentId => _documentId;
 

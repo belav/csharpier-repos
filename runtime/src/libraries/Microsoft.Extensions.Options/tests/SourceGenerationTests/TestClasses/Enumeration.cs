@@ -31,7 +31,11 @@ namespace Enumeration
         public IList<ThirdModel?>? P5 { get; set; }
 
         [ValidateEnumeratedItems]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1125:Use shorthand for nullable types", Justification = "Testing System>Nullable<T>")]
+        [SuppressMessage(
+            "StyleCop.CSharp.ReadabilityRules",
+            "SA1125:Use shorthand for nullable types",
+            Justification = "Testing System>Nullable<T>"
+        )]
         public IList<Nullable<ThirdModel>>? P51 { get; set; }
 
         [ValidateEnumeratedItems]
@@ -41,7 +45,11 @@ namespace Enumeration
         public SynteticEnumerable P7 { get; set; }
 
         [ValidateEnumeratedItems]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1125:Use shorthand for nullable types", Justification = "Testing System>Nullable<T>")]
+        [SuppressMessage(
+            "StyleCop.CSharp.ReadabilityRules",
+            "SA1125:Use shorthand for nullable types",
+            Justification = "Testing System>Nullable<T>"
+        )]
         public Nullable<SynteticEnumerable> P8 { get; set; }
     }
 
@@ -82,12 +90,8 @@ namespace Enumeration
     }
 
     [OptionsValidator]
-    public partial struct FirstValidator : IValidateOptions<FirstModel>
-    {
-    }
+    public partial struct FirstValidator : IValidateOptions<FirstModel> { }
 
     [OptionsValidator]
-    public partial struct SecondValidator : IValidateOptions<SecondModel>
-    {
-    }
+    public partial struct SecondValidator : IValidateOptions<SecondModel> { }
 }

@@ -10,7 +10,15 @@ namespace System.Reflection.Metadata
     public static partial class MetadataUpdater
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_ApplyUpdate")]
-        private static unsafe partial void ApplyUpdate(QCallAssembly assembly, byte* metadataDelta, int metadataDeltaLength, byte* ilDelta, int ilDeltaLength, byte* pdbDelta, int pdbDeltaLength);
+        private static unsafe partial void ApplyUpdate(
+            QCallAssembly assembly,
+            byte* metadataDelta,
+            int metadataDeltaLength,
+            byte* ilDelta,
+            int ilDeltaLength,
+            byte* pdbDelta,
+            int pdbDeltaLength
+        );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_IsApplyUpdateSupported")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -33,7 +41,12 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentNullException">The assembly argument is null.</exception>
         /// <exception cref="InvalidOperationException">The assembly is not editable.</exception>
         /// <exception cref="NotSupportedException">The update could not be applied.</exception>
-        public static void ApplyUpdate(Assembly assembly, ReadOnlySpan<byte> metadataDelta, ReadOnlySpan<byte> ilDelta, ReadOnlySpan<byte> pdbDelta)
+        public static void ApplyUpdate(
+            Assembly assembly,
+            ReadOnlySpan<byte> metadataDelta,
+            ReadOnlySpan<byte> ilDelta,
+            ReadOnlySpan<byte> pdbDelta
+        )
         {
             if (assembly is not RuntimeAssembly runtimeAssembly)
             {
@@ -44,9 +57,21 @@ namespace System.Reflection.Metadata
             unsafe
             {
                 RuntimeAssembly rtAsm = runtimeAssembly;
-                fixed (byte* metadataDeltaPtr = metadataDelta, ilDeltaPtr = ilDelta, pdbDeltaPtr = pdbDelta)
+                fixed (
+                    byte* metadataDeltaPtr = metadataDelta,
+                        ilDeltaPtr = ilDelta,
+                        pdbDeltaPtr = pdbDelta
+                )
                 {
-                    ApplyUpdate(new QCallAssembly(ref rtAsm), metadataDeltaPtr, metadataDelta.Length, ilDeltaPtr, ilDelta.Length, pdbDeltaPtr, pdbDelta.Length);
+                    ApplyUpdate(
+                        new QCallAssembly(ref rtAsm),
+                        metadataDeltaPtr,
+                        metadataDelta.Length,
+                        ilDeltaPtr,
+                        ilDelta.Length,
+                        pdbDeltaPtr,
+                        pdbDelta.Length
+                    );
                 }
             }
         }
@@ -54,7 +79,8 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Returns the metadata update capabilities.
         /// </summary>
-        internal static string GetCapabilities() => "Baseline AddMethodToExistingType AddStaticFieldToExistingType AddInstanceFieldToExistingType NewTypeDefinition ChangeCustomAttributes UpdateParameters GenericUpdateMethod GenericAddMethodToExistingType GenericAddFieldToExistingType";
+        internal static string GetCapabilities() =>
+            "Baseline AddMethodToExistingType AddStaticFieldToExistingType AddInstanceFieldToExistingType NewTypeDefinition ChangeCustomAttributes UpdateParameters GenericUpdateMethod GenericAddMethodToExistingType GenericAddFieldToExistingType";
 
         /// <summary>
         /// Returns true if the apply assembly update is enabled and available.

@@ -7,17 +7,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class DesignTestHelpers : RelationalTestHelpers
 {
-    protected DesignTestHelpers()
-    {
-    }
+    protected DesignTestHelpers() { }
 
     public static DesignTestHelpers Instance { get; } = new();
 
-    public override IServiceCollection AddProviderServices(IServiceCollection services)
-        => FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(services);
+    public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+        FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(services);
 
-    public override DbContextOptionsBuilder UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseFakeRelational();
+    public override DbContextOptionsBuilder UseProviderOptions(
+        DbContextOptionsBuilder optionsBuilder
+    ) => optionsBuilder.UseFakeRelational();
 
-    public override LoggingDefinitions LoggingDefinitions { get; } = new TestRelationalLoggingDefinitions();
+    public override LoggingDefinitions LoggingDefinitions { get; } =
+        new TestRelationalLoggingDefinitions();
 }

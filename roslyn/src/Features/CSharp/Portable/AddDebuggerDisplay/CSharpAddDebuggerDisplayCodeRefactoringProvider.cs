@@ -13,21 +13,26 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.AddDebuggerDisplay), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.AddDebuggerDisplay
+        ),
+        Shared
+    ]
     internal sealed class CSharpAddDebuggerDisplayCodeRefactoringProvider
         : AbstractAddDebuggerDisplayCodeRefactoringProvider<
             TypeDeclarationSyntax,
-            MethodDeclarationSyntax>
+            MethodDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddDebuggerDisplayCodeRefactoringProvider()
-        {
-        }
+        public CSharpAddDebuggerDisplayCodeRefactoringProvider() { }
 
         protected override bool CanNameofAccessNonPublicMembersFromAttributeArgument => true;
 
-        protected override bool SupportsConstantInterpolatedStrings(Document document)
-            => document.Project.ParseOptions!.LanguageVersion().HasConstantInterpolatedStrings();
+        protected override bool SupportsConstantInterpolatedStrings(Document document) =>
+            document.Project.ParseOptions!.LanguageVersion().HasConstantInterpolatedStrings();
     }
 }

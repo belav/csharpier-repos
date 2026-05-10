@@ -13,17 +13,18 @@ public class LocallocTest
 {
     private static bool s_testFailed = false;
     private static int s_locallocSize = 0;
+
     [Fact]
     public static unsafe int TestEntryPoint()
     {
         ulong local1 = Global.INITIAL_VALUE;
         ulong local2 = local1 + 1;
 #if LOCALLOC_SMALL
-		Int32* intArray1 = stackalloc Int32[1];
-		s_locallocSize = 1;
+        Int32* intArray1 = stackalloc Int32[1];
+        s_locallocSize = 1;
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		s_locallocSize = 0x1000;
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        s_locallocSize = 0x1000;
 #else
 
         Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
@@ -35,9 +36,7 @@ public class LocallocTest
             unwindTest1();
             return 1;
         }
-        catch
-        {
-        }
+        catch { }
         if (s_testFailed)
             return 1;
 
@@ -57,12 +56,12 @@ public class LocallocTest
         return 100;
     }
 
-    internal unsafe static void unwindTest1()
+    internal static unsafe void unwindTest1()
     {
 #if LOCALLOC_SMALL
-		Int32* intArray2 = stackalloc Int32[1];
+        Int32* intArray2 = stackalloc Int32[1];
 #elif LOCALLOC_LARGE
-		Int32* intArray2 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
 #else
         Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
 #endif
@@ -84,12 +83,22 @@ public class LocallocTest
         return;
     }
 
-    private unsafe void unwindTest2(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9)
+    private unsafe void unwindTest2(
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        int i8,
+        int i9
+    )
     {
 #if LOCALLOC_SMALL
-		Int32* intArray3 = stackalloc Int32[1];
+        Int32* intArray3 = stackalloc Int32[1];
 #elif LOCALLOC_LARGE
-		Int32* intArray3 = stackalloc Int32[0x1000];
+        Int32* intArray3 = stackalloc Int32[0x1000];
 #else
         Int32* intArray3 = stackalloc Int32[Global.stackAllocSize];
 #endif

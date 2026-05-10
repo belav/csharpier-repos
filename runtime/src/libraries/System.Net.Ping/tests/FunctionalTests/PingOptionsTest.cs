@@ -45,7 +45,10 @@ namespace System.Net.NetworkInformation.Tests
         public void DontFragment_SetGetValidValues_Success(bool dontFragment)
         {
             Assert.Equal(dontFragment, new PingOptions(1, dontFragment).DontFragment);
-            Assert.Equal(dontFragment, new PingOptions { DontFragment = dontFragment }.DontFragment);
+            Assert.Equal(
+                dontFragment,
+                new PingOptions { DontFragment = dontFragment }.DontFragment
+            );
         }
     }
 }

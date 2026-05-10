@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
     /// Special implementation of the copy paste service for testing.  This one avoids going through the actual
     /// clipboard, avoiding complexity of interacting with that during testing.
     /// </summary>
-    [ExportWorkspaceService(typeof(IStringCopyPasteService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IStringCopyPasteService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     public class TestStringCopyPasteService : IStringCopyPasteService
     {
         private string? _key;
@@ -21,9 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestStringCopyPasteService()
-        {
-        }
+        public TestStringCopyPasteService() { }
 
         public bool TrySetClipboardData(string key, string data)
         {
@@ -32,7 +34,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
             return true;
         }
 
-        public string? TryGetClipboardData(string key)
-            => _key == key ? _data : null;
+        public string? TryGetClipboardData(string key) => _key == key ? _data : null;
     }
 }

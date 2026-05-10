@@ -1,5 +1,5 @@
 //
-// ProtectedMemoryCas.cs 
+// ProtectedMemoryCas.cs
 //	- CAS unit tests for System.Security.Cryptography.ProtectedMemory
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,140 +29,156 @@
 #if !MOBILE
 
 using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Cryptography;
 
-namespace MonoCasTests.System.Security.Cryptography {
+namespace MonoCasTests.System.Security.Cryptography
+{
+    [TestFixture]
+    [Category("CAS")]
+    // problem with CSC when an assembly use permissions defined within itself
+    [Category("NotWorking")]
+    public class ProtectedMemoryCas
+    {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	// problem with CSC when an assembly use permissions defined within itself
-	[Category ("NotWorking")] 
-	public class ProtectedMemoryCas {
+        private bool IsEmpty(byte[] array)
+        {
+            int total = 0;
+            for (int i = 0; i < array.Length; i++)
+                total += array[i];
+            return (total == 0);
+        }
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [DataProtectionPermission(
+            SecurityAction.PermitOnly,
+            ProtectMemory = true,
+            UnprotectMemory = true
+        )]
+        public void UnitTestReuse()
+        {
+            ProtectedMemoryTest unit = new ProtectedMemoryTest();
+            unit.ProtectSameProcess();
+            unit.ProtectSameLogon();
+            unit.ProtectCrossProcess();
+            unit.MemoryProtectionScope_All();
+        }
 
-		private bool IsEmpty (byte[] array)
-		{
-			int total = 0;
-			for (int i = 0; i < array.Length; i++)
-				total += array[i];
-			return (total == 0);
-		}
+        [Test]
+        [DataProtectionPermission(SecurityAction.PermitOnly, ProtectMemory = true)]
+        // note: this implies that UnmanagedCode isn't allowed
+        public void Protect_PermitOnly_Protect()
+        {
+            try
+            {
+                byte[] data = new byte[16];
+                ProtectedMemory.Protect(data, MemoryProtectionScope.SameProcess);
+                Assert.IsFalse(IsEmpty(data), "SameProcess");
 
-		[Test]
-		[DataProtectionPermission (SecurityAction.PermitOnly, ProtectMemory = true, UnprotectMemory = true)]
-		public void UnitTestReuse ()
-		{
-			ProtectedMemoryTest unit = new ProtectedMemoryTest ();
-			unit.ProtectSameProcess ();
-			unit.ProtectSameLogon ();
-			unit.ProtectCrossProcess ();
-			unit.MemoryProtectionScope_All ();
-		}
+                data = new byte[16];
+                ProtectedMemory.Protect(data, MemoryProtectionScope.SameLogon);
+                Assert.IsFalse(IsEmpty(data), "SameLogon");
 
-		[Test]
-		[DataProtectionPermission (SecurityAction.PermitOnly, ProtectMemory = true)]
-		// note: this implies that UnmanagedCode isn't allowed
-		public void Protect_PermitOnly_Protect ()
-		{
-			try {
-				byte[] data = new byte[16];
-				ProtectedMemory.Protect (data, MemoryProtectionScope.SameProcess);
-				Assert.IsFalse (IsEmpty (data), "SameProcess");
+                data = new byte[16];
+                ProtectedMemory.Protect(data, MemoryProtectionScope.CrossProcess);
+                Assert.IsFalse(IsEmpty(data), "CrossProcess");
+            }
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
+            }
+        }
 
-				data = new byte[16];
-				ProtectedMemory.Protect (data, MemoryProtectionScope.SameLogon);
-				Assert.IsFalse (IsEmpty (data), "SameLogon");
+        [Test]
+        [DataProtectionPermission(SecurityAction.Deny, ProtectMemory = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Protect_Deny_Protect()
+        {
+            try
+            {
+                ProtectedMemory.Protect(new byte[16], MemoryProtectionScope.SameProcess);
+            }
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
+            }
+        }
 
-				data = new byte[16];
-				ProtectedMemory.Protect (data, MemoryProtectionScope.CrossProcess);
-				Assert.IsFalse (IsEmpty (data), "CrossProcess");
-			}
-			catch (PlatformNotSupportedException) {
-				Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
-			}
-		}
+        [Test]
+        [DataProtectionPermission(SecurityAction.PermitOnly, UnprotectMemory = true)]
+        // note: this implies that UnmanagedCode isn't allowed
+        public void Unprotect_PermitOnly_Unprotect()
+        {
+            try
+            {
+                byte[] data = new byte[16];
+                ProtectedMemory.Unprotect(data, MemoryProtectionScope.SameProcess);
+                Assert.IsFalse(IsEmpty(data), "Unprotect unprotected");
+            }
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
+            }
+        }
 
-		[Test]
-		[DataProtectionPermission (SecurityAction.Deny, ProtectMemory = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Protect_Deny_Protect ()
-		{
-			try {
-				ProtectedMemory.Protect (new byte[16], MemoryProtectionScope.SameProcess);
-			}
-			catch (PlatformNotSupportedException) {
-				Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
-			}
-		}
+        [Test]
+        [DataProtectionPermission(SecurityAction.Deny, UnprotectMemory = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Unprotect_Deny_Unprotect()
+        {
+            try
+            {
+                ProtectedMemory.Unprotect(new byte[16], MemoryProtectionScope.SameProcess);
+            }
+            catch (PlatformNotSupportedException)
+            {
+                Assert.Ignore("Only supported under Windows 2000 SP3 and later");
+            }
+        }
 
-		[Test]
-		[DataProtectionPermission (SecurityAction.PermitOnly, UnprotectMemory = true)]
-		// note: this implies that UnmanagedCode isn't allowed
-		public void Unprotect_PermitOnly_Unprotect ()
-		{
-			try {
-				byte[] data = new byte[16];
-				ProtectedMemory.Unprotect (data, MemoryProtectionScope.SameProcess);
-				Assert.IsFalse (IsEmpty (data), "Unprotect unprotected");
-			}
-			catch (PlatformNotSupportedException) {
-				Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
-			}
-		}
+        [Test]
+        [DataProtectionPermission(
+            SecurityAction.PermitOnly,
+            ProtectMemory = true,
+            UnprotectMemory = true
+        )]
+        public void LinkDemand_PermitOnly_DataProtection()
+        {
+            Type pm = typeof(ProtectedMemory);
+            byte[] data = new byte[16];
+            object[] parameters = new object[2] { data, MemoryProtectionScope.SameProcess };
 
-		[Test]
-		[DataProtectionPermission (SecurityAction.Deny, UnprotectMemory = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Unprotect_Deny_Unprotect ()
-		{
-			try {
-				ProtectedMemory.Unprotect (new byte[16], MemoryProtectionScope.SameProcess);
-			}
-			catch (PlatformNotSupportedException) {
-				Assert.Ignore ("Only supported under Windows 2000 SP3 and later");
-			}
-		}
+            try
+            {
+                MethodInfo mi = pm.GetMethod("Protect");
+                Assert.IsNotNull(mi, "Protect");
+                mi.Invoke(null, parameters);
+                Assert.IsFalse(IsEmpty(data), "Encrypted");
 
-		[Test]
-		[DataProtectionPermission (SecurityAction.PermitOnly, ProtectMemory = true, UnprotectMemory = true)]
-		public void LinkDemand_PermitOnly_DataProtection ()
-		{
-			Type pm = typeof (ProtectedMemory);
-			byte[] data = new byte[16];
-			object[] parameters = new object[2] { data, MemoryProtectionScope.SameProcess };
+                mi = pm.GetMethod("Unprotect");
+                Assert.IsNotNull(mi, "Unprotect");
+                mi.Invoke(null, parameters);
+                Assert.IsTrue(IsEmpty(data), "Decrypted");
 
-			try {
-				MethodInfo mi = pm.GetMethod ("Protect");
-				Assert.IsNotNull (mi, "Protect");
-				mi.Invoke (null, parameters);
-				Assert.IsFalse (IsEmpty (data), "Encrypted");
-
-				mi = pm.GetMethod ("Unprotect");
-				Assert.IsNotNull (mi, "Unprotect");
-				mi.Invoke (null, parameters);
-				Assert.IsTrue (IsEmpty (data), "Decrypted");
-
-				// so no LinkDemand are required (Demand are enough) and
-				// no check for UnmanagedCode are required
-			}
-			catch (TargetInvocationException tie) {
-				if (tie.InnerException is PlatformNotSupportedException)
-					Assert.Ignore ("Only supported under Windows 2000 SP 3 and later");
-			}
-		}
-	}
+                // so no LinkDemand are required (Demand are enough) and
+                // no check for UnmanagedCode are required
+            }
+            catch (TargetInvocationException tie)
+            {
+                if (tie.InnerException is PlatformNotSupportedException)
+                    Assert.Ignore("Only supported under Windows 2000 SP 3 and later");
+            }
+        }
+    }
 }
 #endif

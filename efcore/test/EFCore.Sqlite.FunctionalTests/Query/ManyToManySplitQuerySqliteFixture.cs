@@ -5,9 +5,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class ManyToManySplitQuerySqliteFixture : ManyToManyQuerySqliteFixture
 {
-    protected override string StoreName
-        => "ManyToManySplitQuery";
+    protected override string StoreName => "ManyToManySplitQuery";
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder.UseSqlite(b => b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(
+            builder.UseSqlite(b => b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+        );
 }

@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
     using System.Globalization;
     using System.Messaging;
+    using System.ServiceModel.Channels;
     using System.Xml;
 
     class WorkflowOperationFault : MessageFault
@@ -20,43 +20,52 @@ namespace System.ServiceModel.Dispatcher
         {
             if (errorCode == MessageQueueErrorCode.QueueNotAvailable)
             {
-                faultCode = FaultCode.CreateSenderFaultCode(operationNotAvailable, ContextMessageHeader.ContextHeaderNamespace);
-                faultReason = new FaultReason(new FaultReasonText(SR2.GetString(SR2.OperationNotAvailable), CultureInfo.CurrentCulture));
+                faultCode = FaultCode.CreateSenderFaultCode(
+                    operationNotAvailable,
+                    ContextMessageHeader.ContextHeaderNamespace
+                );
+                faultReason = new FaultReason(
+                    new FaultReasonText(
+                        SR2.GetString(SR2.OperationNotAvailable),
+                        CultureInfo.CurrentCulture
+                    )
+                );
             }
             else
             {
-                faultCode = FaultCode.CreateSenderFaultCode(operationNotImplemented, ContextMessageHeader.ContextHeaderNamespace);
-                faultReason = new FaultReason(new FaultReasonText(SR2.GetString(SR2.OperationNotImplemented), CultureInfo.CurrentCulture));
+                faultCode = FaultCode.CreateSenderFaultCode(
+                    operationNotImplemented,
+                    ContextMessageHeader.ContextHeaderNamespace
+                );
+                faultReason = new FaultReason(
+                    new FaultReasonText(
+                        SR2.GetString(SR2.OperationNotImplemented),
+                        CultureInfo.CurrentCulture
+                    )
+                );
             }
         }
 
         public override FaultCode Code
         {
-            get
-            {
-                return this.faultCode;
-            }
+            get { return this.faultCode; }
         }
 
         public override bool HasDetail
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override FaultReason Reason
         {
-            get
-            {
-                return this.faultReason;
-            }
+            get { return this.faultReason; }
         }
 
         protected override void OnWriteDetailContents(XmlDictionaryWriter writer)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
     }
 }

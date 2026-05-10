@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -23,7 +23,8 @@ namespace System.Linq.Parallel
     /// <summary>
     /// An inlined min/max aggregation and its enumerator, for decimals.
     /// </summary>
-    internal sealed class DecimalMinMaxAggregationOperator : InlinedAggregationOperator<decimal, decimal, decimal>
+    internal sealed class DecimalMinMaxAggregationOperator
+        : InlinedAggregationOperator<decimal, decimal, decimal>
     {
         private readonly int m_sign; // The sign (-1 for min, 1 for max).
 
@@ -31,7 +32,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal DecimalMinMaxAggregationOperator(IEnumerable<decimal> child, int sign) : base(child)
+        internal DecimalMinMaxAggregationOperator(IEnumerable<decimal> child, int sign)
+            : base(child)
         {
             Contract.Assert(sign == -1 || sign == 1, "invalid sign");
             m_sign = sign;
@@ -47,16 +49,23 @@ namespace System.Linq.Parallel
 
         protected override decimal InternalAggregate(ref Exception singularExceptionToThrow)
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<decimal> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<decimal> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Throw an error for empty results.
                 if (!enumerator.MoveNext())
                 {
-                    singularExceptionToThrow = new InvalidOperationException(SR.GetString(SR.NoElements));
+                    singularExceptionToThrow = new InvalidOperationException(
+                        SR.GetString(SR.NoElements)
+                    );
                     return default(decimal);
                 }
 
@@ -95,9 +104,19 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<decimal, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<decimal, TKey> source, object sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<decimal, TKey> source,
+            object sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new DecimalMinMaxAggregationOperatorEnumerator<TKey>(source, index, m_sign, cancellationToken);
+            return new DecimalMinMaxAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                m_sign,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -105,7 +124,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private class DecimalMinMaxAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<decimal>
+        private class DecimalMinMaxAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<decimal>
         {
             private QueryOperatorEnumerator<decimal, TKey> m_source; // The source data.
             private int m_sign; // The sign for comparisons (-1 means min, 1 means max).
@@ -114,9 +134,13 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal DecimalMinMaxAggregationOperatorEnumerator(QueryOperatorEnumerator<decimal, TKey> source, int partitionIndex, int sign,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal DecimalMinMaxAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<decimal, TKey> source,
+                int partitionIndex,
+                int sign,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Contract.Assert(source != null);
                 m_source = source;
@@ -159,7 +183,7 @@ namespace System.Linq.Parallel
                         {
                             if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                                 CancellationState.ThrowIfCanceled(m_cancellationToken);
-                            
+
                             if (elem > currentElement)
                             {
                                 currentElement = elem;

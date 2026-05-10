@@ -42,7 +42,10 @@ namespace System.Globalization.Tests
 
                 try
                 {
-                    RunStringInfoTestCase(inputString.ToString(), expectedGraphemeClusterRanges.ToArray());
+                    RunStringInfoTestCase(
+                        inputString.ToString(),
+                        expectedGraphemeClusterRanges.ToArray()
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -52,7 +55,10 @@ namespace System.Globalization.Tests
             }
         }
 
-        private static void RunStringInfoTestCase(string input, Range[] expectedGraphemeClusterRanges)
+        private static void RunStringInfoTestCase(
+            string input,
+            Range[] expectedGraphemeClusterRanges
+        )
         {
             if (expectedGraphemeClusterRanges.Length == 0)
             {
@@ -79,8 +85,11 @@ namespace System.Globalization.Tests
 
                 int[] combiningCharOffsets = StringInfo.ParseCombiningCharacters(input);
                 Assert.Equal(
-                    expected: expectedGraphemeClusterRanges.Select(range => range.GetOffsetAndLength(input.Length).Offset).ToArray(),
-                    actual: combiningCharOffsets);
+                    expected: expectedGraphemeClusterRanges
+                        .Select(range => range.GetOffsetAndLength(input.Length).Offset)
+                        .ToArray(),
+                    actual: combiningCharOffsets
+                );
 
                 // GetNextTextElement[Length] returns the substring [length] of each grapheme cluster
 
@@ -89,15 +98,36 @@ namespace System.Globalization.Tests
                     string expected = input[range];
 
                     Assert.Equal(expected, StringInfo.GetNextTextElement(input[range.Start..]));
-                    Assert.Equal(expected, StringInfo.GetNextTextElement(input, range.GetOffsetAndLength(input.Length).Offset));
-                    Assert.Equal(expected.Length, StringInfo.GetNextTextElementLength(input[range.Start..]));
-                    Assert.Equal(expected.Length, StringInfo.GetNextTextElementLength(input, range.GetOffsetAndLength(input.Length).Offset));
-                    Assert.Equal(expected.Length, StringInfo.GetNextTextElementLength(input.AsSpan()[range]));
+                    Assert.Equal(
+                        expected,
+                        StringInfo.GetNextTextElement(
+                            input,
+                            range.GetOffsetAndLength(input.Length).Offset
+                        )
+                    );
+                    Assert.Equal(
+                        expected.Length,
+                        StringInfo.GetNextTextElementLength(input[range.Start..])
+                    );
+                    Assert.Equal(
+                        expected.Length,
+                        StringInfo.GetNextTextElementLength(
+                            input,
+                            range.GetOffsetAndLength(input.Length).Offset
+                        )
+                    );
+                    Assert.Equal(
+                        expected.Length,
+                        StringInfo.GetNextTextElementLength(input.AsSpan()[range])
+                    );
                 }
 
                 // StringInfo.LengthInTextElements returns the total grapheme cluster count
 
-                Assert.Equal(expectedGraphemeClusterRanges.Length, new StringInfo(input).LengthInTextElements);
+                Assert.Equal(
+                    expectedGraphemeClusterRanges.Length,
+                    new StringInfo(input).LengthInTextElements
+                );
 
                 // TextElementEnumerator returns an enumerator over each grapheme cluster
 
@@ -106,8 +136,13 @@ namespace System.Globalization.Tests
                     Span<Range> remainingRanges = expectedGraphemeClusterRanges.AsSpan(i);
 
                     int baseOffset = remainingRanges[0].GetOffsetAndLength(input.Length).Offset;
-                    TextElementEnumerator enumerator1 = StringInfo.GetTextElementEnumerator(input[baseOffset..]);
-                    TextElementEnumerator enumerator2 = StringInfo.GetTextElementEnumerator(input, baseOffset);
+                    TextElementEnumerator enumerator1 = StringInfo.GetTextElementEnumerator(
+                        input[baseOffset..]
+                    );
+                    TextElementEnumerator enumerator2 = StringInfo.GetTextElementEnumerator(
+                        input,
+                        baseOffset
+                    );
 
                     foreach (Range innerRange in remainingRanges)
                     {
@@ -115,7 +150,8 @@ namespace System.Globalization.Tests
                         Assert.True(enumerator2.MoveNext()); // input string has been fully provided; enumerator has substringed
 
                         string expectedSubstring = input[innerRange];
-                        int expectedRelativeOffset = innerRange.GetOffsetAndLength(input.Length).Offset - baseOffset;
+                        int expectedRelativeOffset =
+                            innerRange.GetOffsetAndLength(input.Length).Offset - baseOffset;
 
                         Assert.Equal(expectedRelativeOffset, enumerator1.ElementIndex);
                         Assert.Equal(expectedRelativeOffset, enumerator2.ElementIndex);
@@ -140,8 +176,15 @@ namespace System.Globalization.Tests
             {
                 // Arrange
 
-                string forwardActual = string.Concat(clusters.SelectMany(cluster => cluster).Select(rune => rune.ToString()));
-                string reverseExpected = string.Concat(clusters.Reverse().SelectMany(cluster => cluster).Select(rune => rune.ToString()));
+                string forwardActual = string.Concat(
+                    clusters.SelectMany(cluster => cluster).Select(rune => rune.ToString())
+                );
+                string reverseExpected = string.Concat(
+                    clusters
+                        .Reverse()
+                        .SelectMany(cluster => cluster)
+                        .Select(rune => rune.ToString())
+                );
 
                 // Act
 
@@ -154,7 +197,8 @@ namespace System.Globalization.Tests
                     throw EqualException.ForMismatchedValues(
                         expected: PrintCodePointsForDebug(reverseExpected),
                         actual: PrintCodePointsForDebug(reverseActual),
-                        banner: "Grapheme break test failed on test case: " + line);
+                        banner: "Grapheme break test failed on test case: " + line
+                    );
                 }
             }
         }
@@ -169,12 +213,17 @@ namespace System.Globalization.Tests
             // has been changed, we probably need to update the logic in StringInfo
             // and related types.
 
-            Assert.Equal(GraphemeClusterBreakProperty.Other, UnicodeData.GetData('\ud800').GraphemeClusterBreakProperty);
+            Assert.Equal(
+                GraphemeClusterBreakProperty.Other,
+                UnicodeData.GetData('\ud800').GraphemeClusterBreakProperty
+            );
         }
 
         private static IEnumerable<(Rune[][] clusters, string line)> GetGraphemeBreakTestData()
         {
-            using Stream stream = typeof(GraphemeBreakTest).Assembly.GetManifestResourceStream("GraphemeBreakTest.txt");
+            using Stream stream = typeof(GraphemeBreakTest).Assembly.GetManifestResourceStream(
+                "GraphemeBreakTest.txt"
+            );
             using StreamReader reader = new StreamReader(stream);
 
             string line;
@@ -195,15 +244,37 @@ namespace System.Globalization.Tests
                 //
                 // We also return the line for ease of debugging any test failures.
 
-                string[] clusters = line[..line.IndexOf('#')].Trim().Split(BREAK_REQUIRED, StringSplitOptions.RemoveEmptyEntries);
+                string[] clusters = line[..line.IndexOf('#')]
+                    .Trim()
+                    .Split(BREAK_REQUIRED, StringSplitOptions.RemoveEmptyEntries);
 
-                yield return (Array.ConvertAll(clusters, cluster =>
-                {
-                    string[] scalarsWithinClusterAsStrings = cluster.Split(BREAK_FORBIDDEN, StringSplitOptions.RemoveEmptyEntries);
-                    uint[] scalarsWithinClusterAsUInt32s = Array.ConvertAll(scalarsWithinClusterAsStrings, scalar => uint.Parse(scalar, NumberStyles.HexNumber, CultureInfo.InvariantCulture));
-                    Rune[] scalarsWithinClusterAsRunes = Array.ConvertAll(scalarsWithinClusterAsUInt32s, scalar => new Rune(scalar));
-                    return scalarsWithinClusterAsRunes;
-                }), line);
+                yield return (
+                    Array.ConvertAll(
+                        clusters,
+                        cluster =>
+                        {
+                            string[] scalarsWithinClusterAsStrings = cluster.Split(
+                                BREAK_FORBIDDEN,
+                                StringSplitOptions.RemoveEmptyEntries
+                            );
+                            uint[] scalarsWithinClusterAsUInt32s = Array.ConvertAll(
+                                scalarsWithinClusterAsStrings,
+                                scalar =>
+                                    uint.Parse(
+                                        scalar,
+                                        NumberStyles.HexNumber,
+                                        CultureInfo.InvariantCulture
+                                    )
+                            );
+                            Rune[] scalarsWithinClusterAsRunes = Array.ConvertAll(
+                                scalarsWithinClusterAsUInt32s,
+                                scalar => new Rune(scalar)
+                            );
+                            return scalarsWithinClusterAsRunes;
+                        }
+                    ),
+                    line
+                );
             }
         }
 
@@ -216,7 +287,7 @@ namespace System.Globalization.Tests
             IEnumerator<char> enumerator = input.GetEnumerator();
             while (enumerator.MoveNext())
             {
-            SawStandaloneChar:
+                SawStandaloneChar:
                 char thisChar = enumerator.Current;
 
                 if (!char.IsHighSurrogate(thisChar) || !enumerator.MoveNext())

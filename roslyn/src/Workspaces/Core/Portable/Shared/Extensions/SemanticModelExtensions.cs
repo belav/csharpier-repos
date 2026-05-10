@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class SemanticModelExtensions
     {
-        public static SemanticMap GetSemanticMap(this SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken)
-            => SemanticMap.From(semanticModel, node, cancellationToken);
+        public static SemanticMap GetSemanticMap(
+            this SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) => SemanticMap.From(semanticModel, node, cancellationToken);
 
         private static ISymbol? MapSymbol(ISymbol? symbol, ITypeSymbol? type)
         {
@@ -31,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return type;
             }
 
-            if (symbol.IsFunctionValue() &&
-                symbol.ContainingSymbol is IMethodSymbol method)
+            if (symbol.IsFunctionValue() && symbol.ContainingSymbol is IMethodSymbol method)
             {
                 if (method.AssociatedSymbol != null)
                 {
@@ -48,18 +50,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // type of the symbol.  built-in operators can happen when querying the semantic model
             // for operators.  However, we would prefer to just use the real operator on the type
             // if it has one.
-            if (symbol is IMethodSymbol methodSymbol &&
-                methodSymbol.MethodKind == MethodKind.BuiltinOperator &&
-                methodSymbol.ContainingType is ITypeSymbol containingType)
+            if (
+                symbol is IMethodSymbol methodSymbol
+                && methodSymbol.MethodKind == MethodKind.BuiltinOperator
+                && methodSymbol.ContainingType is ITypeSymbol containingType
+            )
             {
                 var comparer = SymbolEquivalenceComparer.Instance.ParameterEquivalenceComparer;
 
                 // Note: this will find the real method vs the built-in.  That's because the
                 // built-in is synthesized operator that isn't actually in the list of members of
                 // its 'ContainingType'.
-                var mapped = containingType.GetMembers(methodSymbol.Name)
-                                           .OfType<IMethodSymbol>()
-                                           .FirstOrDefault(s => s.Parameters.SequenceEqual(methodSymbol.Parameters, comparer));
+                var mapped = containingType
+                    .GetMembers(methodSymbol.Name)
+                    .OfType<IMethodSymbol>()
+                    .FirstOrDefault(s =>
+                        s.Parameters.SequenceEqual(methodSymbol.Parameters, comparer)
+                    );
                 symbol = mapped ?? symbol;
             }
 
@@ -70,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SemanticModel semanticModel,
             SyntaxToken token,
             SolutionServices services,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var languageServices = services.GetLanguageServices(token.Language);
             var syntaxFacts = languageServices.GetRequiredService<ISyntaxFactsService>();
@@ -88,34 +96,60 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbol? declaredSymbol = null;
             var allSymbols = ImmutableArray<ISymbol?>.Empty;
 
-            if (token.RawKind == syntaxKinds.UsingKeyword &&
-                (token.Parent?.RawKind == syntaxKinds.UsingStatement || token.Parent?.RawKind == syntaxKinds.LocalDeclarationStatement))
+            if (
+                token.RawKind == syntaxKinds.UsingKeyword
+                && (
+                    token.Parent?.RawKind == syntaxKinds.UsingStatement
+                    || token.Parent?.RawKind == syntaxKinds.LocalDeclarationStatement
+                )
+            )
             {
                 var usingStatement = token.Parent;
-                declaredSymbol = semanticFacts.TryGetDisposeMethod(semanticModel, token.Parent, cancellationToken);
+                declaredSymbol = semanticFacts.TryGetDisposeMethod(
+                    semanticModel,
+                    token.Parent,
+                    cancellationToken
+                );
             }
             else if (overriddingIdentifier.HasValue)
             {
                 // on an "override" token, we'll find the overridden symbol
-                var overriddingSymbol = semanticFacts.GetDeclaredSymbol(semanticModel, overriddingIdentifier.Value, cancellationToken);
+                var overriddingSymbol = semanticFacts.GetDeclaredSymbol(
+                    semanticModel,
+                    overriddingIdentifier.Value,
+                    cancellationToken
+                );
                 var overriddenSymbol = overriddingSymbol.GetOverriddenMember();
 
-                allSymbols = overriddenSymbol is null ? ImmutableArray<ISymbol?>.Empty : ImmutableArray.Create<ISymbol?>(overriddenSymbol);
+                allSymbols = overriddenSymbol is null
+                    ? ImmutableArray<ISymbol?>.Empty
+                    : ImmutableArray.Create<ISymbol?>(overriddenSymbol);
             }
             else
             {
                 aliasSymbol = semanticModel.GetAliasInfo(token.Parent!, cancellationToken);
                 var bindableParent = syntaxFacts.TryGetBindableParent(token);
-                var typeInfo = bindableParent != null ? semanticModel.GetTypeInfo(bindableParent, cancellationToken) : default;
+                var typeInfo =
+                    bindableParent != null
+                        ? semanticModel.GetTypeInfo(bindableParent, cancellationToken)
+                        : default;
                 type = typeInfo.Type;
                 convertedType = typeInfo.ConvertedType;
-                declaredSymbol = MapSymbol(semanticFacts.GetDeclaredSymbol(semanticModel, token, cancellationToken), type);
+                declaredSymbol = MapSymbol(
+                    semanticFacts.GetDeclaredSymbol(semanticModel, token, cancellationToken),
+                    type
+                );
 
                 var skipSymbolInfoLookup = declaredSymbol.IsKind(SymbolKind.RangeVariable);
                 allSymbols = skipSymbolInfoLookup
                     ? ImmutableArray<ISymbol?>.Empty
                     : semanticFacts
-                        .GetBestOrAllSymbols(semanticModel, bindableParent, token, cancellationToken)
+                        .GetBestOrAllSymbols(
+                            semanticModel,
+                            bindableParent,
+                            token,
+                            cancellationToken
+                        )
                         .WhereAsArray(s => !s.Equals(declaredSymbol))
                         .SelectAsArray(s => MapSymbol(s, type));
             }
@@ -135,8 +169,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 if (type.Kind == SymbolKind.NamedType)
                 {
                     var namedType = (INamedTypeSymbol)type;
-                    if (namedType.TypeKind == TypeKind.Delegate ||
-                        namedType.AssociatedSymbol != null)
+                    if (
+                        namedType.TypeKind == TypeKind.Delegate
+                        || namedType.AssociatedSymbol != null
+                    )
                     {
                         allSymbols = ImmutableArray.Create<ISymbol?>(type);
                         type = null;
@@ -150,7 +186,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 convertedType = null;
             }
 
-            return new TokenSemanticInfo(declaredSymbol, aliasSymbol, allSymbols, type, convertedType, token.Span);
+            return new TokenSemanticInfo(
+                declaredSymbol,
+                aliasSymbol,
+                allSymbols,
+                type,
+                convertedType,
+                token.Span
+            );
         }
     }
 }

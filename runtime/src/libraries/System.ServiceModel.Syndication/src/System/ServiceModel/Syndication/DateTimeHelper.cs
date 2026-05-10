@@ -10,7 +10,10 @@ namespace System.ServiceModel.Syndication
     {
         private const string Rfc3339DateTimeFormat = "yyyy-MM-ddTHH:mm:ssK";
 
-        public static bool DefaultRss20DateTimeParser(XmlDateTimeData XmlDateTimeData, out DateTimeOffset dateTimeOffset)
+        public static bool DefaultRss20DateTimeParser(
+            XmlDateTimeData XmlDateTimeData,
+            out DateTimeOffset dateTimeOffset
+        )
         {
             string dateTimeString = XmlDateTimeData.DateTimeString;
 
@@ -35,7 +38,10 @@ namespace System.ServiceModel.Syndication
             return false;
         }
 
-        public static bool DefaultAtom10DateTimeParser(XmlDateTimeData XmlDateTimeData, out DateTimeOffset dateTimeOffset)
+        public static bool DefaultAtom10DateTimeParser(
+            XmlDateTimeData XmlDateTimeData,
+            out DateTimeOffset dateTimeOffset
+        )
         {
             return Rfc3339DateTimeParser(XmlDateTimeData.DateTimeString, out dateTimeOffset);
         }
@@ -59,13 +65,22 @@ namespace System.ServiceModel.Syndication
                 }
 
 #if NETCOREAPP
-                dateTimeString = string.Concat(dateTimeString.AsSpan(0, 19), dateTimeString.AsSpan(i));
+                dateTimeString = string.Concat(
+                    dateTimeString.AsSpan(0, 19),
+                    dateTimeString.AsSpan(i)
+                );
 #else
                 dateTimeString = dateTimeString.Substring(0, 19) + dateTimeString.Substring(i);
 #endif
             }
 
-            return DateTimeOffset.TryParseExact(dateTimeString, Rfc3339DateTimeFormat, CultureInfo.InvariantCulture.DateTimeFormat, DateTimeStyles.None, out dto);
+            return DateTimeOffset.TryParseExact(
+                dateTimeString,
+                Rfc3339DateTimeFormat,
+                CultureInfo.InvariantCulture.DateTimeFormat,
+                DateTimeStyles.None,
+                out dto
+            );
         }
 
         private static bool Rfc822DateTimeParser(string dateTimeString, out DateTimeOffset dto)
@@ -78,12 +93,19 @@ namespace System.ServiceModel.Syndication
             }
 
             int timeZoneStartIndex;
-            for (timeZoneStartIndex = dateTimeStringBuilder.Length - 1; dateTimeStringBuilder[timeZoneStartIndex] != ' '; timeZoneStartIndex--)
+            for (
+                timeZoneStartIndex = dateTimeStringBuilder.Length - 1;
+                dateTimeStringBuilder[timeZoneStartIndex] != ' ';
+                timeZoneStartIndex--
+            )
                 ;
             timeZoneStartIndex++;
 
             int timeZoneLength = dateTimeStringBuilder.Length - timeZoneStartIndex;
-            string timeZoneSuffix = dateTimeStringBuilder.ToString(timeZoneStartIndex, timeZoneLength);
+            string timeZoneSuffix = dateTimeStringBuilder.ToString(
+                timeZoneStartIndex,
+                timeZoneLength
+            );
             dateTimeStringBuilder.Remove(timeZoneStartIndex, timeZoneLength);
             bool isUtc;
             dateTimeStringBuilder.Append(NormalizeTimeZone(timeZoneSuffix, out isUtc));
@@ -96,12 +118,10 @@ namespace System.ServiceModel.Syndication
                 "dd MMMM yyyy HH:mm:ss zzz",
                 "ddd, dd MMM yyyy HH:mm:ss zzz",
                 "dd MMM yyyy HH:mm:ss zzz",
-
                 "ddd, dd MMMM yyyy HH:mm zzz",
                 "dd MMMM yyyy HH:mm zzz",
                 "ddd, dd MMM yyyy HH:mm zzz",
                 "dd MMM yyyy HH:mm zzz",
-
                 // The original RFC822 spec listed 2 digit years. RFC1123 updated the format to include 4 digit years and states that you should use 4 digits.
                 // Technically RSS2.0 specifies RFC822 but it's presumed that RFC1123 will be used as we're now past Y2K and everyone knows better. The 4 digit
                 // formats are listed first for performance reasons as it's presumed they will be more likely to match first.
@@ -109,16 +129,21 @@ namespace System.ServiceModel.Syndication
                 "dd MMMM yyyy HH:mm:ss zzz",
                 "ddd, dd MMM yy HH:mm:ss zzz",
                 "dd MMM yyyy HH:mm:ss zzz",
-
                 "ddd, dd MMMM yy HH:mm zzz",
                 "dd MMMM yyyy HH:mm zzz",
                 "ddd, dd MMM yy HH:mm zzz",
-                "dd MMM yyyy HH:mm zzz"
+                "dd MMM yyyy HH:mm zzz",
             };
 
-            if (DateTimeOffset.TryParseExact(wellFormattedString, parseFormat,
-                CultureInfo.InvariantCulture.DateTimeFormat,
-                (isUtc ? DateTimeStyles.AdjustToUniversal : DateTimeStyles.None), out theTime))
+            if (
+                DateTimeOffset.TryParseExact(
+                    wellFormattedString,
+                    parseFormat,
+                    CultureInfo.InvariantCulture.DateTimeFormat,
+                    (isUtc ? DateTimeStyles.AdjustToUniversal : DateTimeStyles.None),
+                    out theTime
+                )
+            )
             {
                 dto = theTime;
                 return true;
@@ -211,6 +236,5 @@ namespace System.ServiceModel.Syndication
                     return "";
             }
         }
-
     }
 }

@@ -26,16 +26,16 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 string existingBackupStack = "";
                 try
                 {
-                    existingBackupStack = File.ReadAllText(Path.Combine(_backupPath, "_stackTrace.txt"));
+                    existingBackupStack = File.ReadAllText(
+                        Path.Combine(_backupPath, "_stackTrace.txt")
+                    );
                 }
-                catch (Exception)
-                {
-
-                }
+                catch (Exception) { }
 
                 throw new Exception(
-                    $"The backup directory `{_backupPath}` already exists. Please make sure that all customizers are correctly disposed.\r\n" +
-                    $"The existing backup directory was created with this stack {existingBackupStack}");
+                    $"The backup directory `{_backupPath}` already exists. Please make sure that all customizers are correctly disposed.\r\n"
+                        + $"The existing backup directory was created with this stack {existingBackupStack}"
+                );
             }
         }
 
@@ -44,13 +44,18 @@ namespace Microsoft.DotNet.CoreSetup.Test
             path = Path.GetFullPath(path);
             if (!path.StartsWith(_basePath))
             {
-                throw new Exception($"Trying to backup file {path} which is outside of the backup root {_basePath}.");
+                throw new Exception(
+                    $"Trying to backup file {path} which is outside of the backup root {_basePath}."
+                );
             }
 
             if (!Directory.Exists(_backupPath))
             {
                 Directory.CreateDirectory(_backupPath);
-                File.WriteAllText(Path.Combine(_backupPath, "_stackTrace.txt"), Environment.StackTrace);
+                File.WriteAllText(
+                    Path.Combine(_backupPath, "_stackTrace.txt"),
+                    Environment.StackTrace
+                );
             }
 
             string backupFile = Path.Combine(_backupPath, path.Substring(_basePath.Length + 1));
@@ -94,10 +99,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
                     System.Threading.Thread.Sleep(200);
                 }
-                
+
                 throw new Exception(
                     $"Failed to delete the backup folder {_backupPath} even after retries.\r\n"
-                    + (exception == null ? "" : exception.ToString()));
+                        + (exception == null ? "" : exception.ToString())
+                );
             }
         }
 
@@ -105,7 +111,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
         {
             foreach (string directory in Directory.GetDirectories(source))
             {
-                CopyOverDirectory(directory, Path.Combine(destination, Path.GetFileName(directory)));
+                CopyOverDirectory(
+                    directory,
+                    Path.Combine(destination, Path.GetFileName(directory))
+                );
             }
 
             foreach (string file in Directory.GetFiles(source))

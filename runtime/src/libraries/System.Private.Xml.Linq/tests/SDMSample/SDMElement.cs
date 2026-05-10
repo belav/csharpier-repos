@@ -47,7 +47,8 @@ namespace XDocumentTests.SDMSample
             Assert.Equal(
                 new XNode[] { level2Element, cdata, new XText(someValue) },
                 element.Nodes(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(new[] { attribute.Name }, element.Attributes().Select(x => x.Name));
             Assert.Equal(new[] { attribute.Value }, element.Attributes().Select(x => x.Value));
@@ -74,7 +75,8 @@ namespace XDocumentTests.SDMSample
             Assert.Equal(
                 new XNode[] { level2Element, cdata, new XText(someValue) },
                 elementCopy.Nodes(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(new[] { attribute.Name }, element.Attributes().Select(x => x.Name));
             Assert.Equal(new[] { attribute.Value }, element.Attributes().Select(x => x.Value));
@@ -88,12 +90,16 @@ namespace XDocumentTests.SDMSample
             Assert.Equal(
                 new XNode[] { level2Element, cdata, new XText(someValue) },
                 elementCopy.Nodes(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Empty(elementCopy.Attributes());
 
             // Hsh codes of equal elements should be equal.
-            Assert.Equal(XNode.EqualityComparer.GetHashCode(element), XNode.EqualityComparer.GetHashCode(elementCopy));
+            Assert.Equal(
+                XNode.EqualityComparer.GetHashCode(element),
+                XNode.EqualityComparer.GetHashCode(elementCopy)
+            );
 
             // Null element is not allowed.
             Assert.Throws<ArgumentNullException>(() => new XElement((XElement)null));
@@ -120,7 +126,10 @@ namespace XDocumentTests.SDMSample
                 Assert.Equal("Level1", element.Name.ToString());
                 Assert.Equal(new[] { "Level2" }, element.Elements().Select(x => x.Name.ToString()));
 
-                Assert.Equal(new[] { "a1", "a2" }, element.Attributes().Select(x => x.Name.ToString()));
+                Assert.Equal(
+                    new[] { "a1", "a2" },
+                    element.Attributes().Select(x => x.Name.ToString())
+                );
                 Assert.Equal(new[] { "1", "2" }, element.Attributes().Select(x => x.Value));
 
                 Assert.Equal("12345678text", element.Element("Level2").Value);
@@ -225,7 +234,10 @@ namespace XDocumentTests.SDMSample
             XElement e4 = new XElement("x", 100, "value", 200);
             XElement e5 = new XElement("x", string.Empty);
             XElement e6 = new XElement("x", 1, string.Empty, 5);
-            XElement e7 = new XElement("x", new XElement("y", "inner1", new XElement("z", "foo"), "inner2"));
+            XElement e7 = new XElement(
+                "x",
+                new XElement("y", "inner1", new XElement("z", "foo"), "inner2")
+            );
             XElement e8 = new XElement("x", "text1", new XElement("y", "inner"), "text2");
             XElement e9 = new XElement("x", "text1", new XText("abcd"), new XElement("y", "y"));
             XElement e10 = new XElement("x", new XComment("my comment"));
@@ -593,19 +605,31 @@ namespace XDocumentTests.SDMSample
             XElement level1 = new XElement("Level1", level2);
             XElement level0 = new XElement("Level1", level1);
 
+            Assert.Equal(
+                new XElement[] { level2, level1, level0 },
+                level3.Ancestors(),
+                XNode.EqualityComparer
+            );
 
-            Assert.Equal(new XElement[] { level2, level1, level0 }, level3.Ancestors(), XNode.EqualityComparer);
-
-            Assert.Equal(new XElement[] { level1, level0 }, level3.Ancestors("Level1"), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level1, level0 },
+                level3.Ancestors("Level1"),
+                XNode.EqualityComparer
+            );
 
             Assert.Empty(level3.Ancestors(null));
 
             Assert.Equal(
                 new XElement[] { level3, level2, level1, level0 },
                 level3.AncestorsAndSelf(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
-            Assert.Equal(new XElement[] { level3 }, level3.AncestorsAndSelf("Level3"), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level3 },
+                level3.AncestorsAndSelf("Level3"),
+                XNode.EqualityComparer
+            );
 
             Assert.Empty(level3.AncestorsAndSelf(null));
         }
@@ -622,16 +646,25 @@ namespace XDocumentTests.SDMSample
             XElement level1 = new XElement("Level1", level2, comment);
             XElement level0 = new XElement("Level1", level1);
 
-            Assert.Equal(new XElement[] { level1, level2, level3 }, level1.DescendantsAndSelf(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level1, level2, level3 },
+                level1.DescendantsAndSelf(),
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(
                 new XNode[] { level0, level1, level2, level3, comment },
                 level0.DescendantNodesAndSelf(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Empty(level0.DescendantsAndSelf(null));
 
-            Assert.Equal(new XElement[] { level0, level1 }, level0.DescendantsAndSelf("Level1"), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level0, level1 },
+                level0.DescendantsAndSelf("Level1"),
+                XNode.EqualityComparer
+            );
         }
 
         /// <summary>
@@ -648,13 +681,15 @@ namespace XDocumentTests.SDMSample
                 new XAttribute("a2", "2"),
                 new XAttribute("a3", "3"),
                 new XAttribute("a4", "4"),
-                new XAttribute("a5", "5"));
+                new XAttribute("a5", "5")
+            );
 
             XElement e3 = new XElement(
                 "x",
                 new XAttribute("a1", "1"),
                 new XAttribute("a2", "2"),
-                new XAttribute("a3", "3"));
+                new XAttribute("a3", "3")
+            );
 
             Assert.Null(e1.Attribute("foo"));
             Assert.Null(e2.Attribute("foo"));
@@ -662,7 +697,10 @@ namespace XDocumentTests.SDMSample
             Assert.Equal("a3", e2.Attribute("a3").Name.ToString());
             Assert.Equal("3", e2.Attribute("a3").Value);
 
-            Assert.Equal(new[] { "a1", "a2", "a3", "a4", "a5" }, e2.Attributes().Select(x => x.Name.ToString()));
+            Assert.Equal(
+                new[] { "a1", "a2", "a3", "a4", "a5" },
+                e2.Attributes().Select(x => x.Name.ToString())
+            );
             Assert.Equal(new[] { "1", "2", "3", "4", "5" }, e2.Attributes().Select(x => x.Value));
 
             Assert.Equal(new[] { "a1" }, e2.Attributes("a1").Select(x => x.Name.ToString()));
@@ -715,7 +753,8 @@ namespace XDocumentTests.SDMSample
                 new XText("abcd"),
                 10,
                 new XElement("y", new XComment("comment")),
-                new XElement("z"));
+                new XElement("z")
+            );
 
             Assert.Equal(5, e.DescendantNodesAndSelf().Count());
             Assert.Equal(2, e.Attributes().Count());
@@ -744,11 +783,19 @@ namespace XDocumentTests.SDMSample
 
             // Add of non-existent element
             e1.SetElementValue("foo", "foo-value");
-            Assert.Equal(new XElement[] { new XElement("foo", "foo-value") }, e1.Elements(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { new XElement("foo", "foo-value") },
+                e1.Elements(),
+                XNode.EqualityComparer
+            );
 
             // Overwriting of existing element
             e1.SetElementValue("foo", "noo-value");
-            Assert.Equal(new XElement[] { new XElement("foo", "noo-value") }, e1.Elements(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { new XElement("foo", "noo-value") },
+                e1.Elements(),
+                XNode.EqualityComparer
+            );
 
             // Effective removal of existing element
             e1.SetElementValue("foo", null);
@@ -784,7 +831,10 @@ namespace XDocumentTests.SDMSample
             XElement e = new XElement(ns + "foo");
 
             Assert.Throws<ArgumentNullException>(() => e.GetNamespaceOfPrefix(null));
-            AssertExtensions.Throws<ArgumentException>("prefix", () => e.GetNamespaceOfPrefix(string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "prefix",
+                () => e.GetNamespaceOfPrefix(string.Empty)
+            );
 
             XNamespace n = e.GetNamespaceOfPrefix("xmlns");
             Assert.Equal("http://www.w3.org/2000/xmlns/", n.NamespaceName);
@@ -808,7 +858,9 @@ namespace XDocumentTests.SDMSample
         [Fact]
         public void ElementGetPrefixOfNamespace()
         {
-            Assert.Throws<ArgumentNullException>(() => new XElement("foo").GetPrefixOfNamespace(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new XElement("foo").GetPrefixOfNamespace(null)
+            );
 
             XNamespace ns = XNamespace.Get("http://test");
             XElement e = new XElement(ns + "foo");
@@ -831,9 +883,9 @@ namespace XDocumentTests.SDMSample
             prefix = e.GetPrefixOfNamespace("http://xxx");
             Assert.Equal("foo", prefix);
 
-            e =
-                XElement.Parse(
-                    "<foo:element xmlns:foo='http://foo' xmlns:bar='http://bar'><bar:element /></foo:element>");
+            e = XElement.Parse(
+                "<foo:element xmlns:foo='http://foo' xmlns:bar='http://bar'><bar:element /></foo:element>"
+            );
             prefix = e.GetPrefixOfNamespace("http://foo");
             Assert.Equal("foo", prefix);
             prefix = e.Element(XName.Get("{http://bar}element")).GetPrefixOfNamespace("http://foo");
@@ -854,12 +906,18 @@ namespace XDocumentTests.SDMSample
         public void ElementWithXmlnsAttribute()
         {
             // And with just xmlns local name
-            XElement element = new XElement("MyElement", new XAttribute("xmlns", "http://tempuri/test"));
+            XElement element = new XElement(
+                "MyElement",
+                new XAttribute("xmlns", "http://tempuri/test")
+            );
 
             Assert.Throws<XmlException>(() => element.ToString());
 
             // A qualified element name works.
-            element = new XElement("{http://tempuri/test}MyElement", new XAttribute("xmlns", "http://tempuri/test"));
+            element = new XElement(
+                "{http://tempuri/test}MyElement",
+                new XAttribute("xmlns", "http://tempuri/test")
+            );
 
             Assert.Equal("<MyElement xmlns=\"http://tempuri/test\" />", element.ToString());
         }
@@ -954,9 +1012,16 @@ namespace XDocumentTests.SDMSample
         [Fact]
         public void ElementAppendedChildIsIterated()
         {
-            XElement parent = new XElement("element", new XElement("child1"), new XElement("child2"));
+            XElement parent = new XElement(
+                "element",
+                new XElement("child1"),
+                new XElement("child2")
+            );
 
-            bool b1 = false, b2 = false, b3 = false, b4 = false;
+            bool b1 = false,
+                b2 = false,
+                b3 = false,
+                b4 = false;
 
             foreach (XElement child in parent.Elements())
             {
@@ -982,7 +1047,10 @@ namespace XDocumentTests.SDMSample
                 }
             }
 
-            Assert.True(b1 || b2 || b3 || b4, "Appended child elements not included in parent iteration");
+            Assert.True(
+                b1 || b2 || b3 || b4,
+                "Appended child elements not included in parent iteration"
+            );
         }
     }
 }

@@ -10,7 +10,7 @@ namespace System.ServiceModel.Security
     {
         Windows,
         MembershipProvider,
-        Custom
+        Custom,
     }
 
     static class UserNamePasswordValidationModeHelper
@@ -26,10 +26,14 @@ namespace System.ServiceModel.Security
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(UserNamePasswordValidationMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(UserNamePasswordValidationMode)
+                    )
+                );
             }
         }
-
     }
 }

@@ -14,21 +14,18 @@ namespace System.Workflow.Runtime
     {
         WorkflowRuntime workflowRuntime;
 
-        public abstract string ConfigurationName
-        {
-            get;
-        }
+        public abstract string ConfigurationName { get; }
 
-        public abstract string WorkflowName
-        {
-            get;
-        }
+        public abstract string WorkflowName { get; }
 
-        internal protected WorkflowRuntime WorkflowRuntime
+        protected internal WorkflowRuntime WorkflowRuntime
         {
             get
             {
-                Fx.Assert(this.workflowRuntime != null, "Attempt to call WorkflowRuntime before Register");
+                Fx.Assert(
+                    this.workflowRuntime != null,
+                    "Attempt to call WorkflowRuntime before Register"
+                );
                 return this.workflowRuntime;
             }
         }
@@ -94,6 +91,7 @@ namespace System.Workflow.Runtime
 
             return typeProvider;
         }
+
         protected abstract void OnRegister();
         protected abstract void OnValidate(ValidationErrorCollection errors);
 
@@ -110,7 +108,9 @@ namespace System.Workflow.Runtime
             ValidationManager validationManager = new ValidationManager(serviceContainer);
             foreach (Validator validator in validationManager.GetValidators(rootActivity.GetType()))
             {
-                foreach (ValidationError error in validator.Validate(validationManager, rootActivity))
+                foreach (
+                    ValidationError error in validator.Validate(validationManager, rootActivity)
+                )
                 {
                     if (!error.UserData.Contains(typeof(Activity)))
                     {
@@ -125,9 +125,10 @@ namespace System.Workflow.Runtime
 
             if (errors.HasErrors)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WorkflowValidationFailedException(SR2.WorkflowValidationFailed, errors));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new WorkflowValidationFailedException(SR2.WorkflowValidationFailed, errors)
+                );
             }
         }
-
     }
 }

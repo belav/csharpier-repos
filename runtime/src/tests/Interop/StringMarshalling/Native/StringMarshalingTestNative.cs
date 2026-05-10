@@ -33,46 +33,81 @@ class StringMarshalingTestNative
 
     [DllImport(NativeLibraryName)]
     public static extern bool MatchFunctionName([MarshalAs(StringMarshalingType)] string actual);
+
     [DllImport(NativeLibraryName)]
-    public static extern bool MatchFunctionNameByRef([MarshalAs(StringMarshalingType)] ref string actual);
+    public static extern bool MatchFunctionNameByRef(
+        [MarshalAs(StringMarshalingType)] ref string actual
+    );
+
     [DllImport(NativeLibraryName)]
     public static extern bool MatchFunctionNameInStruct(StringInStruct str);
+
     [DllImport(NativeLibraryName)]
     public static extern void ReverseInplace([MarshalAs(StringMarshalingType)] StringBuilder str);
+
     [DllImport(NativeLibraryName)]
     public static extern void ReverseInplaceByrefInStruct(ref StringInStruct str);
+
     [DllImport(NativeLibraryName)]
     public static extern void ReverseInplaceByref([MarshalAs(StringMarshalingType)] ref string str);
+
     [DllImport(NativeLibraryName)]
-    public static extern void ReverseInplaceByref([MarshalAs(StringMarshalingType)] ref StringBuilder str);
+    public static extern void ReverseInplaceByref(
+        [MarshalAs(StringMarshalingType)] ref StringBuilder str
+    );
+
     [DllImport(NativeLibraryName)]
-    public static extern void Reverse([MarshalAs(StringMarshalingType)] string original, [MarshalAs(StringMarshalingType)] out string reversed);
+    public static extern void Reverse(
+        [MarshalAs(StringMarshalingType)] string original,
+        [MarshalAs(StringMarshalingType)] out string reversed
+    );
+
     [DllImport(NativeLibraryName)]
     [return: MarshalAs(StringMarshalingType)]
     public static extern string ReverseAndReturn([MarshalAs(StringMarshalingType)] string str);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool VerifyReversedCallback([MarshalAs(StringMarshalingType)] string original, [MarshalAs(StringMarshalingType)] string reversed);
-    
+    public delegate bool VerifyReversedCallback(
+        [MarshalAs(StringMarshalingType)] string original,
+        [MarshalAs(StringMarshalingType)] string reversed
+    );
+
     [DllImport(NativeLibraryName)]
-    public static extern bool VerifyReversed([MarshalAs(StringMarshalingType)] string str, VerifyReversedCallback callback);
+    public static extern bool VerifyReversed(
+        [MarshalAs(StringMarshalingType)] string str,
+        VerifyReversedCallback callback
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void ReverseCallback([MarshalAs(StringMarshalingType)] string original, [MarshalAs(StringMarshalingType)] out string reversed);
+    public delegate void ReverseCallback(
+        [MarshalAs(StringMarshalingType)] string original,
+        [MarshalAs(StringMarshalingType)] out string reversed
+    );
 
     [DllImport(NativeLibraryName)]
-    public static extern bool ReverseInCallback([MarshalAs(StringMarshalingType)] string str, ReverseCallback callback);
+    public static extern bool ReverseInCallback(
+        [MarshalAs(StringMarshalingType)] string str,
+        ReverseCallback callback
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void ReverseInplaceCallback([MarshalAs(StringMarshalingType)] StringBuilder original);
+    public delegate void ReverseInplaceCallback(
+        [MarshalAs(StringMarshalingType)] StringBuilder original
+    );
 
     [DllImport(NativeLibraryName)]
-    public static extern bool ReverseInplaceInCallback([MarshalAs(StringMarshalingType)] StringBuilder str, ReverseInplaceCallback callback);
+    public static extern bool ReverseInplaceInCallback(
+        [MarshalAs(StringMarshalingType)] StringBuilder str,
+        ReverseInplaceCallback callback
+    );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     [return: MarshalAs(StringMarshalingType)]
     public delegate string ReverseCallbackReturned([MarshalAs(StringMarshalingType)] string str);
-    
+
     [DllImport(NativeLibraryName)]
-    public static extern bool ReverseInCallbackReturned([MarshalAs(StringMarshalingType)] string str, ReverseCallbackReturned callback);
+    public static extern bool ReverseInCallbackReturned(
+        [MarshalAs(StringMarshalingType)] string str,
+        ReverseCallbackReturned callback
+    );
 }

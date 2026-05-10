@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis
         IncludeAccessibility = 1 << 2,
 
         /// <summary>
-        /// Includes the name of corresponding interface on members that explicitly implement interface members. For example, "IGoo.Bar { get; }".        
+        /// Includes the name of corresponding interface on members that explicitly implement interface members. For example, "IGoo.Bar { get; }".
         /// <para>
         /// This option has no effect in Visual Basic.
         /// </para>
@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis
         IncludeExplicitInterface = 1 << 3,
 
         /// <summary>
-        /// Includes the parameters of methods and properties/indexers.        
+        /// Includes the parameters of methods and properties/indexers.
         /// <para>
         /// See <see cref="SymbolDisplayParameterOptions"/> for finer-grained settings.
         /// </para>
@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis
         IncludeParameters = 1 << 4,
 
         /// <summary>
-        /// Includes the name of the type containing the member.        
+        /// Includes the name of the type containing the member.
         /// <para>
         /// The format of the containing type is determined by <see cref="SymbolDisplayTypeQualificationStyle"/>.
         /// </para>

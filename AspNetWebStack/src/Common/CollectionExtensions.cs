@@ -114,7 +114,11 @@ namespace System.Collections.Generic
         /// <summary>
         /// Return the only value from list, the type's default value if empty, or call the errorAction for 2 or more.
         /// </summary>
-        public static T SingleDefaultOrError<T, TArg1>(this IList<T> list, Action<TArg1> errorAction, TArg1 errorArg1)
+        public static T SingleDefaultOrError<T, TArg1>(
+            this IList<T> list,
+            Action<TArg1> errorAction,
+            TArg1 errorArg1
+        )
         {
             Contract.Assert(list != null);
             Contract.Assert(errorAction != null);
@@ -138,7 +142,12 @@ namespace System.Collections.Generic
         /// Returns a single value in list matching type TMatch if there is only one, null if there are none of type TMatch or calls the
         /// errorAction with errorArg1 if there is more than one.
         /// </summary>
-        public static TMatch SingleOfTypeDefaultOrError<TInput, TMatch, TArg1>(this IList<TInput> list, Action<TArg1> errorAction, TArg1 errorArg1) where TMatch : class
+        public static TMatch SingleOfTypeDefaultOrError<TInput, TMatch, TArg1>(
+            this IList<TInput> list,
+            Action<TArg1> errorAction,
+            TArg1 errorArg1
+        )
+            where TMatch : class
         {
             Contract.Assert(list != null);
             Contract.Assert(errorAction != null);
@@ -166,7 +175,8 @@ namespace System.Collections.Generic
         /// <summary>
         /// Convert an ICollection to an array, removing null values. Fast path for case where there are no null values.
         /// </summary>
-        public static T[] ToArrayWithoutNulls<T>(this ICollection<T> collection) where T : class
+        public static T[] ToArrayWithoutNulls<T>(this ICollection<T> collection)
+            where T : class
         {
             Contract.Assert(collection != null);
 
@@ -195,12 +205,19 @@ namespace System.Collections.Generic
         /// <summary>
         /// Convert the array to a Dictionary using the keySelector to extract keys from values and the specified comparer. Optimized for array input.
         /// </summary>
-        public static Dictionary<TKey, TValue> ToDictionaryFast<TKey, TValue>(this TValue[] array, Func<TValue, TKey> keySelector, IEqualityComparer<TKey> comparer)
+        public static Dictionary<TKey, TValue> ToDictionaryFast<TKey, TValue>(
+            this TValue[] array,
+            Func<TValue, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
             Contract.Assert(array != null);
             Contract.Assert(keySelector != null);
 
-            Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>(array.Length, comparer);
+            Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>(
+                array.Length,
+                comparer
+            );
             for (int i = 0; i < array.Length; i++)
             {
                 TValue value = array[i];
@@ -212,7 +229,11 @@ namespace System.Collections.Generic
         /// <summary>
         /// Convert the list to a Dictionary using the keySelector to extract keys from values and the specified comparer. Optimized for IList of T input with fast path for array.
         /// </summary>
-        public static Dictionary<TKey, TValue> ToDictionaryFast<TKey, TValue>(this IList<TValue> list, Func<TValue, TKey> keySelector, IEqualityComparer<TKey> comparer)
+        public static Dictionary<TKey, TValue> ToDictionaryFast<TKey, TValue>(
+            this IList<TValue> list,
+            Func<TValue, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
             Contract.Assert(list != null);
             Contract.Assert(keySelector != null);
@@ -228,7 +249,11 @@ namespace System.Collections.Generic
         /// <summary>
         /// Convert the enumerable to a Dictionary using the keySelector to extract keys from values and the specified comparer. Fast paths for array and IList of T.
         /// </summary>
-        public static Dictionary<TKey, TValue> ToDictionaryFast<TKey, TValue>(this IEnumerable<TValue> enumerable, Func<TValue, TKey> keySelector, IEqualityComparer<TKey> comparer)
+        public static Dictionary<TKey, TValue> ToDictionaryFast<TKey, TValue>(
+            this IEnumerable<TValue> enumerable,
+            Func<TValue, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
             Contract.Assert(enumerable != null);
             Contract.Assert(keySelector != null);
@@ -254,7 +279,11 @@ namespace System.Collections.Generic
         /// <summary>
         /// Convert the list to a Dictionary using the keySelector to extract keys from values and the specified comparer. Optimized for IList of T input. No checking for other types.
         /// </summary>
-        private static Dictionary<TKey, TValue> ToDictionaryFastNoCheck<TKey, TValue>(IList<TValue> list, Func<TValue, TKey> keySelector, IEqualityComparer<TKey> comparer)
+        private static Dictionary<TKey, TValue> ToDictionaryFastNoCheck<TKey, TValue>(
+            IList<TValue> list,
+            Func<TValue, TKey> keySelector,
+            IEqualityComparer<TKey> comparer
+        )
         {
             Contract.Assert(list != null);
             Contract.Assert(keySelector != null);

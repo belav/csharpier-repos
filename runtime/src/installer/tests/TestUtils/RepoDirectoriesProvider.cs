@@ -24,8 +24,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         public string NugetPackages { get; }
         public string DotnetSDK { get; }
 
-        public RepoDirectoriesProvider(
-            string builtDotnet = null)
+        public RepoDirectoriesProvider(string builtDotnet = null)
         {
             string repoRoot = GetRepoRootDirectory();
             BaseArtifactsFolder = Path.Combine(repoRoot, "artifacts");

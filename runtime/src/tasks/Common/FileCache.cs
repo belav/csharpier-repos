@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.Json;
@@ -16,7 +16,10 @@ internal sealed class FileCache
 {
     private CompilerCache? _newCache;
     private CompilerCache? _oldCache;
-    private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+    private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions
+    {
+        WriteIndented = true,
+    };
 
     public bool Enabled { get; }
     public TaskLoggingHelper Log { get; }
@@ -26,16 +29,22 @@ internal sealed class FileCache
         Log = log;
         if (string.IsNullOrEmpty(cacheFilePath))
         {
-            Log.LogMessage(MessageImportance.Low, $"Disabling cache, because CacheFilePath is not set");
+            Log.LogMessage(
+                MessageImportance.Low,
+                $"Disabling cache, because CacheFilePath is not set"
+            );
             return;
         }
 
         Enabled = true;
         if (File.Exists(cacheFilePath))
         {
-            _oldCache = (CompilerCache?)JsonSerializer.Deserialize(File.ReadAllText(cacheFilePath),
-                                                                    typeof(CompilerCache),
-                                                                    s_jsonOptions);
+            _oldCache = (CompilerCache?)
+                JsonSerializer.Deserialize(
+                    File.ReadAllText(cacheFilePath),
+                    typeof(CompilerCache),
+                    s_jsonOptions
+                );
         }
 
         _oldCache ??= new();
@@ -45,16 +54,21 @@ internal sealed class FileCache
     public bool UpdateAndCheckHasFileChanged(string filePath, string newHash)
     {
         if (!Enabled)
-            throw new InvalidOperationException("Cache is not enabled. Make sure the cache file path is set");
+            throw new InvalidOperationException(
+                "Cache is not enabled. Make sure the cache file path is set"
+            );
 
         _newCache!.FileHashes[filePath] = newHash;
-        return !_oldCache!.FileHashes.TryGetValue(filePath, out string? oldHash) || oldHash != newHash;
+        return !_oldCache!.FileHashes.TryGetValue(filePath, out string? oldHash)
+            || oldHash != newHash;
     }
 
     public bool ShouldCopy(ProxyFile proxyFile, [NotNullWhen(true)] out string? cause)
     {
         if (!Enabled)
-            throw new InvalidOperationException("Cache is not enabled. Make sure the cache file path is set");
+            throw new InvalidOperationException(
+                "Cache is not enabled. Make sure the cache file path is set"
+            );
 
         cause = null;
 
@@ -85,7 +99,7 @@ internal sealed class FileCache
         if (!Enabled || string.IsNullOrEmpty(cacheFilePath))
             return false;
 
-        var json = JsonSerializer.Serialize (_newCache, s_jsonOptions);
+        var json = JsonSerializer.Serialize(_newCache, s_jsonOptions);
         File.WriteAllText(cacheFilePath!, json);
         return true;
     }

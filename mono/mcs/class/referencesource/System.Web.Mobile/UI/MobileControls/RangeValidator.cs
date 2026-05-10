@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RangeValidator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,13 +10,13 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
@@ -32,12 +32,22 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\RangeValidator.uex' path='docs/doc[@for="RangeValidator"]/*' />
     [
-        ToolboxData("<{0}:RangeValidator runat=\"server\" ErrorMessage=\"RangeValidator\"></{0}:RangeValidator>"),
+        ToolboxData(
+            "<{0}:RangeValidator runat=\"server\" ErrorMessage=\"RangeValidator\"></{0}:RangeValidator>"
+        ),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
-    ]    
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    ]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class RangeValidator : BaseValidator
     {
         private WebCntrls.RangeValidator _webRangeValidator;
@@ -63,14 +73,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String MaximumValue
         {
-            get
-            {
-                return _webRangeValidator.MaximumValue;
-            }
-            set
-            {
-                _webRangeValidator.MaximumValue = value;
-            }
+            get { return _webRangeValidator.MaximumValue; }
+            set { _webRangeValidator.MaximumValue = value; }
         }
 
         /// <include file='doc\RangeValidator.uex' path='docs/doc[@for="RangeValidator.MinimumValue"]/*' />
@@ -82,14 +86,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String MinimumValue
         {
-            get
-            {
-                return _webRangeValidator.MinimumValue;
-            }
-            set
-            {
-                _webRangeValidator.MinimumValue = value;
-            }
+            get { return _webRangeValidator.MinimumValue; }
+            set { _webRangeValidator.MinimumValue = value; }
         }
 
         /// <include file='doc\RangeValidator.uex' path='docs/doc[@for="RangeValidator.Type"]/*' />
@@ -101,14 +99,8 @@ namespace System.Web.UI.MobileControls
         ]
         public ValidationDataType Type
         {
-            get
-            {
-                return _webRangeValidator.Type;
-            }
-            set
-            {
-                _webRangeValidator.Type = value;
-            }
+            get { return _webRangeValidator.Type; }
+            set { _webRangeValidator.Type = value; }
         }
 
         /// <include file='doc\RangeValidator.uex' path='docs/doc[@for="RangeValidator.EvaluateIsValid"]/*' />
@@ -128,36 +120,44 @@ namespace System.Web.UI.MobileControls
             String maximumValue = MaximumValue;
             if (!WebCntrls.BaseCompareValidator.CanConvert(maximumValue, Type))
             {
-                throw new ArgumentException(SR.GetString(
+                throw new ArgumentException(
+                    SR.GetString(
                         SR.Validator_ValueBadType,
                         maximumValue,
                         "MaximumValue",
                         ID,
-                        PropertyConverter.EnumToString(
-                            typeof(ValidationDataType), Type)
-                ));
+                        PropertyConverter.EnumToString(typeof(ValidationDataType), Type)
+                    )
+                );
             }
             String minumumValue = MinimumValue;
             if (!WebCntrls.BaseCompareValidator.CanConvert(minumumValue, Type))
             {
-                throw new ArgumentException(SR.GetString(
+                throw new ArgumentException(
+                    SR.GetString(
                         SR.Validator_ValueBadType,
                         minumumValue,
                         "MinimumValue",
                         ID,
-                        PropertyConverter.EnumToString(
-                            typeof(ValidationDataType), Type)
-                ));
+                        PropertyConverter.EnumToString(typeof(ValidationDataType), Type)
+                    )
+                );
             }
             // Check for overlap.
-            if (WebBaseCompareValidator.Compare(minumumValue, maximumValue,
-                                ValidationCompareOperator.GreaterThan, Type))
+            if (
+                WebBaseCompareValidator.Compare(
+                    minumumValue,
+                    maximumValue,
+                    ValidationCompareOperator.GreaterThan,
+                    Type
+                )
+            )
             {
-                throw new ArgumentException(SR.GetString(
-                        SR.RangeValidator_RangeOverlap, maximumValue,
-                        minumumValue, ID));
+                throw new ArgumentException(
+                    SR.GetString(SR.RangeValidator_RangeOverlap, maximumValue, minumumValue, ID)
+                );
             }
-            return base.ControlPropertiesValid();            
+            return base.ControlPropertiesValid();
         }
 
         // The reason of having this class is to expose the method
@@ -179,8 +179,11 @@ namespace System.Web.UI.MobileControls
             }
 
             public static new bool Compare(
-                String leftText, String rightText,
-                ValidationCompareOperator op, ValidationDataType type)
+                String leftText,
+                String rightText,
+                ValidationCompareOperator op,
+                ValidationDataType type
+            )
             {
                 return BaseCompareValidator.Compare(leftText, rightText, op, type);
             }

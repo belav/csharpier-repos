@@ -23,12 +23,17 @@ namespace System.Diagnostics
                 EnsureState(State.Associated | State.IsLocal);
 
                 if (IsSelfOrDescendantOf(GetCurrentProcess()))
-                    throw new InvalidOperationException(SR.KillEntireProcessTree_DisallowedBecauseTreeContainsCallingProcess);
+                    throw new InvalidOperationException(
+                        SR.KillEntireProcessTree_DisallowedBecauseTreeContainsCallingProcess
+                    );
 
                 List<Exception>? result = KillTree();
 
                 if (result != null && result.Count != 0)
-                    throw new AggregateException(SR.KillEntireProcessTree_TerminationIncomplete, result);
+                    throw new AggregateException(
+                        SR.KillEntireProcessTree_TerminationIncomplete,
+                        result
+                    );
             }
         }
 
@@ -103,6 +108,7 @@ namespace System.Diagnostics
             // InvalidOperationException signifies conditions such as the process already being dead.
             // Win32Exception signifies issues such as insufficient permissions to get details on the process.
             // In either case, the predicate couldn't be applied so return the fallback result.
-            e is InvalidOperationException || e is Win32Exception;
+            e is InvalidOperationException
+            || e is Win32Exception;
     }
 }

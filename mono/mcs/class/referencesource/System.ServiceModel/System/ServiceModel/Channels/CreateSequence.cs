@@ -17,12 +17,15 @@ namespace System.ServiceModel.Channels
         ReliableMessagingVersion reliableMessagingVersion;
 
         CreateSequence()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
-        public CreateSequence(AddressingVersion addressingVersion, ReliableMessagingVersion reliableMessagingVersion,
-            bool ordered, IClientReliableChannelBinder binder, UniqueId offerIdentifier)
+        public CreateSequence(
+            AddressingVersion addressingVersion,
+            ReliableMessagingVersion reliableMessagingVersion,
+            bool ordered,
+            IClientReliableChannelBinder binder,
+            UniqueId offerIdentifier
+        )
             : base(true)
         {
             this.addressingVersion = addressingVersion;
@@ -32,9 +35,12 @@ namespace System.ServiceModel.Channels
             this.offerIdentifier = offerIdentifier;
         }
 
-        public static CreateSequenceInfo Create(MessageVersion messageVersion,
-            ReliableMessagingVersion reliableMessagingVersion, ISecureConversationSession securitySession,
-            XmlDictionaryReader reader)
+        public static CreateSequenceInfo Create(
+            MessageVersion messageVersion,
+            ReliableMessagingVersion reliableMessagingVersion,
+            ISecureConversationSession securitySession,
+            XmlDictionaryReader reader
+        )
         {
             if (reader == null)
             {
@@ -48,7 +54,12 @@ namespace System.ServiceModel.Channels
                 XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(reliableMessagingVersion);
                 reader.ReadStartElement(wsrmFeb2005Dictionary.CreateSequence, wsrmNs);
 
-                info.AcksTo = EndpointAddress.ReadFrom(messageVersion.Addressing, reader, wsrmFeb2005Dictionary.AcksTo, wsrmNs);
+                info.AcksTo = EndpointAddress.ReadFrom(
+                    messageVersion.Addressing,
+                    reader,
+                    wsrmFeb2005Dictionary.AcksTo,
+                    wsrmNs
+                );
 
                 if (reader.IsStartElement(wsrmFeb2005Dictionary.Expires, wsrmNs))
                 {
@@ -63,19 +74,34 @@ namespace System.ServiceModel.Channels
                     info.OfferIdentifier = reader.ReadContentAsUniqueId();
                     reader.ReadEndElement();
 
-                    bool wsrm11 = reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
+                    bool wsrm11 =
+                        reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
                     Wsrm11Dictionary wsrm11Dictionary = wsrm11 ? DXD.Wsrm11Dictionary : null;
 
                     if (wsrm11)
                     {
-                        EndpointAddress endpoint = EndpointAddress.ReadFrom(messageVersion.Addressing, reader,
-                            wsrm11Dictionary.Endpoint, wsrmNs);
+                        EndpointAddress endpoint = EndpointAddress.ReadFrom(
+                            messageVersion.Addressing,
+                            reader,
+                            wsrm11Dictionary.Endpoint,
+                            wsrmNs
+                        );
 
                         if (endpoint.Uri != info.AcksTo.Uri)
                         {
                             string reason = SR.GetString(SR.CSRefusedAcksToMustEqualEndpoint);
-                            Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(messageVersion, reliableMessagingVersion, reason);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WsrmMessageInfo.CreateInternalFaultException(faultReply, reason, new ProtocolException(reason)));
+                            Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(
+                                messageVersion,
+                                reliableMessagingVersion,
+                                reason
+                            );
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                WsrmMessageInfo.CreateInternalFaultException(
+                                    faultReply,
+                                    reason,
+                                    new ProtocolException(reason)
+                                )
+                            );
                         }
                     }
 
@@ -86,19 +112,39 @@ namespace System.ServiceModel.Channels
 
                     if (wsrm11)
                     {
-                        if (reader.IsStartElement(wsrm11Dictionary.IncompleteSequenceBehavior, wsrmNs))
+                        if (
+                            reader.IsStartElement(
+                                wsrm11Dictionary.IncompleteSequenceBehavior,
+                                wsrmNs
+                            )
+                        )
                         {
                             string incompleteSequenceBehavior = reader.ReadElementContentAsString();
 
-                            if ((incompleteSequenceBehavior != Wsrm11Strings.DiscardEntireSequence)
-                                && (incompleteSequenceBehavior != Wsrm11Strings.DiscardFollowingFirstGap)
-                                && (incompleteSequenceBehavior != Wsrm11Strings.NoDiscard))
+                            if (
+                                (incompleteSequenceBehavior != Wsrm11Strings.DiscardEntireSequence)
+                                && (
+                                    incompleteSequenceBehavior
+                                    != Wsrm11Strings.DiscardFollowingFirstGap
+                                )
+                                && (incompleteSequenceBehavior != Wsrm11Strings.NoDiscard)
+                            )
                             {
-                                string reason = SR.GetString(SR.CSRefusedInvalidIncompleteSequenceBehavior);
-                                Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(messageVersion, reliableMessagingVersion, reason);
+                                string reason = SR.GetString(
+                                    SR.CSRefusedInvalidIncompleteSequenceBehavior
+                                );
+                                Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(
+                                    messageVersion,
+                                    reliableMessagingVersion,
+                                    reason
+                                );
                                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    WsrmMessageInfo.CreateInternalFaultException(faultReply, reason,
-                                    new ProtocolException(reason)));
+                                    WsrmMessageInfo.CreateInternalFaultException(
+                                        faultReply,
+                                        reason,
+                                        new ProtocolException(reason)
+                                    )
+                                );
                             }
 
                             // Otherwise ignore the value.
@@ -118,8 +164,8 @@ namespace System.ServiceModel.Channels
                 {
                     bool hasValidToken = false;
 
-                    // Since the security element is amongst the extensible elements (i.e. there is no 
-                    // gaurantee of ordering or placement), a loop is required to attempt to parse the 
+                    // Since the security element is amongst the extensible elements (i.e. there is no
+                    // gaurantee of ordering or placement), a loop is required to attempt to parse the
                     // security element.
                     while (reader.IsStartElement())
                     {
@@ -135,8 +181,18 @@ namespace System.ServiceModel.Channels
                     if (!hasValidToken)
                     {
                         string reason = SR.GetString(SR.CSRefusedRequiredSecurityElementMissing);
-                        Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(messageVersion, reliableMessagingVersion, reason);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WsrmMessageInfo.CreateInternalFaultException(faultReply, reason, new ProtocolException(reason)));
+                        Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(
+                            messageVersion,
+                            reliableMessagingVersion,
+                            reason
+                        );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            WsrmMessageInfo.CreateInternalFaultException(
+                                faultReply,
+                                reason,
+                                new ProtocolException(reason)
+                            )
+                        );
                     }
                 }
 
@@ -150,17 +206,40 @@ namespace System.ServiceModel.Channels
                 if (reader.IsStartElement())
                 {
                     string reason = SR.GetString(SR.CSRefusedUnexpectedElementAtEndOfCSMessage);
-                    Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(messageVersion, reliableMessagingVersion, reason);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WsrmMessageInfo.CreateInternalFaultException(faultReply, reason, new ProtocolException(reason)));
+                    Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(
+                        messageVersion,
+                        reliableMessagingVersion,
+                        reason
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WsrmMessageInfo.CreateInternalFaultException(
+                            faultReply,
+                            reason,
+                            new ProtocolException(reason)
+                        )
+                    );
                 }
 
                 return info;
             }
             catch (XmlException e)
             {
-                string reason = SR.GetString(SR.CouldNotParseWithAction, WsrmIndex.GetCreateSequenceActionString(reliableMessagingVersion));
-                Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(messageVersion, reliableMessagingVersion, reason);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WsrmMessageInfo.CreateInternalFaultException(faultReply, reason, new ProtocolException(reason, e)));
+                string reason = SR.GetString(
+                    SR.CouldNotParseWithAction,
+                    WsrmIndex.GetCreateSequenceActionString(reliableMessagingVersion)
+                );
+                Message faultReply = WsrmUtilities.CreateCSRefusedProtocolFault(
+                    messageVersion,
+                    reliableMessagingVersion,
+                    reason
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    WsrmMessageInfo.CreateInternalFaultException(
+                        faultReply,
+                        reason,
+                        new ProtocolException(reason, e)
+                    )
+                );
             }
         }
 
@@ -171,7 +250,12 @@ namespace System.ServiceModel.Channels
             writer.WriteStartElement(wsrmFeb2005Dictionary.CreateSequence, wsrmNs);
 
             EndpointAddress localAddress = this.binder.LocalAddress;
-            localAddress.WriteTo(this.addressingVersion, writer, wsrmFeb2005Dictionary.AcksTo, wsrmNs);
+            localAddress.WriteTo(
+                this.addressingVersion,
+                writer,
+                wsrmFeb2005Dictionary.AcksTo,
+                wsrmNs
+            );
 
             if (this.offerIdentifier != null)
             {
@@ -183,18 +267,27 @@ namespace System.ServiceModel.Channels
                 if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
                 {
                     Wsrm11Dictionary wsrm11Dictionary = DXD.Wsrm11Dictionary;
-                    localAddress.WriteTo(this.addressingVersion, writer, wsrm11Dictionary.Endpoint, wsrmNs);
+                    localAddress.WriteTo(
+                        this.addressingVersion,
+                        writer,
+                        wsrm11Dictionary.Endpoint,
+                        wsrmNs
+                    );
 
                     writer.WriteStartElement(wsrm11Dictionary.IncompleteSequenceBehavior, wsrmNs);
                     writer.WriteValue(
-                        this.ordered ? wsrm11Dictionary.DiscardFollowingFirstGap : wsrm11Dictionary.NoDiscard);
+                        this.ordered
+                            ? wsrm11Dictionary.DiscardFollowingFirstGap
+                            : wsrm11Dictionary.NoDiscard
+                    );
                     writer.WriteEndElement();
                 }
 
                 writer.WriteEndElement();
             }
 
-            ISecureConversationSession securitySession = this.binder.GetInnerSession() as ISecureConversationSession;
+            ISecureConversationSession securitySession =
+                this.binder.GetInnerSession() as ISecureConversationSession;
             if (securitySession != null)
                 securitySession.WriteSessionTokenIdentifier(writer);
 
@@ -202,4 +295,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

@@ -21,20 +21,27 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     [TestService]
     internal partial class ChangeSignatureDialogInProcess
     {
-        private async Task<ChangeSignatureDialog?> TryGetDialogAsync(CancellationToken cancellationToken)
+        private async Task<ChangeSignatureDialog?> TryGetDialogAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
             return Application.Current.Windows.OfType<ChangeSignatureDialog>().SingleOrDefault();
         }
 
-        private async Task ClickAsync(Func<ChangeSignatureDialog, ButtonBase> buttonAccessor, CancellationToken cancellationToken)
+        private async Task ClickAsync(
+            Func<ChangeSignatureDialog, ButtonBase> buttonAccessor,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var dialog = await TryGetDialogAsync(cancellationToken);
             AssertEx.NotNull(dialog);
 
-            Contract.ThrowIfFalse(await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory));
+            Contract.ThrowIfFalse(
+                await buttonAccessor(dialog).SimulateClickAsync(JoinableTaskFactory)
+            );
         }
 
         public async Task VerifyOpenAsync(CancellationToken cancellationToken)
@@ -76,19 +83,31 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             return true;
         }
 
-        public async Task InvokeAsync(CancellationToken cancellationToken)
-            => await TestServices.Input.SendAsync([(VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL), (VirtualKeyCode.VK_V, VirtualKeyCode.CONTROL)], cancellationToken);
+        public async Task InvokeAsync(CancellationToken cancellationToken) =>
+            await TestServices.Input.SendAsync(
+                [
+                    (VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL),
+                    (VirtualKeyCode.VK_V, VirtualKeyCode.CONTROL),
+                ],
+                cancellationToken
+            );
 
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.LightBulb,
+                cancellationToken
+            );
         }
 
         public async Task ClickDownButtonAsync(CancellationToken cancellationToken)
@@ -116,7 +135,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             await ClickAsync(dialog => dialog.GetTestAccessor().RestoreButton, cancellationToken);
         }
 
-        public async Task SelectParameterAsync(string parameterName, CancellationToken cancellationToken)
+        public async Task SelectParameterAsync(
+            string parameterName,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -124,7 +146,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             AssertEx.NotNull(dialog);
 
             var members = dialog.GetTestAccessor().Members;
-            members.SelectedItem = dialog.GetTestAccessor().ViewModel.AllParameters.Single(p => p.ShortAutomationText == parameterName);
+            members.SelectedItem = dialog
+                .GetTestAccessor()
+                .ViewModel.AllParameters.Single(p => p.ShortAutomationText == parameterName);
 
             // Wait for changes to propagate
             await Task.Yield();

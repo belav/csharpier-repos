@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,57 +27,62 @@ using System.Runtime.Serialization;
 
 namespace System.Xaml
 {
-	[Serializable]
-	public class XamlException : Exception
-	{
-		public XamlException ()
-			: this ("XAML error")
-		{
-		}
+    [Serializable]
+    public class XamlException : Exception
+    {
+        public XamlException()
+            : this("XAML error") { }
 
-		public XamlException (string message)
-			: this (message, null)
-		{
-		}
+        public XamlException(string message)
+            : this(message, null) { }
 
-		public XamlException (string message, Exception innerException)
-			: this (message, null, 0, 0)
-		{
-		}
+        public XamlException(string message, Exception innerException)
+            : this(message, null, 0, 0) { }
 
-		static string FormatLine (string message, int lineNumber, int linePosition)
-		{
-			if (lineNumber <= 0)
-				return message;
-			if (linePosition <= 0)
-				return String.Format ("{0} at line {1}", message, lineNumber);
-			return String.Format ("{0} at line {1}, position {2}", message, lineNumber, linePosition);
-		}
+        static string FormatLine(string message, int lineNumber, int linePosition)
+        {
+            if (lineNumber <= 0)
+                return message;
+            if (linePosition <= 0)
+                return String.Format("{0} at line {1}", message, lineNumber);
+            return String.Format(
+                "{0} at line {1}, position {2}",
+                message,
+                lineNumber,
+                linePosition
+            );
+        }
 
-		public XamlException (string message, Exception innerException, int lineNumber, int linePosition)
-			: base (message, innerException)
-		{
-			LineNumber = lineNumber;
-			LinePosition = linePosition;
-		}
+        public XamlException(
+            string message,
+            Exception innerException,
+            int lineNumber,
+            int linePosition
+        )
+            : base(message, innerException)
+        {
+            LineNumber = lineNumber;
+            LinePosition = linePosition;
+        }
 
-		protected XamlException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			LineNumber = info.GetInt32 ("lineNumber");
-			LinePosition = info.GetInt32 ("linePosition");
-		}
+        protected XamlException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            LineNumber = info.GetInt32("lineNumber");
+            LinePosition = info.GetInt32("linePosition");
+        }
 
-		public int LineNumber { get; protected internal set; }
-		public int LinePosition { get; protected internal set; }
-		public override string Message {
-			get { return FormatLine (base.Message, LineNumber, LinePosition); }
-		}
+        public int LineNumber { get; protected internal set; }
+        public int LinePosition { get; protected internal set; }
+        public override string Message
+        {
+            get { return FormatLine(base.Message, LineNumber, LinePosition); }
+        }
 
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			info.AddValue ("lineNumber", LineNumber);
-			info.AddValue ("linePosition", LinePosition);
-		}
-	}
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("lineNumber", LineNumber);
+            info.AddValue("linePosition", LinePosition);
+        }
+    }
 }

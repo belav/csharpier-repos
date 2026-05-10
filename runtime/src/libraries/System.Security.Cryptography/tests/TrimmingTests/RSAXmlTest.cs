@@ -29,13 +29,13 @@ class Program
 
     private static bool KeyEquals(in RSAParameters expected, in RSAParameters actual)
     {
-        return expected.Modulus.SequenceEqual(actual.Modulus) &&
-            expected.Exponent.SequenceEqual(actual.Exponent) &&
-            expected.P.SequenceEqual(actual.P) &&
-            expected.DP.SequenceEqual(actual.DP) &&
-            expected.Q.SequenceEqual(actual.Q) &&
-            expected.DQ.SequenceEqual(actual.DQ) &&
-            expected.InverseQ.SequenceEqual(actual.InverseQ) &&
-            expected.D.SequenceEqual(actual.D);
+        return expected.Modulus.SequenceEqual(actual.Modulus)
+            && expected.Exponent.SequenceEqual(actual.Exponent)
+            && expected.P.SequenceEqual(actual.P)
+            && expected.DP.SequenceEqual(actual.DP)
+            && expected.Q.SequenceEqual(actual.Q)
+            && expected.DQ.SequenceEqual(actual.DQ)
+            && expected.InverseQ.SequenceEqual(actual.InverseQ)
+            && expected.D.SequenceEqual(actual.D);
     }
 }

@@ -1,20 +1,23 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Xml;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Permissions;
+    using System.Xml;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivitySurrogateSelector : SurrogateSelector
     {
         private ActivitySurrogate activitySurrogate = new ActivitySurrogate();
-        private ActivityExecutorSurrogate activityExecutorSurrogate = new ActivityExecutorSurrogate();
+        private ActivityExecutorSurrogate activityExecutorSurrogate =
+            new ActivityExecutorSurrogate();
         private ObjectSurrogate objectSurrogate = new ObjectSurrogate();
         private DependencyStoreSurrogate dependencyStoreSurrogate = new DependencyStoreSurrogate();
         private XmlDocumentSurrogate domDocSurrogate = new XmlDocumentSurrogate();
@@ -24,17 +27,20 @@ namespace System.Workflow.ComponentModel.Serialization
         private ListSurrogate listSurrogate = new ListSurrogate();
         private SimpleTypesSurrogate simpleTypesSurrogate = new SimpleTypesSurrogate();
 
-        private static ActivitySurrogateSelector defaultActivitySurrogateSelector = new ActivitySurrogateSelector();
-        private static Dictionary<Type, ISerializationSurrogate> surrogateCache = new Dictionary<Type, ISerializationSurrogate>();
+        private static ActivitySurrogateSelector defaultActivitySurrogateSelector =
+            new ActivitySurrogateSelector();
+        private static Dictionary<Type, ISerializationSurrogate> surrogateCache =
+            new Dictionary<Type, ISerializationSurrogate>();
         public static ActivitySurrogateSelector Default
         {
-            get
-            {
-                return defaultActivitySurrogateSelector;
-            }
+            get { return defaultActivitySurrogateSelector; }
         }
 
-        public override ISerializationSurrogate GetSurrogate(Type type, StreamingContext context, out ISurrogateSelector selector)
+        public override ISerializationSurrogate GetSurrogate(
+            Type type,
+            StreamingContext context,
+            out ISurrogateSelector selector
+        )
         {
             if (type == null)
                 throw new ArgumentNullException("type");
@@ -93,14 +99,12 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 result = this.simpleTypesSurrogate;
             }
-
-            // 
+            //
             else if (typeof(ActivityBind).IsAssignableFrom(type))
             {
                 result = this.objectSurrogate;
             }
-
-            // 
+            //
             else if (typeof(DependencyObject).IsAssignableFrom(type))
             {
                 result = this.objectSurrogate;
@@ -120,13 +124,22 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 info.AddValue("type", obj.GetType());
                 string[] names = null;
-                MemberInfo[] members = FormatterServicesNoSerializableCheck.GetSerializableMembers(obj.GetType(), out names);
+                MemberInfo[] members = FormatterServicesNoSerializableCheck.GetSerializableMembers(
+                    obj.GetType(),
+                    out names
+                );
                 object[] memberDatas = FormatterServices.GetObjectData(obj, members);
                 info.AddValue("memberDatas", memberDatas);
 
                 info.SetType(typeof(ObjectSerializedRef));
             }
-            public object SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+            public object SetObjectData(
+                object obj,
+                SerializationInfo info,
+                StreamingContext context,
+                ISurrogateSelector selector
+            )
             {
                 return null;
             }
@@ -146,13 +159,22 @@ namespace System.Workflow.ComponentModel.Serialization
                         this.returnedObject = FormatterServices.GetUninitializedObject(this.type);
                     return this.returnedObject;
                 }
+
                 void IDeserializationCallback.OnDeserialization(object sender)
                 {
                     if (this.returnedObject != null)
                     {
                         string[] names = null;
-                        MemberInfo[] members = FormatterServicesNoSerializableCheck.GetSerializableMembers(this.type, out names);
-                        FormatterServices.PopulateObjectMembers(this.returnedObject, members, this.memberDatas);
+                        MemberInfo[] members =
+                            FormatterServicesNoSerializableCheck.GetSerializableMembers(
+                                this.type,
+                                out names
+                            );
+                        FormatterServices.PopulateObjectMembers(
+                            this.returnedObject,
+                            members,
+                            this.memberDatas
+                        );
                         this.returnedObject = null;
                     }
                 }

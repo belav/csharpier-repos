@@ -12,16 +12,15 @@ namespace System.IdentityModel.Metadata
     /// </summary>
     public class SingleSignOnDescriptor : RoleDescriptor
     {
-        IndexedProtocolEndpointDictionary artifactResolutionServices = new IndexedProtocolEndpointDictionary();
+        IndexedProtocolEndpointDictionary artifactResolutionServices =
+            new IndexedProtocolEndpointDictionary();
         Collection<ProtocolEndpoint> singleLogoutServices = new Collection<ProtocolEndpoint>();
         Collection<Uri> nameIdFormats = new Collection<Uri>();
 
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public SingleSignOnDescriptor()
-        {
-        }
+        public SingleSignOnDescriptor() { }
 
         /// <summary>
         /// Gets the a collection of URIs representing the supported name identifier formats.

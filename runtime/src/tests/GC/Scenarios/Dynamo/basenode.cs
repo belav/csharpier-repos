@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace Dynamo {
+namespace Dynamo
+{
     using System;
 
     public class BaseNode
@@ -10,20 +11,21 @@ namespace Dynamo {
         protected int iType = 111111;
         public static Dynamo Cv_Dynamo;
 
-        public int Value {
+        public int Value
+        {
             get { return iValue; }
             set { iValue = value; }
         }
 
-        public int Type {
+        public int Type
+        {
             get { return iType; }
         }
 
         ~BaseNode()
         {
-            if (Cv_Dynamo!=null)
-                Cv_Dynamo.RegisterCleanup( Type, Value );
+            if (Cv_Dynamo != null)
+                Cv_Dynamo.RegisterCleanup(Type, Value);
         }
-
     }
 }

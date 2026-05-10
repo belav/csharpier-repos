@@ -7,12 +7,14 @@ namespace System.Security.Cryptography.Xml
 {
     internal sealed class RSAPKCS1SHA512SignatureDescription : RSAPKCS1SignatureDescription
     {
-        public RSAPKCS1SHA512SignatureDescription() : base("SHA512")
-        {
-        }
+        public RSAPKCS1SHA512SignatureDescription()
+            : base("SHA512") { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2046:AnnotationsMustMatchBase",
-            Justification = "This derived implementation doesn't require unreferenced code, like the base does.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2046:AnnotationsMustMatchBase",
+            Justification = "This derived implementation doesn't require unreferenced code, like the base does."
+        )]
         public sealed override HashAlgorithm CreateDigest()
         {
             return SHA512.Create();

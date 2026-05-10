@@ -18,7 +18,8 @@ namespace System.Web.WebPages
         /// <summary>
         /// Stock Windows Mobile 6.0 user agent string
         /// </summary>
-        private const string MobileUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 8.12; MSIEMobile 6.0)";
+        private const string MobileUserAgent =
+            "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 8.12; MSIEMobile 6.0)";
 
         private static readonly object _browserOverrideKey = new object();
         private static readonly object _userAgentKey = new object();
@@ -34,7 +35,11 @@ namespace System.Web.WebPages
         // Default implementation to generate an HttpBrowserCapabilities object using the current HttpCapabilitiesProvider
         private static HttpBrowserCapabilitiesBase CreateOverriddenBrowser(string userAgent)
         {
-            HttpBrowserCapabilities overriddenBrowser = new HttpContext(new UserAgentWorkerRequest(userAgent)).Request.Browser;
+            HttpBrowserCapabilities overriddenBrowser = new HttpContext(
+                new UserAgentWorkerRequest(userAgent)
+            )
+                .Request
+                .Browser;
             return new HttpBrowserCapabilitiesWrapper(overriddenBrowser);
         }
 
@@ -42,7 +47,9 @@ namespace System.Web.WebPages
         /// Gets the overridden browser for the request based on the overridden user agent.
         /// If no overridden user agent is set, returns the browser for the request.
         /// </summary>
-        public static HttpBrowserCapabilitiesBase GetOverriddenBrowser(this HttpContextBase httpContext)
+        public static HttpBrowserCapabilitiesBase GetOverriddenBrowser(
+            this HttpContextBase httpContext
+        )
         {
             return GetOverriddenBrowser(httpContext, createBrowser: null);
         }
@@ -50,15 +57,25 @@ namespace System.Web.WebPages
         /// <summary>
         /// Internal GetOverriddenBrowser overload to allow the browser creation function to changed. Defaults to CreateOverridenBrowser if createBrowser is null.
         /// </summary>
-        internal static HttpBrowserCapabilitiesBase GetOverriddenBrowser(this HttpContextBase httpContext, Func<string, HttpBrowserCapabilitiesBase> createBrowser)
+        internal static HttpBrowserCapabilitiesBase GetOverriddenBrowser(
+            this HttpContextBase httpContext,
+            Func<string, HttpBrowserCapabilitiesBase> createBrowser
+        )
         {
-            HttpBrowserCapabilitiesBase overriddenBrowser = (HttpBrowserCapabilitiesBase)httpContext.Items[_browserOverrideKey];
+            HttpBrowserCapabilitiesBase overriddenBrowser = (HttpBrowserCapabilitiesBase)
+                httpContext.Items[_browserOverrideKey];
 
             if (overriddenBrowser == null)
             {
                 string overriddenUserAgent = GetOverriddenUserAgent(httpContext);
 
-                if (!String.Equals(overriddenUserAgent, httpContext.Request.UserAgent, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !String.Equals(
+                        overriddenUserAgent,
+                        httpContext.Request.UserAgent,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if (createBrowser != null)
                     {
@@ -85,9 +102,9 @@ namespace System.Web.WebPages
         /// </summary>
         public static string GetOverriddenUserAgent(this HttpContextBase httpContext)
         {
-            return (string)httpContext.Items[_userAgentKey] ??
-                   BrowserOverrideStores.Current.GetOverriddenUserAgent(httpContext) ??
-                   httpContext.Request.UserAgent;
+            return (string)httpContext.Items[_userAgentKey]
+                ?? BrowserOverrideStores.Current.GetOverriddenUserAgent(httpContext)
+                ?? httpContext.Request.UserAgent;
         }
 
         /// <summary>
@@ -105,7 +122,9 @@ namespace System.Web.WebPages
         /// System.Web.HttpApplication.GetVaryByCustomString to differentiate cache keys based on
         /// the overridden browser.
         /// </summary>
-        public static string GetVaryByCustomStringForOverriddenBrowser(this HttpContextBase httpContext)
+        public static string GetVaryByCustomStringForOverriddenBrowser(
+            this HttpContextBase httpContext
+        )
         {
             return GetOverriddenBrowser(httpContext, createBrowser: null).Type;
         }
@@ -113,7 +132,10 @@ namespace System.Web.WebPages
         /// <summary>
         /// Sets the overridden user agent for the request using a BrowserOverride.
         /// </summary>
-        public static void SetOverriddenBrowser(this HttpContextBase httpContext, BrowserOverride browserOverride)
+        public static void SetOverriddenBrowser(
+            this HttpContextBase httpContext,
+            BrowserOverride browserOverride
+        )
         {
             string userAgent = null;
 
@@ -121,13 +143,19 @@ namespace System.Web.WebPages
             {
                 case BrowserOverride.Desktop:
                     // bug:262389 override only if the request was not made from a browser or the browser is not of a desktop device
-                    if (httpContext.Request.Browser == null || httpContext.Request.Browser.IsMobileDevice)
+                    if (
+                        httpContext.Request.Browser == null
+                        || httpContext.Request.Browser.IsMobileDevice
+                    )
                     {
                         userAgent = DesktopUserAgent;
                     }
                     break;
                 case BrowserOverride.Mobile:
-                    if (httpContext.Request.Browser == null || !httpContext.Request.Browser.IsMobileDevice)
+                    if (
+                        httpContext.Request.Browser == null
+                        || !httpContext.Request.Browser.IsMobileDevice
+                    )
                     {
                         userAgent = MobileUserAgent;
                     }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace;
 [Export]
 internal class ProjectInitializationHandler : IDisposable
 {
-    private const string ProjectInitializationCompleteName = "workspace/projectInitializationComplete";
+    private const string ProjectInitializationCompleteName =
+        "workspace/projectInitializationComplete";
 
     private readonly IServiceBroker _serviceBroker;
     private readonly ServiceBrokerClient _serviceBrokerClient;
@@ -32,7 +33,10 @@ internal class ProjectInitializationHandler : IDisposable
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ProjectInitializationHandler([Import(typeof(SVsFullAccessServiceBroker))] IServiceBroker serviceBroker, ILoggerFactory loggerFactory)
+    public ProjectInitializationHandler(
+        [Import(typeof(SVsFullAccessServiceBroker))] IServiceBroker serviceBroker,
+        ILoggerFactory loggerFactory
+    )
     {
         _serviceBroker = serviceBroker;
         _serviceBroker.AvailabilityChanged += AvailabilityChanged;
@@ -44,9 +48,16 @@ internal class ProjectInitializationHandler : IDisposable
 
     public static async Task SendProjectInitializationCompleteNotificationAsync()
     {
-        Contract.ThrowIfNull(LanguageServerHost.Instance, "We don't have an LSP channel yet to send this request through.");
-        var languageServerManager = LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
-        await languageServerManager.SendNotificationAsync(ProjectInitializationCompleteName, CancellationToken.None);
+        Contract.ThrowIfNull(
+            LanguageServerHost.Instance,
+            "We don't have an LSP channel yet to send this request through."
+        );
+        var languageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
+        await languageServerManager.SendNotificationAsync(
+            ProjectInitializationCompleteName,
+            CancellationToken.None
+        );
     }
 
     public async Task SubscribeToInitializationCompleteAsync(CancellationToken cancellationToken)
@@ -58,16 +69,26 @@ internal class ProjectInitializationHandler : IDisposable
             // Service might be null the first time we try to access it - wait for it to become available on the remote side.
             await _serviceAvailable.Task;
             didSubscribe = await TrySubscribeAsync(cancellationToken);
-            Contract.ThrowIfFalse(didSubscribe, $"Unable to subscribe to {Descriptors.RemoteProjectInitializationStatusService.Moniker}");
+            Contract.ThrowIfFalse(
+                didSubscribe,
+                $"Unable to subscribe to {Descriptors.RemoteProjectInitializationStatusService.Moniker}"
+            );
         }
     }
 
     private async Task<bool> TrySubscribeAsync(CancellationToken cancellationToken)
     {
-        using var rental = await _serviceBrokerClient.GetProxyAsync<IProjectInitializationStatusService>(Descriptors.RemoteProjectInitializationStatusService, cancellationToken);
+        using var rental =
+            await _serviceBrokerClient.GetProxyAsync<IProjectInitializationStatusService>(
+                Descriptors.RemoteProjectInitializationStatusService,
+                cancellationToken
+            );
         if (rental.Proxy is not null)
         {
-            _subscription = await rental.Proxy.SubscribeInitializationCompletionAsync(_projectInitializationCompleteObserver, cancellationToken);
+            _subscription = await rental.Proxy.SubscribeInitializationCompletionAsync(
+                _projectInitializationCompleteObserver,
+                cancellationToken
+            );
             return true;
         }
 
@@ -76,7 +97,11 @@ internal class ProjectInitializationHandler : IDisposable
 
     private void AvailabilityChanged(object? sender, BrokeredServicesChangedEventArgs e)
     {
-        if (e.ImpactedServices.Contains(Descriptors.RemoteProjectInitializationStatusService.Moniker))
+        if (
+            e.ImpactedServices.Contains(
+                Descriptors.RemoteProjectInitializationStatusService.Moniker
+            )
+        )
             _serviceAvailable.SetResult();
     }
 
@@ -87,7 +112,8 @@ internal class ProjectInitializationHandler : IDisposable
         _serviceBrokerClient.Dispose();
     }
 
-    internal class ProjectInitializationCompleteObserver : IObserver<ProjectInitializationCompletionState>
+    internal class ProjectInitializationCompleteObserver
+        : IObserver<ProjectInitializationCompletionState>
     {
         private readonly ILogger _logger;
 

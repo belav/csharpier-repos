@@ -22,7 +22,11 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial SafeHeapAllocHandle HeapAlloc(IntPtr hHeap, HeapAllocFlags dwFlags, nint dwBytes);
+        internal static partial SafeHeapAllocHandle HeapAlloc(
+            IntPtr hHeap,
+            HeapAllocFlags dwFlags,
+            nint dwBytes
+        );
 
         [LibraryImport(Libraries.Kernel32)]
         [return: MarshalAs(UnmanagedType.Bool)]

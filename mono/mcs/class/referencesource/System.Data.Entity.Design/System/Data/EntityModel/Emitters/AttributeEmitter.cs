@@ -8,17 +8,15 @@
 //---------------------------------------------------------------------
 
 using System.CodeDom;
-
-using System.Diagnostics;
-using System.Data.SqlTypes;
-using System.Data.Metadata.Edm;
 using System.Collections.Generic;
 using System.Data.Entity.Design;
 using System.Data.Entity.Design.Common;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.Globalization;
-
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -35,6 +33,7 @@ namespace System.Data.EntityModel.Emitters
         }
 
         static readonly string AdoAttributeDataClassesNamespace = "System.Data.Objects.DataClasses";
+
         internal AttributeEmitter(TypeReference typeReference)
         {
             _typeReference = typeReference;
@@ -50,11 +49,16 @@ namespace System.Data.EntityModel.Emitters
             Debug.Assert(emitter != null, "emitter should not be null");
             Debug.Assert(typeDecl != null, "typeDecl should not be null");
 
-            EmitSchemaTypeAttribute(FQAdoFrameworkDataClassesName("EdmEntityTypeAttribute"), emitter, typeDecl);
-            
-            CodeAttributeDeclaration attribute2 = EmitSimpleAttribute("System.Runtime.Serialization.DataContractAttribute");
-            AttributeEmitter.AddNamedAttributeArguments(attribute2,
-                    "IsReference", true);
+            EmitSchemaTypeAttribute(
+                FQAdoFrameworkDataClassesName("EdmEntityTypeAttribute"),
+                emitter,
+                typeDecl
+            );
+
+            CodeAttributeDeclaration attribute2 = EmitSimpleAttribute(
+                "System.Runtime.Serialization.DataContractAttribute"
+            );
+            AttributeEmitter.AddNamedAttributeArguments(attribute2, "IsReference", true);
             typeDecl.CustomAttributes.Add(attribute2);
 
             CodeAttributeDeclaration attribute3 = EmitSimpleAttribute("System.Serializable");
@@ -63,12 +67,19 @@ namespace System.Data.EntityModel.Emitters
             EmitKnownTypeAttributes(emitter.Item, emitter.Generator, typeDecl);
         }
 
-        private void EmitKnownTypeAttributes(EdmType baseType, ClientApiGenerator generator, CodeTypeDeclaration typeDecl)
+        private void EmitKnownTypeAttributes(
+            EdmType baseType,
+            ClientApiGenerator generator,
+            CodeTypeDeclaration typeDecl
+        )
         {
             foreach (EdmType edmType in generator.GetDirectSubTypes(baseType))
             {
-                Debug.Assert(edmType.BaseType == baseType, "The types must be directly derived from basetype");
-                
+                Debug.Assert(
+                    edmType.BaseType == baseType,
+                    "The types must be directly derived from basetype"
+                );
+
                 CodeTypeReference subTypeRef;
                 if (generator.Language == LanguageOption.GenerateCSharpCode)
                 {
@@ -77,10 +88,16 @@ namespace System.Data.EntityModel.Emitters
                 }
                 else
                 {
-                    Debug.Assert(generator.Language == LanguageOption.GenerateVBCode, "Did you add a new language?");
+                    Debug.Assert(
+                        generator.Language == LanguageOption.GenerateVBCode,
+                        "Did you add a new language?"
+                    );
                     subTypeRef = generator.GetLeastPossibleQualifiedTypeReference(edmType);
                 }
-                CodeAttributeDeclaration attribute = EmitSimpleAttribute("System.Runtime.Serialization.KnownTypeAttribute", new CodeTypeOfExpression(subTypeRef));
+                CodeAttributeDeclaration attribute = EmitSimpleAttribute(
+                    "System.Runtime.Serialization.KnownTypeAttribute",
+                    new CodeTypeOfExpression(subTypeRef)
+                );
                 typeDecl.CustomAttributes.Add(attribute);
             }
         }
@@ -115,7 +132,11 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="attributeName">Unqualified name of the attribute</param>
         /// <param name="emitter">The strongly typed emitter</param>
         /// <param name="typeDecl">The type declaration to add the attribues to.</param>
-        public void EmitSchemaTypeAttribute(string attributeName, SchemaTypeEmitter emitter, CodeTypeDeclaration typeDecl)
+        public void EmitSchemaTypeAttribute(
+            string attributeName,
+            SchemaTypeEmitter emitter,
+            CodeTypeDeclaration typeDecl
+        )
         {
             // call the shared static version
             EdmType type = emitter.Item as EdmType;
@@ -129,7 +150,11 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="attributeName">Unqualified name of the attribute</param>
         /// <param name="type">The type or property type of the code that is having the attribute attached.</param>
         /// <param name="member">The type declaration to add the attribues to.</param>
-        public void EmitSchemaTypeAttribute(string attributeName, EdmType type, CodeTypeMember member)
+        public void EmitSchemaTypeAttribute(
+            string attributeName,
+            EdmType type,
+            CodeTypeMember member
+        )
         {
             Debug.Assert(attributeName != null, "attributeName should not be null");
             Debug.Assert(type != null, "type should not be null");
@@ -137,9 +162,13 @@ namespace System.Data.EntityModel.Emitters
 
             // [mappingattribute(SchemaName="namespace",TypeName="classname")
             CodeAttributeDeclaration attribute = EmitSimpleAttribute(attributeName);
-            AttributeEmitter.AddNamedAttributeArguments(attribute,
-                    "NamespaceName", type.NamespaceName,
-                    "Name", type.Name);
+            AttributeEmitter.AddNamedAttributeArguments(
+                attribute,
+                "NamespaceName",
+                type.NamespaceName,
+                "Name",
+                type.Name
+            );
 
             member.CustomAttributes.Add(attribute);
         }
@@ -151,15 +180,19 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="targetRelationshipEnd">The relationship end that is being targeted</param>
         /// <param name="propertyDecl">The property declaration to attach the attribute to.</param>
         /// <param name="additionalAttributes">Additional attributes</param>
-        public void EmitNavigationPropertyAttributes(ClientApiGenerator generator,
-                                                     RelationshipEndMember targetRelationshipEnd, 
-                                                     CodeMemberProperty propertyDecl,
-                                                     List<CodeAttributeDeclaration> additionalAttributes)
+        public void EmitNavigationPropertyAttributes(
+            ClientApiGenerator generator,
+            RelationshipEndMember targetRelationshipEnd,
+            CodeMemberProperty propertyDecl,
+            List<CodeAttributeDeclaration> additionalAttributes
+        )
         {
-            CodeAttributeDeclaration attribute = EmitSimpleAttribute(FQAdoFrameworkDataClassesName("EdmRelationshipNavigationPropertyAttribute"),
+            CodeAttributeDeclaration attribute = EmitSimpleAttribute(
+                FQAdoFrameworkDataClassesName("EdmRelationshipNavigationPropertyAttribute"),
                 targetRelationshipEnd.DeclaringType.NamespaceName,
                 targetRelationshipEnd.DeclaringType.Name,
-                targetRelationshipEnd.Name);
+                targetRelationshipEnd.Name
+            );
 
             propertyDecl.CustomAttributes.Add(attribute);
             EmitGeneratedCodeAttribute(propertyDecl);
@@ -171,31 +204,35 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    generator.AddError(Strings.InvalidAttributeSuppliedForProperty(propertyDecl.Name),
-                                       ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
-                                       EdmSchemaErrorSeverity.Error,
-                                       e);
+                    generator.AddError(
+                        Strings.InvalidAttributeSuppliedForProperty(propertyDecl.Name),
+                        ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
         }
-        
+
         //
         //
         // Emit
         //     [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         //
-        // this allows FxCop to skip analysis of these methods and types, it should not be applied to partial types, only the 
+        // this allows FxCop to skip analysis of these methods and types, it should not be applied to partial types, only the
         // generated members of partial types
         //
         CodeAttributeDeclaration _GeneratedCodeAttribute;
+
         internal void EmitGeneratedCodeAttribute(CodeTypeMember member)
         {
-            if(_GeneratedCodeAttribute == null)
+            if (_GeneratedCodeAttribute == null)
             {
-                _GeneratedCodeAttribute = EmitSimpleAttribute("System.CodeDom.Compiler.GeneratedCode",
+                _GeneratedCodeAttribute = EmitSimpleAttribute(
+                    "System.CodeDom.Compiler.GeneratedCode",
                     "System.Data.Entity.Design.EntityClassGenerator",
-                    typeof(EntityClassGenerator).Assembly.GetName().Version.ToString());
-                
+                    typeof(EntityClassGenerator).Assembly.GetName().Version.ToString()
+                );
             }
 
             member.CustomAttributes.Add(_GeneratedCodeAttribute);
@@ -207,42 +244,76 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="emitter">The strongly typed emitter</param>
         /// <param name="propertyDecl">The type declaration to add the attribues to.</param>
         /// <param name="additionalAttributes">Additional attributes to emit</param>
-        public void EmitPropertyAttributes(PropertyEmitter emitter,
-                                           CodeMemberProperty propertyDecl,
-                                           List<CodeAttributeDeclaration> additionalAttributes)
+        public void EmitPropertyAttributes(
+            PropertyEmitter emitter,
+            CodeMemberProperty propertyDecl,
+            List<CodeAttributeDeclaration> additionalAttributes
+        )
         {
-            if (MetadataUtil.IsPrimitiveType(emitter.Item.TypeUsage.EdmType) || MetadataUtil.IsEnumerationType(emitter.Item.TypeUsage.EdmType))
+            if (
+                MetadataUtil.IsPrimitiveType(emitter.Item.TypeUsage.EdmType)
+                || MetadataUtil.IsEnumerationType(emitter.Item.TypeUsage.EdmType)
+            )
             {
-                CodeAttributeDeclaration scalarPropertyAttribute = EmitSimpleAttribute(FQAdoFrameworkDataClassesName("EdmScalarPropertyAttribute"));
+                CodeAttributeDeclaration scalarPropertyAttribute = EmitSimpleAttribute(
+                    FQAdoFrameworkDataClassesName("EdmScalarPropertyAttribute")
+                );
 
                 if (emitter.IsKeyProperty)
                 {
-                    Debug.Assert(emitter.Item.Nullable == false, "An EntityKeyProperty cannot be nullable.");
+                    Debug.Assert(
+                        emitter.Item.Nullable == false,
+                        "An EntityKeyProperty cannot be nullable."
+                    );
 
-                    AttributeEmitter.AddNamedAttributeArguments(scalarPropertyAttribute, "EntityKeyProperty", true);
+                    AttributeEmitter.AddNamedAttributeArguments(
+                        scalarPropertyAttribute,
+                        "EntityKeyProperty",
+                        true
+                    );
                 }
 
                 if (!emitter.Item.Nullable)
                 {
-                    AttributeEmitter.AddNamedAttributeArguments(scalarPropertyAttribute, "IsNullable", false);
+                    AttributeEmitter.AddNamedAttributeArguments(
+                        scalarPropertyAttribute,
+                        "IsNullable",
+                        false
+                    );
                 }
 
                 propertyDecl.CustomAttributes.Add(scalarPropertyAttribute);
             }
             else //Complex property
             {
-                Debug.Assert(MetadataUtil.IsComplexType(emitter.Item.TypeUsage.EdmType) ||
-                             (MetadataUtil.IsCollectionType(emitter.Item.TypeUsage.EdmType)),
-                             "not a complex type or a collection type");
-                CodeAttributeDeclaration attribute = EmitSimpleAttribute(FQAdoFrameworkDataClassesName("EdmComplexPropertyAttribute"));
+                Debug.Assert(
+                    MetadataUtil.IsComplexType(emitter.Item.TypeUsage.EdmType)
+                        || (MetadataUtil.IsCollectionType(emitter.Item.TypeUsage.EdmType)),
+                    "not a complex type or a collection type"
+                );
+                CodeAttributeDeclaration attribute = EmitSimpleAttribute(
+                    FQAdoFrameworkDataClassesName("EdmComplexPropertyAttribute")
+                );
                 propertyDecl.CustomAttributes.Add(attribute);
 
                 // Have CodeDOM serialization set the properties on the ComplexObject, not the ComplexObject instance.
-                attribute = EmitSimpleAttribute("System.ComponentModel.DesignerSerializationVisibility");
-                AttributeEmitter.AddAttributeArguments(attribute,
-                    new object[] { new CodePropertyReferenceExpression(
-                        new CodeTypeReferenceExpression(TypeReference.ForType(
-                            typeof(System.ComponentModel.DesignerSerializationVisibility))),"Content") });
+                attribute = EmitSimpleAttribute(
+                    "System.ComponentModel.DesignerSerializationVisibility"
+                );
+                AttributeEmitter.AddAttributeArguments(
+                    attribute,
+                    new object[]
+                    {
+                        new CodePropertyReferenceExpression(
+                            new CodeTypeReferenceExpression(
+                                TypeReference.ForType(
+                                    typeof(System.ComponentModel.DesignerSerializationVisibility)
+                                )
+                            ),
+                            "Content"
+                        ),
+                    }
+                );
                 propertyDecl.CustomAttributes.Add(attribute);
 
                 if (!MetadataUtil.IsCollectionType(emitter.Item.TypeUsage.EdmType))
@@ -260,11 +331,10 @@ namespace System.Data.EntityModel.Emitters
                     AttributeEmitter.AddNamedAttributeArguments(attribute, "IsNullable", true);
                     propertyDecl.CustomAttributes.Add(attribute);
                 }
-
             }
 
             // serialization attribute
-            AddDataMemberAttribute(propertyDecl);            
+            AddDataMemberAttribute(propertyDecl);
 
             if (additionalAttributes != null && additionalAttributes.Count > 0)
             {
@@ -274,10 +344,12 @@ namespace System.Data.EntityModel.Emitters
                 }
                 catch (ArgumentNullException e)
                 {
-                    emitter.Generator.AddError(Strings.InvalidAttributeSuppliedForProperty(emitter.Item.Name),
-                                               ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
-                                               EdmSchemaErrorSeverity.Error,
-                                               e);
+                    emitter.Generator.AddError(
+                        Strings.InvalidAttributeSuppliedForProperty(emitter.Item.Name),
+                        ModelBuilderErrorCode.InvalidAttributeSuppliedForProperty,
+                        EdmSchemaErrorSeverity.Error,
+                        e
+                    );
                 }
             }
 
@@ -294,12 +366,16 @@ namespace System.Data.EntityModel.Emitters
             Debug.Assert(emitter != null, "emitter should not be null");
             Debug.Assert(typeDecl != null, "typeDecl should not be null");
 
-            EmitSchemaTypeAttribute(FQAdoFrameworkDataClassesName("EdmComplexTypeAttribute"),
-                emitter, typeDecl);
+            EmitSchemaTypeAttribute(
+                FQAdoFrameworkDataClassesName("EdmComplexTypeAttribute"),
+                emitter,
+                typeDecl
+            );
 
-            CodeAttributeDeclaration attribute = EmitSimpleAttribute("System.Runtime.Serialization.DataContractAttribute");
-            AttributeEmitter.AddNamedAttributeArguments(attribute,
-                    "IsReference", true);
+            CodeAttributeDeclaration attribute = EmitSimpleAttribute(
+                "System.Runtime.Serialization.DataContractAttribute"
+            );
+            AttributeEmitter.AddNamedAttributeArguments(attribute, "IsReference", true);
             typeDecl.CustomAttributes.Add(attribute);
 
             CodeAttributeDeclaration attribute2 = EmitSimpleAttribute("System.Serializable");
@@ -320,14 +396,19 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="attributeType"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public CodeAttributeDeclaration EmitSimpleAttribute(string attributeType, params object[] arguments)
+        public CodeAttributeDeclaration EmitSimpleAttribute(
+            string attributeType,
+            params object[] arguments
+        )
         {
-            CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(TypeReference.FromString(attributeType, true));
+            CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(
+                TypeReference.FromString(attributeType, true)
+            );
 
             AddAttributeArguments(attribute, arguments);
 
@@ -335,11 +416,14 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="attribute"></param>
         /// <param name="arguments"></param>
-        public static void AddAttributeArguments(CodeAttributeDeclaration attribute, object[] arguments)
+        public static void AddAttributeArguments(
+            CodeAttributeDeclaration attribute,
+            object[] arguments
+        )
         {
             foreach (object argument in arguments)
             {
@@ -351,33 +435,41 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="attribute"></param>
         /// <param name="arguments"></param>
-        public static void AddNamedAttributeArguments(CodeAttributeDeclaration attribute, params object[] arguments)
+        public static void AddNamedAttributeArguments(
+            CodeAttributeDeclaration attribute,
+            params object[] arguments
+        )
         {
             for (int i = 1; i < arguments.Length; i += 2)
             {
                 CodeExpression expression = arguments[i] as CodeExpression;
                 if (expression == null)
                     expression = new CodePrimitiveExpression(arguments[i]);
-                attribute.Arguments.Add(new CodeAttributeArgument(arguments[i - 1].ToString(), expression));
+                attribute.Arguments.Add(
+                    new CodeAttributeArgument(arguments[i - 1].ToString(), expression)
+                );
             }
         }
 
         /// <summary>
-        /// Adds an XmlIgnore attribute to the given property declaration.  This is 
+        /// Adds an XmlIgnore attribute to the given property declaration.  This is
         /// used to explicitly skip certain properties during XML serialization.
         /// </summary>
         /// <param name="propertyDecl">the property to mark with XmlIgnore</param>
         public void AddIgnoreAttributes(CodeMemberProperty propertyDecl)
         {
-            CodeAttributeDeclaration xmlIgnoreAttribute = EmitSimpleAttribute(typeof(System.Xml.Serialization.XmlIgnoreAttribute).FullName);
-            CodeAttributeDeclaration soapIgnoreAttribute = EmitSimpleAttribute(typeof(System.Xml.Serialization.SoapIgnoreAttribute).FullName);
+            CodeAttributeDeclaration xmlIgnoreAttribute = EmitSimpleAttribute(
+                typeof(System.Xml.Serialization.XmlIgnoreAttribute).FullName
+            );
+            CodeAttributeDeclaration soapIgnoreAttribute = EmitSimpleAttribute(
+                typeof(System.Xml.Serialization.SoapIgnoreAttribute).FullName
+            );
             propertyDecl.CustomAttributes.Add(xmlIgnoreAttribute);
             propertyDecl.CustomAttributes.Add(soapIgnoreAttribute);
-
         }
 
         /// <summary>
@@ -387,17 +479,21 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="propertyDecl">the property to mark with XmlIgnore</param>
         public void AddBrowsableAttribute(CodeMemberProperty propertyDecl)
         {
-            CodeAttributeDeclaration browsableAttribute = EmitSimpleAttribute(typeof(System.ComponentModel.BrowsableAttribute).FullName, false);
+            CodeAttributeDeclaration browsableAttribute = EmitSimpleAttribute(
+                typeof(System.ComponentModel.BrowsableAttribute).FullName,
+                false
+            );
             propertyDecl.CustomAttributes.Add(browsableAttribute);
         }
 
         public void AddDataMemberAttribute(CodeMemberProperty propertyDecl)
         {
-            CodeAttributeDeclaration browsableAttribute = EmitSimpleAttribute("System.Runtime.Serialization.DataMemberAttribute");
+            CodeAttributeDeclaration browsableAttribute = EmitSimpleAttribute(
+                "System.Runtime.Serialization.DataMemberAttribute"
+            );
             propertyDecl.CustomAttributes.Add(browsableAttribute);
         }
 
         #endregion
-    
     }
 }

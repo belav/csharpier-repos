@@ -20,7 +20,9 @@ namespace System.Web.Http.Controllers
             controller.Request = new HttpRequestMessage();
 
             Mock<UrlHelper> url = new Mock<UrlHelper>();
-            url.Setup(u => u.Link("default", new { id = 42 })).Returns("http://location_header/").Verifiable();
+            url.Setup(u => u.Link("default", new { id = 42 }))
+                .Returns("http://location_header/")
+                .Verifiable();
             controller.Url = url.Object;
 
             // Act
@@ -45,7 +47,8 @@ namespace System.Web.Http.Controllers
             Assert.ThrowsArgument(
                 () => controller.Post(new Customer { ID = 42 }),
                 "name",
-                "A route named 'default' could not be found in the route collection.");
+                "A route named 'default' could not be found in the route collection."
+            );
         }
 
         [Fact]
@@ -54,9 +57,19 @@ namespace System.Web.Http.Controllers
             // Arrange
             CustomersController controller = new CustomersController();
             controller.Configuration = new HttpConfiguration();
-            controller.Configuration.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
-            controller.RequestContext.RouteData = new HttpRouteData(new HttpRoute(), new HttpRouteValueDictionary { { "controller", "Customers" } });
-            controller.Request = new HttpRequestMessage { RequestUri = new Uri("http://locahost/Customers") };
+            controller.Configuration.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+            controller.RequestContext.RouteData = new HttpRouteData(
+                new HttpRoute(),
+                new HttpRouteValueDictionary { { "controller", "Customers" } }
+            );
+            controller.Request = new HttpRequestMessage
+            {
+                RequestUri = new Uri("http://locahost/Customers"),
+            };
 
             // Act
             var result = controller.Post(new Customer { ID = 42 });

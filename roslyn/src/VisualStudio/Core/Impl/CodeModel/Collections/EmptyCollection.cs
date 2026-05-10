@@ -15,25 +15,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     [ComDefaultInterface(typeof(ICodeElements))]
     public sealed class EmptyCollection : AbstractCodeElementCollection
     {
-        private static readonly Snapshot s_snapshot = new CodeElementSnapshot(ImmutableArray.Create<EnvDTE.CodeElement>());
+        private static readonly Snapshot s_snapshot = new CodeElementSnapshot(
+            ImmutableArray.Create<EnvDTE.CodeElement>()
+        );
 
-        internal static EnvDTE.CodeElements Create(
-            CodeModelState state,
-            object parent)
+        internal static EnvDTE.CodeElements Create(CodeModelState state, object parent)
         {
             var collection = new EmptyCollection(state, parent);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private EmptyCollection(
-            CodeModelState state,
-            object parent)
-            : base(state, parent)
-        {
-        }
+        private EmptyCollection(CodeModelState state, object parent)
+            : base(state, parent) { }
 
-        internal override Snapshot CreateSnapshot()
-            => s_snapshot;
+        internal override Snapshot CreateSnapshot() => s_snapshot;
 
         protected override bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element)
         {

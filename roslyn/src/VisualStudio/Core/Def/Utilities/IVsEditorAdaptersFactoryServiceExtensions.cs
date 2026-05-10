@@ -22,20 +22,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             this IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             Microsoft.CodeAnalysis.Workspace workspace,
             DocumentId contextDocumentId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // https://github.com/dotnet/roslyn/issues/17898
-            // We have a report of a null ref occurring in this method. The only place we believe 
-            // this could be would be if 'document' was null. Try to catch a reasonable 
+            // We have a report of a null ref occurring in this method. The only place we believe
+            // this could be would be if 'document' was null. Try to catch a reasonable
             // non -fatal-watson dump to help track down what the root cause of this might be.
             var document = workspace.CurrentSolution.GetDocument(contextDocumentId);
             if (document == null)
             {
-                var message = contextDocumentId == null
-                    ? $"{nameof(contextDocumentId)} was null."
-                    : $"{nameof(contextDocumentId)} was not null.";
+                var message =
+                    contextDocumentId == null
+                        ? $"{nameof(contextDocumentId)} was null."
+                        : $"{nameof(contextDocumentId)} was not null.";
 
-                FatalError.ReportAndCatch(new InvalidOperationException("Could not retrieve document. " + message));
+                FatalError.ReportAndCatch(
+                    new InvalidOperationException("Could not retrieve document. " + message)
+                );
 
                 return null;
             }
@@ -47,7 +51,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         }
 
         public static IOleUndoManager TryGetUndoManager(
-            this IVsEditorAdaptersFactoryService editorAdaptersFactoryService, ITextBuffer subjectBuffer)
+            this IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
+            ITextBuffer subjectBuffer
+        )
         {
             if (subjectBuffer != null)
             {

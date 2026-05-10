@@ -33,24 +33,65 @@ namespace System.Text.Tests
         [Fact]
         public void Ctor_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("replacement", () => new DecoderReplacementFallback(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "replacement",
+                () => new DecoderReplacementFallback(null)
+            );
 
             // Invalid surrogate pair
-            AssertExtensions.Throws<ArgumentException>("replacement", () => new DecoderReplacementFallback("\uD800"));
-            AssertExtensions.Throws<ArgumentException>("replacement", () => new DecoderReplacementFallback("\uD800a"));
-            AssertExtensions.Throws<ArgumentException>("replacement", () => new DecoderReplacementFallback("\uDC00"));
-            AssertExtensions.Throws<ArgumentException>("replacement", () => new DecoderReplacementFallback("a\uDC00"));
-            AssertExtensions.Throws<ArgumentException>("replacement", () => new DecoderReplacementFallback("\uDC00\uDC00"));
-            AssertExtensions.Throws<ArgumentException>("replacement", () => new DecoderReplacementFallback("\uD800\uD800"));
+            AssertExtensions.Throws<ArgumentException>(
+                "replacement",
+                () => new DecoderReplacementFallback("\uD800")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "replacement",
+                () => new DecoderReplacementFallback("\uD800a")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "replacement",
+                () => new DecoderReplacementFallback("\uDC00")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "replacement",
+                () => new DecoderReplacementFallback("a\uDC00")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "replacement",
+                () => new DecoderReplacementFallback("\uDC00\uDC00")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "replacement",
+                () => new DecoderReplacementFallback("\uD800\uD800")
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new DecoderReplacementFallback(), new DecoderReplacementFallback(), true };
-            yield return new object[] { new DecoderReplacementFallback(), new DecoderReplacementFallback("?"), true };
+            yield return new object[]
+            {
+                new DecoderReplacementFallback(),
+                new DecoderReplacementFallback(),
+                true,
+            };
+            yield return new object[]
+            {
+                new DecoderReplacementFallback(),
+                new DecoderReplacementFallback("?"),
+                true,
+            };
 
-            yield return new object[] { new DecoderReplacementFallback("abc"), new DecoderReplacementFallback("abc"), true };
-            yield return new object[] { new DecoderReplacementFallback("abc"), new DecoderReplacementFallback("def"), false };
+            yield return new object[]
+            {
+                new DecoderReplacementFallback("abc"),
+                new DecoderReplacementFallback("abc"),
+                true,
+            };
+            yield return new object[]
+            {
+                new DecoderReplacementFallback("abc"),
+                new DecoderReplacementFallback("def"),
+                false,
+            };
 
             yield return new object[] { new DecoderReplacementFallback(), new object(), false };
             yield return new object[] { new DecoderReplacementFallback(), null, false };
@@ -77,21 +118,34 @@ namespace System.Text.Tests
         [InlineData("", new byte[] { 1 }, false)]
         [InlineData("?", new byte[0], true)]
         [InlineData("?", new byte[] { 1 }, true)]
-        public void CreateFallbackBuffer_Fallback_Char(string replacement, byte[] bytesUnknown, bool expected)
+        public void CreateFallbackBuffer_Fallback_Char(
+            string replacement,
+            byte[] bytesUnknown,
+            bool expected
+        )
         {
-            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(replacement).CreateFallbackBuffer();
+            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(
+                replacement
+            ).CreateFallbackBuffer();
             Assert.Equal(expected, buffer.Fallback(bytesUnknown, 0));
         }
 
         [Theory]
         [InlineData("?")]
         [InlineData("\uD800\uDC00")]
-        public void CreateFallbackBuffer_MultipleFallback_ThrowsArgumentException(string replacement)
+        public void CreateFallbackBuffer_MultipleFallback_ThrowsArgumentException(
+            string replacement
+        )
         {
-            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(replacement).CreateFallbackBuffer();
+            DecoderFallbackBuffer buffer = new DecoderReplacementFallback(
+                replacement
+            ).CreateFallbackBuffer();
             buffer.Fallback(new byte[] { 1 }, 0);
 
-            AssertExtensions.Throws<ArgumentException>("bytesUnknown", () => buffer.Fallback(new byte[] { 1 }, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "bytesUnknown",
+                () => buffer.Fallback(new byte[] { 1 }, 0)
+            );
         }
     }
 }

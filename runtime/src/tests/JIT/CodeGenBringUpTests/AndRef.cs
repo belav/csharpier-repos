@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -24,12 +23,10 @@ public class child
             return Fail;
     }
 
-    [MethodImplAttribute(MethodImplOptions.NoInlining)] 
+    [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int AndRef(int x, ref int a)
     {
         x &= a;
         return x;
     }
-    
 }
-

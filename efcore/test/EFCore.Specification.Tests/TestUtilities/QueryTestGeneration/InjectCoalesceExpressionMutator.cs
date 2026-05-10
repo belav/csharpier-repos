@@ -8,9 +8,7 @@ public class InjectCoalesceExpressionMutator : ExpressionMutator
     private readonly ExpressionFinder _expressionFinder = new();
 
     public InjectCoalesceExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {
@@ -25,11 +23,12 @@ public class InjectCoalesceExpressionMutator : ExpressionMutator
 
         var injector = new ExpressionInjector(
             _expressionFinder.FoundExpressions[i],
-            e => Expression.Convert(
-                Expression.Coalesce(
-                    e,
-                    Expression.Default(e.Type.GetGenericArguments()[0])),
-                e.Type));
+            e =>
+                Expression.Convert(
+                    Expression.Coalesce(e, Expression.Default(e.Type.GetGenericArguments()[0])),
+                    e.Type
+                )
+        );
 
         return injector.Visit(expression);
     }
@@ -42,11 +41,13 @@ public class InjectCoalesceExpressionMutator : ExpressionMutator
 
         public override Expression Visit(Expression node)
         {
-            if (_insideLambda
+            if (
+                _insideLambda
                 && node != null
                 && node.NodeType != ExpressionType.Parameter
                 && node.Type.IsGenericType
-                && node.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                && node.Type.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
             {
                 FoundExpressions.Add(node);
             }

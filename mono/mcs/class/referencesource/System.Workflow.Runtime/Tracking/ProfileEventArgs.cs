@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Workflow.ComponentModel;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Workflow.ComponentModel;
 using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime.Tracking
@@ -11,7 +11,9 @@ namespace System.Workflow.Runtime.Tracking
     /// <summary>
     /// EventArgs for IProfileNotification.ProfileUpdated event.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ProfileUpdatedEventArgs : EventArgs
     {
         private TrackingProfile _profile = null;
@@ -37,10 +39,13 @@ namespace System.Workflow.Runtime.Tracking
             set { _workflowType = value; }
         }
     }
+
     /// <summary>
     /// EventArgs for IProfileNotification.ProfileRemoved event.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ProfileRemovedEventArgs : EventArgs
     {
         private Type _workflowType = null;

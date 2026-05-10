@@ -12,16 +12,16 @@ namespace System.Collections.Immutable
     /// </summary>
     /// <typeparam name="TKey">The type of the dictionary's keys.</typeparam>
     /// <typeparam name="TValue">The type of the dictionary's values.</typeparam>
-    internal sealed class ImmutableDictionaryDebuggerProxy<TKey, TValue> : ImmutableEnumerableDebuggerProxy<KeyValuePair<TKey, TValue>> where TKey : notnull
+    internal sealed class ImmutableDictionaryDebuggerProxy<TKey, TValue>
+        : ImmutableEnumerableDebuggerProxy<KeyValuePair<TKey, TValue>>
+        where TKey : notnull
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ImmutableDictionaryDebuggerProxy{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="dictionary">The enumerable to show in the debugger.</param>
         public ImmutableDictionaryDebuggerProxy(IReadOnlyDictionary<TKey, TValue> dictionary)
-            : base(enumerable: dictionary)
-        {
-        }
+            : base(enumerable: dictionary) { }
     }
 
     /// <summary>

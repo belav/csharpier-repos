@@ -17,7 +17,7 @@ namespace MS.Internal.Xml.XPath
             Group,
             Root,
             Variable,
-            Error
+            Error,
         };
 
         public abstract AstType Type { get; }

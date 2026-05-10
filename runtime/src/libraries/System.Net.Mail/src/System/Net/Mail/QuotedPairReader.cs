@@ -32,9 +32,18 @@ namespace System.Net.Mail
         //   e.g. (a\\\b) given index=4 returns 4, as 'b' is quoted, and so are the previous backslashes
         //
         // Throws a FormatException or false is returned if the an escaped Unicode character is found but was not permitted.
-        internal static bool TryCountQuotedChars(string data, int index, bool permitUnicodeEscaping, out int outIndex, bool throwExceptionIfFail)
+        internal static bool TryCountQuotedChars(
+            string data,
+            int index,
+            bool permitUnicodeEscaping,
+            out int outIndex,
+            bool throwExceptionIfFail
+        )
         {
-            Debug.Assert(0 <= index && index < data.Length, $"Index out of range: {index}, {data.Length}");
+            Debug.Assert(
+                0 <= index && index < data.Length,
+                $"Index out of range: {index}, {data.Length}"
+            );
 
             if (index <= 0 || data[index - 1] != MailBnfHelper.Backslash)
             {
@@ -58,7 +67,9 @@ namespace System.Net.Mail
                     if (throwExceptionIfFail)
                     {
                         // Cannot accept quoted Unicode
-                        throw new FormatException(SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                        throw new FormatException(
+                            SR.Format(SR.MailHeaderFieldInvalidCharacter, data[index])
+                        );
                     }
                     else
                     {
@@ -82,7 +93,10 @@ namespace System.Net.Mail
         // Return value: The number of consecutive backslashes, including the initial one at data[index].
         private static int CountBackslashes(string data, int index)
         {
-            Debug.Assert(index >= 0 && data[index] == MailBnfHelper.Backslash, $"index was not a backslash: {index}");
+            Debug.Assert(
+                index >= 0 && data[index] == MailBnfHelper.Backslash,
+                $"index was not a backslash: {index}"
+            );
 
             // Find all the backslashes. It's possible that there are multiple escaped/quoted backslashes.
             int backslashCount = 0;
@@ -93,7 +107,10 @@ namespace System.Net.Mail
             } while (index >= 0 && data[index] == MailBnfHelper.Backslash);
 
             // At this point data[index] should not be a backslash
-            Debug.Assert(index < 0 || data[index] != MailBnfHelper.Backslash, $"index was a backslash: {index}");
+            Debug.Assert(
+                index < 0 || data[index] != MailBnfHelper.Backslash,
+                $"index was a backslash: {index}"
+            );
 
             return backslashCount;
         }

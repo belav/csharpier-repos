@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,87 +36,93 @@ using System.Data.Odbc;
 using System.Security;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Data.Odbc {
+namespace MonoTests.System.Data.Odbc
+{
+    // NOTE: Most tests are are located in the base class, DBDataPermission
 
-	// NOTE: Most tests are are located in the base class, DBDataPermission
+    [TestFixture]
+    public class OdbcPermissionTest
+    {
+        private void Check(
+            string msg,
+            DBDataPermission dbdp,
+            bool blank,
+            bool unrestricted,
+            int count
+        )
+        {
+            Assert.AreEqual(blank, dbdp.AllowBlankPassword, msg + ".AllowBlankPassword");
+            Assert.AreEqual(unrestricted, dbdp.IsUnrestricted(), msg + ".IsUnrestricted");
+            if (count == 0)
+                Assert.IsNull(dbdp.ToXml().Children, msg + ".Count != 0");
+            else
+                Assert.AreEqual(count, dbdp.ToXml().Children.Count, msg + ".Count");
+        }
 
-	[TestFixture]
-	public class OdbcPermissionTest {
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void PermissionState_Invalid()
+        {
+            PermissionState ps = (PermissionState)Int32.MinValue;
+            OdbcPermission perm = new OdbcPermission(ps);
+        }
 
-		private void Check (string msg, DBDataPermission dbdp, bool blank, bool unrestricted, int count)
-		{
-			Assert.AreEqual (blank, dbdp.AllowBlankPassword, msg + ".AllowBlankPassword");
-			Assert.AreEqual (unrestricted, dbdp.IsUnrestricted (), msg + ".IsUnrestricted");
-			if (count == 0)
-				Assert.IsNull (dbdp.ToXml ().Children, msg + ".Count != 0");
-			else
-				Assert.AreEqual (count, dbdp.ToXml ().Children.Count, msg + ".Count");
-		}
+        [Test]
+        public void None()
+        {
+            OdbcPermission perm = new OdbcPermission(PermissionState.None);
+            Check("None-1", perm, false, false, 0);
+            perm.AllowBlankPassword = true;
+            Check("None-2", perm, true, false, 0);
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void PermissionState_Invalid ()
-		{
-			PermissionState ps = (PermissionState)Int32.MinValue;
-			OdbcPermission perm = new OdbcPermission (ps);
-		}
+            OdbcPermission copy = (OdbcPermission)perm.Copy();
+            Check("Copy_None-1", copy, true, false, 0);
+            copy.AllowBlankPassword = false;
+            Check("Copy_None-2", copy, false, false, 0);
+        }
 
-		[Test]
-		public void None ()
-		{
-			OdbcPermission perm = new OdbcPermission (PermissionState.None);
-			Check ("None-1", perm, false, false, 0);
-			perm.AllowBlankPassword = true;
-			Check ("None-2", perm, true, false, 0);
+        [Test]
+        public void None_Childs()
+        {
+            OdbcPermission perm = new OdbcPermission(PermissionState.None);
+            perm.Add("data source=localhost;", String.Empty, KeyRestrictionBehavior.AllowOnly);
+            perm.Add("data source=127.0.0.1;", "password=;", KeyRestrictionBehavior.PreventUsage);
 
-			OdbcPermission copy = (OdbcPermission)perm.Copy ();
-			Check ("Copy_None-1", copy, true, false, 0);
-			copy.AllowBlankPassword = false;
-			Check ("Copy_None-2", copy, false, false, 0);
-		}
+            Check("None-Childs-1", perm, false, false, 2);
+            perm.AllowBlankPassword = true;
+            Check("None-Childs-2", perm, true, false, 2);
 
-		[Test]
-		public void None_Childs ()
-		{
-			OdbcPermission perm = new OdbcPermission (PermissionState.None);
-			perm.Add ("data source=localhost;", String.Empty, KeyRestrictionBehavior.AllowOnly);
-			perm.Add ("data source=127.0.0.1;", "password=;", KeyRestrictionBehavior.PreventUsage);
+            OdbcPermission copy = (OdbcPermission)perm.Copy();
+            Check("Copy_None-Childs-1", copy, true, false, 2);
+            copy.AllowBlankPassword = false;
+            Check("Copy_None-Childs-2", copy, false, false, 2);
+        }
 
-			Check ("None-Childs-1", perm, false, false, 2);
-			perm.AllowBlankPassword = true;
-			Check ("None-Childs-2", perm, true, false, 2);
+        [Test]
+        public void Unrestricted()
+        {
+            OdbcPermission perm = new OdbcPermission(PermissionState.Unrestricted);
+            Check("Unrestricted-1", perm, false, true, 0);
+            perm.AllowBlankPassword = true;
+            Check("Unrestricted-2", perm, true, true, 0);
 
-			OdbcPermission copy = (OdbcPermission)perm.Copy ();
-			Check ("Copy_None-Childs-1", copy, true, false, 2);
-			copy.AllowBlankPassword = false;
-			Check ("Copy_None-Childs-2", copy, false, false, 2);
-		}
+            OdbcPermission copy = (OdbcPermission)perm.Copy();
+            // note: Unrestricted is always created with default values (so AllowBlankPassword is false)
+            Check("Copy_Unrestricted-1", copy, false, true, 0);
+            copy.AllowBlankPassword = true;
+            Check("Copy_Unrestricted-2", copy, true, true, 0);
+        }
 
-		[Test]
-		public void Unrestricted ()
-		{
-			OdbcPermission perm = new OdbcPermission (PermissionState.Unrestricted);
-			Check ("Unrestricted-1", perm, false, true, 0);
-			perm.AllowBlankPassword = true;
-			Check ("Unrestricted-2", perm, true, true, 0);
-
-			OdbcPermission copy = (OdbcPermission)perm.Copy ();
-			// note: Unrestricted is always created with default values (so AllowBlankPassword is false)
-			Check ("Copy_Unrestricted-1", copy, false, true, 0);
-			copy.AllowBlankPassword = true;
-			Check ("Copy_Unrestricted-2", copy, true, true, 0);
-		}
-
-		[Test]
-		public void Unrestricted_Add ()
-		{
-			OdbcPermission perm = new OdbcPermission (PermissionState.Unrestricted);
-			Check ("Unrestricted-NoChild", perm, false, true, 0);
-			perm.Add ("data source=localhost;", String.Empty, KeyRestrictionBehavior.AllowOnly);
-			// note: Lost unrestricted state when children was added
-			Check ("Unrestricted-WithChild", perm, false, false, 1);
-		}
-	}
+        [Test]
+        public void Unrestricted_Add()
+        {
+            OdbcPermission perm = new OdbcPermission(PermissionState.Unrestricted);
+            Check("Unrestricted-NoChild", perm, false, true, 0);
+            perm.Add("data source=localhost;", String.Empty, KeyRestrictionBehavior.AllowOnly);
+            // note: Lost unrestricted state when children was added
+            Check("Unrestricted-WithChild", perm, false, false, 1);
+        }
+    }
 }
 
 #endif

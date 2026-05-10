@@ -9,16 +9,15 @@
 
 using System;
 using System.CodeDom;
-using System.Data;
-using Som = System.Data.EntityModel.SchemaObjectModel;
 using System.Collections.Generic;
-using System.Data.Entity.Design;
-using System.Data.Metadata.Edm;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Data.Entity.Design.SsdlGenerator;
+using System.Data;
+using System.Data.Entity.Design;
 using System.Data.Entity.Design.Common;
-
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -30,11 +29,35 @@ namespace System.Data.EntityModel.Emitters
         #region Static Fields
         private static Pair<Type, CreateEmitter>[] EmitterCreators = new Pair<Type, CreateEmitter>[]
         {
-            new Pair<Type,CreateEmitter>(typeof(EntityType), delegate (ClientApiGenerator generator, GlobalItem element) { return new EntityTypeEmitter(generator,(EntityType)element); }),
-            new Pair<Type,CreateEmitter>(typeof(ComplexType), delegate (ClientApiGenerator generator, GlobalItem element) { return new ComplexTypeEmitter(generator,(ComplexType)element); }),
-            new Pair<Type,CreateEmitter>(typeof(EntityContainer), delegate (ClientApiGenerator generator, GlobalItem element) { return new EntityContainerEmitter(generator,(EntityContainer)element); }),            
-            new Pair<Type,CreateEmitter>(typeof(AssociationType), delegate (ClientApiGenerator generator, GlobalItem element) { return new AssociationTypeEmitter(generator,(AssociationType)element); }),            
-        };        
+            new Pair<Type, CreateEmitter>(
+                typeof(EntityType),
+                delegate(ClientApiGenerator generator, GlobalItem element)
+                {
+                    return new EntityTypeEmitter(generator, (EntityType)element);
+                }
+            ),
+            new Pair<Type, CreateEmitter>(
+                typeof(ComplexType),
+                delegate(ClientApiGenerator generator, GlobalItem element)
+                {
+                    return new ComplexTypeEmitter(generator, (ComplexType)element);
+                }
+            ),
+            new Pair<Type, CreateEmitter>(
+                typeof(EntityContainer),
+                delegate(ClientApiGenerator generator, GlobalItem element)
+                {
+                    return new EntityContainerEmitter(generator, (EntityContainer)element);
+                }
+            ),
+            new Pair<Type, CreateEmitter>(
+                typeof(AssociationType),
+                delegate(ClientApiGenerator generator, GlobalItem element)
+                {
+                    return new AssociationTypeEmitter(generator, (AssociationType)element);
+                }
+            ),
+        };
         #endregion
 
         #region Private Fields
@@ -45,10 +68,14 @@ namespace System.Data.EntityModel.Emitters
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="generator"></param>
-        public NamespaceEmitter(ClientApiGenerator generator, string codeNamespace, string targetFilePath)
+        public NamespaceEmitter(
+            ClientApiGenerator generator,
+            string codeNamespace,
+            string targetFilePath
+        )
             : base(generator)
         {
             _codeNamespace = codeNamespace;
@@ -64,14 +91,19 @@ namespace System.Data.EntityModel.Emitters
             string namespaceName = Generator.SourceObjectNamespaceName;
 
             // emit the namespace definition
-            CodeNamespace codeNamespace = new CodeNamespace( namespaceName );
+            CodeNamespace codeNamespace = new CodeNamespace(namespaceName);
 
             // output some boiler plate comments
             string comments = Strings.NamespaceComments(
-                System.IO.Path.GetFileName( _targetFilePath ),
-                DateTime.Now.ToString( System.Globalization.CultureInfo.CurrentCulture ));
-            CommentEmitter.EmitComments( CommentEmitter.GetFormattedLines( comments, false ), codeNamespace.Comments, false );
-            CompileUnit.Namespaces.Add( codeNamespace );
+                System.IO.Path.GetFileName(_targetFilePath),
+                DateTime.Now.ToString(System.Globalization.CultureInfo.CurrentCulture)
+            );
+            CommentEmitter.EmitComments(
+                CommentEmitter.GetFormattedLines(comments, false),
+                codeNamespace.Comments,
+                false
+            );
+            CompileUnit.Namespaces.Add(codeNamespace);
 
             // Add the assembly attribute.
             CodeAttributeDeclaration assemblyAttribute;
@@ -79,19 +111,29 @@ namespace System.Data.EntityModel.Emitters
             // This adds a GUID to the assembly attribute so that each generated file will have a unique EdmSchemaAttribute in VB.
             if (this.Generator.Language == System.Data.Entity.Design.LanguageOption.GenerateVBCode) //The GUID is only added in VB
             {
-                assemblyAttribute = AttributeEmitter.EmitSimpleAttribute("System.Data.Objects.DataClasses.EdmSchemaAttribute", System.Guid.NewGuid().ToString());
+                assemblyAttribute = AttributeEmitter.EmitSimpleAttribute(
+                    "System.Data.Objects.DataClasses.EdmSchemaAttribute",
+                    System.Guid.NewGuid().ToString()
+                );
             }
             else
             {
-                assemblyAttribute = AttributeEmitter.EmitSimpleAttribute("System.Data.Objects.DataClasses.EdmSchemaAttribute");
+                assemblyAttribute = AttributeEmitter.EmitSimpleAttribute(
+                    "System.Data.Objects.DataClasses.EdmSchemaAttribute"
+                );
             }
             CompileUnit.AssemblyCustomAttributes.Add(assemblyAttribute);
 
-            Dictionary<string, string> usedClassName = new Dictionary<string, string>(StringComparer.Ordinal);
+            Dictionary<string, string> usedClassName = new Dictionary<string, string>(
+                StringComparer.Ordinal
+            );
             // Emit the classes in the schema
             foreach (GlobalItem element in Generator.GetSourceTypes())
             {
-                Debug.Assert(!(element is EdmFunction), "Are you trying to emit functions now? If so add an emitter for it.");
+                Debug.Assert(
+                    !(element is EdmFunction),
+                    "Are you trying to emit functions now? If so add an emitter for it."
+                );
 
                 if (AddElementNameToCache(element, usedClassName))
                 {
@@ -115,24 +157,31 @@ namespace System.Data.EntityModel.Emitters
         /// <value></value>
         private CodeCompileUnit CompileUnit
         {
-            get
-            {
-                return Generator.CompileUnit;
-            }
-        }        
+            get { return Generator.CompileUnit; }
+        }
         #endregion
 
         private bool AddElementNameToCache(GlobalItem element, Dictionary<string, string> cache)
         {
             if (element.BuiltInTypeKind == BuiltInTypeKind.EntityContainer)
             {
-                return TryAddNameToCache((element as EntityContainer).Name, element.BuiltInTypeKind.ToString(), cache);
+                return TryAddNameToCache(
+                    (element as EntityContainer).Name,
+                    element.BuiltInTypeKind.ToString(),
+                    cache
+                );
             }
-            else if (element.BuiltInTypeKind == BuiltInTypeKind.EntityType ||
-                element.BuiltInTypeKind == BuiltInTypeKind.ComplexType ||
-                element.BuiltInTypeKind == BuiltInTypeKind.AssociationType)
+            else if (
+                element.BuiltInTypeKind == BuiltInTypeKind.EntityType
+                || element.BuiltInTypeKind == BuiltInTypeKind.ComplexType
+                || element.BuiltInTypeKind == BuiltInTypeKind.AssociationType
+            )
             {
-                return TryAddNameToCache((element as StructuralType).Name, element.BuiltInTypeKind.ToString(), cache);
+                return TryAddNameToCache(
+                    (element as StructuralType).Name,
+                    element.BuiltInTypeKind.ToString(),
+                    cache
+                );
             }
             return true;
         }
@@ -145,8 +194,12 @@ namespace System.Data.EntityModel.Emitters
             }
             else
             {
-                this.Generator.AddError(Strings.DuplicateClassName(type, name, cache[name]), ModelBuilderErrorCode.DuplicateClassName, 
-                    EdmSchemaErrorSeverity.Error, name);
+                this.Generator.AddError(
+                    Strings.DuplicateClassName(type, name, cache[name]),
+                    ModelBuilderErrorCode.DuplicateClassName,
+                    EdmSchemaErrorSeverity.Error,
+                    name
+                );
                 return false;
             }
             return true;
@@ -157,18 +210,21 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        private SchemaTypeEmitter CreateElementEmitter( GlobalItem element )
+        private SchemaTypeEmitter CreateElementEmitter(GlobalItem element)
         {
             Type typeOfElement = element.GetType();
-            foreach ( Pair<Type, CreateEmitter> pair in EmitterCreators )
+            foreach (Pair<Type, CreateEmitter> pair in EmitterCreators)
             {
-                if ( pair.First.IsAssignableFrom( typeOfElement ) )
-                    return pair.Second( Generator, element );
+                if (pair.First.IsAssignableFrom(typeOfElement))
+                    return pair.Second(Generator, element);
             }
             return null;
         }
 
-        private delegate SchemaTypeEmitter CreateEmitter( ClientApiGenerator generator, GlobalItem item );
+        private delegate SchemaTypeEmitter CreateEmitter(
+            ClientApiGenerator generator,
+            GlobalItem item
+        );
 
         /// <summary>
         /// Reponsible for relating two objects together into a pair
@@ -179,7 +235,8 @@ namespace System.Data.EntityModel.Emitters
         {
             public T1 First;
             public T2 Second;
-            internal Pair( T1 first, T2 second )
+
+            internal Pair(T1 first, T2 second)
             {
                 First = first;
                 Second = second;

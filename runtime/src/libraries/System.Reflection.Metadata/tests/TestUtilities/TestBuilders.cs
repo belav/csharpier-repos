@@ -19,7 +19,8 @@ namespace System.Reflection.PortableExecutable.Tests
                 PEHeaderBuilder.CreateLibraryHeader(),
                 new MetadataRootBuilder(metadataBuilder),
                 ilBuilder,
-                debugDirectoryBuilder: debugDirectoryBuilder);
+                debugDirectoryBuilder: debugDirectoryBuilder
+            );
 
             var peImageBuilder = new BlobBuilder();
             peBuilder.Serialize(peImageBuilder);

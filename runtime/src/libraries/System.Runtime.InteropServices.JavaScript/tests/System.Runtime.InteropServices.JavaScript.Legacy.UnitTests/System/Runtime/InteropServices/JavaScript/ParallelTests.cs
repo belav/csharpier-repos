@@ -23,10 +23,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public static void ParallelInvokeActionArray(int count)
         {
             var actions = new List<Action>();
-            int sum = 0, expected = 0;
-            for (int i = 0; i < count; i++) {
+            int sum = 0,
+                expected = 0;
+            for (int i = 0; i < count; i++)
+            {
                 int j = i;
-                actions.Add(() => {
+                actions.Add(() =>
+                {
                     sum += j;
                 });
                 expected += j;
@@ -43,10 +46,18 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [InlineData(250)]
         public static void ParallelFor(int count)
         {
-            int sum = 0, expected = 0;
+            int sum = 0,
+                expected = 0;
             for (int i = 0; i < count; i++)
                 expected += i;
-            Parallel.For(0, count, (i) => { sum += i; });
+            Parallel.For(
+                0,
+                count,
+                (i) =>
+                {
+                    sum += i;
+                }
+            );
             Assert.Equal(expected, sum);
         }
 
@@ -57,13 +68,21 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [InlineData(250)]
         public static void ParallelForEach(int count)
         {
-            int sum = 0, expected = 0;
+            int sum = 0,
+                expected = 0;
             var items = new List<int>();
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 items.Add(i);
                 expected += i;
             }
-            Parallel.ForEach(items, (i) => { sum += i; });
+            Parallel.ForEach(
+                items,
+                (i) =>
+                {
+                    sum += i;
+                }
+            );
             Assert.Equal(expected, sum);
         }
     }

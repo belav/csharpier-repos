@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,103 +32,105 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-
 using Mono.Security;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class ApplicationDirectory : EvidenceBase, IBuiltInEvidence
+    {
+        private string directory;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class ApplicationDirectory :
-		EvidenceBase,
-		IBuiltInEvidence {
-		
-		private string directory;
+        //
+        // Public Constructors
+        //
 
-		//
-		// Public Constructors
-		//
-		
-		public ApplicationDirectory (string name)
-		{
-			if (null == name)
-				throw new ArgumentNullException ("name");
-			if (name.Length < 1)
-				throw new FormatException (Locale.GetText ("Empty"));
-			directory = name;
-		}
+        public ApplicationDirectory(string name)
+        {
+            if (null == name)
+                throw new ArgumentNullException("name");
+            if (name.Length < 1)
+                throw new FormatException(Locale.GetText("Empty"));
+            directory = name;
+        }
 
-		//
-		// Public Properties
-		//
-		
-		public string Directory {
-			get { return directory; }
-		}
-		
-		//
-		// Public Methods
-		//
-		
-		public object Copy ()
-		{	
-			return new ApplicationDirectory (this.Directory);
-		}
-		
-		public override bool Equals (object o)
-		{
-			ApplicationDirectory compare = (o as ApplicationDirectory);
-			if (compare != null) {
-				// MS "by design" behaviour (see FDBK14362)
-				ThrowOnInvalid (compare.directory);
-				// no C14N or other mojo here (it's done elsewhere)
-				return (directory == compare.directory);
-			}
-			return false;
-		}
-		
-		public override int GetHashCode ()
-		{
-			return Directory.GetHashCode ();
-		}
-		
-		public override string ToString ()
-		{
-			// MS "by design" behaviour (see FDBK14362)
-			ThrowOnInvalid (Directory);
-			SecurityElement element = new SecurityElement ("System.Security.Policy.ApplicationDirectory");
-			element.AddAttribute ("version", "1");
-			element.AddChild (new SecurityElement ("Directory", directory));
-			return element.ToString ();
-		}
+        //
+        // Public Properties
+        //
 
-		// interface IBuiltInEvidence
+        public string Directory
+        {
+            get { return directory; }
+        }
 
-		int IBuiltInEvidence.GetRequiredSize (bool verbose) 
-		{
-			return ((verbose) ? 3 : 1) + directory.Length;
-		}
+        //
+        // Public Methods
+        //
 
-		[MonoTODO ("IBuiltInEvidence")]
-		int IBuiltInEvidence.InitFromBuffer (char [] buffer, int position) 
-		{
-			return 0;
-		}
+        public object Copy()
+        {
+            return new ApplicationDirectory(this.Directory);
+        }
 
-		[MonoTODO ("IBuiltInEvidence")]
-		int IBuiltInEvidence.OutputToBuffer (char [] buffer, int position, bool verbose) 
-		{
-			return 0;
-		}
+        public override bool Equals(object o)
+        {
+            ApplicationDirectory compare = (o as ApplicationDirectory);
+            if (compare != null)
+            {
+                // MS "by design" behaviour (see FDBK14362)
+                ThrowOnInvalid(compare.directory);
+                // no C14N or other mojo here (it's done elsewhere)
+                return (directory == compare.directory);
+            }
+            return false;
+        }
 
-		// internal stuff
+        public override int GetHashCode()
+        {
+            return Directory.GetHashCode();
+        }
 
-		private void ThrowOnInvalid (string appdir) 
-		{
-			if (appdir.IndexOfAny (Path.InvalidPathChars) != -1) {
-				string msg = Locale.GetText ("Invalid character(s) in directory {0}");
-				throw new ArgumentException (String.Format (msg, appdir), "other");
-			}
-		}
-	}
+        public override string ToString()
+        {
+            // MS "by design" behaviour (see FDBK14362)
+            ThrowOnInvalid(Directory);
+            SecurityElement element = new SecurityElement(
+                "System.Security.Policy.ApplicationDirectory"
+            );
+            element.AddAttribute("version", "1");
+            element.AddChild(new SecurityElement("Directory", directory));
+            return element.ToString();
+        }
+
+        // interface IBuiltInEvidence
+
+        int IBuiltInEvidence.GetRequiredSize(bool verbose)
+        {
+            return ((verbose) ? 3 : 1) + directory.Length;
+        }
+
+        [MonoTODO("IBuiltInEvidence")]
+        int IBuiltInEvidence.InitFromBuffer(char[] buffer, int position)
+        {
+            return 0;
+        }
+
+        [MonoTODO("IBuiltInEvidence")]
+        int IBuiltInEvidence.OutputToBuffer(char[] buffer, int position, bool verbose)
+        {
+            return 0;
+        }
+
+        // internal stuff
+
+        private void ThrowOnInvalid(string appdir)
+        {
+            if (appdir.IndexOfAny(Path.InvalidPathChars) != -1)
+            {
+                string msg = Locale.GetText("Invalid character(s) in directory {0}");
+                throw new ArgumentException(String.Format(msg, appdir), "other");
+            }
+        }
+    }
 }

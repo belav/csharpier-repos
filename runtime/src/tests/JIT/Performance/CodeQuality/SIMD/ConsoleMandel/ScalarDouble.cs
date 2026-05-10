@@ -12,14 +12,18 @@ namespace Algorithms
     internal class ScalarDoubleRenderer : FractalRenderer
     {
         public ScalarDoubleRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc)
-        {
-        }
+            : base(dp, abortFunc) { }
 
         protected const double limit = 4.0;
 
         // Render the fractal using the BCL Complex data type abstraction on a single thread with scalar doubles
-        public void RenderSingleThreadedWithADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderSingleThreadedWithADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -51,7 +55,13 @@ namespace Algorithms
         }
 
         // Render the fractal with no data type abstraction on a single thread with scalar doubles
-        public void RenderSingleThreadedNoADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderSingleThreadedNoADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -85,7 +95,13 @@ namespace Algorithms
         }
 
         // Render the fractal using the BCL Complex data type abstraction on multiple threads with scalar doubles
-        public void RenderMultiThreadedWithADT(float xminf, float xmaxf, float yminf, float ymaxf, float stepf)
+        public void RenderMultiThreadedWithADT(
+            float xminf,
+            float xmaxf,
+            float yminf,
+            float ymaxf,
+            float stepf
+        )
         {
             double xmin = (double)xminf;
             double xmax = (double)xmaxf;
@@ -93,33 +109,43 @@ namespace Algorithms
             double ymax = (double)ymaxf;
             double step = (double)stepf;
 
-            Parallel.For(0, (int)(((ymax - ymin) / step) + .5), (yp) =>
-            {
-                if (Abort)
-                    return;
-                double y = ymin + step * yp;
-                int xp = 0;
-                for (double x = xmin; x < xmax; x += step, xp++)
+            Parallel.For(
+                0,
+                (int)(((ymax - ymin) / step) + .5),
+                (yp) =>
                 {
-                    Complex num = new Complex(x, y);
-                    Complex accum = num;
-                    int iters = 0;
-                    double sqabs = 0f;
-                    do
+                    if (Abort)
+                        return;
+                    double y = ymin + step * yp;
+                    int xp = 0;
+                    for (double x = xmin; x < xmax; x += step, xp++)
                     {
-                        accum = accum.square();
-                        accum += num;
-                        iters++;
-                        sqabs = accum.sqabs();
-                    } while (sqabs < limit && iters < max_iters);
+                        Complex num = new Complex(x, y);
+                        Complex accum = num;
+                        int iters = 0;
+                        double sqabs = 0f;
+                        do
+                        {
+                            accum = accum.square();
+                            accum += num;
+                            iters++;
+                            sqabs = accum.sqabs();
+                        } while (sqabs < limit && iters < max_iters);
 
-                    DrawPixel(xp, yp, iters);
+                        DrawPixel(xp, yp, iters);
+                    }
                 }
-            });
+            );
         }
 
         // Render the fractal with no data type abstraction on multiple threads with scalar doubles
-        public void RenderMultiThreadedNoADT(float xmind, float xmaxd, float ymind, float ymaxd, float stepd)
+        public void RenderMultiThreadedNoADT(
+            float xmind,
+            float xmaxd,
+            float ymind,
+            float ymaxd,
+            float stepd
+        )
         {
             double xmin = (double)xmind;
             double xmax = (double)xmaxd;
@@ -127,31 +153,35 @@ namespace Algorithms
             double ymax = (double)ymaxd;
             double step = (double)stepd;
 
-            Parallel.For(0, (int)(((ymax - ymin) / step) + .5), (yp) =>
-            {
-                if (Abort)
-                    return;
-                double y = ymin + step * yp;
-                int xp = 0;
-                for (double x = xmin; x < xmax; x += step, xp++)
+            Parallel.For(
+                0,
+                (int)(((ymax - ymin) / step) + .5),
+                (yp) =>
                 {
-                    double accumx = x;
-                    double accumy = y;
-                    int iters = 0;
-                    double sqabs = 0.0;
-                    do
+                    if (Abort)
+                        return;
+                    double y = ymin + step * yp;
+                    int xp = 0;
+                    for (double x = xmin; x < xmax; x += step, xp++)
                     {
-                        double naccumx = accumx * accumx - accumy * accumy;
-                        double naccumy = 2.0 * accumx * accumy;
-                        accumx = naccumx + x;
-                        accumy = naccumy + y;
-                        iters++;
-                        sqabs = accumx * accumx + accumy * accumy;
-                    } while (sqabs < limit && iters < max_iters);
+                        double accumx = x;
+                        double accumy = y;
+                        int iters = 0;
+                        double sqabs = 0.0;
+                        do
+                        {
+                            double naccumx = accumx * accumx - accumy * accumy;
+                            double naccumy = 2.0 * accumx * accumy;
+                            accumx = naccumx + x;
+                            accumy = naccumy + y;
+                            iters++;
+                            sqabs = accumx * accumx + accumy * accumy;
+                        } while (sqabs < limit && iters < max_iters);
 
-                    DrawPixel(xp, yp, iters);
+                        DrawPixel(xp, yp, iters);
+                    }
                 }
-            });
+            );
         }
     }
 }

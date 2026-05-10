@@ -19,10 +19,15 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <typeparam name="THostedService">An <see cref="IHostedService"/> to register.</typeparam>
         /// <param name="services">The <see cref="IServiceCollection"/> to register with.</param>
         /// <returns>The original <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddHostedService<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THostedService>(this IServiceCollection services)
+        public static IServiceCollection AddHostedService<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                THostedService
+        >(this IServiceCollection services)
             where THostedService : class, IHostedService
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHostedService, THostedService>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHostedService, THostedService>()
+            );
 
             return services;
         }
@@ -34,10 +39,15 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> to register with.</param>
         /// <param name="implementationFactory">A factory to create new instances of the service implementation.</param>
         /// <returns>The original <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddHostedService<THostedService>(this IServiceCollection services, Func<IServiceProvider, THostedService> implementationFactory)
+        public static IServiceCollection AddHostedService<THostedService>(
+            this IServiceCollection services,
+            Func<IServiceProvider, THostedService> implementationFactory
+        )
             where THostedService : class, IHostedService
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHostedService>(implementationFactory));
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHostedService>(implementationFactory)
+            );
 
             return services;
         }

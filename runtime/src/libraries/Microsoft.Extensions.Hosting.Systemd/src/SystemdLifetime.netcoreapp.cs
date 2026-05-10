@@ -15,7 +15,10 @@ namespace Microsoft.Extensions.Hosting.Systemd
             // systemd only sends SIGTERM to the service process, so we only listen for that signal.
             // Other signals (ex. SIGINT/SIGQUIT) will be handled by the default .NET runtime signal handler
             // and won't cause a graceful shutdown of the systemd service.
-            _sigTermRegistration = PosixSignalRegistration.Create(PosixSignal.SIGTERM, HandlePosixSignal);
+            _sigTermRegistration = PosixSignalRegistration.Create(
+                PosixSignal.SIGTERM,
+                HandlePosixSignal
+            );
         }
 
         private void HandlePosixSignal(PosixSignalContext context)

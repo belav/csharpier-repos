@@ -17,7 +17,11 @@ namespace System.ServiceModel.Diagnostics
     {
         public static bool TryAttachActivity(Message message, EventTraceActivity activity)
         {
-            if (FxTrace.Trace.IsEnd2EndActivityTracingEnabled && (message != null) && (activity != null))
+            if (
+                FxTrace.Trace.IsEnd2EndActivityTracingEnabled
+                && (message != null)
+                && (activity != null)
+            )
             {
                 if (!message.Properties.ContainsKey(EventTraceActivity.Name))
                 {
@@ -81,7 +85,9 @@ namespace System.ServiceModel.Diagnostics
             return eventTraceActivity;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "This sets the ActivityId on the thread. Must not be settable from PT code unless from safe context.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "This sets the ActivityId on the thread. Must not be settable from PT code unless from safe context."
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, Unrestricted = true)]
         internal static void SetOnThread(EventTraceActivity eventTraceActivity)

@@ -15,11 +15,14 @@ namespace Functions
 
         public static void PowDoubleTest()
         {
-            var result = 0.0; var valueX = 2.0; var valueY = -2.0;
+            var result = 0.0;
+            var valueX = 2.0;
+            var valueY = -2.0;
 
             for (var iteration = 0; iteration < iterations; iteration++)
             {
-                valueX += powDoubleDeltaX; valueY += powDoubleDeltaY;
+                valueX += powDoubleDeltaX;
+                valueY += powDoubleDeltaY;
                 result += Math.Pow(valueX, valueY);
             }
 
@@ -27,7 +30,9 @@ namespace Functions
 
             if (diff > doubleEpsilon)
             {
-                throw new Exception($"Expected Result {powDoubleExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {powDoubleExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

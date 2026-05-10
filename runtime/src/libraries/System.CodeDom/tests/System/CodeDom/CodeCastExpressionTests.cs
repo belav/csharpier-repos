@@ -20,12 +20,19 @@ namespace System.CodeDom.Tests
         {
             yield return new object[] { null, null };
             yield return new object[] { new CodeTypeReference(), new CodePrimitiveExpression() };
-            yield return new object[] { new CodeTypeReference(typeof(void)), new CodePrimitiveExpression("Value") };
+            yield return new object[]
+            {
+                new CodeTypeReference(typeof(void)),
+                new CodePrimitiveExpression("Value"),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeTypeReference_TestData))]
-        public void Ctor_CodeTypeReference_CodeExpression(CodeTypeReference type, CodeExpression expression)
+        public void Ctor_CodeTypeReference_CodeExpression(
+            CodeTypeReference type,
+            CodeExpression expression
+        )
         {
             CodeExpression[] initializers = new CodeExpression[0];
             var cast = new CodeCastExpression(type, expression);
@@ -42,7 +49,11 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_TypeString_TestData))]
-        public void Ctor_String_CodeExpression(string type, CodeExpression expression, string expectedBaseType)
+        public void Ctor_String_CodeExpression(
+            string type,
+            CodeExpression expression,
+            string expectedBaseType
+        )
         {
             var cast = new CodeCastExpression(type, expression);
             Assert.Equal(expectedBaseType, cast.TargetType.BaseType);
@@ -52,13 +63,27 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_Type_TestData()
         {
             yield return new object[] { typeof(int), null, "System.Int32" };
-            yield return new object[] { typeof(List<>), new CodePrimitiveExpression(), "System.Collections.Generic.List`1" };
-            yield return new object[] { typeof(void), new CodePrimitiveExpression("Value"), "System.Void" };
+            yield return new object[]
+            {
+                typeof(List<>),
+                new CodePrimitiveExpression(),
+                "System.Collections.Generic.List`1",
+            };
+            yield return new object[]
+            {
+                typeof(void),
+                new CodePrimitiveExpression("Value"),
+                "System.Void",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Type_TestData))]
-        public void Ctor_Type_CodeExpression(Type type, CodeExpression expression, string expectedBaseType)
+        public void Ctor_Type_CodeExpression(
+            Type type,
+            CodeExpression expression,
+            string expectedBaseType
+        )
         {
             var cast = new CodeCastExpression(type, expression);
             Assert.Equal(expectedBaseType, cast.TargetType.BaseType);

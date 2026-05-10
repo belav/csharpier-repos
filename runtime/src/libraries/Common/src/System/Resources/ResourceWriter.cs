@@ -8,7 +8,7 @@ using System.Text;
 
 namespace System.Resources
 #if RESOURCES_EXTENSIONS
-    .Extensions
+.Extensions
 #endif
 {
     // Generates a binary .resources file in the system default format
@@ -24,15 +24,16 @@ namespace System.Resources
     //
     public sealed partial class
 #if RESOURCES_EXTENSIONS
-        PreserializedResourceWriter
+    PreserializedResourceWriter
 #else
-        ResourceWriter
+    ResourceWriter
 #endif
         : IResourceWriter
     {
         // An initial size for our internal sorted list, to avoid extra resizes.
-        private const int AverageNameSize = 20 * 2;  // chars in little endian Unicode
-        internal const string ResourceReaderFullyQualifiedName = "System.Resources.ResourceReader, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+        private const int AverageNameSize = 20 * 2; // chars in little endian Unicode
+        internal const string ResourceReaderFullyQualifiedName =
+            "System.Resources.ResourceReader, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
         private const string ResSetTypeName = "System.Resources.RuntimeResourceSet";
         private const int ResSetVersion = 2;
 
@@ -55,7 +56,9 @@ namespace System.Resources
 
             _output = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
             _resourceList = new SortedDictionary<string, object?>(FastResourceComparer.Default);
-            _caseInsensitiveDups = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+            _caseInsensitiveDups = new Dictionary<string, object?>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public
@@ -77,7 +80,9 @@ namespace System.Resources
 
             _output = stream;
             _resourceList = new SortedDictionary<string, object?>(FastResourceComparer.Default);
-            _caseInsensitiveDups = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+            _caseInsensitiveDups = new Dictionary<string, object?>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         // Adds a string resource to the list of resources to be written to a file.
@@ -196,7 +201,9 @@ namespace System.Resources
 
             // Check for duplicate resources whose names vary only by case.
             _caseInsensitiveDups.Add(name, null);
-            _preserializedData ??= new Dictionary<string, PrecannedResource>(FastResourceComparer.Default);
+            _preserializedData ??= new Dictionary<string, PrecannedResource>(
+                FastResourceComparer.Default
+            );
 
             _preserializedData.Add(name, new PrecannedResource(typeName, data));
         }
@@ -296,7 +303,6 @@ namespace System.Resources
             resMgrHeaderBlob.CopyTo(bw.BaseStream, (int)resMgrHeaderBlob.Length);
             // End ResourceManager header
 
-
             // Write out the RuntimeResourceSet header
             // Version number
             bw.Write(ResSetVersion);
@@ -314,7 +320,7 @@ namespace System.Resources
             MemoryStream nameSection = new MemoryStream(numResources * AverageNameSize);
             BinaryWriter names = new BinaryWriter(nameSection, Encoding.Unicode);
 
-            Stream dataSection = new MemoryStream();  // Either a FileStream or a MemoryStream
+            Stream dataSection = new MemoryStream(); // Either a FileStream or a MemoryStream
 
             using (dataSection)
             {
@@ -370,7 +376,6 @@ namespace System.Resources
                 //  be sorted in parallel.
                 Array.Sort(nameHashes, namePositions);
 
-
                 //  Prepare to write sorted name hashes (alignment fixup)
                 //   Note: For 64-bit machines, these MUST be aligned on 8 byte
                 //   boundaries!  Pointers on IA64 must be aligned!  And we'll
@@ -385,7 +390,10 @@ namespace System.Resources
 
                 //  Write out sorted name hashes.
                 //   Align to 8 bytes.
-                Debug.Assert((bw.BaseStream.Position & 7) == 0, "ResourceWriter: Name hashes array won't be 8 byte aligned!  Ack!");
+                Debug.Assert(
+                    (bw.BaseStream.Position & 7) == 0,
+                    "ResourceWriter: Name hashes array won't be 8 byte aligned!  Ack!"
+                );
 
                 foreach (int hash in nameHashes)
                 {
@@ -396,7 +404,10 @@ namespace System.Resources
                 //   Note: this data is 4 byte aligned, occurring immediately
                 //   after the 8 byte aligned name hashes (whose length may
                 //   potentially be odd).
-                Debug.Assert((bw.BaseStream.Position & 3) == 0, "ResourceWriter: Name positions array won't be 4 byte aligned!  Ack!");
+                Debug.Assert(
+                    (bw.BaseStream.Position & 3) == 0,
+                    "ResourceWriter: Name positions array won't be 4 byte aligned!  Ack!"
+                );
 
                 foreach (int pos in namePositions)
                 {
@@ -410,7 +421,7 @@ namespace System.Resources
 
                 // Write offset to data section
                 int startOfDataSection = (int)(bw.Seek(0, SeekOrigin.Current) + nameSection.Length);
-                startOfDataSection += 4;  // We're writing an int to store this data, adding more bytes to the header
+                startOfDataSection += 4; // We're writing an int to store this data, adding more bytes to the header
                 bw.Write(startOfDataSection);
 
                 // Write name section.
@@ -422,7 +433,10 @@ namespace System.Resources
                 names.Dispose();
 
                 // Write data section.
-                Debug.Assert(startOfDataSection == bw.Seek(0, SeekOrigin.Current), "ResourceWriter::Generate - start of data section is wrong!");
+                Debug.Assert(
+                    startOfDataSection == bw.Seek(0, SeekOrigin.Current),
+                    "ResourceWriter::Generate - start of data section is wrong!"
+                );
                 dataSection.Position = 0;
                 dataSection.CopyTo(bw.BaseStream);
                 data.Dispose();
@@ -478,7 +492,6 @@ namespace System.Resources
             else if (type == typeof(StreamWrapper))
                 return ResourceTypeCode.Stream;
 
-
             // This is a user type, or a precanned resource.  Find type
             // table index.  If not there, add new element.
             string typeName;
@@ -487,8 +500,9 @@ namespace System.Resources
                 typeName = ((PrecannedResource)value).TypeName;
                 if (typeName.StartsWith("ResourceTypeCode.", StringComparison.Ordinal))
                 {
-                    typeName = typeName.Substring(17);  // Remove through '.'
-                    ResourceTypeCode typeCode = (ResourceTypeCode)Enum.Parse(typeof(ResourceTypeCode), typeName);
+                    typeName = typeName.Substring(17); // Remove through '.'
+                    ResourceTypeCode typeCode = (ResourceTypeCode)
+                        Enum.Parse(typeof(ResourceTypeCode), typeName);
                     return typeCode;
                 }
             }
@@ -508,7 +522,11 @@ namespace System.Resources
             return (ResourceTypeCode)(typeIndex + ResourceTypeCode.StartOfUserTypes);
         }
 
-        private static void WriteValue(ResourceTypeCode typeCode, object? value, BinaryWriter writer)
+        private static void WriteValue(
+            ResourceTypeCode typeCode,
+            object? value,
+            BinaryWriter writer
+        )
         {
             Debug.Assert(writer != null);
 
@@ -585,51 +603,56 @@ namespace System.Resources
 
                 // Special Types
                 case ResourceTypeCode.ByteArray:
-                    {
-                        byte[] bytes = (byte[])value!;
-                        writer.Write(bytes.Length);
-                        writer.Write(bytes, 0, bytes.Length);
-                        break;
-                    }
+                {
+                    byte[] bytes = (byte[])value!;
+                    writer.Write(bytes.Length);
+                    writer.Write(bytes, 0, bytes.Length);
+                    break;
+                }
 
                 case ResourceTypeCode.Stream:
+                {
+                    StreamWrapper sw = (StreamWrapper)value!;
+                    if (sw.Stream.GetType() == typeof(MemoryStream))
                     {
-                        StreamWrapper sw = (StreamWrapper)value!;
-                        if (sw.Stream.GetType() == typeof(MemoryStream))
-                        {
-                            MemoryStream ms = (MemoryStream)sw.Stream;
-                            if (ms.Length > int.MaxValue)
-                                throw new ArgumentException(SR.ArgumentOutOfRange_StreamLength);
-                            byte[] arr = ms.ToArray();
-                            writer.Write(arr.Length);
-                            writer.Write(arr, 0, arr.Length);
-                        }
-                        else
-                        {
-                            Stream s = sw.Stream;
-                            // we've already verified that the Stream is seekable
-                            if (s.Length > int.MaxValue)
-                                throw new ArgumentException(SR.ArgumentOutOfRange_StreamLength);
-
-                            s.Position = 0;
-                            writer.Write((int)s.Length);
-                            byte[] buffer = new byte[4096];
-                            int read;
-                            while ((read = s.Read(buffer, 0, buffer.Length)) != 0)
-                            {
-                                writer.Write(buffer, 0, read);
-                            }
-                            if (sw.CloseAfterWrite)
-                            {
-                                s.Close();
-                            }
-                        }
-                        break;
+                        MemoryStream ms = (MemoryStream)sw.Stream;
+                        if (ms.Length > int.MaxValue)
+                            throw new ArgumentException(SR.ArgumentOutOfRange_StreamLength);
+                        byte[] arr = ms.ToArray();
+                        writer.Write(arr.Length);
+                        writer.Write(arr, 0, arr.Length);
                     }
+                    else
+                    {
+                        Stream s = sw.Stream;
+                        // we've already verified that the Stream is seekable
+                        if (s.Length > int.MaxValue)
+                            throw new ArgumentException(SR.ArgumentOutOfRange_StreamLength);
+
+                        s.Position = 0;
+                        writer.Write((int)s.Length);
+                        byte[] buffer = new byte[4096];
+                        int read;
+                        while ((read = s.Read(buffer, 0, buffer.Length)) != 0)
+                        {
+                            writer.Write(buffer, 0, read);
+                        }
+                        if (sw.CloseAfterWrite)
+                        {
+                            s.Close();
+                        }
+                    }
+                    break;
+                }
 
                 default:
-                    Debug.Assert(typeCode >= ResourceTypeCode.StartOfUserTypes, $"ResourceReader: Unsupported ResourceTypeCode in .resources file!  {typeCode}");
-                    throw new PlatformNotSupportedException(SR.NotSupported_BinarySerializedResources);
+                    Debug.Assert(
+                        typeCode >= ResourceTypeCode.StartOfUserTypes,
+                        $"ResourceReader: Unsupported ResourceTypeCode in .resources file!  {typeCode}"
+                    );
+                    throw new PlatformNotSupportedException(
+                        SR.NotSupported_BinarySerializedResources
+                    );
             }
         }
     }

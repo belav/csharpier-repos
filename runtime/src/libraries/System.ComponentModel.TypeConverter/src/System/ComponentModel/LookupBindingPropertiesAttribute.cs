@@ -27,7 +27,12 @@ namespace System.ComponentModel
         /// Initializes a new instance of
         /// the <see cref='System.ComponentModel.LookupBindingPropertiesAttribute'/> class.
         /// </summary>
-        public LookupBindingPropertiesAttribute(string dataSource, string displayMember, string valueMember, string lookupMember)
+        public LookupBindingPropertiesAttribute(
+            string dataSource,
+            string displayMember,
+            string valueMember,
+            string lookupMember
+        )
         {
             DataSource = dataSource;
             DisplayMember = displayMember;
@@ -63,15 +68,16 @@ namespace System.ComponentModel
         /// Specifies the default value for the <see cref='System.ComponentModel.LookupBindingPropertiesAttribute'/>, which is <see langword='null'/>. This
         /// <see langword='static '/>field is read-only.
         /// </summary>
-        public static readonly LookupBindingPropertiesAttribute Default = new LookupBindingPropertiesAttribute();
+        public static readonly LookupBindingPropertiesAttribute Default =
+            new LookupBindingPropertiesAttribute();
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return obj is LookupBindingPropertiesAttribute other &&
-                   other.DataSource == DataSource &&
-                   other.DisplayMember == DisplayMember &&
-                   other.ValueMember == ValueMember &&
-                   other.LookupMember == LookupMember;
+            return obj is LookupBindingPropertiesAttribute other
+                && other.DataSource == DataSource
+                && other.DisplayMember == DisplayMember
+                && other.ValueMember == ValueMember
+                && other.LookupMember == LookupMember;
         }
 
         public override int GetHashCode() => base.GetHashCode();

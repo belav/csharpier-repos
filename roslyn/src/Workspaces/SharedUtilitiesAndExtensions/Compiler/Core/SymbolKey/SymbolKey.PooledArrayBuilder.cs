@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis
         {
             public readonly ArrayBuilder<T> Builder;
 
-            private PooledArrayBuilder(ArrayBuilder<T> builder)
-                => Builder = builder;
+            private PooledArrayBuilder(ArrayBuilder<T> builder) => Builder = builder;
 
             public bool IsDefault => Builder == null;
             public int Count => Builder.Count;
@@ -35,11 +34,10 @@ namespace Microsoft.CodeAnalysis
 
             public ArrayBuilder<T>.Enumerator GetEnumerator() => Builder.GetEnumerator();
 
-            public static PooledArrayBuilder<T> GetInstance()
-                => new(ArrayBuilder<T>.GetInstance());
+            public static PooledArrayBuilder<T> GetInstance() => new(ArrayBuilder<T>.GetInstance());
 
-            public static PooledArrayBuilder<T> GetInstance(int capacity)
-                => new(ArrayBuilder<T>.GetInstance(capacity));
+            public static PooledArrayBuilder<T> GetInstance(int capacity) =>
+                new(ArrayBuilder<T>.GetInstance(capacity));
 
             public void AddValuesIfNotNull(IEnumerable<T> values)
             {

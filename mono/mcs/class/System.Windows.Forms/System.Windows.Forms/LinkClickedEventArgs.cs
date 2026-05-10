@@ -23,26 +23,25 @@
 //	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
-
 // COMPLETE
 
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	[ComVisible(true)]
-	public class LinkClickedEventArgs : EventArgs 
-	{		
-		private string link_text;				
-		
-		public LinkClickedEventArgs (string linkText) 
-		{
-			this.link_text = linkText;
-		}		
-		
-		public string LinkText 
-		{
-			get { return link_text; }
-		}
-	}
+    [ComVisible(true)]
+    public class LinkClickedEventArgs : EventArgs
+    {
+        private string link_text;
+
+        public LinkClickedEventArgs(string linkText)
+        {
+            this.link_text = linkText;
+        }
+
+        public string LinkText
+        {
+            get { return link_text; }
+        }
+    }
 }

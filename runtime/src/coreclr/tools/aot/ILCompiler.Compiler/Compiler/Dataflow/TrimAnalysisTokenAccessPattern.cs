@@ -28,11 +28,19 @@ namespace ILCompiler.Dataflow
             switch (Entity)
             {
                 case MethodDesc method:
-                    reflectionMarker.CheckAndWarnOnReflectionAccess(Origin, method, ReflectionMarker.AccessKind.TokenAccess);
+                    reflectionMarker.CheckAndWarnOnReflectionAccess(
+                        Origin,
+                        method,
+                        ReflectionMarker.AccessKind.TokenAccess
+                    );
                     break;
 
                 case FieldDesc field:
-                    reflectionMarker.CheckAndWarnOnReflectionAccess(Origin, field, ReflectionMarker.AccessKind.TokenAccess);
+                    reflectionMarker.CheckAndWarnOnReflectionAccess(
+                        Origin,
+                        field,
+                        ReflectionMarker.AccessKind.TokenAccess
+                    );
                     break;
 
                 default:

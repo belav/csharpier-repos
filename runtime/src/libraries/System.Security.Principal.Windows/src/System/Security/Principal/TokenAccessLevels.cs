@@ -20,17 +20,18 @@ namespace System.Security.Principal
 
         Write = 0x00020000 | AdjustPrivileges | AdjustGroups | AdjustDefault,
 
-        AllAccess = 0x000F0000 |
-                              AssignPrimary |
-                              Duplicate |
-                              Impersonate |
-                              Query |
-                              QuerySource |
-                              AdjustPrivileges |
-                              AdjustGroups |
-                              AdjustDefault |
-                              AdjustSessionId,
+        AllAccess =
+            0x000F0000
+            | AssignPrimary
+            | Duplicate
+            | Impersonate
+            | Query
+            | QuerySource
+            | AdjustPrivileges
+            | AdjustGroups
+            | AdjustDefault
+            | AdjustSessionId,
 
-        MaximumAllowed = 0x02000000
+        MaximumAllowed = 0x02000000,
     }
 }

@@ -19,7 +19,7 @@ namespace System.ComponentModel.Composition
         ImportEngine_PreventedByExistingImport,
         ImportEngine_InvalidStateForRecomposition,
         ReflectionModel_ImportThrewException,
-        ReflectionModel_ImportNotAssignableFromExport,        
+        ReflectionModel_ImportNotAssignableFromExport,
         ReflectionModel_ImportCollectionNull,
         ReflectionModel_ImportCollectionNotWritable,
         ReflectionModel_ImportCollectionConstructionThrewException,

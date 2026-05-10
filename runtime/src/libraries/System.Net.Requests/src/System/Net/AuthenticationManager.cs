@@ -6,7 +6,11 @@ using System.Collections.Specialized;
 
 namespace System.Net
 {
-    [Obsolete(Obsoletions.AuthenticationManagerMessage, DiagnosticId = Obsoletions.AuthenticationManagerDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.AuthenticationManagerMessage,
+        DiagnosticId = Obsoletions.AuthenticationManagerDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class AuthenticationManager
     {
         private AuthenticationManager() { }
@@ -15,11 +19,16 @@ namespace System.Net
 
         public static StringDictionary CustomTargetNameDictionary { get; } = new StringDictionary();
 
-        public static Authorization? Authenticate(string challenge, WebRequest request, ICredentials credentials) =>
-            throw new PlatformNotSupportedException();
+        public static Authorization? Authenticate(
+            string challenge,
+            WebRequest request,
+            ICredentials credentials
+        ) => throw new PlatformNotSupportedException();
 
-        public static Authorization? PreAuthenticate(WebRequest request, ICredentials credentials) =>
-            throw new PlatformNotSupportedException();
+        public static Authorization? PreAuthenticate(
+            WebRequest request,
+            ICredentials credentials
+        ) => throw new PlatformNotSupportedException();
 
         public static void Register(IAuthenticationModule authenticationModule)
         {
@@ -36,6 +45,7 @@ namespace System.Net
             ArgumentNullException.ThrowIfNull(authenticationScheme);
         }
 
-        public static IEnumerator RegisteredModules => Array.Empty<IAuthenticationModule>().GetEnumerator();
+        public static IEnumerator RegisteredModules =>
+            Array.Empty<IAuthenticationModule>().GetEnumerator();
     }
 }

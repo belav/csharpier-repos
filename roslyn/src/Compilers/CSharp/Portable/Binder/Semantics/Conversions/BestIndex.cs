@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         None,
         Best,
-        Ambiguous
+        Ambiguous,
     }
 
     internal readonly struct BestIndex
@@ -20,9 +20,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal readonly int Ambiguous1;
         internal readonly int Ambiguous2;
 
-        public static BestIndex None() { return new BestIndex(BestIndexKind.None, 0, 0, 0); }
-        public static BestIndex HasBest(int best) { return new BestIndex(BestIndexKind.Best, best, 0, 0); }
-        public static BestIndex IsAmbiguous(int ambig1, int ambig2) { return new BestIndex(BestIndexKind.Ambiguous, 0, ambig1, ambig2); }
+        public static BestIndex None()
+        {
+            return new BestIndex(BestIndexKind.None, 0, 0, 0);
+        }
+
+        public static BestIndex HasBest(int best)
+        {
+            return new BestIndex(BestIndexKind.Best, best, 0, 0);
+        }
+
+        public static BestIndex IsAmbiguous(int ambig1, int ambig2)
+        {
+            return new BestIndex(BestIndexKind.Ambiguous, 0, ambig1, ambig2);
+        }
 
         private BestIndex(BestIndexKind kind, int best, int ambig1, int ambig2)
         {

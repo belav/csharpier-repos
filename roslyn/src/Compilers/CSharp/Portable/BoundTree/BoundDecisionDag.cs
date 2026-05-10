@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableHashSet<LabelSymbol> _reachableLabels;
         private ImmutableArray<BoundDecisionDagNode> _topologicallySortedNodes;
 
-        internal static void AddSuccessors(ref TemporaryArray<BoundDecisionDagNode> builder, BoundDecisionDagNode node)
+        internal static void AddSuccessors(
+            ref TemporaryArray<BoundDecisionDagNode> builder,
+            BoundDecisionDagNode node
+        )
         {
             switch (node)
             {
@@ -49,7 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_reachableLabels == null)
                 {
-                    var result = ImmutableHashSet.CreateBuilder<LabelSymbol>(Symbols.SymbolEqualityComparer.ConsiderEverything);
+                    var result = ImmutableHashSet.CreateBuilder<LabelSymbol>(
+                        Symbols.SymbolEqualityComparer.ConsiderEverything
+                    );
                     foreach (var node in this.TopologicallySortedNodes)
                     {
                         if (node is BoundLeafDecisionDagNode leaf)
@@ -75,7 +80,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (_topologicallySortedNodes.IsDefault)
                 {
                     // We use an iterative topological sort to avoid overflowing the compiler's runtime stack for a large switch statement.
-                    bool wasAcyclic = TopologicalSort.TryIterativeSort(this.RootNode, AddSuccessors, out _topologicallySortedNodes);
+                    bool wasAcyclic = TopologicalSort.TryIterativeSort(
+                        this.RootNode,
+                        AddSuccessors,
+                        out _topologicallySortedNodes
+                    );
 
                     // Since these nodes were constructed by an isomorphic mapping from a known acyclic graph, it cannot be cyclic
                     Debug.Assert(wasAcyclic);
@@ -90,7 +99,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// takes as its input the node to be rewritten and a function that returns the previously computed
         /// rewritten node for successor nodes.
         /// </summary>
-        public BoundDecisionDag Rewrite(Func<BoundDecisionDagNode, IReadOnlyDictionary<BoundDecisionDagNode, BoundDecisionDagNode>, BoundDecisionDagNode> makeReplacement)
+        public BoundDecisionDag Rewrite(
+            Func<
+                BoundDecisionDagNode,
+                IReadOnlyDictionary<BoundDecisionDagNode, BoundDecisionDagNode>,
+                BoundDecisionDagNode
+            > makeReplacement
+        )
         {
             // First, we topologically sort the nodes of the dag so that we can translate the nodes bottom-up.
             // This will avoid overflowing the compiler's runtime stack which would occur for a large switch
@@ -99,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Cache simplified/translated replacement for each translated dag node. Since we always visit
             // a node's successors before the node, the replacement should always be in the cache when we need it.
-            var replacement = PooledDictionary<BoundDecisionDagNode, BoundDecisionDagNode>.GetInstance();
+            var replacement = PooledDictionary<
+                BoundDecisionDagNode,
+                BoundDecisionDagNode
+            >.GetInstance();
 
             // Loop backwards through the topologically sorted nodes to translate them, so that we always visit a node after its successors
             for (int i = sortedNodes.Length - 1; i >= 0; i--)
@@ -119,7 +137,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// A trivial node replacement function for use with <see cref="Rewrite(Func{BoundDecisionDagNode, IReadOnlyDictionary{BoundDecisionDagNode, BoundDecisionDagNode}, BoundDecisionDagNode})"/>.
         /// </summary>
-        public static BoundDecisionDagNode TrivialReplacement(BoundDecisionDagNode dag, IReadOnlyDictionary<BoundDecisionDagNode, BoundDecisionDagNode> replacement)
+        public static BoundDecisionDagNode TrivialReplacement(
+            BoundDecisionDagNode dag,
+            IReadOnlyDictionary<BoundDecisionDagNode, BoundDecisionDagNode> replacement
+        )
         {
             switch (dag)
             {
@@ -128,7 +149,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundTestDecisionDagNode p:
                     return p.Update(p.Test, replacement[p.WhenTrue], replacement[p.WhenFalse]);
                 case BoundWhenDecisionDagNode p:
-                    return p.Update(p.Bindings, p.WhenExpression, replacement[p.WhenTrue], (p.WhenFalse != null) ? replacement[p.WhenFalse] : null);
+                    return p.Update(
+                        p.Bindings,
+                        p.WhenExpression,
+                        replacement[p.WhenTrue],
+                        (p.WhenFalse != null) ? replacement[p.WhenFalse] : null
+                    );
                 case BoundLeafDecisionDagNode p:
                     return p;
                 default:
@@ -153,7 +179,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return Rewrite(makeReplacement);
 
                 // Make a replacement for a given node, using the precomputed replacements for its successors.
-                BoundDecisionDagNode makeReplacement(BoundDecisionDagNode dag, IReadOnlyDictionary<BoundDecisionDagNode, BoundDecisionDagNode> replacement)
+                BoundDecisionDagNode makeReplacement(
+                    BoundDecisionDagNode dag,
+                    IReadOnlyDictionary<BoundDecisionDagNode, BoundDecisionDagNode> replacement
+                )
                 {
                     if (dag is BoundTestDecisionDagNode p)
                     {
@@ -191,7 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return inputConstant.IsNull ? (bool?)false : null;
                         case BoundDagRelationalTest d:
                             var f = ValueSetFactory.ForType(input.Type);
-                            if (f is null) return null;
+                            if (f is null)
+                                return null;
                             return f.Related(d.Relation.Operator(), inputConstant, d.Value);
                         default:
                             throw ExceptionUtilities.UnexpectedValue(choice);
@@ -202,7 +232,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool ContainsAnySynthesizedNodes()
         {
-            return this.TopologicallySortedNodes.Any(static node => node is BoundEvaluationDecisionDagNode e && e.Evaluation.Kind == BoundKind.DagAssignmentEvaluation);
+            return this.TopologicallySortedNodes.Any(static node =>
+                node is BoundEvaluationDecisionDagNode e
+                && e.Evaluation.Kind == BoundKind.DagAssignmentEvaluation
+            );
         }
 
 #if DEBUG

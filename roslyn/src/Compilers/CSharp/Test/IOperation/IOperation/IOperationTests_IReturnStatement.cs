@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SimpleReturnFromRegularMethod()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Method()
@@ -29,20 +30,26 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return;')
   ReturnedValue: 
     null
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ReturnWithValueFromRegularMethod()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static bool Method()
@@ -51,21 +58,27 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return true;')
   ReturnedValue: 
     ILiteralOperation (OperationKind.Literal, Type: System.Boolean, Constant: True) (Syntax: 'true')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void YieldReturnFromRegularMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -75,21 +88,27 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.YieldReturn, Type: null) (Syntax: 'yield return 0;')
   ReturnedValue: 
     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 0) (Syntax: '0')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<YieldStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<YieldStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void YieldBreakFromRegularMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -100,21 +119,27 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.YieldBreak, Type: null) (Syntax: 'yield break;')
   ReturnedValue: 
     null
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<YieldStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<YieldStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(7299, "https://github.com/dotnet/roslyn/issues/7299")]
         public void Return_ConstantConversions_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static float Method()
@@ -123,7 +148,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 0.0;')
   ReturnedValue: 
     IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: System.Single, Constant: 0, IsInvalid, IsImplicit) (Syntax: '0.0')
@@ -131,20 +157,28 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
       Operand: 
         ILiteralOperation (OperationKind.Literal, Type: System.Double, Constant: 0, IsInvalid) (Syntax: '0.0')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (6,26): error CS0664: Literal of type double cannot be implicitly converted to type 'float'; use an 'F' suffix to create a literal of this type
                 //         /*<bind>*/return 0.0;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_LiteralDoubleCast, "0.0").WithArguments("F", "float").WithLocation(6, 26)
+                Diagnostic(ErrorCode.ERR_LiteralDoubleCast, "0.0")
+                    .WithArguments("F", "float")
+                    .WithLocation(6, 26),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ReturnFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F()
@@ -157,7 +191,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -172,7 +207,8 @@ Block[B1] - Exit
         [Fact]
         public void ReturnFlow_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F()
@@ -185,7 +221,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -205,7 +242,8 @@ Block[B2] - Exit
         [Fact]
         public void ReturnFlow_03()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool a)
@@ -221,9 +259,10 @@ class C
                 // (7,9): warning CS0162: Unreachable code detected
                 //         a = true;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "a").WithLocation(7, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B2]
@@ -250,7 +289,8 @@ Block[B2] - Exit
         [Fact]
         public void ReturnFlow_04()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a)
@@ -266,9 +306,10 @@ class C
                 // (7,9): warning CS0162: Unreachable code detected
                 //         a = true;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "a").WithLocation(7, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -300,7 +341,8 @@ Block[B3] - Exit
         [Fact]
         public void ReturnFlow_05()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     object F(object a, object b)
@@ -313,7 +355,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -377,7 +420,8 @@ Block[B5] - Exit
         [Fact]
         public void ReturnFlow_06()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a)
@@ -397,7 +441,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -429,7 +474,8 @@ Block[B4] - Exit
         [Fact]
         public void ReturnFlow_07()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool a)
@@ -449,7 +495,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -483,7 +530,8 @@ Block[B3] - Exit
         [Fact]
         public void ReturnFlow_08()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(bool a)
@@ -505,7 +553,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -547,7 +596,8 @@ Block[B3] - Exit
         [Fact]
         public void ReturnFlow_09()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a, bool b)
@@ -569,7 +619,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -620,7 +671,8 @@ Block[B5] - Exit
         [Fact]
         public void ReturnFlow_10()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F()
@@ -636,9 +688,10 @@ class C
                 // (7,9): warning CS0162: Unreachable code detected
                 //         return 2;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(7, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -663,7 +716,8 @@ Block[B3] - Exit
         [Fact]
         public void ReturnFlow_11()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F()
@@ -679,9 +733,10 @@ class C
                 // (7,9): warning CS0162: Unreachable code detected
                 //         return;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(7, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -696,7 +751,8 @@ Block[B1] - Exit
         [Fact]
         public void ReturnFlow_12()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(int a)
@@ -715,7 +771,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -761,7 +818,8 @@ Block[B3] - Exit
         [Fact]
         public void ReturnFlow_13()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(int a)
@@ -783,7 +841,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -838,7 +897,8 @@ Block[B4] - Exit
         [Fact]
         public void ReturnFlow_14()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(int a)
@@ -859,7 +919,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -906,7 +967,8 @@ Block[B4] - Exit
         [Fact]
         public void ReturnFlow_15()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(int a)
@@ -928,7 +990,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -983,7 +1046,8 @@ Block[B4] - Exit
         [Fact]
         public void ReturnFlow_16()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a)
@@ -1001,7 +1065,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1028,7 +1093,8 @@ Block[B3] - Exit
         [Fact]
         public void ReturnFlow_17()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a)
@@ -1047,7 +1113,8 @@ label2:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1079,7 +1146,8 @@ Block[B4] - Exit
         [Fact]
         public void ReturnFlow_18()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int F(bool a)
@@ -1098,7 +1166,8 @@ label1:
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1138,7 +1207,8 @@ Block[B4] - Exit
         [Fact]
         public void YieldFlow_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F()
@@ -1151,7 +1221,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1166,7 +1237,8 @@ Block[B1] - Exit
         [Fact]
         public void YieldFlow_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F()
@@ -1179,7 +1251,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1202,7 +1275,8 @@ Block[B2] - Exit
         [Fact]
         public void YieldFlow_03()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F(bool a)
@@ -1218,9 +1292,10 @@ class C
                 // (7,9): warning CS0162: Unreachable code detected
                 //         a = true;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "a").WithLocation(7, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B2]
@@ -1247,7 +1322,8 @@ Block[B2] - Exit
         [Fact]
         public void YieldFlow_04()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F(bool a)
@@ -1261,7 +1337,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1292,7 +1369,8 @@ Block[B2] - Exit
         [Fact]
         public void YieldFlow_05()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<object> F(object a, object b)
@@ -1305,7 +1383,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1372,7 +1451,8 @@ Block[B5] - Exit
         [Fact]
         public void YieldFlow_06()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F(bool a)
@@ -1392,7 +1472,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1430,7 +1511,8 @@ Block[B4] - Exit
         [Fact]
         public void YieldFlow_07()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F(bool a)
@@ -1450,7 +1532,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1484,7 +1567,8 @@ Block[B3] - Exit
         [Fact]
         public void YieldFlow_08()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F(bool a)
@@ -1506,7 +1590,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1548,7 +1633,8 @@ Block[B3] - Exit
         [Fact]
         public void YieldFlow_09()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F()
@@ -1562,7 +1648,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1589,7 +1676,8 @@ Block[B2] - Exit
         [Fact]
         public void YieldFlow_10()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     System.Collections.Generic.IEnumerable<int> F()
@@ -1605,9 +1693,10 @@ class C
                 // (7,9): warning CS0162: Unreachable code detected
                 //         yield break;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "yield").WithLocation(7, 9)
-                );
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]

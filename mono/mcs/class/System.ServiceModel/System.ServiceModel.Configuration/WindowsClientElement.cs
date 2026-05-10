@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,64 +49,74 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class WindowsClientElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty allowed_impersonation_level;
-		static ConfigurationProperty allow_ntlm;
+    [MonoTODO]
+    public sealed partial class WindowsClientElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty allowed_impersonation_level;
+        static ConfigurationProperty allow_ntlm;
 
-		static WindowsClientElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			allowed_impersonation_level = new ConfigurationProperty ("allowedImpersonationLevel",
-				typeof (TokenImpersonationLevel), "Identification", null/* FIXME: get converter for TokenImpersonationLevel*/, null,
-				ConfigurationPropertyOptions.None);
+        static WindowsClientElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            allowed_impersonation_level = new ConfigurationProperty(
+                "allowedImpersonationLevel",
+                typeof(TokenImpersonationLevel),
+                "Identification",
+                null /* FIXME: get converter for TokenImpersonationLevel*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			allow_ntlm = new ConfigurationProperty ("allowNtlm",
-				typeof (bool), "true", new BooleanConverter (), null,
-				ConfigurationPropertyOptions.None);
+            allow_ntlm = new ConfigurationProperty(
+                "allowNtlm",
+                typeof(bool),
+                "true",
+                new BooleanConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (allowed_impersonation_level);
-			properties.Add (allow_ntlm);
-		}
+            properties.Add(allowed_impersonation_level);
+            properties.Add(allow_ntlm);
+        }
 
-		public WindowsClientElement ()
-		{
-		}
+        public WindowsClientElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "allowedImpersonationLevel",
+            DefaultValue = "Identification",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public TokenImpersonationLevel AllowedImpersonationLevel
+        {
+            get { return (TokenImpersonationLevel)base[allowed_impersonation_level]; }
+            set { base[allowed_impersonation_level] = value; }
+        }
 
-		[ConfigurationProperty ("allowedImpersonationLevel",
-			 DefaultValue = "Identification",
-			 Options = ConfigurationPropertyOptions.None)]
-		public TokenImpersonationLevel AllowedImpersonationLevel {
-			get { return (TokenImpersonationLevel) base [allowed_impersonation_level]; }
-			set { base [allowed_impersonation_level] = value; }
-		}
+        [ConfigurationProperty(
+            "allowNtlm",
+            DefaultValue = true,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public bool AllowNtlm
+        {
+            get { return (bool)base[allow_ntlm]; }
+            set { base[allow_ntlm] = value; }
+        }
 
-		[ConfigurationProperty ("allowNtlm",
-			DefaultValue = true,
-			 Options = ConfigurationPropertyOptions.None)]
-		public bool AllowNtlm {
-			get { return (bool) base [allow_ntlm]; }
-			set { base [allow_ntlm] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

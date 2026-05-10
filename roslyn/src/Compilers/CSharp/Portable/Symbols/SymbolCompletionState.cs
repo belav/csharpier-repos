@@ -5,13 +5,13 @@
 #nullable disable
 
 using System.Diagnostics;
+using System.Text;
 using System.Threading;
+using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System.Text;
-using Microsoft.CodeAnalysis.Collections;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
@@ -22,24 +22,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// diagnostics. We shouldn't return from ForceComplete (i.e. indicate that diagnostics are
         /// available) until this is equal to <see cref="CompletionPart.All"/>, except that when completing
         /// with a given position, we might not complete <see cref="CompletionPart"/>.Member*.
-        /// 
-        /// Since completeParts is used as a flag indicating completion of other assignments 
-        /// it must be volatile to ensure the read is not reordered/optimized to happen 
+        ///
+        /// Since completeParts is used as a flag indicating completion of other assignments
+        /// it must be volatile to ensure the read is not reordered/optimized to happen
         /// before the writes.
         /// </summary>
         private volatile int _completeParts;
 
         internal int IncompleteParts
         {
-            get
-            {
-                return ~_completeParts & (int)CompletionPart.All;
-            }
+            get { return ~_completeParts & (int)CompletionPart.All; }
         }
 
         /// <summary>
-        /// Used to force (source) symbols to a given state of completion when the only potential remaining 
-        /// part is attributes. This does force the invariant on the caller that the implementation of 
+        /// Used to force (source) symbols to a given state of completion when the only potential remaining
+        /// part is attributes. This does force the invariant on the caller that the implementation of
         /// of <see cref="Symbol.GetAttributes"/> will set the part <see cref="CompletionPart.Attributes"/> on
         /// the thread that actually completes the loading of attributes. Failure to do so will potentially
         /// result in a deadlock.
@@ -54,17 +51,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // Consider the following items:
                 //  1. It is possible for parallel calls to GetAttributes to exist
-                //  2. GetAttributes implementation can validly return when the attributes are available but before the 
+                //  2. GetAttributes implementation can validly return when the attributes are available but before the
                 //     CompletionParts.Attributes value is set.
-                //  3. GetAttributes implementation typically have the invariant that the thread which completes the 
+                //  3. GetAttributes implementation typically have the invariant that the thread which completes the
                 //     loading of attributes is the one which sets CompletionParts.Attributes.
                 //  4. This call cannot correctly return until CompletionParts.Attributes is set.
                 //
-                // Note: #2 above is common practice amongst all of the symbols. 
+                // Note: #2 above is common practice amongst all of the symbols.
                 //
                 // Note: #3 above is an invariant that has existed in the code base for some time. It's not 100% clear
-                // whether this invariant is tied to correctness or not. The most compelling example though is 
-                // SourceEventSymbol which raises SymbolDeclaredEvent before CompletionPart.Attributes is noted as completed. 
+                // whether this invariant is tied to correctness or not. The most compelling example though is
+                // SourceEventSymbol which raises SymbolDeclaredEvent before CompletionPart.Attributes is noted as completed.
                 // Many other implementations have this pattern but no apparent code which could depend on it.
                 SpinWaitComplete(CompletionPart.Attributes, cancellationToken);
             }
@@ -75,8 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal bool HasComplete(CompletionPart part)
         {
-            // completeParts is used as a flag indicating completion of other assignments 
-            // Volatile.Read is used to ensure the read is not reordered/optimized to happen 
+            // completeParts is used as a flag indicating completion of other assignments
+            // Volatile.Read is used to ensure the read is not reordered/optimized to happen
             // before the writes.
             return (_completeParts & (int)part) == (int)part;
         }
@@ -103,7 +100,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // might not produce a result with a single 1-bit.
                 int incomplete = IncompleteParts;
                 int next = incomplete & ~(incomplete - 1);
-                Debug.Assert(HasAtMostOneBitSet(next), "ForceComplete won't handle the result correctly if more than one bit is set.");
+                Debug.Assert(
+                    HasAtMostOneBitSet(next),
+                    "ForceComplete won't handle the result correctly if more than one bit is set."
+                );
                 return (CompletionPart)next;
             }
         }
@@ -142,10 +142,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             for (int i = 0; ; i++)
             {
                 int bit = (1 << i);
-                if ((bit & (int)CompletionPart.All) == 0) break;
+                if ((bit & (int)CompletionPart.All) == 0)
+                    break;
                 if ((bit & _completeParts) != 0)
                 {
-                    if (any) result.Append(", ");
+                    if (any)
+                        result.Append(", ");
                     result.Append(i);
                     any = true;
                 }

@@ -240,11 +240,20 @@ namespace System.Runtime
         private static extern IntPtr InternalAlloc(object? target, object? dependent);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static IntPtr InternalAllocWithGCTransition(object? target, object? dependent)
-            => _InternalAllocWithGCTransition(ObjectHandleOnStack.Create(ref target), ObjectHandleOnStack.Create(ref dependent));
+        private static IntPtr InternalAllocWithGCTransition(object? target, object? dependent) =>
+            _InternalAllocWithGCTransition(
+                ObjectHandleOnStack.Create(ref target),
+                ObjectHandleOnStack.Create(ref dependent)
+            );
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "DependentHandle_InternalAllocWithGCTransition")]
-        private static partial IntPtr _InternalAllocWithGCTransition(ObjectHandleOnStack target, ObjectHandleOnStack dependent);
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "DependentHandle_InternalAllocWithGCTransition"
+        )]
+        private static partial IntPtr _InternalAllocWithGCTransition(
+            ObjectHandleOnStack target,
+            ObjectHandleOnStack dependent
+        );
 
 #if DEBUG
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -254,7 +263,8 @@ namespace System.Runtime
         // This is not used in DEBUG builds as the runtime performs additional checks.
         // The logic below is the inlined copy of ObjectFromHandle in the unmanaged runtime.
 #pragma warning disable 8500 // address of managed types
-        private static unsafe object? InternalGetTarget(IntPtr dependentHandle) => *(object*)dependentHandle;
+        private static unsafe object? InternalGetTarget(IntPtr dependentHandle) =>
+            *(object*)dependentHandle;
 #pragma warning restore 8500
 #endif
 
@@ -262,7 +272,10 @@ namespace System.Runtime
         private static extern object? InternalGetDependent(IntPtr dependentHandle);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern object? InternalGetTargetAndDependent(IntPtr dependentHandle, out object? dependent);
+        private static extern object? InternalGetTargetAndDependent(
+            IntPtr dependentHandle,
+            out object? dependent
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern void InternalSetDependent(IntPtr dependentHandle, object? dependent);
@@ -274,10 +287,13 @@ namespace System.Runtime
         private static extern bool InternalFree(IntPtr dependentHandle);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void InternalFreeWithGCTransition(IntPtr dependentHandle)
-            => _InternalFreeWithGCTransition(dependentHandle);
+        private static void InternalFreeWithGCTransition(IntPtr dependentHandle) =>
+            _InternalFreeWithGCTransition(dependentHandle);
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "DependentHandle_InternalFreeWithGCTransition")]
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "DependentHandle_InternalFreeWithGCTransition"
+        )]
         private static partial void _InternalFreeWithGCTransition(IntPtr dependentHandle);
     }
 }

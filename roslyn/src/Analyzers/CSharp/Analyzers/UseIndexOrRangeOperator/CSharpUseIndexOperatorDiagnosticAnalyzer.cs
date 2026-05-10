@@ -40,19 +40,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
     /// preserve semantics.</para>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SuppressMessage("Documentation", "CA1200:Avoid using cref tags with a prefix", Justification = "Required to avoid ambiguous reference warnings.")]
-    internal sealed partial class CSharpUseIndexOperatorDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    [SuppressMessage(
+        "Documentation",
+        "CA1200:Avoid using cref tags with a prefix",
+        Justification = "Required to avoid ambiguous reference warnings."
+    )]
+    internal sealed partial class CSharpUseIndexOperatorDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseIndexOperatorDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseIndexOperatorDiagnosticId,
-                   EnforceOnBuildValues.UseIndexOperator,
-                   CSharpCodeStyleOptions.PreferIndexOperator,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_index_operator), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Indexing_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseIndexOperatorDiagnosticId,
+                EnforceOnBuildValues.UseIndexOperator,
+                CSharpCodeStyleOptions.PreferIndexOperator,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_index_operator),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Indexing_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -74,12 +88,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 // like: s[s.Length - n]
                 context.RegisterOperationAction(
                     c => AnalyzePropertyReference(c, infoCache),
-                    OperationKind.PropertyReference);
+                    OperationKind.PropertyReference
+                );
 
                 // Register to hear about methods for: s.Get(s.Length - n)
                 context.RegisterOperationAction(
                     c => AnalyzeInvocation(c, infoCache),
-                    OperationKind.Invocation);
+                    OperationKind.Invocation
+                );
 
                 var arrayType = compilation.GetSpecialType(SpecialType.System_Array);
                 var arrayLengthProperty = TryGetNoArgInt32Property(arrayType, nameof(Array.Length));
@@ -90,13 +106,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     // specifically for that.
                     context.RegisterOperationAction(
                         c => AnalyzeArrayElementReference(c, infoCache, arrayLengthProperty),
-                        OperationKind.ArrayElementReference);
+                        OperationKind.ArrayElementReference
+                    );
                 }
             });
         }
 
-        private void AnalyzeInvocation(
-            OperationAnalysisContext context, InfoCache infoCache)
+        private void AnalyzeInvocation(OperationAnalysisContext context, InfoCache infoCache)
         {
             var cancellationToken = context.CancellationToken;
             var invocationOperation = (IInvocationOperation)context.Operation;
@@ -105,16 +121,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 return;
 
             AnalyzeInvokedMember(
-                context, infoCache,
+                context,
+                infoCache,
                 invocationOperation.Instance,
                 invocationOperation.TargetMethod,
                 invocationOperation.Arguments[0].Value,
                 lengthLikeProperty: null,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        private void AnalyzePropertyReference(
-            OperationAnalysisContext context, InfoCache infoCache)
+        private void AnalyzePropertyReference(OperationAnalysisContext context, InfoCache infoCache)
         {
             var cancellationToken = context.CancellationToken;
             var propertyReference = (IPropertyReferenceOperation)context.Operation;
@@ -127,16 +144,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 return;
 
             AnalyzeInvokedMember(
-                context, infoCache,
+                context,
+                infoCache,
                 propertyReference.Instance,
                 propertyReference.Property.GetMethod,
                 propertyReference.Arguments[0].Value,
                 lengthLikeProperty: null,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private void AnalyzeArrayElementReference(
-            OperationAnalysisContext context, InfoCache infoCache, IPropertySymbol arrayLengthProperty)
+            OperationAnalysisContext context,
+            InfoCache infoCache,
+            IPropertySymbol arrayLengthProperty
+        )
         {
             var cancellationToken = context.CancellationToken;
             var arrayElementReference = (IArrayElementReferenceOperation)context.Operation;
@@ -146,12 +168,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 return;
 
             AnalyzeInvokedMember(
-                context, infoCache,
+                context,
+                infoCache,
                 arrayElementReference.ArrayReference,
                 targetMethod: null,
                 arrayElementReference.Indices[0],
                 lengthLikeProperty: arrayLengthProperty,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private void AnalyzeInvokedMember(
@@ -161,14 +185,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             IMethodSymbol? targetMethod,
             IOperation argumentValue,
             IPropertySymbol? lengthLikeProperty,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // look for `s[s.Length - value]` or `s.Get(s.Length- value)`.
 
             // Needs to have the one arg for `s.Length - value`, and that arg needs to be
             // a subtraction.
-            if (instance is null ||
-                !IsSubtraction(argumentValue, out var subtraction))
+            if (instance is null || !IsSubtraction(argumentValue, out var subtraction))
             {
                 return;
             }
@@ -189,8 +213,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             // getting the length off the same instance we're indexing into.
 
             lengthLikeProperty ??= TryGetLengthLikeProperty(infoCache, targetMethod);
-            if (lengthLikeProperty == null ||
-                !IsInstanceLengthCheck(lengthLikeProperty, instance, subtraction.LeftOperand))
+            if (
+                lengthLikeProperty == null
+                || !IsInstanceLengthCheck(lengthLikeProperty, instance, subtraction.LeftOperand)
+            )
             {
                 return;
             }
@@ -198,7 +224,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             var semanticModel = instance.SemanticModel;
             Contract.ThrowIfNull(semanticModel);
 
-            if (CSharpSemanticFacts.Instance.IsInExpressionTree(semanticModel, instance.Syntax, infoCache.ExpressionOfTType, cancellationToken))
+            if (
+                CSharpSemanticFacts.Instance.IsInExpressionTree(
+                    semanticModel,
+                    instance.Syntax,
+                    infoCache.ExpressionOfTType,
+                    cancellationToken
+                )
+            )
                 return;
 
             // Everything looks good.  We can update this to use the System.Index member instead.
@@ -208,11 +241,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     binaryExpression.GetLocation(),
                     option.Notification,
                     ImmutableArray<Location>.Empty,
-                    ImmutableDictionary<string, string?>.Empty));
+                    ImmutableDictionary<string, string?>.Empty
+                )
+            );
         }
 
-        private static IPropertySymbol? TryGetLengthLikeProperty(InfoCache infoCache, IMethodSymbol? targetMethod)
-            => targetMethod != null && infoCache.TryGetMemberInfo(targetMethod, out var memberInfo)
+        private static IPropertySymbol? TryGetLengthLikeProperty(
+            InfoCache infoCache,
+            IMethodSymbol? targetMethod
+        ) =>
+            targetMethod != null && infoCache.TryGetMemberInfo(targetMethod, out var memberInfo)
                 ? memberInfo.LengthLikeProperty
                 : null;
     }

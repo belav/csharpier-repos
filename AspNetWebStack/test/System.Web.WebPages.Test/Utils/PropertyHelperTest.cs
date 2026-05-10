@@ -118,7 +118,10 @@ namespace System.Web.WebPages.Test
 
         private class SetOnly
         {
-            public int Prop2 { set { } }
+            public int Prop2
+            {
+                set { }
+            }
             public int Prop6 { get; set; }
         }
 
@@ -149,8 +152,14 @@ namespace System.Web.WebPages.Test
             anonymous.StringProp = "Five";
 
             // Act + Assert
-            PropertyHelper helper1 = Assert.Single(PropertyHelper.GetProperties(anonymous), prop => prop.Name == "IntProp");
-            PropertyHelper helper2 = Assert.Single(PropertyHelper.GetProperties(anonymous), prop => prop.Name == "StringProp");
+            PropertyHelper helper1 = Assert.Single(
+                PropertyHelper.GetProperties(anonymous),
+                prop => prop.Name == "IntProp"
+            );
+            PropertyHelper helper2 = Assert.Single(
+                PropertyHelper.GetProperties(anonymous),
+                prop => prop.Name == "StringProp"
+            );
             Assert.Equal(3, helper1.GetValue(anonymous));
             Assert.Equal("Five", helper2.GetValue(anonymous));
         }
@@ -175,12 +184,18 @@ namespace System.Web.WebPages.Test
 
         public class DerivedClassWithNew : BaseClassWithVirtual
         {
-            public new string PropB { get { return "Newed"; } }
+            public new string PropB
+            {
+                get { return "Newed"; }
+            }
         }
 
         public class DerivedClassWithOverride : BaseClassWithVirtual
         {
-            public override string PropA { get { return "Overriden"; } }
+            public override string PropA
+            {
+                get { return "Overriden"; }
+            }
         }
 
         [Fact]
@@ -227,7 +242,11 @@ namespace System.Web.WebPages.Test
         public void PropertyHelperForDerivedWithVirtual()
         {
             // Arrange
-            object derived = new DerivedClassWithOverride { PropA = "propAValue", PropB = "propBValue" };
+            object derived = new DerivedClassWithOverride
+            {
+                PropA = "propAValue",
+                PropB = "propBValue",
+            };
 
             // Act
             PropertyHelper[] helpers = PropertyHelper.GetProperties(derived).ToArray();

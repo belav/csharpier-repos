@@ -17,17 +17,15 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultSourceTextUndoService()
-        {
-        }
+        public DefaultSourceTextUndoService() { }
 
-        public ISourceTextUndoTransaction RegisterUndoTransaction(SourceText sourceText, string description)
-            => null;
+        public ISourceTextUndoTransaction RegisterUndoTransaction(
+            SourceText sourceText,
+            string description
+        ) => null;
 
-        public bool BeginUndoTransaction(ITextSnapshot snapshot)
-            => false;
+        public bool BeginUndoTransaction(ITextSnapshot snapshot) => false;
 
-        public bool EndUndoTransaction(ISourceTextUndoTransaction transaction)
-            => false;
+        public bool EndUndoTransaction(ISourceTextUndoTransaction transaction) => false;
     }
 }

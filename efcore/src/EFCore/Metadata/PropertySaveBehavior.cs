@@ -28,5 +28,5 @@ public enum PropertySaveBehavior
     /// <summary>
     ///     If an explicit value is set or the value is changed, then an exception will be thrown.
     /// </summary>
-    Throw
+    Throw,
 }

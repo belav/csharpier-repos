@@ -20,7 +20,8 @@ namespace System.Reflection
         //
         // We also latch failures. That is, _binds can bind a RuntimeAssemblyName to a RoFailedBindAssembly.
         //
-        private readonly ConcurrentDictionary<RoAssemblyName, RoAssembly> _binds = new ConcurrentDictionary<RoAssemblyName, RoAssembly>();
+        private readonly ConcurrentDictionary<RoAssemblyName, RoAssembly> _binds =
+            new ConcurrentDictionary<RoAssemblyName, RoAssembly>();
 
         internal RoAssembly ResolveAssembly(RoAssemblyName refName)
         {
@@ -61,7 +62,9 @@ namespace System.Reflection
             Assembly? assembly = resolver?.Resolve(this, refName.ToAssemblyName());
 
             if (assembly == null)
-                return new RoExceptionAssembly(new FileNotFoundException(SR.Format(SR.FileNotFoundAssembly, refName.FullName)));
+                return new RoExceptionAssembly(
+                    new FileNotFoundException(SR.Format(SR.FileNotFoundAssembly, refName.FullName))
+                );
 
             if (!(assembly is RoAssembly roAssembly && roAssembly.Loader == this))
                 throw new FileLoadException(SR.ExternalAssemblyReturnedByMetadataAssemblyResolver);

@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis
         /// Verify nodes match source.
         /// </summary>
         [Conditional("DEBUG")]
-        internal static void VerifySource(this SyntaxTree tree, IEnumerable<TextChangeRange>? changes = null)
+        internal static void VerifySource(
+            this SyntaxTree tree,
+            IEnumerable<TextChangeRange>? changes = null
+        )
         {
             var root = tree.GetRoot();
             var text = tree.GetText();
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis
                     var position = text.Lines.GetLinePosition(index);
                     var line = text.Lines[position.Line];
                     var allText = text.ToString(); // Entire document as string to allow inspecting the text in the debugger.
-                    message = $"Unexpected difference at offset {index}: Line {position.Line + 1}, Column {position.Character + 1} \"{line.ToString()}\"  (Found: [{found}] Expected: [{expected}])";
+                    message =
+                        $"Unexpected difference at offset {index}: Line {position.Line + 1}, Column {position.Character + 1} \"{line.ToString()}\"  (Found: [{found}] Expected: [{expected}])";
                 }
                 else
                 {
@@ -103,7 +107,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns <c>true</c> if the provided position is in a hidden region inaccessible to the user.
         /// </summary>
-        public static bool IsHiddenPosition(this SyntaxTree tree, int position, CancellationToken cancellationToken = default)
+        public static bool IsHiddenPosition(
+            this SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!tree.HasHiddenRegions())
             {
@@ -111,7 +119,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             var lineVisibility = tree.GetLineVisibility(position, cancellationToken);
-            return lineVisibility == LineVisibility.Hidden || lineVisibility == LineVisibility.BeforeFirstLineDirective;
+            return lineVisibility == LineVisibility.Hidden
+                || lineVisibility == LineVisibility.BeforeFirstLineDirective;
         }
     }
 }

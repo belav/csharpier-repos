@@ -8,7 +8,6 @@ namespace Microsoft.CodeAnalysis.MSBuild.Rpc;
 
 internal sealed class RemoteInvocationException : Exception
 {
-    public RemoteInvocationException(string? message) : base(message)
-    {
-    }
+    public RemoteInvocationException(string? message)
+        : base(message) { }
 }

@@ -27,16 +27,24 @@ namespace System.ComponentModel
         /// Gets a value indicating whether this converter can convert an
         /// object to the given destination type using the context.
         /// </summary>
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
         /// Converts the given value object to a <see cref='System.DateTime'/>
         /// object.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string text)
             {
@@ -53,7 +61,8 @@ namespace System.ComponentModel
 
                     if (culture != null)
                     {
-                        formatInfo = (DateTimeFormatInfo?)culture.GetFormat(typeof(DateTimeFormatInfo));
+                        formatInfo = (DateTimeFormatInfo?)
+                            culture.GetFormat(typeof(DateTimeFormatInfo));
                     }
 
                     if (formatInfo != null)
@@ -67,7 +76,14 @@ namespace System.ComponentModel
                 }
                 catch (FormatException e)
                 {
-                    throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(DateTimeOffset)), e);
+                    throw new FormatException(
+                        SR.Format(
+                            SR.ConvertInvalidPrimitive,
+                            (string)value,
+                            nameof(DateTimeOffset)
+                        ),
+                        e
+                    );
                 }
             }
 
@@ -78,7 +94,12 @@ namespace System.ComponentModel
         /// Converts the given value object to a <see cref='System.DateTimeOffset'/>
         /// object using the arguments.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             // logic is exactly as in DateTimeConverter, only the offset pattern ' zzz' is added to the default
             // ConvertToString pattern.
@@ -123,7 +144,8 @@ namespace System.ComponentModel
                 {
                     // pattern just like DateTimeConverter when DateTime.TimeOfDay.TotalSeconds!=0
                     // but with ' zzz' offset pattern added.
-                    format = formatInfo!.ShortDatePattern + " " + formatInfo.ShortTimePattern + " zzz";
+                    format =
+                        formatInfo!.ShortDatePattern + " " + formatInfo.ShortTimePattern + " zzz";
                 }
 
                 return dto.ToString(format, culture);
@@ -141,8 +163,30 @@ namespace System.ComponentModel
                 }
 
                 return new InstanceDescriptor(
-                    typeof(DateTimeOffset).GetConstructor(new Type[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(TimeSpan) }),
-                    new object[] { dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset }
+                    typeof(DateTimeOffset).GetConstructor(
+                        new Type[]
+                        {
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(TimeSpan),
+                        }
+                    ),
+                    new object[]
+                    {
+                        dto.Year,
+                        dto.Month,
+                        dto.Day,
+                        dto.Hour,
+                        dto.Minute,
+                        dto.Second,
+                        dto.Millisecond,
+                        dto.Offset,
+                    }
                 );
             }
 

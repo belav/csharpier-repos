@@ -1,7 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.RemoteExecutor;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Kerberos.NET.Configuration;
 using Kerberos.NET.Crypto;
-using Kerberos.NET.Server;
 using Kerberos.NET.Logging;
+using Kerberos.NET.Server;
+using Microsoft.DotNet.RemoteExecutor;
 using Xunit.Abstractions;
 
 namespace System.Net.Security.Kerberos;
@@ -29,9 +29,9 @@ public class KerberosExecutor : IDisposable
     private readonly ITestOutputHelper _testOutputHelper;
 
     public static bool IsSupported { get; } =
-        RemoteExecutor.IsSupported &&
-        !PlatformDetection.IsLinuxBionic &&
-        (OperatingSystem.IsLinux() || OperatingSystem.IsMacOS());
+        RemoteExecutor.IsSupported
+        && !PlatformDetection.IsLinuxBionic
+        && (OperatingSystem.IsLinux() || OperatingSystem.IsMacOS());
     public const string DefaultAdminPassword = "PLACEHOLDERadmin.";
 
     public const string DefaultUserPassword = "PLACEHOLDERcorrect20";
@@ -50,7 +50,12 @@ public class KerberosExecutor : IDisposable
 
         byte[] krbtgtPassword = new byte[16];
 
-        var krbtgt = new FakeKerberosPrincipal(PrincipalType.Service, "krbtgt", realm, krbtgtPassword);
+        var krbtgt = new FakeKerberosPrincipal(
+            PrincipalType.Service,
+            "krbtgt",
+            realm,
+            krbtgtPassword
+        );
         _principalService.Add("krbtgt", krbtgt);
         _principalService.Add($"krbtgt/{realm}", krbtgt);
 
@@ -82,9 +87,7 @@ public class KerberosExecutor : IDisposable
                 _testOutputHelper.WriteLine("GSSAPI trace:");
                 _testOutputHelper.WriteLine(File.ReadAllText(_tracePath));
             }
-            catch (IOException)
-            {
-            }
+            catch (IOException) { }
             throw;
         }
         finally
@@ -98,14 +101,24 @@ public class KerberosExecutor : IDisposable
 
     public void AddService(string name, string password = DefaultAdminPassword)
     {
-        var principal = new FakeKerberosPrincipal(PrincipalType.Service, name, _realm, Encoding.Unicode.GetBytes(password));
+        var principal = new FakeKerberosPrincipal(
+            PrincipalType.Service,
+            name,
+            _realm,
+            Encoding.Unicode.GetBytes(password)
+        );
         _principalService.Add(name, principal);
         _servicePrincipals.Add(principal);
     }
- 
+
     public void AddUser(string name, string password = DefaultUserPassword)
     {
-        var principal = new FakeKerberosPrincipal(PrincipalType.User, name, _realm, Encoding.Unicode.GetBytes(password));
+        var principal = new FakeKerberosPrincipal(
+            PrincipalType.User,
+            name,
+            _realm,
+            Encoding.Unicode.GetBytes(password)
+        );
         _principalService.Add(name, principal);
         _principalService.Add($"{name}@{_realm}", principal);
     }
@@ -129,10 +142,12 @@ public class KerberosExecutor : IDisposable
 
         // Generate krb5.conf
         _krb5Path = Path.GetTempFileName();
-        File.WriteAllText(_krb5Path,
-            OperatingSystem.IsLinux() ?
-            $"[realms]\n{_options.DefaultRealm} = {{\n  master_kdc = {endpoint}\n  kdc = {endpoint}\n}}\n" :
-            $"[realms]\n{_options.DefaultRealm} = {{\n  kdc = tcp/{endpoint}\n}}\n");
+        File.WriteAllText(
+            _krb5Path,
+            OperatingSystem.IsLinux()
+                ? $"[realms]\n{_options.DefaultRealm} = {{\n  master_kdc = {endpoint}\n  kdc = {endpoint}\n}}\n"
+                : $"[realms]\n{_options.DefaultRealm} = {{\n  kdc = tcp/{endpoint}\n}}\n"
+        );
 
         // Generate keytab file
         _keytabPath = Path.GetTempFileName();

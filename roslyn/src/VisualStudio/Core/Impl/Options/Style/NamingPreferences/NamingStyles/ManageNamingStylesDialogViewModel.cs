@@ -13,7 +13,9 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.NamingPreferences
 {
-    internal class ManageNamingStylesDialogViewModel : AbstractNotifyPropertyChanged, IManageNamingStylesInfoDialogViewModel
+    internal class ManageNamingStylesDialogViewModel
+        : AbstractNotifyPropertyChanged,
+            IManageNamingStylesInfoDialogViewModel
     {
         private readonly INotificationService _notificationService;
 
@@ -24,23 +26,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         public ManageNamingStylesDialogViewModel(
             ObservableCollection<MutableNamingStyle> namingStyles,
             List<NamingStyleOptionPageViewModel.NamingRuleViewModel> namingRules,
-            INotificationService notificationService)
+            INotificationService notificationService
+        )
         {
             _notificationService = notificationService;
 
-            Items = new ObservableCollection<INamingStylesInfoDialogViewModel>(namingStyles.Select(style => new NamingStyleViewModel(
-                style.Clone(),
-                !namingRules.Any(rule => rule.SelectedStyle?.ID == style.ID),
-                notificationService)));
+            Items = new ObservableCollection<INamingStylesInfoDialogViewModel>(
+                namingStyles.Select(style => new NamingStyleViewModel(
+                    style.Clone(),
+                    !namingRules.Any(rule => rule.SelectedStyle?.ID == style.ID),
+                    notificationService
+                ))
+            );
         }
 
-        internal void RemoveNamingStyle(NamingStyleViewModel namingStyle)
-            => Items.Remove(namingStyle);
+        internal void RemoveNamingStyle(NamingStyleViewModel namingStyle) =>
+            Items.Remove(namingStyle);
 
         public void AddItem()
         {
             var style = new MutableNamingStyle();
-            var viewModel = new NamingStyleViewModel(style, canBeDeleted: true, notificationService: _notificationService);
+            var viewModel = new NamingStyleViewModel(
+                style,
+                canBeDeleted: true,
+                notificationService: _notificationService
+            );
             var dialog = new NamingStyleDialog(viewModel);
 
             if (dialog.ShowModal().Value == true)
@@ -49,15 +59,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             }
         }
 
-        public void RemoveItem(INamingStylesInfoDialogViewModel item)
-            => Items.Remove(item);
+        public void RemoveItem(INamingStylesInfoDialogViewModel item) => Items.Remove(item);
 
         public void EditItem(INamingStylesInfoDialogViewModel item)
         {
             var context = (NamingStyleViewModel)item;
 
             var style = context.GetNamingStyle();
-            var viewModel = new NamingStyleViewModel(style, context.CanBeDeleted, notificationService: _notificationService);
+            var viewModel = new NamingStyleViewModel(
+                style,
+                context.CanBeDeleted,
+                notificationService: _notificationService
+            );
             var dialog = new NamingStyleDialog(viewModel);
 
             if (dialog.ShowModal().Value == true)

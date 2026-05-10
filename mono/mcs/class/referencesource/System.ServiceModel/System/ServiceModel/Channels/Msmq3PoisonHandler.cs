@@ -29,7 +29,10 @@ namespace System.ServiceModel.Channels
             lock (thisLock)
             {
                 seen = this.UpdateSeenCount(lookupId);
-                if (seen > (receiver.MsmqReceiveParameters.ReceiveRetryCount + 1) && receiver.MsmqReceiveParameters.ReceiveRetryCount != Int32.MaxValue)
+                if (
+                    seen > (receiver.MsmqReceiveParameters.ReceiveRetryCount + 1)
+                    && receiver.MsmqReceiveParameters.ReceiveRetryCount != Int32.MaxValue
+                )
                 {
                     if (TD.ReceiveRetryCountReachedIsEnabled())
                     {
@@ -50,7 +53,7 @@ namespace System.ServiceModel.Channels
             switch (receiver.MsmqReceiveParameters.ReceiveErrorHandling)
             {
                 case ReceiveErrorHandling.Drop:
-                    //Unlocking message here since the message is locked under internal transaction and 
+                    //Unlocking message here since the message is locked under internal transaction and
                     //cannot be unlocked by aborting ambient transaction
                     MsmqDefaultLockingQueue queue = this.receiver.Queue as MsmqDefaultLockingQueue;
                     if ((queue != null) && this.receiver.Transactional)
@@ -66,7 +69,9 @@ namespace System.ServiceModel.Channels
                         this.receiver.Channel.FaultChannel();
                     break;
                 default:
-                    Fx.Assert("System.ServiceModel.Channels.Msmq3PoisonHandler.FinalDisposition(): (unexpected ReceiveErrorHandling)");
+                    Fx.Assert(
+                        "System.ServiceModel.Channels.Msmq3PoisonHandler.FinalDisposition(): (unexpected ReceiveErrorHandling)"
+                    );
                     break;
             }
         }
@@ -91,10 +96,8 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public void Open()
-        { }
+        public void Open() { }
 
-        public void Dispose()
-        { }
+        public void Dispose() { }
     }
 }

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -12,31 +13,39 @@ namespace System.Web.UI {
     using System.Globalization;
     using System.Web.Util;
 
-
     /// <devdoc>
     /// Contains parsed attributes organized by filter.
     /// The IDictionary implementation uses the combination of all filters using filter:attrName as the attribute names
     /// </devdoc>
-    internal sealed class ParsedAttributeCollection : IDictionary {
+    internal sealed class ParsedAttributeCollection : IDictionary
+    {
         private IDictionary _filterTable;
         private IDictionary _allFiltersDictionary;
         private IDictionary<String, Pair> _attributeValuePositionInfo;
 
-        internal ParsedAttributeCollection() {
+        internal ParsedAttributeCollection()
+        {
             _filterTable = new ListDictionary(StringComparer.OrdinalIgnoreCase);
         }
 
         /// <devdoc>
         /// Returns the combination of all filters using filter:attrName as the attribute names
         /// </devdoc>
-        private IDictionary AllFiltersDictionary {
-            get {
-                if (_allFiltersDictionary == null) {
+        private IDictionary AllFiltersDictionary
+        {
+            get
+            {
+                if (_allFiltersDictionary == null)
+                {
                     _allFiltersDictionary = new ListDictionary(StringComparer.OrdinalIgnoreCase);
-                    foreach (FilteredAttributeDictionary fac in _filterTable.Values) {
-                        foreach (DictionaryEntry entry in fac) {
+                    foreach (FilteredAttributeDictionary fac in _filterTable.Values)
+                    {
+                        foreach (DictionaryEntry entry in fac)
+                        {
                             Debug.Assert(entry.Key != null);
-                            _allFiltersDictionary[Util.CreateFilteredName(fac.Filter, entry.Key.ToString())] = entry.Value;
+                            _allFiltersDictionary[
+                                Util.CreateFilteredName(fac.Filter, entry.Key.ToString())
+                            ] = entry.Value;
                         }
                     }
                 }
@@ -45,29 +54,35 @@ namespace System.Web.UI {
             }
         }
 
-
         /// <devdoc>
         /// Adds a filtered attribute
         /// </devdoc>
-        public void AddFilteredAttribute(string filter, string name, string value) {
-            if (String.IsNullOrEmpty(name)) {
+        public void AddFilteredAttribute(string filter, string name, string value)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
                 throw ExceptionUtil.ParameterNullOrEmpty("name");
             }
 
-            if (value == null) {
+            if (value == null)
+            {
                 throw new ArgumentNullException("value");
             }
 
-            if (filter == null) {
+            if (filter == null)
+            {
                 filter = String.Empty;
             }
 
-            if (_allFiltersDictionary != null) {
+            if (_allFiltersDictionary != null)
+            {
                 _allFiltersDictionary.Add(Util.CreateFilteredName(filter, name), value);
             }
 
-            FilteredAttributeDictionary filteredAttributes = (FilteredAttributeDictionary)_filterTable[filter];
-            if (filteredAttributes == null) {
+            FilteredAttributeDictionary filteredAttributes = (FilteredAttributeDictionary)
+                _filterTable[filter];
+            if (filteredAttributes == null)
+            {
                 filteredAttributes = new FilteredAttributeDictionary(this, filter);
                 _filterTable[filter] = filteredAttributes;
             }
@@ -81,42 +96,52 @@ namespace System.Web.UI {
         /// <param name="name">Name of the attribute.</param>
         /// <param name="line">The line number where the attribute value expression is present.</param>
         /// <param name="column">The column value where the attribute value expression begins. Note that this is actually after the attribute name itself.</param>
-        public void AddAttributeValuePositionInformation(string name, int line, int column) {
+        public void AddAttributeValuePositionInformation(string name, int line, int column)
+        {
             Debug.Assert(!String.IsNullOrEmpty(name));
             Pair pair = new Pair(line, column);
             AttributeValuePositionsDictionary[name] = pair;
         }
 
-        public IDictionary<String, Pair> AttributeValuePositionsDictionary {
-            get {
-                if (_attributeValuePositionInfo == null) {
-                    _attributeValuePositionInfo = new Dictionary<String, Pair>(StringComparer.OrdinalIgnoreCase);
+        public IDictionary<String, Pair> AttributeValuePositionsDictionary
+        {
+            get
+            {
+                if (_attributeValuePositionInfo == null)
+                {
+                    _attributeValuePositionInfo = new Dictionary<String, Pair>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
                 return _attributeValuePositionInfo;
             }
         }
 
-
-
         /// <devdoc>
         /// Clears all attributes from the specified filter
         /// </devdoc>
-        public void ClearFilter(string filter) {
-            if (filter == null) {
+        public void ClearFilter(string filter)
+        {
+            if (filter == null)
+            {
                 filter = String.Empty;
             }
 
-            if (_allFiltersDictionary != null) {
+            if (_allFiltersDictionary != null)
+            {
                 ArrayList removeList = new ArrayList();
-                foreach (string key in _allFiltersDictionary.Keys) {
+                foreach (string key in _allFiltersDictionary.Keys)
+                {
                     string attrName;
                     string currentFilter = Util.ParsePropertyDeviceFilter(key, out attrName);
-                    if (StringUtil.EqualsIgnoreCase(currentFilter, filter)) {
+                    if (StringUtil.EqualsIgnoreCase(currentFilter, filter))
+                    {
                         removeList.Add(key);
                     }
                 }
 
-                foreach (string key in removeList) {
+                foreach (string key in removeList)
+                {
                     _allFiltersDictionary.Remove(key);
                 }
             }
@@ -124,56 +149,66 @@ namespace System.Web.UI {
             _filterTable.Remove(filter);
         }
 
-
         /// <devdoc>
         /// Gets the collection of FilteredAttributeDictionaries used by this collection.
         /// </devdoc>
-        public ICollection GetFilteredAttributeDictionaries() {
+        public ICollection GetFilteredAttributeDictionaries()
+        {
             return _filterTable.Values;
         }
-
 
         /// <devdoc>
         /// Removes the specified attribute from the specified filter.
         /// </devdoc>
-        public void RemoveFilteredAttribute(string filter, string name) {
-            if (String.IsNullOrEmpty(name)) {
+        public void RemoveFilteredAttribute(string filter, string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
                 throw ExceptionUtil.ParameterNullOrEmpty("name");
             }
 
-            if (filter == null) {
+            if (filter == null)
+            {
                 filter = String.Empty;
             }
 
-            if (_allFiltersDictionary != null) {
+            if (_allFiltersDictionary != null)
+            {
                 _allFiltersDictionary.Remove(Util.CreateFilteredName(filter, name));
             }
 
-            FilteredAttributeDictionary filteredAttributes = (FilteredAttributeDictionary)_filterTable[filter];
-            if (filteredAttributes != null) {
+            FilteredAttributeDictionary filteredAttributes = (FilteredAttributeDictionary)
+                _filterTable[filter];
+            if (filteredAttributes != null)
+            {
                 filteredAttributes.Data.Remove(name);
             }
         }
 
-
         /// <devdoc>
         /// Replaces the specified attribute's value from the specified filter.
         /// </devdoc>
-        public void ReplaceFilteredAttribute(string filter, string name, string value) {
-            if (String.IsNullOrEmpty(name)) {
+        public void ReplaceFilteredAttribute(string filter, string name, string value)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
                 throw ExceptionUtil.ParameterNullOrEmpty("name");
             }
 
-            if (filter == null) {
+            if (filter == null)
+            {
                 filter = String.Empty;
             }
 
-            if (_allFiltersDictionary != null) {
+            if (_allFiltersDictionary != null)
+            {
                 _allFiltersDictionary[Util.CreateFilteredName(filter, name)] = value;
             }
 
-            FilteredAttributeDictionary filteredAttributes = (FilteredAttributeDictionary)_filterTable[filter];
-            if (filteredAttributes == null) {
+            FilteredAttributeDictionary filteredAttributes = (FilteredAttributeDictionary)
+                _filterTable[filter];
+            if (filteredAttributes == null)
+            {
                 filteredAttributes = new FilteredAttributeDictionary(this, filter);
                 _filterTable[filter] = filteredAttributes;
             }
@@ -183,28 +218,25 @@ namespace System.Web.UI {
         #region IDictionary implementation
 
         /// <internalonly/>
-        bool IDictionary.IsFixedSize {
-            get {
-                return false;
-            }
+        bool IDictionary.IsFixedSize
+        {
+            get { return false; }
         }
 
-
         /// <internalonly/>
-        bool IDictionary.IsReadOnly {
-            get {
-                return false;
-            }
+        bool IDictionary.IsReadOnly
+        {
+            get { return false; }
         }
 
-
         /// <internalonly/>
-        object IDictionary.this[object key] {
-            get {
-                return AllFiltersDictionary[key];
-            }
-            set {
-                if (key == null) {
+        object IDictionary.this[object key]
+        {
+            get { return AllFiltersDictionary[key]; }
+            set
+            {
+                if (key == null)
+                {
                     throw new ArgumentNullException("key");
                 }
 
@@ -215,30 +247,28 @@ namespace System.Web.UI {
             }
         }
 
-
         /// <internalonly/>
-        ICollection IDictionary.Keys {
-            get {
-                return AllFiltersDictionary.Keys;
-            }
+        ICollection IDictionary.Keys
+        {
+            get { return AllFiltersDictionary.Keys; }
         }
 
-
         /// <internalonly/>
-        ICollection IDictionary.Values {
-            get {
-                return AllFiltersDictionary.Values;
-            }
+        ICollection IDictionary.Values
+        {
+            get { return AllFiltersDictionary.Values; }
         }
 
-
         /// <internalonly/>
-        void IDictionary.Add(object key, object value) {
-            if (key == null) {
+        void IDictionary.Add(object key, object value)
+        {
+            if (key == null)
+            {
                 throw new ArgumentNullException("key");
             }
 
-            if (value == null) {
+            if (value == null)
+            {
                 value = String.Empty;
             }
 
@@ -248,29 +278,30 @@ namespace System.Web.UI {
             AddFilteredAttribute(filter, attrName, value.ToString());
         }
 
-
         /// <internalonly/>
-        bool IDictionary.Contains(object key) {
+        bool IDictionary.Contains(object key)
+        {
             return AllFiltersDictionary.Contains(key);
         }
 
-
         /// <internalonly/>
-        void IDictionary.Clear() {
+        void IDictionary.Clear()
+        {
             AllFiltersDictionary.Clear();
             _filterTable.Clear();
         }
 
-
         /// <internalonly/>
-        IDictionaryEnumerator IDictionary.GetEnumerator() {
+        IDictionaryEnumerator IDictionary.GetEnumerator()
+        {
             return AllFiltersDictionary.GetEnumerator();
         }
 
-
         /// <internalonly/>
-        void IDictionary.Remove(object key) {
-            if (key == null) {
+        void IDictionary.Remove(object key)
+        {
+            if (key == null)
+            {
                 throw new ArgumentNullException("key");
             }
 
@@ -284,40 +315,34 @@ namespace System.Web.UI {
         #region ICollection implementation
 
         /// <internalonly/>
-        int ICollection.Count {
-            get {
-                return AllFiltersDictionary.Count;
-            }
+        int ICollection.Count
+        {
+            get { return AllFiltersDictionary.Count; }
         }
 
-
         /// <internalonly/>
-        bool ICollection.IsSynchronized {
-            get {
-                return ((ICollection)AllFiltersDictionary).IsSynchronized;
-            }
+        bool ICollection.IsSynchronized
+        {
+            get { return ((ICollection)AllFiltersDictionary).IsSynchronized; }
         }
 
-
         /// <internalonly/>
-        object ICollection.SyncRoot {
-            get {
-                return AllFiltersDictionary.SyncRoot;
-            }
+        object ICollection.SyncRoot
+        {
+            get { return AllFiltersDictionary.SyncRoot; }
         }
 
-
         /// <internalonly/>
-        void ICollection.CopyTo(Array array, int index) {
+        void ICollection.CopyTo(Array array, int index)
+        {
             AllFiltersDictionary.CopyTo(array, index);
         }
 
-
         /// <internalonly/>
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return AllFiltersDictionary.GetEnumerator();
         }
         #endregion ICollection implementation
     }
 }
-

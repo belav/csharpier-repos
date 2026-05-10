@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Discovery.ContractReference.cs
 //
 // Author:
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,34 +26,33 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Net;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Protocols
 {
-	[TestFixture]
-	public class WebClientProtocolTest
-	{
-		[WebServiceBinding (Name = "PokerSoap", Namespace = "http://tempuri.org/")]
-		public class Poker : SoapHttpClientProtocol
-		{
-		}
+    [TestFixture]
+    public class WebClientProtocolTest
+    {
+        [WebServiceBinding(Name = "PokerSoap", Namespace = "http://tempuri.org/")]
+        public class Poker : SoapHttpClientProtocol { }
 
-		[Test]
-		public void TestUseDefaultCredentials () {
-			Poker client = new Poker ();
-			Assert.IsFalse (client.UseDefaultCredentials, "#1");
-			client.UseDefaultCredentials = true;
-			Assert.IsTrue (client.Credentials == CredentialCache.DefaultCredentials, "#2");
-			client.Credentials = new NetworkCredential ("a", "b");
-			Assert.IsFalse (client.UseDefaultCredentials, "#3");
-			client.UseDefaultCredentials = false;
-			Assert.IsNull (client.Credentials, "#4");
-			client.Credentials = CredentialCache.DefaultCredentials;
-			Assert.IsTrue (client.UseDefaultCredentials, "#5");
-		}
-	}
+        [Test]
+        public void TestUseDefaultCredentials()
+        {
+            Poker client = new Poker();
+            Assert.IsFalse(client.UseDefaultCredentials, "#1");
+            client.UseDefaultCredentials = true;
+            Assert.IsTrue(client.Credentials == CredentialCache.DefaultCredentials, "#2");
+            client.Credentials = new NetworkCredential("a", "b");
+            Assert.IsFalse(client.UseDefaultCredentials, "#3");
+            client.UseDefaultCredentials = false;
+            Assert.IsNull(client.Credentials, "#4");
+            client.Credentials = CredentialCache.DefaultCredentials;
+            Assert.IsTrue(client.UseDefaultCredentials, "#5");
+        }
+    }
 }

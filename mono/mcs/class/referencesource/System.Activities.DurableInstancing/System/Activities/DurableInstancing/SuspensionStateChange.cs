@@ -8,6 +8,6 @@ namespace System.Activities.DurableInstancing
     {
         NoChange = 0,
         SuspendInstance = 1,
-        UnsuspendInstance = 2
+        UnsuspendInstance = 2,
     };
 }

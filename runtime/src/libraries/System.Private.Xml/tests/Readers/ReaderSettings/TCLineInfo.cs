@@ -14,13 +14,25 @@ namespace System.Xml.ReaderSettingsTests
         {
             // for function ln02
             {
-                this.AddChild(new CVariation(ln02) { Attribute = new Variation("Line Number Offset negative values") { Pri = 1 } });
+                this.AddChild(
+                    new CVariation(ln02)
+                    {
+                        Attribute = new Variation("Line Number Offset negative values") { Pri = 1 },
+                    }
+                );
             }
-
 
             // for function lp02
             {
-                this.AddChild(new CVariation(lp02) { Attribute = new Variation("Line Position Offset negative values") { Pri = 1 } });
+                this.AddChild(
+                    new CVariation(lp02)
+                    {
+                        Attribute = new Variation("Line Position Offset negative values")
+                        {
+                            Pri = 1,
+                        },
+                    }
+                );
             }
         }
     }

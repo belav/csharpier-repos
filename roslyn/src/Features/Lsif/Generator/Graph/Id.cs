@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     /// </summary>
     /// <typeparam name="T">Used to distinguish what type of object this ID applies to. This is dropped in serialization, but simply helps
     /// to ensure type safety in the code so we don't cross IDs of different types.</typeparam>
-    internal readonly record struct Id<T>(int NumericId) : ISerializableId where T : Element;
+    internal readonly record struct Id<T>(int NumericId) : ISerializableId
+        where T : Element;
 
     internal interface ISerializableId
     {
@@ -23,7 +24,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// <summary>
         /// "Casts" a strongly type ID representing a derived type to a base type.
         /// </summary>
-        public static Id<TOut> As<TIn, TOut>(this Id<TIn> id) where TOut : Element where TIn : TOut
+        public static Id<TOut> As<TIn, TOut>(this Id<TIn> id)
+            where TOut : Element
+            where TIn : TOut
         {
             return new Id<TOut>(id.NumericId);
         }
@@ -31,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// <summary>
         /// Fetches a strongly-typed <see cref="Id{T}"/> for a given element.
         /// </summary>
-        public static Id<T> GetId<T>(this T element) where T : Element
+        public static Id<T> GetId<T>(this T element)
+            where T : Element
         {
             return new Id<T>(element.Id.NumericId);
         }

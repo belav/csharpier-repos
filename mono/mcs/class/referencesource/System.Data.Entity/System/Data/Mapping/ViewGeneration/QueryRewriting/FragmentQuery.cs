@@ -8,15 +8,15 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Common.Utils;
 using System.Data.Common.Utils.Boolean;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Metadata.Edm;
-using System.Linq;
+using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 {
@@ -43,31 +43,69 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             BoolExpression whereClause = cellQuery.WhereClause;
             whereClause = whereClause.MakeCopy();
             whereClause.ExpensiveSimplify();
-            return new FragmentQuery(null /*label*/, fromVariable, new HashSet<MemberPath>(cellQuery.GetProjectedMembers()), whereClause);
+            return new FragmentQuery(
+                null /*label*/
+                ,
+                fromVariable,
+                new HashSet<MemberPath>(cellQuery.GetProjectedMembers()),
+                whereClause
+            );
         }
 
-        public static FragmentQuery Create(string label, RoleBoolean roleBoolean, CellQuery cellQuery)
+        public static FragmentQuery Create(
+            string label,
+            RoleBoolean roleBoolean,
+            CellQuery cellQuery
+        )
         {
             BoolExpression whereClause = cellQuery.WhereClause.Create(roleBoolean);
             whereClause = BoolExpression.CreateAnd(whereClause, cellQuery.WhereClause);
             //return new FragmentQuery(label, null /* fromVariable */, new HashSet<MemberPath>(cellQuery.GetProjectedMembers()), whereClause);
-            // don't need any attributes 
+            // don't need any attributes
             whereClause = whereClause.MakeCopy();
             whereClause.ExpensiveSimplify();
-            return new FragmentQuery(label, null /* fromVariable */, new HashSet<MemberPath>(), whereClause);
+            return new FragmentQuery(
+                label,
+                null /* fromVariable */
+                ,
+                new HashSet<MemberPath>(),
+                whereClause
+            );
         }
 
-        public static FragmentQuery Create(IEnumerable<MemberPath> attrs, BoolExpression whereClause)
+        public static FragmentQuery Create(
+            IEnumerable<MemberPath> attrs,
+            BoolExpression whereClause
+        )
         {
-            return new FragmentQuery(null /* no name */, null /* no fromVariable*/, attrs, whereClause);
+            return new FragmentQuery(
+                null /* no name */
+                ,
+                null /* no fromVariable*/
+                ,
+                attrs,
+                whereClause
+            );
         }
 
         public static FragmentQuery Create(BoolExpression whereClause)
         {
-            return new FragmentQuery(null /* no name */, null /* no fromVariable*/, new MemberPath[] { }, whereClause);
+            return new FragmentQuery(
+                null /* no name */
+                ,
+                null /* no fromVariable*/
+                ,
+                new MemberPath[] { },
+                whereClause
+            );
         }
 
-        internal FragmentQuery(string label, BoolExpression fromVariable, IEnumerable<MemberPath> attrs, BoolExpression condition)
+        internal FragmentQuery(
+            string label,
+            BoolExpression fromVariable,
+            IEnumerable<MemberPath> attrs,
+            BoolExpression condition
+        )
         {
             m_label = label;
             m_fromVariable = fromVariable;
@@ -99,38 +137,68 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             StringBuilder b = new StringBuilder();
             foreach (MemberPath value in this.Attributes)
             {
-                if (b.Length > 0) { b.Append(','); }
+                if (b.Length > 0)
+                {
+                    b.Append(',');
+                }
                 b.Append(value.ToString());
             }
 
             if (Description != null && Description != b.ToString())
             {
-                return String.Format(CultureInfo.InvariantCulture, "{0}: [{1} where {2}]", Description, b, this.Condition);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}: [{1} where {2}]",
+                    Description,
+                    b,
+                    this.Condition
+                );
             }
             else
             {
-                return String.Format(CultureInfo.InvariantCulture, "[{0} where {1}]", b, this.Condition);
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    "[{0} where {1}]",
+                    b,
+                    this.Condition
+                );
             }
         }
 
         #region Static methods
 
         // creates a condition member=value
-        internal static BoolExpression CreateMemberCondition(MemberPath path, Constant domainValue, MemberDomainMap domainMap)
+        internal static BoolExpression CreateMemberCondition(
+            MemberPath path,
+            Constant domainValue,
+            MemberDomainMap domainMap
+        )
         {
             if (domainValue is TypeConstant)
             {
-                return BoolExpression.CreateLiteral(new TypeRestriction(new MemberProjectedSlot(path),
-                                                    new Domain(domainValue, domainMap.GetDomain(path))), domainMap);
+                return BoolExpression.CreateLiteral(
+                    new TypeRestriction(
+                        new MemberProjectedSlot(path),
+                        new Domain(domainValue, domainMap.GetDomain(path))
+                    ),
+                    domainMap
+                );
             }
             else
             {
-                return BoolExpression.CreateLiteral(new ScalarRestriction(new MemberProjectedSlot(path),
-                                                    new Domain(domainValue, domainMap.GetDomain(path))), domainMap);
+                return BoolExpression.CreateLiteral(
+                    new ScalarRestriction(
+                        new MemberProjectedSlot(path),
+                        new Domain(domainValue, domainMap.GetDomain(path))
+                    ),
+                    domainMap
+                );
             }
         }
 
-        internal static IEqualityComparer<FragmentQuery> GetEqualityComparer(FragmentQueryProcessor qp)
+        internal static IEqualityComparer<FragmentQuery> GetEqualityComparer(
+            FragmentQueryProcessor qp
+        )
         {
             return new FragmentQueryEqualityComparer(qp);
         }
@@ -151,7 +219,11 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
             #region IEqualityComparer<FragmentQuery> Members
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2140:TransparentMethodsMustNotReferenceCriticalCode", Justification = "Based on Bug VSTS Pioneer #433188: IsVisibleOutsideAssembly is wrong on generic instantiations.")]       
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Security",
+                "CA2140:TransparentMethodsMustNotReferenceCriticalCode",
+                Justification = "Based on Bug VSTS Pioneer #433188: IsVisibleOutsideAssembly is wrong on generic instantiations."
+            )]
             public bool Equals(FragmentQuery x, FragmentQuery y)
             {
                 if (!x.Attributes.SetEquals(y.Attributes))
@@ -163,7 +235,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
             // Hashing a bit naive: it exploits syntactic properties,
             // i.e., some semantically equivalent queries may produce different hash codes
-            // But that's fine for usage scenarios in QueryRewriter.cs 
+            // But that's fine for usage scenarios in QueryRewriter.cs
             public int GetHashCode(FragmentQuery q)
             {
                 int attrHashCode = 0;
@@ -175,7 +247,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 int constHashCode = 0;
                 foreach (MemberRestriction oneOf in q.Condition.MemberRestrictions)
                 {
-                    varHashCode ^= MemberPath.EqualityComparer.GetHashCode(oneOf.RestrictedMemberSlot.MemberPath);
+                    varHashCode ^= MemberPath.EqualityComparer.GetHashCode(
+                        oneOf.RestrictedMemberSlot.MemberPath
+                    );
                     foreach (Constant constant in oneOf.Domain.Values)
                     {
                         constHashCode ^= Constant.EqualityComparer.GetHashCode(constant);
@@ -187,7 +261,5 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             #endregion
         }
         #endregion
-
     }
-
 }

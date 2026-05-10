@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
         [MemberData(nameof(ExternalPdbFormats))]
         public void SourceLink(DebugInformationFormat format)
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -40,18 +41,27 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding.UTF8.GetBytes(@"
+            var sourceLinkBlob = Encoding.UTF8.GetBytes(
+                @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
-");
+"
+            );
 
-            var c = CreateCompilation(Parse(source, "f:/build/goo.cs"), options: TestOptions.DebugDll);
+            var c = CreateCompilation(
+                Parse(source, "f:/build/goo.cs"),
+                options: TestOptions.DebugDll
+            );
 
             var pdbStream = new MemoryStream();
-            c.EmitToArray(EmitOptions.Default.WithDebugInformationFormat(format), pdbStream: pdbStream, sourceLinkStream: new MemoryStream(sourceLinkBlob));
+            c.EmitToArray(
+                EmitOptions.Default.WithDebugInformationFormat(format),
+                pdbStream: pdbStream,
+                sourceLinkStream: new MemoryStream(sourceLinkBlob)
+            );
 
             var actualData = PdbValidation.GetSourceLinkData(pdbStream);
             AssertEx.Equal(sourceLinkBlob, actualData);
@@ -60,7 +70,8 @@ class C
         [Fact]
         public void SourceLink_Embedded()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -71,30 +82,46 @@ class C
     }
 }
 ";
-            var sourceLinkBlob = Encoding.UTF8.GetBytes(@"
+            var sourceLinkBlob = Encoding.UTF8.GetBytes(
+                @"
 {
   ""documents"": {
      ""f:/build/*"" : ""https://raw.githubusercontent.com/my-org/my-project/1111111111111111111111111111111111111111/*""
   }
 }
-");
-            var c = CreateCompilation(Parse(source, "f:/build/goo.cs"), options: TestOptions.DebugDll);
+"
+            );
+            var c = CreateCompilation(
+                Parse(source, "f:/build/goo.cs"),
+                options: TestOptions.DebugDll
+            );
 
-            var peBlob = c.EmitToArray(EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Embedded), sourceLinkStream: new MemoryStream(sourceLinkBlob));
+            var peBlob = c.EmitToArray(
+                EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Embedded),
+                sourceLinkStream: new MemoryStream(sourceLinkBlob)
+            );
 
             using (var peReader = new PEReader(peBlob))
             {
-                var embeddedEntry = peReader.ReadDebugDirectory().Single(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+                var embeddedEntry = peReader
+                    .ReadDebugDirectory()
+                    .Single(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
 
-                using (var embeddedMetadataProvider = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedEntry))
+                using (
+                    var embeddedMetadataProvider =
+                        peReader.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedEntry)
+                )
                 {
                     var pdbReader = embeddedMetadataProvider.GetMetadataReader();
 
-                    var actualBlob =
-                        (from cdiHandle in pdbReader.GetCustomDebugInformation(EntityHandle.ModuleDefinition)
-                         let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
-                         where pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
-                         select pdbReader.GetBlobBytes(cdi.Value)).Single();
+                    var actualBlob = (
+                        from cdiHandle in pdbReader.GetCustomDebugInformation(
+                            EntityHandle.ModuleDefinition
+                        )
+                        let cdi = pdbReader.GetCustomDebugInformation(cdiHandle)
+                        where pdbReader.GetGuid(cdi.Kind) == PortableCustomDebugInfoKinds.SourceLink
+                        select pdbReader.GetBlobBytes(cdi.Value)
+                    ).Single();
 
                     AssertEx.Equal(sourceLinkBlob, actualBlob);
                 }
@@ -105,7 +132,8 @@ class C
         [MemberData(nameof(PdbFormats))]
         public void SourceLink_Errors(DebugInformationFormat format)
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -116,20 +144,41 @@ class C
     }
 }
 ";
-            var sourceLinkStream = new TestStream(canRead: true, readFunc: (_, __, ___) => { throw new Exception("Error!"); });
+            var sourceLinkStream = new TestStream(
+                canRead: true,
+                readFunc: (_, __, ___) =>
+                {
+                    throw new Exception("Error!");
+                }
+            );
 
-            var c = CreateCompilation(Parse(source, "f:/build/goo.cs"), options: TestOptions.DebugDll);
+            var c = CreateCompilation(
+                Parse(source, "f:/build/goo.cs"),
+                options: TestOptions.DebugDll
+            );
             var pdbStream = format != DebugInformationFormat.Embedded ? new MemoryStream() : null;
-            var result = c.Emit(new MemoryStream(), pdbStream, options: EmitOptions.Default.WithDebugInformationFormat(format), sourceLinkStream: sourceLinkStream);
+            var result = c.Emit(
+                new MemoryStream(),
+                pdbStream,
+                options: EmitOptions.Default.WithDebugInformationFormat(format),
+                sourceLinkStream: sourceLinkStream
+            );
             result.Diagnostics.Verify(
                 // error CS0041: Unexpected error writing debug information -- 'Error!'
-                Diagnostic(ErrorCode.FTL_DebugEmitFailure).WithArguments("Error!").WithLocation(1, 1));
+                Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                    .WithArguments("Error!")
+                    .WithLocation(1, 1)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void SourceLink_Errors_NotSupportedByPdbWriter()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -140,7 +189,10 @@ class C
     }
 }
 ";
-            var c = CreateCompilation(Parse(source, "f:/build/goo.cs"), options: TestOptions.DebugDll);
+            var c = CreateCompilation(
+                Parse(source, "f:/build/goo.cs"),
+                options: TestOptions.DebugDll
+            );
 
             var result = c.Emit(
                 peStream: new MemoryStream(),
@@ -157,19 +209,31 @@ class C
                 rebuildData: null,
                 testData: new CompilationTestData()
                 {
-                    SymWriterFactory = metadataProvider => new SymUnmanagedWriterWithoutSourceLinkSupport(metadataProvider)
-                });
+                    SymWriterFactory =
+                        metadataProvider => new SymUnmanagedWriterWithoutSourceLinkSupport(
+                            metadataProvider
+                        ),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support SourceLink feature: '<lib name>''
-                Diagnostic(ErrorCode.FTL_DebugEmitFailure).WithArguments(string.Format(CodeAnalysisResources.SymWriterDoesNotSupportSourceLink, "<lib name>")));
+                Diagnostic(ErrorCode.FTL_DebugEmitFailure)
+                    .WithArguments(
+                        string.Format(
+                            CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
+                            "<lib name>"
+                        )
+                    )
+            );
         }
 
         [Theory]
         [MemberData(nameof(ExternalPdbFormats))]
         public void SourceLink_Empty(DebugInformationFormat format)
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -182,10 +246,17 @@ class C
 ";
             var sourceLinkBlob = new byte[0];
 
-            var c = CreateCompilation(Parse(source, "f:/build/goo.cs"), options: TestOptions.DebugDll);
+            var c = CreateCompilation(
+                Parse(source, "f:/build/goo.cs"),
+                options: TestOptions.DebugDll
+            );
 
             var pdbStream = new MemoryStream();
-            c.EmitToArray(EmitOptions.Default.WithDebugInformationFormat(format), pdbStream: pdbStream, sourceLinkStream: new MemoryStream(sourceLinkBlob));
+            c.EmitToArray(
+                EmitOptions.Default.WithDebugInformationFormat(format),
+                pdbStream: pdbStream,
+                sourceLinkStream: new MemoryStream(sourceLinkBlob)
+            );
             pdbStream.Position = 0;
             var bs = Roslyn.Utilities.StreamExtensions.ReadAllBytes(pdbStream);
             var actualData = PdbValidation.GetSourceLinkData(pdbStream);

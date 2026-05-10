@@ -20,26 +20,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                 EnforceOnBuildValues.RemoveRedundantNullableDirective,
                 option: null,
                 fadingOption: null,
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Remove_redundant_nullable_directive), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Nullable_directive_is_redundant), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Remove_redundant_nullable_directive),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Nullable_directive_is_redundant),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
             context.RegisterCompilationStartAction(context =>
             {
-                if (((CSharpCompilation)context.Compilation).LanguageVersion < LanguageVersion.CSharp8)
+                if (
+                    ((CSharpCompilation)context.Compilation).LanguageVersion
+                    < LanguageVersion.CSharp8
+                )
                 {
                     // Compilation does not support nullable directives
                     return;
                 }
 
                 var compilationOptions = context.Compilation.Options;
-                var defaultNullableContext = ((CSharpCompilationOptions)compilationOptions).NullableContextOptions;
+                var defaultNullableContext = (
+                    (CSharpCompilationOptions)compilationOptions
+                ).NullableContextOptions;
                 context.RegisterSyntaxTreeAction(context =>
                 {
                     if (ShouldSkipAnalysis(context, compilationOptions, notification: null))
@@ -51,26 +63,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                     if (!root.ContainsDirective(SyntaxKind.NullableDirectiveTrivia))
                         return;
 
-                    var initialState = context.Tree.IsGeneratedCode(context.Options, CSharpSyntaxFacts.Instance, context.CancellationToken)
+                    var initialState = context.Tree.IsGeneratedCode(
+                        context.Options,
+                        CSharpSyntaxFacts.Instance,
+                        context.CancellationToken
+                    )
                         ? NullableContextOptions.Disable
                         : defaultNullableContext;
 
                     NullableContextOptions? currentState = initialState;
-                    for (var directive = root.GetFirstDirective(); directive is not null; directive = directive.GetNextDirective())
+                    for (
+                        var directive = root.GetFirstDirective();
+                        directive is not null;
+                        directive = directive.GetNextDirective()
+                    )
                     {
                         if (directive.DirectiveNameToken.IsKind(SyntaxKind.NullableKeyword))
                         {
-                            var newState = GetNullableContextOptions(defaultNullableContext, currentState, (NullableDirectiveTriviaSyntax)directive);
+                            var newState = GetNullableContextOptions(
+                                defaultNullableContext,
+                                currentState,
+                                (NullableDirectiveTriviaSyntax)directive
+                            );
                             if (newState == currentState)
-                                context.ReportDiagnostic(Diagnostic.Create(Descriptor, directive.GetLocation()));
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(Descriptor, directive.GetLocation())
+                                );
 
                             currentState = newState;
                         }
-                        else if (directive.DirectiveNameToken.Kind() is
-                            SyntaxKind.IfKeyword or
-                            SyntaxKind.ElifKeyword or
-                            SyntaxKind.ElseKeyword or
-                            SyntaxKind.EndIfKeyword)
+                        else if (
+                            directive.DirectiveNameToken.Kind()
+                            is SyntaxKind.IfKeyword
+                                or SyntaxKind.ElifKeyword
+                                or SyntaxKind.ElseKeyword
+                                or SyntaxKind.EndIfKeyword
+                        )
                         {
                             // Reset the known nullable state when crossing a conditional compilation boundary
                             currentState = null;
@@ -80,7 +108,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             });
         }
 
-        internal static NullableContextOptions? GetNullableContextOptions(NullableContextOptions compilationOptions, NullableContextOptions? options, NullableDirectiveTriviaSyntax directive)
+        internal static NullableContextOptions? GetNullableContextOptions(
+            NullableContextOptions compilationOptions,
+            NullableContextOptions? options,
+            NullableDirectiveTriviaSyntax directive
+        )
         {
             if (!directive.TargetToken.IsKind(SyntaxKind.None))
             {

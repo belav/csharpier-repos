@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
 using System.Workflow.ComponentModel.Design;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -23,6 +23,7 @@ namespace System.Workflow.Activities.Rules
         public abstract ICollection<string> GetDependencies(RuleValidation validation);
 
         public abstract string Name { get; set; }
+
         public virtual void OnRuntimeInitialized() { }
 
         public abstract RuleCondition Clone();
@@ -37,19 +38,19 @@ namespace System.Workflow.Activities.Rules
         private CodeExpression _expression;
         private string _name;
         private bool _runtimeInitialized;
+
         [NonSerialized]
         private object _expressionLock = new object();
 
         public override string Name
         {
-            get
-            {
-                return this._name;
-            }
+            get { return this._name; }
             set
             {
                 if (this._runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
 
                 this._name = value;
             }
@@ -58,14 +59,13 @@ namespace System.Workflow.Activities.Rules
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public CodeExpression Expression
         {
-            get
-            {
-                return _expression;
-            }
+            get { return _expression; }
             set
             {
                 if (this._runtimeInitialized)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
 
                 lock (this._expressionLock)
                 {
@@ -77,9 +77,7 @@ namespace System.Workflow.Activities.Rules
         #endregion
 
         #region Constructors
-        public RuleExpressionCondition()
-        {
-        }
+        public RuleExpressionCondition() { }
 
         public RuleExpressionCondition(string conditionName)
         {
@@ -107,12 +105,10 @@ namespace System.Workflow.Activities.Rules
         public override void OnRuntimeInitialized()
         {
             if (this._runtimeInitialized)
-
                 return;
 
             _runtimeInitialized = true;
         }
-
 
         public override bool Equals(object obj)
         {
@@ -121,9 +117,22 @@ namespace System.Workflow.Activities.Rules
 
             if (declarativeConditionDefinition != null)
             {
-                equals = ((this.Name == declarativeConditionDefinition.Name) &&
-                          ((this._expression == null && declarativeConditionDefinition.Expression == null) ||
-                           (this._expression != null && RuleExpressionWalker.Match(this._expression, declarativeConditionDefinition.Expression))));
+                equals = (
+                    (this.Name == declarativeConditionDefinition.Name)
+                    && (
+                        (
+                            this._expression == null
+                            && declarativeConditionDefinition.Expression == null
+                        )
+                        || (
+                            this._expression != null
+                            && RuleExpressionWalker.Match(
+                                this._expression,
+                                declarativeConditionDefinition.Expression
+                            )
+                        )
+                    )
+                );
             }
 
             return equals;
@@ -163,11 +172,17 @@ namespace System.Workflow.Activities.Rules
             {
                 valid = false;
 
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ConditionExpressionNull, typeof(CodePrimitiveExpression).ToString());
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_EmptyExpression);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ConditionExpressionNull,
+                    typeof(CodePrimitiveExpression).ToString()
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_EmptyExpression
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = this;
                 validation.AddError(error);
-
             }
             else
             {
@@ -212,16 +227,16 @@ namespace System.Workflow.Activities.Rules
     [TypeConverter(typeof(Design.RuleConditionReferenceTypeConverter))]
     [ActivityValidator(typeof(RuleConditionReferenceValidator))]
     [SRDisplayName(SR.RuleConditionDisplayName)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class RuleConditionReference : ActivityCondition
     {
         private bool _runtimeInitialized;
         private string _condition;
         private string declaringActivityId = string.Empty;
 
-        public RuleConditionReference()
-        {
-        }
+        public RuleConditionReference() { }
 
         public string ConditionName
         {
@@ -237,7 +252,9 @@ namespace System.Workflow.Activities.Rules
             }
             if (string.IsNullOrEmpty(this._condition))
             {
-                throw new InvalidOperationException(SR.GetString(SR.Error_MissingConditionName, activity.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_MissingConditionName, activity.Name)
+                );
             }
 
             RuleDefinitions defs = null;
@@ -251,7 +268,10 @@ namespace System.Workflow.Activities.Rules
             else
             {
                 // Runtime Initialized.
-                defs = (RuleDefinitions)activity.GetActivityByName(declaringActivityId).GetValue(RuleDefinitions.RuleDefinitionsProperty);
+                defs = (RuleDefinitions)
+                    activity
+                        .GetActivityByName(declaringActivityId)
+                        .GetValue(RuleDefinitions.RuleDefinitionsProperty);
             }
 
             if ((defs == null) || (defs.Conditions == null))
@@ -262,15 +282,24 @@ namespace System.Workflow.Activities.Rules
             RuleCondition conditionDefinitionToEvaluate = defs.Conditions[this._condition];
             if (conditionDefinitionToEvaluate != null)
             {
-                Activity contextActivity = System.Workflow.Activities.Common.Helpers.GetEnclosingActivity(activity);
+                Activity contextActivity =
+                    System.Workflow.Activities.Common.Helpers.GetEnclosingActivity(activity);
                 RuleValidation validation = new RuleValidation(contextActivity);
                 if (!conditionDefinitionToEvaluate.Validate(validation))
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.ConditionValidationFailed, this._condition);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ConditionValidationFailed,
+                        this._condition
+                    );
                     throw new InvalidOperationException(message);
                 }
 
-                RuleExecution context = new RuleExecution(validation, contextActivity, provider as ActivityExecutionContext);
+                RuleExecution context = new RuleExecution(
+                    validation,
+                    contextActivity,
+                    provider as ActivityExecutionContext
+                );
                 return conditionDefinitionToEvaluate.Evaluate(context);
             }
             else
@@ -281,11 +310,13 @@ namespace System.Workflow.Activities.Rules
         }
 
         //
-        //  Method extracted from OnRuntimeInitialized 
+        //  Method extracted from OnRuntimeInitialized
         //  used on special Evaluation case too.
         //
         private static RuleDefinitions GetRuleDefinitions(
-            Activity activity, out CompositeActivity declaringActivity)
+            Activity activity,
+            out CompositeActivity declaringActivity
+        )
         {
             declaringActivity = Helpers.GetDeclaringActivity(activity);
             if (declaringActivity == null)
@@ -310,7 +341,10 @@ namespace System.Workflow.Activities.Rules
                 CompositeActivity declaringActivity = null;
                 Activity ownerActivity = base.ParentDependencyObject as Activity;
 
-                RuleDefinitions definitions = GetRuleDefinitions(ownerActivity, out declaringActivity);
+                RuleDefinitions definitions = GetRuleDefinitions(
+                    ownerActivity,
+                    out declaringActivity
+                );
                 definitions.OnRuntimeInitialized();
 
                 this.declaringActivityId = declaringActivity.QualifiedName;
@@ -319,7 +353,6 @@ namespace System.Workflow.Activities.Rules
             }
         }
         #endregion
-
     }
     #endregion
 
@@ -342,21 +375,35 @@ namespace System.Workflow.Activities.Rules
             RuleConditionReference declarativeCondition = obj as RuleConditionReference;
             if (declarativeCondition == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.UnexpectedArgumentType, typeof(RuleConditionReference).FullName, "obj");
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnexpectedArgumentType,
+                    typeof(RuleConditionReference).FullName,
+                    "obj"
+                );
                 throw new ArgumentException(message, "obj");
             }
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ContextStackItemMissing, typeof(Activity).Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ContextStackItemMissing,
+                    typeof(Activity).Name
+                );
                 throw new InvalidOperationException(message);
             }
 
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ContextStackItemMissing, typeof(PropertyValidationContext).Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ContextStackItemMissing,
+                    typeof(PropertyValidationContext).Name
+                );
                 throw new InvalidOperationException(message);
             }
             if (!string.IsNullOrEmpty(declarativeCondition.ConditionName))
@@ -377,23 +424,45 @@ namespace System.Workflow.Activities.Rules
                 if (rules != null)
                     conditionDefinitions = rules.Conditions;
 
-                if (conditionDefinitions == null || !conditionDefinitions.Contains(declarativeCondition.ConditionName))
+                if (
+                    conditionDefinitions == null
+                    || !conditionDefinitions.Contains(declarativeCondition.ConditionName)
+                )
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.ConditionNotFound, declarativeCondition.ConditionName);
-                    ValidationError validationError = new ValidationError(message, ErrorNumbers.Error_ConditionNotFound);
-                    validationError.PropertyName = GetFullPropertyName(manager) + "." + "ConditionName";
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ConditionNotFound,
+                        declarativeCondition.ConditionName
+                    );
+                    ValidationError validationError = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_ConditionNotFound
+                    );
+                    validationError.PropertyName =
+                        GetFullPropertyName(manager) + "." + "ConditionName";
                     validationErrors.Add(validationError);
                 }
                 else
                 {
-                    RuleCondition actualCondition = conditionDefinitions[declarativeCondition.ConditionName];
+                    RuleCondition actualCondition = conditionDefinitions[
+                        declarativeCondition.ConditionName
+                    ];
 
-                    ITypeProvider typeProvider = (ITypeProvider)manager.GetService(typeof(ITypeProvider));
+                    ITypeProvider typeProvider = (ITypeProvider)
+                        manager.GetService(typeof(ITypeProvider));
 
-                    IDisposable localContextScope = (WorkflowCompilationContext.Current == null ? WorkflowCompilationContext.CreateScope(manager) : null);
+                    IDisposable localContextScope = (
+                        WorkflowCompilationContext.Current == null
+                            ? WorkflowCompilationContext.CreateScope(manager)
+                            : null
+                    );
                     try
                     {
-                        RuleValidation ruleValidator = new RuleValidation(activity, typeProvider, WorkflowCompilationContext.Current.CheckTypes);
+                        RuleValidation ruleValidator = new RuleValidation(
+                            activity,
+                            typeProvider,
+                            WorkflowCompilationContext.Current.CheckTypes
+                        );
                         actualCondition.Validate(ruleValidator);
 
                         ValidationErrorCollection actualConditionErrors = ruleValidator.Errors;
@@ -401,21 +470,33 @@ namespace System.Workflow.Activities.Rules
                         if (actualConditionErrors.Count > 0)
                         {
                             string expressionPropertyName = GetFullPropertyName(manager);
-                            string genericErrorMsg = string.Format(CultureInfo.CurrentCulture, Messages.InvalidConditionExpression, expressionPropertyName);
+                            string genericErrorMsg = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.InvalidConditionExpression,
+                                expressionPropertyName
+                            );
                             int errorNumber = ErrorNumbers.Error_InvalidConditionExpression;
 
                             if (activity.Site != null)
                             {
-                                ValidationError validationError = new ValidationError(genericErrorMsg, errorNumber);
-                                validationError.PropertyName = expressionPropertyName + "." + "Expression";
+                                ValidationError validationError = new ValidationError(
+                                    genericErrorMsg,
+                                    errorNumber
+                                );
+                                validationError.PropertyName =
+                                    expressionPropertyName + "." + "Expression";
                                 validationErrors.Add(validationError);
                             }
                             else
                             {
                                 foreach (ValidationError actualError in actualConditionErrors)
                                 {
-                                    ValidationError validationError = new ValidationError(genericErrorMsg + " " + actualError.ErrorText, errorNumber);
-                                    validationError.PropertyName = expressionPropertyName + "." + "Expression";
+                                    ValidationError validationError = new ValidationError(
+                                        genericErrorMsg + " " + actualError.ErrorText,
+                                        errorNumber
+                                    );
+                                    validationError.PropertyName =
+                                        expressionPropertyName + "." + "Expression";
                                     validationErrors.Add(validationError);
                                 }
                             }
@@ -424,11 +505,22 @@ namespace System.Workflow.Activities.Rules
                         // Test duplicates
                         foreach (RuleCondition definition in conditionDefinitions)
                         {
-                            if (definition.Name == declarativeCondition.ConditionName && definition != actualCondition)
+                            if (
+                                definition.Name == declarativeCondition.ConditionName
+                                && definition != actualCondition
+                            )
                             {
-                                string message = string.Format(CultureInfo.CurrentCulture, Messages.DuplicateConditions, declarativeCondition.ConditionName);
-                                ValidationError validationError = new ValidationError(message, ErrorNumbers.Error_DuplicateConditions);
-                                validationError.PropertyName = GetFullPropertyName(manager) + "." + "ConditionName";
+                                string message = string.Format(
+                                    CultureInfo.CurrentCulture,
+                                    Messages.DuplicateConditions,
+                                    declarativeCondition.ConditionName
+                                );
+                                ValidationError validationError = new ValidationError(
+                                    message,
+                                    ErrorNumbers.Error_DuplicateConditions
+                                );
+                                validationError.PropertyName =
+                                    GetFullPropertyName(manager) + "." + "ConditionName";
                                 validationErrors.Add(validationError);
                             }
                         }
@@ -444,8 +536,15 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.InvalidConditionName, "ConditionName");
-                ValidationError validationError = new ValidationError(message, ErrorNumbers.Error_InvalidConditionName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.InvalidConditionName,
+                    "ConditionName"
+                );
+                ValidationError validationError = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidConditionName
+                );
                 validationError.PropertyName = GetFullPropertyName(manager) + "." + "ConditionName";
                 validationErrors.Add(validationError);
             }

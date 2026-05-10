@@ -15,31 +15,54 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
     internal partial class SQLitePersistentStorage
     {
-        public override Task<bool> ChecksumMatchesAsync(string name, Checksum checksum, CancellationToken cancellationToken)
-            => _solutionAccessor.ChecksumMatchesAsync(_solutionKey, name, checksum, cancellationToken);
+        public override Task<bool> ChecksumMatchesAsync(
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        ) =>
+            _solutionAccessor.ChecksumMatchesAsync(_solutionKey, name, checksum, cancellationToken);
 
-        public override Task<Stream?> ReadStreamAsync(string name, Checksum? checksum, CancellationToken cancellationToken)
-            => _solutionAccessor.ReadStreamAsync(_solutionKey, name, checksum, cancellationToken);
+        public override Task<Stream?> ReadStreamAsync(
+            string name,
+            Checksum? checksum,
+            CancellationToken cancellationToken
+        ) => _solutionAccessor.ReadStreamAsync(_solutionKey, name, checksum, cancellationToken);
 
-        public override Task<bool> WriteStreamAsync(string name, Stream stream, Checksum? checksum, CancellationToken cancellationToken)
-            => _solutionAccessor.WriteStreamAsync(_solutionKey, name, stream, checksum, cancellationToken);
+        public override Task<bool> WriteStreamAsync(
+            string name,
+            Stream stream,
+            Checksum? checksum,
+            CancellationToken cancellationToken
+        ) =>
+            _solutionAccessor.WriteStreamAsync(
+                _solutionKey,
+                name,
+                stream,
+                checksum,
+                cancellationToken
+            );
 
         private readonly record struct SolutionPrimaryKey();
 
         /// <summary>
-        /// <see cref="Accessor{TKey, TDatabaseId}"/> responsible for storing and 
-        /// retrieving data from <see cref="SolutionDataTableName"/>.  Note that with the Solution 
+        /// <see cref="Accessor{TKey, TDatabaseId}"/> responsible for storing and
+        /// retrieving data from <see cref="SolutionDataTableName"/>.  Note that with the Solution
         /// table there is no need for key->id translation.  i.e. the key acts as the ID itself.
         /// </summary>
-        private sealed class SolutionAccessor(SQLitePersistentStorage storage) : Accessor<SolutionKey, SolutionPrimaryKey>(Table.Solution,
-                  storage)
+        private sealed class SolutionAccessor(SQLitePersistentStorage storage)
+            : Accessor<SolutionKey, SolutionPrimaryKey>(Table.Solution, storage)
         {
-
             // For the SolutionDataTable the key itself acts as the data-id.
-            protected override SolutionPrimaryKey? TryGetDatabaseKey(SqlConnection connection, SolutionKey key, bool allowWrite)
-                => new SolutionPrimaryKey();
+            protected override SolutionPrimaryKey? TryGetDatabaseKey(
+                SqlConnection connection,
+                SolutionKey key,
+                bool allowWrite
+            ) => new SolutionPrimaryKey();
 
-            protected override void BindAccessorSpecificPrimaryKeyParameters(SqlStatement statement, SolutionPrimaryKey primaryKey)
+            protected override void BindAccessorSpecificPrimaryKeyParameters(
+                SqlStatement statement,
+                SolutionPrimaryKey primaryKey
+            )
             {
                 // nothing to do.  A solution row just needs the id of the data-name (which the caller handles).
             }

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Classification
             ClassificationType type,
             ClassificationOptions options,
             bool isFullyLoaded,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Tries to get cached semantic classifications for the specified document and the specified <paramref
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Classification
             ImmutableArray<TextSpan> textSpans,
             ClassificationType type,
             Checksum checksum,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>
@@ -62,7 +64,10 @@ namespace Microsoft.CodeAnalysis.Classification
     /// second and third ints encode the span.
     /// </summary>
     [DataContract]
-    internal sealed class SerializableClassifiedSpans(ImmutableArray<string> classificationTypes, ImmutableArray<int> classificationTriples)
+    internal sealed class SerializableClassifiedSpans(
+        ImmutableArray<string> classificationTypes,
+        ImmutableArray<int> classificationTriples
+    )
     {
         [DataMember(Order = 0)]
         public readonly ImmutableArray<string> ClassificationTypes = classificationTypes;
@@ -70,16 +75,24 @@ namespace Microsoft.CodeAnalysis.Classification
         [DataMember(Order = 1)]
         public readonly ImmutableArray<int> ClassificationTriples = classificationTriples;
 
-        internal static SerializableClassifiedSpans Dehydrate(ImmutableArray<ClassifiedSpan> classifiedSpans)
+        internal static SerializableClassifiedSpans Dehydrate(
+            ImmutableArray<ClassifiedSpan> classifiedSpans
+        )
         {
             using var _ = PooledDictionary<string, int>.GetInstance(out var classificationTypeToId);
             return Dehydrate(classifiedSpans, classificationTypeToId);
         }
 
-        private static SerializableClassifiedSpans Dehydrate(ImmutableArray<ClassifiedSpan> classifiedSpans, Dictionary<string, int> classificationTypeToId)
+        private static SerializableClassifiedSpans Dehydrate(
+            ImmutableArray<ClassifiedSpan> classifiedSpans,
+            Dictionary<string, int> classificationTypeToId
+        )
         {
             using var _1 = ArrayBuilder<string>.GetInstance(out var classificationTypes);
-            using var _2 = ArrayBuilder<int>.GetInstance(capacity: classifiedSpans.Length * 3, out var classificationTriples);
+            using var _2 = ArrayBuilder<int>.GetInstance(
+                capacity: classifiedSpans.Length * 3,
+                out var classificationTriples
+            );
 
             foreach (var classifiedSpan in classifiedSpans)
             {
@@ -99,18 +112,20 @@ namespace Microsoft.CodeAnalysis.Classification
 
             return new SerializableClassifiedSpans(
                 classificationTypes.ToImmutableAndClear(),
-                classificationTriples.ToImmutableAndClear());
+                classificationTriples.ToImmutableAndClear()
+            );
         }
 
         internal void Rehydrate(SegmentedList<ClassifiedSpan> classifiedSpans)
         {
             for (int i = 0, n = ClassificationTriples.Length; i < n; i += 3)
             {
-                classifiedSpans.Add(new ClassifiedSpan(
-                    ClassificationTypes[ClassificationTriples[i + 0]],
-                    new TextSpan(
-                        ClassificationTriples[i + 1],
-                        ClassificationTriples[i + 2])));
+                classifiedSpans.Add(
+                    new ClassifiedSpan(
+                        ClassificationTypes[ClassificationTriples[i + 0]],
+                        new TextSpan(ClassificationTriples[i + 1], ClassificationTriples[i + 2])
+                    )
+                );
             }
         }
     }

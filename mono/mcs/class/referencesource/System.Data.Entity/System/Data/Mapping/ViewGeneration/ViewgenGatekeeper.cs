@@ -22,7 +22,7 @@ namespace System.Data.Mapping.ViewGeneration
 {
     using CellGroup = Set<Cell>;
 
-    abstract internal class ViewgenGatekeeper : InternalBase
+    internal abstract class ViewgenGatekeeper : InternalBase
     {
         /// <summary>
         /// Entry point for View Generation
@@ -31,11 +31,17 @@ namespace System.Data.Mapping.ViewGeneration
         /// <param name="workSpace"></param>
         /// <param name="config"></param>
         /// <returns>Generated Views for EntitySets</returns>
-        internal static ViewGenResults GenerateViewsFromMapping(StorageEntityContainerMapping containerMapping, ConfigViewGenerator config)
+        internal static ViewGenResults GenerateViewsFromMapping(
+            StorageEntityContainerMapping containerMapping,
+            ConfigViewGenerator config
+        )
         {
             EntityUtil.CheckArgumentNull(containerMapping, "containerMapping");
             EntityUtil.CheckArgumentNull(config, "config");
-            Debug.Assert(containerMapping.HasViews, "Precondition Violated: No mapping exists to generate views for!");
+            Debug.Assert(
+                containerMapping.HasViews,
+                "Precondition Violated: No mapping exists to generate views for!"
+            );
 
             if (config.IsNormalTracing)
             {
@@ -53,28 +59,41 @@ namespace System.Data.Mapping.ViewGeneration
         /// <summary>
         /// Entry point for Type specific generation of Query Views
         /// </summary>
-        internal static ViewGenResults GenerateTypeSpecificQueryView(StorageEntityContainerMapping containerMapping,
-                                                              ConfigViewGenerator config,
-                                                              EntitySetBase entity,
-                                                              EntityTypeBase type,
-                                                              bool includeSubtypes,
-                                                              out bool success)
+        internal static ViewGenResults GenerateTypeSpecificQueryView(
+            StorageEntityContainerMapping containerMapping,
+            ConfigViewGenerator config,
+            EntitySetBase entity,
+            EntityTypeBase type,
+            bool includeSubtypes,
+            out bool success
+        )
         {
             EntityUtil.CheckArgumentNull(containerMapping, "containerMapping");
             EntityUtil.CheckArgumentNull(config, "config");
             EntityUtil.CheckArgumentNull(entity, "entity");
             EntityUtil.CheckArgumentNull(type, "type");
-            Debug.Assert(!type.Abstract, "Can not generate OfType/OfTypeOnly query view for and abstract type");
+            Debug.Assert(
+                !type.Abstract,
+                "Can not generate OfType/OfTypeOnly query view for and abstract type"
+            );
 
             if (config.IsNormalTracing)
             {
                 Helpers.StringTraceLine("");
-                Helpers.StringTraceLine("<<<<<<<< Generating Query View for Entity [" + entity.Name + "] OfType" + (includeSubtypes ? "" : "Only") + "(" + type.Name + ") >>>>>>>");
+                Helpers.StringTraceLine(
+                    "<<<<<<<< Generating Query View for Entity ["
+                        + entity.Name
+                        + "] OfType"
+                        + (includeSubtypes ? "" : "Only")
+                        + "("
+                        + type.Name
+                        + ") >>>>>>>"
+                );
             }
 
             if (containerMapping.GetEntitySetMapping(entity.Name).QueryView != null)
             {
-                //Type-specific QV does not exist in the cache, but 
+                //Type-specific QV does not exist in the cache, but
                 // there is a EntitySet QV. So we can't generate the view (no mapping exists for this EntitySet)
                 // and we rely on Query to call us again to get the EntitySet View.
                 success = false;
@@ -82,7 +101,10 @@ namespace System.Data.Mapping.ViewGeneration
             }
 
             //Compute Cell Groups or get it from Memoizer
-            InputForComputingCellGroups args = new InputForComputingCellGroups(containerMapping, config);
+            InputForComputingCellGroups args = new InputForComputingCellGroups(
+                containerMapping,
+                config
+            );
             OutputFromComputeCellGroups result = containerMapping.GetCellgroups(args);
             success = result.Success;
 
@@ -93,13 +115,20 @@ namespace System.Data.Mapping.ViewGeneration
 
             List<ForeignConstraint> foreignKeyConstraints = result.ForeignKeyConstraints;
             // Get a Clone of cell groups from cache since cells are modified during viewgen, and we dont want the cached copy to change
-            List<CellGroup> cellGroups = cellGroups = result.CellGroups.Select(setOfcells => new CellGroup(setOfcells.Select(cell => new Cell(cell)))).ToList();
+            List<CellGroup> cellGroups = cellGroups = result
+                .CellGroups.Select(setOfcells => new CellGroup(
+                    setOfcells.Select(cell => new Cell(cell))
+                ))
+                .ToList();
             List<Cell> cells = result.Cells;
             CqlIdentifiers identifiers = result.Identifiers;
 
-
             ViewGenResults viewGenResults = new ViewGenResults();
-            ErrorLog tmpLog = EnsureAllCSpaceContainerSetsAreMapped(cells, config, containerMapping);
+            ErrorLog tmpLog = EnsureAllCSpaceContainerSetsAreMapped(
+                cells,
+                config,
+                containerMapping
+            );
             if (tmpLog.Count > 0)
             {
                 viewGenResults.AddErrors(tmpLog);
@@ -119,12 +148,20 @@ namespace System.Data.Mapping.ViewGeneration
                 ErrorLog groupErrorLog = new ErrorLog();
                 try
                 {
-                    viewGenerator = new ViewGenerator(cellGroup, config, foreignKeyConstraints, containerMapping);
+                    viewGenerator = new ViewGenerator(
+                        cellGroup,
+                        config,
+                        foreignKeyConstraints,
+                        containerMapping
+                    );
                 }
                 catch (InternalMappingException exception)
                 {
                     // All exceptions have mapping errors in them
-                    Debug.Assert(exception.ErrorLog.Count > 0, "Incorrectly created mapping exception");
+                    Debug.Assert(
+                        exception.ErrorLog.Count > 0,
+                        "Incorrectly created mapping exception"
+                    );
                     groupErrorLog = exception.ErrorLog;
                 }
 
@@ -134,9 +171,17 @@ namespace System.Data.Mapping.ViewGeneration
                 }
                 Debug.Assert(viewGenerator != null); //make sure there is no exception thrown that does not add error to log
 
-                ViewGenMode mode = includeSubtypes ? ViewGenMode.OfTypeViews : ViewGenMode.OfTypeOnlyViews;
+                ViewGenMode mode = includeSubtypes
+                    ? ViewGenMode.OfTypeViews
+                    : ViewGenMode.OfTypeOnlyViews;
 
-                groupErrorLog = viewGenerator.GenerateQueryViewForSingleExtent(viewGenResults.Views, identifiers, entity, type, mode);
+                groupErrorLog = viewGenerator.GenerateQueryViewForSingleExtent(
+                    viewGenResults.Views,
+                    identifiers,
+                    entity,
+                    type,
+                    mode
+                );
 
                 if (groupErrorLog.Count != 0)
                 {
@@ -148,27 +193,35 @@ namespace System.Data.Mapping.ViewGeneration
             return viewGenResults;
         }
 
-
         // effects: Given a list of cells in the schema, generates the query and
         // update mapping views for OFTYPE(Extent, Type) combinations in this schema
         // container. Returns a list of generated query and update views.
         // If it is false and some columns in a table are unmapped, an
         // exception is raised
-        private static ViewGenResults GenerateViewsFromCells(List<Cell> cells, ConfigViewGenerator config,
-                                                                   CqlIdentifiers identifiers,
-                                                                   StorageEntityContainerMapping containerMapping)
+        private static ViewGenResults GenerateViewsFromCells(
+            List<Cell> cells,
+            ConfigViewGenerator config,
+            CqlIdentifiers identifiers,
+            StorageEntityContainerMapping containerMapping
+        )
         {
             EntityUtil.CheckArgumentNull(cells, "cells");
             EntityUtil.CheckArgumentNull(config, "config");
-            Debug.Assert(cells.Count > 0, "There must be at least one cell in the container mapping");
-
+            Debug.Assert(
+                cells.Count > 0,
+                "There must be at least one cell in the container mapping"
+            );
 
             // Go through each table and determine their foreign key constraints
             EntityContainer container = containerMapping.StorageEntityContainer;
             Debug.Assert(container != null);
 
             ViewGenResults viewGenResults = new ViewGenResults();
-            ErrorLog tmpLog = EnsureAllCSpaceContainerSetsAreMapped(cells, config, containerMapping);
+            ErrorLog tmpLog = EnsureAllCSpaceContainerSetsAreMapped(
+                cells,
+                config,
+                containerMapping
+            );
             if (tmpLog.Count > 0)
             {
                 viewGenResults.AddErrors(tmpLog);
@@ -176,7 +229,9 @@ namespace System.Data.Mapping.ViewGeneration
                 return viewGenResults;
             }
 
-            List<ForeignConstraint> foreignKeyConstraints = ForeignConstraint.GetForeignConstraints(container);
+            List<ForeignConstraint> foreignKeyConstraints = ForeignConstraint.GetForeignConstraints(
+                container
+            );
 
             CellPartitioner partitioner = new CellPartitioner(cells, foreignKeyConstraints);
             List<CellGroup> cellGroups = partitioner.GroupRelatedCells();
@@ -186,19 +241,30 @@ namespace System.Data.Mapping.ViewGeneration
                 ErrorLog groupErrorLog = new ErrorLog();
                 try
                 {
-                    viewGenerator = new ViewGenerator(cellGroup, config, foreignKeyConstraints, containerMapping);
+                    viewGenerator = new ViewGenerator(
+                        cellGroup,
+                        config,
+                        foreignKeyConstraints,
+                        containerMapping
+                    );
                 }
                 catch (InternalMappingException exception)
                 {
                     // All exceptions have mapping errors in them
-                    Debug.Assert(exception.ErrorLog.Count > 0, "Incorrectly created mapping exception");
+                    Debug.Assert(
+                        exception.ErrorLog.Count > 0,
+                        "Incorrectly created mapping exception"
+                    );
                     groupErrorLog = exception.ErrorLog;
                 }
 
                 if (groupErrorLog.Count == 0)
                 {
                     Debug.Assert(viewGenerator != null);
-                    groupErrorLog = viewGenerator.GenerateAllBidirectionalViews(viewGenResults.Views, identifiers);
+                    groupErrorLog = viewGenerator.GenerateAllBidirectionalViews(
+                        viewGenResults.Views,
+                        identifiers
+                    );
                 }
 
                 if (groupErrorLog.Count != 0)
@@ -213,15 +279,14 @@ namespace System.Data.Mapping.ViewGeneration
             return viewGenResults;
         }
 
-
-
         // effects: Given a container, ensures that all entity/association
         // sets in container on the C-side have been mapped
-        private static ErrorLog EnsureAllCSpaceContainerSetsAreMapped(IEnumerable<Cell> cells,
-                                                                      ConfigViewGenerator config,
-                                                                      StorageEntityContainerMapping containerMapping)
+        private static ErrorLog EnsureAllCSpaceContainerSetsAreMapped(
+            IEnumerable<Cell> cells,
+            ConfigViewGenerator config,
+            StorageEntityContainerMapping containerMapping
+        )
         {
-
             Set<EntitySetBase> mappedExtents = new Set<EntitySetBase>();
             string mslFileLocation = null;
             EntityContainer container = null;
@@ -241,11 +306,13 @@ namespace System.Data.Mapping.ViewGeneration
             // extents that are missing
             foreach (EntitySetBase extent in container.BaseEntitySets)
             {
-                if (mappedExtents.Contains(extent) == false
-                    && !(containerMapping.HasQueryViewForSetMap(extent.Name)))
+                if (
+                    mappedExtents.Contains(extent) == false
+                    && !(containerMapping.HasQueryViewForSetMap(extent.Name))
+                )
                 {
                     AssociationSet associationSet = extent as AssociationSet;
-                    if (associationSet==null || !associationSet.ElementType.IsForeignKey)
+                    if (associationSet == null || !associationSet.ElementType.IsForeignKey)
                     {
                         missingExtents.Add(extent);
                     }
@@ -266,7 +333,9 @@ namespace System.Data.Mapping.ViewGeneration
                     isFirst = false;
                     extentBuilder.Append(extent.Name);
                 }
-                string message = System.Data.Entity.Strings.ViewGen_Missing_Set_Mapping(extentBuilder);
+                string message = System.Data.Entity.Strings.ViewGen_Missing_Set_Mapping(
+                    extentBuilder
+                );
                 // Find the cell with smallest line number - so that we can
                 // point to the beginning of the file
                 int lowestLineNum = -1;
@@ -280,20 +349,20 @@ namespace System.Data.Mapping.ViewGeneration
                     }
                 }
                 Debug.Assert(smallestCell != null && lowestLineNum >= 0);
-                EdmSchemaError edmSchemaError = new EdmSchemaError(message, (int)ViewGenErrorCode.MissingExtentMapping,
-                    EdmSchemaErrorSeverity.Error, containerMapping.SourceLocation, containerMapping.StartLineNumber,
-                    containerMapping.StartLinePosition, null);
+                EdmSchemaError edmSchemaError = new EdmSchemaError(
+                    message,
+                    (int)ViewGenErrorCode.MissingExtentMapping,
+                    EdmSchemaErrorSeverity.Error,
+                    containerMapping.SourceLocation,
+                    containerMapping.StartLineNumber,
+                    containerMapping.StartLinePosition,
+                    null
+                );
                 ErrorLog.Record record = new ErrorLog.Record(edmSchemaError);
                 errorLog.AddEntry(record);
             }
             return errorLog;
         }
-
-
-
-
-
-
 
         #region Static Helpers
         private static bool DoesCellGroupContainEntitySet(CellGroup group, EntitySetBase entity)
@@ -310,12 +379,6 @@ namespace System.Data.Mapping.ViewGeneration
         }
         #endregion
 
-        internal override void ToCompactString(StringBuilder builder)
-        {
-
-        }
-
-
+        internal override void ToCompactString(StringBuilder builder) { }
     }
-
 }

@@ -67,7 +67,10 @@ public class CollectionEntryTest
         Assert.Same(chunky, cherry.Monkeys.Single());
         Assert.Equal(cherry.Id, chunky.GarciaId);
         Assert.Same(chunky, collection.CurrentValue.Cast<Chunky>().Single());
-        Assert.Same(collection.FindEntry(chunky).GetInfrastructure(), context.Entry(chunky).GetInfrastructure());
+        Assert.Same(
+            collection.FindEntry(chunky).GetInfrastructure(),
+            context.Entry(chunky).GetInfrastructure()
+        );
 
         collection.CurrentValue = null;
 
@@ -96,7 +99,10 @@ public class CollectionEntryTest
         Assert.Same(chunky, cherry.Monkeys.Single());
         Assert.Equal(cherry.Id, chunky.GarciaId);
         Assert.Same(chunky, collection.CurrentValue.Single());
-        Assert.Same(collection.FindEntry(chunky).GetInfrastructure(), context.Entry(chunky).GetInfrastructure());
+        Assert.Same(
+            collection.FindEntry(chunky).GetInfrastructure(),
+            context.Entry(chunky).GetInfrastructure()
+        );
 
         collection.CurrentValue = null;
 
@@ -331,7 +337,8 @@ public class CollectionEntryTest
     [InlineData(EntityState.Unchanged, EntityState.Deleted)]
     public void IsModified_can_set_fk_to_modified_principal_with_Added_or_Deleted_dependents(
         EntityState principalState,
-        EntityState dependentState)
+        EntityState dependentState
+    )
     {
         using var context = new FreezerContext();
         var cherry = new Cherry();
@@ -386,7 +393,8 @@ public class CollectionEntryTest
     [InlineData(EntityState.Unchanged, EntityState.Unchanged)]
     public void IsModified_can_set_fk_to_modified_principal_with_Unchanged_dependents(
         EntityState principalState,
-        EntityState dependentState)
+        EntityState dependentState
+    )
     {
         using var context = new FreezerContext();
         var cherry = new Cherry();
@@ -425,7 +433,8 @@ public class CollectionEntryTest
     [InlineData(EntityState.Unchanged, EntityState.Modified)]
     public void IsModified_can_set_fk_to_modified_principal_with_Modified_dependents(
         EntityState principalState,
-        EntityState dependentState)
+        EntityState dependentState
+    )
     {
         using var context = new FreezerContext();
         var cherry = new Cherry { Id = 1 };
@@ -478,8 +487,8 @@ public class CollectionEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 

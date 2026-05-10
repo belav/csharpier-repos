@@ -1,10 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-#if FEATURE_REGISTRY
-using Microsoft.Win32;
-#endif
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+#if FEATURE_REGISTRY
+using Microsoft.Win32;
+#endif
 
 namespace System.Diagnostics
 {
@@ -23,7 +22,10 @@ namespace System.Diagnostics
         private readonly string _machineName;
         private readonly string _perfLcid;
 
-        private static ConcurrentDictionary<(string machineName, string lcidString), PerformanceCounterLib>? s_libraryTable;
+        private static ConcurrentDictionary<
+            (string machineName, string lcidString),
+            PerformanceCounterLib
+        >? s_libraryTable;
         private Dictionary<int, string>? _nameTable;
         private readonly object _nameTableLock = new object();
 
@@ -36,7 +38,12 @@ namespace System.Diagnostics
         }
 
         /// <internalonly/>
-        internal static string ComputerName => LazyInitializer.EnsureInitialized<string>(ref s_computerName, ref s_internalSyncObject, () => Interop.Kernel32.GetComputerName() ?? "");
+        internal static string ComputerName =>
+            LazyInitializer.EnsureInitialized<string>(
+                ref s_computerName,
+                ref s_internalSyncObject,
+                () => Interop.Kernel32.GetComputerName() ?? ""
+            );
 
         internal Dictionary<int, string> NameTable
         {
@@ -60,7 +67,10 @@ namespace System.Diagnostics
             return NameTable.TryGetValue(index, out result) ? result : "";
         }
 
-        internal static PerformanceCounterLib GetPerformanceCounterLib(string machineName, CultureInfo culture)
+        internal static PerformanceCounterLib GetPerformanceCounterLib(
+            string machineName,
+            CultureInfo culture
+        )
         {
             string lcidString = culture.Name.ToLowerInvariant();
             if (machineName.CompareTo(".") == 0)
@@ -68,9 +78,16 @@ namespace System.Diagnostics
             else
                 machineName = machineName.ToLowerInvariant();
 
-            LazyInitializer.EnsureInitialized(ref s_libraryTable, ref s_internalSyncObject, () => new ConcurrentDictionary<(string, string), PerformanceCounterLib>());
+            LazyInitializer.EnsureInitialized(
+                ref s_libraryTable,
+                ref s_internalSyncObject,
+                () => new ConcurrentDictionary<(string, string), PerformanceCounterLib>()
+            );
 
-            return PerformanceCounterLib.s_libraryTable.GetOrAdd((machineName, lcidString), (key) => new PerformanceCounterLib(key.machineName, key.lcidString));
+            return PerformanceCounterLib.s_libraryTable.GetOrAdd(
+                (machineName, lcidString),
+                (key) => new PerformanceCounterLib(key.machineName, key.lcidString)
+            );
         }
 
         internal byte[]? GetPerformanceData(string item)
@@ -97,7 +114,7 @@ namespace System.Diagnostics
             try
             {
                 string[]? names = null;
-                int waitRetries = 14;   //((2^13)-1)*10ms == approximately 1.4mins
+                int waitRetries = 14; //((2^13)-1)*10ms == approximately 1.4mins
                 int waitSleep = 0;
 
                 // In some stress situations, querying counter values from
@@ -156,17 +173,28 @@ namespace System.Diagnostics
                         string nameString = names[(index * 2) + 1] ?? string.Empty;
 
                         int key;
-                        if (!int.TryParse(names[index * 2], NumberStyles.Integer, CultureInfo.InvariantCulture, out key))
+                        if (
+                            !int.TryParse(
+                                names[index * 2],
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out key
+                            )
+                        )
                         {
                             if (isHelp)
                             {
                                 // Category Help Table
-                                throw new InvalidOperationException(SR.Format(SR.CategoryHelpCorrupt, names[index * 2]));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.CategoryHelpCorrupt, names[index * 2])
+                                );
                             }
                             else
                             {
                                 // Counter Name Table
-                                throw new InvalidOperationException(SR.Format(SR.CounterNameCorrupt, names[index * 2]));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.CounterNameCorrupt, names[index * 2])
+                                );
                             }
                         }
 
@@ -206,7 +234,10 @@ namespace System.Diagnostics
             {
                 if (ProcessManager.IsRemoteMachine(_machineName))
                 {
-                    _perfDataKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.PerformanceData, _machineName);
+                    _perfDataKey = RegistryKey.OpenRemoteBaseKey(
+                        RegistryHive.PerformanceData,
+                        _machineName
+                    );
                 }
                 else
                 {
@@ -227,7 +258,7 @@ namespace System.Diagnostics
             internal byte[]? GetData(string item)
             {
 #if FEATURE_REGISTRY
-                int waitRetries = 17;   //2^16*10ms == approximately 10mins
+                int waitRetries = 17; //2^16*10ms == approximately 10mins
                 int waitSleep = 0;
                 byte[]? data = null;
                 int error = 0;
@@ -272,7 +303,10 @@ namespace System.Diagnostics
                     }
                     catch (InvalidCastException e)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.CounterDataCorrupt, _perfDataKey.ToString()), e);
+                        throw new InvalidOperationException(
+                            SR.Format(SR.CounterDataCorrupt, _perfDataKey.ToString()),
+                            e
+                        );
                     }
                 }
 

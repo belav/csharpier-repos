@@ -4,33 +4,28 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
 
-
-    public enum WizardStepType {
-
+    public enum WizardStepType
+    {
         /// <devdoc>
         /// </devdoc>
         Auto = 0,
-
 
         /// <devdoc>
         /// </devdoc>
         Complete,
 
-
         /// <devdoc>
         /// </devdoc>
         Finish,
 
-
         /// <devdoc>
         /// </devdoc>
         Start,
-
 
         /// <devdoc>
         /// </devdoc>

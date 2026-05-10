@@ -19,28 +19,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
     internal class LineSeparatorTag : GraphicsTag
     {
         public LineSeparatorTag(IEditorFormatMap editorFormatMap)
-            : base(editorFormatMap)
-        {
-        }
+            : base(editorFormatMap) { }
 
-        protected override Color? GetColor(
-            IWpfTextView view, IEditorFormatMap editorFormatMap)
+        protected override Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap)
         {
-            var brush = view.VisualElement.TryFindResource("outlining.verticalrule.foreground") as SolidColorBrush;
+            var brush =
+                view.VisualElement.TryFindResource("outlining.verticalrule.foreground")
+                as SolidColorBrush;
             return brush?.Color;
         }
 
         /// <summary>
         /// Creates a very long line at the bottom of bounds.
         /// </summary>
-        public override GraphicsResult GetGraphics(IWpfTextView view, Geometry bounds, TextFormattingRunProperties? format)
+        public override GraphicsResult GetGraphics(
+            IWpfTextView view,
+            Geometry bounds,
+            TextFormattingRunProperties? format
+        )
         {
             var border = new Border()
             {
                 BorderBrush = GetBrush(view),
                 BorderThickness = new Thickness(0, 0, 0, bottom: 1),
                 Height = 1,
-                Width = view.ViewportWidth
+                Width = view.ViewportWidth,
             };
 
             view.ViewportWidthChanged += ViewportWidthChangedHandler;
@@ -50,8 +53,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             // This makes the line separator line up with the outlining bracket.
             Canvas.SetTop(border, bounds.Bounds.Bottom - border.Height);
 
-            return new GraphicsResult(border,
-                () => view.ViewportWidthChanged -= ViewportWidthChangedHandler);
+            return new GraphicsResult(
+                border,
+                () => view.ViewportWidthChanged -= ViewportWidthChangedHandler
+            );
 
             void ViewportWidthChangedHandler(object s, EventArgs e)
             {

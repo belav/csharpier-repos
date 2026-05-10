@@ -28,8 +28,17 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new JsonConsoleFormatterOptions
                 {
                     IncludeScopes = true,
-                    JsonWriterOptions = new JsonWriterOptions() { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }
-                });
+                    JsonWriterOptions = new JsonWriterOptions()
+                    {
+                        Encoder = System
+                            .Text
+                            .Encodings
+                            .Web
+                            .JavaScriptEncoder
+                            .UnsafeRelaxedJsonEscaping,
+                    },
+                }
+            );
             var logger = t.Logger;
             var sink = t.Sink;
 
@@ -59,10 +68,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ConsoleLoggerOptions { FormatterName = ConsoleFormatterNames.Json },
                 simpleOptions: null,
                 systemdOptions: null,
-                jsonOptions: new JsonConsoleFormatterOptions
-                {
-                    TimestampFormat = "hh:mm:ss ",
-                }
+                jsonOptions: new JsonConsoleFormatterOptions { TimestampFormat = "hh:mm:ss " }
             );
             var logger = (ILogger)t.Logger;
             var sink = t.Sink;
@@ -75,7 +81,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             Assert.Equal(1, sink.Writes.Count);
             Assert.Contains(
                 "\"Timestamp\":",
-                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg)));
+                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -88,7 +95,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 systemdOptions: null,
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
-                    JsonWriterOptions = new JsonWriterOptions() { Indented = false }
+                    JsonWriterOptions = new JsonWriterOptions() { Indented = false },
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -104,22 +111,25 @@ namespace Microsoft.Extensions.Logging.Console.Test
             Assert.Equal(3, sink.Writes.Count);
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Critical\",\"Category\":\"test\",\"Message\":\"[null]\""
-                + ",\"State\":{\"Message\":\"[null]\",\"{OriginalFormat}\":\"[null]\"}}"
-                + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"State\":{\"Message\":\"[null]\",\"{OriginalFormat}\":\"[null]\"}}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg))
+            );
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Critical\",\"Category\":\"test\",\"Message\":\"[null]\""
-                + ",\"State\":{\"Message\":\"[null]\",\"{OriginalFormat}\":\"[null]\"}}"
-                + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(1 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"State\":{\"Message\":\"[null]\",\"{OriginalFormat}\":\"[null]\"}}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(1 * t.WritesPerMsg, t.WritesPerMsg))
+            );
 
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Critical\",\"Category\":\"test\""
-                + ",\"Message\":\"[null]\""
-                + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
-                + ",\"State\":{\"Message\":\"[null]\",\"{OriginalFormat}\":\"[null]\"}}"
-                + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(2 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"Message\":\"[null]\""
+                    + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
+                    + ",\"State\":{\"Message\":\"[null]\",\"{OriginalFormat}\":\"[null]\"}}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(2 * t.WritesPerMsg, t.WritesPerMsg))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -133,7 +143,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -142,38 +152,56 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
             // Act
             logger.LogInformation(exception, "exception message with {0}", "stacktrace");
-            logger.Log(LogLevel.Information, 0, state: "exception message", exception: exception, formatter: (a, b) => a);
+            logger.Log(
+                LogLevel.Information,
+                0,
+                state: "exception message",
+                exception: exception,
+                formatter: (a, b) => a
+            );
 
             using (logger.BeginScope("scope1 {name1}", 123))
             using (logger.BeginScope("scope2 {name1} {name2}", 456, 789))
-                logger.Log(LogLevel.Information, 0, state: "exception message", exception: exception, formatter: (a, b) => a);
+                logger.Log(
+                    LogLevel.Information,
+                    0,
+                    state: "exception message",
+                    exception: exception,
+                    formatter: (a, b) => a
+                );
 
             // Assert
             Assert.Equal(3, sink.Writes.Count);
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Information\",\"Category\":\"test\""
-                + ",\"Message\":\"exception message with stacktrace\""
-                + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
-                + ",\"State\":{\"Message\":\"exception message with stacktrace\",\"0\":\"stacktrace\",\"{OriginalFormat}\":\"exception message with {0}\"}"
-                + ",\"Scopes\":[]"
-                + "}" + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"Message\":\"exception message with stacktrace\""
+                    + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
+                    + ",\"State\":{\"Message\":\"exception message with stacktrace\",\"0\":\"stacktrace\",\"{OriginalFormat}\":\"exception message with {0}\"}"
+                    + ",\"Scopes\":[]"
+                    + "}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg))
+            );
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Information\",\"Category\":\"test\""
-                + ",\"Message\":\"exception message\""
-                + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
-                + ",\"State\":{\"Message\":\"exception message\"}"
-                + ",\"Scopes\":[]"
-                + "}" + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(1 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"Message\":\"exception message\""
+                    + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
+                    + ",\"State\":{\"Message\":\"exception message\"}"
+                    + ",\"Scopes\":[]"
+                    + "}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(1 * t.WritesPerMsg, t.WritesPerMsg))
+            );
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Information\",\"Category\":\"test\""
-                + ",\"Message\":\"exception message\""
-                + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
-                + ",\"State\":{\"Message\":\"exception message\"}"
-                + ",\"Scopes\":[{\"Message\":\"scope1 123\",\"name1\":123,\"{OriginalFormat}\":\"scope1 {name1}\"},{\"Message\":\"scope2 456 789\",\"name1\":456,\"name2\":789,\"{OriginalFormat}\":\"scope2 {name1} {name2}\"}]"
-                + "}" + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(2 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"Message\":\"exception message\""
+                    + ",\"Exception\":\"System.InvalidOperationException: Invalid value\""
+                    + ",\"State\":{\"Message\":\"exception message\"}"
+                    + ",\"Scopes\":[{\"Message\":\"scope1 123\",\"name1\":123,\"{OriginalFormat}\":\"scope1 {name1}\"},{\"Message\":\"scope2 456 789\",\"name1\":456,\"name2\":789,\"{OriginalFormat}\":\"scope2 {name1} {name2}\"}]"
+                    + "}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(2 * t.WritesPerMsg, t.WritesPerMsg))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -187,7 +215,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -196,17 +224,25 @@ namespace Microsoft.Extensions.Logging.Console.Test
             // Act
             using (logger.BeginScope("scope1 {name1}", 123))
             using (logger.BeginScope("scope2 {name1} {name2}", 456, 789))
-                logger.Log(LogLevel.Information, 0, state: "exception message", exception: null, formatter: (a, b) => a);
+                logger.Log(
+                    LogLevel.Information,
+                    0,
+                    state: "exception message",
+                    exception: null,
+                    formatter: (a, b) => a
+                );
 
             // Assert
             Assert.Equal(1, sink.Writes.Count);
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Information\",\"Category\":\"test\""
-                + ",\"Message\":\"exception message\""
-                + ",\"State\":{\"Message\":\"exception message\"}"
-                + ",\"Scopes\":[{\"Message\":\"scope1 123\",\"name1\":123,\"{OriginalFormat}\":\"scope1 {name1}\"},{\"Message\":\"scope2 456 789\",\"name1\":456,\"name2\":789,\"{OriginalFormat}\":\"scope2 {name1} {name2}\"}]"
-                + "}" + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"Message\":\"exception message\""
+                    + ",\"State\":{\"Message\":\"exception message\"}"
+                    + ",\"Scopes\":[{\"Message\":\"scope1 123\",\"name1\":123,\"{OriginalFormat}\":\"scope1 {name1}\"},{\"Message\":\"scope2 456 789\",\"name1\":456,\"name2\":789,\"{OriginalFormat}\":\"scope2 {name1} {name2}\"}]"
+                    + "}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -220,7 +256,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -237,16 +273,24 @@ namespace Microsoft.Extensions.Logging.Console.Test
             Assert.Equal(1, sink.Writes.Count);
             Assert.Equal(
                 "{\"EventId\":0,\"LogLevel\":\"Information\",\"Category\":\"test\""
-                + ",\"Message\":\"1\""
-                + ",\"State\":{\"Message\":\"1\",\"LogEntryNumber\":1,\"{OriginalFormat}\":\"{LogEntryNumber}\"}"
-                + ",\"Scopes\":[{\"Message\":\"2\",\"Number\":2,\"{OriginalFormat}\":\"{Number}\"},{\"Message\":\"3\",\"AnotherNumber\":3,\"{OriginalFormat}\":\"{AnotherNumber}\"}]"
-                + "}" + Environment.NewLine,
-                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg)));
+                    + ",\"Message\":\"1\""
+                    + ",\"State\":{\"Message\":\"1\",\"LogEntryNumber\":1,\"{OriginalFormat}\":\"{LogEntryNumber}\"}"
+                    + ",\"Scopes\":[{\"Message\":\"2\",\"Number\":2,\"{OriginalFormat}\":\"{Number}\"},{\"Message\":\"3\",\"AnotherNumber\":3,\"{OriginalFormat}\":\"{AnotherNumber}\"}]"
+                    + "}"
+                    + Environment.NewLine,
+                GetMessage(sink.Writes.GetRange(0 * t.WritesPerMsg, t.WritesPerMsg))
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(SpecialCaseValues))]
-        public void Log_StateAndScopeContainsSpecialCaseValue_SerializesValueAsExpected(object value, string expectedJsonValue)
+        public void Log_StateAndScopeContainsSpecialCaseValue_SerializesValueAsExpected(
+            object value,
+            string expectedJsonValue
+        )
         {
             // Arrange
             var t = SetUp(
@@ -256,7 +300,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -274,7 +318,10 @@ namespace Microsoft.Extensions.Logging.Console.Test
             Assert.Contains("\"LogEntryValue\":" + expectedJsonValue + ",", message);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(FloatingPointValues))]
         public void Log_StateAndScopeContainsFloatingPointType_SerializesValue(object value)
         {
@@ -286,7 +333,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -308,7 +355,15 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 var serializedValueMatch = Regex.Match(message, "\"" + propertyName + "\":(.*?),");
                 Assert.Equal(2, serializedValueMatch.Groups.Count);
                 string jsonValue = serializedValueMatch.Groups[1].Value;
-                Assert.True(double.TryParse(jsonValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatingPointValue), "The json doesn not contain a floating point value: " + jsonValue);
+                Assert.True(
+                    double.TryParse(
+                        jsonValue,
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out var floatingPointValue
+                    ),
+                    "The json doesn not contain a floating point value: " + jsonValue
+                );
                 Assert.Equal(1.2, floatingPointValue, 2);
             }
         }
@@ -324,7 +379,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -333,7 +388,13 @@ namespace Microsoft.Extensions.Logging.Console.Test
             // Act
             using (logger.BeginScope(new WithNullValue("ScopeKey")))
             {
-                logger.Log(LogLevel.Information, 0, state: new WithNullValue("LogKey"), exception: null, formatter: (a, b) => string.Empty);
+                logger.Log(
+                    LogLevel.Information,
+                    0,
+                    state: new WithNullValue("LogKey"),
+                    exception: null,
+                    formatter: (a, b) => string.Empty
+                );
             }
 
             // Assert
@@ -353,14 +414,18 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 jsonOptions: new JsonConsoleFormatterOptions
                 {
                     JsonWriterOptions = new JsonWriterOptions() { Indented = false },
-                    IncludeScopes = true
+                    IncludeScopes = true,
                 }
             );
             var logger = (ILogger)t.Logger;
             var sink = t.Sink;
 
             // Act
-            using (logger.BeginScope(new[] { 2 }.Select(x => new KeyValuePair<string, object>("Value", x))))
+            using (
+                logger.BeginScope(
+                    new[] { 2 }.Select(x => new KeyValuePair<string, object>("Value", x))
+                )
+            )
             {
                 logger.LogInformation("{LogEntryNumber}", 1);
             }
@@ -389,7 +454,6 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     { (short)1, "1" },
                     { (ushort)1, "1" },
                     { 1.2m, "1.2" },
-
                     // nullables primitives, excluding floating point
                     { (bool?)true, "true" },
                     { (byte?)1, "1" },
@@ -402,12 +466,10 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     { (short?)1, "1" },
                     { (ushort?)1, "1" },
                     { (decimal?)1.2m, "1.2" },
-
                     // Dynamic object serialized as string
                     { new { a = 1, b = 2 }, "\"{ a = 1, b = 2 }\"" },
-
                     // null should not be serialized as special string in the state value, only in message
-                    { null, "null" }
+                    { null, "null" },
                 };
                 return data;
             }
@@ -421,10 +483,9 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 {
                     { 1.2 },
                     { 1.2f },
-
                     // nullables
                     { (double?)1.2 },
-                    { (float?)1.2f }
+                    { (float?)1.2f },
                 };
                 return data;
             }
@@ -454,7 +515,9 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 }
             }
 
-            IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+            IEnumerator<KeyValuePair<string, object>> IEnumerable<
+                KeyValuePair<string, object>
+            >.GetEnumerator()
             {
                 yield return new KeyValuePair<string, object>(_key, null);
             }
@@ -467,7 +530,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         private static void EnsureStackTrace(params Exception[] exceptions)
         {
-            if (exceptions == null) return;
+            if (exceptions == null)
+                return;
 
             foreach (Exception exception in exceptions)
             {
@@ -477,8 +541,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     {
                         throw exception;
                     }
-                    catch
-                    { }
+                    catch { }
                 }
                 Assert.False(string.IsNullOrEmpty(exception.StackTrace));
             }
@@ -486,19 +549,30 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         private string GetJson(Exception exception, bool indented)
         {
-            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
             JsonConsoleFormatterOptions jsonOptions = new JsonConsoleFormatterOptions()
             {
                 JsonWriterOptions = new JsonWriterOptions()
                 {
                     Indented = indented,
-                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-                }
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                },
             };
-            var jsonMonitor = new TestFormatterOptionsMonitor<JsonConsoleFormatterOptions>(jsonOptions);
+            var jsonMonitor = new TestFormatterOptionsMonitor<JsonConsoleFormatterOptions>(
+                jsonOptions
+            );
             var jsonFormatter = new JsonConsoleFormatter(jsonMonitor);
-            Func<string, Exception, string> exceptionFormatter = (state, exception) => state.ToString();
-            LogEntry<string> entry = new LogEntry<string>(LogLevel.Error, string.Empty, new EventId(), string.Empty, exception, exceptionFormatter);
+            Func<string, Exception, string> exceptionFormatter = (state, exception) =>
+                state.ToString();
+            LogEntry<string> entry = new LogEntry<string>(
+                LogLevel.Error,
+                string.Empty,
+                new EventId(),
+                string.Empty,
+                exception,
+                exceptionFormatter
+            );
             StringBuilder output = new StringBuilder();
             using (TextWriter writer = new StringWriter(output))
             {
@@ -507,8 +581,10 @@ namespace Microsoft.Extensions.Logging.Console.Test
             return output.ToString();
         }
 
-
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void ShouldContainInnerException(bool indented)
@@ -529,26 +605,39 @@ namespace Microsoft.Extensions.Logging.Console.Test
             // Depending on OS, Environment.NewLine is either '\r\n' OR '\n'
             string newLineReplacement = Environment.NewLine.Length == 2 ? "\\r\\n" : "\\n";
 
-            return exception.ToString()
+            return exception
+                .ToString()
                 .Replace(@"\", @"\\") // for paths in json content
                 .Replace(Environment.NewLine, newLineReplacement);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void ShouldContainAggregateExceptions(bool indented)
         {
-            AggregateException rootException = new AggregateException("aggregate", new Exception("leaf1"), new Exception("leaf2"), new Exception("leaf3"));
+            AggregateException rootException = new AggregateException(
+                "aggregate",
+                new Exception("leaf1"),
+                new Exception("leaf2"),
+                new Exception("leaf3")
+            );
             EnsureStackTrace(rootException);
             EnsureStackTrace(rootException.InnerExceptions.ToArray());
             string json = GetJson(rootException, indented);
 
             Assert.Contains(rootException.Message, json);
-            rootException.InnerExceptions.ToList().ForEach((inner) => Assert.Contains(inner.Message, json));
+            rootException
+                .InnerExceptions.ToList()
+                .ForEach((inner) => Assert.Contains(inner.Message, json));
 
             Assert.Contains(GetContent(rootException), json);
-            rootException.InnerExceptions.ToList().ForEach((inner) => Assert.Contains(GetContent(inner), json));
+            rootException
+                .InnerExceptions.ToList()
+                .ForEach((inner) => Assert.Contains(GetContent(inner), json));
         }
     }
 }

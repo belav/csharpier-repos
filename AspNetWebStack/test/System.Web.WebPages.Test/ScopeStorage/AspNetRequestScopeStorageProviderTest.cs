@@ -30,8 +30,12 @@ namespace System.Web.WebPages.Test
 
             // Act and Assert
             Assert.Throws<InvalidOperationException>(
-                () => { var x = provider.RequestScope; },
-                "RequestScope cannot be created when _AppStart is executing.");
+                () =>
+                {
+                    var x = provider.RequestScope;
+                },
+                "RequestScope cannot be created when _AppStart is executing."
+            );
         }
 
         [Fact]
@@ -42,8 +46,12 @@ namespace System.Web.WebPages.Test
 
             // Act and Assert
             Assert.Throws<InvalidOperationException>(
-                () => { provider.CurrentScope = new ScopeStorageDictionary(); },
-                "Storage scopes cannot be created when _AppStart is executing.");
+                () =>
+                {
+                    provider.CurrentScope = new ScopeStorageDictionary();
+                },
+                "Storage scopes cannot be created when _AppStart is executing."
+            );
         }
 
         [Fact]
@@ -52,7 +60,7 @@ namespace System.Web.WebPages.Test
             // Arrange
             var provider = GetProvider();
 
-            // Act and Assert 
+            // Act and Assert
             Assert.NotNull(provider.RequestScope);
             Assert.Equal(provider.RequestScope, provider.CurrentScope);
         }
@@ -63,7 +71,7 @@ namespace System.Web.WebPages.Test
             // Arrange
             var provider = GetProvider();
 
-            // Act 
+            // Act
             var requestScope = provider.RequestScope;
 
             var Scope = new ScopeStorageDictionary();

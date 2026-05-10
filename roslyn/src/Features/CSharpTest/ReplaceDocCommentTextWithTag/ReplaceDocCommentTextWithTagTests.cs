@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
     [Trait(Traits.Feature, Traits.Features.CodeActionsReplaceDocCommentTextWithTag)]
     public class ReplaceDocCommentTextWithTagTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider();
 
         [Fact]
         public async Task TestStartOfKeyword()
@@ -28,13 +30,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="null"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -47,13 +49,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="abstract"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -66,13 +68,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="static"/>
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -85,13 +87,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="abstract"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -104,13 +106,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="async"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -122,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -135,13 +138,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// TKey must implement the <see cref="System.IDisposable"/> interface.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -154,13 +157,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// TKey must implement the <see cref="System.IDisposable"/> interface.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -173,13 +176,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// TKey must implement the <see cref="System.IDisposable"/> interface.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,13 +195,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// TKey must implement the <see cref="System.IDisposable"/> interface.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -211,13 +214,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// TKey must implement the <see cref="System.IDisposable"/> interface.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -230,13 +233,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// <typeparamref name="TKey"/> must implement the System.IDisposable interface.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -247,11 +250,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 /// [||]TKey must implement the System.IDisposable interface.
                 class C<TKey>{}
                 """,
-
                 """
                 /// <typeparamref name="TKey"/> must implement the System.IDisposable interface.
                 class C<TKey>{}
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -265,14 +268,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value) { }
                 }
                 """,
-
                 """
                 /// Use <see cref="WriteLine"/> as a Console.WriteLine replacement
                 class C
                 {
                     void WriteLine<TKey>(TKey value) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -285,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                     void WriteLine<TKey>(TKey value) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -299,14 +303,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value) { }
                 }
                 """,
-
                 """
                 class C
                 {
                     /// value has type <typeparamref name="TKey"/> so we don't box primitives.
                     void WriteLine<TKey>(TKey value) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -320,14 +324,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value){}
                 }
                 """,
-
                 """
                 class C
                 {
                     /// value has type <typeparamref name="TKey"/> so we don't box primitives.
                     void WriteLine<TKey>(TKey value){}
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -341,14 +345,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     object WriteLine<TKey>(TKey value) => null;
                 }
                 """,
-
                 """
                 class C
                 {
                     /// value has type <typeparamref name="TKey"/> so we don't box primitives.
                     object WriteLine<TKey>(TKey value) => null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -362,14 +366,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value);
                 }
                 """,
-
                 """
                 class C
                 {
                     /// value has type <typeparamref name="TKey"/> so we don't box primitives.
                     void WriteLine<TKey>(TKey value);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -383,14 +387,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value) { }
                 }
                 """,
-
                 """
                 class C
                 {
                     /// <paramref name="value"/> has type TKey so we don't box primitives.
                     void WriteLine<TKey>(TKey value) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -404,14 +408,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value){}
                 }
                 """,
-
                 """
                 class C
                 {
                     /// <paramref name="value"/> has type TKey so we don't box primitives.
                     void WriteLine<TKey>(TKey value){}
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -425,14 +429,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     object WriteLine<TKey>(TKey value) => null;
                 }
                 """,
-
                 """
                 class C
                 {
                     /// <paramref name="value"/> has type TKey so we don't box primitives.
                     object WriteLine<TKey>(TKey value) => null;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -446,14 +450,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                     void WriteLine<TKey>(TKey value);
                 }
                 """,
-
                 """
                 class C
                 {
                     /// <paramref name="value"/> has type TKey so we don't box primitives.
                     void WriteLine<TKey>(TKey value);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -473,7 +477,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22278")]
@@ -486,7 +491,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                     void WriteLine<TKey>(TKey value) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22278")]
@@ -499,7 +505,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                     void WriteLine<TKey>(TKey value) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38370")]
@@ -512,13 +519,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="base"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38370")]
@@ -531,13 +538,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="this"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31208")]
@@ -550,13 +557,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="delegate"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31208")]
@@ -569,13 +576,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReplaceDocCommentTextWi
                 {
                 }
                 """,
-
                 """
                 /// Testing keyword <see langword="yield"/>.
                 class C<TKey>
                 {
                 }
-                """);
+                """
+            );
         }
     }
 }

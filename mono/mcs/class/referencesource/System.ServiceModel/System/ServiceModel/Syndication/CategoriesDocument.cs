@@ -4,31 +4,28 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Xml;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public abstract class CategoriesDocument : IExtensibleSyndicationObject
     {
         Uri baseUri;
         ExtensibleSyndicationObject extensions = new ExtensibleSyndicationObject();
         string language;
 
-        internal CategoriesDocument()
-        {
-        }
+        internal CategoriesDocument() { }
 
         public Dictionary<XmlQualifiedName, string> AttributeExtensions
         {
-            get
-            {
-                return this.extensions.AttributeExtensions;
-            }
+            get { return this.extensions.AttributeExtensions; }
         }
 
         public Uri BaseUri
@@ -39,10 +36,7 @@ namespace System.ServiceModel.Syndication
 
         public SyndicationElementExtensionCollection ElementExtensions
         {
-            get
-            {
-                return this.extensions.ElementExtensions;
-            }
+            get { return this.extensions.ElementExtensions; }
         }
 
         public string Language
@@ -51,17 +45,18 @@ namespace System.ServiceModel.Syndication
             set { this.language = value; }
         }
 
-        internal abstract bool IsInline
-        {
-            get;
-        }
+        internal abstract bool IsInline { get; }
 
         public static InlineCategoriesDocument Create(Collection<SyndicationCategory> categories)
         {
             return new InlineCategoriesDocument(categories);
         }
 
-        public static InlineCategoriesDocument Create(Collection<SyndicationCategory> categories, bool isFixed, string scheme)
+        public static InlineCategoriesDocument Create(
+            Collection<SyndicationCategory> categories,
+            bool isFixed,
+            string scheme
+        )
         {
             return new InlineCategoriesDocument(categories, isFixed, scheme);
         }
@@ -73,7 +68,8 @@ namespace System.ServiceModel.Syndication
 
         public static CategoriesDocument Load(XmlReader reader)
         {
-            AtomPub10CategoriesDocumentFormatter formatter = new AtomPub10CategoriesDocumentFormatter();
+            AtomPub10CategoriesDocumentFormatter formatter =
+                new AtomPub10CategoriesDocumentFormatter();
             formatter.ReadFrom(reader);
             return formatter.Document;
         }
@@ -88,7 +84,12 @@ namespace System.ServiceModel.Syndication
             this.GetFormatter().WriteTo(writer);
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -108,7 +109,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

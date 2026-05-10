@@ -7,18 +7,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    // These classes are for debug and testing purposes only. It is frequently handy to be 
+    // These classes are for debug and testing purposes only. It is frequently handy to be
     // able to create a string representation of a complex tree-based data type. The idea
     // here is to first transform your tree into a standard "tree dumper node" tree, where
     // each node in the tree has a name, some optional data, and a sequence of child nodes.
-    // Once in a standard format the tree can then be rendered in a variety of ways 
+    // Once in a standard format the tree can then be rendered in a variety of ways
     // depending on what is most useful to you.
     //
     // I've started with two string formats. First, a "compact" format in which there is
@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis
                 _sb.Append(i == children.Count - 1 ? '\u2514' : '\u251C');
                 _sb.Append('\u2500');
 
-                // First precondition met; now work out the string needed to indent 
+                // First precondition met; now work out the string needed to indent
                 // the child node's children:
                 DoDumpCompact(child, indent + (i == children.Count - 1 ? "  " : "\u2502 "));
             }
@@ -110,14 +110,12 @@ namespace Microsoft.CodeAnalysis
                     return true;
                 }
 
-                if (node.Text is "locals" or "localFunctions"
-                    && node.Value is IList { Count: 0 })
+                if (node.Text is "locals" or "localFunctions" && node.Value is IList { Count: 0 })
                 {
                     return true;
                 }
 
-                if (node.Text is "hasErrors" or "isSuppressed" or "isRef"
-                    && node.Value is false)
+                if (node.Text is "hasErrors" or "isSuppressed" or "isRef" && node.Value is false)
                 {
                     return true;
                 }
@@ -189,7 +187,9 @@ namespace Microsoft.CodeAnalysis
             var ti = o.GetType().GetTypeInfo();
             if (ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(ImmutableArray<>))
             {
-                var result = ti?.GetDeclaredMethod("get_IsDefault")?.Invoke(o, Array.Empty<object>());
+                var result = ti
+                    ?.GetDeclaredMethod("get_IsDefault")
+                    ?.Invoke(o, Array.Empty<object>());
                 return result is bool b && b;
             }
 
@@ -217,7 +217,10 @@ namespace Microsoft.CodeAnalysis
             var seq = o as IEnumerable;
             if (seq != null)
             {
-                return string.Format("{{{0}}}", string.Join(", ", seq.Cast<object>().Select(DumperString).ToArray()));
+                return string.Format(
+                    "{{{0}}}",
+                    string.Join(", ", seq.Cast<object>().Select(DumperString).ToArray())
+                );
             }
 
             var symbol = o as ISymbol;
@@ -242,16 +245,15 @@ namespace Microsoft.CodeAnalysis
             this.Children = children ?? SpecializedCollections.EmptyEnumerable<TreeDumperNode>();
         }
 
-        public TreeDumperNode(string text) : this(text, null, null) { }
+        public TreeDumperNode(string text)
+            : this(text, null, null) { }
+
         public object? Value { get; }
         public string Text { get; }
         public IEnumerable<TreeDumperNode> Children { get; }
         public TreeDumperNode? this[string child]
         {
-            get
-            {
-                return Children.FirstOrDefault(c => c.Text == child);
-            }
+            get { return Children.FirstOrDefault(c => c.Text == child); }
         }
 
         // enumerates all edges of the tree yielding (parent, node) pairs. The first yielded value is (null, this).
@@ -266,7 +268,9 @@ namespace Microsoft.CodeAnalysis
                 var currentNode = currentEdge.Value;
                 foreach (var child in currentNode.Children.Where(x => x != null).Reverse())
                 {
-                    stack.Push(new KeyValuePair<TreeDumperNode?, TreeDumperNode>(currentNode, child));
+                    stack.Push(
+                        new KeyValuePair<TreeDumperNode?, TreeDumperNode>(currentNode, child)
+                    );
                 }
             }
         }

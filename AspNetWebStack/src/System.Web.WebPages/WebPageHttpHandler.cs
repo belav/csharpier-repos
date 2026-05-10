@@ -23,9 +23,16 @@ namespace System.Web.WebPages
         private readonly Lazy<WebPageRenderingBase> _startPage;
 
         public WebPageHttpHandler(WebPage webPage)
-            : this(webPage, new Lazy<WebPageRenderingBase>(() => System.Web.WebPages.StartPage.GetStartPage(webPage, StartPageFileName, GetRegisteredExtensions())))
-        {
-        }
+            : this(
+                webPage,
+                new Lazy<WebPageRenderingBase>(() =>
+                    System.Web.WebPages.StartPage.GetStartPage(
+                        webPage,
+                        StartPageFileName,
+                        GetRegisteredExtensions()
+                    )
+                )
+            ) { }
 
         internal WebPageHttpHandler(WebPage webPage, Lazy<WebPageRenderingBase> startPage)
         {
@@ -72,7 +79,10 @@ namespace System.Web.WebPages
             return CreateFromVirtualPath(virtualPath, VirtualPathFactoryManager.Instance);
         }
 
-        internal static IHttpHandler CreateFromVirtualPath(string virtualPath, IVirtualPathFactory virtualPathFactory)
+        internal static IHttpHandler CreateFromVirtualPath(
+            string virtualPath,
+            IVirtualPathFactory virtualPathFactory
+        )
         {
             // We will try to create a WebPage from our factory. If this fails, we assume that the virtual path maps to an IHttpHandler.
             // Instantiate the page from the virtual path
@@ -97,7 +107,11 @@ namespace System.Web.WebPages
             return new WebPageHttpHandler(page);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "We don't want a property")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "We don't want a property"
+        )]
         public static ReadOnlyCollection<string> GetRegisteredExtensions()
         {
             return new ReadOnlyCollection<string>(_supportedExtensions);
@@ -108,7 +122,9 @@ namespace System.Web.WebPages
             // DevDiv 216459:
             // This code originally used Assembly.GetName(), but that requires FileIOPermission, which isn't granted in
             // medium trust. However, Assembly.FullName *is* accessible in medium trust.
-            return new AssemblyName(typeof(WebPageHttpHandler).Assembly.FullName).Version.ToString(2);
+            return new AssemblyName(typeof(WebPageHttpHandler).Assembly.FullName).Version.ToString(
+                2
+            );
         }
 
         private static bool HandleError(Exception e)
@@ -129,10 +145,11 @@ namespace System.Web.WebPages
             if (context.SourceFiles.Any())
             {
                 var files = String.Join("|", context.SourceFiles);
-                // Since the characters in the value are files that may include characters outside of the ASCII set, header encoding as specified in RFC2047. 
-                // =?<charset>?<encoding>?...?= 
-                // In the following case, UTF8 is used with base64 encoding 
-                var encodedText = "=?UTF-8?B?" + Convert.ToBase64String(Encoding.UTF8.GetBytes(files)) + "?=";
+                // Since the characters in the value are files that may include characters outside of the ASCII set, header encoding as specified in RFC2047.
+                // =?<charset>?<encoding>?...?=
+                // In the following case, UTF8 is used with base64 encoding
+                var encodedText =
+                    "=?UTF-8?B?" + Convert.ToBase64String(Encoding.UTF8.GetBytes(files)) + "?=";
                 context.HttpContext.Response.AddHeader("X-SourceFiles", encodedText);
             }
         }
@@ -164,7 +181,11 @@ namespace System.Web.WebPages
                 // We call ExecutePageHierarchy on the requested page, passing in the possible initPage, so that
                 // the requested page can take care of the necessary push/pop context and trigger the call to
                 // the initPage.
-                _webPage.ExecutePageHierarchy(new WebPageContext { HttpContext = httpContext }, httpContext.Response.Output, StartPage);
+                _webPage.ExecutePageHierarchy(
+                    new WebPageContext { HttpContext = httpContext },
+                    httpContext.Response.Output,
+                    StartPage
+                );
 
                 if (ShouldGenerateSourceHeader(httpContext))
                 {

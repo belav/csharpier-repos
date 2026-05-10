@@ -20,38 +20,88 @@ namespace System.Net.NetworkInformation
 
         public LinuxIPInterfaceStatistics(string name)
         {
-            _table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(NetworkFiles.InterfaceListingFile, name);
+            _table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(
+                NetworkFiles.InterfaceListingFile,
+                name
+            );
 
             // sys/class/net/<interfacename>/tx_queue_len
-            string transmitQueueLengthFilePath = Path.Combine(NetworkFiles.SysClassNetFolder, name, NetworkFiles.TransmitQueueLengthFileName);
-            _transmitQueueLength = StringParsingHelpers.ParseRawIntFile(transmitQueueLengthFilePath);
-
+            string transmitQueueLengthFilePath = Path.Combine(
+                NetworkFiles.SysClassNetFolder,
+                name,
+                NetworkFiles.TransmitQueueLengthFileName
+            );
+            _transmitQueueLength = StringParsingHelpers.ParseRawIntFile(
+                transmitQueueLengthFilePath
+            );
         }
 
-        public override long BytesReceived { get { return _table.BytesReceived; } }
+        public override long BytesReceived
+        {
+            get { return _table.BytesReceived; }
+        }
 
-        public override long BytesSent { get { return _table.BytesTransmitted; } }
+        public override long BytesSent
+        {
+            get { return _table.BytesTransmitted; }
+        }
 
-        public override long IncomingPacketsDiscarded { get { return _table.IncomingPacketsDropped; } }
+        public override long IncomingPacketsDiscarded
+        {
+            get { return _table.IncomingPacketsDropped; }
+        }
 
-        public override long IncomingPacketsWithErrors { get { return _table.ErrorsReceived; } }
+        public override long IncomingPacketsWithErrors
+        {
+            get { return _table.ErrorsReceived; }
+        }
 
         [UnsupportedOSPlatform("linux")]
-        public override long IncomingUnknownProtocolPackets { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long IncomingUnknownProtocolPackets
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long NonUnicastPacketsReceived { get { return _table.MulticastFramesReceived; } }
+        public override long NonUnicastPacketsReceived
+        {
+            get { return _table.MulticastFramesReceived; }
+        }
 
         [UnsupportedOSPlatform("linux")]
-        public override long NonUnicastPacketsSent { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override long NonUnicastPacketsSent
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override long OutgoingPacketsDiscarded { get { return _table.OutgoingPacketsDropped; } }
+        public override long OutgoingPacketsDiscarded
+        {
+            get { return _table.OutgoingPacketsDropped; }
+        }
 
-        public override long OutgoingPacketsWithErrors { get { return _table.ErrorsTransmitted; } }
+        public override long OutgoingPacketsWithErrors
+        {
+            get { return _table.ErrorsTransmitted; }
+        }
 
-        public override long OutputQueueLength { get { return _transmitQueueLength; } }
+        public override long OutputQueueLength
+        {
+            get { return _transmitQueueLength; }
+        }
 
-        public override long UnicastPacketsReceived { get { return _table.PacketsReceived; } }
+        public override long UnicastPacketsReceived
+        {
+            get { return _table.PacketsReceived; }
+        }
 
-        public override long UnicastPacketsSent { get { return _table.PacketsTransmitted; } }
+        public override long UnicastPacketsSent
+        {
+            get { return _table.PacketsTransmitted; }
+        }
     }
 }

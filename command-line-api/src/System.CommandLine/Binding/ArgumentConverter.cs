@@ -12,7 +12,8 @@ namespace System.CommandLine.Binding
         internal static ArgumentConversionResult ConvertObject(
             ArgumentResult argumentResult,
             Type type,
-            object? value)
+            object? value
+        )
         {
             switch (value)
             {
@@ -38,7 +39,8 @@ namespace System.CommandLine.Binding
         private static ArgumentConversionResult ConvertToken(
             ArgumentResult argumentResult,
             Type type,
-            CliToken token)
+            CliToken token
+        )
         {
             var value = token.Value;
 
@@ -71,9 +73,7 @@ namespace System.CommandLine.Binding
                 {
                     return Success(argumentResult, Enum.Parse(type, value, true));
                 }
-                catch (ArgumentException)
-                {
-                }
+                catch (ArgumentException) { }
 #endif
             }
 
@@ -83,7 +83,8 @@ namespace System.CommandLine.Binding
         private static ArgumentConversionResult ConvertTokens(
             ArgumentResult argumentResult,
             Type type,
-            IReadOnlyList<CliToken> tokens)
+            IReadOnlyList<CliToken> tokens
+        )
         {
             var itemType = type.GetElementTypeIfEnumerable() ?? typeof(string);
             var values = CreateEnumerable(type, itemType, tokens.Count);
@@ -129,19 +130,26 @@ namespace System.CommandLine.Binding
         {
             if (argument.Arity is { MaximumNumberOfValues: 1, MinimumNumberOfValues: 1 })
             {
-                if (argument.ValueType.TryGetNullableType(out var nullableType) &&
-                    StringConverters.TryGetValue(nullableType, out var convertNullable))
+                if (
+                    argument.ValueType.TryGetNullableType(out var nullableType)
+                    && StringConverters.TryGetValue(nullableType, out var convertNullable)
+                )
                 {
-                    return (ArgumentResult result, out object? value) => ConvertSingleString(result, convertNullable, out value);
+                    return (ArgumentResult result, out object? value) =>
+                        ConvertSingleString(result, convertNullable, out value);
                 }
 
                 if (StringConverters.TryGetValue(argument.ValueType, out var convert1))
                 {
-                    return (ArgumentResult result, out object? value) => ConvertSingleString(result, convert1, out value);
+                    return (ArgumentResult result, out object? value) =>
+                        ConvertSingleString(result, convert1, out value);
                 }
 
-                static bool ConvertSingleString(ArgumentResult result, TryConvertString convert, out object? value) =>
-                    convert(result.Tokens[result.Tokens.Count - 1].Value, out value);
+                static bool ConvertSingleString(
+                    ArgumentResult result,
+                    TryConvertString convert,
+                    out object? value
+                ) => convert(result.Tokens[result.Tokens.Count - 1].Value, out value);
             }
 
             if (argument.ValueType.CanBeBoundFromScalarValue())
@@ -178,19 +186,25 @@ namespace System.CommandLine.Binding
 
         internal static ArgumentConversionResult ConvertIfNeeded(
             this ArgumentConversionResult conversionResult,
-            Type toType)
+            Type toType
+        )
         {
             return conversionResult.Result switch
             {
-                ArgumentConversionResultType.Successful when !toType.IsInstanceOfType(conversionResult.Value) =>
-                    ConvertObject(conversionResult.ArgumentResult,
-                                  toType,
-                                  conversionResult.Value),
+                ArgumentConversionResultType.Successful
+                    when !toType.IsInstanceOfType(conversionResult.Value) => ConvertObject(
+                    conversionResult.ArgumentResult,
+                    toType,
+                    conversionResult.Value
+                ),
 
-                ArgumentConversionResultType.NoArgument when conversionResult.ArgumentResult.Argument.IsBoolean() =>
-                    Success(conversionResult.ArgumentResult, true),
-                        
-                _ => conversionResult
+                ArgumentConversionResultType.NoArgument
+                    when conversionResult.ArgumentResult.Argument.IsBoolean() => Success(
+                    conversionResult.ArgumentResult,
+                    true
+                ),
+
+                _ => conversionResult,
             };
         }
 
@@ -212,14 +226,14 @@ namespace System.CommandLine.Binding
             {
                 // 0 is an implicit bool, i.e. a "flag"
                 0 => Success(argumentResult, true),
-                1 => ConvertObject(argumentResult,
-                                   argument.ValueType,
-                                   argumentResult.Tokens.Count > 0
-                                       ? argumentResult.Tokens[argumentResult.Tokens.Count - 1]
-                                       : null),
-                _ => ConvertTokens(argumentResult,
-                                    argument.ValueType,
-                                    argumentResult.Tokens)
+                1 => ConvertObject(
+                    argumentResult,
+                    argument.ValueType,
+                    argumentResult.Tokens.Count > 0
+                        ? argumentResult.Tokens[argumentResult.Tokens.Count - 1]
+                        : null
+                ),
+                _ => ConvertTokens(argumentResult, argument.ValueType, argumentResult.Tokens),
             };
 
             value = result;

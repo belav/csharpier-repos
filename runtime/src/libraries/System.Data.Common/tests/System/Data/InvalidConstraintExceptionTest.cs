@@ -25,7 +25,6 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class InvalidConstraintExceptionTest
@@ -43,7 +42,9 @@ namespace System.Data.Tests
             ds.Tables.Add(dtChild);
             ds.Tables.Add(dtParent);
 
-            ds.Relations.Add(new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0], true));
+            ds.Relations.Add(
+                new DataRelation("myRelation", dtParent.Columns[0], dtChild.Columns[0], true)
+            );
 
             //update to value which is not exists in Parent table
             // InvalidConstraintException - update child row
@@ -56,7 +57,9 @@ namespace System.Data.Tests
             // InvalidConstraintException - Add Relation Child
             Assert.Throws<InvalidConstraintException>(() =>
             {
-                ds.Relations.Add(new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true));
+                ds.Relations.Add(
+                    new DataRelation("test", dtParent.Columns[2], dtChild.Columns[0], true)
+                );
             });
 
             //Attempt to clear rows from parent table
@@ -73,7 +76,14 @@ namespace System.Data.Tests
             // InvalidConstraintException - Add relation with two DataSets
             Assert.Throws<InvalidConstraintException>(() =>
             {
-                ds.Relations.Add(new DataRelation("myRelation", ds1.Tables[0].Columns[0], dtChild.Columns[0], true));
+                ds.Relations.Add(
+                    new DataRelation(
+                        "myRelation",
+                        ds1.Tables[0].Columns[0],
+                        dtChild.Columns[0],
+                        true
+                    )
+                );
             });
         }
     }

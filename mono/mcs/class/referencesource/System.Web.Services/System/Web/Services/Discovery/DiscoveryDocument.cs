@@ -1,26 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="DiscoveryDocument.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Discovery {
-
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.IO;
+namespace System.Web.Services.Discovery
+{
     using System;
-    using System.Text;
     using System.Collections;
+    using System.IO;
+    using System.Text;
     using System.Web.Services.Configuration;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [XmlRoot("discovery", Namespace = DiscoveryDocument.Namespace)]
-    public sealed class DiscoveryDocument {
-
+    public sealed class DiscoveryDocument
+    {
         /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -33,8 +33,7 @@ namespace System.Web.Services.Discovery {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public DiscoveryDocument() {
-        }
+        public DiscoveryDocument() { }
 
         // NOTE, Microsoft: This property is not really ignored by the xml serializer. Instead,
         // the attributes that would go here are configured in WebServicesConfiguration's
@@ -44,17 +43,17 @@ namespace System.Web.Services.Discovery {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlIgnore]
-        public IList References {
-            get {
-                return references;
-            }
+        public IList References
+        {
+            get { return references; }
         }
 
         /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.Read"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static DiscoveryDocument Read(Stream stream) {
+        public static DiscoveryDocument Read(Stream stream)
+        {
             XmlTextReader r = new XmlTextReader(stream);
             r.WhitespaceHandling = WhitespaceHandling.Significant;
             r.XmlResolver = null;
@@ -66,7 +65,8 @@ namespace System.Web.Services.Discovery {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static DiscoveryDocument Read(TextReader reader) {
+        public static DiscoveryDocument Read(TextReader reader)
+        {
             XmlTextReader r = new XmlTextReader(reader);
             r.WhitespaceHandling = WhitespaceHandling.Significant;
             r.XmlResolver = null;
@@ -78,15 +78,18 @@ namespace System.Web.Services.Discovery {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static DiscoveryDocument Read(XmlReader xmlReader) {
-            return (DiscoveryDocument) WebServicesSection.Current.DiscoveryDocumentSerializer.Deserialize(xmlReader);
+        public static DiscoveryDocument Read(XmlReader xmlReader)
+        {
+            return (DiscoveryDocument)
+                WebServicesSection.Current.DiscoveryDocumentSerializer.Deserialize(xmlReader);
         }
 
         /// <include file='doc\DiscoveryDocument.uex' path='docs/doc[@for="DiscoveryDocument.CanRead"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool CanRead(XmlReader xmlReader) {
+        public static bool CanRead(XmlReader xmlReader)
+        {
             return WebServicesSection.Current.DiscoveryDocumentSerializer.CanDeserialize(xmlReader);
         }
 
@@ -94,7 +97,8 @@ namespace System.Web.Services.Discovery {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(TextWriter writer) {
+        public void Write(TextWriter writer)
+        {
             XmlTextWriter xmlWriter = new XmlTextWriter(writer);
             xmlWriter.Formatting = Formatting.Indented;
             xmlWriter.Indentation = 2;
@@ -105,7 +109,8 @@ namespace System.Web.Services.Discovery {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(Stream stream) {
+        public void Write(Stream stream)
+        {
             TextWriter writer = new StreamWriter(stream, new UTF8Encoding(false));
             Write(writer);
         }
@@ -114,19 +119,17 @@ namespace System.Web.Services.Discovery {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Write(XmlWriter writer) {
+        public void Write(XmlWriter writer)
+        {
             XmlSerializer serializer = WebServicesSection.Current.DiscoveryDocumentSerializer;
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             serializer.Serialize(writer, this, ns);
         }
-
-
     }
-
 
     // This is a special serializer that hardwires to the generated
     // ServiceDescriptionSerializer. To regenerate the serializer
-    // Turn on KEEPTEMPFILES 
+    // Turn on KEEPTEMPFILES
     // Restart server
     // Run disco as follows
     //   disco <URL_FOR_VALID_ASMX_FILE>?disco
@@ -140,20 +143,30 @@ namespace System.Web.Services.Discovery {
     // change Serialize to call the new one)
     // Ensure the public Read method is Read11_discovery (If not
     // change Deserialize to call the new one)
-    internal class DiscoveryDocumentSerializer : XmlSerializer {
-        protected override XmlSerializationReader CreateReader() {
+    internal class DiscoveryDocumentSerializer : XmlSerializer
+    {
+        protected override XmlSerializationReader CreateReader()
+        {
             return new DiscoveryDocumentSerializationReader();
         }
-        protected override XmlSerializationWriter CreateWriter() {
+
+        protected override XmlSerializationWriter CreateWriter()
+        {
             return new DiscoveryDocumentSerializationWriter();
         }
-        public override bool CanDeserialize(System.Xml.XmlReader xmlReader) {
+
+        public override bool CanDeserialize(System.Xml.XmlReader xmlReader)
+        {
             return xmlReader.IsStartElement("discovery", "http://schemas.xmlsoap.org/disco/");
         }
-        protected override void Serialize(Object objectToSerialize, XmlSerializationWriter writer) {
+
+        protected override void Serialize(Object objectToSerialize, XmlSerializationWriter writer)
+        {
             ((DiscoveryDocumentSerializationWriter)writer).Write10_discovery(objectToSerialize);
         }
-        protected override object Deserialize(XmlSerializationReader reader) {
+
+        protected override object Deserialize(XmlSerializationReader reader)
+        {
             return ((DiscoveryDocumentSerializationReader)reader).Read10_discovery();
         }
     }

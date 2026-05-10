@@ -7,7 +7,11 @@ using System.Runtime.InteropServices.Marshalling;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms681790(v=vs.85)
-[GeneratedComInterface, Guid(Guids.IID_IResourceManager), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    GeneratedComInterface,
+    Guid(Guids.IID_IResourceManager),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal partial interface IResourceManager
 {
     internal void Enlist(
@@ -15,17 +19,20 @@ internal partial interface IResourceManager
         [MarshalAs(UnmanagedType.Interface)] ITransactionResourceAsync pRes,
         out Guid pUOW,
         out OletxTransactionIsolationLevel pisoLevel,
-        [MarshalAs(UnmanagedType.Interface)] out ITransactionEnlistmentAsync ppEnlist);
+        [MarshalAs(UnmanagedType.Interface)] out ITransactionEnlistmentAsync ppEnlist
+    );
 
     internal void Reenlist(
         [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pPrepInfo,
         uint cbPrepInfom,
         uint lTimeout,
-        out OletxXactStat pXactStat);
+        out OletxXactStat pXactStat
+    );
 
     void ReenlistmentComplete();
 
     void GetDistributedTransactionManager(
         in Guid riid,
-        [MarshalAs(UnmanagedType.Interface)] out object ppvObject);
+        [MarshalAs(UnmanagedType.Interface)] out object ppvObject
+    );
 }

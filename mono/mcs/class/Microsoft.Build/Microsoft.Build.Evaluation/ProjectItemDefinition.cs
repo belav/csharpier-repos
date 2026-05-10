@@ -32,38 +32,44 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Evaluation
 {
-	public class ProjectItemDefinition
-	{
-		internal ProjectItemDefinition (Project project, string itemType)
-		{
-			this.project = project;
-			this.item_type = itemType;
-		}
+    public class ProjectItemDefinition
+    {
+        internal ProjectItemDefinition(Project project, string itemType)
+        {
+            this.project = project;
+            this.item_type = itemType;
+        }
 
-		Project project;
-		string item_type;
-		List<ProjectMetadata> metadata = new List<ProjectMetadata> ();
+        Project project;
+        string item_type;
+        List<ProjectMetadata> metadata = new List<ProjectMetadata>();
 
-		public string ItemType {
-			get { return item_type; }
-		}
+        public string ItemType
+        {
+            get { return item_type; }
+        }
 
-		public IEnumerable<ProjectMetadata> Metadata {
-			get { return metadata; }
-		}
+        public IEnumerable<ProjectMetadata> Metadata
+        {
+            get { return metadata; }
+        }
 
-		public int MetadataCount {
-			get { return metadata.Count; }
-		}
+        public int MetadataCount
+        {
+            get { return metadata.Count; }
+        }
 
-		public Project Project {
-			get { return project; }
-		}
-		
-		internal void AddItems (ProjectItemDefinitionElement xml)
-		{
-			foreach (var item in xml.Metadata)
-				metadata.Add (new ProjectMetadata (project, ItemType, metadata, m => metadata.Remove (m), item));
-		}
-	}
+        public Project Project
+        {
+            get { return project; }
+        }
+
+        internal void AddItems(ProjectItemDefinitionElement xml)
+        {
+            foreach (var item in xml.Metadata)
+                metadata.Add(
+                    new ProjectMetadata(project, ItemType, metadata, m => metadata.Remove(m), item)
+                );
+        }
+    }
 }

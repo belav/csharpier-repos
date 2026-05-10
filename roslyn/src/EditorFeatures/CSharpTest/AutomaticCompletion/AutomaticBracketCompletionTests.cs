@@ -326,7 +326,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                Bracket.OpenCharacter, Bracket.CloseCharacter);
+                Bracket.OpenCharacter,
+                Bracket.CloseCharacter
+            );
         }
     }
 }

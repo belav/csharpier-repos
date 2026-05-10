@@ -17,14 +17,16 @@ public class SqliteNetTopologySuiteMethodCallTranslatorPlugin : IMethodCallTrans
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteNetTopologySuiteMethodCallTranslatorPlugin(ISqlExpressionFactory sqlExpressionFactory)
+    public SqliteNetTopologySuiteMethodCallTranslatorPlugin(
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         Translators = new IMethodCallTranslator[]
         {
             new SqliteGeometryMethodTranslator(sqlExpressionFactory),
             new SqliteGeometryCollectionMethodTranslator(sqlExpressionFactory),
             new SqliteLineStringMethodTranslator(sqlExpressionFactory),
-            new SqlitePolygonMethodTranslator(sqlExpressionFactory)
+            new SqlitePolygonMethodTranslator(sqlExpressionFactory),
         };
     }
 

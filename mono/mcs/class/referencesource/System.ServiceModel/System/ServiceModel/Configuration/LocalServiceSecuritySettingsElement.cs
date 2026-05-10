@@ -10,20 +10,25 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
 
-    public sealed partial class LocalServiceSecuritySettingsElement : ServiceModelConfigurationElement
+    public sealed partial class LocalServiceSecuritySettingsElement
+        : ServiceModelConfigurationElement
     {
-        public LocalServiceSecuritySettingsElement()
-        {
-        }
+        public LocalServiceSecuritySettingsElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.DetectReplays, DefaultValue = SecurityProtocolFactory.defaultDetectReplays)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DetectReplays,
+            DefaultValue = SecurityProtocolFactory.defaultDetectReplays
+        )]
         public bool DetectReplays
         {
             get { return (bool)base[ConfigurationStrings.DetectReplays]; }
             set { base[ConfigurationStrings.DetectReplays] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IssuedCookieLifetime, DefaultValue = SpnegoTokenAuthenticator.defaultServerIssuedTokenLifetimeString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IssuedCookieLifetime,
+            DefaultValue = SpnegoTokenAuthenticator.defaultServerIssuedTokenLifetimeString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan IssuedCookieLifetime
@@ -32,7 +37,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.IssuedCookieLifetime] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxStatefulNegotiations, DefaultValue = SpnegoTokenAuthenticator.defaultServerMaxActiveNegotiations)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxStatefulNegotiations,
+            DefaultValue = SpnegoTokenAuthenticator.defaultServerMaxActiveNegotiations
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxStatefulNegotiations
         {
@@ -40,7 +48,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxStatefulNegotiations] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReplayCacheSize, DefaultValue = SecurityProtocolFactory.defaultMaxCachedNonces)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReplayCacheSize,
+            DefaultValue = SecurityProtocolFactory.defaultMaxCachedNonces
+        )]
         [IntegerValidator(MinValue = 1)]
         public int ReplayCacheSize
         {
@@ -48,7 +59,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ReplayCacheSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxClockSkew, DefaultValue = SecurityProtocolFactory.defaultMaxClockSkewString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxClockSkew,
+            DefaultValue = SecurityProtocolFactory.defaultMaxClockSkewString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan MaxClockSkew
@@ -57,7 +71,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxClockSkew] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.NegotiationTimeout, DefaultValue = SpnegoTokenAuthenticator.defaultServerMaxNegotiationLifetimeString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.NegotiationTimeout,
+            DefaultValue = SpnegoTokenAuthenticator.defaultServerMaxNegotiationLifetimeString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan NegotiationTimeout
@@ -66,7 +83,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.NegotiationTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReplayWindow, DefaultValue = SecurityProtocolFactory.defaultReplayWindowString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReplayWindow,
+            DefaultValue = SecurityProtocolFactory.defaultReplayWindowString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan ReplayWindow
@@ -75,7 +95,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ReplayWindow] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.InactivityTimeout, DefaultValue = SecuritySessionServerSettings.defaultInactivityTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.InactivityTimeout,
+            DefaultValue = SecuritySessionServerSettings.defaultInactivityTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan InactivityTimeout
@@ -84,7 +107,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.InactivityTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SessionKeyRenewalInterval, DefaultValue = SecuritySessionServerSettings.defaultKeyRenewalIntervalString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SessionKeyRenewalInterval,
+            DefaultValue = SecuritySessionServerSettings.defaultKeyRenewalIntervalString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan SessionKeyRenewalInterval
@@ -93,7 +119,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.SessionKeyRenewalInterval] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SessionKeyRolloverInterval, DefaultValue = SecuritySessionServerSettings.defaultKeyRolloverIntervalString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SessionKeyRolloverInterval,
+            DefaultValue = SecuritySessionServerSettings.defaultKeyRolloverIntervalString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan SessionKeyRolloverInterval
@@ -102,14 +131,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.SessionKeyRolloverInterval] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ReconnectTransportOnFailure, DefaultValue = SecuritySessionServerSettings.defaultTolerateTransportFailures)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ReconnectTransportOnFailure,
+            DefaultValue = SecuritySessionServerSettings.defaultTolerateTransportFailures
+        )]
         public bool ReconnectTransportOnFailure
         {
             get { return (bool)base[ConfigurationStrings.ReconnectTransportOnFailure]; }
             set { base[ConfigurationStrings.ReconnectTransportOnFailure] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxPendingSessions, DefaultValue = SecuritySessionServerSettings.defaultMaximumPendingSessions)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxPendingSessions,
+            DefaultValue = SecuritySessionServerSettings.defaultMaximumPendingSessions
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxPendingSessions
         {
@@ -117,7 +152,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxPendingSessions] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxCachedCookies, DefaultValue = SpnegoTokenAuthenticator.defaultServerMaxCachedTokens)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxCachedCookies,
+            DefaultValue = SpnegoTokenAuthenticator.defaultServerMaxCachedTokens
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxCachedCookies
         {
@@ -125,7 +163,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxCachedCookies] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TimestampValidityDuration, DefaultValue = SecurityProtocolFactory.defaultTimestampValidityDurationString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TimestampValidityDuration,
+            DefaultValue = SecurityProtocolFactory.defaultTimestampValidityDurationString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan TimestampValidityDuration
@@ -140,7 +181,12 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("settings");
             }
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.DetectReplays].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.DetectReplays]
+                    .ValueOrigin
+            )
                 settings.DetectReplays = this.DetectReplays;
             settings.IssuedCookieLifetime = this.IssuedCookieLifetime;
             settings.MaxClockSkew = this.MaxClockSkew;
@@ -164,19 +210,58 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("settings");
             }
             this.DetectReplays = settings.DetectReplays; // can't use default value optimization here because runtime default doesn't match config default
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.IssuedCookieLifetime, settings.IssuedCookieLifetime);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxClockSkew, settings.MaxClockSkew);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxPendingSessions, settings.MaxPendingSessions);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxStatefulNegotiations, settings.MaxStatefulNegotiations);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.NegotiationTimeout, settings.NegotiationTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReconnectTransportOnFailure, settings.ReconnectTransportOnFailure);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReplayCacheSize, settings.ReplayCacheSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ReplayWindow, settings.ReplayWindow);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionKeyRenewalInterval, settings.SessionKeyRenewalInterval);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SessionKeyRolloverInterval, settings.SessionKeyRolloverInterval);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.InactivityTimeout, settings.InactivityTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TimestampValidityDuration, settings.TimestampValidityDuration);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxCachedCookies, settings.MaxCachedCookies);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.IssuedCookieLifetime,
+                settings.IssuedCookieLifetime
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxClockSkew,
+                settings.MaxClockSkew
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxPendingSessions,
+                settings.MaxPendingSessions
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxStatefulNegotiations,
+                settings.MaxStatefulNegotiations
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.NegotiationTimeout,
+                settings.NegotiationTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ReconnectTransportOnFailure,
+                settings.ReconnectTransportOnFailure
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ReplayCacheSize,
+                settings.ReplayCacheSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ReplayWindow,
+                settings.ReplayWindow
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SessionKeyRenewalInterval,
+                settings.SessionKeyRenewalInterval
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SessionKeyRolloverInterval,
+                settings.SessionKeyRolloverInterval
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.InactivityTimeout,
+                settings.InactivityTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TimestampValidityDuration,
+                settings.TimestampValidityDuration
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxCachedCookies,
+                settings.MaxCachedCookies
+            );
         }
 
         internal void CopyFrom(LocalServiceSecuritySettingsElement source)
@@ -185,7 +270,13 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("source");
             }
-            if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.DetectReplays].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.DetectReplays]
+                    .ValueOrigin
+            )
                 this.DetectReplays = source.DetectReplays;
             this.IssuedCookieLifetime = source.IssuedCookieLifetime;
             this.MaxClockSkew = source.MaxClockSkew;
@@ -203,6 +294,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

@@ -15,7 +15,9 @@ public partial class ThreadPoolBoundHandleTests
     {
         const int DATA_SIZE = 2;
 
-        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(Path.Combine(TestDirectory, @"SingleOverlappedOverSingleHandle.tmp"));
+        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(
+            Path.Combine(TestDirectory, @"SingleOverlappedOverSingleHandle.tmp")
+        );
         ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle);
 
         OverlappedContext result = new OverlappedContext();
@@ -24,11 +26,21 @@ public partial class ThreadPoolBoundHandleTests
         data[0] = (byte)'A';
         data[1] = (byte)'B';
 
-        NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(OnOverlappedOperationCompleted, result, data);
+        NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(
+            OnOverlappedOperationCompleted,
+            result,
+            data
+        );
 
         fixed (byte* p = data)
         {
-            int retval = DllImport.WriteFile(boundHandle.Handle, p, DATA_SIZE, IntPtr.Zero, overlapped);
+            int retval = DllImport.WriteFile(
+                boundHandle.Handle,
+                p,
+                DATA_SIZE,
+                IntPtr.Zero,
+                overlapped
+            );
 
             if (retval == 0)
             {
@@ -53,7 +65,9 @@ public partial class ThreadPoolBoundHandleTests
     {
         const int DATA_SIZE = 2;
 
-        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(Path.Combine(TestDirectory, @"MultipleOperationsOverSingleHandle.tmp"));
+        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(
+            Path.Combine(TestDirectory, @"MultipleOperationsOverSingleHandle.tmp")
+        );
         ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle);
 
         OverlappedContext result1 = new OverlappedContext();
@@ -63,27 +77,48 @@ public partial class ThreadPoolBoundHandleTests
         data1[0] = (byte)'A';
         data1[1] = (byte)'B';
 
-
         byte[] data2 = new byte[DATA_SIZE];
         data2[0] = (byte)'C';
         data2[1] = (byte)'D';
 
-        NativeOverlapped* overlapped1 = boundHandle.AllocateNativeOverlapped(OnOverlappedOperationCompleted, result1, data1);
-        NativeOverlapped* overlapped2 = boundHandle.AllocateNativeOverlapped(OnOverlappedOperationCompleted, result2, data2);
+        NativeOverlapped* overlapped1 = boundHandle.AllocateNativeOverlapped(
+            OnOverlappedOperationCompleted,
+            result1,
+            data1
+        );
+        NativeOverlapped* overlapped2 = boundHandle.AllocateNativeOverlapped(
+            OnOverlappedOperationCompleted,
+            result2,
+            data2
+        );
 
-        fixed (byte* p1 = data1, p2 = data2)
+        fixed (
+            byte* p1 = data1,
+                p2 = data2
+        )
         {
-            int retval = DllImport.WriteFile(boundHandle.Handle, p1, DATA_SIZE, IntPtr.Zero, overlapped1);
+            int retval = DllImport.WriteFile(
+                boundHandle.Handle,
+                p1,
+                DATA_SIZE,
+                IntPtr.Zero,
+                overlapped1
+            );
 
             if (retval == 0)
             {
                 Assert.Equal(DllImport.ERROR_IO_PENDING, Marshal.GetLastPInvokeError());
             }
 
-
             // Start the offset after the above write, so that it doesn't overwrite the previous write
             overlapped2->OffsetLow = DATA_SIZE;
-            retval = DllImport.WriteFile(boundHandle.Handle, p2, DATA_SIZE, IntPtr.Zero, overlapped2);
+            retval = DllImport.WriteFile(
+                boundHandle.Handle,
+                p2,
+                DATA_SIZE,
+                IntPtr.Zero,
+                overlapped2
+            );
 
             if (retval == 0)
             {
@@ -111,8 +146,12 @@ public partial class ThreadPoolBoundHandleTests
     {
         const int DATA_SIZE = 2;
 
-        SafeHandle handle1 = HandleFactory.CreateAsyncFileHandleForWrite(Path.Combine(TestDirectory, @"MultipleOperationsOverMultipleHandle1.tmp"));
-        SafeHandle handle2 = HandleFactory.CreateAsyncFileHandleForWrite(Path.Combine(TestDirectory, @"MultipleOperationsOverMultipleHandle2.tmp"));
+        SafeHandle handle1 = HandleFactory.CreateAsyncFileHandleForWrite(
+            Path.Combine(TestDirectory, @"MultipleOperationsOverMultipleHandle1.tmp")
+        );
+        SafeHandle handle2 = HandleFactory.CreateAsyncFileHandleForWrite(
+            Path.Combine(TestDirectory, @"MultipleOperationsOverMultipleHandle2.tmp")
+        );
         ThreadPoolBoundHandle boundHandle1 = ThreadPoolBoundHandle.BindHandle(handle1);
         ThreadPoolBoundHandle boundHandle2 = ThreadPoolBoundHandle.BindHandle(handle2);
 
@@ -123,30 +162,51 @@ public partial class ThreadPoolBoundHandleTests
         data1[0] = (byte)'A';
         data1[1] = (byte)'B';
 
-
         byte[] data2 = new byte[DATA_SIZE];
         data2[0] = (byte)'C';
         data2[1] = (byte)'D';
 
-        PreAllocatedOverlapped preAlloc1 = new PreAllocatedOverlapped(OnOverlappedOperationCompleted, result1, data1);
-        PreAllocatedOverlapped preAlloc2 = new PreAllocatedOverlapped(OnOverlappedOperationCompleted, result2, data2);
+        PreAllocatedOverlapped preAlloc1 = new PreAllocatedOverlapped(
+            OnOverlappedOperationCompleted,
+            result1,
+            data1
+        );
+        PreAllocatedOverlapped preAlloc2 = new PreAllocatedOverlapped(
+            OnOverlappedOperationCompleted,
+            result2,
+            data2
+        );
 
         for (int i = 0; i < 10; i++)
         {
             NativeOverlapped* overlapped1 = boundHandle1.AllocateNativeOverlapped(preAlloc1);
             NativeOverlapped* overlapped2 = boundHandle2.AllocateNativeOverlapped(preAlloc2);
 
-            fixed (byte* p1 = data1, p2 = data2)
+            fixed (
+                byte* p1 = data1,
+                    p2 = data2
+            )
             {
-                int retval = DllImport.WriteFile(boundHandle1.Handle, p1, DATA_SIZE, IntPtr.Zero, overlapped1);
+                int retval = DllImport.WriteFile(
+                    boundHandle1.Handle,
+                    p1,
+                    DATA_SIZE,
+                    IntPtr.Zero,
+                    overlapped1
+                );
 
                 if (retval == 0)
                 {
                     Assert.Equal(DllImport.ERROR_IO_PENDING, Marshal.GetLastPInvokeError());
                 }
 
-
-                retval = DllImport.WriteFile(boundHandle2.Handle, p2, DATA_SIZE, IntPtr.Zero, overlapped2);
+                retval = DllImport.WriteFile(
+                    boundHandle2.Handle,
+                    p2,
+                    DATA_SIZE,
+                    IntPtr.Zero,
+                    overlapped2
+                );
 
                 if (retval == 0)
                 {
@@ -187,7 +247,9 @@ public partial class ThreadPoolBoundHandleTests
 
         const int DATA_SIZE = 2;
 
-        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(Path.Combine(TestDirectory, @"AsyncLocal.tmp"));
+        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(
+            Path.Combine(TestDirectory, @"AsyncLocal.tmp")
+        );
         ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle);
 
         OverlappedContext context = new OverlappedContext();
@@ -197,20 +259,26 @@ public partial class ThreadPoolBoundHandleTests
         AsyncLocal<int> asyncLocal = new AsyncLocal<int>();
         asyncLocal.Value = 10;
 
-        int? result  = null;
-        IOCompletionCallback callback = (_, __, ___) => {
-
+        int? result = null;
+        IOCompletionCallback callback = (_, __, ___) =>
+        {
             result = asyncLocal.Value;
             OnOverlappedOperationCompleted(_, __, ___);
         };
 
-        NativeOverlapped* overlapped = shouldFlow ?
-            boundHandle.AllocateNativeOverlapped(callback, context, data) :
-            boundHandle.UnsafeAllocateNativeOverlapped(callback, context, data);
+        NativeOverlapped* overlapped = shouldFlow
+            ? boundHandle.AllocateNativeOverlapped(callback, context, data)
+            : boundHandle.UnsafeAllocateNativeOverlapped(callback, context, data);
 
         fixed (byte* p = data)
         {
-            int retval = DllImport.WriteFile(boundHandle.Handle, p, DATA_SIZE, IntPtr.Zero, overlapped);
+            int retval = DllImport.WriteFile(
+                boundHandle.Handle,
+                p,
+                DATA_SIZE,
+                IntPtr.Zero,
+                overlapped
+            );
 
             if (retval == 0)
             {
@@ -225,9 +293,7 @@ public partial class ThreadPoolBoundHandleTests
         boundHandle.Dispose();
         handle.Dispose();
 
-        Assert.Equal(
-            shouldFlow ? 10 : 0,
-            result);
+        Assert.Equal(shouldFlow ? 10 : 0, result);
     }
 
     [Theory]
@@ -240,7 +306,9 @@ public partial class ThreadPoolBoundHandleTests
 
         const int DATA_SIZE = 2;
 
-        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(Path.Combine(TestDirectory, @"AsyncLocal.tmp"));
+        SafeHandle handle = HandleFactory.CreateAsyncFileHandleForWrite(
+            Path.Combine(TestDirectory, @"AsyncLocal.tmp")
+        );
         ThreadPoolBoundHandle boundHandle = ThreadPoolBoundHandle.BindHandle(handle);
 
         OverlappedContext context = new OverlappedContext();
@@ -251,21 +319,29 @@ public partial class ThreadPoolBoundHandleTests
         asyncLocal.Value = 10;
 
         int? result = null;
-        IOCompletionCallback callback = (_, __, ___) => {
-
+        IOCompletionCallback callback = (_, __, ___) =>
+        {
             result = asyncLocal.Value;
             OnOverlappedOperationCompleted(_, __, ___);
         };
 
-        using (PreAllocatedOverlapped preAlloc = shouldFlow ?
-            new PreAllocatedOverlapped(callback, context, data) :
-            PreAllocatedOverlapped.UnsafeCreate(callback, context, data))
+        using (
+            PreAllocatedOverlapped preAlloc = shouldFlow
+                ? new PreAllocatedOverlapped(callback, context, data)
+                : PreAllocatedOverlapped.UnsafeCreate(callback, context, data)
+        )
         {
             NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(preAlloc);
 
             fixed (byte* p = data)
             {
-                int retval = DllImport.WriteFile(boundHandle.Handle, p, DATA_SIZE, IntPtr.Zero, overlapped);
+                int retval = DllImport.WriteFile(
+                    boundHandle.Handle,
+                    p,
+                    DATA_SIZE,
+                    IntPtr.Zero,
+                    overlapped
+                );
 
                 if (retval == 0)
                 {
@@ -282,14 +358,17 @@ public partial class ThreadPoolBoundHandleTests
         boundHandle.Dispose();
         handle.Dispose();
 
-        Assert.Equal(
-            shouldFlow ? 10 : 0,
-            result);
+        Assert.Equal(shouldFlow ? 10 : 0, result);
     }
 
-    private static unsafe void OnOverlappedOperationCompleted(uint errorCode, uint numBytes, NativeOverlapped* overlapped)
+    private static unsafe void OnOverlappedOperationCompleted(
+        uint errorCode,
+        uint numBytes,
+        NativeOverlapped* overlapped
+    )
     {
-        OverlappedContext result = (OverlappedContext)ThreadPoolBoundHandle.GetNativeOverlappedState(overlapped);
+        OverlappedContext result = (OverlappedContext)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(overlapped);
         result.ErrorCode = (int)errorCode;
         result.BytesWritten = (int)numBytes;
 

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Simplification
         public static readonly SyntaxAnnotation DoNotSimplifyAnnotation = new();
         public static readonly SyntaxAnnotation SimplifyModuleNameAnnotation = new();
 
-        public static TNode CopyAnnotations<TNode>(SyntaxNode from, TNode to) where TNode : SyntaxNode
+        public static TNode CopyAnnotations<TNode>(SyntaxNode from, TNode to)
+            where TNode : SyntaxNode
         {
             // Because we are removing a node that may have annotations (i.e. formatting), we need
             // to copy those annotations to the new node. However, we can only copy all annotations
@@ -61,7 +62,10 @@ namespace Microsoft.CodeAnalysis.Simplification
             return to;
         }
 
-        public static ISymbol? GetOriginalSymbolInfo(SemanticModel semanticModel, SyntaxNode expression)
+        public static ISymbol? GetOriginalSymbolInfo(
+            SemanticModel semanticModel,
+            SyntaxNode expression
+        )
         {
             Contract.ThrowIfNull(expression);
             var annotation1 = expression.GetAnnotations(SymbolAnnotation.Kind).FirstOrDefault();
@@ -72,7 +76,9 @@ namespace Microsoft.CodeAnalysis.Simplification
                     return typeSymbol;
             }
 
-            var annotation2 = expression.GetAnnotations(SpecialTypeAnnotation.Kind).FirstOrDefault();
+            var annotation2 = expression
+                .GetAnnotations(SpecialTypeAnnotation.Kind)
+                .FirstOrDefault();
             if (annotation2 != null)
             {
                 var specialType = SpecialTypeAnnotation.GetSpecialType(annotation2);
@@ -97,7 +103,10 @@ namespace Microsoft.CodeAnalysis.Simplification
             return symbol is not null and not IErrorTypeSymbol;
         }
 
-        public static bool IsNamespaceOrTypeOrThisParameter(SyntaxNode expression, SemanticModel semanticModel)
+        public static bool IsNamespaceOrTypeOrThisParameter(
+            SyntaxNode expression,
+            SemanticModel semanticModel
+        )
         {
             var expressionInfo = semanticModel.GetSymbolInfo(expression);
             if (IsValidSymbolInfo(expressionInfo.Symbol))
@@ -112,7 +121,10 @@ namespace Microsoft.CodeAnalysis.Simplification
             return false;
         }
 
-        internal static bool ShouldSimplifyThisOrMeMemberAccessExpression(SimplifierOptions options, ISymbol symbol)
+        internal static bool ShouldSimplifyThisOrMeMemberAccessExpression(
+            SimplifierOptions options,
+            ISymbol symbol
+        )
         {
             // If we're accessing a static member off of this/me then we should always consider this
             // simplifiable.  Note: in C# this isn't even legal to access a static off of `this`,
@@ -120,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             if (symbol.IsStatic)
                 return true;
 
-            return options.TryGetQualifyMemberAccessOption(symbol.Kind, out var symbolOptions) && !symbolOptions.Value;
+            return options.TryGetQualifyMemberAccessOption(symbol.Kind, out var symbolOptions)
+                && !symbolOptions.Value;
         }
     }
 }

@@ -56,13 +56,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(DocumentHandle left, DocumentHandle right)
         {
@@ -139,15 +139,18 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(MethodDebugInformationHandle left, MethodDebugInformationHandle right)
+        public static bool operator ==(
+            MethodDebugInformationHandle left,
+            MethodDebugInformationHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
@@ -167,7 +170,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(MethodDebugInformationHandle left, MethodDebugInformationHandle right)
+        public static bool operator !=(
+            MethodDebugInformationHandle left,
+            MethodDebugInformationHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -234,13 +240,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(LocalScopeHandle left, LocalScopeHandle right)
         {
@@ -317,13 +323,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(LocalVariableHandle left, LocalVariableHandle right)
         {
@@ -400,13 +406,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(LocalConstantHandle left, LocalConstantHandle right)
         {
@@ -483,13 +489,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ImportScopeHandle left, ImportScopeHandle right)
         {
@@ -566,15 +572,18 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(CustomDebugInformationHandle left, CustomDebugInformationHandle right)
+        public static bool operator ==(
+            CustomDebugInformationHandle left,
+            CustomDebugInformationHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
@@ -594,7 +603,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(CustomDebugInformationHandle left, CustomDebugInformationHandle right)
+        public static bool operator !=(
+            CustomDebugInformationHandle left,
+            CustomDebugInformationHandle right
+        )
         {
             return left._rowId != right._rowId;
         }

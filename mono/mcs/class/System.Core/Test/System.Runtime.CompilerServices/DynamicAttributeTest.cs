@@ -26,38 +26,35 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {
-	[TestFixture]
-	public class DynamicAttributeTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CtorNull ()
-		{
-			new DynamicAttribute (null);
-		}
+    [TestFixture]
+    public class DynamicAttributeTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorNull()
+        {
+            new DynamicAttribute(null);
+        }
 
-		[Test]
-		public void DefaultCtor ()
-		{
-			var da = new DynamicAttribute ();
-			Assert.AreEqual (da.TransformFlags, new [] { true });
-			Assert.IsTrue (da.TransformFlags.IsReadOnly);
-		}
-		
-		[Test]
-		public void TransformCtor ()
-		{
-			var da = new DynamicAttribute (new [] { false, true, false });
-			Assert.AreEqual (da.TransformFlags, new [] { false, true, false });
-		}		
-	}
+        [Test]
+        public void DefaultCtor()
+        {
+            var da = new DynamicAttribute();
+            Assert.AreEqual(da.TransformFlags, new[] { true });
+            Assert.IsTrue(da.TransformFlags.IsReadOnly);
+        }
+
+        [Test]
+        public void TransformCtor()
+        {
+            var da = new DynamicAttribute(new[] { false, true, false });
+            Assert.AreEqual(da.TransformFlags, new[] { false, true, false });
+        }
+    }
 }
-

@@ -46,9 +46,18 @@ namespace Microsoft.CodeAnalysis.Rename
 
         public readonly ImmutableArray<RelatedLocation> RelatedLocations;
 
-        private readonly ImmutableDictionary<DocumentId, ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>> _documentToModifiedSpansMap;
-        private readonly ImmutableDictionary<DocumentId, ImmutableArray<ComplexifiedSpan>> _documentToComplexifiedSpansMap;
-        private readonly ImmutableDictionary<DocumentId, ImmutableArray<RelatedLocation>> _documentToRelatedLocationsMap;
+        private readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>
+        > _documentToModifiedSpansMap;
+        private readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<ComplexifiedSpan>
+        > _documentToComplexifiedSpansMap;
+        private readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<RelatedLocation>
+        > _documentToRelatedLocationsMap;
 
         public ConflictResolution(string errorMessage)
         {
@@ -62,9 +71,18 @@ namespace Microsoft.CodeAnalysis.Rename
             ReplacementTextValid = false;
             DocumentIds = ImmutableArray<DocumentId>.Empty;
             RelatedLocations = ImmutableArray<RelatedLocation>.Empty;
-            _documentToModifiedSpansMap = ImmutableDictionary<DocumentId, ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>>.Empty;
-            _documentToComplexifiedSpansMap = ImmutableDictionary<DocumentId, ImmutableArray<ComplexifiedSpan>>.Empty;
-            _documentToRelatedLocationsMap = ImmutableDictionary<DocumentId, ImmutableArray<RelatedLocation>>.Empty;
+            _documentToModifiedSpansMap = ImmutableDictionary<
+                DocumentId,
+                ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>
+            >.Empty;
+            _documentToComplexifiedSpansMap = ImmutableDictionary<
+                DocumentId,
+                ImmutableArray<ComplexifiedSpan>
+            >.Empty;
+            _documentToRelatedLocationsMap = ImmutableDictionary<
+                DocumentId,
+                ImmutableArray<RelatedLocation>
+            >.Empty;
         }
 
         public ConflictResolution(
@@ -72,10 +90,21 @@ namespace Microsoft.CodeAnalysis.Rename
             Solution newSolutionWithoutRenamedDocument,
             bool replacementTextValid,
             (DocumentId documentId, string newName) renamedDocument,
-            ImmutableArray<DocumentId> documentIds, ImmutableArray<RelatedLocation> relatedLocations,
-            ImmutableDictionary<DocumentId, ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>> documentToModifiedSpansMap,
-            ImmutableDictionary<DocumentId, ImmutableArray<ComplexifiedSpan>> documentToComplexifiedSpansMap,
-            ImmutableDictionary<DocumentId, ImmutableArray<RelatedLocation>> documentToRelatedLocationsMap)
+            ImmutableArray<DocumentId> documentIds,
+            ImmutableArray<RelatedLocation> relatedLocations,
+            ImmutableDictionary<
+                DocumentId,
+                ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>
+            > documentToModifiedSpansMap,
+            ImmutableDictionary<
+                DocumentId,
+                ImmutableArray<ComplexifiedSpan>
+            > documentToComplexifiedSpansMap,
+            ImmutableDictionary<
+                DocumentId,
+                ImmutableArray<RelatedLocation>
+            > documentToRelatedLocationsMap
+        )
         {
             IsSuccessful = true;
             ErrorMessage = null;
@@ -90,13 +119,19 @@ namespace Microsoft.CodeAnalysis.Rename
             _documentToComplexifiedSpansMap = documentToComplexifiedSpansMap;
             _documentToRelatedLocationsMap = documentToRelatedLocationsMap;
 
-            NewSolution = _renamedDocument.Value.documentId == null
-                ? _newSolutionWithoutRenamedDocument
-                : _newSolutionWithoutRenamedDocument.WithDocumentName(_renamedDocument.Value.documentId, _renamedDocument.Value.newName);
+            NewSolution =
+                _renamedDocument.Value.documentId == null
+                    ? _newSolutionWithoutRenamedDocument
+                    : _newSolutionWithoutRenamedDocument.WithDocumentName(
+                        _renamedDocument.Value.documentId,
+                        _renamedDocument.Value.newName
+                    );
         }
 
-        public ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> GetComplexifiedSpans(DocumentId documentId)
-            => _documentToComplexifiedSpansMap.TryGetValue(documentId, out var complexifiedSpans)
+        public ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)> GetComplexifiedSpans(
+            DocumentId documentId
+        ) =>
+            _documentToComplexifiedSpansMap.TryGetValue(documentId, out var complexifiedSpans)
                 ? complexifiedSpans.SelectAsArray(c => (c.OriginalSpan, c.NewSpan))
                 : ImmutableArray<(TextSpan oldSpan, TextSpan newSpan)>.Empty;
 
@@ -121,8 +156,10 @@ namespace Microsoft.CodeAnalysis.Rename
             return result.ToImmutable();
         }
 
-        public ImmutableArray<RelatedLocation> GetRelatedLocationsForDocument(DocumentId documentId)
-            => _documentToRelatedLocationsMap.TryGetValue(documentId, out var result)
+        public ImmutableArray<RelatedLocation> GetRelatedLocationsForDocument(
+            DocumentId documentId
+        ) =>
+            _documentToRelatedLocationsMap.TryGetValue(documentId, out var result)
                 ? result
                 : ImmutableArray<RelatedLocation>.Empty;
 
@@ -137,13 +174,15 @@ namespace Microsoft.CodeAnalysis.Rename
 
             if (_documentToComplexifiedSpansMap.TryGetValue(documentId, out var complexifiedSpans))
             {
-                var first = complexifiedSpans.FirstOrNull(c => c.OriginalSpan.Contains(originalSpan));
+                var first = complexifiedSpans.FirstOrNull(c =>
+                    c.OriginalSpan.Contains(originalSpan)
+                );
                 if (first.HasValue)
                     return first.Value.NewSpan;
             }
 
             // The RenamedSpansTracker doesn't currently track unresolved conflicts for
-            // unmodified locations.  If the document wasn't modified, we can just use the 
+            // unmodified locations.  If the document wasn't modified, we can just use the
             // original span as the new span.
             return originalSpan;
         }

@@ -4,6 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     public delegate void LoginCancelEventHandler(object sender, LoginCancelEventArgs e);
 }

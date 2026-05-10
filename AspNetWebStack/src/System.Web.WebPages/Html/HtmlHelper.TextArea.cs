@@ -14,13 +14,17 @@ namespace System.Web.WebPages.Html
         private const int TextAreaRows = 2;
         private const int TextAreaColumns = 20;
 
-        private static readonly IDictionary<string, object> _implicitRowsAndColumns = new Dictionary<string, object>
-        {
-            { "rows", TextAreaRows.ToString(CultureInfo.InvariantCulture) },
-            { "cols", TextAreaColumns.ToString(CultureInfo.InvariantCulture) },
-        };
+        private static readonly IDictionary<string, object> _implicitRowsAndColumns =
+            new Dictionary<string, object>
+            {
+                { "rows", TextAreaRows.ToString(CultureInfo.InvariantCulture) },
+                { "cols", TextAreaColumns.ToString(CultureInfo.InvariantCulture) },
+            };
 
-        private static IDictionary<string, object> GetRowsAndColumnsDictionary(int rows, int columns)
+        private static IDictionary<string, object> GetRowsAndColumnsDictionary(
+            int rows,
+            int columns
+        )
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
             if (rows > 0)
@@ -41,7 +45,11 @@ namespace System.Web.WebPages.Html
 
         public IHtmlString TextArea(string name, object htmlAttributes)
         {
-            return TextArea(name, value: null, htmlAttributes: AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return TextArea(
+                name,
+                value: null,
+                htmlAttributes: AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
         public IHtmlString TextArea(string name, IDictionary<string, object> htmlAttributes)
@@ -59,54 +67,95 @@ namespace System.Web.WebPages.Html
             return TextArea(name, value, AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public IHtmlString TextArea(string name, string value, IDictionary<string, object> htmlAttributes)
+        public IHtmlString TextArea(
+            string name,
+            string value,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
 
             return BuildTextArea(name, value, _implicitRowsAndColumns, htmlAttributes);
         }
 
-        public IHtmlString TextArea(string name, string value, int rows, int columns,
-                                    object htmlAttributes)
+        public IHtmlString TextArea(
+            string name,
+            string value,
+            int rows,
+            int columns,
+            object htmlAttributes
+        )
         {
-            return TextArea(name, value, rows, columns, AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return TextArea(
+                name,
+                value,
+                rows,
+                columns,
+                AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public IHtmlString TextArea(string name, string value, int rows, int columns,
-                                    IDictionary<string, object> htmlAttributes)
+        public IHtmlString TextArea(
+            string name,
+            string value,
+            int rows,
+            int columns,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "name");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "name"
+                );
             }
-            return BuildTextArea(name, value, GetRowsAndColumnsDictionary(rows, columns), htmlAttributes);
+            return BuildTextArea(
+                name,
+                value,
+                GetRowsAndColumnsDictionary(rows, columns),
+                htmlAttributes
+            );
         }
 
-        private IHtmlString BuildTextArea(string name, string value, IDictionary<string, object> rowsAndColumnsDictionary,
-                                          IDictionary<string, object> htmlAttributes)
+        private IHtmlString BuildTextArea(
+            string name,
+            string value,
+            IDictionary<string, object> rowsAndColumnsDictionary,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             TagBuilder tagBuilder = new TagBuilder("textarea");
 
             if (UnobtrusiveJavaScriptEnabled)
             {
                 // Add validation attributes
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(name);
+                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
+                    name
+                );
                 tagBuilder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 
             // Add user specified htmlAttributes
             tagBuilder.MergeAttributes(htmlAttributes);
 
-            tagBuilder.MergeAttributes(rowsAndColumnsDictionary, rowsAndColumnsDictionary != _implicitRowsAndColumns);
+            tagBuilder.MergeAttributes(
+                rowsAndColumnsDictionary,
+                rowsAndColumnsDictionary != _implicitRowsAndColumns
+            );
 
             // Value becomes the inner html of the textarea element
             var modelState = ModelState[name];
             if (modelState != null)
             {
-                value = value ?? Convert.ToString(ModelState[name].Value, CultureInfo.CurrentCulture);
+                value =
+                    value ?? Convert.ToString(ModelState[name].Value, CultureInfo.CurrentCulture);
             }
             tagBuilder.InnerHtml = Encode(value);
 

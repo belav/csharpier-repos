@@ -9,7 +9,12 @@ namespace System.Runtime.InteropServices
     {
         private const int LoadWithAlteredSearchPathFlag = 0;
 
-        private static IntPtr LoadLibraryHelper(string libraryName, int _ /*flags*/, ref LoadLibErrorTracker errorTracker)
+        private static IntPtr LoadLibraryHelper(
+            string libraryName,
+            int _ /*flags*/
+            ,
+            ref LoadLibErrorTracker errorTracker
+        )
         {
             IntPtr ret = Interop.Sys.LoadLibrary(libraryName);
             if (ret == IntPtr.Zero)
@@ -40,9 +45,13 @@ namespace System.Runtime.InteropServices
             public void Throw(string libraryName)
             {
 #if TARGET_OSX || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                throw new DllNotFoundException(SR.Format(SR.DllNotFound_Mac, libraryName, _errorMessage));
+                throw new DllNotFoundException(
+                    SR.Format(SR.DllNotFound_Mac, libraryName, _errorMessage)
+                );
 #else
-                throw new DllNotFoundException(SR.Format(SR.DllNotFound_Linux, libraryName, _errorMessage));
+                throw new DllNotFoundException(
+                    SR.Format(SR.DllNotFound_Linux, libraryName, _errorMessage)
+                );
 #endif
             }
 

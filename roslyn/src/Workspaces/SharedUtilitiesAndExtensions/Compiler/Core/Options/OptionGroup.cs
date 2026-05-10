@@ -9,7 +9,12 @@ namespace Microsoft.CodeAnalysis.Options
     /// <summary>
     /// Group/sub-feature associated with an option.
     /// </summary>
-    internal sealed class OptionGroup(string name, string description, int priority = int.MaxValue, OptionGroup? parent = null)
+    internal sealed class OptionGroup(
+        string name,
+        string description,
+        int priority = int.MaxValue,
+        OptionGroup? parent = null
+    )
     {
         public static readonly OptionGroup Default = new(string.Empty, string.Empty, int.MaxValue);
 

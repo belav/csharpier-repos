@@ -44,14 +44,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             #region Fields read/and written to only on the UI thread to track active context for files
 
-            private readonly ReferenceCountedDisposableCache<IVsHierarchy, HierarchyEventSink> _hierarchyEventSinkCache = new();
+            private readonly ReferenceCountedDisposableCache<
+                IVsHierarchy,
+                HierarchyEventSink
+            > _hierarchyEventSinkCache = new();
 
             /// <summary>
             /// The IVsHierarchies we have subscribed to to watch for any changes to this moniker. We track this per moniker, so
             /// when a document is closed we know what we have to incrementally unsubscribe from rather than having to unsubscribe from everything.
             /// </summary>
-            private readonly MultiDictionary<string, IReferenceCountedDisposable<ICacheEntry<IVsHierarchy, HierarchyEventSink>>> _watchedHierarchiesForDocumentMoniker
-                = new();
+            private readonly MultiDictionary<
+                string,
+                IReferenceCountedDisposable<ICacheEntry<IVsHierarchy, HierarchyEventSink>>
+            > _watchedHierarchiesForDocumentMoniker = new();
 
             /// <summary>
             /// Boolean flag to indicate if any <see cref="TextDocument"/> has been opened in the workspace.
@@ -60,43 +65,85 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             #endregion
 
-            private OpenFileTracker(VisualStudioWorkspaceImpl workspace, ProjectSystemProjectFactory projectSystemProjectFactory, IComponentModel componentModel)
+            private OpenFileTracker(
+                VisualStudioWorkspaceImpl workspace,
+                ProjectSystemProjectFactory projectSystemProjectFactory,
+                IComponentModel componentModel
+            )
             {
                 _workspace = workspace;
                 _projectSystemProjectFactory = projectSystemProjectFactory;
-                _foregroundAffinitization = new ForegroundThreadAffinitizedObject(workspace._threadingContext, assertIsForeground: true);
-                _editorOptionsFactoryService = componentModel.GetService<IEditorOptionsFactoryService>();
-                _asynchronousOperationListener = componentModel.GetService<IAsynchronousOperationListenerProvider>().GetListener(FeatureAttribute.Workspace);
+                _foregroundAffinitization = new ForegroundThreadAffinitizedObject(
+                    workspace._threadingContext,
+                    assertIsForeground: true
+                );
+                _editorOptionsFactoryService =
+                    componentModel.GetService<IEditorOptionsFactoryService>();
+                _asynchronousOperationListener = componentModel
+                    .GetService<IAsynchronousOperationListenerProvider>()
+                    .GetListener(FeatureAttribute.Workspace);
                 _openTextBufferProvider = componentModel.GetService<OpenTextBufferProvider>();
                 _openTextBufferProvider.AddListener(this);
             }
 
-            void IOpenTextBufferEventListener.OnOpenDocument(string moniker, ITextBuffer textBuffer, IVsHierarchy? hierarchy)
-                => TryOpeningDocumentsForMonikerAndSetContextOnUIThread(moniker, textBuffer, hierarchy);
+            void IOpenTextBufferEventListener.OnOpenDocument(
+                string moniker,
+                ITextBuffer textBuffer,
+                IVsHierarchy? hierarchy
+            ) =>
+                TryOpeningDocumentsForMonikerAndSetContextOnUIThread(
+                    moniker,
+                    textBuffer,
+                    hierarchy
+                );
 
-            void IOpenTextBufferEventListener.OnDocumentOpenedIntoWindowFrame(string moniker, IVsWindowFrame windowFrame) { }
+            void IOpenTextBufferEventListener.OnDocumentOpenedIntoWindowFrame(
+                string moniker,
+                IVsWindowFrame windowFrame
+            ) { }
 
-            void IOpenTextBufferEventListener.OnCloseDocument(string moniker)
-                => TryClosingDocumentsForMoniker(moniker);
+            void IOpenTextBufferEventListener.OnCloseDocument(string moniker) =>
+                TryClosingDocumentsForMoniker(moniker);
 
-            void IOpenTextBufferEventListener.OnRefreshDocumentContext(string moniker, IVsHierarchy hierarchy)
-                => RefreshContextForMoniker(moniker, hierarchy);
+            void IOpenTextBufferEventListener.OnRefreshDocumentContext(
+                string moniker,
+                IVsHierarchy hierarchy
+            ) => RefreshContextForMoniker(moniker, hierarchy);
 
-            void IOpenTextBufferEventListener.OnRenameDocument(string newMoniker, string oldMoniker, ITextBuffer buffer)
+            void IOpenTextBufferEventListener.OnRenameDocument(
+                string newMoniker,
+                string oldMoniker,
+                ITextBuffer buffer
+            )
             {
                 TryClosingDocumentsForMoniker(oldMoniker);
-                TryOpeningDocumentsForMonikerAndSetContextOnUIThread(newMoniker, buffer, hierarchy: _openTextBufferProvider.GetDocumentHierarchy(newMoniker));
+                TryOpeningDocumentsForMonikerAndSetContextOnUIThread(
+                    newMoniker,
+                    buffer,
+                    hierarchy: _openTextBufferProvider.GetDocumentHierarchy(newMoniker)
+                );
             }
 
-            public static async Task<OpenFileTracker> CreateAsync(VisualStudioWorkspaceImpl workspace, ProjectSystemProjectFactory projectSystemProjectFactory, IAsyncServiceProvider asyncServiceProvider)
+            public static async Task<OpenFileTracker> CreateAsync(
+                VisualStudioWorkspaceImpl workspace,
+                ProjectSystemProjectFactory projectSystemProjectFactory,
+                IAsyncServiceProvider asyncServiceProvider
+            )
             {
-                var componentModel = (IComponentModel?)await asyncServiceProvider.GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
+                var componentModel = (IComponentModel?)
+                    await asyncServiceProvider
+                        .GetServiceAsync(typeof(SComponentModel))
+                        .ConfigureAwait(true);
                 Assumes.Present(componentModel);
 
                 return new OpenFileTracker(workspace, projectSystemProjectFactory, componentModel);
             }
 
-            private void TryOpeningDocumentsForMonikerAndSetContextOnUIThread(string moniker, ITextBuffer textBuffer, IVsHierarchy? hierarchy)
+            private void TryOpeningDocumentsForMonikerAndSetContextOnUIThread(
+                string moniker,
+                ITextBuffer textBuffer,
+                IVsHierarchy? hierarchy
+            )
             {
                 _foregroundAffinitization.AssertIsForeground();
 
@@ -109,16 +156,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 });
             }
 
-            private async Task TryOpeningDocumentsForMonikerAndSetContextOnUIThreadAsync(string moniker, ITextBuffer textBuffer, IVsHierarchy? hierarchy, CancellationToken cancellationToken)
+            private async Task TryOpeningDocumentsForMonikerAndSetContextOnUIThreadAsync(
+                string moniker,
+                ITextBuffer textBuffer,
+                IVsHierarchy? hierarchy,
+                CancellationToken cancellationToken
+            )
             {
-                await _projectSystemProjectFactory.ApplyChangeToWorkspaceAsync(async w =>
-                {
-                    await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                    if (TryOpeningDocumentsForFilePathCore(w, moniker, textBuffer, hierarchy))
-                    {
-                        EnsureSuggestedActionsSourceProviderEnabled();
-                    }
-                }, cancellationToken).ConfigureAwait(true);
+                await _projectSystemProjectFactory
+                    .ApplyChangeToWorkspaceAsync(
+                        async w =>
+                        {
+                            await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                                cancellationToken
+                            );
+                            if (
+                                TryOpeningDocumentsForFilePathCore(
+                                    w,
+                                    moniker,
+                                    textBuffer,
+                                    hierarchy
+                                )
+                            )
+                            {
+                                EnsureSuggestedActionsSourceProviderEnabled();
+                            }
+                        },
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
             }
 
             private void EnsureSuggestedActionsSourceProviderEnabled()
@@ -141,13 +207,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// the hierarchy will be used to determine the correct context. Otherwise, an arbitrary context will be chosen.
             /// </summary>
             /// <returns>True if we actually opened at least one document.</returns>
-            private bool TryOpeningDocumentsForFilePathCore(Workspace workspace, string moniker, ITextBuffer textBuffer, IVsHierarchy? hierarchy)
+            private bool TryOpeningDocumentsForFilePathCore(
+                Workspace workspace,
+                string moniker,
+                ITextBuffer textBuffer,
+                IVsHierarchy? hierarchy
+            )
             {
                 // If this method is given a hierarchy, we will need to be on the UI thread to use it; in any other case, we can be free-threaded.
                 if (hierarchy != null)
                     _foregroundAffinitization.AssertIsForeground();
 
-                var documentIds = _projectSystemProjectFactory.Workspace.CurrentSolution.GetDocumentIdsWithFilePath(moniker);
+                var documentIds =
+                    _projectSystemProjectFactory.Workspace.CurrentSolution.GetDocumentIdsWithFilePath(
+                        moniker
+                    );
                 if (documentIds.IsDefaultOrEmpty)
                 {
                     return false;
@@ -166,7 +240,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
                 else
                 {
-                    activeContextProjectId = GetActiveContextProjectIdAndWatchHierarchies_NoLock(moniker, documentIds.Select(d => d.ProjectId), hierarchy);
+                    activeContextProjectId = GetActiveContextProjectIdAndWatchHierarchies_NoLock(
+                        moniker,
+                        documentIds.Select(d => d.ProjectId),
+                        hierarchy
+                    );
                 }
 
                 var textContainer = textBuffer.AsTextContainer();
@@ -175,7 +253,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 foreach (var documentId in documentIds)
                 {
-                    if (!workspace.IsDocumentOpen(documentId) && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(documentId))
+                    if (
+                        !workspace.IsDocumentOpen(documentId)
+                        && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(documentId)
+                    )
                     {
                         var isCurrentContext = documentId.ProjectId == activeContextProjectId;
                         if (workspace.CurrentSolution.ContainsDocument(documentId))
@@ -184,12 +265,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         }
                         else if (workspace.CurrentSolution.ContainsAdditionalDocument(documentId))
                         {
-                            workspace.OnAdditionalDocumentOpened(documentId, textContainer, isCurrentContext);
+                            workspace.OnAdditionalDocumentOpened(
+                                documentId,
+                                textContainer,
+                                isCurrentContext
+                            );
                         }
                         else
                         {
-                            Debug.Assert(workspace.CurrentSolution.ContainsAnalyzerConfigDocument(documentId));
-                            workspace.OnAnalyzerConfigDocumentOpened(documentId, textContainer, isCurrentContext);
+                            Debug.Assert(
+                                workspace.CurrentSolution.ContainsAnalyzerConfigDocument(documentId)
+                            );
+                            workspace.OnAnalyzerConfigDocumentOpened(
+                                documentId,
+                                textContainer,
+                                isCurrentContext
+                            );
                         }
 
                         documentOpened = true;
@@ -199,7 +290,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 return documentOpened;
             }
 
-            private ProjectId GetActiveContextProjectIdAndWatchHierarchies_NoLock(string moniker, IEnumerable<ProjectId> projectIds, IVsHierarchy? hierarchy)
+            private ProjectId GetActiveContextProjectIdAndWatchHierarchies_NoLock(
+                string moniker,
+                IEnumerable<ProjectId> projectIds,
+                IVsHierarchy? hierarchy
+            )
             {
                 _foregroundAffinitization.AssertIsForeground();
 
@@ -216,7 +311,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 void WatchHierarchy(IVsHierarchy hierarchyToWatch)
                 {
-                    _watchedHierarchiesForDocumentMoniker.Add(moniker, _hierarchyEventSinkCache.GetOrCreate(hierarchyToWatch, static (h, self) => new HierarchyEventSink(h, self), this));
+                    _watchedHierarchiesForDocumentMoniker.Add(
+                        moniker,
+                        _hierarchyEventSinkCache.GetOrCreate(
+                            hierarchyToWatch,
+                            static (h, self) => new HierarchyEventSink(h, self),
+                            this
+                        )
+                    );
                 }
 
                 // Take a snapshot of the immutable data structure here to avoid mutation underneath us
@@ -242,13 +344,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
 
                 // We may have multiple projects with the same hierarchy, but we can use __VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext to distinguish
-                if (ErrorHandler.Succeeded(hierarchy.GetProperty(VSConstants.VSITEMID_ROOT, (int)__VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext, out var contextProjectNameObject)))
+                if (
+                    ErrorHandler.Succeeded(
+                        hierarchy.GetProperty(
+                            VSConstants.VSITEMID_ROOT,
+                            (int)__VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext,
+                            out var contextProjectNameObject
+                        )
+                    )
+                )
                 {
                     WatchHierarchy(hierarchy);
 
                     if (contextProjectNameObject is string contextProjectName)
                     {
-                        var project = _workspace.GetProjectWithHierarchyAndName_NoLock(hierarchy, contextProjectName);
+                        var project = _workspace.GetProjectWithHierarchyAndName_NoLock(
+                            hierarchy,
+                            contextProjectName
+                        );
 
                         if (project != null && projectIds.Contains(project.Id))
                         {
@@ -259,7 +372,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 // At this point, we should hopefully have only one project that matches by hierarchy. If there's multiple, at this point we can't figure anything
                 // out better.
-                var matchingProjectId = projectIds.FirstOrDefault(id => projectToHierarchyMap.GetValueOrDefault(id, null) == hierarchy);
+                var matchingProjectId = projectIds.FirstOrDefault(id =>
+                    projectToHierarchyMap.GetValueOrDefault(id, null) == hierarchy
+                );
 
                 if (matchingProjectId != null)
                 {
@@ -288,7 +403,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 _projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
                 {
-                    var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(moniker);
+                    var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
+                        moniker
+                    );
                     if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
                     {
                         return;
@@ -299,8 +416,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         return;
                     }
 
-                    var activeProjectId = GetActiveContextProjectIdAndWatchHierarchies_NoLock(moniker, documentIds.Select(d => d.ProjectId), hierarchy);
-                    w.OnDocumentContextUpdated(documentIds.First(d => d.ProjectId == activeProjectId));
+                    var activeProjectId = GetActiveContextProjectIdAndWatchHierarchies_NoLock(
+                        moniker,
+                        documentIds.Select(d => d.ProjectId),
+                        hierarchy
+                    );
+                    w.OnDocumentContextUpdated(
+                        documentIds.First(d => d.ProjectId == activeProjectId)
+                    );
                 });
             }
 
@@ -312,7 +435,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // We have to clone this since we will be modifying it under the covers.
                 foreach (var moniker in _watchedHierarchiesForDocumentMoniker.Keys.ToList())
                 {
-                    foreach (var subscribedHierarchy in _watchedHierarchiesForDocumentMoniker[moniker])
+                    foreach (
+                        var subscribedHierarchy in _watchedHierarchiesForDocumentMoniker[moniker]
+                    )
                     {
                         if (subscribedHierarchy.Target.Key == hierarchy)
                         {
@@ -338,61 +463,129 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                     foreach (var documentId in documentIds)
                     {
-                        if (w.IsDocumentOpen(documentId) && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(documentId))
+                        if (
+                            w.IsDocumentOpen(documentId)
+                            && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(
+                                documentId
+                            )
+                        )
                         {
                             var solution = w.CurrentSolution;
 
                             if (solution.GetDocument(documentId) is { } document)
                             {
-                                w.OnDocumentClosed(documentId, new WorkspaceFileTextLoader(w.Services.SolutionServices, moniker, defaultEncoding: null));
+                                w.OnDocumentClosed(
+                                    documentId,
+                                    new WorkspaceFileTextLoader(
+                                        w.Services.SolutionServices,
+                                        moniker,
+                                        defaultEncoding: null
+                                    )
+                                );
                             }
-                            else if (solution.GetAdditionalDocument(documentId) is { } additionalDocument)
+                            else if (
+                                solution.GetAdditionalDocument(documentId) is { } additionalDocument
+                            )
                             {
-                                w.OnAdditionalDocumentClosed(documentId, new WorkspaceFileTextLoader(w.Services.SolutionServices, moniker, defaultEncoding: null));
+                                w.OnAdditionalDocumentClosed(
+                                    documentId,
+                                    new WorkspaceFileTextLoader(
+                                        w.Services.SolutionServices,
+                                        moniker,
+                                        defaultEncoding: null
+                                    )
+                                );
                             }
                             else
                             {
-                                var analyzerConfigDocument = solution.GetRequiredAnalyzerConfigDocument(documentId);
-                                w.OnAnalyzerConfigDocumentClosed(documentId, new WorkspaceFileTextLoader(w.Services.SolutionServices, moniker, defaultEncoding: null));
+                                var analyzerConfigDocument =
+                                    solution.GetRequiredAnalyzerConfigDocument(documentId);
+                                w.OnAnalyzerConfigDocumentClosed(
+                                    documentId,
+                                    new WorkspaceFileTextLoader(
+                                        w.Services.SolutionServices,
+                                        moniker,
+                                        defaultEncoding: null
+                                    )
+                                );
                             }
                         }
                     }
                 });
             }
 
-            public Task CheckForAddedFileBeingOpenMaybeAsync(bool useAsync, ImmutableArray<string> newFileNames)
+            public Task CheckForAddedFileBeingOpenMaybeAsync(
+                bool useAsync,
+                ImmutableArray<string> newFileNames
+            )
             {
                 ForegroundThreadAffinitizedObject.ThisCanBeCalledOnAnyThread();
 
-                return _projectSystemProjectFactory.ApplyChangeToWorkspaceMaybeAsync(useAsync, w =>
-                {
-                    foreach (var newFileName in newFileNames)
-                    {
-                        if (_openTextBufferProvider.TryGetBufferFromFilePath(newFileName, out var textBuffer))
+                return _projectSystemProjectFactory
+                    .ApplyChangeToWorkspaceMaybeAsync(
+                        useAsync,
+                        w =>
                         {
-                            // If we are on the UI thread, we can just grab the hierarchy and properly wire up to the correct context; if we're off the UI thread we'll instead wire up to some
-                            // document, and then asynchronously jump to the UI thread to pick the correct context. This ensures the workspace has the correct content,
-                            // even if we don't immediately know the right context.
-                            if (_workspace._threadingContext.JoinableTaskContext.IsOnMainThread)
+                            foreach (var newFileName in newFileNames)
                             {
-                                var hierarchy = _openTextBufferProvider.GetDocumentHierarchy(newFileName);
-                                if (TryOpeningDocumentsForFilePathCore(w, newFileName, textBuffer, hierarchy))
-                                    EnsureSuggestedActionsSourceProviderEnabled();
-                            }
-                            else
-                            {
-                                // Since we're not on the UI thread, we can't grab a hierarchy to wire up the correct context. We'll try wire up without a context
-                                // and if it was actually open, we'll schedule an update asynchronously.
-                                if (TryOpeningDocumentsForFilePathCore(w, newFileName, textBuffer, hierarchy: null))
+                                if (
+                                    _openTextBufferProvider.TryGetBufferFromFilePath(
+                                        newFileName,
+                                        out var textBuffer
+                                    )
+                                )
                                 {
-                                    // The files are now tied to the buffer, but let's schedule work to correctly update the context.
-                                    var token = _asynchronousOperationListener.BeginAsyncOperation(nameof(CheckForAddedFileBeingOpenMaybeAsync));
-                                    UpdateContextAfterOpenAsync(newFileName).CompletesAsyncOperation(token);
+                                    // If we are on the UI thread, we can just grab the hierarchy and properly wire up to the correct context; if we're off the UI thread we'll instead wire up to some
+                                    // document, and then asynchronously jump to the UI thread to pick the correct context. This ensures the workspace has the correct content,
+                                    // even if we don't immediately know the right context.
+                                    if (
+                                        _workspace
+                                            ._threadingContext
+                                            .JoinableTaskContext
+                                            .IsOnMainThread
+                                    )
+                                    {
+                                        var hierarchy =
+                                            _openTextBufferProvider.GetDocumentHierarchy(
+                                                newFileName
+                                            );
+                                        if (
+                                            TryOpeningDocumentsForFilePathCore(
+                                                w,
+                                                newFileName,
+                                                textBuffer,
+                                                hierarchy
+                                            )
+                                        )
+                                            EnsureSuggestedActionsSourceProviderEnabled();
+                                    }
+                                    else
+                                    {
+                                        // Since we're not on the UI thread, we can't grab a hierarchy to wire up the correct context. We'll try wire up without a context
+                                        // and if it was actually open, we'll schedule an update asynchronously.
+                                        if (
+                                            TryOpeningDocumentsForFilePathCore(
+                                                w,
+                                                newFileName,
+                                                textBuffer,
+                                                hierarchy: null
+                                            )
+                                        )
+                                        {
+                                            // The files are now tied to the buffer, but let's schedule work to correctly update the context.
+                                            var token =
+                                                _asynchronousOperationListener.BeginAsyncOperation(
+                                                    nameof(CheckForAddedFileBeingOpenMaybeAsync)
+                                                );
+                                            UpdateContextAfterOpenAsync(newFileName)
+                                                .CompletesAsyncOperation(token);
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }).AsTask();
+                    )
+                    .AsTask();
             }
 
             private async Task UpdateContextAfterOpenAsync(string filePath)
@@ -405,15 +598,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 EnsureSuggestedActionsSourceProviderEnabled();
             }
 
-            internal async Task CheckForOpenFilesThatWeMissedAsync(CancellationToken cancellationToken)
+            internal async Task CheckForOpenFilesThatWeMissedAsync(
+                CancellationToken cancellationToken
+            )
             {
                 // It's possible that Roslyn is loading asynchronously after documents were already opened by the user; this is a one-time check for
                 // any of those -- after this point, we are subscribed to events so we'll know of anything else.
-                await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                foreach (var (filePath, textBuffer, hierarchy) in _openTextBufferProvider.EnumerateDocumentSet())
+                foreach (
+                    var (
+                        filePath,
+                        textBuffer,
+                        hierarchy
+                    ) in _openTextBufferProvider.EnumerateDocumentSet()
+                )
                 {
-                    await TryOpeningDocumentsForMonikerAndSetContextOnUIThreadAsync(filePath, textBuffer, hierarchy, cancellationToken).ConfigureAwait(true);
+                    await TryOpeningDocumentsForMonikerAndSetContextOnUIThreadAsync(
+                            filePath,
+                            textBuffer,
+                            hierarchy,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(true);
                 }
             }
 
@@ -427,25 +636,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     _hierarchy = hierarchy;
                     _openFileTracker = openFileTracker;
-                    ErrorHandler.ThrowOnFailure(_hierarchy.AdviseHierarchyEvents(this, out _cookie));
+                    ErrorHandler.ThrowOnFailure(
+                        _hierarchy.AdviseHierarchyEvents(this, out _cookie)
+                    );
                 }
 
-                void IDisposable.Dispose()
-                    => _hierarchy.UnadviseHierarchyEvents(_cookie);
+                void IDisposable.Dispose() => _hierarchy.UnadviseHierarchyEvents(_cookie);
 
-                int IVsHierarchyEvents.OnItemAdded(uint itemidParent, uint itemidSiblingPrev, uint itemidAdded)
-                    => VSConstants.E_NOTIMPL;
+                int IVsHierarchyEvents.OnItemAdded(
+                    uint itemidParent,
+                    uint itemidSiblingPrev,
+                    uint itemidAdded
+                ) => VSConstants.E_NOTIMPL;
 
-                int IVsHierarchyEvents.OnItemsAppended(uint itemidParent)
-                    => VSConstants.E_NOTIMPL;
+                int IVsHierarchyEvents.OnItemsAppended(uint itemidParent) => VSConstants.E_NOTIMPL;
 
-                int IVsHierarchyEvents.OnItemDeleted(uint itemid)
-                    => VSConstants.E_NOTIMPL;
+                int IVsHierarchyEvents.OnItemDeleted(uint itemid) => VSConstants.E_NOTIMPL;
 
                 int IVsHierarchyEvents.OnPropertyChanged(uint itemid, int propid, uint flags)
                 {
-                    if (propid is ((int)__VSHPROPID7.VSHPROPID_SharedItemContextHierarchy) or
-                        ((int)__VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext))
+                    if (
+                        propid
+                        is ((int)__VSHPROPID7.VSHPROPID_SharedItemContextHierarchy)
+                            or ((int)__VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext)
+                    )
                     {
                         _openFileTracker.RefreshContextsForHierarchyPropertyChange(_hierarchy);
                     }
@@ -453,11 +667,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     return VSConstants.S_OK;
                 }
 
-                int IVsHierarchyEvents.OnInvalidateItems(uint itemidParent)
-                    => VSConstants.E_NOTIMPL;
+                int IVsHierarchyEvents.OnInvalidateItems(uint itemidParent) =>
+                    VSConstants.E_NOTIMPL;
 
-                int IVsHierarchyEvents.OnInvalidateIcon(IntPtr hicon)
-                    => VSConstants.E_NOTIMPL;
+                int IVsHierarchyEvents.OnInvalidateIcon(IntPtr hicon) => VSConstants.E_NOTIMPL;
             }
         }
     }

@@ -11,10 +11,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Data;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Diagnostics;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -27,6 +27,7 @@ namespace System.Data.EntityModel.Emitters
             Property,
             Other,
         }
+
         public enum VBStatementType
         {
             BeginClass,
@@ -44,29 +45,27 @@ namespace System.Data.EntityModel.Emitters
         #endregion
 
         #region Instance Fields
-        private Dictionary<string,List<FixUp>> _classFixUps = null;
+        private Dictionary<string, List<FixUp>> _classFixUps = null;
         private LanguageOption _language;
         #endregion
 
         #region Static Fields
-        static readonly char[] _CSEndOfClassDelimiters = new char[] { ' ',':' };
+        static readonly char[] _CSEndOfClassDelimiters = new char[] { ' ', ':' };
         const string _CSClassKeyWord = " class ";
-        static readonly char[] _CSFieldMarkers = new char[] { '=',';' };
+        static readonly char[] _CSFieldMarkers = new char[] { '=', ';' };
         static readonly char[] _VBEndOfClassDelimiters = new char[] { ' ', '(' };
         static readonly char[] _VBNonDeclMarkers = new char[] { '=', '"', '\'' };
         #endregion
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        public FixUpCollection()
-        {
-        }
+        public FixUpCollection() { }
 
         public static bool IsLanguageSupported(LanguageOption language)
         {
-            switch ( language )
+            switch (language)
             {
                 case LanguageOption.GenerateVBCode:
                 case LanguageOption.GenerateCSharpCode:
@@ -76,32 +75,37 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="writer"></param>
         /// <param name="language"></param>
-        public void Do(System.IO.TextReader reader, System.IO.TextWriter writer, LanguageOption language, bool hasNamespace)
+        public void Do(
+            System.IO.TextReader reader,
+            System.IO.TextWriter writer,
+            LanguageOption language,
+            bool hasNamespace
+        )
         {
             Language = language;
 
             // set up the fix ups for each class.
-            foreach ( FixUp fixUp in this )
+            foreach (FixUp fixUp in this)
             {
                 List<FixUp> fixUps = null;
-                if ( ClassFixUps.ContainsKey(fixUp.Class) )
+                if (ClassFixUps.ContainsKey(fixUp.Class))
                 {
                     fixUps = ClassFixUps[fixUp.Class];
                 }
                 else
                 {
                     fixUps = new List<FixUp>();
-                    ClassFixUps.Add(fixUp.Class,fixUps);
+                    ClassFixUps.Add(fixUp.Class, fixUps);
                 }
                 fixUps.Add(fixUp);
             }
 
-            switch ( Language )
+            switch (Language)
             {
                 case LanguageOption.GenerateVBCode:
                     DoFixUpsForVB(reader, writer);
@@ -110,30 +114,34 @@ namespace System.Data.EntityModel.Emitters
                     DoFixUpsForCS(reader, writer, hasNamespace);
                     break;
                 default:
-                    Debug.Assert(false,"Unexpected language value: "+Language.ToString());
-                    CopyFile(reader,writer);
+                    Debug.Assert(false, "Unexpected language value: " + Language.ToString());
+                    CopyFile(reader, writer);
                     break;
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="writer"></param>
         private static void CopyFile(System.IO.TextReader reader, System.IO.TextWriter writer)
         {
             string line;
-            while ( (line=reader.ReadLine()) != null )
+            while ((line = reader.ReadLine()) != null)
                 writer.WriteLine(line);
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="writer"></param>
-        private void DoFixUpsForCS(System.IO.TextReader reader, System.IO.TextWriter writer, bool hasNamespace)
+        private void DoFixUpsForCS(
+            System.IO.TextReader reader,
+            System.IO.TextWriter writer,
+            bool hasNamespace
+        )
         {
             int braceCount = 0;
             string line;
@@ -144,12 +152,12 @@ namespace System.Data.EntityModel.Emitters
             FixUp getterFixUp = null;
             FixUp setterFixUp = null;
             int nameSpaceLevel = hasNamespace ? 1 : 0;
-            while ( (line=reader.ReadLine()) != null )
+            while ((line = reader.ReadLine()) != null)
             {
                 trimmedLine = line.Trim();
-                if ( trimmedLine == "{" )
+                if (trimmedLine == "{")
                     ++braceCount;
-                else if ( trimmedLine == "}" )
+                else if (trimmedLine == "}")
                 {
                     --braceCount;
                     if (braceCount < nameSpaceLevel + 2)
@@ -162,31 +170,34 @@ namespace System.Data.EntityModel.Emitters
                         }
                     }
                 }
-                else if ( string.IsNullOrEmpty(trimmedLine) || trimmedLine.StartsWith("//",StringComparison.Ordinal) )
+                else if (
+                    string.IsNullOrEmpty(trimmedLine)
+                    || trimmedLine.StartsWith("//", StringComparison.Ordinal)
+                )
                 {
                     // comment, just emit as is....
                 }
-                else if ( IsCSClassDefinition(line,out className) )
+                else if (IsCSClassDefinition(line, out className))
                 {
                     if (braceCount == nameSpaceLevel)
                     {
                         currentOuterClass = className;
                         className = null;
                         classWanted = IsClassWanted(currentOuterClass);
-                        if ( classWanted )
-                            line = FixUpClassDecl(currentOuterClass,line);
+                        if (classWanted)
+                            line = FixUpClassDecl(currentOuterClass, line);
                     }
                 }
-                else if ( classWanted )
+                else if (classWanted)
                 {
                     //we only care about methods/properties in top level classes
                     if (braceCount == nameSpaceLevel + 1)
                     {
                         string name;
-                        switch ( GetCSDeclType(trimmedLine,out name) )
+                        switch (GetCSDeclType(trimmedLine, out name))
                         {
                             case CSDeclType.Method:
-                                line = FixUpMethodDecl(currentOuterClass,name,line);
+                                line = FixUpMethodDecl(currentOuterClass, name, line);
                                 break;
                             case CSDeclType.Property:
                                 setterFixUp = FixUpSetter(currentOuterClass, name);
@@ -213,7 +224,7 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="writer"></param>
@@ -228,25 +239,25 @@ namespace System.Data.EntityModel.Emitters
             bool classWanted = false;
             FixUp getterFixUp = null;
             FixUp setterFixUp = null;
-            while ( (line=reader.ReadLine()) != null )
+            while ((line = reader.ReadLine()) != null)
             {
-                if ( line == null || line.Length == 0 || line[0] == '\'' )
+                if (line == null || line.Length == 0 || line[0] == '\'')
                 {
                     // empty line or comment, ouput as is
                 }
                 else
                 {
                     string name;
-                    switch ( GetVBStatementType(context, line, out name) )
+                    switch (GetVBStatementType(context, line, out name))
                     {
                         case VBStatementType.BeginClass:
                             ++classDepth;
                             setterFixUp = null;
-                            if ( classDepth == 1 )
+                            if (classDepth == 1)
                             {
                                 currentOuterClass = name;
                                 classWanted = IsClassWanted(name);
-                                if ( classWanted )
+                                if (classWanted)
                                     line = FixUpClassDecl(currentOuterClass, line);
                             }
                             break;
@@ -309,7 +320,7 @@ namespace System.Data.EntityModel.Emitters
 
         #region Private Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="className"></param>
         /// <returns></returns>
@@ -319,57 +330,56 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="line"></param>
         /// <param name="className"></param>
         /// <returns></returns>
-        private static bool IsCSClassDefinition(string line,out string className)
+        private static bool IsCSClassDefinition(string line, out string className)
         {
-            int index = line.IndexOf(_CSClassKeyWord,StringComparison.Ordinal);
-            if ( index < 0 )
+            int index = line.IndexOf(_CSClassKeyWord, StringComparison.Ordinal);
+            if (index < 0)
             {
                 className = null;
                 return false;
             }
             index += _CSClassKeyWord.Length;
             int end = line.IndexOfAny(_CSEndOfClassDelimiters, index);
-            if ( end < 0 )
+            if (end < 0)
                 className = line.Substring(index);
             else
-                className = line.Substring(index,end-index);
-
+                className = line.Substring(index, end - index);
 
             if (className.StartsWith("@", StringComparison.Ordinal))
             {
                 // remove the escaping mechanisim for C# keywords
                 className = className.Substring(1);
             }
-            
+
             return true;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="className"></param>
         /// <param name="line"></param>
         /// <returns></returns>
-        private string FixUpClassDecl(string className,string line)
+        private string FixUpClassDecl(string className, string line)
         {
             IList<FixUp> fixUps = ClassFixUps[className];
-            foreach ( FixUp fixUp in fixUps )
+            foreach (FixUp fixUp in fixUps)
             {
-                if ( fixUp.Type == FixUpType.MarkClassAsStatic )
+                if (fixUp.Type == FixUpType.MarkClassAsStatic)
                 {
-                    return fixUp.Fix(Language,line);
+                    return fixUp.Fix(Language, line);
                 }
             }
             return line;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="line"></param>
         /// <param name="name"></param>
@@ -413,42 +423,51 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="className"></param>
         /// <param name="methodName"></param>
         /// <param name="line"></param>
         /// <returns></returns>
-        private string FixUpMethodDecl(string className,string methodName,string line)
+        private string FixUpMethodDecl(string className, string methodName, string line)
         {
             IList<FixUp> fixUps = ClassFixUps[className];
-            foreach ( FixUp fixUp in fixUps )
+            foreach (FixUp fixUp in fixUps)
             {
-                if ( fixUp.Method == methodName && 
-                    (fixUp.Type == FixUpType.MarkOverrideMethodAsSealed || fixUp.Type == FixUpType.MarkAbstractMethodAsPartial) )
+                if (
+                    fixUp.Method == methodName
+                    && (
+                        fixUp.Type == FixUpType.MarkOverrideMethodAsSealed
+                        || fixUp.Type == FixUpType.MarkAbstractMethodAsPartial
+                    )
+                )
                 {
-                    return fixUp.Fix(Language,line);
+                    return fixUp.Fix(Language, line);
                 }
             }
             return line;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="className"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        private FixUp FixUpSetter(string className,string propertyName)
+        private FixUp FixUpSetter(string className, string propertyName)
         {
             IList<FixUp> fixUps = ClassFixUps[className];
-            foreach ( FixUp fixUp in fixUps )
+            foreach (FixUp fixUp in fixUps)
             {
-                if (fixUp.Property == propertyName &&
-                    (fixUp.Type == FixUpType.MarkPropertySetAsPrivate ||
-                     fixUp.Type == FixUpType.MarkPropertySetAsInternal ||
-                     fixUp.Type == FixUpType.MarkPropertySetAsPublic ||
-                     fixUp.Type == FixUpType.MarkPropertySetAsProtected))
+                if (
+                    fixUp.Property == propertyName
+                    && (
+                        fixUp.Type == FixUpType.MarkPropertySetAsPrivate
+                        || fixUp.Type == FixUpType.MarkPropertySetAsInternal
+                        || fixUp.Type == FixUpType.MarkPropertySetAsPublic
+                        || fixUp.Type == FixUpType.MarkPropertySetAsProtected
+                    )
+                )
                 {
                     return fixUp;
                 }
@@ -461,40 +480,48 @@ namespace System.Data.EntityModel.Emitters
             IList<FixUp> fixUps = ClassFixUps[className];
             foreach (FixUp fixUp in fixUps)
             {
-                if (fixUp.Property == propertyName && 
-                    (fixUp.Type == FixUpType.MarkPropertyGetAsPrivate ||
-                     fixUp.Type == FixUpType.MarkPropertyGetAsInternal ||
-                     fixUp.Type == FixUpType.MarkPropertyGetAsPublic ||
-                     fixUp.Type == FixUpType.MarkPropertyGetAsProtected))
+                if (
+                    fixUp.Property == propertyName
+                    && (
+                        fixUp.Type == FixUpType.MarkPropertyGetAsPrivate
+                        || fixUp.Type == FixUpType.MarkPropertyGetAsInternal
+                        || fixUp.Type == FixUpType.MarkPropertyGetAsPublic
+                        || fixUp.Type == FixUpType.MarkPropertyGetAsProtected
+                    )
+                )
                 {
                     return fixUp;
                 }
             }
             return null;
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="context"></param>
         /// <param name="line"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        private static VBStatementType GetVBStatementType(Stack<VBStatementType> context, string line, out string name)
+        private static VBStatementType GetVBStatementType(
+            Stack<VBStatementType> context,
+            string line,
+            out string name
+        )
         {
             name = null;
             VBStatementType current = VBStatementType.Other;
 
             // if the statement constains ", =, or... then it's not a statement type we care about
-            if ( line.IndexOfAny(_VBNonDeclMarkers) >= 0 )
+            if (line.IndexOfAny(_VBNonDeclMarkers) >= 0)
                 return current;
 
-            
             string normalizedLine = NormalizeForVB(line);
 
-            if ( context.Count <= 0 )
+            if (context.Count <= 0)
             {
                 // without context we only accept BeginClass
-                if ( LineIsVBBeginClassMethodProperty(normalizedLine, "Class", ref name) )
+                if (LineIsVBBeginClassMethodProperty(normalizedLine, "Class", ref name))
                 {
                     current = VBStatementType.BeginClass;
                     context.Push(current);
@@ -503,38 +530,56 @@ namespace System.Data.EntityModel.Emitters
             else
             {
                 // we only look for things based on context:
-                switch ( context.Peek() )
+                switch (context.Peek())
                 {
-                    // at BeginClass we only accept 
+                    // at BeginClass we only accept
                     //    BeginClass
                     //    EndClass
                     //    BeginProperty
                     //    BeginMethod
                     case VBStatementType.BeginClass:
-                        if ( normalizedLine == "End Class" )
+                        if (normalizedLine == "End Class")
                         {
                             current = VBStatementType.EndClass;
                             context.Pop();
                         }
                         else
                         {
-                            if ( LineIsVBBeginClassMethodProperty(normalizedLine, "Class", ref name) )
+                            if (LineIsVBBeginClassMethodProperty(normalizedLine, "Class", ref name))
                             {
                                 current = VBStatementType.BeginClass;
                                 context.Push(current);
                             }
-                            else if ( LineIsVBBeginClassMethodProperty(normalizedLine, "MustOverride Sub", ref name) )
+                            else if (
+                                LineIsVBBeginClassMethodProperty(
+                                    normalizedLine,
+                                    "MustOverride Sub",
+                                    ref name
+                                )
+                            )
                             {
                                 // Abstract methods do not have an "End Sub", this don't push the context.
                                 current = VBStatementType.BeginMethod;
                             }
-                            else if ( LineIsVBBeginClassMethodProperty(normalizedLine, "Function", ref name) 
-                                || LineIsVBBeginClassMethodProperty(normalizedLine, "Sub", ref name) )
+                            else if (
+                                LineIsVBBeginClassMethodProperty(
+                                    normalizedLine,
+                                    "Function",
+                                    ref name
+                                )
+                                || LineIsVBBeginClassMethodProperty(normalizedLine, "Sub", ref name)
+                            )
                             {
                                 current = VBStatementType.BeginMethod;
                                 context.Push(current);
                             }
-                            else if ( LineIsVBBeginClassMethodProperty(normalizedLine, "Property", ref name) )
+                            else if (
+                                LineIsVBBeginClassMethodProperty(
+                                    normalizedLine,
+                                    "Property",
+                                    ref name
+                                )
+                            )
                             {
                                 current = VBStatementType.BeginProperty;
                                 context.Push(current);
@@ -547,19 +592,19 @@ namespace System.Data.EntityModel.Emitters
                     //    BeginPropertyGetter
                     //    BeginPropertySetter
                     case VBStatementType.BeginProperty:
-                        if ( normalizedLine == "End Property" )
+                        if (normalizedLine == "End Property")
                         {
                             current = VBStatementType.EndProperty;
                             context.Pop();
                         }
                         else
                         {
-                            if ( LineIsVBBeginSetterGetter(normalizedLine, "Get") )
+                            if (LineIsVBBeginSetterGetter(normalizedLine, "Get"))
                             {
                                 current = VBStatementType.BeginPropertyGetter;
                                 context.Push(current);
                             }
-                            else if ( LineIsVBBeginSetterGetter(normalizedLine, "Set") )
+                            else if (LineIsVBBeginSetterGetter(normalizedLine, "Set"))
                             {
                                 current = VBStatementType.BeginPropertySetter;
                                 context.Push(current);
@@ -570,7 +615,7 @@ namespace System.Data.EntityModel.Emitters
                     // at BeginMethod we only accept
                     //    EndMethod
                     case VBStatementType.BeginMethod:
-                        if ( normalizedLine == "End Sub" || normalizedLine == "End Function" )
+                        if (normalizedLine == "End Sub" || normalizedLine == "End Function")
                         {
                             current = VBStatementType.EndMethod;
                             context.Pop();
@@ -580,7 +625,7 @@ namespace System.Data.EntityModel.Emitters
                     // at BeginPropertyGetter we only accept
                     //    EndPropertyGetter
                     case VBStatementType.BeginPropertyGetter:
-                        if ( normalizedLine == "End Get" )
+                        if (normalizedLine == "End Get")
                         {
                             current = VBStatementType.EndPropertyGetter;
                             context.Pop();
@@ -590,7 +635,7 @@ namespace System.Data.EntityModel.Emitters
                     // at BeginPropertySetter we only accept
                     //    EndPropertySetter
                     case VBStatementType.BeginPropertySetter:
-                        if ( normalizedLine == "End Set" )
+                        if (normalizedLine == "End Set")
                         {
                             current = VBStatementType.EndPropertySetter;
                             context.Pop();
@@ -603,7 +648,7 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
@@ -614,14 +659,14 @@ namespace System.Data.EntityModel.Emitters
 
             // consecutuve spaces are replaced with single spaces...
             // (we don't care about hammering strings; we just use the normalized line for statment identification...
-            while ( line.IndexOf("  ", 0,StringComparison.Ordinal) >= 0 )
+            while (line.IndexOf("  ", 0, StringComparison.Ordinal) >= 0)
                 line = line.Replace("  ", " ");
 
             return line;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="line"></param>
         /// <param name="keyword"></param>
@@ -632,91 +677,99 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="line"></param>
         /// <param name="keyword"></param>
         /// <returns></returns>
         private static int IndexOfKeyword(string line, string keyword)
         {
-            int index = line.IndexOf(keyword,StringComparison.Ordinal);
-            if ( index < 0 )
+            int index = line.IndexOf(keyword, StringComparison.Ordinal);
+            if (index < 0)
                 return index;
 
             char ch;
-            int indexAfter = index+keyword.Length;
-            if ( (index == 0 || char.IsWhiteSpace(line, index-1)) && (indexAfter == line.Length || (ch=line[indexAfter]) == '(' || char.IsWhiteSpace(ch)) )
+            int indexAfter = index + keyword.Length;
+            if (
+                (index == 0 || char.IsWhiteSpace(line, index - 1))
+                && (
+                    indexAfter == line.Length
+                    || (ch = line[indexAfter]) == '('
+                    || char.IsWhiteSpace(ch)
+                )
+            )
                 return index;
 
             return -1;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="line"></param>
         /// <param name="keyword"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        private static bool LineIsVBBeginClassMethodProperty(string line, string keyword, ref string name)
+        private static bool LineIsVBBeginClassMethodProperty(
+            string line,
+            string keyword,
+            ref string name
+        )
         {
             // line must contain the keyword
             int index = IndexOfKeyword(line, keyword);
-            if ( index < 0 )
+            if (index < 0)
                 return false;
 
             // after the keyword we expact a space and the name
             index += keyword.Length;
-            if ( index >= line.Length || !char.IsWhiteSpace(line, index) )
+            if (index >= line.Length || !char.IsWhiteSpace(line, index))
                 return false;
             ++index;
-            if ( index >= line.Length )
+            if (index >= line.Length)
                 return false;
 
             // after the name we expect a EOL or a delimiter...
             int end = line.IndexOfAny(_VBEndOfClassDelimiters, index);
-            if ( end < 0 )
+            if (end < 0)
                 end = line.Length;
 
-            name = line.Substring(index, end-index).Trim();
+            name = line.Substring(index, end - index).Trim();
 
-            if (name.StartsWith("[", StringComparison.Ordinal) && name.EndsWith("]", StringComparison.Ordinal))
+            if (
+                name.StartsWith("[", StringComparison.Ordinal)
+                && name.EndsWith("]", StringComparison.Ordinal)
+            )
             {
                 // remove the vb keyword escaping mechanisim
                 name = name.Substring(1, name.Length - 2);
             }
-            
+
             return true;
         }
         #endregion
 
         #region Private Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private LanguageOption Language
         {
-            get
-            {
-                return _language;
-            }
-            set
-            {
-                _language = value;
-            }
+            get { return _language; }
+            set { _language = value; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <value></value>
-        private Dictionary<string,List<FixUp>> ClassFixUps
+        private Dictionary<string, List<FixUp>> ClassFixUps
         {
             get
             {
-                if ( _classFixUps == null )
+                if (_classFixUps == null)
                 {
-                    _classFixUps = new Dictionary<string,List<FixUp>>();
+                    _classFixUps = new Dictionary<string, List<FixUp>>();
                 }
 
                 return _classFixUps;

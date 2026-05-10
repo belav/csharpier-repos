@@ -7,7 +7,8 @@ namespace System.Security.Cryptography.Csp.Tests
 {
     public static class CspParametersTests
     {
-        public static bool ManualTestsEnabled => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
+        public static bool ManualTestsEnabled =>
+            !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
 
         const int PROV_RSA_FULL = 1;
         const int PROV_RSA_AES = 24;
@@ -29,10 +30,18 @@ namespace System.Security.Cryptography.Csp.Tests
             CspParameters cspParameters = new CspParameters();
 
             // Unmapped values (> 0xFF) throw
-            AssertExtensions.Throws<ArgumentException>(null, "value", () => cspParameters.Flags = (CspProviderFlags)0x0100);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                "value",
+                () => cspParameters.Flags = (CspProviderFlags)0x0100
+            );
 
             // Unmapped values (> 0xFF) throw, even when combined with known values.
-            AssertExtensions.Throws<ArgumentException>(null, "value", () => cspParameters.Flags = (CspProviderFlags)0x0100 | CspProviderFlags.NoPrompt);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                "value",
+                () => cspParameters.Flags = (CspProviderFlags)0x0100 | CspProviderFlags.NoPrompt
+            );
         }
 
         [Fact]
@@ -70,7 +79,7 @@ namespace System.Security.Cryptography.Csp.Tests
                 {
                     KeyNumber = (int)KeyNumber.Exchange,
                     Flags = CspProviderFlags.UseExistingKey | CspProviderFlags.UseMachineKeyStore,
-                    KeyPassword = pwd
+                    KeyPassword = pwd,
                 };
 
                 Action sign = () =>

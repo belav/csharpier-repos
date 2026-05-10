@@ -1,24 +1,24 @@
-﻿
-namespace System.IdentityModel.Diagnostics
+﻿namespace System.IdentityModel.Diagnostics
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.IdentityModel.Diagnostics;
     using System.Diagnostics;
-    using System.Runtime.Diagnostics;
-    using System.Security.Authentication.ExtendedProtection;
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.ServiceModel.Diagnostics;
-    using System.Xml;
+    using System.IdentityModel.Diagnostics;
     using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography;
+    using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Xml;
 
     class SecurityTraceRecord : TraceRecord
     {
         String traceName;
+
         internal SecurityTraceRecord(String traceName)
         {
             if (string.IsNullOrEmpty(traceName))
@@ -27,19 +27,48 @@ namespace System.IdentityModel.Diagnostics
                 this.traceName = traceName;
         }
 
-        internal override string EventId { get { return BuildEventId(traceName); } }
+        internal override string EventId
+        {
+            get { return BuildEventId(traceName); }
+        }
     }
 
     internal static class SecurityTraceRecordHelper
     {
-        internal static void TraceServiceNameBindingOnServer(string serviceBindingNameSentByClient, string defaultServiceBindingNameOfServer, ServiceNameCollection serviceNameCollectionConfiguredOnServer)
+        internal static void TraceServiceNameBindingOnServer(
+            string serviceBindingNameSentByClient,
+            string defaultServiceBindingNameOfServer,
+            ServiceNameCollection serviceNameCollectionConfiguredOnServer
+        )
         {
-            TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ServiceBindingCheck, SR.GetString(SR.TraceCodeServiceBindingCheck), new ServiceBindingNameTraceRecord(serviceBindingNameSentByClient, defaultServiceBindingNameOfServer, serviceNameCollectionConfiguredOnServer), null, null);
+            TraceUtility.TraceEvent(
+                TraceEventType.Information,
+                TraceCode.ServiceBindingCheck,
+                SR.GetString(SR.TraceCodeServiceBindingCheck),
+                new ServiceBindingNameTraceRecord(
+                    serviceBindingNameSentByClient,
+                    defaultServiceBindingNameOfServer,
+                    serviceNameCollectionConfiguredOnServer
+                ),
+                null,
+                null
+            );
         }
 
-        internal static void TraceChannelBindingInformation(ExtendedProtectionPolicyHelper policyHelper, bool isServer, ChannelBinding channelBinding)
+        internal static void TraceChannelBindingInformation(
+            ExtendedProtectionPolicyHelper policyHelper,
+            bool isServer,
+            ChannelBinding channelBinding
+        )
         {
-            TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ChannelBindingCheck, SR.GetString(SR.TraceCodeChannelBindingCheck), new ChannelBindingNameTraceRecord(policyHelper, isServer, channelBinding), null, null);
+            TraceUtility.TraceEvent(
+                TraceEventType.Information,
+                TraceCode.ChannelBindingCheck,
+                SR.GetString(SR.TraceCodeChannelBindingCheck),
+                new ChannelBindingNameTraceRecord(policyHelper, isServer, channelBinding),
+                null,
+                null
+            );
         }
 
         class ServiceBindingNameTraceRecord : SecurityTraceRecord
@@ -48,12 +77,17 @@ namespace System.IdentityModel.Diagnostics
             string defaultServiceBindingNameOfServer;
             ServiceNameCollection serviceNameCollectionConfiguredOnServer;
 
-            public ServiceBindingNameTraceRecord(string serviceBindingNameSentByClient, string defaultServiceBindingNameOfServer, ServiceNameCollection serviceNameCollectionConfiguredOnServer)
+            public ServiceBindingNameTraceRecord(
+                string serviceBindingNameSentByClient,
+                string defaultServiceBindingNameOfServer,
+                ServiceNameCollection serviceNameCollectionConfiguredOnServer
+            )
                 : base("ServiceBindingCheckAfterSpNego")
             {
                 this.serviceBindingNameSentByClient = serviceBindingNameSentByClient;
                 this.defaultServiceBindingNameOfServer = defaultServiceBindingNameOfServer;
-                this.serviceNameCollectionConfiguredOnServer = serviceNameCollectionConfiguredOnServer;
+                this.serviceNameCollectionConfiguredOnServer =
+                    serviceNameCollectionConfiguredOnServer;
             }
 
             internal override void WriteTo(XmlWriter xml)
@@ -66,7 +100,10 @@ namespace System.IdentityModel.Diagnostics
 
                 xml.WriteComment(SR.GetString(SR.ServiceNameOnService));
                 xml.WriteStartElement("ServiceNameCollection");
-                if (this.serviceNameCollectionConfiguredOnServer == null || this.serviceNameCollectionConfiguredOnServer.Count < 1)
+                if (
+                    this.serviceNameCollectionConfiguredOnServer == null
+                    || this.serviceNameCollectionConfiguredOnServer.Count < 1
+                )
                 {
                     xml.WriteElementString("ServiceName", this.defaultServiceBindingNameOfServer);
                 }
@@ -79,7 +116,6 @@ namespace System.IdentityModel.Diagnostics
                 }
 
                 xml.WriteFullEndElement();
-
             }
         }
 
@@ -90,7 +126,11 @@ namespace System.IdentityModel.Diagnostics
             bool channelBindingUsed;
             ChannelBinding channelBinding;
 
-            public ChannelBindingNameTraceRecord(ExtendedProtectionPolicyHelper policyHelper, bool isServer, ChannelBinding channelBinding)
+            public ChannelBindingNameTraceRecord(
+                ExtendedProtectionPolicyHelper policyHelper,
+                bool isServer,
+                ChannelBinding channelBinding
+            )
                 : base("SpNegoChannelBindingInformation")
             {
                 this.policyHelper = policyHelper;
@@ -105,12 +145,21 @@ namespace System.IdentityModel.Diagnostics
                     return;
                 if (this.policyHelper != null)
                 {
-                    xml.WriteElementString("PolicyEnforcement", this.policyHelper.PolicyEnforcement.ToString());
-                    xml.WriteElementString("ProtectionScenario", this.policyHelper.ProtectionScenario.ToString());
+                    xml.WriteElementString(
+                        "PolicyEnforcement",
+                        this.policyHelper.PolicyEnforcement.ToString()
+                    );
+                    xml.WriteElementString(
+                        "ProtectionScenario",
+                        this.policyHelper.ProtectionScenario.ToString()
+                    );
 
                     xml.WriteStartElement("ServiceNameCollection");
 
-                    if (this.policyHelper.ServiceNameCollection != null && this.policyHelper.ServiceNameCollection.Count > 0)
+                    if (
+                        this.policyHelper.ServiceNameCollection != null
+                        && this.policyHelper.ServiceNameCollection.Count > 0
+                    )
                     {
                         foreach (string serviceName in this.policyHelper.ServiceNameCollection)
                         {
@@ -129,12 +178,25 @@ namespace System.IdentityModel.Diagnostics
                         this.channelBindingUsed = this.policyHelper.ChannelBinding != null;
                     }
 
-                    xml.WriteElementString("ChannelBindingUsed", this.channelBindingUsed.ToString());
+                    xml.WriteElementString(
+                        "ChannelBindingUsed",
+                        this.channelBindingUsed.ToString()
+                    );
 
-                    if (this.channelBinding != null && this.policyHelper.PolicyEnforcement != PolicyEnforcement.Never && this.channelBindingUsed == true)
+                    if (
+                        this.channelBinding != null
+                        && this.policyHelper.PolicyEnforcement != PolicyEnforcement.Never
+                        && this.channelBindingUsed == true
+                    )
                     {
-                        ExtendedProtectionPolicy extendedProtection = new ExtendedProtectionPolicy(policyHelper.PolicyEnforcement, channelBinding);
-                        xml.WriteElementString("ChannelBindingData", GetBase64EncodedChannelBindingData(extendedProtection));
+                        ExtendedProtectionPolicy extendedProtection = new ExtendedProtectionPolicy(
+                            policyHelper.PolicyEnforcement,
+                            channelBinding
+                        );
+                        xml.WriteElementString(
+                            "ChannelBindingData",
+                            GetBase64EncodedChannelBindingData(extendedProtection)
+                        );
                     }
                 }
                 else
@@ -144,10 +206,16 @@ namespace System.IdentityModel.Diagnostics
                     {
                         xml.WriteElementString("ChannelBindingUsed", "true");
 
-                        // We do not know the PolicyEnforcement value here on the client side and we can not pass Never 
+                        // We do not know the PolicyEnforcement value here on the client side and we can not pass Never
                         //as ExtendedProtectionPolicy constructor would throw on PolicyEnforcement.Never
-                        ExtendedProtectionPolicy extendedProtection = new ExtendedProtectionPolicy(PolicyEnforcement.WhenSupported, channelBinding);
-                        xml.WriteElementString("ChannelBindingData", GetBase64EncodedChannelBindingData(extendedProtection));
+                        ExtendedProtectionPolicy extendedProtection = new ExtendedProtectionPolicy(
+                            PolicyEnforcement.WhenSupported,
+                            channelBinding
+                        );
+                        xml.WriteElementString(
+                            "ChannelBindingData",
+                            GetBase64EncodedChannelBindingData(extendedProtection)
+                        );
                     }
                     else
                     {
@@ -155,10 +223,11 @@ namespace System.IdentityModel.Diagnostics
                         xml.WriteElementString("ChannelBindingData", null);
                     }
                 }
-
             }
 
-            internal string GetBase64EncodedChannelBindingData(ExtendedProtectionPolicy extendedProtectionPolicy)
+            internal string GetBase64EncodedChannelBindingData(
+                ExtendedProtectionPolicy extendedProtectionPolicy
+            )
             {
                 MemoryStream ms = new MemoryStream();
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -187,14 +256,18 @@ namespace System.IdentityModel.Diagnostics
             {
                 SessionSecurityTokenHandler ssth = GetOrCreateSessionSecurityTokenHandler();
 
-                XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(writer);
+                XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(
+                    writer
+                );
                 ssth.WriteToken(dictionaryWriter, sessionToken);
             }
 
             private static SessionSecurityTokenHandler GetOrCreateSessionSecurityTokenHandler()
             {
-                SecurityTokenHandlerCollection defaultHandlers = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
-                SessionSecurityTokenHandler ssth = defaultHandlers[typeof(SessionSecurityToken)] as SessionSecurityTokenHandler;
+                SecurityTokenHandlerCollection defaultHandlers =
+                    SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                SessionSecurityTokenHandler ssth =
+                    defaultHandlers[typeof(SessionSecurityToken)] as SessionSecurityTokenHandler;
 
                 if (ssth == null)
                 {
@@ -219,7 +292,8 @@ namespace System.IdentityModel.Diagnostics
                 }
                 else
                 {
-                    SecurityTokenHandlerCollection sthc = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                    SecurityTokenHandlerCollection sthc =
+                        SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
                     if (sthc.CanWriteToken(_securityToken))
                     {
                         {
@@ -228,7 +302,13 @@ namespace System.IdentityModel.Diagnostics
                     }
                     else
                     {
-                        writer.WriteElementString("Warning", SR.GetString(SR.TraceUnableToWriteToken, _securityToken.GetType().ToString()));
+                        writer.WriteElementString(
+                            "Warning",
+                            SR.GetString(
+                                SR.TraceUnableToWriteToken,
+                                _securityToken.GetType().ToString()
+                            )
+                        );
                     }
                 }
 

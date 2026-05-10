@@ -13,17 +13,16 @@ namespace Microsoft.CodeAnalysis
 {
     internal sealed class ReadOnlyMemoryOfCharComparer : IEqualityComparer<ReadOnlyMemory<char>>
     {
-        public static readonly ReadOnlyMemoryOfCharComparer Instance = new ReadOnlyMemoryOfCharComparer();
+        public static readonly ReadOnlyMemoryOfCharComparer Instance =
+            new ReadOnlyMemoryOfCharComparer();
 
-        private ReadOnlyMemoryOfCharComparer()
-        {
-        }
+        private ReadOnlyMemoryOfCharComparer() { }
 
-        public static bool Equals(ReadOnlySpan<char> x, ReadOnlyMemory<char> y)
-            => x.SequenceEqual(y.Span);
+        public static bool Equals(ReadOnlySpan<char> x, ReadOnlyMemory<char> y) =>
+            x.SequenceEqual(y.Span);
 
-        public bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y)
-            => x.Span.SequenceEqual(y.Span);
+        public bool Equals(ReadOnlyMemory<char> x, ReadOnlyMemory<char> y) =>
+            x.Span.SequenceEqual(y.Span);
 
         public int GetHashCode(ReadOnlyMemory<char> obj)
         {
@@ -39,16 +38,16 @@ namespace Microsoft.CodeAnalysis
     /// Very cheap trivial comparer that never matches the keys,
     /// should only be used in empty dictionaries.
     /// </summary>
-    internal sealed class EmptyReadOnlyMemoryOfCharComparer : IEqualityComparer<ReadOnlyMemory<char>>
+    internal sealed class EmptyReadOnlyMemoryOfCharComparer
+        : IEqualityComparer<ReadOnlyMemory<char>>
     {
-        public static readonly EmptyReadOnlyMemoryOfCharComparer Instance = new EmptyReadOnlyMemoryOfCharComparer();
+        public static readonly EmptyReadOnlyMemoryOfCharComparer Instance =
+            new EmptyReadOnlyMemoryOfCharComparer();
 
-        private EmptyReadOnlyMemoryOfCharComparer()
-        {
-        }
+        private EmptyReadOnlyMemoryOfCharComparer() { }
 
-        public bool Equals(ReadOnlyMemory<char> a, ReadOnlyMemory<char> b)
-            => throw ExceptionUtilities.Unreachable();
+        public bool Equals(ReadOnlyMemory<char> a, ReadOnlyMemory<char> b) =>
+            throw ExceptionUtilities.Unreachable();
 
         public int GetHashCode(ReadOnlyMemory<char> s)
         {

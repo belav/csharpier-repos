@@ -9,8 +9,6 @@ namespace System.Web.Mvc.ExpressionUtil.Test
     internal sealed class DummyExpressionFingerprint : ExpressionFingerprint
     {
         public DummyExpressionFingerprint(ExpressionType nodeType, Type type)
-            : base(nodeType, type)
-        {
-        }
+            : base(nodeType, type) { }
     }
 }

@@ -11,10 +11,13 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
         private readonly struct AddConstructorParameterResult(
             ImmutableArray<AddConstructorParametersCodeAction> requiredParameterActions,
             ImmutableArray<AddConstructorParametersCodeAction> optionalParameterActions,
-            bool useSubMenu)
+            bool useSubMenu
+        )
         {
-            internal readonly ImmutableArray<AddConstructorParametersCodeAction> RequiredParameterActions = requiredParameterActions;
-            internal readonly ImmutableArray<AddConstructorParametersCodeAction> OptionalParameterActions = optionalParameterActions;
+            internal readonly ImmutableArray<AddConstructorParametersCodeAction> RequiredParameterActions =
+                requiredParameterActions;
+            internal readonly ImmutableArray<AddConstructorParametersCodeAction> OptionalParameterActions =
+                optionalParameterActions;
             internal readonly bool UseSubMenu = useSubMenu;
         }
     }

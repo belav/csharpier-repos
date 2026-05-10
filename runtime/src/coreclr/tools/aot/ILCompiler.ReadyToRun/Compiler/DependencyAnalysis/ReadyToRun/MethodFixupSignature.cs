@@ -5,13 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
+using Internal.CorConstants;
 using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.CorConstants;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -22,20 +21,25 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly MethodWithToken _method;
 
         public MethodFixupSignature(
-            ReadyToRunFixupKind fixupKind, 
+            ReadyToRunFixupKind fixupKind,
             MethodWithToken method,
-            bool isInstantiatingStub)
+            bool isInstantiatingStub
+        )
         {
             _fixupKind = fixupKind;
             _method = method;
             IsInstantiatingStub = isInstantiatingStub;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)method.Method.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)
+                method.Method.Context;
             compilerContext.EnsureLoadableMethod(method.Method);
             compilerContext.EnsureLoadableType(_method.OwningType);
 
-            if (method.ConstrainedType != null && !method.ConstrainedType.IsRuntimeDeterminedSubtype)
+            if (
+                method.ConstrainedType != null
+                && !method.ConstrainedType.IsRuntimeDeterminedSubtype
+            )
                 compilerContext.EnsureLoadableType(method.ConstrainedType);
         }
 
@@ -48,28 +52,34 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public TypeDesc ConstrainedType => _method.ConstrainedType;
 
-        public bool NeedsInstantiationArg => _method.ConstrainedType?.IsCanonicalSubtype(CanonicalFormKind.Any) ?? false;
+        public bool NeedsInstantiationArg =>
+            _method.ConstrainedType?.IsCanonicalSubtype(CanonicalFormKind.Any) ?? false;
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
             DependencyList list = base.ComputeNonRelocationBasedDependencies(factory);
-            if (_fixupKind == ReadyToRunFixupKind.VirtualEntry &&
-                !Method.IsAbstract &&
-                !Method.HasInstantiation &&
-                Method.GetCanonMethodTarget(CanonicalFormKind.Specific) is var canonMethod &&
-                !factory.CompilationModuleGroup.VersionsWithMethodBody(canonMethod) &&
-                factory.CompilationModuleGroup.CrossModuleCompileable(canonMethod) &&
-                factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false))
+            if (
+                _fixupKind == ReadyToRunFixupKind.VirtualEntry
+                && !Method.IsAbstract
+                && !Method.HasInstantiation
+                && Method.GetCanonMethodTarget(CanonicalFormKind.Specific) is var canonMethod
+                && !factory.CompilationModuleGroup.VersionsWithMethodBody(canonMethod)
+                && factory.CompilationModuleGroup.CrossModuleCompileable(canonMethod)
+                && factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false)
+            )
             {
-                list = list ?? new DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>.DependencyList();
+                list =
+                    list
+                    ?? new DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>.DependencyList();
                 try
                 {
                     factory.DetectGenericCycles(_method.Method, canonMethod);
-                    list.Add(factory.CompiledMethodNode(canonMethod), "Virtual function dependency on cross module inlineable method");
+                    list.Add(
+                        factory.CompiledMethodNode(canonMethod),
+                        "Virtual function dependency on cross module inlineable method"
+                    );
                 }
-                catch (TypeSystemException)
-                {
-                }
+                catch (TypeSystemException) { }
             }
 
             return list;
@@ -80,7 +90,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (relocsOnly)
             {
                 // Method fixup signature doesn't contain any direct relocs
-                return new ObjectData(data: Array.Empty<byte>(), relocs: null, alignment: 0, definedSymbols: null);
+                return new ObjectData(
+                    data: Array.Empty<byte>(),
+                    relocs: null,
+                    alignment: 0,
+                    definedSymbols: null
+                );
             }
 
             ObjectDataSignatureBuilder dataBuilder = new ObjectDataSignatureBuilder();
@@ -89,10 +104,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Optimize some of the fixups into a more compact form
             ReadyToRunFixupKind fixupKind = _fixupKind;
             bool optimized = false;
-            if (!_method.Unboxing && !IsInstantiatingStub && _method.ConstrainedType == null &&
-                fixupKind == ReadyToRunFixupKind.MethodEntry)
+            if (
+                !_method.Unboxing
+                && !IsInstantiatingStub
+                && _method.ConstrainedType == null
+                && fixupKind == ReadyToRunFixupKind.MethodEntry
+            )
             {
-                if (!_method.Method.HasInstantiation && !_method.Method.OwningType.HasInstantiation && !_method.Method.OwningType.IsArray)
+                if (
+                    !_method.Method.HasInstantiation
+                    && !_method.Method.OwningType.HasInstantiation
+                    && !_method.Method.OwningType.IsArray
+                )
                 {
                     if (_method.Token.TokenType == CorTokenType.mdtMethodDef)
                     {
@@ -111,23 +134,40 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             MethodWithToken method = _method;
-            
+
             if (factory.CompilationModuleGroup.VersionsWithMethodBody(method.Method))
             {
                 if (method.Token.TokenType == CorTokenType.mdtMethodSpec)
                 {
-                    method = new MethodWithToken(method.Method, factory.SignatureContext.GetModuleTokenForMethod(method.Method), method.ConstrainedType, unboxing: _method.Unboxing, null);
+                    method = new MethodWithToken(
+                        method.Method,
+                        factory.SignatureContext.GetModuleTokenForMethod(method.Method),
+                        method.ConstrainedType,
+                        unboxing: _method.Unboxing,
+                        null
+                    );
                 }
                 else if (!optimized && (method.Token.TokenType == CorTokenType.mdtMemberRef))
                 {
                     if (method.Method.OwningType.GetTypeDefinition() is EcmaType)
                     {
-                        method = new MethodWithToken(method.Method, factory.SignatureContext.GetModuleTokenForMethod(method.Method), method.ConstrainedType, unboxing: _method.Unboxing, null);
+                        method = new MethodWithToken(
+                            method.Method,
+                            factory.SignatureContext.GetModuleTokenForMethod(method.Method),
+                            method.ConstrainedType,
+                            unboxing: _method.Unboxing,
+                            null
+                        );
                     }
                 }
             }
 
-            SignatureContext innerContext = dataBuilder.EmitFixup(factory, fixupKind, method.Token.Module, factory.SignatureContext);
+            SignatureContext innerContext = dataBuilder.EmitFixup(
+                factory,
+                fixupKind,
+                method.Token.Module,
+                factory.SignatureContext
+            );
 
             if (optimized && method.Token.TokenType == CorTokenType.mdtMethodDef)
             {
@@ -139,7 +179,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             else
             {
-                dataBuilder.EmitMethodSignature(method, enforceDefEncoding: false, enforceOwningType: false, innerContext, IsInstantiatingStub);
+                dataBuilder.EmitMethodSignature(
+                    method,
+                    enforceDefEncoding: false,
+                    enforceOwningType: false,
+                    innerContext,
+                    IsInstantiatingStub
+                );
             }
 
             return dataBuilder.ToObjectData();

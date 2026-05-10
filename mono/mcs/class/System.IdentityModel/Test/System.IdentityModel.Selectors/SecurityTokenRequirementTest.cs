@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,67 +33,78 @@ using NUnit.Framework;
 
 namespace MonoTests.System.IdentityModel.Selectors
 {
-	[TestFixture]
-	public class SecurityTokenRequirementTest
-	{
-		[Test]
-		public void Constants ()
-		{
-			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/KeySize",
-				SecurityTokenRequirement.KeySizeProperty, "#1");
-			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/KeyType",
-				SecurityTokenRequirement.KeyTypeProperty, "#2");
-			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/KeyUsage",
-				SecurityTokenRequirement.KeyUsageProperty, "#3");
-			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/RequireCryptographicToken",
-				SecurityTokenRequirement.RequireCryptographicTokenProperty, "#4");
-			Assert.AreEqual ("http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/TokenType",
-				SecurityTokenRequirement.TokenTypeProperty, "#5");
-		}
+    [TestFixture]
+    public class SecurityTokenRequirementTest
+    {
+        [Test]
+        public void Constants()
+        {
+            Assert.AreEqual(
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/KeySize",
+                SecurityTokenRequirement.KeySizeProperty,
+                "#1"
+            );
+            Assert.AreEqual(
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/KeyType",
+                SecurityTokenRequirement.KeyTypeProperty,
+                "#2"
+            );
+            Assert.AreEqual(
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/KeyUsage",
+                SecurityTokenRequirement.KeyUsageProperty,
+                "#3"
+            );
+            Assert.AreEqual(
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/RequireCryptographicToken",
+                SecurityTokenRequirement.RequireCryptographicTokenProperty,
+                "#4"
+            );
+            Assert.AreEqual(
+                "http://schemas.microsoft.com/ws/2006/05/identitymodel/securitytokenrequirement/TokenType",
+                SecurityTokenRequirement.TokenTypeProperty,
+                "#5"
+            );
+        }
 
-		[Test]
-		public void DefaultValues ()
-		{
-			SecurityTokenRequirement r =
-				new SecurityTokenRequirement ();
-			Assert.AreEqual (0, r.KeySize, "#1");
-			Assert.AreEqual (SecurityKeyType.SymmetricKey, r.KeyType, "#2");
-			Assert.AreEqual (SecurityKeyUsage.Signature, r.KeyUsage, "#3");
-			Assert.IsNull (r.TokenType, "#4");
-			Assert.AreEqual (false, r.RequireCryptographicToken, "#5");
-		}
+        [Test]
+        public void DefaultValues()
+        {
+            SecurityTokenRequirement r = new SecurityTokenRequirement();
+            Assert.AreEqual(0, r.KeySize, "#1");
+            Assert.AreEqual(SecurityKeyType.SymmetricKey, r.KeyType, "#2");
+            Assert.AreEqual(SecurityKeyUsage.Signature, r.KeyUsage, "#3");
+            Assert.IsNull(r.TokenType, "#4");
+            Assert.AreEqual(false, r.RequireCryptographicToken, "#5");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TryGetPropertyTypeMismatch ()
-		{
-			SecurityTokenRequirement r =
-				new SecurityTokenRequirement ();
-			r.Properties ["urn:foo"] = 1;
-			string s;
-			r.TryGetProperty<string> ("urn:foo", out s);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TryGetPropertyTypeMismatch()
+        {
+            SecurityTokenRequirement r = new SecurityTokenRequirement();
+            r.Properties["urn:foo"] = 1;
+            string s;
+            r.TryGetProperty<string>("urn:foo", out s);
+        }
 
-		[Test]
-		public void TryGetPropertyTypeBaseMatch ()
-		{
-			SecurityTokenRequirement r =
-				new SecurityTokenRequirement ();
-			r.Properties ["urn:foo"] = 1;
-			object o;
-			r.TryGetProperty<object> ("urn:foo", out o);
-		}
+        [Test]
+        public void TryGetPropertyTypeBaseMatch()
+        {
+            SecurityTokenRequirement r = new SecurityTokenRequirement();
+            r.Properties["urn:foo"] = 1;
+            object o;
+            r.TryGetProperty<object>("urn:foo", out o);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void TryGetPropertyTypeConvertible ()
-		{
-			SecurityTokenRequirement r =
-				new SecurityTokenRequirement ();
-			r.Properties ["urn:foo"] = 1;
-			double d;
-			r.TryGetProperty<double> ("urn:foo", out d);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TryGetPropertyTypeConvertible()
+        {
+            SecurityTokenRequirement r = new SecurityTokenRequirement();
+            r.Properties["urn:foo"] = 1;
+            double d;
+            r.TryGetProperty<double>("urn:foo", out d);
+        }
+    }
 }
 #endif

@@ -5,25 +5,13 @@ namespace ILCompiler.DependencyAnalysis
 {
     public interface INodeWithCodeInfo
     {
-        FrameInfo[] FrameInfos
-        {
-            get;
-        }
+        FrameInfo[] FrameInfos { get; }
 
-        byte[] GCInfo
-        {
-            get;
-        }
+        byte[] GCInfo { get; }
 
-        DebugEHClauseInfo[] DebugEHClauseInfos
-        {
-            get;
-        }
+        DebugEHClauseInfo[] DebugEHClauseInfos { get; }
 
-        MethodExceptionHandlingInfoNode EHInfo
-        {
-            get;
-        }
+        MethodExceptionHandlingInfoNode EHInfo { get; }
 
         ISymbolNode GetAssociatedDataNode(NodeFactory factory);
     }

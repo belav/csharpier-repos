@@ -19,7 +19,10 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
 {
-    [ExportLanguageService(typeof(IEditorInlineRenameService), StringConstants.XamlLanguageName), Shared]
+    [
+        ExportLanguageService(typeof(IEditorInlineRenameService), StringConstants.XamlLanguageName),
+        Shared
+    ]
     internal class XamlEditorInlineRenameService : IEditorInlineRenameService
     {
         private readonly IXamlRenameInfoService _renameService;
@@ -31,9 +34,15 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
             _renameService = renameService;
         }
 
-        public async Task<IInlineRenameInfo> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken)
+        public async Task<IInlineRenameInfo> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var renameInfo = await _renameService.GetRenameInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var renameInfo = await _renameService
+                .GetRenameInfoAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
 
             return new InlineRenameInfo(document, renameInfo);
         }
@@ -68,24 +77,38 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
             // This property isn't currently supported in XAML since it would involve modifying the IXamlRenameInfo interface.
             public ImmutableArray<CodeAnalysis.DocumentSpan> DefinitionLocations => default;
 
-            public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(SymbolRenameOptions options, CancellationToken cancellationToken)
+            public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(
+                SymbolRenameOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var references = new List<InlineRenameLocation>();
 
-                var renameLocations = await _renameInfo.FindRenameLocationsAsync(
-                    renameInStrings: options.RenameInStrings,
-                    renameInComments: options.RenameInComments,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
+                var renameLocations = await _renameInfo
+                    .FindRenameLocationsAsync(
+                        renameInStrings: options.RenameInStrings,
+                        renameInComments: options.RenameInComments,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                references.AddRange(renameLocations.Select(
-                    ds => new InlineRenameLocation(ds.Document, ds.TextSpan)));
+                references.AddRange(
+                    renameLocations.Select(ds => new InlineRenameLocation(ds.Document, ds.TextSpan))
+                );
 
                 return new InlineRenameLocationSet(
-                    _renameInfo, _document.Project.Solution,
-                    references.ToImmutableArray());
+                    _renameInfo,
+                    _document.Project.Solution,
+                    references.ToImmutableArray()
+                );
             }
 
-            public TextSpan? GetConflictEditSpan(InlineRenameLocation location, string triggerText, string replacementText, CancellationToken cancellationToken)
+            public TextSpan? GetConflictEditSpan(
+                InlineRenameLocation location,
+                string triggerText,
+                string replacementText,
+                CancellationToken cancellationToken
+            )
             {
                 return location.TextSpan;
             }
@@ -95,17 +118,29 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 return replacementText;
             }
 
-            public TextSpan GetReferenceEditSpan(InlineRenameLocation location, string triggerText, CancellationToken cancellationToken)
+            public TextSpan GetReferenceEditSpan(
+                InlineRenameLocation location,
+                string triggerText,
+                CancellationToken cancellationToken
+            )
             {
                 return location.TextSpan;
             }
 
-            public bool TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText)
+            public bool TryOnAfterGlobalSymbolRenamed(
+                Workspace workspace,
+                IEnumerable<DocumentId> changedDocumentIDs,
+                string replacementText
+            )
             {
                 return true;
             }
 
-            public bool TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText)
+            public bool TryOnBeforeGlobalSymbolRenamed(
+                Workspace workspace,
+                IEnumerable<DocumentId> changedDocumentIDs,
+                string replacementText
+            )
             {
                 return true;
             }
@@ -133,15 +168,19 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                 return glyph;
             }
 
-            public InlineRenameFileRenameInfo GetFileRenameInfo()
-                => InlineRenameFileRenameInfo.NotAllowed;
+            public InlineRenameFileRenameInfo GetFileRenameInfo() =>
+                InlineRenameFileRenameInfo.NotAllowed;
 
             private class InlineRenameLocationSet : IInlineRenameLocationSet
             {
                 private readonly IXamlRenameInfo _renameInfo;
                 private readonly Solution _oldSolution;
 
-                public InlineRenameLocationSet(IXamlRenameInfo renameInfo, Solution solution, ImmutableArray<InlineRenameLocation> locations)
+                public InlineRenameLocationSet(
+                    IXamlRenameInfo renameInfo,
+                    Solution solution,
+                    ImmutableArray<InlineRenameLocation> locations
+                )
                 {
                     _renameInfo = renameInfo;
                     _oldSolution = solution;
@@ -155,14 +194,22 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                     return _renameInfo.IsReplacementTextValid(replacementText);
                 }
 
-                public async Task<IInlineRenameReplacementInfo> GetReplacementsAsync(string replacementText, SymbolRenameOptions options, CancellationToken cancellationToken)
+                public async Task<IInlineRenameReplacementInfo> GetReplacementsAsync(
+                    string replacementText,
+                    SymbolRenameOptions options,
+                    CancellationToken cancellationToken
+                )
                 {
                     var newSolution = _oldSolution;
                     foreach (var group in Locations.GroupBy(l => l.Document))
                     {
                         var document = group.Key;
-                        var oldSource = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-                        var newSource = oldSource.WithChanges(group.Select(l => new TextChange(l.TextSpan, replacementText)));
+                        var oldSource = await document
+                            .GetValueTextAsync(cancellationToken)
+                            .ConfigureAwait(false);
+                        var newSource = oldSource.WithChanges(
+                            group.Select(l => new TextChange(l.TextSpan, replacementText))
+                        );
                         newSolution = newSolution.WithDocumentText(document.Id, newSource);
                     }
 
@@ -174,7 +221,11 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
                     private readonly InlineRenameLocationSet _inlineRenameLocationSet;
                     private readonly string _replacementText;
 
-                    public InlineRenameReplacementInfo(InlineRenameLocationSet inlineRenameLocationSet, Solution newSolution, string replacementText)
+                    public InlineRenameReplacementInfo(
+                        InlineRenameLocationSet inlineRenameLocationSet,
+                        Solution newSolution,
+                        string replacementText
+                    )
                     {
                         NewSolution = newSolution;
                         _inlineRenameLocationSet = inlineRenameLocationSet;
@@ -183,11 +234,15 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
 
                     public Solution NewSolution { get; }
 
-                    public IEnumerable<DocumentId> DocumentIds => _inlineRenameLocationSet.Locations.Select(l => l.Document.Id).Distinct();
+                    public IEnumerable<DocumentId> DocumentIds =>
+                        _inlineRenameLocationSet.Locations.Select(l => l.Document.Id).Distinct();
 
-                    public bool ReplacementTextValid => _inlineRenameLocationSet.IsReplacementTextValid(_replacementText);
+                    public bool ReplacementTextValid =>
+                        _inlineRenameLocationSet.IsReplacementTextValid(_replacementText);
 
-                    public IEnumerable<InlineRenameReplacement> GetReplacements(DocumentId documentId)
+                    public IEnumerable<InlineRenameReplacement> GetReplacements(
+                        DocumentId documentId
+                    )
                     {
                         yield break;
                     }

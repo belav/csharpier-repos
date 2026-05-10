@@ -30,18 +30,16 @@ namespace System.Configuration
         /// <summary>
         /// Default constructor without a concept of "owner" component.
         /// </summary>
-        protected ApplicationSettingsBase() : base()
-        {
-        }
+        protected ApplicationSettingsBase()
+            : base() { }
 
         /// <summary>
         /// Constructor that takes an IComponent. The IComponent acts as the "owner" of this settings class. One
         /// of the things we do is query the component's site to see if it has a SettingsProvider service. If it
         /// does, we allow it to override the providers specified in the metadata.
         /// </summary>
-        protected ApplicationSettingsBase(IComponent owner) : this(owner, string.Empty)
-        {
-        }
+        protected ApplicationSettingsBase(IComponent owner)
+            : this(owner, string.Empty) { }
 
         /// <summary>
         /// Convenience overload that takes the settings key
@@ -54,7 +52,8 @@ namespace System.Configuration
         /// <summary>
         /// Convenience overload that takes the owner component and settings key.
         /// </summary>
-        protected ApplicationSettingsBase(IComponent owner, string settingsKey) : this(settingsKey)
+        protected ApplicationSettingsBase(IComponent owner, string settingsKey)
+            : this(settingsKey)
         {
             if (owner is null)
             {
@@ -65,7 +64,9 @@ namespace System.Configuration
 
             if (owner.Site != null)
             {
-                ISettingsProviderService providerService = owner.Site.GetService(typeof(ISettingsProviderService)) as ISettingsProviderService;
+                ISettingsProviderService providerService =
+                    owner.Site.GetService(typeof(ISettingsProviderService))
+                    as ISettingsProviderService;
                 if (providerService != null)
                 {
                     // The component's site has a settings provider service. We pass each SettingsProperty to it
@@ -110,7 +111,6 @@ namespace System.Configuration
                         _context = new SettingsContext();
                         EnsureInitialized();
                     }
-
                 }
 
                 return _context;
@@ -145,7 +145,6 @@ namespace System.Configuration
                         _settings = new SettingsPropertyCollection();
                         EnsureInitialized();
                     }
-
                 }
 
                 return _settings;
@@ -158,10 +157,7 @@ namespace System.Configuration
         [Browsable(false)]
         public override SettingsPropertyValueCollection PropertyValues
         {
-            get
-            {
-                return base.PropertyValues;
-            }
+            get { return base.PropertyValues; }
         }
 
         /// <summary>
@@ -202,10 +198,7 @@ namespace System.Configuration
         [Browsable(false)]
         public string SettingsKey
         {
-            get
-            {
-                return _settingsKey;
-            }
+            get { return _settingsKey; }
             set
             {
                 _settingsKey = value;
@@ -218,15 +211,8 @@ namespace System.Configuration
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged
         {
-            add
-            {
-                _onPropertyChanged += value;
-            }
-            remove
-            {
-                _onPropertyChanged -= value;
-            }
-
+            add { _onPropertyChanged += value; }
+            remove { _onPropertyChanged -= value; }
         }
 
         /// <summary>
@@ -234,14 +220,8 @@ namespace System.Configuration
         /// </summary>
         public event SettingChangingEventHandler SettingChanging
         {
-            add
-            {
-                _onSettingChanging += value;
-            }
-            remove
-            {
-                _onSettingChanging -= value;
-            }
+            add { _onSettingChanging += value; }
+            remove { _onSettingChanging -= value; }
         }
 
         /// <summary>
@@ -249,14 +229,8 @@ namespace System.Configuration
         /// </summary>
         public event SettingsLoadedEventHandler SettingsLoaded
         {
-            add
-            {
-                _onSettingsLoaded += value;
-            }
-            remove
-            {
-                _onSettingsLoaded -= value;
-            }
+            add { _onSettingsLoaded += value; }
+            remove { _onSettingsLoaded -= value; }
         }
 
         /// <summary>
@@ -264,14 +238,8 @@ namespace System.Configuration
         /// </summary>
         public event SettingsSavingEventHandler SettingsSaving
         {
-            add
-            {
-                _onSettingsSaving += value;
-            }
-            remove
-            {
-                _onSettingsSaving -= value;
-            }
+            add { _onSettingsSaving += value; }
+            remove { _onSettingsSaving -= value; }
         }
 
         /// <summary>
@@ -399,11 +367,16 @@ namespace System.Configuration
                 {
                     return GetPropertyValue(propertyName);
                 }
-
             }
             set
             {
-                SettingChangingEventArgs e = new SettingChangingEventArgs(propertyName, this.GetType().FullName, SettingsKey, value, false);
+                SettingChangingEventArgs e = new SettingChangingEventArgs(
+                    propertyName,
+                    this.GetType().FullName,
+                    SettingsKey,
+                    value,
+                    false
+                );
                 OnSettingChanging(this, e);
 
                 if (!e.Cancel)
@@ -427,7 +400,10 @@ namespace System.Configuration
             {
                 foreach (SettingsProvider provider in Providers)
                 {
-                    (provider as IApplicationSettingsProvider)?.Upgrade(Context, GetPropertiesForProvider(provider));
+                    (provider as IApplicationSettingsProvider)?.Upgrade(
+                        Context,
+                        GetPropertiesForProvider(provider)
+                    );
                 }
             }
 
@@ -466,22 +442,31 @@ namespace System.Configuration
                 }
                 else if (attribute is SettingsProviderAttribute)
                 {
-                    string providerTypeName = ((SettingsProviderAttribute)attribute).ProviderTypeName;
+                    string providerTypeName = (
+                        (SettingsProviderAttribute)attribute
+                    ).ProviderTypeName;
                     Type providerType = Type.GetType(providerTypeName);
                     if (providerType == null)
                     {
-                        throw new ConfigurationErrorsException(SR.Format(SR.ProviderTypeLoadFailed, providerTypeName));
+                        throw new ConfigurationErrorsException(
+                            SR.Format(SR.ProviderTypeLoadFailed, providerTypeName)
+                        );
                     }
 
-                    SettingsProvider settingsProvider = TypeUtil.CreateInstance(providerType) as SettingsProvider;
+                    SettingsProvider settingsProvider =
+                        TypeUtil.CreateInstance(providerType) as SettingsProvider;
 
                     if (settingsProvider == null)
                     {
-                        throw new ConfigurationErrorsException(SR.Format(SR.ProviderInstantiationFailed, providerTypeName));
+                        throw new ConfigurationErrorsException(
+                            SR.Format(SR.ProviderInstantiationFailed, providerTypeName)
+                        );
                     }
 
                     settingsProvider.Initialize(null, null);
-                    settingsProvider.ApplicationName = ConfigurationManagerInternalFactory.Instance.ExeProductName;
+                    settingsProvider.ApplicationName = ConfigurationManagerInternalFactory
+                        .Instance
+                        .ExeProductName;
 
                     // See if we already have a provider of the same name in our collection. If so,
                     // re-use the existing instance, since we cannot have multiple providers of the same name.
@@ -495,7 +480,9 @@ namespace System.Configuration
                 }
                 else if (attribute is SettingsSerializeAsAttribute)
                 {
-                    settingsProperty.SerializeAs = ((SettingsSerializeAsAttribute)attribute).SerializeAs;
+                    settingsProperty.SerializeAs = (
+                        (SettingsSerializeAsAttribute)attribute
+                    ).SerializeAs;
                     explicitSerialize = true;
                 }
                 else
@@ -551,7 +538,9 @@ namespace System.Configuration
                 _context["SettingsKey"] = SettingsKey;
                 _context["SettingsClassType"] = type;
 
-                PropertyInfo[] properties = SettingsFilter(type.GetProperties(BindingFlags.Instance | BindingFlags.Public));
+                PropertyInfo[] properties = SettingsFilter(
+                    type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                );
                 _classAttributes = type.GetCustomAttributes(false);
 
                 _settings ??= new SettingsPropertyCollection();
@@ -608,32 +597,47 @@ namespace System.Configuration
                                 else if (attr is SettingsGroupNameAttribute)
                                 {
                                     _context ??= new SettingsContext();
-                                    _context["GroupName"] = ((SettingsGroupNameAttribute)attr).GroupName;
+                                    _context["GroupName"] = (
+                                        (SettingsGroupNameAttribute)attr
+                                    ).GroupName;
                                 }
                                 else if (attr is SettingsProviderAttribute)
                                 {
-                                    string providerTypeName = ((SettingsProviderAttribute)attr).ProviderTypeName;
+                                    string providerTypeName = (
+                                        (SettingsProviderAttribute)attr
+                                    ).ProviderTypeName;
                                     Type providerType = Type.GetType(providerTypeName);
                                     if (providerType != null)
                                     {
-                                        SettingsProvider spdr = TypeUtil.CreateInstance(providerType) as SettingsProvider;
+                                        SettingsProvider spdr =
+                                            TypeUtil.CreateInstance(providerType)
+                                            as SettingsProvider;
                                         if (spdr != null)
                                         {
                                             provider = spdr;
                                         }
                                         else
                                         {
-                                            throw new ConfigurationErrorsException(SR.Format(SR.ProviderInstantiationFailed, providerTypeName));
+                                            throw new ConfigurationErrorsException(
+                                                SR.Format(
+                                                    SR.ProviderInstantiationFailed,
+                                                    providerTypeName
+                                                )
+                                            );
                                         }
                                     }
                                     else
                                     {
-                                        throw new ConfigurationErrorsException(SR.Format(SR.ProviderTypeLoadFailed, providerTypeName));
+                                        throw new ConfigurationErrorsException(
+                                            SR.Format(SR.ProviderTypeLoadFailed, providerTypeName)
+                                        );
                                     }
                                 }
                                 else if (attr is SettingsSerializeAsAttribute)
                                 {
-                                    _init.SerializeAs = ((SettingsSerializeAsAttribute)attr).SerializeAs;
+                                    _init.SerializeAs = (
+                                        (SettingsSerializeAsAttribute)attr
+                                    ).SerializeAs;
                                     _explicitSerializeOnClass = true;
                                 }
                                 else
@@ -651,9 +655,10 @@ namespace System.Configuration
 
                     //Initialize the SettingsProvider
                     provider.Initialize(null, null);
-                    provider.ApplicationName = ConfigurationManagerInternalFactory.Instance.ExeProductName;
+                    provider.ApplicationName = ConfigurationManagerInternalFactory
+                        .Instance
+                        .ExeProductName;
                     _init.Provider = provider;
-
                 }
 
                 return _init;
@@ -694,7 +699,10 @@ namespace System.Configuration
                 SettingsProperty setting = Properties[propertyName];
                 SettingsProvider provider = setting?.Provider;
 
-                Debug.Assert(provider != null, "Could not determine provider from which settings were loaded");
+                Debug.Assert(
+                    provider != null,
+                    "Could not determine provider from which settings were loaded"
+                );
 
                 SettingsLoadedEventArgs e = new SettingsLoadedEventArgs(provider);
                 OnSettingsLoaded(this, e);

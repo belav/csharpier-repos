@@ -15,16 +15,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal sealed partial class TopLevelSyntaxTreeIndex
     {
         private static TopLevelSyntaxTreeIndex CreateIndex(
-            ProjectState project, SyntaxNode root, Checksum checksum, CancellationToken cancellationToken)
+            ProjectState project,
+            SyntaxNode root,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
-            var infoFactory = project.LanguageServices.GetRequiredService<IDeclaredSymbolInfoFactoryService>();
+            var infoFactory =
+                project.LanguageServices.GetRequiredService<IDeclaredSymbolInfoFactoryService>();
 
-            using var _1 = ArrayBuilder<DeclaredSymbolInfo>.GetInstance(out var declaredSymbolInfos);
-            using var _2 = PooledDictionary<string, ArrayBuilder<int>>.GetInstance(out var extensionMethodInfo);
+            using var _1 = ArrayBuilder<DeclaredSymbolInfo>.GetInstance(
+                out var declaredSymbolInfos
+            );
+            using var _2 = PooledDictionary<string, ArrayBuilder<int>>.GetInstance(
+                out var extensionMethodInfo
+            );
             try
             {
                 infoFactory.AddDeclaredSymbolInfos(
-                    project, root, declaredSymbolInfos, extensionMethodInfo, cancellationToken);
+                    project,
+                    root,
+                    declaredSymbolInfos,
+                    extensionMethodInfo,
+                    cancellationToken
+                );
 
                 return new TopLevelSyntaxTreeIndex(
                     checksum,
@@ -32,7 +46,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     new ExtensionMethodInfo(
                         extensionMethodInfo.ToImmutableDictionary(
                             static kvp => kvp.Key,
-                            static kvp => kvp.Value.ToImmutable())));
+                            static kvp => kvp.Value.ToImmutable()
+                        )
+                    )
+                );
             }
             finally
             {

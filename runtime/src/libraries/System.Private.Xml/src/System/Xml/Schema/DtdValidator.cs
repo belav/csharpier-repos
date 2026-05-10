@@ -20,19 +20,27 @@ namespace System.Xml.Schema
         //required by ParseValue
         private sealed class NamespaceManager : XmlNamespaceManager
         {
-            public override string LookupNamespace(string prefix) { return prefix; }
+            public override string LookupNamespace(string prefix)
+            {
+                return prefix;
+            }
         }
 
         private static readonly NamespaceManager s_namespaceManager = new NamespaceManager();
         private const int STACK_INCREMENT = 10;
-        private HWStack _validationStack;  // validaton contexts
+        private HWStack _validationStack; // validaton contexts
         private Hashtable _attPresence;
         private XmlQualifiedName _name = XmlQualifiedName.Empty;
         private Hashtable? _IDs;
         private IdRefNode? _idRefListHead;
         private readonly bool _processIdentityConstraints;
 
-        internal DtdValidator(XmlValidatingReaderImpl reader, IValidationEventHandling eventHandling, bool processIdentityConstraints) : base(reader, null, eventHandling)
+        internal DtdValidator(
+            XmlValidatingReaderImpl reader,
+            IValidationEventHandling eventHandling,
+            bool processIdentityConstraints
+        )
+            : base(reader, null, eventHandling)
         {
             _processIdentityConstraints = processIdentityConstraints;
             Init();
@@ -78,8 +86,8 @@ namespace System.Xml.Schema
                         ValidatePIComment();
                         break;
 
-                    case XmlNodeType.Text:          // text inside a node
-                    case XmlNodeType.CDATA:         // <![CDATA[...]]>
+                    case XmlNodeType.Text: // text inside a node
+                    case XmlNodeType.CDATA: // <![CDATA[...]]>
                         ValidateText();
                         break;
                     case XmlNodeType.EntityReference:
@@ -95,20 +103,27 @@ namespace System.Xml.Schema
             }
             else
             {
-                if (reader.Depth == 0 &&
-                    reader.NodeType == XmlNodeType.Element)
+                if (reader.Depth == 0 && reader.NodeType == XmlNodeType.Element)
                 {
-                    SendValidationEvent(SR.Xml_NoDTDPresent, _name.ToString(), XmlSeverityType.Warning);
+                    SendValidationEvent(
+                        SR.Xml_NoDTDPresent,
+                        _name.ToString(),
+                        XmlSeverityType.Warning
+                    );
                 }
             }
         }
 
         private bool MeetsStandAloneConstraint()
         {
-            if (reader.StandAlone &&                  // VC 1 - iv
-                 context!.ElementDecl != null &&
-                 context.ElementDecl.IsDeclaredInExternal &&
-                 context.ElementDecl.ContentValidator!.ContentType == XmlSchemaContentType.ElementOnly)
+            if (
+                reader.StandAlone
+                && // VC 1 - iv
+                context!.ElementDecl != null
+                && context.ElementDecl.IsDeclaredInExternal
+                && context.ElementDecl.ContentValidator!.ContentType
+                    == XmlSchemaContentType.ElementOnly
+            )
             {
                 SendValidationEvent(SR.Sch_StandAlone);
                 return false;
@@ -131,9 +146,11 @@ namespace System.Xml.Schema
         private void ValidateElement()
         {
             elementName.Init(reader.LocalName, reader.Prefix);
-            if ((reader.Depth == 0) &&
-                  (!schemaInfo!.DocTypeName.IsEmpty) &&
-                  (!schemaInfo.DocTypeName.Equals(elementName)))
+            if (
+                (reader.Depth == 0)
+                && (!schemaInfo!.DocTypeName.IsEmpty)
+                && (!schemaInfo.DocTypeName.Equals(elementName))
+            )
             { //VC 1
                 SendValidationEvent(SR.Sch_RootMatchDocType);
             }
@@ -150,10 +167,23 @@ namespace System.Xml.Schema
             if (context!.NeedValidateChildren)
             { //i think i can get away with removing this if cond since won't make this call for documentelement
                 int errorCode;
-                context.ElementDecl!.ContentValidator!.ValidateElement(elementName, context, out errorCode);
+                context.ElementDecl!.ContentValidator!.ValidateElement(
+                    elementName,
+                    context,
+                    out errorCode
+                );
                 if (errorCode < 0)
                 {
-                    XmlSchemaValidator.ElementValidationError(elementName, context, EventHandler, reader, reader.BaseURI, PositionInfo.LineNumber, PositionInfo.LinePosition, null);
+                    XmlSchemaValidator.ElementValidationError(
+                        elementName,
+                        context,
+                        EventHandler,
+                        reader,
+                        reader.BaseURI,
+                        PositionInfo.LineNumber,
+                        PositionInfo.LinePosition,
+                        null
+                    );
                 }
             }
         }
@@ -182,10 +212,15 @@ namespace System.Xml.Schema
                     try
                     {
                         reader.SchemaTypeObject = null;
-                        SchemaAttDef? attnDef = context.ElementDecl!.GetAttDef(new XmlQualifiedName(reader.LocalName, reader.Prefix));
+                        SchemaAttDef? attnDef = context.ElementDecl!.GetAttDef(
+                            new XmlQualifiedName(reader.LocalName, reader.Prefix)
+                        );
                         if (attnDef != null)
                         {
-                            if (context.ElementDecl != null && context.ElementDecl.HasRequiredAttribute)
+                            if (
+                                context.ElementDecl != null
+                                && context.ElementDecl.HasRequiredAttribute
+                            )
                             {
                                 _attPresence.Add(attnDef.Name, attnDef);
                             }
@@ -204,7 +239,11 @@ namespace System.Xml.Schema
                     }
                     catch (XmlSchemaException e)
                     {
-                        e.SetSource(Reader.BaseURI, PositionInfo.LineNumber, PositionInfo.LinePosition);
+                        e.SetSource(
+                            Reader.BaseURI,
+                            PositionInfo.LineNumber,
+                            PositionInfo.LinePosition
+                        );
                         SendValidationEvent(e);
                     }
                 } while (Reader.MoveToNextAttribute());
@@ -250,7 +289,10 @@ namespace System.Xml.Schema
             }
             else
             {
-                SendValidationEvent(SR.Sch_UndeclaredElement, XmlSchemaValidator.QNameString(context!.LocalName!, context.Namespace!));
+                SendValidationEvent(
+                    SR.Sch_UndeclaredElement,
+                    XmlSchemaValidator.QNameString(context!.LocalName!, context.Namespace!)
+                );
                 context.ElementDecl = null;
             }
         }
@@ -275,13 +317,21 @@ namespace System.Xml.Schema
                 {
                     if (!context.ElementDecl.ContentValidator!.CompleteValidation(context))
                     {
-                        XmlSchemaValidator.CompleteValidationError(context, EventHandler, reader, reader.BaseURI, PositionInfo.LineNumber, PositionInfo.LinePosition, null);
+                        XmlSchemaValidator.CompleteValidationError(
+                            context,
+                            EventHandler,
+                            reader,
+                            reader.BaseURI,
+                            PositionInfo.LineNumber,
+                            PositionInfo.LinePosition,
+                            null
+                        );
                     }
                 }
 
                 if (checkDatatype)
                 {
-                    string stringValue = !hasSibling ? textString! : textValue!.ToString()!;  // only for identity-constraint exception reporting
+                    string stringValue = !hasSibling ? textString! : textValue!.ToString()!; // only for identity-constraint exception reporting
                     CheckValue(stringValue, null);
                     checkDatatype = false;
                     textValue!.Length = 0; // cleanup
@@ -293,14 +343,15 @@ namespace System.Xml.Schema
 
         public override bool PreserveWhitespace
         {
-            get { return context!.ElementDecl != null ? context.ElementDecl.ContentValidator!.PreserveWhitespace : false; }
+            get
+            {
+                return context!.ElementDecl != null
+                    ? context.ElementDecl.ContentValidator!.PreserveWhitespace
+                    : false;
+            }
         }
 
-
-        private void ProcessTokenizedType(
-            XmlTokenizedType ttype,
-            string name
-        )
+        private void ProcessTokenizedType(XmlTokenizedType ttype, string name)
         {
             switch (ttype)
             {
@@ -323,13 +374,26 @@ namespace System.Xml.Schema
                         object? p = FindId(name);
                         if (p == null)
                         { // add it to linked list to check it later
-                            _idRefListHead = new IdRefNode(_idRefListHead, name, this.PositionInfo.LineNumber, this.PositionInfo.LinePosition);
+                            _idRefListHead = new IdRefNode(
+                                _idRefListHead,
+                                name,
+                                this.PositionInfo.LineNumber,
+                                this.PositionInfo.LinePosition
+                            );
                         }
                     }
 
                     break;
                 case XmlTokenizedType.ENTITY:
-                    ProcessEntity(schemaInfo!, name, this, EventHandler, Reader.BaseURI, PositionInfo.LineNumber, PositionInfo.LinePosition);
+                    ProcessEntity(
+                        schemaInfo!,
+                        name,
+                        this,
+                        EventHandler,
+                        Reader.BaseURI,
+                        PositionInfo.LineNumber,
+                        PositionInfo.LinePosition
+                    );
                     break;
                 default:
                     break;
@@ -343,7 +407,9 @@ namespace System.Xml.Schema
             {
                 reader.TypedValueObject = null;
                 bool isAttn = attdef != null;
-                XmlSchemaDatatype? dtype = isAttn ? attdef!.Datatype : context!.ElementDecl!.Datatype;
+                XmlSchemaDatatype? dtype = isAttn
+                    ? attdef!.Datatype
+                    : context!.ElementDecl!.Datatype;
                 if (dtype == null)
                 {
                     return; // no reason to check
@@ -358,7 +424,11 @@ namespace System.Xml.Schema
                 reader.TypedValueObject = typedValue;
                 // Check special types
                 XmlTokenizedType ttype = dtype.TokenizedType;
-                if (ttype == XmlTokenizedType.ENTITY || ttype == XmlTokenizedType.ID || ttype == XmlTokenizedType.IDREF)
+                if (
+                    ttype == XmlTokenizedType.ENTITY
+                    || ttype == XmlTokenizedType.ID
+                    || ttype == XmlTokenizedType.IDREF
+                )
                 {
                     if (dtype.Variety == XmlSchemaDatatypeVariety.List)
                     {
@@ -374,7 +444,9 @@ namespace System.Xml.Schema
                     }
                 }
 
-                SchemaDeclBase decl = isAttn ? (SchemaDeclBase)attdef! : (SchemaDeclBase)context!.ElementDecl!;
+                SchemaDeclBase decl = isAttn
+                    ? (SchemaDeclBase)attdef!
+                    : (SchemaDeclBase)context!.ElementDecl!;
                 if (decl.Values != null && !decl.CheckEnumeration(typedValue))
                 {
                     if (dtype.TokenizedType == XmlTokenizedType.NOTATION)
@@ -394,7 +466,10 @@ namespace System.Xml.Schema
                     }
                     else
                     {
-                        SendValidationEvent(SR.Sch_FixedElementValue, XmlSchemaValidator.QNameString(context!.LocalName!, context.Namespace!));
+                        SendValidationEvent(
+                            SR.Sch_FixedElementValue,
+                            XmlSchemaValidator.QNameString(context!.LocalName!, context.Namespace!)
+                        );
                     }
                 }
             }
@@ -406,11 +481,13 @@ namespace System.Xml.Schema
                 }
                 else
                 {
-                    SendValidationEvent(SR.Sch_ElementValueDataType, XmlSchemaValidator.QNameString(context!.LocalName!, context.Namespace!));
+                    SendValidationEvent(
+                        SR.Sch_ElementValueDataType,
+                        XmlSchemaValidator.QNameString(context!.LocalName!, context.Namespace!)
+                    );
                 }
             }
         }
-
 
         internal void AddID(string name, object node)
         {
@@ -459,7 +536,6 @@ namespace System.Xml.Schema
             }
         }
 
-
         private SchemaEntity? GetEntity(XmlQualifiedName qname, bool fParameterEntity)
         {
             SchemaEntity? entity;
@@ -487,7 +563,15 @@ namespace System.Xml.Schema
             {
                 if (FindId(next.Id) == null)
                 {
-                    SendValidationEvent(new XmlSchemaException(SR.Sch_UndeclaredId, next.Id, reader.BaseURI, next.LineNo, next.LinePos));
+                    SendValidationEvent(
+                        new XmlSchemaException(
+                            SR.Sch_UndeclaredId,
+                            next.Id,
+                            reader.BaseURI,
+                            next.LineNo,
+                            next.LinePos
+                        )
+                    );
                 }
                 IdRefNode? ptr = next.Next;
                 next.Next = null; // unhook each object so it is cleaned up by Garbage Collector
@@ -540,7 +624,11 @@ namespace System.Xml.Schema
                 {
                     value = value.Trim();
                 }
-                attdef.DefaultValueTyped = dtype.ParseValue(value, readerAdapter.NameTable, readerAdapter.NamespaceResolver);
+                attdef.DefaultValueTyped = dtype.ParseValue(
+                    value,
+                    readerAdapter.NameTable,
+                    readerAdapter.NamespaceResolver
+                );
             }
 #if DEBUG
             catch (XmlSchemaException)
@@ -548,10 +636,15 @@ namespace System.Xml.Schema
             catch (Exception)
 #endif
             {
-                IValidationEventHandling? eventHandling = ((IDtdParserAdapterWithValidation)readerAdapter).ValidationEventHandling;
+                IValidationEventHandling? eventHandling = (
+                    (IDtdParserAdapterWithValidation)readerAdapter
+                ).ValidationEventHandling;
                 if (eventHandling != null)
                 {
-                    XmlSchemaException e = new XmlSchemaException(SR.Sch_AttributeDefaultDataType, attdef.Name.ToString());
+                    XmlSchemaException e = new XmlSchemaException(
+                        SR.Sch_AttributeDefaultDataType,
+                        attdef.Name.ToString()
+                    );
                     eventHandling.SendEvent(e, XmlSeverityType.Error);
                 }
             }
@@ -583,12 +676,26 @@ namespace System.Xml.Schema
                         string[] ss = (string[])typedValue!;
                         for (int i = 0; i < ss.Length; ++i)
                         {
-                            ProcessEntity(sinfo, ss[i], eventHandling, baseUriStr, attdef.ValueLineNumber, attdef.ValueLinePosition);
+                            ProcessEntity(
+                                sinfo,
+                                ss[i],
+                                eventHandling,
+                                baseUriStr,
+                                attdef.ValueLineNumber,
+                                attdef.ValueLinePosition
+                            );
                         }
                     }
                     else
                     {
-                        ProcessEntity(sinfo, (string)typedValue!, eventHandling, baseUriStr, attdef.ValueLineNumber, attdef.ValueLinePosition);
+                        ProcessEntity(
+                            sinfo,
+                            (string)typedValue!,
+                            eventHandling,
+                            baseUriStr,
+                            attdef.ValueLineNumber,
+                            attdef.ValueLinePosition
+                        );
                     }
                 }
                 else if (ttype == XmlTokenizedType.ENUMERATION)
@@ -597,7 +704,13 @@ namespace System.Xml.Schema
                     {
                         if (eventHandling != null)
                         {
-                            XmlSchemaException e = new XmlSchemaException(SR.Sch_EnumerationValue, typedValue!.ToString(), baseUriStr, attdef.ValueLineNumber, attdef.ValueLinePosition);
+                            XmlSchemaException e = new XmlSchemaException(
+                                SR.Sch_EnumerationValue,
+                                typedValue!.ToString(),
+                                baseUriStr,
+                                attdef.ValueLineNumber,
+                                attdef.ValueLinePosition
+                            );
                             eventHandling.SendEvent(e, XmlSeverityType.Error);
                         }
                     }
@@ -609,10 +722,12 @@ namespace System.Xml.Schema
             catch (Exception)
 #endif
             {
-
                 if (eventHandling != null)
                 {
-                    XmlSchemaException e = new XmlSchemaException(SR.Sch_AttributeDefaultDataType, attdef.Name.ToString());
+                    XmlSchemaException e = new XmlSchemaException(
+                        SR.Sch_AttributeDefaultDataType,
+                        attdef.Name.ToString()
+                    );
                     eventHandling.SendEvent(e, XmlSeverityType.Error);
                 }
             }

@@ -19,37 +19,78 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             SynthesizedPrimaryConstructor ctor,
             ImmutableArray<Symbol> positionalMembers,
-            int memberOffset)
-            : base(containingType, WellKnownMemberNames.DeconstructMethodName, memberOffset,
-                   DeclarationModifiers.Public | (IsReadOnly(containingType, positionalMembers) ? DeclarationModifiers.ReadOnly : 0))
+            int memberOffset
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.DeconstructMethodName,
+                memberOffset,
+                DeclarationModifiers.Public
+                    | (
+                        IsReadOnly(containingType, positionalMembers)
+                            ? DeclarationModifiers.ReadOnly
+                            : 0
+                    )
+            )
         {
-            Debug.Assert(positionalMembers.All(p => p is PropertySymbol { GetMethod: not null } or FieldSymbol));
+            Debug.Assert(
+                positionalMembers.All(p =>
+                    p is PropertySymbol { GetMethod: not null } or FieldSymbol
+                )
+            );
             _ctor = ctor;
             _positionalMembers = positionalMembers;
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Void, location, diagnostics)),
-                    Parameters: _ctor.Parameters.SelectAsArray<ParameterSymbol, ImmutableArray<Location>, ParameterSymbol>(
-                                        (param, locations) =>
-                                            new SourceSimpleParameterSymbol(owner: this,
-                                                param.TypeWithAnnotations,
-                                                param.Ordinal,
-                                                RefKind.Out,
-                                                ScopedKind.None,
-                                                param.Name,
-                                                locations),
-                                        arg: Locations));
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Void,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: _ctor.Parameters.SelectAsArray<
+                    ParameterSymbol,
+                    ImmutableArray<Location>,
+                    ParameterSymbol
+                >(
+                    (param, locations) =>
+                        new SourceSimpleParameterSymbol(
+                            owner: this,
+                            param.TypeWithAnnotations,
+                            param.Ordinal,
+                            RefKind.Out,
+                            ScopedKind.None,
+                            param.Name,
+                            locations
+                        ),
+                    arg: Locations
+                )
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => _ctor.ParameterCount;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
 
             if (ParameterCount != _positionalMembers.Length)
             {
@@ -58,7 +99,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var statementsBuilder = ArrayBuilder<BoundStatement>.GetInstance(_positionalMembers.Length + 1);
+            var statementsBuilder = ArrayBuilder<BoundStatement>.GetInstance(
+                _positionalMembers.Length + 1
+            );
             for (int i = 0; i < _positionalMembers.Length; i++)
             {
                 var parameter = Parameters[i];
@@ -68,7 +111,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     PropertySymbol property => property.Type,
                     FieldSymbol field => field.Type,
-                    _ => throw ExceptionUtilities.Unreachable()
+                    _ => throw ExceptionUtilities.Unreachable(),
                 };
 
                 if (!parameter.Type.Equals(type, TypeCompareKind.AllIgnoreOptions))
@@ -83,11 +126,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     case PropertySymbol property:
                         // parameter_i = property_i;
-                        statementsBuilder.Add(F.Assignment(F.Parameter(parameter), F.Property(F.This(), property)));
+                        statementsBuilder.Add(
+                            F.Assignment(F.Parameter(parameter), F.Property(F.This(), property))
+                        );
                         break;
                     case FieldSymbol field:
                         // parameter_i = field_i;
-                        statementsBuilder.Add(F.Assignment(F.Parameter(parameter), F.Field(F.This(), field)));
+                        statementsBuilder.Add(
+                            F.Assignment(F.Parameter(parameter), F.Field(F.This(), field))
+                        );
                         break;
                 }
             }
@@ -96,9 +143,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             F.CloseMethod(F.Block(statementsBuilder.ToImmutableAndFree()));
         }
 
-        private static bool IsReadOnly(SourceMemberContainerTypeSymbol containingType, ImmutableArray<Symbol> positionalMembers)
+        private static bool IsReadOnly(
+            SourceMemberContainerTypeSymbol containingType,
+            ImmutableArray<Symbol> positionalMembers
+        )
         {
-            return containingType.IsReadOnly || (containingType.IsRecordStruct && !positionalMembers.Any(static m => hasNonReadOnlyGetter(m)));
+            return containingType.IsReadOnly
+                || (
+                    containingType.IsRecordStruct
+                    && !positionalMembers.Any(static m => hasNonReadOnlyGetter(m))
+                );
 
             static bool hasNonReadOnlyGetter(Symbol m)
             {

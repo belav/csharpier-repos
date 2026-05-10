@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,39 +32,38 @@ using System;
 
 namespace System.Windows.Forms.Design
 {
-	public sealed class EventHandlerService
-	{
-		public event EventHandler EventHandlerChanged;
+    public sealed class EventHandlerService
+    {
+        public event EventHandler EventHandlerChanged;
 
-		public EventHandlerService (Control focusWnd)
-		{
-			_focusWnd = focusWnd;
-		}
+        public EventHandlerService(Control focusWnd)
+        {
+            _focusWnd = focusWnd;
+        }
 
-		[MonoTODO]
-		public object GetHandler (Type handlerType)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public object GetHandler(Type handlerType)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void PopHandler (object handler)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void PopHandler(object handler)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void PushHandler (object handler)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void PushHandler(object handler)
+        {
+            throw new NotImplementedException();
+        }
 
-		public Control FocusWindow {
-			get {
-				return _focusWnd;
-			}
-		}
+        public Control FocusWindow
+        {
+            get { return _focusWnd; }
+        }
 
-		private readonly Control _focusWnd;
-	}
+        private readonly Control _focusWnd;
+    }
 }

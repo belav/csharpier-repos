@@ -44,38 +44,165 @@ namespace System.Xml.Xsl.Xslt
                 _ => VisitUnknown((XslNode)node),
             };
 
-        protected virtual T VisitApplyImports(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitApplyTemplates(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitAttribute(NodeCtor node) { return VisitChildren(node); }
-        protected virtual T VisitAttributeSet(AttributeSet node) { return VisitChildren(node); }
-        protected virtual T VisitCallTemplate(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitChoose(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitComment(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitCopy(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitCopyOf(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitElement(NodeCtor node) { return VisitChildren(node); }
-        protected virtual T VisitError(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitForEach(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitIf(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitKey(Key node) { return VisitChildren(node); }
-        protected virtual T VisitList(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitLiteralAttribute(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitLiteralElement(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitMessage(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitNop(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitNumber(Number node) { return VisitChildren(node); }
-        protected virtual T VisitOtherwise(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitParam(VarPar node) { return VisitChildren(node); }
-        protected virtual T VisitPI(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitSort(Sort node) { return VisitChildren(node); }
-        protected virtual T VisitTemplate(Template node) { return VisitChildren(node); }
-        protected virtual T VisitText(Text node) { return VisitChildren(node); }
-        protected virtual T VisitUseAttributeSet(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitValueOf(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitValueOfDoe(XslNode node) { return VisitChildren(node); }
-        protected virtual T VisitVariable(VarPar node) { return VisitChildren(node); }
-        protected virtual T VisitWithParam(VarPar node) { return VisitChildren(node); }
-        protected virtual T VisitUnknown(XslNode node) { return VisitChildren(node); }
+        protected virtual T VisitApplyImports(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitApplyTemplates(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitAttribute(NodeCtor node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitAttributeSet(AttributeSet node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitCallTemplate(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitChoose(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitComment(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitCopy(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitCopyOf(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitElement(NodeCtor node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitError(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitForEach(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitIf(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitKey(Key node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitList(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitLiteralAttribute(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitLiteralElement(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitMessage(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitNop(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitNumber(Number node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitOtherwise(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitParam(VarPar node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitPI(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitSort(Sort node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitTemplate(Template node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitText(Text node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitUseAttributeSet(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitValueOf(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitValueOfDoe(XslNode node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitVariable(VarPar node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitWithParam(VarPar node)
+        {
+            return VisitChildren(node);
+        }
+
+        protected virtual T VisitUnknown(XslNode node)
+        {
+            return VisitChildren(node);
+        }
 
         protected virtual T VisitChildren(XslNode node)
         {

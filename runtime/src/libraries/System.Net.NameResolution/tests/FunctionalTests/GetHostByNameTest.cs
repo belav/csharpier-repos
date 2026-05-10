@@ -4,7 +4,6 @@
 #pragma warning disable 0618 // use of obsolete methods
 
 using System.Net.Sockets;
-
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 
@@ -22,7 +21,11 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public void DnsObsoleteBeginGetHostByName_IPv4String_ReturnsOnlyGivenIP()
         {
-            IAsyncResult asyncObject = Dns.BeginGetHostByName(IPAddress.Loopback.ToString(), null, null);
+            IAsyncResult asyncObject = Dns.BeginGetHostByName(
+                IPAddress.Loopback.ToString(),
+                null,
+                null
+            );
             IPHostEntry entry = Dns.EndGetHostByName(asyncObject);
 
             Assert.Equal(IPAddress.Loopback.ToString(), entry.HostName);
@@ -44,28 +47,37 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public void DnsObsoleteGetHostByName_HostAlmostTooLong254Chars_Throws()
         {
-            Assert.ThrowsAny<SocketException>(() => Dns.GetHostByName(
-                "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
-                + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are"));
+            Assert.ThrowsAny<SocketException>(() =>
+                Dns.GetHostByName(
+                    "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+                        + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
+                        + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are"
+                )
+            );
         }
 
         [Fact]
         public void DnsObsoleteGetHostByName_HostAlmostTooLong254CharsAndDot_Throws()
         {
-            Assert.ThrowsAny<SocketException>(() => Dns.GetHostByName(
-                "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
-                + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are."));
+            Assert.ThrowsAny<SocketException>(() =>
+                Dns.GetHostByName(
+                    "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+                        + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
+                        + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are."
+                )
+            );
         }
 
         [Fact]
         public void DnsObsoleteGetHostByName_HostTooLong255Chars_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => Dns.GetHostByName(
-                "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
-                + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret"));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Dns.GetHostByName(
+                    "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+                        + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
+                        + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret"
+                )
+            );
         }
 
         [Fact]
@@ -105,7 +117,10 @@ namespace System.Net.NameResolution.Tests
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/1488", TestPlatforms.OSX)]
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/27622")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51377", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51377",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void DnsObsoleteGetHostByName_EmptyString_ReturnsHostName()
         {
             IPHostEntry entry = Dns.GetHostByName("");
@@ -114,9 +129,16 @@ namespace System.Net.NameResolution.Tests
             Assert.Contains(Dns.GetHostName(), entry.HostName, StringComparison.OrdinalIgnoreCase);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotArm64Process), nameof(PlatformDetection.IsThreadingSupported))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/27622")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotArm64Process),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/27622")]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/1488", TestPlatforms.OSX)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51377", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51377",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void DnsObsoleteBeginEndGetHostByName_EmptyString_ReturnsHostName()
         {
             IPHostEntry entry = Dns.EndGetHostByName(Dns.BeginGetHostByName("", null, null));

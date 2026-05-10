@@ -4,10 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
-    using System.Configuration.Internal;
     using System.Configuration;
+    using System.Configuration.Internal;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
@@ -21,8 +22,9 @@ namespace System.Web.Configuration {
 
     // If a path is null, we need this to tell the difference between machine.config
     // or root web.config.
-    enum WebLevel {
+    enum WebLevel
+    {
         Machine = 1,
-        Path = 2
+        Path = 2,
     }
 }

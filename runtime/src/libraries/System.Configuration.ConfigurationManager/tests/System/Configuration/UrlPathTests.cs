@@ -86,35 +86,50 @@ namespace System.ConfigurationTests
         [Fact]
         public void IsEqualOrSubDirectory_SubDirAndDirAreReversed_NoTrailingBackslash()
         {
-            bool test = UrlPath.IsEqualOrSubdirectory("C:\\Directory\\SubDirectory", "C:\\Directory");
+            bool test = UrlPath.IsEqualOrSubdirectory(
+                "C:\\Directory\\SubDirectory",
+                "C:\\Directory"
+            );
             Assert.False(test);
         }
 
         [Fact]
         public void IsEqualOrSubDirectory_SubDirIsASubDirOfDir_NoTrailingBackslash()
         {
-            bool test = UrlPath.IsEqualOrSubdirectory("C:\\Directory", "C:\\Directory\\SubDirectory");
+            bool test = UrlPath.IsEqualOrSubdirectory(
+                "C:\\Directory",
+                "C:\\Directory\\SubDirectory"
+            );
             Assert.True(test);
         }
 
         [Fact]
         public void IsEqualOrSubDirectory_True_TrailingBackslashOnBoth()
         {
-            bool test = UrlPath.IsEqualOrSubdirectory("C:\\Directory\\", "C:\\Directory\\SubDirectory");
+            bool test = UrlPath.IsEqualOrSubdirectory(
+                "C:\\Directory\\",
+                "C:\\Directory\\SubDirectory"
+            );
             Assert.True(test);
         }
 
         [Fact]
         public void IsEqualOrSubDirectory_True_DirBackslash()
         {
-            bool test = UrlPath.IsEqualOrSubdirectory("C:\\Directory\\", "C:\\Directory\\SubDirectory");
+            bool test = UrlPath.IsEqualOrSubdirectory(
+                "C:\\Directory\\",
+                "C:\\Directory\\SubDirectory"
+            );
             Assert.True(test);
         }
 
         [Fact]
         public void IsEqualOrSubDirectory_True_SubDirBackslash()
         {
-            bool test = UrlPath.IsEqualOrSubdirectory("C:\\Directory", "C:\\Directory\\SubDirectory\\");
+            bool test = UrlPath.IsEqualOrSubdirectory(
+                "C:\\Directory",
+                "C:\\Directory\\SubDirectory\\"
+            );
             Assert.True(test);
         }
 
@@ -148,15 +163,15 @@ namespace System.ConfigurationTests
 
         public static IEnumerable<object[]> UnixDirectories = new List<object[]>()
         {
-            new object[] { "/dir/sub", "/dir", false },     // no slash
-            new object[] { "/dir", "/dir/sub", true },      // no slash
-            new object[] { "/dir/", "/dir/sub/", true },    // both slash
-            new object[] { "/dir/", "/dir/sub", true },     // dir slash
-            new object[] { "/dir", "/dir/sub/", true },     // subdir slash
-            new object[] { "/dir", "/dir", true },          // no slashes
-            new object[] { "/var/", "/var/", true },        // both slashes
-            new object[] { "/var/", "/var", true },         // first has slash
-            new object[] { "/var", "/var/", true },         // second has slash
+            new object[] { "/dir/sub", "/dir", false }, // no slash
+            new object[] { "/dir", "/dir/sub", true }, // no slash
+            new object[] { "/dir/", "/dir/sub/", true }, // both slash
+            new object[] { "/dir/", "/dir/sub", true }, // dir slash
+            new object[] { "/dir", "/dir/sub/", true }, // subdir slash
+            new object[] { "/dir", "/dir", true }, // no slashes
+            new object[] { "/var/", "/var/", true }, // both slashes
+            new object[] { "/var/", "/var", true }, // first has slash
+            new object[] { "/var", "/var/", true }, // second has slash
         };
 
         [Theory]

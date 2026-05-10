@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,28 +23,32 @@
 //   Jonathan Pobst  monkey@jpobst.com
 //
 
-using System.Drawing;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	public class TreeViewImageKeyConverter : ImageKeyConverter
-	{
-		#region Constructors
-		public TreeViewImageKeyConverter () { }
-		#endregion Constructors
+    public class TreeViewImageKeyConverter : ImageKeyConverter
+    {
+        #region Constructors
+        public TreeViewImageKeyConverter() { }
+        #endregion Constructors
 
-		#region Public Methods
-		// XXX - Can't find the difference from the base method
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
-						  object value, Type destinationType)
-		{
-			return base.ConvertTo (context, culture, value, destinationType);
-		}
-		#endregion Public Methods
-	}
+        #region Public Methods
+        // XXX - Can't find the difference from the base method
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+        #endregion Public Methods
+    }
 }

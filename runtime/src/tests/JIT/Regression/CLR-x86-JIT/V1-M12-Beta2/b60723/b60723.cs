@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public struct AA
     {
         public static bool m_bFwd2;
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -23,6 +25,7 @@ namespace Test
                 return 100;
             }
         }
+
         public static void Main1()
         {
             try

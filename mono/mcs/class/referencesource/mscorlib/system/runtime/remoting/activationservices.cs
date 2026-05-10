@@ -1,48 +1,50 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 **  File:    ActivationServices.cs
 **
-**  Author(s):  
+**  Author(s):
 **
-**  Purpose:           
+**  Purpose:
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Activation {
-
+namespace System.Runtime.Remoting.Activation
+{
     using System;
-    using System.Security;
-    using System.Threading;
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Contexts;
-    using System.Runtime.Remoting.Proxies;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
-    using System.Collections;
-    using System.Reflection;
-    using System.IO;
+    using System.Runtime.Remoting.Proxies;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Runtime.CompilerServices;
-    using System.Diagnostics.Contracts;
+    using System.Threading;
 
     // Implements various activation services
     internal static class ActivationServices
     {
+        private static volatile IActivator activator = null;
 
-        private static volatile IActivator activator = null;     
-        
         private static Hashtable _proxyTable = new Hashtable();
-        private static readonly Type proxyAttributeType = typeof(System.Runtime.Remoting.Proxies.ProxyAttribute); 
+        private static readonly Type proxyAttributeType =
+            typeof(System.Runtime.Remoting.Proxies.ProxyAttribute);
+
         [System.Security.SecurityCritical] // auto-generated
         private static ProxyAttribute _proxyAttribute = new ProxyAttribute();
+
         [ThreadStaticAttribute()]
         internal static ActivationAttributeStack _attributeStack;
         internal static readonly Assembly s_MscorlibAssembly = typeof(Object).Assembly;
@@ -54,19 +56,14 @@ namespace System.Runtime.Remoting.Activation {
         internal const String ConnectKey = "Connect";
 
         [System.Security.SecuritySafeCritical] // static constructors should be safe to call
-        static ActivationServices()
-        { }
+        static ActivationServices() { }
 
         // <
-
-
-
-
 
         //1 private static LocalActivator  localActivator = null;
 
         // ActivationListener is the object that listens to incoming
-        // activation requests. It delegates the incoming request to 
+        // activation requests. It delegates the incoming request to
         // the local activator.
         //2 private static ActivationListener ActivationListener = null;
 
@@ -75,15 +72,14 @@ namespace System.Runtime.Remoting.Activation {
 
         // This gets called upon the first attempt to activate
         // anything that is ContextBound or MarshalByRef
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void Startup()
-        {            
+        {
             DomainSpecificRemotingData remData = Thread.GetDomain().RemotingData;
 
             // wait on the lock if a)activation has not been initialized yet
             // or b) activation is being initialized by another thread!
-            if ((!remData.ActivationInitialized) 
-               || remData.InitializingActivation)
+            if ((!remData.ActivationInitialized) || remData.InitializingActivation)
             {
                 Object configLock = remData.ConfigLock;
                 bool fLocked = false;
@@ -97,7 +93,11 @@ namespace System.Runtime.Remoting.Activation {
                     if (!remData.ActivationInitialized)
                     {
                         // Startup the activation service
-                        BCLDebug.Trace("REMOTE","Starting up activation service ",Thread.CurrentContext);
+                        BCLDebug.Trace(
+                            "REMOTE",
+                            "Starting up activation service ",
+                            Thread.CurrentContext
+                        );
 
                         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         // NOTE: This should be the first step in Startup!
@@ -118,9 +118,8 @@ namespace System.Runtime.Remoting.Activation {
 
                         remData.ActivationListener = new ActivationListener();
                         remData.ActivationInitialized = true;
-
                     }
-                    
+
                     remData.InitializingActivation = false;
                 } //lock (remData)
                 finally
@@ -131,66 +130,77 @@ namespace System.Runtime.Remoting.Activation {
                     }
                 }
             }
-        }            
-           
-        [System.Security.SecurityCritical]  // auto-generated
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
         private static void InitActivationServices()
         {
-            // If activation services has not been loaded do it now and create 
+            // If activation services has not been loaded do it now and create
             // the instace that will service the activation requests.
             if (null == activator)
             {
                 activator = GetActivator();
                 if (null == activator)
                 {
-                    Message.DebugOut("Fatal Error... Could not create activator\n");                
+                    Message.DebugOut("Fatal Error... Could not create activator\n");
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_BadInternalState_ActivationFailure")));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_BadInternalState_ActivationFailure"
+                            )
+                        )
+                    );
                 }
             }
         }
 
-        // Determine whether the current context is ok for the activation.  
-        [System.Security.SecurityCritical]  // auto-generated
+        // Determine whether the current context is ok for the activation.
+        [System.Security.SecurityCritical] // auto-generated
         private static MarshalByRefObject IsCurrentContextOK(
-            RuntimeType serverType, Object[] props, bool bNewObj)
+            RuntimeType serverType,
+            Object[] props,
+            bool bNewObj
+        )
         {
-            Contract.Assert(!serverType.IsInterface,"!serverType.IsInterface");
+            Contract.Assert(!serverType.IsInterface, "!serverType.IsInterface");
 
             MarshalByRefObject retObj = null;
-            
+
             // Initialize activation services if needed.
             //   (we temporary null out the activation attributes in case
-            //    InitActivationServices creates an MBR).            
-            InitActivationServices();            
-            
-            // Obtain the method info which will create an instance 
+            //    InitActivationServices creates an MBR).
+            InitActivationServices();
+
+            // Obtain the method info which will create an instance
             // of type RealProxy
             ProxyAttribute pa = GetProxyAttribute(serverType);
             Contract.Assert(null != pa, "null != pa");
 
             if (Object.ReferenceEquals(pa, DefaultProxyAttribute))
                 retObj = pa.CreateInstanceInternal(serverType);
-            else            
+            else
             {
                 retObj = pa.CreateInstance(serverType);
-                // We called a custom proxy attribute .. make sure it is 
+                // We called a custom proxy attribute .. make sure it is
                 // returning a server of the correct type.
                 if (retObj != null)
                 {
                     // If a transparent proxy is returned we are fine.
                     // If not then the object's type MUST be compatible
                     // with the type we were requested to activate!
-                    if (!RemotingServices.IsTransparentProxy(retObj) 
-                        && !serverType.IsAssignableFrom(retObj.GetType()))
+                    if (
+                        !RemotingServices.IsTransparentProxy(retObj)
+                        && !serverType.IsAssignableFrom(retObj.GetType())
+                    )
                     {
                         throw new RemotingException(
                             String.Format(
-                                CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                    "Remoting_Activation_BadObject"),
-                            serverType));
+                                CultureInfo.CurrentCulture,
+                                Environment.GetResourceString("Remoting_Activation_BadObject"),
+                                serverType
+                            )
+                        );
                     }
                 }
             }
@@ -198,26 +208,31 @@ namespace System.Runtime.Remoting.Activation {
             return retObj;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static MarshalByRefObject CreateObjectForCom(
-            RuntimeType serverType, Object[] props, bool bNewObj)
+            RuntimeType serverType,
+            Object[] props,
+            bool bNewObj
+        )
         {
-            Contract.Assert(!serverType.IsInterface,"!serverType.IsInterface");
+            Contract.Assert(!serverType.IsInterface, "!serverType.IsInterface");
 
             MarshalByRefObject retObj = null;
-            
+
             if (PeekActivationAttributes(serverType) != null)
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_ActivForCom" ));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_ActivForCom")
+                );
 
             // Initialize activation services if needed
             InitActivationServices();
-                                               
-            // Obtain the method info which will create an instance 
+
+            // Obtain the method info which will create an instance
             // of type RealProxy
             ProxyAttribute pa = GetProxyAttribute(serverType);
             Contract.Assert(null != pa, "null != pa");
 
-            if(pa is ICustomFactory)
+            if (pa is ICustomFactory)
             {
                 retObj = ((ICustomFactory)pa).CreateInstance(serverType);
             }
@@ -230,14 +245,17 @@ namespace System.Runtime.Remoting.Activation {
             return retObj;
         }
 
-        // For types with no proxy attribute, we take the default route of 
-        // querying attributes if the current context is suitable for 
+        // For types with no proxy attribute, we take the default route of
+        // querying attributes if the current context is suitable for
         // activation.
-        [System.Security.SecurityCritical]  // auto-generated
-        private static bool IsCurrentContextOK(RuntimeType serverType, Object[] props, 
-                                               ref ConstructorCallMessage ctorCallMsg)
+        [System.Security.SecurityCritical] // auto-generated
+        private static bool IsCurrentContextOK(
+            RuntimeType serverType,
+            Object[] props,
+            ref ConstructorCallMessage ctorCallMsg
+        )
         {
-             //Get callSite attributes
+            //Get callSite attributes
             Object[] callSiteAttr = PeekActivationAttributes(serverType);
 
             // Clear from the attribute stack
@@ -245,25 +263,20 @@ namespace System.Runtime.Remoting.Activation {
             {
                 PopActivationAttributes(serverType);
             }
-            
+
             Object[] womAttr = new Object[1];
             womAttr[0] = GetGlobalAttribute();
 
             // Get the type context attributes
             Object[] typeAttr = GetContextAttributesForType(serverType);
 
-            // Get the client context (current context)                                                             
+            // Get the client context (current context)
             Context cliCtx = Thread.CurrentContext;
 
-            // Create a ctorCallMsg with the reqd info 
-            ctorCallMsg = 
-                new ConstructorCallMessage(
-                    callSiteAttr,
-                    womAttr,
-                    typeAttr,
-                    serverType);
+            // Create a ctorCallMsg with the reqd info
+            ctorCallMsg = new ConstructorCallMessage(callSiteAttr, womAttr, typeAttr, serverType);
 
-            // This is the activator that handles activation in *all* cases 
+            // This is the activator that handles activation in *all* cases
             // Based on whether what the activation attributes do.... other
             // activators may get chained ahead of this one and may take
             // over the activation process... (possibly) delegating to this
@@ -272,98 +285,98 @@ namespace System.Runtime.Remoting.Activation {
             // scenarios ... because of the 2-step activation model of JIT.
             ctorCallMsg.Activator = new ConstructionLevelActivator();
 
-
             // Ask all attributes if they are happy with the current context
             // NOTE: if someone says no, we do not ask the rest of the attributes
             // This is why, womAttr (which is the global activation service
             // attribute) *must* be the first one we query.
-            bool bCtxOK = QueryAttributesIfContextOK(cliCtx, 
-                                                     ctorCallMsg,
-                                                     womAttr);
+            bool bCtxOK = QueryAttributesIfContextOK(cliCtx, ctorCallMsg, womAttr);
             if (bCtxOK == true)
             {
-                bCtxOK = QueryAttributesIfContextOK(cliCtx, 
-                                                    ctorCallMsg,
-                                                    callSiteAttr);
+                bCtxOK = QueryAttributesIfContextOK(cliCtx, ctorCallMsg, callSiteAttr);
                 if (bCtxOK == true)
                 {
-                    bCtxOK = QueryAttributesIfContextOK(cliCtx, 
-                                                        ctorCallMsg,
-                                                        typeAttr);
+                    bCtxOK = QueryAttributesIfContextOK(cliCtx, ctorCallMsg, typeAttr);
                 }
             }
 
             return bCtxOK;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void CheckForInfrastructurePermission(RuntimeAssembly asm)
         {
             // Make a security check to ensure that the context attribute
             // is from a trusted assembly!
             if (asm != s_MscorlibAssembly)
             {
-                SecurityPermission remotingInfrastructurePermission = new SecurityPermission(SecurityPermissionFlag.Infrastructure);
+                SecurityPermission remotingInfrastructurePermission = new SecurityPermission(
+                    SecurityPermissionFlag.Infrastructure
+                );
                 CodeAccessSecurityEngine.CheckAssembly(asm, remotingInfrastructurePermission);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static bool QueryAttributesIfContextOK(
-            Context ctx, IConstructionCallMessage ctorMsg, Object[] attributes) 
-        {       
+            Context ctx,
+            IConstructionCallMessage ctorMsg,
+            Object[] attributes
+        )
+        {
             bool bCtxOK = true;
             if (attributes != null)
             {
-                for (int i=0; i<attributes.Length; i++)
+                for (int i = 0; i < attributes.Length; i++)
                 {
-                    // All the attributes, including callsite attributes should 
-                    // expose IContextAttribute. If not, then we throw an 
+                    // All the attributes, including callsite attributes should
+                    // expose IContextAttribute. If not, then we throw an
                     // exception.
                     IContextAttribute attr = attributes[i] as IContextAttribute;
-                    if(null != attr)
-                    { 
-                        RuntimeAssembly asm = (RuntimeAssembly)attr.GetType().Assembly; 
+                    if (null != attr)
+                    {
+                        RuntimeAssembly asm = (RuntimeAssembly)attr.GetType().Assembly;
                         // Make a security check to ensure that the context attribute
                         // is from a trusted assembly!
                         CheckForInfrastructurePermission(asm);
-                    
+
                         bCtxOK = attr.IsContextOK(ctx, ctorMsg);
                         if (bCtxOK == false)
                         {
                             break;
                         }
-                    }                        
+                    }
                     else
                     {
                         throw new RemotingException(
-                                Environment.GetResourceString(
-                                    "Remoting_Activation_BadAttribute"));
+                            Environment.GetResourceString("Remoting_Activation_BadAttribute")
+                        );
                     }
                 }
             }
             return bCtxOK;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void GetPropertiesFromAttributes(
-            IConstructionCallMessage ctorMsg, Object[] attributes)
+            IConstructionCallMessage ctorMsg,
+            Object[] attributes
+        )
         {
             if (attributes != null)
             {
-                for (int i=0; i<attributes.Length; i++)
+                for (int i = 0; i < attributes.Length; i++)
                 {
-                    // All the attributes, including callsite attributes should 
-                    // expose IContextAttribute. If not, then we throw an 
+                    // All the attributes, including callsite attributes should
+                    // expose IContextAttribute. If not, then we throw an
                     // exception.
                     IContextAttribute attr = attributes[i] as IContextAttribute;
-                    if(null != attr) 
+                    if (null != attr)
                     {
-                        RuntimeAssembly asm = (RuntimeAssembly)attr.GetType().Assembly; 
+                        RuntimeAssembly asm = (RuntimeAssembly)attr.GetType().Assembly;
                         // Make a security check to ensure that the context attribute
                         // is from a trusted assembly!
                         CheckForInfrastructurePermission(asm);
-                    
+
                         // We ask each attribute to contribute its properties.
                         // The attributes can examine the current list of properties
                         // from the ctorCallMsg and decide which properties to add.
@@ -374,8 +387,8 @@ namespace System.Runtime.Remoting.Activation {
                     else
                     {
                         throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Activation_BadAttribute"));
+                            Environment.GetResourceString("Remoting_Activation_BadAttribute")
+                        );
                     }
                 }
             }
@@ -384,106 +397,103 @@ namespace System.Runtime.Remoting.Activation {
         // Return the default implementation of the proxy attribute
         internal static ProxyAttribute DefaultProxyAttribute
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return _proxyAttribute; }
         }
 
-        // Iterate over the custom attributes of the class and see if it 
+        // Iterate over the custom attributes of the class and see if it
         // defines a ProxyAttribute. If one is not defined then return
         // the default proxy attribute defined by us.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static ProxyAttribute GetProxyAttribute(Type serverType)
         {
-            
-            Contract.Assert(    
-                serverType.IsMarshalByRef,
-                "type should be at least marshal-by-ref");
+            Contract.Assert(serverType.IsMarshalByRef, "type should be at least marshal-by-ref");
 
             if (!serverType.HasProxyAttribute)
                 return DefaultProxyAttribute;
-                    
+
             // Type has a non-default proxy attribute ... see if we have
             // it cached?
             ProxyAttribute pa = _proxyTable[serverType] as ProxyAttribute;
 
             if (pa == null)
-            {   
-                Object[] ca = Attribute.GetCustomAttributes(
-                                            serverType, 
-                                            proxyAttributeType, 
-                                            true);
-                if((null != ca) && (0 != ca.Length))
-                {                    
+            {
+                Object[] ca = Attribute.GetCustomAttributes(serverType, proxyAttributeType, true);
+                if ((null != ca) && (0 != ca.Length))
+                {
                     if (!serverType.IsContextful)
                     {
                         throw new RemotingException(
-                                    Environment.GetResourceString(
-                                    "Remoting_Activation_MBR_ProxyAttribute"));
+                            Environment.GetResourceString("Remoting_Activation_MBR_ProxyAttribute")
+                        );
                     }
                     pa = ca[0] as ProxyAttribute;
                 }
-                Contract.Assert(pa!=null, "expect proxy attribute");
+                Contract.Assert(pa != null, "expect proxy attribute");
 
-                if(!_proxyTable.Contains(serverType))
+                if (!_proxyTable.Contains(serverType))
                 {
-                    lock(_proxyTable)
+                    lock (_proxyTable)
                     {
-                        if(!_proxyTable.Contains(serverType))
+                        if (!_proxyTable.Contains(serverType))
                         {
                             // Create a new entry
                             _proxyTable.Add(serverType, pa);
                         }
-                    }                    
+                    }
                 }
             }
 
             return pa;
         }
 
-        // Creates either an uninitialized object or a proxy depending on 
+        // Creates either an uninitialized object or a proxy depending on
         // whether the current context is OK or not.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static MarshalByRefObject CreateInstance(RuntimeType serverType)
         {
-            // Use our activation implementation               
+            // Use our activation implementation
             MarshalByRefObject retObj = null;
             ConstructorCallMessage ctorCallMsg = null;
             bool bCtxOK = IsCurrentContextOK(serverType, null, ref ctorCallMsg);
             if (bCtxOK && !serverType.IsContextful)
             {
                 // Marshal by ref case
-                Message.DebugOut("Allocating blank marshal-by-ref object"); 
+                Message.DebugOut("Allocating blank marshal-by-ref object");
                 // We create an uninitialized instance of the actual type and
                 // let the regular jit-activation execute the constructor on it.
                 retObj = RemotingServices.AllocateUninitializedObject(serverType);
             }
-            else 
+            else
             {
                 //  (context not OK) || (serverType is Contextful)
                 // We always return a proxy and the jit-activation's attempt
                 // to execute the constructor gets intercepted by the TP stub
                 // and routed to RemotingServices.Activate() below.
 
-                // if context *is* OK 
-                // this is a contextBound type being activated for which 
+                // if context *is* OK
+                // this is a contextBound type being activated for which
                 // we always create a proxy (proxies-everywhere!)
 
-                // if context *is not* OK 
-                // this could be a MarshalByRef or ContextBound type 
-                // being activated outside this appDomain 
+                // if context *is not* OK
+                // this could be a MarshalByRef or ContextBound type
+                // being activated outside this appDomain
                 // OR
-                // this could be a ContextBound type being activated cross-ctx 
+                // this could be a ContextBound type being activated cross-ctx
 
                 RemotingProxy rp;
                 // See if the object-type is configured for Connect (with a URL)
                 retObj = (MarshalByRefObject)ConnectIfNecessary(ctorCallMsg);
                 if (retObj == null)
                 {
-                    // not configured for connect, take the usual route of 
+                    // not configured for connect, take the usual route of
                     // creating a proxy
-                    Message.DebugOut("Creating remoting proxy for " + 
-                                 serverType.FullName + " in context " + 
-                                 Thread.CurrentContext);  
+                    Message.DebugOut(
+                        "Creating remoting proxy for "
+                            + serverType.FullName
+                            + " in context "
+                            + Thread.CurrentContext
+                    );
 
                     rp = new RemotingProxy(serverType);
 
@@ -493,18 +503,17 @@ namespace System.Runtime.Remoting.Activation {
                 else
                 {
                     Message.DebugOut("NewObj did a Connect!");
-                    rp = (RemotingProxy)RemotingServices.GetRealProxy(retObj);                    
-                }                    
+                    rp = (RemotingProxy)RemotingServices.GetRealProxy(retObj);
+                }
 
                 // Store the constructor call message in the proxy
                 rp.ConstructorMessage = ctorCallMsg;
 
                 if (!bCtxOK)
                 {
-
                     // Chain in the context level activator now
                     ContextLevelActivator activator = new ContextLevelActivator();
-                    activator.NextActivator = ctorCallMsg.Activator; 
+                    activator.NextActivator = ctorCallMsg.Activator;
                     ctorCallMsg.Activator = activator;
                 }
                 else
@@ -522,14 +531,16 @@ namespace System.Runtime.Remoting.Activation {
 
         //
         // NOTE: This is an internal method used by RemotingProxy to do Activation
-        // 
-        // Starts off the activation chain by sending the constructor call message to 
+        //
+        // Starts off the activation chain by sending the constructor call message to
         // the activator or the client context sink chain. On return, a constructor
         // return message is made and the out parameters are propagated.
         //
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IConstructionReturnMessage Activate(
-            RemotingProxy remProxy, IConstructionCallMessage ctorMsg)
+            RemotingProxy remProxy,
+            IConstructionCallMessage ctorMsg
+        )
         {
             IConstructionReturnMessage ctorRetMsg = null;
 
@@ -538,11 +549,14 @@ namespace System.Runtime.Remoting.Activation {
                 // The current context was approved for activation
                 Contract.Assert(
                     ctorMsg.Activator.Level == ActivatorLevel.Construction,
-                    "activator level must ActivatorLevel.Construction!");
+                    "activator level must ActivatorLevel.Construction!"
+                );
 
                 // This has to be a ContextBound type (proxies-everywhere)
-                Contract.Assert(ctorMsg.ActivationType.IsContextful, 
-                                "Inconsistent state during activation");
+                Contract.Assert(
+                    ctorMsg.ActivationType.IsContextful,
+                    "Inconsistent state during activation"
+                );
 
                 // Ask the activator in the message to take over
                 ctorRetMsg = ctorMsg.Activator.Activate(ctorMsg);
@@ -557,17 +571,19 @@ namespace System.Runtime.Remoting.Activation {
                 // Client context was not approved for activation ...
                 Contract.Assert(
                     ctorMsg.Activator.Level >= ActivatorLevel.Context,
-                    "activator level must be at least x-context!");
+                    "activator level must be at least x-context!"
+                );
 
                 // Check with ActivationServices if we did a "Connect" with
                 // a remote server during IsContextOK
                 Contract.Assert(
                     ActivationServices.CheckIfConnected(remProxy, ctorMsg) == null,
-                    "We shouldn't come through this path on a Connect.");                    
+                    "We shouldn't come through this path on a Connect."
+                );
 
                 // Client context was not approved for activation ...
                 // This is the more elaborate (real) activation case i.e.
-                // we have to go at least out of the client context to 
+                // we have to go at least out of the client context to
                 // finish the work.
 
                 // Prepare for the handoff to Activation Service
@@ -577,25 +593,26 @@ namespace System.Runtime.Remoting.Activation {
                 // the activation chain (to hijack/participate in
                 // the activation process).
                 ActivationServices.GetPropertiesFromAttributes(
-                    (IConstructionCallMessage)ctorMsg, 
-                    ctorMsg.CallSiteActivationAttributes);
+                    (IConstructionCallMessage)ctorMsg,
+                    ctorMsg.CallSiteActivationAttributes
+                );
 
                 ActivationServices.GetPropertiesFromAttributes(
-                    ctorMsg, 
-                    ((ConstructorCallMessage)ctorMsg).GetWOMAttributes());
+                    ctorMsg,
+                    ((ConstructorCallMessage)ctorMsg).GetWOMAttributes()
+                );
 
                 ActivationServices.GetPropertiesFromAttributes(
-                    (IConstructionCallMessage)ctorMsg, 
-                ((ConstructorCallMessage)ctorMsg).GetTypeAttributes());       
+                    (IConstructionCallMessage)ctorMsg,
+                    ((ConstructorCallMessage)ctorMsg).GetTypeAttributes()
+                );
 
                 // Fetch the client context chain
-                IMessageSink cliCtxChain = 
-                Thread.CurrentContext.GetClientContextChain();
+                IMessageSink cliCtxChain = Thread.CurrentContext.GetClientContextChain();
 
                 // Ask the client context chain to take over from here.
-                IMethodReturnMessage retMsg =  
-                    (IMethodReturnMessage)
-                        cliCtxChain.SyncProcessMessage(ctorMsg);
+                IMethodReturnMessage retMsg = (IMethodReturnMessage)
+                    cliCtxChain.SyncProcessMessage(ctorMsg);
 
                 // The return message may not be of type
                 // IConstructionReturnMessage if an exception happens
@@ -604,20 +621,18 @@ namespace System.Runtime.Remoting.Activation {
                 if (null == retMsg)
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Activation_Failed"));
+                        Environment.GetResourceString("Remoting_Activation_Failed")
+                    );
                 }
                 else if (retMsg.Exception != null)
                 {
                     throw retMsg.Exception;
-                }                                
+                }
             }
             // Note: PropagateOutParameters is now handled by RealProxy
             // CallContext from retMsg should be already set by RealProxy
-            Contract.Assert(
-                null != ctorRetMsg, 
-                "Activate returning null ConstructorReturnMessage");
-                
+            Contract.Assert(null != ctorRetMsg, "Activate returning null ConstructorReturnMessage");
+
             return ctorRetMsg;
         }
 
@@ -627,38 +642,36 @@ namespace System.Runtime.Remoting.Activation {
         // It is also called to do satisfy remote incoming requests from
         // the activation services. These could be for both ContextBound
         // and MarshalByRef types.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IConstructionReturnMessage DoCrossContextActivation(
-            IConstructionCallMessage reqMsg)
-        {           
+            IConstructionCallMessage reqMsg
+        )
+        {
             bool bCtxBound = reqMsg.ActivationType.IsContextful;
             Context serverContext = null;
-            
+
             if (bCtxBound)
             {
-                // If the type is context bound, we need to create 
+                // If the type is context bound, we need to create
                 // the appropriate context and activate the object inside
                 // it.
                 // <
 
                 // Create a new Context
-                serverContext = new Context();              
+                serverContext = new Context();
 
                 // <
 
-
-
-                
-                ArrayList list = (ArrayList) reqMsg.ContextProperties;
+                ArrayList list = (ArrayList)reqMsg.ContextProperties;
                 RuntimeAssembly asm = null;
-                for (int i=0; i<list.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     IContextProperty prop = list[i] as IContextProperty;
                     if (null == prop)
                     {
                         throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Activation_BadAttribute"));
+                            Environment.GetResourceString("Remoting_Activation_BadAttribute")
+                        );
                     }
                     asm = (RuntimeAssembly)prop.GetType().Assembly;
                     // Make a security check to ensure that the context property
@@ -679,30 +692,30 @@ namespace System.Runtime.Remoting.Activation {
                 // (This seems like an overkill but that is how it is spec-ed)
                 // Ask each of the properties in the context we formed from
                 // if it is happy with the current context.
-                for (int i=0; i<list.Count;i++)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if (!((IContextProperty)list[i]).IsNewContextOK(
-                        serverContext))
+                    if (!((IContextProperty)list[i]).IsNewContextOK(serverContext))
                     {
                         throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Activation_PropertyUnhappy"));
+                            Environment.GetResourceString("Remoting_Activation_PropertyUnhappy")
+                        );
                     }
                 }
             }
 
+            IConstructionReturnMessage replyMsg;
 
-            IConstructionReturnMessage  replyMsg;
-
-            InternalCrossContextDelegate xctxDel = 
-                new InternalCrossContextDelegate(DoCrossContextActivationCallback);
+            InternalCrossContextDelegate xctxDel = new InternalCrossContextDelegate(
+                DoCrossContextActivationCallback
+            );
 
             Object[] args = new Object[] { reqMsg };
-            
+
             if (bCtxBound)
             {
-                replyMsg = Thread.CurrentThread.InternalCrossContextCallback(
-                    serverContext, xctxDel, args) as IConstructionReturnMessage;
+                replyMsg =
+                    Thread.CurrentThread.InternalCrossContextCallback(serverContext, xctxDel, args)
+                    as IConstructionReturnMessage;
             }
             else
             {
@@ -712,17 +725,17 @@ namespace System.Runtime.Remoting.Activation {
             return replyMsg;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object DoCrossContextActivationCallback(Object[] args)
         {
-            IConstructionCallMessage    reqMsg   = (IConstructionCallMessage) args[0]; 
-            IConstructionReturnMessage  replyMsg = null;
-                
+            IConstructionCallMessage reqMsg = (IConstructionCallMessage)args[0];
+            IConstructionReturnMessage replyMsg = null;
+
             // call the first sink in the server context chain
             // <
-            IMethodReturnMessage retMsg =  (IMethodReturnMessage) 
-                    Thread.CurrentContext.GetServerContextChain().SyncProcessMessage(reqMsg);
-        
+            IMethodReturnMessage retMsg = (IMethodReturnMessage)
+                Thread.CurrentContext.GetServerContextChain().SyncProcessMessage(reqMsg);
+
             // The return message may not be of type
             // IConstructionReturnMessage if an exception happens
             // in the sink chains.
@@ -737,77 +750,74 @@ namespace System.Runtime.Remoting.Activation {
                 else
                 {
                     e = new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Activation_Failed"));
-        
+                        Environment.GetResourceString("Remoting_Activation_Failed")
+                    );
                 }
-                replyMsg = new ConstructorReturnMessage(e,null); 
+                replyMsg = new ConstructorReturnMessage(e, null);
                 // We have created our own message ... transfer the callcontext
                 // from the request message.
                 ((ConstructorReturnMessage)replyMsg).SetLogicalCallContext(
-                        (LogicalCallContext)
-                        reqMsg.Properties[Message.CallContextKey]);
+                    (LogicalCallContext)reqMsg.Properties[Message.CallContextKey]
+                );
             }
 
             return replyMsg;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IConstructionReturnMessage DoServerContextActivation(
-            IConstructionCallMessage reqMsg)
+            IConstructionCallMessage reqMsg
+        )
         {
-            Contract.Assert(reqMsg!=null, "NULL ctorReqMsg");
-            Exception e=null;
+            Contract.Assert(reqMsg != null, "NULL ctorReqMsg");
+            Exception e = null;
             Type serverType = reqMsg.ActivationType;
-            Object serverObj = ActivateWithMessage(
-                                    serverType, 
-                                    reqMsg, 
-                                    null,
-                                    out e);
+            Object serverObj = ActivateWithMessage(serverType, reqMsg, null, out e);
 
-            IConstructionReturnMessage replyMsg = 
-                SetupConstructionReply(serverObj, reqMsg, e);
+            IConstructionReturnMessage replyMsg = SetupConstructionReply(serverObj, reqMsg, e);
 
-            Contract.Assert(replyMsg!=null, "NULL ctorRetMsg");
+            Contract.Assert(replyMsg != null, "NULL ctorRetMsg");
             return replyMsg;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IConstructionReturnMessage SetupConstructionReply(
             Object serverObj,
             IConstructionCallMessage ctorMsg,
-            Exception e)
+            Exception e
+        )
         {
             IConstructionReturnMessage replyMsg = null;
             if (e == null)
             {
-                replyMsg =
-                    new ConstructorReturnMessage(
-                        (MarshalByRefObject)serverObj,
-                        null,   // <
-                                // if ctor-s with ref/out are supported</
-                        0,
-                        (LogicalCallContext)
-                            ctorMsg.Properties[Message.CallContextKey],
-                        ctorMsg);
+                replyMsg = new ConstructorReturnMessage(
+                    (MarshalByRefObject)serverObj,
+                    null, // <
+                    // if ctor-s with ref/out are supported</
+                    0,
+                    (LogicalCallContext)ctorMsg.Properties[Message.CallContextKey],
+                    ctorMsg
+                );
             }
             else
             {
-                replyMsg = new ConstructorReturnMessage(e,null);
+                replyMsg = new ConstructorReturnMessage(e, null);
                 // We have created our own message ... transfer the callcontext
                 // from the request message.
                 ((ConstructorReturnMessage)replyMsg).SetLogicalCallContext(
-                        (LogicalCallContext)
-                            ctorMsg.Properties[Message.CallContextKey]);
-
+                    (LogicalCallContext)ctorMsg.Properties[Message.CallContextKey]
+                );
             }
             return replyMsg;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object ActivateWithMessage(
-            Type serverType, IMessage msg, ServerIdentity srvIdToBind,
-            out Exception e)
+            Type serverType,
+            IMessage msg,
+            ServerIdentity srvIdToBind,
+            out Exception e
+        )
         {
             Object server = null;
             e = null;
@@ -834,12 +844,14 @@ namespace System.Runtime.Remoting.Activation {
                 // This associates the proxy with the real object and sets
                 // up the proxy's native context, ID etc.
                 proxyForObject = RemotingServices.Wrap(
-                                        (ContextBoundObject)server,
-                                        proxyForObject, 
-                                        false);
+                    (ContextBoundObject)server,
+                    proxyForObject,
+                    false
+                );
                 Contract.Assert(
                     RemotingServices.IsTransparentProxy(proxyForObject),
-                    "Wrapped object should be a transparent proxy");
+                    "Wrapped object should be a transparent proxy"
+                );
             }
             else
             {
@@ -848,19 +860,18 @@ namespace System.Runtime.Remoting.Activation {
                 if (Thread.CurrentContext != Context.DefaultContext)
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Activation_Failed"));
+                        Environment.GetResourceString("Remoting_Activation_Failed")
+                    );
                 }
                 // Marshal-by-ref case we just return the object
-                proxyForObject = server;                                
+                proxyForObject = server;
             }
 
             // Create the dispatcher which will help run the CTOR
             IMessageSink dispatcher = (IMessageSink)new StackBuilderSink(proxyForObject);
 
             // This call runs the CTOR on the object
-            IMethodReturnMessage retMsg = (IMethodReturnMessage) 
-                                        dispatcher.SyncProcessMessage(msg);
+            IMethodReturnMessage retMsg = (IMethodReturnMessage)dispatcher.SyncProcessMessage(msg);
 
             if (retMsg.Exception == null)
             {
@@ -881,7 +892,7 @@ namespace System.Runtime.Remoting.Activation {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void StartListeningForRemoteRequests()
         {
             // Get the activation services set up.
@@ -903,10 +914,11 @@ namespace System.Runtime.Remoting.Activation {
                         // calls. We have to create the objref because that is when
                         // the channels start listening for requests.
                         RemotingServices.MarshalInternal(
-                            Thread.GetDomain().RemotingData.ActivationListener, 
+                            Thread.GetDomain().RemotingData.ActivationListener,
                             ActivationServiceURI,
-                            typeof(System.Runtime.Remoting.Activation.IActivator)); 
-                            
+                            typeof(System.Runtime.Remoting.Activation.IActivator)
+                        );
+
                         ServerIdentity srvID = (ServerIdentity)
                             IdentityHolder.ResolveIdentity(ActivationServiceURI);
 
@@ -927,7 +939,7 @@ namespace System.Runtime.Remoting.Activation {
         }
 
         // This returns the local activator
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IActivator GetActivator()
         {
             DomainSpecificRemotingData remData = Thread.GetDomain().RemotingData;
@@ -938,7 +950,7 @@ namespace System.Runtime.Remoting.Activation {
             return (IActivator)remData.LocalActivator;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void Initialize()
         {
             GetActivator();
@@ -946,7 +958,7 @@ namespace System.Runtime.Remoting.Activation {
 
         // This returns the attribute that takes part in every activation
         // The local activator itself exposes that functionality
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static ContextAttribute GetGlobalAttribute()
         {
             DomainSpecificRemotingData remData = Thread.GetDomain().RemotingData;
@@ -956,7 +968,7 @@ namespace System.Runtime.Remoting.Activation {
             }
             return (ContextAttribute)remData.LocalActivator;
         }
-            
+
         // This function returns the array of custom attributes of
         // type "ContextAttribute" walking the entire class hierarchy
         // of the serverType
@@ -966,8 +978,9 @@ namespace System.Runtime.Remoting.Activation {
         [System.Security.SecurityCritical]
         internal static IContextAttribute[] GetContextAttributesForType(Type serverType)
         {
-            if (!(typeof(ContextBoundObject).IsAssignableFrom(serverType)) ||
-                serverType.IsCOMObject)
+            if (
+                !(typeof(ContextBoundObject).IsAssignableFrom(serverType)) || serverType.IsCOMObject
+            )
             {
                 return new ContextAttribute[0];
             }
@@ -977,19 +990,16 @@ namespace System.Runtime.Remoting.Activation {
             int retSize = 8;
             IContextAttribute[] retAttr = new IContextAttribute[retSize];
             int numAttr = 0;
-    
-    
-            // Obtain the custom attributes that implement 
+
+            // Obtain the custom attributes that implement
             // IContextAttribute for this type
-            currAttr = currType.GetCustomAttributes(
-                                    typeof(IContextAttribute),
-                                    true);  // recursively on the typeHierarchy
-            Boolean bDupe;                             
+            currAttr = currType.GetCustomAttributes(typeof(IContextAttribute), true); // recursively on the typeHierarchy
+            Boolean bDupe;
             foreach (IContextAttribute attr in currAttr)
             {
                 Type attrType = attr.GetType();
                 bDupe = false;
-                for (int i=0; i<numAttr; i++)
+                for (int i = 0; i < numAttr; i++)
                 {
                     if (attrType.Equals(retAttr[i].GetType()))
                     {
@@ -999,89 +1009,89 @@ namespace System.Runtime.Remoting.Activation {
                 }
 
                 if (!bDupe)
-                { 
+                {
                     // We must add this attribute to our list
                     numAttr++;
-                     
+
                     // Check if we have enough space to store it
                     // Leaving one spot for a NULL value!
-                    if (numAttr > retSize-1)
+                    if (numAttr > retSize - 1)
                     {
-                        IContextAttribute[] newAttr = new IContextAttribute[2*retSize];
+                        IContextAttribute[] newAttr = new IContextAttribute[2 * retSize];
                         Array.Copy(
-                            retAttr,     // srcArray
-                            0,          // srcIndex
-                            newAttr,    // destArray
-                            0,          // destIndex
-                            retSize);   // lengthToCopy
+                            retAttr, // srcArray
+                            0, // srcIndex
+                            newAttr, // destArray
+                            0, // destIndex
+                            retSize
+                        ); // lengthToCopy
                         retAttr = newAttr;
-                        retSize = retSize*2;
+                        retSize = retSize * 2;
                     }
-                    retAttr[numAttr-1] = attr;
+                    retAttr[numAttr - 1] = attr;
                 }
             }
-           
+
             IContextAttribute[] ctxAttr = new IContextAttribute[numAttr];
             Array.Copy(retAttr, ctxAttr, numAttr);
             return ctxAttr;
-        }  
-                              
+        }
+
         // This is called during RS.IsContextOK to check if the new XXX() is configured
         // to do a direct connect, and if it is we Connect to the URL and return
         // the proxy. In the second stage, when the constructor executes on the proxy
         // we will make sure (in Activate) that there are no CTOR args.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object ConnectIfNecessary(IConstructionCallMessage ctorMsg)
         {
             // If the type being instantiated is configured for Connect
-            // we would have added its URL as the connect key during 
+            // we would have added its URL as the connect key during
             // LocalActivator::IsContextOK
 
             // Look for the connect URL
-            String objURL = (String) ctorMsg.Properties[ConnectKey];
+            String objURL = (String)ctorMsg.Properties[ConnectKey];
             Object proxy = null;
             if (objURL != null)
-            {   
+            {
                 // Connect to the URL and return the proxy
-                proxy = RemotingServices.Connect(
-                                        ctorMsg.ActivationType,
-                                        objURL);
+                proxy = RemotingServices.Connect(ctorMsg.ActivationType, objURL);
             }
 
             // If the type is not setup for connecting we return null!
-            return proxy;                                            
-        }                                        
+            return proxy;
+        }
 
-        // This is really used to distinguish between proxies for completely 
+        // This is really used to distinguish between proxies for completely
         // within AppDomain activations and the ones from "Connect" during
         // the second stage (RS::Activate)
         // For the former, we have to run constructor etc and for the latter
         // we have to check that there is no non-defaul CTOR.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object CheckIfConnected(
-            RemotingProxy proxy, IConstructionCallMessage ctorMsg)
+            RemotingProxy proxy,
+            IConstructionCallMessage ctorMsg
+        )
         {
             // If we performed a connect, we must have put the URL as
             // the connectKey in the message.
-            String objURL = (String)
-                            ctorMsg.Properties[ConnectKey];
+            String objURL = (String)ctorMsg.Properties[ConnectKey];
             Object tp = null;
 
             if (objURL != null)
-            {   
-                // We did perform a connect during IsContextOK 
+            {
+                // We did perform a connect during IsContextOK
                 // Just get the TP from RP and return it.
                 tp = (Object)proxy.GetTransparentProxy();
-            } 
+            }
             // We return null if we do not recognize this proxy!
-            return tp;                                            
+            return tp;
         }
-        
+
         internal static void PushActivationAttributes(Type serverType, Object[] attributes)
         {
             // There is one such object per thread
             if (_attributeStack == null)
-            {            
+            {
                 _attributeStack = new ActivationAttributeStack();
             }
             _attributeStack.Push(serverType, attributes);
@@ -1092,43 +1102,37 @@ namespace System.Runtime.Remoting.Activation {
             // We can get a peek w/o a prior Push (eg. activation starting
             // with NewObj)
             if (_attributeStack == null)
-            {            
+            {
                 return null;
             }
             return _attributeStack.Peek(serverType);
         }
-        
+
         internal static void PopActivationAttributes(Type serverType)
         {
             Contract.Assert(_attributeStack != null, "Pop w/o a prior Set()?");
             _attributeStack.Pop(serverType);
-        }        
-    } // class ActivationServices    
+        }
+    } // class ActivationServices
 
-
-    // This is the local activation helper and also the Attribute 
+    // This is the local activation helper and also the Attribute
     // that gets queried about every activation
-    [System.Security.SecurityCritical]  // auto-generated
-    internal class LocalActivator: ContextAttribute, IActivator
+    [System.Security.SecurityCritical] // auto-generated
+    internal class LocalActivator : ContextAttribute, IActivator
     {
         internal LocalActivator()
-            : base(ActivationServices.ActivationServiceURI)
-        {
-        
-        }
+            : base(ActivationServices.ActivationServiceURI) { }
 
-        // ---------------------------------------------------------------        
+        // ---------------------------------------------------------------
         // ContextAttribute functionality
-        // ---------------------------------------------------------------        
+        // ---------------------------------------------------------------
 
         // IContextAttribute::IsContextOK
-        // This will check if a type is configured for remote activation ... 
+        // This will check if a type is configured for remote activation ...
         // We return 'false' for IsContextOK if it is.
         [System.Security.SecurityCritical]
-        public override bool IsContextOK(
-            Context ctx, IConstructionCallMessage ctorMsg)
+        public override bool IsContextOK(Context ctx, IConstructionCallMessage ctorMsg)
         {
-
             // If the app is not using config mechanism, we don't want
             // to intercept activation.
             if (RemotingConfigHandler.Info == null)
@@ -1136,27 +1140,31 @@ namespace System.Runtime.Remoting.Activation {
                 return true;
             }
 
-            // check if this type is configured for connect 
+            // check if this type is configured for connect
             // (instead of remote activate)
             RuntimeType activationType = ctorMsg.ActivationType as RuntimeType;
             if (activationType == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeType"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeType")
+                );
 
-            WellKnownClientTypeEntry wkte = 
-                RemotingConfigHandler.IsWellKnownClientType(activationType);
+            WellKnownClientTypeEntry wkte = RemotingConfigHandler.IsWellKnownClientType(
+                activationType
+            );
             String typeURL = (wkte == null ? null : wkte.ObjectUrl);
 
             if (typeURL != null)
             {
-                // this type does have a direct uri, we will try to connect 
+                // this type does have a direct uri, we will try to connect
                 // to it during the activate call. Cache it in the message.
                 ctorMsg.Properties[ActivationServices.ConnectKey] = typeURL;
                 return false;
             }
             else
             {
-                ActivatedClientTypeEntry acte = 
-                    RemotingConfigHandler.IsRemotelyActivatedClientType(activationType);
+                ActivatedClientTypeEntry acte = RemotingConfigHandler.IsRemotelyActivatedClientType(
+                    activationType
+                );
 
                 String appURL = null;
 
@@ -1165,19 +1173,19 @@ namespace System.Runtime.Remoting.Activation {
                     // This is the case where the config file had no entry for this type.
                     // We should check the callsite attributes for a URL
                     Object[] callsiteAttributes = ctorMsg.CallSiteActivationAttributes;
-                    if(null != callsiteAttributes)
+                    if (null != callsiteAttributes)
                     {
-                        for(int i = 0; i < callsiteAttributes.Length; i++)
+                        for (int i = 0; i < callsiteAttributes.Length; i++)
                         {
                             UrlAttribute attr = callsiteAttributes[i] as UrlAttribute;
-                            if(null != attr)
+                            if (null != attr)
                             {
-                                appURL = attr.UrlValue; 
+                                appURL = attr.UrlValue;
                             }
                         }
                     }
-                        
-                    if(appURL == null)
+
+                    if (appURL == null)
                     {
                         // We don't really care about intercepting the activation in this case.
                         return true;
@@ -1188,44 +1196,43 @@ namespace System.Runtime.Remoting.Activation {
                     appURL = acte.ApplicationUrl;
                 }
 
-                // Generate the URL of the remote activator                    
+                // Generate the URL of the remote activator
                 String activatorURL = null;
                 if (!appURL.EndsWith("/", StringComparison.Ordinal))
                     activatorURL = appURL + "/" + ActivationServices.ActivationServiceURI;
                 else
                     activatorURL = appURL + ActivationServices.ActivationServiceURI;
-                            
-                // Mark a flag for remote activation 
+
+                // Mark a flag for remote activation
                 // (caching the url of the activation svc of the remote server)
                 ctorMsg.Properties[ActivationServices.RemoteActivateKey] = activatorURL;
                 return false;
             }
         }
-                
+
         // IContextAttribute::GetPropertiesForNewContext
         [System.Security.SecurityCritical]
-        public override void GetPropertiesForNewContext(
-            IConstructionCallMessage ctorMsg)
-        {            
+        public override void GetPropertiesForNewContext(IConstructionCallMessage ctorMsg)
+        {
             BCLDebug.Log("ActivationSvc:GlobalAttrib::GetPropForNewCtx");
             // This is called during RS::Activate .. when we are sure that
             // activation is at least x-context and this is a real activation
             // instead of a spoofed connect underneath the "new".
-            Contract.Assert(ctorMsg!=null, "ctorMsg null?");
+            Contract.Assert(ctorMsg != null, "ctorMsg null?");
             if (ctorMsg.Properties.Contains(ActivationServices.RemoteActivateKey))
             {
                 // Means we did want to intercept activation!
                 String remActivatorURL = (String)
                     ctorMsg.Properties[ActivationServices.RemoteActivateKey];
-                
-                AppDomainLevelActivator activator = 
-                    new AppDomainLevelActivator(remActivatorURL);
+
+                AppDomainLevelActivator activator = new AppDomainLevelActivator(remActivatorURL);
                 // Chain ourselves at the end of the AppDomainLevel activators
                 Contract.Assert(
-                        ctorMsg.Activator != null, 
-                        "Should have at least x-context activator");
+                    ctorMsg.Activator != null,
+                    "Should have at least x-context activator"
+                );
                 IActivator curr = ctorMsg.Activator;
-                
+
                 if (curr.Level < ActivatorLevel.AppDomain)
                 {
                     // Common case .. .only x-context activator(s) in chain
@@ -1233,9 +1240,9 @@ namespace System.Runtime.Remoting.Activation {
                     ctorMsg.Activator = activator;
                 }
                 else if (curr.NextActivator == null)
-                {  
+                {
                     // Only one activator but not ContextLevel ...
-                    // We go at the end of the chain 
+                    // We go at the end of the chain
                     curr.NextActivator = activator;
                 }
                 else
@@ -1243,23 +1250,24 @@ namespace System.Runtime.Remoting.Activation {
                     // We will have to walk the chain till the end of the last
                     // AD activator and plug ourselves in.
                     while (curr.NextActivator.Level >= ActivatorLevel.AppDomain)
-                    {                        
+                    {
                         curr = curr.NextActivator;
                     }
                     Contract.Assert(
                         curr.NextActivator.Level.Equals(ActivatorLevel.Context),
-                        "bad ordering of activators!");
+                        "bad ordering of activators!"
+                    );
                     activator.NextActivator = curr.NextActivator;
                     curr.NextActivator = activator;
-                }                                
+                }
             }
-        }                     
+        }
 
-        // ---------------------------------------------------------------        
+        // ---------------------------------------------------------------
         // IActivator functionality
-        // ---------------------------------------------------------------        
+        // ---------------------------------------------------------------
         //IActivator::NextActivator
-        public virtual IActivator NextActivator 
+        public virtual IActivator NextActivator
         {
             // We are a singleton internal infrastructure object.
             [System.Security.SecurityCritical]
@@ -1275,33 +1283,34 @@ namespace System.Runtime.Remoting.Activation {
             [System.Security.SecurityCritical]
             get { return ActivatorLevel.AppDomain; }
         }
-                
+
         private static MethodBase GetMethodBase(IConstructionCallMessage msg)
         {
             MethodBase mb = msg.MethodBase;
-            if(null == mb)      
+            if (null == mb)
             {
                 BCLDebug.Trace("REMOTE", "Method missing w/name ", msg.MethodName);
-                    throw new RemotingException(
-                        String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Message_MethodMissing"),
-                            msg.MethodName,
-                            msg.TypeName));
+                throw new RemotingException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Message_MethodMissing"),
+                        msg.MethodName,
+                        msg.TypeName
+                    )
+                );
             }
-                    
+
             return mb;
         }
 
         //IActivator::Activate
         [System.Security.SecurityCritical]
         [System.Runtime.InteropServices.ComVisible(true)]
-        public virtual IConstructionReturnMessage Activate(
-            IConstructionCallMessage ctorMsg)
+        public virtual IConstructionReturnMessage Activate(IConstructionCallMessage ctorMsg)
         {
             // This is where the activation service hooks in to activation
             // requests. We get called as the activation message is recognized
-            // by the ClientContextTerminatorSink & routed to us. 
+            // by the ClientContextTerminatorSink & routed to us.
             //
             // NOTE: This gets called for both purely within appDomain activation
             // and 'real' remote activation scenarios as the request goes out of
@@ -1315,23 +1324,23 @@ namespace System.Runtime.Remoting.Activation {
                 throw new ArgumentNullException("ctorMsg");
             }
             Contract.EndContractBlock();
-            
-            // Check if we have marked this activation to go remote 
+
+            // Check if we have marked this activation to go remote
             if (ctorMsg.Properties.Contains(ActivationServices.RemoteActivateKey))
             {
                 //DBG Console.WriteLine("Attempting remote activation!");
-                                
+
                 return DoRemoteActivation(ctorMsg);
             }
             else
-            {                
+            {
                 // We must be in either a pure cross context activation or
                 // a remote incoming activation request (in which case we
                 // already checked the permission to create an instance of
                 // this type).
                 if (ctorMsg.Properties.Contains(ActivationServices.PermissionKey))
-                { 
-                    Type activationType = ctorMsg.ActivationType;                    
+                {
+                    Type activationType = ctorMsg.ActivationType;
 
                     // We are on the server end of a real remote activation
                     // Create a local attribute that contributes the context
@@ -1339,23 +1348,22 @@ namespace System.Runtime.Remoting.Activation {
                     Object[] attr = null;
                     if (activationType.IsContextful)
                     {
-                    IList cp = ctorMsg.ContextProperties;
-                    if (cp != null && cp.Count > 0)
-                    {
-                        RemotePropertyHolderAttribute rph = new RemotePropertyHolderAttribute(cp);
-                        attr = new Object[1];
-                        attr[0] = rph;
+                        IList cp = ctorMsg.ContextProperties;
+                        if (cp != null && cp.Count > 0)
+                        {
+                            RemotePropertyHolderAttribute rph = new RemotePropertyHolderAttribute(
+                                cp
+                            );
+                            attr = new Object[1];
+                            attr[0] = rph;
+                        }
                     }
-                    }
-                    MethodBase mb = GetMethodBase(ctorMsg); 
-                    RemotingMethodCachedData methodCache = 
-                                            InternalRemotingServices.GetReflectionCachedData(mb);
+                    MethodBase mb = GetMethodBase(ctorMsg);
+                    RemotingMethodCachedData methodCache =
+                        InternalRemotingServices.GetReflectionCachedData(mb);
                     Object[] args = Message.CoerceArgs(ctorMsg, methodCache.Parameters);
-                    
-                    Object server = Activator.CreateInstance(
-                        activationType, 
-                        args,
-                        attr);
+
+                    Object server = Activator.CreateInstance(activationType, args, attr);
 
                     // check to see if we need to do redirection
                     if (RemotingServices.IsClientProxy(server))
@@ -1365,104 +1373,100 @@ namespace System.Runtime.Remoting.Activation {
 
                         // The redirection proxy masquerades as an object of the appropriate
                         // type, and forwards incoming messages to the actual proxy.
-                        RedirectionProxy redirectedProxy = 
-                            new RedirectionProxy((MarshalByRefObject)server, activationType);
+                        RedirectionProxy redirectedProxy = new RedirectionProxy(
+                            (MarshalByRefObject)server,
+                            activationType
+                        );
                         RemotingServices.MarshalInternal(redirectedProxy, null, activationType);
 
                         server = redirectedProxy;
-                    }                        
-                     
-                    return ActivationServices.SetupConstructionReply(
-                        server, ctorMsg, null);
+                    }
+
+                    return ActivationServices.SetupConstructionReply(server, ctorMsg, null);
                 }
                 else
                 {
                     BCLDebug.Log("Attempting X-Context activation!");
-                    // delegate to the Activator in the message 
+                    // delegate to the Activator in the message
                     return ctorMsg.Activator.Activate(ctorMsg);
                 }
             }
         }
 
-
         // This is called by the local activator during an outgoing activation
         // request.
         internal static IConstructionReturnMessage DoRemoteActivation(
-            IConstructionCallMessage ctorMsg)
+            IConstructionCallMessage ctorMsg
+        )
         {
             Contract.Assert(ctorMsg != null, "Null ctorMsg");
 
             // <
 
-
-
-
             // <
 
-
-            
             BCLDebug.Log("Attempting Connection to remote activation service");
             IActivator remActivator = null;
             String remActivatorURL = (String)
                 ctorMsg.Properties[ActivationServices.RemoteActivateKey];
-            try 
+            try
             {
-                remActivator = (IActivator) 
+                remActivator = (IActivator)
                     RemotingServices.Connect(
                         typeof(System.Runtime.Remoting.Activation.IActivator),
-                        remActivatorURL);
-                                    
+                        remActivatorURL
+                    );
             }
             catch (Exception e)
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString(
-                            "Remoting_Activation_ConnectFailed"),
-                        e));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Activation_ConnectFailed"),
+                        e
+                    )
+                );
             }
             // Remove the remote activate key as its purpose is served.
             ctorMsg.Properties.Remove(ActivationServices.RemoteActivateKey);
 
             // Delegate the work to the remote activator
-            return remActivator.Activate(ctorMsg);                        
+            return remActivator.Activate(ctorMsg);
         }
-        
-    }// class LocalActivator
+    } // class LocalActivator
 
     // This is the object that listens to activation requests
-    internal class ActivationListener:MarshalByRefObject, IActivator
+    internal class ActivationListener : MarshalByRefObject, IActivator
     {
         // Override lifetime services to make this object live forever...
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public override Object InitializeLifetimeService()
         {
-           return null;
+            return null;
         }
 
         //IActivator::NextActivator
-        public virtual IActivator NextActivator 
+        public virtual IActivator NextActivator
         {
             // We are a singleton internal infrastructure object.
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return null; }
             // Don't allow a set either.
-            [System.Security.SecurityCritical]  // auto-generated
-            set { throw new InvalidOperationException();}
+            [System.Security.SecurityCritical] // auto-generated
+            set { throw new InvalidOperationException(); }
         }
 
         //IActivator::ActivatorLevel
         public virtual ActivatorLevel Level
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return ActivatorLevel.AppDomain;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return ActivatorLevel.AppDomain; }
         }
-    
+
         //IActivator::Activate
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
-        public virtual IConstructionReturnMessage Activate(
-            IConstructionCallMessage ctorMsg)
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public virtual IConstructionReturnMessage Activate(IConstructionCallMessage ctorMsg)
         {
             BCLDebug.Log("ActivationListener: received new activation request!");
             if (ctorMsg == null || RemotingServices.IsTransparentProxy(ctorMsg))
@@ -1470,7 +1474,7 @@ namespace System.Runtime.Remoting.Activation {
                 throw new ArgumentNullException("ctorMsg");
             }
             Contract.EndContractBlock();
-            
+
             // Add the permission key which distinguishes pure-cross context activation from
             // a remote request (both of which go through DoCrossContextActivation)
             ctorMsg.Properties[ActivationServices.PermissionKey] = "allowed";
@@ -1481,9 +1485,11 @@ namespace System.Runtime.Remoting.Activation {
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString(
-                            "Remoting_Activation_PermissionDenied"),
-                        ctorMsg.ActivationTypeName));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Activation_PermissionDenied"),
+                        ctorMsg.ActivationTypeName
+                    )
+                );
             }
 
             Type activationType = ctorMsg.ActivationType;
@@ -1491,68 +1497,68 @@ namespace System.Runtime.Remoting.Activation {
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_BadType"),
-                        ctorMsg.ActivationTypeName));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_BadType"),
+                        ctorMsg.ActivationTypeName
+                    )
+                );
             }
-            
+
             // Delegate to the local activator for further work
             return ActivationServices.GetActivator().Activate(ctorMsg);
-        }        
-
-        
-    }   // class ActivationListener
-
+        }
+    } // class ActivationListener
 
     // This is a lightweight object to help with the activation
-    // at the appDomain level ... it delegates its work to 
-    // ActivationServices.LocalActivator ... which is a heavy 
+    // at the appDomain level ... it delegates its work to
+    // ActivationServices.LocalActivator ... which is a heavy
     // object we can't afford to carry around in the ActivatorChain
     // (since it may get Serialized/Deserialized)
- [Serializable]
+    [Serializable]
     // attribute .. the latter shall be turned on during Beta-2!</
     internal class AppDomainLevelActivator : IActivator
     {
-        IActivator m_NextActivator;        
+        IActivator m_NextActivator;
 
         // Do we need this?
         String m_RemActivatorURL;
-        
+
         internal AppDomainLevelActivator(String remActivatorURL)
         {
-            Contract.Assert(remActivatorURL!=null,"Bad activator URL");
+            Contract.Assert(remActivatorURL != null, "Bad activator URL");
             m_RemActivatorURL = remActivatorURL;
         }
 
-        internal AppDomainLevelActivator(SerializationInfo info, StreamingContext context) {
-            if (info==null)
+        internal AppDomainLevelActivator(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
             {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
-            m_NextActivator = (IActivator) info.GetValue("m_NextActivator",typeof(IActivator));
+            m_NextActivator = (IActivator)info.GetValue("m_NextActivator", typeof(IActivator));
         }
 
         //IActivator::NextActivator
-        public virtual IActivator NextActivator 
-        {            
-            [System.Security.SecurityCritical]  // auto-generated
+        public virtual IActivator NextActivator
+        {
+            [System.Security.SecurityCritical] // auto-generated
             get { return m_NextActivator; }
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             set { m_NextActivator = value; }
         }
 
         //IActivator::ActivatorLevel
         public virtual ActivatorLevel Level
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return ActivatorLevel.AppDomain; }
         }
 
         //IActivator::Activate
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
-        public virtual IConstructionReturnMessage Activate(
-            IConstructionCallMessage ctorMsg)
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public virtual IConstructionReturnMessage Activate(IConstructionCallMessage ctorMsg)
         {
             // This function will get invoked when the ClientContextTerminator sink
             // notices that an activation request message is passed to it ... it
@@ -1561,102 +1567,97 @@ namespace System.Runtime.Remoting.Activation {
 
             // remove ourselves from the Activator chain
             ctorMsg.Activator = m_NextActivator;
-            return ActivationServices.GetActivator().Activate(ctorMsg);            
+            return ActivationServices.GetActivator().Activate(ctorMsg);
         }
     }
 
     // This is a lightweight object to help with the activation
-    // at the context level ...     
+    // at the context level ...
     [Serializable]
     internal class ContextLevelActivator : IActivator
-    {                
+    {
         IActivator m_NextActivator;
+
         internal ContextLevelActivator()
         {
             m_NextActivator = null;
         }
-        
-        internal ContextLevelActivator(SerializationInfo info, StreamingContext context) 
+
+        internal ContextLevelActivator(SerializationInfo info, StreamingContext context)
         {
-            if (info==null)
+            if (info == null)
             {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
-            m_NextActivator = (IActivator) info.GetValue("m_NextActivator",typeof(IActivator));
+            m_NextActivator = (IActivator)info.GetValue("m_NextActivator", typeof(IActivator));
         }
 
         //IActivator::NextActivator
-        public virtual IActivator NextActivator 
-        {            
-            [System.Security.SecurityCritical]  // auto-generated
+        public virtual IActivator NextActivator
+        {
+            [System.Security.SecurityCritical] // auto-generated
             get { return m_NextActivator; }
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             set { m_NextActivator = value; }
         }
 
         //IActivator::ActivatorLevel
         public virtual ActivatorLevel Level
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return ActivatorLevel.Context; }
         }
 
         //IActivator::Activate
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
-        public virtual IConstructionReturnMessage Activate(
-            IConstructionCallMessage ctorMsg)
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public virtual IConstructionReturnMessage Activate(IConstructionCallMessage ctorMsg)
         {
             // remove ourselves from the Activator chain
             ctorMsg.Activator = ctorMsg.Activator.NextActivator;
-            
+
             // Delegate to remoting services to do the hard work.
             // This will create a context, enter it, run through
             // the context sink chain & then delegate to the nex
-            // activator inside the ctorMsg (quite likely to be 
+            // activator inside the ctorMsg (quite likely to be
             // the default ConstructionLevelActivator)
             return ActivationServices.DoCrossContextActivation(ctorMsg);
-        }        
+        }
     }
 
     // This is a lightweight object to help with the activation
-    // at the appDomain level ... it delegates its work to 
-    // ActivationServices.LocalActivator ... which is a heavy 
+    // at the appDomain level ... it delegates its work to
+    // ActivationServices.LocalActivator ... which is a heavy
     // object we can't afford to carry around in the ActivatorChain
     // (since it may get Serialized/Deserialized)
     [Serializable]
     internal class ConstructionLevelActivator : IActivator
-    {                
-        internal ConstructionLevelActivator()
-        {
-        
-        }
-
+    {
+        internal ConstructionLevelActivator() { }
 
         //IActivator::NextActivator
-        public virtual IActivator NextActivator 
-        {            
+        public virtual IActivator NextActivator
+        {
             // The construction level activator is a terminating activator
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return null; }
             // Throw if someone attempts a set
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             set { throw new InvalidOperationException(); }
         }
 
         //IActivator::ActivatorLevel
         public virtual ActivatorLevel Level
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return ActivatorLevel.Construction; }
         }
 
         //IActivator::Activate
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
-        public virtual IConstructionReturnMessage Activate(
-            IConstructionCallMessage ctorMsg)
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public virtual IConstructionReturnMessage Activate(IConstructionCallMessage ctorMsg)
         {
             // This function will get invoked when the ClientContextTerminator sink
             // notices that an activation request message is passed to it ... it
@@ -1665,23 +1666,25 @@ namespace System.Runtime.Remoting.Activation {
 
             // remove ourselves from the Activator chain
             ctorMsg.Activator = ctorMsg.Activator.NextActivator;
-            return ActivationServices.DoServerContextActivation(ctorMsg);            
+            return ActivationServices.DoServerContextActivation(ctorMsg);
         }
     }
 
-    // This acts as a pseudo call site attribute and transfers 
+    // This acts as a pseudo call site attribute and transfers
     // the context properties carried in from a remote activation request
-    // to the server side activation 
+    // to the server side activation
     internal class RemotePropertyHolderAttribute : IContextAttribute
     {
-        IList _cp;      // incoming list of context properties
+        IList _cp; // incoming list of context properties
+
         internal RemotePropertyHolderAttribute(IList cp)
         {
             _cp = cp;
-            Contract.Assert(cp != null && cp.Count > 0,"Bad _cp?");
+            Contract.Assert(cp != null && cp.Count > 0, "Bad _cp?");
         }
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
+
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
         public virtual bool IsContextOK(Context ctx, IConstructionCallMessage msg)
         {
             // The fact that we got instantiated means some remote activation
@@ -1689,16 +1692,15 @@ namespace System.Runtime.Remoting.Activation {
             return false;
         }
 
-
-        // properties are collected in order from callsite, wom & type 
+        // properties are collected in order from callsite, wom & type
         // attributes ... so we get a first shot at adding properties
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
         public virtual void GetPropertiesForNewContext(IConstructionCallMessage ctorMsg)
         {
-            for (int i=0; i<_cp.Count; i++)
+            for (int i = 0; i < _cp.Count; i++)
             {
-                // Just cycle through the list and add the properties to 
+                // Just cycle through the list and add the properties to
                 // the construction message.
                 // We will throw at a later stage if any of these do not
                 // implement IContextProperty
@@ -1706,21 +1708,21 @@ namespace System.Runtime.Remoting.Activation {
             }
         }
     }
-        
+
     // Note: One instance of this class is setup per thread that comes to
     // managed remoting for activation of MBR types. All access to methods
     // is by design single-threaded. (Each thread is working on its own object).
 
     // In the case of Activator.CreateInstance ... that API does the Push &
     // Remoting does a Pop() as soon as it has picked up the attributes from
-    // the threadStatic. The CreateInstance API itself does a Pop() too in 
-    // a try-finally. (So this does not work very well if the infrastructure 
+    // the threadStatic. The CreateInstance API itself does a Pop() too in
+    // a try-finally. (So this does not work very well if the infrastructure
     // creates an instance of the same MBR type as the outer type being created.
     // However, to minimize code churn this is the least risky fix we can do.
     // The full fix would be to pass activationAttributes into the VM through
     // reflection code and have the VM pass them over to remoting which will
     // then hand them over to managed remoting helpers. This will also involve
-    // adding attributes as an additional parameter to 
+    // adding attributes as an additional parameter to
     // ProxyAttribute.CreateInstance() public method.
 
     internal class ActivationAttributeStack
@@ -1728,6 +1730,7 @@ namespace System.Runtime.Remoting.Activation {
         Object[] activationTypes;
         Object[] activationAttributes;
         int freeIndex;
+
         internal ActivationAttributeStack()
         {
             activationTypes = new Object[4];
@@ -1737,17 +1740,17 @@ namespace System.Runtime.Remoting.Activation {
 
         internal void Push(Type typ, Object[] attr)
         {
-            Contract.Assert(typ!=null, "typ != null");                    
-            Contract.Assert(attr!=null, "attr != null");        
+            Contract.Assert(typ != null, "typ != null");
+            Contract.Assert(attr != null, "attr != null");
 
             if (freeIndex == activationTypes.Length)
             {
                 // Need to grow our arrays ... this will be exceedingly rare
                 Object[] newTypes = new Object[activationTypes.Length * 2];
                 Object[] newAttr = new Object[activationAttributes.Length * 2];
-                Contract.Assert(newAttr.Length == newTypes.Length,"These should be in sync!");
+                Contract.Assert(newAttr.Length == newTypes.Length, "These should be in sync!");
                 Array.Copy(activationTypes, newTypes, activationTypes.Length);
-                Array.Copy(activationAttributes, newAttr, activationAttributes.Length);    
+                Array.Copy(activationAttributes, newAttr, activationAttributes.Length);
                 activationTypes = newTypes;
                 activationAttributes = newAttr;
             }
@@ -1758,22 +1761,22 @@ namespace System.Runtime.Remoting.Activation {
 
         internal Object[] Peek(Type typ)
         {
-            Contract.Assert(typ!=null, "typ != null");
-            if (freeIndex == 0 || activationTypes[freeIndex-1] != (object)typ)
+            Contract.Assert(typ != null, "typ != null");
+            if (freeIndex == 0 || activationTypes[freeIndex - 1] != (object)typ)
             {
                 return null;
             }
-            return (Object[])activationAttributes[freeIndex-1];
+            return (Object[])activationAttributes[freeIndex - 1];
         }
 
-        // Note: Read the comments above .. you can have 2 pops for the same 
-        // push. We also count on infrastructure code not activating 
+        // Note: Read the comments above .. you can have 2 pops for the same
+        // push. We also count on infrastructure code not activating
         // the same type as the caller causing a recursive activation.
         internal void Pop(Type typ)
         {
-            Contract.Assert(typ!=null, "typ != null");
-            if (freeIndex != 0 && activationTypes[freeIndex-1] == (object)typ)
-            {                
+            Contract.Assert(typ != null, "typ != null");
+            if (freeIndex != 0 && activationTypes[freeIndex - 1] == (object)typ)
+            {
                 freeIndex--;
                 // Clear the popped entry
                 activationTypes[freeIndex] = null;
@@ -1781,4 +1784,4 @@ namespace System.Runtime.Remoting.Activation {
             }
         }
     }
-}//namespace
+} //namespace

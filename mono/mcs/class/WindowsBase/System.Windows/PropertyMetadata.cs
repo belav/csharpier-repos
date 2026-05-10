@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,96 +26,112 @@
 //   Chris Toshok (toshok@ximian.com)
 //
 
-namespace System.Windows {
-	public class PropertyMetadata {
-		private object defaultValue;
-		private bool isSealed;
-		private PropertyChangedCallback propertyChangedCallback;
-		private CoerceValueCallback coerceValueCallback;
-		
-		protected bool IsSealed {
-			get { return isSealed; }
-		}
+namespace System.Windows
+{
+    public class PropertyMetadata
+    {
+        private object defaultValue;
+        private bool isSealed;
+        private PropertyChangedCallback propertyChangedCallback;
+        private CoerceValueCallback coerceValueCallback;
 
-		public object DefaultValue {
-			get { return defaultValue; }
-			set {
-				if (IsSealed)
-					throw new InvalidOperationException ("Cannot change metadata once it has been applied to a property");
-				if (value == DependencyProperty.UnsetValue)
-					throw new ArgumentException ("Cannot set property metadata's default value to 'Unset'");
+        protected bool IsSealed
+        {
+            get { return isSealed; }
+        }
 
-				defaultValue = value;
-			}
-		}
+        public object DefaultValue
+        {
+            get { return defaultValue; }
+            set
+            {
+                if (IsSealed)
+                    throw new InvalidOperationException(
+                        "Cannot change metadata once it has been applied to a property"
+                    );
+                if (value == DependencyProperty.UnsetValue)
+                    throw new ArgumentException(
+                        "Cannot set property metadata's default value to 'Unset'"
+                    );
 
-		public PropertyChangedCallback PropertyChangedCallback {
-			get { return propertyChangedCallback; }
-			set {
-				if (IsSealed)
-					throw new InvalidOperationException ("Cannot change metadata once it has been applied to a property");
-				propertyChangedCallback = value;
-			}
-		}
+                defaultValue = value;
+            }
+        }
 
-		public CoerceValueCallback CoerceValueCallback {
-			get { return coerceValueCallback; }
-			set {
-				if (IsSealed)
-					throw new InvalidOperationException ("Cannot change metadata once it has been applied to a property");
-				coerceValueCallback = value;
-			}
-		}
+        public PropertyChangedCallback PropertyChangedCallback
+        {
+            get { return propertyChangedCallback; }
+            set
+            {
+                if (IsSealed)
+                    throw new InvalidOperationException(
+                        "Cannot change metadata once it has been applied to a property"
+                    );
+                propertyChangedCallback = value;
+            }
+        }
 
-		public PropertyMetadata()
-			: this (null, null, null)
-		{
-		}
+        public CoerceValueCallback CoerceValueCallback
+        {
+            get { return coerceValueCallback; }
+            set
+            {
+                if (IsSealed)
+                    throw new InvalidOperationException(
+                        "Cannot change metadata once it has been applied to a property"
+                    );
+                coerceValueCallback = value;
+            }
+        }
 
-		public PropertyMetadata(object defaultValue)
-			: this (defaultValue, null, null)
-		{
-		}
+        public PropertyMetadata()
+            : this(null, null, null) { }
 
-		public PropertyMetadata (PropertyChangedCallback propertyChangedCallback)
-			: this (null, propertyChangedCallback, null)
-		{
-		}
+        public PropertyMetadata(object defaultValue)
+            : this(defaultValue, null, null) { }
 
-		public PropertyMetadata (object defaultValue, PropertyChangedCallback propertyChangedCallback)
-			: this (defaultValue, propertyChangedCallback, null)
-		{
-		}
+        public PropertyMetadata(PropertyChangedCallback propertyChangedCallback)
+            : this(null, propertyChangedCallback, null) { }
 
-		public PropertyMetadata (object defaultValue, PropertyChangedCallback propertyChangedCallback, CoerceValueCallback coerceValueCallback)
-		{
-			if (defaultValue == DependencyProperty.UnsetValue)
-				throw new ArgumentException ("Cannot initialize property metadata's default value to 'Unset'");
+        public PropertyMetadata(
+            object defaultValue,
+            PropertyChangedCallback propertyChangedCallback
+        )
+            : this(defaultValue, propertyChangedCallback, null) { }
 
-			this.defaultValue = defaultValue;
-			this.propertyChangedCallback = propertyChangedCallback;
-			this.coerceValueCallback = coerceValueCallback;
-		}
-		
-		protected virtual void Merge (PropertyMetadata baseMetadata, DependencyProperty dp)
-		{
-			if (defaultValue == null)
-				defaultValue = baseMetadata.defaultValue;
-			if (propertyChangedCallback == null)
-				propertyChangedCallback = baseMetadata.propertyChangedCallback;
-			if (coerceValueCallback == null)
-				coerceValueCallback = baseMetadata.coerceValueCallback;
-		}
-		
-		protected virtual void OnApply (DependencyProperty dp, Type targetType)
-		{
-		}
+        public PropertyMetadata(
+            object defaultValue,
+            PropertyChangedCallback propertyChangedCallback,
+            CoerceValueCallback coerceValueCallback
+        )
+        {
+            if (defaultValue == DependencyProperty.UnsetValue)
+                throw new ArgumentException(
+                    "Cannot initialize property metadata's default value to 'Unset'"
+                );
 
-		internal void DoMerge (PropertyMetadata baseMetadata, DependencyProperty dp, Type targetType)
-		{
-			Merge (baseMetadata, dp);
-			OnApply (dp, targetType);
-			isSealed = true;
-		}
-	}
+            this.defaultValue = defaultValue;
+            this.propertyChangedCallback = propertyChangedCallback;
+            this.coerceValueCallback = coerceValueCallback;
+        }
+
+        protected virtual void Merge(PropertyMetadata baseMetadata, DependencyProperty dp)
+        {
+            if (defaultValue == null)
+                defaultValue = baseMetadata.defaultValue;
+            if (propertyChangedCallback == null)
+                propertyChangedCallback = baseMetadata.propertyChangedCallback;
+            if (coerceValueCallback == null)
+                coerceValueCallback = baseMetadata.coerceValueCallback;
+        }
+
+        protected virtual void OnApply(DependencyProperty dp, Type targetType) { }
+
+        internal void DoMerge(PropertyMetadata baseMetadata, DependencyProperty dp, Type targetType)
+        {
+            Merge(baseMetadata, dp);
+            OnApply(dp, targetType);
+            isSealed = true;
+        }
+    }
 }

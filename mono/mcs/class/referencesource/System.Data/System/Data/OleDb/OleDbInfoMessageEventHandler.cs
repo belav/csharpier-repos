@@ -6,7 +6,7 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
+namespace System.Data.OleDb
+{
     public delegate void OleDbInfoMessageEventHandler(object sender, OleDbInfoMessageEventArgs e);
 }

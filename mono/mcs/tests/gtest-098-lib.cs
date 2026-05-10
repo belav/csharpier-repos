@@ -2,17 +2,17 @@
 
 public interface IFoo
 {
-	void Test<T> ();
+    void Test<T>();
 
-	void Test<U,V> ();
+    void Test<U, V>();
 }
 
 public interface IBar<T>
 {
-	void Test ();
+    void Test();
 }
 
-public interface IBar<U,V>
+public interface IBar<U, V>
 {
-	void Test ();
+    void Test();
 }

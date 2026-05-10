@@ -27,6 +27,6 @@ using System;
 
 namespace Mono.WebBrowser.DOM
 {
-	public delegate void NodeEventHandler (object sender, NodeEventArgs e);
-	public delegate void WindowEventHandler (object sender, WindowEventArgs e);
+    public delegate void NodeEventHandler(object sender, NodeEventArgs e);
+    public delegate void WindowEventHandler(object sender, WindowEventArgs e);
 }

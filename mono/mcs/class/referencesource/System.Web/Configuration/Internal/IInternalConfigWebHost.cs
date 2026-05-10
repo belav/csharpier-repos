@@ -4,12 +4,18 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration.Internal {
+namespace System.Web.Configuration.Internal
+{
     using System;
 
     [System.Runtime.InteropServices.ComVisible(false)]
-    public interface IInternalConfigWebHost {
-        void GetSiteIDAndVPathFromConfigPath(string configPath, out string siteID, out string vpath);
+    public interface IInternalConfigWebHost
+    {
+        void GetSiteIDAndVPathFromConfigPath(
+            string configPath,
+            out string siteID,
+            out string vpath
+        );
         string GetConfigPathFromSiteIDAndVPath(string siteID, string vpath);
-    }    
+    }
 }

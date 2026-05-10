@@ -27,8 +27,13 @@ namespace System.IO.Tests
             Directory.CreateDirectory(targetPath);
             DirectoryInfo junctionInfo = CreateJunction(junctionPath, targetPath);
 
-            FileSystemInfo? targetFromDirectoryInfo = junctionInfo.ResolveLinkTarget(returnFinalTarget);
-            FileSystemInfo? targetFromDirectory = Directory.ResolveLinkTarget(junctionPath, returnFinalTarget);
+            FileSystemInfo? targetFromDirectoryInfo = junctionInfo.ResolveLinkTarget(
+                returnFinalTarget
+            );
+            FileSystemInfo? targetFromDirectory = Directory.ResolveLinkTarget(
+                junctionPath,
+                returnFinalTarget
+            );
 
             Assert.True(targetFromDirectoryInfo is DirectoryInfo);
             Assert.True(targetFromDirectory is DirectoryInfo);
@@ -54,8 +59,13 @@ namespace System.IO.Tests
 
             string expectedTargetPath = returnFinalTarget ? targetPath : middleJunctionPath;
 
-            FileSystemInfo? targetFromDirectoryInfo = firstJunctionInfo.ResolveLinkTarget(returnFinalTarget);
-            FileSystemInfo? targetFromDirectory = Directory.ResolveLinkTarget(firstJunctionPath, returnFinalTarget);
+            FileSystemInfo? targetFromDirectoryInfo = firstJunctionInfo.ResolveLinkTarget(
+                returnFinalTarget
+            );
+            FileSystemInfo? targetFromDirectory = Directory.ResolveLinkTarget(
+                firstJunctionPath,
+                returnFinalTarget
+            );
 
             Assert.True(targetFromDirectoryInfo is DirectoryInfo);
             Assert.True(targetFromDirectory is DirectoryInfo);
@@ -83,14 +93,16 @@ namespace System.IO.Tests
             Assert.Equal(expectedTarget, linkInfo.LinkTarget);
 
             FileSystemInfo? targetFromDirectoryInfo = linkInfo.ResolveLinkTarget(returnFinalTarget);
-            FileSystemInfo? targetFromDirectory = Directory.ResolveLinkTarget(linkPath, returnFinalTarget);
+            FileSystemInfo? targetFromDirectory = Directory.ResolveLinkTarget(
+                linkPath,
+                returnFinalTarget
+            );
 
             Assert.NotNull(targetFromDirectoryInfo);
             Assert.NotNull(targetFromDirectory);
 
             Assert.False(targetFromDirectoryInfo.Exists);
             Assert.False(targetFromDirectory.Exists);
-
 
             Assert.Equal(expectedTarget, targetFromDirectoryInfo.FullName);
             Assert.Equal(expectedTarget, targetFromDirectory.FullName);

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -28,48 +27,35 @@ namespace Internal.IL.Stubs
         {
             get
             {
-                return Context.GetWellKnownType(WellKnownType.Object).GetKnownMethod("GetHashCode", null);
+                return Context
+                    .GetWellKnownType(WellKnownType.Object)
+                    .GetKnownMethod("GetHashCode", null);
             }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override MethodSignature Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         }
 
         public override string Name
         {
-            get
-            {
-                return "GetHashCode";
-            }
+            get { return "GetHashCode"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "GetHashCode";
-            }
+            get { return "GetHashCode"; }
         }
 
         public override bool IsVirtual
@@ -119,48 +105,35 @@ namespace Internal.IL.Stubs
         {
             get
             {
-                return Context.GetWellKnownType(WellKnownType.Object).GetKnownMethod("Equals", null);
+                return Context
+                    .GetWellKnownType(WellKnownType.Object)
+                    .GetKnownMethod("Equals", null);
             }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override MethodSignature Signature
         {
-            get
-            {
-                return _signature;
-            }
+            get { return _signature; }
         }
 
         public override string Name
         {
-            get
-            {
-                return "Equals";
-            }
+            get { return "Equals"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "Equals";
-            }
+            get { return "Equals"; }
         }
 
         public override bool IsVirtual
@@ -196,7 +169,12 @@ namespace Internal.IL.Stubs
             // return ({underlyingtype})this == ({underlyingtype})obj;
 
             // PREFER: ILOpcode.unbox, but the codegen for that is pretty bad
-            codeStream.Emit(ILOpcode.ldflda, emitter.NewToken(Context.GetWellKnownType(WellKnownType.Object).GetKnownField("m_pEEType")));
+            codeStream.Emit(
+                ILOpcode.ldflda,
+                emitter.NewToken(
+                    Context.GetWellKnownType(WellKnownType.Object).GetKnownField("m_pEEType")
+                )
+            );
             codeStream.EmitLdc(Context.Target.PointerSize);
             codeStream.Emit(ILOpcode.add);
             codeStream.EmitLdInd(owningTypeAsOpen);

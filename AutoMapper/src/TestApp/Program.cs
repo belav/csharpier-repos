@@ -25,17 +25,11 @@ using (var scope = provider.CreateScope())
 
 Console.ReadKey();
 
-public class Source
-{
-}
+public class Source { }
 
-public class Dest
-{
-}
+public class Dest { }
 
-public class Source2
-{
-}
+public class Source2 { }
 
 public class Dest2
 {
@@ -90,4 +84,3 @@ public class FooService : ISomeService
 
     public int Modify(int value) => value + _value;
 }
-

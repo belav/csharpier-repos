@@ -8,22 +8,20 @@ using System.Runtime.CompilerServices;
 
 public class Test_finalizedest
 {
-
     public class Dummy
     {
-
-        public static bool visited=false;
+        public static bool visited = false;
 
         ~Dummy()
         {
             Console.WriteLine("In Finalize() of Dummy");
-            visited=true;
+            visited = true;
         }
     }
 
     public class CreateObj
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         Dummy obj;
 #pragma warning restore 0414
@@ -38,7 +36,7 @@ public class Test_finalizedest
         [MethodImpl(MethodImplOptions.NoInlining)]
         public void RunTest()
         {
-            obj=null;
+            obj = null;
         }
     }
 
@@ -47,9 +45,9 @@ public class Test_finalizedest
         CreateObj temp = new CreateObj();
         temp.RunTest();
 
-        GC.Collect(); 
-        GC.WaitForPendingFinalizers();  // makes sure Finalize() is called.
-        GC.Collect(); 
+        GC.Collect();
+        GC.WaitForPendingFinalizers(); // makes sure Finalize() is called.
+        GC.Collect();
 
         if (Dummy.visited)
         {
@@ -58,6 +56,5 @@ public class Test_finalizedest
         }
         Console.WriteLine("Test Failed");
         return 1;
-
     }
 }

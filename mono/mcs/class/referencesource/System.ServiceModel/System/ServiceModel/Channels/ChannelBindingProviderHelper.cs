@@ -10,10 +10,6 @@ namespace System.ServiceModel.Channels
             this.IsChannelBindingSupportEnabled = true;
         }
 
-        public bool IsChannelBindingSupportEnabled
-        {
-            get;
-            private set;
-        }
+        public bool IsChannelBindingSupportEnabled { get; private set; }
     }
 }

@@ -4,19 +4,20 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.SessionState;
-    using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.SessionState;
+    using System.Xml;
 
     /*         <!-- sessionState Attributes:
                 mode="[Off|InProc|StateServer|SQLServer|Custom]"
@@ -65,106 +66,127 @@ namespace System.Web.Configuration {
         </sessionState>
 
  */
-    public sealed class SessionStateSection : ConfigurationSection {
+    public sealed class SessionStateSection : ConfigurationSection
+    {
         private static readonly ConfigurationElementProperty s_elemProperty =
-            new ConfigurationElementProperty(new CallbackValidator(typeof(SessionStateSection), Validate));
-
+            new ConfigurationElementProperty(
+                new CallbackValidator(typeof(SessionStateSection), Validate)
+            );
 
         private static ConfigurationPropertyCollection _properties;
 
-        private static readonly ConfigurationProperty _propMode =
-            new ConfigurationProperty("mode",
-                                        typeof(SessionStateMode),
-                                        SessionStateModule.MODE_DEFAULT,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propMode = new ConfigurationProperty(
+            "mode",
+            typeof(SessionStateMode),
+            SessionStateModule.MODE_DEFAULT,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _propStateConnectionString =
-            new ConfigurationProperty("stateConnectionString",
-                                        typeof(string),
-                                        SessionStateModule.STATE_CONNECTION_STRING_DEFAULT,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "stateConnectionString",
+                typeof(string),
+                SessionStateModule.STATE_CONNECTION_STRING_DEFAULT,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propStateNetworkTimeout =
-            new ConfigurationProperty("stateNetworkTimeout",
-                                        typeof(TimeSpan),
+            new ConfigurationProperty(
+                "stateNetworkTimeout",
+                typeof(TimeSpan),
 #if FEATURE_PAL // FEATURE_PAL does not enable OutOfProcSessionStore
-                                        TimeSpan.FromSeconds(600),
+                TimeSpan.FromSeconds(600),
 #else // FEATURE_PAL
-                                        TimeSpan.FromSeconds((long)
-                                            OutOfProcSessionStateStore.STATE_NETWORK_TIMEOUT_DEFAULT),
+                TimeSpan.FromSeconds(
+                    (long)OutOfProcSessionStateStore.STATE_NETWORK_TIMEOUT_DEFAULT
+                ),
 #endif // FEATURE_PAL
-                                        StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
-                                        StdValidatorsAndConverters.PositiveTimeSpanValidator,
-                                        ConfigurationPropertyOptions.None);
+                StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
+                StdValidatorsAndConverters.PositiveTimeSpanValidator,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propSqlConnectionString =
-            new ConfigurationProperty("sqlConnectionString",
-                                        typeof(string),
+            new ConfigurationProperty(
+                "sqlConnectionString",
+                typeof(string),
 #if FEATURE_PAL // FEATURE_PAL does not enable SessionStateModule
-                                        "data source=localhost;Integrated Security=SSPI",
+                "data source=localhost;Integrated Security=SSPI",
 #else // FEATURE_PAL
-                                        SessionStateModule.SQL_CONNECTION_STRING_DEFAULT,
+                SessionStateModule.SQL_CONNECTION_STRING_DEFAULT,
 #endif // FEATURE_PAL
-                                        ConfigurationPropertyOptions.None);
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propSqlCommandTimeout =
-            new ConfigurationProperty("sqlCommandTimeout",
-                                        typeof(TimeSpan),
+            new ConfigurationProperty(
+                "sqlCommandTimeout",
+                typeof(TimeSpan),
 #if FEATURE_PAL // FEATURE_PAL does not enable SqlSessionStateStore
-                                        TimeSpan.FromSeconds(1800),
+                TimeSpan.FromSeconds(1800),
 #else // FEATURE_PAL
-                                        TimeSpan.FromSeconds((long)
-                                            SqlSessionStateStore.SQL_COMMAND_TIMEOUT_DEFAULT),
+                TimeSpan.FromSeconds((long)SqlSessionStateStore.SQL_COMMAND_TIMEOUT_DEFAULT),
 #endif // FEATURE_PAL
-                                        StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
-                                        null,
-                                        ConfigurationPropertyOptions.None);
+                StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propSqlConnectionRetryInterval =
-                    new ConfigurationProperty("sqlConnectionRetryInterval",
-                                                typeof(TimeSpan),
-                                                TimeSpan.FromSeconds(0),
-                                                StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
-                                                null,
-                                                ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "sqlConnectionRetryInterval",
+                typeof(TimeSpan),
+                TimeSpan.FromSeconds(0),
+                StdValidatorsAndConverters.TimeSpanSecondsOrInfiniteConverter,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propCustomProvider =
-            new ConfigurationProperty("customProvider",
-                                        typeof(string),
-                                        String.Empty,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "customProvider",
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
 
-        private static readonly ConfigurationProperty _propCookieless =
-            new ConfigurationProperty("cookieless",
-                                        typeof(string),
-                                        SessionIDManager.COOKIEMODE_DEFAULT.ToString(),
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propCookieless = new ConfigurationProperty(
+            "cookieless",
+            typeof(string),
+            SessionIDManager.COOKIEMODE_DEFAULT.ToString(),
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propCookieName =
-            new ConfigurationProperty("cookieName",
-                                        typeof(string),
-                                        SessionIDManager.SESSION_COOKIE_DEFAULT,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propCookieName = new ConfigurationProperty(
+            "cookieName",
+            typeof(string),
+            SessionIDManager.SESSION_COOKIE_DEFAULT,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propTimeout =
-            new ConfigurationProperty("timeout",
-                                        typeof(TimeSpan),
-                                        TimeSpan.FromMinutes((long)SessionStateModule.TIMEOUT_DEFAULT),
-                                        StdValidatorsAndConverters.TimeSpanMinutesOrInfiniteConverter,
-                                        new TimeSpanValidator(TimeSpan.FromMinutes(1), TimeSpan.MaxValue),
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propTimeout = new ConfigurationProperty(
+            "timeout",
+            typeof(TimeSpan),
+            TimeSpan.FromMinutes((long)SessionStateModule.TIMEOUT_DEFAULT),
+            StdValidatorsAndConverters.TimeSpanMinutesOrInfiniteConverter,
+            new TimeSpanValidator(TimeSpan.FromMinutes(1), TimeSpan.MaxValue),
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propAllowCustomSqlDatabase =
-            new ConfigurationProperty("allowCustomSqlDatabase",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "allowCustomSqlDatabase",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propCompressionEnabled =
-            new ConfigurationProperty("compressionEnabled",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
-
+            new ConfigurationProperty(
+                "compressionEnabled",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
 
         //        private static readonly ConfigurationProperty _propLockAttributes =
         //            new ConfigurationProperty("lockAttributes",
@@ -172,41 +194,52 @@ namespace System.Web.Configuration {
         //                                    "",
         //                                    ConfigurationPropertyOptions.None);
 
-        private static readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty("providers",
-                                        typeof(ProviderSettingsCollection),
-                                        null,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            "providers",
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _propRegenerateExpiredSessionId =
-            new ConfigurationProperty("regenerateExpiredSessionId",
-                                        typeof(bool),
-                                        true,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "regenerateExpiredSessionId",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propPartitionResolverType =
-            new ConfigurationProperty("partitionResolverType",
-                                        typeof(string),
-                                        String.Empty,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "partitionResolverType",
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propUseHostingIdentity =
-            new ConfigurationProperty("useHostingIdentity",
-                                        typeof(bool),
-                                        true,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "useHostingIdentity",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propSessionIDManagerType =
-            new ConfigurationProperty("sessionIDManagerType",
-                                        typeof(string),
-                                        String.Empty,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "sessionIDManagerType",
+                typeof(string),
+                String.Empty,
+                ConfigurationPropertyOptions.None
+            );
 
         private HttpCookieMode cookielessCache = SessionIDManager.COOKIEMODE_DEFAULT;
         private bool cookielessCached = false;
         private bool regenerateExpiredSessionIdCache = false;
         private bool regenerateExpiredSessionIdCached = false;
-        static SessionStateSection() {
+
+        static SessionStateSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propMode);
@@ -229,169 +262,152 @@ namespace System.Web.Configuration {
             _properties.Add(_propSessionIDManagerType);
         }
 
-        public SessionStateSection() {
-        }
+        public SessionStateSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("mode", DefaultValue = SessionStateModule.MODE_DEFAULT)]
-        public SessionStateMode Mode {
-            get {
-                return (SessionStateMode)base[_propMode];
-            }
-            set {
-                base[_propMode] = value;
-            }
+        public SessionStateMode Mode
+        {
+            get { return (SessionStateMode)base[_propMode]; }
+            set { base[_propMode] = value; }
         }
 
-        [ConfigurationProperty("stateConnectionString", DefaultValue = SessionStateModule.STATE_CONNECTION_STRING_DEFAULT)]
-        public string StateConnectionString {
-            get {
-                return (string)base[_propStateConnectionString];
-            }
-            set {
-                base[_propStateConnectionString] = value;
-            }
+        [ConfigurationProperty(
+            "stateConnectionString",
+            DefaultValue = SessionStateModule.STATE_CONNECTION_STRING_DEFAULT
+        )]
+        public string StateConnectionString
+        {
+            get { return (string)base[_propStateConnectionString]; }
+            set { base[_propStateConnectionString] = value; }
         }
 
         [ConfigurationProperty("stateNetworkTimeout", DefaultValue = "00:00:10")]
         [TypeConverter(typeof(TimeSpanSecondsOrInfiniteConverter))]
-        public TimeSpan StateNetworkTimeout {
-            get {
-                return (TimeSpan)base[_propStateNetworkTimeout];
-            }
-            set {
-                base[_propStateNetworkTimeout] = value;
-            }
+        public TimeSpan StateNetworkTimeout
+        {
+            get { return (TimeSpan)base[_propStateNetworkTimeout]; }
+            set { base[_propStateNetworkTimeout] = value; }
         }
 
-        [ConfigurationProperty("sqlConnectionString", DefaultValue = SessionStateModule.SQL_CONNECTION_STRING_DEFAULT)]
-        public string SqlConnectionString {
-            get {
-                return (string)base[_propSqlConnectionString];
-            }
-            set {
-                base[_propSqlConnectionString] = value;
-            }
+        [ConfigurationProperty(
+            "sqlConnectionString",
+            DefaultValue = SessionStateModule.SQL_CONNECTION_STRING_DEFAULT
+        )]
+        public string SqlConnectionString
+        {
+            get { return (string)base[_propSqlConnectionString]; }
+            set { base[_propSqlConnectionString] = value; }
         }
 
         [ConfigurationProperty("sqlCommandTimeout", DefaultValue = "00:00:30")]
         [TypeConverter(typeof(TimeSpanSecondsOrInfiniteConverter))]
-        public TimeSpan SqlCommandTimeout {
-            get {
-                return (TimeSpan)base[_propSqlCommandTimeout];
-            }
-            set {
-                base[_propSqlCommandTimeout] = value;
-            }
+        public TimeSpan SqlCommandTimeout
+        {
+            get { return (TimeSpan)base[_propSqlCommandTimeout]; }
+            set { base[_propSqlCommandTimeout] = value; }
         }
 
         [ConfigurationProperty("sqlConnectionRetryInterval", DefaultValue = "00:00:00")]
         [TypeConverter(typeof(TimeSpanSecondsOrInfiniteConverter))]
-        public TimeSpan SqlConnectionRetryInterval {
-            get {
-                return (TimeSpan)base[_propSqlConnectionRetryInterval];
-            }
-            set {
-                base[_propSqlConnectionRetryInterval] = value;
-            }
+        public TimeSpan SqlConnectionRetryInterval
+        {
+            get { return (TimeSpan)base[_propSqlConnectionRetryInterval]; }
+            set { base[_propSqlConnectionRetryInterval] = value; }
         }
 
-
         [ConfigurationProperty("customProvider", DefaultValue = "")]
-        public string CustomProvider {
-            get {
-                return (string)base[_propCustomProvider];
-            }
-            set {
-                base[_propCustomProvider] = value;
-            }
+        public string CustomProvider
+        {
+            get { return (string)base[_propCustomProvider]; }
+            set { base[_propCustomProvider] = value; }
         }
 
         [ConfigurationProperty("cookieless")]
-        public HttpCookieMode Cookieless {
-            get {
-                if (cookielessCached == false) {
+        public HttpCookieMode Cookieless
+        {
+            get
+            {
+                if (cookielessCached == false)
+                {
                     cookielessCache = ConvertToCookieMode((string)base[_propCookieless]);
                     cookielessCached = true;
                 }
                 return cookielessCache;
             }
-            set {
+            set
+            {
                 base[_propCookieless] = value.ToString();
                 cookielessCache = value;
             }
         }
 
-        [ConfigurationProperty("cookieName", DefaultValue = SessionIDManager.SESSION_COOKIE_DEFAULT)]
-        public string CookieName {
-            get {
-                return (string)base[_propCookieName];
-            }
-            set {
-                base[_propCookieName] = value;
-            }
+        [ConfigurationProperty(
+            "cookieName",
+            DefaultValue = SessionIDManager.SESSION_COOKIE_DEFAULT
+        )]
+        public string CookieName
+        {
+            get { return (string)base[_propCookieName]; }
+            set { base[_propCookieName] = value; }
         }
 
         [ConfigurationProperty("timeout", DefaultValue = "00:20:00")]
         [TypeConverter(typeof(TimeSpanMinutesOrInfiniteConverter))]
-        [TimeSpanValidator(MinValueString = "00:01:00", MaxValueString = TimeSpanValidatorAttribute.TimeSpanMaxValue)]
-        public TimeSpan Timeout {
-            get {
-                return (TimeSpan)base[_propTimeout];
-            }
-            set {
-                base[_propTimeout] = value;
-            }
+        [TimeSpanValidator(
+            MinValueString = "00:01:00",
+            MaxValueString = TimeSpanValidatorAttribute.TimeSpanMaxValue
+        )]
+        public TimeSpan Timeout
+        {
+            get { return (TimeSpan)base[_propTimeout]; }
+            set { base[_propTimeout] = value; }
         }
 
         [ConfigurationProperty("allowCustomSqlDatabase", DefaultValue = false)]
-        public bool AllowCustomSqlDatabase {
-            get {
-                return (bool)base[_propAllowCustomSqlDatabase];
-            }
-            set {
-                base[_propAllowCustomSqlDatabase] = value;
-            }
+        public bool AllowCustomSqlDatabase
+        {
+            get { return (bool)base[_propAllowCustomSqlDatabase]; }
+            set { base[_propAllowCustomSqlDatabase] = value; }
         }
 
         [ConfigurationProperty("compressionEnabled", DefaultValue = false)]
-        public bool CompressionEnabled{
-            get {
-                return (bool)base[_propCompressionEnabled];
-            }
-            set {
-                base[_propCompressionEnabled] = value;
-            }
+        public bool CompressionEnabled
+        {
+            get { return (bool)base[_propCompressionEnabled]; }
+            set { base[_propCompressionEnabled] = value; }
         }
 
         [ConfigurationProperty("regenerateExpiredSessionId", DefaultValue = true)]
-        public bool RegenerateExpiredSessionId {
-            get {
-                if (regenerateExpiredSessionIdCached == false) {
+        public bool RegenerateExpiredSessionId
+        {
+            get
+            {
+                if (regenerateExpiredSessionIdCached == false)
+                {
                     regenerateExpiredSessionIdCache = (bool)base[_propRegenerateExpiredSessionId];
                     regenerateExpiredSessionIdCached = true;
                 }
                 return regenerateExpiredSessionIdCache;
             }
-            set {
+            set
+            {
                 base[_propRegenerateExpiredSessionId] = value;
                 regenerateExpiredSessionIdCache = value;
             }
         }
 
-
 #if DONTCOMPILE
         [ConfigurationProperty("lockAttributes", DefaultValue = "")]
-        public string LockAttributes {
-            get {
-                return (string)base[_propLockAttributes];
-            }
-            set {
+        public string LockAttributes
+        {
+            get { return (string)base[_propLockAttributes]; }
+            set
+            {
                 // base.LockedAttributes.SetFromList(value); // keep the internal list in sync
                 base[_propLockAttributes] = value;
             }
@@ -399,65 +415,63 @@ namespace System.Web.Configuration {
 #endif
 
         [ConfigurationProperty("providers")]
-        public ProviderSettingsCollection Providers {
-            get {
-                return (ProviderSettingsCollection)base[_propProviders];
-            }
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base[_propProviders]; }
         }
 
         [ConfigurationProperty("partitionResolverType", DefaultValue = "")]
-        public string PartitionResolverType {
-            get {
-                return (string)base[_propPartitionResolverType];
-            }
-            set {
-                base[_propPartitionResolverType] = value;
-            }
+        public string PartitionResolverType
+        {
+            get { return (string)base[_propPartitionResolverType]; }
+            set { base[_propPartitionResolverType] = value; }
         }
 
         [ConfigurationProperty("useHostingIdentity", DefaultValue = true)]
-        public bool UseHostingIdentity {
-            get {
-                return (bool)base[_propUseHostingIdentity];
-            }
-            set {
-                base[_propUseHostingIdentity] = value;
-            }
+        public bool UseHostingIdentity
+        {
+            get { return (bool)base[_propUseHostingIdentity]; }
+            set { base[_propUseHostingIdentity] = value; }
         }
 
         [ConfigurationProperty("sessionIDManagerType", DefaultValue = "")]
-        public string SessionIDManagerType {
-            get {
-                return (string)base[_propSessionIDManagerType];
-            }
-            set {
-                base[_propSessionIDManagerType] = value;
-            }
+        public string SessionIDManagerType
+        {
+            get { return (string)base[_propSessionIDManagerType]; }
+            set { base[_propSessionIDManagerType] = value; }
         }
 
-
-        HttpCookieMode ConvertToCookieMode(string s) {
-            if (s == "true") {
+        HttpCookieMode ConvertToCookieMode(string s)
+        {
+            if (s == "true")
+            {
                 return HttpCookieMode.UseUri;
             }
-            else if (s == "false") {
+            else if (s == "false")
+            {
                 return HttpCookieMode.UseCookies;
             }
-            else {
+            else
+            {
                 int iTemp = 0;
                 Type enumType = typeof(HttpCookieMode);
 
-                if (Enum.IsDefined(enumType, s)) {
+                if (Enum.IsDefined(enumType, s))
+                {
                     iTemp = (int)Enum.Parse(enumType, s);
                 }
-                else {
+                else
+                {
                     // if not null and not defined throw error
                     string names = "true, false";
-                    foreach (string name in Enum.GetNames(enumType)) {
-                        if (names == null) {
+                    foreach (string name in Enum.GetNames(enumType))
+                    {
+                        if (names == null)
+                        {
                             names = name;
                         }
-                        else {
+                        else
+                        {
                             names += ", " + name;
                         }
                     }
@@ -465,38 +479,47 @@ namespace System.Web.Configuration {
                     throw new ConfigurationErrorsException(
                         SR.GetString(SR.Invalid_enum_attribute, "cookieless", names),
                         ElementInformation.Properties["cookieless"].Source,
-                        ElementInformation.Properties["cookieless"].LineNumber);
+                        ElementInformation.Properties["cookieless"].LineNumber
+                    );
                 }
 
                 return (HttpCookieMode)iTemp;
             }
         }
 
-        protected override void PostDeserialize() {
+        protected override void PostDeserialize()
+        {
             ConvertToCookieMode((string)base[_propCookieless]);
         }
 
-        protected override ConfigurationElementProperty ElementProperty {
-            get {
-                return s_elemProperty;
-            }
+        protected override ConfigurationElementProperty ElementProperty
+        {
+            get { return s_elemProperty; }
         }
 
-        private static void Validate(object value) {
-            if (value == null) {
+        private static void Validate(object value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException("sessionState");
             }
             Debug.Assert(value is SessionStateSection);
 
             SessionStateSection elem = (SessionStateSection)value;
 
-            if (elem.Timeout.TotalMinutes > SessionStateModule.MAX_CACHE_BASED_TIMEOUT_MINUTES &&
-                (elem.Mode == SessionStateMode.InProc ||
-                elem.Mode == SessionStateMode.StateServer)) {
+            if (
+                elem.Timeout.TotalMinutes > SessionStateModule.MAX_CACHE_BASED_TIMEOUT_MINUTES
+                && (
+                    elem.Mode == SessionStateMode.InProc
+                    || elem.Mode == SessionStateMode.StateServer
+                )
+            )
+            {
                 throw new ConfigurationErrorsException(
                     SR.GetString(SR.Invalid_cache_based_session_timeout),
                     elem.ElementInformation.Properties["timeout"].Source,
-                    elem.ElementInformation.Properties["timeout"].LineNumber);
+                    elem.ElementInformation.Properties["timeout"].LineNumber
+                );
             }
         }
     }

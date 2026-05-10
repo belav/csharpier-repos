@@ -15,7 +15,11 @@ namespace System.IO.Packaging
         private readonly FileAccess _packageFileAccess;
         private readonly FileMode _packageFileMode;
 
-        public ZipStreamManager(ZipArchive zipArchive, FileMode packageFileMode, FileAccess packageFileAccess)
+        public ZipStreamManager(
+            ZipArchive zipArchive,
+            FileMode packageFileMode,
+            FileAccess packageFileAccess
+        )
         {
             _zipArchive = zipArchive;
             _packageFileMode = packageFileMode;
@@ -82,7 +86,14 @@ namespace System.IO.Packaging
             }
 
             Stream ns = zipArchiveEntry.Open();
-            return new ZipWrappingStream(zipArchiveEntry, ns, _packageFileMode, _packageFileAccess, canRead, canWrite);
+            return new ZipWrappingStream(
+                zipArchiveEntry,
+                ns,
+                _packageFileMode,
+                _packageFileAccess,
+                canRead,
+                canWrite
+            );
         }
     }
 }

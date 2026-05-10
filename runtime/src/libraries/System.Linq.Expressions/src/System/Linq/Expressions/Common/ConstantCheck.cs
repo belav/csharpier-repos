@@ -10,7 +10,7 @@ namespace System.Linq.Expressions
         KnownFalse,
         KnownTrue,
         KnownAssignable, // need null check only
-        Unknown,         // need full runtime check
+        Unknown, // need full runtime check
     }
 
     internal static class ConstantCheck
@@ -54,7 +54,9 @@ namespace System.Linq.Expressions
             // An expression is either of type void, or it isn't.
             if (operandType == typeof(void))
             {
-                return testType == typeof(void) ? AnalyzeTypeIsResult.KnownTrue : AnalyzeTypeIsResult.KnownFalse;
+                return testType == typeof(void)
+                    ? AnalyzeTypeIsResult.KnownTrue
+                    : AnalyzeTypeIsResult.KnownFalse;
             }
 
             if (testType == typeof(void) || testType.IsPointer)

@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Collections
         /// </summary>
         internal static class PrivateInterlocked
         {
-            internal static ImmutableSegmentedList<T> VolatileRead(in ImmutableSegmentedList<T> location)
+            internal static ImmutableSegmentedList<T> VolatileRead(
+                in ImmutableSegmentedList<T> location
+            )
             {
                 var list = Volatile.Read(ref Unsafe.AsRef(in location._list));
                 if (list is null)
@@ -23,7 +25,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 return new ImmutableSegmentedList<T>(list);
             }
 
-            internal static ImmutableSegmentedList<T> InterlockedExchange(ref ImmutableSegmentedList<T> location, ImmutableSegmentedList<T> value)
+            internal static ImmutableSegmentedList<T> InterlockedExchange(
+                ref ImmutableSegmentedList<T> location,
+                ImmutableSegmentedList<T> value
+            )
             {
                 var list = Interlocked.Exchange(ref Unsafe.AsRef(in location._list), value._list);
                 if (list is null)
@@ -32,9 +37,17 @@ namespace Microsoft.CodeAnalysis.Collections
                 return new ImmutableSegmentedList<T>(list);
             }
 
-            internal static ImmutableSegmentedList<T> InterlockedCompareExchange(ref ImmutableSegmentedList<T> location, ImmutableSegmentedList<T> value, ImmutableSegmentedList<T> comparand)
+            internal static ImmutableSegmentedList<T> InterlockedCompareExchange(
+                ref ImmutableSegmentedList<T> location,
+                ImmutableSegmentedList<T> value,
+                ImmutableSegmentedList<T> comparand
+            )
             {
-                var list = Interlocked.CompareExchange(ref Unsafe.AsRef(in location._list), value._list, comparand._list);
+                var list = Interlocked.CompareExchange(
+                    ref Unsafe.AsRef(in location._list),
+                    value._list,
+                    comparand._list
+                );
                 if (list is null)
                     return default;
 

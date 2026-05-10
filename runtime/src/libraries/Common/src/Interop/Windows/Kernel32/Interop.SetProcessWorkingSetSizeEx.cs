@@ -11,6 +11,11 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetProcessWorkingSetSizeEx(SafeProcessHandle handle, IntPtr min, IntPtr max, int flags);
+        internal static partial bool SetProcessWorkingSetSizeEx(
+            SafeProcessHandle handle,
+            IntPtr min,
+            IntPtr max,
+            int flags
+        );
     }
 }

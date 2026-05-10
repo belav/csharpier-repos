@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,18 +29,20 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public interface IDuplexContextChannel : IContextChannel, IChannel,
-		ICommunicationObject
-	{
-		bool AutomaticInputSessionShutdown { get; set; }
+    public interface IDuplexContextChannel : IContextChannel, IChannel, ICommunicationObject
+    {
+        bool AutomaticInputSessionShutdown { get; set; }
 
-		InstanceContext CallbackInstance { get; set; }
+        InstanceContext CallbackInstance { get; set; }
 
-		IAsyncResult BeginCloseOutputSession (TimeSpan timeout,
-			AsyncCallback callback, object state);
+        IAsyncResult BeginCloseOutputSession(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-		void CloseOutputSession (TimeSpan timeout);
+        void CloseOutputSession(TimeSpan timeout);
 
-		void EndCloseOutputSession (IAsyncResult result);
-	}
+        void EndCloseOutputSession(IAsyncResult result);
+    }
 }
