@@ -88,12 +88,12 @@ namespace ILCompiler.DependencyAnalysis
                     }
 
                     // Method name and signature
-                    NativeLayoutVertexNode nameAndSig =
-                        factory.NativeLayout.MethodNameAndSignatureVertex(
-                            method.GetTypicalMethodDefinition()
-                        );
-                    NativeLayoutSavedVertexNode placedNameAndSig =
-                        factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
+                    NativeLayoutVertexNode nameAndSig = factory
+                        .NativeLayout
+                        .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
+                    NativeLayoutSavedVertexNode placedNameAndSig = factory
+                        .NativeLayout
+                        .PlacedSignatureVertex(nameAndSig);
                     Vertex placedNameAndSigVertexOffset = nativeWriter.GetUnsignedConstant(
                         (uint)placedNameAndSig.SavedVertex.VertexOffset
                     );
@@ -162,11 +162,12 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             // Method name and signature
-            NativeLayoutVertexNode nameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(
-                method.GetTypicalMethodDefinition()
-            );
-            NativeLayoutSavedVertexNode placedNameAndSig =
-                factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
+            NativeLayoutVertexNode nameAndSig = factory
+                .NativeLayout
+                .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
+            NativeLayoutSavedVertexNode placedNameAndSig = factory
+                .NativeLayout
+                .PlacedSignatureVertex(nameAndSig);
             dependencies.Add(
                 new DependencyListEntry(placedNameAndSig, "GenericMethodsHashtable entry signature")
             );

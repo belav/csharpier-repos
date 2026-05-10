@@ -104,11 +104,13 @@ namespace System.ServiceModel.Description
 
                 if (collection.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnableToLoadCertificateIdentity)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UnableToLoadCertificateIdentity)
+                            )
+                        );
                 }
 
                 // We assume the first certificate in the list is the primary
@@ -138,11 +140,13 @@ namespace System.ServiceModel.Description
 
                     if (collection.Count == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.UnableToLoadCertificateIdentity)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.UnableToLoadCertificateIdentity)
+                                )
+                            );
                     }
 
                     // Just select the first certificate.
@@ -196,26 +200,30 @@ namespace System.ServiceModel.Description
             {
                 if (wildcard)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxConfigContractNotFound,
-                                serviceEndpoint.Contract.ConfigurationName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxConfigContractNotFound,
+                                    serviceEndpoint.Contract.ConfigurationName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxConfigChannelConfigurationNotFound,
-                                configurationName,
-                                serviceEndpoint.Contract.ConfigurationName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxConfigChannelConfigurationNotFound,
+                                    configurationName,
+                                    serviceEndpoint.Contract.ConfigurationName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             if (serviceEndpoint.Binding == null && !string.IsNullOrEmpty(channelElement.Binding))
@@ -470,28 +478,32 @@ namespace System.ServiceModel.Description
                 Type wsdlImporterType = Type.GetType(wsdlImporterElement.Type, true, true);
                 if (!typeof(IWsdlImportExtension).IsAssignableFrom(wsdlImporterType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.InvalidWsdlExtensionTypeInConfig,
-                                wsdlImporterType.AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.InvalidWsdlExtensionTypeInConfig,
+                                    wsdlImporterType.AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // Verify that the type has a default constructor
                 ConstructorInfo constructorInfo = wsdlImporterType.GetConstructor(emptyTypeArray);
                 if (constructorInfo == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.WsdlExtensionTypeRequiresDefaultConstructor,
-                                wsdlImporterType.AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.WsdlExtensionTypeRequiresDefaultConstructor,
+                                    wsdlImporterType.AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 wsdlImporters.Add((IWsdlImportExtension)constructorInfo.Invoke(emptyObjectArray));
@@ -519,28 +531,32 @@ namespace System.ServiceModel.Description
                 Type policyImporterType = Type.GetType(policyImporterElement.Type, true, true);
                 if (!typeof(IPolicyImportExtension).IsAssignableFrom(policyImporterType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.InvalidPolicyExtensionTypeInConfig,
-                                policyImporterType.AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.InvalidPolicyExtensionTypeInConfig,
+                                    policyImporterType.AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // Verify that the type has a default constructor
                 ConstructorInfo constructorInfo = policyImporterType.GetConstructor(emptyTypeArray);
                 if (constructorInfo == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.PolicyExtensionTypeRequiresDefaultConstructor,
-                                policyImporterType.AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.PolicyExtensionTypeRequiresDefaultConstructor,
+                                    policyImporterType.AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 policyImporters.Add(
@@ -609,9 +625,13 @@ namespace System.ServiceModel.Description
                         Uri uri;
                         if (!Uri.TryCreate(cookedAddress, UriKind.Absolute, out uri))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ArgumentException(SR.GetString(SR.BaseAddressMustBeAbsolute))
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(SR.BaseAddressMustBeAbsolute)
+                                    )
+                                );
                         }
                         addBaseAddress(uri);
                     }
@@ -837,11 +857,13 @@ namespace System.ServiceModel.Description
         {
             if (string.IsNullOrEmpty(endpointSectionName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigEndpointTypeCannotBeNullOrEmpty)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigEndpointTypeCannotBeNullOrEmpty)
+                        )
+                    );
             }
             EndpointCollectionElement endpointCollectionElement = null;
             if (context == null)
@@ -950,10 +972,9 @@ namespace System.ServiceModel.Description
             )
             {
                 if (
-                    standardEndpointElement.Name.Equals(
-                        endpointConfiguration,
-                        StringComparison.Ordinal
-                    )
+                    standardEndpointElement
+                        .Name
+                        .Equals(endpointConfiguration, StringComparison.Ordinal)
                 )
                 {
                     if (null == ConfigLoader.resolvedEndpoints)
@@ -979,16 +1000,18 @@ namespace System.ServiceModel.Description
                         // by not starting up channel, etc...
                         ConfigLoader.resolvedEndpoints = null;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigEndpointReferenceCycleDetected,
-                                    detectedCycle.ToString()
-                                ),
-                                configErrorElement.ElementInformation.Source,
-                                configErrorElement.ElementInformation.LineNumber
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigEndpointReferenceCycleDetected,
+                                        detectedCycle.ToString()
+                                    ),
+                                    configErrorElement.ElementInformation.Source,
+                                    configErrorElement.ElementInformation.LineNumber
+                                )
+                            );
                     }
 
                     try
@@ -1110,17 +1133,19 @@ namespace System.ServiceModel.Description
             endpoint = standardEndpointElement.CreateServiceEndpoint(contract);
             if (endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ConfigNoEndpointCreated,
-                            standardEndpointElement.GetType().AssemblyQualifiedName,
-                            (standardEndpointElement.EndpointType == null)
-                                ? string.Empty
-                                : standardEndpointElement.EndpointType.AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ConfigNoEndpointCreated,
+                                standardEndpointElement.GetType().AssemblyQualifiedName,
+                                (standardEndpointElement.EndpointType == null)
+                                    ? string.Empty
+                                    : standardEndpointElement.EndpointType.AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             //binding
@@ -1216,10 +1241,9 @@ namespace System.ServiceModel.Description
             )
             {
                 if (
-                    standardEndpointElement.Name.Equals(
-                        endpointConfiguration,
-                        StringComparison.Ordinal
-                    )
+                    standardEndpointElement
+                        .Name
+                        .Equals(endpointConfiguration, StringComparison.Ordinal)
                 )
                 {
                     if (null == ConfigLoader.resolvedEndpoints)
@@ -1245,16 +1269,18 @@ namespace System.ServiceModel.Description
                         // by not starting up channel, etc...
                         ConfigLoader.resolvedEndpoints = null;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigEndpointReferenceCycleDetected,
-                                    detectedCycle.ToString()
-                                ),
-                                configErrorElement.ElementInformation.Source,
-                                configErrorElement.ElementInformation.LineNumber
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigEndpointReferenceCycleDetected,
+                                        detectedCycle.ToString()
+                                    ),
+                                    configErrorElement.ElementInformation.Source,
+                                    configErrorElement.ElementInformation.LineNumber
+                                )
+                            );
                     }
 
                     try
@@ -1385,17 +1411,19 @@ namespace System.ServiceModel.Description
             endpoint = standardEndpointElement.CreateServiceEndpoint(contract);
             if (endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ConfigNoEndpointCreated,
-                            standardEndpointElement.GetType().AssemblyQualifiedName,
-                            (standardEndpointElement.EndpointType == null)
-                                ? string.Empty
-                                : standardEndpointElement.EndpointType.AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ConfigNoEndpointCreated,
+                                standardEndpointElement.GetType().AssemblyQualifiedName,
+                                (standardEndpointElement.EndpointType == null)
+                                    ? string.Empty
+                                    : standardEndpointElement.EndpointType.AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             //binding
@@ -1575,11 +1603,13 @@ namespace System.ServiceModel.Description
         {
             if (string.IsNullOrEmpty(bindingSectionName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigBindingTypeCannotBeNullOrEmpty)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigBindingTypeCannotBeNullOrEmpty)
+                        )
+                    );
             }
             if (context == null)
             {
@@ -1717,16 +1747,18 @@ namespace System.ServiceModel.Description
                                 // by not starting up channel, etc...
                                 ConfigLoader.resolvedBindings = null;
 
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ConfigurationErrorsException(
-                                        SR.GetString(
-                                            SR.ConfigBindingReferenceCycleDetected,
-                                            detectedCycle.ToString()
-                                        ),
-                                        configErrorElement.ElementInformation.Source,
-                                        configErrorElement.ElementInformation.LineNumber
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ConfigurationErrorsException(
+                                            SR.GetString(
+                                                SR.ConfigBindingReferenceCycleDetected,
+                                                detectedCycle.ToString()
+                                            ),
+                                            configErrorElement.ElementInformation.Source,
+                                            configErrorElement.ElementInformation.LineNumber
+                                        )
+                                    );
                             }
 
                             try
@@ -1971,26 +2003,30 @@ namespace System.ServiceModel.Description
                         {
                             if (wildcard)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.SFxConfigLoaderMultipleEndpointMatchesWildcard1,
-                                            contract.ConfigurationName
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.SFxConfigLoaderMultipleEndpointMatchesWildcard1,
+                                                contract.ConfigurationName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.SFxConfigLoaderMultipleEndpointMatchesSpecified2,
-                                            contract.ConfigurationName,
-                                            configurationName
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.SFxConfigLoaderMultipleEndpointMatchesSpecified2,
+                                                contract.ConfigurationName,
+                                                configurationName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         retval = channelElement;
@@ -2057,23 +2093,27 @@ namespace System.ServiceModel.Description
             {
                 if (contractName == String.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SfxReflectedContractKeyNotFoundEmpty, serviceName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SfxReflectedContractKeyNotFoundEmpty, serviceName)
+                            )
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SfxReflectedContractKeyNotFound2,
-                                contractName,
-                                serviceName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SfxReflectedContractKeyNotFound2,
+                                    contractName,
+                                    serviceName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -2090,14 +2130,16 @@ namespace System.ServiceModel.Description
             {
                 if (contractName == ServiceMetadataBehavior.MexContractName)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SfxReflectedContractKeyNotFoundIMetadataExchange,
-                                serviceName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SfxReflectedContractKeyNotFoundIMetadataExchange,
+                                    serviceName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             return contract;
@@ -2182,9 +2224,9 @@ namespace System.ServiceModel.Description
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsWebConfigAboveApplication(ContextInformation contextInformation)
         {
-            return AspNetEnvironment.Current.IsWebConfigAboveApplication(
-                contextInformation.HostingContext
-            );
+            return AspNetEnvironment
+                .Current
+                .IsWebConfigAboveApplication(contextInformation.HostingContext);
         }
 
         [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - enforces a security decision.")]

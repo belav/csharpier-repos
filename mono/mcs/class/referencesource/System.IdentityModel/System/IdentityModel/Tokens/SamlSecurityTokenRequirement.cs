@@ -71,10 +71,9 @@ namespace System.IdentityModel.Tokens
             foreach (XmlAttribute attribute in element.Attributes)
             {
                 if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        attribute.LocalName,
-                        ConfigurationStrings.MapToWindows
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(attribute.LocalName, ConfigurationStrings.MapToWindows)
                 )
                 {
                     bool outMapToWindows = false;
@@ -87,19 +86,23 @@ namespace System.IdentityModel.Tokens
                     this.MapToWindows = outMapToWindows;
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        attribute.LocalName,
-                        ConfigurationStrings.IssuerCertificateValidator
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.IssuerCertificateValidator
+                        )
                 )
                 {
                     customValidator = attribute.Value.ToString();
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        attribute.LocalName,
-                        ConfigurationStrings.IssuerCertificateRevocationMode
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.IssuerCertificateRevocationMode
+                        )
                 )
                 {
                     foundCustomX509Validator = true;
@@ -107,46 +110,56 @@ namespace System.IdentityModel.Tokens
                     string revocationModeString = attribute.Value.ToString();
 
                     if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            revocationModeString,
-                            ConfigurationStrings.X509RevocationModeNoCheck
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                revocationModeString,
+                                ConfigurationStrings.X509RevocationModeNoCheck
+                            )
                     )
                     {
                         revocationMode = X509RevocationMode.NoCheck;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            revocationModeString,
-                            ConfigurationStrings.X509RevocationModeOffline
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                revocationModeString,
+                                ConfigurationStrings.X509RevocationModeOffline
+                            )
                     )
                     {
                         revocationMode = X509RevocationMode.Offline;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            revocationModeString,
-                            ConfigurationStrings.X509RevocationModeOnline
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                revocationModeString,
+                                ConfigurationStrings.X509RevocationModeOnline
+                            )
                     )
                     {
                         revocationMode = X509RevocationMode.Online;
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.ID7011, attribute.LocalName, element.LocalName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ID7011, attribute.LocalName, element.LocalName)
+                                )
+                            );
                     }
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        attribute.LocalName,
-                        ConfigurationStrings.IssuerCertificateValidationMode
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.IssuerCertificateValidationMode
+                        )
                 )
                 {
                     foundCustomX509Validator = true;
@@ -154,64 +167,78 @@ namespace System.IdentityModel.Tokens
                     string validationModeString = attribute.Value.ToString();
 
                     if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            validationModeString,
-                            ConfigurationStrings.X509CertificateValidationModeChainTrust
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModeChainTrust
+                            )
                     )
                     {
                         certificateValidationMode = X509CertificateValidationMode.ChainTrust;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            validationModeString,
-                            ConfigurationStrings.X509CertificateValidationModePeerOrChainTrust
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModePeerOrChainTrust
+                            )
                     )
                     {
                         certificateValidationMode = X509CertificateValidationMode.PeerOrChainTrust;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            validationModeString,
-                            ConfigurationStrings.X509CertificateValidationModePeerTrust
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModePeerTrust
+                            )
                     )
                     {
                         certificateValidationMode = X509CertificateValidationMode.PeerTrust;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            validationModeString,
-                            ConfigurationStrings.X509CertificateValidationModeNone
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModeNone
+                            )
                     )
                     {
                         certificateValidationMode = X509CertificateValidationMode.None;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            validationModeString,
-                            ConfigurationStrings.X509CertificateValidationModeCustom
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModeCustom
+                            )
                     )
                     {
                         certificateValidationMode = X509CertificateValidationMode.Custom;
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.ID7011, attribute.LocalName, element.LocalName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ID7011, attribute.LocalName, element.LocalName)
+                                )
+                            );
                     }
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        attribute.LocalName,
-                        ConfigurationStrings.IssuerCertificateTrustedStoreLocation
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.IssuerCertificateTrustedStoreLocation
+                        )
                 )
                 {
                     foundCustomX509Validator = true;
@@ -219,39 +246,47 @@ namespace System.IdentityModel.Tokens
                     string trustedStoreLocationString = attribute.Value.ToString();
 
                     if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            trustedStoreLocationString,
-                            ConfigurationStrings.X509TrustedStoreLocationCurrentUser
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                trustedStoreLocationString,
+                                ConfigurationStrings.X509TrustedStoreLocationCurrentUser
+                            )
                     )
                     {
                         trustedStoreLocation = StoreLocation.CurrentUser;
                     }
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            trustedStoreLocationString,
-                            ConfigurationStrings.X509TrustedStoreLocationLocalMachine
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                trustedStoreLocationString,
+                                ConfigurationStrings.X509TrustedStoreLocationLocalMachine
+                            )
                     )
                     {
                         trustedStoreLocation = StoreLocation.LocalMachine;
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.ID7011, attribute.LocalName, element.LocalName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ID7011, attribute.LocalName, element.LocalName)
+                                )
+                            );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ID7004, attribute.LocalName, element.LocalName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ID7004, attribute.LocalName, element.LocalName)
+                            )
+                        );
                 }
             }
 
@@ -260,18 +295,19 @@ namespace System.IdentityModel.Tokens
             foreach (XmlElement childElement in configElements)
             {
                 if (
-                    StringComparer.Ordinal.Equals(
-                        childElement.LocalName,
-                        ConfigurationStrings.NameClaimType
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(childElement.LocalName, ConfigurationStrings.NameClaimType)
                 )
                 {
                     if (
                         childElement.Attributes.Count != 1
-                        || !StringComparer.Ordinal.Equals(
-                            childElement.Attributes[0].LocalName,
-                            ConfigurationStrings.Value
-                        )
+                        || !StringComparer
+                            .Ordinal
+                            .Equals(
+                                childElement.Attributes[0].LocalName,
+                                ConfigurationStrings.Value
+                            )
                     )
                     {
                         throw DiagnosticUtility.ThrowHelperInvalidOperation(
@@ -290,18 +326,19 @@ namespace System.IdentityModel.Tokens
                     this.NameClaimType = childElement.Attributes[0].Value;
                 }
                 else if (
-                    StringComparer.Ordinal.Equals(
-                        childElement.LocalName,
-                        ConfigurationStrings.RoleClaimType
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(childElement.LocalName, ConfigurationStrings.RoleClaimType)
                 )
                 {
                     if (
                         childElement.Attributes.Count != 1
-                        || !StringComparer.Ordinal.Equals(
-                            childElement.Attributes[0].LocalName,
-                            ConfigurationStrings.Value
-                        )
+                        || !StringComparer
+                            .Ordinal
+                            .Equals(
+                                childElement.Attributes[0].LocalName,
+                                ConfigurationStrings.Value
+                            )
                     )
                     {
                         throw DiagnosticUtility.ThrowHelperInvalidOperation(
@@ -342,10 +379,9 @@ namespace System.IdentityModel.Tokens
 
                 if (customValidatorType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID7007, customValidatorType)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID7007, customValidatorType));
                 }
 
                 _certificateValidator = CustomTypeElement.Resolve<X509CertificateValidator>(
@@ -446,9 +482,11 @@ namespace System.IdentityModel.Tokens
                     return (null == token.SecurityKeys || 0 == token.SecurityKeys.Count);
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID4025, audienceUriMode))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ID4025, audienceUriMode))
+                        );
             }
         }
 
@@ -468,9 +506,9 @@ namespace System.IdentityModel.Tokens
         {
             if (null == allowedAudienceUris)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "allowedAudienceUris"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("allowedAudienceUris");
             }
 
             if (null == tokenAudiences)
@@ -480,16 +518,20 @@ namespace System.IdentityModel.Tokens
 
             if (0 == tokenAudiences.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new AudienceUriValidationFailedException(SR.GetString(SR.ID1036))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new AudienceUriValidationFailedException(SR.GetString(SR.ID1036))
+                    );
             }
 
             if (0 == allowedAudienceUris.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new AudienceUriValidationFailedException(SR.GetString(SR.ID1043))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new AudienceUriValidationFailedException(SR.GetString(SR.ID1043))
+                    );
             }
 
             bool found = false;
@@ -528,11 +570,13 @@ namespace System.IdentityModel.Tokens
 #pragma warning suppress 56506
                 if (1 == tokenAudiences.Count || null != tokenAudiences[0])
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new AudienceUriValidationFailedException(
-                            SR.GetString(SR.ID1038, tokenAudiences[0].OriginalString)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new AudienceUriValidationFailedException(
+                                SR.GetString(SR.ID1038, tokenAudiences[0].OriginalString)
+                            )
+                        );
                 }
                 else
                 {
@@ -558,9 +602,11 @@ namespace System.IdentityModel.Tokens
 
                     TraceUtility.TraceString(TraceEventType.Error, sb.ToString());
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new AudienceUriValidationFailedException(SR.GetString(SR.ID1037))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new AudienceUriValidationFailedException(SR.GetString(SR.ID1037))
+                        );
                 }
             }
         }

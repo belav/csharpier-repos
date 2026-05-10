@@ -67,15 +67,17 @@ namespace System.IdentityModel.Tokens
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             }
             if (clause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("clause")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("clause"));
             }
             this.clauses.Add(clause);
         }
@@ -89,9 +91,11 @@ namespace System.IdentityModel.Tokens
                     return this[i].CreateKey();
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.KeyIdentifierCannotCreateKey))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.KeyIdentifierCannotCreateKey))
+                );
         }
 
         public TClause Find<TClause>()
@@ -100,12 +104,14 @@ namespace System.IdentityModel.Tokens
             TClause clause;
             if (!TryFind<TClause>(out clause))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.NoKeyIdentifierClauseFound, typeof(TClause)),
-                        "TClause"
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.NoKeyIdentifierClauseFound, typeof(TClause)),
+                            "TClause"
+                        )
+                    );
             }
             return clause;
         }

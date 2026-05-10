@@ -83,15 +83,21 @@ namespace Mono.Mozilla
                     {
                         short version = gluezilla_init(platform, out mozPlatform);
 
-                        monoMozDir = System.IO.Path.Combine(
-                            System.IO.Path.Combine(
-                                Environment.GetFolderPath(
-                                    Environment.SpecialFolder.LocalApplicationData
-                                ),
-                                ".mono"
-                            ),
-                            "mozilla-" + version
-                        );
+                        monoMozDir = System
+                            .IO
+                            .Path
+                            .Combine(
+                                System
+                                    .IO
+                                    .Path
+                                    .Combine(
+                                        Environment.GetFolderPath(
+                                            Environment.SpecialFolder.LocalApplicationData
+                                        ),
+                                        ".mono"
+                                    ),
+                                "mozilla-" + version
+                            );
 
                         if (!System.IO.Directory.Exists(monoMozDir))
                             System.IO.Directory.CreateDirectory(monoMozDir);

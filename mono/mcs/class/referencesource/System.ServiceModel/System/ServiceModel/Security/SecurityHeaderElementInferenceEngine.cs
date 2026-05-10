@@ -37,9 +37,9 @@ namespace System.ServiceModel.Security
                 case SecurityHeaderLayout.LaxTimestampLast:
                     return LaxTimestampLastModeSecurityHeaderElementInferenceEngine.Instance;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("layout")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("layout"));
             }
         }
     }

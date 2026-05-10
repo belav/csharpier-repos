@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var result);
 
             var beginInvoke = symbol
-                .ContainingType.GetMembers(WellKnownMemberNames.DelegateBeginInvokeName)
+                .ContainingType
+                .GetMembers(WellKnownMemberNames.DelegateBeginInvokeName)
                 .FirstOrDefault();
             if (beginInvoke != null)
                 result.Add(beginInvoke);
@@ -126,8 +127,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 .Where(syntaxFacts.IsInvocationExpression)
                 .Where(e =>
                     state
-                        .SemanticModel.GetSymbolInfo(e, cancellationToken)
-                        .Symbol?.OriginalDefinition == methodSymbol
+                        .SemanticModel
+                        .GetSymbolInfo(e, cancellationToken)
+                        .Symbol
+                        ?.OriginalDefinition == methodSymbol
                 );
 
             return invocations

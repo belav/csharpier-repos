@@ -94,7 +94,8 @@ namespace Microsoft.Extensions.Configuration
         {
             var s = $"Path = {Path}";
             var childCount = Configuration
-                .ConfigurationSectionDebugView.FromConfiguration(this, _root)
+                .ConfigurationSectionDebugView
+                .FromConfiguration(this, _root)
                 .Count;
             if (childCount > 0)
             {
@@ -103,8 +104,9 @@ namespace Microsoft.Extensions.Configuration
             if (Value is not null)
             {
                 s += $", Value = {Value}";
-                IConfigurationProvider? provider =
-                    Configuration.ConfigurationSectionDebugView.GetValueProvider(_root, Path);
+                IConfigurationProvider? provider = Configuration
+                    .ConfigurationSectionDebugView
+                    .GetValueProvider(_root, Path);
                 if (provider != null)
                 {
                     s += $", Provider = {provider}";
@@ -121,10 +123,9 @@ namespace Microsoft.Extensions.Configuration
             public ConfigurationSectionDebugView(ConfigurationSection current)
             {
                 _current = current;
-                _provider = Configuration.ConfigurationSectionDebugView.GetValueProvider(
-                    _current._root,
-                    _current.Path
-                );
+                _provider = Configuration
+                    .ConfigurationSectionDebugView
+                    .GetValueProvider(_current._root, _current.Path);
             }
 
             public string Path => _current.Path;
@@ -132,10 +133,9 @@ namespace Microsoft.Extensions.Configuration
             public string? Value => _current.Value;
             public IConfigurationProvider? Provider => _provider;
             public List<Configuration.ConfigurationSectionDebugView> Sections =>
-                Configuration.ConfigurationSectionDebugView.FromConfiguration(
-                    _current,
-                    _current._root
-                );
+                Configuration
+                    .ConfigurationSectionDebugView
+                    .FromConfiguration(_current, _current._root);
         }
     }
 }

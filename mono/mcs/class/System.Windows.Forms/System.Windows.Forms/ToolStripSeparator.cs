@@ -267,21 +267,25 @@ namespace System.Windows.Forms
             if (this.Owner != null)
             {
                 if (this.IsOnDropDown)
-                    this.Owner.Renderer.DrawSeparator(
-                        new ToolStripSeparatorRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            this.Owner.Orientation == Orientation.Horizontal ? false : true
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawSeparator(
+                            new ToolStripSeparatorRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                this.Owner.Orientation == Orientation.Horizontal ? false : true
+                            )
+                        );
                 else
-                    this.Owner.Renderer.DrawSeparator(
-                        new ToolStripSeparatorRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            this.Owner.Orientation == Orientation.Horizontal ? true : false
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawSeparator(
+                            new ToolStripSeparatorRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                this.Owner.Orientation == Orientation.Horizontal ? true : false
+                            )
+                        );
             }
         }
 

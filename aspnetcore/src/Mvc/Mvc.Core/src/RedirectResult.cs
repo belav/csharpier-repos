@@ -100,9 +100,10 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<RedirectResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<RedirectResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

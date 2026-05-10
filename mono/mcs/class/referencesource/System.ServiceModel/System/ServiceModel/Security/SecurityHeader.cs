@@ -47,9 +47,9 @@ namespace System.ServiceModel.Security
             }
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "standardsManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("standardsManager");
             }
             if (algorithmSuite == null)
             {
@@ -155,11 +155,13 @@ namespace System.ServiceModel.Security
         {
             if (this.processingStarted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.OperationCannotBeDoneAfterProcessingIsStarted)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.OperationCannotBeDoneAfterProcessingIsStarted)
+                        )
+                    );
             }
         }
 

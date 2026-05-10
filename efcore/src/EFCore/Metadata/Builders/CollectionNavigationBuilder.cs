@@ -180,25 +180,26 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
 
             if (SkipNavigation.Inverse != null)
             {
-                (
-                    (EntityType)SkipNavigation.Inverse.DeclaringEntityType
-                ).Builder.HasNoSkipNavigation(
-                    (SkipNavigation)SkipNavigation.Inverse,
-                    ConfigurationSource.Explicit
-                );
+                ((EntityType)SkipNavigation.Inverse.DeclaringEntityType)
+                    .Builder
+                    .HasNoSkipNavigation(
+                        (SkipNavigation)SkipNavigation.Inverse,
+                        ConfigurationSource.Explicit
+                    );
             }
 
-            declaringEntityType.Builder.HasNoSkipNavigation(
-                (SkipNavigation)SkipNavigation,
-                ConfigurationSource.Explicit
-            );
+            declaringEntityType
+                .Builder
+                .HasNoSkipNavigation((SkipNavigation)SkipNavigation, ConfigurationSource.Explicit);
 
-            Builder = declaringEntityType.Builder.HasRelationship(
-                (EntityType)RelatedEntityType,
-                navigationName,
-                ConfigurationSource.Explicit,
-                targetIsPrincipal: false
-            );
+            Builder = declaringEntityType
+                .Builder
+                .HasRelationship(
+                    (EntityType)RelatedEntityType,
+                    navigationName,
+                    ConfigurationSource.Explicit,
+                    targetIsPrincipal: false
+                );
             SkipNavigation = null;
         }
 
@@ -297,13 +298,14 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
 
         using (foreignKey.DeclaringEntityType.Model.DelayConventions())
         {
-            foreignKey.DeclaringEntityType.Builder.HasNoRelationship(
-                foreignKey,
-                ConfigurationSource.Explicit
-            );
+            foreignKey
+                .DeclaringEntityType
+                .Builder
+                .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
             Builder = null;
             return ((EntityType)DeclaringEntityType)
-                .Builder.HasSkipNavigation(
+                .Builder
+                .HasSkipNavigation(
                     navigationMember,
                     (EntityType)RelatedEntityType,
                     foreignKey.PrincipalToDependent?.ClrType,
@@ -367,10 +369,10 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
 
                 if (conflictingNavigation != null)
                 {
-                    foreignKey!.DeclaringEntityType.Builder.HasNoRelationship(
-                        foreignKey,
-                        ConfigurationSource.Explicit
-                    );
+                    foreignKey!
+                        .DeclaringEntityType
+                        .Builder
+                        .HasNoRelationship(foreignKey, ConfigurationSource.Explicit);
                 }
                 else
                 {
@@ -386,7 +388,8 @@ public class CollectionNavigationBuilder : IInfrastructure<IConventionForeignKey
             }
 
             return ((EntityType)RelatedEntityType)
-                .Builder.HasSkipNavigation(
+                .Builder
+                .HasSkipNavigation(
                     navigationMember,
                     (EntityType)DeclaringEntityType,
                     ConfigurationSource.Explicit,

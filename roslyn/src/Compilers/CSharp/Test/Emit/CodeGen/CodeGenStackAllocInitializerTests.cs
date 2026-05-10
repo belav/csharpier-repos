@@ -48,9 +48,9 @@ class Program
 }";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     expectedOutput: "000123",
                     verify: Verification.Fails
@@ -129,9 +129,9 @@ unsafe class Test
 }";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     expectedOutput: "424242424242424242",
                     verify: Verification.Fails
@@ -334,9 +334,9 @@ public class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     expectedOutput: "2",
                     verify: Verification.Fails
@@ -398,9 +398,9 @@ static unsafe class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.Fails
                 )
@@ -447,9 +447,9 @@ static unsafe class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     expectedOutput: "12",
                     verify: Verification.Passes
@@ -473,9 +473,9 @@ static unsafe class C
                 );
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeDebugExe,
                     expectedOutput: "12",
                     verify: Verification.Fails
@@ -545,9 +545,9 @@ static unsafe class C
             // PEVerify: [ : C::Main][mdToken=0x6000002][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.FailsPEVerify
                 )
@@ -588,9 +588,9 @@ static unsafe class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.Fails,
                     expectedOutput: @"424242"
@@ -637,9 +637,9 @@ static unsafe class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.Fails,
                     expectedOutput: @"ffffffffffffffffffffffff"
@@ -754,9 +754,9 @@ static unsafe class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.Fails,
                     expectedOutput: @"123456789"
@@ -818,9 +818,9 @@ static unsafe class C
 ";
             CompileAndVerify(
                     text,
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.Fails,
                     expectedOutput: @"123"
@@ -1094,9 +1094,9 @@ static unsafe class C
         private void Test(string pointerType, string il) =>
             CompileAndVerify(
                     GetSource(pointerType),
-                    parseOptions: TestOptions.Regular.WithLanguageVersion(
-                        LanguageVersion.CSharp7_3
-                    ),
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithLanguageVersion(LanguageVersion.CSharp7_3),
                     options: TestOptions.UnsafeReleaseExe,
                     verify: Verification.Fails,
                     expectedOutput: @"123"

@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var tokens = state
-                .Root.DescendantTokens(descendIntoTrivia: true)
+                .Root
+                .DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
                     static (token, state) => IsPotentialReference(state.SyntaxFacts, token),
                     state

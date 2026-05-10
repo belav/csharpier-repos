@@ -88,9 +88,9 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (wrappingSspiContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappingSspiContext"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappingSspiContext");
             }
             this.wrappingSspiContext = wrappingSspiContext;
             if (wrappedKey == null)
@@ -169,13 +169,13 @@ namespace System.ServiceModel.Security.Tokens
             if (id == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("id");
             if (wrappingAlgorithm == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappingAlgorithm"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappingAlgorithm");
             if (keyToWrap == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityKeyToWrap"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityKeyToWrap");
 
             this.id = id;
             this.effectiveTime = DateTime.UtcNow;

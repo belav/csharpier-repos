@@ -456,15 +456,19 @@ namespace System.Runtime.Serialization.Schema.Tests
             nsMgr.AddNamespace("xs", XmlSchema.Namespace);
             XmlNode xmlNode = xmlDoc.SelectSingleNode(xpath, nsMgr);
             if (insertAfter)
-                xmlNode.ParentNode.InsertAfter(
-                    xmlDoc.ReadNode(XmlReader.Create(new StringReader(xmlFrag))),
-                    xmlNode
-                );
+                xmlNode
+                    .ParentNode
+                    .InsertAfter(
+                        xmlDoc.ReadNode(XmlReader.Create(new StringReader(xmlFrag))),
+                        xmlNode
+                    );
             else
-                xmlNode.ParentNode.InsertBefore(
-                    xmlDoc.ReadNode(XmlReader.Create(new StringReader(xmlFrag))),
-                    xmlNode
-                );
+                xmlNode
+                    .ParentNode
+                    .InsertBefore(
+                        xmlDoc.ReadNode(XmlReader.Create(new StringReader(xmlFrag))),
+                        xmlNode
+                    );
 
             StringWriter stringWriter = new StringWriter();
             xmlDoc.Save(XmlWriter.Create(stringWriter, writerSettings));

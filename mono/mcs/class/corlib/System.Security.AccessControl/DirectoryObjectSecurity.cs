@@ -189,58 +189,66 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        descriptor.DiscretionaryAcl.AddAccess(
-                            orule.AccessControlType,
-                            SidFromIR(orule.IdentityReference),
-                            orule.AccessMask,
-                            orule.InheritanceFlags,
-                            orule.PropagationFlags,
-                            orule.ObjectFlags,
-                            orule.ObjectType,
-                            orule.InheritedObjectType
-                        );
+                        descriptor
+                            .DiscretionaryAcl
+                            .AddAccess(
+                                orule.AccessControlType,
+                                SidFromIR(orule.IdentityReference),
+                                orule.AccessMask,
+                                orule.InheritanceFlags,
+                                orule.PropagationFlags,
+                                orule.ObjectFlags,
+                                orule.ObjectType,
+                                orule.InheritedObjectType
+                            );
                         break;
                     case AccessControlModification.Set:
-                        descriptor.DiscretionaryAcl.SetAccess(
-                            orule.AccessControlType,
-                            SidFromIR(orule.IdentityReference),
-                            orule.AccessMask,
-                            orule.InheritanceFlags,
-                            orule.PropagationFlags,
-                            orule.ObjectFlags,
-                            orule.ObjectType,
-                            orule.InheritedObjectType
-                        );
+                        descriptor
+                            .DiscretionaryAcl
+                            .SetAccess(
+                                orule.AccessControlType,
+                                SidFromIR(orule.IdentityReference),
+                                orule.AccessMask,
+                                orule.InheritanceFlags,
+                                orule.PropagationFlags,
+                                orule.ObjectFlags,
+                                orule.ObjectType,
+                                orule.InheritedObjectType
+                            );
                         break;
                     case AccessControlModification.Reset:
                         PurgeAccessRules(orule.IdentityReference);
                         goto case AccessControlModification.Add;
                     case AccessControlModification.Remove:
-                        modified = descriptor.DiscretionaryAcl.RemoveAccess(
-                            orule.AccessControlType,
-                            SidFromIR(orule.IdentityReference),
-                            rule.AccessMask,
-                            orule.InheritanceFlags,
-                            orule.PropagationFlags,
-                            orule.ObjectFlags,
-                            orule.ObjectType,
-                            orule.InheritedObjectType
-                        );
+                        modified = descriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                orule.AccessControlType,
+                                SidFromIR(orule.IdentityReference),
+                                rule.AccessMask,
+                                orule.InheritanceFlags,
+                                orule.PropagationFlags,
+                                orule.ObjectFlags,
+                                orule.ObjectType,
+                                orule.InheritedObjectType
+                            );
                         break;
                     case AccessControlModification.RemoveAll:
                         PurgeAccessRules(orule.IdentityReference);
                         break;
                     case AccessControlModification.RemoveSpecific:
-                        descriptor.DiscretionaryAcl.RemoveAccessSpecific(
-                            orule.AccessControlType,
-                            SidFromIR(orule.IdentityReference),
-                            orule.AccessMask,
-                            orule.InheritanceFlags,
-                            orule.PropagationFlags,
-                            orule.ObjectFlags,
-                            orule.ObjectType,
-                            orule.InheritedObjectType
-                        );
+                        descriptor
+                            .DiscretionaryAcl
+                            .RemoveAccessSpecific(
+                                orule.AccessControlType,
+                                SidFromIR(orule.IdentityReference),
+                                orule.AccessMask,
+                                orule.InheritanceFlags,
+                                orule.PropagationFlags,
+                                orule.ObjectFlags,
+                                orule.ObjectType,
+                                orule.InheritedObjectType
+                            );
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("modification");
@@ -311,31 +319,35 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor.SystemAcl.AddAudit(
-                            orule.AuditFlags,
-                            SidFromIR(orule.IdentityReference),
-                            orule.AccessMask,
-                            orule.InheritanceFlags,
-                            orule.PropagationFlags,
-                            orule.ObjectFlags,
-                            orule.ObjectType,
-                            orule.InheritedObjectType
-                        );
+                        descriptor
+                            .SystemAcl
+                            .AddAudit(
+                                orule.AuditFlags,
+                                SidFromIR(orule.IdentityReference),
+                                orule.AccessMask,
+                                orule.InheritanceFlags,
+                                orule.PropagationFlags,
+                                orule.ObjectFlags,
+                                orule.ObjectType,
+                                orule.InheritedObjectType
+                            );
                         break;
                     case AccessControlModification.Set:
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor.SystemAcl.SetAudit(
-                            orule.AuditFlags,
-                            SidFromIR(orule.IdentityReference),
-                            orule.AccessMask,
-                            orule.InheritanceFlags,
-                            orule.PropagationFlags,
-                            orule.ObjectFlags,
-                            orule.ObjectType,
-                            orule.InheritedObjectType
-                        );
+                        descriptor
+                            .SystemAcl
+                            .SetAudit(
+                                orule.AuditFlags,
+                                SidFromIR(orule.IdentityReference),
+                                orule.AccessMask,
+                                orule.InheritanceFlags,
+                                orule.PropagationFlags,
+                                orule.ObjectFlags,
+                                orule.ObjectType,
+                                orule.InheritedObjectType
+                            );
                         break;
                     case AccessControlModification.Reset:
                         break;
@@ -343,32 +355,36 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             modified = false;
                         else
-                            modified = descriptor.SystemAcl.RemoveAudit(
-                                orule.AuditFlags,
-                                SidFromIR(orule.IdentityReference),
-                                orule.AccessMask,
-                                orule.InheritanceFlags,
-                                orule.PropagationFlags,
-                                orule.ObjectFlags,
-                                orule.ObjectType,
-                                orule.InheritedObjectType
-                            );
+                            modified = descriptor
+                                .SystemAcl
+                                .RemoveAudit(
+                                    orule.AuditFlags,
+                                    SidFromIR(orule.IdentityReference),
+                                    orule.AccessMask,
+                                    orule.InheritanceFlags,
+                                    orule.PropagationFlags,
+                                    orule.ObjectFlags,
+                                    orule.ObjectType,
+                                    orule.InheritedObjectType
+                                );
                         break;
                     case AccessControlModification.RemoveAll:
                         PurgeAuditRules(orule.IdentityReference);
                         break;
                     case AccessControlModification.RemoveSpecific:
                         if (null != descriptor.SystemAcl)
-                            descriptor.SystemAcl.RemoveAuditSpecific(
-                                orule.AuditFlags,
-                                SidFromIR(orule.IdentityReference),
-                                orule.AccessMask,
-                                orule.InheritanceFlags,
-                                orule.PropagationFlags,
-                                orule.ObjectFlags,
-                                orule.ObjectType,
-                                orule.InheritedObjectType
-                            );
+                            descriptor
+                                .SystemAcl
+                                .RemoveAuditSpecific(
+                                    orule.AuditFlags,
+                                    SidFromIR(orule.IdentityReference),
+                                    orule.AccessMask,
+                                    orule.InheritanceFlags,
+                                    orule.PropagationFlags,
+                                    orule.ObjectFlags,
+                                    orule.ObjectType,
+                                    orule.InheritedObjectType
+                                );
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("modification");

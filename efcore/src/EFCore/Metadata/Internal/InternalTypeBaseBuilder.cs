@@ -612,11 +612,14 @@ public abstract class InternalTypeBaseBuilder
                         newProperties![i] = propertyBuilder.Metadata;
                     }
                     else if (
-                        Metadata.Model.Builder.CanBeConfigured(
-                            clrType,
-                            TypeConfigurationType.Property,
-                            ConfigurationSource.Convention
-                        )
+                        Metadata
+                            .Model
+                            .Builder
+                            .CanBeConfigured(
+                                clrType,
+                                TypeConfigurationType.Property,
+                                ConfigurationSource.Convention
+                            )
                     )
                     {
                         canReuniquify = true;
@@ -717,7 +720,9 @@ public abstract class InternalTypeBaseBuilder
                 )
                 {
                     property = property
-                        .DeclaringType.Builder.Property(
+                        .DeclaringType
+                        .Builder
+                        .Property(
                             property.ClrType.MakeNullable(false),
                             property.Name,
                             configurationSource.Value
@@ -727,7 +732,9 @@ public abstract class InternalTypeBaseBuilder
                 else
                 {
                     property = property
-                        .DeclaringType.Builder.Property(property.Name, configurationSource.Value)!
+                        .DeclaringType
+                        .Builder
+                        .Property(property.Name, configurationSource.Value)!
                         .Metadata;
                 }
             }
@@ -867,9 +874,9 @@ public abstract class InternalTypeBaseBuilder
         var detachedProperties = new List<InternalPropertyBuilder>();
         foreach (var propertyToDetach in propertiesToDetach)
         {
-            var property = propertyToDetach.DeclaringType.FindDeclaredProperty(
-                propertyToDetach.Name
-            );
+            var property = propertyToDetach
+                .DeclaringType
+                .FindDeclaredProperty(propertyToDetach.Name);
             if (property != null)
             {
                 var propertyBuilder = property.Builder;
@@ -880,10 +887,10 @@ public abstract class InternalTypeBaseBuilder
                 ConfigurationSource? removedConfigurationSource;
                 if (property.DeclaringType.IsInModel)
                 {
-                    removedConfigurationSource = property.DeclaringType.Builder.RemoveProperty(
-                        property,
-                        property.GetConfigurationSource()
-                    );
+                    removedConfigurationSource = property
+                        .DeclaringType
+                        .Builder
+                        .RemoveProperty(property, property.GetConfigurationSource());
                 }
                 else
                 {
@@ -934,9 +941,9 @@ public abstract class InternalTypeBaseBuilder
         {
             if (conflictingComplexProperty.GetConfigurationSource() != ConfigurationSource.Explicit)
             {
-                conflictingComplexProperty.DeclaringType.RemoveComplexProperty(
-                    conflictingComplexProperty
-                );
+                conflictingComplexProperty
+                    .DeclaringType
+                    .RemoveComplexProperty(conflictingComplexProperty);
             }
         }
     }
@@ -1065,10 +1072,10 @@ public abstract class InternalTypeBaseBuilder
 
             foreach (var index in property.GetContainingIndexes().ToList())
             {
-                var removed = index.DeclaringEntityType.Builder.HasNoIndex(
-                    index,
-                    configurationSource
-                );
+                var removed = index
+                    .DeclaringEntityType
+                    .Builder
+                    .HasNoIndex(index, configurationSource);
                 Check.DebugAssert(removed != null, "removed is null");
             }
 

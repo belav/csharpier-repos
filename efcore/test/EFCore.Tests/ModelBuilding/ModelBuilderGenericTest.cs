@@ -65,7 +65,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             modelBuilder.FinalizeModel();
 
             var property = modelBuilder
-                .Model.FindEntityType(typeof(DoubleProperty))!
+                .Model
+                .FindEntityType(typeof(DoubleProperty))!
                 .GetProperty("Property");
             Assert.EndsWith(
                 typeof(IReplaceable).Name + "." + nameof(IReplaceable.Property),
@@ -98,9 +99,11 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             modelBuilder.FinalizeModel();
 
             var property = modelBuilder
-                .Model.FindEntityType(typeof(ComplexProperties))!
+                .Model
+                .FindEntityType(typeof(ComplexProperties))!
                 .FindComplexProperty(nameof(DoubleProperty))!
-                .ComplexType.FindProperty("Property")!;
+                .ComplexType
+                .FindProperty("Property")!;
             Assert.EndsWith(
                 typeof(IReplaceable).Name + "." + nameof(IReplaceable.Property),
                 property.GetIdentifyingMemberInfo()!.Name

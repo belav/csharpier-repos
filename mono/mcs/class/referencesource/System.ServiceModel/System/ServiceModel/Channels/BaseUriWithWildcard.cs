@@ -53,16 +53,18 @@ namespace System.ServiceModel.Channels
 
             if (urlParameters.Length != segmentCount)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new UriFormatException(
-                        SR.GetString(
-                            SR.Hosting_MisformattedBinding,
-                            binding,
-                            protocol,
-                            sampleBinding
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new UriFormatException(
+                            SR.GetString(
+                                SR.Hosting_MisformattedBinding,
+                                binding,
+                                protocol,
+                                sampleBinding
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             int currentIndex = segmentCount - 1;
@@ -84,11 +86,18 @@ namespace System.ServiceModel.Channels
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new UriFormatException(
-                            SR.GetString(SR.Hosting_MisformattedPort, protocol, binding, portString)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new UriFormatException(
+                                SR.GetString(
+                                    SR.Hosting_MisformattedPort,
+                                    protocol,
+                                    binding,
+                                    portString
+                                )
+                            )
+                        );
                 }
 
                 if (port == defaultPort)
@@ -111,11 +120,13 @@ namespace System.ServiceModel.Channels
 
                 DiagnosticUtility.TraceHandledException(exception, TraceEventType.Error);
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new UriFormatException(
-                        SR.GetString(SR.Hosting_MisformattedBindingData, binding, protocol)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new UriFormatException(
+                            SR.GetString(SR.Hosting_MisformattedBindingData, binding, protocol)
+                        )
+                    );
             }
             SetComparisonAddressAndHashCode();
         }
@@ -285,9 +296,11 @@ namespace System.ServiceModel.Channels
                 );
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new UriFormatException(SR.GetString(SR.Hosting_NotSupportedProtocol, binding))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new UriFormatException(SR.GetString(SR.Hosting_NotSupportedProtocol, binding))
+                );
         }
 
         internal static BaseUriWithWildcard CreateHostedPipeUri(string binding, string path)
@@ -379,10 +392,12 @@ namespace System.ServiceModel.Channels
 
             if (!HostNameComparisonModeHelper.IsDefined(this.HostNameComparisonMode))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "context",
-                    SR.GetString(SR.Hosting_BaseUriDeserializedNotValid)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "context",
+                        SR.GetString(SR.Hosting_BaseUriDeserializedNotValid)
+                    );
             }
             this.SetComparisonAddressAndHashCode();
         }

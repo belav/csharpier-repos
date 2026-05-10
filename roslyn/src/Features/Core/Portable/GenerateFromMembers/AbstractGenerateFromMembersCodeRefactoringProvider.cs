@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
                     )
                     .First();
                 var parameterName = parameterNamingRule
-                    .NamingStyle.MakeCompliant(identifierNameParts.BaseName)
+                    .NamingStyle
+                    .MakeCompliant(identifierNameParts.BaseName)
                     .First();
 
                 parameters.Add(

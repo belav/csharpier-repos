@@ -127,13 +127,15 @@ public class ImageTagHelper : UrlResolutionTagHelper
             // not function properly.
             Src = output.Attributes[SrcAttributeName].Value as string;
 
-            output.Attributes.SetAttribute(
-                SrcAttributeName,
-                FileVersionProvider.AddFileVersionToPath(
-                    ViewContext.HttpContext.Request.PathBase,
-                    Src
-                )
-            );
+            output
+                .Attributes
+                .SetAttribute(
+                    SrcAttributeName,
+                    FileVersionProvider.AddFileVersionToPath(
+                        ViewContext.HttpContext.Request.PathBase,
+                        Src
+                    )
+                );
         }
     }
 
@@ -141,8 +143,10 @@ public class ImageTagHelper : UrlResolutionTagHelper
     {
         if (FileVersionProvider == null)
         {
-            FileVersionProvider =
-                ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+            FileVersionProvider = ViewContext
+                .HttpContext
+                .RequestServices
+                .GetRequiredService<IFileVersionProvider>();
         }
     }
 }

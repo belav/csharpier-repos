@@ -28,9 +28,9 @@ namespace System.ServiceModel.Dispatcher
         public SyncMethodInvoker(MethodInfo method)
         {
             if (method == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("method")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("method"));
 
             this.method = method;
         }
@@ -38,14 +38,14 @@ namespace System.ServiceModel.Dispatcher
         public SyncMethodInvoker(Type type, string methodName)
         {
             if (type == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("type")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("type"));
 
             if (methodName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("methodName")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("methodName"));
 
             this.type = type;
             this.methodName = methodName;
@@ -88,31 +88,37 @@ namespace System.ServiceModel.Dispatcher
             EnsureIsInitialized();
 
             if (instance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                    );
             if (inputs == null)
             {
                 if (this.inputParameterCount > 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxInputParametersToServiceNull,
+                                    this.inputParameterCount
+                                )
+                            )
+                        );
+            }
+            else if (inputs.Length != this.inputParameterCount)
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
                         new InvalidOperationException(
                             SR.GetString(
-                                SR.SFxInputParametersToServiceNull,
-                                this.inputParameterCount
+                                SR.SFxInputParametersToServiceInvalid,
+                                this.inputParameterCount,
+                                inputs.Length
                             )
                         )
                     );
-            }
-            else if (inputs.Length != this.inputParameterCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInputParametersToServiceInvalid,
-                            this.inputParameterCount,
-                            inputs.Length
-                        )
-                    )
-                );
 
             outputs = EmptyArray.Allocate(this.outputParameterCount);
 
@@ -128,9 +134,11 @@ namespace System.ServiceModel.Dispatcher
                 try
                 {
                     if (
-                        System.ServiceModel.Channels.UnsafeNativeMethods.QueryPerformanceCounter(
-                            out startCounter
-                        ) == 0
+                        System
+                            .ServiceModel
+                            .Channels
+                            .UnsafeNativeMethods
+                            .QueryPerformanceCounter(out startCounter) == 0
                     )
                     {
                         startCounter = -1;
@@ -142,12 +150,14 @@ namespace System.ServiceModel.Dispatcher
                         securityException,
                         TraceEventType.Warning
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(SR.PartialTrustPerformanceCountersNotEnabled),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(SR.PartialTrustPerformanceCountersNotEnabled),
+                                securityException
+                            )
+                        );
                 }
             }
 
@@ -232,9 +242,9 @@ namespace System.ServiceModel.Dispatcher
             catch (System.Security.SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    AuthorizationBehavior.CreateAccessDeniedFaultException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
             }
             finally
             {
@@ -243,9 +253,11 @@ namespace System.ServiceModel.Dispatcher
                     long elapsedTime = 0;
                     if (
                         startCounter >= 0
-                        && System.ServiceModel.Channels.UnsafeNativeMethods.QueryPerformanceCounter(
-                            out stopCounter
-                        ) != 0
+                        && System
+                            .ServiceModel
+                            .Channels
+                            .UnsafeNativeMethods
+                            .QueryPerformanceCounter(out stopCounter) != 0
                     )
                     {
                         elapsedTime = stopCounter - startCounter;
@@ -313,16 +325,16 @@ namespace System.ServiceModel.Dispatcher
             object state
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         void EnsureIsInitialized()

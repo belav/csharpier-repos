@@ -69,17 +69,17 @@ namespace System.ServiceModel.Routing.Configuration
                 ConfigurationManager.GetSection("system.serviceModel/routing");
             if (routingSection == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.RoutingSectionNotFound)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR2.RoutingSectionNotFound));
             }
 
             FilterTableEntryCollection routingTableElement = routingSection.FilterTables[name];
             if (routingTableElement == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.RoutingTableNotFound(name))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR2.RoutingTableNotFound(name)));
             }
             XmlNamespaceManager xmlNamespaces = new XPathMessageContext();
             foreach (NamespaceElement nsElement in routingSection.NamespaceTable)
@@ -95,9 +95,13 @@ namespace System.ServiceModel.Routing.Configuration
                 FilterElement filterElement = filterElements[entry.FilterName];
                 if (filterElement == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR2.FilterElementNotFound(entry.FilterName))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.FilterElementNotFound(entry.FilterName)
+                            )
+                        );
                 }
                 MessageFilter filter = filterElement.CreateFilter(xmlNamespaces, filterElements);
                 //retreive alternate service endpoints
@@ -108,9 +112,13 @@ namespace System.ServiceModel.Routing.Configuration
                         routingSection.BackupLists[entry.BackupList];
                     if (alternateEndpointListElement == null)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR2.BackupListNotFound(entry.BackupList))
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR2.BackupListNotFound(entry.BackupList)
+                                )
+                            );
                     }
                     endpoints = alternateEndpointListElement.CreateAlternateEndpoints();
                 }

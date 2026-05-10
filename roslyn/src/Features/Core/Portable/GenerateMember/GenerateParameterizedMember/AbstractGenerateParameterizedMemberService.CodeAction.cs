@@ -77,13 +77,17 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             )
             {
                 var syntaxFactory = _document
-                    .Project.Solution.Services.GetLanguageServices(_state.TypeToGenerateIn.Language)
+                    .Project
+                    .Solution
+                    .Services
+                    .GetLanguageServices(_state.TypeToGenerateIn.Language)
                     .GetService<SyntaxGenerator>();
 
                 if (_generateProperty)
                 {
                     var property = await _state
-                        .SignatureInfo.GeneratePropertyAsync(
+                        .SignatureInfo
+                        .GeneratePropertyAsync(
                             syntaxFactory,
                             _isAbstract,
                             _state.IsWrittenTo,
@@ -113,11 +117,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 else
                 {
                     var method = await _state
-                        .SignatureInfo.GenerateMethodAsync(
-                            syntaxFactory,
-                            _isAbstract,
-                            cancellationToken
-                        )
+                        .SignatureInfo
+                        .GenerateMethodAsync(syntaxFactory, _isAbstract, cancellationToken)
                         .ConfigureAwait(false);
 
                     var result = await CodeGenerator

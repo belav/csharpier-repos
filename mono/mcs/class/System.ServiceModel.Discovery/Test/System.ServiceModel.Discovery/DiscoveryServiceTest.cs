@@ -68,21 +68,27 @@ namespace MonoTests.System.ServiceModel.Discovery
                 )
             );
 
-            var v11 = host.Description.Endpoints.FirstOrDefault(ep =>
-                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01"
-            );
+            var v11 = host.Description
+                .Endpoints
+                .FirstOrDefault(ep =>
+                    ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01"
+                );
             Assert.IsNotNull(v11, "v11");
             Assert.AreEqual("BasicHttpBinding_DiscoveryProxy", v11.Name, "v11.Name");
 
-            var v200504 = host.Description.Endpoints.FirstOrDefault(ep =>
-                ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery"
-            );
+            var v200504 = host.Description
+                .Endpoints
+                .FirstOrDefault(ep =>
+                    ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery"
+                );
             Assert.IsNotNull(v200504, "v200504");
             Assert.AreEqual("BasicHttpBinding_DiscoveryProxy", v200504.Name, "v200504.Name");
 
-            var vCD1 = host.Description.Endpoints.FirstOrDefault(ep =>
-                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09"
-            );
+            var vCD1 = host.Description
+                .Endpoints
+                .FirstOrDefault(ep =>
+                    ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09"
+                );
             Assert.IsNotNull(vCD1, "vCD1");
             Assert.AreEqual("BasicHttpBinding_DiscoveryProxy", vCD1.Name, "v11.Name");
         }
@@ -106,21 +112,27 @@ namespace MonoTests.System.ServiceModel.Discovery
                 )
             );
 
-            var v11 = host.Description.Endpoints.FirstOrDefault(ep =>
-                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01"
-            );
+            var v11 = host.Description
+                .Endpoints
+                .FirstOrDefault(ep =>
+                    ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2009/01"
+                );
             Assert.IsNotNull(v11, "v11");
             Assert.AreEqual("CustomBinding_TargetService", v11.Name, "v11.Name");
 
-            var v200504 = host.Description.Endpoints.FirstOrDefault(ep =>
-                ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery"
-            );
+            var v200504 = host.Description
+                .Endpoints
+                .FirstOrDefault(ep =>
+                    ep.Contract.Namespace == "http://schemas.xmlsoap.org/ws/2005/04/discovery"
+                );
             Assert.IsNotNull(v200504, "v200504");
             Assert.AreEqual("CustomBinding_TargetService", v200504.Name, "v200504.Name");
 
-            var vCD1 = host.Description.Endpoints.FirstOrDefault(ep =>
-                ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09"
-            );
+            var vCD1 = host.Description
+                .Endpoints
+                .FirstOrDefault(ep =>
+                    ep.Contract.Namespace == "http://docs.oasis-open.org/ws-dd/ns/discovery/2008/09"
+                );
             Assert.IsNotNull(vCD1, "vCD1");
             Assert.AreEqual("CustomBinding_TargetService", vCD1.Name, "v11.Name");
         }

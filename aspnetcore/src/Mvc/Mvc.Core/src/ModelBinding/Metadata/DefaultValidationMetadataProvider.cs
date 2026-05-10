@@ -38,14 +38,17 @@ internal sealed class DefaultValidationMetadataProvider : IValidationMetadataPro
         if (context.Key.MetadataKind == ModelMetadataKind.Property)
         {
             var validationFilter = context
-                .PropertyAttributes!.OfType<IPropertyValidationFilter>()
+                .PropertyAttributes!
+                .OfType<IPropertyValidationFilter>()
                 .FirstOrDefault();
             if (validationFilter == null)
             {
                 // No IPropertyValidationFilter attributes on the property.
                 // Check if container has such an attribute.
                 validationFilter = context
-                    .Key.ContainerType!.GetCustomAttributes(inherit: true)
+                    .Key
+                    .ContainerType!
+                    .GetCustomAttributes(inherit: true)
                     .OfType<IPropertyValidationFilter>()
                     .FirstOrDefault();
             }
@@ -55,7 +58,8 @@ internal sealed class DefaultValidationMetadataProvider : IValidationMetadataPro
         else if (context.Key.MetadataKind == ModelMetadataKind.Parameter)
         {
             var validationFilter = context
-                .ParameterAttributes!.OfType<IPropertyValidationFilter>()
+                .ParameterAttributes!
+                .OfType<IPropertyValidationFilter>()
                 .FirstOrDefault();
             context.ValidationMetadata.PropertyValidationFilter = validationFilter;
         }

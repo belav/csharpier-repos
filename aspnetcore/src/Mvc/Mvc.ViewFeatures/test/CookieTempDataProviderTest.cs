@@ -38,9 +38,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext.Features.Set<IResponseCookiesFeature>(
-            new FakeResponseCookiesFeature(responseCookies)
-        );
+        httpContext
+            .Features
+            .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -128,9 +128,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext.Features.Set<IResponseCookiesFeature>(
-            new FakeResponseCookiesFeature(responseCookies)
-        );
+        httpContext
+            .Features
+            .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -166,9 +166,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext.Features.Set<IResponseCookiesFeature>(
-            new FakeResponseCookiesFeature(responseCookies)
-        );
+        httpContext
+            .Features
+            .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
         httpContext.Request.IsHttps = isRequestSecure;
 
         // Act
@@ -205,9 +205,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = pathBase;
-        httpContext.Features.Set<IResponseCookiesFeature>(
-            new FakeResponseCookiesFeature(responseCookies)
-        );
+        httpContext
+            .Features
+            .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -254,9 +254,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = requestPathBase;
-        httpContext.Features.Set<IResponseCookiesFeature>(
-            new FakeResponseCookiesFeature(responseCookies)
-        );
+        httpContext
+            .Features
+            .Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);

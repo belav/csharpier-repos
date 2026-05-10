@@ -116,9 +116,9 @@ namespace System.Workflow.Runtime.DebugEngine
 
                 try
                 {
-                    RegistryKey debugEngineSubKey = Registry.LocalMachine.OpenSubKey(
-                        RegistryKeys.DebuggerSubKey
-                    );
+                    RegistryKey debugEngineSubKey = Registry
+                        .LocalMachine
+                        .OpenSubKey(RegistryKeys.DebuggerSubKey);
                     if (debugEngineSubKey != null)
                     {
                         string evaluationFrameTypeName =

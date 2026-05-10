@@ -92,8 +92,9 @@ namespace System.ServiceModel.Description
             ServiceHostBase serviceHostBase
         )
         {
-            ServiceMetadataExtension sme =
-                serviceHostBase.Extensions.Find<ServiceMetadataExtension>();
+            ServiceMetadataExtension sme = serviceHostBase
+                .Extensions
+                .Find<ServiceMetadataExtension>();
             if (sme == null)
             {
                 sme = new ServiceMetadataExtension();

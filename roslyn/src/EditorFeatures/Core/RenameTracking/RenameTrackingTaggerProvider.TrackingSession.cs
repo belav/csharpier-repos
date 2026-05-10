@@ -63,10 +63,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             {
                 _threadingContext = stateMachine.ThreadingContext;
                 _asyncListener = asyncListener;
-                _trackingSpan = snapshotSpan.Snapshot.CreateTrackingSpan(
-                    snapshotSpan.Span,
-                    SpanTrackingMode.EdgeInclusive
-                );
+                _trackingSpan = snapshotSpan
+                    .Snapshot
+                    .CreateTrackingSpan(snapshotSpan.Span, SpanTrackingMode.EdgeInclusive);
                 _cancellationToken = _cancellationTokenSource.Token;
 
                 if (snapshotSpan.Length > 0)
@@ -92,10 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                             async t =>
                             {
                                 await _threadingContext
-                                    .JoinableTaskFactory.SwitchToMainThreadAsync(
-                                        alwaysYield: true,
-                                        _cancellationToken
-                                    )
+                                    .JoinableTaskFactory
+                                    .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken)
                                     .NoThrowAwaitable();
 
                                 // Avoid throwing an exception in this common case
@@ -134,10 +131,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                         async t =>
                         {
                             await _threadingContext
-                                .JoinableTaskFactory.SwitchToMainThreadAsync(
-                                    alwaysYield: true,
-                                    _cancellationToken
-                                )
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync(alwaysYield: true, _cancellationToken)
                                 .NoThrowAwaitable();
 
                             // Avoid throwing an exception in this common case
@@ -348,10 +343,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     return TriggerIdentifierKind.NotRenamable;
                 }
 
-                return sourceSymbol.Locations.Any(
-                    static (loc, token) => loc == token.GetLocation(),
-                    token
-                )
+                return sourceSymbol
+                    .Locations
+                    .Any(static (loc, token) => loc == token.GetLocation(), token)
                     ? TriggerIdentifierKind.RenamableDeclaration
                     : TriggerIdentifierKind.RenamableReference;
             }

@@ -2208,9 +2208,11 @@ public abstract class ComplexTypeIntegrationTestBase
                     binding =>
                     {
                         // A real details provider could customize message based on BindingMetadataProviderContext.
-                        binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
-                            name => $"Hurts when '{name}' is not provided."
-                        );
+                        binding
+                            .ModelBindingMessageProvider
+                            .SetMissingBindRequiredValueAccessor(name =>
+                                $"Hurts when '{name}' is not provided."
+                            );
                     }
                 )
             );

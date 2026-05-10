@@ -536,7 +536,8 @@ namespace System.Globalization
             bool compareResult =
                 CultureInfo
                     .GetCultureInfo(_textInfoName)
-                    .CompareInfo.Compare(
+                    .CompareInfo
+                    .Compare(
                         "abcdefghijklmnopqrstuvwxyz",
                         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                         CompareOptions.IgnoreCase

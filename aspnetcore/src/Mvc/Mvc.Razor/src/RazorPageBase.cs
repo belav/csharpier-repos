@@ -645,21 +645,25 @@ public abstract class RazorPageBase : IRazorPage
                 // attribute is treated as a TagHelper attribute so it's only available in
                 // TagHelperContext.AllAttributes for TagHelper authors to see (if they want to see why the
                 // attribute was removed from TagHelperOutput.Attributes).
-                _tagHelperAttributeInfo.ExecutionContext.AddTagHelperAttribute(
-                    _tagHelperAttributeInfo.Name,
-                    value?.ToString() ?? string.Empty,
-                    _tagHelperAttributeInfo.AttributeValueStyle
-                );
+                _tagHelperAttributeInfo
+                    .ExecutionContext
+                    .AddTagHelperAttribute(
+                        _tagHelperAttributeInfo.Name,
+                        value?.ToString() ?? string.Empty,
+                        _tagHelperAttributeInfo.AttributeValueStyle
+                    );
                 _tagHelperAttributeInfo.Suppressed = true;
                 return;
             }
             else if (IsBoolTrueWithEmptyPrefixValue(prefix, value))
             {
-                _tagHelperAttributeInfo.ExecutionContext.AddHtmlAttribute(
-                    _tagHelperAttributeInfo.Name,
-                    _tagHelperAttributeInfo.Name,
-                    _tagHelperAttributeInfo.AttributeValueStyle
-                );
+                _tagHelperAttributeInfo
+                    .ExecutionContext
+                    .AddHtmlAttribute(
+                        _tagHelperAttributeInfo.Name,
+                        _tagHelperAttributeInfo.Name,
+                        _tagHelperAttributeInfo.AttributeValueStyle
+                    );
                 _tagHelperAttributeInfo.Suppressed = true;
                 return;
             }
@@ -753,8 +757,10 @@ public abstract class RazorPageBase : IRazorPage
         var viewContext = ViewContext;
         if (viewContext != null)
         {
-            var antiforgery =
-                viewContext.HttpContext.RequestServices.GetRequiredService<IAntiforgery>();
+            var antiforgery = viewContext
+                .HttpContext
+                .RequestServices
+                .GetRequiredService<IAntiforgery>();
             antiforgery.SetCookieTokenAndHeader(viewContext.HttpContext);
         }
         return HtmlString.Empty;

@@ -40,10 +40,9 @@ public class TypeEquals1
 
             if (!t1.Equals((Object)t2))
             {
-                TestLibrary.TestFramework.LogError(
-                    "001",
-                    "Two Types of the same class are not equals"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("001", "Two Types of the same class are not equals");
                 retVal = false;
             }
         }
@@ -61,9 +60,9 @@ public class TypeEquals1
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest2: Compare Type and instance are not equal"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest2: Compare Type and instance are not equal");
 
         try
         {
@@ -90,9 +89,9 @@ public class TypeEquals1
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest3: Compare Type and different instance are not equal"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest3: Compare Type and different instance are not equal");
 
         try
         {
@@ -128,10 +127,9 @@ public class TypeEquals1
 
             if (t1.Equals(t2))
             {
-                TestLibrary.TestFramework.LogError(
-                    "007",
-                    "Type.Equals returns true for different types"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("007", "Type.Equals returns true for different types");
                 retVal = false;
             }
         }
@@ -157,10 +155,9 @@ public class TypeEquals1
 
             if (!t1.Equals((Object)t1))
             {
-                TestLibrary.TestFramework.LogError(
-                    "009",
-                    "Type.Equals returns false when comparing a type with itself"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError("009", "Type.Equals returns false when comparing a type with itself");
                 retVal = false;
             }
         }

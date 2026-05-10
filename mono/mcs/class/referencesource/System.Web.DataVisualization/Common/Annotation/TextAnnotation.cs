@@ -403,10 +403,33 @@ namespace System.Web.UI.DataVisualization.Charting
                     using (GraphicsPath ellipsePath = new GraphicsPath())
                     {
                         ellipsePath.AddEllipse(textPosition);
-                        this.Common.HotRegionsList.AddHotRegion(
-                            graphics,
-                            ellipsePath,
-                            true,
+                        this.Common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                graphics,
+                                ellipsePath,
+                                true,
+                                ReplaceKeywords(this.ToolTip),
+#if Microsoft_CONTROL
+                                String.Empty,
+                                String.Empty,
+                                String.Empty,
+#else // Microsoft_CONTROL
+                                ReplaceKeywords(this.Url),
+                                ReplaceKeywords(this.MapAreaAttributes),
+                                ReplaceKeywords(this.PostBackValue),
+#endif // Microsoft_CONTROL
+                                this,
+                                ChartElementType.Annotation
+                            );
+                    }
+                }
+                else
+                {
+                    this.Common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            textPosition,
                             ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
                             String.Empty,
@@ -418,28 +441,9 @@ namespace System.Web.UI.DataVisualization.Charting
                             ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
                             this,
-                            ChartElementType.Annotation
+                            ChartElementType.Annotation,
+                            String.Empty
                         );
-                    }
-                }
-                else
-                {
-                    this.Common.HotRegionsList.AddHotRegion(
-                        textPosition,
-                        ReplaceKeywords(this.ToolTip),
-#if Microsoft_CONTROL
-                        String.Empty,
-                        String.Empty,
-                        String.Empty,
-#else // Microsoft_CONTROL
-                        ReplaceKeywords(this.Url),
-                        ReplaceKeywords(this.MapAreaAttributes),
-                        ReplaceKeywords(this.PostBackValue),
-#endif // Microsoft_CONTROL
-                        this,
-                        ChartElementType.Annotation,
-                        String.Empty
-                    );
                 }
             }
 

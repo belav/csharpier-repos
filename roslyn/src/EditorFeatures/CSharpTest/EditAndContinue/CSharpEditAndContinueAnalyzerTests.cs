@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                     SourceText.From(source, Encoding.UTF8),
                     filePath: Path.Combine(TempRoot.Root, "test.cs")
                 )
-                .Project.Solution;
+                .Project
+                .Solution;
         }
 
         private static void TestSpans(string source, Func<SyntaxNode, bool> hasLabel)
@@ -523,7 +524,8 @@ class C
 
             var projectId = ProjectId.CreateNewId();
             var oldSolution = workspace
-                .CurrentSolution.AddProject(
+                .CurrentSolution
+                .AddProject(
                     ProjectInfo.Create(
                         projectId,
                         VersionStamp.Create(),
@@ -534,7 +536,8 @@ class C
                 )
                 .GetProject(projectId)
                 .AddDocument("test.cs", root, filePath: Path.Combine(TempRoot.Root, "test.cs"))
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var oldProject = oldSolution.Projects.Single();
             var oldDocument = oldProject.Documents.Single();
@@ -591,10 +594,9 @@ class C
                 var oldDocument = oldProject.Documents.Single();
                 var documentId = oldDocument.Id;
 
-                var newSolution = workspace.CurrentSolution.WithDocumentText(
-                    documentId,
-                    SourceText.From(source2)
-                );
+                var newSolution = workspace
+                    .CurrentSolution
+                    .WithDocumentText(documentId, SourceText.From(source2));
 
                 var result = await AnalyzeDocumentAsync(
                     oldProject,
@@ -910,7 +912,8 @@ class D
             AssertEx.Equal(
                 new[] { expectedDiagnostic },
                 result
-                    .RudeEditErrors.Select(d => d.ToDiagnostic(newSyntaxTree))
+                    .RudeEditErrors
+                    .Select(d => d.ToDiagnostic(newSyntaxTree))
                     .Select(d =>
                         $"{d.Id}: {d.GetMessage().Split(new[] { Environment.NewLine }, StringSplitOptions.None).First()}"
                     )

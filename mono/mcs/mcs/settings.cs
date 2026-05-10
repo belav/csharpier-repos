@@ -1973,9 +1973,14 @@ namespace Mono.CSharp
         void Version()
         {
             string version = System
-                .Reflection.MethodBase.GetCurrentMethod()
-                .DeclaringType.Assembly.GetName()
-                .Version.ToString();
+                .Reflection
+                .MethodBase
+                .GetCurrentMethod()
+                .DeclaringType
+                .Assembly
+                .GetName()
+                .Version
+                .ToString();
             output.WriteLine("Mono C# compiler version {0}", version);
         }
     }

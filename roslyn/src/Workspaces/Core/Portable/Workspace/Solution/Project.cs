@@ -153,9 +153,9 @@ namespace Microsoft.CodeAnalysis
         /// The list of all other projects within the same solution that this project references.
         /// </summary>
         public IEnumerable<ProjectReference> ProjectReferences =>
-            _projectState.ProjectReferences.Where(pr =>
-                this.Solution.ContainsProject(pr.ProjectId)
-            );
+            _projectState
+                .ProjectReferences
+                .Where(pr => this.Solution.ContainsProject(pr.ProjectId));
 
         /// <summary>
         /// The list of all other projects that this project references, including projects that
@@ -339,18 +339,22 @@ namespace Microsoft.CodeAnalysis
         > GetSourceGeneratedDocumentsAsync(CancellationToken cancellationToken = default)
         {
             var generatedDocumentStates = await _solution
-                .State.GetSourceGeneratedDocumentStatesAsync(this.State, cancellationToken)
+                .State
+                .GetSourceGeneratedDocumentStatesAsync(this.State, cancellationToken)
                 .ConfigureAwait(false);
 
             // return an iterator to avoid eagerly allocating all the document instances
-            return generatedDocumentStates.States.Values.Select(state =>
-                ImmutableHashMapExtensions.GetOrAdd(
-                    ref _idToSourceGeneratedDocumentMap,
-                    state.Id,
-                    s_createSourceGeneratedDocumentFunction,
-                    (state, this)
-                )
-            )!;
+            return generatedDocumentStates
+                .States
+                .Values
+                .Select(state =>
+                    ImmutableHashMapExtensions.GetOrAdd(
+                        ref _idToSourceGeneratedDocumentMap,
+                        state.Id,
+                        s_createSourceGeneratedDocumentFunction,
+                        (state, this)
+                    )
+                )!;
         }
 
         internal async ValueTask<
@@ -389,7 +393,8 @@ namespace Microsoft.CodeAnalysis
 
             // We'll have to run generators if we haven't already and now try to find it.
             var generatedDocumentStates = await _solution
-                .State.GetSourceGeneratedDocumentStatesAsync(State, cancellationToken)
+                .State
+                .GetSourceGeneratedDocumentStatesAsync(State, cancellationToken)
                 .ConfigureAwait(false);
             var generatedDocumentState = generatedDocumentStates.GetState(documentId);
             if (generatedDocumentState is null)
@@ -435,8 +440,9 @@ namespace Microsoft.CodeAnalysis
 
             // Trickier case now: it's possible we generated this, but we don't actually have the SourceGeneratedDocument for it, so let's go
             // try to fetch the state.
-            var documentState =
-                _solution.State.TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(documentId);
+            var documentState = _solution
+                .State
+                .TryGetSourceGeneratedDocumentStateForAlreadyGeneratedId(documentId);
             if (documentState == null)
                 return null;
 
@@ -452,10 +458,9 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken
         )
         {
-            return _solution.State.GetSourceGeneratorDiagnosticsAsync(
-                this.State,
-                cancellationToken
-            );
+            return _solution
+                .State
+                .GetSourceGeneratorDiagnosticsAsync(this.State, cancellationToken);
         }
 
         internal Task<bool> ContainsSymbolsWithNameAsync(
@@ -595,10 +600,10 @@ namespace Microsoft.CodeAnalysis
             Project,
             AnalyzerConfigDocument?
         > s_tryCreateAnalyzerConfigDocumentFunction = (documentId, project) =>
-            project._projectState.AnalyzerConfigDocumentStates.TryGetState(
-                documentId,
-                out var state
-            )
+            project
+                ._projectState
+                .AnalyzerConfigDocumentStates
+                .TryGetState(documentId, out var state)
                 ? new AnalyzerConfigDocument(project, state)
                 : null;
 
@@ -724,8 +729,8 @@ namespace Microsoft.CodeAnalysis
         /// Creates a new instance of this project updated to have the new default namespace.
         /// </summary>
         public Project WithDefaultNamespace(string defaultNamespace) =>
-            this
-                .Solution.WithProjectDefaultNamespace(this.Id, defaultNamespace)
+            this.Solution
+                .WithProjectDefaultNamespace(this.Id, defaultNamespace)
                 .GetProject(this.Id)!;
 
         /// <summary>
@@ -792,8 +797,8 @@ namespace Microsoft.CodeAnalysis
         /// with the specified ones.
         /// </summary>
         public Project WithMetadataReferences(IEnumerable<MetadataReference> metadataReferences) =>
-            this
-                .Solution.WithProjectMetadataReferences(this.Id, metadataReferences)
+            this.Solution
+                .WithProjectMetadataReferences(this.Id, metadataReferences)
                 .GetProject(this.Id)!;
 
         /// <summary>
@@ -821,8 +826,8 @@ namespace Microsoft.CodeAnalysis
         /// with the specified ones.
         /// </summary>
         public Project WithAnalyzerReferences(IEnumerable<AnalyzerReference> analyzerReferencs) =>
-            this
-                .Solution.WithProjectAnalyzerReferences(this.Id, analyzerReferencs)
+            this.Solution
+                .WithProjectAnalyzerReferences(this.Id, analyzerReferencs)
                 .GetProject(this.Id)!;
 
         /// <summary>
@@ -839,8 +844,8 @@ namespace Microsoft.CodeAnalysis
 
             // use preserve identity for forked solution directly from syntax node.
             // this lets us not serialize temporary tree unnecessarily
-            return this
-                .Solution.AddDocument(
+            return this.Solution
+                .AddDocument(
                     id,
                     name,
                     syntaxRoot,
@@ -890,8 +895,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             var id = DocumentId.CreateNewId(this.Id);
-            return this
-                .Solution.AddAdditionalDocument(id, name, text, folders, filePath)
+            return this.Solution
+                .AddAdditionalDocument(id, name, text, folders, filePath)
                 .GetAdditionalDocument(id)!;
         }
 
@@ -906,8 +911,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             var id = DocumentId.CreateNewId(this.Id);
-            return this
-                .Solution.AddAdditionalDocument(id, name, text, folders, filePath)
+            return this.Solution
+                .AddAdditionalDocument(id, name, text, folders, filePath)
                 .GetAdditionalDocument(id)!;
         }
 
@@ -922,8 +927,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             var id = DocumentId.CreateNewId(this.Id);
-            return this
-                .Solution.AddAnalyzerConfigDocument(id, name, text, folders, filePath)
+            return this.Solution
+                .AddAnalyzerConfigDocument(id, name, text, folders, filePath)
                 .GetAnalyzerConfigDocument(id)!;
         }
 
@@ -982,8 +987,8 @@ namespace Microsoft.CodeAnalysis
         {
             CheckIdsContainedInProject(documentIds);
 
-            return this
-                .Solution.RemoveAnalyzerConfigDocuments(documentIds)
+            return this.Solution
+                .RemoveAnalyzerConfigDocuments(documentIds)
                 .GetRequiredProject(this.Id);
         }
 

@@ -555,10 +555,9 @@ namespace System.Reflection.Emit
             {
                 AssemblyName aname = new AssemblyName();
                 aname.Name = "Anonymously Hosted DynamicMethods Assembly";
-                AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    aname,
-                    AssemblyBuilderAccess.Run
-                );
+                AssemblyBuilder ab = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
 
                 anon_host_module = ab.GetManifestModule();
             }

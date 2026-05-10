@@ -196,10 +196,11 @@ namespace System.ServiceModel.Dispatcher
         )]
         static void SendTransaction(ref ProxyRpc rpc)
         {
-            System.ServiceModel.Channels.TransactionFlowProperty.Set(
-                Transaction.Current,
-                rpc.Request
-            );
+            System
+                .ServiceModel
+                .Channels
+                .TransactionFlowProperty
+                .Set(Transaction.Current, rpc.Request);
         }
 
         internal void InitializeChannel(IClientChannel channel)
@@ -233,15 +234,17 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.operationSelector == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.SFxNeedProxyBehaviorOperationSelector2,
-                            methodBase.Name,
-                            methodBase.DeclaringType.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.SFxNeedProxyBehaviorOperationSelector2,
+                                methodBase.Name,
+                                methodBase.DeclaringType.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             try

@@ -64,8 +64,10 @@ namespace System.ServiceModel
                         try
                         {
                             aspNetPermissionSet.PermitOnly();
-                            aspNetSecurityContext =
-                                System.Runtime.PartialTrustHelpers.CaptureSecurityContextNoIdentityFlow();
+                            aspNetSecurityContext = System
+                                .Runtime
+                                .PartialTrustHelpers
+                                .CaptureSecurityContextNoIdentityFlow();
                         }
                         finally
                         {
@@ -133,9 +135,11 @@ namespace System.ServiceModel
 
             if (isInPartialTrustOutsideAspNet)
             {
-                throw FxTrace.Exception.AsError(
-                    new SecurityException(Activation.SR.CannotRunInPartialTrustOutsideAspNet)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new SecurityException(Activation.SR.CannotRunInPartialTrustOutsideAspNet)
+                    );
             }
         }
     }

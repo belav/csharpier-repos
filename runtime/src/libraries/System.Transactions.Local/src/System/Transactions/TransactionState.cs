@@ -744,9 +744,11 @@ namespace System.Transactions
             enlistments._volatileEnlistmentCount++;
 
             // Make it's state active.
-            VolatileEnlistmentState.VolatileEnlistmentActive.EnterState(
-                enlistments._volatileEnlistments[enlistments._volatileEnlistmentCount - 1]
-            );
+            VolatileEnlistmentState
+                .VolatileEnlistmentActive
+                .EnterState(
+                    enlistments._volatileEnlistments[enlistments._volatileEnlistmentCount - 1]
+                );
         }
     }
 
@@ -766,10 +768,9 @@ namespace System.Transactions
         )
         {
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System.Delegate.Combine(
-                    tx._transactionCompletedDelegate,
-                    transactionCompletedDelegate
-                );
+                System
+                    .Delegate
+                    .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
     }
 
@@ -1260,10 +1261,10 @@ namespace System.Transactions
                 // Broadcast prepare to the phase 0 enlistments
                 for (int i = 0; i < volatileCount; i++)
                 {
-                    tx._phase0Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase0Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase0Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase0Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase0Prepares())
                     {
                         break;
@@ -1488,10 +1489,10 @@ namespace System.Transactions
                 // Broadcast prepare to the phase 0 enlistments
                 for (int i = 0; i < volatileCount; i++)
                 {
-                    tx._phase0Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase0Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase0Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase0Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase0Prepares())
                     {
                         break;
@@ -1589,10 +1590,10 @@ namespace System.Transactions
                 // Broadcast prepare to the phase 0 enlistments
                 for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
                 {
-                    tx._phase1Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase1Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase1Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase1Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase1Prepares())
                     {
                         break;
@@ -1657,10 +1658,10 @@ namespace System.Transactions
                 "There must be exactly 1 phase 1 volatile enlistment for TransactionStateVolatileSPC"
             );
 
-            tx._phase1Volatiles._volatileEnlistments[0]
-                ._twoPhaseState!.ChangeStateSinglePhaseCommit(
-                    tx._phase1Volatiles._volatileEnlistments[0]
-                );
+            tx._phase1Volatiles
+                ._volatileEnlistments[0]
+                ._twoPhaseState!
+                .ChangeStateSinglePhaseCommit(tx._phase1Volatiles._volatileEnlistments[0]);
         }
 
         internal override void ChangeStateTransactionCommitted(InternalTransaction tx)
@@ -1778,14 +1779,18 @@ namespace System.Transactions
             // Notify the enlistments that the transaction has aborted
             for (int i = 0; i < tx._phase0Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase0Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalAborted(tx._phase0Volatiles._volatileEnlistments[i]);
+                tx._phase0Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalAborted(tx._phase0Volatiles._volatileEnlistments[i]);
             }
 
             for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase1Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalAborted(tx._phase1Volatiles._volatileEnlistments[i]);
+                tx._phase1Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalAborted(tx._phase1Volatiles._volatileEnlistments[i]);
             }
 
             // Notify the durable enlistment
@@ -1925,15 +1930,19 @@ namespace System.Transactions
             // Notify the phase 0 enlistments that the transaction has aborted
             for (int i = 0; i < tx._phase0Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase0Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalCommitted(tx._phase0Volatiles._volatileEnlistments[i]);
+                tx._phase0Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalCommitted(tx._phase0Volatiles._volatileEnlistments[i]);
             }
 
             // Notify the phase 1 enlistments that the transaction has aborted
             for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase1Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalCommitted(tx._phase1Volatiles._volatileEnlistments[i]);
+                tx._phase1Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalCommitted(tx._phase1Volatiles._volatileEnlistments[i]);
             }
 
             // Remove this from the timeout list
@@ -1989,15 +1998,19 @@ namespace System.Transactions
             // Notify the phase 0 enlistments that the transaction has aborted
             for (int i = 0; i < tx._phase0Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase0Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalIndoubt(tx._phase0Volatiles._volatileEnlistments[i]);
+                tx._phase0Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalIndoubt(tx._phase0Volatiles._volatileEnlistments[i]);
             }
 
             // Notify the phase 1 enlistments that the transaction has aborted
             for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase1Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalIndoubt(tx._phase1Volatiles._volatileEnlistments[i]);
+                tx._phase1Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalIndoubt(tx._phase1Volatiles._volatileEnlistments[i]);
             }
 
             // Remove this from the timeout list
@@ -2272,10 +2285,9 @@ namespace System.Transactions
         {
             // Add this delegate to the list of delegates to be notified of the outcome.
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System.Delegate.Combine(
-                    tx._transactionCompletedDelegate,
-                    transactionCompletedDelegate
-                );
+                System
+                    .Delegate
+                    .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
 
         internal override void BeginCommit(
@@ -2637,9 +2649,9 @@ namespace System.Transactions
                 options.Timeout = newTimeout;
 
                 // Create a new distributed transaction.
-                distributedTx = TransactionManager.DistributedTransactionManager.CreateTransaction(
-                    options
-                );
+                distributedTx = TransactionManager
+                    .DistributedTransactionManager
+                    .CreateTransaction(options);
                 distributedTx.SavedLtmPromotedTransaction = tx._outcomeSource;
 
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -2738,10 +2750,9 @@ namespace System.Transactions
                 );
 
                 // Promote the enlistment.
-                tx._durableEnlistment.State.ChangeStatePromoted(
-                    tx._durableEnlistment,
-                    promotedEnlistment
-                );
+                tx._durableEnlistment
+                    .State
+                    .ChangeStatePromoted(tx._durableEnlistment, promotedEnlistment);
             }
 
             return true;
@@ -2985,10 +2996,10 @@ namespace System.Transactions
                 // Broadcast preprepare to the volatile subordinates
                 for (int i = 0; i < volatileCount; i++)
                 {
-                    tx._phase0Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase0Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase0Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase0Volatiles._volatileEnlistments[i]);
 
                     if (!tx.State!.ContinuePhase0Prepares())
                     {
@@ -3073,10 +3084,10 @@ namespace System.Transactions
                 // Broadcast preprepare to the volatile subordinates
                 for (int i = 0; i < volatileCount; i++)
                 {
-                    tx._phase1Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase1Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase1Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase1Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase1Prepares())
                     {
                         break;
@@ -4091,10 +4102,9 @@ namespace System.Transactions
         {
             // Add this guy to the list of people to be notified of the outcome.
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System.Delegate.Combine(
-                    tx._transactionCompletedDelegate,
-                    transactionCompletedDelegate
-                );
+                System
+                    .Delegate
+                    .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
 
         // Start the commit processing by transitioning to TransactionStatePromotedNonMSDTCPhase0.
@@ -4268,10 +4278,10 @@ namespace System.Transactions
                 // Broadcast prepare to the phase 0 enlistments
                 for (int i = 0; i < volatileCount; i++)
                 {
-                    tx._phase0Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase0Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase0Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase0Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase0Prepares())
                     {
                         break;
@@ -4323,10 +4333,10 @@ namespace System.Transactions
                 // Broadcast prepare to the phase 0 enlistments
                 for (int i = 0; i < volatileCount; i++)
                 {
-                    tx._phase0Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase0Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase0Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase0Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase0Prepares())
                     {
                         break;
@@ -4378,10 +4388,10 @@ namespace System.Transactions
                 // Broadcast prepare to the phase 0 enlistments
                 for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
                 {
-                    tx._phase1Volatiles._volatileEnlistments[i]
-                        ._twoPhaseState!.ChangeStatePreparing(
-                            tx._phase1Volatiles._volatileEnlistments[i]
-                        );
+                    tx._phase1Volatiles
+                        ._volatileEnlistments[i]
+                        ._twoPhaseState!
+                        .ChangeStatePreparing(tx._phase1Volatiles._volatileEnlistments[i]);
                     if (!tx.State!.ContinuePhase1Prepares())
                     {
                         break;
@@ -4724,14 +4734,18 @@ namespace System.Transactions
             // Notify the enlistments that the transaction has aborted
             for (int i = 0; i < tx._phase0Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase0Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalAborted(tx._phase0Volatiles._volatileEnlistments[i]);
+                tx._phase0Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalAborted(tx._phase0Volatiles._volatileEnlistments[i]);
             }
 
             for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase1Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalAborted(tx._phase1Volatiles._volatileEnlistments[i]);
+                tx._phase1Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalAborted(tx._phase1Volatiles._volatileEnlistments[i]);
             }
 
             // Notify the durable enlistment
@@ -4851,15 +4865,19 @@ namespace System.Transactions
             // Notify the phase 0 enlistments that the transaction has committed
             for (int i = 0; i < tx._phase0Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase0Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalCommitted(tx._phase0Volatiles._volatileEnlistments[i]);
+                tx._phase0Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalCommitted(tx._phase0Volatiles._volatileEnlistments[i]);
             }
 
             // Notify the phase 1 enlistments that the transaction has committed
             for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase1Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalCommitted(tx._phase1Volatiles._volatileEnlistments[i]);
+                tx._phase1Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalCommitted(tx._phase1Volatiles._volatileEnlistments[i]);
             }
 
             // Fire Completion for anyone listening
@@ -4898,15 +4916,19 @@ namespace System.Transactions
             // Notify the phase 0 enlistments that the transaction is indoubt
             for (int i = 0; i < tx._phase0Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase0Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalIndoubt(tx._phase0Volatiles._volatileEnlistments[i]);
+                tx._phase0Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalIndoubt(tx._phase0Volatiles._volatileEnlistments[i]);
             }
 
             // Notify the phase 1 enlistments that the transaction is indoubt
             for (int i = 0; i < tx._phase1Volatiles._volatileEnlistmentCount; i++)
             {
-                tx._phase1Volatiles._volatileEnlistments[i]
-                    ._twoPhaseState!.InternalIndoubt(tx._phase1Volatiles._volatileEnlistments[i]);
+                tx._phase1Volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!
+                    .InternalIndoubt(tx._phase1Volatiles._volatileEnlistments[i]);
             }
 
             // Fire Completion for anyone listening
@@ -5423,9 +5445,9 @@ namespace System.Transactions
 
             try
             {
-                tx._durableEnlistment.PromotableSinglePhaseNotification.SinglePhaseCommit(
-                    tx._durableEnlistment.SinglePhaseEnlistment
-                );
+                tx._durableEnlistment
+                    .PromotableSinglePhaseNotification
+                    .SinglePhaseCommit(tx._durableEnlistment.SinglePhaseEnlistment);
             }
             finally
             {
@@ -5462,9 +5484,9 @@ namespace System.Transactions
                     );
                 }
 
-                tx._durableEnlistment.PromotableSinglePhaseNotification.Rollback(
-                    tx._durableEnlistment.SinglePhaseEnlistment
-                );
+                tx._durableEnlistment
+                    .PromotableSinglePhaseNotification
+                    .Rollback(tx._durableEnlistment.SinglePhaseEnlistment);
             }
             finally
             {

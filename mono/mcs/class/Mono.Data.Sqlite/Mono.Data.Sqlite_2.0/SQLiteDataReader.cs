@@ -384,14 +384,9 @@ namespace Mono.Data.Sqlite
                 );
 
             VerifyType(i, DbType.Binary);
-            return _activeStatement._sql.GetBytes(
-                _activeStatement,
-                i,
-                (int)fieldOffset,
-                buffer,
-                bufferoffset,
-                length
-            );
+            return _activeStatement
+                ._sql
+                .GetBytes(_activeStatement, i, (int)fieldOffset, buffer, bufferoffset, length);
         }
 
         /// <summary>
@@ -438,14 +433,9 @@ namespace Mono.Data.Sqlite
                 );
 
             VerifyType(i, DbType.String);
-            return _activeStatement._sql.GetChars(
-                _activeStatement,
-                i,
-                (int)fieldoffset,
-                buffer,
-                bufferoffset,
-                length
-            );
+            return _activeStatement
+                ._sql
+                .GetChars(_activeStatement, i, (int)fieldoffset, buffer, bufferoffset, length);
         }
 
         /// <summary>
@@ -728,10 +718,10 @@ namespace Mono.Data.Sqlite
                 {
                     try
                     {
-                        strColumn = _command.Connection._sql.ColumnOriginalName(
-                            _activeStatement,
-                            n
-                        );
+                        strColumn = _command
+                            .Connection
+                            ._sql
+                            .ColumnOriginalName(_activeStatement, n);
                         if (String.IsNullOrEmpty(strColumn) == false)
                             row[SchemaTableColumn.BaseColumnName] = strColumn;
 
@@ -771,16 +761,19 @@ namespace Mono.Data.Sqlite
                     string[] arSize;
 
                     // Get the column meta data
-                    _command.Connection._sql.ColumnMetaData(
-                        (string)row[SchemaTableOptionalColumn.BaseCatalogName],
-                        (string)row[SchemaTableColumn.BaseTableName],
-                        strColumn,
-                        out dataType,
-                        out collSeq,
-                        out bNotNull,
-                        out bPrimaryKey,
-                        out bAutoIncrement
-                    );
+                    _command
+                        .Connection
+                        ._sql
+                        .ColumnMetaData(
+                            (string)row[SchemaTableOptionalColumn.BaseCatalogName],
+                            (string)row[SchemaTableColumn.BaseTableName],
+                            strColumn,
+                            out dataType,
+                            out collSeq,
+                            out bNotNull,
+                            out bPrimaryKey,
+                            out bAutoIncrement
+                        );
 
                     if (bNotNull || bPrimaryKey)
                         row[SchemaTableColumn.AllowDBNull] = false;
@@ -871,31 +864,35 @@ namespace Mono.Data.Sqlite
                             strCatalog = (string)row[SchemaTableOptionalColumn.BaseCatalogName];
                             strTable = (string)row[SchemaTableColumn.BaseTableName];
 
-                            tblIndexes = _command.Connection.GetSchema(
-                                "Indexes",
-                                new string[]
-                                {
-                                    (string)row[SchemaTableOptionalColumn.BaseCatalogName],
-                                    null,
-                                    (string)row[SchemaTableColumn.BaseTableName],
-                                    null,
-                                }
-                            );
+                            tblIndexes = _command
+                                .Connection
+                                .GetSchema(
+                                    "Indexes",
+                                    new string[]
+                                    {
+                                        (string)row[SchemaTableOptionalColumn.BaseCatalogName],
+                                        null,
+                                        (string)row[SchemaTableColumn.BaseTableName],
+                                        null,
+                                    }
+                                );
                         }
 
                         foreach (DataRow rowIndexes in tblIndexes.Rows)
                         {
-                            tblIndexColumns = _command.Connection.GetSchema(
-                                "IndexColumns",
-                                new string[]
-                                {
-                                    (string)row[SchemaTableOptionalColumn.BaseCatalogName],
-                                    null,
-                                    (string)row[SchemaTableColumn.BaseTableName],
-                                    (string)rowIndexes["INDEX_NAME"],
-                                    null,
-                                }
-                            );
+                            tblIndexColumns = _command
+                                .Connection
+                                .GetSchema(
+                                    "IndexColumns",
+                                    new string[]
+                                    {
+                                        (string)row[SchemaTableOptionalColumn.BaseCatalogName],
+                                        null,
+                                        (string)row[SchemaTableColumn.BaseTableName],
+                                        (string)rowIndexes["INDEX_NAME"],
+                                        null,
+                                    }
+                                );
                             foreach (DataRow rowColumnIndex in tblIndexColumns.Rows)
                             {
                                 if (

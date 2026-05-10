@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (methodGroup.ReceiverOpt == null)
                     {
                         // Calling a static method defined on an outer class via its simple name.
-                        NamedTypeSymbol firstContainer = node
-                            .ApplicableMethods.First()
+                        NamedTypeSymbol firstContainer = node.ApplicableMethods
+                            .First()
                             .ContainingType;
                         Debug.Assert(
                             node.ApplicableMethods.All(m =>
@@ -152,11 +152,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var m in methods)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(
-                            m.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module
+                            .EmbeddedTypesManagerOpt
+                            .EmbedMethodIfNeedTo(
+                                m.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -179,11 +181,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var p in properties)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(
-                            p.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module
+                            .EmbeddedTypesManagerOpt
+                            .EmbedPropertyIfNeedTo(
+                                p.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -367,10 +371,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case (not null, null):
                 case (not null, not null)
-                    when !methodThisParameter.Type.Equals(
-                        interceptorThisParameterForCompare.Type,
-                        TypeCompareKind.ObliviousNullableModifierMatchesAny
-                    )
+                    when !methodThisParameter
+                        .Type
+                        .Equals(
+                            interceptorThisParameterForCompare.Type,
+                            TypeCompareKind.ObliviousNullableModifierMatchesAny
+                        )
                         || methodThisParameter.RefKind
                             != interceptorThisParameterForCompare.RefKind:
                     this._diagnostics.Add(
@@ -444,9 +450,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var thisRefKind = methodThisParameter.RefKind;
                 if (argumentRefKindsOpt.IsDefault && thisRefKind != RefKind.None)
                 {
-                    argumentRefKindsOpt = method.Parameters.SelectAsArray(static param =>
-                        param.RefKind
-                    );
+                    argumentRefKindsOpt = method
+                        .Parameters
+                        .SelectAsArray(static param => param.RefKind);
                 }
 
                 if (!argumentRefKindsOpt.IsDefault)

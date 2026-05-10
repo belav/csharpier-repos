@@ -52,9 +52,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return 0;
 
             double overlap = BasicBlocks.Sum(bb =>
-                bb.Edges.Values.Sum(e =>
-                    Math.Min(e.Count1 / (double)total1, e.Count2 / (double)total2)
-                )
+                bb.Edges
+                    .Values
+                    .Sum(e => Math.Min(e.Count1 / (double)total1, e.Count2 / (double)total2))
             );
             return overlap;
         }
@@ -281,8 +281,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         private static Dictionary<int, PgoSchemaElem> GroupBlocks(MethodProfileData data)
         {
-            return data
-                .SchemaData.Where(e =>
+            return data.SchemaData
+                .Where(e =>
                     e.InstrumentationKind == PgoInstrumentationKind.BasicBlockIntCount
                     || e.InstrumentationKind == PgoInstrumentationKind.BasicBlockLongCount
                 )
@@ -291,8 +291,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         private static Dictionary<(int, int), PgoSchemaElem> GroupEdges(MethodProfileData data)
         {
-            return data
-                .SchemaData.Where(e =>
+            return data.SchemaData
+                .Where(e =>
                     e.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount
                     || e.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount
                 )

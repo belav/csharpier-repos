@@ -18,11 +18,11 @@ namespace IdeBenchmarks.StackTraceExplorer
         [Benchmark]
         public async Task BenchmarkStackTraceParsing()
         {
-            var result =
-                await Microsoft.CodeAnalysis.StackTraceExplorer.StackTraceAnalyzer.AnalyzeAsync(
-                    Stack,
-                    CancellationToken.None
-                );
+            var result = await Microsoft
+                .CodeAnalysis
+                .StackTraceExplorer
+                .StackTraceAnalyzer
+                .AnalyzeAsync(Stack, CancellationToken.None);
             Console.WriteLine($"Total {result.ParsedFrames.Length} items");
         }
 

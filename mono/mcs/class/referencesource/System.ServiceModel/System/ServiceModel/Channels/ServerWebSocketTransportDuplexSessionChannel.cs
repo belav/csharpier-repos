@@ -180,9 +180,9 @@ namespace System.ServiceModel.Channels
 
             public override void UpdateMessageProperties(MessageProperties inboundMessageProperties)
             {
-                this.channel.webSocketMessageSource.UpdateOpenNotificationMessageProperties(
-                    inboundMessageProperties
-                );
+                this.channel
+                    .webSocketMessageSource
+                    .UpdateOpenNotificationMessageProperties(inboundMessageProperties);
             }
         }
     }

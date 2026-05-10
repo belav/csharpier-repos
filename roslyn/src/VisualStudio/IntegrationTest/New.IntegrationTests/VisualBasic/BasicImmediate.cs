@@ -23,23 +23,26 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         {
             await base.InitializeAsync();
 
-            await TestServices.SolutionExplorer.CreateSolutionAsync(
-                nameof(BasicImmediate),
-                HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.AddProjectAsync(
-                "TestProj",
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.VisualBasic,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .CreateSolutionAsync(nameof(BasicImmediate), HangMitigatingCancellationToken);
+            await TestServices
+                .SolutionExplorer
+                .AddProjectAsync(
+                    "TestProj",
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.VisualBasic,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
         public async Task DumpLocalVariableValue()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    @"
 Module Module1
     Sub Main()
         Dim n1Var As Integer = 42
@@ -47,33 +50,36 @@ Module Module1
     End Sub
 End Module
 ",
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.Workspace,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Debugger.SetBreakpointAsync(
-                "Module1.vb",
-                "End Sub",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Debugger.GoAsync(
-                waitForBreakMode: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.Workspace,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Debugger
+                .SetBreakpointAsync("Module1.vb", "End Sub", HangMitigatingCancellationToken);
+            await TestServices
+                .Debugger
+                .GoAsync(waitForBreakMode: true, HangMitigatingCancellationToken);
             await TestServices.ImmediateWindow.ShowAsync(HangMitigatingCancellationToken);
             await TestServices.ImmediateWindow.ClearAllAsync(HangMitigatingCancellationToken);
             await TestServices.Input.SendWithoutActivateAsync("?", HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.CompletionSet,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendWithoutActivateAsync(
-                ["n1", VirtualKeyCode.TAB, VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.CompletionSet,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Input
+                .SendWithoutActivateAsync(
+                    ["n1", VirtualKeyCode.TAB, VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
             Assert.Contains(
                 "?n1Var\r\n42",
                 await TestServices.ImmediateWindow.GetTextAsync(HangMitigatingCancellationToken)

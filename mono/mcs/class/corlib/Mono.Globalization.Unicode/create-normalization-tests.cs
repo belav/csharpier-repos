@@ -92,11 +92,13 @@ namespace Mono.Globalization.Unicode
                     int x = int.Parse(values[i].Trim(), NumberStyles.HexNumber);
                     if (x > char.MaxValue)
                     {
-                        Console.Error.WriteLine(
-                            "at line {0} test contains character {1:X} that is larger than char.MaxValue. Ignored.",
-                            line,
-                            x
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                "at line {0} test contains character {1:X} that is larger than char.MaxValue. Ignored.",
+                                line,
+                                x
+                            );
                         skip = true;
                         break;
                     }

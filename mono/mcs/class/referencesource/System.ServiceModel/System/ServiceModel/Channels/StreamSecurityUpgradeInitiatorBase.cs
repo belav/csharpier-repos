@@ -78,11 +78,13 @@ namespace System.ServiceModel.Channels
         {
             if (!securityUpgraded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.OperationInvalidBeforeSecurityNegotiation)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.OperationInvalidBeforeSecurityNegotiation)
+                        )
+                    );
             }
 
             return this.remoteSecurity;

@@ -266,11 +266,9 @@ namespace System.Runtime.Caching
         {
             if (State == EntryState.AddedToCache)
             {
-                _fields._cache.RemoveEntry(
-                    this.Key,
-                    this,
-                    CacheEntryRemovedReason.ChangeMonitorChanged
-                );
+                _fields
+                    ._cache
+                    .RemoveEntry(this.Key, this, CacheEntryRemovedReason.ChangeMonitorChanged);
             }
         }
 

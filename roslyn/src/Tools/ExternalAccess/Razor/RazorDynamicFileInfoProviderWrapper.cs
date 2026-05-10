@@ -48,12 +48,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             }
 
             var result = await _innerDynamicFileInfoProvider
-                .Value.GetDynamicFileInfoAsync(
-                    projectId,
-                    projectFilePath,
-                    filePath,
-                    cancellationToken
-                )
+                .Value
+                .GetDynamicFileInfoAsync(projectId, projectFilePath, filePath, cancellationToken)
                 .ConfigureAwait(false);
             // This might not be a file/project Razor is interested in
             if (result is null)
@@ -64,8 +60,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             var serviceProvider = new RazorDocumentServiceProviderWrapper(
                 result.DocumentServiceProvider
             );
-            var razorDocumentPropertiesService =
-                result.DocumentServiceProvider.GetService<IRazorDocumentPropertiesService>();
+            var razorDocumentPropertiesService = result
+                .DocumentServiceProvider
+                .GetService<IRazorDocumentPropertiesService>();
             var designTimeOnly = razorDocumentPropertiesService?.DesignTimeOnly ?? false;
             var dynamicFileInfo = new DynamicFileInfo(
                 result.FilePath,
@@ -91,12 +88,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 return Task.CompletedTask;
             }
 
-            return _innerDynamicFileInfoProvider.Value.RemoveDynamicFileInfoAsync(
-                projectId,
-                projectFilePath,
-                filePath,
-                cancellationToken
-            );
+            return _innerDynamicFileInfoProvider
+                .Value
+                .RemoveDynamicFileInfoAsync(
+                    projectId,
+                    projectFilePath,
+                    filePath,
+                    cancellationToken
+                );
         }
 
         private void InnerDynamicFileInfoProvider_Updated(object? sender, string e)

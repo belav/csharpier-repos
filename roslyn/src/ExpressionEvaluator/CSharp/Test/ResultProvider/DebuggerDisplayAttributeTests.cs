@@ -978,9 +978,11 @@ public class Picard { }
             public override VisualStudio.Debugger.Metadata.Type GetLmrType()
             {
                 if (
-                    Environment.StackTrace.Contains(
-                        "Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.GetTypeName"
-                    )
+                    Environment
+                        .StackTrace
+                        .Contains(
+                            "Microsoft.CodeAnalysis.ExpressionEvaluator.ResultProvider.GetTypeName"
+                        )
                 )
                 {
                     throw Exception;

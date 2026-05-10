@@ -115,9 +115,11 @@ namespace System.ServiceModel.Security
         {
             if (incomingNego == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive))
+                    );
             }
             incomingNego.Validate(this.NegotiationValueType);
         }
@@ -254,10 +256,12 @@ namespace System.ServiceModel.Security
             negotiationState.Context = requestSecurityToken.Context;
             if (requestSecurityToken.KeySize != 0)
             {
-                WSTrust.Driver.ValidateRequestedKeySize(
-                    requestSecurityToken.KeySize,
-                    this.SecurityAlgorithmSuite
-                );
+                WSTrust
+                    .Driver
+                    .ValidateRequestedKeySize(
+                        requestSecurityToken.KeySize,
+                        this.SecurityAlgorithmSuite
+                    );
             }
             negotiationState.RequestedKeySize = requestSecurityToken.KeySize;
             string appliesToName;
@@ -291,14 +295,16 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(
-                                SR.AddressingVersionNotSupported,
-                                request.Version.Addressing
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.AddressingVersionNotSupported,
+                                    request.Version.Addressing
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 negotiationState.AppliesToSerializer = serializer;
@@ -440,14 +446,16 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.AddressingVersionNotSupported,
-                                    incomingMessage.Version.Addressing
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.AddressingVersionNotSupported,
+                                        incomingMessage.Version.Addressing
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 dummyRstr.MakeReadOnly();
@@ -490,14 +498,16 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.AddressingVersionNotSupported,
-                                    incomingMessage.Version.Addressing
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.AddressingVersionNotSupported,
+                                        incomingMessage.Version.Addressing
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 negotiationRstr.MakeReadOnly();

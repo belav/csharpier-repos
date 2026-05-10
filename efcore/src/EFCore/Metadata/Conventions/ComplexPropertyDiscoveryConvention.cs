@@ -106,13 +106,15 @@ public class ComplexPropertyDiscoveryConvention
                 memberInfo is PropertyInfo propertyInfo
                 && propertyInfo.GetIndexParameters().Length != 0
             )
-            || !Dependencies.MemberClassifier.IsCandidateComplexProperty(
-                memberInfo,
-                structuralType.Model,
-                UseAttributes,
-                out var elementType,
-                out var explicitlyConfigured
-            )
+            || !Dependencies
+                .MemberClassifier
+                .IsCandidateComplexProperty(
+                    memberInfo,
+                    structuralType.Model,
+                    UseAttributes,
+                    out var elementType,
+                    out var explicitlyConfigured
+                )
         )
         {
             targetClrType = null;
@@ -150,7 +152,8 @@ public class ComplexPropertyDiscoveryConvention
         structuralType is IConventionComplexType
             ? structuralType
                 .GetRuntimeProperties()
-                .Values.Cast<MemberInfo>()
+                .Values
+                .Cast<MemberInfo>()
                 .Concat(structuralType.GetRuntimeFields().Values)
             : structuralType.GetRuntimeProperties().Values.Cast<MemberInfo>();
 

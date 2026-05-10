@@ -238,9 +238,9 @@ namespace Microsoft.Build.Tasks
 
                     // add the code and a 'return true' at the end of the method
                     method.Statements.Add(new CodeSnippetStatement(code));
-                    method.Statements.Add(
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(true))
-                    );
+                    method
+                        .Statements
+                        .Add(new CodeMethodReturnStatement(new CodePrimitiveExpression(true)));
 
                     taskClass.Members.Add(method);
                 }
@@ -255,9 +255,9 @@ namespace Microsoft.Build.Tasks
             var cscParams = new CompilerParameters();
             cscParams.ReferencedAssemblies.Add("Microsoft.Build.Framework.dll");
             cscParams.ReferencedAssemblies.Add("Microsoft.Build.Utilities.v4.0.dll"); // since we use Task, it depends on this dll.
-            cscParams.ReferencedAssemblies.AddRange(
-                GetReferences(references, taskFactoryLoggingHost)
-            );
+            cscParams
+                .ReferencedAssemblies
+                .AddRange(GetReferences(references, taskFactoryLoggingHost));
             cscParams.GenerateInMemory = true;
             var results = CodeDomProvider
                 .CreateProvider(language)

@@ -98,9 +98,9 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
 
             foreach (var unusedParameterName in routeParameterNames)
             {
-                var unusedParameter = routeUsage.RoutePattern.GetRouteParameter(
-                    unusedParameterName
-                );
+                var unusedParameter = routeUsage
+                    .RoutePattern
+                    .GetRouteParameter(unusedParameterName);
 
                 var parameterInsertIndex = -1;
                 var insertPoint = CalculateInsertPoint(
@@ -110,9 +110,10 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
                 );
                 if (insertPoint is { } ip)
                 {
-                    parameterInsertIndex = routeUsage.UsageContext.Parameters.IndexOf(
-                        ip.ExistingParameter
-                    );
+                    parameterInsertIndex = routeUsage
+                        .UsageContext
+                        .Parameters
+                        .IndexOf(ip.ExistingParameter);
                     if (!ip.Before)
                     {
                         parameterInsertIndex++;

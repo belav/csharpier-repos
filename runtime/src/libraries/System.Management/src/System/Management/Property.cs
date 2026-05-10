@@ -102,13 +102,9 @@ namespace System.Management
         {
             propertyValue = null; // Needed so we don't leak this in/out parameter...
 
-            int status = parent.wbemObject.Get_(
-                propertyName,
-                0,
-                ref propertyValue,
-                ref propertyType,
-                ref propertyFlavor
-            );
+            int status = parent
+                .wbemObject
+                .Get_(propertyName, 0, ref propertyValue, ref propertyType, ref propertyFlavor);
 
             if (status < 0)
             {

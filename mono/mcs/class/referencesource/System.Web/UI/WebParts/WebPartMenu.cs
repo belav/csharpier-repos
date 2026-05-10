@@ -117,13 +117,16 @@ menu"
 
             if (_menuUser.Page != null)
             {
-                _menuUser.Page.ClientScript.RegisterStartupScript(
-                    (Control)_menuUser,
-                    typeof(WebPartMenu),
-                    clientID,
-                    script,
-                    false
-                );
+                _menuUser
+                    .Page
+                    .ClientScript
+                    .RegisterStartupScript(
+                        (Control)_menuUser,
+                        typeof(WebPartMenu),
+                        clientID,
+                        script,
+                        false
+                    );
 
                 IScriptManager scriptManager = _menuUser.Page.ScriptManager;
                 if ((scriptManager != null) && scriptManager.SupportsPartialRendering)
@@ -149,11 +152,11 @@ menu"
                     _menuUser.ClientID
                     + "__Menu_"
                     + _cssStyleIndex++.ToString(NumberFormatInfo.InvariantInfo);
-                _menuUser.Page.Header.StyleSheet.CreateStyleRule(
-                    style,
-                    _menuUser.UrlResolver,
-                    "." + name
-                );
+                _menuUser
+                    .Page
+                    .Header
+                    .StyleSheet
+                    .CreateStyleRule(style, _menuUser.UrlResolver, "." + name);
                 style.SetRegisteredCssClass(name);
             }
         }
@@ -399,10 +402,10 @@ menu"
                                 + Util.QuoteJScriptString(eventArgument)
                                 + "');";
 
-                            _menuUser.Page.ClientScript.RegisterForEventValidation(
-                                target,
-                                eventArgument
-                            );
+                            _menuUser
+                                .Page
+                                .ClientScript
+                                .RegisterForEventValidation(target, eventArgument);
                         }
 
                         string clientClickScript = null;

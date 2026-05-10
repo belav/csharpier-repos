@@ -56,9 +56,9 @@ namespace System.Activities.Runtime
 
         public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
         {
-            this.location.TemporaryResolutionEnvironment.CollapseTemporaryResolutionLocation(
-                this.location
-            );
+            this.location
+                .TemporaryResolutionEnvironment
+                .CollapseTemporaryResolutionLocation(this.location);
             return true;
         }
 

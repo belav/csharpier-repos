@@ -55,9 +55,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                Format.MemberOptions.IncludesOption(
-                    SymbolDisplayMemberOptions.IncludeContainingType
-                ) && IncludeNamedType(symbol.ContainingType)
+                Format
+                    .MemberOptions
+                    .IncludesOption(SymbolDisplayMemberOptions.IncludeContainingType)
+                && IncludeNamedType(symbol.ContainingType)
             )
             {
                 symbol.ContainingType.Accept(this.NotFirstVisitor);
@@ -79,9 +80,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 this.IsFirstSymbolVisited
-                && Format.MemberOptions.IncludesOption(
-                    SymbolDisplayMemberOptions.IncludeConstantValue
-                )
+                && Format
+                    .MemberOptions
+                    .IncludesOption(SymbolDisplayMemberOptions.IncludeConstantValue)
                 && symbol.IsConst
                 && symbol.HasConstantValue
                 && CanAddConstant(symbol.Type, symbol.ConstantValue)
@@ -181,9 +182,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                Format.MemberOptions.IncludesOption(
-                    SymbolDisplayMemberOptions.IncludeContainingType
-                ) && IncludeNamedType(symbol.ContainingType)
+                Format
+                    .MemberOptions
+                    .IncludesOption(SymbolDisplayMemberOptions.IncludeContainingType)
+                && IncludeNamedType(symbol.ContainingType)
             )
             {
                 symbol.ContainingType.Accept(this.NotFirstVisitor);
@@ -244,9 +246,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                this.Format.MemberOptions.IncludesOption(
-                    SymbolDisplayMemberOptions.IncludeParameters
-                ) && symbol.Parameters.Any()
+                this.Format
+                    .MemberOptions
+                    .IncludesOption(SymbolDisplayMemberOptions.IncludeParameters)
+                && symbol.Parameters.Any()
             )
             {
                 AddPunctuation(SyntaxKind.OpenBracketToken);
@@ -283,9 +286,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             if (
-                Format.MemberOptions.IncludesOption(
-                    SymbolDisplayMemberOptions.IncludeContainingType
-                ) && IncludeNamedType(symbol.ContainingType)
+                Format
+                    .MemberOptions
+                    .IncludesOption(SymbolDisplayMemberOptions.IncludeContainingType)
+                && IncludeNamedType(symbol.ContainingType)
             )
             {
                 symbol.ContainingType.Accept(this.NotFirstVisitor);
@@ -382,9 +386,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // Otherwise we eschew it since it is redundant in a conversion
                             // signature.
                             if (
-                                Format.CompilerInternalOptions.IncludesOption(
-                                    SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                                )
+                                Format
+                                    .CompilerInternalOptions
+                                    .IncludesOption(
+                                        SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                                    )
                             )
                             {
                                 goto default;
@@ -397,9 +403,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // Otherwise we eschew it since it is redundant in a conversion
                             // signature.
                             if (
-                                Format.CompilerInternalOptions.IncludesOption(
-                                    SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                                )
+                                Format
+                                    .CompilerInternalOptions
+                                    .IncludesOption(
+                                        SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                                    )
                                 || tryGetUserDefinedOperatorTokenKind(symbol.MetadataName)
                                     == SyntaxKind.None
                             )
@@ -440,9 +448,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    Format.MemberOptions.IncludesOption(
-                        SymbolDisplayMemberOptions.IncludeContainingType
-                    )
+                    Format
+                        .MemberOptions
+                        .IncludesOption(SymbolDisplayMemberOptions.IncludeContainingType)
                 )
                 {
                     ITypeSymbol? containingType;
@@ -545,9 +553,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // symbol.containingType is null (which should never be the case here) or is an
                     //       anonymous type (which 'does not have a name').
                     var name =
-                        Format.CompilerInternalOptions.IncludesOption(
-                            SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                        )
+                        Format
+                            .CompilerInternalOptions
+                            .IncludesOption(
+                                SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                            )
                         || symbol.ContainingType == null
                         || symbol.ContainingType.IsAnonymousType
                             ? symbol.Name
@@ -564,9 +574,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // Note: we are using the metadata name also in the case that symbol.containingType is null, which should never be the case here.
                     if (
-                        Format.CompilerInternalOptions.IncludesOption(
-                            SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                        )
+                        Format
+                            .CompilerInternalOptions
+                            .IncludesOption(
+                                SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                            )
                         || symbol.ContainingType == null
                     )
                     {
@@ -584,9 +596,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddExplicitInterfaceIfNeeded(symbol.ExplicitInterfaceImplementations);
 
                     if (
-                        !Format.CompilerInternalOptions.IncludesOption(
-                            SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                        )
+                        !Format
+                            .CompilerInternalOptions
+                            .IncludesOption(
+                                SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                            )
                         && symbol.GetSymbol()?.OriginalDefinition
                             is SourceUserDefinedOperatorSymbolBase sourceUserDefinedOperatorSymbolBase
                     )
@@ -633,9 +647,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case MethodKind.BuiltinOperator:
                 {
                     if (
-                        Format.CompilerInternalOptions.IncludesOption(
-                            SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                        )
+                        Format
+                            .CompilerInternalOptions
+                            .IncludesOption(
+                                SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                            )
                     )
                     {
                         Builder.Add(
@@ -668,9 +684,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case MethodKind.Conversion:
                 {
                     if (
-                        Format.CompilerInternalOptions.IncludesOption(
-                            SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
-                        )
+                        Format
+                            .CompilerInternalOptions
+                            .IncludesOption(
+                                SymbolDisplayCompilerInternalOptions.UseMetadataMethodNames
+                            )
                     )
                     {
                         Builder.Add(
@@ -948,9 +966,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void AddTypeParameterConstraints(IMethodSymbol symbol)
         {
             if (
-                Format.GenericsOptions.IncludesOption(
-                    SymbolDisplayGenericsOptions.IncludeTypeConstraints
-                )
+                Format
+                    .GenericsOptions
+                    .IncludesOption(SymbolDisplayGenericsOptions.IncludeTypeConstraints)
             )
             {
                 AddTypeParameterConstraints(symbol.TypeArguments);
@@ -980,29 +998,31 @@ namespace Microsoft.CodeAnalysis.CSharp
             // (e.g. field types, param types, etc), which just want the name whereas parameters are
             // used on their own or in the context of methods.
 
-            var includeType = Format.ParameterOptions.IncludesOption(
-                SymbolDisplayParameterOptions.IncludeType
-            );
+            var includeType = Format
+                .ParameterOptions
+                .IncludesOption(SymbolDisplayParameterOptions.IncludeType);
             var includeName =
                 symbol.Name.Length != 0
                 && (
-                    Format.ParameterOptions.IncludesOption(
-                        SymbolDisplayParameterOptions.IncludeName
-                    )
+                    Format
+                        .ParameterOptions
+                        .IncludesOption(SymbolDisplayParameterOptions.IncludeName)
                     || (
-                        !Format.CompilerInternalOptions.IncludesOption(
-                            SymbolDisplayCompilerInternalOptions.ExcludeParameterNameIfStandalone
-                        )
+                        !Format
+                            .CompilerInternalOptions
+                            .IncludesOption(
+                                SymbolDisplayCompilerInternalOptions.ExcludeParameterNameIfStandalone
+                            )
                         && Builder.Count == 0
                     )
                 );
-            var includeBrackets = Format.ParameterOptions.IncludesOption(
-                SymbolDisplayParameterOptions.IncludeOptionalBrackets
-            );
+            var includeBrackets = Format
+                .ParameterOptions
+                .IncludesOption(SymbolDisplayParameterOptions.IncludeOptionalBrackets);
             var includeDefaultValue =
-                Format.ParameterOptions.IncludesOption(
-                    SymbolDisplayParameterOptions.IncludeDefaultValue
-                )
+                Format
+                    .ParameterOptions
+                    .IncludesOption(SymbolDisplayParameterOptions.IncludeDefaultValue)
                 && Format.ParameterOptions.IncludesOption(SymbolDisplayParameterOptions.IncludeName)
                 && symbol.HasExplicitDefaultValue
                 && CanAddConstant(symbol.Type, symbol.ExplicitDefaultValue);
@@ -1015,9 +1035,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (includeType)
             {
                 if (
-                    Format.ParameterOptions.IncludesOption(
-                        SymbolDisplayParameterOptions.IncludeModifiers
-                    )
+                    Format
+                        .ParameterOptions
+                        .IncludesOption(SymbolDisplayParameterOptions.IncludeModifiers)
                 )
                 {
                     // Add 'scoped' unless the parameter is an out parameter or
@@ -1042,9 +1062,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 if (
-                    Format.ParameterOptions.IncludesOption(
-                        SymbolDisplayParameterOptions.IncludeModifiers
-                    )
+                    Format
+                        .ParameterOptions
+                        .IncludesOption(SymbolDisplayParameterOptions.IncludeModifiers)
                 )
                 {
                     if (
@@ -1242,9 +1262,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else if (hasThisParameter)
                     {
                         if (
-                            Format.ParameterOptions.IncludesOption(
-                                SymbolDisplayParameterOptions.IncludeExtensionThis
-                            )
+                            Format
+                                .ParameterOptions
+                                .IncludesOption(SymbolDisplayParameterOptions.IncludeExtensionThis)
                         )
                         {
                             AddKeyword(SyntaxKind.ThisKeyword);
@@ -1300,9 +1320,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             where T : ISymbol
         {
             if (
-                Format.MemberOptions.IncludesOption(
-                    SymbolDisplayMemberOptions.IncludeExplicitInterface
-                ) && !implementedMembers.IsEmpty
+                Format
+                    .MemberOptions
+                    .IncludesOption(SymbolDisplayMemberOptions.IncludeExplicitInterface)
+                && !implementedMembers.IsEmpty
             )
             {
                 var implementedMember = implementedMembers[0];
@@ -1324,9 +1345,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             if (
-                this.Format.CompilerInternalOptions.IncludesOption(
-                    SymbolDisplayCompilerInternalOptions.IncludeCustomModifiers
-                ) && !customModifiers.IsEmpty
+                this.Format
+                    .CompilerInternalOptions
+                    .IncludesOption(SymbolDisplayCompilerInternalOptions.IncludeCustomModifiers)
+                && !customModifiers.IsEmpty
             )
             {
                 bool first = true;

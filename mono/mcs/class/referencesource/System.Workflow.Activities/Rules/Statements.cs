@@ -249,10 +249,12 @@ namespace System.Workflow.Activities.Rules
         internal override void Execute(RuleExecution execution)
         {
             Type leftType = execution
-                .Validation.ExpressionInfo(assignStatement.Left)
+                .Validation
+                .ExpressionInfo(assignStatement.Left)
                 .ExpressionType;
             Type rightType = execution
-                .Validation.ExpressionInfo(assignStatement.Right)
+                .Validation
+                .ExpressionInfo(assignStatement.Right)
                 .ExpressionType;
 
             RuleExpressionResult leftResult = RuleExpressionWalker.Evaluate(

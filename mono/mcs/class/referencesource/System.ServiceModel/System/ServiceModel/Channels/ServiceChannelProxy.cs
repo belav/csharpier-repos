@@ -45,9 +45,9 @@ namespace System.ServiceModel.Channels
             : base(proxiedType)
         {
             if (!MessageDirectionHelper.IsDefined(direction))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("direction")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("direction"));
 
             this.interfaceType = interfaceType;
             this.proxiedType = proxiedType;
@@ -152,17 +152,21 @@ namespace System.ServiceModel.Channels
                 if (operation == null)
                 {
                     if (this.serviceChannel.Factory != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.SFxMethodNotSupported1, method.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.SFxMethodNotSupported1, method.Name)
+                                )
+                            );
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(SR.SFxMethodNotSupportedOnCallback1, method.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.SFxMethodNotSupportedOnCallback1, method.Name)
+                                )
+                            );
                 }
 
                 MethodType methodType;
@@ -207,9 +211,11 @@ namespace System.ServiceModel.Channels
                 IMethodCallMessage methodCall = message as IMethodCallMessage;
 
                 if (methodCall == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.SFxExpectedIMethodCallMessage))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.SFxExpectedIMethodCallMessage))
+                        );
 
                 MethodData methodData = GetMethodData(methodCall);
 
@@ -231,14 +237,16 @@ namespace System.ServiceModel.Channels
                         return InvokeObject(methodCall);
                     default:
                         Fx.Assert("Invalid proxy method type");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                String.Format(
-                                    CultureInfo.InvariantCulture,
-                                    "Invalid proxy method type"
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    String.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "Invalid proxy method type"
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
             }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -394,14 +402,16 @@ namespace System.ServiceModel.Channels
                     }
                 };
 
-                return Task<T>.Factory.FromAsync<ServiceChannel, ProxyOperationRuntime, object[]>(
-                    beginCallDelegate,
-                    endCallDelegate,
-                    channel,
-                    operation,
-                    inputParameters,
-                    OperationContext.Current
-                );
+                return Task<T>
+                    .Factory
+                    .FromAsync<ServiceChannel, ProxyOperationRuntime, object[]>(
+                        beginCallDelegate,
+                        endCallDelegate,
+                        channel,
+                        operation,
+                        inputParameters,
+                        OperationContext.Current
+                    );
             }
         }
 
@@ -780,30 +790,30 @@ namespace System.ServiceModel.Channels
 
             public object GetArg(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
 
             public string GetArgName(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
 
             public object GetOutArg(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
 
             public string GetOutArgName(int index)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
 
             class PropertyDictionary : IDictionary
@@ -926,9 +936,13 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.SFxDictionaryIsEmpty)
+                                    )
+                                );
                         }
                     }
 
@@ -939,9 +953,13 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.SFxDictionaryIsEmpty)
+                                    )
+                                );
                         }
                     }
 
@@ -950,9 +968,13 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.SFxDictionaryIsEmpty)
+                                    )
+                                );
                         }
                     }
 
@@ -961,9 +983,13 @@ namespace System.ServiceModel.Channels
                         get
                         {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR.GetString(SR.SFxDictionaryIsEmpty))
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.SFxDictionaryIsEmpty)
+                                    )
+                                );
                         }
                     }
                 }

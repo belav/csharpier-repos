@@ -60,11 +60,11 @@ namespace Microsoft.CodeAnalysis.InlineTemporary
                         .GetRequiredSyntaxRootAsync(cancellationToken)
                         .ConfigureAwait(false);
                     return referencedSymbol
-                        .Locations.Where(loc =>
-                            !semanticModel.SyntaxTree.OverlapsHiddenPosition(
-                                loc.Location.SourceSpan,
-                                cancellationToken
-                            )
+                        .Locations
+                        .Where(loc =>
+                            !semanticModel
+                                .SyntaxTree
+                                .OverlapsHiddenPosition(loc.Location.SourceSpan, cancellationToken)
                         )
                         .Select(loc =>
                             root.FindToken(loc.Location.SourceSpan.Start).Parent

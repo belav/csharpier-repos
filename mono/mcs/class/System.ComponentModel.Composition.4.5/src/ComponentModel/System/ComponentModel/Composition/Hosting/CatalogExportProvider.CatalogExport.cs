@@ -73,9 +73,9 @@ namespace System.ComponentModel.Composition.Hosting
                 CreationPolicy importCreationPolicy
             )
             {
-                CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(
-                    CompositionConstants.PartCreationPolicyMetadataName
-                );
+                CreationPolicy partPolicy = partDefinition
+                    .Metadata
+                    .GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
                 bool isSharedPart = ShouldUseSharedPart(partPolicy, importCreationPolicy);
 
                 if (isSharedPart)

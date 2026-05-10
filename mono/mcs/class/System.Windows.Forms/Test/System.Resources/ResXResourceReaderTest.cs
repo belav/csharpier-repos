@@ -352,9 +352,10 @@ namespace MonoTests.System.Resources
                     //					Assert.AreEqual (821, inner.LinePosition, "#A10");
                     Assert.IsNotNull(inner.Message, "#A11");
                     Assert.IsTrue(
-                        inner.Message.IndexOf(
-                            Path.Combine(Directory.GetCurrentDirectory(), relRefFile)
-                        ) != -1,
+                        inner
+                            .Message
+                            .IndexOf(Path.Combine(Directory.GetCurrentDirectory(), relRefFile))
+                            != -1,
                         "#A12"
                     );
 
@@ -364,9 +365,10 @@ namespace MonoTests.System.Resources
                     Assert.IsNull(inner2.InnerException, "#A14");
                     Assert.IsNotNull(inner2.Message, "#A15");
                     Assert.IsTrue(
-                        inner2.Message.IndexOf(
-                            Path.Combine(Directory.GetCurrentDirectory(), relRefFile)
-                        ) != -1,
+                        inner2
+                            .Message
+                            .IndexOf(Path.Combine(Directory.GetCurrentDirectory(), relRefFile))
+                            != -1,
                         "#A16"
                     );
                 }

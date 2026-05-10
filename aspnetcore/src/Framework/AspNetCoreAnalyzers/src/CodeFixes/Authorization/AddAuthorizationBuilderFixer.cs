@@ -29,7 +29,8 @@ public sealed class AddAuthorizationBuilderFixer : CodeFixProvider
     public override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         var root = await context
-            .Document.GetSyntaxRootAsync(context.CancellationToken)
+            .Document
+            .GetSyntaxRootAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (root == null)
         {
@@ -37,7 +38,8 @@ public sealed class AddAuthorizationBuilderFixer : CodeFixProvider
         }
 
         var semanticModel = await context
-            .Document.GetSemanticModelAsync(context.CancellationToken)
+            .Document
+            .GetSemanticModelAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (semanticModel == null)
         {

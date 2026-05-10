@@ -180,9 +180,9 @@ public class StaticFileMiddlewareTests : LoggedTest
 
         using (var client = new HttpClient { BaseAddress = new Uri(Helpers.GetAddress(host)) })
         {
-            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(
-                Path.GetFileName(requestUrl)
-            );
+            var fileInfo = hostingEnvironment
+                .WebRootFileProvider
+                .GetFileInfo(Path.GetFileName(requestUrl));
             var response = await client.GetAsync(requestUrl);
             var responseContent = await response.Content.ReadAsByteArrayAsync();
 
@@ -230,9 +230,9 @@ public class StaticFileMiddlewareTests : LoggedTest
 
         using (var client = new HttpClient { BaseAddress = new Uri(Helpers.GetAddress(host)) })
         {
-            var fileInfo = hostingEnvironment.WebRootFileProvider.GetFileInfo(
-                Path.GetFileName(requestUrl)
-            );
+            var fileInfo = hostingEnvironment
+                .WebRootFileProvider
+                .GetFileInfo(Path.GetFileName(requestUrl));
             var request = new HttpRequestMessage(HttpMethod.Head, requestUrl);
             var response = await client.SendAsync(request);
 

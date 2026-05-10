@@ -178,9 +178,9 @@ namespace IBM.Data.DB2
         {
             lock (openFreeConnections.SyncRoot)
             {
-                connection.poolDisposalTime = DateTime.Now.Add(
-                    connectionSettings.ConnectionLifeTime
-                );
+                connection.poolDisposalTime = DateTime
+                    .Now
+                    .Add(connectionSettings.ConnectionLifeTime);
                 if (timer == null)
                 {
                     timer = new Timer(

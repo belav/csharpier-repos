@@ -197,8 +197,9 @@ namespace Microsoft.Build.Internal
                 var pg =
                     ut.ParameterGroup == null
                         ? null
-                        : ut
-                            .ParameterGroup.Parameters.Select(p => new TaskPropertyInfo(
+                        : ut.ParameterGroup
+                            .Parameters
+                            .Select(p => new TaskPropertyInfo(
                                 p.Name,
                                 Type.GetType(p.ParameterType),
                                 cond(p.Output),

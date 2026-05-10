@@ -1024,7 +1024,8 @@ namespace DebuggerTests
                     );
                     Assert.True(
                         res.Error["result"]
-                            ?["description"]?.Value<string>()
+                            ?["description"]
+                            ?.Value<string>()
                             .StartsWith(
                                 "Cannot evaluate '(cc.indexedByStr[\"invalid\"]",
                                 StringComparison.Ordinal
@@ -1037,7 +1038,8 @@ namespace DebuggerTests
                     );
                     Assert.True(
                         res.Error["result"]
-                            ?["description"]?.Value<string>()
+                            ?["description"]
+                            ?.Value<string>()
                             .StartsWith(
                                 "Cannot evaluate '(cc.indexedByStr[null]",
                                 StringComparison.Ordinal

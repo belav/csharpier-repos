@@ -46,8 +46,10 @@ namespace System.ServiceModel.Channels
             this.port = bindingElement.Port;
             this.resolver = peerResolver;
             readerQuotas = new XmlDictionaryReaderQuotas();
-            BinaryMessageEncodingBindingElement encoder =
-                context.Binding.Elements.Find<BinaryMessageEncodingBindingElement>();
+            BinaryMessageEncodingBindingElement encoder = context
+                .Binding
+                .Elements
+                .Find<BinaryMessageEncodingBindingElement>();
             if (encoder != null)
                 encoder.ReaderQuotas.CopyTo(this.readerQuotas);
             else

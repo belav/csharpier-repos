@@ -881,12 +881,9 @@ namespace System.Web.Services.Protocols
                         isEncoded ? encodingNs : null
                     )
                 );
-            method.parameterSerializer.Serialize(
-                writer,
-                parameters,
-                null,
-                isEncoded ? encodingNs : null
-            );
+            method
+                .parameterSerializer
+                .Serialize(writer, parameters, null, isEncoded ? encodingNs : null);
             if (Tracing.On)
                 Tracing.Exit(Tracing.TraceId(Res.TraceWriteRequest), caller);
 
@@ -1060,10 +1057,9 @@ namespace System.Web.Services.Protocols
                     {
                         message.SetParameterValues(
                             (object[])
-                                method.returnSerializer.Deserialize(
-                                    reader,
-                                    isEncodedSoap ? encodingNs : null
-                                )
+                                method
+                                    .returnSerializer
+                                    .Deserialize(reader, isEncodedSoap ? encodingNs : null)
                         );
                     }
 

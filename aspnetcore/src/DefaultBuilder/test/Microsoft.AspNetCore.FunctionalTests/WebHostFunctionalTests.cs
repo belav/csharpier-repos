@@ -322,12 +322,12 @@ public class WebHostFunctionalTests : LoggedTest
         string environment
     )
     {
-        deploymentParameters.EnvironmentVariables.Add(
-            new KeyValuePair<string, string>("aspnetcore_environment", environment)
-        );
-        deploymentParameters.EnvironmentVariables.Add(
-            new KeyValuePair<string, string>("envKey", "envValue")
-        );
+        deploymentParameters
+            .EnvironmentVariables
+            .Add(new KeyValuePair<string, string>("aspnetcore_environment", environment));
+        deploymentParameters
+            .EnvironmentVariables
+            .Add(new KeyValuePair<string, string>("envKey", "envValue"));
     }
 
     private static string GetTestSitesPath()

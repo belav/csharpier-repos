@@ -124,24 +124,26 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             {
                 if (_doNotAccessDirectlyOutputPane == null)
                 {
-                    _threadingContext.JoinableTaskFactory.Run(async () =>
-                    {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                        if (_doNotAccessDirectlyOutputPane != null)
+                    _threadingContext
+                        .JoinableTaskFactory
+                        .Run(async () =>
                         {
-                            // check whether other one already initialized output window.
-                            // the output API already handle double initialization, so this is just quick bail
-                            // rather than any functional issue
-                            return;
-                        }
+                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                        var outputWindow = (IVsOutputWindow)
-                            _serviceProvider.GetService(typeof(SVsOutputWindow));
+                            if (_doNotAccessDirectlyOutputPane != null)
+                            {
+                                // check whether other one already initialized output window.
+                                // the output API already handle double initialization, so this is just quick bail
+                                // rather than any functional issue
+                                return;
+                            }
 
-                        // this should bring outout window to the front
-                        _doNotAccessDirectlyOutputPane = CreateOutputPane(outputWindow);
-                    });
+                            var outputWindow = (IVsOutputWindow)
+                                _serviceProvider.GetService(typeof(SVsOutputWindow));
+
+                            // this should bring outout window to the front
+                            _doNotAccessDirectlyOutputPane = CreateOutputPane(outputWindow);
+                        });
                 }
 
                 return _doNotAccessDirectlyOutputPane;

@@ -142,11 +142,11 @@ public abstract class InheritanceRelationshipsQueryFixtureBase
                         );
                         if (ee.OwnedCollectionOnBase?.Count > 0)
                         {
-                            var orderedExpected = ee
-                                .OwnedCollectionOnBase.OrderBy(x => x.Id)
+                            var orderedExpected = ee.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
                                 .ToList();
-                            var orderedActual = aa
-                                .OwnedCollectionOnBase.OrderBy(x => x.Id)
+                            var orderedActual = aa.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
                                 .ToList();
                             for (var i = 0; i < orderedExpected.Count; i++)
                             {
@@ -190,11 +190,11 @@ public abstract class InheritanceRelationshipsQueryFixtureBase
                         );
                         if (ee.OwnedCollectionOnBase?.Count > 0)
                         {
-                            var orderedExpected = ee
-                                .OwnedCollectionOnBase.OrderBy(x => x.Id)
+                            var orderedExpected = ee.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
                                 .ToList();
-                            var orderedActual = aa
-                                .OwnedCollectionOnBase.OrderBy(x => x.Id)
+                            var orderedActual = aa.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
                                 .ToList();
                             for (var i = 0; i < orderedExpected.Count; i++)
                             {
@@ -209,11 +209,11 @@ public abstract class InheritanceRelationshipsQueryFixtureBase
                         );
                         if (ee.OwnedCollectionOnDerived?.Count > 0)
                         {
-                            var orderedExpected = ee
-                                .OwnedCollectionOnDerived.OrderBy(x => x.Id)
+                            var orderedExpected = ee.OwnedCollectionOnDerived
+                                .OrderBy(x => x.Id)
                                 .ToList();
-                            var orderedActual = aa
-                                .OwnedCollectionOnDerived.OrderBy(x => x.Id)
+                            var orderedActual = aa.OwnedCollectionOnDerived
+                                .OrderBy(x => x.Id)
                                 .ToList();
                             for (var i = 0; i < orderedExpected.Count; i++)
                             {

@@ -20,11 +20,13 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(
-                typeof(MediaTypeFormatterCollection),
-                TypeAssert.TypeProperties.IsPublicVisibleClass,
-                typeof(Collection<MediaTypeFormatter>)
-            );
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(MediaTypeFormatterCollection),
+                    TypeAssert.TypeProperties.IsPublicVisibleClass,
+                    typeof(Collection<MediaTypeFormatter>)
+                );
         }
 
         [Fact]

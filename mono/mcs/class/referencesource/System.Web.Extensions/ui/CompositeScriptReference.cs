@@ -117,10 +117,9 @@ namespace System.Web.UI
                 if (
                     (scriptManager.AjaxFrameworkMode == AjaxFrameworkMode.Explicit)
                     && reference.IsAjaxFrameworkScript(scriptManager)
-                    && reference.EffectiveResourceName.StartsWith(
-                        "MicrosoftAjax.",
-                        StringComparison.Ordinal
-                    )
+                    && reference
+                        .EffectiveResourceName
+                        .StartsWith("MicrosoftAjax.", StringComparison.Ordinal)
                 )
                 {
                     continue;

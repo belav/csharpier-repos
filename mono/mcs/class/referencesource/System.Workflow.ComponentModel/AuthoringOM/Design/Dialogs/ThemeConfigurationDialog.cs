@@ -188,27 +188,32 @@ namespace System.Workflow.ComponentModel.Design
                 this.nameLocationTableLayoutPanel,
                 "nameLocationTableLayoutPanel"
             );
-            this.nameLocationTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle()
-            );
-            this.nameLocationTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F)
-            );
-            this.nameLocationTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle()
-            );
+            this.nameLocationTableLayoutPanel
+                .ColumnStyles
+                .Add(new System.Windows.Forms.ColumnStyle());
+            this.nameLocationTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(
+                        System.Windows.Forms.SizeType.Percent,
+                        100F
+                    )
+                );
+            this.nameLocationTableLayoutPanel
+                .ColumnStyles
+                .Add(new System.Windows.Forms.ColumnStyle());
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeNameLabel, 0, 0);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeNameTextBox, 1, 0);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeLocationButton, 2, 1);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeLocationLabel, 0, 1);
             this.nameLocationTableLayoutPanel.Controls.Add(this.themeLocationTextBox, 1, 1);
             this.nameLocationTableLayoutPanel.Name = "nameLocationTableLayoutPanel";
-            this.nameLocationTableLayoutPanel.RowStyles.Add(
-                new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F)
-            );
-            this.nameLocationTableLayoutPanel.RowStyles.Add(
-                new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F)
-            );
+            this.nameLocationTableLayoutPanel
+                .RowStyles
+                .Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.nameLocationTableLayoutPanel
+                .RowStyles
+                .Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             //
             // themeLocationButton
             //
@@ -289,22 +294,30 @@ namespace System.Workflow.ComponentModel.Design
             // okCancelTableLayoutPanel
             //
             resources.ApplyResources(this.okCancelTableLayoutPanel, "okCancelTableLayoutPanel");
-            this.okCancelTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
-            );
-            this.okCancelTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
-            );
-            this.okCancelTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
-            );
+            this.okCancelTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
+                );
+            this.okCancelTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
+                );
+            this.okCancelTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F)
+                );
             this.okCancelTableLayoutPanel.Controls.Add(this.okButton, 0, 0);
             this.okCancelTableLayoutPanel.Controls.Add(this.cancelButton, 1, 0);
             this.okCancelTableLayoutPanel.Controls.Add(this.previewButton, 2, 0);
             this.okCancelTableLayoutPanel.Name = "okCancelTableLayoutPanel";
-            this.okCancelTableLayoutPanel.RowStyles.Add(
-                new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F)
-            );
+            this.okCancelTableLayoutPanel
+                .RowStyles
+                .Add(
+                    new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F)
+                );
             //
             // ThemeConfigurationDialog
             //
@@ -412,9 +425,11 @@ namespace System.Workflow.ComponentModel.Design
             this.splitter = new Splitter();
             this.splitter.Dock = DockStyle.Left;
             this.propertiesGrid.Dock = DockStyle.Fill;
-            this.themeConfigPanel.Controls.AddRange(
-                new Control[] { this.propertiesGrid, this.splitter, this.designerTreeView }
-            );
+            this.themeConfigPanel
+                .Controls
+                .AddRange(
+                    new Control[] { this.propertiesGrid, this.splitter, this.designerTreeView }
+                );
 
             this.themePanel.Paint += new PaintEventHandler(OnThemePanelPaint);
             this.previewButton.Click += new EventHandler(OnPreviewClicked);
@@ -529,10 +544,12 @@ namespace System.Workflow.ComponentModel.Design
 
             //Before we try saving show the warning if the user has changed the theme path
             if (
-                !this.bufferedTheme.FilePath.Equals(
-                    this.themeLocationTextBox.Text.Trim(),
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !this.bufferedTheme
+                    .FilePath
+                    .Equals(
+                        this.themeLocationTextBox.Text.Trim(),
+                        StringComparison.OrdinalIgnoreCase
+                    )
             )
             {
                 if (
@@ -843,14 +860,18 @@ namespace System.Workflow.ComponentModel.Design
                             foreach (ToolboxItemFilterAttribute filter in toolboxItem.Filter)
                             {
                                 if (
-                                    filter.FilterString.StartsWith(
-                                        "Microsoft.Workflow.VSDesigner",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
-                                    || filter.FilterString.StartsWith(
-                                        "System.Workflow.ComponentModel",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                                    filter
+                                        .FilterString
+                                        .StartsWith(
+                                            "Microsoft.Workflow.VSDesigner",
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                    || filter
+                                        .FilterString
+                                        .StartsWith(
+                                            "System.Workflow.ComponentModel",
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
                                 )
                                 {
                                     customWinOEActivityType = true;
@@ -917,10 +938,10 @@ namespace System.Workflow.ComponentModel.Design
                                 treeView.ImageList = new ImageList();
                                 treeView.ImageList.ColorDepth = ColorDepth.Depth32Bit;
                                 Image standardImage = DR.GetImage(DR.Activity) as Image;
-                                treeView.ImageList.Images.Add(
-                                    standardImage,
-                                    AmbientTheme.TransparentColor
-                                );
+                                treeView
+                                    .ImageList
+                                    .Images
+                                    .Add(standardImage, AmbientTheme.TransparentColor);
                             }
 
                             TreeNode parentNode = ThemeConfigHelpers.GetCatagoryNodeForDesigner(
@@ -931,10 +952,10 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 int imageIndex =
                                     (image != null)
-                                        ? treeView.ImageList.Images.Add(
-                                            image,
-                                            AmbientTheme.TransparentColor
-                                        )
+                                        ? treeView
+                                            .ImageList
+                                            .Images
+                                            .Add(image, AmbientTheme.TransparentColor)
                                         : 0;
                                 TreeNode nodeToInsert =
                                     (imageIndex >= 0)
@@ -1064,10 +1085,12 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Type designerBaseType =
                             (
-                                activityType.FullName.Equals(
-                                    DesignerHelpers.SequentialWorkflowTypeRef,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                activityType
+                                    .FullName
+                                    .Equals(
+                                        DesignerHelpers.SequentialWorkflowTypeRef,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                                 ? typeof(IRootDesigner)
                                 : typeof(IDesigner);
@@ -1127,10 +1150,12 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Type designerBaseType =
                             (
-                                activityType.FullName.Equals(
-                                    DesignerHelpers.SequentialWorkflowTypeRef,
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                activityType
+                                    .FullName
+                                    .Equals(
+                                        DesignerHelpers.SequentialWorkflowTypeRef,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                                 ? typeof(IRootDesigner)
                                 : typeof(IDesigner);
@@ -1273,10 +1298,12 @@ namespace System.Workflow.ComponentModel.Design
                     //Add new activities to preview
                     if (
                         activityType == null
-                        || activityType.FullName.Equals(
-                            DesignerHelpers.SequentialWorkflowTypeRef,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        || activityType
+                            .FullName
+                            .Equals(
+                                DesignerHelpers.SequentialWorkflowTypeRef,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                     )
                     {
                         AddDummyActivity(

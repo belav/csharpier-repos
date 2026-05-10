@@ -35,8 +35,9 @@ namespace System.ServiceModel.Channels
             );
             if (useManagedPresentationAssertion != null)
             {
-                UseManagedPresentationBindingElement settings =
-                    policyContext.BindingElements.Find<UseManagedPresentationBindingElement>();
+                UseManagedPresentationBindingElement settings = policyContext
+                    .BindingElements
+                    .Find<UseManagedPresentationBindingElement>();
 
                 if (null == settings)
                 {

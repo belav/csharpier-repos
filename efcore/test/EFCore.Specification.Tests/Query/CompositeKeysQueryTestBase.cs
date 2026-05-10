@@ -126,8 +126,8 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
                 select new
                 {
                     e1.Name,
-                    Middle = e1
-                        .OneToMany_Optional1.OrderBy(e2 => e2.Id2)
+                    Middle = e1.OneToMany_Optional1
+                        .OrderBy(e2 => e2.Id2)
                         .Select(e2 => new
                         {
                             e2.Name,
@@ -164,20 +164,20 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
                 select new
                 {
                     e1.Name,
-                    Outer1 = e1
-                        .OneToMany_Optional1.Select(e2 => new
+                    Outer1 = e1.OneToMany_Optional1
+                        .Select(e2 => new
                         {
                             e2.Name,
-                            Middle1 = e2
-                                .OneToMany_Required2.Select(e3 => new
+                            Middle1 = e2.OneToMany_Required2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Optional3.ToList(),
                                     Inner2 = e3.OneToMany_Required3.ToList(),
                                 })
                                 .ToList(),
-                            Middle2 = e2
-                                .OneToMany_Optional2.Select(e3 => new
+                            Middle2 = e2.OneToMany_Optional2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Required3.ToList(),
@@ -186,20 +186,20 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
                                 .ToList(),
                         })
                         .ToList(),
-                    Outer2 = e1
-                        .OneToMany_Required1.Select(e2 => new
+                    Outer2 = e1.OneToMany_Required1
+                        .Select(e2 => new
                         {
                             e2.Name,
-                            Middle1 = e2
-                                .OneToMany_Optional2.Select(e3 => new
+                            Middle1 = e2.OneToMany_Optional2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Required3.ToList(),
                                     Inner2 = e3.OneToMany_Optional3.ToList(),
                                 })
                                 .ToList(),
-                            Middle2 = e2
-                                .OneToMany_Optional2.Select(e3 => new
+                            Middle2 = e2.OneToMany_Optional2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Optional3.ToList(),
@@ -292,12 +292,12 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
                 orderby e1.Name
                 select new
                 {
-                    Outer1 = e1
-                        .OneToMany_Optional1.Select(e2 => new
+                    Outer1 = e1.OneToMany_Optional1
+                        .Select(e2 => new
                         {
                             e2.Name,
-                            Middle1 = e2
-                                .OneToMany_Required2.OrderByDescending(e3 => e3.Id2)
+                            Middle1 = e2.OneToMany_Required2
+                                .OrderByDescending(e3 => e3.Id2)
                                 .ThenByDescending(e3 => e3.Id1)
                                 .Select(e3 => new
                                 {
@@ -305,8 +305,8 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
                                     Inner2 = e3.OneToMany_Required3.ToList(),
                                 })
                                 .ToList(),
-                            Middle2 = e2
-                                .OneToMany_Optional2.Select(e3 => new
+                            Middle2 = e2.OneToMany_Optional2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Required3.ToList(),
@@ -315,26 +315,26 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
                                 .ToList(),
                         })
                         .ToList(),
-                    Outer2 = e1
-                        .OneToMany_Required1.OrderBy(e2 => e2.Name.Length)
+                    Outer2 = e1.OneToMany_Required1
+                        .OrderBy(e2 => e2.Name.Length)
                         .Select(e2 => new
                         {
                             e2.Name,
-                            Middle1 = e2
-                                .OneToMany_Optional2.Select(e3 => new
+                            Middle1 = e2.OneToMany_Optional2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Required3.ToList(),
                                     Inner2 = e3.OneToMany_Optional3.ToList(),
                                 })
                                 .ToList(),
-                            Middle2 = e2
-                                .OneToMany_Optional2.Select(e3 => new
+                            Middle2 = e2.OneToMany_Optional2
+                                .Select(e3 => new
                                 {
                                     e3.Name,
                                     Inner1 = e3.OneToMany_Optional3.ToList(),
-                                    Inner2 = e3
-                                        .OneToMany_Required3.OrderByDescending(x => x.Id1 + x.Id2)
+                                    Inner2 = e3.OneToMany_Required3
+                                        .OrderByDescending(x => x.Id1 + x.Id2)
                                         .ToList(),
                                 })
                                 .ToList(),

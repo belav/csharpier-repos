@@ -143,7 +143,9 @@ namespace Roslyn.Test.Utilities
                 foreach (var module in EnumerateModules(metadata))
                 {
                     ImmutableArray<byte> bytes = module
-                        .Module.PEReaderOpt.GetEntireImage()
+                        .Module
+                        .PEReaderOpt
+                        .GetEntireImage()
                         .GetContent();
                     ModuleData moduleData;
                     if (isManifestModule)
@@ -232,7 +234,8 @@ namespace Roslyn.Test.Utilities
         {
             var corLibIdentity = compilation
                 .GetSpecialType(SpecialType.System_Object)
-                .ContainingAssembly.Identity;
+                .ContainingAssembly
+                .Identity;
 
             // A Compilation can appear multiple times in a dependency graph as both a Compilation and as a MetadataReference
             // value.  Iterate the Compilations eagerly so they are always emitted directly and later references can re-use
@@ -288,9 +291,9 @@ namespace Roslyn.Test.Utilities
             EmitOptions emitOptions
         )
         {
-            emitOptions ??= EmitOptions.Default.WithDebugInformationFormat(
-                DebugInformationFormat.Embedded
-            );
+            emitOptions ??= EmitOptions
+                .Default
+                .WithDebugInformationFormat(DebugInformationFormat.Embedded);
 
             using var executableStream = new MemoryStream();
 
@@ -303,7 +306,8 @@ namespace Roslyn.Test.Utilities
 
             // Note: don't forget to name the source inputs to get them embedded for debugging
             var embeddedTexts = compilation
-                .SyntaxTrees.Select(t => (filePath: t.FilePath, text: t.GetText()))
+                .SyntaxTrees
+                .Select(t => (filePath: t.FilePath, text: t.GetText()))
                 .Where(t => t.text.CanBeEmbedded && !string.IsNullOrEmpty(t.filePath))
                 .Select(t => EmbeddedText.FromSource(t.filePath, t.text))
                 .ToImmutableArray();

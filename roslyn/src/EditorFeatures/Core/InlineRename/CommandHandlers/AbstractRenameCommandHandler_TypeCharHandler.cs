@@ -30,8 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 nextHandler,
                 (activeSession, span) =>
                 {
-                    var document =
-                        args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document = args.SubjectBuffer
+                        .CurrentSnapshot
+                        .GetOpenDocumentInCurrentContextWithChanges();
                     if (document == null)
                     {
                         nextHandler();

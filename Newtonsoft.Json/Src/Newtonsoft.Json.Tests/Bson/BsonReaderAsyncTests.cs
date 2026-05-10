@@ -454,11 +454,9 @@ namespace Newtonsoft.Json.Tests.Bson
             Assert.IsFalse(await reader.ReadAsync());
             Assert.AreEqual(JsonToken.None, reader.TokenType);
 
-            string decodedString = Encoding.UTF8.GetString(
-                encodedStringData,
-                0,
-                encodedStringData.Length
-            );
+            string decodedString = Encoding
+                .UTF8
+                .GetString(encodedStringData, 0, encodedStringData.Length);
             Assert.AreEqual("Hello world!", decodedString);
         }
 

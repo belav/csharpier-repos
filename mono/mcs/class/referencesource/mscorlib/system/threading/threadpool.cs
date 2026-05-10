@@ -656,11 +656,13 @@ namespace System.Threading
         {
             queueTail = queueHead = new QueueSegment();
 #if !MONO
-            loggingEnabled = FrameworkEventSource.Log.IsEnabled(
-                EventLevel.Verbose,
-                FrameworkEventSource.Keywords.ThreadPool
-                    | FrameworkEventSource.Keywords.ThreadTransfer
-            );
+            loggingEnabled = FrameworkEventSource
+                .Log
+                .IsEnabled(
+                    EventLevel.Verbose,
+                    FrameworkEventSource.Keywords.ThreadPool
+                        | FrameworkEventSource.Keywords.ThreadTransfer
+                );
 #endif
         }
 
@@ -733,9 +735,12 @@ namespace System.Threading
 
 #if !MONO
             if (loggingEnabled)
-                System.Diagnostics.Tracing.FrameworkEventSource.Log.ThreadPoolEnqueueWorkObject(
-                    callback
-                );
+                System
+                    .Diagnostics
+                    .Tracing
+                    .FrameworkEventSource
+                    .Log
+                    .ThreadPoolEnqueueWorkObject(callback);
 #endif
             if (null != tl)
             {
@@ -856,11 +861,13 @@ namespace System.Threading
 
 #if !MONO
             // Has the desire for logging changed since the last time we entered?
-            workQueue.loggingEnabled = FrameworkEventSource.Log.IsEnabled(
-                EventLevel.Verbose,
-                FrameworkEventSource.Keywords.ThreadPool
-                    | FrameworkEventSource.Keywords.ThreadTransfer
-            );
+            workQueue.loggingEnabled = FrameworkEventSource
+                .Log
+                .IsEnabled(
+                    EventLevel.Verbose,
+                    FrameworkEventSource.Keywords.ThreadPool
+                        | FrameworkEventSource.Keywords.ThreadTransfer
+                );
 #endif
             //
             // Assume that we're going to need another thread if this one returns to the VM.  We'll set this to
@@ -921,9 +928,12 @@ namespace System.Threading
                     {
 #if !MONO
                         if (workQueue.loggingEnabled)
-                            System.Diagnostics.Tracing.FrameworkEventSource.Log.ThreadPoolDequeueWorkObject(
-                                workItem
-                            );
+                            System
+                                .Diagnostics
+                                .Tracing
+                                .FrameworkEventSource
+                                .Log
+                                .ThreadPoolDequeueWorkObject(workItem);
 #endif
                         //
                         // Execute the workitem outside of any finally blocks, so that it can be aborted if needed.

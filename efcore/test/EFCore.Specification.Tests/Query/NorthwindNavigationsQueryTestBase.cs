@@ -197,7 +197,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => new { o.CustomerID, o.OrderID })
                             .FirstOrDefault()
                     ),
@@ -217,7 +218,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     .OrderBy(c => c.CustomerID)
                     .Take(2)
                     .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderID)
+                        c.Orders
+                            .OrderBy(o => o.OrderID)
                             .Select(o => new
                             {
                                 o.CustomerID,
@@ -831,7 +833,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                         != null
                             ? ss.Set<Order>()
                                 .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                .Customer.City
+                                .Customer
+                                .City
                             : null
                     )
         );
@@ -850,7 +853,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                         ss.Set<Order>()
                             .OrderBy(o => o.CustomerID)
                             .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                            .Customer.City
+                            .Customer
+                            .City
                     )
         );
 
@@ -966,8 +970,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                 from c in ss.Set<Customer>()
                 orderby c.CustomerID
                 where
-                    c
-                        .Orders.Select(o => o.OrderID)
+                    c.Orders
+                        .Select(o => o.OrderID)
                         .Contains(
                             ss.Set<Order>()
                                 .OrderByDescending(o => ClientMethod(o.OrderID))
@@ -1030,8 +1034,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                 select new
                 {
                     c.CustomerID,
-                    OrderId = c
-                        .Orders.OrderBy(o => o.OrderID)
+                    OrderId = c.Orders
+                        .OrderBy(o => o.OrderID)
                         .Select(o => (int?)o.OrderID)
                         .FirstOrDefault(),
                 },
@@ -1040,8 +1044,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                 select new
                 {
                     c.CustomerID,
-                    OrderId = c
-                        .Orders.OrderBy(o => o.OrderID)
+                    OrderId = c.Orders
+                        .OrderBy(o => o.OrderID)
                         .Select(o => (int?)o.OrderID)
                         .FirstOrDefault(),
                 },
@@ -1079,8 +1083,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                     select new
                     {
                         o.OrderID,
-                        OrderDetail = o
-                            .OrderDetails.OrderBy(od => od.OrderID)
+                        OrderDetail = o.OrderDetails
+                            .OrderBy(od => od.OrderID)
                             .ThenBy(od => od.ProductID)
                             .Select(od => od.OrderID)
                             .FirstOrDefault(),

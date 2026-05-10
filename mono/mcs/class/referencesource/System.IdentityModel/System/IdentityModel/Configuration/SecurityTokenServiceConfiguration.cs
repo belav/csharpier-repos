@@ -163,10 +163,9 @@ namespace System.IdentityModel.Configuration
 
                 if (!typeof(System.IdentityModel.SecurityTokenService).IsAssignableFrom(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID2069)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID2069));
                 }
 
                 _securityTokenServiceType = value;
@@ -276,10 +275,9 @@ namespace System.IdentityModel.Configuration
 
                 if (SecurityTokenHandlers[value] == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID2015, value)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID2015, value));
                 }
 
                 _defaultTokenType = value;

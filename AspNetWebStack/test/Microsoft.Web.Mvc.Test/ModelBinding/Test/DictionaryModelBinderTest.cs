@@ -39,17 +39,19 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
-                        mbc.Model = mbc
-                            .ValueProvider.GetValue(mbc.ModelName)
+                        mbc.Model = mbc.ValueProvider
+                            .GetValue(mbc.ModelName)
                             .ConvertTo(mbc.ModelType);
                         return true;
                     }
                 );
-            bindingContext.ModelBinderProviders.RegisterBinderForType(
-                typeof(KeyValuePair<int, string>),
-                mockKvpBinder.Object,
-                false /* suppressPrefixCheck */
-            );
+            bindingContext
+                .ModelBinderProviders
+                .RegisterBinderForType(
+                    typeof(KeyValuePair<int, string>),
+                    mockKvpBinder.Object,
+                    false /* suppressPrefixCheck */
+                );
 
             // Act
             bool retVal = new DictionaryModelBinder<int, string>().BindModel(

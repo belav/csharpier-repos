@@ -257,7 +257,8 @@ public abstract partial class ModelBuilderTest
                 entity
                     .GetKeys()
                     .First(key => key != entity.FindPrimaryKey())
-                    .Properties.First()
+                    .Properties
+                    .First()
                     .Name
             );
         }
@@ -281,7 +282,8 @@ public abstract partial class ModelBuilderTest
                 entity
                     .GetKeys()
                     .First(key => key != entity.FindPrimaryKey())
-                    .Properties.First()
+                    .Properties
+                    .First()
                     .Name
             );
         }
@@ -303,7 +305,8 @@ public abstract partial class ModelBuilderTest
                 entity
                     .GetKeys()
                     .First(key => key != entity.FindPrimaryKey())
-                    .Properties.First()
+                    .Properties
+                    .First()
                     .Name
             );
         }
@@ -2260,7 +2263,8 @@ public abstract partial class ModelBuilderTest
             Assert.DoesNotContain(
                 nameof(IEntityBase.Target),
                 modelBuilder
-                    .Model.FindEntityType(typeof(EntityBase))!
+                    .Model
+                    .FindEntityType(typeof(EntityBase))!
                     .GetProperties()
                     .Select(p => p.Name)
             );
@@ -2270,7 +2274,8 @@ public abstract partial class ModelBuilderTest
             Assert.Contains(
                 nameof(IEntityBase.Target),
                 modelBuilder
-                    .Model.FindEntityType(typeof(EntityBase))!
+                    .Model
+                    .FindEntityType(typeof(EntityBase))!
                     .GetProperties()
                     .Select(p => p.Name)
             );

@@ -66,10 +66,9 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             }
             else
             {
-                bindingContext.ModelState.AddModelError(
-                    bindingContext.ModelName,
-                    Resources.MissingSignedRequest
-                );
+                bindingContext
+                    .ModelState
+                    .AddModelError(bindingContext.ModelName, Resources.MissingSignedRequest);
             }
 
             return null;

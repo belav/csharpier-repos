@@ -140,21 +140,22 @@ namespace Microsoft.CodeAnalysis.Syntax
                     case 2:
                         return new SyntaxTriviaList(
                             default(SyntaxToken),
-                            InternalSyntax.SyntaxList.List(
-                                _nodes[0].UnderlyingNode!,
-                                _nodes[1].UnderlyingNode!
-                            ),
+                            InternalSyntax
+                                .SyntaxList
+                                .List(_nodes[0].UnderlyingNode!, _nodes[1].UnderlyingNode!),
                             position: 0,
                             index: 0
                         );
                     case 3:
                         return new SyntaxTriviaList(
                             default(SyntaxToken),
-                            InternalSyntax.SyntaxList.List(
-                                _nodes[0].UnderlyingNode!,
-                                _nodes[1].UnderlyingNode!,
-                                _nodes[2].UnderlyingNode!
-                            ),
+                            InternalSyntax
+                                .SyntaxList
+                                .List(
+                                    _nodes[0].UnderlyingNode!,
+                                    _nodes[1].UnderlyingNode!,
+                                    _nodes[2].UnderlyingNode!
+                                ),
                             position: 0,
                             index: 0
                         );

@@ -61,9 +61,9 @@ namespace DbLinq.Oracle
                     constraint.TableName,
                     constraint.TableSchema
                 );
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(t =>
-                    constraintFullDbName == t.Name
-                );
+                DbLinq.Schema.Dbml.Table table = schema
+                    .Tables
+                    .FirstOrDefault(t => constraintFullDbName == t.Name);
                 if (table == null)
                 {
                     WriteErrorLine(
@@ -82,7 +82,9 @@ namespace DbLinq.Oracle
                 {
                     //A) add primary key
                     DbLinq.Schema.Dbml.Column pkColumn = table
-                        .Type.Columns.Where(c => constraint.ColumnNames.Contains(c.Name))
+                        .Type
+                        .Columns
+                        .Where(c => constraint.ColumnNames.Contains(c.Name))
                         .First();
                     pkColumn.IsPrimaryKey = true;
                 }
@@ -121,7 +123,9 @@ namespace DbLinq.Oracle
                 else if (constraint.ConstraintType == "T" && constraint.ColumnNames.Count == 1)
                 {
                     var column = table
-                        .Type.Columns.Where(c => c.Name == constraint.ColumnNames[0])
+                        .Type
+                        .Columns
+                        .Where(c => c.Name == constraint.ColumnNames[0])
                         .First();
                     column.Expression = constraint.Expression;
                     column.IsDbGenerated = true;

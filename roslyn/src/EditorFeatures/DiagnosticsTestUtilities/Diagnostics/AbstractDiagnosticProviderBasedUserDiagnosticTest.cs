@@ -317,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 #pragma warning restore CS1574 // XML comment has cref attribute that could not be resolved
         {
             var analyzerExceptionDiagnostics = diagnostics.Where(diag =>
-                diag.Descriptor.ImmutableCustomTags()
+                diag.Descriptor
+                    .ImmutableCustomTags()
                     .Contains(WellKnownDiagnosticTags.AnalyzerException)
             );
             AssertEx.Empty(analyzerExceptionDiagnostics, "Found analyzer exception diagnostics");

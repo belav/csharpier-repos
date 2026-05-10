@@ -102,15 +102,14 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext.OutgoingMessageProperties.ContainsKey(
-                        HttpRequestMessageProperty.Name
-                    )
+                    !operationContext
+                        .OutgoingMessageProperties
+                        .ContainsKey(HttpRequestMessageProperty.Name)
                 )
                 {
-                    operationContext.OutgoingMessageProperties.Add(
-                        HttpRequestMessageProperty.Name,
-                        new HttpRequestMessageProperty()
-                    );
+                    operationContext
+                        .OutgoingMessageProperties
+                        .Add(HttpRequestMessageProperty.Name, new HttpRequestMessageProperty());
                 }
                 return operationContext.OutgoingMessageProperties[HttpRequestMessageProperty.Name]
                     as HttpRequestMessageProperty;

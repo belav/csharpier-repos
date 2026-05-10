@@ -45,10 +45,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         + "_";
                 }
 
-                _path = System.IO.Path.Combine(
-                    directory ?? TempRoot.Root,
-                    prefix + Guid.NewGuid() + (extension ?? ".tmp")
-                );
+                _path = System
+                    .IO
+                    .Path
+                    .Combine(
+                        directory ?? TempRoot.Root,
+                        prefix + Guid.NewGuid() + (extension ?? ".tmp")
+                    );
 
                 try
                 {

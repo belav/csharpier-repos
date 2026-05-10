@@ -119,11 +119,15 @@ namespace Microsoft.Web.FxCop
             var classNode = typeNode as ClassNode;
             return (
                 classNode != null
-                && classNode.Attributes.Any(c =>
-                    c.Type.FullName.Equals(
-                        typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute).FullName
+                && classNode
+                    .Attributes
+                    .Any(c =>
+                        c.Type
+                            .FullName
+                            .Equals(
+                                typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute).FullName
+                            )
                     )
-                )
                 && classNode.Name.Name.Contains("Resource")
             );
         }

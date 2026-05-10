@@ -23,13 +23,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var backingFields = symbol
-                .ContainingType.GetMembers()
+                .ContainingType
+                .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => symbol.Equals(f.AssociatedSymbol))
                 .ToImmutableArray<ISymbol>();
 
             var associatedNamedTypes = symbol
-                .ContainingType.GetTypeMembers()
+                .ContainingType
+                .GetTypeMembers()
                 .WhereAsArray(n => symbol.Equals(n.AssociatedSymbol))
                 .CastArray<ISymbol>();
 

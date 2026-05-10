@@ -202,10 +202,9 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
                 // Check if there is an associated active stream and cancel it if it exists.
                 // The cts will be removed when the streaming method completes executing
                 if (
-                    connection.ActiveRequestCancellationSources.TryGetValue(
-                        cancelInvocationMessage.InvocationId!,
-                        out var cts
-                    )
+                    connection
+                        .ActiveRequestCancellationSources
+                        .TryGetValue(cancelInvocationMessage.InvocationId!, out var cts)
                 )
                 {
                     Log.CancelStream(_logger, cancelInvocationMessage.InvocationId!);
@@ -355,7 +354,8 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
             if (!isStreamCall && !isStreamResponse)
             {
                 return connection
-                    .ActiveInvocationLimit.RunAsync(
+                    .ActiveInvocationLimit
+                    .RunAsync(
                         static state =>
                         {
                             var (dispatcher, descriptor, connection, invocationMessage) = state;
@@ -1042,11 +1042,13 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
                         hubMethodInvocationMessage.StreamIds![streamPointer]
                     );
                     var itemType = descriptor.StreamingParameters![streamPointer];
-                    arguments[parameterPointer] = connection.StreamTracker.AddStream(
-                        hubMethodInvocationMessage.StreamIds[streamPointer],
-                        itemType,
-                        descriptor.OriginalParameterTypes[parameterPointer]
-                    );
+                    arguments[parameterPointer] = connection
+                        .StreamTracker
+                        .AddStream(
+                            hubMethodInvocationMessage.StreamIds[streamPointer],
+                            itemType,
+                            descriptor.OriginalParameterTypes[parameterPointer]
+                        );
 
                     streamPointer++;
                 }
@@ -1073,8 +1075,9 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
         IServiceProviderIsService? serviceProviderIsService = null;
         if (!disableImplicitFromServiceParameters)
         {
-            serviceProviderIsService =
-                scope.ServiceProvider.GetService<IServiceProviderIsService>();
+            serviceProviderIsService = scope
+                .ServiceProvider
+                .GetService<IServiceProviderIsService>();
         }
 
         foreach (var methodInfo in HubReflectionHelper.GetHubMethods(hubType))

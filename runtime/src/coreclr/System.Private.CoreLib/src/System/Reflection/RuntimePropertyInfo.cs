@@ -79,7 +79,8 @@ namespace System.Reflection
                 if (m_signature == null)
                 {
                     GetRuntimeModule()
-                        .MetadataImport.GetPropertyProps(m_token, out _, out _, out ConstArray sig);
+                        .MetadataImport
+                        .GetPropertyProps(m_token, out _, out _, out ConstArray sig);
 
                     m_signature = new Signature(
                         sig.Signature.ToPointer(),

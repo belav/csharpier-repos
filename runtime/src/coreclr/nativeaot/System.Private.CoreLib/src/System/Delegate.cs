@@ -310,10 +310,9 @@ namespace System
             }
             else
             {
-                DynamicInvokeInfo dynamicInvokeInfo =
-                    ReflectionAugments.ReflectionCoreCallbacks.GetDelegateDynamicInvokeInfo(
-                        GetType()
-                    );
+                DynamicInvokeInfo dynamicInvokeInfo = ReflectionAugments
+                    .ReflectionCoreCallbacks
+                    .GetDelegateDynamicInvokeInfo(GetType());
 
                 object? result = dynamicInvokeInfo.Invoke(
                     m_firstParameter,
@@ -378,12 +377,9 @@ namespace System
             MethodInfo method,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
-                type,
-                firstArgument,
-                method,
-                throwOnBindFailure
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .CreateDelegate(type, firstArgument, method, throwOnBindFailure);
 
         // V1 api: Creates open delegates to static or instance methods - relaxed signature checking allowed.
         public static Delegate CreateDelegate(
@@ -391,11 +387,9 @@ namespace System
             MethodInfo method,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
-                type,
-                method,
-                throwOnBindFailure
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .CreateDelegate(type, method, throwOnBindFailure);
 
         // V1 api: Creates closed delegates to instance methods only, relaxed signature checking disallowed.
         [RequiresUnreferencedCode("The target method might be removed")]
@@ -406,13 +400,9 @@ namespace System
             bool ignoreCase,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
-                type,
-                target,
-                method,
-                ignoreCase,
-                throwOnBindFailure
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure);
 
         // V1 api: Creates open delegates to static methods only, relaxed signature checking disallowed.
         public static Delegate CreateDelegate(
@@ -422,13 +412,9 @@ namespace System
             bool ignoreCase,
             bool throwOnBindFailure
         ) =>
-            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
-                type,
-                target,
-                method,
-                ignoreCase,
-                throwOnBindFailure
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure);
 
         internal bool IsOpenStatic
         {

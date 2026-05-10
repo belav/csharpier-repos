@@ -31,8 +31,10 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
 
             if (OperatingSystem.IsWindows())
             {
@@ -66,10 +68,12 @@ namespace HostActivation.Tests
                 .Should()
                 .Pass()
                 // Note that this is an exact match - we don't expect any output from the host itself
-                .And.HaveStdOut(
+                .And
+                .HaveStdOut(
                     $"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {TestContext.MicrosoftNETCoreAppVersion}{Environment.NewLine}"
                 )
-                .And.NotHaveStdErr();
+                .And
+                .NotHaveStdErr();
 
             // Make sure tracing indicates there is no runtime config and no deps json
             Command
@@ -78,15 +82,14 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOut(
+                .And
+                .HaveStdOut(
                     $"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {TestContext.MicrosoftNETCoreAppVersion}{Environment.NewLine}"
                 )
-                .And.HaveStdErrContaining(
-                    $"Runtime config does not exist at [{app.RuntimeConfigJson}]"
-                )
-                .And.HaveStdErrContaining(
-                    $"Dependencies manifest does not exist at [{app.DepsJson}]"
-                );
+                .And
+                .HaveStdErrContaining($"Runtime config does not exist at [{app.RuntimeConfigJson}]")
+                .And
+                .HaveStdErrContaining($"Dependencies manifest does not exist at [{app.DepsJson}]");
         }
 
         [Fact]
@@ -104,8 +107,10 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
         }
 
         [Fact]
@@ -133,8 +138,10 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining(TestContext.MicrosoftNETCoreAppVersion);
         }
 
         [Fact]
@@ -158,11 +165,13 @@ namespace HostActivation.Tests
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveUsedDotNetRootInstallLocation(
+                .And
+                .HaveUsedDotNetRootInstallLocation(
                     Path.GetFullPath(app.Location),
                     TestContext.TargetRID
                 )
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The required library {Binaries.HostFxr.FileName} could not be found."
                 );
         }

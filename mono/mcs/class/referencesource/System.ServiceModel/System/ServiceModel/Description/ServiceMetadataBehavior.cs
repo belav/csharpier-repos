@@ -49,15 +49,17 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttp)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
-                            "HttpGetUrl",
-                            Uri.UriSchemeHttp,
-                            value.ToString(),
-                            value.Scheme
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
+                                "HttpGetUrl",
+                                Uri.UriSchemeHttp,
+                                value.ToString(),
+                                value.Scheme
+                            )
+                        );
                 }
                 this.httpGetUrl = value;
             }
@@ -77,15 +79,17 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
-                            "HttpsGetUrl",
-                            Uri.UriSchemeHttps,
-                            value.ToString(),
-                            value.Scheme
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
+                                "HttpsGetUrl",
+                                Uri.UriSchemeHttps,
+                                value.ToString(),
+                                value.Scheme
+                            )
+                        );
                 }
 
                 this.httpsGetUrl = value;
@@ -101,35 +105,40 @@ namespace System.ServiceModel.Description
                 {
                     if (!value.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxBindingSchemeDoesNotMatch,
-                                value.Scheme,
-                                value.GetType().ToString(),
-                                Uri.UriSchemeHttp
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxBindingSchemeDoesNotMatch,
+                                    value.Scheme,
+                                    value.GetType().ToString(),
+                                    Uri.UriSchemeHttp
+                                )
+                            );
                     }
                     CustomBinding customBinding = new CustomBinding(value);
                     TextMessageEncodingBindingElement textMessageEncodingBindingElement =
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement.MessageVersion.IsMatch(
-                            MessageVersion.None
-                        )
+                        && !textMessageEncodingBindingElement
+                            .MessageVersion
+                            .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxIncorrectMessageVersion,
-                                textMessageEncodingBindingElement.MessageVersion.ToString(),
-                                MessageVersion.None.ToString()
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxIncorrectMessageVersion,
+                                    textMessageEncodingBindingElement.MessageVersion.ToString(),
+                                    MessageVersion.None.ToString()
+                                )
+                            );
                     }
-                    HttpTransportBindingElement httpTransportBindingElement =
-                        customBinding.Elements.Find<HttpTransportBindingElement>();
+                    HttpTransportBindingElement httpTransportBindingElement = customBinding
+                        .Elements
+                        .Find<HttpTransportBindingElement>();
                     if (httpTransportBindingElement != null)
                     {
                         httpTransportBindingElement.Method = "GET";
@@ -150,35 +159,40 @@ namespace System.ServiceModel.Description
                         !value.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxBindingSchemeDoesNotMatch,
-                                value.Scheme,
-                                value.GetType().ToString(),
-                                Uri.UriSchemeHttps
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxBindingSchemeDoesNotMatch,
+                                    value.Scheme,
+                                    value.GetType().ToString(),
+                                    Uri.UriSchemeHttps
+                                )
+                            );
                     }
                     CustomBinding customBinding = new CustomBinding(value);
                     TextMessageEncodingBindingElement textMessageEncodingBindingElement =
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement.MessageVersion.IsMatch(
-                            MessageVersion.None
-                        )
+                        && !textMessageEncodingBindingElement
+                            .MessageVersion
+                            .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxIncorrectMessageVersion,
-                                textMessageEncodingBindingElement.MessageVersion.ToString(),
-                                MessageVersion.None.ToString()
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxIncorrectMessageVersion,
+                                    textMessageEncodingBindingElement.MessageVersion.ToString(),
+                                    MessageVersion.None.ToString()
+                                )
+                            );
                     }
-                    HttpsTransportBindingElement httpsTransportBindingElement =
-                        customBinding.Elements.Find<HttpsTransportBindingElement>();
+                    HttpsTransportBindingElement httpsTransportBindingElement = customBinding
+                        .Elements
+                        .Find<HttpsTransportBindingElement>();
                     if (httpsTransportBindingElement != null)
                     {
                         httpsTransportBindingElement.Method = "GET";
@@ -200,14 +214,16 @@ namespace System.ServiceModel.Description
                     && !(value.Scheme == Uri.UriSchemeHttp || value.Scheme == Uri.UriSchemeHttps)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "ExternalMetadataLocation",
-                        SR.GetString(
-                            SR.SFxBadMetadataLocationUri,
-                            value.OriginalString,
-                            value.Scheme
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "ExternalMetadataLocation",
+                            SR.GetString(
+                                SR.SFxBadMetadataLocationUri,
+                                value.OriginalString,
+                                value.Scheme
+                            )
+                        );
                 }
                 this.externalMetadataLocation = value;
             }
@@ -303,20 +319,24 @@ namespace System.ServiceModel.Description
             {
                 if (this.httpGetEnabled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxServiceMetadataBehaviorNoHttpBaseAddress)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxServiceMetadataBehaviorNoHttpBaseAddress)
+                            )
+                        );
                 }
 
                 if (this.httpsGetEnabled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxServiceMetadataBehaviorNoHttpsBaseAddress)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxServiceMetadataBehaviorNoHttpsBaseAddress)
+                            )
+                        );
                 }
             }
         }
@@ -378,8 +398,9 @@ namespace System.ServiceModel.Description
             mex.HttpGetBinding = this.httpGetBinding;
             mex.HttpsGetBinding = this.httpsGetBinding;
 
-            UseRequestHeadersForMetadataAddressBehavior dynamicUpdateBehavior =
-                description.Behaviors.Find<UseRequestHeadersForMetadataAddressBehavior>();
+            UseRequestHeadersForMetadataAddressBehavior dynamicUpdateBehavior = description
+                .Behaviors
+                .Find<UseRequestHeadersForMetadataAddressBehavior>();
             if (dynamicUpdateBehavior != null)
             {
                 mex.UpdateAddressDynamically = true;
@@ -430,15 +451,17 @@ namespace System.ServiceModel.Description
                 {
                     if (channelDispatcher.Endpoints.Count != 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxServiceMetadataBehaviorInstancingError,
-                                    channelDispatcher.Listener.Uri,
-                                    channelDispatcher.CreateContractListString()
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxServiceMetadataBehaviorInstancingError,
+                                        channelDispatcher.Listener.Uri,
+                                        channelDispatcher.CreateContractListString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     DispatchRuntime dispatcher = channelDispatcher.Endpoints[0].DispatchRuntime;
@@ -597,10 +620,9 @@ namespace System.ServiceModel.Description
         {
             if (!resolver.BehaviorContracts.ContainsKey(MexContractName))
             {
-                resolver.BehaviorContracts.Add(
-                    MexContractName,
-                    ServiceMetadataBehavior.MexContract
-                );
+                resolver
+                    .BehaviorContracts
+                    .Add(MexContractName, ServiceMetadataBehavior.MexContract);
             }
         }
 
@@ -672,8 +694,10 @@ namespace System.ServiceModel.Description
                             new Collection<ServiceEndpoint>();
                         foreach (ServiceEndpoint endpoint in this.description.Endpoints)
                         {
-                            ServiceMetadataContractBehavior contractBehavior =
-                                endpoint.Contract.Behaviors.Find<ServiceMetadataContractBehavior>();
+                            ServiceMetadataContractBehavior contractBehavior = endpoint
+                                .Contract
+                                .Behaviors
+                                .Find<ServiceMetadataContractBehavior>();
 
                             // if contract behavior exists, generate metadata when the behavior allows metadata generation
                             // if contract behavior doesn't exist, generate metadata only for non system endpoints

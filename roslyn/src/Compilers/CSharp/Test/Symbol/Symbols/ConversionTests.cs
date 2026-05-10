@@ -2165,7 +2165,8 @@ class C
             var interfaceI3 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
             var typeIntArrayWithCustomModifiers = interfaceI3
                 .GetMember<MethodSymbol>("M1")
-                .Parameters.Single()
+                .Parameters
+                .Single()
                 .Type;
 
             Assert.True(
@@ -2237,7 +2238,8 @@ public class Program
             Assert.Equal(
                 ConversionKind.Identity,
                 tuple
-                    .Item2.ClassifyConversion(
+                    .Item2
+                    .ClassifyConversion(
                         tuple.Item1,
                         comp.GetSpecialType(SpecialType.System_Boolean)
                     )
@@ -3846,8 +3848,8 @@ class C<T>
                     )
             );
 
-            var destinationType = comp
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+            var destinationType = comp.GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .Construct(comp.GetSpecialType(SpecialType.System_Int32));
             var conversionSymbols = destinationType
                 .GetMembers()

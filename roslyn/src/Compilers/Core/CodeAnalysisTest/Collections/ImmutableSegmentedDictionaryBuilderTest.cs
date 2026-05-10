@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void EnumerateBuilderWhileMutating()
         {
             var builder = ImmutableSegmentedDictionary<int, string?>
-                .Empty.AddRange(
+                .Empty
+                .AddRange(
                     Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string?>(n, null))
                 )
                 .ToBuilder();

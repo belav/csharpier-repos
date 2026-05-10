@@ -182,9 +182,9 @@ public class SessionTests
                             }
                             Assert.True(value.HasValue);
                             context.Session.SetInt32("Key", value.Value + 1);
-                            return context.Response.WriteAsync(
-                                value.Value.ToString(CultureInfo.InvariantCulture)
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(value.Value.ToString(CultureInfo.InvariantCulture));
                         });
                     })
                     .ConfigureServices(services =>
@@ -208,10 +208,9 @@ public class SessionTests
             var cookie = SetCookieHeaderValue
                 .ParseList(response.Headers.GetValues("Set-Cookie").ToList())
                 .First();
-            client.DefaultRequestHeaders.Add(
-                "Cookie",
-                new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-            );
+            client
+                .DefaultRequestHeaders
+                .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
             Assert.Equal("1", await client.GetStringAsync("/"));
             Assert.Equal("2", await client.GetStringAsync("/"));
             Assert.Equal("3", await client.GetStringAsync("/"));
@@ -249,9 +248,9 @@ public class SessionTests
                                 Assert.False(value.HasValue);
                                 value = 2;
                             }
-                            return context.Response.WriteAsync(
-                                value.Value.ToString(CultureInfo.InvariantCulture)
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(value.Value.ToString(CultureInfo.InvariantCulture));
                         });
                     })
                     .ConfigureServices(services =>
@@ -275,10 +274,9 @@ public class SessionTests
             var cookie = SetCookieHeaderValue
                 .ParseList(response.Headers.GetValues("Set-Cookie").ToList())
                 .First();
-            client.DefaultRequestHeaders.Add(
-                "Cookie",
-                new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-            );
+            client
+                .DefaultRequestHeaders
+                .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
             Assert.Equal("1", await client.GetStringAsync("/second"));
             Assert.Equal("2", await client.GetStringAsync("/third"));
         }
@@ -315,9 +313,9 @@ public class SessionTests
                                 Assert.False(value.HasValue);
                                 value = 2;
                             }
-                            return context.Response.WriteAsync(
-                                value.Value.ToString(CultureInfo.InvariantCulture)
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(value.Value.ToString(CultureInfo.InvariantCulture));
                         });
                     })
                     .ConfigureServices(services =>
@@ -341,10 +339,9 @@ public class SessionTests
             var cookie = SetCookieHeaderValue
                 .ParseList(response.Headers.GetValues("Set-Cookie").ToList())
                 .First();
-            client.DefaultRequestHeaders.Add(
-                "Cookie",
-                new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-            );
+            client
+                .DefaultRequestHeaders
+                .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
             Assert.Equal("1", await client.GetStringAsync("/second"));
             Assert.Equal("2", await client.GetStringAsync("/third"));
         }
@@ -429,9 +426,9 @@ public class SessionTests
                                 Assert.False(value.HasValue);
                                 value = 2;
                             }
-                            return context.Response.WriteAsync(
-                                value.Value.ToString(CultureInfo.InvariantCulture)
-                            );
+                            return context
+                                .Response
+                                .WriteAsync(value.Value.ToString(CultureInfo.InvariantCulture));
                         });
                     })
                     .ConfigureServices(services =>
@@ -456,10 +453,9 @@ public class SessionTests
             var cookie = SetCookieHeaderValue
                 .ParseList(response.Headers.GetValues("Set-Cookie").ToList())
                 .First();
-            client.DefaultRequestHeaders.Add(
-                "Cookie",
-                new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-            );
+            client
+                .DefaultRequestHeaders
+                .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
             Thread.Sleep(50);
             result = await client.GetStringAsync("/second");
         }
@@ -536,10 +532,9 @@ public class SessionTests
             var cookie = SetCookieHeaderValue
                 .ParseList(response.Headers.GetValues("Set-Cookie").ToList())
                 .First();
-            client.DefaultRequestHeaders.Add(
-                "Cookie",
-                new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-            );
+            client
+                .DefaultRequestHeaders
+                .Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
 
             for (var i = 0; i < 5; i++)
             {
@@ -954,24 +949,22 @@ public class SessionTests
             response.EnsureSuccessStatusCode();
         }
 
-        var sessionLogMessage = sink
-            .Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(DistributedSession).FullName,
-                    StringComparison.Ordinal
-                )
+        var sessionLogMessage = sink.Writes
+            .Where(message =>
+                message
+                    .LoggerName
+                    .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
             )
             .Single();
 
         Assert.Contains("Session started", sessionLogMessage.State.ToString());
         Assert.Equal(LogLevel.Information, sessionLogMessage.LogLevel);
 
-        var sessionMiddlewareLogMessage = sink
-            .Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(SessionMiddleware).FullName,
-                    StringComparison.Ordinal
-                )
+        var sessionMiddlewareLogMessage = sink.Writes
+            .Where(message =>
+                message
+                    .LoggerName
+                    .Equals(typeof(SessionMiddleware).FullName, StringComparison.Ordinal)
             )
             .Single();
 
@@ -1034,12 +1027,11 @@ public class SessionTests
             response.EnsureSuccessStatusCode();
         }
 
-        var sessionLogMessages = sink
-            .Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(DistributedSession).FullName,
-                    StringComparison.Ordinal
-                )
+        var sessionLogMessages = sink.Writes
+            .Where(message =>
+                message
+                    .LoggerName
+                    .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
             )
             .ToList();
 
@@ -1052,12 +1044,11 @@ public class SessionTests
         );
         Assert.Equal(LogLevel.Warning, sessionLogMessages[1].LogLevel);
 
-        var sessionMiddlewareLogs = sink
-            .Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(SessionMiddleware).FullName,
-                    StringComparison.Ordinal
-                )
+        var sessionMiddlewareLogs = sink.Writes
+            .Where(message =>
+                message
+                    .LoggerName
+                    .Equals(typeof(SessionMiddleware).FullName, StringComparison.Ordinal)
             )
             .ToList();
 
@@ -1127,12 +1118,11 @@ public class SessionTests
         }
 
         // The session is automatically committed on unwind even after the manual commit was canceled.
-        var sessionLogMessages = sink
-            .Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(DistributedSession).FullName,
-                    StringComparison.Ordinal
-                )
+        var sessionLogMessages = sink.Writes
+            .Where(message =>
+                message
+                    .LoggerName
+                    .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
             )
             .ToList();
 
@@ -1144,10 +1134,9 @@ public class SessionTests
 
         Assert.Empty(
             sink.Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(SessionMiddleware).FullName,
-                    StringComparison.Ordinal
-                )
+                message
+                    .LoggerName
+                    .Equals(typeof(SessionMiddleware).FullName, StringComparison.Ordinal)
             )
         );
     }
@@ -1209,12 +1198,11 @@ public class SessionTests
             response.EnsureSuccessStatusCode();
         }
 
-        var sessionLogMessages = sink
-            .Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(DistributedSession).FullName,
-                    StringComparison.Ordinal
-                )
+        var sessionLogMessages = sink.Writes
+            .Where(message =>
+                message
+                    .LoggerName
+                    .Equals(typeof(DistributedSession).FullName, StringComparison.Ordinal)
             )
             .ToList();
 
@@ -1226,10 +1214,9 @@ public class SessionTests
 
         Assert.Empty(
             sink.Writes.Where(message =>
-                message.LoggerName.Equals(
-                    typeof(SessionMiddleware).FullName,
-                    StringComparison.Ordinal
-                )
+                message
+                    .LoggerName
+                    .Equals(typeof(SessionMiddleware).FullName, StringComparison.Ordinal)
             )
         );
     }

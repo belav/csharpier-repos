@@ -29,9 +29,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                 if (certificatePal is AppleCertificatePal applePal)
                 {
-                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
-                        applePal.CertificateHandle
-                    );
+                    SafeSecKeyRefHandle key = Interop
+                        .AppleCrypto
+                        .X509GetPublicKey(applePal.CertificateHandle);
                     Debug.Assert(!key.IsInvalid);
                     return new RSAImplementation.RSASecurityTransforms(key);
                 }

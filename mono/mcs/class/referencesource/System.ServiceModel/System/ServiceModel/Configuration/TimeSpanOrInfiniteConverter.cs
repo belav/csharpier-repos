@@ -26,10 +26,12 @@ namespace System.ServiceModel.Configuration
 
             if (!(value is TimeSpan))
             {
-                throw FxTrace.Exception.Argument(
-                    "value",
-                    InternalSR.IncompatibleArgumentType(typeof(TimeSpan), value.GetType())
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "value",
+                        InternalSR.IncompatibleArgumentType(typeof(TimeSpan), value.GetType())
+                    );
             }
 
             if ((TimeSpan)value == TimeSpan.MaxValue)

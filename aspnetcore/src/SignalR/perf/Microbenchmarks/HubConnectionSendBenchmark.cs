@@ -62,9 +62,11 @@ public class HubConnectionSendBenchmark
         {
             var connection = new DefaultConnectionContext();
             // prevents keep alive time being activated
-            connection.Features.Set<IConnectionInherentKeepAliveFeature>(
-                new TestConnectionInherentKeepAliveFeature()
-            );
+            connection
+                .Features
+                .Set<IConnectionInherentKeepAliveFeature>(
+                    new TestConnectionInherentKeepAliveFeature()
+                );
             connection.Transport = _pipe;
             return new ValueTask<ConnectionContext>(connection);
         });

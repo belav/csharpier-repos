@@ -1813,9 +1813,9 @@ namespace System.Activities
                 {
                     Attribute attribute = propertyAttributes[i];
                     if (
-                        ReflectedInformation.OverloadGroupAttributeType.IsAssignableFrom(
-                            attribute.GetType()
-                        )
+                        ReflectedInformation
+                            .OverloadGroupAttributeType
+                            .IsAssignableFrom(attribute.GetType())
                     )
                     {
                         overloadGroupNames.Add(((OverloadGroupAttribute)attribute).GroupName);
@@ -1894,15 +1894,23 @@ namespace System.Activities
                         if (value == null)
                         {
                             string argName = (key == null) ? "<null>" : key;
-                            throw FxTrace.Exception.AsError(
-                                new ValidationException(SR.MissingArgument(argName, propertyName))
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new ValidationException(
+                                        SR.MissingArgument(argName, propertyName)
+                                    )
+                                );
                         }
                         if (string.IsNullOrEmpty(key))
                         {
-                            throw FxTrace.Exception.AsError(
-                                new ValidationException(SR.MissingNameProperty(value.ArgumentType))
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new ValidationException(
+                                        SR.MissingNameProperty(value.ArgumentType)
+                                    )
+                                );
                         }
 
                         RuntimeArgument runtimeArgument = new RuntimeArgument(
@@ -1991,10 +1999,9 @@ namespace System.Activities
 
                 if (this.Result == null && value != null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "value",
-                        SR.ResultArgumentMustBeSpecificType(typeof(TResult))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument("value", SR.ResultArgumentMustBeSpecificType(typeof(TResult)));
                 }
             }
         }
@@ -2048,13 +2055,15 @@ namespace System.Activities
                 }
             }
 
-            throw FxTrace.Exception.Argument(
-                "variable",
-                SR.ConvertVariableToValueExpressionFailed(
-                    variable.GetType().FullName,
-                    typeof(Activity<TResult>).FullName
-                )
-            );
+            throw FxTrace
+                .Exception
+                .Argument(
+                    "variable",
+                    SR.ConvertVariableToValueExpressionFailed(
+                        variable.GetType().FullName,
+                        typeof(Activity<TResult>).FullName
+                    )
+                );
         }
 
         [SuppressMessage(

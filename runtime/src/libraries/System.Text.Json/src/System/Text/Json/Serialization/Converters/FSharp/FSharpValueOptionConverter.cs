@@ -29,16 +29,12 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpValueOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter =
-                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionValueGetter<
-                    TValueOption,
-                    TElement
-                >();
-            _optionConstructor =
-                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionSomeConstructor<
-                    TValueOption,
-                    TElement
-                >();
+            _optionValueGetter = FSharpCoreReflectionProxy
+                .Instance
+                .CreateFSharpValueOptionValueGetter<TValueOption, TElement>();
+            _optionConstructor = FSharpCoreReflectionProxy
+                .Instance
+                .CreateFSharpValueOptionSomeConstructor<TValueOption, TElement>();
             ConverterStrategy = elementConverter.ConverterStrategy;
         }
 

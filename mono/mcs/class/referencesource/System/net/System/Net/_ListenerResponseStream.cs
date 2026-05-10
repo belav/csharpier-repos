@@ -243,12 +243,9 @@ namespace System.Net
                                     .HTTP_SEND_RESPONSE_FLAG_MORE_DATA;
                         if (!sentHeaders)
                         {
-                            statusCode = m_HttpContext.Response.SendHeaders(
-                                &dataChunk,
-                                null,
-                                flags,
-                                false
-                            );
+                            statusCode = m_HttpContext
+                                .Response
+                                .SendHeaders(&dataChunk, null, flags, false);
                         }
                         else
                         {
@@ -258,18 +255,20 @@ namespace System.Net
                                     + "::Write() calling UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody"
                             );
 
-                            statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody(
-                                m_HttpContext.RequestQueueHandle,
-                                m_HttpContext.RequestId,
-                                (uint)flags,
-                                1,
-                                &dataChunk,
-                                null,
-                                SafeLocalFree.Zero,
-                                0,
-                                null,
-                                null
-                            );
+                            statusCode = UnsafeNclNativeMethods
+                                .HttpApi
+                                .HttpSendResponseEntityBody(
+                                    m_HttpContext.RequestQueueHandle,
+                                    m_HttpContext.RequestId,
+                                    (uint)flags,
+                                    1,
+                                    &dataChunk,
+                                    null,
+                                    SafeLocalFree.Zero,
+                                    0,
+                                    null,
+                                    null
+                                );
 
                             GlobalLog.Print(
                                 "HttpResponseStream#"
@@ -394,12 +393,9 @@ namespace System.Net
             {
                 if (!sentHeaders)
                 {
-                    statusCode = m_HttpContext.Response.SendHeaders(
-                        null,
-                        asyncResult,
-                        flags,
-                        false
-                    );
+                    statusCode = m_HttpContext
+                        .Response
+                        .SendHeaders(null, asyncResult, flags, false);
                 }
                 else
                 {
@@ -410,18 +406,20 @@ namespace System.Net
                     );
 
                     m_HttpContext.EnsureBoundHandle();
-                    statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody(
-                        m_HttpContext.RequestQueueHandle,
-                        m_HttpContext.RequestId,
-                        (uint)flags,
-                        asyncResult.dataChunkCount,
-                        asyncResult.pDataChunks,
-                        &bytesSent,
-                        SafeLocalFree.Zero,
-                        0,
-                        asyncResult.m_pOverlapped,
-                        null
-                    );
+                    statusCode = UnsafeNclNativeMethods
+                        .HttpApi
+                        .HttpSendResponseEntityBody(
+                            m_HttpContext.RequestQueueHandle,
+                            m_HttpContext.RequestId,
+                            (uint)flags,
+                            asyncResult.dataChunkCount,
+                            asyncResult.pDataChunks,
+                            &bytesSent,
+                            SafeLocalFree.Zero,
+                            0,
+                            asyncResult.m_pOverlapped,
+                            null
+                        );
 
                     GlobalLog.Print(
                         "HttpResponseStream#"
@@ -661,12 +659,9 @@ namespace System.Net
                             }
                             if (!sentHeaders)
                             {
-                                statusCode = m_HttpContext.Response.SendHeaders(
-                                    pDataChunk,
-                                    null,
-                                    flags,
-                                    false
-                                );
+                                statusCode = m_HttpContext
+                                    .Response
+                                    .SendHeaders(pDataChunk, null, flags, false);
                             }
                             else
                             {
@@ -676,8 +671,9 @@ namespace System.Net
                                         + "::Close() calling UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody"
                                 );
 
-                                statusCode =
-                                    UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody(
+                                statusCode = UnsafeNclNativeMethods
+                                    .HttpApi
+                                    .HttpSendResponseEntityBody(
                                         m_HttpContext.RequestQueueHandle,
                                         m_HttpContext.RequestId,
                                         (uint)flags,
@@ -712,12 +708,9 @@ namespace System.Net
                     {
                         if (!sentHeaders)
                         {
-                            statusCode = m_HttpContext.Response.SendHeaders(
-                                null,
-                                null,
-                                flags,
-                                false
-                            );
+                            statusCode = m_HttpContext
+                                .Response
+                                .SendHeaders(null, null, flags, false);
                         }
                     }
                     if (

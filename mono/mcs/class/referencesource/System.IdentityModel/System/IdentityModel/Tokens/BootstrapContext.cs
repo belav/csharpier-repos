@@ -54,9 +54,11 @@ namespace System.IdentityModel.Tokens
 
                                     if (token == null)
                                     {
-                                        _tokenString = Text.Encoding.UTF8.GetString(
-                                            Convert.FromBase64String(info.GetString(_tokenKey))
-                                        );
+                                        _tokenString = Text.Encoding
+                                            .UTF8
+                                            .GetString(
+                                                Convert.FromBase64String(info.GetString(_tokenKey))
+                                            );
                                     }
                                     else
                                     {
@@ -67,9 +69,9 @@ namespace System.IdentityModel.Tokens
                         }
                         else
                         {
-                            _tokenString = Text.Encoding.UTF8.GetString(
-                                Convert.FromBase64String(info.GetString(_tokenKey))
-                            );
+                            _tokenString = Text.Encoding
+                                .UTF8
+                                .GetString(Convert.FromBase64String(info.GetString(_tokenKey)));
                         }
                     }
 

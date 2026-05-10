@@ -74,11 +74,13 @@ namespace Microsoft.CodeAnalysis.CSharp.PopulateSwitch
             )
             {
                 return switchNode.WithArms(
-                    switchNode.Arms.InsertRangeWithTrailingSeparator(
-                        insertLocation,
-                        newArms,
-                        SyntaxKind.CommaToken
-                    )
+                    switchNode
+                        .Arms
+                        .InsertRangeWithTrailingSeparator(
+                            insertLocation,
+                            newArms,
+                            SyntaxKind.CommaToken
+                        )
                 );
             }
 

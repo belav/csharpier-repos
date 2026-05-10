@@ -35,7 +35,8 @@ public class VersionOneSchemaTest : IClassFixture<ScratchDatabaseFixture>
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
 
         using var scope = _builder
-            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<VersionOneDbContext>();
         db.Database.EnsureCreated();
@@ -45,7 +46,8 @@ public class VersionOneSchemaTest : IClassFixture<ScratchDatabaseFixture>
     public void EnsureDefaultSchema()
     {
         using var scope = _builder
-            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<VersionOneDbContext>();
         VerifyVersion1Schema(db);

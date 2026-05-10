@@ -32,9 +32,9 @@ namespace System.Workflow.Runtime
         {
             if (workflowDefinition == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowDefinition"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowDefinition");
             }
 
             this.workflowDefinition = new byte[workflowDefinition.Length];
@@ -60,9 +60,9 @@ namespace System.Workflow.Runtime
 
             if (workflowDefinitionPath == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowDefinitionPath"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowDefinitionPath");
             }
 
             try
@@ -392,12 +392,14 @@ namespace System.Workflow.Runtime
 
                 if (errors.HasErrors)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WorkflowValidationFailedException(
-                            SR2.GetString(SR2.WorkflowValidationFailed),
-                            errors
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new WorkflowValidationFailedException(
+                                SR2.GetString(SR2.WorkflowValidationFailed),
+                                errors
+                            )
+                        );
                 }
 
                 return root;

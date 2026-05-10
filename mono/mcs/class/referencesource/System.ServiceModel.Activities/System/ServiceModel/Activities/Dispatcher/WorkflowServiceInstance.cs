@@ -348,11 +348,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     || stateValue.Value == null
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InstancePersistenceException(
-                            SR.WorkflowInstanceNotFoundInStore(instanceId)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InstancePersistenceException(
+                                SR.WorkflowInstanceNotFoundInStore(instanceId)
+                            )
+                        );
                 }
                 deserializedRuntimeState = stateValue.Value;
 
@@ -1007,7 +1009,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.state = State.Aborted;
                         if (shouldTrackAbort)
                         {
-                            this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted();
+                            this.serviceHost
+                                .WorkflowServiceHostPerformanceCounters
+                                .WorkflowAborted();
                             this.Controller.Abort(reason);
                         }
                         else
@@ -1045,7 +1049,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 this.state = State.Aborted;
                                 if (shouldTrackAbort)
                                 {
-                                    this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted();
+                                    this.serviceHost
+                                        .WorkflowServiceHostPerformanceCounters
+                                        .WorkflowAborted();
                                     this.Controller.Abort(reason);
                                 }
                                 else
@@ -1381,7 +1387,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         GetCompletionState();
                         if (this.completionState == ActivityInstanceState.Closed)
                         {
-                            this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCompleted();
+                            this.serviceHost
+                                .WorkflowServiceHostPerformanceCounters
+                                .WorkflowCompleted();
                         }
 
                         if (this.Controller.HasPendingTrackingRecords)
@@ -2138,13 +2146,15 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.state == State.Aborted)
             {
-                throw FxTrace.Exception.AsError(
-                    new FaultException(
-                        OperationExecutionFault.CreateAbortedFault(
-                            SR.WorkflowInstanceAborted(this.Id)
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateAbortedFault(
+                                SR.WorkflowInstanceAborted(this.Id)
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -2154,23 +2164,27 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.terminationException != null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new FaultException(
-                            OperationExecutionFault.CreateTerminatedFault(
-                                SR.WorkflowInstanceTerminated(this.Id)
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new FaultException(
+                                OperationExecutionFault.CreateTerminatedFault(
+                                    SR.WorkflowInstanceTerminated(this.Id)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new FaultException(
-                            OperationExecutionFault.CreateCompletedFault(
-                                SR.WorkflowInstanceCompleted(this.Id)
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new FaultException(
+                                OperationExecutionFault.CreateCompletedFault(
+                                    SR.WorkflowInstanceCompleted(this.Id)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -2179,13 +2193,15 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.state == State.Unloaded)
             {
-                throw FxTrace.Exception.AsError(
-                    new FaultException(
-                        OperationExecutionFault.CreateInstanceUnloadedFault(
-                            SR.WorkflowInstanceUnloaded(this.Id)
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateInstanceUnloadedFault(
+                                SR.WorkflowInstanceUnloaded(this.Id)
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -2193,9 +2209,9 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.state == State.Suspended)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.InstanceMustNotBeSuspended)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.InstanceMustNotBeSuspended));
             }
         }
 
@@ -2203,9 +2219,11 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.persistenceContext == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.PersistenceProviderRequiredToPersist)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.PersistenceProviderRequiredToPersist)
+                    );
             }
         }
 
@@ -2830,14 +2848,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                     != (useThreadTransaction ? Transaction.Current : ambientTransaction)
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new FaultException(
-                        OperationExecutionFault.CreateTransactedLockException(
-                            this.persistenceContext.InstanceId,
-                            operationName
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateTransactedLockException(
+                                this.persistenceContext.InstanceId,
+                                operationName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (controlEndpoint)
@@ -2847,25 +2867,29 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (this.state == State.Unloaded)
             {
-                throw FxTrace.Exception.AsError(
-                    new FaultException(
-                        OperationExecutionFault.CreateInstanceUnloadedFault(
-                            SR.ServiceInstanceUnloaded(this.persistenceContext.InstanceId)
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateInstanceUnloadedFault(
+                                SR.ServiceInstanceUnloaded(this.persistenceContext.InstanceId)
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             //Do a fast check to fail fast.
             if (this.state == State.Completed || this.state == State.Aborted)
             {
-                throw FxTrace.Exception.AsError(
-                    new FaultException(
-                        OperationExecutionFault.CreateInstanceNotFoundFault(
-                            SR.ServiceInstanceTerminated(this.persistenceContext.InstanceId)
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateInstanceNotFoundFault(
+                                SR.ServiceInstanceTerminated(this.persistenceContext.InstanceId)
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (
@@ -2882,11 +2906,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 )
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new FaultException(
-                        OperationExecutionFault.CreateSuspendedFault(this.Id, operationName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateSuspendedFault(this.Id, operationName)
+                        )
+                    );
             }
         }
 
@@ -2898,9 +2924,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.serviceHost.DecrementBusyCount();
                 if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceDecrementBusyCount(
-                        SR.BusyCountTraceFormatString(this.Id)
-                    );
+                    AspNetEnvironment
+                        .Current
+                        .TraceDecrementBusyCount(SR.BusyCountTraceFormatString(this.Id));
                 }
                 this.hasIncrementedBusyCount = false;
             }
@@ -2914,9 +2940,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.serviceHost.IncrementBusyCount();
                 if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceIncrementBusyCount(
-                        SR.BusyCountTraceFormatString(this.Id)
-                    );
+                    AspNetEnvironment
+                        .Current
+                        .TraceIncrementBusyCount(SR.BusyCountTraceFormatString(this.Id));
                 }
                 this.hasIncrementedBusyCount = true;
             }
@@ -3001,11 +3027,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool TryAcquire()
             {
                 if (
-                    this.workflowInstance.acquireReferenceSemaphore.EnterAsync(
-                        timeoutHelper.RemainingTime(),
-                        acquireCompletedCallback,
-                        this
-                    )
+                    this.workflowInstance
+                        .acquireReferenceSemaphore
+                        .EnterAsync(timeoutHelper.RemainingTime(), acquireCompletedCallback, this)
                 )
                 {
                     return this.HandleEndAcquireReference();
@@ -3266,11 +3290,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     onReleasePersistenceContext = new AsyncCompletion(OnReleasePersistenceContext);
                 }
 
-                IAsyncResult result = this.workflowInstance.persistenceContext.BeginRelease(
-                    this.workflowInstance.persistTimeout,
-                    PrepareAsyncCompletion(onReleasePersistenceContext),
-                    this
-                );
+                IAsyncResult result = this.workflowInstance
+                    .persistenceContext
+                    .BeginRelease(
+                        this.workflowInstance.persistTimeout,
+                        PrepareAsyncCompletion(onReleasePersistenceContext),
+                        this
+                    );
 
                 return SyncContinue(result);
             }
@@ -3284,11 +3310,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                     onClosePersistenceContext = new AsyncCompletion(OnClosePersistenceContext);
                 }
 
-                IAsyncResult closeResult = thisPtr.workflowInstance.persistenceContext.BeginClose(
-                    thisPtr.timeoutHelper.RemainingTime(),
-                    thisPtr.PrepareAsyncCompletion(onClosePersistenceContext),
-                    thisPtr
-                );
+                IAsyncResult closeResult = thisPtr
+                    .workflowInstance
+                    .persistenceContext
+                    .BeginClose(
+                        thisPtr.timeoutHelper.RemainingTime(),
+                        thisPtr.PrepareAsyncCompletion(onClosePersistenceContext),
+                        thisPtr
+                    );
                 return thisPtr.SyncContinue(closeResult);
             }
 
@@ -3309,10 +3338,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (completionException != null && !Fx.IsFatal(completionException))
                         {
-                            thisPtr.workflowInstance.AbortInstance(
-                                completionException,
-                                thisPtr.ownsLock
-                            );
+                            thisPtr
+                                .workflowInstance
+                                .AbortInstance(completionException, thisPtr.ownsLock);
                         }
                     }
                     finally
@@ -3368,11 +3396,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool TryAcquire()
             {
                 if (
-                    this.instance.acquireReferenceSemaphore.EnterAsync(
-                        timeoutHelper.RemainingTime(),
-                        acquireCompletedCallback,
-                        this
-                    )
+                    this.instance
+                        .acquireReferenceSemaphore
+                        .EnterAsync(timeoutHelper.RemainingTime(), acquireCompletedCallback, this)
                 )
                 {
                     this.HandleEndAcquireReference();
@@ -3560,12 +3586,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.transaction))
                 {
-                    result = this.workflow.persistenceContext.BeginAssociateInfrastructureKeys(
-                        this.associatedKeys,
-                        this.workflow.persistTimeout,
-                        PrepareAsyncCompletion(handleAssociateInfrastructureKeys),
-                        this
-                    );
+                    result = this.workflow
+                        .persistenceContext
+                        .BeginAssociateInfrastructureKeys(
+                            this.associatedKeys,
+                            this.workflow.persistTimeout,
+                            PrepareAsyncCompletion(handleAssociateInfrastructureKeys),
+                            this
+                        );
                 }
                 return SyncContinue(result);
             }
@@ -3737,11 +3765,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
 
                     if (
-                        this.instance.workflowServiceInstanceReadyWaitHandle.WaitAsync(
-                            workflowServiceInstanceReadyCallback,
-                            this,
-                            this.timeoutHelper.RemainingTime()
-                        )
+                        this.instance
+                            .workflowServiceInstanceReadyWaitHandle
+                            .WaitAsync(
+                                workflowServiceInstanceReadyCallback,
+                                this,
+                                this.timeoutHelper.RemainingTime()
+                            )
                     )
                     {
                         return DoResumeBookmark();
@@ -3904,11 +3934,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     Fx.Assert(completeSelf, "CompleteSelf should be true at this point.");
 
-                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(
-                        this.instance.trackTimeout,
-                        PrepareAsyncCompletion(handleEndTrack),
-                        this
-                    );
+                    IAsyncResult result = this.instance
+                        .Controller
+                        .BeginFlushTrackingRecords(
+                            this.instance.trackTimeout,
+                            PrepareAsyncCompletion(handleEndTrack),
+                            this
+                        );
                     completeSelf = SyncContinue(result);
                 }
 
@@ -4309,10 +4341,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                             "We should never be calling ReleaseLock if this is the workflow thread."
                         );
 
-                        thisPtr.instance.ReleaseLock(
-                            ref thisPtr.ownsLock,
-                            thisPtr.isIdlePolicyPersist && thisPtr.tryResult
-                        );
+                        thisPtr
+                            .instance
+                            .ReleaseLock(
+                                ref thisPtr.ownsLock,
+                                thisPtr.isIdlePolicyPersist && thisPtr.tryResult
+                            );
                     }
                 }
 
@@ -4364,11 +4398,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     && this.instance.persistenceContext.State == CommunicationState.Created
                 )
                 {
-                    IAsyncResult result = this.instance.persistenceContext.BeginOpen(
-                        timeoutHelper.RemainingTime(),
-                        PrepareInnerAsyncCompletion(providerOpenedCallback),
-                        this
-                    );
+                    IAsyncResult result = this.instance
+                        .persistenceContext
+                        .BeginOpen(
+                            timeoutHelper.RemainingTime(),
+                            PrepareInnerAsyncCompletion(providerOpenedCallback),
+                            this
+                        );
 
                     if (result.CompletedSynchronously)
                     {
@@ -4429,10 +4465,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // We don't want to release the lock if we're the workflow thread
                         if (!thisPtr.isWorkflowThread)
                         {
-                            thisPtr.instance.ReleaseLock(
-                                ref thisPtr.ownsLock,
-                                thisPtr.isIdlePolicyPersist && thisPtr.tryResult
-                            );
+                            thisPtr
+                                .instance
+                                .ReleaseLock(
+                                    ref thisPtr.ownsLock,
+                                    thisPtr.isIdlePolicyPersist && thisPtr.tryResult
+                                );
                         }
                     }
                 }
@@ -4492,11 +4530,13 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (this.instance.Controller.HasPendingTrackingRecords)
                 {
-                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(
-                        this.instance.trackTimeout,
-                        PrepareInnerAsyncCompletion(trackingCompleteCallback),
-                        this
-                    );
+                    IAsyncResult result = this.instance
+                        .Controller
+                        .BeginFlushTrackingRecords(
+                            this.instance.trackTimeout,
+                            PrepareInnerAsyncCompletion(trackingCompleteCallback),
+                            this
+                        );
                     return SyncContinue(result);
                 }
                 else
@@ -4581,13 +4621,15 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     using (PrepareTransactionalCall(this.context.PublicTransaction))
                     {
-                        result = this.instance.persistenceContext.BeginSave(
-                            this.data,
-                            this.saveStatus,
-                            this.instance.persistTimeout,
-                            PrepareInnerAsyncCompletion(persistedCallback),
-                            this
-                        );
+                        result = this.instance
+                            .persistenceContext
+                            .BeginSave(
+                                this.data,
+                                this.saveStatus,
+                                this.instance.persistTimeout,
+                                PrepareInnerAsyncCompletion(persistedCallback),
+                                this
+                            );
                     }
                 }
                 catch (InstancePersistenceException)
@@ -4653,9 +4695,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                         Thread.MemoryBarrier();
                         if (this.instance.abortingExtensions)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new OperationCanceledException(SR.DefaultAbortReason)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(new OperationCanceledException(SR.DefaultAbortReason));
                         }
 
                         using (PrepareTransactionalCall(this.context.PublicTransaction))
@@ -4731,21 +4773,25 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                         using (PrepareTransactionalCall(this.context.PublicTransaction))
                         {
-                            result = this.instance.creationContext.OnBeginWorkflowCompleted(
-                                this.instance.completionState,
-                                this.instance.workflowOutputs,
-                                this.instance.terminationException,
-                                this.timeoutHelper.RemainingTime(),
-                                PrepareInnerAsyncCompletion(notifyCompletionCallback),
-                                this
-                            );
+                            result = this.instance
+                                .creationContext
+                                .OnBeginWorkflowCompleted(
+                                    this.instance.completionState,
+                                    this.instance.workflowOutputs,
+                                    this.instance.terminationException,
+                                    this.timeoutHelper.RemainingTime(),
+                                    PrepareInnerAsyncCompletion(notifyCompletionCallback),
+                                    this
+                                );
                             if (result == null)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR.WorkflowCompletionAsyncResultCannotBeNull
-                                    )
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR.WorkflowCompletionAsyncResultCannotBeNull
+                                        )
+                                    );
                             }
                         }
                     }
@@ -4793,9 +4839,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // Computing Persist Duration.
                 if (this.operation == PersistenceOperation.Save)
                 {
-                    this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowPersistDuration(
-                        GetDuration()
-                    );
+                    this.instance
+                        .serviceHost
+                        .WorkflowServiceHostPerformanceCounters
+                        .WorkflowPersistDuration(GetDuration());
                 }
 
                 if (this.context != null)
@@ -5028,11 +5075,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                         handleEndTrack = new AsyncCompletion(HandleEndTrack);
                     }
 
-                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(
-                        this.instance.trackTimeout,
-                        PrepareAsyncCompletion(handleEndTrack),
-                        this
-                    );
+                    IAsyncResult result = this.instance
+                        .Controller
+                        .BeginFlushTrackingRecords(
+                            this.instance.trackTimeout,
+                            PrepareAsyncCompletion(handleEndTrack),
+                            this
+                        );
                     if (result.CompletedSynchronously)
                     {
                         return HandleEndTrack(result);
@@ -5255,11 +5304,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 try
                 {
-                    return this.Instance.persistenceContext.BeginRelease(
-                        this.Instance.persistTimeout,
-                        callback,
-                        state
-                    );
+                    return this.Instance
+                        .persistenceContext
+                        .BeginRelease(this.Instance.persistTimeout, callback, state);
                 }
                 catch (Exception exception)
                 {
@@ -5280,19 +5327,24 @@ namespace System.ServiceModel.Activities.Dispatcher
                     this.Instance.persistenceContext.EndRelease(result);
                     if (!this.shouldTrackAbort && this.Instance.Controller.TrackingEnabled)
                     {
-                        this.Instance.Controller.Track(
-                            new WorkflowInstanceRecord(
-                                this.Instance.Id,
-                                this.Instance.WorkflowDefinition.DisplayName,
-                                WorkflowInstanceStates.Unloaded,
-                                this.Instance.DefinitionIdentity
-                            )
-                        );
+                        this.Instance
+                            .Controller
+                            .Track(
+                                new WorkflowInstanceRecord(
+                                    this.Instance.Id,
+                                    this.Instance.WorkflowDefinition.DisplayName,
+                                    WorkflowInstanceStates.Unloaded,
+                                    this.Instance.DefinitionIdentity
+                                )
+                            );
                     }
 
                     if (!this.shouldTrackAbort)
                     {
-                        this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowUnloaded();
+                        this.instance
+                            .serviceHost
+                            .WorkflowServiceHostPerformanceCounters
+                            .WorkflowUnloaded();
                     }
 
                     this.Instance.AbortInstance(this.reason, true, this.shouldTrackAbort);
@@ -5372,12 +5424,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 try
                 {
-                    return this.Instance.persistenceContext.BeginUpdateSuspendMetadata(
-                        this.reason,
-                        this.Instance.persistTimeout,
-                        callback,
-                        state
-                    );
+                    return this.Instance
+                        .persistenceContext
+                        .BeginUpdateSuspendMetadata(
+                            this.reason,
+                            this.Instance.persistTimeout,
+                            callback,
+                            state
+                        );
                 }
                 catch (Exception exception)
                 {
@@ -5400,17 +5454,22 @@ namespace System.ServiceModel.Activities.Dispatcher
                         result.AsyncState;
                     if (this.Instance.Controller.TrackingEnabled)
                     {
-                        this.Instance.Controller.Track(
-                            new WorkflowInstanceSuspendedRecord(
-                                this.Instance.Id,
-                                this.Instance.WorkflowDefinition.DisplayName,
-                                data.reason.Message,
-                                this.Instance.DefinitionIdentity
-                            )
-                        );
+                        this.Instance
+                            .Controller
+                            .Track(
+                                new WorkflowInstanceSuspendedRecord(
+                                    this.Instance.Id,
+                                    this.Instance.WorkflowDefinition.DisplayName,
+                                    data.reason.Message,
+                                    this.Instance.DefinitionIdentity
+                                )
+                            );
                     }
 
-                    this.Instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended();
+                    this.Instance
+                        .serviceHost
+                        .WorkflowServiceHostPerformanceCounters
+                        .WorkflowSuspended();
                 }
                 finally
                 {
@@ -5645,12 +5704,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     this.parent = parent;
 
-                    IAsyncResult result = this.parent.Instance.BeginWaitForCanPersist(
-                        ref this.parent.ownsLock,
-                        this.parent.timeoutHelper.RemainingTime(),
-                        PrepareAsyncCompletion(handleEndWaitForCanPersist),
-                        this
-                    );
+                    IAsyncResult result = this.parent
+                        .Instance
+                        .BeginWaitForCanPersist(
+                            ref this.parent.ownsLock,
+                            this.parent.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(handleEndWaitForCanPersist),
+                            this
+                        );
                     if (SyncContinue(result))
                     {
                         this.Complete(true);
@@ -5665,10 +5726,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 static bool HandleEndWaitForCanPersist(IAsyncResult result)
                 {
                     SuspendCoreAsyncResult thisPtr = (SuspendCoreAsyncResult)result.AsyncState;
-                    thisPtr.parent.Instance.EndWaitForCanPersist(
-                        result,
-                        ref thisPtr.parent.ownsLock
-                    );
+                    thisPtr
+                        .parent
+                        .Instance
+                        .EndWaitForCanPersist(result, ref thisPtr.parent.ownsLock);
 
                     thisPtr.parent.Instance.persistenceContext.IsSuspended = true;
                     thisPtr.parent.Instance.persistenceContext.SuspendedReason = thisPtr
@@ -5678,17 +5739,26 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     if (thisPtr.parent.Instance.Controller.TrackingEnabled)
                     {
-                        thisPtr.parent.Instance.Controller.Track(
-                            new WorkflowInstanceSuspendedRecord(
-                                thisPtr.parent.Instance.Id,
-                                thisPtr.parent.Instance.WorkflowDefinition.DisplayName,
-                                thisPtr.parent.reason,
-                                thisPtr.parent.Instance.DefinitionIdentity
-                            )
-                        );
+                        thisPtr
+                            .parent
+                            .Instance
+                            .Controller
+                            .Track(
+                                new WorkflowInstanceSuspendedRecord(
+                                    thisPtr.parent.Instance.Id,
+                                    thisPtr.parent.Instance.WorkflowDefinition.DisplayName,
+                                    thisPtr.parent.reason,
+                                    thisPtr.parent.Instance.DefinitionIdentity
+                                )
+                            );
                     }
 
-                    thisPtr.parent.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended();
+                    thisPtr
+                        .parent
+                        .instance
+                        .serviceHost
+                        .WorkflowServiceHostPerformanceCounters
+                        .WorkflowSuspended();
 
                     // This is to handle a corner case where Pause is called
                     // from an event handler:
@@ -5760,14 +5830,16 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (this.Instance.Controller.TrackingEnabled)
                 {
-                    this.Instance.Controller.Track(
-                        new WorkflowInstanceRecord(
-                            this.Instance.Id,
-                            this.Instance.WorkflowDefinition.DisplayName,
-                            WorkflowInstanceStates.Unsuspended,
-                            this.Instance.DefinitionIdentity
-                        )
-                    );
+                    this.Instance
+                        .Controller
+                        .Track(
+                            new WorkflowInstanceRecord(
+                                this.Instance.Id,
+                                this.Instance.WorkflowDefinition.DisplayName,
+                                WorkflowInstanceStates.Unsuspended,
+                                this.Instance.DefinitionIdentity
+                            )
+                        );
                 }
             }
 
@@ -5827,13 +5899,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.instance.executorLock.SetupWaiter(ref lockToken);
                     }
 
-                    completeSelf = this.instance.executorLock.EnterAsync(
-                        this.timeoutHelper.RemainingTime(),
-                        ref lockToken,
-                        ref ownsLock,
-                        lockAcquiredCallback,
-                        this
-                    );
+                    completeSelf = this.instance
+                        .executorLock
+                        .EnterAsync(
+                            this.timeoutHelper.RemainingTime(),
+                            ref lockToken,
+                            ref ownsLock,
+                            lockAcquiredCallback,
+                            this
+                        );
 
                     // We don't want to decrement the count if we went async
                     // because the async callback will do the decrement
@@ -5978,11 +6052,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 if (asyncException != null)
                 {
                     if (
-                        thisPtr.instance.CleanupIdleWaiter(
-                            thisPtr.idleEvent,
-                            asyncException,
-                            ref thisPtr.acquiredLockAsynchronously
-                        )
+                        thisPtr
+                            .instance
+                            .CleanupIdleWaiter(
+                                thisPtr.idleEvent,
+                                asyncException,
+                                ref thisPtr.acquiredLockAsynchronously
+                            )
                     )
                     {
                         Fx.Assert(
@@ -6329,9 +6405,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (!TryEnter(timeout, ref token, ref ownsLock))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(SR.TimeoutOnOperation(timeout))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new TimeoutException(SR.TimeoutOnOperation(timeout)));
                 }
             }
 
@@ -7064,11 +7140,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     bool completeSelf = true;
 
                     if (
-                        this.instance.acquireReferenceSemaphore.EnterAsync(
-                            this.timeoutHelper.RemainingTime(),
-                            acquireCompletedCallback,
-                            this
-                        )
+                        this.instance
+                            .acquireReferenceSemaphore
+                            .EnterAsync(
+                                this.timeoutHelper.RemainingTime(),
+                                acquireCompletedCallback,
+                                this
+                            )
                     )
                     {
                         try

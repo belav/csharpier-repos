@@ -29,13 +29,15 @@ namespace System.ServiceModel.Dispatcher
         public XPathMessageFilterTable(int capacity)
         {
             if (capacity < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "capacity",
-                        capacity,
-                        SR.GetString(SR.FilterCapacityNegative)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "capacity",
+                            capacity,
+                            SR.GetString(SR.FilterCapacityNegative)
+                        )
+                    );
 
             Init(capacity);
         }
@@ -134,13 +136,15 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "NodeQuota",
-                            value,
-                            SR.GetString(SR.FilterQuotaRange)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "NodeQuota",
+                                value,
+                                SR.GetString(SR.FilterQuotaRange)
+                            )
+                        );
                 }
 
                 if (null == this.iqMatcher)
@@ -321,13 +325,15 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(messageBuffer, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MultipleFilterMatchesException(
-                        SR.GetString(SR.FilterMultipleMatches),
-                        null,
-                        filters
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MultipleFilterMatchesException(
+                            SR.GetString(SR.FilterMultipleMatches),
+                            null,
+                            filters
+                        )
+                    );
             }
             else if (filters.Count == 1)
             {
@@ -347,13 +353,15 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(navigator, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MultipleFilterMatchesException(
-                        SR.GetString(SR.FilterMultipleMatches),
-                        null,
-                        filters
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MultipleFilterMatchesException(
+                            SR.GetString(SR.FilterMultipleMatches),
+                            null,
+                            filters
+                        )
+                    );
             }
             else if (filters.Count == 1)
             {
@@ -373,13 +381,15 @@ namespace System.ServiceModel.Dispatcher
             this.GetMatchingFilters(navigator, filters);
             if (filters.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MultipleFilterMatchesException(
-                        SR.GetString(SR.FilterMultipleMatches),
-                        null,
-                        filters
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MultipleFilterMatchesException(
+                            SR.GetString(SR.FilterMultipleMatches),
+                            null,
+                            filters
+                        )
+                    );
             }
             else if (filters.Count == 1)
             {

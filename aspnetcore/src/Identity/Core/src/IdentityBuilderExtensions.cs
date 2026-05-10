@@ -56,20 +56,26 @@ public static class IdentityBuilderExtensions
     private static void AddSignInManagerDeps(this IdentityBuilder builder)
     {
         builder.Services.AddHttpContextAccessor();
-        builder.Services.AddScoped(
-            typeof(ISecurityStampValidator),
-            typeof(SecurityStampValidator<>).MakeGenericType(builder.UserType)
-        );
-        builder.Services.AddScoped(
-            typeof(ITwoFactorSecurityStampValidator),
-            typeof(TwoFactorSecurityStampValidator<>).MakeGenericType(builder.UserType)
-        );
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IPostConfigureOptions<SecurityStampValidatorOptions>,
-                PostConfigureSecurityStampValidatorOptions
-            >()
-        );
+        builder
+            .Services
+            .AddScoped(
+                typeof(ISecurityStampValidator),
+                typeof(SecurityStampValidator<>).MakeGenericType(builder.UserType)
+            );
+        builder
+            .Services
+            .AddScoped(
+                typeof(ITwoFactorSecurityStampValidator),
+                typeof(TwoFactorSecurityStampValidator<>).MakeGenericType(builder.UserType)
+            );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<SecurityStampValidatorOptions>,
+                    PostConfigureSecurityStampValidatorOptions
+                >()
+            );
     }
 
     /// <summary>
@@ -122,10 +128,12 @@ public static class IdentityBuilderExtensions
         }
         if (managerType != customType)
         {
-            builder.Services.AddScoped(
-                typeof(TSignInManager),
-                services => services.GetRequiredService(managerType)
-            );
+            builder
+                .Services
+                .AddScoped(
+                    typeof(TSignInManager),
+                    services => services.GetRequiredService(managerType)
+                );
         }
         builder.Services.AddScoped(managerType, typeof(TSignInManager));
         return builder;
@@ -144,17 +152,18 @@ public static class IdentityBuilderExtensions
 
         builder.AddSignInManager();
         builder.AddDefaultTokenProviders();
-        builder.Services.TryAddTransient(
-            typeof(IEmailSender<>),
-            typeof(DefaultMessageEmailSender<>)
-        );
+        builder
+            .Services
+            .TryAddTransient(typeof(IEmailSender<>), typeof(DefaultMessageEmailSender<>));
         builder.Services.TryAddTransient<IEmailSender, NoOpEmailSender>();
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<JsonOptions>,
-                IdentityEndpointsJsonOptionsSetup
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<JsonOptions>,
+                    IdentityEndpointsJsonOptionsSetup
+                >()
+            );
         return builder;
     }
 

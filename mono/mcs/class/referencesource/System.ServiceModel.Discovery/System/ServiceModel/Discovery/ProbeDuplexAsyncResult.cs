@@ -133,10 +133,9 @@ namespace System.ServiceModel.Discovery
                 (ProbeDuplexAsyncResult<TProbeMessage, TResponseChannel>)result.AsyncState;
 
             if (
-                thisPtr.multicastSuppressionImpl.EndShouldRedirectFind(
-                    result,
-                    out redirectionEndpoints
-                )
+                thisPtr
+                    .multicastSuppressionImpl
+                    .EndShouldRedirectFind(result, out redirectionEndpoints)
             )
             {
                 return thisPtr.SendProxyAnnouncements(redirectionEndpoints);
@@ -490,9 +489,11 @@ namespace System.ServiceModel.Discovery
                 {
                     if (this.probeDuplexAsyncResult.isFindCompleted)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(SR.DiscoveryCannotAddMatchingEndpoint)
+                            );
                     }
                     else
                     {

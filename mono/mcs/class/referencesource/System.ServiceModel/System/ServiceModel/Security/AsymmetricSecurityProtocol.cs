@@ -75,15 +75,16 @@ namespace System.ServiceModel.Security
                 {
                     InitiatorServiceModelSecurityTokenRequirement requirement =
                         CreateInitiatorSecurityTokenRequirement();
-                    this.Factory.CryptoTokenParameters.InitializeSecurityTokenRequirement(
-                        requirement
-                    );
+                    this.Factory
+                        .CryptoTokenParameters
+                        .InitializeSecurityTokenRequirement(requirement);
                     requirement.KeyUsage = SecurityKeyUsage.Signature;
                     requirement.Properties[
                         ServiceModelSecurityTokenRequirement.MessageDirectionProperty
                     ] = MessageDirection.Output;
-                    this.initiatorCryptoTokenProvider =
-                        this.Factory.SecurityTokenManager.CreateSecurityTokenProvider(requirement);
+                    this.initiatorCryptoTokenProvider = this.Factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenProvider(requirement);
                     SecurityUtils.OpenTokenProviderIfRequired(
                         this.initiatorCryptoTokenProvider,
                         timeoutHelper.RemainingTime()
@@ -93,9 +94,9 @@ namespace System.ServiceModel.Security
                 {
                     InitiatorServiceModelSecurityTokenRequirement providerRequirement =
                         CreateInitiatorSecurityTokenRequirement();
-                    this.Factory.AsymmetricTokenParameters.InitializeSecurityTokenRequirement(
-                        providerRequirement
-                    );
+                    this.Factory
+                        .AsymmetricTokenParameters
+                        .InitializeSecurityTokenRequirement(providerRequirement);
                     providerRequirement.KeyUsage = SecurityKeyUsage.Exchange;
                     providerRequirement.Properties[
                         ServiceModelSecurityTokenRequirement.MessageDirectionProperty
@@ -103,10 +104,9 @@ namespace System.ServiceModel.Security
                         (this.Factory.ApplyConfidentiality)
                             ? MessageDirection.Output
                             : MessageDirection.Input;
-                    this.initiatorAsymmetricTokenProvider =
-                        this.Factory.SecurityTokenManager.CreateSecurityTokenProvider(
-                            providerRequirement
-                        );
+                    this.initiatorAsymmetricTokenProvider = this.Factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenProvider(providerRequirement);
                     SecurityUtils.OpenTokenProviderIfRequired(
                         this.initiatorAsymmetricTokenProvider,
                         timeoutHelper.RemainingTime()
@@ -114,9 +114,9 @@ namespace System.ServiceModel.Security
 
                     InitiatorServiceModelSecurityTokenRequirement authenticatorRequirement =
                         CreateInitiatorSecurityTokenRequirement();
-                    this.Factory.AsymmetricTokenParameters.InitializeSecurityTokenRequirement(
-                        authenticatorRequirement
-                    );
+                    this.Factory
+                        .AsymmetricTokenParameters
+                        .InitializeSecurityTokenRequirement(authenticatorRequirement);
                     authenticatorRequirement.IsOutOfBandToken =
                         !this.Factory.AllowSerializedSigningTokenOnReply;
                     authenticatorRequirement.KeyUsage = SecurityKeyUsage.Exchange;
@@ -128,8 +128,9 @@ namespace System.ServiceModel.Security
                             : MessageDirection.Input;
                     // Create authenticator (we dont support out of band resolvers on the client side
                     SecurityTokenResolver outOfBandTokenResolver;
-                    this.initiatorAsymmetricTokenAuthenticator =
-                        this.Factory.SecurityTokenManager.CreateSecurityTokenAuthenticator(
+                    this.initiatorAsymmetricTokenAuthenticator = this.Factory
+                        .SecurityTokenManager
+                        .CreateSecurityTokenAuthenticator(
                             authenticatorRequirement,
                             out outOfBandTokenResolver
                         );
@@ -240,11 +241,13 @@ namespace System.ServiceModel.Security
                 if (this.Factory.ActAsInitiator == false)
                 {
                     Fx.Assert("Unexpected code path for server security application");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SendingOutgoingmessageOnRecipient)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SendingOutgoingmessageOnRecipient)
+                            )
+                        );
                 }
                 AsymmetricSecurityProtocolFactory factory = this.Factory;
                 SecurityTokenProvider encProvider = factory.ApplyConfidentiality

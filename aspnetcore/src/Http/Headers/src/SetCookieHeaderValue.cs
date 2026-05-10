@@ -27,13 +27,16 @@ public class SetCookieHeaderValue
     // RFC Draft: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00
     private const string SameSiteToken = "samesite";
     private static readonly string SameSiteNoneToken = SameSiteMode
-        .None.ToString()
+        .None
+        .ToString()
         .ToLowerInvariant();
     private static readonly string SameSiteLaxToken = SameSiteMode
-        .Lax.ToString()
+        .Lax
+        .ToString()
         .ToLowerInvariant();
     private static readonly string SameSiteStrictToken = SameSiteMode
-        .Strict.ToString()
+        .Strict
+        .ToString()
         .ToLowerInvariant();
 
     private const string HttpOnlyToken = "httponly";

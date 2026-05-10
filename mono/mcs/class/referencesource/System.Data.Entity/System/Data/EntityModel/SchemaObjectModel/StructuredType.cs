@@ -182,11 +182,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         )
                     )
                     {
-                        errorMessage = System.Data.Entity.Strings.DuplicateMemberName(
-                            member.Name,
-                            FQName,
-                            definingType.FQName
-                        );
+                        errorMessage = System
+                            .Data
+                            .Entity
+                            .Strings
+                            .DuplicateMemberName(member.Name, FQName, definingType.FQName);
                     }
                     if (errorMessage != null)
                         member.AddError(
@@ -229,10 +229,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 newMember.AddError(
                     ErrorCode.BadProperty,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidMemberNameMatchesTypeName(
-                        newMember.Name,
-                        FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidMemberNameMatchesTypeName(newMember.Name, FQName)
                 );
             }
 
@@ -357,10 +358,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.InvalidBaseType,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidBaseTypeForStructuredType(
-                        UnresolvedBaseType,
-                        FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidBaseTypeForStructuredType(UnresolvedBaseType, FQName)
                 );
                 _baseTypeResolveResult = false;
                 return _baseTypeResolveResult.Value;

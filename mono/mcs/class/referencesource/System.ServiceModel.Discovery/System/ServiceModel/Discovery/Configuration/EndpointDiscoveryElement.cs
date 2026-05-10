@@ -133,12 +133,14 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 foreach (ContractTypeNameElement contractTypeNameElement in ContractTypeNames)
                 {
-                    behavior.ContractTypeNames.Add(
-                        new XmlQualifiedName(
-                            contractTypeNameElement.Name,
-                            contractTypeNameElement.Namespace
-                        )
-                    );
+                    behavior
+                        .ContractTypeNames
+                        .Add(
+                            new XmlQualifiedName(
+                                contractTypeNameElement.Name,
+                                contractTypeNameElement.Namespace
+                            )
+                        );
                 }
             }
 

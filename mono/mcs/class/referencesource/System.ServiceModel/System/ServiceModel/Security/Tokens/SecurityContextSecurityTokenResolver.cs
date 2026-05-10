@@ -36,22 +36,26 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (securityContextCacheCapacity <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "securityContextCacheCapacity",
-                        SR.GetString(SR.ValueMustBeGreaterThanZero)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "securityContextCacheCapacity",
+                            SR.GetString(SR.ValueMustBeGreaterThanZero)
+                        )
+                    );
             }
 
             if (clockSkew < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "clockSkew",
-                        SR.GetString(SR.TimeSpanCannotBeLessThanTimeSpanZero)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "clockSkew",
+                            SR.GetString(SR.TimeSpanCannotBeLessThanTimeSpanZero)
+                        )
+                    );
             }
 
             this.capacity = securityContextCacheCapacity;

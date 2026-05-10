@@ -265,10 +265,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 foreach (var modifier in modifiers)
                 {
                     if (modifier.IsKind(SyntaxKind.FixedKeyword))
-                        MessageID.IDS_FeatureFixedBuffer.CheckFeatureAvailability(
-                            diagnostics,
-                            modifier
-                        );
+                        MessageID
+                            .IDS_FeatureFixedBuffer
+                            .CheckFeatureAvailability(diagnostics, modifier);
                 }
 
                 reportBadMemberFlagIfAny(
@@ -689,11 +688,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     type = binder.BindType(typeOnly, diagnosticsForFirstDeclarator);
                     if (refKind != RefKind.None)
                     {
-                        MessageID.IDS_FeatureRefFields.CheckFeatureAvailability(
-                            diagnostics,
-                            compilation,
-                            typeSyntax.SkipScoped(out _).Location
-                        );
+                        MessageID
+                            .IDS_FeatureRefFields
+                            .CheckFeatureAvailability(
+                                diagnostics,
+                                compilation,
+                                typeSyntax.SkipScoped(out _).Location
+                            );
                         if (!compilation.Assembly.RuntimeSupportsByRefFields)
                             diagnostics.Add(
                                 ErrorCode.ERR_RuntimeDoesNotSupportRefFields,

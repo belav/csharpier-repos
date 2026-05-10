@@ -544,9 +544,9 @@ namespace Mono.Data.Tds
                 case "datetime2":
                     return Encoding.Default.GetBytes(GetDateTimeString(TdsColumnType.DateTime2));
                 case "datetimeoffset":
-                    return Encoding.Default.GetBytes(
-                        GetDateTimeString(TdsColumnType.DateTimeOffset)
-                    );
+                    return Encoding
+                        .Default
+                        .GetBytes(GetDateTimeString(TdsColumnType.DateTimeOffset));
                 default:
                     return ((byte[])Value);
             }

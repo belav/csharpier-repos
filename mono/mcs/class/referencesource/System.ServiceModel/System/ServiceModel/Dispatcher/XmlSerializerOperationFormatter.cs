@@ -44,11 +44,13 @@ namespace System.ServiceModel.Dispatcher
                 xmlSerializerFormatAttribute.IsEncoded
                 && xmlSerializerFormatAttribute.Style != OperationFormatStyle.Rpc
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxDocEncodedNotSupported, description.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxDocEncodedNotSupported, description.Name)
+                        )
+                    );
             this.isEncoded = xmlSerializerFormatAttribute.IsEncoded;
 
             this.requestMessageInfo = requestMessageInfo;
@@ -136,21 +138,23 @@ namespace System.ServiceModel.Dispatcher
                         MessageHeaderDescription matchingHeaderDescription =
                             headerDescriptionTable.Get(element.LocalName, element.NamespaceURI);
                         if (matchingHeaderDescription == null)
-                            message.Headers.Add(
-                                new XmlElementMessageHeader(
-                                    this,
-                                    message.Version,
-                                    element.LocalName,
-                                    element.NamespaceURI,
-                                    false /*mustUnderstand*/
-                                    ,
-                                    null /*actor*/
-                                    ,
-                                    false /*relay*/
-                                    ,
-                                    element
-                                )
-                            );
+                            message
+                                .Headers
+                                .Add(
+                                    new XmlElementMessageHeader(
+                                        this,
+                                        message.Version,
+                                        element.LocalName,
+                                        element.NamespaceURI,
+                                        false /*mustUnderstand*/
+                                        ,
+                                        null /*actor*/
+                                        ,
+                                        false /*relay*/
+                                        ,
+                                        element
+                                    )
+                                );
                         else
                         {
                             if (matchingHeaderDescription.TypedHeader)
@@ -166,18 +170,20 @@ namespace System.ServiceModel.Dispatcher
                                 relay = matchingHeaderDescription.Relay;
                                 actor = matchingHeaderDescription.Actor;
                             }
-                            message.Headers.Add(
-                                new XmlElementMessageHeader(
-                                    this,
-                                    message.Version,
-                                    element.LocalName,
-                                    element.NamespaceURI,
-                                    mustUnderstand,
-                                    actor,
-                                    relay,
-                                    element
-                                )
-                            );
+                            message
+                                .Headers
+                                .Add(
+                                    new XmlElementMessageHeader(
+                                        this,
+                                        message.Version,
+                                        element.LocalName,
+                                        element.NamespaceURI,
+                                        mustUnderstand,
+                                        actor,
+                                        relay,
+                                        element
+                                    )
+                                );
                         }
                     }
                 }
@@ -199,33 +205,37 @@ namespace System.ServiceModel.Dispatcher
                             out actor
                         );
                         if (element != null)
-                            message.Headers.Add(
-                                new XmlElementMessageHeader(
-                                    this,
-                                    message.Version,
-                                    element.LocalName,
-                                    element.NamespaceURI,
-                                    mustUnderstand,
-                                    actor,
-                                    relay,
-                                    element
-                                )
-                            );
+                            message
+                                .Headers
+                                .Add(
+                                    new XmlElementMessageHeader(
+                                        this,
+                                        message.Version,
+                                        element.LocalName,
+                                        element.NamespaceURI,
+                                        mustUnderstand,
+                                        actor,
+                                        relay,
+                                        element
+                                    )
+                                );
                     }
                 }
             }
             catch (InvalidOperationException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorSerializingHeader,
-                            messageDescription.MessageName,
-                            e.Message
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorSerializingHeader,
+                                messageDescription.MessageName,
+                                e.Message
+                            ),
+                            e
+                        )
+                    );
             }
         }
 
@@ -388,15 +398,17 @@ namespace System.ServiceModel.Dispatcher
             {
                 // all exceptions from XmlSerializer get wrapped in InvalidOperationException,
                 // so we must be conservative and never turn this into a fault
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingHeader,
-                            messageDescription.MessageName
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingHeader,
+                                messageDescription.MessageName
+                            ),
+                            e
+                        )
+                    );
             }
         }
 
@@ -449,13 +461,13 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             if (parameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
             try
             {
                 MessageInfo messageInfo;
@@ -482,11 +494,13 @@ namespace System.ServiceModel.Dispatcher
                 ];
                 object bodyObject = parameters[messageDescription.Body.Parts[0].Index];
                 if (bodyObject == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxBodyCannotBeNull, messageDescription.MessageName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxBodyCannotBeNull, messageDescription.MessageName)
+                            )
+                        );
                 int i = 0;
                 foreach (
                     MessagePartDescription bodyPart in messageInfo.RpcEncodedTypedMessageBodyParts
@@ -517,16 +531,18 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (InvalidOperationException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorSerializingBody,
-                            messageDescription.MessageName,
-                            e.Message
-                        ),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorSerializingBody,
+                                messageDescription.MessageName,
+                                e.Message
+                            ),
+                            e
+                        )
+                    );
             }
         }
 
@@ -627,13 +643,13 @@ namespace System.ServiceModel.Dispatcher
             try
             {
                 if (reader == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("reader")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("reader"));
                 if (parameters == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("parameters")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("parameters"));
                 object returnValue = null;
                 if (serializer == null)
                 {
@@ -664,9 +680,11 @@ namespace System.ServiceModel.Dispatcher
                     ? SR.SFxErrorDeserializingRequestBody
                     : SR.SFxErrorDeserializingReplyBody;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(resourceKey, OperationName), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(SR.GetString(resourceKey, OperationName), e)
+                    );
             }
         }
 
@@ -682,10 +700,12 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "version",
-                    SR.GetString(SR.EnvelopeVersionNotSupported, version)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "version",
+                        SR.GetString(SR.EnvelopeVersionNotSupported, version)
+                    );
             }
         }
 

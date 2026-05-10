@@ -53,11 +53,13 @@ class C2 { }
 class C3 { }
 ";
 
-            await TestServices.EditorVerifier.TextContainsAsync(
-                expected,
-                assertCaretPosition: true,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    expected,
+                    assertCaretPosition: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
     }
 }

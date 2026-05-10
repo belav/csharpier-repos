@@ -243,10 +243,10 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    HeaderNames.ContentLength,
-                    out var contentLength
-                ),
+                response
+                    .Content
+                    .Headers
+                    .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
             );
             Assert.Equal(
@@ -290,10 +290,10 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    HeaderNames.ContentLength,
-                    out var contentLength
-                ),
+                response
+                    .Content
+                    .Headers
+                    .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
             );
             Assert.Equal(body.Length.ToString(CultureInfo.InvariantCulture), contentLength.First());
@@ -335,10 +335,10 @@ public class ResponseTrailersTests : LoggedTest
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
             Assert.True(
-                response.Content.Headers.TryGetValues(
-                    HeaderNames.ContentLength,
-                    out var contentLength
-                ),
+                response
+                    .Content
+                    .Headers
+                    .TryGetValues(HeaderNames.ContentLength, out var contentLength),
                 HeaderNames.ContentLength
             );
             Assert.Equal(body.Length.ToString(CultureInfo.InvariantCulture), contentLength.First());
@@ -435,10 +435,12 @@ public class ResponseTrailersTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext.Response.AppendTrailer(
-                        "trailername",
-                        new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
-                    );
+                    httpContext
+                        .Response
+                        .AppendTrailer(
+                            "trailername",
+                            new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
+                        );
                     return Task.FromResult(0);
                 },
                 LoggerFactory
@@ -481,10 +483,12 @@ public class ResponseTrailersTests : LoggedTest
                 out var address,
                 httpContext =>
                 {
-                    httpContext.Response.AppendTrailer(
-                        "ThisIsALongerHeaderNameThatStillWorksForReals",
-                        new StringValues(values)
-                    );
+                    httpContext
+                        .Response
+                        .AppendTrailer(
+                            "ThisIsALongerHeaderNameThatStillWorksForReals",
+                            new StringValues(values)
+                        );
                     return Task.FromResult(0);
                 },
                 LoggerFactory

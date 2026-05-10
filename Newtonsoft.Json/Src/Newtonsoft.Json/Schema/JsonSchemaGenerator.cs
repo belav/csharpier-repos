@@ -322,13 +322,15 @@ namespace Newtonsoft.Json.Schema
                         if (collectionItemType != null)
                         {
                             CurrentSchema.Items = new List<JsonSchema>();
-                            CurrentSchema.Items.Add(
-                                GenerateInternal(
-                                    collectionItemType,
-                                    (!allowNullItem) ? Required.Always : Required.Default,
-                                    false
-                                )
-                            );
+                            CurrentSchema
+                                .Items
+                                .Add(
+                                    GenerateInternal(
+                                        collectionItemType,
+                                        (!allowNullItem) ? Required.Always : Required.Default,
+                                        false
+                                    )
+                                );
                         }
                         break;
                     case JsonContractType.Primitive:

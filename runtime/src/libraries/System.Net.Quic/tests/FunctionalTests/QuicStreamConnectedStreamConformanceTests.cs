@@ -22,8 +22,13 @@ namespace System.Net.Quic.Tests
         protected override bool BlocksOnZeroByteReads => true;
         protected override bool CanTimeout => true;
 
-        public readonly X509Certificate2 ServerCertificate =
-            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+        public readonly X509Certificate2 ServerCertificate = System
+            .Net
+            .Test
+            .Common
+            .Configuration
+            .Certificates
+            .GetServerCertificate();
         public ITestOutputHelper _output;
 
         protected override void Dispose(bool disposing)

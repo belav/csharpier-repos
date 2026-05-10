@@ -767,9 +767,8 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument
         if (jsonObjectContract != null)
         {
             return jsonObjectContract
-                .Properties.First(jsonProperty =>
-                    jsonProperty.UnderlyingName == memberExpression.Member.Name
-                )
+                .Properties
+                .First(jsonProperty => jsonProperty.UnderlyingName == memberExpression.Member.Name)
                 .PropertyName;
         }
 

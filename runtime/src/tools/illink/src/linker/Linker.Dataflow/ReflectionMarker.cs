@@ -81,13 +81,15 @@ namespace Mono.Linker.Dataflow
         )
         {
             if (
-                !_context.TypeNameResolver.TryResolveTypeName(
-                    typeName,
-                    diagnosticContext,
-                    out TypeReference? typeRef,
-                    out var typeResolutionRecords,
-                    needsAssemblyName
-                ) || typeRef.ResolveToTypeDefinition(_context) is not TypeDefinition foundType
+                !_context
+                    .TypeNameResolver
+                    .TryResolveTypeName(
+                        typeName,
+                        diagnosticContext,
+                        out TypeReference? typeRef,
+                        out var typeResolutionRecords,
+                        needsAssemblyName
+                    ) || typeRef.ResolveToTypeDefinition(_context) is not TypeDefinition foundType
             )
             {
                 type = default;
@@ -109,12 +111,14 @@ namespace Mono.Linker.Dataflow
         )
         {
             if (
-                !_context.TypeNameResolver.TryResolveTypeName(
-                    assembly,
-                    typeName,
-                    out TypeReference? typeRef,
-                    out var typeResolutionRecords
-                ) || typeRef.ResolveToTypeDefinition(_context) is not TypeDefinition foundType
+                !_context
+                    .TypeNameResolver
+                    .TryResolveTypeName(
+                        assembly,
+                        typeName,
+                        out TypeReference? typeRef,
+                        out var typeResolutionRecords
+                    ) || typeRef.ResolveToTypeDefinition(_context) is not TypeDefinition foundType
             )
             {
                 type = default;
@@ -150,15 +154,17 @@ namespace Mono.Linker.Dataflow
                 );
                 foreach (var typeResolutionRecord in typeResolutionRecords)
                 {
-                    _context.MarkingHelpers.MarkMatchingExportedType(
-                        typeResolutionRecord.ResolvedType,
-                        typeResolutionRecord.ReferringAssembly,
-                        new DependencyInfo(
-                            DependencyKind.DynamicallyAccessedMember,
-                            typeDefinition
-                        ),
-                        origin
-                    );
+                    _context
+                        .MarkingHelpers
+                        .MarkMatchingExportedType(
+                            typeResolutionRecord.ResolvedType,
+                            typeResolutionRecord.ReferringAssembly,
+                            new DependencyInfo(
+                                DependencyKind.DynamicallyAccessedMember,
+                                typeDefinition
+                            ),
+                            origin
+                        );
                 }
             }
         }

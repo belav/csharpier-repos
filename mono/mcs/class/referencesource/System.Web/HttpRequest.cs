@@ -926,12 +926,10 @@ namespace System.Web
 
             while (i < l)
             {
-                i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                    headerValue,
-                    attrName,
-                    i,
-                    CompareOptions.IgnoreCase
-                );
+                i = CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .IndexOf(headerValue, attrName, i, CompareOptions.IgnoreCase);
                 if (i < 0)
                     break;
                 if (i + k >= l)
@@ -1063,7 +1061,8 @@ namespace System.Web
                         ref _rawContent,
                         RuntimeConfig
                             .GetConfig(_context)
-                            .HttpRuntime.RequestLengthDiskThresholdBytes
+                            .HttpRuntime
+                            .RequestLengthDiskThresholdBytes
                     );
                 }
                 return _rawContent;
@@ -1763,7 +1762,9 @@ namespace System.Web
 
                     int filePathLen = _context
                         .GetFilePathData()
-                        .Path.VirtualPathStringNoTrailingSlash.Length;
+                        .Path
+                        .VirtualPathStringNoTrailingSlash
+                        .Length;
 
                     // case could be wrong in config (_path has the correct case)
                     string path = Path;
@@ -3134,7 +3135,8 @@ namespace System.Web
             // Verify that the header does not contain invalid chars
             char[] invalidChars = RuntimeConfig
                 .GetConfig(Context)
-                .HttpRuntime.RequestPathInvalidCharactersArray;
+                .HttpRuntime
+                .RequestPathInvalidCharactersArray;
             if (invalidChars != null && invalidChars.Length > 0)
             {
                 int index = header.IndexOfAny(invalidChars);
@@ -3175,13 +3177,15 @@ namespace System.Web
 
             int validationFailureIndex;
             if (
-                !RequestValidator.Current.IsValidRequestString(
-                    contextToProvide,
-                    value,
-                    requestCollection,
-                    collectionKey,
-                    out validationFailureIndex
-                )
+                !RequestValidator
+                    .Current
+                    .IsValidRequestString(
+                        contextToProvide,
+                        value,
+                        requestCollection,
+                        collectionKey,
+                        out validationFailureIndex
+                    )
             )
             {
                 // Display only the piece of the string that caused the problem, padded by on each side

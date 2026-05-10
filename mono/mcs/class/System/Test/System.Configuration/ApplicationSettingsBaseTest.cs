@@ -339,10 +339,9 @@ namespace MonoTests.System.Configuration
 #endif
             Assert.AreEqual(
                 expected,
-                new SettingsProviderAttribute(typeof(ProviderPoker)).ProviderTypeName.Substring(
-                    0,
-                    expected.Length
-                ),
+                new SettingsProviderAttribute(typeof(ProviderPoker))
+                    .ProviderTypeName
+                    .Substring(0, expected.Length),
                 "#1"
             );
             TestSettings2 settings = new TestSettings2();

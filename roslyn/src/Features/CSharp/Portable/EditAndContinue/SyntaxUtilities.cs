@@ -68,21 +68,22 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 ConstructorDeclarationSyntax constructorDeclaration
                     when constructorDeclaration.Body != null
-                        || constructorDeclaration.ExpressionBody != null =>
-                    constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
-                        ? CreateSimpleBody(
-                            BlockOrExpression(
-                                constructorDeclaration.Body,
-                                constructorDeclaration.ExpressionBody
-                            )
+                        || constructorDeclaration.ExpressionBody != null => constructorDeclaration
+                    .Modifiers
+                    .Any(SyntaxKind.StaticKeyword)
+                    ? CreateSimpleBody(
+                        BlockOrExpression(
+                            constructorDeclaration.Body,
+                            constructorDeclaration.ExpressionBody
                         )
-                    : (constructorDeclaration.Initializer != null)
-                        ? new OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(
-                            constructorDeclaration
-                        )
-                    : new OrdinaryInstanceConstructorWithImplicitInitializerDeclarationBody(
+                    )
+                : (constructorDeclaration.Initializer != null)
+                    ? new OrdinaryInstanceConstructorWithExplicitInitializerDeclarationBody(
                         constructorDeclaration
-                    ),
+                    )
+                : new OrdinaryInstanceConstructorWithImplicitInitializerDeclarationBody(
+                    constructorDeclaration
+                ),
 
                 CompilationUnitSyntax unit when unit.ContainsGlobalStatements() =>
                     new TopLevelCodeDeclarationBody(unit),
@@ -212,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             var firstGetter = accessorList
-                ?.Accessors.Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
+                ?.Accessors
+                .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
                 .FirstOrDefault();
             if (firstGetter == null)
             {
@@ -254,9 +256,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             return property.ExpressionBody == null
-                && property.AccessorList!.Accessors.Any(e =>
-                    e.Body == null && e.ExpressionBody == null
-                );
+                && property
+                    .AccessorList!
+                    .Accessors
+                    .Any(e => e.Body == null && e.ExpressionBody == null);
         }
 
         /// <summary>
@@ -280,9 +283,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             return declaration switch
             {
                 MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
-                LocalFunctionStatementSyntax localFunction => localFunction.Modifiers.Any(
-                    SyntaxKind.AsyncKeyword
-                ),
+                LocalFunctionStatementSyntax localFunction => localFunction
+                    .Modifiers
+                    .Any(SyntaxKind.AsyncKeyword),
                 _ => false,
             };
         }

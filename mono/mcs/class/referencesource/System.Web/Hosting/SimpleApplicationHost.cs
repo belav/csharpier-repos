@@ -94,16 +94,23 @@ namespace System.Web.Hosting
             VirtualPath vpath = VirtualPath.Create(virtualPath);
 
             // Application path
-            webFileMap.VirtualDirectories.Add(
-                vpath.VirtualPathStringNoTrailingSlash,
-                new VirtualDirectoryMapping(physicalPath, true)
-            );
+            webFileMap
+                .VirtualDirectories
+                .Add(
+                    vpath.VirtualPathStringNoTrailingSlash,
+                    new VirtualDirectoryMapping(physicalPath, true)
+                );
 
             // Client script file path
-            webFileMap.VirtualDirectories.Add(
-                HttpRuntime.AspClientScriptVirtualPath,
-                new VirtualDirectoryMapping(HttpRuntime.AspClientScriptPhysicalPathInternal, false)
-            );
+            webFileMap
+                .VirtualDirectories
+                .Add(
+                    HttpRuntime.AspClientScriptVirtualPath,
+                    new VirtualDirectoryMapping(
+                        HttpRuntime.AspClientScriptPhysicalPathInternal,
+                        false
+                    )
+                );
 
             return new UserMapPath(webFileMap);
         }

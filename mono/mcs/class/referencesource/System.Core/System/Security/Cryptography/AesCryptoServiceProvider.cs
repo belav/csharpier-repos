@@ -484,12 +484,14 @@ namespace System.Security.Cryptography
             try
             {
                 if (
-                    !CapiNative.UnsafeNativeMethods.CryptGenKey(
-                        m_cspHandle,
-                        GetAlgorithmId(KeySizeValue),
-                        CapiNative.KeyFlags.Exportable,
-                        out key
-                    )
+                    !CapiNative
+                        .UnsafeNativeMethods
+                        .CryptGenKey(
+                            m_cspHandle,
+                            GetAlgorithmId(KeySizeValue),
+                            CapiNative.KeyFlags.Exportable,
+                            out key
+                        )
                 )
                 {
                     throw new CryptographicException(Marshal.GetLastWin32Error());

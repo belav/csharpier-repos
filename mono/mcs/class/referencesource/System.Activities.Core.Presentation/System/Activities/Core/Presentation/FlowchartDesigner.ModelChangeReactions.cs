@@ -31,9 +31,12 @@ namespace System.Activities.Core.Presentation
         void CreateStartSymbol()
         {
             //Instantiate the start symbol
-            StartSymbol start = System.Activities.Core.Presentation.StartSymbol.CreateStartSymbol(
-                this.Context
-            );
+            StartSymbol start = System
+                .Activities
+                .Core
+                .Presentation
+                .StartSymbol
+                .CreateStartSymbol(this.Context);
             start.Text = "Start";
             this.flowStart = start.ModelItem;
             DragDropHelper.SetCompositeView(start, this);
@@ -87,8 +90,9 @@ namespace System.Activities.Core.Presentation
         protected override void OnModelItemChanged(object newItem)
         {
             // Make flowchart designer always collapse by default, but only if the user didnt explicitly specify collapsed or expanded.
-            ViewStateService viewStateService =
-                this.Context.Services.GetService<ViewStateService>();
+            ViewStateService viewStateService = this.Context
+                .Services
+                .GetService<ViewStateService>();
             if (viewStateService != null)
             {
                 bool? isExpanded = (bool?)
@@ -329,9 +333,9 @@ namespace System.Activities.Core.Presentation
                 {
                     CollectionChange collectionChange = change as CollectionChange;
                     if (
-                        collectionChange.Collection.Equals(
-                            this.ModelItem.Properties["Nodes"].Collection
-                        )
+                        collectionChange
+                            .Collection
+                            .Equals(this.ModelItem.Properties["Nodes"].Collection)
                     )
                     {
                         if (collectionChange.Operation == CollectionChange.OperationType.Delete)
@@ -358,11 +362,17 @@ namespace System.Activities.Core.Presentation
                     if (
                         collectionChange.Collection.Parent != null
                         && collectionChange.Collection.Parent.Parent != null
-                        && this.ModelItem.Properties["Nodes"]
-                            .Collection.Contains(collectionChange.Collection.Parent.Parent)
+                        && this.ModelItem
+                            .Properties["Nodes"]
+                            .Collection
+                            .Contains(collectionChange.Collection.Parent.Parent)
                         && collectionChange.Collection.Parent.Parent.ItemType.IsGenericType
-                        && collectionChange.Collection.Parent.Parent.ItemType.GetGenericTypeDefinition()
-                            == typeof(FlowSwitch<>)
+                        && collectionChange
+                            .Collection
+                            .Parent
+                            .Parent
+                            .ItemType
+                            .GetGenericTypeDefinition() == typeof(FlowSwitch<>)
                     )
                     {
                         ModelItem item = collectionChange.Item;
@@ -416,8 +426,10 @@ namespace System.Activities.Core.Presentation
 
                     if (
                         dictionaryChange.Dictionary.Parent != null
-                        && this.ModelItem.Properties["Nodes"]
-                            .Collection.Contains(dictionaryChange.Dictionary.Parent)
+                        && this.ModelItem
+                            .Properties["Nodes"]
+                            .Collection
+                            .Contains(dictionaryChange.Dictionary.Parent)
                         && dictionaryChange.Dictionary.Parent.ItemType.IsGenericType
                         && dictionaryChange.Dictionary.Parent.ItemType.GetGenericTypeDefinition()
                             == typeof(FlowSwitch<>)
@@ -1010,7 +1022,8 @@ namespace System.Activities.Core.Presentation
                         if (
                             linkModelItem
                                 .Properties["IsDefaultCase"]
-                                .Value.GetCurrentValue()
+                                .Value
+                                .GetCurrentValue()
                                 .Equals(true) && propertyName.Equals("Default")
                         )
                         {
@@ -1023,7 +1036,8 @@ namespace System.Activities.Core.Presentation
                             if (
                                 linkModelItem
                                     .Properties["IsDefaultCase"]
-                                    .Value.GetCurrentValue()
+                                    .Value
+                                    .GetCurrentValue()
                                     .Equals(false)
                             )
                             {
@@ -1051,13 +1065,15 @@ namespace System.Activities.Core.Presentation
                                 else if (connectorCaseMI == null)
                                 {
                                     if (
-                                        GenericFlowSwitchHelper.FlowSwitchNullCaseKeyIdentifier.Equals(
-                                            propertyName.Substring(
-                                                GenericFlowSwitchHelper
-                                                    .FlowSwitchCasesKeyIdentifier
-                                                    .Length
+                                        GenericFlowSwitchHelper
+                                            .FlowSwitchNullCaseKeyIdentifier
+                                            .Equals(
+                                                propertyName.Substring(
+                                                    GenericFlowSwitchHelper
+                                                        .FlowSwitchCasesKeyIdentifier
+                                                        .Length
+                                                )
                                             )
-                                        )
                                     )
                                     {
                                         linkOnCanvas = connector;

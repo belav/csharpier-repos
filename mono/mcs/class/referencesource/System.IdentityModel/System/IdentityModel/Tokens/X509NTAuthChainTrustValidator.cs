@@ -60,15 +60,17 @@ namespace System.IdentityModel.Tokens
 
             if (!chain.Build(certificate))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenValidationException(
-                        SR.GetString(
-                            SR.ID4070,
-                            X509Util.GetCertificateId(certificate),
-                            GetChainStatusInformation(chain.ChainStatus)
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(
+                                SR.ID4070,
+                                X509Util.GetCertificateId(certificate),
+                                GetChainStatusInformation(chain.ChainStatus)
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

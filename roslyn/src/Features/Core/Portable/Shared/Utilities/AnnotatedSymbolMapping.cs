@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             );
 
             var typeNodeRoot = await typeNode
-                .SyntaxTree.GetRootAsync(cancellationToken)
+                .SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var typeNodeAnnotation = new SyntaxAnnotation();
 

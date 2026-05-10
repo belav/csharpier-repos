@@ -10,14 +10,17 @@ namespace System.IO.Pipelines
     {
         public override void Schedule(Action<object> action, object state)
         {
-            System.Threading.ThreadPool.QueueUserWorkItem(
-                s =>
-                {
-                    var tuple = (Tuple<Action<object>, object>)s;
-                    tuple.Item1(tuple.Item2);
-                },
-                Tuple.Create(action, state)
-            );
+            System
+                .Threading
+                .ThreadPool
+                .QueueUserWorkItem(
+                    s =>
+                    {
+                        var tuple = (Tuple<Action<object>, object>)s;
+                        tuple.Item1(tuple.Item2);
+                    },
+                    Tuple.Create(action, state)
+                );
         }
     }
 }

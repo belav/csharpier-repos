@@ -336,44 +336,48 @@ namespace System.Web.UI.WebControls.WebParts
                 typeof(WebPartExportMode)
             );
             _exportMode = new DropDownList();
-            _exportMode.Items.AddRange(
-                new ListItem[]
-                {
-                    new ListItem(
-                        SR.GetString(SR.BehaviorEditorPart_ExportModeNone),
-                        exportModeConverter.ConvertToString(WebPartExportMode.None)
-                    ),
-                    new ListItem(
-                        SR.GetString(SR.BehaviorEditorPart_ExportModeAll),
-                        exportModeConverter.ConvertToString(WebPartExportMode.All)
-                    ),
-                    new ListItem(
-                        SR.GetString(SR.BehaviorEditorPart_ExportModeNonSensitiveData),
-                        exportModeConverter.ConvertToString(WebPartExportMode.NonSensitiveData)
-                    ),
-                }
-            );
+            _exportMode
+                .Items
+                .AddRange(
+                    new ListItem[]
+                    {
+                        new ListItem(
+                            SR.GetString(SR.BehaviorEditorPart_ExportModeNone),
+                            exportModeConverter.ConvertToString(WebPartExportMode.None)
+                        ),
+                        new ListItem(
+                            SR.GetString(SR.BehaviorEditorPart_ExportModeAll),
+                            exportModeConverter.ConvertToString(WebPartExportMode.All)
+                        ),
+                        new ListItem(
+                            SR.GetString(SR.BehaviorEditorPart_ExportModeNonSensitiveData),
+                            exportModeConverter.ConvertToString(WebPartExportMode.NonSensitiveData)
+                        ),
+                    }
+                );
             controls.Add(_exportMode);
 
             TypeConverter helpModeConverter = TypeDescriptor.GetConverter(typeof(WebPartHelpMode));
             _helpMode = new DropDownList();
-            _helpMode.Items.AddRange(
-                new ListItem[]
-                {
-                    new ListItem(
-                        SR.GetString(SR.BehaviorEditorPart_HelpModeModal),
-                        helpModeConverter.ConvertToString(WebPartHelpMode.Modal)
-                    ),
-                    new ListItem(
-                        SR.GetString(SR.BehaviorEditorPart_HelpModeModeless),
-                        helpModeConverter.ConvertToString(WebPartHelpMode.Modeless)
-                    ),
-                    new ListItem(
-                        SR.GetString(SR.BehaviorEditorPart_HelpModeNavigate),
-                        helpModeConverter.ConvertToString(WebPartHelpMode.Navigate)
-                    ),
-                }
-            );
+            _helpMode
+                .Items
+                .AddRange(
+                    new ListItem[]
+                    {
+                        new ListItem(
+                            SR.GetString(SR.BehaviorEditorPart_HelpModeModal),
+                            helpModeConverter.ConvertToString(WebPartHelpMode.Modal)
+                        ),
+                        new ListItem(
+                            SR.GetString(SR.BehaviorEditorPart_HelpModeModeless),
+                            helpModeConverter.ConvertToString(WebPartHelpMode.Modeless)
+                        ),
+                        new ListItem(
+                            SR.GetString(SR.BehaviorEditorPart_HelpModeNavigate),
+                            helpModeConverter.ConvertToString(WebPartHelpMode.Navigate)
+                        ),
+                    }
+                );
             controls.Add(_helpMode);
 
             _description = new TextBox();

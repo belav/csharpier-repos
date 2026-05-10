@@ -73,13 +73,15 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
 #endif
 
             if (
-                !CSharpAddAccessibilityModifiers.Instance.ShouldUpdateAccessibilityModifier(
-                    CSharpAccessibilityFacts.Instance,
-                    member,
-                    option.Value,
-                    out var name,
-                    out var modifiersAdded
-                )
+                !CSharpAddAccessibilityModifiers
+                    .Instance
+                    .ShouldUpdateAccessibilityModifier(
+                        CSharpAccessibilityFacts.Instance,
+                        member,
+                        option.Value,
+                        out var name,
+                        out var modifiersAdded
+                    )
             )
             {
                 return;

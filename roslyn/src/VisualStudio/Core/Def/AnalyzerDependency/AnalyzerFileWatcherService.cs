@@ -188,8 +188,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             using var argsBuilder = TemporaryArray<DiagnosticsUpdatedArgs>.Empty;
             foreach (var project in _workspace.CurrentSolution.Projects)
             {
-                var analyzerFileReferences =
-                    project.AnalyzerReferences.OfType<AnalyzerFileReference>();
+                var analyzerFileReferences = project
+                    .AnalyzerReferences
+                    .OfType<AnalyzerFileReference>();
 
                 if (
                     analyzerFileReferences.Any(a =>

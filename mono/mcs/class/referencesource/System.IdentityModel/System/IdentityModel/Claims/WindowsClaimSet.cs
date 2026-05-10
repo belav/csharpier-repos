@@ -199,9 +199,9 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
 
@@ -404,15 +404,15 @@ namespace System.IdentityModel.Claims
                     if (!result)
                     {
                         safeAllocHandle.Close();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(dwErrorCode)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new Win32Exception(dwErrorCode));
                     }
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(dwErrorCode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(dwErrorCode));
             }
             return safeAllocHandle;
         }

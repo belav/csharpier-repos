@@ -51,9 +51,9 @@ namespace System.CommandLine.Rendering
         }
 
         public override void SetCursorPosition(int left, int top) =>
-            Console.Out.Write(
-                Ansi.Cursor.Move.ToLocation(left: left + 1, top: top + 1).EscapeSequence
-            );
+            Console
+                .Out
+                .Write(Ansi.Cursor.Move.ToLocation(left: left + 1, top: top + 1).EscapeSequence);
 
         public override void HideCursor()
         {

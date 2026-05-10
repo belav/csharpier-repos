@@ -122,8 +122,11 @@ public static class SpatialiteLoader
             var rid = RuntimeInformation.RuntimeIdentifier;
             var rids =
                 DependencyContext
-                    .Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)
-                    ?.Fallbacks.ToList()
+                    .Default!
+                    .RuntimeGraph
+                    .FirstOrDefault(g => g.Runtime == rid)
+                    ?.Fallbacks
+                    .ToList()
                 ?? new List<string?>();
             rids.Insert(0, rid);
 

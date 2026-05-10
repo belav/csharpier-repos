@@ -271,11 +271,9 @@ namespace Microsoft.Interop
         {
             return (type, other) switch
             {
-                (INamedTypeSymbol namedType, INamedTypeSymbol namedOther) =>
-                    SymbolEqualityComparer.Default.Equals(
-                        namedType.ConstructedFrom,
-                        namedOther.ConstructedFrom
-                    ),
+                (INamedTypeSymbol namedType, INamedTypeSymbol namedOther) => SymbolEqualityComparer
+                    .Default
+                    .Equals(namedType.ConstructedFrom, namedOther.ConstructedFrom),
                 _ => SymbolEqualityComparer.Default.Equals(type, other),
             };
         }
@@ -382,7 +380,8 @@ namespace Microsoft.Interop
                         // including accounting for nesting.
                         numOriginalTypeArgumentsSubstituted += numArgumentsToPropogate;
                         currentType
-                            .TypeParameters.CastArray<ITypeSymbol>()
+                            .TypeParameters
+                            .CastArray<ITypeSymbol>()
                             .CopyTo(
                                 currentType.TypeParameters.Length - numArgumentsToPropogate,
                                 arguments,

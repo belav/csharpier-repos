@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
     {
         private static void TextContainsRegionOrUsing(string input, bool expected, string language)
         {
-            var exportProvider =
-                EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+            var exportProvider = EditorTestCompositions
+                .EditorFeatures
+                .ExportProviderFactory
+                .CreateExportProvider();
             var buffer = EditorFactory.CreateBuffer(
                 exportProvider,
                 input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None)

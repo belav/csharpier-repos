@@ -148,11 +148,13 @@ namespace System.Runtime.CompilerServices
                 int continuationId = Task.NewId();
                 Task currentTask = Task.InternalCurrent;
                 // fire the correlation ETW event
-                TplEtwProvider.Log.AwaitTaskContinuationScheduled(
-                    TaskScheduler.Current.Id,
-                    (currentTask != null) ? currentTask.Id : 0,
-                    continuationId
-                );
+                TplEtwProvider
+                    .Log
+                    .AwaitTaskContinuationScheduled(
+                        TaskScheduler.Current.Id,
+                        (currentTask != null) ? currentTask.Id : 0,
+                        continuationId
+                    );
 
                 return AsyncMethodBuilderCore.CreateContinuationWrapper(
                     continuation,

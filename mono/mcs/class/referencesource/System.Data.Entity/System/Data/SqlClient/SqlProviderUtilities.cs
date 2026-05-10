@@ -71,7 +71,8 @@ namespace System.Data.SqlClient
 
                 foreach (
                     EntitySet entitySet in container
-                        .BaseEntitySets.OfType<EntitySet>()
+                        .BaseEntitySets
+                        .OfType<EntitySet>()
                         .OrderBy(s => s.Name)
                 )
                 {
@@ -80,7 +81,8 @@ namespace System.Data.SqlClient
 
                 foreach (
                     AssociationSet associationSet in container
-                        .BaseEntitySets.OfType<AssociationSet>()
+                        .BaseEntitySets
+                        .OfType<AssociationSet>()
                         .OrderBy(s => s.Name)
                 )
                 {
@@ -390,11 +392,10 @@ namespace System.Data.SqlClient
             if (
                 type.EdmType.Name == "binary"
                 && 8 == type.GetMaxLength()
-                && column.TypeUsage.Facets.TryGetValue(
-                    "StoreGeneratedPattern",
-                    false,
-                    out storeGenFacet
-                )
+                && column
+                    .TypeUsage
+                    .Facets
+                    .TryGetValue("StoreGeneratedPattern", false, out storeGenFacet)
                 && storeGenFacet.Value != null
                 && StoreGeneratedPattern.Computed == (StoreGeneratedPattern)storeGenFacet.Value
             )
@@ -458,11 +459,10 @@ namespace System.Data.SqlClient
 
             if (
                 !isTimestamp
-                && column.TypeUsage.Facets.TryGetValue(
-                    "StoreGeneratedPattern",
-                    false,
-                    out storeGenFacet
-                )
+                && column
+                    .TypeUsage
+                    .Facets
+                    .TryGetValue("StoreGeneratedPattern", false, out storeGenFacet)
                 && storeGenFacet.Value != null
             )
             {

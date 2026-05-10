@@ -219,11 +219,9 @@ namespace System.Net.PeerToPeer.Collaboration
         {
             get
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Get Isonline called."
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(TraceEventType.Information, 0, "Get Isonline called.");
                 if (m_Disposed)
                     throw new ObjectDisposedException(this.GetType().FullName);
 
@@ -240,12 +238,9 @@ namespace System.Net.PeerToPeer.Collaboration
                     }
                     catch (Exception e)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "Exception thrown {0}",
-                            e.Message
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(TraceEventType.Error, 0, "Exception thrown {0}", e.Message);
                     }
                     if (
                         (presenceInfo != null)
@@ -256,12 +251,14 @@ namespace System.Net.PeerToPeer.Collaboration
                         break;
                     }
                 }
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Leaving Isonline called with {0}.",
-                    isOnline
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Leaving Isonline called with {0}.",
+                        isOnline
+                    );
                 return isOnline;
             }
         }
@@ -375,11 +372,9 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         public PeerPresenceInfo GetPresenceInfo(PeerEndPoint peerEndPoint)
         {
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "GetPresenceInfo()called."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, 0, "GetPresenceInfo()called.");
             if (m_Disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
             PeerCollaborationPermission.UnrestrictedPeerCollaborationPermission.Demand();
@@ -392,11 +387,13 @@ namespace System.Net.PeerToPeer.Collaboration
 
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Getting presence for the following endpoint."
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Getting presence for the following endpoint."
+                    );
                 peerEndPoint.TracePeerEndPoint();
             }
 
@@ -436,12 +433,14 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "PeerCollabGetPresenceInfo returned with errorcode {0}",
-                        errorCode
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "PeerCollabGetPresenceInfo returned with errorcode {0}",
+                            errorCode
+                        );
                     throw PeerToPeerException.CreateFromHr(
                         SR.GetString(SR.Collab_GetPresenceFailed),
                         errorCode
@@ -464,11 +463,9 @@ namespace System.Net.PeerToPeer.Collaboration
                 if (presenceInfo != null)
                     presenceInfo.Dispose();
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Leaving GetPresenceInfo()."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, 0, "Leaving GetPresenceInfo().");
 
             return peerPresenceInfo;
         }
@@ -509,12 +506,14 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         private PeerObjectCollection InternalGetAllObjects(Guid objectId, bool guidSupplied)
         {
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Entering InternalGetAllObjects() with ObjectId {0}.",
-                objectId
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Entering InternalGetAllObjects() with ObjectId {0}.",
+                    objectId
+                );
 
             Dictionary<Guid, PeerObject> mergedObjects = new Dictionary<Guid, PeerObject>();
             PeerObjectCollection peerObjectCollection;
@@ -552,12 +551,14 @@ namespace System.Net.PeerToPeer.Collaboration
                 peerObjectCollection.Add(peerObject);
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Leaving InternalGetAllObjects(). " + "Returning collection with {0} objects.",
-                peerObjectCollection.Count
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Leaving InternalGetAllObjects(). " + "Returning collection with {0} objects.",
+                    peerObjectCollection.Count
+                );
 
             return peerObjectCollection;
         }
@@ -591,11 +592,13 @@ namespace System.Net.PeerToPeer.Collaboration
         {
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Entering InternalGetObjects() with the following PeerEndPoint"
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Entering InternalGetObjects() with the following PeerEndPoint"
+                    );
                 peerEndPoint.TracePeerEndPoint();
             }
 
@@ -647,12 +650,14 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (errorCode != 0)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "PeerCollabEnumObjects returned with errorcode {0}",
-                        errorCode
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "PeerCollabEnumObjects returned with errorcode {0}",
+                            errorCode
+                        );
                     throw PeerToPeerException.CreateFromHr(
                         SR.GetString(SR.Collab_GetObjectsFailed),
                         errorCode
@@ -665,12 +670,14 @@ namespace System.Net.PeerToPeer.Collaboration
                 );
                 if (errorCode != 0)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "PeerGetItemCount returned with errorcode {0}",
-                        errorCode
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "PeerGetItemCount returned with errorcode {0}",
+                            errorCode
+                        );
                     throw PeerToPeerException.CreateFromHr(
                         SR.GetString(SR.Collab_GetObjectsFailed),
                         errorCode
@@ -679,11 +686,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
                 if (objectCount == 0)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "No PeerObjects found."
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(TraceEventType.Error, 0, "No PeerObjects found.");
                     return peerObjectColl;
                 }
                 unsafe
@@ -696,12 +701,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "PeerGetNextItem returned with errorcode {0}",
-                            errorCode
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "PeerGetNextItem returned with errorcode {0}",
+                                errorCode
+                            );
                         throw PeerToPeerException.CreateFromHr(
                             SR.GetString(SR.Collab_GetObjectsFailed),
                             errorCode
@@ -738,11 +745,13 @@ namespace System.Net.PeerToPeer.Collaboration
 
                         if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
                         {
-                            Logging.P2PTraceSource.TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "Retrieved following Object"
-                            );
+                            Logging
+                                .P2PTraceSource
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "Retrieved following Object"
+                                );
                             peerObject.TracePeerObject();
                         }
 
@@ -762,12 +771,15 @@ namespace System.Net.PeerToPeer.Collaboration
                     handlePeerEnum.Dispose();
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Leaving InternalGetApplications(). " + "Returning collection with {0} objects.",
-                peerObjectColl.Count
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Leaving InternalGetApplications(). "
+                        + "Returning collection with {0} objects.",
+                    peerObjectColl.Count
+                );
 
             return peerObjectColl;
         }
@@ -812,27 +824,24 @@ namespace System.Net.PeerToPeer.Collaboration
         {
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Entering InternalInviteEndPoint() with the following information."
-                );
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Invitation Message: ",
-                    message
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Entering InternalInviteEndPoint() with the following information."
+                    );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(TraceEventType.Information, 0, "Invitation Message: ", message);
                 if (
                     Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Verbose)
                     && (invitationData != null)
                 )
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "\tInvitation data:"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(TraceEventType.Information, 0, "\tInvitation data:");
                     Logging.DumpData(
                         Logging.P2PTraceSource,
                         TraceEventType.Verbose,
@@ -843,12 +852,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                 }
                 else
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "Invitation Data length: ",
-                        (invitationData != null ? invitationData.Length : 0)
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Invitation Data length: ",
+                            (invitationData != null ? invitationData.Length : 0)
+                        );
 
                 if (peerEndPoint != null)
                     peerEndPoint.TracePeerEndPoint();
@@ -943,25 +954,29 @@ namespace System.Net.PeerToPeer.Collaboration
                         || (errorCode == UnsafeCollabReturnCodes.ERROR_TIMEOUT)
                     )
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "Timed out. Leaving InternalInviteEndPoint() with InvitationResponseType expired."
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                0,
+                                "Timed out. Leaving InternalInviteEndPoint() with InvitationResponseType expired."
+                            );
 
                         return new PeerInvitationResponse(PeerInvitationResponseType.Expired);
                     }
 
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        (
-                            (peerContact != null)
-                                ? "PeerCollabInviteContact"
-                                : "PeerCollabInviteEndpoint"
-                        ) + " returned with errorcode {0}",
-                        errorCode
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            (
+                                (peerContact != null)
+                                    ? "PeerCollabInviteContact"
+                                    : "PeerCollabInviteEndpoint"
+                            ) + " returned with errorcode {0}",
+                            errorCode
+                        );
                     throw PeerToPeerException.CreateFromHr(
                         SR.GetString(SR.Collab_InviteFailed),
                         errorCode
@@ -988,12 +1003,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     peerEP.Free();
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Leaving InternalInviteEndPoint() with InvitationResponse {0}.",
-                peerInvResponse
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Leaving InternalInviteEndPoint() with InvitationResponse {0}.",
+                    peerInvResponse
+                );
 
             return peerInvResponse;
         }
@@ -1105,11 +1122,13 @@ namespace System.Net.PeerToPeer.Collaboration
             if (handlerCopy != null)
             {
                 handlerCopy(this, e);
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Fired the invite completed event callback."
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Fired the invite completed event callback."
+                    );
             }
         }
 
@@ -1128,20 +1147,24 @@ namespace System.Net.PeerToPeer.Collaboration
                 InviteAsyncHelper helper = m_inviteAsyncHelperList[args.UserState];
                 if (helper == null)
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Critical,
-                        0,
-                        "userState for which we are about to call Completed event does not exist in the pending async list"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Critical,
+                            0,
+                            "userState for which we are about to call Completed event does not exist in the pending async list"
+                        );
                 }
                 else
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Critical,
-                        helper.TraceEventId,
-                        "userState {0} is being removed from the pending async list",
-                        args.UserState.GetHashCode()
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Critical,
+                            helper.TraceEventId,
+                            "userState {0} is being removed from the pending async list",
+                            args.UserState.GetHashCode()
+                        );
                     m_inviteAsyncHelperList.Remove(args.UserState);
                 }
             }
@@ -1162,19 +1185,23 @@ namespace System.Net.PeerToPeer.Collaboration
             {
                 if (!m_inviteAsyncHelperList.TryGetValue(userToken, out helper))
                 {
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Warning,
-                        0,
-                        "InviteAsyncCancel called with a userState token that is not in the pending async list - returning"
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Warning,
+                            0,
+                            "InviteAsyncCancel called with a userState token that is not in the pending async list - returning"
+                        );
                     return;
                 }
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                helper.TraceEventId,
-                "Proceeding to cancel the pending async"
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    helper.TraceEventId,
+                    "Proceeding to cancel the pending async"
+                );
             helper.CancelAsync(userToken);
         }
 
@@ -1353,21 +1380,25 @@ namespace System.Net.PeerToPeer.Collaboration
             m_TraceEventId = NewTraceEventId;
             m_peerWeakReference = new WeakReference(parentPeer);
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "New InviteAsyncHelper created with TraceEventID {0}",
-                m_TraceEventId
-            );
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "\tPeerContact: {0}, App Guid: {1}, userState {2}, ParentReference {3}",
-                (m_peerContact != null ? m_peerContact.ToString() : "null"),
-                applicationId.ToString(),
-                userState.GetHashCode(),
-                m_peerWeakReference.Target.GetHashCode()
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "New InviteAsyncHelper created with TraceEventID {0}",
+                    m_TraceEventId
+                );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "\tPeerContact: {0}, App Guid: {1}, userState {2}, ParentReference {3}",
+                    (m_peerContact != null ? m_peerContact.ToString() : "null"),
+                    applicationId.ToString(),
+                    userState.GetHashCode(),
+                    m_peerWeakReference.Target.GetHashCode()
+                );
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -1388,11 +1419,9 @@ namespace System.Net.PeerToPeer.Collaboration
             if (m_Disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "InviteAsync called"
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, m_TraceEventId, "InviteAsync called");
             //
             //First wire up a callback
             //
@@ -1450,11 +1479,9 @@ namespace System.Net.PeerToPeer.Collaboration
             //
             m_AsyncOp = AsyncOperationManager.CreateOperation(m_userState);
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Leaving InviteAsync."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, m_TraceEventId, "Leaving InviteAsync.");
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -1475,11 +1502,13 @@ namespace System.Net.PeerToPeer.Collaboration
         {
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "InviteAsyncEndPoint() is called with the following Info"
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "InviteAsyncEndPoint() is called with the following Info"
+                    );
                 peerEndPoint.TracePeerEndPoint();
             }
 
@@ -1557,11 +1586,13 @@ namespace System.Net.PeerToPeer.Collaboration
                     errorCode
                 );
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Leaving InviteAsyncEndPoint."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "Leaving InviteAsyncEndPoint."
+                );
         }
 
         //
@@ -1580,11 +1611,9 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         internal void InviteCallback(object state, bool timedOut)
         {
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Entering InviteCallback."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, m_TraceEventId, "Entering InviteCallback.");
 
             SafeCollabData response = null;
 
@@ -1600,13 +1629,15 @@ namespace System.Net.PeerToPeer.Collaboration
                 {
                     if (m_Cancelled || m_Completed)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            m_TraceEventId,
-                            "Invite cancelled({0}) or completed({1}). Returning without doing anything.",
-                            m_Cancelled,
-                            m_Completed
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                m_TraceEventId,
+                                "Invite cancelled({0}) or completed({1}). Returning without doing anything.",
+                                m_Cancelled,
+                                m_Completed
+                            );
                         return;
                     }
                     errorCode = UnsafeCollabNativeMethods.PeerCollabGetInvitationResponse(
@@ -1621,12 +1652,14 @@ namespace System.Net.PeerToPeer.Collaboration
                         SR.GetString(SR.Collab_AsyncInviteException),
                         errorCode
                     );
-                    Logging.P2PTraceSource.TraceEvent(
-                        TraceEventType.Information,
-                        m_TraceEventId,
-                        "Got an exception {0}. Storing it in latest exception.",
-                        m_latestException
-                    );
+                    Logging
+                        .P2PTraceSource
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            m_TraceEventId,
+                            "Got an exception {0}. Storing it in latest exception.",
+                            m_latestException
+                        );
                 }
                 else
                 {
@@ -1656,11 +1689,13 @@ namespace System.Net.PeerToPeer.Collaboration
                         // Got an accepted. unregister callback to disable all othe other endpoint callbacks
                         //
 
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Information,
-                            m_TraceEventId,
-                            "Found an accepted. About to fire callback."
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                m_TraceEventId,
+                                "Found an accepted. About to fire callback."
+                            );
 
                         m_RegisteredWaitHandle.Unregister(null);
                     }
@@ -1713,11 +1748,13 @@ namespace System.Net.PeerToPeer.Collaboration
 
                         if (foundDeclined)
                         {
-                            Logging.P2PTraceSource.TraceEvent(
-                                TraceEventType.Information,
-                                m_TraceEventId,
-                                "Got a declined invite response."
-                            );
+                            Logging
+                                .P2PTraceSource
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    m_TraceEventId,
+                                    "Got a declined invite response."
+                                );
                             inviteCompletedArgs = new InviteCompletedEventArgs(
                                 new PeerInvitationResponse(PeerInvitationResponseType.Declined),
                                 null,
@@ -1727,11 +1764,13 @@ namespace System.Net.PeerToPeer.Collaboration
                         }
                         else if (foundExpired)
                         {
-                            Logging.P2PTraceSource.TraceEvent(
-                                TraceEventType.Information,
-                                m_TraceEventId,
-                                "Got an expired invite response but no accepted or declined."
-                            );
+                            Logging
+                                .P2PTraceSource
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    m_TraceEventId,
+                                    "Got an expired invite response but no accepted or declined."
+                                );
                             inviteCompletedArgs = new InviteCompletedEventArgs(
                                 new PeerInvitationResponse(PeerInvitationResponseType.Expired),
                                 null,
@@ -1741,11 +1780,13 @@ namespace System.Net.PeerToPeer.Collaboration
                         }
                         else
                         {
-                            Logging.P2PTraceSource.TraceEvent(
-                                TraceEventType.Information,
-                                m_TraceEventId,
-                                "Got all error responses"
-                            );
+                            Logging
+                                .P2PTraceSource
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    m_TraceEventId,
+                                    "Got all error responses"
+                                );
                             inviteCompletedArgs = new InviteCompletedEventArgs(
                                 null,
                                 (
@@ -1778,12 +1819,14 @@ namespace System.Net.PeerToPeer.Collaboration
                                 //Mark as completed so that this gets fired only once
                                 //
                                 m_Completed = true;
-                                Logging.P2PTraceSource.TraceEvent(
-                                    TraceEventType.Information,
-                                    m_TraceEventId,
-                                    "Firing callback with response type {0}.",
-                                    inviteCompletedArgs.InviteResponse
-                                );
+                                Logging
+                                    .P2PTraceSource
+                                    .TraceEvent(
+                                        TraceEventType.Information,
+                                        m_TraceEventId,
+                                        "Firing callback with response type {0}.",
+                                        inviteCompletedArgs.InviteResponse
+                                    );
                                 peer.PrepareToRaiseInviteCompletedEvent(
                                     m_AsyncOp,
                                     inviteCompletedArgs
@@ -1798,11 +1841,9 @@ namespace System.Net.PeerToPeer.Collaboration
                 if (response != null)
                     response.Dispose();
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Leaving InviteCallback."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, m_TraceEventId, "Leaving InviteCallback.");
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -1813,11 +1854,13 @@ namespace System.Net.PeerToPeer.Collaboration
         [System.Security.SecurityCritical]
         public void ContinueCancelCallback(object state)
         {
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Entering ContineCancelCallback."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "Entering ContineCancelCallback."
+                );
 
             try
             {
@@ -1832,12 +1875,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "PeerCollabCancelInvitation returned with errorcode {0}",
-                            errorCode
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "PeerCollabCancelInvitation returned with errorcode {0}",
+                                errorCode
+                            );
                     }
 
                     m_SafeCollabInvite.Dispose();
@@ -1857,19 +1902,23 @@ namespace System.Net.PeerToPeer.Collaboration
             }
             catch (ObjectDisposedException ex)
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Critical,
-                    0,
-                    "Exception while cancelling the call {0}",
-                    ex
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Critical,
+                        0,
+                        "Exception while cancelling the call {0}",
+                        ex
+                    );
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                m_TraceEventId,
-                "Leaving ContineCancelCallback."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    m_TraceEventId,
+                    "Leaving ContineCancelCallback."
+                );
         }
 
         // <SecurityKernel Critical="True" Ring="1">

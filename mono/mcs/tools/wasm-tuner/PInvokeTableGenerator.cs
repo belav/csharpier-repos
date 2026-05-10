@@ -44,9 +44,11 @@ public class PInvokeTableGenerator
                 {
                     if (pinvoke.CDecl != prev_pinvoke.CDecl)
                     {
-                        Console.Error.WriteLine(
-                            $"Warning: PInvoke method '{pinvoke.EntryPoint}' has incompatible declarations."
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                $"Warning: PInvoke method '{pinvoke.EntryPoint}' has incompatible declarations."
+                            );
                         pinvoke.TableEntryPoint = "mono_wasm_pinvoke_vararg_stub";
                         prev_pinvoke.TableEntryPoint = "mono_wasm_pinvoke_vararg_stub";
                         continue;

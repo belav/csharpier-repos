@@ -61,38 +61,26 @@ namespace MonoTests.System.Globalization
 
             Assert.AreEqual(
                 0,
-                CultureInfo.InvariantCulture.CompareInfo.Compare(
-                    "",
-                    0,
-                    "".Length,
-                    "",
-                    0,
-                    "".Length
-                ),
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .Compare("", 0, "".Length, "", 0, "".Length),
                 "Compare two empty strings, with 0 offsets and specified lengths"
             );
             Assert.AreEqual(
                 1,
-                CultureInfo.InvariantCulture.CompareInfo.Compare(
-                    s1,
-                    0,
-                    s1.Length,
-                    "",
-                    0,
-                    "".Length
-                ),
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .Compare(s1, 0, s1.Length, "", 0, "".Length),
                 "Compare string with empty string, with 0 offsets and specified lengths"
             );
             Assert.AreEqual(
                 -1,
-                CultureInfo.InvariantCulture.CompareInfo.Compare(
-                    "",
-                    0,
-                    "".Length,
-                    s1,
-                    0,
-                    s1.Length
-                ),
+                CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .Compare("", 0, "".Length, s1, 0, s1.Length),
                 "Compare empty string with string, with 0 offsets and specified lengths"
             );
 

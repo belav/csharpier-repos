@@ -23,12 +23,9 @@ namespace System.Threading
             if (handle.IsClosed || handle.IsInvalid)
                 throw new ArgumentException(SR.Argument_InvalidHandle, nameof(handle));
 
-            SafeThreadPoolIOHandle threadPoolHandle = Interop.Kernel32.CreateThreadpoolIo(
-                handle,
-                &OnNativeIOCompleted,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            SafeThreadPoolIOHandle threadPoolHandle = Interop
+                .Kernel32
+                .CreateThreadpoolIo(handle, &OnNativeIOCompleted, IntPtr.Zero, IntPtr.Zero);
             if (threadPoolHandle.IsInvalid)
             {
                 int errorCode = Marshal.GetLastWin32Error();
@@ -94,9 +91,11 @@ namespace System.Threading
                 overlapped->Data._boundHandle = this;
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
-                    NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(
-                        Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped)
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolIOEnqueue(
+                            Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped)
+                        );
 
                 Interop.Kernel32.StartThreadpoolIo(_threadPoolHandle!);
 
@@ -134,11 +133,13 @@ namespace System.Threading
                 data._boundHandle = this;
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
-                    NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(
-                        Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(
-                            preAllocated._overlappedWindowsThreadPool
-                        )
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolIOEnqueue(
+                            Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(
+                                preAllocated._overlappedWindowsThreadPool
+                            )
+                        );
 
                 Interop.Kernel32.StartThreadpoolIo(_threadPoolHandle!);
 
@@ -242,9 +243,11 @@ namespace System.Threading
             boundHandle.Release();
 
             if (NativeRuntimeEventSource.Log.IsEnabled())
-                NativeRuntimeEventSource.Log.ThreadPoolIODequeue(
-                    Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped)
-                );
+                NativeRuntimeEventSource
+                    .Log
+                    .ThreadPoolIODequeue(
+                        Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped)
+                    );
 
             Win32ThreadPoolNativeOverlapped.CompleteWithCallback(
                 ioResult,

@@ -182,10 +182,9 @@ internal sealed class AddressBinder
 
             if (context.Logger.IsEnabled(LogLevel.Debug))
             {
-                context.Logger.LogDebug(
-                    CoreStrings.BindingToDefaultAddress,
-                    Constants.DefaultServerAddress
-                );
+                context
+                    .Logger
+                    .LogDebug(CoreStrings.BindingToDefaultAddress, Constants.DefaultServerAddress);
             }
         }
     }
@@ -206,11 +205,13 @@ internal sealed class AddressBinder
             var joined = string.Join(", ", _addresses);
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context.Logger.LogInformation(
-                    CoreStrings.OverridingWithPreferHostingUrls,
-                    nameof(IServerAddressesFeature.PreferHostingUrls),
-                    joined
-                );
+                context
+                    .Logger
+                    .LogInformation(
+                        CoreStrings.OverridingWithPreferHostingUrls,
+                        nameof(IServerAddressesFeature.PreferHostingUrls),
+                        joined
+                    );
             }
 
             return base.BindAsync(context, cancellationToken);
@@ -237,10 +238,12 @@ internal sealed class AddressBinder
         {
             if (context.Logger.IsEnabled(LogLevel.Warning))
             {
-                context.Logger.LogWarning(
-                    CoreStrings.OverridingWithKestrelOptions,
-                    string.Join(", ", _originalAddresses)
-                );
+                context
+                    .Logger
+                    .LogWarning(
+                        CoreStrings.OverridingWithKestrelOptions,
+                        string.Join(", ", _originalAddresses)
+                    );
             }
 
             return base.BindAsync(context, cancellationToken);

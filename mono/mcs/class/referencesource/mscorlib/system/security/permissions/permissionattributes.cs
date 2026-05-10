@@ -1313,17 +1313,23 @@ namespace System.Security.Permissions
                 else if (m_certFile != null)
                 {
                     return new PublisherIdentityPermission(
-                        System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromCertFile(
-                            m_certFile
-                        )
+                        System
+                            .Security
+                            .Cryptography
+                            .X509Certificates
+                            .X509Certificate
+                            .CreateFromCertFile(m_certFile)
                     );
                 }
                 else if (m_signedFile != null)
                 {
                     return new PublisherIdentityPermission(
-                        System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromSignedFile(
-                            m_signedFile
-                        )
+                        System
+                            .Security
+                            .Cryptography
+                            .X509Certificates
+                            .X509Certificate
+                            .CreateFromSignedFile(m_signedFile)
                     );
                 }
                 else

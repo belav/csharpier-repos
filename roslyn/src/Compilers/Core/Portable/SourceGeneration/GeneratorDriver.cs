@@ -104,9 +104,9 @@ namespace Microsoft.CodeAnalysis
             var newState = _state.With(
                 sourceGenerators: _state.Generators.AddRange(generators),
                 incrementalGenerators: _state.IncrementalGenerators.AddRange(incrementalGenerators),
-                generatorStates: _state.GeneratorStates.AddRange(
-                    new GeneratorState[generators.Length]
-                )
+                generatorStates: _state
+                    .GeneratorStates
+                    .AddRange(new GeneratorState[generators.Length])
             );
             return FromState(newState);
         }
@@ -210,20 +210,22 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriverRunResult GetRunResult()
         {
-            var results = _state.Generators.ZipAsArray(
-                _state.GeneratorStates,
-                (generator, generatorState) =>
-                    new GeneratorRunResult(
-                        generator,
-                        diagnostics: generatorState.Diagnostics,
-                        exception: generatorState.Exception,
-                        generatedSources: getGeneratorSources(generatorState),
-                        elapsedTime: generatorState.ElapsedTime,
-                        namedSteps: generatorState.ExecutedSteps,
-                        outputSteps: generatorState.OutputSteps,
-                        hostOutputs: generatorState.HostOutputs
-                    )
-            );
+            var results = _state
+                .Generators
+                .ZipAsArray(
+                    _state.GeneratorStates,
+                    (generator, generatorState) =>
+                        new GeneratorRunResult(
+                            generator,
+                            diagnostics: generatorState.Diagnostics,
+                            exception: generatorState.Exception,
+                            generatedSources: getGeneratorSources(generatorState),
+                            elapsedTime: generatorState.ElapsedTime,
+                            namedSteps: generatorState.ExecutedSteps,
+                            outputSteps: generatorState.OutputSteps,
+                            hostOutputs: generatorState.HostOutputs
+                        )
+                );
             return new GeneratorDriverRunResult(results, _state.RunTime);
 
             static ImmutableArray<GeneratedSourceResult> getGeneratorSources(
@@ -248,11 +250,13 @@ namespace Microsoft.CodeAnalysis
 
         public GeneratorDriverTimingInfo GetTimingInfo()
         {
-            var generatorTimings = _state.Generators.ZipAsArray(
-                _state.GeneratorStates,
-                (generator, generatorState) =>
-                    new GeneratorTimingInfo(generator, generatorState.ElapsedTime)
-            );
+            var generatorTimings = _state
+                .Generators
+                .ZipAsArray(
+                    _state.GeneratorStates,
+                    (generator, generatorState) =>
+                        new GeneratorTimingInfo(generator, generatorState.ElapsedTime)
+                );
             return new GeneratorDriverTimingInfo(_state.RunTime, generatorTimings);
         }
 
@@ -365,10 +369,9 @@ namespace Microsoft.CodeAnalysis
                     // the generator is initialized, but we need to reparse the post-init trees as the parse options have changed
                     var reparsedInitSources = ParseAdditionalSources(
                         sourceGenerator,
-                        generatorState.PostInitTrees.SelectAsArray(t => new GeneratedSourceText(
-                            t.HintName,
-                            t.Text
-                        )),
+                        generatorState
+                            .PostInitTrees
+                            .SelectAsArray(t => new GeneratedSourceText(t.HintName, t.Text)),
                         cancellationToken
                     );
                     generatorState = new GeneratorState(
@@ -402,12 +405,14 @@ namespace Microsoft.CodeAnalysis
             }
             constantSourcesBuilder.Free();
 
-            var syntaxStoreBuilder = _state.SyntaxStore.ToBuilder(
-                compilation,
-                syntaxInputNodes.ToImmutableAndFree(),
-                _state.TrackIncrementalSteps,
-                cancellationToken
-            );
+            var syntaxStoreBuilder = _state
+                .SyntaxStore
+                .ToBuilder(
+                    compilation,
+                    syntaxInputNodes.ToImmutableAndFree(),
+                    _state.TrackIncrementalSteps,
+                    cancellationToken
+                );
 
             var driverStateBuilder = new DriverStateTable.Builder(
                 compilation,
@@ -423,8 +428,9 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                using var generatorTimer =
-                    CodeAnalysisEventSource.Log.CreateSingleGeneratorRunTimer(
+                using var generatorTimer = CodeAnalysisEventSource
+                    .Log
+                    .CreateSingleGeneratorRunTimer(
                         state.Generators[i],
                         (t) =>
                             t.Add(
@@ -587,10 +593,9 @@ namespace Microsoft.CodeAnalysis
         {
             if (CodeAnalysisEventSource.Log.IsEnabled())
             {
-                CodeAnalysisEventSource.Log.GeneratorException(
-                    generator.GetGeneratorType().Name,
-                    e.ToString()
-                );
+                CodeAnalysisEventSource
+                    .Log
+                    .GeneratorException(generator.GetGeneratorType().Name, e.ToString());
             }
 
             var diagnostic = CreateGeneratorExceptionDiagnostic(provider, generator, e, isInit);

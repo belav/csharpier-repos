@@ -824,9 +824,9 @@ namespace System.Xml.Serialization
             for (int i = 0; i < includes.Length; i++)
             {
                 Type includedType = includes[i].Type;
-                objectMapping.DerivedTypes.Add(
-                    ImportTypeMapping(includedType, null, defaultNamespace)
-                );
+                objectMapping
+                    .DerivedTypes
+                    .Add(ImportTypeMapping(includedType, null, defaultNamespace));
             }
 
             // Register this map as a derived class of object

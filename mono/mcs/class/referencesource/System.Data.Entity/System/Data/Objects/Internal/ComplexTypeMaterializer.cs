@@ -134,11 +134,13 @@ namespace System.Data.Objects.Internal
             Debug.Assert(index != _lastPlanIndex || (null == plans[index]), "index wrapped around");
 
             // create a new plan
-            ObjectTypeMapping mapping =
-                System.Data.Common.Internal.Materialization.Util.GetObjectMapping(
-                    recordInfo.RecordType.EdmType,
-                    _workspace
-                );
+            ObjectTypeMapping mapping = System
+                .Data
+                .Common
+                .Internal
+                .Materialization
+                .Util
+                .GetObjectMapping(recordInfo.RecordType.EdmType, _workspace);
             Debug.Assert(null != mapping, "null ObjectTypeMapping");
 
             Debug.Assert(

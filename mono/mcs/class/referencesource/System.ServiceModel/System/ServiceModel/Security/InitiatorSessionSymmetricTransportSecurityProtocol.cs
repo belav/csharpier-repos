@@ -32,14 +32,16 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator != true)
             {
                 Fx.Assert("This protocol can only be used at the initiator.");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.ProtocolMustBeInitiator,
-                            "InitiatorSessionSymmetricTransportSecurityProtocol"
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.ProtocolMustBeInitiator,
+                                "InitiatorSessionSymmetricTransportSecurityProtocol"
+                            )
                         )
-                    )
-                );
+                    );
             }
             this.requireDerivedKeys = factory.SecurityTokenParameters.RequireDerivedKeys;
         }
@@ -92,17 +94,18 @@ namespace System.ServiceModel.Security
                     this.derivedSignatureToken = new DerivedKeySecurityToken(
                         -1,
                         0,
-                        this.Factory.OutgoingAlgorithmSuite.GetSignatureKeyDerivationLength(
-                            token,
-                            this.Factory.MessageSecurityVersion.SecureConversationVersion
-                        ),
+                        this.Factory
+                            .OutgoingAlgorithmSuite
+                            .GetSignatureKeyDerivationLength(
+                                token,
+                                this.Factory.MessageSecurityVersion.SecureConversationVersion
+                            ),
                         null,
                         DerivedKeySecurityToken.DefaultNonceLength,
                         token,
-                        this.Factory.SecurityTokenParameters.CreateKeyIdentifierClause(
-                            token,
-                            SecurityTokenReferenceStyle.Internal
-                        ),
+                        this.Factory
+                            .SecurityTokenParameters
+                            .CreateKeyIdentifierClause(token, SecurityTokenReferenceStyle.Internal),
                         derivationAlgorithm,
                         SecurityUtils.GenerateId()
                     );

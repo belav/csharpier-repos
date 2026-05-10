@@ -21,23 +21,21 @@ namespace System.Globalization
             int result;
 
             if (HasEmptyCultureName)
-                result = Interop.Globalization.ChangeCaseInvariantNative(
-                    src,
-                    srcLen,
-                    dstBuffer,
-                    dstBufferCapacity,
-                    toUpper
-                );
+                result = Interop
+                    .Globalization
+                    .ChangeCaseInvariantNative(src, srcLen, dstBuffer, dstBufferCapacity, toUpper);
             else
-                result = Interop.Globalization.ChangeCaseNative(
-                    _cultureName,
-                    _cultureName.Length,
-                    src,
-                    srcLen,
-                    dstBuffer,
-                    dstBufferCapacity,
-                    toUpper
-                );
+                result = Interop
+                    .Globalization
+                    .ChangeCaseNative(
+                        _cultureName,
+                        _cultureName.Length,
+                        src,
+                        srcLen,
+                        dstBuffer,
+                        dstBufferCapacity,
+                        toUpper
+                    );
 
             if (result != (int)Interop.Globalization.ResultCode.Success)
                 throw new Exception(

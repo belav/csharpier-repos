@@ -51,8 +51,10 @@ namespace MonoTests.System.ServiceModel
         [Test]
         public void SecurityTokenVersion()
         {
-            ReadOnlyCollection<string> specs =
-                MessageSecurityVersion.Default.SecurityTokenVersion.GetSecuritySpecifications();
+            ReadOnlyCollection<string> specs = MessageSecurityVersion
+                .Default
+                .SecurityTokenVersion
+                .GetSecuritySpecifications();
             Assert.AreEqual(3, specs.Count, "#1");
             // Not sure why MS limits the results to them. This
             // result rather means that it is not worthy of
@@ -75,8 +77,10 @@ namespace MonoTests.System.ServiceModel
                 )
                     Assert.Fail(String.Format("Unexpected spec '{0}'", spec), "#2");
 
-            specs =
-                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10.SecurityTokenVersion.GetSecuritySpecifications();
+            specs = MessageSecurityVersion
+                .WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
+                .SecurityTokenVersion
+                .GetSecuritySpecifications();
             Assert.AreEqual(4, specs.Count, "#3");
             // Not sure why MS limits the results to them. This
             // result rather means that it is not worthy of testing.
@@ -99,8 +103,10 @@ namespace MonoTests.System.ServiceModel
                 )
                     Assert.Fail(String.Format("Unexpected spec '{0}'", spec), "#4");
 
-            specs =
-                MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10.SecurityTokenVersion.GetSecuritySpecifications();
+            specs = MessageSecurityVersion
+                .WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
+                .SecurityTokenVersion
+                .GetSecuritySpecifications();
             Assert.AreEqual(4, specs.Count, "#5");
             // Not sure why MS limits the results to them. This
             // result rather means that it is not worthy of testing.

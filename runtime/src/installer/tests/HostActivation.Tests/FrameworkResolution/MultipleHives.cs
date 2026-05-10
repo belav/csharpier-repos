@@ -60,7 +60,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     multiLevelLookup
                 )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedVersion)
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"Ignoring FX version [{requestedVersion}] without .deps.json"
                 );
         }
@@ -255,7 +256,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .HaveStdOut(expectedOutput)
-                .And.HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
+                .And
+                .HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
         }
 
         [Theory]
@@ -281,7 +283,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             RunTest(new TestSettings().WithCommandLine("--info"), multiLevelLookup, testApp: null)
                 .Should()
                 .HaveStdOutContaining(expectedOutput)
-                .And.HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
+                .And
+                .HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
         }
 
         [Theory]
@@ -319,9 +322,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(expectedOutput)
-                .And.HaveStdErrContaining("https://aka.ms/dotnet/app-launch-failed")
-                .And.HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
+                .And
+                .HaveStdErrContaining(expectedOutput)
+                .And
+                .HaveStdErrContaining("https://aka.ms/dotnet/app-launch-failed")
+                .And
+                .HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
         }
 
         private CommandResult RunTest(

@@ -108,20 +108,22 @@ namespace System.Windows.Forms
             toolbar.ShowToolTips = true;
             toolbar.DropDownArrows = true;
             toolbar.TabStop = true;
-            toolbar.Buttons.AddRange(
-                new ToolBarButton[]
-                {
-                    print,
-                    zoom,
-                    separator1,
-                    one_page,
-                    two_page,
-                    three_page,
-                    four_page,
-                    six_page,
-                    separator2,
-                }
-            );
+            toolbar
+                .Buttons
+                .AddRange(
+                    new ToolBarButton[]
+                    {
+                        print,
+                        zoom,
+                        separator1,
+                        one_page,
+                        two_page,
+                        three_page,
+                        four_page,
+                        six_page,
+                        separator2,
+                    }
+                );
             toolbar.ButtonClick += new ToolBarButtonClickEventHandler(OnClickToolBarButton);
 
             /* print button */

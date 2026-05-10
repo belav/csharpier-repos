@@ -59,7 +59,8 @@ if ((output = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
 #endif
 
     await Console
-        .Out.WriteLineAsync($"Discovering tests in {testDescriptor}...")
+        .Out
+        .WriteLineAsync($"Discovering tests in {testDescriptor}...")
         .ConfigureAwait(false);
 
     using var xunit = new XunitFrontController(
@@ -84,18 +85,21 @@ if ((output = await sr.ReadLineAsync().ConfigureAwait(false)) is not null)
     if (sink.AnyWriteFailures)
     {
         await Console
-            .Error.WriteLineAsync($"Channel failed to write for '{assemblyFileName}'")
+            .Error
+            .WriteLineAsync($"Channel failed to write for '{assemblyFileName}'")
             .ConfigureAwait(false);
         return ExitFailure;
     }
 
 #if NET6_0_OR_GREATER
     await Console
-        .Out.WriteLineAsync($"Discovered {testsToWrite.Count} tests in {testDescriptor}")
+        .Out
+        .WriteLineAsync($"Discovered {testsToWrite.Count} tests in {testDescriptor}")
         .ConfigureAwait(false);
 #else
     await Console
-        .Out.WriteLineAsync($"Discovered {testsToWrite.Count} tests in {testDescriptor}")
+        .Out
+        .WriteLineAsync($"Discovered {testsToWrite.Count} tests in {testDescriptor}")
         .ConfigureAwait(false);
 #endif
 

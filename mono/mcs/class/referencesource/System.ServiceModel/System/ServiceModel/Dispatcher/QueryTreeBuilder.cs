@@ -44,7 +44,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 // We reached a leaf in the query tree
                 // Simply add the remainder of the inserted code to the end of the tree path..
-                this.diverger.TreePath[this.diverger.TreePath.Count - 1]
+                this.diverger
+                    .TreePath[this.diverger.TreePath.Count - 1]
                     .Attach(this.diverger.InsertOpcode);
             }
             else

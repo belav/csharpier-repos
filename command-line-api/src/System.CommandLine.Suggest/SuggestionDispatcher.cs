@@ -50,9 +50,9 @@ namespace System.CommandLine.Suggest
             ListCommand.SetAction(
                 (ctx, cancellationToken) =>
                 {
-                    ctx.Configuration.Output.WriteLine(
-                        ShellPrefixesToMatch(_suggestionRegistration)
-                    );
+                    ctx.Configuration
+                        .Output
+                        .WriteLine(ShellPrefixesToMatch(_suggestionRegistration));
                     return Task.CompletedTask;
                 }
             );

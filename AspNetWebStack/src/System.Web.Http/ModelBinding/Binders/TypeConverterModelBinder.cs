@@ -26,9 +26,9 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             ModelBindingHelper.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            ValueProviderResult valueProviderResult = bindingContext
+                .ValueProvider
+                .GetValue(bindingContext.ModelName);
             if (valueProviderResult == null)
             {
                 return false; // no entry
@@ -55,10 +55,9 @@ namespace System.Web.Http.ModelBinding.Binders
                     );
                     if (errorString != null)
                     {
-                        bindingContext.ModelState.AddModelError(
-                            bindingContext.ModelName,
-                            errorString
-                        );
+                        bindingContext
+                            .ModelState
+                            .AddModelError(bindingContext.ModelName, errorString);
                     }
                 }
                 else

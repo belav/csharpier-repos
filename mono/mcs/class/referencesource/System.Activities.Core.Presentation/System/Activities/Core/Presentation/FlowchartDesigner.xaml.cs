@@ -182,8 +182,9 @@ namespace System.Activities.Core.Presentation
                     designerView.ContextMenu.Items.Add(setAsStartNode);
                 }
 
-                WorkflowCommandExtensionItem item =
-                    this.Context.Items.GetValue<WorkflowCommandExtensionItem>();
+                WorkflowCommandExtensionItem item = this.Context
+                    .Items
+                    .GetValue<WorkflowCommandExtensionItem>();
                 if (item != null)
                 {
                     if (item.CommandExtensionCallback is DefaultCommandExtensionCallback)
@@ -438,8 +439,9 @@ namespace System.Activities.Core.Presentation
                 OnFreeFormPanelRequiredSizeChanged
             );
 
-            DesignerPerfEventProvider perfEventProvider =
-                this.Context.Services.GetService<DesignerPerfEventProvider>();
+            DesignerPerfEventProvider perfEventProvider = this.Context
+                .Services
+                .GetService<DesignerPerfEventProvider>();
             perfEventProvider.FlowchartDesignerLoadStart();
             ModelTreeManager modelTreeManager = (this.ModelItem as IModelTreeItem).ModelTreeManager;
             modelTreeManager.EditingScopeCompleted += new EventHandler<EditingScopeEventArgs>(
@@ -1053,7 +1055,8 @@ namespace System.Activities.Core.Presentation
                             //If the Link source is dropped onto itself, we need to set the isLinkValidDueToLinkMove flag.
                             bool isLinkValidDueToLinkMove = FreeFormPanel
                                 .GetSourceConnectionPoint(movedConnector)
-                                .ParentDesigner.Equals(newViewElement);
+                                .ParentDesigner
+                                .Equals(newViewElement);
                             if (newConnectionPoint == null)
                             {
                                 linkCreated = CreateLinkGesture(
@@ -1313,9 +1316,9 @@ namespace System.Activities.Core.Presentation
                     key = link.CaseName + CaseViewStateKeyAppendString;
                 }
                 //Transitioning from fake ModelItem world to real ModelItem world.
-                ModelItem realFSModelItem = (
-                    this.ModelItem as IModelTreeItem
-                ).ModelTreeManager.WrapAsModelItem(link.ParentFlowSwitch);
+                ModelItem realFSModelItem = (this.ModelItem as IModelTreeItem)
+                    .ModelTreeManager
+                    .WrapAsModelItem(link.ParentFlowSwitch);
                 connectorLocation = this.ViewStateService.RetrieveViewState(realFSModelItem, key);
             }
             else
@@ -1330,11 +1333,14 @@ namespace System.Activities.Core.Presentation
             {
                 ConnectionPoint srcConnPoint,
                     destConnPoint;
-                System.Diagnostics.Debug.WriteLine(
-                    this.isLoaded
-                        ? "About to call ConnectionPointHitTest - Loaded"
-                        : "About to call ConnectionPointHitTest - Not Loaded"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .WriteLine(
+                        this.isLoaded
+                            ? "About to call ConnectionPointHitTest - Loaded"
+                            : "About to call ConnectionPointHitTest - Not Loaded"
+                    );
                 srcConnPoint = ConnectionPointHitTest(source, locationPts[0]);
                 destConnPoint = ConnectionPointHitTest(dest, locationPts[locationPts.Count - 1]);
                 //In Debug mode, the size of the designer changes due to the debug adorner(border). Because of this connection points will move and
@@ -1579,8 +1585,9 @@ namespace System.Activities.Core.Presentation
             UIElement container;
             if (!this.modelElement.TryGetValue(model, out container))
             {
-                VirtualizedContainerService containerService =
-                    this.Context.Services.GetService<VirtualizedContainerService>();
+                VirtualizedContainerService containerService = this.Context
+                    .Services
+                    .GetService<VirtualizedContainerService>();
                 Fx.Assert(this.ViewService != null, "ViewService is null");
                 container = containerService.GetContainer(model, this);
                 //WorkflowViewElement view = (WorkflowViewElement)this.ViewService.GetView(model);
@@ -1897,9 +1904,9 @@ namespace System.Activities.Core.Presentation
                 IFlowSwitchLink link = (IFlowSwitchLink)linkModelItem.GetCurrentValue();
                 //Getting FlowSwitch ModelItem since there is no CFx object for linkModelItem.
                 IModelTreeItem modelTreeItem = this.ModelItem as IModelTreeItem;
-                storageModelItem = modelTreeItem.ModelTreeManager.WrapAsModelItem(
-                    link.ParentFlowSwitch
-                );
+                storageModelItem = modelTreeItem
+                    .ModelTreeManager
+                    .WrapAsModelItem(link.ParentFlowSwitch);
             }
             return storageModelItem;
         }
@@ -2119,9 +2126,10 @@ namespace System.Activities.Core.Presentation
                             {
                                 // FlowNode is a new created one, which means this is an Activity dragged
                                 // from somewhere else, outside of Flowchart.
-                                flowElementMI = this
-                                    .ModelItem.Properties["Nodes"]
-                                    .Collection.Add(flowElement);
+                                flowElementMI = this.ModelItem
+                                    .Properties["Nodes"]
+                                    .Collection
+                                    .Add(flowElement);
                                 flowNodeModelItemMap[flowElement] = flowElementMI;
                             }
                             newFlowStepMI = flowElementMI;
@@ -2166,9 +2174,10 @@ namespace System.Activities.Core.Presentation
                                 shouldStoreCurrentSizeViewState = false;
                             }
 
-                            newFlowStepMI = this
-                                .ModelItem.Properties["Nodes"]
-                                .Collection.Add(flowStep);
+                            newFlowStepMI = this.ModelItem
+                                .Properties["Nodes"]
+                                .Collection
+                                .Add(flowStep);
                             droppedModelItem = newFlowStepMI.Properties["Action"].Value;
                         }
                         else if (typeof(FlowNode).IsAssignableFrom(droppedObject.GetType()))
@@ -2179,9 +2188,10 @@ namespace System.Activities.Core.Presentation
                                 this.StoreCurrentSizeViewStateWithUndo();
                                 shouldStoreCurrentSizeViewState = false;
                             }
-                            droppedModelItem = this
-                                .ModelItem.Properties["Nodes"]
-                                .Collection.Add(droppedObject);
+                            droppedModelItem = this.ModelItem
+                                .Properties["Nodes"]
+                                .Collection
+                                .Add(droppedObject);
                             newFlowStepMI = droppedModelItem;
                         }
 
@@ -2568,12 +2578,14 @@ namespace System.Activities.Core.Presentation
             }
             else if (
                 (new List<Key> { Key.Left, Key.Right, Key.Up, Key.Down }).Contains(e.Key)
-                && currentSelection.SelectedObjects.All<ModelItem>(
-                    (p) =>
-                    {
-                        return this.modelElement.ContainsKey(p);
-                    }
-                )
+                && currentSelection
+                    .SelectedObjects
+                    .All<ModelItem>(
+                        (p) =>
+                        {
+                            return this.modelElement.ContainsKey(p);
+                        }
+                    )
             )
             {
                 KeyboardMove(e.Key);
@@ -2601,8 +2613,9 @@ namespace System.Activities.Core.Presentation
             {
                 bool shouldStoreCurrentSizeViewState = true;
                 foreach (
-                    ModelItem selectedModelItem in this
-                        .Context.Items.GetValue<Selection>()
+                    ModelItem selectedModelItem in this.Context
+                        .Items
+                        .GetValue<Selection>()
                         .SelectedObjects
                 )
                 {

@@ -49,11 +49,13 @@ namespace System.ServiceModel.Discovery
             }
             if (duplicateMessageHistoryLength < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "duplicateMessageHistoryLength",
-                    duplicateMessageHistoryLength,
-                    SR.DiscoveryNegativeDuplicateMessageHistoryLength
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "duplicateMessageHistoryLength",
+                        duplicateMessageHistoryLength,
+                        SR.DiscoveryNegativeDuplicateMessageHistoryLength
+                    );
             }
             if (duplicateMessageHistoryLength > 0)
             {

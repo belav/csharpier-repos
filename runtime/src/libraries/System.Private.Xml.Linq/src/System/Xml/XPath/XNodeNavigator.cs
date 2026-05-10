@@ -864,11 +864,14 @@ namespace System.Xml.XPath
         {
             if (s_XmlNamespaceDeclaration == null)
             {
-                System.Threading.Interlocked.CompareExchange(
-                    ref s_XmlNamespaceDeclaration,
-                    new XAttribute(XNamespace.Xmlns.GetName("xml"), xmlPrefixNamespace),
-                    null
-                );
+                System
+                    .Threading
+                    .Interlocked
+                    .CompareExchange(
+                        ref s_XmlNamespaceDeclaration,
+                        new XAttribute(XNamespace.Xmlns.GetName("xml"), xmlPrefixNamespace),
+                        null
+                    );
             }
             return s_XmlNamespaceDeclaration;
         }

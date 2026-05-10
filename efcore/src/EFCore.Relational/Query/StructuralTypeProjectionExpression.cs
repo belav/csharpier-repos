@@ -280,7 +280,8 @@ public class StructuralTypeProjectionExpression : Expression
                 .Select(e => (string)e.GetDiscriminatorValue()!)
                 .ToList();
             var whenClauses = caseExpression
-                .WhenClauses.Where(wc =>
+                .WhenClauses
+                .Where(wc =>
                     entityTypesToSelect.Contains((string)((SqlConstantExpression)wc.Result).Value!)
                 )
                 .ToList();

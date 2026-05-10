@@ -398,15 +398,17 @@ namespace Microsoft.InfoCards.Diagnostics
                     message
                 );
 
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    TraceEventType.Verbose,
-                    TraceCode.GeneralInformation,
-                    SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
-                    GetMsdnTraceCode(TraceCode.GeneralInformation),
-                    tr,
-                    null,
-                    message
-                );
+                DiagnosticUtility
+                    .DiagnosticTrace
+                    .TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.GeneralInformation,
+                        SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
+                        GetMsdnTraceCode(TraceCode.GeneralInformation),
+                        tr,
+                        null,
+                        message
+                    );
             }
 #endif
         }
@@ -433,15 +435,17 @@ namespace Microsoft.InfoCards.Diagnostics
                     message
                 );
 
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    TraceEventType.Verbose,
-                    TraceCode.GeneralInformation,
-                    SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
-                    GetMsdnTraceCode(TraceCode.GeneralInformation),
-                    tr,
-                    null,
-                    message
-                );
+                DiagnosticUtility
+                    .DiagnosticTrace
+                    .TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.GeneralInformation,
+                        SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
+                        GetMsdnTraceCode(TraceCode.GeneralInformation),
+                        tr,
+                        null,
+                        message
+                    );
             }
 #endif
         }
@@ -882,15 +886,17 @@ namespace Microsoft.InfoCards.Diagnostics
                 // Build a trace message conforming to the ETL trace schema and
                 // call down through the diagnostic support classes to trace the call.
                 //
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    level,
-                    traceCode,
-                    SR.GetString(GetTraceString(traceCode)),
-                    GetMsdnTraceCode(TraceCode.GeneralInformation),
-                    new InfoCardTraceRecord(GetTraceString(traceCode), message),
-                    null,
-                    message
-                );
+                DiagnosticUtility
+                    .DiagnosticTrace
+                    .TraceEvent(
+                        level,
+                        traceCode,
+                        SR.GetString(GetTraceString(traceCode)),
+                        GetMsdnTraceCode(TraceCode.GeneralInformation),
+                        new InfoCardTraceRecord(GetTraceString(traceCode), message),
+                        null,
+                        message
+                    );
             }
 #endif
         }

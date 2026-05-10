@@ -42,11 +42,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode root,
             CancellationToken cancellationToken
         ) =>
-            CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.GetDirectiveInfoForRoot<DirectiveTriviaSyntax>(
-                root,
-                CSharpSyntaxKinds.Instance,
-                cancellationToken
-            );
+            CodeAnalysis
+                .Shared
+                .Extensions
+                .SyntaxNodeExtensions
+                .GetDirectiveInfoForRoot<DirectiveTriviaSyntax>(
+                    root,
+                    CSharpSyntaxKinds.Instance,
+                    cancellationToken
+                );
 
         internal static DirectiveTriviaSyntax? GetMatchingDirective(
             this DirectiveTriviaSyntax directive,

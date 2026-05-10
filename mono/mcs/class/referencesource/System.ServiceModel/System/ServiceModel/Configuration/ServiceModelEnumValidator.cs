@@ -36,13 +36,15 @@ namespace System.ServiceModel.Configuration
             if (!retVal)
             {
                 ParameterInfo[] isDefinedParameters = this.isDefined.GetParameters();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        isDefinedParameters[0].ParameterType
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            isDefinedParameters[0].ParameterType
+                        )
+                    );
             }
         }
     }

@@ -1649,18 +1649,24 @@ class B : A
                     Assert.Equal(
                         identityAS2,
                         context
-                            .Compilation.GlobalNamespace.GetMembers("A")
+                            .Compilation
+                            .GlobalNamespace
+                            .GetMembers("A")
                             .OfType<NamedTypeSymbol>()
                             .Single()
-                            .ContainingAssembly.Identity
+                            .ContainingAssembly
+                            .Identity
                     );
                     Assert.Equal(
                         identityBS2,
                         context
-                            .Compilation.GlobalNamespace.GetMembers("B")
+                            .Compilation
+                            .GlobalNamespace
+                            .GetMembers("B")
                             .OfType<NamedTypeSymbol>()
                             .Single()
-                            .ContainingAssembly.Identity
+                            .ContainingAssembly
+                            .Identity
                     );
 
                     string error;
@@ -1711,9 +1717,10 @@ IL_0005:  ret
 }"
                     );
                     Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
+                        ((MethodSymbol)methodData.Method)
+                            .ReturnType
+                            .ContainingAssembly
+                            .ToDisplayString(),
                         identityBS2.GetDisplayName()
                     );
                     // B.F should result in missing assembly AS2 since there were no direct references to AS2.
@@ -1790,9 +1797,10 @@ IL_0005:  ret
 }"
                     );
                     Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
+                        ((MethodSymbol)methodData.Method)
+                            .ReturnType
+                            .ContainingAssembly
+                            .ToDisplayString(),
                         identityBS2.GetDisplayName()
                     );
                     // B.F should result in missing assembly AS2 since there were no direct references to AS2.
@@ -2433,9 +2441,10 @@ IL_0005:  ret
 }"
                     );
                     Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
+                        ((MethodSymbol)methodData.Method)
+                            .ReturnType
+                            .ContainingAssembly
+                            .ToDisplayString(),
                         identityObjectModel.GetDisplayName()
                     );
                 }
@@ -2608,9 +2617,10 @@ namespace System
                 parseOptions: parseOptions
             );
             compCorLib.VerifyDiagnostics();
-            var objectType = compCorLib.SourceAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "System.Object"
-            );
+            var objectType = compCorLib
+                .SourceAssembly
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("System.Object");
             Assert.NotNull(objectType.BaseType());
 
             ImmutableArray<byte> peBytes;
@@ -2644,7 +2654,8 @@ namespace System
                 Assert.Equal(0, module.Module.ReferencedAssemblies.Length);
                 // Verify the underlying metadata has the expected assembly references.
                 var actualReferences = metadataReader
-                    .AssemblyReferences.Select(r =>
+                    .AssemblyReferences
+                    .Select(r =>
                         metadataReader.GetString(metadataReader.GetAssemblyReference(r).Name)
                     )
                     .ToImmutableArray();
@@ -2755,9 +2766,10 @@ namespace System
                 options: options
             );
             compCorLib.VerifyDiagnostics();
-            var objectType = compCorLib.SourceAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                "System.Object"
-            );
+            var objectType = compCorLib
+                .SourceAssembly
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("System.Object");
             Assert.NotNull(objectType.BaseType());
 
             var pdbPath = Temp.CreateDirectory().Path;
@@ -2794,7 +2806,8 @@ namespace System
                 Assert.Equal(0, module.Module.ReferencedAssemblies.Length);
                 // Verify the underlying metadata has the expected assembly references.
                 var actualReferences = metadataReader
-                    .AssemblyReferences.Select(r =>
+                    .AssemblyReferences
+                    .Select(r =>
                         metadataReader.GetString(metadataReader.GetAssemblyReference(r).Name)
                     )
                     .ToImmutableArray();

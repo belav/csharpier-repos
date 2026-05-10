@@ -197,10 +197,9 @@ namespace System.Web.Http.WebHost
                 {
                     // Assert
                     object ignore;
-                    bool found = actualRequest.Properties.TryGetValue(
-                        HttpControllerHandler.OwinEnvironmentKey,
-                        out ignore
-                    );
+                    bool found = actualRequest
+                        .Properties
+                        .TryGetValue(HttpControllerHandler.OwinEnvironmentKey, out ignore);
                     Assert.False(found);
                 }
             }
@@ -223,10 +222,9 @@ namespace System.Web.Http.WebHost
                 {
                     // Assert
                     object ignore;
-                    bool found = actualRequest.Properties.TryGetValue(
-                        HttpControllerHandler.OwinEnvironmentKey,
-                        out ignore
-                    );
+                    bool found = actualRequest
+                        .Properties
+                        .TryGetValue(HttpControllerHandler.OwinEnvironmentKey, out ignore);
                     Assert.False(found);
                 }
             }
@@ -1439,10 +1437,12 @@ namespace System.Web.Http.WebHost
             HttpConfiguration config = new HttpConfiguration();
             config.Formatters.Clear();
             config.Formatters.Add(formatterMock.Object);
-            config.Services.Replace(
-                typeof(IContentNegotiator),
-                null /*negotiatorMock.Object*/
-            );
+            config
+                .Services
+                .Replace(
+                    typeof(IContentNegotiator),
+                    null /*negotiatorMock.Object*/
+                );
 
             MemoryStream memoryStream = new MemoryStream();
             Mock<HttpContextBase> contextMock = CreateMockHttpContextBaseForResponse(memoryStream);

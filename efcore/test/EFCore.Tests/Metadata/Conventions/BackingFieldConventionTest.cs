@@ -293,7 +293,8 @@ public class BackingFieldConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices()
+            .Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private static IMutableModel CreateModel() => new Model();

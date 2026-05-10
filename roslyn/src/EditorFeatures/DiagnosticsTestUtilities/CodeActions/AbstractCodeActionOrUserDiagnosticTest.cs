@@ -307,9 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         protected virtual TestComposition GetComposition() =>
             EditorTestCompositions
-                .EditorFeatures.AddExcludedPartTypes(
-                    typeof(IDiagnosticUpdateSourceRegistrationService)
-                )
+                .EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
         protected virtual void InitializeWorkspace(
@@ -565,7 +564,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             var expectedTextSpans = spans[textSpanMarker].Sort();
             var actualTextSpans = refactoring
-                .CodeActions.WhereAsArray(action => action.applicableToSpan is not null)
+                .CodeActions
+                .WhereAsArray(action => action.applicableToSpan is not null)
                 .SelectAsArray(action => action.applicableToSpan)
                 .Sort();
             Assert.Equal(expectedTextSpans.Length, actualTextSpans.Length);
@@ -838,16 +838,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 if (
                     diagnostic
-                        .Descriptor.ImmutableCustomTags()
+                        .Descriptor
+                        .ImmutableCustomTags()
                         .Contains(WellKnownDiagnosticTags.Unnecessary)
                 )
                     yield return diagnostic.Location;
 
                 if (
-                    !diagnostic.Properties.TryGetValue(
-                        WellKnownDiagnosticTags.Unnecessary,
-                        out var additionalUnnecessaryLocationsString
-                    )
+                    !diagnostic
+                        .Properties
+                        .TryGetValue(
+                            WellKnownDiagnosticTags.Unnecessary,
+                            out var additionalUnnecessaryLocationsString
+                        )
                 )
                     yield break;
 
@@ -1084,9 +1087,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     foreach (var doc in project.Documents)
                     {
                         var root = await doc.GetSyntaxRootAsync();
-                        var expectedDocuments = expectedProject.Documents.Where(d =>
-                            d.Name == doc.Name
-                        );
+                        var expectedDocuments = expectedProject
+                            .Documents
+                            .Where(d => d.Name == doc.Name);
 
                         if (expectedDocuments.Any())
                         {
@@ -1109,9 +1112,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                     foreach (var additionalDoc in project.AdditionalDocuments)
                     {
                         var root = await additionalDoc.GetTextAsync();
-                        var expectedDocument = expectedProject.AdditionalDocuments.Single(d =>
-                            d.Name == additionalDoc.Name
-                        );
+                        var expectedDocument = expectedProject
+                            .AdditionalDocuments
+                            .Single(d => d.Name == additionalDoc.Name);
                         var expectedRoot = await expectedDocument.GetTextAsync();
                         VerifyExpectedDocumentText(expectedRoot.ToString(), root.ToString());
                     }
@@ -1127,9 +1130,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                             continue;
                         }
 
-                        var expectedDocument = expectedProject.AnalyzerConfigDocuments.Single(d =>
-                            d.FilePath == analyzerConfigDoc.FilePath
-                        );
+                        var expectedDocument = expectedProject
+                            .AnalyzerConfigDocuments
+                            .Single(d => d.FilePath == analyzerConfigDoc.FilePath);
                         var expectedRoot = await expectedDocument.GetTextAsync();
                         VerifyExpectedDocumentText(expectedRoot.ToString(), actualString);
                     }

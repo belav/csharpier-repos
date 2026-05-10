@@ -16,9 +16,11 @@ namespace Microsoft.Extensions.FileProviders.Composite
         {
             // Castle DynamicProxy hasn't been updated to ignore .net5 infrastructure attributes
             // and few tests here mock IEnumerable interface
-            Castle.DynamicProxy.Generators.AttributesToAvoidReplicating.Add(
-                typeof(System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute)
-            );
+            Castle
+                .DynamicProxy
+                .Generators
+                .AttributesToAvoidReplicating
+                .Add(typeof(System.Diagnostics.CodeAnalysis.DynamicDependencyAttribute));
         }
 #endif
 

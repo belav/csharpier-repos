@@ -398,9 +398,9 @@ namespace System.Windows.Forms
 
                 IntPtr hdc = dc.GetHdc();
 
-                XplatUIWin32.RECT r = XplatUIWin32.RECT.FromRectangle(
-                    new Rectangle(Point.Empty, proposedSize)
-                );
+                XplatUIWin32.RECT r = XplatUIWin32
+                    .RECT
+                    .FromRectangle(new Rectangle(Point.Empty, proposedSize));
 
                 IntPtr prevobj;
 

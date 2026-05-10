@@ -14,9 +14,9 @@ public class DatabaseFacadeTest
     {
         var creator = new FakeDatabaseCreator();
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDatabaseCreator>(creator)
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(new ServiceCollection().AddSingleton<IDatabaseCreator>(creator));
 
         if (async)
         {
@@ -122,11 +122,13 @@ public class DatabaseFacadeTest
     {
         var transaction = new FakeDbContextTransaction();
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
-                new FakeDbContextTransactionManager(transaction)
-            )
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
+                    new FakeDbContextTransactionManager(transaction)
+                )
+            );
 
         Assert.Same(
             transaction,
@@ -250,9 +252,11 @@ public class DatabaseFacadeTest
     {
         var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
         context.Database.CommitTransaction();
 
@@ -264,9 +268,11 @@ public class DatabaseFacadeTest
     {
         var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
         await context.Database.CommitTransactionAsync();
 
@@ -278,9 +284,11 @@ public class DatabaseFacadeTest
     {
         var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
         context.Database.RollbackTransaction();
 
@@ -292,9 +300,11 @@ public class DatabaseFacadeTest
     {
         var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
         await context.Database.RollbackTransactionAsync();
 
@@ -306,11 +316,13 @@ public class DatabaseFacadeTest
     {
         var transaction = new FakeDbContextTransaction();
 
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
-                new FakeDbContextTransactionManager(transaction)
-            )
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
+                    new FakeDbContextTransactionManager(transaction)
+                )
+            );
 
         Assert.Same(transaction, context.Database.CurrentTransaction);
     }

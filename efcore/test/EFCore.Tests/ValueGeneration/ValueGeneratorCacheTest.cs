@@ -13,7 +13,8 @@ public class ValueGeneratorCacheTest
         var property1 = entityType.FindProperty("Zeppelin");
         var property2 = entityType.FindProperty("Stairway");
         var cache = InMemoryTestHelpers
-            .Instance.CreateContextServices(model)
+            .Instance
+            .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorCache>();
 
         var generator1 = cache.GetOrAdd(property1, entityType, (p, et) => new GuidValueGenerator());

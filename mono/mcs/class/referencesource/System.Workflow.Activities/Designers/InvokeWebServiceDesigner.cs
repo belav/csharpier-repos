@@ -275,10 +275,9 @@ namespace System.Workflow.Activities
                 if (DialogResult.OK == extUIService.AddWebReference(out url, out proxyClass))
                 {
                     returnVal = (url != null) ? url.ToString() : string.Empty;
-                    typeDescriptorContext.PropertyDescriptor.SetValue(
-                        typeDescriptorContext.Instance,
-                        returnVal as string
-                    );
+                    typeDescriptorContext
+                        .PropertyDescriptor
+                        .SetValue(typeDescriptorContext.Instance, returnVal as string);
                 }
             }
             return returnVal;

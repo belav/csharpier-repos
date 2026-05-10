@@ -41,16 +41,18 @@ namespace System.ServiceModel.Channels
                     < this.udpTransportBindingElement.MaxReceivedMessageSize
             )
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "SocketReceiveBufferSize",
-                    this.udpTransportBindingElement.SocketReceiveBufferSize,
-                    SR.Property1LessThanOrEqualToProperty2(
-                        "MaxReceivedMessageSize",
-                        this.udpTransportBindingElement.MaxReceivedMessageSize,
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
                         "SocketReceiveBufferSize",
-                        this.udpTransportBindingElement.SocketReceiveBufferSize
-                    )
-                );
+                        this.udpTransportBindingElement.SocketReceiveBufferSize,
+                        SR.Property1LessThanOrEqualToProperty2(
+                            "MaxReceivedMessageSize",
+                            this.udpTransportBindingElement.MaxReceivedMessageSize,
+                            "SocketReceiveBufferSize",
+                            this.udpTransportBindingElement.SocketReceiveBufferSize
+                        )
+                    );
             }
 
             this.messageEncoderFactory = UdpUtility.GetEncoder(context);
@@ -131,19 +133,16 @@ namespace System.ServiceModel.Channels
 
             if (!UdpUtility.IsSupportedHostNameType(via.HostNameType))
             {
-                throw FxTrace.Exception.Argument(
-                    "via",
-                    SR.UnsupportedUriHostNameType(via.Host, via.HostNameType)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("via", SR.UnsupportedUriHostNameType(via.Host, via.HostNameType));
             }
 
             if (via.IsDefaultPort || via.Port == 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "via",
-                    via,
-                    SR.PortNumberRequiredOnVia(via)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange("via", via, SR.PortNumberRequiredOnVia(via));
             }
 
             UdpSocket[] sockets = null;
@@ -239,9 +238,9 @@ namespace System.ServiceModel.Channels
             {
                 // System.Net.Dns shouldn't ever allow this to happen, but...
                 Fx.Assert("DnsCache returned a HostEntry with zero length address list");
-                throw FxTrace.Exception.AsError(
-                    new EndpointNotFoundException(SR.DnsResolveFailed(via.DnsSafeHost))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new EndpointNotFoundException(SR.DnsResolveFailed(via.DnsSafeHost)));
             }
 
             remoteEndPoint = new IPEndPoint(remoteAddressList[0], via.Port);
@@ -364,9 +363,9 @@ namespace System.ServiceModel.Channels
 
                 if (socketList.Count == 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(SR.UdpFailedToFindMulticastAdapter(via))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ArgumentException(SR.UdpFailedToFindMulticastAdapter(via)));
                 }
 
                 results = socketList.ToArray();

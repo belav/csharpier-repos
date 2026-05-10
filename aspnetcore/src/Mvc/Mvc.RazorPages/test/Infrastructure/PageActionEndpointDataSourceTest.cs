@@ -73,12 +73,14 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource.DefaultBuilder.Add(
-            (b) =>
-            {
-                b.Metadata.Add("Hi there");
-            }
-        );
+        dataSource
+            .DefaultBuilder
+            .Add(
+                (b) =>
+                {
+                    b.Metadata.Add("Hi there");
+                }
+            );
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -132,12 +134,14 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource.DefaultBuilder.Add(
-            (b) =>
-            {
-                b.Metadata.Add("Hi there");
-            }
-        );
+        dataSource
+            .DefaultBuilder
+            .Add(
+                (b) =>
+                {
+                    b.Metadata.Add("Hi there");
+                }
+            );
 
         // Act
         var groupConventions = new List<Action<EndpointBuilder>>()
@@ -253,15 +257,17 @@ public class PageActionEndpointDataSourceTest : ActionEndpointDataSourceBaseTest
             mockDescriptorProvider.Object
         );
 
-        dataSource.DefaultBuilder.Finally(
-            (b) =>
-            {
-                if (b.Metadata.Any(md => md is string smd && smd == "initial-metadata"))
+        dataSource
+            .DefaultBuilder
+            .Finally(
+                (b) =>
                 {
-                    b.Metadata.Add("initial-metadata-observed");
+                    if (b.Metadata.Any(md => md is string smd && smd == "initial-metadata"))
+                    {
+                        b.Metadata.Add("initial-metadata-observed");
+                    }
                 }
-            }
-        );
+            );
 
         // Act
         var endpoints = dataSource.Endpoints;

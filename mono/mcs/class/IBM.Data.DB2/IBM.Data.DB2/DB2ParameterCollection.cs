@@ -114,13 +114,16 @@ namespace IBM.Data.DB2
 
         private int _cultureAwareCompare(string strA, string strB)
         {
-            return CultureInfo.CurrentCulture.CompareInfo.Compare(
-                strA,
-                strB,
-                CompareOptions.IgnoreKanaType
-                    | CompareOptions.IgnoreWidth
-                    | CompareOptions.IgnoreCase
-            );
+            return CultureInfo
+                .CurrentCulture
+                .CompareInfo
+                .Compare(
+                    strA,
+                    strB,
+                    CompareOptions.IgnoreKanaType
+                        | CompareOptions.IgnoreWidth
+                        | CompareOptions.IgnoreCase
+                );
         }
 
         internal void GetOutValues()

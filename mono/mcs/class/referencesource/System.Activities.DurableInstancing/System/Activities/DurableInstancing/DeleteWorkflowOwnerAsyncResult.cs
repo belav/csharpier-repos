@@ -36,14 +36,16 @@ namespace System.Activities.DurableInstancing
         {
             base.GenerateSqlCommand(sqlCommand);
             this.surrogateLockOwnerId = base.StoreLock.SurrogateLockOwnerId;
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@surrogateLockOwnerId",
-                    SqlDbType = SqlDbType.BigInt,
-                    Value = this.surrogateLockOwnerId,
-                }
-            );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@surrogateLockOwnerId",
+                        SqlDbType = SqlDbType.BigInt,
+                        Value = this.surrogateLockOwnerId,
+                    }
+                );
         }
 
         protected override string GetSqlCommandText()

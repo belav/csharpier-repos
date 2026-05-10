@@ -511,10 +511,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         public override IEnumerator<ComposablePartDefinition> GetEnumerator()
         {
-            return this
-                ._catalogCollection.SelectMany(catalog =>
-                    catalog as IEnumerable<ComposablePartDefinition>
-                )
+            return this._catalogCollection
+                .SelectMany(catalog => catalog as IEnumerable<ComposablePartDefinition>)
                 .GetEnumerator();
         }
 

@@ -21,9 +21,10 @@ namespace System.Data.SqlClient
     public sealed class SqlTransaction : DbTransaction
     {
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
         internal readonly IsolationLevel _isolationLevel = IsolationLevel.ReadCommitted;
 
         private SqlInternalTransaction _internalTransaction;

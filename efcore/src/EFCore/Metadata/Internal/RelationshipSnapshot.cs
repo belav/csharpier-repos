@@ -87,10 +87,12 @@ public class RelationshipSnapshot
                             : navigationEntityType.FindSkipNavigation(skipNavigation.Name);
                     }
 
-                    skipNavigation?.Builder.HasForeignKey(
-                        newRelationship.Metadata,
-                        referencingNavigationTuple.ForeignKeyConfigurationSource
-                    );
+                    skipNavigation
+                        ?.Builder
+                        .HasForeignKey(
+                            newRelationship.Metadata,
+                            referencingNavigationTuple.ForeignKeyConfigurationSource
+                        );
                 }
             }
         }

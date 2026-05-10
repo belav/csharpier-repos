@@ -1100,9 +1100,9 @@ class H
                 VerifyModelForDeclarationField(model, x1Decl, x1Ref);
                 Assert.Equal(
                     "System.Int32",
-                    (
-                        (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
-                    ).Type.ToTestDisplayString()
+                    ((IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl))
+                        .Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -1798,9 +1798,9 @@ class H
                 VerifyModelForDeclarationField(model, x1Decl, x1Ref);
                 Assert.Equal(
                     "System.Int32",
-                    (
-                        (IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl)
-                    ).Type.ToTestDisplayString()
+                    ((IFieldSymbol)compilation.GetSemanticModel(tree).GetDeclaredSymbol(x1Decl))
+                        .Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetPatternDeclarations(tree, "x2").Single();

@@ -111,17 +111,21 @@ namespace System.Workflow.ComponentModel.Design
                     value != null
                     && typeDescriptorContext.PropertyDescriptor.PropertyType != typeof(string)
                     && typeDescriptorContext.PropertyDescriptor.Converter != null
-                    && typeDescriptorContext.PropertyDescriptor.Converter.CanConvertTo(
-                        typeof(string)
-                    )
+                    && typeDescriptorContext
+                        .PropertyDescriptor
+                        .Converter
+                        .CanConvertTo(typeof(string))
                 )
                     oldTypeName =
-                        typeDescriptorContext.PropertyDescriptor.Converter.ConvertTo(
-                            typeDescriptorContext,
-                            CultureInfo.CurrentCulture,
-                            value,
-                            typeof(string)
-                        ) as string;
+                        typeDescriptorContext
+                            .PropertyDescriptor
+                            .Converter
+                            .ConvertTo(
+                                typeDescriptorContext,
+                                CultureInfo.CurrentCulture,
+                                value,
+                                typeof(string)
+                            ) as string;
 
                 using (
                     TypeBrowserDialog dlg = new TypeBrowserDialog(
@@ -141,13 +145,15 @@ namespace System.Workflow.ComponentModel.Design
                             returnVal = dlg.SelectedType.FullName;
                         else if (
                             typeDescriptorContext.PropertyDescriptor.Converter != null
-                            && typeDescriptorContext.PropertyDescriptor.Converter.CanConvertFrom(
-                                typeDescriptorContext,
-                                typeof(string)
-                            )
+                            && typeDescriptorContext
+                                .PropertyDescriptor
+                                .Converter
+                                .CanConvertFrom(typeDescriptorContext, typeof(string))
                         )
-                            returnVal =
-                                typeDescriptorContext.PropertyDescriptor.Converter.ConvertFrom(
+                            returnVal = typeDescriptorContext
+                                .PropertyDescriptor
+                                .Converter
+                                .ConvertFrom(
                                     typeDescriptorContext,
                                     CultureInfo.CurrentCulture,
                                     dlg.SelectedType.FullName

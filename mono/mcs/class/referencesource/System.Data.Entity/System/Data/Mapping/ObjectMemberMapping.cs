@@ -28,10 +28,13 @@ namespace System.Data.Mapping
         /// <param name="clrMember"></param>
         protected ObjectMemberMapping(EdmMember edmMember, EdmMember clrMember)
         {
-            System.Diagnostics.Debug.Assert(
-                edmMember.BuiltInTypeKind == clrMember.BuiltInTypeKind,
-                "BuiltInTypeKind must be the same"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    edmMember.BuiltInTypeKind == clrMember.BuiltInTypeKind,
+                    "BuiltInTypeKind must be the same"
+                );
             this.m_edmMember = edmMember;
             this.m_clrMember = clrMember;
         }

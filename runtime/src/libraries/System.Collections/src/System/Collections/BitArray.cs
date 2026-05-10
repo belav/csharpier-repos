@@ -1163,11 +1163,13 @@ namespace System.Collections
                             );
                             Vector128<byte> normalizedHigher = AdvSimd.Min(extractedHigher, ones);
 
-                            AdvSimd.Arm64.StorePair(
-                                (byte*)destination + i,
-                                normalizedLower,
-                                normalizedHigher
-                            );
+                            AdvSimd
+                                .Arm64
+                                .StorePair(
+                                    (byte*)destination + i,
+                                    normalizedLower,
+                                    normalizedHigher
+                                );
                         }
                     }
                 }

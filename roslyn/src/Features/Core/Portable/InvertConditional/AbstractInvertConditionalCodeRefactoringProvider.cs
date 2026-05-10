@@ -63,21 +63,26 @@ namespace Microsoft.CodeAnalysis.InvertConditional
 
             var editor = new SyntaxEditor(root, document.Project.Solution.Services);
 
-            editor.Generator.SyntaxFacts.GetPartsOfConditionalExpression(
-                conditional,
-                out var condition,
-                out var whenTrue,
-                out var whenFalse
-            );
+            editor
+                .Generator
+                .SyntaxFacts
+                .GetPartsOfConditionalExpression(
+                    conditional,
+                    out var condition,
+                    out var whenTrue,
+                    out var whenFalse
+                );
 
             editor.ReplaceNode(
                 condition,
-                editor.Generator.Negate(
-                    editor.Generator.SyntaxGeneratorInternal,
-                    condition,
-                    semanticModel,
-                    cancellationToken
-                )
+                editor
+                    .Generator
+                    .Negate(
+                        editor.Generator.SyntaxGeneratorInternal,
+                        condition,
+                        semanticModel,
+                        cancellationToken
+                    )
             );
             editor.ReplaceNode(whenTrue, whenFalse.WithTriviaFrom(whenTrue));
             editor.ReplaceNode(whenFalse, whenTrue.WithTriviaFrom(whenFalse));

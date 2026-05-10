@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis
             source
                 .GetType()
                 .GetTypeInfo()
-                .Assembly.GetName()
+                .Assembly
+                .GetName()
                 .GetPublicKey()
                 .SequenceEqual(
                     typeof(RoslynAssemblyHelper).GetTypeInfo().Assembly.GetName().GetPublicKey()

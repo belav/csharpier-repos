@@ -856,9 +856,9 @@ namespace Microsoft.Interop.Analyzers
         private void PrepareForAnalysis(CompilationStartAnalysisContext context)
         {
             if (
-                context.Compilation.GetBestTypeByMetadataName(
-                    TypeNames.CustomMarshallerAttribute
-                ) is
+                context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.CustomMarshallerAttribute) is
                 { } customMarshallerAttribute
             )
             {
@@ -898,10 +898,9 @@ namespace Microsoft.Interop.Analyzers
                 IAttributeOperation attr = (IAttributeOperation)context.Operation;
                 if (
                     attr.Operation is IObjectCreationOperation attrCreation
-                    && attrCreation.Type.Equals(
-                        _customMarshallerAttribute,
-                        SymbolEqualityComparer.Default
-                    )
+                    && attrCreation
+                        .Type
+                        .Equals(_customMarshallerAttribute, SymbolEqualityComparer.Default)
                 )
                 {
                     INamedTypeSymbol entryType = (INamedTypeSymbol)context.ContainingSymbol!;
@@ -970,9 +969,9 @@ namespace Microsoft.Interop.Analyzers
                         {
                             DiagnosticReporter marshallerTypeReporter =
                                 DiagnosticReporter.CreateForLocation(
-                                    (
-                                        (TypeOfExpressionSyntax)marshallerTypeOfOp.Syntax
-                                    ).Type.GetLocation(),
+                                    ((TypeOfExpressionSyntax)marshallerTypeOfOp.Syntax)
+                                        .Type
+                                        .GetLocation(),
                                     context.ReportDiagnostic
                                 );
                             ITypeSymbol? marshallerTypeInAttribute = marshallerTypeOfOp.TypeOperand;
@@ -1318,10 +1317,12 @@ namespace Microsoft.Interop.Analyzers
                         if (isLinearCollectionMarshaller)
                         {
                             if (
-                                !SymbolEqualityComparer.Default.Equals(
-                                    methods.UnmanagedValuesDestination.Parameters[0].Type,
-                                    unmanagedType
-                                )
+                                !SymbolEqualityComparer
+                                    .Default
+                                    .Equals(
+                                        methods.UnmanagedValuesDestination.Parameters[0].Type,
+                                        unmanagedType
+                                    )
                             )
                             {
                                 diagnosticReporter.CreateAndReportDiagnostic(
@@ -1340,10 +1341,12 @@ namespace Microsoft.Interop.Analyzers
                         {
                             // If the marshaller has both "ConvertToUnmanaged" method variants, verify that their return types match.
                             if (
-                                !SymbolEqualityComparer.Default.Equals(
-                                    methods.ToUnmanaged.ReturnType,
-                                    methods.ToUnmanagedWithBuffer.ReturnType
-                                )
+                                !SymbolEqualityComparer
+                                    .Default
+                                    .Equals(
+                                        methods.ToUnmanaged.ReturnType,
+                                        methods.ToUnmanagedWithBuffer.ReturnType
+                                    )
                             )
                             {
                                 diagnosticReporter.CreateAndReportDiagnostic(
@@ -1363,10 +1366,9 @@ namespace Microsoft.Interop.Analyzers
 
                         if (
                             unmanagedType is not null
-                            && !SymbolEqualityComparer.Default.Equals(
-                                unmanagedType,
-                                toManagedMethod.Parameters[0].Type
-                            )
+                            && !SymbolEqualityComparer
+                                .Default
+                                .Equals(unmanagedType, toManagedMethod.Parameters[0].Type)
                         )
                         {
                             // If both shapes are present, verify that the unmanaged types match
@@ -1384,10 +1386,12 @@ namespace Microsoft.Interop.Analyzers
                         if (isLinearCollectionMarshaller)
                         {
                             if (
-                                !SymbolEqualityComparer.Default.Equals(
-                                    methods.UnmanagedValuesSource.Parameters[0].Type,
-                                    unmanagedType
-                                )
+                                !SymbolEqualityComparer
+                                    .Default
+                                    .Equals(
+                                        methods.UnmanagedValuesSource.Parameters[0].Type,
+                                        unmanagedType
+                                    )
                             )
                             {
                                 diagnosticReporter.CreateAndReportDiagnostic(
@@ -1406,10 +1410,12 @@ namespace Microsoft.Interop.Analyzers
                         {
                             // If the marshaller has both "ConvertToUnmanaged" method variants, verify that their parameter types match.
                             if (
-                                !SymbolEqualityComparer.Default.Equals(
-                                    methods.ToManaged.Parameters[1].Type,
-                                    methods.ToManagedFinally.Parameters[1].Type
-                                )
+                                !SymbolEqualityComparer
+                                    .Default
+                                    .Equals(
+                                        methods.ToManaged.Parameters[1].Type,
+                                        methods.ToManagedFinally.Parameters[1].Type
+                                    )
                             )
                             {
                                 diagnosticReporter.CreateAndReportDiagnostic(
@@ -1439,10 +1445,9 @@ namespace Microsoft.Interop.Analyzers
                                     methods.ManagedValuesDestination.ReturnType,
                                     out ITypeSymbol destinationElementType
                                 )
-                                && !SymbolEqualityComparer.Default.Equals(
-                                    sourceElementType,
-                                    destinationElementType
-                                )
+                                && !SymbolEqualityComparer
+                                    .Default
+                                    .Equals(sourceElementType, destinationElementType)
                             )
                             {
                                 diagnosticReporter.CreateAndReportDiagnostic(
@@ -1487,10 +1492,9 @@ namespace Microsoft.Interop.Analyzers
                         unmanagedValuesCollectionMethod.ReturnType,
                         out ITypeSymbol sourceElementType
                     )
-                    && !SymbolEqualityComparer.Default.Equals(
-                        sourceElementType,
-                        expectedElementType
-                    )
+                    && !SymbolEqualityComparer
+                        .Default
+                        .Equals(sourceElementType, expectedElementType)
                 )
                 {
                     diagnosticReporter.CreateAndReportDiagnostic(
@@ -1565,14 +1569,12 @@ namespace Microsoft.Interop.Analyzers
             )
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        spanTypeMaybe.OriginalDefinition,
-                        _spanOfT
-                    )
-                    || SymbolEqualityComparer.Default.Equals(
-                        spanTypeMaybe.OriginalDefinition,
-                        _readOnlySpanOfT
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(spanTypeMaybe.OriginalDefinition, _spanOfT)
+                    || SymbolEqualityComparer
+                        .Default
+                        .Equals(spanTypeMaybe.OriginalDefinition, _readOnlySpanOfT)
                 )
                 {
                     elementType = ((INamedTypeSymbol)spanTypeMaybe).TypeArguments[0];
@@ -1874,10 +1876,9 @@ namespace Microsoft.Interop.Analyzers
                         IMethodSymbol fromUnmanagedMethod = fromUnmanagedCandidates[0];
                         if (
                             unmanagedType is not null
-                            && !SymbolEqualityComparer.Default.Equals(
-                                unmanagedType,
-                                fromUnmanagedMethod.Parameters[0].Type
-                            )
+                            && !SymbolEqualityComparer
+                                .Default
+                                .Equals(unmanagedType, fromUnmanagedMethod.Parameters[0].Type)
                         )
                         {
                             // If both shapes are present, verify that the unmanaged types match
@@ -1922,10 +1923,9 @@ namespace Microsoft.Interop.Analyzers
                                     methods.ManagedValuesDestination.ReturnType,
                                     out ITypeSymbol destinationElementType
                                 )
-                                && !SymbolEqualityComparer.Default.Equals(
-                                    sourceElementType,
-                                    destinationElementType
-                                )
+                                && !SymbolEqualityComparer
+                                    .Default
+                                    .Equals(sourceElementType, destinationElementType)
                             )
                             {
                                 diagnosticReporter.CreateAndReportDiagnostic(

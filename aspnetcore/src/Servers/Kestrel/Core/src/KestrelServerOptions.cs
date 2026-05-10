@@ -415,7 +415,8 @@ public class KestrelServerOptions
         try
         {
             var cert = CertificateManager
-                .Instance.ListCertificates(
+                .Instance
+                .ListCertificates(
                     StoreName.My,
                     StoreLocation.CurrentUser,
                     isValid: true,
@@ -429,10 +430,9 @@ public class KestrelServerOptions
                 return null;
             }
 
-            var status = CertificateManager.Instance.CheckCertificateState(
-                cert,
-                interactive: false
-            );
+            var status = CertificateManager
+                .Instance
+                .CheckCertificateState(cert, interactive: false);
             if (!status.Success)
             {
                 // Display a warning indicating to the user that a prompt might appear and provide instructions on what to do in that

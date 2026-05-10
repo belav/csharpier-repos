@@ -194,16 +194,18 @@ namespace System.StubHelpers
             fixed (char* pwzChar = strManaged)
             {
 #if TARGET_WINDOWS
-                cbWritten = Interop.Kernel32.WideCharToMultiByte(
-                    Interop.Kernel32.CP_ACP,
-                    bestFit ? 0 : Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
-                    pwzChar,
-                    numChars,
-                    buffer,
-                    length,
-                    null,
-                    throwOnUnmappableChar ? &defaultCharUsed : null
-                );
+                cbWritten = Interop
+                    .Kernel32
+                    .WideCharToMultiByte(
+                        Interop.Kernel32.CP_ACP,
+                        bestFit ? 0 : Interop.Kernel32.WC_NO_BEST_FIT_CHARS,
+                        pwzChar,
+                        numChars,
+                        buffer,
+                        length,
+                        null,
+                        throwOnUnmappableChar ? &defaultCharUsed : null
+                    );
 #else
                 cbWritten = Encoding.UTF8.GetBytes(pwzChar, numChars, buffer, length);
 #endif

@@ -39,9 +39,9 @@ public static class MessagePackProtocolDependencyInjectionExtensions
     )
         where TBuilder : ISignalRBuilder
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IHubProtocol, MessagePackHubProtocol>()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, MessagePackHubProtocol>());
         builder.Services.Configure(configure);
         return builder;
     }

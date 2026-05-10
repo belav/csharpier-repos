@@ -86,9 +86,14 @@ namespace System.ServiceModel.Persistence
 
                         if (settings == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                SR2.GetString(SR2.ConnectionStringNameIncorrect, parameters[key])
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperArgument(
+                                    SR2.GetString(
+                                        SR2.ConnectionStringNameIncorrect,
+                                        parameters[key]
+                                    )
+                                );
                         }
 
                         this.connectionString = settings.ConnectionString;
@@ -103,27 +108,31 @@ namespace System.ServiceModel.Persistence
                         );
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            key,
-                            SR2.GetString(
-                                SR2.UnknownSqlPersistenceConfigurationParameter,
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
                                 key,
-                                connectionStringNameParameter,
-                                serializeAsTextParameter,
-                                lockTimeoutParameter
-                            )
-                        );
+                                SR2.GetString(
+                                    SR2.UnknownSqlPersistenceConfigurationParameter,
+                                    key,
+                                    connectionStringNameParameter,
+                                    serializeAsTextParameter,
+                                    lockTimeoutParameter
+                                )
+                            );
                 }
             }
 
             if (this.connectionString == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR2.GetString(
-                        SR2.ConnectionStringNameParameterRequired,
-                        connectionStringNameParameter
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR2.GetString(
+                            SR2.ConnectionStringNameParameterRequired,
+                            connectionStringNameParameter
+                        )
+                    );
             }
 
             this.loadHandler = new LoadHandler(this);
@@ -158,12 +167,14 @@ namespace System.ServiceModel.Persistence
                     || (value > TimeSpan.FromSeconds(int.MaxValue) && value != TimeSpan.MaxValue)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR2.GetString(SR2.LockTimeoutOutOfRange)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR2.GetString(SR2.LockTimeoutOutOfRange)
+                            )
+                        );
                 }
                 this.lockTimeout = value;
             }
@@ -221,10 +232,12 @@ namespace System.ServiceModel.Persistence
 
             if (Guid.Empty == id)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "id",
-                    SR2.GetString(SR2.SqlPersistenceProviderRequiresNonEmptyGuid)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "id",
+                        SR2.GetString(SR2.SqlPersistenceProviderRequiresNonEmptyGuid)
+                    );
             }
 
             return new SqlPersistenceProvider(id, this);
@@ -303,12 +316,14 @@ namespace System.ServiceModel.Persistence
                     throw;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new PersistenceException(
-                        SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new PersistenceException(
+                            SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
+                            e
+                        )
+                    );
             }
         }
 
@@ -745,12 +760,14 @@ namespace System.ServiceModel.Persistence
                     throw;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new PersistenceException(
-                        SR2.GetString(SR2.PersistenceOperationError, handler.OperationName),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new PersistenceException(
+                            SR2.GetString(SR2.PersistenceOperationError, handler.OperationName),
+                            e
+                        )
+                    );
             }
 
             Exception toThrow = handler.ProcessResult(resultCode, id, returnValue);
@@ -820,10 +837,9 @@ namespace System.ServiceModel.Persistence
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "timeout",
-                    SR2.GetString(SR2.CommandTimeoutOutOfRange)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("timeout", SR2.GetString(SR2.CommandTimeoutOutOfRange));
             }
         }
 
@@ -1269,15 +1285,17 @@ namespace System.ServiceModel.Persistence
                     }
                     finally
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new PersistenceException(
-                                SR2.GetString(
-                                    SR2.PersistenceOperationError,
-                                    this.handler.OperationName
-                                ),
-                                e
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new PersistenceException(
+                                    SR2.GetString(
+                                        SR2.PersistenceOperationError,
+                                        this.handler.OperationName
+                                    ),
+                                    e
+                                )
+                            );
                     }
                 }
 

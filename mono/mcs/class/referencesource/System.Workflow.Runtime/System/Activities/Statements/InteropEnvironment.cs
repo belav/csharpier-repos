@@ -424,11 +424,11 @@ namespace System.Activities.Statements
                 //Validate whether there is DP(Meta) backup
                 string dependencyPropertyName = propertyInfo.Name;
 
-                System.Workflow.ComponentModel.DependencyProperty dependencyProperty =
-                    System.Workflow.ComponentModel.DependencyProperty.FromName(
-                        dependencyPropertyName,
-                        propertyInfo.DeclaringType
-                    );
+                System.Workflow.ComponentModel.DependencyProperty dependencyProperty = System
+                    .Workflow
+                    .ComponentModel
+                    .DependencyProperty
+                    .FromName(dependencyPropertyName, propertyInfo.DeclaringType);
 
                 if (dependencyProperty != null && dependencyProperty.DefaultMetadata.IsMetaProperty)
                 {

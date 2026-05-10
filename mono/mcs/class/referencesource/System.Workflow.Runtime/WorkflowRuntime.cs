@@ -199,12 +199,14 @@ namespace System.Workflow.Runtime
         /// <param name="settings"></param>
         private void PrivateInitialize(WorkflowRuntimeSection settings)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime: Created WorkflowRuntime {0}",
-                _uid
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime: Created WorkflowRuntime {0}",
+                    _uid
+                );
 
             _workflowDefinitionDispenser = new WorkflowDefinitionDispenser(
                 this,
@@ -564,11 +566,13 @@ namespace System.Workflow.Runtime
                     // If we get here, 'executor' is either null or has not been replaced.
                     // If it has not been replaced, we know that it is unusable
 
-                    WorkflowTrace.Host.TraceInformation(
-                        "WorkflowRuntime:: replacing unusable executor for key {0} with new one (hc: {1})",
-                        key,
-                        executor.GetHashCode()
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceInformation(
+                            "WorkflowRuntime:: replacing unusable executor for key {0} with new one (hc: {1})",
+                            key,
+                            executor.GetHashCode()
+                        );
                     executors[key] = executor;
                     RegisterExecutor(context != null && context.IsActivation, executor);
                 }
@@ -602,10 +606,12 @@ namespace System.Workflow.Runtime
             {
                 oldWorkflowExecutor.IsInstanceValid = false;
 
-                WorkflowTrace.Host.TraceInformation(
-                    "WorkflowRuntime:: replacing old executor for key {0} with new one",
-                    instanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceInformation(
+                        "WorkflowRuntime:: replacing old executor for key {0} with new one",
+                        instanceId
+                    );
                 executors[instanceId] = newWorkflowExecutor;
             }
         }
@@ -685,11 +691,13 @@ namespace System.Workflow.Runtime
                 }
                 rootActivity.SetValue(Activity.WorkflowDefinitionProperty, workflowDefinition);
 
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Creating instance " + instanceId.ToString()
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Creating instance " + instanceId.ToString()
+                    );
 
                 context.Created = true;
                 executor.Initialize(
@@ -759,12 +767,14 @@ namespace System.Workflow.Runtime
             // by the hosting environment
             try
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Received OnIdle Event for instance, {0}",
-                    executor.InstanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Received OnIdle Event for instance, {0}",
+                        executor.InstanceId
+                    );
                 WorkflowInstance scheduleInstance = executor.WorkflowInstance;
                 if (WorkflowIdled != null)
                 {
@@ -774,12 +784,14 @@ namespace System.Workflow.Runtime
             catch (Exception)
             {
                 //
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Warning,
-                    0,
-                    "OnIdle Event for instance, {0} threw an exception",
-                    executor.InstanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Warning,
+                        0,
+                        "OnIdle Event for instance, {0} threw an exception",
+                        executor.InstanceId
+                    );
                 throw;
             }
         }
@@ -787,13 +799,15 @@ namespace System.Workflow.Runtime
         private void _unRegister(WorkflowExecutor executor)
         {
             TryRemoveWorkflowExecutor(executor.InstanceId, executor);
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime::_removeInstance, instance:{0}, hc:{1}",
-                executor.InstanceId,
-                executor.GetHashCode()
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime::_removeInstance, instance:{0}, hc:{1}",
+                    executor.InstanceId,
+                    executor.GetHashCode()
+                );
 
             // be sure to flush all traces
             WorkflowTrace.Runtime.Flush();
@@ -805,42 +819,50 @@ namespace System.Workflow.Runtime
         {
             try
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "WorkflowRuntime dispensing resource, instanceId: {0}",
-                    instanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "WorkflowRuntime dispensing resource, instanceId: {0}",
+                        instanceId
+                    );
 
                 WorkflowExecutor executor = this.Load(instanceId, context, null);
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "WorkflowRuntime dispensing resource instanceId: {0}, hc: {1}",
-                    instanceId,
-                    executor.GetHashCode()
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "WorkflowRuntime dispensing resource instanceId: {0}, hc: {1}",
+                        instanceId,
+                        executor.GetHashCode()
+                    );
                 return executor;
             }
             catch (OutOfMemoryException)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "WorkflowRuntime dispensing resource, can't create service due to OOM!(1), instance, {0}",
-                    instanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "WorkflowRuntime dispensing resource, can't create service due to OOM!(1), instance, {0}",
+                        instanceId
+                    );
                 throw;
             }
             catch (Exception e)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "WorkflowRuntime dispensing resource, can't create service due to unexpected exception!(2), instance, {0}, exception, {1}",
-                    instanceId,
-                    e
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "WorkflowRuntime dispensing resource, can't create service due to unexpected exception!(2), instance, {0}, exception, {1}",
+                        instanceId,
+                        e
+                    );
                 throw;
             }
         }
@@ -854,12 +876,14 @@ namespace System.Workflow.Runtime
             WorkflowCompletedEventArgs args
         )
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleCompleted event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleCompleted event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
 
             Debug.Assert(schedule != null);
             try
@@ -870,11 +894,13 @@ namespace System.Workflow.Runtime
             }
             catch (Exception)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "WorkflowRuntime:OnScheduleCompleted Event threw an exception."
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "WorkflowRuntime:OnScheduleCompleted Event threw an exception."
+                    );
                 throw;
             }
             finally
@@ -888,12 +914,14 @@ namespace System.Workflow.Runtime
             WorkflowSuspendedEventArgs args
         )
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleSuspension event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleSuspension event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
 
             try
             {
@@ -902,11 +930,13 @@ namespace System.Workflow.Runtime
             }
             catch (Exception)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "WorkflowRuntime:OnScheduleSuspended Event threw an exception."
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "WorkflowRuntime:OnScheduleSuspended Event threw an exception."
+                    );
                 throw;
             }
         }
@@ -916,12 +946,14 @@ namespace System.Workflow.Runtime
             WorkflowTerminatedEventArgs args
         )
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleTermination event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleTermination event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
 
             try
             {
@@ -930,11 +962,13 @@ namespace System.Workflow.Runtime
             }
             catch (Exception)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "WorkflowRuntime:OnScheduleTerminated Event threw an exception."
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "WorkflowRuntime:OnScheduleTerminated Event threw an exception."
+                    );
                 throw;
             }
             finally
@@ -945,69 +979,81 @@ namespace System.Workflow.Runtime
 
         internal void OnScheduleLoaded(WorkflowExecutor schedule)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleLoaded event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleLoaded event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
 
             _OnServiceEvent(schedule, false, WorkflowLoaded);
         }
 
         internal void OnScheduleAborted(WorkflowExecutor schedule)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleAborted event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleAborted event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
             _OnServiceEvent(schedule, true, WorkflowAborted);
         }
 
         internal void OnScheduleUnloaded(WorkflowExecutor schedule)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleUnloaded event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleUnloaded event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
 
             _OnServiceEvent(schedule, true, WorkflowUnloaded);
         }
 
         internal void OnScheduleResumed(WorkflowExecutor schedule)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleResumed event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleResumed event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
             _OnServiceEvent(schedule, false, WorkflowResumed);
         }
 
         internal void OnScheduleDynamicallyChanged(WorkflowExecutor schedule)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:ScheduleDynamicallyChanged event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:ScheduleDynamicallyChanged event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
             _OnServiceEvent(schedule, false, WorkflowDynamicallyChanged);
         }
 
         internal void OnSchedulePersisted(WorkflowExecutor schedule)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime:SchedulePersisted event raised for instance Id {0}",
-                schedule.InstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime:SchedulePersisted event raised for instance Id {0}",
+                    schedule.InstanceId
+                );
 
             _OnServiceEvent(schedule, false, WorkflowPersisted);
         }
@@ -1028,11 +1074,13 @@ namespace System.Workflow.Runtime
             }
             catch (Exception)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "WorkflowRuntime:OnService Event threw an exception."
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "WorkflowRuntime:OnService Event threw an exception."
+                    );
                 throw;
             }
             finally
@@ -1047,13 +1095,15 @@ namespace System.Workflow.Runtime
         internal void RaiseServicesExceptionNotHandledEvent(Exception exception, Guid instanceId)
         {
             VerifyInternalState();
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Critical,
-                0,
-                "WorkflowRuntime:ServicesExceptionNotHandled event raised for instance Id {0} {1}",
-                instanceId,
-                exception.ToString()
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Critical,
+                    0,
+                    "WorkflowRuntime:ServicesExceptionNotHandled event raised for instance Id {0} {1}",
+                    instanceId,
+                    exception.ToString()
+                );
             EventHandler<ServicesExceptionNotHandledEventArgs> handler =
                 ServicesExceptionNotHandled;
             if (handler != null)
@@ -1372,12 +1422,14 @@ namespace System.Workflow.Runtime
         /// </remarks>
         public void StartRuntime()
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime: Starting WorkflowRuntime {0}",
-                _uid
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime: Starting WorkflowRuntime {0}",
+                    _uid
+                );
             lock (_startStopLock)
             {
                 VerifyInternalState();
@@ -1459,12 +1511,14 @@ namespace System.Workflow.Runtime
                     }
                 }
             }
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WorkflowRuntime: Started WorkflowRuntime {0}",
-                _uid
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "WorkflowRuntime: Started WorkflowRuntime {0}",
+                    _uid
+                );
         }
 
         void DynamicUpdateCommit(object sender, WorkflowExecutor.DynamicUpdateEventArgs e)
@@ -1610,12 +1664,14 @@ namespace System.Workflow.Runtime
 
             using (new WorkflowRuntime.EventContext())
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "WorkflowRuntime: Stopping WorkflowRuntime {0}",
-                    _uid
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "WorkflowRuntime: Stopping WorkflowRuntime {0}",
+                        _uid
+                    );
                 lock (_startStopLock)
                 {
                     if (_startedServices)
@@ -1639,13 +1695,15 @@ namespace System.Workflow.Runtime
                                         {
                                             try
                                             {
-                                                WorkflowTrace.Host.TraceEvent(
-                                                    TraceEventType.Information,
-                                                    0,
-                                                    "WorkflowRuntime: Calling Unload on instance {0} executor hc {1}",
-                                                    executor.InstanceIdString,
-                                                    executor.GetHashCode()
-                                                );
+                                                WorkflowTrace
+                                                    .Host
+                                                    .TraceEvent(
+                                                        TraceEventType.Information,
+                                                        0,
+                                                        "WorkflowRuntime: Calling Unload on instance {0} executor hc {1}",
+                                                        executor.InstanceIdString,
+                                                        executor.GetHashCode()
+                                                    );
                                                 executor.Unload();
                                             }
                                             catch (ExecutorLocksHeldException)
@@ -1691,12 +1749,14 @@ namespace System.Workflow.Runtime
                             StopServices();
                             _startedServices = false;
 
-                            WorkflowTrace.Host.TraceEvent(
-                                TraceEventType.Information,
-                                0,
-                                "WorkflowRuntime: Stopped WorkflowRuntime {0}",
-                                _uid
-                            );
+                            WorkflowTrace
+                                .Host
+                                .TraceEvent(
+                                    TraceEventType.Information,
+                                    0,
+                                    "WorkflowRuntime: Stopped WorkflowRuntime {0}",
+                                    _uid
+                                );
 
                             //
                             // Clean up tracking
@@ -1712,11 +1772,13 @@ namespace System.Workflow.Runtime
                         }
                         catch (Exception)
                         {
-                            WorkflowTrace.Host.TraceEvent(
-                                TraceEventType.Error,
-                                0,
-                                "WorkflowRuntime::StartUnload Unexpected Exception"
-                            );
+                            WorkflowTrace
+                                .Host
+                                .TraceEvent(
+                                    TraceEventType.Error,
+                                    0,
+                                    "WorkflowRuntime::StartUnload Unexpected Exception"
+                                );
                             throw;
                         }
                         finally
@@ -1747,18 +1809,18 @@ namespace System.Workflow.Runtime
             if (runtime != null)
             {
                 if (e.Type != null)
-                    return runtime._workflowDefinitionDispenser.GetRootActivity(
-                        e.Type,
-                        e.CreateNewDefinition,
-                        e.InitializeForRuntime
-                    );
+                    return runtime
+                        ._workflowDefinitionDispenser
+                        .GetRootActivity(e.Type, e.CreateNewDefinition, e.InitializeForRuntime);
                 else
-                    return runtime._workflowDefinitionDispenser.GetRootActivity(
-                        e.WorkflowMarkup,
-                        e.RulesMarkup,
-                        e.CreateNewDefinition,
-                        e.InitializeForRuntime
-                    );
+                    return runtime
+                        ._workflowDefinitionDispenser
+                        .GetRootActivity(
+                            e.WorkflowMarkup,
+                            e.RulesMarkup,
+                            e.CreateNewDefinition,
+                            e.InitializeForRuntime
+                        );
             }
             return null;
         }
@@ -1982,13 +2044,15 @@ namespace System.Workflow.Runtime
                     && Object.Equals(executor, currentRes)
                 )
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "WorkflowRuntime::TryRemoveWorkflowExecutor, instance:{0}, hc:{1}",
-                        executor.InstanceIdString,
-                        executor.GetHashCode()
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "WorkflowRuntime::TryRemoveWorkflowExecutor, instance:{0}, hc:{1}",
+                            executor.InstanceIdString,
+                            executor.GetHashCode()
+                        );
                     return executors.Remove(instanceId);
                 }
 

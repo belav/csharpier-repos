@@ -72,7 +72,8 @@ public class MessagePackHubProtocol : IHubProtocol
 
     internal static MessagePackSerializerOptions CreateDefaultMessagePackSerializerOptions() =>
         MessagePackSerializerOptions
-            .Standard.WithResolver(SignalRResolver.Instance)
+            .Standard
+            .WithResolver(SignalRResolver.Instance)
             .WithSecurity(MessagePackSecurity.UntrustedData);
 
     internal sealed class SignalRResolver : IFormatterResolver

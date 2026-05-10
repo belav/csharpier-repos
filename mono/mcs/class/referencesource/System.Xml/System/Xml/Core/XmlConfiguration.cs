@@ -72,9 +72,11 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XmlReaderSection section =
-                    System.Configuration.ConfigurationManager.GetSection(
-                        XmlConfigurationString.XmlReaderSectionPath
-                    ) as XmlReaderSection;
+                    System
+                        .Configuration
+                        .ConfigurationManager
+                        .GetSection(XmlConfigurationString.XmlReaderSectionPath)
+                    as XmlReaderSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
 #else
                 return false;
@@ -133,9 +135,11 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XmlReaderSection section =
-                    System.Configuration.ConfigurationManager.GetSection(
-                        XmlConfigurationString.XmlReaderSectionPath
-                    ) as XmlReaderSection;
+                    System
+                        .Configuration
+                        .ConfigurationManager
+                        .GetSection(XmlConfigurationString.XmlReaderSectionPath)
+                    as XmlReaderSection;
                 return (section != null) ? section._CollapseWhiteSpaceIntoEmptyString : false;
 #else
                 return false;
@@ -178,9 +182,10 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XsltConfigSection section =
-                    System.Configuration.ConfigurationManager.GetSection(
-                        XmlConfigurationString.XsltSectionPath
-                    ) as XsltConfigSection;
+                    System
+                        .Configuration
+                        .ConfigurationManager
+                        .GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._ProhibitDefaultResolver : false;
 #else
                 return false;
@@ -224,9 +229,10 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XsltConfigSection section =
-                    System.Configuration.ConfigurationManager.GetSection(
-                        XmlConfigurationString.XsltSectionPath
-                    ) as XsltConfigSection;
+                    System
+                        .Configuration
+                        .ConfigurationManager
+                        .GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null) ? section._LimitXPathComplexity : true;
 #else
                 return true;
@@ -269,9 +275,10 @@ namespace System.Xml.XmlConfiguration
             {
 #if CONFIGURATION_DEP
                 XsltConfigSection section =
-                    System.Configuration.ConfigurationManager.GetSection(
-                        XmlConfigurationString.XsltSectionPath
-                    ) as XsltConfigSection;
+                    System
+                        .Configuration
+                        .ConfigurationManager
+                        .GetSection(XmlConfigurationString.XsltSectionPath) as XsltConfigSection;
                 return (section != null)
                     ? section._EnableMemberAccessForXslCompiledTransform
                     : false;

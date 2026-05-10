@@ -41,11 +41,9 @@ namespace System.Net.Http.Functional.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/71877", TestPlatforms.Browser)]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(HttpClient).Assembly.GetType(
-                "System.Net.NetEventSource",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type esType = typeof(HttpClient)
+                .Assembly
+                .GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
             Assert.NotNull(esType);
 
             Assert.Equal(
@@ -583,10 +581,12 @@ namespace System.Net.Http.Functional.Tests
                                     request.Headers.TryGetValues("Request-Id", out var requestId)
                                 );
                                 Assert.True(
-                                    request.Headers.TryGetValues(
-                                        "Correlation-Context",
-                                        out var correlationContext
-                                    )
+                                    request
+                                        .Headers
+                                        .TryGetValues(
+                                            "Correlation-Context",
+                                            out var correlationContext
+                                        )
                                 );
                                 Assert.Equal(
                                     "key=value, goodkey=bad%2Fvalue, bad%2Fkey=value",
@@ -1541,9 +1541,9 @@ namespace System.Net.Http.Functional.Tests
                                 || diagnosticListenerActivityEnabled.Value
                             );
 
-                            listenerSubscription = DiagnosticListener.AllListeners.Subscribe(
-                                diagnosticListenerObserver
-                            );
+                            listenerSubscription = DiagnosticListener
+                                .AllListeners
+                                .Subscribe(diagnosticListenerObserver);
                         }
 
                         Activity parent = currentActivitySet
@@ -1636,9 +1636,8 @@ namespace System.Net.Http.Functional.Tests
         private static string GetHeaderValue(HttpRequestData request, string name)
         {
             return request
-                .Headers.SingleOrDefault(h =>
-                    h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-                )
+                .Headers
+                .SingleOrDefault(h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
                 .Value;
         }
 

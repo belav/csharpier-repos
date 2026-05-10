@@ -94,10 +94,10 @@ public class ActionSelectorTest
         var routeContext = CreateRouteContext("GET");
         routeContext.RouteData.Values.Add("controller", "Home");
         routeContext.RouteData.Values.Add("action", "Index");
-        routeContext.RouteData.Values.Add(
-            "date",
-            new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7))
-        );
+        routeContext
+            .RouteData
+            .Values
+            .Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
         // Act
         var candidates = selector.SelectCandidates(routeContext);

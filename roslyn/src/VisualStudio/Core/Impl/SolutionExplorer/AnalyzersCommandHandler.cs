@@ -108,9 +108,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 // Analyzers folder context menu items
                 _addMenuItem = AddCommandHandler(
@@ -316,10 +316,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             _referencesContextAddMenuItem.Visible = selectedProjectSupportsAnalyzers;
             _setActiveRuleSetMenuItem.Visible =
                 selectedProjectSupportsAnalyzers
-                && _tracker.SelectedHierarchy.TryGetItemName(
-                    _tracker.SelectedItemId,
-                    out var itemName
-                )
+                && _tracker
+                    .SelectedHierarchy
+                    .TryGetItemName(_tracker.SelectedItemId, out var itemName)
                 && Path.GetExtension(itemName)
                     .Equals(".ruleset", StringComparison.OrdinalIgnoreCase);
         }
@@ -370,11 +369,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 foreach (var diagnosticItem in group)
                 {
-                    var severity = diagnosticItem.Descriptor.GetEffectiveSeverity(
-                        project.CompilationOptions,
-                        analyzerConfigOptions?.AnalyzerOptions,
-                        analyzerConfigOptions?.TreeOptions
-                    );
+                    var severity = diagnosticItem
+                        .Descriptor
+                        .GetEffectiveSeverity(
+                            project.CompilationOptions,
+                            analyzerConfigOptions?.AnalyzerOptions,
+                            analyzerConfigOptions?.TreeOptions
+                        );
                     selectedItemSeverities.Add(severity);
                 }
             }
@@ -411,10 +412,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         private void UpdateSeverityMenuItemsEnabled()
         {
-            var configurable = !_tracker.SelectedDiagnosticItems.Any(static item =>
-                item.Descriptor.ImmutableCustomTags()
-                    .Contains(WellKnownDiagnosticTags.NotConfigurable)
-            );
+            var configurable = !_tracker
+                .SelectedDiagnosticItems
+                .Any(static item =>
+                    item.Descriptor
+                        .ImmutableCustomTags()
+                        .Contains(WellKnownDiagnosticTags.NotConfigurable)
+                );
 
             _setSeverityDefaultMenuItem.Enabled = configurable;
             _setSeverityErrorMenuItem.Enabled = configurable;
@@ -488,7 +492,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private void SetSeverityHandler(object sender, EventArgs args)
         {
             _threadingContext
-                .JoinableTaskFactory.RunAsync(async () =>
+                .JoinableTaskFactory
+                .RunAsync(async () =>
                 {
                     using var asyncToken = _listener.BeginAsyncOperation(
                         nameof(SetSeverityHandler)
@@ -510,9 +515,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     if (notificationMessages.Count > 0)
                     {
                         var totalMessage = string.Join(Environment.NewLine, notificationMessages);
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            _threadingContext.DisposalToken
-                        );
+                        await _threadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(_threadingContext.DisposalToken);
 
                         SendErrorNotification(
                             workspace,
@@ -521,7 +526,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         );
                     }
                 })
-                .Task.ReportNonFatalErrorUnlessCancelledAsync(_threadingContext.DisposalToken);
+                .Task
+                .ReportNonFatalErrorUnlessCancelledAsync(_threadingContext.DisposalToken);
         }
 
         private async Task SetSeverityHandlerAsync(
@@ -669,10 +675,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         {
             if (
                 _tracker.SelectedHierarchy.TryGetProject(out var project)
-                && _tracker.SelectedHierarchy.TryGetCanonicalName(
-                    _tracker.SelectedItemId,
-                    out var ruleSetFileFullPath
-                )
+                && _tracker
+                    .SelectedHierarchy
+                    .TryGetCanonicalName(_tracker.SelectedItemId, out var ruleSetFileFullPath)
             )
             {
                 var projectDirectoryFullPath = Path.GetDirectoryName(project.FullName);
@@ -863,8 +868,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 var componentModel = (IComponentModel)
                     _serviceProvider.GetService(typeof(SComponentModel));
-                _workspace =
-                    componentModel.DefaultExportProvider.GetExportedValueOrDefault<VisualStudioWorkspace>();
+                _workspace = componentModel
+                    .DefaultExportProvider
+                    .GetExportedValueOrDefault<VisualStudioWorkspace>();
             }
 
             return _workspace;

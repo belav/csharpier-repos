@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                 Debug.Assert(!semanticModel.IsSpeculativeSemanticModel);
 
                 var root = await semanticModel
-                    .SyntaxTree.GetRootAsync(cancellationToken)
+                    .SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
 #if DEBUG
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var root = await semanticModel
-                .SyntaxTree.GetRootAsync(cancellationToken)
+                .SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             // prep namespace imports marked for simplification
@@ -183,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
                 root = await semanticModel
-                    .SyntaxTree.GetRootAsync(cancellationToken)
+                    .SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -328,14 +331,18 @@ namespace Microsoft.CodeAnalysis.Simplification
                                             );
 
                                         var replacedParent = isNode
-                                            ? nodeOrToken.Parent.ReplaceNode(
-                                                nodeOrToken.AsNode()!,
-                                                currentNodeOrToken.AsNode()!
-                                            )
-                                            : nodeOrToken.Parent.ReplaceToken(
-                                                nodeOrToken.AsToken(),
-                                                currentNodeOrToken.AsToken()
-                                            );
+                                            ? nodeOrToken
+                                                .Parent
+                                                .ReplaceNode(
+                                                    nodeOrToken.AsNode()!,
+                                                    currentNodeOrToken.AsNode()!
+                                                )
+                                            : nodeOrToken
+                                                .Parent
+                                                .ReplaceToken(
+                                                    nodeOrToken.AsToken(),
+                                                    currentNodeOrToken.AsToken()
+                                                );
 
                                         currentNodeOrToken = replacedParent
                                             .ChildNodesAndTokens()
@@ -362,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                                                 .GetRequiredSemanticModelAsync(cancellationToken)
                                                 .ConfigureAwait(false);
                                             newRoot = await semanticModelForReduce
-                                                .SyntaxTree.GetRootAsync(cancellationToken)
+                                                .SyntaxTree
+                                                .GetRootAsync(cancellationToken)
                                                 .ConfigureAwait(false);
                                             currentNodeOrToken = newRoot
                                                 .DescendantNodes()

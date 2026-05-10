@@ -223,9 +223,9 @@ namespace System.Net
             // GlobalLog.Print("NetworkCredential::get_Password: returning \"" + m_password + "\"");
             return m_password;
 #else //!FEATURE_PAL
-            string decryptedString = UnsafeNclNativeMethods.SecureStringHelper.CreateString(
-                m_password
-            );
+            string decryptedString = UnsafeNclNativeMethods
+                .SecureStringHelper
+                .CreateString(m_password);
 
             // GlobalLog.Print("NetworkCredential::get_Password: returning \"" + decryptedString + "\"");
             return decryptedString;
@@ -291,10 +291,12 @@ namespace System.Net
             return (
                 InternalGetUserName() == compCred.InternalGetUserName()
                 && InternalGetDomain() == compCred.InternalGetDomain()
-                && UnsafeNclNativeMethods.SecureStringHelper.AreEqualValues(
-                    InternalGetSecurePassword(),
-                    compCred.InternalGetSecurePassword()
-                )
+                && UnsafeNclNativeMethods
+                    .SecureStringHelper
+                    .AreEqualValues(
+                        InternalGetSecurePassword(),
+                        compCred.InternalGetSecurePassword()
+                    )
             );
 #endif //!FEATURE_PAL
         }

@@ -20,10 +20,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class AttributeTests_NativeInteger : CSharpTestBase
     {
-        private static readonly SymbolDisplayFormat FormatWithSpecialTypes =
-            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat FormatWithSpecialTypes = SymbolDisplayFormat
+            .TestFormat
+            .WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
 
         [Fact]
         public void EmptyProject()
@@ -53,9 +52,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
+                    var attributeType = module
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        );
                     Assert.NotNull(attributeType);
                     AssertNativeIntegerAttributes(module, expected);
                 }
@@ -89,9 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
+                    var attributeType = module
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        );
                     Assert.Null(attributeType);
                     AssertNativeIntegerAttributes(module, expected);
                 }
@@ -1328,7 +1331,8 @@ class Program
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program+<>c")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Program+<>c")
                         .GetMethod("<M>b__0_0");
                     AssertNativeIntegerAttribute(method.GetReturnTypeAttributes());
                 }
@@ -1355,7 +1359,8 @@ class Program
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program+<>c")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Program+<>c")
                         .GetMethod("<M>b__0_0");
                     AssertNativeIntegerAttribute(method.Parameters[0].GetAttributes());
                 }
@@ -1381,7 +1386,8 @@ class Program
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("<M>g__L|0_0");
                     AssertNativeIntegerAttribute(method.GetReturnTypeAttributes());
                     AssertAttributes(
@@ -1411,7 +1417,8 @@ class Program
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Program")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Program")
                         .GetMethod("<M>g__L|0_0");
                     AssertNativeIntegerAttribute(method.Parameters[0].GetAttributes());
                 }
@@ -1740,9 +1747,9 @@ public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.In
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9
             );
             var expected =
@@ -1784,9 +1791,9 @@ class B : A<System.UIntPtr, nint>
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 parseOptions: TestOptions.Regular9.WithNullablePublicOnly()
             );
             var expected =
@@ -1812,9 +1819,11 @@ class B : A<System.UIntPtr, nint>
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
+                    var attributeType = module
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        );
                     AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
                     Assert.False(attributeUsage.Inherited);
                     Assert.False(attributeUsage.AllowMultiple);
@@ -1984,9 +1993,11 @@ C
         private static TypeDefinition GetTypeDefinitionByName(MetadataReader reader, string name)
         {
             return reader.GetTypeDefinition(
-                reader.TypeDefinitions.Single(h =>
-                    reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                )
+                reader
+                    .TypeDefinitions
+                    .Single(h =>
+                        reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                    )
             );
         }
 

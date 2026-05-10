@@ -42,7 +42,8 @@ public static class SqlServerDbSetExtensions
         var entityType = entityQueryRootExpression.EntityType;
 
         return queryableSource
-            .Provider.CreateQuery<TEntity>(
+            .Provider
+            .CreateQuery<TEntity>(
                 new TemporalAsOfQueryRootExpression(
                     entityQueryRootExpression.QueryProvider!,
                     entityType,
@@ -93,7 +94,8 @@ public static class SqlServerDbSetExtensions
         var entityType = entityQueryRootExpression.EntityType;
 
         return queryableSource
-            .Provider.CreateQuery<TEntity>(
+            .Provider
+            .CreateQuery<TEntity>(
                 new TemporalFromToQueryRootExpression(
                     entityQueryRootExpression.QueryProvider!,
                     entityType,
@@ -145,7 +147,8 @@ public static class SqlServerDbSetExtensions
         var entityType = entityQueryRootExpression.EntityType;
 
         return queryableSource
-            .Provider.CreateQuery<TEntity>(
+            .Provider
+            .CreateQuery<TEntity>(
                 new TemporalBetweenQueryRootExpression(
                     entityQueryRootExpression.QueryProvider!,
                     entityType,
@@ -197,7 +200,8 @@ public static class SqlServerDbSetExtensions
         var entityType = entityQueryRootExpression.EntityType;
 
         return queryableSource
-            .Provider.CreateQuery<TEntity>(
+            .Provider
+            .CreateQuery<TEntity>(
                 new TemporalContainedInQueryRootExpression(
                     entityQueryRootExpression.QueryProvider!,
                     entityType,
@@ -231,7 +235,8 @@ public static class SqlServerDbSetExtensions
         var entityType = entityQueryRootExpression.EntityType;
 
         return queryableSource
-            .Provider.CreateQuery<TEntity>(
+            .Provider
+            .CreateQuery<TEntity>(
                 new TemporalAllQueryRootExpression(
                     entityQueryRootExpression.QueryProvider!,
                     entityType

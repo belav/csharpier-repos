@@ -103,8 +103,9 @@ namespace ILCompiler.DependencyAnalysis
                 && !_type.IsCanonicalSubtype(CanonicalFormKind.Any)
                     ? new WritableDataNode(this)
                     : null;
-            _hasConditionalDependenciesFromMetadataManager =
-                factory.MetadataManager.HasConditionalDependenciesDueToEETypePresence(type);
+            _hasConditionalDependenciesFromMetadataManager = factory
+                .MetadataManager
+                .HasConditionalDependenciesDueToEETypePresence(type);
 
             if (EmitVirtualSlotsAndInterfaces)
                 _virtualMethodAnalysisFlags = AnalyzeVirtualMethods(type);
@@ -474,9 +475,9 @@ namespace ILCompiler.DependencyAnalysis
                         bool canUseTentativeMethod =
                             isNonInterfaceAbstractType
                             && !decl.CanMethodBeInSealedVTable()
-                            && factory.CompilationModuleGroup.AllowVirtualMethodOnAbstractTypeOptimization(
-                                canonImpl
-                            );
+                            && factory
+                                .CompilationModuleGroup
+                                .AllowVirtualMethodOnAbstractTypeOptimization(canonImpl);
                         IMethodNode implNode = canUseTentativeMethod
                             ? factory.TentativeMethodEntrypoint(
                                 canonImpl,
@@ -497,12 +498,9 @@ namespace ILCompiler.DependencyAnalysis
                         factory.MetadataManager.NoteOverridingMethod(decl, impl);
                     }
 
-                    factory.MetadataManager.GetDependenciesForOverridingMethod(
-                        ref result,
-                        factory,
-                        decl,
-                        impl
-                    );
+                    factory
+                        .MetadataManager
+                        .GetDependenciesForOverridingMethod(ref result, factory, decl, impl);
                 }
 
                 Debug.Assert(
@@ -564,8 +562,9 @@ namespace ILCompiler.DependencyAnalysis
 
                         MethodDesc interfaceMethodDefinition = interfaceMethod;
                         if (interfaceType != definitionInterfaceType)
-                            interfaceMethodDefinition =
-                                factory.TypeSystemContext.GetMethodForInstantiatedType(
+                            interfaceMethodDefinition = factory
+                                .TypeSystemContext
+                                .GetMethodForInstantiatedType(
                                     interfaceMethodDefinition.GetTypicalMethodDefinition(),
                                     (InstantiatedType)definitionInterfaceType
                                 );
@@ -584,10 +583,12 @@ namespace ILCompiler.DependencyAnalysis
                                 implType = implType.BaseType;
 
                             if (!implType.IsTypeDefinition)
-                                implMethod = factory.TypeSystemContext.GetMethodForInstantiatedType(
-                                    implMethod.GetTypicalMethodDefinition(),
-                                    (InstantiatedType)implType
-                                );
+                                implMethod = factory
+                                    .TypeSystemContext
+                                    .GetMethodForInstantiatedType(
+                                        implMethod.GetTypicalMethodDefinition(),
+                                        (InstantiatedType)implType
+                                    );
 
                             if (isStaticInterfaceMethod)
                             {
@@ -646,17 +647,18 @@ namespace ILCompiler.DependencyAnalysis
                                 );
                             }
 
-                            factory.MetadataManager.NoteOverridingMethod(
-                                interfaceMethod,
-                                implMethod
-                            );
+                            factory
+                                .MetadataManager
+                                .NoteOverridingMethod(interfaceMethod, implMethod);
 
-                            factory.MetadataManager.GetDependenciesForOverridingMethod(
-                                ref result,
-                                factory,
-                                interfaceMethod,
-                                implMethod
-                            );
+                            factory
+                                .MetadataManager
+                                .GetDependenciesForOverridingMethod(
+                                    ref result,
+                                    factory,
+                                    interfaceMethod,
+                                    implMethod
+                                );
                         }
                         else
                         {
@@ -688,8 +690,9 @@ namespace ILCompiler.DependencyAnalysis
                                 )
                                 {
                                     // Canonical instance default methods need to go through a thunk that adds the right generic context
-                                    defaultIntfMethod =
-                                        factory.TypeSystemContext.GetDefaultInterfaceMethodImplementationThunk(
+                                    defaultIntfMethod = factory
+                                        .TypeSystemContext
+                                        .GetDefaultInterfaceMethodImplementationThunk(
                                             defaultIntfMethod,
                                             _type.ConvertToCanonForm(CanonicalFormKind.Specific),
                                             providingInterfaceDefinitionType
@@ -703,28 +706,27 @@ namespace ILCompiler.DependencyAnalysis
                                     )
                                 );
 
-                                factory.MetadataManager.NoteOverridingMethod(
-                                    interfaceMethod,
-                                    implMethod
-                                );
+                                factory
+                                    .MetadataManager
+                                    .NoteOverridingMethod(interfaceMethod, implMethod);
 
-                                factory.MetadataManager.GetDependenciesForOverridingMethod(
-                                    ref result,
-                                    factory,
-                                    interfaceMethod,
-                                    implMethod
-                                );
+                                factory
+                                    .MetadataManager
+                                    .GetDependenciesForOverridingMethod(
+                                        ref result,
+                                        factory,
+                                        interfaceMethod,
+                                        implMethod
+                                    );
                             }
                         }
                     }
                 }
             }
 
-            factory.MetadataManager.GetConditionalDependenciesDueToEETypePresence(
-                ref result,
-                factory,
-                _type
-            );
+            factory
+                .MetadataManager
+                .GetConditionalDependenciesDueToEETypePresence(ref result, factory, _type);
 
             return result;
         }
@@ -847,11 +849,9 @@ namespace ILCompiler.DependencyAnalysis
             {
                 // If necessary MethodTable is the highest load level for this type, ask the metadata manager
                 // if we have any dependencies due to presence of the EEType.
-                factory.MetadataManager.GetDependenciesDueToEETypePresence(
-                    ref dependencies,
-                    factory,
-                    _type
-                );
+                factory
+                    .MetadataManager
+                    .GetDependenciesDueToEETypePresence(ref dependencies, factory, _type);
 
                 // If necessary MethodTable is the highest load level, consider this a module use
                 if (_type is MetadataType mdType)
@@ -1357,9 +1357,9 @@ namespace ILCompiler.DependencyAnalysis
                         && !mdImplType.IsInterface
                         && implMethod.OwningType is MetadataType mdImplMethodType
                         && mdImplMethodType.IsAbstract
-                        && factory.CompilationModuleGroup.AllowVirtualMethodOnAbstractTypeOptimization(
-                            canonImplMethod
-                        );
+                        && factory
+                            .CompilationModuleGroup
+                            .AllowVirtualMethodOnAbstractTypeOptimization(canonImplMethod);
 
                     IMethodNode implSymbol = canUseTentativeEntrypoint
                         ? factory.TentativeMethodEntrypoint(

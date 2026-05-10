@@ -245,10 +245,12 @@ namespace System.Collections.Tests
             var list = new SortedList() { { "a", 1 }, { "b", 2 } };
             DebuggerAttributeInfo debuggerAttribute =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(list);
-            PropertyInfo itemProperty = debuggerAttribute.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = debuggerAttribute
+                .Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             Array itemArray = (Array)itemProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(list.Count, itemArray.Length);
@@ -263,10 +265,12 @@ namespace System.Collections.Tests
             var list = SortedList.Synchronized(new SortedList() { { "a", 1 }, { "b", 2 } });
             DebuggerAttributeInfo debuggerAttribute =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(list);
-            PropertyInfo itemProperty = debuggerAttribute.Properties.Single(pr =>
-                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
-                == DebuggerBrowsableState.RootHidden
-            );
+            PropertyInfo itemProperty = debuggerAttribute
+                .Properties
+                .Single(pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+                );
             Array itemArray = (Array)itemProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(list.Count, itemArray.Length);

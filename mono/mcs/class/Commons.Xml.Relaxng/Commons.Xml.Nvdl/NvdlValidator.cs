@@ -51,12 +51,14 @@ namespace Commons.Xml.Nvdl
 
         public void StartElement()
         {
-            NvdlDebug.Writer.WriteLine(
-                "  <dispatcher.StartElement {0}. stack depth: {1}. current section ns {2}",
-                Reader.Name,
-                sectionStack.Count,
-                section == null ? "(none)" : section.Namespace
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "  <dispatcher.StartElement {0}. stack depth: {1}. current section ns {2}",
+                    Reader.Name,
+                    sectionStack.Count,
+                    section == null ? "(none)" : section.Namespace
+                );
             NvdlSection prev = section;
             section = GetSection(section);
 
@@ -100,11 +102,13 @@ namespace Commons.Xml.Nvdl
 
         public void EndElement()
         {
-            NvdlDebug.Writer.WriteLine(
-                "  <dispatcher.EndElement {0}. depth: {1}",
-                Reader.Name,
-                sectionStack.Count
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "  <dispatcher.EndElement {0}. depth: {1}",
+                    Reader.Name,
+                    sectionStack.Count
+                );
             if (section != null)
             {
                 section = sectionStack.Pop();
@@ -169,12 +173,14 @@ namespace Commons.Xml.Nvdl
                 }
             }
 
-            NvdlDebug.Writer.WriteLine(
-                "New section: ns {0} / interp.count {1} / loc: {2}",
-                ns,
-                ilist.Count,
-                ((IXmlLineInfo)dispatcher.Reader).LineNumber
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "New section: ns {0} / interp.count {1} / loc: {2}",
+                    ns,
+                    ilist.Count,
+                    ((IXmlLineInfo)dispatcher.Reader).LineNumber
+                );
         }
 
         private NvdlInterpretation GetInterp(SimpleAction a, NvdlDispatcher d)
@@ -189,11 +195,13 @@ namespace Commons.Xml.Nvdl
             NvdlInterpretation p
         )
         {
-            NvdlDebug.Writer.WriteLine(
-                "***** new interp from action {0} from mode {1}",
-                a.Location,
-                m.Location
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "***** new interp from action {0} from mode {1}",
+                    a.Location,
+                    m.Location
+                );
             SimpleValidate v = a as SimpleValidate;
             if (v != null)
                 return new NvdlValidateInterp(d, m, v, p);
@@ -204,22 +212,24 @@ namespace Commons.Xml.Nvdl
         {
             SimpleMode m = FindContextMode(i.Action, parentState);
             SimpleRule rule = FindElementRule(m, dispatcher.Reader);
-            NvdlDebug.Writer.WriteLine(
-                "***** populate interp from action {0} whose mode is {1}. Rule is {2} whose actions are {3}",
-                i.Action.Location,
-                m.Location,
-                rule.Location,
-                rule.Actions.Length
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "***** populate interp from action {0} whose mode is {1}. Rule is {2} whose actions are {3}",
+                    i.Action.Location,
+                    m.Location,
+                    rule.Location,
+                    rule.Actions.Length
+                );
             foreach (SimpleAction a in rule.Actions)
             {
                 NvdlInterpretation cur = i;
                 for (; cur != null; cur = cur.Parent)
                     if (cur.CreatedMode == m && cur.Action == a)
                     {
-                        NvdlDebug.Writer.WriteLine(
-                            "------- corresponding PlanElem already exists."
-                        );
+                        NvdlDebug
+                            .Writer
+                            .WriteLine("------- corresponding PlanElem already exists.");
                         break;
                     }
                 if (cur == null)
@@ -339,12 +349,14 @@ namespace Commons.Xml.Nvdl
 
         public void EndElement()
         {
-            NvdlDebug.Writer.WriteLine(
-                "    <section.EndElement {0} ({2}). {1} interp.",
-                Reader.Name,
-                ilist.Count,
-                ns
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "    <section.EndElement {0} ({2}). {1} interp.",
+                    Reader.Name,
+                    ilist.Count,
+                    ns
+                );
             ValidateEndElement();
             elementNameStack.RemoveAt(elementNameStack.Count - 1);
         }
@@ -513,9 +525,9 @@ namespace Commons.Xml.Nvdl
 
         public override void StartElement()
         {
-            NvdlDebug.Writer.WriteLine(
-                "            <result.StartElement : " + type + "/" + Action.Location
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine("            <result.StartElement : " + type + "/" + Action.Location);
             if (type != NvdlResultType.Unwrap)
                 ValidateStartElement(); // unwrap itself does not dispatch to parent interpretation
             NvdlDebug.Writer.WriteLine("            </result>");
@@ -523,12 +535,14 @@ namespace Commons.Xml.Nvdl
 
         public override void EndElement()
         {
-            NvdlDebug.Writer.WriteLine(
-                "            <result.EndElement : "
-                    + type
-                    + "/"
-                    + ((IXmlLineInfo)Dispatcher.Reader).LineNumber
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "            <result.EndElement : "
+                        + type
+                        + "/"
+                        + ((IXmlLineInfo)Dispatcher.Reader).LineNumber
+                );
             if (type != NvdlResultType.Unwrap)
                 ValidateEndElement(); // unwrap itself does not dispatch to parent interpretation
             NvdlDebug.Writer.WriteLine("            </result>");
@@ -536,12 +550,14 @@ namespace Commons.Xml.Nvdl
 
         public override void Text()
         {
-            NvdlDebug.Writer.WriteLine(
-                "            <result.Text : "
-                    + type
-                    + "/"
-                    + ((IXmlLineInfo)Dispatcher.Reader).LineNumber
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "            <result.Text : "
+                        + type
+                        + "/"
+                        + ((IXmlLineInfo)Dispatcher.Reader).LineNumber
+                );
             if (type != NvdlResultType.Unwrap)
                 ValidateText(); // unwrap itself does not dispatch to parent interpretation
             NvdlDebug.Writer.WriteLine("            </result>");
@@ -549,12 +565,14 @@ namespace Commons.Xml.Nvdl
 
         public override void Whitespace()
         {
-            NvdlDebug.Writer.WriteLine(
-                "            <result.Whitespace : "
-                    + type
-                    + "/"
-                    + ((IXmlLineInfo)Dispatcher.Reader).LineNumber
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "            <result.Whitespace : "
+                        + type
+                        + "/"
+                        + ((IXmlLineInfo)Dispatcher.Reader).LineNumber
+                );
             if (type != NvdlResultType.Unwrap)
                 ValidateWhitespace(); // unwrap itself does not dispatch to parent interpretation
             NvdlDebug.Writer.WriteLine("            </result>");
@@ -661,11 +679,13 @@ namespace Commons.Xml.Nvdl
 
         public override void StartElement()
         {
-            NvdlDebug.Writer.WriteLine(
-                "  <validate.StartElement {0} {1}",
-                validator.Name,
-                validator.IsEmptyElement ? "(EmptyElement)" : ""
-            );
+            NvdlDebug
+                .Writer
+                .WriteLine(
+                    "  <validate.StartElement {0} {1}",
+                    validator.Name,
+                    validator.IsEmptyElement ? "(EmptyElement)" : ""
+                );
             ValidateStartElement();
         }
 

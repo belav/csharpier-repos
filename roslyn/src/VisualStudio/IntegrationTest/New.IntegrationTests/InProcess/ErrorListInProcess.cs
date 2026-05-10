@@ -131,10 +131,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 cancellationToken
             );
             var args = await errorList
-                .TableControl.ForceUpdateAsync()
+                .TableControl
+                .ForceUpdateAsync()
                 .WithCancellation(cancellationToken);
-            return args
-                .AllEntries.Where(item =>
+            return args.AllEntries
+                .Where(item =>
                 {
                     if (item.GetCategory() > minimumSeverity)
                     {

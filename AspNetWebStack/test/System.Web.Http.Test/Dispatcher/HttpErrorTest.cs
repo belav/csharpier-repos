@@ -343,26 +343,30 @@ namespace System.Web.Http.Dispatcher
         public void HttpError_Message_RoundTrips()
         {
             string message = "HelloWorld";
-            Assert.Reflection.Property(
-                new HttpError(message),
-                e => e.Message,
-                expectedDefaultValue: message,
-                allowNull: true,
-                roundTripTestValue: "HelloAgain"
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new HttpError(message),
+                    e => e.Message,
+                    expectedDefaultValue: message,
+                    allowNull: true,
+                    roundTripTestValue: "HelloAgain"
+                );
         }
 
         [Fact]
         public void HttpError_MessageDetail_RoundTrips()
         {
             string messageDetail = "HelloWorld";
-            Assert.Reflection.Property(
-                new HttpError("message", messageDetail),
-                e => e.MessageDetail,
-                expectedDefaultValue: messageDetail,
-                allowNull: true,
-                roundTripTestValue: "HelloAgain"
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new HttpError("message", messageDetail),
+                    e => e.MessageDetail,
+                    expectedDefaultValue: messageDetail,
+                    allowNull: true,
+                    roundTripTestValue: "HelloAgain"
+                );
         }
 
         [Fact]
@@ -370,26 +374,30 @@ namespace System.Web.Http.Dispatcher
         {
             string exceptionMessage = "ExceptionMessage";
             Exception exception = new Exception(exceptionMessage);
-            Assert.Reflection.Property(
-                new HttpError(exception, includeErrorDetail: true),
-                e => e.ExceptionMessage,
-                expectedDefaultValue: exceptionMessage,
-                allowNull: true,
-                roundTripTestValue: "HelloAgain"
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new HttpError(exception, includeErrorDetail: true),
+                    e => e.ExceptionMessage,
+                    expectedDefaultValue: exceptionMessage,
+                    allowNull: true,
+                    roundTripTestValue: "HelloAgain"
+                );
         }
 
         [Fact]
         public void HttpError_ExceptionType_RoundTrips()
         {
             ApplicationException exception = new ApplicationException("HelloWorld");
-            Assert.Reflection.Property(
-                new HttpError(exception, includeErrorDetail: true),
-                e => e.ExceptionType,
-                expectedDefaultValue: exception.GetType().FullName,
-                allowNull: true,
-                roundTripTestValue: "HelloAgain"
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new HttpError(exception, includeErrorDetail: true),
+                    e => e.ExceptionType,
+                    expectedDefaultValue: exception.GetType().FullName,
+                    allowNull: true,
+                    roundTripTestValue: "HelloAgain"
+                );
         }
 
         [Fact]
@@ -405,13 +413,15 @@ namespace System.Web.Http.Dispatcher
                 exception = e;
             }
 
-            Assert.Reflection.Property(
-                new HttpError(exception, includeErrorDetail: true),
-                e => e.StackTrace,
-                expectedDefaultValue: exception.StackTrace,
-                allowNull: true,
-                roundTripTestValue: "HelloAgain"
-            );
+            Assert
+                .Reflection
+                .Property(
+                    new HttpError(exception, includeErrorDetail: true),
+                    e => e.StackTrace,
+                    expectedDefaultValue: exception.StackTrace,
+                    allowNull: true,
+                    roundTripTestValue: "HelloAgain"
+                );
         }
 
         [Fact]

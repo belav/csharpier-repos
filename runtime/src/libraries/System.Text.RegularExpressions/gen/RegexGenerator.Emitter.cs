@@ -179,7 +179,9 @@ namespace System.Text.RegularExpressions.Generator
                 writer.Write("        base.Caps = new Hashtable {");
                 AppendHashtableContents(
                     writer,
-                    rm.Tree.CaptureNumberSparseMapping.Cast<DictionaryEntry>()
+                    rm.Tree
+                        .CaptureNumberSparseMapping
+                        .Cast<DictionaryEntry>()
                         .OrderBy(de => de.Key as int?)
                 );
                 writer.WriteLine($" }};");
@@ -189,7 +191,9 @@ namespace System.Text.RegularExpressions.Generator
                 writer.Write("        base.CapNames = new Hashtable {");
                 AppendHashtableContents(
                     writer,
-                    rm.Tree.CaptureNameToNumberMapping.Cast<DictionaryEntry>()
+                    rm.Tree
+                        .CaptureNameToNumberMapping
+                        .Cast<DictionaryEntry>()
                         .OrderBy(de => de.Key as string, StringComparer.Ordinal)
                 );
                 writer.WriteLine($" }};");

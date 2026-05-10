@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseThrowExpression
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
             !diagnostic
-                .Descriptor.ImmutableCustomTags()
+                .Descriptor
+                .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)

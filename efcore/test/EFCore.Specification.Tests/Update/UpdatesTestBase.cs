@@ -148,10 +148,12 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.AFewBytes.AddRange(
-                    new AFewBytes { Id = id1, Bytes = bytes },
-                    new AFewBytes { Id = id2, Bytes = bytes }
-                );
+                context
+                    .AFewBytes
+                    .AddRange(
+                        new AFewBytes { Id = id1, Bytes = bytes },
+                        new AFewBytes { Id = id2, Bytes = bytes }
+                    );
 
                 context.SaveChanges();
             },
@@ -215,13 +217,15 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void Save_partial_update_on_missing_record_throws() =>
         ExecuteWithStrategyInTransaction(context =>
         {
-            var entry = context.Products.Attach(
-                new Product
-                {
-                    Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10"),
-                    Name = "Apple Fritter",
-                }
-            );
+            var entry = context
+                .Products
+                .Attach(
+                    new Product
+                    {
+                        Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10"),
+                        Name = "Apple Fritter",
+                    }
+                );
 
             entry.Property(c => c.Name).IsModified = true;
 
@@ -238,14 +242,16 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
 
         ExecuteWithStrategyInTransaction(context =>
         {
-            var entry = context.Products.Attach(
-                new Product
-                {
-                    Id = productId,
-                    Name = "Apple Fritter",
-                    Price = 3.49M, // Not the same as the value stored in the database
-                }
-            );
+            var entry = context
+                .Products
+                .Attach(
+                    new Product
+                    {
+                        Id = productId,
+                        Name = "Apple Fritter",
+                        Price = 3.49M, // Not the same as the value stored in the database
+                    }
+                );
 
             entry.Property(c => c.Name).IsModified = true;
 
@@ -277,14 +283,16 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context.ProductWithBytes.Attach(
-                    new ProductWithBytes
-                    {
-                        Id = productId,
-                        Name = "MegaChips",
-                        Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 },
-                    }
-                );
+                var entry = context
+                    .ProductWithBytes
+                    .Attach(
+                        new ProductWithBytes
+                        {
+                            Id = productId,
+                            Name = "MegaChips",
+                            Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 },
+                        }
+                    );
 
                 entry.Entity.Name = "GigaChips";
 
@@ -315,14 +323,16 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context.ProductWithBytes.Attach(
-                    new ProductWithBytes
-                    {
-                        Id = productId,
-                        Name = "MegaChips",
-                        Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 },
-                    }
-                );
+                var entry = context
+                    .ProductWithBytes
+                    .Attach(
+                        new ProductWithBytes
+                        {
+                            Id = productId,
+                            Name = "MegaChips",
+                            Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 },
+                        }
+                    );
 
                 entry.Entity.Name = "GigaChips";
 
@@ -353,14 +363,16 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context.ProductWithBytes.Attach(
-                    new ProductWithBytes
-                    {
-                        Id = productId,
-                        Name = "MegaChips",
-                        Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 },
-                    }
-                );
+                var entry = context
+                    .ProductWithBytes
+                    .Attach(
+                        new ProductWithBytes
+                        {
+                            Id = productId,
+                            Name = "MegaChips",
+                            Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 },
+                        }
+                    );
 
                 entry.State = EntityState.Deleted;
 
@@ -391,14 +403,16 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var entry = context.ProductWithBytes.Attach(
-                    new ProductWithBytes
-                    {
-                        Id = productId,
-                        Name = "MegaChips",
-                        Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 },
-                    }
-                );
+                var entry = context
+                    .ProductWithBytes
+                    .Attach(
+                        new ProductWithBytes
+                        {
+                            Id = productId,
+                            Name = "MegaChips",
+                            Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 },
+                        }
+                    );
 
                 entry.State = EntityState.Deleted;
 
@@ -536,9 +550,9 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
     public virtual void Remove_partial_on_missing_record_throws() =>
         ExecuteWithStrategyInTransaction(context =>
         {
-            context.Products.Remove(
-                new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") }
-            );
+            context
+                .Products
+                .Remove(new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") });
 
             Assert.Equal(
                 UpdateConcurrencyMessage,
@@ -553,13 +567,15 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
 
         ExecuteWithStrategyInTransaction(context =>
         {
-            context.Products.Remove(
-                new Product
-                {
-                    Id = productId,
-                    Price = 3.49M, // Not the same as the value stored in the database
-                }
-            );
+            context
+                .Products
+                .Remove(
+                    new Product
+                    {
+                        Id = productId,
+                        Price = 3.49M, // Not the same as the value stored in the database
+                    }
+                );
 
             Assert.Equal(
                 UpdateConcurrencyTokenMessage,
@@ -575,7 +591,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var category = context.Categories.AsNoTracking().Single();
                 var products = context
-                    .Products.AsNoTracking()
+                    .Products
+                    .AsNoTracking()
                     .Where(p => p.DependentId == category.PrincipalId)
                     .ToList();
 
@@ -596,7 +613,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var category = context.Categories.Single();
                 var products = context
-                    .Products.Where(p => p.DependentId == category.PrincipalId)
+                    .Products
+                    .Where(p => p.DependentId == category.PrincipalId)
                     .ToList();
 
                 Assert.Equal("New Category", category.Name);
@@ -1012,22 +1030,26 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             modelBuilder
                 .Entity<Baked>()
                 .Property(e => e.Id)
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
             modelBuilder.Entity<Cake>();
             modelBuilder.Entity<CupCake>();
             modelBuilder.Entity<Muffin>();
             modelBuilder
                 .Entity<Tin>()
                 .Property(e => e.Id)
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
             modelBuilder
                 .Entity<Ingredient>()
                 .Property(e => e.Id)
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
             modelBuilder
                 .Entity<Top>()
                 .Property(e => e.Id)
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
 
             modelBuilder
                 .Entity<Product>()

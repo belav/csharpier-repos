@@ -15,11 +15,9 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithRangeAttribute()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(string),
-                "Length"
-            );
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => null, typeof(string), "Length");
             var context = new ControllerContext();
             var attribute = new RangeAttribute(typeof(decimal), "0", "100");
             var adapter = new RangeAttributeAdapter(metadata, context, attribute);

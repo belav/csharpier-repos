@@ -59,11 +59,11 @@ namespace System.IdentityModel.Diagnostics
             // canonical element string
             //
             byte[] contentBuffer = _logStream.GetBuffer();
-            string contentAsString = System.Text.Encoding.UTF8.GetString(
-                contentBuffer,
-                0,
-                (int)_logStream.Length
-            );
+            string contentAsString = System
+                .Text
+                .Encoding
+                .UTF8
+                .GetString(contentBuffer, 0, (int)_logStream.Length);
 
             writer.WriteElementString(
                 CanonicalElementStringLength,

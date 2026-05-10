@@ -114,16 +114,19 @@ namespace System.Web.Http.Routing
             Contract.Assert(configuration != null);
             Contract.Assert(directRouteProvider != null);
 
-            IHttpControllerSelector controllerSelector =
-                configuration.Services.GetHttpControllerSelector();
+            IHttpControllerSelector controllerSelector = configuration
+                .Services
+                .GetHttpControllerSelector();
             IDictionary<string, HttpControllerDescriptor> controllerMap =
                 controllerSelector.GetControllerMapping();
             if (controllerMap != null)
             {
                 foreach (HttpControllerDescriptor controllerDescriptor in controllerMap.Values)
                 {
-                    IHttpActionSelector actionSelector =
-                        controllerDescriptor.Configuration.Services.GetActionSelector();
+                    IHttpActionSelector actionSelector = controllerDescriptor
+                        .Configuration
+                        .Services
+                        .GetActionSelector();
 
                     ILookup<string, HttpActionDescriptor> actionsByName =
                         actionSelector.GetActionMapping(controllerDescriptor);
@@ -163,12 +166,14 @@ namespace System.Web.Http.Routing
 
                         // We need to mark each action as only reachable by direct routes so that traditional routes
                         // don't accidentally hit them.
-                        HttpControllerDescriptor routeControllerDescriptor =
-                            entry.Route.GetTargetControllerDescriptor();
+                        HttpControllerDescriptor routeControllerDescriptor = entry
+                            .Route
+                            .GetTargetControllerDescriptor();
                         if (routeControllerDescriptor == null)
                         {
-                            HttpActionDescriptor[] actionDescriptors =
-                                entry.Route.GetTargetActionDescriptors();
+                            HttpActionDescriptor[] actionDescriptors = entry
+                                .Route
+                                .GetTargetActionDescriptors();
                             foreach (var actionDescriptor in actionDescriptors)
                             {
                                 actionDescriptor.SetIsAttributeRouted(true);

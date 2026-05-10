@@ -68,9 +68,9 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm
         )
             : this(
-                Encoding.UTF8.GetBytes(
-                    password ?? throw new ArgumentNullException(nameof(password))
-                ),
+                Encoding
+                    .UTF8
+                    .GetBytes(password ?? throw new ArgumentNullException(nameof(password))),
                 salt,
                 iterations,
                 hashAlgorithm,

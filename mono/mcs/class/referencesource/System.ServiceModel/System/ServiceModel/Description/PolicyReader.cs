@@ -467,9 +467,11 @@ namespace System.ServiceModel.Description
                     get
                     {
 #pragma warning suppress 56503 // Microsoft, IEnumerator guidelines, Current throws exception before calling MoveNext
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.NoValue0))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(SR.GetString(SR.NoValue0))
+                            );
                     }
                 }
 

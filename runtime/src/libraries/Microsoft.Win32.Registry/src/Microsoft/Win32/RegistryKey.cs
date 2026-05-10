@@ -253,19 +253,21 @@ namespace Microsoft.Win32
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
 
             // By default, the new key will be writable.
-            int ret = Interop.Advapi32.RegCreateKeyEx(
-                _hkey,
-                subkey,
-                0,
-                null,
-                (int)registryOptions /* specifies if the key is volatile */
-                ,
-                GetRegistryKeyAccess(permissionCheck != RegistryKeyPermissionCheck.ReadSubTree)
-                    | (int)_regView,
-                ref secAttrs,
-                out SafeRegistryHandle result,
-                out int _
-            );
+            int ret = Interop
+                .Advapi32
+                .RegCreateKeyEx(
+                    _hkey,
+                    subkey,
+                    0,
+                    null,
+                    (int)registryOptions /* specifies if the key is volatile */
+                    ,
+                    GetRegistryKeyAccess(permissionCheck != RegistryKeyPermissionCheck.ReadSubTree)
+                        | (int)_regView,
+                    ref secAttrs,
+                    out SafeRegistryHandle result,
+                    out int _
+                );
 
             if (ret == 0 && !result.IsInvalid)
             {
@@ -397,12 +399,9 @@ namespace Microsoft.Win32
                     // RegDeleteTree doesn't self-delete when lpSubKey is empty.
                     // Manually delete the key to restore old behavior.
 
-                    ret = Interop.Advapi32.RegDeleteKeyEx(
-                        key._hkey,
-                        string.Empty,
-                        (int)_regView,
-                        0
-                    );
+                    ret = Interop
+                        .Advapi32
+                        .RegDeleteKeyEx(key._hkey, string.Empty, (int)_regView, 0);
                     if (ret != 0)
                     {
                         Win32Error(ret, null);
@@ -511,11 +510,13 @@ namespace Microsoft.Win32
             }
 
             // connect to the specified remote registry
-            int ret = Interop.Advapi32.RegConnectRegistry(
-                machineName,
-                new IntPtr((int)hKey),
-                out SafeRegistryHandle foreignHKey
-            );
+            int ret = Interop
+                .Advapi32
+                .RegConnectRegistry(
+                    machineName,
+                    new IntPtr((int)hKey),
+                    out SafeRegistryHandle foreignHKey
+                );
             if (ret == 0 && !foreignHKey.IsInvalid)
             {
                 RegistryKey key = new RegistryKey(
@@ -569,13 +570,15 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
             name = FixupName(name);
 
-            int ret = Interop.Advapi32.RegOpenKeyEx(
-                _hkey,
-                name,
-                0,
-                (GetRegistryKeyAccess(writable) | (int)_regView),
-                out SafeRegistryHandle result
-            );
+            int ret = Interop
+                .Advapi32
+                .RegOpenKeyEx(
+                    _hkey,
+                    name,
+                    0,
+                    (GetRegistryKeyAccess(writable) | (int)_regView),
+                    out SafeRegistryHandle result
+                );
             if (ret == 0 && !result.IsInvalid)
             {
                 RegistryKey key = new RegistryKey(
@@ -637,13 +640,15 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
             name = FixupName(name); // Fixup multiple slashes to a single slash
 
-            int ret = Interop.Advapi32.RegOpenKeyEx(
-                _hkey,
-                name,
-                0,
-                (int)rights | (int)_regView,
-                out SafeRegistryHandle result
-            );
+            int ret = Interop
+                .Advapi32
+                .RegOpenKeyEx(
+                    _hkey,
+                    name,
+                    0,
+                    (int)rights | (int)_regView,
+                    out SafeRegistryHandle result
+                );
             if (ret == 0 && !result.IsInvalid)
             {
                 RegistryKey key = new RegistryKey(
@@ -680,13 +685,15 @@ namespace Microsoft.Win32
             ValidateKeyName(name);
             EnsureNotDisposed();
 
-            int ret = Interop.Advapi32.RegOpenKeyEx(
-                _hkey,
-                name,
-                0,
-                GetRegistryKeyAccess(writable) | (int)_regView,
-                out SafeRegistryHandle result
-            );
+            int ret = Interop
+                .Advapi32
+                .RegOpenKeyEx(
+                    _hkey,
+                    name,
+                    0,
+                    GetRegistryKeyAccess(writable) | (int)_regView,
+                    out SafeRegistryHandle result
+                );
             if (ret == 0 && !result.IsInvalid)
             {
                 RegistryKey key = new RegistryKey(
@@ -738,20 +745,22 @@ namespace Microsoft.Win32
                 EnsureNotDisposed();
                 int subkeys = 0;
                 int junk = 0;
-                int ret = Interop.Advapi32.RegQueryInfoKey(
-                    _hkey,
-                    null,
-                    null,
-                    0,
-                    ref subkeys, // subkeys
-                    null,
-                    null,
-                    ref junk, // values
-                    null,
-                    null,
-                    null,
-                    null
-                );
+                int ret = Interop
+                    .Advapi32
+                    .RegQueryInfoKey(
+                        _hkey,
+                        null,
+                        null,
+                        0,
+                        ref subkeys, // subkeys
+                        null,
+                        null,
+                        ref junk, // values
+                        null,
+                        null,
+                        null,
+                        null
+                    );
 
                 if (ret != 0)
                 {
@@ -812,13 +821,15 @@ namespace Microsoft.Win32
             }
 
             // open the base key so that RegistryKey.Handle will return a valid handle
-            ret = Interop.Advapi32.RegOpenKeyEx(
-                baseKey,
-                null,
-                0,
-                GetRegistryKeyAccess(IsWritable()) | (int)_regView,
-                out SafeRegistryHandle result
-            );
+            ret = Interop
+                .Advapi32
+                .RegOpenKeyEx(
+                    baseKey,
+                    null,
+                    0,
+                    GetRegistryKeyAccess(IsWritable()) | (int)_regView,
+                    out SafeRegistryHandle result
+                );
 
             if (ret != 0 || result.IsInvalid)
             {
@@ -904,16 +915,18 @@ namespace Microsoft.Win32
 
             while (
                 (
-                    result = Interop.Advapi32.RegEnumKeyEx(
-                        _hkey,
-                        cpt,
-                        ref MemoryMarshal.GetReference(nameSpan),
-                        ref nameLength,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
+                    result = Interop
+                        .Advapi32
+                        .RegEnumKeyEx(
+                            _hkey,
+                            cpt,
+                            ref MemoryMarshal.GetReference(nameSpan),
+                            ref nameLength,
+                            null,
+                            null,
+                            null,
+                            null
+                        )
                 ) != Interop.Errors.ERROR_NO_MORE_ITEMS
             )
             {
@@ -954,20 +967,22 @@ namespace Microsoft.Win32
                 EnsureNotDisposed();
                 int values = 0;
                 int junk = 0;
-                int ret = Interop.Advapi32.RegQueryInfoKey(
-                    _hkey,
-                    null,
-                    null,
-                    0,
-                    ref junk, // subkeys
-                    null,
-                    null,
-                    ref values, // values
-                    null,
-                    null,
-                    null,
-                    null
-                );
+                int ret = Interop
+                    .Advapi32
+                    .RegQueryInfoKey(
+                        _hkey,
+                        null,
+                        null,
+                        0,
+                        ref junk, // subkeys
+                        null,
+                        null,
+                        ref values, // values
+                        null,
+                        null,
+                        null,
+                        null
+                    );
                 if (ret != 0)
                 {
                     Win32Error(ret, null);
@@ -1008,16 +1023,9 @@ namespace Microsoft.Win32
 
                 while (
                     (
-                        result = Interop.Advapi32.RegEnumValue(
-                            _hkey,
-                            cpt,
-                            name,
-                            ref nameLength,
-                            0,
-                            null,
-                            null,
-                            null
-                        )
+                        result = Interop
+                            .Advapi32
+                            .RegEnumValue(_hkey, cpt, name, ref nameLength, 0, null, null, null)
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
                 )
                 {
@@ -1171,14 +1179,9 @@ namespace Microsoft.Win32
 
                     fixed (byte* lpData = &MemoryMarshal.GetReference(span))
                     {
-                        result = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            &type,
-                            lpData,
-                            (uint*)&dataLength
-                        );
+                        result = Interop
+                            .Advapi32
+                            .RegQueryValueEx(_hkey, name, null, &type, lpData, (uint*)&dataLength);
                         if (dataLength < 0)
                         {
                             // Greater than 2GB values aren't supported.
@@ -1369,14 +1372,9 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
             int type = 0;
             int datasize = 0;
-            int ret = Interop.Advapi32.RegQueryValueEx(
-                _hkey,
-                name,
-                null,
-                &type,
-                (byte*)null,
-                (uint*)&datasize
-            );
+            int ret = Interop
+                .Advapi32
+                .RegQueryValueEx(_hkey, name, null, &type, (byte*)null, (uint*)&datasize);
             if (ret != 0)
             {
                 Win32Error(ret, null);
@@ -1436,14 +1434,16 @@ namespace Microsoft.Win32
                     case RegistryValueKind.String:
                     {
                         string data = value.ToString()!;
-                        ret = Interop.Advapi32.RegSetValueEx(
-                            _hkey,
-                            name,
-                            0,
-                            (int)valueKind,
-                            data,
-                            checked(data.Length * 2 + 2)
-                        );
+                        ret = Interop
+                            .Advapi32
+                            .RegSetValueEx(
+                                _hkey,
+                                name,
+                                0,
+                                (int)valueKind,
+                                data,
+                                checked(data.Length * 2 + 2)
+                            );
                         break;
                     }
 
@@ -1480,14 +1480,16 @@ namespace Microsoft.Win32
                             destinationIndex += (length + 1); // +1 for null terminator, which is already zero-initialized in new array.
                         }
 
-                        ret = Interop.Advapi32.RegSetValueEx(
-                            _hkey,
-                            name,
-                            0,
-                            Interop.Advapi32.RegistryValues.REG_MULTI_SZ,
-                            dataChars,
-                            sizeInBytes
-                        );
+                        ret = Interop
+                            .Advapi32
+                            .RegSetValueEx(
+                                _hkey,
+                                name,
+                                0,
+                                Interop.Advapi32.RegistryValues.REG_MULTI_SZ,
+                                dataChars,
+                                sizeInBytes
+                            );
 
                         break;
                     }
@@ -1495,18 +1497,20 @@ namespace Microsoft.Win32
                     case RegistryValueKind.None:
                     case RegistryValueKind.Binary:
                         byte[] dataBytes = (byte[])value;
-                        ret = Interop.Advapi32.RegSetValueEx(
-                            _hkey,
-                            name,
-                            0,
-                            (
-                                valueKind == RegistryValueKind.None
-                                    ? Interop.Advapi32.RegistryValues.REG_NONE
-                                    : Interop.Advapi32.RegistryValues.REG_BINARY
-                            ),
-                            dataBytes,
-                            dataBytes.Length
-                        );
+                        ret = Interop
+                            .Advapi32
+                            .RegSetValueEx(
+                                _hkey,
+                                name,
+                                0,
+                                (
+                                    valueKind == RegistryValueKind.None
+                                        ? Interop.Advapi32.RegistryValues.REG_NONE
+                                        : Interop.Advapi32.RegistryValues.REG_BINARY
+                                ),
+                                dataBytes,
+                                dataBytes.Length
+                            );
                         break;
 
                     case RegistryValueKind.DWord:
@@ -1518,14 +1522,16 @@ namespace Microsoft.Win32
                             System.Globalization.CultureInfo.InvariantCulture
                         );
 
-                        ret = Interop.Advapi32.RegSetValueEx(
-                            _hkey,
-                            name,
-                            0,
-                            Interop.Advapi32.RegistryValues.REG_DWORD,
-                            ref data,
-                            4
-                        );
+                        ret = Interop
+                            .Advapi32
+                            .RegSetValueEx(
+                                _hkey,
+                                name,
+                                0,
+                                Interop.Advapi32.RegistryValues.REG_DWORD,
+                                ref data,
+                                4
+                            );
                         break;
                     }
 
@@ -1536,14 +1542,16 @@ namespace Microsoft.Win32
                             System.Globalization.CultureInfo.InvariantCulture
                         );
 
-                        ret = Interop.Advapi32.RegSetValueEx(
-                            _hkey,
-                            name,
-                            0,
-                            Interop.Advapi32.RegistryValues.REG_QWORD,
-                            ref data,
-                            8
-                        );
+                        ret = Interop
+                            .Advapi32
+                            .RegSetValueEx(
+                                _hkey,
+                                name,
+                                0,
+                                Interop.Advapi32.RegistryValues.REG_QWORD,
+                                ref data,
+                                8
+                            );
                         break;
                     }
                 }

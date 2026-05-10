@@ -63,12 +63,13 @@ internal readonly struct SynthesizedTypeMaps(
 
     public bool IsSubsetOf(SynthesizedTypeMaps other) =>
         AnonymousTypes.Keys.All(static (key, other) => other.AnonymousTypes.ContainsKey(key), other)
-        && AnonymousDelegates.Keys.All(
-            static (key, other) => other.AnonymousDelegates.ContainsKey(key),
-            other
-        )
-        && AnonymousDelegatesWithIndexedNames.Keys.All(
-            static (key, other) => other.AnonymousDelegatesWithIndexedNames.ContainsKey(key),
-            other
-        );
+        && AnonymousDelegates
+            .Keys
+            .All(static (key, other) => other.AnonymousDelegates.ContainsKey(key), other)
+        && AnonymousDelegatesWithIndexedNames
+            .Keys
+            .All(
+                static (key, other) => other.AnonymousDelegatesWithIndexedNames.ContainsKey(key),
+                other
+            );
 }

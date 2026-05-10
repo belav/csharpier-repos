@@ -45,9 +45,11 @@ namespace System.IdentityModel.Tokens
                 {
                     if (value.Value < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("value", SR.GetString(SR.ID0002))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("value", SR.GetString(SR.ID0002))
+                            );
                     }
                 }
 

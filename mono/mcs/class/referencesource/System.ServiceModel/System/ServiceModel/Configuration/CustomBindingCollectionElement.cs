@@ -81,30 +81,32 @@ namespace System.ServiceModel.Configuration
                     as BindingElementExtensionElement;
                 if (null == bindingElementExtension)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidExtensionType,
-                                element.Type,
-                                assemblyName,
-                                ConfigurationStrings.BindingElementExtensions
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidExtensionType,
+                                    element.Type,
+                                    assemblyName,
+                                    ConfigurationStrings.BindingElementExtensions
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 bool isMatch;
                 if (allowDerivedTypes)
                 {
-                    isMatch = bindingElementExtension.BindingElementType.IsAssignableFrom(
-                        bindingElement.GetType()
-                    );
+                    isMatch = bindingElementExtension
+                        .BindingElementType
+                        .IsAssignableFrom(bindingElement.GetType());
                 }
                 else
                 {
-                    isMatch = bindingElementExtension.BindingElementType.Equals(
-                        bindingElement.GetType()
-                    );
+                    isMatch = bindingElementExtension
+                        .BindingElementType
+                        .Equals(bindingElement.GetType());
                 }
 
                 if (isMatch)

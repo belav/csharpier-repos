@@ -1741,10 +1741,9 @@ namespace Internal.TypeSystem.Interop
         private ILLocalVariable? _marshallerInstance;
 
         private MetadataType Marshaller =>
-            Context.SystemModule.GetKnownType(
-                "System.Runtime.InteropServices.Marshalling",
-                "Utf8StringMarshaller"
-            );
+            Context
+                .SystemModule
+                .GetKnownType("System.Runtime.InteropServices.Marshalling", "Utf8StringMarshaller");
 
         private MetadataType MarshallerIn => Marshaller.GetNestedType("ManagedToUnmanagedIn");
 
@@ -1790,7 +1789,8 @@ namespace Internal.TypeSystem.Interop
                 codeStream.EmitLdc(LocalBufferLength);
 
                 var spanOfByte = Context
-                    .SystemModule.GetKnownType("System", "Span`1")
+                    .SystemModule
+                    .GetKnownType("System", "Span`1")
                     .MakeInstantiatedType(
                         new TypeDesc[] { Context.GetWellKnownType(WellKnownType.Byte) }
                     );
@@ -2101,20 +2101,22 @@ namespace Internal.TypeSystem.Interop
 
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes
-                        .GetMarshal(Context)
-                        .GetKnownMethod(
-                            "GetFunctionPointerForDelegate",
-                            new MethodSignature(
-                                MethodSignatureFlags.Static,
-                                1,
-                                Context.GetWellKnownType(WellKnownType.IntPtr),
-                                new TypeDesc[] { Context.GetSignatureVariable(0, method: true) }
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropTypes
+                            .GetMarshal(Context)
+                            .GetKnownMethod(
+                                "GetFunctionPointerForDelegate",
+                                new MethodSignature(
+                                    MethodSignatureFlags.Static,
+                                    1,
+                                    Context.GetWellKnownType(WellKnownType.IntPtr),
+                                    new TypeDesc[] { Context.GetSignatureVariable(0, method: true) }
+                                )
                             )
-                        )
-                        .MakeInstantiatedMethod(ManagedType)
-                )
+                            .MakeInstantiatedMethod(ManagedType)
+                    )
             );
 
             codeStream.Emit(ILOpcode.br, lDone);
@@ -2139,20 +2141,25 @@ namespace Internal.TypeSystem.Interop
 
             codeStream.Emit(
                 ILOpcode.call,
-                _ilCodeStreams.Emitter.NewToken(
-                    InteropTypes
-                        .GetMarshal(Context)
-                        .GetKnownMethod(
-                            "GetDelegateForFunctionPointer",
-                            new MethodSignature(
-                                MethodSignatureFlags.Static,
-                                1,
-                                Context.GetSignatureVariable(0, method: true),
-                                new TypeDesc[] { Context.GetWellKnownType(WellKnownType.IntPtr) }
+                _ilCodeStreams
+                    .Emitter
+                    .NewToken(
+                        InteropTypes
+                            .GetMarshal(Context)
+                            .GetKnownMethod(
+                                "GetDelegateForFunctionPointer",
+                                new MethodSignature(
+                                    MethodSignatureFlags.Static,
+                                    1,
+                                    Context.GetSignatureVariable(0, method: true),
+                                    new TypeDesc[]
+                                    {
+                                        Context.GetWellKnownType(WellKnownType.IntPtr),
+                                    }
+                                )
                             )
-                        )
-                        .MakeInstantiatedMethod(ManagedType)
-                )
+                            .MakeInstantiatedMethod(ManagedType)
+                    )
             );
 
             codeStream.Emit(ILOpcode.br, lDone);
@@ -2176,9 +2183,9 @@ namespace Internal.TypeSystem.Interop
                 LoadManagedValue(codeStream);
                 codeStream.Emit(
                     ILOpcode.call,
-                    _ilCodeStreams.Emitter.NewToken(
-                        InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null)
-                    )
+                    _ilCodeStreams
+                        .Emitter
+                        .NewToken(InteropTypes.GetGC(Context).GetKnownMethod("KeepAlive", null))
                 );
             }
         }

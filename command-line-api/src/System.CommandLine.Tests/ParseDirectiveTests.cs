@@ -61,7 +61,8 @@ namespace System.CommandLine.Tests
             await result.InvokeAsync();
 
             config
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Be($"[ {CliRootCommand.ExecutableName} [ --help ] ]" + Environment.NewLine);
         }
@@ -80,7 +81,8 @@ namespace System.CommandLine.Tests
             await result.InvokeAsync();
 
             config
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Be($"[ {CliRootCommand.ExecutableName} [ --version ] ]" + Environment.NewLine);
         }

@@ -120,7 +120,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                 >();
 
                                 var tasks = project
-                                    .Solution.Projects.Select(async p => new
+                                    .Solution
+                                    .Projects
+                                    .Select(async p => new
                                     {
                                         Project = p,
                                         Diagnostics = await fixAllContext

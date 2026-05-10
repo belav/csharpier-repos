@@ -179,8 +179,10 @@ namespace System.Data.EntityClient
                         storeCommandDefinition,
                     };
 
-                    EntitySet firstResultEntitySet =
-                        mapping.FunctionImport.EntitySets.FirstOrDefault();
+                    EntitySet firstResultEntitySet = mapping
+                        .FunctionImport
+                        .EntitySets
+                        .FirstOrDefault();
                     if (firstResultEntitySet != null)
                     {
                         _entitySets = new Set<EntitySet>();
@@ -347,11 +349,15 @@ namespace System.Data.EntityClient
                     if (property.TypeUsage.EdmType.BuiltInTypeKind == BuiltInTypeKind.ComplexType)
                     {
                         throw new NotSupportedException(
-                            System.Data.Entity.Strings.ComplexTypeAsReturnTypeAndNestedComplexProperty(
-                                property.Name,
-                                complexType.Name,
-                                functionImport.FullName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ComplexTypeAsReturnTypeAndNestedComplexProperty(
+                                    property.Name,
+                                    complexType.Name,
+                                    functionImport.FullName
+                                )
                         );
                     }
                 }
@@ -378,16 +384,22 @@ namespace System.Data.EntityClient
             // Find mapped store function.
             FunctionImportMapping targetFunctionMapping;
             if (
-                !functionCommandTree.MetadataWorkspace.TryGetFunctionImportMapping(
-                    functionCommandTree.EdmFunction,
-                    out targetFunctionMapping
-                )
+                !functionCommandTree
+                    .MetadataWorkspace
+                    .TryGetFunctionImportMapping(
+                        functionCommandTree.EdmFunction,
+                        out targetFunctionMapping
+                    )
             )
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.EntityClient_UnmappedFunctionImport(
-                        functionCommandTree.EdmFunction.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .EntityClient_UnmappedFunctionImport(
+                            functionCommandTree.EdmFunction.FullName
+                        )
                 );
             }
             return (FunctionImportMappingNonComposable)targetFunctionMapping;
@@ -508,9 +520,9 @@ namespace System.Data.EntityClient
                 }
                 else if (Helper.IsSpatialType(type, out primitiveTypeKind))
                 {
-                    parameter.EdmType = EdmProviderManifest.Instance.GetPrimitiveType(
-                        primitiveTypeKind
-                    );
+                    parameter.EdmType = EdmProviderManifest
+                        .Instance
+                        .GetPrimitiveType(primitiveTypeKind);
                 }
             }
 
@@ -635,9 +647,9 @@ namespace System.Data.EntityClient
                     // wouldn't be very meaningful.  Instead, I use the IndexOf method and
                     // if I don't find it, it's not a big deal (The store provider must
                     // have added it).
-                    int parameterOrdinal = entityCommand.Parameters.IndexOf(
-                        storeParameter.ParameterName
-                    );
+                    int parameterOrdinal = entityCommand
+                        .Parameters
+                        .IndexOf(storeParameter.ParameterName);
                     if (-1 != parameterOrdinal)
                     {
                         EntityParameter entityParameter = entityCommand.Parameters[

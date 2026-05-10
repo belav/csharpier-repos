@@ -288,14 +288,16 @@ namespace NS.NS1 {
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef1)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef2)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
@@ -368,14 +370,16 @@ namespace NS.NS1 {
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef1)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef2)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
@@ -495,9 +499,10 @@ namespace Goo<T>
         {
             var source = @"public class C { }";
 
-            var aliasedCorlib = TestMetadata.Net451.mscorlib.WithAliases(
-                ImmutableArray.Create("Goo")
-            );
+            var aliasedCorlib = TestMetadata
+                .Net451
+                .mscorlib
+                .WithAliases(ImmutableArray.Create("Goo"));
 
             var comp = CreateEmptyCompilation(source, new[] { aliasedCorlib });
 

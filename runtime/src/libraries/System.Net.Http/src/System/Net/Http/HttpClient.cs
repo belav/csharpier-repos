@@ -731,7 +731,8 @@ namespace System.Net.Http
                         }
 
                         await response
-                            .Content.LoadIntoBufferAsync(_maxResponseContentBufferSize, cts.Token)
+                            .Content
+                            .LoadIntoBufferAsync(_maxResponseContentBufferSize, cts.Token)
                             .ConfigureAwait(false);
                     }
 

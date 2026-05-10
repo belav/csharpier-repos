@@ -244,7 +244,8 @@ void Render()
 
             var textB = SourceText.From(sourceB);
             var actualVisibility = textB
-                .Lines.Select(line => treeB.GetLineVisibility(line.Start))
+                .Lines
+                .Select(line => treeB.GetLineVisibility(line.Start))
                 .ToImmutableArray();
             var expectedVisibility = new[]
             {

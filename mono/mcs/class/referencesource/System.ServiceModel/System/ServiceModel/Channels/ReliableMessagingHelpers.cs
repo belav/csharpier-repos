@@ -252,9 +252,11 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     if (!TimeoutHelper.WaitOne(this.closeEvent, timeout))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnOperation, timeout))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(SR.GetString(SR.TimeoutOnOperation, timeout))
+                            );
                 }
                 finally
                 {
@@ -631,9 +633,9 @@ namespace System.ServiceModel.Channels
                 if (set)
                 {
                     if (this.communicationObject != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            this.GetException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(this.GetException());
 
                     return true;
                 }
@@ -649,9 +651,11 @@ namespace System.ServiceModel.Channels
                 if (!TimeoutHelper.WaitOne(this.handle, timeout))
                 {
                     if (throwTimeoutException)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnOperation, timeout))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(SR.GetString(SR.TimeoutOnOperation, timeout))
+                            );
                     else
                         return false;
                 }
@@ -1147,12 +1151,9 @@ namespace System.ServiceModel.Channels
             object state
         )
         {
-            return faultState.RequestContext.BeginReply(
-                faultState.FaultMessage,
-                timeout,
-                callback,
-                state
-            );
+            return faultState
+                .RequestContext
+                .BeginReply(faultState.FaultMessage, timeout, callback, state);
         }
 
         protected override void EndSendFault(
@@ -1646,14 +1647,16 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(
-                            SR.GetString(
-                                SR.AddressingVersionNotSupported,
-                                this.messageVersion.Addressing
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.AddressingVersionNotSupported,
+                                    this.messageVersion.Addressing
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -1698,9 +1701,9 @@ namespace System.ServiceModel.Channels
             {
                 if (exception is QuotaExceededException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(exception.Message, exception)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new CommunicationException(exception.Message, exception));
                 }
 
                 if (
@@ -1727,11 +1730,13 @@ namespace System.ServiceModel.Channels
         {
             if (this.timeoutString1Index != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(
-                        SR.GetString(this.timeoutString1Index, this.originalTimeout)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(this.timeoutString1Index, this.originalTimeout)
+                        )
+                    );
             }
         }
 
@@ -1960,11 +1965,9 @@ namespace System.ServiceModel.Channels
                         break;
                     }
 
-                    IAsyncResult waitResult = this.requestor.abortHandle.BeginWait(
-                        iterationTimeoutHelper.RemainingTime(),
-                        waitCallback,
-                        this
-                    );
+                    IAsyncResult waitResult = this.requestor
+                        .abortHandle
+                        .BeginWait(iterationTimeoutHelper.RemainingTime(), waitCallback, this);
 
                     if (!waitResult.CompletedSynchronously)
                     {
@@ -2228,13 +2231,15 @@ namespace System.ServiceModel.Channels
 
             bool BeginSend()
             {
-                IAsyncResult sendResult = this.requestor.Binder.BeginSend(
-                    this.request,
-                    this.timeoutHelper.RemainingTime(),
-                    MaskingMode.None,
-                    sendCallback,
-                    this
-                );
+                IAsyncResult sendResult = this.requestor
+                    .Binder
+                    .BeginSend(
+                        this.request,
+                        this.timeoutHelper.RemainingTime(),
+                        MaskingMode.None,
+                        sendCallback,
+                        this
+                    );
 
                 if (sendResult.CompletedSynchronously)
                 {
@@ -2261,12 +2266,9 @@ namespace System.ServiceModel.Channels
                 TimeSpan receiveTimeout = this.requestor.GetReceiveTimeout(
                     this.timeoutHelper.RemainingTime()
                 );
-                IAsyncResult tryReceiveResult = this.requestor.Binder.BeginTryReceive(
-                    receiveTimeout,
-                    MaskingMode.None,
-                    tryReceiveCallback,
-                    this
-                );
+                IAsyncResult tryReceiveResult = this.requestor
+                    .Binder
+                    .BeginTryReceive(receiveTimeout, MaskingMode.None, tryReceiveCallback, this);
 
                 if (tryReceiveResult.CompletedSynchronously)
                 {
@@ -2933,11 +2935,13 @@ namespace System.ServiceModel.Channels
 
             if (cache == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                        SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
+                        )
+                    );
             }
 
             return cache.GetActionHeader(element);
@@ -3497,16 +3501,18 @@ namespace System.ServiceModel.Channels
             int bufferRemaining
         )
         {
-            message.Headers.Insert(
-                0,
-                new WsrmAcknowledgmentHeader(
-                    reliableMessagingVersion,
-                    id,
-                    ranges,
-                    final,
-                    bufferRemaining
-                )
-            );
+            message
+                .Headers
+                .Insert(
+                    0,
+                    new WsrmAcknowledgmentHeader(
+                        reliableMessagingVersion,
+                        id,
+                        ranges,
+                        final,
+                        bufferRemaining
+                    )
+                );
         }
 
         internal static void AddAckRequestedHeader(
@@ -3526,10 +3532,17 @@ namespace System.ServiceModel.Channels
             bool isLast
         )
         {
-            message.Headers.Insert(
-                0,
-                new WsrmSequencedMessageHeader(reliableMessagingVersion, id, sequenceNumber, isLast)
-            );
+            message
+                .Headers
+                .Insert(
+                    0,
+                    new WsrmSequencedMessageHeader(
+                        reliableMessagingVersion,
+                        id,
+                        sequenceNumber,
+                        isLast
+                    )
+                );
         }
 
         internal static void AssertWsrm11(ReliableMessagingVersion reliableMessagingVersion)
@@ -4029,9 +4042,11 @@ namespace System.ServiceModel.Channels
 
             if (sequenceNumber < 0 || (sequenceNumber == 0 && !allowZero))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.InvalidSequenceNumber, sequenceNumber))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.InvalidSequenceNumber, sequenceNumber))
+                    );
             }
 
             return sequenceNumber;

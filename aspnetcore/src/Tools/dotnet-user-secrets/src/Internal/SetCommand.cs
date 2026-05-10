@@ -89,9 +89,9 @@ Examples:
                 context.SecretStore.Set(k.Key, k.Value);
             }
 
-            context.Reporter.Output(
-                Resources.FormatMessage_Saved_Secrets(provider.CurrentData.Count)
-            );
+            context
+                .Reporter
+                .Output(Resources.FormatMessage_Saved_Secrets(provider.CurrentData.Count));
 
             context.SecretStore.Save();
         }

@@ -411,10 +411,10 @@ class C
             expectedDiagnostic = Diagnostic(analyzer.Descriptor.Id, source, isSuppressed: true);
             VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors, expectedDiagnostic);
 
-            var specificDiagnosticOptions = compilation.Options.SpecificDiagnosticOptions.Add(
-                suppressionId,
-                ReportDiagnostic.Suppress
-            );
+            var specificDiagnosticOptions = compilation
+                .Options
+                .SpecificDiagnosticOptions
+                .Add(suppressionId, ReportDiagnostic.Suppress);
             compilation = compilation.WithOptions(
                 compilation.Options.WithSpecificDiagnosticOptions(specificDiagnosticOptions)
             );
@@ -487,9 +487,9 @@ class C { }";
                             value: DiagnosticDescriptor.MapSeverityToReport(effectiveSeverity)
                         );
                         compilation = compilation.WithOptions(
-                            compilation.Options.WithSpecificDiagnosticOptions(
-                                specificDiagnosticOptions
-                            )
+                            compilation
+                                .Options
+                                .WithSpecificDiagnosticOptions(specificDiagnosticOptions)
                         );
 
                         // Verify analyzer diagnostic without suppressor, also verify no suppressions.
@@ -870,7 +870,8 @@ class C { }";
             var suppressionInfo = diagnostics
                 .Select(d => d.ProgrammaticSuppressionInfo)
                 .Single()
-                .Suppressions.Single();
+                .Suppressions
+                .Single();
             Assert.Equal(suppressionId, suppressionInfo.Id);
             Assert.Equal(
                 suppressor.SuppressionDescriptor.Justification,
@@ -895,7 +896,8 @@ class C { }";
                 .Single();
             Assert.Equal(2, programmaticSuppression.Suppressions.Count);
             var orderedSuppressions = programmaticSuppression
-                .Suppressions.Order()
+                .Suppressions
+                .Order()
                 .ToImmutableArrayOrEmpty();
             Assert.Equal(suppressionId, orderedSuppressions[0].Id);
             Assert.Equal(

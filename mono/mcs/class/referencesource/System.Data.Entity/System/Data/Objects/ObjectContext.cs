@@ -856,7 +856,8 @@ namespace System.Data.Objects
             var navProp = ParsePropertySelectorExpression<TEntity>(selector, out removedConvert);
             IEntityWrapper wrappedEntity = WrapEntityAndCheckContext(entity, "property");
             wrappedEntity
-                .RelationshipManager.GetRelatedEnd(navProp, throwArgumentException: removedConvert)
+                .RelationshipManager
+                .GetRelatedEnd(navProp, throwArgumentException: removedConvert)
                 .Load();
         }
 
@@ -887,7 +888,8 @@ namespace System.Data.Objects
             var navProp = ParsePropertySelectorExpression<TEntity>(selector, out removedConvert);
             IEntityWrapper wrappedEntity = WrapEntityAndCheckContext(entity, "property");
             wrappedEntity
-                .RelationshipManager.GetRelatedEnd(navProp, throwArgumentException: removedConvert)
+                .RelationshipManager
+                .GetRelatedEnd(navProp, throwArgumentException: removedConvert)
                 .Load(mergeOption);
         }
 
@@ -901,17 +903,21 @@ namespace System.Data.Objects
             if (wrappedEntity.Context == null)
             {
                 throw new InvalidOperationException(
-                    System.Data.Entity.Strings.ObjectContext_CannotExplicitlyLoadDetachedRelationships(
-                        refType
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ObjectContext_CannotExplicitlyLoadDetachedRelationships(refType)
                 );
             }
             if (wrappedEntity.Context != this)
             {
                 throw new InvalidOperationException(
-                    System.Data.Entity.Strings.ObjectContext_CannotLoadReferencesUsingDifferentContext(
-                        refType
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ObjectContext_CannotLoadReferencesUsingDifferentContext(refType)
                 );
             }
             return wrappedEntity;
@@ -1652,8 +1658,11 @@ namespace System.Data.Objects
                 || (_connection.State == ConnectionState.Broken)
             )
             {
-                string message =
-                    System.Data.Entity.Strings.EntityClient_ExecutingOnClosedConnection(
+                string message = System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityClient_ExecutingOnClosedConnection(
                         _connection.State == ConnectionState.Closed
                             ? System.Data.Entity.Strings.EntityClient_ConnectionStateClosed
                             : System.Data.Entity.Strings.EntityClient_ConnectionStateBroken
@@ -3093,9 +3102,11 @@ namespace System.Data.Objects
                 if (null == parameter)
                 {
                     throw EntityUtil.InvalidOperation(
-                        System.Data.Entity.Strings.ObjectContext_ExecuteFunctionCalledWithNullParameter(
-                            i
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .ObjectContext_ExecuteFunctionCalledWithNullParameter(i)
                     );
                 }
             }
@@ -3200,8 +3211,9 @@ namespace System.Data.Objects
                     entitySets.Count > resultSetIndex ? entitySets[resultSetIndex] : null;
 
                 // create the shaper
-                System.Data.Common.QueryCache.QueryCacheManager cacheManager =
-                    this.Perspective.MetadataWorkspace.GetQueryCacheManager();
+                System.Data.Common.QueryCache.QueryCacheManager cacheManager = this.Perspective
+                    .MetadataWorkspace
+                    .GetQueryCacheManager();
                 ShaperFactory<TElement> shaperFactory = Translator.TranslateColumnMap<TElement>(
                     cacheManager,
                     commandDefinition.CreateColumnMap(storeReader, resultSetIndex),
@@ -3406,11 +3418,9 @@ namespace System.Data.Objects
                 }
                 if (matchCount == 1)
                 {
-                    functionImport.Parameters.TryGetValue(
-                        parameterName,
-                        true,
-                        out functionParameter
-                    );
+                    functionImport
+                        .Parameters
+                        .TryGetValue(parameterName, true, out functionParameter);
                 }
             }
             return functionParameter;
@@ -3547,10 +3557,9 @@ namespace System.Data.Objects
                     proxyTypeInfo.SetEntityWrapper(wrappedEntity);
                     if (proxyTypeInfo.InitializeEntityCollections != null)
                     {
-                        proxyTypeInfo.InitializeEntityCollections.Invoke(
-                            null,
-                            new object[] { wrappedEntity }
-                        );
+                        proxyTypeInfo
+                            .InitializeEntityCollections
+                            .Invoke(null, new object[] { wrappedEntity });
                     }
                 }
                 finally

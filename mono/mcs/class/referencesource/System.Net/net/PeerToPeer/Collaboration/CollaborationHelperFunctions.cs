@@ -51,12 +51,14 @@ namespace System.Net.PeerToPeer.Collaboration
                         );
                         if (errorCode != 0)
                         {
-                            Logging.P2PTraceSource.TraceEvent(
-                                TraceEventType.Error,
-                                0,
-                                "PeerCollabStartup returned with errorcode {0}",
-                                errorCode
-                            );
+                            Logging
+                                .P2PTraceSource
+                                .TraceEvent(
+                                    TraceEventType.Error,
+                                    0,
+                                    "PeerCollabStartup returned with errorcode {0}",
+                                    errorCode
+                                );
                             throw PeerToPeerException.CreateFromHr(
                                 SR.GetString(SR.Collab_StartupFailed),
                                 errorCode
@@ -569,12 +571,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "PeerCollabRegisterEvent returned with errorcode {0}",
-                            errorCode
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "PeerCollabRegisterEvent returned with errorcode {0}",
+                                errorCode
+                            );
                         throw PeerToPeerException.CreateFromHr(
                             SR.GetString(SR.Collab_PresenceChangedRegFailed),
                             errorCode
@@ -584,11 +588,9 @@ namespace System.Net.PeerToPeer.Collaboration
                 presenceChanged += callback;
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "AddMyPresenceChanged() successful."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, 0, "AddMyPresenceChanged() successful.");
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -645,12 +647,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "PeerCollabRegisterEvent returned with errorcode {0}",
-                            errorCode
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "PeerCollabRegisterEvent returned with errorcode {0}",
+                                errorCode
+                            );
                         throw PeerToPeerException.CreateFromHr(
                             SR.GetString(SR.Collab_ApplicationChangedRegFailed),
                             errorCode
@@ -660,11 +664,9 @@ namespace System.Net.PeerToPeer.Collaboration
                 applicationChanged += callback;
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "AddApplicationChanged() successful."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, 0, "AddApplicationChanged() successful.");
         }
 
         // <SecurityKernel Critical="True" Ring="0">
@@ -721,12 +723,14 @@ namespace System.Net.PeerToPeer.Collaboration
                     );
                     if (errorCode != 0)
                     {
-                        Logging.P2PTraceSource.TraceEvent(
-                            TraceEventType.Error,
-                            0,
-                            "PeerCollabRegisterEvent returned with errorcode {0}",
-                            errorCode
-                        );
+                        Logging
+                            .P2PTraceSource
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                0,
+                                "PeerCollabRegisterEvent returned with errorcode {0}",
+                                errorCode
+                            );
                         throw PeerToPeerException.CreateFromHr(
                             SR.GetString(SR.Collab_ObjectChangedRegFailed),
                             errorCode
@@ -736,11 +740,9 @@ namespace System.Net.PeerToPeer.Collaboration
                 objectChanged += callback;
             }
 
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "AddObjectChanged() successful."
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(TraceEventType.Information, 0, "AddObjectChanged() successful.");
         }
 
         internal static void ThrowIfInvitationResponseInvalid(PeerInvitationResponse response)

@@ -67,22 +67,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
             // Do the same for implemented interfaces.
             foreach (
-                NamedTypeSymbol @interface in UnderlyingNamedType.AdaptedNamedTypeSymbol.GetInterfacesToEmit()
+                NamedTypeSymbol @interface in UnderlyingNamedType
+                    .AdaptedNamedTypeSymbol
+                    .GetInterfacesToEmit()
             )
             {
-                TypeManager.ModuleBeingBuilt.Translate(
-                    @interface,
-                    syntaxNodeOpt,
-                    diagnostics,
-                    fromImplements: true
-                );
+                TypeManager
+                    .ModuleBeingBuilt
+                    .Translate(@interface, syntaxNodeOpt, diagnostics, fromImplements: true);
             }
         }
 
         protected override int GetAssemblyRefIndex()
         {
-            ImmutableArray<AssemblySymbol> refs =
-                TypeManager.ModuleBeingBuilt.SourceModule.GetReferencedAssemblySymbols();
+            ImmutableArray<AssemblySymbol> refs = TypeManager
+                .ModuleBeingBuilt
+                .SourceModule
+                .GetReferencedAssemblySymbols();
             return refs.IndexOf(
                 UnderlyingNamedType.AdaptedNamedTypeSymbol.ContainingAssembly,
                 ReferenceEqualityComparer.Instance
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         protected override IEnumerable<FieldSymbolAdapter> GetFieldsToEmit()
         {
             return UnderlyingNamedType
-                .AdaptedNamedTypeSymbol.GetFieldsToEmit()
+                .AdaptedNamedTypeSymbol
+                .GetFieldsToEmit()
 #if DEBUG
                 .Select(s => s.GetCciAdapter())
 #endif
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         protected override IEnumerable<MethodSymbolAdapter> GetMethodsToEmit()
         {
             return UnderlyingNamedType
-                .AdaptedNamedTypeSymbol.GetMethodsToEmit()
+                .AdaptedNamedTypeSymbol
+                .GetMethodsToEmit()
 #if DEBUG
                 .Select(s => s?.GetCciAdapter())
 #endif
@@ -135,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         protected override IEnumerable<EventSymbolAdapter> GetEventsToEmit()
         {
             return UnderlyingNamedType
-                .AdaptedNamedTypeSymbol.GetEventsToEmit()
+                .AdaptedNamedTypeSymbol
+                .GetEventsToEmit()
 #if DEBUG
                 .Select(s => s.GetCciAdapter())
 #endif
@@ -145,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         protected override IEnumerable<PropertySymbolAdapter> GetPropertiesToEmit()
         {
             return UnderlyingNamedType
-                .AdaptedNamedTypeSymbol.GetPropertiesToEmit()
+                .AdaptedNamedTypeSymbol
+                .GetPropertiesToEmit()
 #if DEBUG
                 .Select(s => s.GetCciAdapter())
 #endif
@@ -161,7 +166,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             foreach (
-                NamedTypeSymbol @interface in UnderlyingNamedType.AdaptedNamedTypeSymbol.GetInterfacesToEmit()
+                NamedTypeSymbol @interface in UnderlyingNamedType
+                    .AdaptedNamedTypeSymbol
+                    .GetInterfacesToEmit()
             )
             {
                 var typeRef = moduleBeingBuilt.Translate(
@@ -255,9 +262,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBuilder
         )
         {
-            return UnderlyingNamedType.AdaptedNamedTypeSymbol.GetCustomAttributesToEmit(
-                moduleBuilder
-            );
+            return UnderlyingNamedType
+                .AdaptedNamedTypeSymbol
+                .GetCustomAttributesToEmit(moduleBuilder);
         }
 
         protected override CSharpAttributeData CreateTypeIdentifierAttribute(
@@ -309,9 +316,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                             new TypedConstant(
                                 stringType,
                                 TypedConstantKind.Primitive,
-                                UnderlyingNamedType.AdaptedNamedTypeSymbol.ToDisplayString(
-                                    SymbolDisplayFormat.QualifiedNameOnlyFormat
-                                )
+                                UnderlyingNamedType
+                                    .AdaptedNamedTypeSymbol
+                                    .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat)
                             )
                         ),
                         ImmutableArray<KeyValuePair<string, TypedConstant>>.Empty

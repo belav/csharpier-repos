@@ -172,12 +172,12 @@ namespace System.Web.Management
             sqlCommand.Parameters.Add(new SqlParameter("@EventCode", SqlDbType.Int));
             sqlCommand.Parameters.Add(new SqlParameter("@EventDetailCode", SqlDbType.Int));
             sqlCommand.Parameters.Add(new SqlParameter("@Message", SqlDbType.NVarChar, 1024));
-            sqlCommand.Parameters.Add(
-                new SqlParameter("@ApplicationPath", SqlDbType.NVarChar, 256)
-            );
-            sqlCommand.Parameters.Add(
-                new SqlParameter("@ApplicationVirtualPath", SqlDbType.NVarChar, 256)
-            );
+            sqlCommand
+                .Parameters
+                .Add(new SqlParameter("@ApplicationPath", SqlDbType.NVarChar, 256));
+            sqlCommand
+                .Parameters
+                .Add(new SqlParameter("@ApplicationVirtualPath", SqlDbType.NVarChar, 256));
             sqlCommand.Parameters.Add(new SqlParameter("@MachineName", SqlDbType.NVarChar, 256));
             sqlCommand.Parameters.Add(new SqlParameter("@RequestUrl", SqlDbType.NVarChar, 1024));
             sqlCommand.Parameters.Add(new SqlParameter("@ExceptionType", SqlDbType.NVarChar, 256));
@@ -192,10 +192,9 @@ namespace System.Web.Management
             WebApplicationInformation appInfo = WebBaseEvent.ApplicationInformation;
             int n = 0;
 
-            sqlCommand.Parameters[n++].Value = eventRaised.EventID.ToString(
-                "N",
-                CultureInfo.InstalledUICulture
-            ); // @EventId
+            sqlCommand.Parameters[n++].Value = eventRaised
+                .EventID
+                .ToString("N", CultureInfo.InstalledUICulture); // @EventId
             sqlCommand.Parameters[n++].Value = eventRaised.EventTimeUtc; // @EventTimeUtc
             sqlCommand.Parameters[n++].Value = eventRaised.EventTime; // @EventTime
             sqlCommand.Parameters[n++].Value = eventRaised.GetType().ToString(); // @EventType

@@ -26,8 +26,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [CombinatorialData]
         public async Task CodeDefinitionWindowOpensMetadataAsSource(bool enableDecompilation)
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -54,16 +55,16 @@ public class Test
             // The structure line should be the same, and we'll check for the presence/absence of the decompilation marker
             Assert.Contains(
                 "public struct Int32",
-                await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .CodeDefinitionWindow
+                    .GetCurrentLineTextAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 enableDecompilation,
                 (
-                    await TestServices.CodeDefinitionWindow.GetTextAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices
+                        .CodeDefinitionWindow
+                        .GetTextAsync(HangMitigatingCancellationToken)
                 ).Contains("Decompiled with ICSharpCode.Decompiler")
             );
         }

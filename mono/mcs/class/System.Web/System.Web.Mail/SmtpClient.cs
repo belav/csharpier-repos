@@ -224,23 +224,23 @@ namespace System.Web.Mail
                 msg.Fields.Data["http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"]
                 != null
             )
-                msg.Fields.Data.Remove(
-                    "http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"
-                );
+                msg.Fields
+                    .Data
+                    .Remove("http://schemas.microsoft.com/cdo/configuration/smtpauthenticate");
             if (
                 msg.Fields.Data["http://schemas.microsoft.com/cdo/configuration/sendusername"]
                 != null
             )
-                msg.Fields.Data.Remove(
-                    "http://schemas.microsoft.com/cdo/configuration/sendusername"
-                );
+                msg.Fields
+                    .Data
+                    .Remove("http://schemas.microsoft.com/cdo/configuration/sendusername");
             if (
                 msg.Fields.Data["http://schemas.microsoft.com/cdo/configuration/sendpassword"]
                 != null
             )
-                msg.Fields.Data.Remove(
-                    "http://schemas.microsoft.com/cdo/configuration/sendpassword"
-                );
+                msg.Fields
+                    .Data
+                    .Remove("http://schemas.microsoft.com/cdo/configuration/sendpassword");
             partHeader.Data.Add(msg.Fields.Data);
 
             smtp.WriteHeader(partHeader);

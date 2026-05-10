@@ -248,10 +248,9 @@ namespace Novell.Directory.Ldap.Utilclass
                                             if (nameList.Count > 0)
                                             {
                                                 names = new System.String[nameList.Count];
-                                                SupportClass.ArrayListSupport.ToArray(
-                                                    nameList,
-                                                    names
-                                                );
+                                                SupportClass
+                                                    .ArrayListSupport
+                                                    .ToArray(nameList, names);
                                             }
                                         }
                                     }
@@ -360,8 +359,8 @@ namespace Novell.Directory.Ldap.Utilclass
                                     continue;
                                 }
                                 if (
-                                    st2
-                                        .StringValue.ToUpper()
+                                    st2.StringValue
+                                        .ToUpper()
                                         .Equals("NO-USER-MODIFICATION".ToUpper())
                                 )
                                 {

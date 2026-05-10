@@ -26,10 +26,10 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         public void VerifyEnvironmentVariable()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.StartInfo.EnvironmentVariables.Add(
-                "DOTNET_RUNTIME_ID",
-                "overriddenFromEnv-rid"
-            );
+            options
+                .StartInfo
+                .EnvironmentVariables
+                .Add("DOTNET_RUNTIME_ID", "overriddenFromEnv-rid");
 
             RemoteExecutor
                 .Invoke(
@@ -101,14 +101,12 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
 
             // Should either start with linux (portable builds or NativeAOT) or the OS name (source builds)
             Assert.True(
-                RuntimeInformation.RuntimeIdentifier.StartsWith(
-                    "linux",
-                    StringComparison.OrdinalIgnoreCase
-                )
-                    || RuntimeInformation.RuntimeIdentifier.StartsWith(
-                        expectedOSName,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                RuntimeInformation
+                    .RuntimeIdentifier
+                    .StartsWith("linux", StringComparison.OrdinalIgnoreCase)
+                    || RuntimeInformation
+                        .RuntimeIdentifier
+                        .StartsWith(expectedOSName, StringComparison.OrdinalIgnoreCase)
             );
         }
 

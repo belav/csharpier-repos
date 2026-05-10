@@ -54,7 +54,8 @@ namespace CSharpSyntaxGenerator
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             var syntaxXmlFiles = context
-                .AdditionalTextsProvider.Where(at => Path.GetFileName(at.Path) == "Syntax.xml")
+                .AdditionalTextsProvider
+                .Where(at => Path.GetFileName(at.Path) == "Syntax.xml")
                 .Collect();
 
             context.RegisterSourceOutput(

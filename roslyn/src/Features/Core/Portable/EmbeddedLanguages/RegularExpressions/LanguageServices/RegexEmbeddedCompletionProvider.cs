@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 
         // Always soft-select these completion items.  Also, never filter down.
         private static readonly CompletionItemRules s_rules = CompletionItemRules
-            .Default.WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
+            .Default
+            .WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(
                     CharacterSetModificationKind.Replace,

@@ -19,32 +19,34 @@ var hash = SHA256.HashData(certificate.RawData);
 var certStr = Convert.ToBase64String(hash);
 
 // configure the ports
-builder.WebHost.ConfigureKestrel(
-    (context, options) =>
-    {
-        // website configured port
-        options.Listen(
-            IPAddress.Any,
-            5001,
-            listenOptions =>
-            {
-                listenOptions.UseHttps();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-            }
-        );
-        // webtransport configured port
-        options.Listen(
-            IPAddress.Any,
-            5002,
-            listenOptions =>
-            {
-                listenOptions.UseHttps(certificate);
-                listenOptions.UseConnectionLogging();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
-    }
-);
+builder
+    .WebHost
+    .ConfigureKestrel(
+        (context, options) =>
+        {
+            // website configured port
+            options.Listen(
+                IPAddress.Any,
+                5001,
+                listenOptions =>
+                {
+                    listenOptions.UseHttps();
+                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                }
+            );
+            // webtransport configured port
+            options.Listen(
+                IPAddress.Any,
+                5002,
+                listenOptions =>
+                {
+                    listenOptions.UseHttps(certificate);
+                    listenOptions.UseConnectionLogging();
+                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                }
+            );
+        }
+    );
 
 var app = builder.Build();
 
@@ -155,11 +157,14 @@ static async Task ApplySpecialCommands(IWebTransportSession session, string mess
             var stream = await session.OpenUnidirectionalStreamAsync();
             if (stream is not null)
             {
-                await stream.Transport.Output.WriteAsync(
-                    new(
-                        "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
-                    )
-                );
+                await stream
+                    .Transport
+                    .Output
+                    .WriteAsync(
+                        new(
+                            "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
+                        )
+                    );
             }
             break;
         case "Abort":

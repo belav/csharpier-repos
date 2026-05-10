@@ -88,12 +88,13 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                     var builder = PooledDictionary<Document, ArrayBuilder<TextSpan>>.GetInstance();
                     foreach (var syntaxRef in symbol.DeclaringSyntaxReferences)
                     {
-                        var documentForLocation = document.Project.GetDocument(
-                            syntaxRef.SyntaxTree
-                        );
+                        var documentForLocation = document
+                            .Project
+                            .GetDocument(syntaxRef.SyntaxTree);
                         Contract.ThrowIfNull(documentForLocation);
                         var root = await syntaxRef
-                            .SyntaxTree.GetRootAsync(cancellationToken)
+                            .SyntaxTree
+                            .GetRootAsync(cancellationToken)
                             .ConfigureAwait(false);
                         var partialDeclSpan = syntaxFacts
                             .GetContainingTypeDeclaration(root, syntaxRef.Span.Start)

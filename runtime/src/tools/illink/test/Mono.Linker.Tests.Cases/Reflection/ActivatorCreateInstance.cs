@@ -566,85 +566,109 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             // Just a basic test that these are all recognized, we're not testing that it marks correctly as it has the exact same implementation
             // as the above tested Activator.CreateInstance overloads
-            AppDomain.CurrentDomain.CreateInstance(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
-            );
-            AppDomain.CurrentDomain.CreateInstance(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                new object[] { }
-            );
-            AppDomain.CurrentDomain.CreateInstance(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                false,
-                BindingFlags.Public,
-                null,
-                null,
-                null,
-                null
-            );
+            AppDomain
+                .CurrentDomain
+                .CreateInstance(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstance(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    new object[] { }
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstance(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    false,
+                    BindingFlags.Public,
+                    null,
+                    null,
+                    null,
+                    null
+                );
 
-            AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
-            );
-            AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                new object[] { }
-            );
-            AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                false,
-                BindingFlags.Public,
-                null,
-                null,
-                null,
-                null
-            );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceAndUnwrap(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceAndUnwrap(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    new object[] { }
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceAndUnwrap(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    false,
+                    BindingFlags.Public,
+                    null,
+                    null,
+                    null,
+                    null
+                );
 
-            AppDomain.CurrentDomain.CreateInstanceFrom(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
-            );
-            AppDomain.CurrentDomain.CreateInstanceFrom(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                new object[] { }
-            );
-            AppDomain.CurrentDomain.CreateInstanceFrom(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                false,
-                BindingFlags.Public,
-                null,
-                null,
-                null,
-                null
-            );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceFrom(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceFrom(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    new object[] { }
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceFrom(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    false,
+                    BindingFlags.Public,
+                    null,
+                    null,
+                    null,
+                    null
+                );
 
-            AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
-            );
-            AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                new object[] { }
-            );
-            AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
-                "test",
-                "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
-                false,
-                BindingFlags.Public,
-                null,
-                null,
-                null,
-                null
-            );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceFromAndUnwrap(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType"
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceFromAndUnwrap(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    new object[] { }
+                );
+            AppDomain
+                .CurrentDomain
+                .CreateInstanceFromAndUnwrap(
+                    "test",
+                    "Mono.Linker.Tests.Cases.Reflection.ActivatorCreateInstance+AppDomainCreateInstanceType",
+                    false,
+                    BindingFlags.Public,
+                    null,
+                    null,
+                    null,
+                    null
+                );
         }
 
         [Kept]
@@ -664,19 +688,20 @@ namespace Mono.Linker.Tests.Cases.Reflection
         private static void UnsupportedCreateInstance()
         {
             typeof(ActivatorCreateInstance).Assembly.CreateInstance("NonExistent");
-            typeof(ActivatorCreateInstance).Assembly.CreateInstance(
-                "NonExistent",
-                ignoreCase: false
-            );
-            typeof(ActivatorCreateInstance).Assembly.CreateInstance(
-                "NonExistent",
-                false,
-                BindingFlags.Public,
-                null,
-                new object[] { },
-                null,
-                new object[] { }
-            );
+            typeof(ActivatorCreateInstance)
+                .Assembly
+                .CreateInstance("NonExistent", ignoreCase: false);
+            typeof(ActivatorCreateInstance)
+                .Assembly
+                .CreateInstance(
+                    "NonExistent",
+                    false,
+                    BindingFlags.Public,
+                    null,
+                    new object[] { },
+                    null,
+                    new object[] { }
+                );
         }
 
         [Kept]

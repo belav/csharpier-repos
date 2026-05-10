@@ -1591,9 +1591,9 @@ public class D : C<long>
 
             CreateCompilation(
                     source,
-                    options: TestOptions.ReleaseDll.WithNullableContextOptions(
-                        nullableContextOptions
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithNullableContextOptions(nullableContextOptions)
                 )
                 .VerifyDiagnostics(
                     // (7,32): warning CS3001: Argument type 'C<int>.N' is not CLS-compliant
@@ -2473,8 +2473,8 @@ public class C : B
             var comp = CreateCompilationWithILAndMscorlib40(source, il);
             comp.VerifyDiagnostics();
 
-            var accessor = comp
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var accessor = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<PropertySymbol>("P")
                 .GetMethod;
             Assert.True(accessor.Name[0] == '_');
@@ -3945,8 +3945,8 @@ public sealed class C
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
             );
 
-            var @event = comp
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var @event = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<EventSymbol>("E");
             Assert.True(@event.IsWindowsRuntimeEvent);
         }

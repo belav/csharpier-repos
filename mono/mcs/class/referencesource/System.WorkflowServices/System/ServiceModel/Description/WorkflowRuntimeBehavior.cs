@@ -55,9 +55,9 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.cachedInstanceExpiration = value;
             }
@@ -116,9 +116,9 @@ namespace System.ServiceModel.Description
             }
             if (serviceHostBase.Extensions == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceHostBase.Extensions"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceHostBase.Extensions");
             }
 
             WorkflowInstanceLifetimeManagerExtension cachedInstanceExpirationExtension =
@@ -152,11 +152,13 @@ namespace System.ServiceModel.Description
         {
             if (workflowRuntime.IsStarted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.WorkflowRuntimeStartedBeforeHostOpen)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.WorkflowRuntimeStartedBeforeHostOpen)
+                        )
+                    );
             }
 
             WorkflowSchedulerService workflowSchedulerService =
@@ -166,11 +168,13 @@ namespace System.ServiceModel.Description
             {
                 if (workflowSchedulerService != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.WrongSchedulerServiceRegistered)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.WrongSchedulerServiceRegistered)
+                            )
+                        );
                 }
                 workflowRuntime.AddService(new SynchronizationContextWorkflowSchedulerService());
             }

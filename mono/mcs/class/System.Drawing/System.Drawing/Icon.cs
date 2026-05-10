@@ -297,7 +297,8 @@ namespace System.Drawing
             using (
                 Stream s = typeof(Icon)
                     .GetTypeInfo()
-                    .Assembly.GetManifestResourceStream(resourceName)
+                    .Assembly
+                    .GetManifestResourceStream(resourceName)
             )
             {
                 if (s == null)

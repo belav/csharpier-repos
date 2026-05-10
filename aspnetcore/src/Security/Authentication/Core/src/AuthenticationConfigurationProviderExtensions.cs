@@ -32,8 +32,8 @@ public static class AuthenticationConfigurationProviderExtensions
             );
         }
 
-        return provider.AuthenticationConfiguration.GetSection(
-            $"{AuthenticationSchemesKey}:{authenticationScheme}"
-        );
+        return provider
+            .AuthenticationConfiguration
+            .GetSection($"{AuthenticationSchemesKey}:{authenticationScheme}");
     }
 }

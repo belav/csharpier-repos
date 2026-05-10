@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 new[] { "apple", "APPLE" }
             );
             CustomSortTestHelper(
-                ImmutableSegmentedHashSet<string>.Empty.WithComparer(
-                    StringComparer.OrdinalIgnoreCase
-                ),
+                ImmutableSegmentedHashSet<string>
+                    .Empty
+                    .WithComparer(StringComparer.OrdinalIgnoreCase),
                 false,
                 new[] { "apple", "APPLE" },
                 new[] { "apple" }
@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void ChangeUnorderedEqualityComparer()
         {
             var ordinalSet = ImmutableSegmentedHashSet<string>
-                .Empty.WithComparer(StringComparer.Ordinal)
+                .Empty
+                .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
             Assert.Equal(2, ordinalSet.Count); // claimed count

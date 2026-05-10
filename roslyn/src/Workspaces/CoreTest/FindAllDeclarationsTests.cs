@@ -405,7 +405,8 @@ Inner i;
                 )
             ).SingleOrDefault();
             var expectedSymbol = (await solution.GetProject(submission0Id).GetCompilationAsync())
-                .GlobalNamespace.GetMembers("Outer")
+                .GlobalNamespace
+                .GetMembers("Outer")
                 .SingleOrDefault()
                 .GetMembers("Inner")
                 .SingleOrDefault();
@@ -1626,12 +1627,8 @@ End Class
             var pid = ProjectId.CreateNewId();
             using var workspace = CreateWorkspace();
             var solution = workspace
-                .CurrentSolution.AddProject(
-                    pid,
-                    "VBProject",
-                    "VBProject",
-                    LanguageNames.VisualBasic
-                )
+                .CurrentSolution
+                .AddProject(pid, "VBProject", "VBProject", LanguageNames.VisualBasic)
                 .AddMetadataReference(pid, MscorlibRef);
             var did = DocumentId.CreateNewId(pid);
             solution = solution.AddDocument(did, "VBDocument.vb", SourceText.From(source));

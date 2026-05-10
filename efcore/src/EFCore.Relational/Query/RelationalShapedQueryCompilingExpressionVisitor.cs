@@ -121,30 +121,31 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
             try
             {
-                return relationalQueryContext.ExecutionStrategy.Execute(
-                    (relationalQueryContext, relationalCommandCache, commandSource),
-                    static (_, state) =>
-                    {
-                        EntityFrameworkEventSource.Log.QueryExecuting();
+                return relationalQueryContext
+                    .ExecutionStrategy
+                    .Execute(
+                        (relationalQueryContext, relationalCommandCache, commandSource),
+                        static (_, state) =>
+                        {
+                            EntityFrameworkEventSource.Log.QueryExecuting();
 
-                        var relationalCommand =
-                            state.relationalCommandCache.RentAndPopulateRelationalCommand(
-                                state.relationalQueryContext
+                            var relationalCommand = state
+                                .relationalCommandCache
+                                .RentAndPopulateRelationalCommand(state.relationalQueryContext);
+
+                            return relationalCommand.ExecuteNonQuery(
+                                new RelationalCommandParameterObject(
+                                    state.relationalQueryContext.Connection,
+                                    state.relationalQueryContext.ParameterValues,
+                                    null,
+                                    state.relationalQueryContext.Context,
+                                    state.relationalQueryContext.CommandLogger,
+                                    state.commandSource
+                                )
                             );
-
-                        return relationalCommand.ExecuteNonQuery(
-                            new RelationalCommandParameterObject(
-                                state.relationalQueryContext.Connection,
-                                state.relationalQueryContext.ParameterValues,
-                                null,
-                                state.relationalQueryContext.Context,
-                                state.relationalQueryContext.CommandLogger,
-                                state.commandSource
-                            )
-                        );
-                    },
-                    null
-                );
+                        },
+                        null
+                    );
             }
             finally
             {
@@ -165,24 +166,21 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 switch (commandSource)
                 {
                     case CommandSource.ExecuteDelete:
-                        relationalQueryContext.QueryLogger.ExecuteDeleteFailed(
-                            contextType,
-                            exception
-                        );
+                        relationalQueryContext
+                            .QueryLogger
+                            .ExecuteDeleteFailed(contextType, exception);
                         break;
 
                     case CommandSource.ExecuteUpdate:
-                        relationalQueryContext.QueryLogger.ExecuteUpdateFailed(
-                            contextType,
-                            exception
-                        );
+                        relationalQueryContext
+                            .QueryLogger
+                            .ExecuteUpdateFailed(contextType, exception);
                         break;
 
                     default:
-                        relationalQueryContext.QueryLogger.NonQueryOperationFailed(
-                            contextType,
-                            exception
-                        );
+                        relationalQueryContext
+                            .QueryLogger
+                            .NonQueryOperationFailed(contextType, exception);
                         break;
                 }
             }
@@ -208,32 +206,33 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
 
             try
             {
-                return relationalQueryContext.ExecutionStrategy.ExecuteAsync(
-                    (relationalQueryContext, relationalCommandCache, commandSource),
-                    static (_, state, cancellationToken) =>
-                    {
-                        EntityFrameworkEventSource.Log.QueryExecuting();
+                return relationalQueryContext
+                    .ExecutionStrategy
+                    .ExecuteAsync(
+                        (relationalQueryContext, relationalCommandCache, commandSource),
+                        static (_, state, cancellationToken) =>
+                        {
+                            EntityFrameworkEventSource.Log.QueryExecuting();
 
-                        var relationalCommand =
-                            state.relationalCommandCache.RentAndPopulateRelationalCommand(
-                                state.relationalQueryContext
+                            var relationalCommand = state
+                                .relationalCommandCache
+                                .RentAndPopulateRelationalCommand(state.relationalQueryContext);
+
+                            return relationalCommand.ExecuteNonQueryAsync(
+                                new RelationalCommandParameterObject(
+                                    state.relationalQueryContext.Connection,
+                                    state.relationalQueryContext.ParameterValues,
+                                    null,
+                                    state.relationalQueryContext.Context,
+                                    state.relationalQueryContext.CommandLogger,
+                                    state.commandSource
+                                ),
+                                cancellationToken
                             );
-
-                        return relationalCommand.ExecuteNonQueryAsync(
-                            new RelationalCommandParameterObject(
-                                state.relationalQueryContext.Connection,
-                                state.relationalQueryContext.ParameterValues,
-                                null,
-                                state.relationalQueryContext.Context,
-                                state.relationalQueryContext.CommandLogger,
-                                state.commandSource
-                            ),
-                            cancellationToken
-                        );
-                    },
-                    null,
-                    relationalQueryContext.CancellationToken
-                );
+                        },
+                        null,
+                        relationalQueryContext.CancellationToken
+                    );
             }
             finally
             {
@@ -254,24 +253,21 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                 switch (commandSource)
                 {
                     case CommandSource.ExecuteDelete:
-                        relationalQueryContext.QueryLogger.ExecuteDeleteFailed(
-                            contextType,
-                            exception
-                        );
+                        relationalQueryContext
+                            .QueryLogger
+                            .ExecuteDeleteFailed(contextType, exception);
                         break;
 
                     case CommandSource.ExecuteUpdate:
-                        relationalQueryContext.QueryLogger.ExecuteUpdateFailed(
-                            contextType,
-                            exception
-                        );
+                        relationalQueryContext
+                            .QueryLogger
+                            .ExecuteUpdateFailed(contextType, exception);
                         break;
 
                     default:
-                        relationalQueryContext.QueryLogger.NonQueryOperationFailed(
-                            contextType,
-                            exception
-                        );
+                        relationalQueryContext
+                            .QueryLogger
+                            .NonQueryOperationFailed(contextType, exception);
                         break;
                 }
             }
@@ -426,7 +422,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     Constant(readerColumns, typeof(IReadOnlyList<ReaderColumn?>)),
                     Constant(
                         selectExpression
-                            .Projection.Select(pe => ((ColumnExpression)pe.Expression).Name)
+                            .Projection
+                            .Select(pe => ((ColumnExpression)pe.Expression).Name)
                             .ToList(),
                         typeof(IReadOnlyList<string>)
                     ),

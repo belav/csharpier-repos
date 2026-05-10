@@ -435,13 +435,15 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = parent.bufferedStream.BeginRead(
-                        parent.byteBuffer,
-                        0,
-                        parent.byteBuffer.Length,
-                        readCallback,
-                        this
-                    );
+                    IAsyncResult result = parent
+                        .bufferedStream
+                        .BeginRead(
+                            parent.byteBuffer,
+                            0,
+                            parent.byteBuffer.Length,
+                            readCallback,
+                            this
+                        );
                     if (!result.CompletedSynchronously)
                     {
                         return;

@@ -85,6 +85,7 @@ app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)}? todo) => TypedRes
         GeneratorRunResult? result
     ) =>
         result
-            ?.TrackedOutputSteps.SelectMany(step => step.Value)
+            ?.TrackedOutputSteps
+            .SelectMany(step => step.Value)
             .SelectMany(value => value.Outputs);
 }

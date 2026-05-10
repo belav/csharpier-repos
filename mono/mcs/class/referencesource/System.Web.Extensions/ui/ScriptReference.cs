@@ -793,8 +793,9 @@ namespace System.Web.UI
 
             public ScriptEffectiveInfo(ScriptReference scriptReference)
             {
-                ScriptResourceDefinition definition =
-                    ScriptManager.ScriptResourceMapping.GetDefinition(scriptReference);
+                ScriptResourceDefinition definition = ScriptManager
+                    .ScriptResourceMapping
+                    .GetDefinition(scriptReference);
                 string name = scriptReference.Name;
                 string path = scriptReference.Path;
                 Assembly assembly = scriptReference.GetAssembly();

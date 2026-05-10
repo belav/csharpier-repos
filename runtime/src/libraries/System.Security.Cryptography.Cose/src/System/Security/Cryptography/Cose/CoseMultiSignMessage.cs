@@ -1133,9 +1133,9 @@ namespace System.Security.Cryptography.Cose
                 contentLength: 0
             );
 
-            byte[] buffer = ArrayPool<byte>.Shared.Rent(
-                Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer))
-            );
+            byte[] buffer = ArrayPool<byte>
+                .Shared
+                .Rent(Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer)));
 
             try
             {
@@ -1252,9 +1252,9 @@ namespace System.Security.Cryptography.Cose
                 contentLength: 0
             );
 
-            byte[] buffer = ArrayPool<byte>.Shared.Rent(
-                Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer))
-            );
+            byte[] buffer = ArrayPool<byte>
+                .Shared
+                .Rent(Math.Max(toBeSignedLength, CoseHelpers.ComputeSignatureSize(signer)));
 
             int bytesWritten = CoseHeaderMap.Encode(
                 signProtectedHeaders,

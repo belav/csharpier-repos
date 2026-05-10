@@ -876,14 +876,17 @@ public sealed partial class SelectExpression
                     }
 
                     var newProjections = selectExpression
-                        ._projection.Select(Visit)
+                        ._projection
+                        .Select(Visit)
                         .ToList<ProjectionExpression>();
 
                     var newTables = selectExpression
-                        ._tables.Select(Visit)
+                        ._tables
+                        .Select(Visit)
                         .ToList<TableExpressionBase>();
                     var tpcTablesMap = selectExpression
-                        ._tables.Select(UnwrapJoinExpression)
+                        ._tables
+                        .Select(UnwrapJoinExpression)
                         .Zip(newTables.Select(UnwrapJoinExpression))
                         .Where(e => e.First is TpcTablesExpression)
                         .ToDictionary(
@@ -895,10 +898,8 @@ public sealed partial class SelectExpression
                     // In other cases (like VisitChildren), we just reuse the same table references and update the SelectExpression inside it.
                     // We initially assign old SelectExpression in table references and later update it once we construct clone
                     var newTableReferences = selectExpression
-                        ._tableReferences.Select(e => new TableReferenceExpression(
-                            selectExpression,
-                            e.Alias
-                        ))
+                        ._tableReferences
+                        .Select(e => new TableReferenceExpression(selectExpression, e.Alias))
                         .ToList();
                     Check.DebugAssert(
                         newTables
@@ -909,12 +910,14 @@ public sealed partial class SelectExpression
 
                     var predicate = (SqlExpression?)Visit(selectExpression.Predicate);
                     var newGroupBy = selectExpression
-                        ._groupBy.Select(Visit)
+                        ._groupBy
+                        .Select(Visit)
                         .Where(e => e is not (SqlConstantExpression or SqlParameterExpression))
                         .ToList<SqlExpression>();
                     var havingExpression = (SqlExpression?)Visit(selectExpression.Having);
                     var newOrderings = selectExpression
-                        ._orderings.Select(Visit)
+                        ._orderings
+                        .Select(Visit)
                         .ToList<OrderingExpression>();
                     var offset = (SqlExpression?)Visit(selectExpression.Offset);
                     var limit = (SqlExpression?)Visit(selectExpression.Limit);
@@ -940,9 +943,9 @@ public sealed partial class SelectExpression
                         _mutable = selectExpression._mutable,
                     };
 
-                    newSelectExpression._removableJoinTables.AddRange(
-                        selectExpression._removableJoinTables
-                    );
+                    newSelectExpression
+                        ._removableJoinTables
+                        .AddRange(selectExpression._removableJoinTables);
 
                     foreach (var kvp in selectExpression._tpcDiscriminatorValues)
                     {
@@ -952,9 +955,9 @@ public sealed partial class SelectExpression
 
                     // Since identifiers are ColumnExpression, they are not visited since they don't contain SelectExpression inside it.
                     newSelectExpression._identifier.AddRange(selectExpression._identifier);
-                    newSelectExpression._childIdentifiers.AddRange(
-                        selectExpression._childIdentifiers
-                    );
+                    newSelectExpression
+                        ._childIdentifiers
+                        .AddRange(selectExpression._childIdentifiers);
 
                     // Remap tableReferences in new select expression
                     foreach (var tableReference in newTableReferences)
@@ -976,7 +979,8 @@ public sealed partial class SelectExpression
                 {
                     // Deep clone
                     var subSelectExpressions = tpcTablesExpression
-                        .SelectExpressions.Select(Visit)
+                        .SelectExpressions
+                        .Select(Visit)
                         .ToList<SelectExpression>();
                     var newTpcTable = new TpcTablesExpression(
                         tpcTablesExpression.Alias,
@@ -1126,7 +1130,8 @@ public sealed partial class SelectExpression
                     var tpcTablesExpression = kvp.Key;
                     var subSelectExpressions = tpcTablesExpression
                         .Prune(kvp.Value.Item2)
-                        .SelectExpressions.Select(AssignUniqueAliasToTable)
+                        .SelectExpressions
+                        .Select(AssignUniqueAliasToTable)
                         .ToList();
                     var firstSelectExpression = subSelectExpressions[0]; // There will be at least one.
 
@@ -1140,7 +1145,8 @@ public sealed partial class SelectExpression
                         // So for all cases in case of identity select when we are doing the lift, we need to remap projections
                         reindexingMap = new int[selectExpression.Projection.Count];
                         var innerProjections = firstSelectExpression
-                            .Projection.Select(e => e.Alias)
+                            .Projection
+                            .Select(e => e.Alias)
                             .ToList();
                         var identityMap = true;
                         for (var i = 0; i < selectExpression.Projection.Count; i++)
@@ -1201,15 +1207,17 @@ public sealed partial class SelectExpression
                         generatedSelectExpression._tableReferences.Add(tableReferenceExpression);
                         foreach (var projection in result.Projection)
                         {
-                            generatedSelectExpression._projection.Add(
-                                new ProjectionExpression(
-                                    new ConcreteColumnExpression(
-                                        projection,
-                                        tableReferenceExpression
-                                    ),
-                                    projection.Alias
-                                )
-                            );
+                            generatedSelectExpression
+                                ._projection
+                                .Add(
+                                    new ProjectionExpression(
+                                        new ConcreteColumnExpression(
+                                            projection,
+                                            tableReferenceExpression
+                                        ),
+                                        projection.Alias
+                                    )
+                                );
                         }
 
                         generatedSelectExpression._mutable = false;
@@ -1233,9 +1241,11 @@ public sealed partial class SelectExpression
 
                     {
                         result.Alias = tpcTablesExpression.Alias;
-                        var tableIndex = selectExpression._tables.FindIndex(teb =>
-                            ReferenceEquals(UnwrapJoinExpression(teb), tpcTablesExpression)
-                        );
+                        var tableIndex = selectExpression
+                            ._tables
+                            .FindIndex(teb =>
+                                ReferenceEquals(UnwrapJoinExpression(teb), tpcTablesExpression)
+                            );
                         var table = selectExpression._tables[tableIndex];
                         selectExpression._tables[tableIndex] = (TableExpressionBase)
                             ReplacingExpressionVisitor.Replace(tpcTablesExpression, result, table);

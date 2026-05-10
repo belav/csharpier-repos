@@ -996,12 +996,9 @@ namespace System.Windows.Forms
 
         internal override void OnPaintInternal(PaintEventArgs args)
         {
-            ThemeEngine.Current.DrawPopupMenu(
-                args.Graphics,
-                menu,
-                args.ClipRectangle,
-                ClientRectangle
-            );
+            ThemeEngine
+                .Current
+                .DrawPopupMenu(args.Graphics, menu, args.ClipRectangle, ClientRectangle);
         }
 
         public void HideWindow()

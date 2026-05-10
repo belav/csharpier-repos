@@ -103,27 +103,41 @@ namespace System.Web.UI.Design.WebControls.Util
             );
             this._wizardButtonsTableLayoutPanel.AutoSize = true;
             this._wizardButtonsTableLayoutPanel.ColumnCount = 7;
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
-            );
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F)
-            );
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
-            );
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F)
-            );
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
-            );
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F)
-            );
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
-            );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+                );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F)
+                );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+                );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F)
+                );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+                );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F)
+                );
+            this._wizardButtonsTableLayoutPanel
+                .ColumnStyles
+                .Add(
+                    new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+                );
             this._wizardButtonsTableLayoutPanel.Controls.Add(this._previousButton);
             this._wizardButtonsTableLayoutPanel.Controls.Add(this._dummyLabel1);
             this._wizardButtonsTableLayoutPanel.Controls.Add(this._nextButton);

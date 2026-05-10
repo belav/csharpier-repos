@@ -47,7 +47,8 @@ namespace System.Runtime.Remoting.Messaging
         public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
             return Thread
-                .CurrentContext.GetClientContextSinkChain()
+                .CurrentContext
+                .GetClientContextSinkChain()
                 .AsyncProcessMessage(msg, replySink);
         }
 

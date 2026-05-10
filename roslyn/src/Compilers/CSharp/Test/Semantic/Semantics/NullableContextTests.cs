@@ -1477,9 +1477,9 @@ partial class Program
 #nullable restore
     object F4 = null;
 }";
-            var options = TestOptions.ReleaseDll.WithNullableContextOptions(
-                NullableContextOptions.Disable
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithNullableContextOptions(NullableContextOptions.Disable);
 
             verify(new[] { source1, source2 }, options, new string[0]);
 
@@ -3109,7 +3109,8 @@ string";
         )
         {
             return ((NullableWalker.NullableAnalysisData)compilationData)
-                .Data.Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
+                .Data
+                .Where(pair => !requiredAnalysis || pair.Value.RequiredAnalysis)
                 .Select(pair => GetNullableDataKeyAsString(pair.Key))
                 .OrderBy(key => key)
                 .ToArray();
@@ -3122,7 +3123,8 @@ string";
         {
             toString ??= GetNullableDataKeyAsString;
             return ((NullableWalker.NullableAnalysisData)compilationData)
-                .Data.Where(pair =>
+                .Data
+                .Where(pair =>
                     pair.Value.RequiredAnalysis
                     && pair.Key is MethodSymbol method
                     && method.IsNullableAnalysisEnabled()

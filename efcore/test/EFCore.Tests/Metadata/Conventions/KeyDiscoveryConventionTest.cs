@@ -175,7 +175,8 @@ public class KeyDiscoveryConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices()
+            .Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
         {
             Logger = CreateLogger(),

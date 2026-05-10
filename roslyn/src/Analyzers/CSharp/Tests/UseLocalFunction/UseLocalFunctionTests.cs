@@ -30,8 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 new CSharpUseLocalFunctionCodeFixProvider()
             );
 
-        private static readonly ParseOptions CSharp72ParseOptions =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_2);
 
         [Fact]
         public async Task TestMissingBeforeCSharp7()
@@ -57,9 +58,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 }
                 """,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp6
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp6)
                 )
             );
         }
@@ -4293,9 +4294,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp10
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp10)
             );
         }
 
@@ -4313,9 +4314,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 }
                 """,
                 new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp9
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp9)
                 )
             );
         }

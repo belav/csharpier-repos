@@ -1457,7 +1457,8 @@ namespace System.Text.RegularExpressions
                             {
                                 Debug.Assert(node.Kind == RegexNodeKind.Multi);
                                 Debug.Assert(
-                                    node.Str.AsSpan()
+                                    node.Str
+                                        .AsSpan()
                                         .StartsWith(startingSpan, StringComparison.Ordinal)
                                 );
                                 if (node.Str!.Length == startingSpan.Length)

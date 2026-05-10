@@ -33,9 +33,9 @@ namespace System.ServiceModel.Security
         {
             if (saml2SecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedSaml2SecurityTokenHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedSaml2SecurityTokenHandler");
             }
 
             if (exceptionMapper == null)

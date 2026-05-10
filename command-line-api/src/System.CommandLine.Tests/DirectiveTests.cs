@@ -219,7 +219,8 @@ namespace System.CommandLine.Tests
             result.GetResult(directive).Should().BeNull();
 
             result
-                .UnmatchedTokens.Should()
+                .UnmatchedTokens
+                .Should()
                 .BeEquivalentTo(firstUnmatchedToken, secondUnmatchedToken);
         }
 

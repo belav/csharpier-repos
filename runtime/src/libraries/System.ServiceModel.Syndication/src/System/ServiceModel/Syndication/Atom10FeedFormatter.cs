@@ -208,10 +208,9 @@ namespace System.ServiceModel.Syndication
                         {
                             if (preserveAttributeExtensions)
                             {
-                                category.AttributeExtensions.Add(
-                                    new XmlQualifiedName(name, ns),
-                                    val
-                                );
+                                category
+                                    .AttributeExtensions
+                                    .Add(new XmlQualifiedName(name, ns), val);
                             }
                         }
                     }
@@ -906,10 +905,12 @@ namespace System.ServiceModel.Syndication
                         {
                             if (PreserveAttributeExtensions)
                             {
-                                result.AttributeExtensions.Add(
-                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                    reader.Value
-                                );
+                                result
+                                    .AttributeExtensions
+                                    .Add(
+                                        new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                        reader.Value
+                                    );
                             }
                         }
                     }
@@ -984,13 +985,15 @@ namespace System.ServiceModel.Syndication
                                 {
                                     if (PreserveAttributeExtensions)
                                     {
-                                        result.AttributeExtensions.Add(
-                                            new XmlQualifiedName(
-                                                reader.LocalName,
-                                                reader.NamespaceURI
-                                            ),
-                                            reader.Value
-                                        );
+                                        result
+                                            .AttributeExtensions
+                                            .Add(
+                                                new XmlQualifiedName(
+                                                    reader.LocalName,
+                                                    reader.NamespaceURI
+                                                ),
+                                                reader.Value
+                                            );
                                     }
                                 }
                             }
@@ -1118,10 +1121,12 @@ namespace System.ServiceModel.Syndication
                         {
                             if (PreserveAttributeExtensions)
                             {
-                                result.AttributeExtensions.Add(
-                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                    reader.Value
-                                );
+                                result
+                                    .AttributeExtensions
+                                    .Add(
+                                        new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                        reader.Value
+                                    );
                             }
                         }
                     }
@@ -1345,10 +1350,12 @@ namespace System.ServiceModel.Syndication
                     {
                         if (PreserveAttributeExtensions)
                         {
-                            result.AttributeExtensions.Add(
-                                new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
-                                reader.Value
-                            );
+                            result
+                                .AttributeExtensions
+                                .Add(
+                                    new XmlQualifiedName(reader.LocalName, reader.NamespaceURI),
+                                    reader.Value
+                                );
                         }
                     }
                 }

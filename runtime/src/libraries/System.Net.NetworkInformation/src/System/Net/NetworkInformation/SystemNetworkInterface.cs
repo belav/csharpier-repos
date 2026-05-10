@@ -87,13 +87,9 @@ namespace System.Net.NetworkInformation
                 | Interop.IpHlpApi.GetAdaptersAddressesFlags.IncludeWins;
 
             // Figure out the right buffer size for the adapter information.
-            uint result = Interop.IpHlpApi.GetAdaptersAddresses(
-                family,
-                (uint)flags,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                &bufferSize
-            );
+            uint result = Interop
+                .IpHlpApi
+                .GetAdaptersAddresses(family, (uint)flags, IntPtr.Zero, IntPtr.Zero, &bufferSize);
 
             while (result == Interop.IpHlpApi.ERROR_BUFFER_OVERFLOW)
             {
@@ -101,13 +97,15 @@ namespace System.Net.NetworkInformation
                 IntPtr buffer = Marshal.AllocHGlobal((int)bufferSize);
                 try
                 {
-                    result = Interop.IpHlpApi.GetAdaptersAddresses(
-                        family,
-                        (uint)flags,
-                        IntPtr.Zero,
-                        buffer,
-                        &bufferSize
-                    );
+                    result = Interop
+                        .IpHlpApi
+                        .GetAdaptersAddresses(
+                            family,
+                            (uint)flags,
+                            IntPtr.Zero,
+                            buffer,
+                            &bufferSize
+                        );
 
                     // If succeeded, we're going to add each new interface.
                     if (result == Interop.IpHlpApi.ERROR_SUCCESS)

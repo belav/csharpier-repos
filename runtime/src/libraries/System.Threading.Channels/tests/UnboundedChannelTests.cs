@@ -145,8 +145,8 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c
-                .Reader.WaitToReadAsync()
+            Task r = c.Reader
+                .WaitToReadAsync()
                 .AsTask()
                 .ContinueWith(
                     _ =>
@@ -172,18 +172,20 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.Completion.ContinueWith(
-                _ =>
-                {
-                    Assert.Equal(
-                        AllowSynchronousContinuations,
-                        expectedId == Environment.CurrentManagedThreadId
-                    );
-                },
-                CancellationToken.None,
-                TaskContinuationOptions.ExecuteSynchronously,
-                TaskScheduler.Default
-            );
+            Task r = c.Reader
+                .Completion
+                .ContinueWith(
+                    _ =>
+                    {
+                        Assert.Equal(
+                            AllowSynchronousContinuations,
+                            expectedId == Environment.CurrentManagedThreadId
+                        );
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
 
             Assert.True(c.Writer.TryComplete());
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation

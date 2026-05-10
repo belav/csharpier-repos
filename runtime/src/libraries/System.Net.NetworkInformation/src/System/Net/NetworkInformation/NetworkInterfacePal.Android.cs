@@ -29,12 +29,14 @@ namespace System.Net.NetworkInformation
             Interop.Sys.IpAddressInfo* addressInfo = null;
 
             if (
-                Interop.Sys.GetNetworkInterfaces(
-                    &interfaceCount,
-                    &networkInterfaceInfo,
-                    &addressCount,
-                    &addressInfo
-                ) != 0
+                Interop
+                    .Sys
+                    .GetNetworkInterfaces(
+                        &interfaceCount,
+                        &networkInterfaceInfo,
+                        &addressCount,
+                        &addressInfo
+                    ) != 0
             )
             {
                 string message = Interop.Sys.GetLastErrorInfo().GetErrorMessage();

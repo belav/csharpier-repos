@@ -320,12 +320,16 @@ namespace System.Activities.Runtime
                         {
                             throw;
                         }
-                        throw FxTrace.Exception.AsError(
-                            new CallbackException(
-                                SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId),
-                                e
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new CallbackException(
+                                    SR.CallbackExceptionFromHostGetExtension(
+                                        this.WorkflowInstanceId
+                                    ),
+                                    e
+                                )
+                            );
                     }
                 }
 
@@ -375,11 +379,13 @@ namespace System.Activities.Runtime
                     WorkflowInstanceId = this.host.Id;
                     if (!this.instanceIdSet)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.EmptyIdReturnedFromHost(this.host.GetType())
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.EmptyIdReturnedFromHost(this.host.GetType())
+                                )
+                            );
                     }
                 }
 
@@ -845,11 +851,13 @@ namespace System.Activities.Runtime
         {
             if (this.throwDuringSerialization)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.StateCannotBeSerialized(this.WorkflowInstanceId)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.StateCannotBeSerialized(this.WorkflowInstanceId)
+                        )
+                    );
             }
         }
 
@@ -1715,12 +1723,14 @@ namespace System.Activities.Runtime
                 {
                     throw;
                 }
-                throw FxTrace.Exception.AsError(
-                    new CallbackException(
-                        SR.CallbackExceptionFromHostAbort(this.WorkflowInstanceId),
-                        e
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new CallbackException(
+                            SR.CallbackExceptionFromHostAbort(this.WorkflowInstanceId),
+                            e
+                        )
+                    );
             }
         }
 
@@ -1998,12 +2008,14 @@ namespace System.Activities.Runtime
 
             if (!object.Equals(workflowInstance.DefinitionIdentity, this.WorkflowIdentity))
             {
-                throw FxTrace.Exception.AsError(
-                    new VersionMismatchException(
-                        workflowInstance.DefinitionIdentity,
-                        this.WorkflowIdentity
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new VersionMismatchException(
+                            workflowInstance.DefinitionIdentity,
+                            this.WorkflowIdentity
+                        )
+                    );
             }
 
             this.rootElement = workflow;
@@ -2011,17 +2023,19 @@ namespace System.Activities.Runtime
 
             if (!this.instanceIdSet)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.EmptyGuidOnDeserializedInstance)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.EmptyGuidOnDeserializedInstance));
             }
             if (this.host.Id != this.instanceId)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.HostIdDoesNotMatchInstance(this.host.Id, this.instanceId)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.HostIdDoesNotMatchInstance(this.host.Id, this.instanceId)
+                        )
+                    );
             }
 
             if (this.host.HasTrackingParticipant)
@@ -2087,12 +2101,14 @@ namespace System.Activities.Runtime
                 {
                     throw;
                 }
-                throw FxTrace.Exception.AsError(
-                    new CallbackException(
-                        SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId),
-                        e
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new CallbackException(
+                            SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId),
+                            e
+                        )
+                    );
             }
 
             return extension;
@@ -2137,9 +2153,9 @@ namespace System.Activities.Runtime
                 if (propertyManagerOwner != null && propertyManagerOwner.PropertyManager != null)
                 {
                     // This throws only fatal exceptions
-                    propertyManagerOwner.PropertyManager.CleanupWorkflowThread(
-                        ref setupOrCleanupException
-                    );
+                    propertyManagerOwner
+                        .PropertyManager
+                        .CleanupWorkflowThread(ref setupOrCleanupException);
                 }
 
                 if (setupOrCleanupException != null)
@@ -2481,10 +2497,9 @@ namespace System.Activities.Runtime
             {
                 if (targetInstance.PropertyManager != null)
                 {
-                    targetInstance.PropertyManager.UnregisterProperties(
-                        targetInstance,
-                        targetInstance.Activity.MemberOf
-                    );
+                    targetInstance
+                        .PropertyManager
+                        .UnregisterProperties(targetInstance, targetInstance.Activity.MemberOf);
                 }
 
                 if (IsSecondaryRoot(targetInstance))
@@ -2707,11 +2722,13 @@ namespace System.Activities.Runtime
                         );
                         if (location == null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.NoOutputLocationWasFound(argument.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.NoOutputLocationWasFound(argument.Name)
+                                    )
+                                );
                         }
                         this.workflowOutputs.Add(argument.Name, location.Value);
                     }
@@ -3306,11 +3323,9 @@ namespace System.Activities.Runtime
                         // Populate argument location. Set it's value in the activity handler's
                         // instance environment only if it is a DelegateInArgument.
                         Location newLocation = runtimeArgument.BoundArgument.CreateLocation();
-                        handlerInstance.Environment.Declare(
-                            runtimeArgument.BoundArgument,
-                            newLocation,
-                            handlerInstance
-                        );
+                        handlerInstance
+                            .Environment
+                            .Declare(runtimeArgument.BoundArgument, newLocation, handlerInstance);
 
                         if (ArgumentDirectionHelper.IsIn(runtimeArgument.Direction))
                         {
@@ -3478,10 +3493,15 @@ namespace System.Activities.Runtime
 
             if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
             {
-                throw FxTrace.Exception.Argument(
-                    "activity",
-                    SR.ActivityNotPartOfThisTree(activity.DisplayName, parent.Activity.DisplayName)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "activity",
+                        SR.ActivityNotPartOfThisTree(
+                            activity.DisplayName,
+                            parent.Activity.DisplayName
+                        )
+                    );
             }
 
             if (activity.SkipArgumentResolution)
@@ -3632,9 +3652,9 @@ namespace System.Activities.Runtime
         {
             if (this.activeOperations != null && this.activeOperations.ContainsKey(owningActivity))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.OnlyOneOperationPerActivity)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.OnlyOneOperationPerActivity));
             }
 
             this.EnterNoPersist();
@@ -3815,10 +3835,12 @@ namespace System.Activities.Runtime
 
                     try
                     {
-                        result = executor.host.OnBeginPersist(
-                            Fx.ThunkCallback(new AsyncCallback(OnPersistComplete)),
-                            executor
-                        );
+                        result = executor
+                            .host
+                            .OnBeginPersist(
+                                Fx.ThunkCallback(new AsyncCallback(OnPersistComplete)),
+                                executor
+                            );
 
                         if (result.CompletedSynchronously)
                         {
@@ -4950,12 +4972,14 @@ namespace System.Activities.Runtime
                     {
                         try
                         {
-                            result = this.executor.host.OnBeginPersist(
-                                PrepareAsyncCompletion(
-                                    TransactionalPersistAsyncResult.onPersistComplete
-                                ),
-                                this
-                            );
+                            result = this.executor
+                                .host
+                                .OnBeginPersist(
+                                    PrepareAsyncCompletion(
+                                        TransactionalPersistAsyncResult.onPersistComplete
+                                    ),
+                                    this
+                                );
                         }
                         catch (Exception e)
                         {
@@ -5167,11 +5191,13 @@ namespace System.Activities.Runtime
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.executor.CurrentTransaction))
                 {
-                    result = this.executor.host.OnBeginAssociateKeys(
-                        keysToAssociate,
-                        PrepareAsyncCompletion(associatedCallback),
-                        this
-                    );
+                    result = this.executor
+                        .host
+                        .OnBeginAssociateKeys(
+                            keysToAssociate,
+                            PrepareAsyncCompletion(associatedCallback),
+                            this
+                        );
                 }
                 if (SyncContinue(result))
                 {

@@ -674,10 +674,9 @@ public partial class ParameterViewTest
     public void WorksWhenDynamicCodeNotSupported()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
-            "false"
-        );
+        options
+            .RuntimeConfigurationOptions
+            .Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", "false");
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>

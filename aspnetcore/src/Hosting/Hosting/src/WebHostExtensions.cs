@@ -92,8 +92,8 @@ public static class WebHostExtensions
         var done = new ManualResetEventSlim(false);
         using (var cts = new CancellationTokenSource())
         {
-            var shutdownMessage = host
-                .Services.GetRequiredService<WebHostOptions>()
+            var shutdownMessage = host.Services
+                .GetRequiredService<WebHostOptions>()
                 .SuppressStatusMessages
                 ? string.Empty
                 : "Application is shutting down...";

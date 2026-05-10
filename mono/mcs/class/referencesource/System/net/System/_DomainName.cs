@@ -78,10 +78,13 @@ namespace System
         )
         {
 #if TRAVE
-            System.Net.GlobalLog.Assert(
-                name != null && pos <= returnedEnd,
-                "DomainNameHelper::IsValid()|The name parameter is either null or indexes are out of range."
-            );
+            System
+                .Net
+                .GlobalLog
+                .Assert(
+                    name != null && pos <= returnedEnd,
+                    "DomainNameHelper::IsValid()|The name parameter is either null or indexes are out of range."
+                );
 #endif
 
             char* curPos = name + pos;
@@ -164,10 +167,13 @@ namespace System
         )
         {
 #if TRAVE
-            System.Net.GlobalLog.Assert(
-                name != null && pos <= returnedEnd,
-                "DomainNameHelper::IsValid()|The name parameter is either null or indexes are out of range."
-            );
+            System
+                .Net
+                .GlobalLog
+                .Assert(
+                    name != null && pos <= returnedEnd,
+                    "DomainNameHelper::IsValid()|The name parameter is either null or indexes are out of range."
+                );
 #endif
             char* curPos = name + pos;
             char* newPos = curPos;

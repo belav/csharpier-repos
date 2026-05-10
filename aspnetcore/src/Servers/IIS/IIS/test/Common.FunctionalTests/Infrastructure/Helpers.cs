@@ -28,10 +28,9 @@ public static class Helpers
     )
     {
         // Sometimes the site is not ready, so retry until its actually started and ready
-        var response = await deploymentResult.HttpClient.RetryRequestAsync(
-            path,
-            r => r.IsSuccessStatusCode
-        );
+        var response = await deploymentResult
+            .HttpClient
+            .RetryRequestAsync(path, r => r.IsSuccessStatusCode);
         var responseText = await response.Content.ReadAsStringAsync();
         if (response.IsSuccessStatusCode)
         {

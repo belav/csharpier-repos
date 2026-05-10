@@ -104,10 +104,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 {
                     var vsCompletionItem = (LSP.VSInternalCompletionItem)lspItem;
                     vsCompletionItem.Description = new ClassifiedTextElement(
-                        description.TaggedParts.Select(tp => new ClassifiedTextRun(
-                            tp.Tag.ToClassificationTypeName(),
-                            tp.Text
-                        ))
+                        description
+                            .TaggedParts
+                            .Select(tp => new ClassifiedTextRun(
+                                tp.Tag.ToClassificationTypeName(),
+                                tp.Text
+                            ))
                     );
                 }
                 else

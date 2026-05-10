@@ -20,12 +20,14 @@ internal partial class EndpointHtmlRenderer
     {
         SetHttpContext(httpContext);
 
-        var manager =
-            _httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = _httpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         var renderModesMetadata = httpContext
             .GetEndpoint()
-            ?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
+            ?.Metadata
+            .GetMetadata<ConfiguredRenderModesMetadata>();
 
         IPersistentComponentStateStore? store = null;
 
@@ -149,8 +151,9 @@ internal partial class EndpointHtmlRenderer
             }
         }
 
-        var manager =
-            _httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = _httpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Now given the mode, we obtain a particular store for that mode
         // and persist the state and return the HTML content

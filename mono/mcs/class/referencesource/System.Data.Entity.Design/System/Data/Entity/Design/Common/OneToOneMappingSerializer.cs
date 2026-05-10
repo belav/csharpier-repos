@@ -171,10 +171,9 @@ namespace System.Data.Entity.Design.Common
                 deleteBehavior = OperationAction.None;
                 if (multiplicity != RelationshipMultiplicity.Many)
                 {
-                    OperationAction otherEndBehavior = GetAssociationSetEnd(
-                        definingSet,
-                        false
-                    ).CorrespondingAssociationEndMember.DeleteBehavior;
+                    OperationAction otherEndBehavior = GetAssociationSetEnd(definingSet, false)
+                        .CorrespondingAssociationEndMember
+                        .DeleteBehavior;
                     if (otherEndBehavior == OperationAction.None)
                     {
                         // Since the other end does not have an operation

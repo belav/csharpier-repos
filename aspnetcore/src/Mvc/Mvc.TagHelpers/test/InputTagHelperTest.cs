@@ -966,10 +966,9 @@ public class InputTagHelperTest
             ) // htmlAttributes
             .Returns(tagBuilder)
             .Callback(() =>
-                viewContext.FormContext.InvariantField(
-                    tagBuilder.Attributes["name"],
-                    usesInvariantFormatting
-                )
+                viewContext
+                    .FormContext
+                    .InvariantField(tagBuilder.Attributes["name"], usesInvariantFormatting)
             )
             .Verifiable();
 
@@ -1204,9 +1203,10 @@ public class InputTagHelperTest
             expectedEndOfFormContent,
             string.Join(
                 "",
-                viewContext.FormContext.EndOfFormContent.Select(html =>
-                    HtmlContentUtilities.HtmlContentToString(html)
-                )
+                viewContext
+                    .FormContext
+                    .EndOfFormContent
+                    .Select(html => HtmlContentUtilities.HtmlContentToString(html))
             )
         );
         Assert.True(
@@ -1541,9 +1541,10 @@ public class InputTagHelperTest
             expectedEndOfFormContent,
             string.Join(
                 "",
-                viewContext.FormContext.EndOfFormContent.Select(html =>
-                    HtmlContentUtilities.HtmlContentToString(html)
-                )
+                viewContext
+                    .FormContext
+                    .EndOfFormContent
+                    .Select(html => HtmlContentUtilities.HtmlContentToString(html))
             )
         );
         Assert.True(

@@ -1283,7 +1283,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using var context = CreateContext(useRelationalNulls: true);
         var names = new[] { "Foo", "Bar" };
         var result = context
-            .Entities1.Where(e => names.Contains(e.NullableStringA))
+            .Entities1
+            .Where(e => names.Contains(e.NullableStringA))
             .Select(e => e.NullableStringA)
             .ToList();
 
@@ -1296,7 +1297,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using var context = CreateContext(useRelationalNulls: true);
         var names = new string[0];
         var result = context
-            .Entities1.Where(e => names.Contains(e.NullableStringA))
+            .Entities1
+            .Where(e => names.Contains(e.NullableStringA))
             .Select(e => e.NullableStringA)
             .ToList()
             .Count;
@@ -1310,7 +1312,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using var context = CreateContext(useRelationalNulls: true);
         var names = new string[] { null };
         var result = context
-            .Entities1.Where(e => names.Contains(e.NullableStringA))
+            .Entities1
+            .Where(e => names.Contains(e.NullableStringA))
             .Select(e => e.NullableStringA)
             .ToList()
             .Count;
@@ -1363,7 +1366,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using var context = CreateContext(useRelationalNulls: true);
         var prm = false;
         context
-            .Entities1.Where(e => e.NullableBoolA == e.NullableBoolB || prm)
+            .Entities1
+            .Where(e => e.NullableBoolA == e.NullableBoolB || prm)
             .Select(e => e.Id)
             .ToList();
     }
@@ -1389,7 +1393,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using var context = CreateContext(useRelationalNulls: true);
         var prm = false;
         context
-            .Entities1.Where(e => e.NullableBoolA != e.NullableBoolB || prm)
+            .Entities1
+            .Where(e => e.NullableBoolA != e.NullableBoolB || prm)
             .Select(e => e.Id)
             .ToList();
     }
@@ -1470,7 +1475,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using (var context = CreateContext())
         {
             var query = context
-                .Entities1.Where(e => e.NullableBoolA == e.NullableBoolB)
+                .Entities1
+                .Where(e => e.NullableBoolA == e.NullableBoolB)
                 .Select(e => e.Id);
 
             results1 = query.ToList();
@@ -1479,7 +1485,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
         using (var context = CreateContext(useRelationalNulls: true))
         {
             var query = context
-                .Entities1.Where(e => e.NullableBoolA == e.NullableBoolB)
+                .Entities1
+                .Where(e => e.NullableBoolA == e.NullableBoolB)
                 .Select(e => e.Id);
 
             results2 = query.ToList();
@@ -1509,7 +1516,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         using var context = CreateContext(useRelationalNulls: true);
         var actual = context
-            .Entities1.FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [Entities1]"))
+            .Entities1
+            .FromSqlRaw(NormalizeDelimitersInRawString("SELECT * FROM [Entities1]"))
             .Where(c => c.StringA == c.StringB)
             .ToArray();
 
@@ -3174,8 +3182,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => e.NullableIntA != 1 && e.NullableIntA != null)
             .ToList();
         ClearLog();
@@ -3193,8 +3201,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => e.NullableIntA != 1 && e.NullableIntA != 2 && e.NullableIntA != null)
             .ToList();
         ClearLog();
@@ -3212,8 +3220,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => e.NullableIntA is 1 or null)
             .ToList();
         ClearLog();
@@ -3231,8 +3239,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => new int?[] { 1, 2, 3 }.Contains(e.NullableIntA))
             .ToList();
 
@@ -3270,8 +3278,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => new int?[] { 1, 2 }.Contains(e.NullableIntA) || e.NullableIntA == null)
             .ToList();
 
@@ -3292,8 +3300,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => !(new int?[] { 1, 2 }.Contains(e.NullableIntA)) && e.NullableIntA != null)
             .ToList();
 
@@ -3314,8 +3322,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ctx = CreateContext(useRelationalNulls: true);
 
-        var expected = ctx
-            .Entities1.AsEnumerable()
+        var expected = ctx.Entities1
+            .AsEnumerable()
             .Where(e => !(new int?[] { 1, 2, 3, null }.Contains(e.NullableIntA)))
             .ToList();
 

@@ -2009,9 +2009,9 @@ namespace MonoTests.System.Runtime.Serialization
             var serializer = new DataContractSerializer(typeof(MyData));
             using (
                 var stream = new MemoryStream(
-                    Encoding.UTF8.GetBytes(
-                        whatItGets.Replace("ID-GOES-HERE", Guid.NewGuid().ToString())
-                    )
+                    Encoding
+                        .UTF8
+                        .GetBytes(whatItGets.Replace("ID-GOES-HERE", Guid.NewGuid().ToString()))
                 )
             )
             {

@@ -67,7 +67,8 @@ public class ApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollect
         }
 
         var groups = context
-            .Results.GroupBy(d => d.GroupName)
+            .Results
+            .GroupBy(d => d.GroupName)
             .Select(g => new ApiDescriptionGroup(g.Key, g.ToArray()))
             .ToArray();
 

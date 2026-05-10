@@ -75,7 +75,9 @@ namespace System.IO.IsolatedStorage
                     IsolatedStorageFile.GetAssemblyIdentityFromEvidence(
                         new StackFrame(3)
                             .GetMethod()
-                            .ReflectedType.Assembly.UnprotectedGetEvidence()
+                            .ReflectedType
+                            .Assembly
+                            .UnprotectedGetEvidence()
                     )
                 ); // skip self and constructor
 #endif

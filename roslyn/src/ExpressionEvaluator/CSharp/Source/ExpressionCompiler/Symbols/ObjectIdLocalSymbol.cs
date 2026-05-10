@@ -104,22 +104,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     method.ContainingType,
                     method.Name,
                     m =>
-                        method.TypeParameters.SelectAsArray(t =>
-                            (TypeParameterSymbol)new SimpleTypeParameterSymbol(m, t.Ordinal, t.Name)
-                        ),
+                        method
+                            .TypeParameters
+                            .SelectAsArray(t =>
+                                (TypeParameterSymbol)
+                                    new SimpleTypeParameterSymbol(m, t.Ordinal, t.Name)
+                            ),
                     m => m.TypeParameters[0], // return type is <>T&
                     m =>
-                        method.Parameters.SelectAsArray(p =>
-                            SynthesizedParameterSymbol.Create(
-                                m,
-                                p.TypeWithAnnotations,
-                                p.Ordinal,
-                                p.RefKind,
-                                p.Name,
-                                p.EffectiveScope,
-                                refCustomModifiers: p.RefCustomModifiers
+                        method
+                            .Parameters
+                            .SelectAsArray(p =>
+                                SynthesizedParameterSymbol.Create(
+                                    m,
+                                    p.TypeWithAnnotations,
+                                    p.Ordinal,
+                                    p.RefKind,
+                                    p.Name,
+                                    p.EffectiveScope,
+                                    refCustomModifiers: p.RefCustomModifiers
+                                )
                             )
-                        )
                 );
                 var local = variable.LocalSymbol;
                 return InvokeGetMethod(method.Construct(local.Type), variable.Syntax, local.Name);

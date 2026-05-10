@@ -95,10 +95,9 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore
                 newCounts.IncrementWaiterCount();
             }
 
-            Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
-                newCounts,
-                counts
-            );
+            Counts countsBeforeUpdate = _separated
+                ._counts
+                .InterlockedCompareExchange(newCounts, counts);
             if (countsBeforeUpdate == counts)
             {
                 if (counts.SignalCount != 0)
@@ -182,10 +181,9 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore
                 newCounts.DecrementCountOfWaitersSignaledToWake();
             }
 
-            Counts countsBeforeUpdate = self._separated._counts.InterlockedCompareExchange(
-                newCounts,
-                counts
-            );
+            Counts countsBeforeUpdate = self._separated
+                ._counts
+                .InterlockedCompareExchange(newCounts, counts);
             if (countsBeforeUpdate == counts)
             {
                 if (counts.SignalCount != 0)

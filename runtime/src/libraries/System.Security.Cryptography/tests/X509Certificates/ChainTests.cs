@@ -807,10 +807,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder.Chain.ChainStatus.Aggregate(
-                        X509ChainStatusFlags.NoError,
-                        (a, status) => a | status.Status
-                    )
+                    holder
+                        .Chain
+                        .ChainStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
 
                 Assert.Equal(3, holder.Chain.ChainElements.Count);
@@ -827,31 +827,28 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
                     holder
-                        .Chain.ChainElements[0]
-                        .ChainElementStatus.Aggregate(
-                            X509ChainStatusFlags.NoError,
-                            (a, status) => a | status.Status
-                        )
+                        .Chain
+                        .ChainElements[0]
+                        .ChainElementStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
                     holder
-                        .Chain.ChainElements[1]
-                        .ChainElementStatus.Aggregate(
-                            X509ChainStatusFlags.NoError,
-                            (a, status) => a | status.Status
-                        )
+                        .Chain
+                        .ChainElements[1]
+                        .ChainElementStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
                     holder
-                        .Chain.ChainElements[2]
-                        .ChainElementStatus.Aggregate(
-                            X509ChainStatusFlags.NoError,
-                            (a, status) => a | status.Status
-                        )
+                        .Chain
+                        .ChainElements[2]
+                        .ChainElementStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
             }
         }
@@ -1087,8 +1084,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             //
             // These certificates have been hard-coded to enable the scenario on
             // netstandard.
-            byte[] endEntityBytes = Encoding.ASCII.GetBytes(
-                @"
+            byte[] endEntityBytes = Encoding
+                .ASCII
+                .GetBytes(
+                    @"
 -----BEGIN CERTIFICATE-----
 MIIC6DCCAdCgAwIBAgIQAKjmD7+TWUwQN2ucajn9kTANBgkqhkiG9w0BAQsFADAXMRUwEwYDVQQD
 EwxJbnRlcm1lZGlhdGUwHhcNMTkwMzAzMjM1NzA3WhcNMTkwNjAzMjM1NzA3WjAVMRMwEQYDVQQD
@@ -1105,9 +1104,11 @@ MPmiZicaNlXPVO9vyW4s6J23+kol6X8K2rnVht9jagfnOQ990Ux2xXGyDGM4I0pvW1Zo4vid/eli
 psHHsU9xg0o7L2WXD5qYhD2JCQIVWNRmRZCf1luWlKqUaqWWONMJ44hk8Md+ohxpyCRmbtLRZPzd
 wlkQzPsc9A==
 -----END CERTIFICATE-----"
-            );
-            byte[] intermediateBytes = Encoding.ASCII.GetBytes(
-                @"
+                );
+            byte[] intermediateBytes = Encoding
+                .ASCII
+                .GetBytes(
+                    @"
 -----BEGIN CERTIFICATE-----
 MIIC1DCCAbygAwIBAgIPRoY1rB2tMVJeYB4GILkNMA0GCSqGSIb3DQEBCwUAMBQxEjAQBgNVBAMT
 CVRlc3QgUm9vdDAeFw0xOTAyMTgyMzU3MDdaFw0yMDAyMTgyMzU3MDdaMBcxFTATBgNVBAMTDElu
@@ -1123,9 +1124,11 @@ CY0IMP8pCHUZH9OX/K0N9L+GItqlBK8G4grJ4o43da2x9L0hIrdauPadaGcJalf8k1ymhJ4VDj7t
 ueuTl2qTtbBh015GuEld61EBXSBLIUqwOAeFYrNJbC4J2mXgnLTWC380cBf5KWeSdjLYgk2sZ1V4
 FKKQecZIhxdlDGzMAbbmEV+2EqS+As2C7+y4dkpG4nnbQe/4AFr8vekHdrI=
 -----END CERTIFICATE-----"
-            );
-            byte[] rootBytes = Encoding.ASCII.GetBytes(
-                @"
+                );
+            byte[] rootBytes = Encoding
+                .ASCII
+                .GetBytes(
+                    @"
 -----BEGIN CERTIFICATE-----
 MIICyjCCAbKgAwIBAgIIKKt3K3rRbvQwDQYJKoZIhvcNAQELBQAwFDESMBAGA1UEAxMJVGVzdCBS
 b290MB4XDTE5MDIwNDIzNTcwN1oXDTIxMDIwNDIzNTcwN1owFDESMBAGA1UEAxMJVGVzdCBSb290
@@ -1141,7 +1144,7 @@ HAwJjH/eKZ5iuOMhFljs2R5Gh5rRsQjNVUCRsolCds4d1f+76fi2SGaKqkAA4gzg1c71SPTAaUPR
 ythjxnoCBDVFmwV5opXZj9qIZoUdH92gCVFgMWkxWCYWzyH78uIUzV1oo+KNwK1SCTnfVHcfWRIL
 tHP28fj0LUop/QFojSZPsaPAW6JvoQ0t4hd6WoyX6z7FsA==
 -----END CERTIFICATE-----"
-            );
+                );
 
             using (X509Certificate2 endEntityCert = new X509Certificate2(endEntityBytes))
             using (X509Certificate2 intermediateCert = new X509Certificate2(intermediateBytes))
@@ -1349,9 +1352,9 @@ mLgOGT78BTHjFtn9kAUDhsZXAR9/eKDPM2qqZmsi0KdJIw=="
                 }
                 else
                 {
-                    X509ChainElement certElement = chain.ChainElements.Single(e =>
-                        e.Certificate.Subject == cert.Subject
-                    );
+                    X509ChainElement certElement = chain
+                        .ChainElements
+                        .Single(e => e.Certificate.Subject == cert.Subject);
 
                     const X509ChainStatusFlags ExpectedFlag = X509ChainStatusFlags.ExplicitDistrust;
                     X509ChainStatusFlags actualFlags = certElement.AllStatusFlags();
@@ -1443,9 +1446,9 @@ yY1kePIfwE+GFWvagZ2ehANB/6LgBTT8jFhR95Tw2oE3N0I="
                 }
                 else
                 {
-                    X509ChainElement certElement = chain.ChainElements.Single(e =>
-                        e.Certificate.Subject == intermediateCert.Subject
-                    );
+                    X509ChainElement certElement = chain
+                        .ChainElements
+                        .Single(e => e.Certificate.Subject == intermediateCert.Subject);
 
                     const X509ChainStatusFlags ExpectedFlag = X509ChainStatusFlags.ExplicitDistrust;
                     X509ChainStatusFlags actualFlags = certElement.AllStatusFlags();
@@ -1545,18 +1548,16 @@ LjCvFGJ+RiZCbxIZfUZEuJ5vAH5WOa2S0tYoEAeyfzuLMIqY9xK74nlZ/vzz1cY="
 
         internal static X509ChainStatusFlags AllStatusFlags(this X509Chain chain)
         {
-            return chain.ChainStatus.Aggregate(
-                X509ChainStatusFlags.NoError,
-                (f, s) => f | s.Status
-            );
+            return chain
+                .ChainStatus
+                .Aggregate(X509ChainStatusFlags.NoError, (f, s) => f | s.Status);
         }
 
         internal static X509ChainStatusFlags AllStatusFlags(this X509ChainElement chainElement)
         {
-            return chainElement.ChainElementStatus.Aggregate(
-                X509ChainStatusFlags.NoError,
-                (f, s) => f | s.Status
-            );
+            return chainElement
+                .ChainElementStatus
+                .Aggregate(X509ChainStatusFlags.NoError, (f, s) => f | s.Status);
         }
 
         internal static void AllowUnknownAuthorityOrAddSelfSignedToCustomTrust(

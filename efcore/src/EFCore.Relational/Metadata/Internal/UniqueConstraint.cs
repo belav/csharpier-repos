@@ -78,8 +78,12 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
             static constraint =>
                 RuntimeFeature.IsDynamicCodeSupported
                     ? constraint
-                        .Table.Model.Model.GetRelationalDependencies()
-                        .RowKeyValueFactoryFactory.Create(constraint)
+                        .Table
+                        .Model
+                        .Model
+                        .GetRelationalDependencies()
+                        .RowKeyValueFactoryFactory
+                        .Create(constraint)
                     : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
         );
 

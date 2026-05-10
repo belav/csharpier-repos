@@ -79,7 +79,8 @@ namespace tests.system_data_dll.System_Data
 
             //add data to check GH bug of DataSet.ReadXml of empty strings
             ds1.Tables[1]
-                .Rows.Add(
+                .Rows
+                .Add(
                     new object[]
                     {
                         7,
@@ -91,11 +92,11 @@ namespace tests.system_data_dll.System_Data
                     }
                 );
             ds1.Tables[1]
-                .Rows.Add(
-                    new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-                );
+                .Rows
+                .Add(new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
             ds1.Tables[1]
-                .Rows.Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+                .Rows
+                .Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
 
             System.IO.MemoryStream ms = new System.IO.MemoryStream();
             //write xml file, data only

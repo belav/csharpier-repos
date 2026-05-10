@@ -32,13 +32,15 @@ namespace System.Security.AccessControl
             uint ByteArraySize = 0;
 
             if (
-                !Interop.Advapi32.ConvertSdToStringSd(
-                    binaryForm,
-                    (uint)requestedRevision,
-                    (uint)si,
-                    out ByteArray,
-                    ref ByteArraySize
-                )
+                !Interop
+                    .Advapi32
+                    .ConvertSdToStringSd(
+                        binaryForm,
+                        (uint)requestedRevision,
+                        (uint)si,
+                        out ByteArray,
+                        ref ByteArraySize
+                    )
             )
             {
                 errorCode = Marshal.GetLastPInvokeError();
@@ -132,16 +134,18 @@ namespace System.Security.AccessControl
                 if (name != null)
                 {
                     errorCode = (int)
-                        Interop.Advapi32.GetSecurityInfoByName(
-                            name,
-                            (uint)resourceType,
-                            (uint)SecurityInfos,
-                            out SidOwner,
-                            out SidGroup,
-                            out Dacl,
-                            out Sacl,
-                            out ByteArray
-                        );
+                        Interop
+                            .Advapi32
+                            .GetSecurityInfoByName(
+                                name,
+                                (uint)resourceType,
+                                (uint)SecurityInfos,
+                                out SidOwner,
+                                out SidGroup,
+                                out Dacl,
+                                out Sacl,
+                                out ByteArray
+                            );
                 }
                 else if (handle != null)
                 {
@@ -152,16 +156,18 @@ namespace System.Security.AccessControl
                     else
                     {
                         errorCode = (int)
-                            Interop.Advapi32.GetSecurityInfoByHandle(
-                                handle,
-                                (uint)resourceType,
-                                (uint)SecurityInfos,
-                                &SidOwner,
-                                &SidGroup,
-                                &Dacl,
-                                &Sacl,
-                                &ByteArray
-                            );
+                            Interop
+                                .Advapi32
+                                .GetSecurityInfoByHandle(
+                                    handle,
+                                    (uint)resourceType,
+                                    (uint)SecurityInfos,
+                                    &SidOwner,
+                                    &SidGroup,
+                                    &Dacl,
+                                    &Sacl,
+                                    &ByteArray
+                                );
                     }
                 }
                 else
@@ -315,15 +321,17 @@ namespace System.Security.AccessControl
                 if (name != null)
                 {
                     errorCode = (int)
-                        Interop.Advapi32.SetSecurityInfoByName(
-                            name,
-                            (uint)type,
-                            unchecked((uint)securityInformation),
-                            OwnerBinary,
-                            GroupBinary,
-                            DaclBinary,
-                            SaclBinary
-                        );
+                        Interop
+                            .Advapi32
+                            .SetSecurityInfoByName(
+                                name,
+                                (uint)type,
+                                unchecked((uint)securityInformation),
+                                OwnerBinary,
+                                GroupBinary,
+                                DaclBinary,
+                                SaclBinary
+                            );
                 }
                 else if (handle != null)
                 {
@@ -334,15 +342,17 @@ namespace System.Security.AccessControl
                     else
                     {
                         errorCode = (int)
-                            Interop.Advapi32.SetSecurityInfoByHandle(
-                                handle,
-                                (uint)type,
-                                (uint)securityInformation,
-                                OwnerBinary,
-                                GroupBinary,
-                                DaclBinary,
-                                SaclBinary
-                            );
+                            Interop
+                                .Advapi32
+                                .SetSecurityInfoByHandle(
+                                    handle,
+                                    (uint)type,
+                                    (uint)securityInformation,
+                                    OwnerBinary,
+                                    GroupBinary,
+                                    DaclBinary,
+                                    SaclBinary
+                                );
                     }
                 }
                 else

@@ -667,7 +667,8 @@ class Program
         public async Task OnlyOfferFixAllProjectsFromCSharp6ToDefaultWhenApplicable()
         {
             var defaultVersion = LanguageVersion
-                .Default.MapSpecifiedToEffectiveVersion()
+                .Default
+                .MapSpecifiedToEffectiveVersion()
                 .ToDisplayString();
             await TestExactActionSetOfferedAsync(
                 $@"<Workspace>
@@ -735,7 +736,8 @@ class C
         public async Task OnlyOfferFixAllProjectsToDefaultWhenApplicable()
         {
             var defaultEffectiveVersion = LanguageVersion
-                .Default.MapSpecifiedToEffectiveVersion()
+                .Default
+                .MapSpecifiedToEffectiveVersion()
                 .ToDisplayString();
             await TestExactActionSetOfferedAsync(
                 $@"<Workspace>

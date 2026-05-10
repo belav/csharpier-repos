@@ -166,14 +166,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                     .GetMembers()
                     .OfType<IMethodSymbol>()
                     .FirstOrDefault(m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator())
-                    ?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
+                    ?.ReturnType
+                    ?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
                     .OfType<IPropertySymbol>()
                     .FirstOrDefault(p => p.GetMethod != null)
                     ?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
                 collectionType ??= namedType
-                    .AllInterfaces.FirstOrDefault(t =>
+                    .AllInterfaces
+                    .FirstOrDefault(t =>
                         t.OriginalDefinition.SpecialType
                             == SpecialType.System_Collections_Generic_IEnumerable_T
                         || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
@@ -228,7 +230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             // heuristic.  If there's a matching type under System.Collections with that name, then assume it's a
             // collection and attempt to create a name from the type arg.
             var system = compilation
-                .GlobalNamespace.GetMembers(nameof(System))
+                .GlobalNamespace
+                .GetMembers(nameof(System))
                 .OfType<INamespaceSymbol>()
                 .FirstOrDefault();
             var systemCollections = system
@@ -270,7 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
         {
             var rules = namingStyleOptions
                 .CreateRules()
-                .NamingRules.AddRange(FallbackNamingRules.CompletionFallbackRules);
+                .NamingRules
+                .AddRange(FallbackNamingRules.CompletionFallbackRules);
 
             var supplementaryRules = FallbackNamingRules.CompletionSupplementaryRules;
             var semanticFactsService = context.GetRequiredLanguageService<ISemanticFactsService>();
@@ -335,8 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                     {
                         foreach (var baseName in baseNames)
                         {
-                            var name = rule
-                                .NamingStyle.CreateName(baseName)
+                            var name = rule.NamingStyle
+                                .CreateName(baseName)
                                 .EscapeIdentifier(context.IsInQuery);
 
                             // Don't add multiple items for the same name and only add valid identifiers
@@ -426,7 +430,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
                 return;
 
             var currentParameterNames = baseMethod
-                .ParameterList.Parameters.Select(p => p.Identifier.ValueText)
+                .ParameterList
+                .Parameters
+                .Select(p => p.Identifier.ValueText)
                 .ToImmutableHashSet();
 
             foreach (var overload in overloads)

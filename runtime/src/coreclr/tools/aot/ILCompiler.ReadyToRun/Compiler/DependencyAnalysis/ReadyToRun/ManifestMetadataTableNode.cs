@@ -126,7 +126,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (!_nodeFactory.CompilationModuleGroup.IsCompositeBuildMode)
             {
                 MetadataReader mdReader = _nodeFactory
-                    .CompilationModuleGroup.CompilationModuleSet.Single()
+                    .CompilationModuleGroup
+                    .CompilationModuleSet
+                    .Single()
                     .MetadataReader;
                 _assemblyRefCount = mdReader.GetTableRowCount(TableIndex.AssemblyRef);
 
@@ -283,9 +285,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (_nodeFactory.CompilationModuleGroup.VersionsWithModule(emodule))
                 {
                     _manifestAssemblyMvids.Add(
-                        module.MetadataReader.GetGuid(
-                            module.MetadataReader.GetModuleDefinition().Mvid
-                        )
+                        module
+                            .MetadataReader
+                            .GetGuid(module.MetadataReader.GetModuleDefinition().Mvid)
                     );
                 }
                 else

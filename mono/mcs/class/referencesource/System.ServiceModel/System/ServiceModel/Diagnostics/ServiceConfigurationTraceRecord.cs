@@ -39,9 +39,10 @@ namespace System.ServiceModel.Diagnostics
                     );
                     xml.WriteElementString(
                         "ConfigurationFileLineNumber",
-                        this.serviceElement.ElementInformation.LineNumber.ToString(
-                            CultureInfo.InvariantCulture
-                        )
+                        this.serviceElement
+                            .ElementInformation
+                            .LineNumber
+                            .ToString(CultureInfo.InvariantCulture)
                     );
                 }
                 xml.WriteStartElement("ServiceConfigurationInformation");

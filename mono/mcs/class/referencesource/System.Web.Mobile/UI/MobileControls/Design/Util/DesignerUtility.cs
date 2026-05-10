@@ -89,10 +89,9 @@ namespace System.Web.UI.Design.MobileControls.Util
                 return;
             }
 
-            Object serviceInstance = System.Activator.CreateInstance(
-                serviceType,
-                new Object[] { site }
-            );
+            Object serviceInstance = System
+                .Activator
+                .CreateInstance(serviceType, new Object[] { site });
 
             try
             {

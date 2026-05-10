@@ -23,7 +23,8 @@ namespace MonoTests.System.Text
                 charsUsed;
             bool done;
             Encoding
-                .UTF8.GetEncoder()
+                .UTF8
+                .GetEncoder()
                 .Convert(
                     null,
                     0,
@@ -46,7 +47,8 @@ namespace MonoTests.System.Text
                 charsUsed;
             bool done;
             Encoding
-                .UTF8.GetEncoder()
+                .UTF8
+                .GetEncoder()
                 .Convert(
                     new char[100],
                     0,
@@ -137,7 +139,8 @@ namespace MonoTests.System.Text
             byte[] bytes = new byte[0];
 
             Encoding
-                .UTF8.GetEncoder()
+                .UTF8
+                .GetEncoder()
                 .Convert(
                     new char[0],
                     0,
@@ -173,7 +176,8 @@ namespace MonoTests.System.Text
             )
             {
                 return Encoding
-                    .UTF8.GetEncoder()
+                    .UTF8
+                    .GetEncoder()
                     .GetBytes(chars, charIndex, charCount, bytes, byteIndex, flush);
             }
         }

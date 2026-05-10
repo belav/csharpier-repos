@@ -54,17 +54,15 @@ namespace System.IdentityModel.Claims
             if (claimType == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("claimType");
             if (claimType.Length <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "claimType",
-                    SR.GetString(SR.ArgumentCannotBeEmptyString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("claimType", SR.GetString(SR.ArgumentCannotBeEmptyString));
             if (right == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("right");
             if (right.Length <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "right",
-                    SR.GetString(SR.ArgumentCannotBeEmptyString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("right", SR.GetString(SR.ArgumentCannotBeEmptyString));
 
             this.claimType = StringUtil.OptimizeString(claimType);
             this.resource = resource;
@@ -210,9 +208,9 @@ namespace System.IdentityModel.Claims
         )
         {
             if (x500DistinguishedName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "x500DistinguishedName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("x500DistinguishedName");
 
             return new Claim(
                 ClaimTypes.X500DistinguishedName,

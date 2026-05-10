@@ -142,12 +142,12 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             if (containingType == null)
                 return;
 
-            var ienumerableType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_Collections_Generic_IEnumerable_T
-            );
-            var ienumeratorType = semanticModel.Compilation.GetSpecialType(
-                SpecialType.System_Collections_Generic_IEnumerator_T
-            );
+            var ienumerableType = semanticModel
+                .Compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T);
+            var ienumeratorType = semanticModel
+                .Compilation
+                .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerator_T);
 
             // make sure the collection can be iterated.
             if (
@@ -453,18 +453,18 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 var indexerType = GetIndexerType(
                     containingType,
                     collectionType,
-                    semanticModel.Compilation.GetSpecialType(
-                        SpecialType.System_Collections_Generic_IEnumerable_T
-                    )
+                    semanticModel
+                        .Compilation
+                        .GetSpecialType(SpecialType.System_Collections_Generic_IEnumerable_T)
                 );
                 if (!Equals(indexerType, iterationType))
                 {
                     typeNode = (TTypeNode)
                         generator.TypeExpression(
                             indexerType
-                                ?? semanticModel.Compilation.GetSpecialType(
-                                    SpecialType.System_Object
-                                )
+                                ?? semanticModel
+                                    .Compilation
+                                    .GetSpecialType(SpecialType.System_Object)
                         );
                 }
             }

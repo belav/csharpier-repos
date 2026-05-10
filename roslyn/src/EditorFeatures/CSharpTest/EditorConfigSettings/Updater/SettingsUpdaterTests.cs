@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             Assert.True(
                 workspace.TryApplyChanges(
                     workspace
-                        .CurrentSolution.AddProject(
+                        .CurrentSolution
+                        .AddProject(
                             ProjectInfo.Create(
                                 projectId,
                                 VersionStamp.Create(),
@@ -71,7 +72,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         }
 
         private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
-            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+            workspace
+                .Services
+                .SolutionServices
+                .ExportProvider
+                .GetExportedValue<IGlobalOptionService>();
 
         private static AnalyzerConfigDocument CreateAnalyzerConfigDocument(
             Workspace workspace,
@@ -80,8 +85,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         {
             var solution = workspace.CurrentSolution;
             var documentId = solution
-                .Projects.Single()
-                .State.AnalyzerConfigDocumentStates.Ids.First();
+                .Projects
+                .Single()
+                .State
+                .AnalyzerConfigDocumentStates
+                .Ids
+                .First();
             var text = SourceText.From(contents);
             var newSolution1 = solution.WithAnalyzerConfigDocumentText(
                 documentId,
@@ -491,7 +500,8 @@ csharp_new_line_before_else = true";
 
             var solution = workspace.CurrentSolution;
             var editorconfig = solution
-                .Projects.SelectMany(p =>
+                .Projects
+                .SelectMany(p =>
                     p.AnalyzerConfigDocuments.Where(a => a.FilePath == EditorconfigPath)
                 )
                 .Single();
@@ -539,9 +549,9 @@ csharp_new_line_before_else = true";
         public async Task TestNamingStyleSettingsUpdater()
         {
             var workspace = CreateWorkspaceWithProjectAndDocuments();
-            var settingsProviderFactory = workspace.Services.GetRequiredService<
-                IWorkspaceSettingsProviderFactory<NamingStyleSetting>
-            >();
+            var settingsProviderFactory = workspace
+                .Services
+                .GetRequiredService<IWorkspaceSettingsProviderFactory<NamingStyleSetting>>();
             var settingsProvider = settingsProviderFactory.GetForFile(EditorconfigPath);
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);

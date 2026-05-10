@@ -24,13 +24,9 @@ namespace System.Globalization
             if (estimatedLength < StackallocThreshold)
             {
                 char* outputStack = stackalloc char[estimatedLength];
-                actualLength = Interop.Globalization.ToAscii(
-                    flags,
-                    unicode,
-                    count,
-                    outputStack,
-                    estimatedLength
-                );
+                actualLength = Interop
+                    .Globalization
+                    .ToAscii(flags, unicode, count, outputStack, estimatedLength);
                 if (actualLength > 0 && actualLength <= estimatedLength)
                 {
                     return GetStringForOutput(
@@ -54,13 +50,9 @@ namespace System.Globalization
             char[] outputHeap = new char[actualLength];
             fixed (char* pOutputHeap = &outputHeap[0])
             {
-                actualLength = Interop.Globalization.ToAscii(
-                    flags,
-                    unicode,
-                    count,
-                    pOutputHeap,
-                    actualLength
-                );
+                actualLength = Interop
+                    .Globalization
+                    .ToAscii(flags, unicode, count, pOutputHeap, actualLength);
                 if (actualLength == 0 || actualLength > outputHeap.Length)
                 {
                     throw new ArgumentException(SR.Argument_IdnIllegalName, nameof(unicode));
@@ -124,13 +116,9 @@ namespace System.Globalization
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(asciiString != null && asciiString.Length >= count);
 
-            int realLen = Interop.Globalization.ToUnicode(
-                flags,
-                ascii,
-                count,
-                output,
-                outputLength
-            );
+            int realLen = Interop
+                .Globalization
+                .ToUnicode(flags, ascii, count, output, outputLength);
 
             if (realLen == 0)
             {

@@ -44,8 +44,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var previewDialogService =
-                        _workspace.Services.GetService<IPreviewDialogService>();
+                    var previewDialogService = _workspace
+                        .Services
+                        .GetService<IPreviewDialogService>();
                     if (previewDialogService == null)
                     {
                         return ImmutableArray<CodeActionOperation>.Empty;

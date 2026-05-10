@@ -67,11 +67,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         )
         {
             var options = await context
-                .Document.GetCodeFixOptionsAsync(context.GetOptionsProvider(), cancellationToken)
+                .Document
+                .GetCodeFixOptionsAsync(context.GetOptionsProvider(), cancellationToken)
                 .ConfigureAwait(false);
             var formattingOptions = options.GetFormattingOptions(SyntaxFormatting);
             var tree = await context
-                .Document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .Document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var updatedTree = await FormattingCodeFixHelper
                 .FixOneAsync(
@@ -82,9 +84,9 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            return context.Document.WithText(
-                await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false)
-            );
+            return context
+                .Document
+                .WithText(await updatedTree.GetTextAsync(cancellationToken).ConfigureAwait(false));
         }
 
         protected override async Task FixAllAsync(

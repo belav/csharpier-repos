@@ -365,9 +365,9 @@ class CL3
             );
 
             var withModifiers = cl3.BaseType().BaseType();
-            var withoutModifiers = withModifiers.OriginalDefinition.Construct(
-                withModifiers.TypeArguments()
-            );
+            var withoutModifiers = withModifiers
+                .OriginalDefinition
+                .Construct(withModifiers.TypeArguments());
             Assert.True(HasTypeArgumentsCustomModifiers(withModifiers));
             Assert.False(HasTypeArgumentsCustomModifiers(withoutModifiers));
             Assert.True(
@@ -1455,9 +1455,12 @@ class CL3
                 test.GetMethod.ToTestDisplayString()
             );
             Assert.True(
-                test.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.SequenceEqual(
-                    test.SetMethod.Parameters.First().TypeWithAnnotations.CustomModifiers
-                )
+                test.GetMethod
+                    .ReturnTypeWithAnnotations
+                    .CustomModifiers
+                    .SequenceEqual(
+                        test.SetMethod.Parameters.First().TypeWithAnnotations.CustomModifiers
+                    )
             );
 
             CompileAndVerify(
@@ -1806,7 +1809,8 @@ class Module1
                     (CSharpCustomModifier)
                         ((NamedTypeSymbol)test.Parameters.First().Type)
                             .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
-                            .CustomModifiers.First()
+                            .CustomModifiers
+                            .First()
                 )
                     .ModifierSymbol
                     .ContainingAssembly
@@ -1836,7 +1840,8 @@ class Module1
                     (CSharpCustomModifier)
                         ((NamedTypeSymbol)test.Parameters.First().Type)
                             .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
-                            .CustomModifiers.First()
+                            .CustomModifiers
+                            .First()
                 )
                     .ModifierSymbol
                     .ContainingAssembly

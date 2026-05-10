@@ -27,7 +27,8 @@ public class HelpOptionTests
         await result.InvokeAsync();
 
         config
-            .Output.ToString()
+            .Output
+            .ToString()
             .Should()
             .Contain($"{CliRootCommand.ExecutableName} command subcommand [options]");
     }

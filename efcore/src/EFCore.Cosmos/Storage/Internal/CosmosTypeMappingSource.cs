@@ -32,9 +32,9 @@ public class CosmosTypeMappingSource : TypeMappingSource
                 typeof(JObject),
                 new CosmosTypeMapping(
                     typeof(JObject),
-                    jsonValueReaderWriter: dependencies.JsonValueReaderWriterSource.FindReaderWriter(
-                        typeof(JObject)
-                    )
+                    jsonValueReaderWriter: dependencies
+                        .JsonValueReaderWriterSource
+                        .FindReaderWriter(typeof(JObject))
                 )
             },
         };
@@ -70,9 +70,9 @@ public class CosmosTypeMappingSource : TypeMappingSource
         {
             return new CosmosTypeMapping(
                 clrType,
-                jsonValueReaderWriter: Dependencies.JsonValueReaderWriterSource.FindReaderWriter(
-                    clrType
-                )
+                jsonValueReaderWriter: Dependencies
+                    .JsonValueReaderWriterSource
+                    .FindReaderWriter(clrType)
             );
         }
 
@@ -94,9 +94,9 @@ public class CosmosTypeMappingSource : TypeMappingSource
             return null;
         }
 
-        var jsonValueReaderWriter = Dependencies.JsonValueReaderWriterSource.FindReaderWriter(
-            clrType
-        );
+        var jsonValueReaderWriter = Dependencies
+            .JsonValueReaderWriterSource
+            .FindReaderWriter(clrType);
 
         if (clrType.IsArray)
         {

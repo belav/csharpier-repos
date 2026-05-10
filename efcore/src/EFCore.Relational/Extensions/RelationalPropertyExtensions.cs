@@ -166,7 +166,8 @@ public static class RelationalPropertyExtensions
                 else
                 {
                     var fragments = property
-                        .DeclaringType.GetMappingFragments(storeObject.StoreObjectType)
+                        .DeclaringType
+                        .GetMappingFragments(storeObject.StoreObjectType)
                         .ToList();
                     if (fragments.Count > 0)
                     {
@@ -304,7 +305,8 @@ public static class RelationalPropertyExtensions
             StoreObjectIdentifier.Create(property.DeclaringType, currentStoreObject.StoreObjectType)
                 == currentStoreObject
             || property
-                .DeclaringType.GetMappingFragments(storeObject.StoreObjectType)
+                .DeclaringType
+                .GetMappingFragments(storeObject.StoreObjectType)
                 .Any(f => f.StoreObject == currentStoreObject)
         )
         {

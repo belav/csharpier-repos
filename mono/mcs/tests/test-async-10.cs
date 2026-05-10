@@ -7,8 +7,8 @@ class C
 {
     static async Task<string> TestCompositionCall_1()
     {
-        return await Task
-                .Factory.StartNew(() =>
+        return await Task.Factory
+                .StartNew(() =>
                 {
                     Thread.Sleep(10);
                     return "a";
@@ -39,8 +39,8 @@ class C
 
     static async Task<int> TestCompositionPair_2()
     {
-        return await Task
-                .Factory.StartNew(() =>
+        return await Task.Factory
+                .StartNew(() =>
                 {
                     Thread.Sleep(10);
                     return 3;

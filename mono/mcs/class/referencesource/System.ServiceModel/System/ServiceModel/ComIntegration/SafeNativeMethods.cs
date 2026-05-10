@@ -558,9 +558,9 @@ namespace System.ServiceModel.ComIntegration
             IntPtr pUnk = Marshal.GetIUnknownForObject(obj);
             if (IntPtr.Zero == pUnk)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentException(SR.GetString(SR.UnableToRetrievepUnk)));
             }
 
             IntPtr ppv = IntPtr.Zero;
@@ -622,17 +622,17 @@ namespace System.ServiceModel.ComIntegration
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("GetHKCR: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
             }
 
             return regHandle;
@@ -652,17 +652,17 @@ namespace System.ServiceModel.ComIntegration
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("Get64bitHKCR: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
             }
 
             return regHandle;
@@ -682,17 +682,17 @@ namespace System.ServiceModel.ComIntegration
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("Get64bitHKCR: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
             }
             return regHandle;
         }
@@ -708,9 +708,9 @@ namespace System.ServiceModel.ComIntegration
             else if (!is64bit && IntPtr.Size == 4)
                 return GetHKCR();
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED));
         }
 
         public static RegistryHandle GetBitnessHKCR(bool is64bit)
@@ -729,9 +729,9 @@ namespace System.ServiceModel.ComIntegration
             else if (!is64bit && IntPtr.Size == 4)
                 return GetHKLMSubkey(key);
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_NOT_SUPPORTED));
         }
 
         [ResourceConsumption(ResourceScope.Machine)]
@@ -748,17 +748,17 @@ namespace System.ServiceModel.ComIntegration
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
                 Fx.Assert("GetHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle.");
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
             }
             return regHandle;
         }
@@ -777,9 +777,9 @@ namespace System.ServiceModel.ComIntegration
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
@@ -787,9 +787,9 @@ namespace System.ServiceModel.ComIntegration
                     "Get64bitHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle."
                 );
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
             }
             return regHandle;
         }
@@ -808,9 +808,9 @@ namespace System.ServiceModel.ComIntegration
             if (status != SafeNativeMethods.ERROR_SUCCESS)
             {
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
             }
             if (null == regHandle || regHandle.IsInvalid)
             {
@@ -818,9 +818,9 @@ namespace System.ServiceModel.ComIntegration
                     "Get32bitHKLMSubkey: RegOpenKeyEx returned null but with an invalid handle."
                 );
                 Utility.CloseInvalidOutSafeHandle(regHandle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(SafeNativeMethods.ERROR_INVALID_HANDLE));
             }
             return regHandle;
         }
@@ -884,9 +884,9 @@ namespace System.ServiceModel.ComIntegration
                 (value.Length * 2) + 2
             );
             if (status != SafeNativeMethods.ERROR_SUCCESS)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(status));
         }
 
         [ResourceConsumption(ResourceScope.Machine)]

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia
         )
         {
             var (items, selectedItemIndex) = await _lazyImplementation
-                .Value.GetMethodGroupItemsAndSelectionAsync(
+                .Value
+                .GetMethodGroupItemsAndSelectionAsync(
                     accessibleMethods,
                     document,
                     invocationExpression,

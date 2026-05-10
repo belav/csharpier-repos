@@ -57,7 +57,8 @@ public static class DbUtil
 
         foreach (
             var property in context
-                .Model.GetEntityTypes()
+                .Model
+                .GetEntityTypes()
                 .Single(e => e.GetTableName() == table)
                 .GetProperties()
         )

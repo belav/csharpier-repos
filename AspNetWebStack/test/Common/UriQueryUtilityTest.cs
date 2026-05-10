@@ -20,10 +20,13 @@ namespace System.Net.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(
-                typeof(WebUtility),
-                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass
-            );
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(WebUtility),
+                    TypeAssert.TypeProperties.IsStatic
+                        | TypeAssert.TypeProperties.IsPublicVisibleClass
+                );
         }
 
         [Fact]

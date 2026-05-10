@@ -28,7 +28,8 @@ public class Program
 
         var runtimeVersion =
             typeof(object)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion
             ?? "Unknown";
         Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");

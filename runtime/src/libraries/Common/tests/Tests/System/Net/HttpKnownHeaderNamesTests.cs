@@ -116,7 +116,8 @@ namespace Tests.System.Net
             {
                 string[] constants = typeof(HttpKnownHeaderNames)
                     .GetTypeInfo()
-                    .DeclaredFields.Where(f =>
+                    .DeclaredFields
+                    .Where(f =>
                         f.IsLiteral && f.IsStatic && f.IsPublic && f.FieldType == typeof(string)
                     )
                     .Select(f => (string)f.GetValue(null))

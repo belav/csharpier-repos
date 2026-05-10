@@ -112,43 +112,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             action: waitContext =>
                             {
                                 var cancellationToken = waitContext.UserCancellationToken;
-                                var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                var textBuffer = _languageService
+                                    .EditorAdaptersFactoryService
+                                    .GetDataBuffer(pBuffer);
                                 if (textBuffer != null)
                                 {
-                                    var nullablePoint = textBuffer.CurrentSnapshot.TryGetPoint(
-                                        iLine,
-                                        iCol
-                                    );
+                                    var nullablePoint = textBuffer
+                                        .CurrentSnapshot
+                                        .TryGetPoint(iLine, iCol);
                                     if (nullablePoint.HasValue)
                                     {
                                         var point = nullablePoint.Value;
-                                        var document =
-                                            point.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                                        var document = point
+                                            .Snapshot
+                                            .GetOpenDocumentInCurrentContextWithChanges();
 
                                         if (document != null)
                                         {
                                             // NOTE(cyrusn): We have to wait here because the debuggers'
                                             // GetNameOfLocation is a blocking call.  In the future, it
                                             // would be nice if they could make it async.
-                                            _threadingContext.JoinableTaskFactory.Run(async () =>
-                                            {
-                                                var debugLocationInfo = await _languageDebugInfo
-                                                    .GetLocationInfoAsync(
-                                                        document,
-                                                        point,
-                                                        cancellationToken
-                                                    )
-                                                    .ConfigureAwait(false);
-
-                                                if (!debugLocationInfo.IsDefault)
+                                            _threadingContext
+                                                .JoinableTaskFactory
+                                                .Run(async () =>
                                                 {
-                                                    name = debugLocationInfo.Name;
-                                                    lineOffset = debugLocationInfo.LineOffset;
-                                                }
-                                            });
+                                                    var debugLocationInfo = await _languageDebugInfo
+                                                        .GetLocationInfoAsync(
+                                                            document,
+                                                            point,
+                                                            cancellationToken
+                                                        )
+                                                        .ConfigureAwait(false);
+
+                                                    if (!debugLocationInfo.IsDefault)
+                                                    {
+                                                        name = debugLocationInfo.Name;
+                                                        lineOffset = debugLocationInfo.LineOffset;
+                                                    }
+                                                });
                                         }
                                     }
                                 }
@@ -198,10 +199,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             showProgress: false,
                             action: context =>
                             {
-                                var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                var textBuffer = _languageService
+                                    .EditorAdaptersFactoryService
+                                    .GetDataBuffer(pBuffer);
 
                                 if (textBuffer != null)
                                 {
@@ -268,34 +268,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         showProgress: false,
                         action: waitContext =>
                         {
-                            _threadingContext.JoinableTaskFactory.Run(async () =>
-                            {
-                                var cancellationToken = waitContext.UserCancellationToken;
-                                if (dwFlags == (uint)RESOLVENAMEFLAGS.RNF_BREAKPOINT)
+                            _threadingContext
+                                .JoinableTaskFactory
+                                .Run(async () =>
                                 {
-                                    var solution = _languageService.Workspace.CurrentSolution;
-
-                                    // NOTE(cyrusn): We have to wait here because the debuggers' ResolveName
-                                    // call is synchronous.  In the future it would be nice to make it async.
-                                    if (_breakpointService != null)
+                                    var cancellationToken = waitContext.UserCancellationToken;
+                                    if (dwFlags == (uint)RESOLVENAMEFLAGS.RNF_BREAKPOINT)
                                     {
-                                        var breakpoints = await _breakpointService
-                                            .ResolveBreakpointsAsync(
-                                                solution,
-                                                pszName,
-                                                cancellationToken
-                                            )
-                                            .ConfigureAwait(false);
-                                        var debugNames = await breakpoints
-                                            .SelectAsArrayAsync(bp =>
-                                                CreateDebugNameAsync(bp, cancellationToken)
-                                            )
-                                            .ConfigureAwait(false);
+                                        var solution = _languageService.Workspace.CurrentSolution;
 
-                                        enumName = new VsEnumDebugName(debugNames);
+                                        // NOTE(cyrusn): We have to wait here because the debuggers' ResolveName
+                                        // call is synchronous.  In the future it would be nice to make it async.
+                                        if (_breakpointService != null)
+                                        {
+                                            var breakpoints = await _breakpointService
+                                                .ResolveBreakpointsAsync(
+                                                    solution,
+                                                    pszName,
+                                                    cancellationToken
+                                                )
+                                                .ConfigureAwait(false);
+                                            var debugNames = await breakpoints
+                                                .SelectAsArrayAsync(bp =>
+                                                    CreateDebugNameAsync(bp, cancellationToken)
+                                                )
+                                                .ConfigureAwait(false);
+
+                                            enumName = new VsEnumDebugName(debugNames);
+                                        }
                                     }
-                                }
-                            });
+                                });
                         }
                     );
 
@@ -378,9 +380,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return VSConstants.E_FAIL;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    pBuffer
-                );
+                var textBuffer = _languageService
+                    .EditorAdaptersFactoryService
+                    .GetDataBuffer(pBuffer);
                 if (textBuffer != null)
                 {
                     var snapshot = textBuffer.CurrentSnapshot;
@@ -477,7 +479,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                         if (pCodeSpan != null && pCodeSpan.Length > 0)
                         {
                             pCodeSpan[0] = breakpoint
-                                .TextSpan.ToSnapshotSpan(snapshot)
+                                .TextSpan
+                                .ToSnapshotSpan(snapshot)
                                 .ToVsTextSpan();
                         }
 

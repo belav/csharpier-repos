@@ -99,9 +99,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 // Replace hooks with ones that always throw exceptions. These hooks detect cases where code executing
                 // after the end of a test attempts to create an ExportProvider.
-                MefHostServices.TestAccessor.HookServiceCreation(
-                    DenyMefHostServicesCreationBetweenTests
-                );
+                MefHostServices
+                    .TestAccessor
+                    .HookServiceCreation(DenyMefHostServicesCreationBetweenTests);
 
                 // Reset static state variables.
                 _hostServices = null;

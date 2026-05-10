@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis.Indentation
                 if (firstNonWhitespacePos.Value == token.SpanStart)
                 {
                     // token was on it's own line.  Start the end delimiter at the same location as it.
-                    return document.Text.ToString(
-                        TextSpan.FromBounds(tokenLine.Start, token.SpanStart)
-                    );
+                    return document
+                        .Text
+                        .ToString(TextSpan.FromBounds(tokenLine.Start, token.SpanStart));
                 }
             }
 
@@ -59,20 +59,22 @@ namespace Microsoft.CodeAnalysis.Indentation
             var annotation = new SyntaxAnnotation();
             var newToken = token.WithAdditionalAnnotations(annotation);
 
-            var syntaxGenerator =
-                document.LanguageServices.GetRequiredService<SyntaxGeneratorInternal>();
+            var syntaxGenerator = document
+                .LanguageServices
+                .GetRequiredService<SyntaxGeneratorInternal>();
             newToken = newToken.WithLeadingTrivia(
-                newToken.LeadingTrivia.Add(
-                    syntaxGenerator.EndOfLine(options.FormattingOptions.NewLine)
-                )
+                newToken
+                    .LeadingTrivia
+                    .Add(syntaxGenerator.EndOfLine(options.FormattingOptions.NewLine))
             );
 
             var newRoot = document.Root.ReplaceToken(token, newToken);
             var newDocument = document.WithChangedRoot(newRoot, cancellationToken);
 
-            var newTokenLine = newDocument.Text.Lines.GetLineFromPosition(
-                newRoot.GetAnnotatedTokens(annotation).Single().SpanStart
-            );
+            var newTokenLine = newDocument
+                .Text
+                .Lines
+                .GetLineFromPosition(newRoot.GetAnnotatedTokens(annotation).Single().SpanStart);
 
             var indenter = document.LanguageServices.GetRequiredService<IIndentationService>();
             var indentation = indenter.GetIndentation(

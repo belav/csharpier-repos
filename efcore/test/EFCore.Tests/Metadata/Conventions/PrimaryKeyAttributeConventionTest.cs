@@ -100,7 +100,8 @@ public class PrimaryKeyAttributeConventionTest
         // assert that the base type is not part of the model
         Assert.Empty(
             modelBuilder
-                .Model.GetEntityTypes()
+                .Model
+                .GetEntityTypes()
                 .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithPrimaryKey))
         );
 
@@ -263,7 +264,8 @@ public class PrimaryKeyAttributeConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices()
+            .Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     [PrimaryKey(nameof(A), nameof(B))]

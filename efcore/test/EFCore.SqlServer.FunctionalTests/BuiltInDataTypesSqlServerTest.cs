@@ -5578,7 +5578,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
 
         foreach (
             var property in context
-                .Model.GetEntityTypes()
+                .Model
+                .GetEntityTypes()
                 .SelectMany(e => e.GetDeclaredProperties())
         )
         {

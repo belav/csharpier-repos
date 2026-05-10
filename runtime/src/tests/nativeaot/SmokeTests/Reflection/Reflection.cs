@@ -1134,7 +1134,8 @@ internal static class ReflectionTest
             // Also tests GetEntryAssembly
             var modAttr = Assembly
                 .GetEntryAssembly()
-                .ManifestModule.GetCustomAttribute<TestModuleAttribute>();
+                .ManifestModule
+                .GetCustomAttribute<TestModuleAttribute>();
             if (modAttr == null)
                 throw new Exception();
         }

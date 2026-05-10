@@ -26,8 +26,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var service =
-                context.Document.Project.Solution.Services.GetRequiredService<ISupportedChangesService>();
+            var service = context
+                .Document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<ISupportedChangesService>();
             if (service.CanApplyChange(ApplyChangesKind.ChangeDocumentInfo))
             {
                 context.RegisterCodeFix(

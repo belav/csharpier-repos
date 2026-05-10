@@ -1665,9 +1665,9 @@ namespace System.Web.Security
                     break;
 
                 case MembershipPasswordFormat.Encrypted:
-                    password = Encoding.Unicode.GetString(
-                        DecryptPassword(Convert.FromBase64String(password))
-                    );
+                    password = Encoding
+                        .Unicode
+                        .GetString(DecryptPassword(Convert.FromBase64String(password)));
                     break;
 
                 case MembershipPasswordFormat.Hashed:

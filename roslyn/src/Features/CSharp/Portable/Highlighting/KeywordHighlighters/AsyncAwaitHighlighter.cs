@@ -95,9 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
                     usingStatement.AwaitKeyword,
                     spans
                 ),
-                LocalDeclarationStatementSyntax localDeclaration =>
-                    localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword
-                        && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
+                LocalDeclarationStatementSyntax localDeclaration => localDeclaration
+                    .UsingKeyword
+                    .Kind() == SyntaxKind.UsingKeyword
+                    && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
                 CommonForEachStatementSyntax forEachStatement => TryAddAsyncOrAwaitKeyword(
                     forEachStatement.AwaitKeyword,
                     spans

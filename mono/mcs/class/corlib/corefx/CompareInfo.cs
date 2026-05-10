@@ -178,9 +178,10 @@ namespace System.Globalization
 
         static unsafe bool IsSortable(char* text, int length)
         {
-            return Mono.Globalization.Unicode.MSCompatUnicodeTable.IsSortable(
-                new string(text, 0, length)
-            );
+            return Mono.Globalization
+                .Unicode
+                .MSCompatUnicodeTable
+                .IsSortable(new string(text, 0, length));
         }
 
         SortKey CreateSortKey(String source, CompareOptions options)

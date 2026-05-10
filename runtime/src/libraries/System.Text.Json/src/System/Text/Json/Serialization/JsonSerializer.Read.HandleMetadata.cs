@@ -294,7 +294,8 @@ namespace System.Text.Json
             return (propertyName.Length > 0 && propertyName[0] == '$')
                 || (
                     resolver
-                        ?.TypeDiscriminatorPropertyNameUtf8?.AsSpan()
+                        ?.TypeDiscriminatorPropertyNameUtf8
+                        ?.AsSpan()
                         .SequenceEqual(propertyName) == true
                 );
         }
@@ -405,10 +406,9 @@ namespace System.Text.Json
                         }
 
                         object boxedElement = element;
-                        state.ReferenceResolver.AddReference(
-                            property.Value.GetString()!,
-                            boxedElement
-                        );
+                        state
+                            .ReferenceResolver
+                            .AddReference(property.Value.GetString()!, boxedElement);
                         referenceValue = boxedElement;
                         return true;
                     }
@@ -436,9 +436,9 @@ namespace System.Text.Json
                             );
                         }
 
-                        referenceValue = state.ReferenceResolver.ResolveReference(
-                            property.Value.GetString()!
-                        );
+                        referenceValue = state
+                            .ReferenceResolver
+                            .ResolveReference(property.Value.GetString()!);
                         refMetadataFound = true;
                     }
                 }

@@ -31,7 +31,8 @@ namespace System.Threading.Tests
                 Assert.True(lockTaken);
                 Assert.True(sl.IsHeld);
                 Assert.True(sl.IsHeldByCurrentThread);
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () =>
                         {
                             Assert.True(sl.IsHeld);

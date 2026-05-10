@@ -173,11 +173,13 @@ namespace System.ServiceModel.Channels
             {
                 if (requiredSize > this.remainingSize)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
-                            this.maxSize
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            MaxMessageSizeStream.CreateMaxReceivedMessageSizeExceededException(
+                                this.maxSize
+                            )
+                        );
                 }
                 this.remainingSize -= requiredSize;
             }

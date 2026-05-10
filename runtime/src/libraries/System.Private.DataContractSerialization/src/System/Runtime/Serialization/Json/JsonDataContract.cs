@@ -378,9 +378,11 @@ namespace System.Runtime.Serialization.Json
                             )
                             {
                                 DataContract itemDataContract = DataContract.GetDataContract(
-                                    Globals.TypeOfKeyValuePair.MakeGenericType(
-                                        collectionDataContract.ItemType.GenericTypeArguments
-                                    )
+                                    Globals
+                                        .TypeOfKeyValuePair
+                                        .MakeGenericType(
+                                            collectionDataContract.ItemType.GenericTypeArguments
+                                        )
                                 );
                                 _knownDataContracts.TryAdd(
                                     itemDataContract.XmlName,

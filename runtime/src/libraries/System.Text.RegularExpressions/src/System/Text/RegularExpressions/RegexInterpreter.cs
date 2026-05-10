@@ -357,11 +357,9 @@ namespace System.Text.RegularExpressions
             if (runregex.RightToLeft)
             {
                 while (
-                    _code.FindOptimizations.TryFindNextStartingPositionRightToLeft(
-                        text,
-                        ref runtextpos,
-                        runtextstart
-                    )
+                    _code
+                        .FindOptimizations
+                        .TryFindNextStartingPositionRightToLeft(text, ref runtextpos, runtextstart)
                 )
                 {
                     CheckTimeout();
@@ -381,11 +379,9 @@ namespace System.Text.RegularExpressions
             else
             {
                 while (
-                    _code.FindOptimizations.TryFindNextStartingPositionLeftToRight(
-                        text,
-                        ref runtextpos,
-                        runtextstart
-                    )
+                    _code
+                        .FindOptimizations
+                        .TryFindNextStartingPositionLeftToRight(text, ref runtextpos, runtextstart)
                 )
                 {
                     CheckTimeout();

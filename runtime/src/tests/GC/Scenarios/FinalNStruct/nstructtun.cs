@@ -35,12 +35,14 @@ namespace NStruct
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                Console.Out.WriteLine(
-                    FinalizeCount.icCreat
-                        + " NStruct Objects were deleted and "
-                        + FinalizeCount.icFinal
-                        + " finalized."
-                );
+                Console
+                    .Out
+                    .WriteLine(
+                        FinalizeCount.icCreat
+                            + " NStruct Objects were deleted and "
+                            + FinalizeCount.icFinal
+                            + " finalized."
+                    );
 
                 return (FinalizeCount.icCreat == FinalizeCount.icFinal);
             }

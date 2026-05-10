@@ -111,11 +111,13 @@
                 && (modelBindingExecutionContext != null)
                 && (modelBindingExecutionContext.HttpContext != null)
             )
-                ? modelBindingExecutionContext.HttpContext.GetGlobalResourceObject(
-                    resourceClassKey,
-                    resourceName,
-                    CultureInfo.CurrentUICulture
-                ) as string
+                ? modelBindingExecutionContext
+                    .HttpContext
+                    .GetGlobalResourceObject(
+                        resourceClassKey,
+                        resourceName,
+                        CultureInfo.CurrentUICulture
+                    ) as string
                 : null;
         }
 

@@ -60,8 +60,9 @@ namespace Microsoft.CodeAnalysis.Indentation
 #if CODE_STYLE
             var baseIndentationRule = NoOpFormattingRule.Instance;
 #else
-            var formattingRuleFactory =
-                document.SolutionServices.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = document
+                .SolutionServices
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             var baseIndentationRule = formattingRuleFactory.CreateRule(
                 document,
                 lineToBeIndented.Start

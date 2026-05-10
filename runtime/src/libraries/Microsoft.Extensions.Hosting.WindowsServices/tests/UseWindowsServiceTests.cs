@@ -96,8 +96,8 @@ namespace Microsoft.Extensions.Hosting
 
             using IHost host = builder.Build();
 
-            var eventLogSettings = host
-                .Services.GetRequiredService<IOptions<EventLogSettings>>()
+            var eventLogSettings = host.Services
+                .GetRequiredService<IOptions<EventLogSettings>>()
                 .Value;
             Assert.Same(appName, eventLogSettings.SourceName);
         }

@@ -434,10 +434,9 @@ namespace System.CodeDom.Compiler
             if (options.OutputAssembly == null || options.OutputAssembly.Length == 0)
             {
                 string extension = (options.GenerateExecutable) ? "exe" : "dll";
-                options.OutputAssembly = results.TempFiles.AddExtension(
-                    extension,
-                    !options.GenerateInMemory
-                );
+                options.OutputAssembly = results
+                    .TempFiles
+                    .AddExtension(extension, !options.GenerateInMemory);
 
                 // Create an empty assembly.  This is so that the file will have permissions that
                 // we can later access with our current credential.  If we don't do this, the compiler

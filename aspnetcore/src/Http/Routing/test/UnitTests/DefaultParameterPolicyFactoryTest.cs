@@ -254,10 +254,9 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithArguments)
-        );
+        options
+            .ConstraintMap
+            .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -281,10 +280,9 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithMultipleArguments)
-        );
+        options
+            .ConstraintMap
+            .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultipleArguments));
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -310,10 +308,9 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithOnlyServiceArguments)
-        );
+        options
+            .ConstraintMap
+            .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithOnlyServiceArguments));
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -339,10 +336,9 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithMultipleCtors)
-        );
+        options
+            .ConstraintMap
+            .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithMultipleCtors));
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -366,10 +362,12 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithMultipleCtorsInAscendingOrder)
-        );
+        options
+            .ConstraintMap
+            .Add(
+                "customConstraintPolicy",
+                typeof(CustomParameterPolicyWithMultipleCtorsInAscendingOrder)
+            );
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -396,10 +394,9 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithAmbiguousMultipleCtors)
-        );
+        options
+            .ConstraintMap
+            .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithAmbiguousMultipleCtors));
 
         var services = new ServiceCollection();
         services.AddTransient<ITestService, TestService>();
@@ -448,10 +445,9 @@ public class DefaultParameterPolicyFactoryTest
     {
         // Arrange
         var options = new RouteOptions();
-        options.ConstraintMap.Add(
-            "customConstraintPolicy",
-            typeof(CustomParameterPolicyWithArguments)
-        );
+        options
+            .ConstraintMap
+            .Add("customConstraintPolicy", typeof(CustomParameterPolicyWithArguments));
 
         var services = new ServiceCollection();
 

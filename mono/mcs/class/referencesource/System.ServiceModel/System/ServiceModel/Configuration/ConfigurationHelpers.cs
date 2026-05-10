@@ -40,25 +40,33 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigBindingExtensionNotFound,
-                                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigBindingExtensionNotFound,
+                                    ConfigurationHelpers.GetBindingsSectionPath(
+                                        bindingCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigBindingExtensionNotFound,
-                                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigBindingExtensionNotFound,
+                                    ConfigurationHelpers.GetBindingsSectionPath(
+                                        bindingCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -91,25 +99,33 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigBindingExtensionNotFound,
-                                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigBindingExtensionNotFound,
+                                    ConfigurationHelpers.GetBindingsSectionPath(
+                                        bindingCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigBindingExtensionNotFound,
-                                ConfigurationHelpers.GetBindingsSectionPath(bindingCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigBindingExtensionNotFound,
+                                    ConfigurationHelpers.GetBindingsSectionPath(
+                                        bindingCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -138,25 +154,33 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigEndpointExtensionNotFound,
-                                ConfigurationHelpers.GetEndpointsSectionPath(endpointCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigEndpointExtensionNotFound,
+                                    ConfigurationHelpers.GetEndpointsSectionPath(
+                                        endpointCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigEndpointExtensionNotFound,
-                                ConfigurationHelpers.GetEndpointsSectionPath(endpointCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigEndpointExtensionNotFound,
+                                    ConfigurationHelpers.GetEndpointsSectionPath(
+                                        endpointCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -189,25 +213,33 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (KeyNotFoundException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigEndpointExtensionNotFound,
-                                ConfigurationHelpers.GetEndpointsSectionPath(endpointCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigEndpointExtensionNotFound,
+                                    ConfigurationHelpers.GetEndpointsSectionPath(
+                                        endpointCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 catch (NullReferenceException) // System.Configuration.ConfigurationElement bug
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigEndpointExtensionNotFound,
-                                ConfigurationHelpers.GetEndpointsSectionPath(endpointCollectionName)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigEndpointExtensionNotFound,
+                                    ConfigurationHelpers.GetEndpointsSectionPath(
+                                        endpointCollectionName
+                                    )
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -245,11 +277,13 @@ namespace System.ServiceModel.Configuration
             }
             if (retval == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigSectionNotFound, sectionPath)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigSectionNotFound, sectionPath)
+                        )
+                    );
             }
             return retval;
         }
@@ -287,11 +321,13 @@ namespace System.ServiceModel.Configuration
             }
             if (retval == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigSectionNotFound, sectionPath)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigSectionNotFound, sectionPath)
+                        )
+                    );
             }
 
             return retval;
@@ -378,11 +414,13 @@ namespace System.ServiceModel.Configuration
 
             if (retval == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigSectionNotFound, sectionPath)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigSectionNotFound, sectionPath)
+                        )
+                    );
             }
 
             return retval;

@@ -19,9 +19,9 @@ namespace System.Activities.XamlIntegration
 
         public override XamlReader Save(object value, IServiceProvider serviceProvider)
         {
-            throw FxTrace.Exception.AsError(
-                new NotSupportedException(SR.SavingActivityToXamlNotSupported)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(new NotSupportedException(SR.SavingActivityToXamlNotSupported));
         }
     }
 }

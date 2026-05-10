@@ -241,10 +241,9 @@ namespace System.Xml.XmlDocumentTests
 
             var newNode = xmlDocument.CreateTextNode("new text node");
             var countBefore = xmlDocument.DocumentElement.ChildNodes.Count;
-            xmlDocument.DocumentElement.ReplaceChild(
-                newNode,
-                xmlDocument.DocumentElement.FirstChild
-            );
+            xmlDocument
+                .DocumentElement
+                .ReplaceChild(newNode, xmlDocument.DocumentElement.FirstChild);
 
             Assert.Equal(countBefore, xmlDocument.DocumentElement.ChildNodes.Count);
         }

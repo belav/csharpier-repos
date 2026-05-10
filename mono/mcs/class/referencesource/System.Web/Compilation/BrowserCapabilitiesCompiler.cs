@@ -26,10 +26,9 @@ namespace System.Web.Compilation
 
     static class BrowserCapabilitiesCompiler
     {
-        internal static readonly VirtualPath AppBrowsersVirtualDir =
-            HttpRuntime.AppDomainAppVirtualPathObject.SimpleCombineWithDir(
-                HttpRuntime.BrowsersDirectoryName
-            );
+        internal static readonly VirtualPath AppBrowsersVirtualDir = HttpRuntime
+            .AppDomainAppVirtualPathObject
+            .SimpleCombineWithDir(HttpRuntime.BrowsersDirectoryName);
 
         private const string browerCapabilitiesTypeName = "BrowserCapabilities";
         private const string browerCapabilitiesCacheKey = "__browserCapabilitiesCompiler";

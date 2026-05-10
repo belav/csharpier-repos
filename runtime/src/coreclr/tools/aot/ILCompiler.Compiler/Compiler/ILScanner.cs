@@ -405,9 +405,9 @@ namespace ILCompiler
                 {
                     if (lookupResult is MethodDictionaryGenericLookupResult methodDictLookup)
                     {
-                        MethodDesc targetMethod = methodDictLookup.Method.GetCanonMethodTarget(
-                            CanonicalFormKind.Specific
-                        );
+                        MethodDesc targetMethod = methodDictLookup
+                            .Method
+                            .GetCanonMethodTarget(CanonicalFormKind.Specific);
                         DictionaryLayoutNode targetLayout = factory.GenericDictionaryLayout(
                             targetMethod
                         );
@@ -1014,10 +1014,9 @@ namespace ILCompiler
                     var canonOwningType = (InstantiatedType)
                         owningType.ConvertToCanonForm(CanonicalFormKind.Specific);
                     if (owningType != canonOwningType)
-                        field = field.Context.GetFieldForInstantiatedType(
-                            typicalField,
-                            canonOwningType
-                        );
+                        field = field
+                            .Context
+                            .GetFieldForInstantiatedType(typicalField, canonOwningType);
                 }
 
                 return !_writtenFields.Contains(field);

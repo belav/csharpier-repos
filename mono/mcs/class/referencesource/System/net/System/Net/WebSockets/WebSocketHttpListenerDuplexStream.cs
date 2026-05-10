@@ -185,8 +185,9 @@ namespace System.Net.WebSockets
                     }
                     else
                     {
-                        bytesRead =
-                            await m_ReadTaskCompletionSource.Task.SuppressContextFlow<int>();
+                        bytesRead = await m_ReadTaskCompletionSource
+                            .Task
+                            .SuppressContextFlow<int>();
                     }
                 }
             }
@@ -287,15 +288,17 @@ namespace System.Net.WebSockets
                 m_InputStream.InternalHttpContext.EnsureBoundHandle();
                 uint flags = 0;
                 uint bytesReturned = 0;
-                statusCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveRequestEntityBody2(
-                    m_InputStream.InternalHttpContext.RequestQueueHandle,
-                    m_InputStream.InternalHttpContext.RequestId,
-                    flags,
-                    (byte*)m_WebSocket.InternalBuffer.ToIntPtr(eventArgs.Offset),
-                    (uint)eventArgs.Count,
-                    out bytesReturned,
-                    eventArgs.NativeOverlapped
-                );
+                statusCode = UnsafeNclNativeMethods
+                    .HttpApi
+                    .HttpReceiveRequestEntityBody2(
+                        m_InputStream.InternalHttpContext.RequestQueueHandle,
+                        m_InputStream.InternalHttpContext.RequestId,
+                        flags,
+                        (byte*)m_WebSocket.InternalBuffer.ToIntPtr(eventArgs.Offset),
+                        (uint)eventArgs.Count,
+                        out bytesReturned,
+                        eventArgs.NativeOverlapped
+                    );
 
                 if (
                     statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
@@ -613,18 +616,20 @@ namespace System.Net.WebSockets
 
                 m_OutputStream.InternalHttpContext.EnsureBoundHandle();
                 uint bytesSent;
-                statusCode = UnsafeNclNativeMethods.HttpApi.HttpSendResponseEntityBody2(
-                    m_OutputStream.InternalHttpContext.RequestQueueHandle,
-                    m_OutputStream.InternalHttpContext.RequestId,
-                    (uint)flags,
-                    eventArgs.EntityChunkCount,
-                    eventArgs.EntityChunks,
-                    out bytesSent,
-                    SafeLocalFree.Zero,
-                    0,
-                    eventArgs.NativeOverlapped,
-                    IntPtr.Zero
-                );
+                statusCode = UnsafeNclNativeMethods
+                    .HttpApi
+                    .HttpSendResponseEntityBody2(
+                        m_OutputStream.InternalHttpContext.RequestQueueHandle,
+                        m_OutputStream.InternalHttpContext.RequestId,
+                        (uint)flags,
+                        eventArgs.EntityChunkCount,
+                        eventArgs.EntityChunks,
+                        out bytesSent,
+                        SafeLocalFree.Zero,
+                        0,
+                        eventArgs.NativeOverlapped,
+                        IntPtr.Zero
+                    );
 
                 if (
                     statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
@@ -1348,11 +1353,9 @@ namespace System.Net.WebSockets
                 else
                 {
                     m_DataChunks[index].pBuffer = (byte*)
-                        m_WebSocket.InternalBuffer.ConvertPinnedSendPayloadToNative(
-                            buffer,
-                            offset,
-                            count
-                        );
+                        m_WebSocket
+                            .InternalBuffer
+                            .ConvertPinnedSendPayloadToNative(buffer, offset, count);
                 }
 
                 m_DataChunks[index].BufferLength = (uint)count;

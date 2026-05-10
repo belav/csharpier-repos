@@ -26,9 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
             {
                 baseObjectCreation = objectCreation
                     .WithType(
-                        objectCreation.Type.WithTrailingTrivia(
-                            objectCreation.ArgumentList.GetTrailingTrivia()
-                        )
+                        objectCreation
+                            .Type
+                            .WithTrailingTrivia(objectCreation.ArgumentList.GetTrailingTrivia())
                     )
                     .WithArgumentList(null);
             }

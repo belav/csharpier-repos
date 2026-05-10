@@ -91,11 +91,13 @@ namespace System.ServiceModel.Channels
                     if (listener == null)
                     {
                         // The listener has been stopped.
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new CommunicationObjectAbortedException(
-                                SR.GetString(SR.Sharing_ListenerProxyStopped)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.Sharing_ListenerProxyStopped)
+                                )
+                            );
                     }
 
                     if (!demuxerCreated)
@@ -197,10 +199,9 @@ namespace System.ServiceModel.Channels
 
         void Unregister()
         {
-            TcpChannelListener.StaticTransportManagerTable.UnregisterUri(
-                this.ListenUri,
-                this.HostNameComparisonMode
-            );
+            TcpChannelListener
+                .StaticTransportManagerTable
+                .UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
         }
 
         internal override void OnAbort()

@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             {
                 var actionBlock = new ActionBlock<T>(observer.OnNext);
                 actionBlock
-                    .Completion.ContinueWith(
+                    .Completion
+                    .ContinueWith(
                         static (t, s) =>
                         {
                             var observer = (IObserver<T>)s!;

@@ -47,10 +47,9 @@ namespace System.Net.Http
             // It is mandatory for servers to implement sha-256 per RFC 7616
             // Keep MD5 for backward compatibility.
             string? algorithm;
-            bool isAlgorithmSpecified = digestResponse.Parameters.TryGetValue(
-                Algorithm,
-                out algorithm
-            );
+            bool isAlgorithmSpecified = digestResponse
+                .Parameters
+                .TryGetValue(Algorithm, out algorithm);
             if (isAlgorithmSpecified)
             {
                 if (

@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Rename
         )
         {
             var bindableToken = semanticModel
-                .SyntaxTree.GetRoot(cancellationToken)
+                .SyntaxTree
+                .GetRoot(cancellationToken)
                 .FindToken(position, findInsideTrivia: true);
             var semanticInfo = semanticModel.GetSemanticInfo(
                 bindableToken,
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Rename
             else
             {
                 var documentsOfRenameSymbolDeclaration = symbol
-                    .Locations.Where(l => l.IsInSource)
+                    .Locations
+                    .Where(l => l.IsInSource)
                     .Select(l => solution.GetRequiredDocument(l.SourceTree!));
                 var projectIdsOfRenameSymbolDeclaration = documentsOfRenameSymbolDeclaration
                     .SelectMany(d => d.GetLinkedDocumentIds())

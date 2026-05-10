@@ -19,7 +19,8 @@ internal static class Constants
     private static string GetUserAgentHeader()
     {
         var assemblyVersion = typeof(Constants)
-            .Assembly.GetCustomAttributes<AssemblyInformationalVersionAttribute>()
+            .Assembly
+            .GetCustomAttributes<AssemblyInformationalVersionAttribute>()
             .FirstOrDefault();
 
         Debug.Assert(assemblyVersion != null);

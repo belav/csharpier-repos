@@ -321,9 +321,10 @@ namespace System.ServiceModel.Activities
                 if (followingCorrelation == null)
                 {
                     ambientCorrelation =
-                        executionContext.Properties.Find(
-                            CorrelationHandle.StaticExecutionPropertyName
-                        ) as CorrelationHandle;
+                        executionContext
+                            .Properties
+                            .Find(CorrelationHandle.StaticExecutionPropertyName)
+                        as CorrelationHandle;
                     triedAmbientCorrelation = true;
                     if (ambientCorrelation != null)
                     {
@@ -361,9 +362,10 @@ namespace System.ServiceModel.Activities
                     if (ambientCorrelation == null)
                     {
                         ambientCorrelation =
-                            executionContext.Properties.Find(
-                                CorrelationHandle.StaticExecutionPropertyName
-                            ) as CorrelationHandle;
+                            executionContext
+                                .Properties
+                                .Find(CorrelationHandle.StaticExecutionPropertyName)
+                            as CorrelationHandle;
                     }
                     if (!this.IsOneWay && ambientCorrelation == null)
                     {
@@ -375,13 +377,15 @@ namespace System.ServiceModel.Activities
                         if (channelCorrelationHandle == null)
                         {
                             // With a two-way contract, we require a request/reply correlation handle
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
-                                        this.OperationName
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
+                                            this.OperationName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
 
@@ -411,9 +415,9 @@ namespace System.ServiceModel.Activities
 
             if (workflowContext == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.WorkflowMustBeHosted)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR2.WorkflowMustBeHosted));
             }
 
             ReceiveMessageInstanceData instance = new ReceiveMessageInstanceData(
@@ -446,9 +450,10 @@ namespace System.ServiceModel.Activities
                     //TransactedReceiveData is used to pass information about the Initiating Transaction to the TransactedReceiveScope
                     //so that it can subsequently call Complete or Commit on it at the end of the scope
                     TransactedReceiveData transactedReceiveData =
-                        executionContext.Properties.Find(
-                            TransactedReceiveData.TransactedReceiveDataExecutionPropertyName
-                        ) as TransactedReceiveData;
+                        executionContext
+                            .Properties
+                            .Find(TransactedReceiveData.TransactedReceiveDataExecutionPropertyName)
+                        as TransactedReceiveData;
                     if (transactedReceiveData != null)
                     {
                         if (this.AdditionalData.IsFirstReceiveOfTransactedReceiveScopeTree)
@@ -473,11 +478,13 @@ namespace System.ServiceModel.Activities
                     {
                         if (!currentTransaction.Equals(workflowContext.CurrentTransaction))
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR2.FlowedTransactionDifferentFromAmbient
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR2.FlowedTransactionDifferentFromAmbient
+                                    )
+                                );
                         }
                         else
                         {
@@ -503,9 +510,13 @@ namespace System.ServiceModel.Activities
                 else
                 {
                     //Receive was probably not used within a TransactionFlowScope since no ambient transaction handle was found
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR2.ReceiveNotWithinATransactedReceiveScope)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.ReceiveNotWithinATransactedReceiveScope
+                            )
+                        );
                 }
             }
 
@@ -706,11 +717,13 @@ namespace System.ServiceModel.Activities
                 // this is one way, verify that the channelHandle is null
                 if (channelCorrelationHandle != null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.RequestReplyHandleShouldNotBePresentForOneWay
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.RequestReplyHandleShouldNotBePresentForOneWay
+                            )
+                        );
                 }
 
                 // we need to enter the nopersistzone using the NoPersistHandle and exit it in the formatter
@@ -735,9 +748,11 @@ namespace System.ServiceModel.Activities
                         )
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR2.TryRegisterRequestContextFailed)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(SR2.TryRegisterRequestContextFailed)
+                            );
                     }
                 }
                 else // if that fails, use ambient handle. we should never initialize CorrelatesWith with response context
@@ -754,13 +769,15 @@ namespace System.ServiceModel.Activities
                     )
                     {
                         // With a two-way contract, the request context must be initialized
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
-                                    this.OperationName
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
+                                        this.OperationName
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -1030,14 +1047,17 @@ namespace System.ServiceModel.Activities
                     if (this.IsOneWay)
                     {
                         // mark this workflow service operation as complete
-                        instance.CorrelationResponseContext.WorkflowOperationContext.SetOperationCompleted();
+                        instance
+                            .CorrelationResponseContext
+                            .WorkflowOperationContext
+                            .SetOperationCompleted();
 
                         if (instance.CorrelationResponseContext.Exception != null)
                         {
                             // We got an unexpected exception while running the OnReceivedMessage action
-                            throw FxTrace.Exception.AsError(
-                                instance.CorrelationResponseContext.Exception
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(instance.CorrelationResponseContext.Exception);
                         }
                     }
                 }
@@ -1116,13 +1136,15 @@ namespace System.ServiceModel.Activities
                             )
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
-                                        this.OperationName
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
+                                            this.OperationName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
@@ -1160,9 +1182,9 @@ namespace System.ServiceModel.Activities
                 executionContext.GetExtension<SendReceiveExtension>();
             if (sendReceiveExtension == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.SendReceiveExtensionNotFound)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR2.SendReceiveExtensionNotFound));
             }
 
             // Now that the bookmark has been resumed, clear out the workflow variable holding its value.
@@ -1171,11 +1193,13 @@ namespace System.ServiceModel.Activities
             MessageContext messageContext = state as MessageContext;
             if (messageContext == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR2.InvalidDataFromReceiveBookmarkState(this.OperationName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR2.InvalidDataFromReceiveBookmarkState(this.OperationName)
+                        )
+                    );
             }
 
             this.Message.Set(executionContext, messageContext.Message);
@@ -1255,22 +1279,26 @@ namespace System.ServiceModel.Activities
 
                 if (requestReplyHandle == null && ambientHandle == null && !this.IsOneWay)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
-                                this.OperationName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.ReceiveMessageNeedsToPairWithSendMessageForTwoWayContract(
+                                    this.OperationName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (requestReplyHandle != null && this.IsOneWay)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.RequestReplyHandleShouldNotBePresentForOneWay
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.RequestReplyHandleShouldNotBePresentForOneWay
+                            )
+                        );
                 }
 
                 CorrelationHandle correlatesWithHandle;
@@ -1307,13 +1335,15 @@ namespace System.ServiceModel.Activities
                     {
                         if (requestReplyHandle != null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR2.FailedToInitializeRequestReplyCorrelationHandle(
-                                        this.OperationName
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR2.FailedToInitializeRequestReplyCorrelationHandle(
+                                            this.OperationName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }

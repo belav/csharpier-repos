@@ -53,7 +53,8 @@ class X
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void X.f()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -62,7 +63,8 @@ class X
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void X.f()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal("void X.f(System.Int32 i)", sortedMethodGroup[1].ToTestDisplayString());
@@ -129,7 +131,8 @@ class K<T>
             Assert.Equal(CandidateReason.WrongArity, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("K<T>", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -166,7 +169,8 @@ class K<T>
             Assert.Equal(CandidateReason.WrongArity, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("K<T>", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -210,7 +214,8 @@ class K<T>
             Assert.Equal(CandidateReason.WrongArity, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("K<T>", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -254,7 +259,8 @@ class K<T>
             Assert.Equal(CandidateReason.WrongArity, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("K<T>", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -297,7 +303,8 @@ class K
             Assert.Equal(CandidateReason.NotInvocable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 K.f", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Field, sortedCandidates[0].Kind);
@@ -337,7 +344,8 @@ class K
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 K.f", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Field, sortedCandidates[0].Kind);
@@ -400,7 +408,8 @@ namespace Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Test.Base..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -497,7 +506,8 @@ class K
             Assert.Equal(CandidateReason.NotAVariable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("K", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -540,7 +550,8 @@ class K
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("K.J", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -586,7 +597,8 @@ namespace N2
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("N1.A", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -637,7 +649,8 @@ namespace N2
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("N1.A", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -688,7 +701,8 @@ namespace N2
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("N1.A<T>", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -744,7 +758,8 @@ public class Class1
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 I1.P { get; }", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Property, sortedCandidates[0].Kind);
@@ -850,7 +865,8 @@ class C
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "void Array.Find<System.Int32>(System.Int32 t)",
@@ -860,7 +876,8 @@ class C
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "void Array.Find<System.Int32>(System.Int32 t)",
@@ -1467,7 +1484,8 @@ static class E
 }";
             compilation = CreateCompilation(source: sourceCode);
             type = compilation
-                .GlobalNamespace.GetMember<INamespaceSymbol>("N2")
+                .GlobalNamespace
+                .GetMember<INamespaceSymbol>("N2")
                 .GetMember<INamedTypeSymbol>("C");
             tree = compilation.SyntaxTrees.First();
             model = compilation.GetSemanticModel(tree);
@@ -1516,7 +1534,8 @@ static class E
 }";
             compilation = CreateCompilation(source: sourceCode);
             type = compilation
-                .GlobalNamespace.GetMember<INamespaceSymbol>("N")
+                .GlobalNamespace
+                .GetMember<INamespaceSymbol>("N")
                 .GetMember<INamedTypeSymbol>("C");
             tree = compilation.SyntaxTrees.First();
             model = compilation.GetSemanticModel(tree);
@@ -2877,7 +2896,8 @@ class A
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("A..ctor()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal("A..ctor(System.Int32 x)", sortedMethodGroup[1].ToTestDisplayString());
@@ -2919,7 +2939,8 @@ class A
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "void A.f(System.Int32 x, System.Int32 y)",
@@ -2966,7 +2987,8 @@ class A
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "void A.f(System.Int32 x, System.Int32 y)",
@@ -2978,7 +3000,8 @@ class A
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "void A.f(System.Int32 x, System.Int32 y)",
@@ -3027,7 +3050,8 @@ class Goo
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 C.M()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -3036,7 +3060,8 @@ class Goo
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 C.M()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal("System.Int32 C.M()", sortedMethodGroup[1].ToTestDisplayString());
@@ -3078,7 +3103,8 @@ class Goo
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 C.M(System.Int32 i)",
@@ -3088,7 +3114,8 @@ class Goo
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 C.M(System.Int32 i)",
@@ -3177,7 +3204,8 @@ class A
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 A.f(System.String z)",
@@ -3224,7 +3252,8 @@ class Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "void Test.NestedTest.Method1()",
@@ -3272,7 +3301,8 @@ class Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "Test.NestedTest.NestedNestedTest..ctor()",
@@ -3312,14 +3342,16 @@ public class B : A
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 B.m()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 B.m()", sortedMethodGroup[0].ToTestDisplayString());
         }
@@ -3468,7 +3500,8 @@ public class MyClass : MyBase
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void MyClass.MyMeth()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -3513,7 +3546,8 @@ class C
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void D.M2(System.Int32 x)", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal(
@@ -3565,7 +3599,8 @@ public class Test
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void C2.M1()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -3607,7 +3642,8 @@ public class TestClass : AbsClass
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void TestClass.Test()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -3646,7 +3682,8 @@ public class Program
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void IB.M()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -3686,7 +3723,8 @@ public class Program
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void IR.M()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -3857,7 +3895,8 @@ public class A
             Assert.Equal(CandidateReason.NotATypeOrNamespace, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("B B", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Local, sortedCandidates[0].Kind);
@@ -4421,7 +4460,8 @@ class C
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -4575,7 +4615,8 @@ class C<T1>
             Assert.Equal(CandidateReason.WrongArity, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C<T1>", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -4613,7 +4654,8 @@ class C<T1>
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C<T1>..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -4648,7 +4690,8 @@ class B {
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("B..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -5321,7 +5364,8 @@ class D
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void C.M(System.Int32 i)", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal("void C.M(System.Int64 i)", sortedCandidates[1].ToTestDisplayString());
@@ -5330,7 +5374,8 @@ class D
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void C.M(System.Int32 i)", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal("void C.M(System.Int64 i)", sortedMethodGroup[1].ToTestDisplayString());
@@ -5373,7 +5418,8 @@ class Class1
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(3, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Class1..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -5387,7 +5433,8 @@ class Class1
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             sortedCandidates = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Class1..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -5438,7 +5485,8 @@ class Class1
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(3, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Class1..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -5452,7 +5500,8 @@ class Class1
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             sortedCandidates = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Class1..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -5541,7 +5590,8 @@ class Class1 : Attribute
 
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "Class1..ctor(System.Int32 a, System.Int64 b)",
@@ -5551,7 +5601,8 @@ class Class1 : Attribute
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Class1..ctor()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal(
@@ -5601,7 +5652,8 @@ class Class1 : Attribute
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "Class1..ctor(System.Int32 a, System.Int64 b)",
@@ -5611,7 +5663,8 @@ class Class1 : Attribute
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Class1..ctor()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal(
@@ -5666,7 +5719,8 @@ class Class1
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "Class1..ctor(System.Int32 a, System.Int64 b)",
@@ -5758,7 +5812,8 @@ class Class1 : Attribute
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "Class1..ctor(System.Int32 a, System.Int64 b)",
@@ -5812,7 +5867,8 @@ class Class1 : Attribute
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "Class1..ctor(System.Int32 a, System.Int64 b)",
@@ -5903,7 +5959,8 @@ class D
             Assert.Equal(CandidateReason.NotReferencable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void C.P.set", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -5911,7 +5968,8 @@ class D
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void C.P.set", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -5950,7 +6008,8 @@ class D
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(3, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -6957,7 +7016,8 @@ struct Struct{
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Struct..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -6985,7 +7045,8 @@ class Class { string M(int i) { new T(/*<bind>*/M/*</bind>*/); } }
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.String Class.M(System.Int32 i)",
@@ -6995,7 +7056,8 @@ class Class { string M(int i) { new T(/*<bind>*/M/*</bind>*/); } }
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.String Class.M(System.Int32 i)",
@@ -7041,7 +7103,8 @@ class C
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C.Func C.Goo()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal(
@@ -7295,7 +7358,8 @@ class Program
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -7724,7 +7788,8 @@ struct Struct{
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Struct..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -7755,7 +7820,8 @@ class MyAttribute : System.Attribute { }
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("MyAttribute..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -7789,7 +7855,8 @@ namespace N1
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("N1.MyAttribute..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -8261,7 +8328,8 @@ class Program
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 z", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Parameter, sortedCandidates[0].Kind);
@@ -9100,14 +9168,16 @@ public class Test
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<T>..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<T>..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -9139,14 +9209,16 @@ public class Test
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Goo..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Goo..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -9451,7 +9523,8 @@ public class Test
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 Test.M()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -9860,7 +9933,8 @@ public class Test
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 Test.M()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -9923,7 +9997,8 @@ class Program
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("A.B", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -10165,7 +10240,8 @@ namespace Green
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Blue.DescriptionAttribute", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -10230,7 +10306,8 @@ namespace Green
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Blue.DescriptionAttribute", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -10274,7 +10351,8 @@ class Program
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(3, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -10294,7 +10372,8 @@ class Program
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -10372,7 +10451,8 @@ class Class1
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -10412,7 +10492,8 @@ class Class1
 
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -10467,7 +10548,8 @@ namespace TestNamespace_01
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "ValidWithSuffix.DescriptionAttribute",
@@ -10674,7 +10756,8 @@ namespace TestNamespace_04
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "ValidWithSuffix_And_ValidWithoutSuffix.Description",
@@ -10740,7 +10823,8 @@ namespace TestNamespace_05
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "InvalidWithoutSuffix.Description..ctor(System.String name)",
@@ -10750,7 +10834,8 @@ namespace TestNamespace_05
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "InvalidWithoutSuffix.Description..ctor(System.String name)",
@@ -10812,7 +10897,8 @@ namespace TestNamespace_07
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "InvalidWithSuffix_And_InvalidWithoutSuffix.Description",
@@ -10854,7 +10940,8 @@ class A1 : System.Attribute { }
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("A1..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -10897,7 +10984,8 @@ class C { }
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -10951,7 +11039,8 @@ class C { }
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -11005,7 +11094,8 @@ class C { }
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -11059,7 +11149,8 @@ class C { }
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -11125,7 +11216,8 @@ namespace N
                                 (CSharp.Symbols.PublicModel.NamedTypeSymbol)semanticInfo.Symbol
                             ).UnderlyingNamedTypeSymbol
                     )
-                        .SyntaxReferences.First()
+                        .SyntaxReferences
+                        .First()
                         .GetSyntax()
                 ),
                 "IsAttributeName can be true only for alias name being qualified"
@@ -11174,7 +11266,8 @@ namespace N
                                 (CSharp.Symbols.PublicModel.NamedTypeSymbol)semanticInfo.Symbol
                             ).UnderlyingNamedTypeSymbol
                     )
-                        .SyntaxReferences.First()
+                        .SyntaxReferences
+                        .First()
                         .GetSyntax()
                 ),
                 "IsAttributeName can be true only for alias name being qualified"
@@ -11217,7 +11310,8 @@ namespace N
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "AttributeClass.NonAttributeClass..ctor()",
@@ -11227,7 +11321,8 @@ namespace N
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "AttributeClass.NonAttributeClass..ctor()",
@@ -11273,7 +11368,8 @@ namespace N
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "AttributeClass.NonAttributeClass..ctor()",
@@ -11283,7 +11379,8 @@ namespace N
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "AttributeClass.NonAttributeClass..ctor()",
@@ -11315,14 +11412,16 @@ class C { }
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("C..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -11355,14 +11454,16 @@ class Gen<T> { }
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<System.Int32>..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<System.Int32>..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -11395,7 +11496,8 @@ class A2 : System.Attribute { }
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("A1", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -11432,7 +11534,8 @@ class C { }
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("GooAttribute", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -11469,7 +11572,8 @@ class C { }
             Assert.Equal(CandidateReason.Ambiguous, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("GooAttribute", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -11515,7 +11619,8 @@ class Class1
 
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -11555,7 +11660,8 @@ class MyClass
             Assert.Null(semanticInfo.Symbol);
             Assert.Equal(CandidateReason.StaticInstanceMismatch, semanticInfo.CandidateReason);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 MyClass.intTest", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Field, sortedCandidates[0].Kind);
@@ -11585,7 +11691,8 @@ class MyClass
             Assert.Null(semanticInfo.Symbol);
             Assert.Equal(CandidateReason.NotReferencable, semanticInfo.CandidateReason);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(1, sortedCandidates.Length);
             Assert.Equal("MyClass this", sortedCandidates[0].ToTestDisplayString());
@@ -11618,7 +11725,8 @@ class MyClass
             Assert.Equal(SymbolKind.Parameter, semanticInfo.CandidateSymbols[0].Kind);
             Assert.Equal(CandidateReason.NotReferencable, semanticInfo.CandidateReason);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(1, sortedCandidates.Length);
             Assert.Equal("MyClass this", sortedCandidates[0].ToTestDisplayString());
@@ -11656,7 +11764,8 @@ class MyClass2
             Assert.Null(semanticInfo.Symbol);
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 MyClass1.myInt1", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Field, sortedCandidates[0].Kind);
@@ -11702,7 +11811,8 @@ public class Test
             Assert.Equal(CandidateReason.NotAValue, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 MyClass.Property { private get; set; }",
@@ -11745,7 +11855,8 @@ public class Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 Test.Class1.a { get; set; }",
@@ -11788,7 +11899,8 @@ public class Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 Test.Class1.a", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Field, sortedCandidates[0].Kind);
@@ -11830,7 +11942,8 @@ public class Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "event System.Action Test.Class1.a",
@@ -11879,7 +11992,8 @@ public class Test
             Assert.Equal(CandidateReason.NotAVariable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 MyClass.Property { get; private set; }",
@@ -11927,7 +12041,8 @@ public class Test
             Assert.Equal(CandidateReason.NotAVariable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Object MyClass.this[System.Int32 index] { get; private set; }",
@@ -11970,14 +12085,16 @@ public class Test
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<T>..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<T>..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -12305,7 +12422,8 @@ class Program
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(3, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -12325,7 +12443,8 @@ class Program
 
             Assert.Equal(3, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.ObsoleteAttribute..ctor()",
@@ -12407,7 +12526,8 @@ class Goo
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Goo..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -12416,7 +12536,8 @@ class Goo
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Goo..ctor()", sortedMethodGroup[0].ToTestDisplayString());
             Assert.Equal("Goo..ctor(System.Int32 x)", sortedMethodGroup[1].ToTestDisplayString());
@@ -12735,7 +12856,8 @@ class Program
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 System.String.Goo()",
@@ -12745,7 +12867,8 @@ class Program
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 System.String.Goo()",
@@ -12783,7 +12906,8 @@ public class D { }
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.Int32 B.X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Field, sortedCandidates[0].Kind);
@@ -12832,7 +12956,8 @@ public interface Interface1
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Runtime.CompilerServices.IndexerNameAttribute..ctor(System.String indexerName)",
@@ -13480,7 +13605,8 @@ interface X { }
             Assert.Equal(CandidateReason.NotCreatable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -13552,7 +13678,8 @@ class Program<T>
             Assert.Equal(CandidateReason.NotCreatable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("T", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.TypeParameter, sortedCandidates[0].Kind);
@@ -13624,7 +13751,8 @@ abstract class X { }
             Assert.Equal(CandidateReason.NotCreatable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -13663,7 +13791,8 @@ abstract class X
             Assert.Equal(CandidateReason.NotCreatable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("X", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -14272,7 +14401,8 @@ public class Test
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 MemberInitializerTest.y { get; set; }",
@@ -14316,7 +14446,8 @@ public struct Test
             Assert.Equal(CandidateReason.NotAVariable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "System.Int32 MemberInitializerTest.y { get; }",
@@ -14363,7 +14494,8 @@ public class Test
             Assert.Equal(CandidateReason.NotAValue, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "MemberInitializerTest Test.Prop { set; }",
@@ -14577,7 +14709,8 @@ public class MemberInitializerTest
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "MemberInitializerTest MemberInitializerTest.Goo()",
@@ -14587,7 +14720,8 @@ public class MemberInitializerTest
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "MemberInitializerTest MemberInitializerTest.Goo()",
@@ -15249,14 +15383,16 @@ public class Test
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<T>..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen<T>..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -15293,14 +15429,16 @@ public class Test
             Assert.Equal(CandidateReason.NotAnAttributeType, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen2<T>..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Gen2<T>..ctor()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -15647,7 +15785,8 @@ public class MainClass
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal(
                 "GenericCoClassType<System.Int32, System.String>..ctor(System.String x)",
@@ -15744,7 +15883,8 @@ public class MainClass
             Assert.Equal(CandidateReason.Inaccessible, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("Wrapper.CoClassType..ctor()", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.Method, sortedCandidates[0].Kind);
@@ -15832,7 +15972,8 @@ public class MainClass
             Assert.Equal(CandidateReason.NotCreatable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("InterfaceType", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -15927,7 +16068,8 @@ public class Program
             Assert.Equal(CandidateReason.NotCreatable, semanticInfo.CandidateReason);
             Assert.Equal(1, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .CandidateSymbols
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("System.IFormattable", sortedCandidates[0].ToTestDisplayString());
             Assert.Equal(SymbolKind.NamedType, sortedCandidates[0].Kind);
@@ -16102,7 +16244,8 @@ class C<[T(a: 1)]T>
 
             Assert.Equal(1, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
+                .MethodGroup
+                .OrderBy(s => s.ToTestDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("void C.Goo()", sortedMethodGroup[0].ToTestDisplayString());
 
@@ -16572,7 +16715,8 @@ public class C
             Assert.Equal(CandidateReason.OverloadResolutionFailure, semanticInfo.CandidateReason);
             Assert.Equal(2, semanticInfo.CandidateSymbols.Length);
             var sortedCandidates = semanticInfo
-                .CandidateSymbols.AsEnumerable()
+                .CandidateSymbols
+                .AsEnumerable()
                 .OrderBy(s => s.ToDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("string.ToString()", sortedCandidates[0].ToDisplayString());
@@ -16585,7 +16729,8 @@ public class C
 
             Assert.Equal(2, semanticInfo.MethodGroup.Length);
             var sortedMethodGroup = semanticInfo
-                .MethodGroup.AsEnumerable()
+                .MethodGroup
+                .AsEnumerable()
                 .OrderBy(s => s.ToDisplayString(), StringComparer.Ordinal)
                 .ToArray();
             Assert.Equal("string.ToString()", sortedMethodGroup[0].ToDisplayString());

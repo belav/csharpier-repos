@@ -128,15 +128,17 @@ public class RequiredMembersTests : CSharpTestBase
             {
                 var peMethod = (PEMethodSymbol)ctor;
                 var decoder = new MetadataDecoder(peModule, peMethod);
-                var obsoleteAttribute =
-                    peModule.Module.TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
+                var obsoleteAttribute = peModule
+                    .Module
+                    .TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                         peMethod.Handle,
                         decoder,
                         ignoreByRefLikeMarker: false,
                         ignoreRequiredMemberMarker: false
                     );
-                string? unsupportedCompilerFeatureToken =
-                    peModule.Module.GetFirstUnsupportedCompilerFeatureFromToken(
+                string? unsupportedCompilerFeatureToken = peModule
+                    .Module
+                    .GetFirstUnsupportedCompilerFeatureFromToken(
                         peMethod.Handle,
                         decoder,
                         CompilerFeatureRequiredFeatures.None
@@ -163,11 +165,13 @@ public class RequiredMembersTests : CSharpTestBase
                         unsupportedCompilerFeatureToken
                     );
                     Assert.Null(
-                        peModule.Module.GetFirstUnsupportedCompilerFeatureFromToken(
-                            peMethod.Handle,
-                            decoder,
-                            CompilerFeatureRequiredFeatures.RequiredMembers
-                        )
+                        peModule
+                            .Module
+                            .GetFirstUnsupportedCompilerFeatureFromToken(
+                                peMethod.Handle,
+                                decoder,
+                                CompilerFeatureRequiredFeatures.RequiredMembers
+                            )
                     );
                 }
             }
@@ -7419,7 +7423,8 @@ public class Derived : Base
                     copyCtor
                         .GetAttributes()
                         .Single(a => a.AttributeClass!.IsWellKnownSetsRequiredMembersAttribute())
-                        .AttributeConstructor.ToTestDisplayString()
+                        .AttributeConstructor
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -7505,7 +7510,8 @@ public class Derived : Base
                     copyCtor
                         .GetAttributes()
                         .Single(a => a.AttributeClass!.IsWellKnownSetsRequiredMembersAttribute())
-                        .AttributeConstructor.ToTestDisplayString()
+                        .AttributeConstructor
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -8741,7 +8747,8 @@ public class Derived : Base
         AssertEx.Equal(
             new[] { "AnotherField", "Item1", "Item2", "Property" },
             tupleType
-                .AllRequiredMembers.OrderBy(m => m.Key, StringComparer.InvariantCulture)
+                .AllRequiredMembers
+                .OrderBy(m => m.Key, StringComparer.InvariantCulture)
                 .Select(m => m.Key)
         );
         Assert.All(tupleType.TupleElements, field => Assert.True(field.IsRequired));

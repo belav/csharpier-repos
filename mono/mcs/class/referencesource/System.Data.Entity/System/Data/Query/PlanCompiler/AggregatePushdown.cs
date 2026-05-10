@@ -936,9 +936,9 @@ namespace System.Data.Query.PlanCompiler
                 )
             )
             {
-                referencedGroupAggregateVarInfo.CandidateAggregateNodes.Add(
-                    new KeyValuePair<Node, Node>(n, templateNode)
-                );
+                referencedGroupAggregateVarInfo
+                    .CandidateAggregateNodes
+                    .Add(new KeyValuePair<Node, Node>(n, templateNode));
             }
         }
 

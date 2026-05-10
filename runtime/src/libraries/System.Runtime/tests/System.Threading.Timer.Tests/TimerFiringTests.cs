@@ -255,7 +255,9 @@ namespace System.Threading.Tests
             int maxTimers = 10000;
             CountdownEvent ce = new CountdownEvent(maxTimers);
             Timer[] timers = System
-                .Linq.Enumerable.Range(0, maxTimers)
+                .Linq
+                .Enumerable
+                .Range(0, maxTimers)
                 .Select(_ => new Timer(
                     s => ce.Signal(),
                     null,

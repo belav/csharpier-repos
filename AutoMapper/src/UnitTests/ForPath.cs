@@ -151,9 +151,11 @@ public class ForPathWithoutSettersForSubObjects : AutoMapperSpecBase
         new Action(() =>
             Mapper.Map<Order>(new OrderDto())
         ).ShouldThrowException<AutoMapperMappingException>(ex =>
-            ex.InnerException?.Message.ShouldBe(
-                "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."
-            )
+            ex.InnerException
+                ?.Message
+                .ShouldBe(
+                    "typeMapDestination.CustomerHolder.Customer cannot be null because it's used by ForPath."
+                )
         );
     }
 }

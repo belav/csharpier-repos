@@ -308,9 +308,11 @@ namespace System.Workflow.ComponentModel.Design
                     this.connectorHitInfo.AssociatedDesigner != null
                     && this.connectorHitInfo.AssociatedDesigner.Activity.Site != null
                 )
-                    return this.connectorHitInfo.AssociatedDesigner.Activity.Site.GetService(
-                        serviceType
-                    );
+                    return this.connectorHitInfo
+                        .AssociatedDesigner
+                        .Activity
+                        .Site
+                        .GetService(serviceType);
                 else
                     return null;
             }

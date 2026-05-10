@@ -390,8 +390,8 @@ namespace StaticTestGenerator
         )
         {
             // Create the dictionary containing all tests and associated test cases.
-            Dictionary<IXunitTestCase, List<TestCase>> testCases = sink
-                .TestCases.Cast<IXunitTestCase>()
+            Dictionary<IXunitTestCase, List<TestCase>> testCases = sink.TestCases
+                .Cast<IXunitTestCase>()
                 .Select(tc =>
                 {
                     MethodInfo testMethod = ((ReflectionMethodInfo)tc.Method).MethodInfo;

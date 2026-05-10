@@ -339,15 +339,17 @@ namespace System.Security.Cryptography
                 fixed (byte* pData = &buffer[offset])
                 {
                     if (
-                        !CapiNative.UnsafeNativeMethods.CryptEncrypt(
-                            m_key,
-                            SafeCapiHashHandle.InvalidHandle,
-                            false,
-                            0,
-                            new IntPtr(pData),
-                            ref dataLength,
-                            buffer.Length - offset
-                        )
+                        !CapiNative
+                            .UnsafeNativeMethods
+                            .CryptEncrypt(
+                                m_key,
+                                SafeCapiHashHandle.InvalidHandle,
+                                false,
+                                0,
+                                new IntPtr(pData),
+                                ref dataLength,
+                                buffer.Length - offset
+                            )
                     )
                     {
                         throw new CryptographicException(Marshal.GetLastWin32Error());
@@ -395,11 +397,9 @@ namespace System.Security.Cryptography
                 case PaddingMode.ISO10126:
                     result = new byte[count + padBytes];
 
-                    CapiNative.UnsafeNativeMethods.CryptGenRandom(
-                        m_provider,
-                        result.Length - 1,
-                        result
-                    );
+                    CapiNative
+                        .UnsafeNativeMethods
+                        .CryptGenRandom(m_provider, result.Length - 1, result);
                     Buffer.BlockCopy(block, 0, result, 0, count);
                     result[result.Length - 1] = (byte)padBytes;
                     break;
@@ -523,14 +523,16 @@ namespace System.Security.Cryptography
                 fixed (byte* pData = &buffer[offset])
                 {
                     if (
-                        !CapiNative.UnsafeNativeMethods.CryptDecrypt(
-                            m_key,
-                            SafeCapiHashHandle.InvalidHandle,
-                            false,
-                            0,
-                            new IntPtr(pData),
-                            ref dataLength
-                        )
+                        !CapiNative
+                            .UnsafeNativeMethods
+                            .CryptDecrypt(
+                                m_key,
+                                SafeCapiHashHandle.InvalidHandle,
+                                false,
+                                0,
+                                new IntPtr(pData),
+                                ref dataLength
+                            )
                     )
                     {
                         throw new CryptographicException(Marshal.GetLastWin32Error());
@@ -564,15 +566,17 @@ namespace System.Security.Cryptography
                 {
                     if (m_encryptionMode == EncryptionMode.Encrypt)
                     {
-                        CapiNative.UnsafeNativeMethods.CryptEncrypt(
-                            m_key,
-                            SafeCapiHashHandle.InvalidHandle,
-                            true,
-                            0,
-                            new IntPtr(pBuffer),
-                            ref resetSize,
-                            buffer.Length
-                        );
+                        CapiNative
+                            .UnsafeNativeMethods
+                            .CryptEncrypt(
+                                m_key,
+                                SafeCapiHashHandle.InvalidHandle,
+                                true,
+                                0,
+                                new IntPtr(pBuffer),
+                                ref resetSize,
+                                buffer.Length
+                            );
                     }
                     else
                     {
@@ -582,14 +586,16 @@ namespace System.Security.Cryptography
                         {
                             resetSize = buffer.Length;
                         }
-                        CapiNative.UnsafeNativeMethods.CryptDecrypt(
-                            m_key,
-                            SafeCapiHashHandle.InvalidHandle,
-                            true,
-                            0,
-                            new IntPtr(pBuffer),
-                            ref resetSize
-                        );
+                        CapiNative
+                            .UnsafeNativeMethods
+                            .CryptDecrypt(
+                                m_key,
+                                SafeCapiHashHandle.InvalidHandle,
+                                true,
+                                0,
+                                new IntPtr(pBuffer),
+                                ref resetSize
+                            );
                     }
                 }
             }

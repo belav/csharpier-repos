@@ -1352,7 +1352,8 @@ public unsafe struct FixedBuffer
                 targetFramework: TargetFramework.Mscorlib46
             );
             var retargetingField = comp3
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("FixedBuffer")
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("FixedBuffer")
                 .GetMember<RetargetingFieldSymbol>("buffer");
             Assert.True(retargetingField.IsFixedSizeBuffer);
         }

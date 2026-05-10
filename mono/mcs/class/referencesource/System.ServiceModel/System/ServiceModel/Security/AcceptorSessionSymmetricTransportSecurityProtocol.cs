@@ -35,11 +35,13 @@ namespace System.ServiceModel.Security
             if (factory.ActAsInitiator == true)
             {
                 Fx.Assert("This protocol can only be used at the recipient.");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ProtocolMustBeRecipient, this.GetType().ToString())
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ProtocolMustBeRecipient, this.GetType().ToString())
+                        )
+                    );
             }
             this.requireDerivedKeys = factory.SecurityTokenParameters.RequireDerivedKeys;
         }
@@ -101,8 +103,9 @@ namespace System.ServiceModel.Security
         protected override void VerifyIncomingMessageCore(ref Message message, TimeSpan timeout)
         {
             string actor = string.Empty; // message.Version.Envelope.UltimateDestinationActor;
-            ReceiveSecurityHeader securityHeader =
-                this.Factory.StandardsManager.CreateReceiveSecurityHeader(
+            ReceiveSecurityHeader securityHeader = this.Factory
+                .StandardsManager
+                .CreateReceiveSecurityHeader(
                     message,
                     actor,
                     this.Factory.IncomingAlgorithmSuite,
@@ -155,11 +158,13 @@ namespace System.ServiceModel.Security
             );
             if (securityHeader.Timestamp == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(
-                        SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)
+                        )
+                    );
             }
             bool didSessionSctEndorse = false;
             if (securityHeader.EndorsingSupportingTokens != null)
@@ -178,9 +183,13 @@ namespace System.ServiceModel.Security
             }
             if (!didSessionSctEndorse)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new MessageSecurityException(SR.GetString(SR.NoSessionTokenPresentInMessage))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.NoSessionTokenPresentInMessage)
+                        )
+                    );
             }
             message = securityHeader.ProcessedMessage;
             AttachRecipientSecurityProperty(

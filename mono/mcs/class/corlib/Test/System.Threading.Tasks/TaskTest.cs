@@ -1076,8 +1076,8 @@ namespace MonoTests.System.Threading.Tasks
 
             parent_wfc = Task.Factory.StartNew(() =>
             {
-                nested = Task
-                    .Factory.StartNew(
+                nested = Task.Factory
+                    .StartNew(
                         () =>
                         {
                             Assert.IsTrue(mre.WaitOne(4000), "parent_wfc needs to be set first");
@@ -1111,7 +1111,8 @@ namespace MonoTests.System.Threading.Tasks
             bool result = false;
             var task = new Task(() =>
             {
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () =>
                         {
                             Thread.Sleep(200);
@@ -1137,7 +1138,8 @@ namespace MonoTests.System.Threading.Tasks
         {
             var task = new Task(() =>
             {
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         () =>
                         {
                             Thread.Sleep(200);
@@ -2404,14 +2406,16 @@ namespace MonoTests.System.Threading.Tasks
         [Test]
         public void ContinueWith_StateValueGeneric()
         {
-            var t = Task<int>.Factory.StartNew(
-                l =>
-                {
-                    Assert.AreEqual(1, l, "a-1");
-                    return 80;
-                },
-                1
-            );
+            var t = Task<int>
+                .Factory
+                .StartNew(
+                    l =>
+                    {
+                        Assert.AreEqual(1, l, "a-1");
+                        return 80;
+                    },
+                    1
+                );
 
             var c = t.ContinueWith(
                 (a, b) =>
@@ -2447,8 +2451,8 @@ namespace MonoTests.System.Threading.Tasks
         public void ContinueWith_CustomScheduleRejected()
         {
             var scheduler = new NonInlineableScheduler();
-            var t = Task
-                .Factory.StartNew(delegate { })
+            var t = Task.Factory
+                .StartNew(delegate { })
                 .ContinueWith(
                     r => { },
                     CancellationToken.None,

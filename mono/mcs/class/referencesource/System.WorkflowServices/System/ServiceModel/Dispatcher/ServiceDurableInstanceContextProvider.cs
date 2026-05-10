@@ -47,9 +47,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (runtimeValidator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "runtimeValidator"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("runtimeValidator");
             }
 
             this.serviceType = serviceType;

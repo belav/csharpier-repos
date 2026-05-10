@@ -26,7 +26,8 @@ namespace System.Xml
             {
                 binaryCompatabilityType = typeof(Object)
                     .GetTypeInfo()
-                    .Assembly.GetType("System.Runtime.Versioning.BinaryCompatibility", false);
+                    .Assembly
+                    .GetType("System.Runtime.Versioning.BinaryCompatibility", false);
             }
             catch (TypeLoadException)
             {

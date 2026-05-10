@@ -29,11 +29,13 @@ namespace System.Activities
 
             if (rootActivity.HasBeenAssociatedWithAnInstance)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.RootActivityAlreadyAssociatedWithInstance(rootActivity.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.RootActivityAlreadyAssociatedWithInstance(rootActivity.DisplayName)
+                        )
+                    );
             }
 
             IList<ValidationError> validationErrors = null;

@@ -156,10 +156,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var called = false;
             callBackService.NotificationCallback = (_, _, _) => called = true;
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
-                PredefinedCommandHandlerNames.ExtractMethod,
-                ContentTypeNames.CSharpContentType
-            );
+            var handler = workspace
+                .ExportProvider
+                .GetCommandHandler<ExtractMethodCommandHandler>(
+                    PredefinedCommandHandlerNames.ExtractMethod,
+                    ContentTypeNames.CSharpContentType
+                );
 
             handler.ExecuteCommand(
                 new ExtractMethodCommandArgs(view, view.TextBuffer),
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             );
 
             var waiter = workspace
-                .ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>()
+                .ExportProvider
+                .GetExportedValue<IAsynchronousOperationListenerProvider>()
                 .GetWaiter(FeatureAttribute.ExtractMethod);
             await waiter.ExpeditedWaitAsync();
 

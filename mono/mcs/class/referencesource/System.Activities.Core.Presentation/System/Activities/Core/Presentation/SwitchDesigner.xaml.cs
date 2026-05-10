@@ -171,8 +171,9 @@ namespace System.Activities.Core.Presentation
             this.Context.Items.Subscribe<Selection>(OnSelectionChanged);
             this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
 
-            ViewStateService viewStateService =
-                this.Context.Services.GetService<ViewStateService>();
+            ViewStateService viewStateService = this.Context
+                .Services
+                .GetService<ViewStateService>();
 
             foreach (
                 ModelItem modelItem in this.ModelItem

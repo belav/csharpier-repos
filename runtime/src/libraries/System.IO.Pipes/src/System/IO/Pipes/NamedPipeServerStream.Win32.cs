@@ -29,22 +29,26 @@ namespace System.IO.Pipes
                 ) && Environment.Is64BitProcess
             )
             {
-                Interop.Kernel32.LoadLibraryEx(
-                    "sspicli.dll",
-                    IntPtr.Zero,
-                    Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
-                );
+                Interop
+                    .Kernel32
+                    .LoadLibraryEx(
+                        "sspicli.dll",
+                        IntPtr.Zero,
+                        Interop.Kernel32.LOAD_LIBRARY_SEARCH_SYSTEM32
+                    );
 
                 if (
-                    Interop.Kernel32.GetNamedPipeHandleStateW(
-                        InternalHandle!,
-                        null,
-                        null,
-                        null,
-                        null,
-                        userName,
-                        userNameMaxLength
-                    )
+                    Interop
+                        .Kernel32
+                        .GetNamedPipeHandleStateW(
+                            InternalHandle!,
+                            null,
+                            null,
+                            null,
+                            null,
+                            userName,
+                            userNameMaxLength
+                        )
                 )
                 {
                     return new string(userName);

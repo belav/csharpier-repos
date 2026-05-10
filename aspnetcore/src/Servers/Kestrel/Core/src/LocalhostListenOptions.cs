@@ -44,13 +44,15 @@ internal sealed class LocalhostListenOptions : ListenOptions
         {
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context.Logger.LogInformation(
-                    0,
-                    CoreStrings.NetworkInterfaceBindingFailed,
-                    GetDisplayName(),
-                    "IPv4 loopback",
-                    ex.Message
-                );
+                context
+                    .Logger
+                    .LogInformation(
+                        0,
+                        CoreStrings.NetworkInterfaceBindingFailed,
+                        GetDisplayName(),
+                        "IPv4 loopback",
+                        ex.Message
+                    );
             }
             exceptions.Add(ex);
         }
@@ -66,13 +68,15 @@ internal sealed class LocalhostListenOptions : ListenOptions
         {
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context.Logger.LogInformation(
-                    0,
-                    CoreStrings.NetworkInterfaceBindingFailed,
-                    GetDisplayName(),
-                    "IPv6 loopback",
-                    ex.Message
-                );
+                context
+                    .Logger
+                    .LogInformation(
+                        0,
+                        CoreStrings.NetworkInterfaceBindingFailed,
+                        GetDisplayName(),
+                        "IPv6 loopback",
+                        ex.Message
+                    );
             }
             exceptions.Add(ex);
         }

@@ -28,9 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
     public partial class SmartIndenterTests : CSharpFormatterTestsBase
     {
         private static readonly TestComposition s_compositionWithTestFormattingRules =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestFormattingRuleFactoryServiceFactory)
-            );
+            EditorTestCompositions
+                .EditorFeatures
+                .AddParts(typeof(TestFormattingRuleFactoryServiceFactory));
 
         public SmartIndenterTests(ITestOutputHelper output)
             : base(output) { }
@@ -3220,15 +3220,18 @@ namespace NS
 
                 var indentationLine = projectedDocument
                     .GetTextBuffer()
-                    .CurrentSnapshot.GetLineFromPosition(projectedDocument.CursorPosition.Value);
+                    .CurrentSnapshot
+                    .GetLineFromPosition(projectedDocument.CursorPosition.Value);
                 var textView = projectedDocument.GetTextView();
                 var buffer = subjectDocument.GetTextBuffer();
-                var point = textView.BufferGraph.MapDownToBuffer(
-                    indentationLine.Start,
-                    PointTrackingMode.Negative,
-                    buffer,
-                    PositionAffinity.Predecessor
-                );
+                var point = textView
+                    .BufferGraph
+                    .MapDownToBuffer(
+                        indentationLine.Start,
+                        PointTrackingMode.Negative,
+                        buffer,
+                        PositionAffinity.Predecessor
+                    );
 
                 var editorOptions = editorOptionsService.Factory.GetOptions(buffer);
                 editorOptions.SetOptionValue(
@@ -3333,9 +3336,9 @@ namespace NS
 
                 var wpfTextView = workspace.Documents.First().GetTextView();
                 var line = wpfTextView
-                    .TextBuffer.CurrentSnapshot.GetLineFromPosition(
-                        wpfTextView.Caret.Position.BufferPosition
-                    )
+                    .TextBuffer
+                    .CurrentSnapshot
+                    .GetLineFromPosition(wpfTextView.Caret.Position.BufferPosition)
                     .LineNumber;
                 TestIndentation(workspace, line, expectedIndentation, indentStyle, useTabs);
             }

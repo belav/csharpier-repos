@@ -102,7 +102,9 @@ public class FormatterTests
         var document = workspace.AddDocument(project.Id, "File.dummy", SourceText.From("dummy"));
 
         var solutionOptions = workspace
-            .CurrentSolution.Options.WithChangedOption(
+            .CurrentSolution
+            .Options
+            .WithChangedOption(
                 new OptionKey(FormattingOptions.UseTabs, NoCompilationConstants.LanguageName),
                 false
             )
@@ -123,7 +125,9 @@ public class FormatterTests
             );
 
         document = document
-            .Project.Solution.WithOptions(solutionOptions)
+            .Project
+            .Solution
+            .WithOptions(solutionOptions)
             .GetRequiredDocument(document.Id);
 
 #pragma warning disable RS0030 // Do not used banned APIs
@@ -134,7 +138,8 @@ public class FormatterTests
         var options = passExplicitOptions
             ? new TestOptionSet(
                 ImmutableDictionary<OptionKey, object?>
-                    .Empty.Add(
+                    .Empty
+                    .Add(
                         new OptionKey(
                             FormattingOptions.UseTabs,
                             NoCompilationConstants.LanguageName
@@ -244,9 +249,9 @@ public class FormatterTests
             workspace.CurrentSolution.Options,
             OptionsTestHelpers.PublicFormattingOptionsWithNonDefaultValues
         );
-        var solutionWithUpdatedOptions = workspace.CurrentSolution.WithOptions(
-            updatedSolutionOptions
-        );
+        var solutionWithUpdatedOptions = workspace
+            .CurrentSolution
+            .WithOptions(updatedSolutionOptions);
         var csDocumentWithUpdatedOptions = solutionWithUpdatedOptions.GetRequiredDocument(
             csDocument.Id
         );
@@ -319,9 +324,9 @@ public class FormatterTests
                 formattingOptions.Spacing.HasFlag(SpacePlacement.AfterMethodDeclarationName)
             );
             Assert.True(
-                formattingOptions.Spacing.HasFlag(
-                    SpacePlacement.BetweenEmptyMethodDeclarationParentheses
-                )
+                formattingOptions
+                    .Spacing
+                    .HasFlag(SpacePlacement.BetweenEmptyMethodDeclarationParentheses)
             );
             Assert.True(
                 formattingOptions.Spacing.HasFlag(SpacePlacement.WithinMethodDeclarationParenthesis)
@@ -357,9 +362,9 @@ public class FormatterTests
             );
 
             Assert.False(
-                formattingOptions.NewLines.HasFlag(
-                    NewLinePlacement.BeforeMembersInObjectInitializers
-                )
+                formattingOptions
+                    .NewLines
+                    .HasFlag(NewLinePlacement.BeforeMembersInObjectInitializers)
             );
             Assert.False(
                 formattingOptions.NewLines.HasFlag(NewLinePlacement.BeforeMembersInAnonymousTypes)
@@ -374,9 +379,9 @@ public class FormatterTests
                 formattingOptions.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInAnonymousTypes)
             );
             Assert.False(
-                formattingOptions.NewLines.HasFlag(
-                    NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
-                )
+                formattingOptions
+                    .NewLines
+                    .HasFlag(NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers)
             );
             Assert.False(
                 formattingOptions.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInProperties)
@@ -388,14 +393,14 @@ public class FormatterTests
                 formattingOptions.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInAccessors)
             );
             Assert.False(
-                formattingOptions.NewLines.HasFlag(
-                    NewLinePlacement.BeforeOpenBraceInAnonymousMethods
-                )
+                formattingOptions
+                    .NewLines
+                    .HasFlag(NewLinePlacement.BeforeOpenBraceInAnonymousMethods)
             );
             Assert.False(
-                formattingOptions.NewLines.HasFlag(
-                    NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody
-                )
+                formattingOptions
+                    .NewLines
+                    .HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody)
             );
             Assert.False(
                 formattingOptions.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInControlBlocks)
@@ -412,9 +417,9 @@ public class FormatterTests
                 formattingOptions.Indentation.HasFlag(IndentationPlacement.SwitchCaseContents)
             );
             Assert.False(
-                formattingOptions.Indentation.HasFlag(
-                    IndentationPlacement.SwitchCaseContentsWhenBlock
-                )
+                formattingOptions
+                    .Indentation
+                    .HasFlag(IndentationPlacement.SwitchCaseContentsWhenBlock)
             );
             Assert.False(formattingOptions.Indentation.HasFlag(IndentationPlacement.SwitchSection));
 

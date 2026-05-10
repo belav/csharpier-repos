@@ -23,7 +23,10 @@ internal static partial class AddImportPlacementOptionsProviders
             .GetRequiredSyntaxTreeAsync(cancellationToken)
             .ConfigureAwait(false);
         var configOptions = document
-            .Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree)
+            .Project
+            .AnalyzerOptions
+            .AnalyzerConfigOptionsProvider
+            .GetOptions(syntaxTree)
             .GetOptionsReader();
         return addImportsService.GetAddImportOptions(
             configOptions,

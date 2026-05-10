@@ -206,7 +206,8 @@ namespace System.Data.Query.PlanCompiler
             // Replace command strongly typed spatial parameters with a counterpart whose type is the underlying spatial union type of the original parameter
             foreach (
                 var paramVar in m_command
-                    .Vars.OfType<ParameterVar>()
+                    .Vars
+                    .OfType<ParameterVar>()
                     .Where(v =>
                         md.TypeSemantics.IsEnumerationType(v.Type)
                         || md.TypeSemantics.IsStrongSpatialType(v.Type)
@@ -1789,10 +1790,13 @@ namespace System.Data.Query.PlanCompiler
                     }
                     else
                     { // structured type
-                        System.Diagnostics.Debug.Assert(
-                            outerVarInfo.Kind == VarInfoKind.StructuredTypeVarInfo,
-                            "StructuredVarInfo expected"
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(
+                                outerVarInfo.Kind == VarInfoKind.StructuredTypeVarInfo,
+                                "StructuredVarInfo expected"
+                            );
 
                         StructuredVarInfo outerSvarInfo = (StructuredVarInfo)outerVarInfo;
                         StructuredVarInfo innerSvarInfo = (StructuredVarInfo)innerVarInfo;
@@ -3248,9 +3252,9 @@ namespace System.Data.Query.PlanCompiler
                         .FlattenedType;
 
                     // Find offset of opField in top-level flat type
-                    int nestedPropertyOffset = typeInfo.RootType.GetNestedStructureOffset(
-                        new SimplePropertyRef(opField)
-                    );
+                    int nestedPropertyOffset = typeInfo
+                        .RootType
+                        .GetNestedStructureOffset(new SimplePropertyRef(opField));
 
                     foreach (md.EdmProperty nestedProperty in nestedFlatType.Properties)
                     {
@@ -3293,9 +3297,9 @@ namespace System.Data.Query.PlanCompiler
                         .FlattenedType;
 
                     // Find offset of opField in top-level flat type
-                    int nestedPropertyOffset = typeInfo.RootType.GetNestedStructureOffset(
-                        new RelPropertyRef(relProp)
-                    );
+                    int nestedPropertyOffset = typeInfo
+                        .RootType
+                        .GetNestedStructureOffset(new RelPropertyRef(relProp));
 
                     foreach (md.EdmProperty nestedProperty in nestedFlatType.Properties)
                     {

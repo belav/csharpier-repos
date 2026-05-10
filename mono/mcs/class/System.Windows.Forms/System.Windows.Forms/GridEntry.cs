@@ -650,11 +650,10 @@ namespace System.Windows.Forms.PropertyGridInternal
                                     propertyOwners[i]
                                 );
                         }
-                        object updatedParentValue =
-                            this.ParentEntry.PropertyDescriptor.Converter.CreateInstance(
-                                (ITypeDescriptorContext)this,
-                                updatedParentProperties
-                            );
+                        object updatedParentValue = this.ParentEntry
+                            .PropertyDescriptor
+                            .Converter
+                            .CreateInstance((ITypeDescriptorContext)this, updatedParentProperties);
                         if (updatedParentValue != null)
                             current_changed = this.ParentEntry.SetValueCore(
                                 updatedParentValue,
@@ -828,9 +827,9 @@ namespace System.Windows.Forms.PropertyGridInternal
             get
             {
                 if (PropertyDescriptor != null)
-                    return PropertyDescriptor.Attributes.Contains(
-                        PasswordPropertyTextAttribute.Yes
-                    );
+                    return PropertyDescriptor
+                        .Attributes
+                        .Contains(PasswordPropertyTextAttribute.Yes);
                 return false;
             }
         }
@@ -1059,11 +1058,9 @@ namespace System.Windows.Forms.PropertyGridInternal
                 return properties ?? new PropertyDescriptorCollection(null);
             }
 
-            return property_grid.SelectedTab.GetProperties(
-                (ITypeDescriptorContext)this,
-                propertyOwner,
-                atts
-            );
+            return property_grid
+                .SelectedTab
+                .GetProperties((ITypeDescriptorContext)this, propertyOwner, atts);
         }
         #endregion  // Population
     }

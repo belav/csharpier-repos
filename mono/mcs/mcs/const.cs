@@ -63,11 +63,9 @@ namespace Mono.CSharp
                 field_attr |= FieldAttributes.Literal;
             }
 
-            FieldBuilder = Parent.TypeBuilder.DefineField(
-                Name,
-                MemberType.GetMetaInfo(),
-                field_attr
-            );
+            FieldBuilder = Parent
+                .TypeBuilder
+                .DefineField(Name, MemberType.GetMetaInfo(), field_attr);
             spec = new ConstSpec(
                 Parent.Definition,
                 this,
@@ -80,10 +78,12 @@ namespace Mono.CSharp
             Parent.MemberCache.AddMember(spec);
 
             if ((field_attr & FieldAttributes.InitOnly) != 0)
-                Parent.PartialContainer.RegisterFieldForInitialization(
-                    this,
-                    new FieldInitializer(this, initializer, Location)
-                );
+                Parent
+                    .PartialContainer
+                    .RegisterFieldForInitialization(
+                        this,
+                        new FieldInitializer(this, initializer, Location)
+                    );
 
             if (declarators != null)
             {
@@ -121,11 +121,10 @@ namespace Mono.CSharp
             var c = ((ConstSpec)spec).Value as Constant;
             if (c.Type.BuiltinType == BuiltinTypeSpec.Type.Decimal)
             {
-                Module.PredefinedAttributes.DecimalConstant.EmitAttribute(
-                    FieldBuilder,
-                    (decimal)c.GetValue(),
-                    c.Location
-                );
+                Module
+                    .PredefinedAttributes
+                    .DecimalConstant
+                    .EmitAttribute(FieldBuilder, (decimal)c.GetValue(), c.Location);
             }
             else
             {
@@ -245,12 +244,15 @@ namespace Mono.CSharp
         {
             if (in_transit)
             {
-                field.Compiler.Report.Error(
-                    110,
-                    expr.Location,
-                    "The evaluation of the constant value for `{0}' involves a circular definition",
-                    GetSignatureForError()
-                );
+                field
+                    .Compiler
+                    .Report
+                    .Error(
+                        110,
+                        expr.Location,
+                        "The evaluation of the constant value for `{0}' involves a circular definition",
+                        GetSignatureForError()
+                    );
 
                 expr = null;
             }

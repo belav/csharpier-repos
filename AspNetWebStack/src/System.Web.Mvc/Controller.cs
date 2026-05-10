@@ -955,10 +955,9 @@ namespace System.Web.Mvc
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                    () => model,
-                    typeof(TModel)
-                ),
+                ModelMetadata = ModelMetadataProviders
+                    .Current
+                    .GetMetadataForType(() => model, typeof(TModel)),
                 ModelName = prefix,
                 ModelState = ModelState,
                 PropertyFilter = propertyFilter,
@@ -983,10 +982,9 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("model");
             }
 
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
-                () => model,
-                model.GetType()
-            );
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForType(() => model, model.GetType());
 
             foreach (
                 ModelValidationResult validationResult in ModelValidator
@@ -1310,12 +1308,14 @@ namespace System.Web.Mvc
                         ExecuteCoreState innerState
                     )
                     {
-                        return innerState.AsyncInvoker.BeginInvokeAction(
-                            innerState.Controller.ControllerContext,
-                            innerState.ActionName,
-                            asyncCallback,
-                            asyncState
-                        );
+                        return innerState
+                            .AsyncInvoker
+                            .BeginInvokeAction(
+                                innerState.Controller.ControllerContext,
+                                innerState.ActionName,
+                                asyncCallback,
+                                asyncState
+                            );
                     };
 
                     EndInvokeVoidDelegate<ExecuteCoreState> endDelegate = delegate(

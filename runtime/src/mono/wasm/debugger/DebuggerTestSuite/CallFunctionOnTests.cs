@@ -817,8 +817,7 @@ namespace DebuggerTests
 
             // Check the object at the bp
             var frame_locals = await GetProperties(
-                pause_location["callFrames"]
-                    [0]["scopeChain"][0]["object"]["objectId"]
+                pause_location["callFrames"][0]["scopeChain"][0]["object"]["objectId"]
                     .Value<string>()
             );
             var obj = GetAndAssertObjectWithName(frame_locals, "big");
@@ -915,8 +914,7 @@ namespace DebuggerTests
             var pause_location = await insp.WaitFor(Inspector.PAUSE);
 
             var frame_locals = await GetProperties(
-                pause_location["callFrames"]
-                    [0]["scopeChain"][0]["object"]["objectId"]
+                pause_location["callFrames"][0]["scopeChain"][0]["object"]["objectId"]
                     .Value<string>()
             );
             var obj = GetAndAssertObjectWithName(frame_locals, "big");
@@ -942,7 +940,9 @@ namespace DebuggerTests
 
             var hasErrorMessage = result
                 .Error["exceptionDetails"]
-                ?["exception"]?["description"]?.Value<string>()
+                ?["exception"]
+                ?["description"]
+                ?.Value<string>()
                 ?.Contains(error_msg);
             Assert.True((hasErrorMessage ?? false), "Exception message not found");
         }
@@ -1340,8 +1340,7 @@ namespace DebuggerTests
             var pause_location = await insp.WaitFor(Inspector.PAUSE);
 
             var frame_locals = await GetProperties(
-                pause_location["callFrames"]
-                    [0]["scopeChain"][0]["object"]["objectId"]
+                pause_location["callFrames"][0]["scopeChain"][0]["object"]["objectId"]
                     .Value<string>()
             );
             var ptd = GetAndAssertObjectWithName(frame_locals, "ptd");
@@ -1382,8 +1381,7 @@ namespace DebuggerTests
             var pause_location = await insp.WaitFor(Inspector.PAUSE);
 
             var frame_locals = await GetProperties(
-                pause_location["callFrames"]
-                    [0]["scopeChain"][0]["object"]["objectId"]
+                pause_location["callFrames"][0]["scopeChain"][0]["object"]["objectId"]
                     .Value<string>()
             );
             var ptd = GetAndAssertObjectWithName(frame_locals, "ptd");
@@ -1499,8 +1497,7 @@ namespace DebuggerTests
 
             // Check the object at the bp
             var frame_locals = await GetProperties(
-                pause_location["callFrames"]
-                    [0]["scopeChain"][0]["object"]["objectId"]
+                pause_location["callFrames"][0]["scopeChain"][0]["object"]["objectId"]
                     .Value<string>()
             );
             var obj = GetAndAssertObjectWithName(frame_locals, local_name);

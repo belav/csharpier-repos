@@ -1858,25 +1858,29 @@ if (zoneElement != null) {{
 
                     if (connection.ConflictsWithConsumer(otherConnection))
                     {
-                        connection.Consumer.SetConnectErrorMessage(
-                            SR.GetString(
-                                SR.WebPartConnection_Duplicate,
-                                connection.ConsumerConnectionPoint.DisplayName,
-                                connection.Consumer.DisplayTitle
-                            )
-                        );
+                        connection
+                            .Consumer
+                            .SetConnectErrorMessage(
+                                SR.GetString(
+                                    SR.WebPartConnection_Duplicate,
+                                    connection.ConsumerConnectionPoint.DisplayName,
+                                    connection.Consumer.DisplayTitle
+                                )
+                            );
                         hasConflict = true;
                     }
 
                     if (connection.ConflictsWithProvider(otherConnection))
                     {
-                        connection.Consumer.SetConnectErrorMessage(
-                            SR.GetString(
-                                SR.WebPartConnection_Duplicate,
-                                connection.ProviderConnectionPoint.DisplayName,
-                                connection.Provider.DisplayTitle
-                            )
-                        );
+                        connection
+                            .Consumer
+                            .SetConnectErrorMessage(
+                                SR.GetString(
+                                    SR.WebPartConnection_Duplicate,
+                                    connection.ProviderConnectionPoint.DisplayName,
+                                    connection.Provider.DisplayTitle
+                                )
+                            );
                         hasConflict = true;
                     }
                 }

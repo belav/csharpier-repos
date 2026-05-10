@@ -137,9 +137,9 @@ namespace System.ServiceModel.Activities
             requestFormatter = new FromRequest();
             foreach (KeyValuePair<string, OutArgument> parameter in this.Parameters)
             {
-                requestFormatter.Parameters.Add(
-                    OutArgument.CreateReference(parameter.Value, parameter.Key)
-                );
+                requestFormatter
+                    .Parameters
+                    .Add(OutArgument.CreateReference(parameter.Value, parameter.Key));
             }
         }
 
@@ -151,9 +151,9 @@ namespace System.ServiceModel.Activities
             responseFormatter = new FromReply();
             foreach (KeyValuePair<string, OutArgument> parameter in this.Parameters)
             {
-                responseFormatter.Parameters.Add(
-                    OutArgument.CreateReference(parameter.Value, parameter.Key)
-                );
+                responseFormatter
+                    .Parameters
+                    .Add(OutArgument.CreateReference(parameter.Value, parameter.Key));
             }
         }
 

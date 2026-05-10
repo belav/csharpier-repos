@@ -5404,9 +5404,9 @@ class D
         [Fact]
         public void UseSiteWarning()
         {
-            var signedDll = TestOptions.ReleaseDll.WithCryptoPublicKey(
-                TestResources.TestKeys.PublicKey_ce65828c82a341f2
-            );
+            var signedDll = TestOptions
+                .ReleaseDll
+                .WithCryptoPublicKey(TestResources.TestKeys.PublicKey_ce65828c82a341f2);
 
             var libBTemplate =
                 @"

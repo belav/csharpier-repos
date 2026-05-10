@@ -318,12 +318,14 @@ namespace System.Web.UI
             if (filter == null)
                 filter = String.Empty;
 
-            _parser.RootBuilder.PreprocessAttribute(
-                filter,
-                name,
-                value,
-                true /*mainDirectiveMode*/
-            );
+            _parser
+                .RootBuilder
+                .PreprocessAttribute(
+                    filter,
+                    name,
+                    value,
+                    true /*mainDirectiveMode*/
+                );
         }
     }
 

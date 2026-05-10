@@ -65,14 +65,16 @@ namespace System.Windows.Forms.Theming.Default
             if (!label.Enabled)
             {
                 dc.SetClip(clip_rectangle);
-                ThemeEngine.Current.CPDrawStringDisabled(
-                    dc,
-                    label.Text,
-                    label.Font,
-                    label.BackColor,
-                    client_rect,
-                    label.string_format
-                );
+                ThemeEngine
+                    .Current
+                    .CPDrawStringDisabled(
+                        dc,
+                        label.Text,
+                        label.Font,
+                        label.BackColor,
+                        client_rect,
+                        label.string_format
+                    );
                 return;
             }
 

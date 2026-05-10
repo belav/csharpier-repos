@@ -360,7 +360,8 @@ public class CSharpRuntimeAnnotationCodeGenerator : ICSharpRuntimeAnnotationCode
         }
 
         parameters
-            .MainBuilder.Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
+            .MainBuilder
+            .Append(parameters.IsRuntime ? "AddRuntimeAnnotation(" : "AddAnnotation(")
             .Append(Dependencies.CSharpHelper.Literal(annotationName))
             .Append(", ")
             .Append(valueString)

@@ -96,10 +96,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
             var docComment = DocumentationComment.FromXmlFragment(xmlFragment);
 
-            var commentLines = AbstractMetadataAsSourceService.DocCommentFormatter.Format(
-                _formattingService,
-                docComment
-            );
+            var commentLines = AbstractMetadataAsSourceService
+                .DocCommentFormatter
+                .Format(_formattingService, docComment);
 
             foreach (var line in commentLines)
             {

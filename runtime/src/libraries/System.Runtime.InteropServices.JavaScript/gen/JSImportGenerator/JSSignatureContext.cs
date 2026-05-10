@@ -23,12 +23,15 @@ namespace Microsoft.Interop.JavaScript
             );
 
         internal static readonly string GeneratorName = typeof(JSImportGenerator)
-            .Assembly.GetName()
+            .Assembly
+            .GetName()
             .Name;
 
         internal static readonly string GeneratorVersion = typeof(JSImportGenerator)
-            .Assembly.GetName()
-            .Version.ToString();
+            .Assembly
+            .GetName()
+            .Version
+            .ToString();
 
         public SignatureContext SignatureContext { get; private init; }
 
@@ -70,9 +73,9 @@ namespace Microsoft.Interop.JavaScript
                 typeof(JSImportGenerator).Assembly
             );
 
-            string stubTypeFullName = method.ContainingType.ToDisplayString(
-                TypeContainingTypesAndNamespacesStyle
-            );
+            string stubTypeFullName = method
+                .ContainingType
+                .ToDisplayString(TypeContainingTypesAndNamespacesStyle);
 
             // there could be multiple method signatures with the same name, get unique signature name
             uint hash = 17;
@@ -105,7 +108,8 @@ namespace Microsoft.Interop.JavaScript
         {
             // Mono style nested class name format.
             string typeName = method
-                .ContainingType.ToDisplayString(TypeAndContainingTypesStyle)
+                .ContainingType
+                .ToDisplayString(TypeAndContainingTypesStyle)
                 .Replace(".", "/");
 
             if (!method.ContainingType.ContainingNamespace.IsGlobalNamespace)

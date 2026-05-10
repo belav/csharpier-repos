@@ -189,11 +189,10 @@ public class ComplexProperty
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnComplexPropertyFieldChanged(
-            Builder,
-            newFieldInfo,
-            oldFieldInfo
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnComplexPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -277,12 +276,10 @@ public class ComplexProperty
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnComplexPropertyAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnComplexPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

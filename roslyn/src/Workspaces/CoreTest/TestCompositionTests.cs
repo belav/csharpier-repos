@@ -15,14 +15,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void FactoryReuse()
         {
-            var composition1 = FeaturesTestCompositions.Features.AddParts(
-                typeof(TestErrorReportingService),
-                typeof(TestTemporaryStorageServiceFactory)
-            );
-            var composition2 = FeaturesTestCompositions.Features.AddParts(
-                typeof(TestTemporaryStorageServiceFactory),
-                typeof(TestErrorReportingService)
-            );
+            var composition1 = FeaturesTestCompositions
+                .Features
+                .AddParts(
+                    typeof(TestErrorReportingService),
+                    typeof(TestTemporaryStorageServiceFactory)
+                );
+            var composition2 = FeaturesTestCompositions
+                .Features
+                .AddParts(
+                    typeof(TestTemporaryStorageServiceFactory),
+                    typeof(TestErrorReportingService)
+                );
             Assert.Same(composition1.ExportProviderFactory, composition2.ExportProviderFactory);
         }
 
@@ -92,11 +96,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var excluded2 = typeof(byte);
 
             var composition1 = TestComposition
-                .Empty.AddAssemblies(assembly1)
+                .Empty
+                .AddAssemblies(assembly1)
                 .AddParts(type1)
                 .AddExcludedPartTypes(excluded1);
             var composition2 = TestComposition
-                .Empty.AddAssemblies(assembly2)
+                .Empty
+                .AddAssemblies(assembly2)
                 .AddParts(type1, type2)
                 .AddExcludedPartTypes(excluded2);
             var composition3 = composition1.Add(composition2);

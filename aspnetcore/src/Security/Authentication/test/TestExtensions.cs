@@ -58,12 +58,14 @@ public static class TestExtensions
             foreach (var identity in principal.Identities)
             {
                 xml.Add(
-                    identity.Claims.Select(claim => new XElement(
-                        "claim",
-                        new XAttribute("type", claim.Type),
-                        new XAttribute("value", claim.Value),
-                        new XAttribute("issuer", claim.Issuer)
-                    ))
+                    identity
+                        .Claims
+                        .Select(claim => new XElement(
+                            "claim",
+                            new XAttribute("type", claim.Type),
+                            new XAttribute("value", claim.Value),
+                            new XAttribute("issuer", claim.Issuer)
+                        ))
                 );
             }
         }

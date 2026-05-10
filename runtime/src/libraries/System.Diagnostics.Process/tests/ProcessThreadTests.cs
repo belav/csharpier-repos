@@ -165,8 +165,8 @@ namespace System.Diagnostics.Tests
                         p.Refresh();
                         try
                         {
-                            var newest = p
-                                .Threads.Cast<ProcessThread>()
+                            var newest = p.Threads
+                                .Cast<ProcessThread>()
                                 .OrderBy(t => t.StartTime.ToUniversalTime())
                                 .Last();
                             Assert.InRange(

@@ -367,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 {
                     _providerManager._projectProvidersWorkQueue.AddWork(project.AnalyzerReferences);
                     await _providerManager
-                        ._projectProvidersWorkQueue.WaitUntilCurrentBatchCompletesAsync()
+                        ._projectProvidersWorkQueue
+                        .WaitUntilCurrentBatchCompletesAsync()
                         .ConfigureAwait(false);
                     // Now the extension cache is guaranteed to be populated.
                     return _providerManager.GetCachedProjectCompletionProvidersOrQueueLoadInBackground(

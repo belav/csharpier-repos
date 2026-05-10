@@ -119,15 +119,17 @@ namespace System.Data.Common
             {
                 Locale = CultureInfo.InvariantCulture,
             };
-            toReturn.Columns.AddRange(
-                new[]
-                {
-                    nameColumn,
-                    descriptionColumn,
-                    invariantNameColumn,
-                    assemblyQualifiedNameColumn,
-                }
-            );
+            toReturn
+                .Columns
+                .AddRange(
+                    new[]
+                    {
+                        nameColumn,
+                        descriptionColumn,
+                        invariantNameColumn,
+                        assemblyQualifiedNameColumn,
+                    }
+                );
             toReturn.PrimaryKey = new[] { invariantNameColumn };
             foreach (var kvp in _registeredFactories)
             {

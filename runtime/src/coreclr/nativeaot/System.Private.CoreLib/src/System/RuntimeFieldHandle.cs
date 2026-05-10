@@ -43,16 +43,12 @@ namespace System
             RuntimeTypeHandle declaringType1,
                 declaringType2;
 
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(
-                this,
-                out declaringType1,
-                out fieldName1
-            );
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(
-                handle,
-                out declaringType2,
-                out fieldName2
-            );
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeFieldHandleComponents(this, out declaringType1, out fieldName1);
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeFieldHandleComponents(handle, out declaringType2, out fieldName2);
 
             return declaringType1.Equals(declaringType2) && fieldName1 == fieldName2;
         }
@@ -70,11 +66,9 @@ namespace System
 
             string fieldName;
             RuntimeTypeHandle declaringType;
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleComponents(
-                this,
-                out declaringType,
-                out fieldName
-            );
+            RuntimeAugments
+                .TypeLoaderCallbacks
+                .GetRuntimeFieldHandleComponents(this, out declaringType, out fieldName);
 
             int hashcode = declaringType.GetHashCode();
             return (hashcode + _rotl(hashcode, 13)) ^ fieldName.GetHashCode();

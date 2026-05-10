@@ -78,10 +78,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                     continue;
 
                 var binary = (BinaryExpressionSyntax)
-                    diagnostic.Location.FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken: cancellationToken
-                    );
+                    diagnostic
+                        .Location
+                        .FindNode(
+                            getInnermostNodeForTie: true,
+                            cancellationToken: cancellationToken
+                        );
 
                 editor.ReplaceNode(
                     binary,

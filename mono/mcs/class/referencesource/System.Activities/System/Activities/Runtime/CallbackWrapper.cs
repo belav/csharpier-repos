@@ -167,11 +167,13 @@ namespace System.Activities.Runtime
                 )
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.InvalidExecutionCallback(this.callback.Method, null)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.InvalidExecutionCallback(this.callback.Method, null)
+                        )
+                    );
             }
         }
 
@@ -395,11 +397,13 @@ namespace System.Activities.Runtime
         protected virtual void OnSerializingGenericCallback()
         {
             // Generics are invalid by default
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(
-                    SR.InvalidExecutionCallback(this.callback.Method, null)
-                )
-            );
+            throw FxTrace
+                .Exception
+                .AsError(
+                    new InvalidOperationException(
+                        SR.InvalidExecutionCallback(this.callback.Method, null)
+                    )
+                );
         }
     }
 }

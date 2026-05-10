@@ -214,9 +214,9 @@ namespace ILLink.RoslynAnalyzer.Tests
                         $"Expected diagnostic message arguments to match"
                     );
                     verifier.SequenceEqual(
-                        expected.MessageArguments.Select(argument =>
-                            argument?.ToString() ?? string.Empty
-                        ),
+                        expected
+                            .MessageArguments
+                            .Select(argument => argument?.ToString() ?? string.Empty),
                         GetArguments(actual)
                             .Select(argument => argument?.ToString() ?? string.Empty),
                         StringComparer.Ordinal,
@@ -396,7 +396,8 @@ namespace ILLink.RoslynAnalyzer.Tests
                         AppendLocation(span);
                         if (
                             diagnostics[i]
-                                .Options.HasFlag(DiagnosticOptions.IgnoreAdditionalLocations)
+                                .Options
+                                .HasFlag(DiagnosticOptions.IgnoreAdditionalLocations)
                         )
                         {
                             break;
@@ -585,7 +586,8 @@ namespace ILLink.RoslynAnalyzer.Tests
                     (
                         location: result.Location.GetLineSpan(),
                         additionalLocations: result
-                            .AdditionalLocations.Select(location => location.GetLineSpan())
+                            .AdditionalLocations
+                            .Select(location => location.GetLineSpan())
                             .ToImmutableArray()
                     )
                 )
@@ -602,7 +604,8 @@ namespace ILLink.RoslynAnalyzer.Tests
             var expectedArguments = expectedResults
                 .Select(expected =>
                     expected
-                        .MessageArguments?.Select(argument => argument?.ToString() ?? string.Empty)
+                        .MessageArguments
+                        ?.Select(argument => argument?.ToString() ?? string.Empty)
                         .ToImmutableArray()
                     ?? ImmutableArray<string>.Empty
                 )
@@ -883,9 +886,9 @@ namespace ILLink.RoslynAnalyzer.Tests
                     }
 
                     if (
-                        diagnosticResult.Options.HasFlag(
-                            DiagnosticOptions.IgnoreAdditionalLocations
-                        )
+                        diagnosticResult
+                            .Options
+                            .HasFlag(DiagnosticOptions.IgnoreAdditionalLocations)
                     )
                     {
                         return true;

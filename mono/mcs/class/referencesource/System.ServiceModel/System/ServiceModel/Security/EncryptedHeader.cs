@@ -30,9 +30,11 @@ namespace System.ServiceModel.Security
         {
             if (!headerXml.HasId || headerXml.Id == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(SR.GetString(SR.EncryptedHeaderXmlMustHaveId))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(SR.GetString(SR.EncryptedHeaderXmlMustHaveId))
+                    );
             }
             this.headerXml = headerXml;
             this.name = name;
@@ -87,21 +89,23 @@ namespace System.ServiceModel.Security
         {
             if (!IsMessageVersionSupported(messageVersion))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.MessageHeaderVersionNotSupported,
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "{0}:{1}",
-                                this.Namespace,
-                                this.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.MessageHeaderVersionNotSupported,
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0}:{1}",
+                                    this.Namespace,
+                                    this.Name
+                                ),
+                                version.ToString()
                             ),
-                            version.ToString()
-                        ),
-                        "version"
-                    )
-                );
+                            "version"
+                        )
+                    );
             }
 
             this.headerXml.WriteHeaderElement(writer);

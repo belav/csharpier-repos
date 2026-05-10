@@ -29,10 +29,9 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
             foreach (var configurationSection in _configuration.GetChildren())
             {
                 if (
-                    configurationSection.Key.Equals(
-                        EnabledMetricsKey,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    configurationSection
+                        .Key
+                        .Equals(EnabledMetricsKey, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     // Load listener defaults
@@ -44,20 +43,18 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                     );
                 }
                 else if (
-                    configurationSection.Key.Equals(
-                        EnabledGlobalMetricsKey,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    configurationSection
+                        .Key
+                        .Equals(EnabledGlobalMetricsKey, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     // Load global listener defaults
                     LoadMeterRules(options, configurationSection, MeterScope.Global, null);
                 }
                 else if (
-                    configurationSection.Key.Equals(
-                        EnabledLocalMetricsKey,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    configurationSection
+                        .Key
+                        .Equals(EnabledLocalMetricsKey, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     // Load local listener defaults
@@ -131,15 +128,17 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                         meterName = null;
                     }
                     // Simple bool, enable/disable all instruments for this meter
-                    options.Rules.Add(
-                        new InstrumentRule(
-                            meterName,
-                            instrumentName: null,
-                            listenerName,
-                            scopes,
-                            meterEnabled
-                        )
-                    );
+                    options
+                        .Rules
+                        .Add(
+                            new InstrumentRule(
+                                meterName,
+                                instrumentName: null,
+                                listenerName,
+                                scopes,
+                                meterEnabled
+                            )
+                        );
                 }
             }
         }
@@ -169,15 +168,17 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                         instrumentName = null;
                     }
                     // Simple bool, enable/disable all instruments for this meter
-                    options.Rules.Add(
-                        new InstrumentRule(
-                            meterSection.Key,
-                            instrumentName,
-                            listenerName,
-                            scopes,
-                            instrumentEnabled
-                        )
-                    );
+                    options
+                        .Rules
+                        .Add(
+                            new InstrumentRule(
+                                meterSection.Key,
+                                instrumentName,
+                                listenerName,
+                                scopes,
+                                instrumentEnabled
+                            )
+                        );
                 }
             }
         }

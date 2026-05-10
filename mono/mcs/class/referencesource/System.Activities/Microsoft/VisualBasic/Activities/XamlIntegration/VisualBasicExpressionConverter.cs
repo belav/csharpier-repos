@@ -169,14 +169,16 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 if (match.Success)
                 {
                     mapping.ImportReferences = new HashSet<VisualBasicImportReference>();
-                    mapping.ImportReferences.Add(
-                        new VisualBasicImportReference
-                        {
-                            Assembly = match.Groups["assembly"].Value,
-                            Import = match.Groups["namespace"].Value,
-                            Xmlns = xmlns,
-                        }
-                    );
+                    mapping
+                        .ImportReferences
+                        .Add(
+                            new VisualBasicImportReference
+                            {
+                                Assembly = match.Groups["assembly"].Value,
+                                Import = match.Groups["namespace"].Value,
+                                Xmlns = xmlns,
+                            }
+                        );
                 }
                 else
                 {
@@ -462,9 +464,10 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 }
                 if (
                     this.wrappedReference.AssemblyName.CultureInfo != null
-                    && !this.wrappedReference.AssemblyName.CultureInfo.Equals(
-                        assemblyName.CultureInfo
-                    )
+                    && !this.wrappedReference
+                        .AssemblyName
+                        .CultureInfo
+                        .Equals(assemblyName.CultureInfo)
                 )
                 {
                     return false;

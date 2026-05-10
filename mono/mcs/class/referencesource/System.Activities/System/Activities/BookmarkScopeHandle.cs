@@ -69,9 +69,9 @@ namespace System.Activities
             this.ThrowIfContextIsNullOrDisposed(context);
             if (this.bookmarkScope != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CreateBookmarkScopeFailed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.CreateBookmarkScopeFailed));
             }
 
             this.ThrowIfUninitialized();
@@ -84,9 +84,9 @@ namespace System.Activities
             this.ThrowIfContextIsNullOrDisposed(context);
             if (this.bookmarkScope != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CreateBookmarkScopeFailed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.CreateBookmarkScopeFailed));
             }
 
             this.ThrowIfUninitialized();

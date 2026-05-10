@@ -30,10 +30,12 @@ internal static class StaticRouteHandlerModelEmitter
         }
         var parameterTypeList = string.Join(
             ", ",
-            endpoint.Parameters.Select(
-                (p, i) =>
-                    $"{EmitUnwrappedParameterType(p)} arg{i}{(p.HasDefaultValue ? $"= {p.DefaultValue}" : string.Empty)}"
-            )
+            endpoint
+                .Parameters
+                .Select(
+                    (p, i) =>
+                        $"{EmitUnwrappedParameterType(p)} arg{i}{(p.HasDefaultValue ? $"= {p.DefaultValue}" : string.Empty)}"
+                )
         );
 
         if (
@@ -95,10 +97,9 @@ internal static class StaticRouteHandlerModelEmitter
         if (endpoint.Parameters.Length > 0)
         {
             codeWriter.WriteLine(
-                endpoint.Parameters.EmitParameterPreparation(
-                    endpoint.EmitterContext,
-                    codeWriter.Indent
-                )
+                endpoint
+                    .Parameters
+                    .EmitParameterPreparation(endpoint.EmitterContext, codeWriter.Indent)
             );
         }
 
@@ -243,10 +244,9 @@ internal static class StaticRouteHandlerModelEmitter
         if (endpoint.Parameters.Length > 0)
         {
             codeWriter.WriteLine(
-                endpoint.Parameters.EmitParameterPreparation(
-                    endpoint.EmitterContext,
-                    codeWriter.Indent
-                )
+                endpoint
+                    .Parameters
+                    .EmitParameterPreparation(endpoint.EmitterContext, codeWriter.Indent)
             );
         }
 

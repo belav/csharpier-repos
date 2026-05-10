@@ -260,7 +260,8 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
         var entry = context.Entry(entity);
         foreach (
             var property in context
-                .Model.FindEntityType(entity.GetType())!
+                .Model
+                .FindEntityType(entity.GetType())!
                 .GetProperties()
                 .Where(p => !p.IsPrimaryKey() && !p.IsShadowProperty())
         )
@@ -301,8 +302,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_nulls_to_string_non_nulls_in_provider()
     {
-        var converter =
-            new NullStringToNonNullStringConverter().ConvertToProviderExpression.Compile();
+        var converter = new NullStringToNonNullStringConverter()
+            .ConvertToProviderExpression
+            .Compile();
 
         Assert.Equal("A", converter("A"));
         Assert.Equal("<null>", converter(null));
@@ -324,8 +326,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_nulls_to_string_non_nulls_in_app()
     {
-        var converter =
-            new NonNullStringToNullStringConverter().ConvertFromProviderExpression.Compile();
+        var converter = new NonNullStringToNullStringConverter()
+            .ConvertFromProviderExpression
+            .Compile();
 
         Assert.Equal("A", converter("A"));
         Assert.Equal("<null>", converter(null));
@@ -347,8 +350,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_non_nulls_to_string_nulls_in_provider()
     {
-        var converter =
-            new NonNullStringToNullStringConverter().ConvertToProviderExpression.Compile();
+        var converter = new NonNullStringToNullStringConverter()
+            .ConvertToProviderExpression
+            .Compile();
 
         Assert.Equal("A", converter("A"));
         Assert.Null(converter("<null>"));
@@ -368,8 +372,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_non_nulls_to_string_nulls_in_app()
     {
-        var converter =
-            new NullStringToNonNullStringConverter().ConvertFromProviderExpression.Compile();
+        var converter = new NullStringToNonNullStringConverter()
+            .ConvertFromProviderExpression
+            .Compile();
 
         Assert.Equal("A", converter("A"));
         Assert.Null(converter("<null>"));
@@ -409,8 +414,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_int_non_nulls_to_string_non_nulls_in_provider()
     {
-        var converter =
-            new NonNullIntToNonNullStringConverter().ConvertToProviderExpression.Compile();
+        var converter = new NonNullIntToNonNullStringConverter()
+            .ConvertToProviderExpression
+            .Compile();
 
         Assert.Equal("0", converter(0));
         Assert.Equal("1", converter(1));
@@ -428,8 +434,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_nulls_to_int_non_nulls_in_app()
     {
-        var converter =
-            new NonNullIntToNullStringConverter().ConvertFromProviderExpression.Compile();
+        var converter = new NonNullIntToNullStringConverter()
+            .ConvertFromProviderExpression
+            .Compile();
 
         Assert.Equal(0, converter("0"));
         Assert.Equal(1, converter("1"));
@@ -450,8 +457,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_non_nulls_to_int_non_nulls_in_app()
     {
-        var converter =
-            new NonNullIntToNonNullStringConverter().ConvertFromProviderExpression.Compile();
+        var converter = new NonNullIntToNonNullStringConverter()
+            .ConvertFromProviderExpression
+            .Compile();
 
         Assert.Equal(0, converter("0"));
         Assert.Equal(1, converter("1"));
@@ -461,8 +469,9 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     [ConditionalFact]
     protected void Convert_string_non_nulls_to_int_nulls_in_app()
     {
-        var converter =
-            new NullIntToNonNullStringConverter().ConvertFromProviderExpression.Compile();
+        var converter = new NullIntToNonNullStringConverter()
+            .ConvertFromProviderExpression
+            .Compile();
 
         Assert.Equal(0, converter("0"));
         Assert.Equal(1, converter("1"));

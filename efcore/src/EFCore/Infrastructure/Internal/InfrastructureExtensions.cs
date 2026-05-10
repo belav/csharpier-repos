@@ -36,9 +36,11 @@ public static class InfrastructureExtensions
             internalServiceProvider.GetService(serviceType)
             ?? internalServiceProvider
                 .GetService<IDbContextOptions>()
-                ?.Extensions.OfType<CoreOptionsExtension>()
+                ?.Extensions
+                .OfType<CoreOptionsExtension>()
                 .FirstOrDefault()
-                ?.ApplicationServiceProvider?.GetService(serviceType);
+                ?.ApplicationServiceProvider
+                ?.GetService(serviceType);
 
         if (service == null)
         {

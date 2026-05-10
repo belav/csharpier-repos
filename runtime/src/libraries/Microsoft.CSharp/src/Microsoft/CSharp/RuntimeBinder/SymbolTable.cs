@@ -322,11 +322,13 @@ namespace Microsoft.CSharp.RuntimeBinder
                 for (int i = 0; i < genericArguments.Length; i++)
                 {
                     Type t = genericArguments[i];
-                    ((TypeParameterType)ctypes[i]).Symbol.SetBounds(
-                        TypeArray.Allocate(
-                            GetCTypeArrayFromTypes(t.GetGenericParameterConstraints())
-                        )
-                    );
+                    ((TypeParameterType)ctypes[i])
+                        .Symbol
+                        .SetBounds(
+                            TypeArray.Allocate(
+                                GetCTypeArrayFromTypes(t.GetGenericParameterConstraints())
+                            )
+                        );
                 }
 
                 return TypeArray.Allocate(ctypes);
@@ -1019,11 +1021,13 @@ namespace Microsoft.CSharp.RuntimeBinder
                     Type t = genericArguments[i];
                     if (agg.GetTypeVars()[i] is TypeParameterType typeVar)
                     {
-                        typeVar.Symbol.SetBounds(
-                            TypeArray.Allocate(
-                                GetCTypeArrayFromTypes(t.GetGenericParameterConstraints())
-                            )
-                        );
+                        typeVar
+                            .Symbol
+                            .SetBounds(
+                                TypeArray.Allocate(
+                                    GetCTypeArrayFromTypes(t.GetGenericParameterConstraints())
+                                )
+                            );
                     }
                 }
             }

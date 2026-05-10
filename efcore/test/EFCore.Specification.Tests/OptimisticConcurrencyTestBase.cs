@@ -42,7 +42,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         string originalName;
         var newName = "New name";
         using var c = CreateF1Context();
-        c.Database.CreateExecutionStrategy()
+        c.Database
+            .CreateExecutionStrategy()
             .Execute(
                 c,
                 context =>
@@ -178,9 +179,9 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                     Assert.Equal(
                         LogLevel.Debug,
                         Fixture
-                            .ListLoggerFactory.Log.Single(l =>
-                                l.Id == CoreEventId.OptimisticConcurrencyException
-                            )
+                            .ListLoggerFactory
+                            .Log
+                            .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
                             .Level
                     );
 
@@ -230,9 +231,9 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                     Assert.Equal(
                         LogLevel.Debug,
                         Fixture
-                            .ListLoggerFactory.Log.Single(l =>
-                                l.Id == CoreEventId.OptimisticConcurrencyException
-                            )
+                            .ListLoggerFactory
+                            .Log
+                            .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
                             .Level
                     );
 
@@ -253,8 +254,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     public virtual Task Concurrency_issue_where_the_FK_is_the_concurrency_token_can_be_handled() =>
         ConcurrencyTestAsync(
             c =>
-                c.Engines.Single(e => e.Name == "056").EngineSupplierId = c
-                    .EngineSuppliers.Single(s => s.Name == "Cosworth")
+                c.Engines.Single(e => e.Name == "056").EngineSupplierId = c.EngineSuppliers
+                    .Single(s => s.Name == "Cosworth")
                     .Name,
             c =>
                 c.Engines.Single(e => e.Name == "056").EngineSupplier = c.EngineSuppliers.Single(
@@ -311,8 +312,10 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
             c =>
             {
                 c.Teams.Include(e => e.Sponsors).Load();
-                c.Teams.Single(t => t.Id == Team.McLaren)
-                    .Sponsors.Remove(c.Sponsors.Single(s => s.Name.Contains("FIA")));
+                c.Teams
+                    .Single(t => t.Id == Team.McLaren)
+                    .Sponsors
+                    .Remove(c.Sponsors.Single(s => s.Name.Contains("FIA")));
             },
             (c, ex) =>
             {
@@ -339,8 +342,10 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         void Change(F1Context c)
         {
             c.Teams.Include(e => e.Sponsors).Load();
-            c.Teams.Single(t => t.Id == Team.McLaren)
-                .Sponsors.Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
+            c.Teams
+                .Single(t => t.Id == Team.McLaren)
+                .Sponsors
+                .Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
         }
     }
 
@@ -374,32 +379,36 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     public virtual async Task Adding_the_same_entity_twice_results_in_DbUpdateException()
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
                 {
                     using var transaction = BeginTransaction(context.Database);
-                    context.Teams.Add(
-                        new Team
-                        {
-                            Id = -1,
-                            Name = "Wubbsy Racing",
-                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
-                        }
-                    );
+                    context
+                        .Teams
+                        .Add(
+                            new Team
+                            {
+                                Id = -1,
+                                Name = "Wubbsy Racing",
+                                Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
+                            }
+                        );
 
                     using var innerContext = CreateF1Context();
                     UseTransaction(innerContext.Database, transaction);
-                    innerContext.Teams.Add(
-                        new Team
-                        {
-                            Id = -1,
-                            Name = "Wubbsy Racing",
-                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
-                        }
-                    );
+                    innerContext
+                        .Teams
+                        .Add(
+                            new Team
+                            {
+                                Id = -1,
+                                Name = "Wubbsy Racing",
+                                Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
+                            }
+                        );
 
                     await innerContext.SaveChangesAsync();
 
@@ -498,17 +507,17 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     )
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
                 {
                     using (BeginTransaction(context.Database))
                     {
-                        var entry = context.Drivers.Add(
-                            new Driver { Name = "Larry David", TeamId = Team.Ferrari }
-                        );
+                        var entry = context
+                            .Drivers
+                            .Add(new Driver { Name = "Larry David", TeamId = Team.Ferrari });
 
                         if (async)
                         {
@@ -556,22 +565,24 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     private async Task TestReloadGone(EntityState state, bool async)
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
                 {
                     using (BeginTransaction(context.Database))
                     {
-                        var entry = context.Drivers.Add(
-                            new Driver
-                            {
-                                Id = 676,
-                                Name = "Larry David",
-                                TeamId = Team.Ferrari,
-                            }
-                        );
+                        var entry = context
+                            .Drivers
+                            .Add(
+                                new Driver
+                                {
+                                    Id = 676,
+                                    Name = "Larry David",
+                                    TeamId = Team.Ferrari,
+                                }
+                            );
 
                         entry.State = state;
 
@@ -628,8 +639,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     private async Task TestReloadPositive(EntityState state, bool async)
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -665,8 +676,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     public virtual async Task Calling_GetDatabaseValues_on_owned_entity_works(bool async)
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -703,8 +714,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
     public virtual async Task Calling_Reload_on_owned_entity_works(bool async)
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -818,8 +829,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         where TException : DbUpdateException
     {
         using var c = CreateF1Context();
-        await c
-            .Database.CreateExecutionStrategy()
+        await c.Database
+            .CreateExecutionStrategy()
             .ExecuteAsync(
                 c,
                 async context =>
@@ -841,9 +852,9 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                         Assert.Equal(
                             LogLevel.Debug,
                             Fixture
-                                .ListLoggerFactory.Log.Single(l =>
-                                    l.Id == CoreEventId.OptimisticConcurrencyException
-                                )
+                                .ListLoggerFactory
+                                .Log
+                                .Single(l => l.Id == CoreEventId.OptimisticConcurrencyException)
                                 .Level
                         );
                     }

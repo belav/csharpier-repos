@@ -27,9 +27,9 @@ namespace System.Activities.Debugger
             {
                 if (!condition)
                 {
-                    throw FxTrace.Exception.AsError(
-                        UnitTestUtility.AssertionExceptionFactory(assertionMessage)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(UnitTestUtility.AssertionExceptionFactory(assertionMessage));
                 }
             }
             else

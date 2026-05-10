@@ -36,9 +36,9 @@ app.MapPost("/", ([FromForm] Todo todo) => Results.Ok(todo));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -77,9 +77,9 @@ app.MapPost("/", ([FromForm] Todo todo) => Results.Ok(todo));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -121,9 +121,9 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -163,9 +163,9 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -205,9 +205,9 @@ app.MapPost("/", ([FromForm] Dictionary<string, bool> elements) => Results.Ok(el
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
         Assert.Equal(StatusCodes.Status400BadRequest, httpContext.Response.StatusCode);
@@ -254,9 +254,9 @@ app.MapPost("/", ([FromForm] List<int> elements) => Results.Ok(elements));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -296,9 +296,9 @@ app.MapPost("/", ([FromForm] List<int> elements) => Results.Ok(elements));
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 

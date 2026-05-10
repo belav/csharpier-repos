@@ -12,20 +12,24 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
         public static void BeginSection(string type, string name)
         {
-            Reporter.Output.WriteLine(
-                $"[{type.PadRight(10)} >]".Green()
-                    + $" [....] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
-                    + $" {name}"
-            );
+            Reporter
+                .Output
+                .WriteLine(
+                    $"[{type.PadRight(10)} >]".Green()
+                        + $" [....] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
+                        + $" {name}"
+                );
         }
 
         public static void SectionComment(string type, string comment)
         {
-            Reporter.Output.WriteLine(
-                $"[{type.PadRight(10)} -]".Green()
-                    + $" [....] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
-                    + $" {comment}"
-            );
+            Reporter
+                .Output
+                .WriteLine(
+                    $"[{type.PadRight(10)} -]".Green()
+                        + $" [....] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
+                        + $" {comment}"
+                );
         }
 
         public static void EndSection(string type, string name, bool success)
@@ -40,11 +44,13 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 header = header.Red();
             }
             var successString = success ? " OK " : "FAIL";
-            Reporter.Output.WriteLine(
-                header
-                    + $" [{successString}] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
-                    + $" {name}"
-            );
+            Reporter
+                .Output
+                .WriteLine(
+                    header
+                        + $" [{successString}] [{(DateTime.Now - _initialTime).ToString(TimeSpanFormat)}]".Blue()
+                        + $" {name}"
+                );
         }
     }
 }

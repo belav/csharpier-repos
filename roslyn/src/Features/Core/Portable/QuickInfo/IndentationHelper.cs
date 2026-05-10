@@ -108,8 +108,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             int? indentationColumn = null;
             foreach (var span in spans)
             {
-                var startLineNumber = text
-                    .Lines.GetLineFromPosition(span.TextSpan.Start)
+                var startLineNumber = text.Lines
+                    .GetLineFromPosition(span.TextSpan.Start)
                     .LineNumber;
                 var endLineNumber = text.Lines.GetLineFromPosition(span.TextSpan.End).LineNumber;
 

@@ -412,8 +412,7 @@ namespace System.Linq.Parallel
                     // First we must rendezvous with our merge partner so we know the previous sort
                     // and merge phase has been completed.  By convention, we always use the left-most
                     // partner's barrier for this; all that matters is that both uses the same.
-                    _sharedBarriers[phase]
-                        [Math.Min(_partitionIndex, partnerIndex)]
+                    _sharedBarriers[phase][Math.Min(_partitionIndex, partnerIndex)]
                         .SignalAndWait(cancelToken);
 
                     // Grab the two sorted inputs and then merge them cooperatively into one list.  One

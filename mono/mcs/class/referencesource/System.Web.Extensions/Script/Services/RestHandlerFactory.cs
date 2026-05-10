@@ -49,10 +49,9 @@ namespace System.Web.Script.Services
         {
             return !String.IsNullOrEmpty(request.PathInfo)
                 && (
-                    request.ContentType.StartsWith(
-                        "application/json;",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    request
+                        .ContentType
+                        .StartsWith("application/json;", StringComparison.OrdinalIgnoreCase)
                     || string.Equals(
                         request.ContentType,
                         "application/json",

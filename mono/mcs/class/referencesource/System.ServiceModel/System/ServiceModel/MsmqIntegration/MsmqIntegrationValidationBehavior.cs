@@ -124,16 +124,18 @@ namespace System.ServiceModel.MsmqIntegration
                         continue;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.MsmqInvalidServiceOperationForMsmqIntegrationBinding,
-                            binding.Name,
-                            operation.Name,
-                            contract.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.MsmqInvalidServiceOperationForMsmqIntegrationBinding,
+                                binding.Name,
+                                operation.Name,
+                                contract.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
     }

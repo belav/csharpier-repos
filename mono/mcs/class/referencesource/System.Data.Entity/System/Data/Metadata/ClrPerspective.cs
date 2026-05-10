@@ -128,9 +128,9 @@ namespace System.Data.Metadata.Edm
                     );
                     if (primitiveType != null)
                     {
-                        typeUsage = EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(
-                            primitiveType.PrimitiveTypeKind
-                        );
+                        typeUsage = EdmProviderManifest
+                            .Instance
+                            .GetCanonicalModelTypeUsage(primitiveType.PrimitiveTypeKind);
                     }
                 }
                 else

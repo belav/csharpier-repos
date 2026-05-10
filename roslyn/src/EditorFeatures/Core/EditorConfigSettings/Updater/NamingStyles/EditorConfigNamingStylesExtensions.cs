@@ -23,10 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         {
             namingStyleOption = null;
             foreach (
-                var (
-                    option,
-                    optionAsNamingStyle
-                ) in editorConfigNamingStyles.Rules.AsNamingStyleSettings()
+                var (option, optionAsNamingStyle) in editorConfigNamingStyles
+                    .Rules
+                    .AsNamingStyleSettings()
             )
             {
                 if (AreSameRule(optionAsNamingStyle, namingStyleSetting))

@@ -283,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var returnType = (NamedTypeSymbol)method.ReturnType;
                 var resultType = returnType
-                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single()
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    .Single()
                     .Type;
                 if (resultType.IsDynamic())
                 {

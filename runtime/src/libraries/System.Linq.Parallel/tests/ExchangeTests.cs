@@ -258,7 +258,8 @@ namespace System.Linq.Parallel.Tests
             Assert.Equal(
                 0,
                 labeled
-                    .Item.WithDegreeOfParallelism(count - 1)
+                    .Item
+                    .WithDegreeOfParallelism(count - 1)
                     .WithMergeOptions(options)
                     .Select(down)
                     .First()
@@ -326,8 +327,8 @@ namespace System.Linq.Parallel.Tests
         {
             _ = leftCount;
             _ = rightCount;
-            ParallelQuery<int> query = left
-                .Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+            ParallelQuery<int> query = left.Item
+                .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
                 .Select(x =>
                 {
                     if (x == 4)
@@ -368,7 +369,8 @@ namespace System.Linq.Parallel.Tests
             _ = rightCount;
             ParallelQuery<int> query = Partitioner
                 .Create(
-                    left.Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+                    left.Item
+                        .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
                         .Select(x =>
                         {
                             if (x == 4)

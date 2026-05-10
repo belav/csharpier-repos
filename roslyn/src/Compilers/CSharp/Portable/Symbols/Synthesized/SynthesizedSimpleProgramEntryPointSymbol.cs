@@ -190,9 +190,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return compilation
-                .SourceModule.GlobalNamespace.GetTypeMembers(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName
-                )
+                .SourceModule
+                .GlobalNamespace
+                .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
                 .OfType<SourceNamedTypeSymbol>()
                 .SingleOrDefault(s => s.IsSimpleProgram);
         }
@@ -355,9 +355,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var span = definedWithinSpan.GetValueOrDefault();
 
                     foreach (
-                        var global in (
-                            (CompilationUnitSyntax)tree.GetRoot(cancellationToken)
-                        ).Members.OfType<GlobalStatementSyntax>()
+                        var global in ((CompilationUnitSyntax)tree.GetRoot(cancellationToken))
+                            .Members
+                            .OfType<GlobalStatementSyntax>()
                     )
                     {
                         cancellationToken.ThrowIfCancellationRequested();

@@ -627,10 +627,9 @@ namespace System.Net.Http
 
             IEnumerable<string> hostValues;
             if (
-                httpRequest.HttpHeaders.TryGetValues(
-                    FormattingUtilities.HttpHostHeader,
-                    out hostValues
-                )
+                httpRequest
+                    .HttpHeaders
+                    .TryGetValues(FormattingUtilities.HttpHostHeader, out hostValues)
             )
             {
                 int hostCount = hostValues.Count();

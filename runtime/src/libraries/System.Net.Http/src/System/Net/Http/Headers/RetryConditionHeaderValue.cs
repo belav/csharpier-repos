@@ -69,12 +69,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.RetryConditionParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .RetryConditionParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (RetryConditionHeaderValue)output!;

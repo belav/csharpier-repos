@@ -25,10 +25,9 @@ namespace Microsoft.Interop.JavaScript
 
         public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
             attributeType.IsGenericType
-            && SymbolEqualityComparer.Default.Equals(
-                _jsMarshalAsAttribute,
-                attributeType.ConstructUnboundGenericType()
-            );
+            && SymbolEqualityComparer
+                .Default
+                .Equals(_jsMarshalAsAttribute, attributeType.ConstructUnboundGenericType());
 
         public MarshallingInfo ParseAttribute(
             AttributeData attributeData,
@@ -52,7 +51,8 @@ namespace Microsoft.Interop.JavaScript
 
                 foreach (
                     var ta in jsTypeArgs
-                        .TypeArguments.Cast<INamedTypeSymbol>()
+                        .TypeArguments
+                        .Cast<INamedTypeSymbol>()
                         .Select(x => x.ToDisplayString())
                 )
                 {

@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.F1Help
 
             var service = Assert.IsType<CSharpHelpContextService>(
                 workspace
-                    .Services.GetLanguageServices(LanguageNames.CSharp)
+                    .Services
+                    .GetLanguageServices(LanguageNames.CSharp)
                     .GetService<IHelpContextService>()
             );
             var actualText = await service.GetHelpTermAsync(

@@ -735,23 +735,27 @@ namespace System.ServiceModel.Channels
                             throw Fx.AssertAndThrow("The isLast overload does not take a state.");
                         }
 
-                        result = this.connection.strategy.BeginAddLast(
-                            message,
-                            this.timeoutHelper.RemainingTime(),
-                            state,
-                            addCompleteStatic,
-                            this
-                        );
+                        result = this.connection
+                            .strategy
+                            .BeginAddLast(
+                                message,
+                                this.timeoutHelper.RemainingTime(),
+                                state,
+                                addCompleteStatic,
+                                this
+                            );
                     }
                     else
                     {
-                        result = this.connection.strategy.BeginAdd(
-                            message,
-                            this.timeoutHelper.RemainingTime(),
-                            state,
-                            addCompleteStatic,
-                            this
-                        );
+                        result = this.connection
+                            .strategy
+                            .BeginAdd(
+                                message,
+                                this.timeoutHelper.RemainingTime(),
+                                state,
+                                addCompleteStatic,
+                                this
+                            );
                     }
                 }
                 catch (TimeoutException)

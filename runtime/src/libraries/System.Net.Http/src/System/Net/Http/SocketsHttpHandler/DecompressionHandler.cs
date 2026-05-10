@@ -337,14 +337,16 @@ namespace System.Net.Http
                         )
                         {
                             int firstByte = await thisRef
-                                ._stream.PeekFirstByteAsync(cancellationToken)
+                                ._stream
+                                .PeekFirstByteAsync(cancellationToken)
                                 .ConfigureAwait(false);
                             thisRef._decompressionStream = CreateDecompressionStream(
                                 firstByte,
                                 thisRef._stream
                             );
                             return await thisRef
-                                ._decompressionStream.ReadAsync(buffer, cancellationToken)
+                                ._decompressionStream
+                                .ReadAsync(buffer, cancellationToken)
                                 .ConfigureAwait(false);
                         }
                     }

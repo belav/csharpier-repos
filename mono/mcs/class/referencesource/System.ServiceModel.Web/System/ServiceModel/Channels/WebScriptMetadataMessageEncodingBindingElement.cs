@@ -38,10 +38,12 @@ namespace System.ServiceModel.Channels
                 }
                 if (value != MessageVersion.None)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)
+                        );
                 }
             }
         }

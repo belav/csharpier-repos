@@ -169,33 +169,35 @@ internal partial class TestRunner
                 return string.Empty;
             }
 
-            var results = testRunChangedEventArgs.NewTestResults.Select(result =>
-            {
-                var messageBuilder = new StringBuilder();
-                messageBuilder.Append($"[{result.Outcome}] {result.TestCase.DisplayName}");
-                if (result.ErrorMessage != null || result.ErrorStackTrace != null)
+            var results = testRunChangedEventArgs
+                .NewTestResults
+                .Select(result =>
                 {
-                    messageBuilder.AppendLine();
-                }
+                    var messageBuilder = new StringBuilder();
+                    messageBuilder.Append($"[{result.Outcome}] {result.TestCase.DisplayName}");
+                    if (result.ErrorMessage != null || result.ErrorStackTrace != null)
+                    {
+                        messageBuilder.AppendLine();
+                    }
 
-                if (!string.IsNullOrWhiteSpace(result.ErrorMessage))
-                {
-                    messageBuilder.AppendLine(
-                        IndentString($"{LanguageServerResources.Message}:", 4)
-                    );
-                    messageBuilder.AppendLine(IndentString(result.ErrorMessage, 8));
-                }
+                    if (!string.IsNullOrWhiteSpace(result.ErrorMessage))
+                    {
+                        messageBuilder.AppendLine(
+                            IndentString($"{LanguageServerResources.Message}:", 4)
+                        );
+                        messageBuilder.AppendLine(IndentString(result.ErrorMessage, 8));
+                    }
 
-                if (!string.IsNullOrWhiteSpace(result.ErrorStackTrace))
-                {
-                    messageBuilder.AppendLine(
-                        value: IndentString($"{LanguageServerResources.Stack_Trace}:", 4)
-                    );
-                    messageBuilder.AppendLine(IndentString(result.ErrorStackTrace, 8));
-                }
+                    if (!string.IsNullOrWhiteSpace(result.ErrorStackTrace))
+                    {
+                        messageBuilder.AppendLine(
+                            value: IndentString($"{LanguageServerResources.Stack_Trace}:", 4)
+                        );
+                        messageBuilder.AppendLine(IndentString(result.ErrorStackTrace, 8));
+                    }
 
-                return messageBuilder.ToString();
-            });
+                    return messageBuilder.ToString();
+                });
 
             return string.Join(Environment.NewLine, results);
 

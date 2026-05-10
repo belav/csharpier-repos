@@ -84,10 +84,8 @@ public interface IConventionDiscriminatorBuilder
             return false;
         }
 
-        return entityType.Builder.CanSetAnnotation(
-            CoreAnnotationNames.DiscriminatorValue,
-            value,
-            fromDataAnnotation
-        );
+        return entityType
+            .Builder
+            .CanSetAnnotation(CoreAnnotationNames.DiscriminatorValue, value, fromDataAnnotation);
     }
 }

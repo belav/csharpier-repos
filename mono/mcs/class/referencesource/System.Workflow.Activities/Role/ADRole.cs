@@ -270,12 +270,14 @@ namespace System.Workflow.Activities
                 }
                 else
                 {
-                    WorkflowActivityTrace.Activity.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "Unable to find 'objectSid' property for directory entry = {0}.",
-                        entry.Path
-                    );
+                    WorkflowActivityTrace
+                        .Activity
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "Unable to find 'objectSid' property for directory entry = {0}.",
+                            entry.Path
+                        );
                 }
             }
 

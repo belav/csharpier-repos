@@ -529,7 +529,8 @@ namespace ILCompiler
                     ILOpcode.ldflda,
                     emit.NewToken(
                         Context
-                            .SystemModule.GetKnownType("System.Runtime.CompilerServices", "RawData")
+                            .SystemModule
+                            .GetKnownType("System.Runtime.CompilerServices", "RawData")
                             .GetField("Data")
                     )
                 );
@@ -617,7 +618,8 @@ namespace ILCompiler
                     ILOpcode.ldflda,
                     emit.NewToken(
                         Context
-                            .SystemModule.GetKnownType("System.Runtime.CompilerServices", "RawData")
+                            .SystemModule
+                            .GetKnownType("System.Runtime.CompilerServices", "RawData")
                             .GetField("Data")
                     )
                 );
@@ -633,10 +635,12 @@ namespace ILCompiler
                 if (owner.HasInstantiation)
                 {
                     MetadataType instantiatedOwner = (MetadataType)owner.InstantiateAsOpen();
-                    methodToInstantiate = _targetMethod.Context.GetMethodForInstantiatedType(
-                        _targetMethod,
-                        (InstantiatedType)instantiatedOwner
-                    );
+                    methodToInstantiate = _targetMethod
+                        .Context
+                        .GetMethodForInstantiatedType(
+                            _targetMethod,
+                            (InstantiatedType)instantiatedOwner
+                        );
                 }
                 if (methodToInstantiate.HasInstantiation)
                 {

@@ -45,8 +45,9 @@ namespace System.ServiceModel.Dispatcher
                 if (description.BeginMethod != null)
                 {
                     // both sync and async methods are present on the contract, check the preference
-                    OperationBehaviorAttribute operationBehaviorAttribue =
-                        description.Behaviors.Find<OperationBehaviorAttribute>();
+                    OperationBehaviorAttribute operationBehaviorAttribue = description
+                        .Behaviors
+                        .Find<OperationBehaviorAttribute>();
                     if (
                         (operationBehaviorAttribue != null)
                         && operationBehaviorAttribue.PreferAsyncInvocation

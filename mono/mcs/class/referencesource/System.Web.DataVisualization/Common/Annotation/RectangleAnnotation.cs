@@ -665,9 +665,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 && this.Common != null
             )
             {
-                IBorderType border3D = this.Common.BorderTypeRegistry.GetBorderType(
-                    _borderSkin.SkinStyle.ToString()
-                );
+                IBorderType border3D = this.Common
+                    .BorderTypeRegistry
+                    .GetBorderType(_borderSkin.SkinStyle.ToString());
                 if (border3D != null)
                 {
                     // Adjust are position to the border size

@@ -23,17 +23,19 @@ namespace System.Globalization
             }
 
             IntPtr handle;
-            int ret = Interop.Kernel32.LCMapStringEx(
-                cultureName,
-                Interop.Kernel32.LCMAP_SORTHANDLE,
-                null,
-                0,
-                &handle,
-                IntPtr.Size,
-                null,
-                null,
-                IntPtr.Zero
-            );
+            int ret = Interop
+                .Kernel32
+                .LCMapStringEx(
+                    cultureName,
+                    Interop.Kernel32.LCMAP_SORTHANDLE,
+                    null,
+                    0,
+                    &handle,
+                    IntPtr.Size,
+                    null,
+                    null,
+                    IntPtr.Zero
+                );
             if (ret > 0)
             {
                 // Even if we can get the sort handle, it is not guaranteed to work when Windows compatibility shim is applied
@@ -41,17 +43,19 @@ namespace System.Globalization
                 // otherwise the whole framework app will not start.
                 int hashValue = 0;
                 char a = 'a';
-                ret = Interop.Kernel32.LCMapStringEx(
-                    null,
-                    Interop.Kernel32.LCMAP_HASH,
-                    &a,
-                    1,
-                    &hashValue,
-                    sizeof(int),
-                    null,
-                    null,
-                    handle
-                );
+                ret = Interop
+                    .Kernel32
+                    .LCMapStringEx(
+                        null,
+                        Interop.Kernel32.LCMAP_HASH,
+                        &a,
+                        1,
+                        &hashValue,
+                        sizeof(int),
+                        null,
+                        null,
+                        handle
+                    );
                 if (ret > 1)
                 {
                     return handle;
@@ -78,14 +82,16 @@ namespace System.Globalization
                 Debug.Assert(pSource != null);
                 Debug.Assert(pValue != null);
 
-                int ret = Interop.Kernel32.FindStringOrdinal(
-                    dwFindStringOrdinalFlags,
-                    pSource,
-                    source.Length,
-                    pValue,
-                    value.Length,
-                    bIgnoreCase ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
-                );
+                int ret = Interop
+                    .Kernel32
+                    .FindStringOrdinal(
+                        dwFindStringOrdinalFlags,
+                        pSource,
+                        source.Length,
+                        pValue,
+                        value.Length,
+                        bIgnoreCase ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                    );
 
                 Debug.Assert(ret >= -1 && ret <= source.Length);
 
@@ -179,18 +185,20 @@ namespace System.Globalization
 
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             {
-                int sortKeyLength = Interop.Kernel32.LCMapStringEx(
-                    _sortHandle != IntPtr.Zero ? null : _sortName,
-                    flags,
-                    pSource,
-                    sourceLength /* in chars */
-                    ,
-                    null,
-                    0,
-                    null,
-                    null,
-                    _sortHandle
-                );
+                int sortKeyLength = Interop
+                    .Kernel32
+                    .LCMapStringEx(
+                        _sortHandle != IntPtr.Zero ? null : _sortName,
+                        flags,
+                        pSource,
+                        sourceLength /* in chars */
+                        ,
+                        null,
+                        0,
+                        null,
+                        null,
+                        _sortHandle
+                    );
                 if (sortKeyLength == 0)
                 {
                     throw new ArgumentException(SR.Arg_ExternalException);
@@ -210,18 +218,20 @@ namespace System.Globalization
                 fixed (byte* pSortKey = &MemoryMarshal.GetReference(span))
                 {
                     if (
-                        Interop.Kernel32.LCMapStringEx(
-                            _sortHandle != IntPtr.Zero ? null : _sortName,
-                            flags,
-                            pSource,
-                            sourceLength /* in chars */
-                            ,
-                            pSortKey,
-                            sortKeyLength,
-                            null,
-                            null,
-                            _sortHandle
-                        ) != sortKeyLength
+                        Interop
+                            .Kernel32
+                            .LCMapStringEx(
+                                _sortHandle != IntPtr.Zero ? null : _sortName,
+                                flags,
+                                pSource,
+                                sourceLength /* in chars */
+                                ,
+                                pSortKey,
+                                sortKeyLength,
+                                null,
+                                null,
+                                _sortHandle
+                            ) != sortKeyLength
                     )
                     {
                         throw new ArgumentException(SR.Arg_ExternalException);
@@ -260,13 +270,9 @@ namespace System.Globalization
                 Debug.Assert(char2 != null);
 
                 // Use the OS to compare and then convert the result to expected value by subtracting 2
-                int result = Interop.Kernel32.CompareStringOrdinal(
-                    char1,
-                    count1,
-                    char2,
-                    count2,
-                    bIgnoreCase: true
-                );
+                int result = Interop
+                    .Kernel32
+                    .CompareStringOrdinal(char1, count1, char2, count2, bIgnoreCase: true);
                 if (result == 0)
                 {
                     throw new ArgumentException(SR.Arg_ExternalException);
@@ -310,17 +316,19 @@ namespace System.Globalization
                 Debug.Assert(*pString1 >= 0); // assert that we can always dereference this
                 Debug.Assert(*pString2 >= 0); // assert that we can always dereference this
 
-                int result = Interop.Kernel32.CompareStringEx(
-                    pLocaleName,
-                    (uint)GetNativeCompareFlags(options),
-                    pString1,
-                    string1.Length,
-                    pString2,
-                    string2.Length,
-                    null,
-                    null,
-                    _sortHandle
-                );
+                int result = Interop
+                    .Kernel32
+                    .CompareStringEx(
+                        pLocaleName,
+                        (uint)GetNativeCompareFlags(options),
+                        pString1,
+                        string1.Length,
+                        pString2,
+                        string2.Length,
+                        null,
+                        null,
+                        _sortHandle
+                    );
 
                 if (result == 0)
                 {
@@ -363,18 +371,20 @@ namespace System.Globalization
             {
                 Debug.Assert(pSource != null && pValue != null);
 
-                int result = Interop.Kernel32.FindNLSStringEx(
-                    pLocaleName,
-                    dwFindNLSStringFlags,
-                    pSource,
-                    lpStringSourceLength,
-                    pValue,
-                    lpStringValue.Length,
-                    pcchFound,
-                    null,
-                    null,
-                    _sortHandle
-                );
+                int result = Interop
+                    .Kernel32
+                    .FindNLSStringEx(
+                        pLocaleName,
+                        dwFindNLSStringFlags,
+                        pSource,
+                        lpStringSourceLength,
+                        pValue,
+                        lpStringValue.Length,
+                        pcchFound,
+                        null,
+                        null,
+                        _sortHandle
+                    );
 
                 Debug.Assert(result >= -1 && result <= lpStringSource.Length);
 
@@ -508,17 +518,19 @@ namespace System.Globalization
 
             fixed (char* pSource = source)
             {
-                int sortKeyLength = Interop.Kernel32.LCMapStringEx(
-                    _sortHandle != IntPtr.Zero ? null : _sortName,
-                    flags,
-                    pSource,
-                    sourceLength,
-                    null,
-                    0,
-                    null,
-                    null,
-                    _sortHandle
-                );
+                int sortKeyLength = Interop
+                    .Kernel32
+                    .LCMapStringEx(
+                        _sortHandle != IntPtr.Zero ? null : _sortName,
+                        flags,
+                        pSource,
+                        sourceLength,
+                        null,
+                        0,
+                        null,
+                        null,
+                        _sortHandle
+                    );
                 if (sortKeyLength == 0)
                 {
                     throw new ArgumentException(SR.Arg_ExternalException);
@@ -529,17 +541,19 @@ namespace System.Globalization
                 fixed (byte* pBytes = keyData)
                 {
                     if (
-                        Interop.Kernel32.LCMapStringEx(
-                            _sortHandle != IntPtr.Zero ? null : _sortName,
-                            flags,
-                            pSource,
-                            sourceLength,
-                            pBytes,
-                            keyData.Length,
-                            null,
-                            null,
-                            _sortHandle
-                        ) != sortKeyLength
+                        Interop
+                            .Kernel32
+                            .LCMapStringEx(
+                                _sortHandle != IntPtr.Zero ? null : _sortName,
+                                flags,
+                                pSource,
+                                sourceLength,
+                                pBytes,
+                                keyData.Length,
+                                null,
+                                null,
+                                _sortHandle
+                            ) != sortKeyLength
                     )
                     {
                         throw new ArgumentException(SR.Arg_ExternalException);
@@ -607,17 +621,19 @@ namespace System.Globalization
                     // Manually check that the destination buffer is large enough to hold the full output.
                     // See earlier comment for reasoning.
 
-                    int requiredSortKeyLength = Interop.Kernel32.LCMapStringEx(
-                        _sortHandle != IntPtr.Zero ? null : _sortName,
-                        flags,
-                        pSource,
-                        sourceLength,
-                        null,
-                        0,
-                        null,
-                        null,
-                        _sortHandle
-                    );
+                    int requiredSortKeyLength = Interop
+                        .Kernel32
+                        .LCMapStringEx(
+                            _sortHandle != IntPtr.Zero ? null : _sortName,
+                            flags,
+                            pSource,
+                            sourceLength,
+                            null,
+                            0,
+                            null,
+                            null,
+                            _sortHandle
+                        );
 
                     if (requiredSortKeyLength > destination.Length)
                     {
@@ -631,17 +647,19 @@ namespace System.Globalization
                 }
 #endif
 
-                actualSortKeyLength = Interop.Kernel32.LCMapStringEx(
-                    _sortHandle != IntPtr.Zero ? null : _sortName,
-                    flags,
-                    pSource,
-                    sourceLength,
-                    pSortKey,
-                    destination.Length,
-                    null,
-                    null,
-                    _sortHandle
-                );
+                actualSortKeyLength = Interop
+                    .Kernel32
+                    .LCMapStringEx(
+                        _sortHandle != IntPtr.Zero ? null : _sortName,
+                        flags,
+                        pSource,
+                        sourceLength,
+                        pSortKey,
+                        destination.Length,
+                        null,
+                        null,
+                        _sortHandle
+                    );
             }
 
             if (actualSortKeyLength <= 0)
@@ -692,17 +710,19 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             {
                 Debug.Assert(pSource != null);
-                sortKeyLength = Interop.Kernel32.LCMapStringEx(
-                    _sortHandle != IntPtr.Zero ? null : _sortName,
-                    flags,
-                    pSource,
-                    sourceLength,
-                    null,
-                    0,
-                    null,
-                    null,
-                    _sortHandle
-                );
+                sortKeyLength = Interop
+                    .Kernel32
+                    .LCMapStringEx(
+                        _sortHandle != IntPtr.Zero ? null : _sortName,
+                        flags,
+                        pSource,
+                        sourceLength,
+                        null,
+                        0,
+                        null,
+                        null,
+                        _sortHandle
+                    );
             }
 
             if (sortKeyLength <= 0)
@@ -729,13 +749,15 @@ namespace System.Globalization
 
             fixed (char* pText = &MemoryMarshal.GetReference(text))
             {
-                return Interop.Kernel32.IsNLSDefinedString(
-                    Interop.Kernel32.COMPARE_STRING,
-                    0,
-                    IntPtr.Zero,
-                    pText,
-                    text.Length
-                );
+                return Interop
+                    .Kernel32
+                    .IsNLSDefinedString(
+                        Interop.Kernel32.COMPARE_STRING,
+                        0,
+                        IntPtr.Zero,
+                        pText,
+                        text.Length
+                    );
             }
         }
 
@@ -814,11 +836,9 @@ namespace System.Globalization
 
             Interop.Kernel32.NlsVersionInfoEx nlsVersion = default;
             nlsVersion.dwNLSVersionInfoSize = sizeof(Interop.Kernel32.NlsVersionInfoEx);
-            Interop.Kernel32.GetNLSVersionEx(
-                Interop.Kernel32.COMPARE_STRING,
-                _sortName,
-                &nlsVersion
-            );
+            Interop
+                .Kernel32
+                .GetNLSVersionEx(Interop.Kernel32.COMPARE_STRING, _sortName, &nlsVersion);
             return new SortVersion(
                 nlsVersion.dwNLSVersion,
                 nlsVersion.dwEffectiveId == 0 ? LCID : nlsVersion.dwEffectiveId,

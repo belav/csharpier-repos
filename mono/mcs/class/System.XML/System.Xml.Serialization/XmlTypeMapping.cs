@@ -227,10 +227,12 @@ namespace System.Xml.Serialization
                 }
 
                 string method = schemaProvider.MethodName;
-                MethodInfo mi = typeData.Type.GetMethod(
-                    method,
-                    BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy
-                );
+                MethodInfo mi = typeData
+                    .Type
+                    .GetMethod(
+                        method,
+                        BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy
+                    );
                 if (mi == null)
                     throw new InvalidOperationException(
                         String.Format(

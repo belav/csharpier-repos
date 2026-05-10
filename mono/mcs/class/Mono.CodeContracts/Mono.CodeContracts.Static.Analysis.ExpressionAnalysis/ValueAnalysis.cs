@@ -86,7 +86,8 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             foreach (SymbolicValue sv in originalState.Keys)
             {
                 Expr<SymbolicValue> expression = originalState[sv]
-                    .Value.Substitute(sourceTargetMap);
+                    .Value
+                    .Substitute(sourceTargetMap);
                 if (expression != null)
                     domain = domain.Add(sv, expression);
             }

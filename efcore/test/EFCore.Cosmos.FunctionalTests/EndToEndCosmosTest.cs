@@ -915,12 +915,14 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             IReadOnlyDictionary<string, Dictionary<string, short?>>
         >(
             ImmutableDictionary<string, Dictionary<string, short?>>
-                .Empty.Add("2", new Dictionary<string, short?> { { "value", 2 } })
+                .Empty
+                .Add("2", new Dictionary<string, short?> { { "value", 2 } })
                 .Add("1", new Dictionary<string, short?> { { "value", 1 } }),
             c =>
             {
                 c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>
-                    .Empty.Add("1", new Dictionary<string, short?> { { "value", 1 } })
+                    .Empty
+                    .Add("1", new Dictionary<string, short?> { { "value", 1 } })
                     .Add("2", null);
             },
             new Dictionary<string, Dictionary<string, short?>>
@@ -1040,7 +1042,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
             Assert.Null(
                 context
-                    .Model.FindEntityType(typeof(CustomerWithResourceId))
+                    .Model
+                    .FindEntityType(typeof(CustomerWithResourceId))
                     .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
             );
 

@@ -89,16 +89,20 @@ namespace System.IdentityModel.Tokens
         {
             if (sizeAfterPurge < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID0008), "sizeAfterPurge")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID0008), "sizeAfterPurge")
+                    );
             }
 
             if (sizeAfterPurge >= maximumSize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID0009), "sizeAfterPurge")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID0009), "sizeAfterPurge")
+                    );
             }
 
             // null comparer is ok
@@ -279,9 +283,9 @@ namespace System.IdentityModel.Tokens
         /// <param name="endpointId">The endpoint id for the entry to be removed.</param>
         public override void RemoveAll(string endpointId)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException(SR.GetString(SR.ID4294))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID4294)));
         }
 
         /// <summary>

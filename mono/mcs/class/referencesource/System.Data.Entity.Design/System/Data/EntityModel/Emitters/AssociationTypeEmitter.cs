@@ -31,19 +31,22 @@ namespace System.Data.EntityModel.Emitters
             AssociationEndMember end1 = Item.AssociationEndMembers[0];
             AssociationEndMember end2 = Item.AssociationEndMembers[1];
 
-            Generator.CompileUnit.AssemblyCustomAttributes.Add(
-                AttributeEmitter.EmitSimpleAttribute(
-                    Utils.FQAdoFrameworkDataClassesName("EdmRelationshipAttribute"),
-                    Item.NamespaceName, //it is ok to use the c namespace because relationships aren't backed by clr objects
-                    Item.Name,
-                    end1.Name,
-                    GetMultiplicityCodeExpression(end1.RelationshipMultiplicity),
-                    GetEndTypeCodeExpression(end1),
-                    end2.Name,
-                    GetMultiplicityCodeExpression(end2.RelationshipMultiplicity),
-                    GetEndTypeCodeExpression(end2)
-                )
-            );
+            Generator
+                .CompileUnit
+                .AssemblyCustomAttributes
+                .Add(
+                    AttributeEmitter.EmitSimpleAttribute(
+                        Utils.FQAdoFrameworkDataClassesName("EdmRelationshipAttribute"),
+                        Item.NamespaceName, //it is ok to use the c namespace because relationships aren't backed by clr objects
+                        Item.Name,
+                        end1.Name,
+                        GetMultiplicityCodeExpression(end1.RelationshipMultiplicity),
+                        GetEndTypeCodeExpression(end1),
+                        end2.Name,
+                        GetMultiplicityCodeExpression(end2.RelationshipMultiplicity),
+                        GetEndTypeCodeExpression(end2)
+                    )
+                );
 
             // this method doesn't actually create a new type, just a new assembly level attribute for each end
             return new CodeTypeDeclarationCollection();

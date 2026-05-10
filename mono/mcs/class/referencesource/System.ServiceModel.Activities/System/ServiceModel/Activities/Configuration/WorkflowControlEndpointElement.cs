@@ -155,15 +155,17 @@ namespace System.ServiceModel.Activities.Configuration
                 // we need to add validation here
                 if (binding == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR.FailedToLoadBindingInControlEndpoint(
-                                this.Binding,
-                                this.BindingConfiguration,
-                                this.Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR.FailedToLoadBindingInControlEndpoint(
+                                    this.Binding,
+                                    this.BindingConfiguration,
+                                    this.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 result.Binding = binding;

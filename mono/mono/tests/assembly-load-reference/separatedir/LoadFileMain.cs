@@ -23,9 +23,11 @@ public class Test
             }
             else
             {
-                Console.Error.WriteLine(
-                    $"Expected tie.InnerException to be FileNotFoundException, but got {tie.InnerException}"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"Expected tie.InnerException to be FileNotFoundException, but got {tie.InnerException}"
+                    );
                 return 1;
             }
         }

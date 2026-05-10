@@ -60,8 +60,10 @@ namespace Microsoft.CodeAnalysis.AddPackage
                 symbolSearchService != null
                 && installerService != null
                 && context
-                    .Options.GetOptions(document.Project.Services)
-                    .SearchOptions.SearchNuGetPackages
+                    .Options
+                    .GetOptions(document.Project.Services)
+                    .SearchOptions
+                    .SearchNuGetPackages
                 && installerService.IsEnabled(document.Project.Id)
             )
             {

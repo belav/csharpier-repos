@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 var bindingMap = GetSemanticMap(cancellationToken);
                 if (
                     bindingMap
-                        .AllReferencedSymbols.OfType<ITypeParameterSymbol>()
+                        .AllReferencedSymbols
+                        .OfType<ITypeParameterSymbol>()
                         .Where(tp => tp.TypeParameterKind == TypeParameterKind.Method)
                         .Any()
                 )

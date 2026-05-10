@@ -176,10 +176,9 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                OtherCertificateFormat.Value.Encode(
-                    writer,
-                    new Asn1Tag(TagClass.ContextSpecific, 3)
-                );
+                OtherCertificateFormat
+                    .Value
+                    .Encode(writer, new Asn1Tag(TagClass.ContextSpecific, 3));
                 wroteValue = true;
             }
 
@@ -267,12 +266,18 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 3)))
             {
                 System.Security.Cryptography.Pkcs.Asn1.OtherCertificateFormat tmpOtherCertificateFormat;
-                System.Security.Cryptography.Pkcs.Asn1.OtherCertificateFormat.Decode(
-                    ref reader,
-                    new Asn1Tag(TagClass.ContextSpecific, 3),
-                    rebind,
-                    out tmpOtherCertificateFormat
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .OtherCertificateFormat
+                    .Decode(
+                        ref reader,
+                        new Asn1Tag(TagClass.ContextSpecific, 3),
+                        rebind,
+                        out tmpOtherCertificateFormat
+                    );
                 decoded.OtherCertificateFormat = tmpOtherCertificateFormat;
             }
             else

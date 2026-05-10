@@ -65,16 +65,16 @@ namespace System.ServiceModel.ComIntegration
 
         public void ReadXml(XmlReader xmlReader)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public XmlSchema GetSchema()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
     }
 
@@ -988,16 +988,16 @@ namespace System.ServiceModel.ComIntegration
 
             public void ReadXml(XmlReader xmlReader)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
 
             public XmlSchema GetSchema()
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException());
             }
         }
     }

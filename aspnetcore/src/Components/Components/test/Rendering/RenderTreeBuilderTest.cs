@@ -2244,9 +2244,9 @@ public class RenderTreeBuilderTest
             {
                 AssertFrame.Component<TestComponent>(frame, 3, 0);
                 Assert.True(
-                    frame.ComponentFrameFlags.HasFlag(
-                        ComponentFrameFlags.HasCallerSpecifiedRenderMode
-                    )
+                    frame
+                        .ComponentFrameFlags
+                        .HasFlag(ComponentFrameFlags.HasCallerSpecifiedRenderMode)
                 );
             },
             frame => AssertFrame.Attribute(frame, "param", 123, 1),
@@ -2291,9 +2291,9 @@ public class RenderTreeBuilderTest
             {
                 AssertFrame.Component<TestComponent>(frame, 2, 0);
                 Assert.False(
-                    frame.ComponentFrameFlags.HasFlag(
-                        ComponentFrameFlags.HasCallerSpecifiedRenderMode
-                    )
+                    frame
+                        .ComponentFrameFlags
+                        .HasFlag(ComponentFrameFlags.HasCallerSpecifiedRenderMode)
                 );
             },
             frame => AssertFrame.Attribute(frame, "param", 123, 1)

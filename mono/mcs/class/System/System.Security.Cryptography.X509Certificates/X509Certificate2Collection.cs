@@ -293,8 +293,8 @@ namespace System.Security.Cryptography.X509Certificates
                         );
                         break;
                     case X509FindType.FindBySubjectName:
-                        string[] names = x
-                            .SubjectName.Format(true)
+                        string[] names = x.SubjectName
+                            .Format(true)
                             .Split(newline_split, StringSplitOptions.RemoveEmptyEntries);
                         foreach (string name in names)
                         {

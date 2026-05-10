@@ -90,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             var solution = _workspace.CurrentSolution;
             var currentAnalyzerPaths = solution
-                .Projects.SelectMany(p => p.AnalyzerReferences)
+                .Projects
+                .SelectMany(p => p.AnalyzerReferences)
                 .OfType<AnalyzerFileReference>()
                 .Select(a => a.FullPath)
                 .ToImmutableHashSet(StringComparer.OrdinalIgnoreCase);
@@ -136,7 +137,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         )
         {
             var loadedAssemblies = AppDomain
-                .CurrentDomain.GetAssemblies()
+                .CurrentDomain
+                .GetAssemblies()
                 .Select(assembly => AssemblyIdentity.FromAssemblyDefinition(assembly));
             var loadedAssembliesList = new IgnorableAssemblyIdentityList(loadedAssemblies);
 
@@ -174,7 +176,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 var analyzerFilePaths = new HashSet<string>(
                     project
-                        .AnalyzerReferences.OfType<AnalyzerFileReference>()
+                        .AnalyzerReferences
+                        .OfType<AnalyzerFileReference>()
                         .Select(f => f.FullPath),
                     StringComparer.OrdinalIgnoreCase
                 );
@@ -305,9 +308,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             public AssemblyIdentity ApplyBindingRedirects(AssemblyIdentity originalIdentity)
             {
-                var redirectedAssemblyName = AppDomain.CurrentDomain.ApplyPolicy(
-                    originalIdentity.ToString()
-                );
+                var redirectedAssemblyName = AppDomain
+                    .CurrentDomain
+                    .ApplyPolicy(originalIdentity.ToString());
                 if (
                     AssemblyIdentity.TryParseDisplayName(
                         redirectedAssemblyName,

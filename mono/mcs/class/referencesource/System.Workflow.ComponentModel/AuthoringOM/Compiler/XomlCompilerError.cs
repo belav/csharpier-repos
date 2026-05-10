@@ -70,9 +70,9 @@ namespace System.Workflow.ComponentModel.Compiler
             this.Line = exception.LineNumber - 1;
             this.Column = exception.LinePosition - 1;
             this.ErrorText = exception.Message;
-            this.ErrorNumber = ErrorNumbers.Error_SerializationError.ToString(
-                CultureInfo.InvariantCulture
-            );
+            this.ErrorNumber = ErrorNumbers
+                .Error_SerializationError
+                .ToString(CultureInfo.InvariantCulture);
             this.incrementLineAndColumn = true;
         }
 

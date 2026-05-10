@@ -11,7 +11,8 @@ public class RecordConstructorValidation : AutoMapperSpecBase
     public void Validate() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Message.ShouldContainWithoutWhitespace(
+            .Message
+            .ShouldContainWithoutWhitespace(
                 "When mapping to records, consider using only public constructors."
             );
 }
@@ -30,7 +31,8 @@ public class RecordConstructorValidationForCtorParam : AutoMapperSpecBase
     public void Validate() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Message.ShouldContainWithoutWhitespace(
+            .Message
+            .ShouldContainWithoutWhitespace(
                 "When mapping to records, consider using only public constructors."
             );
 }

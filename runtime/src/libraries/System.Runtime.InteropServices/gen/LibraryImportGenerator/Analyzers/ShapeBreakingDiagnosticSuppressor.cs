@@ -43,7 +43,9 @@ namespace Microsoft.Interop.Analyzers
             SemanticModel model = context.GetSemanticModel(diagnostic.Location.SourceTree);
             ISymbol diagnosedSymbol = model.GetDeclaredSymbol(
                 diagnostic
-                    .Location.SourceTree.GetRoot(context.CancellationToken)
+                    .Location
+                    .SourceTree
+                    .GetRoot(context.CancellationToken)
                     .FindNode(diagnostic.Location.SourceSpan),
                 context.CancellationToken
             );
@@ -106,10 +108,9 @@ namespace Microsoft.Interop.Analyzers
                             (_, _) => { },
                             out ITypeSymbol constructedMarshallerType
                         )
-                        && SymbolEqualityComparer.Default.Equals(
-                            constructedMarshallerType,
-                            marshallerType
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(constructedMarshallerType, marshallerType)
                     );
                 if (attrData is not null)
                 {

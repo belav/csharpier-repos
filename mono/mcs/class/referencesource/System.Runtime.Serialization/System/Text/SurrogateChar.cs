@@ -22,15 +22,20 @@ namespace System.Text
         public SurrogateChar(int ch)
         {
             if (ch < MinValue || ch > MaxValue)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.XmlInvalidSurrogate,
-                            ch.ToString("X", CultureInfo.InvariantCulture)
-                        ),
-                        "ch"
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.XmlInvalidSurrogate,
+                                ch.ToString("X", CultureInfo.InvariantCulture)
+                            ),
+                            "ch"
+                        )
+                    );
 
             const int mask = ((1 << 10) - 1);
 
@@ -41,26 +46,36 @@ namespace System.Text
         public SurrogateChar(char lowChar, char highChar)
         {
             if (lowChar < surLowMin || lowChar > surLowMax)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.XmlInvalidLowSurrogate,
-                            ((int)lowChar).ToString("X", CultureInfo.InvariantCulture)
-                        ),
-                        "lowChar"
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.XmlInvalidLowSurrogate,
+                                ((int)lowChar).ToString("X", CultureInfo.InvariantCulture)
+                            ),
+                            "lowChar"
+                        )
+                    );
 
             if (highChar < surHighMin || highChar > surHighMax)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.XmlInvalidHighSurrogate,
-                            ((int)highChar).ToString("X", CultureInfo.InvariantCulture)
-                        ),
-                        "highChar"
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.XmlInvalidHighSurrogate,
+                                ((int)highChar).ToString("X", CultureInfo.InvariantCulture)
+                            ),
+                            "highChar"
+                        )
+                    );
 
             this.lowChar = lowChar;
             this.highChar = highChar;

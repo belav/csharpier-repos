@@ -1064,7 +1064,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         {
             return (AbstractCommentSelectionBase<ValueTuple>)
                 workspace
-                    .ExportProvider.GetExportedValues<ICommandHandler>()
+                    .ExportProvider
+                    .GetExportedValues<ICommandHandler>()
                     .First(export =>
                         typeof(ToggleLineCommentCommandHandler).Equals(export.GetType())
                     );

@@ -41,10 +41,9 @@ namespace System.Security.Cryptography.X509Certificates
                 // Apple returns things in the opposite order from Windows, so read backwards.
                 for (int i = count - 1; i >= 0; i--)
                 {
-                    IntPtr handle = Interop.CoreFoundation.CFArrayGetValueAtIndex(
-                        _collectionHandle,
-                        i
-                    );
+                    IntPtr handle = Interop
+                        .CoreFoundation
+                        .CFArrayGetValueAtIndex(_collectionHandle, i);
 
                     if (handle != IntPtr.Zero)
                     {

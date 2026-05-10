@@ -52,10 +52,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     Contract.ThrowIfFalse(
                         _firstStatementOrFieldToReplace.Parent
                             == _lastStatementOrFieldToReplace.Parent
-                            || CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
-                                _firstStatementOrFieldToReplace,
-                                _lastStatementOrFieldToReplace
-                            )
+                            || CSharpSyntaxFacts
+                                .Instance
+                                .AreStatementsInSameContainer(
+                                    _firstStatementOrFieldToReplace,
+                                    _lastStatementOrFieldToReplace
+                                )
                     );
                 }
 

@@ -1552,14 +1552,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && source.TryGetInlineArrayElementField()
                     is { TypeWithAnnotations: var elementType }
                 && (
-                    destination.OriginalDefinition.Equals(
-                        Compilation.GetWellKnownType(WellKnownType.System_Span_T),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
-                    || destination.OriginalDefinition.Equals(
-                        Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    destination
+                        .OriginalDefinition
+                        .Equals(
+                            Compilation.GetWellKnownType(WellKnownType.System_Span_T),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
+                    || destination
+                        .OriginalDefinition
+                        .Equals(
+                            Compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                 )
                 && HasIdentityConversionInternal(
                     ((NamedTypeSymbol)destination.OriginalDefinition).Construct(
@@ -2031,10 +2035,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     invokeMethod.RefKind != refKind
-                    || !invokeMethod.ReturnType.Equals(
-                        returnType.Type,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    || !invokeMethod
+                        .ReturnType
+                        .Equals(returnType.Type, TypeCompareKind.AllIgnoreOptions)
                 )
                 {
                     return LambdaConversionResult.MismatchedReturnType;
@@ -2069,7 +2072,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 compilation
                             )
                             || !delegateParameters[p]
-                                .Type.Equals(
+                                .Type
+                                .Equals(
                                     anonymousFunction.ParameterType(p),
                                     TypeCompareKind.AllIgnoreOptions
                                 )
@@ -4968,8 +4972,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 foreach (
-                    var iface in this
-                        .corLibrary.GetDeclaredSpecialType(SpecialType.System_Array)
+                    var iface in this.corLibrary
+                        .GetDeclaredSpecialType(SpecialType.System_Array)
                         .AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                 )
                 {

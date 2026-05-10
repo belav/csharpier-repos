@@ -27,14 +27,14 @@ namespace System.IdentityModel
             AsyncResult asyncResult = result as AsyncResult;
 
             if (asyncResult == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID4001), "result")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentException(SR.GetString(SR.ID4001), "result"));
 
             if (asyncResult.endCalled)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4002))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4002)));
 
             asyncResult.endCalled = true;
 
@@ -113,9 +113,9 @@ namespace System.IdentityModel
             if (completed == true)
             {
                 // it is a bug to call complete twice
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new AsynchronousOperationException(SR.GetString(SR.ID4005))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new AsynchronousOperationException(SR.GetString(SR.ID4005)));
             }
 
             completedSync = completedSynchronously;
@@ -171,9 +171,14 @@ namespace System.IdentityModel
                 // Because the stack trace gets lost on a rethrow, we're wrapping it in a generic exception
                 // so the stack trace is preserved.
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new AsynchronousOperationException(SR.GetString(SR.ID4003), unhandledException)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new AsynchronousOperationException(
+                            SR.GetString(SR.ID4003),
+                            unhandledException
+                        )
+                    );
             }
         }
 

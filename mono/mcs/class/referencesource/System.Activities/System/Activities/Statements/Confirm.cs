@@ -188,11 +188,13 @@ namespace System.Activities.Statements
                 context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.ConfirmWithoutCompensableActivity(this.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ConfirmWithoutCompensableActivity(this.DisplayName)
+                        )
+                    );
             }
 
             if (Target.IsEmpty)
@@ -214,11 +216,13 @@ namespace System.Activities.Statements
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.InvalidConfirmActivityUsage(this.DisplayName)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.InvalidConfirmActivityUsage(this.DisplayName)
+                            )
+                        );
                 }
             }
             else
@@ -231,10 +235,9 @@ namespace System.Activities.Statements
 
                 if (compensationToken == null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "Target",
-                        SR.InvalidCompensationToken(this.DisplayName)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument("Target", SR.InvalidCompensationToken(this.DisplayName));
                 }
 
                 if (compensationToken.ConfirmCalled)
@@ -245,11 +248,13 @@ namespace System.Activities.Statements
 
                 if (tokenData == null || tokenData.CompensationState != CompensationState.Completed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CompensableActivityAlreadyConfirmedOrCompensated
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CompensableActivityAlreadyConfirmedOrCompensated
+                            )
+                        );
                 }
 
                 // A valid in-arg was passed...

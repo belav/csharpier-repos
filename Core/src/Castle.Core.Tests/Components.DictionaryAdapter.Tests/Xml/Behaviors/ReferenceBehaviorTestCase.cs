@@ -622,7 +622,9 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             )
             {
                 return dictionaryAdapter
-                    .This.Initializers.OfType<IDictionaryReferenceManager>()
+                    .This
+                    .Initializers
+                    .OfType<IDictionaryReferenceManager>()
                     .Single();
             }
         }

@@ -73,7 +73,8 @@ namespace Moq
                 if (baseSetter != setter)
                 {
                     var baseProperty = baseSetter
-                        .DeclaringType.GetMember(
+                        .DeclaringType
+                        .GetMember(
                             property.Name,
                             MemberTypes.Property,
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -122,7 +123,8 @@ namespace Moq
                 if (baseGetter != getter)
                 {
                     var baseProperty = baseGetter
-                        .DeclaringType.GetMember(
+                        .DeclaringType
+                        .GetMember(
                             property.Name,
                             MemberTypes.Property,
                             BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
@@ -587,7 +589,8 @@ namespace Moq
         {
             return setups
                 .FindLast(setup => !setup.IsConditional && predicate(setup))
-                ?.InnerMocks.SingleOrDefault();
+                ?.InnerMocks
+                .SingleOrDefault();
         }
     }
 }

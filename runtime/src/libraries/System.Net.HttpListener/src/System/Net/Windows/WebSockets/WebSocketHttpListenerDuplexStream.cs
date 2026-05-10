@@ -258,15 +258,17 @@ namespace System.Net.WebSockets
 
                 uint flags = 0;
                 uint bytesReturned = 0;
-                uint statusCode = Interop.HttpApi.HttpReceiveRequestEntityBody(
-                    _inputStream.InternalHttpContext.RequestQueueHandle,
-                    _inputStream.InternalHttpContext.RequestId,
-                    flags,
-                    (byte*)_webSocket!.InternalBuffer.ToIntPtr(eventArgs.Offset),
-                    (uint)eventArgs.Count,
-                    out bytesReturned,
-                    eventArgs.NativeOverlapped
-                );
+                uint statusCode = Interop
+                    .HttpApi
+                    .HttpReceiveRequestEntityBody(
+                        _inputStream.InternalHttpContext.RequestQueueHandle,
+                        _inputStream.InternalHttpContext.RequestId,
+                        flags,
+                        (byte*)_webSocket!.InternalBuffer.ToIntPtr(eventArgs.Offset),
+                        (uint)eventArgs.Count,
+                        out bytesReturned,
+                        eventArgs.NativeOverlapped
+                    );
 
                 if (
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
@@ -521,18 +523,20 @@ namespace System.Net.WebSockets
                 }
 
                 uint bytesSent;
-                statusCode = Interop.HttpApi.HttpSendResponseEntityBody(
-                    _outputStream.InternalHttpContext.RequestQueueHandle,
-                    _outputStream.InternalHttpContext.RequestId,
-                    (uint)flags,
-                    eventArgs.EntityChunkCount,
-                    (Interop.HttpApi.HTTP_DATA_CHUNK*)eventArgs.EntityChunks,
-                    &bytesSent,
-                    null,
-                    0,
-                    eventArgs.NativeOverlapped,
-                    null
-                );
+                statusCode = Interop
+                    .HttpApi
+                    .HttpSendResponseEntityBody(
+                        _outputStream.InternalHttpContext.RequestQueueHandle,
+                        _outputStream.InternalHttpContext.RequestId,
+                        (uint)flags,
+                        eventArgs.EntityChunkCount,
+                        (Interop.HttpApi.HTTP_DATA_CHUNK*)eventArgs.EntityChunks,
+                        &bytesSent,
+                        null,
+                        0,
+                        eventArgs.NativeOverlapped,
+                        null
+                    );
 
                 if (
                     statusCode != Interop.HttpApi.ERROR_SUCCESS
@@ -1160,11 +1164,9 @@ namespace System.Net.WebSockets
                 else
                 {
                     _dataChunks![index].pBuffer = (byte*)
-                        _webSocket.InternalBuffer.ConvertPinnedSendPayloadToNative(
-                            buffer,
-                            offset,
-                            count
-                        );
+                        _webSocket
+                            .InternalBuffer
+                            .ConvertPinnedSendPayloadToNative(buffer, offset, count);
                 }
 
                 _dataChunks![index].BufferLength = (uint)count;

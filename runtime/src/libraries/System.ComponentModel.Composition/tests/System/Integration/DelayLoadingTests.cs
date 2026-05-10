@@ -232,10 +232,12 @@ namespace Tests.Integration
             )
             {
                 IEnumerable<ExportDefinition> exports = partDefinition
-                    .ExportDefinitions.Select(e => this.CreateWrapped(e, type))
+                    .ExportDefinitions
+                    .Select(e => this.CreateWrapped(e, type))
                     .ToArray();
                 IEnumerable<ImportDefinition> imports = partDefinition
-                    .ImportDefinitions.Cast<ContractBasedImportDefinition>()
+                    .ImportDefinitions
+                    .Cast<ContractBasedImportDefinition>()
                     .Select(i => this.CreateWrapped(i, type))
                     .ToArray();
 

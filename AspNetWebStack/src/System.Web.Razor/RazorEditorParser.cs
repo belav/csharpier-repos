@@ -241,10 +241,9 @@ namespace System.Web.Razor
                 && _lastChangeOwner.EditHandler.OwnsChange(_lastChangeOwner, change)
             )
             {
-                EditResult editResult = _lastChangeOwner.EditHandler.ApplyChange(
-                    _lastChangeOwner,
-                    change
-                );
+                EditResult editResult = _lastChangeOwner
+                    .EditHandler
+                    .ApplyChange(_lastChangeOwner, change);
                 result = editResult.Result;
                 if (!editResult.Result.HasFlag(PartialParseResult.Rejected))
                 {
@@ -264,10 +263,9 @@ namespace System.Web.Razor
             }
             else if (_lastChangeOwner != null)
             {
-                EditResult editRes = _lastChangeOwner.EditHandler.ApplyChange(
-                    _lastChangeOwner,
-                    change
-                );
+                EditResult editRes = _lastChangeOwner
+                    .EditHandler
+                    .ApplyChange(_lastChangeOwner, change);
                 result = editRes.Result;
                 if (!editRes.Result.HasFlag(PartialParseResult.Rejected))
                 {

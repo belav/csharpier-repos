@@ -105,9 +105,9 @@ namespace System.Formats.Asn1.Tests
                 Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(Asn1Tag.PrimitiveBitString)
             );
             Assert.False(
-                Asn1Tag.PrimitiveOctetString.HasSameClassAndValue(
-                    new Asn1Tag(TagClass.ContextSpecific, 4)
-                )
+                Asn1Tag
+                    .PrimitiveOctetString
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 4))
             );
         }
 

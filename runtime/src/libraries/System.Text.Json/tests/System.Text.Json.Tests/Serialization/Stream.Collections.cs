@@ -61,9 +61,9 @@ namespace System.Text.Json.Serialization.Tests
 
             if (
                 options.ReferenceHandler == ReferenceHandler.Preserve
-                && TypeHelper<TElement>.NonRoundtrippableWithReferenceHandler.Contains(
-                    typeof(TCollection)
-                )
+                && TypeHelper<TElement>
+                    .NonRoundtrippableWithReferenceHandler
+                    .Contains(typeof(TCollection))
             )
             {
                 return;

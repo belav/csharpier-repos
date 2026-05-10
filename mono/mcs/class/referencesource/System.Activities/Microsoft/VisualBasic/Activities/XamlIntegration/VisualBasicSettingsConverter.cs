@@ -70,9 +70,9 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                     )
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.InvalidVisualBasicSettingsValue)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SR.InvalidVisualBasicSettingsValue));
                 }
 
                 return CollectXmlNamespacesAndAssemblies(context);

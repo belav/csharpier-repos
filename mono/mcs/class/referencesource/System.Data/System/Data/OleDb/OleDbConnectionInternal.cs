@@ -90,10 +90,10 @@ namespace System.Data.OleDb
             }
             catch (System.Security.SecurityException)
             {
-                System.Diagnostics.Debug.Assert(
-                    false,
-                    "unexpected SecurityException for current codepath"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(false, "unexpected SecurityException for current codepath");
                 throw;
             }
 #endif
@@ -396,12 +396,14 @@ namespace System.Data.OleDb
                     {
                         throw ODB.TransactionsNotSupported(Provider, (Exception)null);
                     }
-                    transactionJoin.Value.JoinTransaction(
-                        oleTxTransaction,
-                        (int)IsolationLevel.Unspecified,
-                        0,
-                        IntPtr.Zero
-                    );
+                    transactionJoin
+                        .Value
+                        .JoinTransaction(
+                            oleTxTransaction,
+                            (int)IsolationLevel.Unspecified,
+                            0,
+                            IntPtr.Zero
+                        );
                     _unEnlistDuringDeactivate = (null != transaction);
                 }
             }

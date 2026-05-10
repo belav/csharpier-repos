@@ -321,9 +321,9 @@ namespace System.Workflow.ComponentModel
             lock (((ICollection)DependencyProperty.dependencyProperties).SyncRoot)
             {
                 if (
-                    DependencyProperty.dependencyProperties.ContainsKey(
-                        dependencyProperty.GetHashCode()
-                    )
+                    DependencyProperty
+                        .dependencyProperties
+                        .ContainsKey(dependencyProperty.GetHashCode())
                 )
                     throw new InvalidOperationException(
                         SR.GetString(
@@ -332,10 +332,9 @@ namespace System.Workflow.ComponentModel
                         )
                     );
 
-                DependencyProperty.dependencyProperties.Add(
-                    dependencyProperty.GetHashCode(),
-                    dependencyProperty
-                );
+                DependencyProperty
+                    .dependencyProperties
+                    .Add(dependencyProperty.GetHashCode(), dependencyProperty);
             }
 
             return dependencyProperty;

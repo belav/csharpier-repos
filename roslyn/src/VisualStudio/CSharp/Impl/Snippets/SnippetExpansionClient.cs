@@ -82,10 +82,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SubjectBuffer.Insert(endPosition, commentString);
 
             var commentSpan = new Span(endPosition, commentString.Length);
-            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(
-                commentSpan,
-                SpanTrackingMode.EdgeExclusive
-            );
+            return SubjectBuffer
+                .CurrentSnapshot
+                .CreateTrackingSpan(commentSpan, SpanTrackingMode.EdgeExclusive);
         }
 
         protected override string FallbackDefaultLiteral => "default";
@@ -135,7 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
             var compilation = document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .WaitAndGetResult(cancellationToken);
             var newRoot = addImportService.AddImports(
                 compilation,
@@ -157,10 +157,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     cancellationToken
                 )
                 .WaitAndGetResult(cancellationToken);
-            document.Project.Solution.Workspace.ApplyDocumentChanges(
-                formattedDocument,
-                cancellationToken
-            );
+            document
+                .Project
+                .Solution
+                .Workspace
+                .ApplyDocumentChanges(formattedDocument, cancellationToken);
 
             return formattedDocument;
         }

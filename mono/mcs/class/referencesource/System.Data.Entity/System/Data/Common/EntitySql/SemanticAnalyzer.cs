@@ -598,9 +598,9 @@ namespace System.Data.Common.EntitySql
             //
             // Add function parameters to the scope.
             //
-            functionInfo.Parameters.ForEach(p =>
-                sr.CurrentScope.Add(p.VariableName, new FreeVariableScopeEntry(p))
-            );
+            functionInfo
+                .Parameters
+                .ForEach(p => sr.CurrentScope.Add(p.VariableName, new FreeVariableScopeEntry(p)));
 
             //
             // Convert function body expression
@@ -943,8 +943,10 @@ namespace System.Data.Common.EntitySql
                 //
                 // Project the argument off the DbGroupAggregate binding.
                 //
-                DbExpression definition =
-                    aggregateInfo.EvaluatingScopeRegion.GroupAggregateBinding.Project(arg);
+                DbExpression definition = aggregateInfo
+                    .EvaluatingScopeRegion
+                    .GroupAggregateBinding
+                    .Project(arg);
 
                 if (groupAggregateExpr.DistinctKind == AST.DistinctKind.Distinct)
                 {
@@ -1155,9 +1157,10 @@ namespace System.Data.Common.EntitySql
             )
             {
                 var mappingCollection =
-                    sr.TypeResolver.Perspective.MetadataWorkspace.GetItemCollection(
-                        DataSpace.CSSpace
-                    ) as StorageMappingItemCollection;
+                    sr.TypeResolver
+                        .Perspective
+                        .MetadataWorkspace
+                        .GetItemCollection(DataSpace.CSSpace) as StorageMappingItemCollection;
 
                 Debug.Assert(mappingCollection != null, "mappingCollection != null");
 
@@ -1533,7 +1536,9 @@ namespace System.Data.Common.EntitySql
             // Later, when the outer max(...) is processed as an aggregate, processing of the inner max(...) gets into TryConvertAsResolvedGroupAggregate(...)
             // and at this point we finally wire up the two aggregates.
             //
-            groupAggregateExpr.AggregateInfo.SetContainingAggregate(sr.CurrentGroupAggregateInfo);
+            groupAggregateExpr
+                .AggregateInfo
+                .SetContainingAggregate(sr.CurrentGroupAggregateInfo);
 
             if (
                 !sr.TryResolveInternalAggregateName(
@@ -2088,12 +2093,14 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.ToEndIdentifier != null)
             {
                 toEnd = (RelationshipEndMember)
-                    relationshipType.Members.FirstOrDefault(m =>
-                        m.Name.Equals(
-                            relshipExpr.ToEndIdentifier.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    );
+                    relationshipType
+                        .Members
+                        .FirstOrDefault(m =>
+                            m.Name.Equals(
+                                relshipExpr.ToEndIdentifier.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
                 if (toEnd == null)
                 {
                     throw EntityUtil.EntitySqlError(
@@ -2139,7 +2146,8 @@ namespace System.Data.Common.EntitySql
             else
             {
                 var toEndCandidates = relationshipType
-                    .Members.Select(m => (RelationshipEndMember)m)
+                    .Members
+                    .Select(m => (RelationshipEndMember)m)
                     .Where(e =>
                         TypeSemantics.IsStructurallyEqualOrPromotableTo(
                             refType,
@@ -2177,12 +2185,14 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.FromEndIdentifier != null)
             {
                 fromEnd = (RelationshipEndMember)
-                    relationshipType.Members.FirstOrDefault(m =>
-                        m.Name.Equals(
-                            relshipExpr.FromEndIdentifier.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    );
+                    relationshipType
+                        .Members
+                        .FirstOrDefault(m =>
+                            m.Name.Equals(
+                                relshipExpr.FromEndIdentifier.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
                 if (fromEnd == null)
                 {
                     throw EntityUtil.EntitySqlError(
@@ -2219,7 +2229,8 @@ namespace System.Data.Common.EntitySql
             else
             {
                 var fromEndCandidates = relationshipType
-                    .Members.Select(m => (RelationshipEndMember)m)
+                    .Members
+                    .Select(m => (RelationshipEndMember)m)
                     .Where(e =>
                         TypeSemantics.IsStructurallyEqualOrPromotableTo(
                             driverEntityType.GetReferenceType(),
@@ -2306,12 +2317,14 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.ToEndIdentifier != null)
             {
                 toEnd = (RelationshipEndMember)
-                    relationshipType.Members.FirstOrDefault(m =>
-                        m.Name.Equals(
-                            relshipExpr.ToEndIdentifier.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    );
+                    relationshipType
+                        .Members
+                        .FirstOrDefault(m =>
+                            m.Name.Equals(
+                                relshipExpr.ToEndIdentifier.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
                 if (toEnd == null)
                 {
                     throw EntityUtil.EntitySqlError(
@@ -2335,12 +2348,14 @@ namespace System.Data.Common.EntitySql
             if (relshipExpr.FromEndIdentifier != null)
             {
                 fromEnd = (RelationshipEndMember)
-                    relationshipType.Members.FirstOrDefault(m =>
-                        m.Name.Equals(
-                            relshipExpr.FromEndIdentifier.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    );
+                    relationshipType
+                        .Members
+                        .FirstOrDefault(m =>
+                            m.Name.Equals(
+                                relshipExpr.FromEndIdentifier.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
                 if (fromEnd == null)
                 {
                     throw EntityUtil.EntitySqlError(
@@ -2377,7 +2392,8 @@ namespace System.Data.Common.EntitySql
             else
             {
                 var fromEndCandidates = relationshipType
-                    .Members.Select(m => (RelationshipEndMember)m)
+                    .Members
+                    .Select(m => (RelationshipEndMember)m)
                     .Where(e =>
                         TypeSemantics.IsStructurallyEqualOrPromotableTo(
                             sourceRefType,
@@ -2411,7 +2427,8 @@ namespace System.Data.Common.EntitySql
             if (toEnd == null)
             {
                 var toEndCandidates = relationshipType
-                    .Members.Select(m => (RelationshipEndMember)m)
+                    .Members
+                    .Select(m => (RelationshipEndMember)m)
                     .Where(e => !e.EdmEquals(fromEnd))
                     .ToArray();
                 switch (toEndCandidates.Length)
@@ -3018,7 +3035,8 @@ namespace System.Data.Common.EntitySql
                                 astBuiltInExpr.Kind.ToString().ToUpperInvariant(),
                                 TypeHelpers
                                     .GetElementTypeUsage(leftExpr.ResultType)
-                                    .EdmType.FullName
+                                    .EdmType
+                                    .FullName
                             )
                         );
                     }
@@ -3039,7 +3057,8 @@ namespace System.Data.Common.EntitySql
                                 astBuiltInExpr.Kind.ToString().ToUpperInvariant(),
                                 TypeHelpers
                                     .GetElementTypeUsage(rightExpr.ResultType)
-                                    .EdmType.FullName
+                                    .EdmType
+                                    .FullName
                             )
                         );
                     }
@@ -3459,10 +3478,12 @@ namespace System.Data.Common.EntitySql
                 );
 
                 converted = TypeHelpers.CreateRowTypeUsage(
-                    rowTypeDefExpr.Properties.Select(p => new KeyValuePair<string, TypeUsage>(
-                        p.Name.Name,
-                        ConvertTypeDefinition(p.Type, sr)
-                    )),
+                    rowTypeDefExpr
+                        .Properties
+                        .Select(p => new KeyValuePair<string, TypeUsage>(
+                            p.Name.Name,
+                            ConvertTypeDefinition(p.Type, sr)
+                        )),
                     true /* readOnly */
                 );
             }
@@ -3554,7 +3575,8 @@ namespace System.Data.Common.EntitySql
             }
 
             var mSetExprs = msetCtor
-                .ExprList.Select(e => ConvertValueExpressionAllowUntypedNulls(e, sr))
+                .ExprList
+                .Select(e => ConvertValueExpressionAllowUntypedNulls(e, sr))
                 .ToArray();
 
             var multisetTypes = mSetExprs.Where(e => e != null).Select(e => e.ResultType).ToArray();
@@ -4640,19 +4662,17 @@ namespace System.Data.Common.EntitySql
             //
             // Create input binding for DbGroupByExpression.
             //
-            DbGroupExpressionBinding groupInputBinding = source.Expression.GroupBindAs(
-                sr.GenerateInternalName("geb"),
-                sr.GenerateInternalName("group")
-            );
+            DbGroupExpressionBinding groupInputBinding = source
+                .Expression
+                .GroupBindAs(sr.GenerateInternalName("geb"), sr.GenerateInternalName("group"));
 
             //
             // Create group partition (DbGroupAggregate) and projection template.
             //
             DbGroupAggregate groupAggregateDefinition = groupInputBinding.GroupAggregate;
-            DbVariableReferenceExpression groupAggregateVarRef =
-                groupAggregateDefinition.ResultType.Variable(
-                    sr.GenerateInternalName("groupAggregate")
-                );
+            DbVariableReferenceExpression groupAggregateVarRef = groupAggregateDefinition
+                .ResultType
+                .Variable(sr.GenerateInternalName("groupAggregate"));
             DbExpressionBinding groupAggregateBinding = groupAggregateVarRef.BindAs(
                 sr.GenerateInternalName("groupPartitionItem")
             );
@@ -5172,7 +5192,9 @@ namespace System.Data.Common.EntitySql
                     // Project function group aggregates along with GROUPPARTITION definitions and group keys.
                     //
                     projectionItems.AddRange(
-                        sr.CurrentScopeRegion.GroupAggregateInfos.Where(groupAggregateInfo =>
+                        sr.CurrentScopeRegion
+                            .GroupAggregateInfos
+                            .Where(groupAggregateInfo =>
                                 groupAggregateInfo.AggregateKind == GroupAggregateKind.Function
                             )
                             .Select(groupAggregateInfo => new KeyValuePair<string, DbExpression>(
@@ -5252,10 +5274,10 @@ namespace System.Data.Common.EntitySql
                 GroupAggregateInfo groupAggregateInfo in sr.CurrentScopeRegion.GroupAggregateInfos
             )
             {
-                DbVariableReferenceExpression aggVarRef =
-                    groupAggregateInfo.AggregateStubExpression.ResultType.Variable(
-                        groupAggregateInfo.AggregateName
-                    );
+                DbVariableReferenceExpression aggVarRef = groupAggregateInfo
+                    .AggregateStubExpression
+                    .ResultType
+                    .Variable(groupAggregateInfo.AggregateName);
 
                 Debug.Assert(
                     !sr.CurrentScope.Contains(aggVarRef.VariableName)
@@ -5329,9 +5351,9 @@ namespace System.Data.Common.EntitySql
                             new KeyValuePair<string, DbExpression>(
                                 groupAggregateInfo.AggregateName,
                                 gpExpressionLambda.Invoke(
-                                    groupBinding.Variable.Property(
-                                        groupAggregateVarRef.VariableName
-                                    )
+                                    groupBinding
+                                        .Variable
+                                        .Property(groupAggregateVarRef.VariableName)
                                 )
                             )
                         );
@@ -5630,10 +5652,10 @@ namespace System.Data.Common.EntitySql
                     );
                     foreach (var projectionExpression in projectionItems)
                     {
-                        DbVariableReferenceExpression projectionExpressionRef =
-                            projectionExpression.Value.ResultType.Variable(
-                                projectionExpression.Key
-                            );
+                        DbVariableReferenceExpression projectionExpressionRef = projectionExpression
+                            .Value
+                            .ResultType
+                            .Variable(projectionExpression.Key);
 
                         sr.CurrentScope.Replace(
                             projectionExpressionRef.VariableName,
@@ -5846,10 +5868,9 @@ namespace System.Data.Common.EntitySql
 
             var predicates = rightColl.Arguments.Select(arg => left.Equal(arg));
             List<DbExpression> args = new List<DbExpression>(predicates);
-            DbExpression orExpr = Utils.Helpers.BuildBalancedTreeInPlace(
-                args,
-                (prev, next) => prev.Or(next)
-            );
+            DbExpression orExpr = Utils
+                .Helpers
+                .BuildBalancedTreeInPlace(args, (prev, next) => prev.Or(next));
 
             return orExpr;
         }
@@ -6423,9 +6444,9 @@ namespace System.Data.Common.EntitySql
                         sr.GenerateInternalName("l_flatten")
                     );
 
-                    DbExpressionBinding rightExpr = leftExpr.Variable.BindAs(
-                        sr.GenerateInternalName("r_flatten")
-                    );
+                    DbExpressionBinding rightExpr = leftExpr
+                        .Variable
+                        .BindAs(sr.GenerateInternalName("r_flatten"));
 
                     DbExpressionBinding applyBinding = leftExpr
                         .CrossApply(rightExpr)

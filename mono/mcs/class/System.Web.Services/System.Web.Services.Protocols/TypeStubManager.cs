@@ -207,10 +207,9 @@ namespace System.Web.Services.Protocols
             {
                 if (
                     !isClientProxy
-                    && mi.CustomAttributeProvider.GetCustomAttributes(
-                        typeof(WebMethodAttribute),
-                        true
-                    ).Length == 0
+                    && mi.CustomAttributeProvider
+                        .GetCustomAttributes(typeof(WebMethodAttribute), true)
+                        .Length == 0
                 )
                     continue;
 

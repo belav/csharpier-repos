@@ -866,9 +866,9 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
 
                             // get the invoke method
-                            MethodInfo invokeMethod = validationBindContext.TargetType.GetMethod(
-                                "Invoke"
-                            );
+                            MethodInfo invokeMethod = validationBindContext
+                                .TargetType
+                                .GetMethod("Invoke");
                             if (invokeMethod == null)
                                 throw new Exception(
                                     SR.GetString(

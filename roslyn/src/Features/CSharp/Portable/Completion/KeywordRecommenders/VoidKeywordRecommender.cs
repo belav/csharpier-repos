@@ -58,24 +58,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || IsUnsafeDefaultExpressionContext(context)
                 || IsUnsafeUsingDirectiveContext(context)
                 || context.IsFixedVariableDeclarationContext
-                || context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                    position,
-                    SyntaxKindSet.AllGlobalMemberModifiers,
-                    cancellationToken
-                )
-                || context.SyntaxTree.IsLocalFunctionDeclarationContext(
-                    position,
-                    cancellationToken
-                );
+                || context
+                    .SyntaxTree
+                    .IsGlobalMemberDeclarationContext(
+                        position,
+                        SyntaxKindSet.AllGlobalMemberModifiers,
+                        cancellationToken
+                    )
+                || context
+                    .SyntaxTree
+                    .IsLocalFunctionDeclarationContext(position, cancellationToken);
         }
 
         private static bool IsUnsafeDefaultExpressionContext(CSharpSyntaxContext context)
         {
             return context.TargetToken.IsUnsafeContext()
-                && context.SyntaxTree.IsDefaultExpressionContext(
-                    context.Position,
-                    context.LeftToken
-                );
+                && context
+                    .SyntaxTree
+                    .IsDefaultExpressionContext(context.Position, context.LeftToken);
         }
 
         private static bool IsUnsafeCastTypeContext(CSharpSyntaxContext context)
@@ -126,11 +126,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CSharpSyntaxContext context,
             CancellationToken cancellationToken
         ) =>
-            context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                position,
-                SyntaxKindSet.AllGlobalMemberModifiers,
-                cancellationToken
-            )
+            context
+                .SyntaxTree
+                .IsGlobalMemberDeclarationContext(
+                    position,
+                    SyntaxKindSet.AllGlobalMemberModifiers,
+                    cancellationToken
+                )
             || context.IsMemberDeclarationContext(
                 validModifiers: s_validClassInterfaceRecordModifiers,
                 validTypeDeclarations: SyntaxKindSet.ClassInterfaceRecordTypeDeclarations,

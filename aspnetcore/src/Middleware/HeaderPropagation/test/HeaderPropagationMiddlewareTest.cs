@@ -119,16 +119,18 @@ public class HeaderPropagationMiddlewareTest
         string receivedName = null;
         StringValues receivedValue = default;
         HttpContext receivedContext = null;
-        Configuration.Headers.Add(
-            "in",
-            context =>
-            {
-                receivedValue = context.HeaderValue;
-                receivedName = context.HeaderName;
-                receivedContext = context.HttpContext;
-                return filterValues;
-            }
-        );
+        Configuration
+            .Headers
+            .Add(
+                "in",
+                context =>
+                {
+                    receivedValue = context.HeaderValue;
+                    receivedName = context.HeaderName;
+                    receivedContext = context.HttpContext;
+                    return filterValues;
+                }
+            );
 
         Context.Request.Headers.Add("in", "value");
 

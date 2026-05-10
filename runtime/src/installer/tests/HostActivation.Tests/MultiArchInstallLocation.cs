@@ -35,7 +35,8 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedDotNetRootInstallLocation(
+                .And
+                .HaveUsedDotNetRootInstallLocation(
                     fixture.BuiltDotnet.BinPath,
                     fixture.CurrentRid,
                     arch
@@ -56,10 +57,8 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedDotNetRootInstallLocation(
-                    fixture.BuiltDotnet.BinPath,
-                    fixture.CurrentRid
-                );
+                .And
+                .HaveUsedDotNetRootInstallLocation(fixture.BuiltDotnet.BinPath, fixture.CurrentRid);
         }
 
         [Fact]
@@ -78,8 +77,10 @@ namespace HostActivation.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
-                .And.NotHaveStdErrContaining("Using environment variable DOTNET_ROOT=");
+                .And
+                .HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
+                .And
+                .NotHaveStdErrContaining("Using environment variable DOTNET_ROOT=");
         }
 
         [Fact]
@@ -109,8 +110,10 @@ namespace HostActivation.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
-                    .And.NotHaveStdErrContaining("Using global install location");
+                    .And
+                    .HaveUsedDotNetRootInstallLocation(dotnet, fixture.CurrentRid, arch)
+                    .And
+                    .NotHaveStdErrContaining("Using global install location");
             }
         }
 
@@ -134,12 +137,15 @@ namespace HostActivation.Tests
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         "Did not find [DOTNET_ROOT] directory [non_existent_path]"
                     )
                     // If DOTNET_ROOT points to a folder that does not exist, we fall back to the global install path.
-                    .And.HaveUsedGlobalInstallLocation(sharedTestState.InstallLocation)
-                    .And.HaveStdOutContaining("Hello World");
+                    .And
+                    .HaveUsedGlobalInstallLocation(sharedTestState.InstallLocation)
+                    .And
+                    .HaveStdOutContaining("Hello World");
             }
         }
 
@@ -164,9 +170,11 @@ namespace HostActivation.Tests
                     .Execute()
                     .Should()
                     .Fail()
-                    .And.HaveUsedDotNetRootInstallLocation(projDir, fixture.CurrentRid)
+                    .And
+                    .HaveUsedDotNetRootInstallLocation(projDir, fixture.CurrentRid)
                     // If DOTNET_ROOT points to a folder that exists we assume that there's a dotnet installation in it
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"The required library {Binaries.HostFxr.FileName} could not be found."
                     );
             }
@@ -198,14 +206,18 @@ namespace HostActivation.Tests
             result
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Environment variables:")
-                .And.HaveStdOutMatching(
+                .And
+                .HaveStdOutContaining("Environment variables:")
+                .And
+                .HaveStdOutMatching(
                     $@"{Constants.DotnetRoot.EnvironmentVariable}\s*\[{dotnetRootNoArch}\]"
                 )
-                .And.NotHaveStdOutContaining(
+                .And
+                .NotHaveStdOutContaining(
                     $"{Constants.DotnetRoot.ArchitectureEnvironmentVariablePrefix}{unknownEnvVar.Architecture.ToUpper()}"
                 )
-                .And.NotHaveStdOutContaining($"[{unknownEnvVar.Path}]");
+                .And
+                .NotHaveStdOutContaining($"[{unknownEnvVar.Path}]");
 
             foreach ((string architecture, string path) in envVars)
             {
@@ -258,7 +270,8 @@ namespace HostActivation.Tests
                 result
                     .Should()
                     .HaveUsedRegisteredInstallLocation(path2)
-                    .And.HaveUsedGlobalInstallLocation(path2);
+                    .And
+                    .HaveUsedGlobalInstallLocation(path2);
             }
         }
 
@@ -296,7 +309,8 @@ namespace HostActivation.Tests
                     .HaveLookedForDefaultInstallLocation(
                         registeredInstallLocationOverride.PathValueOverride
                     )
-                    .And.HaveUsedRegisteredInstallLocation(reallyLongPath);
+                    .And
+                    .HaveUsedRegisteredInstallLocation(reallyLongPath);
             }
         }
 
@@ -390,15 +404,17 @@ namespace HostActivation.Tests
                     result
                         .Should()
                         .Pass()
-                        .And.HaveStdOutContaining("Other architectures found:")
-                        .And.NotHaveStdOutContaining(unknownArchInstall.Architecture)
-                        .And.NotHaveStdOutContaining($"[{unknownArchInstall.Path}]");
+                        .And
+                        .HaveStdOutContaining("Other architectures found:")
+                        .And
+                        .NotHaveStdOutContaining(unknownArchInstall.Architecture)
+                        .And
+                        .NotHaveStdOutContaining($"[{unknownArchInstall.Path}]");
 
                     string pathOverride = OperatingSystem.IsWindows() // Host uses short form of base key for Windows
-                        ? registeredInstallLocationOverride.PathValueOverride.Replace(
-                            Microsoft.Win32.Registry.CurrentUser.Name,
-                            "HKCU"
-                        )
+                        ? registeredInstallLocationOverride
+                            .PathValueOverride
+                            .Replace(Microsoft.Win32.Registry.CurrentUser.Name, "HKCU")
                         : registeredInstallLocationOverride.PathValueOverride;
                     pathOverride = System.Text.RegularExpressions.Regex.Escape(pathOverride);
                     foreach ((string arch, string path) in installLocations)

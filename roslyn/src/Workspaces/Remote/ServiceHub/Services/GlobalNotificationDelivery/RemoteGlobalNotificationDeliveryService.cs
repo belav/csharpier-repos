@@ -64,7 +64,10 @@ namespace Microsoft.CodeAnalysis.Remote
             =>
             (RemoteGlobalOperationNotificationService)
                 GetWorkspace()
-                    .Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                    .Services
+                    .SolutionServices
+                    .ExportProvider
+                    .GetExports<IGlobalOperationNotificationService>()
                     .Single()
                     .Value;
     }

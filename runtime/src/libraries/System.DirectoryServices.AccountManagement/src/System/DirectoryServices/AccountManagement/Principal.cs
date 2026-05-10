@@ -1101,12 +1101,16 @@ namespace System.DirectoryServices.AccountManagement
         )
         {
             // Ask the store to find a Principal based on this IdentityReference info.
-            Principal p = context.QueryCtx.FindPrincipalByIdentRef(
-                principalType,
-                (identityType == null) ? null : (string)IdentMap.StringMap[(int)identityType, 1],
-                identityValue,
-                refDate
-            );
+            Principal p = context
+                .QueryCtx
+                .FindPrincipalByIdentRef(
+                    principalType,
+                    (identityType == null)
+                        ? null
+                        : (string)IdentMap.StringMap[(int)identityType, 1],
+                    identityValue,
+                    refDate
+                );
 
             // Did we find a match?
             if (p != null)

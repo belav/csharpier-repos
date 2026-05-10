@@ -73,18 +73,22 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
         static DataList_ExtractTemplateRows()
         {
             DataList_ExtractTemplateRows.m_data = new DataTable("Items");
-            DataList_ExtractTemplateRows.m_data.Columns.Add(
-                new DataColumn("StringValue", typeof(string))
-            );
-            DataList_ExtractTemplateRows.m_data.Columns.Add(
-                new DataColumn("PriceValue", typeof(string))
-            );
-            DataList_ExtractTemplateRows.m_data.Columns.Add(
-                new DataColumn("DescriptionValue", typeof(string))
-            );
-            DataList_ExtractTemplateRows.m_data.Columns.Add(
-                new DataColumn("ExponentialValue", typeof(string))
-            );
+            DataList_ExtractTemplateRows
+                .m_data
+                .Columns
+                .Add(new DataColumn("StringValue", typeof(string)));
+            DataList_ExtractTemplateRows
+                .m_data
+                .Columns
+                .Add(new DataColumn("PriceValue", typeof(string)));
+            DataList_ExtractTemplateRows
+                .m_data
+                .Columns
+                .Add(new DataColumn("DescriptionValue", typeof(string)));
+            DataList_ExtractTemplateRows
+                .m_data
+                .Columns
+                .Add(new DataColumn("ExponentialValue", typeof(string)));
             int num1 = 0;
             do
             {

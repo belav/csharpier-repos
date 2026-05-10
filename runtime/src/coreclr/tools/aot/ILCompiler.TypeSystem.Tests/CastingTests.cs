@@ -105,10 +105,9 @@ namespace TypeSystemTests
             TypeDesc stringType = _context.GetWellKnownType(WellKnownType.String);
             TypeDesc intBasedEnumType = _testModule.GetType("Casting", "IntBasedEnum");
             MetadataType iListType = _context.SystemModule.GetType("System.Collections", "IList");
-            MetadataType iListOfTType = _context.SystemModule.GetType(
-                "System.Collections.Generic",
-                "IList`1"
-            );
+            MetadataType iListOfTType = _context
+                .SystemModule
+                .GetType("System.Collections.Generic", "IList`1");
 
             InstantiatedType iListOfIntType = iListOfTType.MakeInstantiatedType(intType);
             InstantiatedType iListOfObjectType = iListOfTType.MakeInstantiatedType(objectType);
@@ -206,10 +205,9 @@ namespace TypeSystemTests
 
             TypeDesc stringSzArrayType = stringType.MakeArrayType();
 
-            MetadataType iEnumerableOfTType = _context.SystemModule.GetType(
-                "System.Collections.Generic",
-                "IEnumerable`1"
-            );
+            MetadataType iEnumerableOfTType = _context
+                .SystemModule
+                .GetType("System.Collections.Generic", "IEnumerable`1");
             InstantiatedType iEnumerableOfObjectType = iEnumerableOfTType.MakeInstantiatedType(
                 objectType
             );

@@ -24,8 +24,9 @@ namespace System.Net.Security.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/68206", TestPlatforms.Android)]
         public async Task SslStream_ClientSendsSNIServerReceives_Ok(string hostName)
         {
-            using X509Certificate serverCert =
-                Configuration.Certificates.GetSelfSignedServerCertificate();
+            using X509Certificate serverCert = Configuration
+                .Certificates
+                .GetSelfSignedServerCertificate();
 
             await WithVirtualConnection(
                 async (server, client) =>
@@ -76,8 +77,9 @@ namespace System.Net.Security.Tests
             string hostName
         )
         {
-            using X509Certificate serverCert =
-                Configuration.Certificates.GetSelfSignedServerCertificate();
+            using X509Certificate serverCert = Configuration
+                .Certificates
+                .GetSelfSignedServerCertificate();
 
             int timesCallbackCalled = 0;
 
@@ -149,8 +151,9 @@ namespace System.Net.Security.Tests
             if (PlatformDetection.IsAndroid && hostName.ToCharArray().Any(c => !char.IsAscii(c)))
                 throw new SkipTestException("Android does not support non-ASCII host names");
 
-            using X509Certificate serverCert =
-                Configuration.Certificates.GetSelfSignedServerCertificate();
+            using X509Certificate serverCert = Configuration
+                .Certificates
+                .GetSelfSignedServerCertificate();
 
             int timesCallbackCalled = 0;
 
@@ -302,10 +305,12 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             {
-                using X509Certificate2 serverCertificate =
-                    Configuration.Certificates.GetServerCertificate();
-                using X509Certificate2 clientCertificate =
-                    Configuration.Certificates.GetClientCertificate();
+                using X509Certificate2 serverCertificate = Configuration
+                    .Certificates
+                    .GetServerCertificate();
+                using X509Certificate2 clientCertificate = Configuration
+                    .Certificates
+                    .GetClientCertificate();
 
                 SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions()
                 {
@@ -396,10 +401,12 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             {
-                using X509Certificate2 serverCertificate =
-                    Configuration.Certificates.GetServerCertificate();
-                using X509Certificate2 clientCertificate =
-                    Configuration.Certificates.GetClientCertificate();
+                using X509Certificate2 serverCertificate = Configuration
+                    .Certificates
+                    .GetServerCertificate();
+                using X509Certificate2 clientCertificate = Configuration
+                    .Certificates
+                    .GetClientCertificate();
 
                 SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions()
                 {
@@ -439,8 +446,9 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             {
-                using X509Certificate2 serverCertificate =
-                    Configuration.Certificates.GetServerCertificate();
+                using X509Certificate2 serverCertificate = Configuration
+                    .Certificates
+                    .GetServerCertificate();
 
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()
                 {

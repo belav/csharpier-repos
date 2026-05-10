@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             if (baseType != null && baseType.TryGetPrimaryConstructor(out var basePrimary))
             {
                 return basePrimary
-                    .Parameters.Select(param =>
+                    .Parameters
+                    .Select(param =>
                         param.GetAssociatedSynthesizedRecordProperty(cancellationToken)
                     )
                     .WhereNotNull()

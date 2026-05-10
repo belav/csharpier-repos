@@ -168,10 +168,12 @@ namespace Microsoft.Extensions.Logging.Generators
                                     foreach (AttributeData attributeData in boundAttributes)
                                     {
                                         if (
-                                            !SymbolEqualityComparer.Default.Equals(
-                                                attributeData.AttributeClass,
-                                                loggerMessageAttribute
-                                            )
+                                            !SymbolEqualityComparer
+                                                .Default
+                                                .Equals(
+                                                    attributeData.AttributeClass,
+                                                    loggerMessageAttribute
+                                                )
                                         )
                                         {
                                             continue;
@@ -528,9 +530,11 @@ namespace Microsoft.Extensions.Logging.Generators
                                         }
 
                                         string typeName = paramTypeSymbol.ToDisplayString(
-                                            SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
-                                                SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                                            )
+                                            SymbolDisplayFormat
+                                                .FullyQualifiedFormat
+                                                .WithMiscellaneousOptions(
+                                                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                                                )
                                         );
 
                                         var lp = new LoggerParameter
@@ -713,7 +717,8 @@ namespace Microsoft.Extensions.Logging.Generators
                                                         StringComparison.OrdinalIgnoreCase
                                                     )
                                                     || t.Key[0] == '@'
-                                                        && t.Key.Substring(1)
+                                                        && t.Key
+                                                            .Substring(1)
                                                             .Equals(
                                                                 p.CodeName,
                                                                 StringComparison.OrdinalIgnoreCase

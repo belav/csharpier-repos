@@ -43,9 +43,10 @@ namespace System.Data.ProviderBase
         private DbMetaDataFactory _metaDataFactory;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         // always lock this before changing _state, we don't want to move out of the 'Disabled' state
         // PoolGroupStateUninitialized = 0;
@@ -152,7 +153,10 @@ namespace System.Data.ProviderBase
 
                         DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 #if !MOBILE
-                        connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement();
+                        connectionFactory
+                            .PerformanceCounters
+                            .NumberOfActiveConnectionPools
+                            .Decrement();
 #endif
                         connectionFactory.QueuePoolForRelease(pool, true);
                     }
@@ -230,7 +234,10 @@ namespace System.Data.ProviderBase
                                         "No other pool with current identity should exist at this point"
                                     );
 #if !MOBILE
-                                    connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Increment();
+                                    connectionFactory
+                                        .PerformanceCounters
+                                        .NumberOfActiveConnectionPools
+                                        .Increment();
 #endif
                                     pool = newPool;
                                     newPool = null;
@@ -325,7 +332,10 @@ namespace System.Data.ProviderBase
                                 DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 
 #if !MOBILE
-                                connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement();
+                                connectionFactory
+                                    .PerformanceCounters
+                                    .NumberOfActiveConnectionPools
+                                    .Decrement();
 #endif
                                 connectionFactory.QueuePoolForRelease(pool, false);
                             }

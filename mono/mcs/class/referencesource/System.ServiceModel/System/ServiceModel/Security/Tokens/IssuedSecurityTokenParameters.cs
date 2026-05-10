@@ -158,12 +158,14 @@ namespace System.ServiceModel.Security.Tokens
             set
             {
                 if (value < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 this.keySize = value;
             }
         }
@@ -223,9 +225,9 @@ namespace System.ServiceModel.Security.Tokens
         )
         {
             if (requestParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestParameters"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestParameters");
 
             if (trustDriver == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("trustDriver");
@@ -839,15 +841,17 @@ namespace System.ServiceModel.Security.Tokens
         {
             this.additionalRequestParameters.Insert(
                 0,
-                standardsManager.TrustDriver.CreateEncryptionAlgorithmElement(
-                    algorithmSuite.DefaultEncryptionAlgorithm
-                )
+                standardsManager
+                    .TrustDriver
+                    .CreateEncryptionAlgorithmElement(algorithmSuite.DefaultEncryptionAlgorithm)
             );
             this.additionalRequestParameters.Insert(
                 0,
-                standardsManager.TrustDriver.CreateCanonicalizationAlgorithmElement(
-                    algorithmSuite.DefaultCanonicalizationAlgorithm
-                )
+                standardsManager
+                    .TrustDriver
+                    .CreateCanonicalizationAlgorithmElement(
+                        algorithmSuite.DefaultCanonicalizationAlgorithm
+                    )
             );
 
             if (this.keyType == SecurityKeyType.BearerKey)
@@ -940,10 +944,9 @@ namespace System.ServiceModel.Security.Tokens
                 string algorithm;
                 XmlElement element = trustVersionNormalizedParameterCollection[i];
                 if (
-                    standardsManager.TrustDriver.IsCanonicalizationAlgorithmElement(
-                        element,
-                        out algorithm
-                    )
+                    standardsManager
+                        .TrustDriver
+                        .IsCanonicalizationAlgorithmElement(element, out algorithm)
                 )
                 {
                     if (algorithmSuite.DefaultCanonicalizationAlgorithm != algorithm)
@@ -987,10 +990,9 @@ namespace System.ServiceModel.Security.Tokens
                     doesEncryptWithAlgorithmMatch = true;
                 }
                 else if (
-                    standardsManager.TrustDriver.IsEncryptionAlgorithmElement(
-                        element,
-                        out algorithm
-                    )
+                    standardsManager
+                        .TrustDriver
+                        .IsEncryptionAlgorithmElement(element, out algorithm)
                 )
                 {
                     if (algorithm != algorithmSuite.DefaultEncryptionAlgorithm)

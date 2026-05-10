@@ -228,12 +228,14 @@ internal static partial class Interop
             const int MountPointFormatBufferSizeInBytes = 32;
             byte* formatBuffer = stackalloc byte[MountPointFormatBufferSizeInBytes]; // format names should be small
             long numericFormat;
-            int result = Interop.Sys.GetFormatInfoForMountPoint(
-                SysFsCgroupFileSystemPath,
-                formatBuffer,
-                MountPointFormatBufferSizeInBytes,
-                &numericFormat
-            );
+            int result = Interop
+                .Sys
+                .GetFormatInfoForMountPoint(
+                    SysFsCgroupFileSystemPath,
+                    formatBuffer,
+                    MountPointFormatBufferSizeInBytes,
+                    &numericFormat
+                );
             if (result == 0)
             {
                 cgroupVersion = numericFormat switch

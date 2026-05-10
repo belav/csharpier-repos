@@ -328,10 +328,9 @@ namespace System.Xaml
                     sti.Name,
                     sti.TypeName.TypeArguments == null
                         ? null
-                        : sti
-                            .TypeName.TypeArguments.Select<XamlTypeName, XamlType>(xxtn =>
-                                sctx.GetXamlType(xxtn)
-                            )
+                        : sti.TypeName
+                            .TypeArguments
+                            .Select<XamlTypeName, XamlType>(xxtn => sctx.GetXamlType(xxtn))
                             .ToArray(),
                     sctx
                 );
@@ -588,9 +587,9 @@ namespace System.Xaml
 
         static XamlDirective FindStandardDirective(string name, AllowedMemberLocations loc)
         {
-            return XamlLanguage.AllDirectives.FirstOrDefault(dd =>
-                (dd.AllowedLocation & loc) != 0 && dd.Name == name
-            );
+            return XamlLanguage
+                .AllDirectives
+                .FirstOrDefault(dd => (dd.AllowedLocation & loc) != 0 && dd.Name == name);
         }
 
         IEnumerable<XamlXmlNodeInfo> ReadMemberText(XamlType xt)

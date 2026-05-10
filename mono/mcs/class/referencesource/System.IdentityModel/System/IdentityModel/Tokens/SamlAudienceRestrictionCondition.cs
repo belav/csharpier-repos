@@ -22,19 +22,21 @@ namespace System.IdentityModel.Tokens
         public SamlAudienceRestrictionCondition(IEnumerable<Uri> audiences)
         {
             if (audiences == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("audiences")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("audiences"));
 
             foreach (Uri audience in audiences)
             {
                 if (audience == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SAMLEntityCannotBeNullOrEmpty,
-                            XD.SamlDictionary.Audience.Value
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SAMLEntityCannotBeNullOrEmpty,
+                                XD.SamlDictionary.Audience.Value
+                            )
+                        );
 
                 this.audiences.Add(audience);
             }
@@ -67,11 +69,13 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (this.audiences.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAudienceRestrictionShouldHaveOneAudience)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAudienceRestrictionShouldHaveOneAudience)
+                        )
+                    );
         }
 
         public override void ReadXml(
@@ -82,14 +86,14 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
@@ -103,11 +107,15 @@ namespace System.IdentityModel.Tokens
                     reader.MoveToContent();
                     string audience = reader.ReadString();
                     if (string.IsNullOrEmpty(audience))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.SAMLAudienceRestrictionInvalidAudienceValueOnRead)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(
+                                        SR.SAMLAudienceRestrictionInvalidAudienceValueOnRead
+                                    )
+                                )
+                            );
 
                     this.audiences.Add(new Uri(audience));
                     reader.MoveToContent();
@@ -115,23 +123,27 @@ namespace System.IdentityModel.Tokens
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.SAMLBadSchema,
-                                dictionary.AudienceRestrictionCondition.Value
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.SAMLBadSchema,
+                                    dictionary.AudienceRestrictionCondition.Value
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
             if (this.audiences.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAudienceRestrictionShouldHaveOneAudienceOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAudienceRestrictionShouldHaveOneAudienceOnRead)
+                        )
+                    );
 
             reader.MoveToContent();
             reader.ReadEndElement();
@@ -146,14 +158,14 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;

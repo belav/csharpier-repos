@@ -39,7 +39,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                     case StandardTableKeyNames2.DefinitionIcon:
                         return DefinitionBucket
-                            ?.DefinitionItem.Tags.GetFirstGlyph()
+                            ?.DefinitionItem
+                            .Tags
+                            .GetFirstGlyph()
                             .GetImageMoniker();
                 }
 

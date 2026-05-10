@@ -110,10 +110,9 @@
                 ModelName = bindingContext.ModelName,
             };
 
-            IModelBinder complexModelBinder = bindingContext.ModelBinderProviders.GetRequiredBinder(
-                modelBindingExecutionContext,
-                complexModelBindingContext
-            );
+            IModelBinder complexModelBinder = bindingContext
+                .ModelBinderProviders
+                .GetRequiredBinder(modelBindingExecutionContext, complexModelBindingContext);
             complexModelBinder.BindModel(modelBindingExecutionContext, complexModelBindingContext);
             return (ComplexModel)complexModelBindingContext.Model;
         }
@@ -195,7 +194,8 @@
         private static object GetPropertyDefaultValue(PropertyDescriptor propertyDescriptor)
         {
             DefaultValueAttribute attr = propertyDescriptor
-                .Attributes.OfType<DefaultValueAttribute>()
+                .Attributes
+                .OfType<DefaultValueAttribute>()
                 .FirstOrDefault();
             return (attr != null) ? attr.Value : null;
         }
@@ -220,7 +220,8 @@
             foreach (PropertyDescriptor propertyDescriptor in propertyDescriptors)
             {
                 BindingBehaviorAttribute propAttr = propertyDescriptor
-                    .Attributes.OfType<BindingBehaviorAttribute>()
+                    .Attributes
+                    .OfType<BindingBehaviorAttribute>()
                     .SingleOrDefault();
                 BindingBehaviorAttribute workingAttr = propAttr ?? typeAttr;
                 if (workingAttr != null)
@@ -323,7 +324,8 @@
                 if (bindingContext.ModelState.IsValidField(modelStateKey))
                 {
                     ModelValidator requiredValidator = ModelValidatorProviders
-                        .Providers.GetValidators(propertyMetadata, modelBindingExecutionContext)
+                        .Providers
+                        .GetValidators(propertyMetadata, modelBindingExecutionContext)
                         .Where(v => v.IsRequired)
                         .FirstOrDefault();
                     if (requiredValidator != null)
@@ -334,10 +336,9 @@
                             )
                         )
                         {
-                            bindingContext.ModelState.AddModelError(
-                                modelStateKey,
-                                validationResult.Message
-                            );
+                            bindingContext
+                                .ModelState
+                                .AddModelError(modelStateKey, validationResult.Message);
                         }
                     }
                 }

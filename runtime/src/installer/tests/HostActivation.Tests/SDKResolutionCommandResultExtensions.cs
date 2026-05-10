@@ -19,7 +19,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 ? assertion.NotHaveStdErrContaining(noSdkMessage)
                 : assertion
                     .HaveStdErrContaining(noSdkMessage)
-                    .And.HaveStdErrContaining("Download a .NET SDK:");
+                    .And
+                    .HaveStdErrContaining("Download a .NET SDK:");
         }
 
         public static AndConstraint<CommandResultAssertions> NotFindCompatibleSdk(
@@ -32,23 +33,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             if (globalJsonPath is not null)
             {
-                constraint = constraint.And.HaveStdErrContaining(
-                    $"global.json file: {globalJsonPath}"
-                );
+                constraint = constraint
+                    .And
+                    .HaveStdErrContaining($"global.json file: {globalJsonPath}");
             }
 
             if (requestedVersion is not null)
             {
-                constraint = constraint.And.HaveStdErrContaining(
-                    $"Requested SDK version: {requestedVersion}"
-                );
+                constraint = constraint
+                    .And
+                    .HaveStdErrContaining($"Requested SDK version: {requestedVersion}");
             }
 
             if (globalJsonPath is not null && requestedVersion is not null)
             {
-                constraint = constraint.And.HaveStdErrContaining(
-                    $"Install the [{requestedVersion}] .NET SDK or update [{globalJsonPath}] to match an installed SDK."
-                );
+                constraint = constraint
+                    .And
+                    .HaveStdErrContaining(
+                        $"Install the [{requestedVersion}] .NET SDK or update [{globalJsonPath}] to match an installed SDK."
+                    );
             }
 
             return constraint;

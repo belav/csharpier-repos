@@ -84,7 +84,8 @@ public class EventSourceTests : LoggedTest
 
         // Other tests executing in parallel may log events.
         var events = _listener
-            .EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
+            .EventData
+            .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
 
@@ -230,7 +231,8 @@ public class EventSourceTests : LoggedTest
 
         // Other tests executing in parallel may log events.
         var events = _listener
-            .EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
+            .EventData
+            .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
 
@@ -362,7 +364,8 @@ public class EventSourceTests : LoggedTest
 
         // Other tests executing in parallel may log events.
         var events = _listener
-            .EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
+            .EventData
+            .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
 
@@ -467,7 +470,8 @@ public class EventSourceTests : LoggedTest
 
         // Other tests executing in parallel may log events.
         var events = _listener
-            .EventData.Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
+            .EventData
+            .Where(e => e != null && GetProperty(e, "connectionId") == connectionId)
             .ToList();
         var eventIndex = 0;
 

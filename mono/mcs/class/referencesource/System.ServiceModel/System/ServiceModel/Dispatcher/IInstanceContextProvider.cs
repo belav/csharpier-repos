@@ -87,9 +87,9 @@ namespace System.ServiceModel.Dispatcher
             IContextChannel channel
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public virtual void InitializeInstanceContext(
@@ -98,16 +98,16 @@ namespace System.ServiceModel.Dispatcher
             IContextChannel channel
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public virtual bool IsIdle(InstanceContext instanceContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public virtual void NotifyIdle(
@@ -115,9 +115,9 @@ namespace System.ServiceModel.Dispatcher
             InstanceContext instanceContext
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         #endregion

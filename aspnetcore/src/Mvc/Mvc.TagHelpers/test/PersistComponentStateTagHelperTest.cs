@@ -83,18 +83,23 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper
+            .ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(
-            () =>
-            {
-                manager.State.PersistAsJson("state", "state value");
-                return Task.CompletedTask;
-            },
-            RenderMode.InteractiveWebAssembly
-        );
+        manager
+            .State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    manager.State.PersistAsJson("state", "state value");
+                    return Task.CompletedTask;
+                },
+                RenderMode.InteractiveWebAssembly
+            );
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
@@ -117,18 +122,23 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper
+            .ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(
-            () =>
-            {
-                manager.State.PersistAsJson("state", "state value");
-                return Task.CompletedTask;
-            },
-            RenderMode.InteractiveWebAssembly
-        );
+        manager
+            .State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    manager.State.PersistAsJson("state", "state value");
+                    return Task.CompletedTask;
+                },
+                RenderMode.InteractiveWebAssembly
+            );
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
@@ -150,18 +160,23 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper
+            .ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(
-            () =>
-            {
-                manager.State.PersistAsJson("state", "state value");
-                return Task.CompletedTask;
-            },
-            RenderMode.InteractiveServer
-        );
+        manager
+            .State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    manager.State.PersistAsJson("state", "state value");
+                    return Task.CompletedTask;
+                },
+                RenderMode.InteractiveServer
+            );
 
         await tagHelper.ProcessAsync(context, output);
 
@@ -207,18 +222,23 @@ public class PersistComponentStateTagHelperTest
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager =
-            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager = tagHelper
+            .ViewContext
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(
-            () =>
-            {
-                manager.State.PersistAsJson("state", "state value");
-                return Task.CompletedTask;
-            },
-            RenderMode.InteractiveServer
-        );
+        manager
+            .State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    manager.State.PersistAsJson("state", "state value");
+                    return Task.CompletedTask;
+                },
+                RenderMode.InteractiveServer
+            );
 
         await tagHelper.ProcessAsync(context, output);
 

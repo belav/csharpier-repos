@@ -137,11 +137,13 @@ namespace System.ServiceModel.Dispatcher
             object result
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedServerSide)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedServerSide)
+                    )
+                );
         }
     }
 }

@@ -545,15 +545,17 @@ namespace System.Net.Mail
                     string response;
                     if (!RecipientCommand.EndSend(result, out response))
                     {
-                        thisPtr.failedRecipientExceptions.Add(
-                            new SmtpFailedRecipientException(
-                                thisPtr.connection.Reader.StatusCode,
-                                thisPtr
-                                    .toCollection[thisPtr.toIndex - 1]
-                                    .GetSmtpAddress(thisPtr.allowUnicode),
-                                response
-                            )
-                        );
+                        thisPtr
+                            .failedRecipientExceptions
+                            .Add(
+                                new SmtpFailedRecipientException(
+                                    thisPtr.connection.Reader.StatusCode,
+                                    thisPtr
+                                        .toCollection[thisPtr.toIndex - 1]
+                                        .GetSmtpAddress(thisPtr.allowUnicode),
+                                    response
+                                )
+                            );
 
                         if (thisPtr.failedRecipientExceptions.Count == thisPtr.toCollection.Count)
                         {

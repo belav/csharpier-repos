@@ -70,10 +70,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             CancellationToken cancellationToken
         )
         {
-            var node = diagnostic.Location.FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var node = diagnostic
+                .Location
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
             if (node is not BinaryExpressionSyntax asExpression)
                 return;
 

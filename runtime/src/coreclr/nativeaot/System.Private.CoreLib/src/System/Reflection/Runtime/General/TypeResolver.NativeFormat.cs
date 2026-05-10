@@ -150,11 +150,9 @@ namespace System.Reflection.Runtime.General
                         .ToFunctionPointerSignatureHandle(reader)
                         .GetFunctionPointerSignature(reader);
                     MethodSignature methodSig = sig.Signature.GetMethodSignature(reader);
-                    RuntimeTypeInfo? returnType = methodSig.ReturnType.TryResolve(
-                        reader,
-                        typeContext,
-                        ref exception
-                    );
+                    RuntimeTypeInfo? returnType = methodSig
+                        .ReturnType
+                        .TryResolve(reader, typeContext, ref exception);
                     if (returnType == null)
                         return null;
                     var parameterTypes = new RuntimeTypeInfo[methodSig.Parameters.Count];

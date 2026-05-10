@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // perform semantic checks to ensure these are valid references to the symbol
             // and if so, add these locations to the computed references.
             var root = await semanticModel
-                .SyntaxTree.GetRootAsync(cancellationToken)
+                .SyntaxTree
+                .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             using var _ = ArrayBuilder<FinderLocation>.GetInstance(out var locations);
             foreach (var token in root.DescendantTokens())
@@ -244,7 +245,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // Check the attribute type matches 'SuppressMessageAttribute'.
                 var attributeSymbol = semanticModel
                     .GetSymbolInfo(attributeNode, cancellationToken)
-                    .Symbol?.ContainingType;
+                    .Symbol
+                    ?.ContainingType;
                 return suppressMessageAttribute.Equals(attributeSymbol);
             }
 

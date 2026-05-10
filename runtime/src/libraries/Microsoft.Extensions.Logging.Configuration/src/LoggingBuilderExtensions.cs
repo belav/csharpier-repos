@@ -26,12 +26,16 @@ namespace Microsoft.Extensions.Logging
         {
             builder.AddConfiguration();
 
-            builder.Services.AddSingleton<IConfigureOptions<LoggerFilterOptions>>(
-                new LoggerFilterConfigureOptions(configuration)
-            );
-            builder.Services.AddSingleton<IOptionsChangeTokenSource<LoggerFilterOptions>>(
-                new ConfigurationChangeTokenSource<LoggerFilterOptions>(configuration)
-            );
+            builder
+                .Services
+                .AddSingleton<IConfigureOptions<LoggerFilterOptions>>(
+                    new LoggerFilterConfigureOptions(configuration)
+                );
+            builder
+                .Services
+                .AddSingleton<IOptionsChangeTokenSource<LoggerFilterOptions>>(
+                    new ConfigurationChangeTokenSource<LoggerFilterOptions>(configuration)
+                );
 
             builder.Services.AddSingleton(new LoggingConfiguration(configuration));
 

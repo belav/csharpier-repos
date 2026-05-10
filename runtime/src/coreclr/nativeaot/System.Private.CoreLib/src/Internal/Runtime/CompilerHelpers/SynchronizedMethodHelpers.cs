@@ -84,10 +84,9 @@ namespace Internal.Runtime.CompilerHelpers
 
         private static unsafe MethodTable* GetClassFromMethodParam(IntPtr pDictionary)
         {
-            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetOwningTypeForMethodDictionary(
-                pDictionary,
-                out RuntimeTypeHandle th
-            );
+            bool success = RuntimeAugments
+                .TypeLoaderCallbacks
+                .TryGetOwningTypeForMethodDictionary(pDictionary, out RuntimeTypeHandle th);
             Debug.Assert(success);
             return th.ToMethodTable();
         }

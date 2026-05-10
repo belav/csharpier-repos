@@ -625,9 +625,10 @@ app.MapGet("/camera/archive/{cameraId}/chunk/{chunkName}", ({{sourceAttribute}}s
             switch (sourceAttribute)
             {
                 case "[FromQuery]":
-                    httpContext.Request.QueryString = httpContext.Request.QueryString.Add(
-                        QueryString.Create(value, value)
-                    );
+                    httpContext.Request.QueryString = httpContext
+                        .Request
+                        .QueryString
+                        .Add(QueryString.Create(value, value));
                     break;
                 case "[FromHeader]":
                     httpContext.Request.Headers[value] = value;

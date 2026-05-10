@@ -436,10 +436,9 @@ namespace System.CodeDom.Compiler
 
         public virtual object Create(object inheritedObject, object configContextObj, XmlNode node)
         {
-            return CodeDomCompilationConfiguration.SectionHandler.CreateStatic(
-                inheritedObject,
-                node
-            );
+            return CodeDomCompilationConfiguration
+                .SectionHandler
+                .CreateStatic(inheritedObject, node);
         }
     }
 

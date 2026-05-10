@@ -499,7 +499,8 @@ namespace System.Activities.Presentation
                         {
                             argumentKVPair
                                 .Properties["Value"]
-                                .Value.Properties["Expression"]
+                                .Value
+                                .Properties["Expression"]
                                 .SetValue(wrapper.Expression.GetCurrentValue());
                         }
                     }
@@ -641,9 +642,9 @@ namespace System.Activities.Presentation
                             )
                         )
                         {
-                            entry.Expression = (
-                                this.OwnerActivity as IModelTreeItem
-                            ).ModelTreeManager.WrapAsModelItem(newExpression);
+                            entry.Expression = (this.OwnerActivity as IModelTreeItem)
+                                .ModelTreeManager
+                                .WrapAsModelItem(newExpression);
                         }
                         else
                         {
@@ -665,10 +666,8 @@ namespace System.Activities.Presentation
             }
             else
             {
-                var defaultNames = this
-                    .DynamicArguments.Select<DynamicArgumentWrapperObject, string>(p =>
-                        (string)p.Name
-                    )
+                var defaultNames = this.DynamicArguments
+                    .Select<DynamicArgumentWrapperObject, string>(p => (string)p.Name)
                     .Where<string>(p =>
                         0
                         == string.Compare(

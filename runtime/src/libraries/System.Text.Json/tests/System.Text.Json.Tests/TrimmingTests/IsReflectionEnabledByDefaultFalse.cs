@@ -128,11 +128,13 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
                 NumberHandling = default,
             };
 
-        jsonTypeInfo =
-            global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreateObjectInfo<global::MyPoco>(
-                options,
-                objectInfo
-            );
+        jsonTypeInfo = global::System
+            .Text
+            .Json
+            .Serialization
+            .Metadata
+            .JsonMetadataServices
+            .CreateObjectInfo<global::MyPoco>(options, objectInfo);
         jsonTypeInfo.OriginatingResolver = this;
         return jsonTypeInfo;
     }
@@ -163,10 +165,13 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
             };
 
         global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo propertyInfo0 =
-            global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreatePropertyInfo<global::System.Int32>(
-                options,
-                info0
-            );
+            global::System
+                .Text
+                .Json
+                .Serialization
+                .Metadata
+                .JsonMetadataServices
+                .CreatePropertyInfo<global::System.Int32>(options, info0);
         properties[0] = propertyInfo0;
 
         return properties;
@@ -178,8 +183,13 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
     {
         global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::System.Int32>? jsonTypeInfo =
             null;
-        jsonTypeInfo =
-            global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreateValueInfo<global::System.Int32>(
+        jsonTypeInfo = global::System
+            .Text
+            .Json
+            .Serialization
+            .Metadata
+            .JsonMetadataServices
+            .CreateValueInfo<global::System.Int32>(
                 options,
                 global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.Int32Converter
             );

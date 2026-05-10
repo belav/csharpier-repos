@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // These symbols should all have (singular) definitions, but in the case that we can't find
             // any location, we just won't move that particular symbol
             var memberNodes = moveOptions
-                .SelectedMembers.Select(symbol => symbol.Locations.FirstOrDefault())
+                .SelectedMembers
+                .Select(symbol => symbol.Locations.FirstOrDefault())
                 .WhereNotNull()
                 .SelectAsArray(loc => loc.FindNode(cancellationToken));
             root = root.TrackNodes(memberNodes);
@@ -75,7 +76,9 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 // When it is an existing type, "FileName" points to a full path rather than just the name
                 // There should be no two docs that have the same file path
                 var destinationDocId = _document
-                    .Project.Solution.GetDocumentIdsWithFilePath(moveOptions.FileName)
+                    .Project
+                    .Solution
+                    .GetDocumentIdsWithFilePath(moveOptions.FileName)
                     .Single();
                 var fixedSolution = await RefactorAndMoveAsync(
                         moveOptions.SelectedMembers,
@@ -231,7 +234,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newTypeNode = newType
-                .DeclaringSyntaxReferences.SelectAsArray(sRef => sRef.GetSyntax(cancellationToken))
+                .DeclaringSyntaxReferences
+                .SelectAsArray(sRef => sRef.GetSyntax(cancellationToken))
                 .First(node => newTypeRoot.Contains(node));
             newTypeRoot = newTypeRoot.TrackNodes(newTypeNode);
             oldSolution = newTypeDoc.WithSyntaxRoot(newTypeRoot).Project.Solution;
@@ -490,7 +494,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 .Flatten()
                 .SelectMany(refSymbol =>
                     refSymbol
-                        .Locations.Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
+                        .Locations
+                        .Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
                         .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
                 )
                 .ToImmutableArrayOrEmpty();

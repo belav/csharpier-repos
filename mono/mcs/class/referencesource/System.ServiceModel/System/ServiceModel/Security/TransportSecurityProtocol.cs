@@ -266,12 +266,14 @@ namespace System.ServiceModel.Security
                     throw;
 
                 base.OnVerifyIncomingMessageFailure(message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.MessageSecurityVerificationFailed),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.MessageSecurityVerificationFailed),
+                            e
+                        )
+                    );
             }
         }
 
@@ -304,8 +306,9 @@ namespace System.ServiceModel.Security
                 this.SecurityProtocolFactory;
             string actor = string.Empty; // message.Version.Envelope.UltimateDestinationActor;
 
-            ReceiveSecurityHeader securityHeader =
-                factory.StandardsManager.TryCreateReceiveSecurityHeader(
+            ReceiveSecurityHeader securityHeader = factory
+                .StandardsManager
+                .TryCreateReceiveSecurityHeader(
                     message,
                     actor,
                     factory.IncomingAlgorithmSuite,
@@ -341,19 +344,27 @@ namespace System.ServiceModel.Security
                 else
                 {
                     if (String.IsNullOrEmpty(actor))
-                        throw System.ServiceModel.Diagnostics.TraceUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(SR.UnableToFindSecurityHeaderInMessageNoActor)
-                            ),
-                            message
-                        );
+                        throw System
+                            .ServiceModel
+                            .Diagnostics
+                            .TraceUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.UnableToFindSecurityHeaderInMessageNoActor)
+                                ),
+                                message
+                            );
                     else
-                        throw System.ServiceModel.Diagnostics.TraceUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(SR.UnableToFindSecurityHeaderInMessage, actor)
-                            ),
-                            message
-                        );
+                        throw System
+                            .ServiceModel
+                            .Diagnostics
+                            .TraceUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.UnableToFindSecurityHeaderInMessage, actor)
+                                ),
+                                message
+                            );
                 }
             }
 

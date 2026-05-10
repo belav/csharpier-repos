@@ -226,8 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var usingAliases = this.UsingAliases.SetItems(otherImports.UsingAliases); // NB: SetItems, rather than AddRange
-            var usings = this
-                .Usings.AddRange(otherImports.Usings)
+            var usings = this.Usings
+                .AddRange(otherImports.Usings)
                 .Distinct(UsingTargetComparer.Instance);
             var externAliases = ConcatExternAliases(this.ExternAliases, otherImports.ExternAliases);
 

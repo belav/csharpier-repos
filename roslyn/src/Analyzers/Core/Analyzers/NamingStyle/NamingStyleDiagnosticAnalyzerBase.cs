@@ -112,10 +112,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                     return;
                 }
 
-                var symbol = syntaxContext.SemanticModel.GetDeclaredSymbol(
-                    syntaxContext.Node,
-                    syntaxContext.CancellationToken
-                );
+                var symbol = syntaxContext
+                    .SemanticModel
+                    .GetDeclaredSymbol(syntaxContext.Node, syntaxContext.CancellationToken);
                 if (symbol?.Locations.FirstOrDefault()?.SourceTree is not { } sourceTree)
                 {
                     // Catch clauses don't need to have a declaration.

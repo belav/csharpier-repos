@@ -53,12 +53,9 @@ namespace System.ServiceModel.Diagnostics
             }
             if (this.address != null)
             {
-                this.address.EndpointAddress.WriteTo(
-                    AddressingVersion.WSAddressing10,
-                    writer,
-                    "LocalAddress",
-                    ""
-                );
+                this.address
+                    .EndpointAddress
+                    .WriteTo(AddressingVersion.WSAddressing10, writer, "LocalAddress", "");
                 foreach (IPAddress address in this.address.IPAddresses)
                 {
                     writer.WriteElementString("IPAddress", address.ToString());
@@ -127,12 +124,9 @@ namespace System.ServiceModel.Diagnostics
             );
             if (this.listenAddress != null)
             {
-                this.listenAddress.EndpointAddress.WriteTo(
-                    AddressingVersion.WSAddressing10,
-                    writer,
-                    "ListenAddress",
-                    ""
-                );
+                this.listenAddress
+                    .EndpointAddress
+                    .WriteTo(AddressingVersion.WSAddressing10, writer, "ListenAddress", "");
                 foreach (IPAddress address in this.listenAddress.IPAddresses)
                 {
                     writer.WriteElementString("IPAddress", address.ToString());
@@ -232,12 +226,9 @@ namespace System.ServiceModel.Diagnostics
             {
                 foreach (PeerNodeAddress nodeAddress in addresses)
                 {
-                    nodeAddress.EndpointAddress.WriteTo(
-                        AddressingVersion.WSAddressing10,
-                        writer,
-                        "Address",
-                        ""
-                    );
+                    nodeAddress
+                        .EndpointAddress
+                        .WriteTo(AddressingVersion.WSAddressing10, writer, "Address", "");
                     foreach (IPAddress ipAddress in nodeAddress.IPAddresses)
                     {
                         writer.WriteElementString("IPAddress", ipAddress.ToString());

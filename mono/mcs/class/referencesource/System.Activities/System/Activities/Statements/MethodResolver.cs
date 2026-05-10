@@ -734,7 +734,8 @@ namespace System.Activities.Statements
                         if (MethodResolver.HaveParameterArray(formalParams)) // Check if the last parameter of method is marked w/ "params" attribute
                         {
                             Type elementType = formalParams[formalParams.Length - 1]
-                                .ParameterType.GetElementType();
+                                .ParameterType
+                                .GetElementType();
 
                             bool allCompatible = true;
                             // There could be more actual parameters than formal parameters, because the formal parameter is a params T'[] for some T'.
@@ -776,16 +777,18 @@ namespace System.Activities.Statements
                                     bindingAttr == staticBindingFlags
                                         ? staticString
                                         : instanceString;
-                                throw FxTrace.Exception.AsError(
-                                    new AmbiguousMatchException(
-                                        SR.DuplicateMethodFound(
-                                            type,
-                                            bindingType,
-                                            name,
-                                            this.parentActivity.DisplayName
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new AmbiguousMatchException(
+                                            SR.DuplicateMethodFound(
+                                                type,
+                                                bindingType,
+                                                name,
+                                                this.parentActivity.DisplayName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             else
                             {

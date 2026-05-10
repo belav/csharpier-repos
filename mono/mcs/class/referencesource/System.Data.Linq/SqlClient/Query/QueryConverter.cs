@@ -3847,8 +3847,9 @@ namespace System.Data.Linq.SqlClient
             try
             {
                 MetaTable metaTable = this.services.Model.GetTable(item.Type);
-                Expression source = this
-                    .services.Context.GetTable(metaTable.RowType.Type)
+                Expression source = this.services
+                    .Context
+                    .GetTable(metaTable.RowType.Type)
                     .Expression;
                 Type rowType = metaTable.RowType.Type;
 
@@ -3955,10 +3956,13 @@ namespace System.Data.Linq.SqlClient
 
         void AddIdentityMembers(IEnumerable<MemberInfo> members)
         {
-            System.Diagnostics.Debug.Assert(
-                this.IdentityMembers == null,
-                "We already have a set of keys -- why are we adding more?"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    this.IdentityMembers == null,
+                    "We already have a set of keys -- why are we adding more?"
+                );
             this.IdentityMembers = new List<MemberInfo>(members);
         }
 

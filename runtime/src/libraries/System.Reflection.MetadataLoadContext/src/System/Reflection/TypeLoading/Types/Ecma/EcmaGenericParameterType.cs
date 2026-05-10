@@ -70,7 +70,8 @@ namespace System.Reflection.TypeLoading.Ecma
             foreach (GenericParameterConstraintHandle h in handles)
             {
                 RoType constraint = h.GetGenericParameterConstraint(reader)
-                    .Type.ResolveTypeDefRefOrSpec(GetEcmaModule(), typeContext);
+                    .Type
+                    .ResolveTypeDefRefOrSpec(GetEcmaModule(), typeContext);
 
                 // A constraint can have modifiers such as 'System.Runtime.InteropServices.UnmanagedType' which here is a 'System.ValueType'
                 // modified type with a modreq for 'UnmanagedType' which would be obtainable through 'GetRequiredCustomModifiers()'.

@@ -3386,9 +3386,9 @@ class C : List<int>
                     {
                         Parse(
                             source,
-                            options: TestOptions.Regular.WithLanguageVersion(
-                                LanguageVersion.CSharp5
-                            )
+                            options: TestOptions
+                                .Regular
+                                .WithLanguageVersion(LanguageVersion.CSharp5)
                         ),
                     }
                 )
@@ -3544,9 +3544,9 @@ class C : List<int>
                     {
                         Parse(
                             source,
-                            options: TestOptions.Regular.WithLanguageVersion(
-                                LanguageVersion.CSharp5
-                            )
+                            options: TestOptions
+                                .Regular
+                                .WithLanguageVersion(LanguageVersion.CSharp5)
                         ),
                     }
                 )

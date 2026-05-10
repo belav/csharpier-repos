@@ -412,9 +412,9 @@ namespace System.Activities.Runtime
 
             // We snapshot these values here so that we can
             // use them after calling OnSchedulerIdle.
-            bool isTracingEnabled = FxTrace.Trace.ShouldTraceToTraceSource(
-                TraceEventLevel.Informational
-            );
+            bool isTracingEnabled = FxTrace
+                .Trace
+                .ShouldTraceToTraceSource(TraceEventLevel.Informational);
             Guid oldActivityId = Guid.Empty;
             Guid workflowInstanceId = Guid.Empty;
 
@@ -520,10 +520,9 @@ namespace System.Activities.Runtime
                     isInstanceComplete = thisPtr.callbacks.IsCompleted;
                 }
 
-                thisPtr.callbacks.NotifyUnhandledException(
-                    notifyAction.Exception,
-                    notifyAction.Source
-                );
+                thisPtr
+                    .callbacks
+                    .NotifyUnhandledException(notifyAction.Exception, notifyAction.Source);
             }
 
             if (isTracingEnabled)

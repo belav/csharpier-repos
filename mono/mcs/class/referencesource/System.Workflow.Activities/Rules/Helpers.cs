@@ -241,10 +241,10 @@ namespace System.Workflow.Activities.Rules
             else
             {
                 string resourceName = workflowType.Name + ".rules";
-                Stream stream = workflowType.Module.Assembly.GetManifestResourceStream(
-                    workflowType,
-                    resourceName
-                );
+                Stream stream = workflowType
+                    .Module
+                    .Assembly
+                    .GetManifestResourceStream(workflowType, resourceName);
 
                 // Try just the .rules file name. This is needed for wfc.exe compilation scenarios.
                 if (stream == null)
@@ -296,7 +296,8 @@ namespace System.Workflow.Activities.Rules
             Type underlyingType = typeof(int);
             if (
                 type.GetType()
-                    .FullName.Equals(
+                    .FullName
+                    .Equals(
                         "System.Workflow.ComponentModel.Compiler.DesignTimeType",
                         StringComparison.Ordinal
                     )

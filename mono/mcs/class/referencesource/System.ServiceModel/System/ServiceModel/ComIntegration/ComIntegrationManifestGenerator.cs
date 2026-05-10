@@ -27,9 +27,11 @@ namespace System.ServiceModel.ComIntegration
             String path = Path.GetDirectoryName(strAssemblyManifestFileName);
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
+                    );
             }
 
             Stream s = null;
@@ -74,12 +76,15 @@ namespace System.ServiceModel.ComIntegration
 
                 s.Close();
                 File.Delete(strAssemblyManifestFileName);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ManifestCreationFailed(
-                        strAssemblyManifestFileName,
-                        e.Message
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        System
+                            .ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ManifestCreationFailed(strAssemblyManifestFileName, e.Message)
+                    );
             }
 
             s.Close();
@@ -98,9 +103,11 @@ namespace System.ServiceModel.ComIntegration
             String path = Path.GetDirectoryName(strAssemblyManifestFileName);
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        System.ServiceModel.ComIntegration.Error.DirectoryNotFound(path)
+                    );
             }
 
             Stream s = null;
@@ -127,12 +134,15 @@ namespace System.ServiceModel.ComIntegration
 
                 s.Close();
                 File.Delete(strAssemblyManifestFileName);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.ManifestCreationFailed(
-                        strAssemblyManifestFileName,
-                        e.Message
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        System
+                            .ServiceModel
+                            .ComIntegration
+                            .Error
+                            .ManifestCreationFailed(strAssemblyManifestFileName, e.Message)
+                    );
             }
 
             s.Close();

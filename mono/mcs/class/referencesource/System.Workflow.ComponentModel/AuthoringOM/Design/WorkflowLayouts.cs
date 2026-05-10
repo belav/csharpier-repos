@@ -1137,8 +1137,9 @@ namespace System.Workflow.ComponentModel.Design
             //Read the unprintable margins
             Margins hardMargins = new Margins();
             using (
-                Graphics printerGraphics =
-                    this.printDocument.PrinterSettings.CreateMeasurementGraphics()
+                Graphics printerGraphics = this.printDocument
+                    .PrinterSettings
+                    .CreateMeasurementGraphics()
             )
                 hardMargins = this.printDocument.GetHardMargins(printerGraphics);
 

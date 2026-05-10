@@ -120,7 +120,8 @@ public class InputRadioTest
 
     private static IEnumerable<TestInputRadio> FindInputRadioComponents(CapturedBatch batch) =>
         batch
-            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+            .ReferenceFrames
+            .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component)
             .OfType<TestInputRadio>();
 

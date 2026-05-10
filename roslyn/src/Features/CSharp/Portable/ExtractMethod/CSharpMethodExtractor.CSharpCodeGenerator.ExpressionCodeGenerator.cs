@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                     // This is similar to FieldDeclaration case but we only want to do this
                     // if the member has an expression body.
-                    scope ??= this
-                        .SelectionResult.GetContainingScopeOf<ArrowExpressionClauseSyntax>()
+                    scope ??= this.SelectionResult
+                        .GetContainingScopeOf<ArrowExpressionClauseSyntax>()
                         .Parent;
 
                     return scope;

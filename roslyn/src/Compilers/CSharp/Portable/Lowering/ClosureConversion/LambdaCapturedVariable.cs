@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return frame
-                .TypeMap.SubstituteType(
+                .TypeMap
+                .SubstituteType(
                     (
                         (object)local != null
                             ? local.TypeWithAnnotations

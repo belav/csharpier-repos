@@ -95,9 +95,9 @@ namespace System.ComponentModel.Composition.Hosting
                         foreach (var candidateReachablePart in candidateReachableParts)
                         {
                             foreach (
-                                ImportDefinition import in candidateReachablePart.ImportDefinitions.Where(
-                                    _importFilter
-                                )
+                                ImportDefinition import in candidateReachablePart
+                                    .ImportDefinitions
+                                    .Where(_importFilter)
                             )
                             {
                                 if (

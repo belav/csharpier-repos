@@ -149,10 +149,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var convertedValue = value ? 1 : 0;
             var project = await GetProjectAsync(projectName, cancellationToken);
             project.Properties.Item("OptionInfer").Value = convertedValue;
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.Workspace],
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace], cancellationToken);
         }
 
         public async Task AddProjectReferenceAsync(
@@ -299,7 +298,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             var project = await GetProjectAsync(projectName, cancellationToken);
             var references = ((VSProject)project.Object)
-                .References.Cast<Reference>()
+                .References
+                .Cast<Reference>()
                 .Where(x => x.SourceProject == null)
                 .Select(x => x.Name + "," + x.Version + "," + x.PublicKeyToken)
                 .ToArray();
@@ -315,7 +315,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             var project = await GetProjectAsync(projectName, cancellationToken);
             var references = ((VSProject)project.Object)
-                .References.Cast<Reference>()
+                .References
+                .Cast<Reference>()
                 .Where(x => x.SourceProject != null)
                 .Select(x => x.Name)
                 .ToArray();
@@ -443,7 +444,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 var textDocument = (EnvDTE.TextDocument)
                     document.Object(nameof(EnvDTE.TextDocument));
                 var currentTextInDocument = textDocument
-                    .StartPoint.CreateEditPoint()
+                    .StartPoint
+                    .CreateEditPoint()
                     .GetText(textDocument.EndPoint);
                 var fullPath = document.FullName;
                 document.Save();
@@ -555,21 +557,19 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         public async Task SaveAllAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd97CmdID.SaveSolution,
-                cancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(VSConstants.VSStd97CmdID.SaveSolution, cancellationToken);
 
             // Wait for async save operations to complete before proceeding
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.Workspace],
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace], cancellationToken);
 
             // Verify documents are truly saved after a Save Solution operation
-            await TestServices.SolutionExplorerVerifier.AllDocumentsAreSavedAsync(
-                cancellationToken
-            );
+            await TestServices
+                .SolutionExplorerVerifier
+                .AllDocumentsAreSavedAsync(cancellationToken);
         }
 
         public async Task OpenFileWithDesignerAsync(
@@ -1027,10 +1027,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             solutionEvents.OnUpdateSolutionDone += HandleUpdateSolutionDone;
             try
             {
-                await TestServices.Shell.ExecuteCommandAsync(
-                    VSConstants.VSStd97CmdID.BuildSln,
-                    cancellationToken
-                );
+                await TestServices
+                    .Shell
+                    .ExecuteCommandAsync(VSConstants.VSStd97CmdID.BuildSln, cancellationToken);
 
                 await buildCompleteTaskCompletionSource.Task;
             }
@@ -1111,7 +1110,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             Assumes.Present(solution);
 
             var project = solution
-                .Projects.Cast<EnvDTE.Project>()
+                .Projects
+                .Cast<EnvDTE.Project>()
                 .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);
             return Path.Combine(projectPath, relativeFilePath);
@@ -1210,7 +1210,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             var dte = await GetRequiredGlobalServiceAsync<SDTE, EnvDTE.DTE>(cancellationToken);
             var solution = (EnvDTE80.Solution2)dte.Solution;
             return solution
-                .Projects.OfType<EnvDTE.Project>()
+                .Projects
+                .OfType<EnvDTE.Project>()
                 .First(project =>
                 {
                     ThreadHelper.ThrowIfNotOnUIThread();

@@ -172,9 +172,13 @@ namespace System.ServiceModel.Channels
                 SegmentHierarchyNode<TItem> node = FindOrCreateNode(key);
                 if (node.Data != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.DuplicateRegistration, uri))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.DuplicateRegistration, uri)
+                            )
+                        );
                 }
                 node.SetData(item, key);
                 count++;

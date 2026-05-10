@@ -66,13 +66,15 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             if (target is PositionalPatternClauseSyntax positionalPattern)
             {
                 // Code in GenerateDeconstructMethodCodeFixProvider has already checked that all subpatterns are ConstantPatternSyntax.
-                var namesBuilder = positionalPattern.Subpatterns.SelectAsArray(sub =>
-                    semanticModel.GenerateNameForExpression(
-                        ((ConstantPatternSyntax)sub.Pattern).Expression,
-                        capitalize: false,
-                        cancellationToken
-                    )
-                );
+                var namesBuilder = positionalPattern
+                    .Subpatterns
+                    .SelectAsArray(sub =>
+                        semanticModel.GenerateNameForExpression(
+                            ((ConstantPatternSyntax)sub.Pattern).Expression,
+                            capitalize: false,
+                            cancellationToken
+                        )
+                    );
 
                 var names = NameGenerator.EnsureUniqueness(namesBuilder);
 
@@ -91,9 +93,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                                     cancellationToken
                                 )
                                 .Type
-                                ?? semanticModel.Compilation.GetSpecialType(
-                                    SpecialType.System_Object
-                                ),
+                                ?? semanticModel
+                                    .Compilation
+                                    .GetSpecialType(SpecialType.System_Object),
                             name: name
                         )
                 );

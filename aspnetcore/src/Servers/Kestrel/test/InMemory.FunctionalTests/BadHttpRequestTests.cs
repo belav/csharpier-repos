@@ -274,7 +274,8 @@ public class BadHttpRequestTests : LoggedTest
             using (var client = server.CreateConnection())
             {
                 await client
-                    .Stream.WriteAsync(Core.Internal.Http2.Http2Connection.ClientPreface.ToArray())
+                    .Stream
+                    .WriteAsync(Core.Internal.Http2.Http2Connection.ClientPreface.ToArray())
                     .DefaultTimeout();
 
                 var data = await client.Stream.ReadAtLeastLengthAsync(17);

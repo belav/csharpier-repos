@@ -218,9 +218,9 @@ namespace System.Web.Services.Description
 
             AppendMetadata(method.MimeReturn.Attributes, mainCodeMethod.ReturnTypeCustomAttributes);
 
-            mainCodeMethod.Comments.Add(
-                new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-            );
+            mainCodeMethod
+                .Comments
+                .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
             for (int i = 0; i < parameters.Count; i++)
             {
@@ -250,11 +250,13 @@ namespace System.Web.Services.Description
                 );
                 if (method.MimeReturn.ReaderType != null)
                 {
-                    mainCodeMethod.Statements.Add(
-                        new CodeMethodReturnStatement(
-                            new CodeCastExpression(method.MimeReturn.TypeName, invoke)
-                        )
-                    );
+                    mainCodeMethod
+                        .Statements
+                        .Add(
+                            new CodeMethodReturnStatement(
+                                new CodeCastExpression(method.MimeReturn.TypeName, invoke)
+                            )
+                        );
                 }
                 else
                 {
@@ -285,9 +287,9 @@ namespace System.Web.Services.Description
                         metadata,
                         CodeFlags.IsPublic
                     );
-                    beginCodeMethod.Comments.Add(
-                        new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-                    );
+                    beginCodeMethod
+                        .Comments
+                        .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
                     invokeParams = new CodeExpression[5];
                     CreateInvokeParams(invokeParams, method, parameterNames);
@@ -312,9 +314,9 @@ namespace System.Web.Services.Description
                         metadata,
                         CodeFlags.IsPublic
                     );
-                    endCodeMethod.Comments.Add(
-                        new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-                    );
+                    endCodeMethod
+                        .Comments
+                        .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
                     CodeExpression expr = new CodeArgumentReferenceExpression("asyncResult");
                     invoke = new CodeMethodInvokeExpression(
@@ -324,11 +326,13 @@ namespace System.Web.Services.Description
                     );
                     if (method.MimeReturn.ReaderType != null)
                     {
-                        endCodeMethod.Statements.Add(
-                            new CodeMethodReturnStatement(
-                                new CodeCastExpression(method.MimeReturn.TypeName, invoke)
-                            )
-                        );
+                        endCodeMethod
+                            .Statements
+                            .Add(
+                                new CodeMethodReturnStatement(
+                                    new CodeCastExpression(method.MimeReturn.TypeName, invoke)
+                                )
+                            );
                     }
                     else
                     {
@@ -443,9 +447,9 @@ namespace System.Web.Services.Description
                                     delegateInfo.handlerArgs,
                                     new string[] { method.MimeReturn.TypeName },
                                     new string[] { "Result" },
-                                    ServiceImporter.CodeGenerator.Supports(
-                                        GeneratorSupport.PartialTypes
-                                    )
+                                    ServiceImporter
+                                        .CodeGenerator
+                                        .Supports(GeneratorSupport.PartialTypes)
                                 )
                             );
                         }

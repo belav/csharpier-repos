@@ -942,9 +942,9 @@ namespace Microsoft.Build.BuildEngine
 
                 if (SchemaFile != null)
                 {
-                    xmlDocument.Schemas.Add(
-                        XmlSchema.Read(new StreamReader(SchemaFile), ValidationCallBack)
-                    );
+                    xmlDocument
+                        .Schemas
+                        .Add(XmlSchema.Read(new StreamReader(SchemaFile), ValidationCallBack));
                     xmlDocument.Validate(ValidationCallBack);
                 }
 

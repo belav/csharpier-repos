@@ -364,9 +364,9 @@ namespace System.Runtime.CompilerServices
             if (mt->NumVtableSlots == 0)
             {
                 // This is a type without a vtable or GCDesc. We must not allow creating an instance of it
-                throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(
-                    type
-                );
+                throw ReflectionCoreExecution
+                    .ExecutionEnvironment
+                    .CreateMissingMetadataException(type);
             }
             // Paranoid check: not-meant-for-GC-heap types should be reliably identifiable by empty vtable.
             Debug.Assert(

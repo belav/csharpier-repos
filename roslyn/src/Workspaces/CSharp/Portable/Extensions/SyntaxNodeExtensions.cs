@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this MemberAccessExpressionSyntax memberAccess
         ) =>
             memberAccess
-                .Name.WithLeadingTrivia(GetLeadingTriviaForSimplifiedMemberAccess(memberAccess))
+                .Name
+                .WithLeadingTrivia(GetLeadingTriviaForSimplifiedMemberAccess(memberAccess))
                 .WithTrailingTrivia(memberAccess.GetTrailingTrivia());
 
         private static SyntaxTriviaList GetLeadingTriviaForSimplifiedMemberAccess(

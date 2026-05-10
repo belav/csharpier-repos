@@ -82,9 +82,12 @@ namespace System.Runtime.Serialization
         public void Import(XmlSchemaSet schemas)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             InternalImport(schemas, null, null, null);
         }
@@ -92,14 +95,20 @@ namespace System.Runtime.Serialization
         public void Import(XmlSchemaSet schemas, ICollection<XmlQualifiedName> typeNames)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeNames == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeNames")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeNames"));
 
             InternalImport(schemas, typeNames, emptyElementArray, emptyTypeNameArray);
         }
@@ -107,14 +116,20 @@ namespace System.Runtime.Serialization
         public void Import(XmlSchemaSet schemas, XmlQualifiedName typeName)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeName == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeName")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeName"));
 
             SingleTypeNameArray[0] = typeName;
             InternalImport(schemas, SingleTypeNameArray, emptyElementArray, emptyTypeNameArray);
@@ -123,14 +138,20 @@ namespace System.Runtime.Serialization
         public XmlQualifiedName Import(XmlSchemaSet schemas, XmlSchemaElement element)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (element == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("element")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("element"));
 
             SingleTypeNameArray[0] = null;
             SingleElementArray[0] = element;
@@ -146,9 +167,12 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             return InternalCanImport(schemas, null, null, null);
         }
@@ -156,14 +180,20 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas, ICollection<XmlQualifiedName> typeNames)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeNames == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeNames")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeNames"));
 
             return InternalCanImport(schemas, typeNames, emptyElementArray, emptyTypeNameArray);
         }
@@ -171,14 +201,20 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas, XmlQualifiedName typeName)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (typeName == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeName")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeName"));
 
             return InternalCanImport(
                 schemas,
@@ -191,14 +227,20 @@ namespace System.Runtime.Serialization
         public bool CanImport(XmlSchemaSet schemas, XmlSchemaElement element)
         {
             if (schemas == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("schemas")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("schemas"));
 
             if (element == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("element")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("element"));
 
             SingleTypeNameArray[0] = null;
             SingleElementArray[0] = element;
@@ -227,13 +269,13 @@ namespace System.Runtime.Serialization
         )
         {
             if (element == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("element")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("element"));
             if (typeName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeName")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeName"));
             DataContract dataContract = FindDataContract(typeName);
             CodeExporter codeExporter = new CodeExporter(
                 DataContractSet,
@@ -247,9 +289,12 @@ namespace System.Runtime.Serialization
         internal DataContract FindDataContract(XmlQualifiedName typeName)
         {
             if (typeName == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeName")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeName"));
 
             DataContract dataContract = DataContract.GetBuiltInDataContract(
                 typeName.Name,
@@ -259,15 +304,20 @@ namespace System.Runtime.Serialization
             {
                 dataContract = DataContractSet[typeName];
                 if (dataContract == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TypeHasNotBeenImported,
-                                typeName.Name,
-                                typeName.Namespace
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.TypeHasNotBeenImported,
+                                    typeName.Name,
+                                    typeName.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
             }
             return dataContract;
         }
@@ -275,9 +325,12 @@ namespace System.Runtime.Serialization
         public ICollection<CodeTypeReference> GetKnownTypeReferences(XmlQualifiedName typeName)
         {
             if (typeName == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("typeName")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("typeName"));
 
             DataContract dataContract = DataContract.GetBuiltInDataContract(
                 typeName.Name,
@@ -287,15 +340,20 @@ namespace System.Runtime.Serialization
             {
                 dataContract = DataContractSet[typeName];
                 if (dataContract == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.TypeHasNotBeenImported,
-                                typeName.Name,
-                                typeName.Namespace
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.TypeHasNotBeenImported,
+                                    typeName.Name,
+                                    typeName.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             CodeExporter codeExporter = new CodeExporter(

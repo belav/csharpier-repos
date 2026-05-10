@@ -126,10 +126,12 @@ namespace System.Net.WebSockets
                 if (shouldSendSecWebSocketProtocolHeader)
                 {
                     secWebSocketProtocols.Add(outgoingSecWebSocketProtocolString);
-                    response.Headers.Add(
-                        HttpKnownHeaderNames.SecWebSocketProtocol,
-                        outgoingSecWebSocketProtocolString
-                    );
+                    response
+                        .Headers
+                        .Add(
+                            HttpKnownHeaderNames.SecWebSocketProtocol,
+                            outgoingSecWebSocketProtocolString
+                        );
                 }
 
                 // negotiate the websocket key return value
@@ -139,10 +141,9 @@ namespace System.Net.WebSockets
                 );
 
                 response.Headers.Add(HttpKnownHeaderNames.Connection, HttpKnownHeaderNames.Upgrade);
-                response.Headers.Add(
-                    HttpKnownHeaderNames.Upgrade,
-                    WebSocketHelpers.WebSocketUpgradeToken
-                );
+                response
+                    .Headers
+                    .Add(HttpKnownHeaderNames.Upgrade, WebSocketHelpers.WebSocketUpgradeToken);
                 response.Headers.Add(HttpKnownHeaderNames.SecWebSocketAccept, secWebSocketAccept);
 
                 response.StatusCode = (int)HttpStatusCode.SwitchingProtocols; // HTTP 101

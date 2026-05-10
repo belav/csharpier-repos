@@ -60,13 +60,15 @@ internal sealed class SwaggathererApplication : CommandLineApplication
 
         if (InputDirectory.HasValue())
         {
-            Input.Values.AddRange(
-                Directory.EnumerateFiles(
-                    InputDirectory.Value(),
-                    "*.json",
-                    SearchOption.AllDirectories
-                )
-            );
+            Input
+                .Values
+                .AddRange(
+                    Directory.EnumerateFiles(
+                        InputDirectory.Value(),
+                        "*.json",
+                        SearchOption.AllDirectories
+                    )
+                );
         }
 
         Console.WriteLine($"Processing {Input.Values.Count} files...");

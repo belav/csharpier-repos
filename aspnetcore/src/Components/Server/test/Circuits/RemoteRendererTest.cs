@@ -251,17 +251,19 @@ public class RemoteRendererTest
             );
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                        [nameof(AutoParameterTestComponent.Trigger)] = trigger,
-                    }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+                renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                            [nameof(AutoParameterTestComponent.Trigger)] = trigger,
+                        }
+                    )
                 )
-            )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -334,17 +336,19 @@ public class RemoteRendererTest
             );
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                        [nameof(AutoParameterTestComponent.Trigger)] = trigger,
-                    }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+                renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                            [nameof(AutoParameterTestComponent.Trigger)] = trigger,
+                        }
+                    )
                 )
-            )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -417,17 +421,19 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                        [nameof(AutoParameterTestComponent.Trigger)] = trigger,
-                    }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+                renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                            [nameof(AutoParameterTestComponent.Trigger)] = trigger,
+                        }
+                    )
                 )
-            )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -494,17 +500,19 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(() =>
-            renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                ParameterView.FromDictionary(
-                    new Dictionary<string, object>
-                    {
-                        [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                        [nameof(AutoParameterTestComponent.Trigger)] = trigger,
-                    }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+                renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                    ParameterView.FromDictionary(
+                        new Dictionary<string, object>
+                        {
+                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                            [nameof(AutoParameterTestComponent.Trigger)] = trigger,
+                        }
+                    )
                 )
-            )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -672,17 +680,19 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0, "mykey");
-        await renderer.Dispatcher.InvokeAsync(() =>
-        {
-            var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
-            var parameters = new Dictionary<string, object> { ["Name"] = "value" };
-            webRootComponentManager.UpdateRootComponentAsync(
-                0,
-                typeof(TestComponent),
-                key,
-                CreateWebRootComponentParameters(parameters)
-            );
-        });
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+            {
+                var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
+                var parameters = new Dictionary<string, object> { ["Name"] = "value" };
+                webRootComponentManager.UpdateRootComponentAsync(
+                    0,
+                    typeof(TestComponent),
+                    key,
+                    CreateWebRootComponentParameters(parameters)
+                );
+            });
 
         // Assert
         Assert.Equal(2, renderer._unacknowledgedRenderBatches.Count); // Initial render, re-render
@@ -697,16 +707,18 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0);
-        await renderer.Dispatcher.InvokeAsync(() =>
-        {
-            var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
-            webRootComponentManager.UpdateRootComponentAsync(
-                0,
-                typeof(TestComponent),
-                key,
-                WebRootComponentParameters.Empty
-            );
-        });
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+            {
+                var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
+                webRootComponentManager.UpdateRootComponentAsync(
+                    0,
+                    typeof(TestComponent),
+                    key,
+                    WebRootComponentParameters.Empty
+                );
+            });
 
         // Assert
         Assert.Single(renderer._unacknowledgedRenderBatches);
@@ -721,17 +733,19 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0);
-        await renderer.Dispatcher.InvokeAsync(() =>
-        {
-            var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
-            var parameters = new Dictionary<string, object> { ["Name"] = "value" };
-            webRootComponentManager.UpdateRootComponentAsync(
-                0,
-                typeof(TestComponent),
-                key,
-                CreateWebRootComponentParameters(parameters)
-            );
-        });
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+            {
+                var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
+                var parameters = new Dictionary<string, object> { ["Name"] = "value" };
+                webRootComponentManager.UpdateRootComponentAsync(
+                    0,
+                    typeof(TestComponent),
+                    key,
+                    CreateWebRootComponentParameters(parameters)
+                );
+            });
 
         // Assert
         Assert.Equal(3, renderer._unacknowledgedRenderBatches.Count); // Initial render, dispose, and re-initialize
@@ -764,11 +778,13 @@ public class RemoteRendererTest
 
         // Act
         var key = await AddWebRootComponentAsync(renderer, 0);
-        await renderer.Dispatcher.InvokeAsync(() =>
-        {
-            var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
-            webRootComponentManager.RemoveRootComponent(0);
-        });
+        await renderer
+            .Dispatcher
+            .InvokeAsync(() =>
+            {
+                var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
+                webRootComponentManager.RemoveRootComponent(0);
+            });
 
         // Assert
         Assert.Equal(2, renderer._unacknowledgedRenderBatches.Count); // Initial render, dispose
@@ -814,22 +830,24 @@ public class RemoteRendererTest
         int ssrComponentId,
         string componentKey = null
     ) =>
-        renderer.Dispatcher.InvokeAsync(async () =>
-        {
-            var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
-            var componentMarkerKey = new ComponentMarkerKey()
+        renderer
+            .Dispatcher
+            .InvokeAsync(async () =>
             {
-                LocationHash = ssrComponentId.ToString(CultureInfo.CurrentCulture),
-                FormattedComponentKey = componentKey,
-            };
-            await webRootComponentManager.AddRootComponentAsync(
-                ssrComponentId,
-                typeof(TestComponent),
-                componentMarkerKey,
-                WebRootComponentParameters.Empty
-            );
-            return componentMarkerKey;
-        });
+                var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
+                var componentMarkerKey = new ComponentMarkerKey()
+                {
+                    LocationHash = ssrComponentId.ToString(CultureInfo.CurrentCulture),
+                    FormattedComponentKey = componentKey,
+                };
+                await webRootComponentManager.AddRootComponentAsync(
+                    ssrComponentId,
+                    typeof(TestComponent),
+                    componentMarkerKey,
+                    WebRootComponentParameters.Empty
+                );
+                return componentMarkerKey;
+            });
 
     private static WebRootComponentParameters CreateWebRootComponentParameters(
         IDictionary<string, object> parameters
@@ -936,9 +954,9 @@ public class RemoteRendererTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle.Dispatcher.InvokeAsync(() =>
-                _renderHandle.Render(_renderFragment)
-            );
+            var task = _renderHandle
+                .Dispatcher
+                .InvokeAsync(() => _renderHandle.Render(_renderFragment));
             Assert.True(task.IsCompletedSuccessfully);
         }
     }

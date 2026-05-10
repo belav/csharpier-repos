@@ -14,13 +14,15 @@ namespace System.ServiceModel.Channels
         {
             if (size <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "size",
-                        size,
-                        SR.GetString(SR.ValueMustBePositive)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "size",
+                            size,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
             }
         }
     }
@@ -38,9 +40,11 @@ namespace System.ServiceModel.Channels
             {
                 if (!isValueDecoded)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return value;
             }
         }
@@ -62,9 +66,11 @@ namespace System.ServiceModel.Channels
             DecoderHelper.ValidateSize(size);
             if (isValueDecoded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                    );
             }
             int bytesConsumed = 0;
             while (bytesConsumed < size)
@@ -74,9 +80,11 @@ namespace System.ServiceModel.Channels
                 bytesConsumed++;
                 if (index == LastIndex && (next & 0xF8) != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataException(SR.GetString(SR.FramingSizeTooLarge))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataException(SR.GetString(SR.FramingSizeTooLarge))
+                        );
                 }
                 index++;
                 if ((next & 0x80) == 0)
@@ -120,9 +128,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return value;
             }
         }
@@ -142,9 +152,9 @@ namespace System.ServiceModel.Channels
                         if (encodedSize > sizeQuota)
                         {
                             Exception quotaExceeded = OnSizeQuotaExceeded(encodedSize);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                quotaExceeded
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(quotaExceeded);
                         }
                         if (encodedBytes == null || encodedBytes.Length < encodedSize)
                         {
@@ -189,9 +199,11 @@ namespace System.ServiceModel.Channels
                     }
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataException(SR.GetString(SR.InvalidDecoderStateMachine))
+                        );
             }
 
             return bytesConsumed;
@@ -253,9 +265,14 @@ namespace System.ServiceModel.Channels
             }
             catch (UriFormatException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataException(SR.GetString(SR.FramingViaNotUri, value), exception)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataException(
+                            SR.GetString(SR.FramingViaNotUri, value),
+                            exception
+                        )
+                    );
             }
         }
 
@@ -265,9 +282,11 @@ namespace System.ServiceModel.Channels
             {
                 if (!IsValueDecoded)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return via;
             }
         }
@@ -458,9 +477,9 @@ namespace System.ServiceModel.Channels
         {
             if (foundType != expectedType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateInvalidRecordTypeException(expectedType, foundType)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(CreateInvalidRecordTypeException(expectedType, foundType));
             }
         }
 
@@ -482,9 +501,9 @@ namespace System.ServiceModel.Channels
                 {
                     exceptionString = SR.GetString(SR.PreambleAckIncorrect);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(exceptionString, inner)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ProtocolException(exceptionString, inner));
             }
         }
 
@@ -597,13 +616,15 @@ namespace System.ServiceModel.Channels
                         bytesConsumed = 1;
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -637,9 +658,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return mode;
             }
         }
@@ -650,9 +673,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return majorVersion;
             }
         }
@@ -663,9 +688,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.Done)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return minorVersion;
             }
         }
@@ -723,9 +750,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.PreUpgradeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return contentType;
             }
         }
@@ -736,9 +765,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return viaDecoder.ValueAsUri;
             }
         }
@@ -755,9 +786,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.UpgradeRequest)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return upgrade;
             }
         }
@@ -768,9 +801,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.EnvelopeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return envelopeSize;
             }
         }
@@ -917,17 +952,23 @@ namespace System.ServiceModel.Channels
                         currentState = State.ReadingEndRecord;
                         break;
                     case State.End:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
-                    default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
-                            )
-                        );
+                            );
+                    default:
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
+                                )
+                            );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -998,9 +1039,11 @@ namespace System.ServiceModel.Channels
                 if (currentState < State.ChunkStart)
                 {
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 }
 
                 return this.chunkSize;
@@ -1060,18 +1103,24 @@ namespace System.ServiceModel.Channels
                         currentState = State.End;
                         break;
                     case State.End:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
+                                )
+                            );
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1139,9 +1188,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return viaDecoder.ValueAsUri;
             }
         }
@@ -1152,9 +1203,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.PreUpgradeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return contentType;
             }
         }
@@ -1165,9 +1218,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState != State.UpgradeRequest)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return upgrade;
             }
         }
@@ -1275,17 +1330,23 @@ namespace System.ServiceModel.Channels
                         currentState = State.EnvelopeStart;
                         break;
                     case State.EnvelopeStart:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
-                    default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
-                            )
-                        );
+                            );
+                    default:
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
+                                )
+                            );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1395,17 +1456,23 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case State.Start:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
-                    default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
-                            )
-                        );
+                            );
+                    default:
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
+                                )
+                            );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1439,9 +1506,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.ReadingContentTypeRecord)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return viaDecoder.ValueAsUri;
             }
         }
@@ -1452,9 +1521,11 @@ namespace System.ServiceModel.Channels
             {
                 if (currentState < State.Start)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return contentType;
             }
         }
@@ -1539,9 +1610,11 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.EnvelopeStart)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return envelopeSize;
             }
         }
@@ -1552,9 +1625,11 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.Fault)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return faultDecoder.Value;
             }
         }
@@ -1665,17 +1740,23 @@ namespace System.ServiceModel.Channels
                         base.CurrentState = ClientFramingDecoderState.End;
                         break;
                     case ClientFramingDecoderState.End:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
-                    default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
-                            )
-                        );
+                            );
+                    default:
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
+                                )
+                            );
                 }
 
                 StreamPosition += bytesConsumed;
@@ -1704,9 +1785,11 @@ namespace System.ServiceModel.Channels
             {
                 if (CurrentState < ClientFramingDecoderState.Fault)
 #pragma warning suppress 56503 // Microsoft, not a publicly accessible API
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.FramingValueNotAvailable))
+                        );
                 return faultDecoder.Value;
             }
         }
@@ -1777,9 +1860,13 @@ namespace System.ServiceModel.Channels
                         break;
 
                     case ClientFramingDecoderState.EnvelopeStart:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
+                                )
+                            );
 
                     case ClientFramingDecoderState.ReadingFault:
                         recordType = (FramingRecordType)bytes[offset];
@@ -1796,17 +1883,23 @@ namespace System.ServiceModel.Channels
                         }
                         break;
                     case ClientFramingDecoderState.Fault:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(new InvalidDataException(SR.GetString(SR.FramingAtEnd)))
-                        );
-                    default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateException(
-                                new InvalidDataException(
-                                    SR.GetString(SR.InvalidDecoderStateMachine)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(SR.GetString(SR.FramingAtEnd))
                                 )
-                            )
-                        );
+                            );
+                    default:
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateException(
+                                    new InvalidDataException(
+                                        SR.GetString(SR.InvalidDecoderStateMachine)
+                                    )
+                                )
+                            );
                 }
 
                 StreamPosition += bytesConsumed;

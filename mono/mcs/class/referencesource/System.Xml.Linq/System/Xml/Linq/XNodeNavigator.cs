@@ -782,10 +782,11 @@ namespace System.Xml.XPath
             XContainer c = source as XContainer;
             if (c == null)
                 throw new InvalidOperationException(
-                    System.Xml.Linq.Res.GetString(
-                        System.Xml.Linq.Res.InvalidOperation_BadNodeType,
-                        NodeType
-                    )
+                    System
+                        .Xml
+                        .Linq
+                        .Res
+                        .GetString(System.Xml.Linq.Res.InvalidOperation_BadNodeType, NodeType)
                 );
             return new XNodeReader(c, nameTable);
         }
@@ -966,11 +967,17 @@ namespace System.Xml.XPath
         {
             if (XmlNamespaceDeclaration == null)
             {
-                System.Threading.Interlocked.CompareExchange(
-                    ref XmlNamespaceDeclaration,
-                    new XAttribute(XNamespace.Xmlns.GetName("xml"), XNamespace.xmlPrefixNamespace),
-                    null
-                );
+                System
+                    .Threading
+                    .Interlocked
+                    .CompareExchange(
+                        ref XmlNamespaceDeclaration,
+                        new XAttribute(
+                            XNamespace.Xmlns.GetName("xml"),
+                            XNamespace.xmlPrefixNamespace
+                        ),
+                        null
+                    );
             }
             return XmlNamespaceDeclaration;
         }
@@ -1003,10 +1010,14 @@ namespace System.Xml.XPath
             }
             if (!(result is T))
                 throw new InvalidOperationException(
-                    System.Xml.Linq.Res.GetString(
-                        System.Xml.Linq.Res.InvalidOperation_UnexpectedEvaluation,
-                        result.GetType()
-                    )
+                    System
+                        .Xml
+                        .Linq
+                        .Res
+                        .GetString(
+                            System.Xml.Linq.Res.InvalidOperation_UnexpectedEvaluation,
+                            result.GetType()
+                        )
                 );
             return (T)result;
         }
@@ -1018,10 +1029,14 @@ namespace System.Xml.XPath
                 object r = navigator.UnderlyingObject;
                 if (!(r is T))
                     throw new InvalidOperationException(
-                        System.Xml.Linq.Res.GetString(
-                            System.Xml.Linq.Res.InvalidOperation_UnexpectedEvaluation,
-                            r.GetType()
-                        )
+                        System
+                            .Xml
+                            .Linq
+                            .Res
+                            .GetString(
+                                System.Xml.Linq.Res.InvalidOperation_UnexpectedEvaluation,
+                                r.GetType()
+                            )
                     );
                 yield return (T)r;
                 XText t = r as XText;
@@ -1067,20 +1082,28 @@ namespace System.Xml.XPath
                 throw new ArgumentNullException("node");
             if (node is XDocumentType)
                 throw new ArgumentException(
-                    System.Xml.Linq.Res.GetString(
-                        System.Xml.Linq.Res.Argument_CreateNavigator,
-                        XmlNodeType.DocumentType
-                    )
+                    System
+                        .Xml
+                        .Linq
+                        .Res
+                        .GetString(
+                            System.Xml.Linq.Res.Argument_CreateNavigator,
+                            XmlNodeType.DocumentType
+                        )
                 );
             XText text = node as XText;
             if (text != null)
             {
                 if (text.parent is XDocument)
                     throw new ArgumentException(
-                        System.Xml.Linq.Res.GetString(
-                            System.Xml.Linq.Res.Argument_CreateNavigator,
-                            XmlNodeType.Whitespace
-                        )
+                        System
+                            .Xml
+                            .Linq
+                            .Res
+                            .GetString(
+                                System.Xml.Linq.Res.Argument_CreateNavigator,
+                                XmlNodeType.Whitespace
+                            )
                     );
                 node = CalibrateText(text);
             }

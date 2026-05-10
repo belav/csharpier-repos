@@ -106,20 +106,23 @@ namespace System.ServiceModel.Channels
         {
             if (mode == PeerAuthenticationMode.None && !signing)
                 return null;
-            ClientCredentials clientCredentials =
-                context.BindingParameters.Find<ClientCredentials>();
+            ClientCredentials clientCredentials = context
+                .BindingParameters
+                .Find<ClientCredentials>();
             if (clientCredentials != null)
             {
                 return new PeerSecurityCredentialsManager(clientCredentials.Peer, mode, signing);
             }
-            ServiceCredentials serviceCredentials =
-                context.BindingParameters.Find<ServiceCredentials>();
+            ServiceCredentials serviceCredentials = context
+                .BindingParameters
+                .Find<ServiceCredentials>();
             if (serviceCredentials != null)
             {
                 return new PeerSecurityCredentialsManager(serviceCredentials.Peer, mode, signing);
             }
-            SecurityCredentialsManager credman =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credman = context
+                .BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credman == null)
             {
                 PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
@@ -204,8 +207,9 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            ChannelProtectionRequirements reqs =
-                context.BindingParameters.Find<ChannelProtectionRequirements>();
+            ChannelProtectionRequirements reqs = context
+                .BindingParameters
+                .Find<ChannelProtectionRequirements>();
             PeerSecurityCredentialsManager credman = GetCredentialsManager(
                 authenticationMode,
                 signMessages,
@@ -270,9 +274,9 @@ namespace System.ServiceModel.Channels
             if (signMessages)
             {
                 if (
-                    !credential.MessageSenderAuthentication.TryGetCertificateValidator(
-                        out validator
-                    )
+                    !credential
+                        .MessageSenderAuthentication
+                        .TryGetCertificateValidator(out validator)
                 )
                 {
                     PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
@@ -284,8 +288,9 @@ namespace System.ServiceModel.Channels
 
         void ApplyAuditBehaviorSettings(BindingContext context)
         {
-            ServiceSecurityAuditBehavior auditBehavior =
-                context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
+            ServiceSecurityAuditBehavior auditBehavior = context
+                .BindingParameters
+                .Find<ServiceSecurityAuditBehavior>();
             if (auditBehavior != null)
             {
                 this.auditBehavior = auditBehavior.Clone();
@@ -372,9 +377,9 @@ namespace System.ServiceModel.Channels
                             );
                         }
                         if (
-                            !credential.PeerAuthentication.TryGetCertificateValidator(
-                                out connectionValidator
-                            )
+                            !credential
+                                .PeerAuthentication
+                                .TryGetCertificateValidator(out connectionValidator)
                         )
                         {
                             PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
@@ -389,9 +394,9 @@ namespace System.ServiceModel.Channels
                 if (credential.MessageSenderAuthentication != null)
                 {
                     if (
-                        !credential.MessageSenderAuthentication.TryGetCertificateValidator(
-                            out messageValidator
-                        )
+                        !credential
+                            .MessageSenderAuthentication
+                            .TryGetCertificateValidator(out messageValidator)
                     )
                     {
                         PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
@@ -489,10 +494,9 @@ namespace System.ServiceModel.Channels
                     SecurityTokenResolver resolver;
                     X509SecurityTokenAuthenticator auth =
                         tokenManager.CreateSecurityTokenAuthenticator(
-                            PeerSecurityCredentialsManager.PeerClientSecurityTokenManager.CreateRequirement(
-                                SecurityTokenTypes.X509Certificate,
-                                true
-                            ),
+                            PeerSecurityCredentialsManager
+                                .PeerClientSecurityTokenManager
+                                .CreateRequirement(SecurityTokenTypes.X509Certificate, true),
                             out resolver
                         ) as X509SecurityTokenAuthenticator;
                     if (auth != null)
@@ -786,8 +790,9 @@ namespace System.ServiceModel.Channels
                 Abort(neighbor);
                 return null;
             }
-            PeerChannelAuthenticatorExtension extension =
-                neighbor.Extensions.Find<PeerChannelAuthenticatorExtension>();
+            PeerChannelAuthenticatorExtension extension = neighbor
+                .Extensions
+                .Find<PeerChannelAuthenticatorExtension>();
             Claim claim = FindClaim(ServiceSecurityContext.Current);
             if (!(extension != null && claim != null))
             {
@@ -922,9 +927,9 @@ namespace System.ServiceModel.Channels
                     X509SecurityTokenProvider tokenProvider =
                         this.manager.CreateSecurityTokenProvider(req) as X509SecurityTokenProvider;
                     if (tokenProvider == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "TokenProvider"
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument("TokenProvider");
                     X509SecurityToken token =
                         tokenProvider.GetToken(ServiceDefaults.SendTimeout) as X509SecurityToken;
                     if (token == null)
@@ -1096,14 +1101,16 @@ namespace System.ServiceModel.Channels
                         delegateManager.CreateSecurityTokenProvider(requirement)
                         as UserNameSecurityTokenProvider;
                     if (tokenProvider == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(
-                                    SR.SecurityTokenManagerCannotCreateProviderForRequirement,
-                                    requirement
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(
+                                        SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                        requirement
+                                    )
                                 )
-                            )
-                        );
+                            );
                     return tokenProvider;
                 }
                 else
@@ -1133,14 +1140,16 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(
-                                    SR.SecurityTokenManagerCannotCreateSerializerForVersion,
-                                    version
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(
+                                        SR.SecurityTokenManagerCannotCreateSerializerForVersion,
+                                        version
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -1208,13 +1217,13 @@ namespace System.ServiceModel.Channels
                                 );
                             }
                             if (
-                                !this.credential.MessageSenderAuthentication.TryGetCertificateValidator(
-                                    out validator
-                                )
+                                !this.credential
+                                    .MessageSenderAuthentication
+                                    .TryGetCertificateValidator(out validator)
                             )
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                                    "TokenType"
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperArgumentNull("TokenType");
                             return new PeerX509TokenProvider(
                                 validator,
                                 this.credential.Certificate
@@ -1227,16 +1236,16 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                            "TokenType"
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgumentNull("TokenType");
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "tokenRequirement"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("tokenRequirement");
                 }
             }
 
@@ -1314,18 +1323,20 @@ namespace System.ServiceModel.Channels
                                 if (this.mode == PeerAuthenticationMode.MutualCertificate)
                                 {
                                     if (
-                                        !this.credential.PeerAuthentication.TryGetCertificateValidator(
-                                            out validator
-                                        )
+                                        !this.credential
+                                            .PeerAuthentication
+                                            .TryGetCertificateValidator(out validator)
                                     )
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                            new NotSupportedException(
-                                                SR.GetString(
-                                                    SR.SecurityTokenManagerCannotCreateProviderForRequirement,
-                                                    requirement
+                                        throw DiagnosticUtility
+                                            .ExceptionUtility
+                                            .ThrowHelperError(
+                                                new NotSupportedException(
+                                                    SR.GetString(
+                                                        SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                                        requirement
+                                                    )
                                                 )
-                                            )
-                                        );
+                                            );
                                 }
                                 else
                                     validator = X509CertificateValidator.None;
@@ -1333,34 +1344,36 @@ namespace System.ServiceModel.Channels
                             else
                             {
                                 if (
-                                    !this.credential.MessageSenderAuthentication.TryGetCertificateValidator(
-                                        out validator
-                                    )
+                                    !this.credential
+                                        .MessageSenderAuthentication
+                                        .TryGetCertificateValidator(out validator)
                                 )
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new NotSupportedException(
-                                            SR.GetString(
-                                                SR.SecurityTokenManagerCannotCreateProviderForRequirement,
-                                                requirement
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(
+                                            new NotSupportedException(
+                                                SR.GetString(
+                                                    SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                                    requirement
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                             }
                             return new X509SecurityTokenAuthenticator(validator);
                         }
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "tokenRequirement"
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument("tokenRequirement");
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "tokenRequirement"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("tokenRequirement");
                 }
             }
 

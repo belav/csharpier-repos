@@ -7,8 +7,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations;
 
 public class SqliteMigrationAnnotationProviderTest
 {
-    private readonly TestHelpers.TestModelBuilder _modelBuilder =
-        SqliteTestHelpers.Instance.CreateConventionBuilder();
+    private readonly TestHelpers.TestModelBuilder _modelBuilder = SqliteTestHelpers
+        .Instance
+        .CreateConventionBuilder();
     private readonly SqliteAnnotationProvider _provider = new(
         new RelationalAnnotationProviderDependencies()
     );

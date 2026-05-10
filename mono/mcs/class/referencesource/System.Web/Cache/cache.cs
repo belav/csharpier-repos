@@ -444,14 +444,16 @@ namespace System.Web.Caching
                         && (cacheDependency == null || !cacheDependency.HasChanged)
                     )
                     {
-                        HttpRuntime.Cache.Insert(
-                            entry.Key,
-                            expensiveObject,
-                            cacheDependency,
-                            absoluteExpiration,
-                            slidingExpiration,
-                            entry.CacheItemUpdateCallback
-                        );
+                        HttpRuntime
+                            .Cache
+                            .Insert(
+                                entry.Key,
+                                expensiveObject,
+                                cacheDependency,
+                                absoluteExpiration,
+                                slidingExpiration,
+                                entry.CacheItemUpdateCallback
+                            );
                     }
                     else
                     {
@@ -600,18 +602,21 @@ namespace System.Web.Caching
                 dependencies = deps;
             }
             // Insert sentinel entry for the updatable cache entry
-            HttpRuntime.Cache.InternalCache.Insert(
-                CacheInternal.PrefixValidationSentinel + key,
-                new SentinelEntry(key, expensiveObjectDep, onUpdateCallback),
-                new CacheInsertOptions()
-                {
-                    Dependencies = dependencies,
-                    AbsoluteExpiration = utcAbsoluteExpiration,
-                    SlidingExpiration = slidingExpiration,
-                    Priority = CacheItemPriority.NotRemovable,
-                    OnRemovedCallback = Cache.s_sentinelRemovedCallback,
-                }
-            );
+            HttpRuntime
+                .Cache
+                .InternalCache
+                .Insert(
+                    CacheInternal.PrefixValidationSentinel + key,
+                    new SentinelEntry(key, expensiveObjectDep, onUpdateCallback),
+                    new CacheInsertOptions()
+                    {
+                        Dependencies = dependencies,
+                        AbsoluteExpiration = utcAbsoluteExpiration,
+                        SlidingExpiration = slidingExpiration,
+                        Priority = CacheItemPriority.NotRemovable,
+                        OnRemovedCallback = Cache.s_sentinelRemovedCallback,
+                    }
+                );
         }
 
         public object Add(

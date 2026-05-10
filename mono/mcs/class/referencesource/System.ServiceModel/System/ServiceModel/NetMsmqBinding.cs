@@ -32,13 +32,15 @@ namespace System.ServiceModel
         public NetMsmqBinding(NetMsmqSecurityMode securityMode)
         {
             if (!NetMsmqSecurityModeHelper.IsDefined(securityMode))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "mode",
-                        (int)securityMode,
-                        typeof(NetMsmqSecurityMode)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "mode",
+                            (int)securityMode,
+                            typeof(NetMsmqSecurityMode)
+                        )
+                    );
             Initialize();
             this.security = new NetMsmqSecurity(securityMode);
         }
@@ -208,20 +210,23 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            Config.NetMsmqBindingCollectionElement section =
-                Config.NetMsmqBindingCollectionElement.GetBindingCollectionElement();
+            Config.NetMsmqBindingCollectionElement section = Config
+                .NetMsmqBindingCollectionElement
+                .GetBindingCollectionElement();
             Config.NetMsmqBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            Config.ConfigurationStrings.NetMsmqBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                Config.ConfigurationStrings.NetMsmqBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {

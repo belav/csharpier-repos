@@ -687,10 +687,8 @@ namespace System.Web.UI.Design.WebControls
                         !_usingEntityFrameworkVersionHigherThanFive
                         && assembly
                             .GetName()
-                            .Name.Equals(
-                                "EntityFramework",
-                                StringComparison.InvariantCultureIgnoreCase
-                            )
+                            .Name
+                            .Equals("EntityFramework", StringComparison.InvariantCultureIgnoreCase)
                         && assembly.GetName().Version.Major > 5
                     )
                     {

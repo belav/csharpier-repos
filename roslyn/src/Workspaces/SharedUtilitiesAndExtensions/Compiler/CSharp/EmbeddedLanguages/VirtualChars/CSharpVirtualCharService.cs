@@ -248,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             var parentSourceText = parentExpression.SyntaxTree.GetText();
             var indentationLength =
                 parentSourceText
-                    .Lines.GetLineFromPosition(parentExpression.Span.End)
+                    .Lines
+                    .GetLineFromPosition(parentExpression.Span.End)
                     .GetFirstNonWhitespaceOffset()
                 ?? 0;
 

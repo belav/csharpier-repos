@@ -99,9 +99,9 @@ public static class RelationalQueryableExtensions
         Check.NotNull(parameters, nameof(parameters));
 
         var queryableSource = (IQueryable)source;
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            GenerateFromSqlQueryRoot(queryableSource, sql, parameters)
-        );
+        return queryableSource
+            .Provider
+            .CreateQuery<TEntity>(GenerateFromSqlQueryRoot(queryableSource, sql, parameters));
     }
 
     /// <summary>
@@ -138,9 +138,11 @@ public static class RelationalQueryableExtensions
         Check.NotEmpty(sql.Format, nameof(source));
 
         var queryableSource = (IQueryable)source;
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
-        );
+        return queryableSource
+            .Provider
+            .CreateQuery<TEntity>(
+                GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
+            );
     }
 
     /// <summary>
@@ -177,9 +179,11 @@ public static class RelationalQueryableExtensions
         Check.NotEmpty(sql.Format, nameof(source));
 
         var queryableSource = (IQueryable)source;
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
-        );
+        return queryableSource
+            .Provider
+            .CreateQuery<TEntity>(
+                GenerateFromSqlQueryRoot(queryableSource, sql.Format, sql.GetArguments())
+            );
     }
 
     private static FromSqlQueryRootExpression GenerateFromSqlQueryRoot(
@@ -240,12 +244,14 @@ public static class RelationalQueryableExtensions
     public static IQueryable<TEntity> AsSingleQuery<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
                 )
-            )
             : source;
 
     internal static readonly MethodInfo AsSingleQueryMethodInfo =
@@ -277,12 +283,14 @@ public static class RelationalQueryableExtensions
     public static IQueryable<TEntity> AsSplitQuery<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
                 )
-            )
             : source;
 
     internal static readonly MethodInfo AsSplitQueryMethodInfo =
@@ -312,12 +320,14 @@ public static class RelationalQueryableExtensions
     /// <param name="source">The source query.</param>
     /// <returns>The total number of rows deleted in the database.</returns>
     public static int ExecuteDelete<TSource>(this IQueryable<TSource> source) =>
-        source.Provider.Execute<int>(
-            Expression.Call(
-                ExecuteDeleteMethodInfo.MakeGenericMethod(typeof(TSource)),
-                source.Expression
-            )
-        );
+        source
+            .Provider
+            .Execute<int>(
+                Expression.Call(
+                    ExecuteDeleteMethodInfo.MakeGenericMethod(typeof(TSource)),
+                    source.Expression
+                )
+            );
 
     /// <summary>
     ///     Asynchronously deletes database rows for the entity instances which match the LINQ query from the database.
@@ -382,13 +392,15 @@ public static class RelationalQueryableExtensions
         this IQueryable<TSource> source,
         Expression<Func<SetPropertyCalls<TSource>, SetPropertyCalls<TSource>>> setPropertyCalls
     ) =>
-        source.Provider.Execute<int>(
-            Expression.Call(
-                ExecuteUpdateMethodInfo.MakeGenericMethod(typeof(TSource)),
-                source.Expression,
-                setPropertyCalls
-            )
-        );
+        source
+            .Provider
+            .Execute<int>(
+                Expression.Call(
+                    ExecuteUpdateMethodInfo.MakeGenericMethod(typeof(TSource)),
+                    source.Expression,
+                    setPropertyCalls
+                )
+            );
 
     /// <summary>
     ///     Asynchronously updates database rows for the entity instances which match the LINQ query from the database.

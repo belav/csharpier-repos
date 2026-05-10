@@ -55,11 +55,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         return ((DelegateDeclarationSyntax)member).Identifier;
                     case SyntaxKind.FieldDeclaration:
                         return ((FieldDeclarationSyntax)member)
-                            .Declaration.Variables.First()
+                            .Declaration
+                            .Variables
+                            .First()
                             .Identifier;
                     case SyntaxKind.EventFieldDeclaration:
                         return ((EventFieldDeclarationSyntax)member)
-                            .Declaration.Variables.First()
+                            .Declaration
+                            .Variables
+                            .First()
                             .Identifier;
                     case SyntaxKind.PropertyDeclaration:
                         return ((PropertyDeclarationSyntax)member).Identifier;

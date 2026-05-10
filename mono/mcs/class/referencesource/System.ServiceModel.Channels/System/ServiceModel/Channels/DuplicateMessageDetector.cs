@@ -46,9 +46,9 @@ namespace System.ServiceModel.Channels
             {
                 if (disposed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ObjectDisposedException(this.GetType().ToString()));
                 }
 
                 hash = this.hashAlgorithm.ComputeHash(
@@ -83,9 +83,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.disposed)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ObjectDisposedException(this.GetType().ToString()));
                 }
 
                 this.duplicateDetector.Remove(msgHash);

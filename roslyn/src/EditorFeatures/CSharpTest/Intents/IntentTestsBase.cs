@@ -149,10 +149,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var currentTextBuffer = testDocument.GetTextBuffer();
 
             // Get the text change to pass into the API that rewinds the current document to the prior document.
-            var currentDocument =
-                currentTextBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
-            var textDiffService =
-                workspace.CurrentSolution.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var currentDocument = currentTextBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
+            var textDiffService = workspace
+                .CurrentSolution
+                .Services
+                .GetRequiredService<IDocumentTextDifferencingService>();
             var changes = await textDiffService
                 .GetTextChangesAsync(currentDocument, priorDocument, CancellationToken.None)
                 .ConfigureAwait(false);

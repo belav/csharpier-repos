@@ -47,15 +47,17 @@ namespace System.ServiceModel.Dispatcher
                 this.formatters.TryGetValue(format, out selectedFormatter);
                 if (selectedFormatter == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.UnrecognizedHttpMessageFormat,
-                                format,
-                                GetSupportedFormats()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.UnrecognizedHttpMessageFormat,
+                                    format,
+                                    GetSupportedFormats()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
@@ -63,11 +65,13 @@ namespace System.ServiceModel.Dispatcher
                 selectedFormatter = this.defaultFormatter;
                 if (selectedFormatter == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.MessageFormatPropertyNotFound3)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(SR2.MessageFormatPropertyNotFound3)
+                            )
+                        );
                 }
             }
             return selectedFormatter.DeserializeReply(message, parameters);
@@ -75,11 +79,13 @@ namespace System.ServiceModel.Dispatcher
 
         public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)
+                    )
+                );
         }
 
         string GetSupportedFormats()

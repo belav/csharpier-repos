@@ -273,9 +273,12 @@ namespace Mono.ApiTools
 
             string windir = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
             string pf = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            state.TypeHelper.Resolver.AddSearchDirectory(
-                Path.Combine(windir, @"assembly\GAC\MSDATASRC\7.0.3300.0__b03f5f7f11d50a3a")
-            );
+            state
+                .TypeHelper
+                .Resolver
+                .AddSearchDirectory(
+                    Path.Combine(windir, @"assembly\GAC\MSDATASRC\7.0.3300.0__b03f5f7f11d50a3a")
+                );
 
             var acoll = new AssemblyCollection(state);
             if (assemblyFiles != null)
@@ -286,38 +289,56 @@ namespace Mono.ApiTools
 
                     if (arg.Contains("v3.0"))
                     {
-                        state.TypeHelper.Resolver.AddSearchDirectory(
-                            Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727")
-                        );
+                        state
+                            .TypeHelper
+                            .Resolver
+                            .AddSearchDirectory(
+                                Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727")
+                            );
                     }
                     else if (arg.Contains("v3.5"))
                     {
-                        state.TypeHelper.Resolver.AddSearchDirectory(
-                            Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727")
-                        );
-                        state.TypeHelper.Resolver.AddSearchDirectory(
-                            Path.Combine(
-                                windir,
-                                @"Microsoft.NET\Framework\v3.0\Windows Communication Foundation"
-                            )
-                        );
+                        state
+                            .TypeHelper
+                            .Resolver
+                            .AddSearchDirectory(
+                                Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727")
+                            );
+                        state
+                            .TypeHelper
+                            .Resolver
+                            .AddSearchDirectory(
+                                Path.Combine(
+                                    windir,
+                                    @"Microsoft.NET\Framework\v3.0\Windows Communication Foundation"
+                                )
+                            );
                     }
                     else if (arg.Contains("v4.0"))
                     {
                         if (arg.Contains("Silverlight"))
                         {
-                            state.TypeHelper.Resolver.AddSearchDirectory(
-                                Path.Combine(pf, @"Microsoft Silverlight\4.0.51204.0")
-                            );
+                            state
+                                .TypeHelper
+                                .Resolver
+                                .AddSearchDirectory(
+                                    Path.Combine(pf, @"Microsoft Silverlight\4.0.51204.0")
+                                );
                         }
                         else
                         {
-                            state.TypeHelper.Resolver.AddSearchDirectory(
-                                Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319")
-                            );
-                            state.TypeHelper.Resolver.AddSearchDirectory(
-                                Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319\WPF")
-                            );
+                            state
+                                .TypeHelper
+                                .Resolver
+                                .AddSearchDirectory(
+                                    Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319")
+                                );
+                            state
+                                .TypeHelper
+                                .Resolver
+                                .AddSearchDirectory(
+                                    Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319\WPF")
+                                );
                         }
                     }
                     else
@@ -433,10 +454,10 @@ namespace Mono.ApiTools
             if (File.Exists(assembly))
                 return state.TypeHelper.Resolver.ResolveFile(assembly);
 
-            return state.TypeHelper.Resolver.Resolve(
-                AssemblyNameReference.Parse(assembly),
-                new ReaderParameters()
-            );
+            return state
+                .TypeHelper
+                .Resolver
+                .Resolve(AssemblyNameReference.Parse(assembly), new ReaderParameters());
         }
 
         AssemblyDefinition LoadAssembly(Stream assembly)
@@ -785,7 +806,8 @@ namespace Mono.ApiTools
             AttributeData.OutputAttributes(writer, state, type);
 
             var ifaces = state
-                .TypeHelper.GetInterfaces(type)
+                .TypeHelper
+                .GetInterfaces(type)
                 .Where((iface) => state.TypeHelper.IsPublic(iface))
                 . // we're only interested in public interfaces
                 OrderBy(s => s.FullName, StringComparer.Ordinal);
@@ -1428,9 +1450,12 @@ namespace Mono.ApiTools
 
             ParameterData parms = new ParameterData(writer, mbase.Parameters, state)
             {
-                HasExtensionParameter = mbase.CustomAttributes.Any(l =>
-                    l.AttributeType.FullName == "System.Runtime.CompilerServices.ExtensionAttribute"
-                ),
+                HasExtensionParameter = mbase
+                    .CustomAttributes
+                    .Any(l =>
+                        l.AttributeType.FullName
+                        == "System.Runtime.CompilerServices.ExtensionAttribute"
+                    ),
             };
 
             parms.DoOutput();
@@ -1494,7 +1519,9 @@ namespace Mono.ApiTools
                 AddAttribute(
                     "position",
                     parameter
-                        .Method.Parameters.IndexOf(parameter)
+                        .Method
+                        .Parameters
+                        .IndexOf(parameter)
                         .ToString(CultureInfo.InvariantCulture)
                 );
                 AddAttribute("attrib", ((int)parameter.Attributes).ToString());
@@ -1567,7 +1594,8 @@ namespace Mono.ApiTools
                     TypeForwardedToData.OutputForwarders(writer, ass, state);
 
                 var attributes = provider
-                    .CustomAttributes.Where((att) => !SkipAttribute(att))
+                    .CustomAttributes
+                    .Where((att) => !SkipAttribute(att))
                     .OrderBy((a) => a.Constructor.DeclaringType.FullName, StringComparer.Ordinal);
 
                 foreach (var att in attributes)
@@ -1947,10 +1975,11 @@ namespace Mono.ApiTools
             if (!state.TypeHelper.IsPublic(attribute))
                 return true;
 
-            return attribute.Constructor.DeclaringType.Name.EndsWith(
-                "TODOAttribute",
-                StringComparison.Ordinal
-            );
+            return attribute
+                .Constructor
+                .DeclaringType
+                .Name
+                .EndsWith("TODOAttribute", StringComparison.Ordinal);
         }
 
         public static void OutputAttributes(

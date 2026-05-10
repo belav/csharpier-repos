@@ -117,10 +117,9 @@ namespace System.IdentityModel
                 {
                     if (algorithm == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "value",
-                            SR.GetString(SR.ID6034, value)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument("value", SR.GetString(SR.ID6034, value));
                     }
                     _hashName = value;
                 }
@@ -145,10 +144,9 @@ namespace System.IdentityModel
 
             if (0 == encoded.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "encoded",
-                    SR.GetString(SR.ID6045)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("encoded", SR.GetString(SR.ID6045));
             }
 
             ReadOnlyCollection<RSA> decryptionKeys = DecryptionKeys;
@@ -172,9 +170,11 @@ namespace System.IdentityModel
                     int encryptedKeyAndIVSize = br.ReadInt32();
                     if (encryptedKeyAndIVSize < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new FormatException(SR.GetString(SR.ID1006, encryptedKeyAndIVSize))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new FormatException(SR.GetString(SR.ID1006, encryptedKeyAndIVSize))
+                            );
                     }
                     //
                     // Enforce upper limit on key size to prevent large buffer allocation in br.ReadBytes()
@@ -182,27 +182,29 @@ namespace System.IdentityModel
 
                     if (encryptedKeyAndIVSize > encoded.Length)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new FormatException(SR.GetString(SR.ID1007))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new FormatException(SR.GetString(SR.ID1007)));
                     }
                     encryptedKeyAndIV = br.ReadBytes(encryptedKeyAndIVSize);
 
                     int encryptedDataSize = br.ReadInt32();
                     if (encryptedDataSize < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new FormatException(SR.GetString(SR.ID1008, encryptedDataSize))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new FormatException(SR.GetString(SR.ID1008, encryptedDataSize))
+                            );
                     }
                     //
                     // Enforce upper limit on data size to prevent large buffer allocation in br.ReadBytes()
                     //
                     if (encryptedDataSize > encoded.Length)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new FormatException(SR.GetString(SR.ID1009))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new FormatException(SR.GetString(SR.ID1009)));
                     }
 
                     encryptedData = br.ReadBytes(encryptedDataSize);
@@ -293,10 +295,9 @@ namespace System.IdentityModel
 
             if (0 == value.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR.GetString(SR.ID6044)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("value", SR.GetString(SR.ID6044));
             }
 
             RSA encryptionKey = EncryptionKey;

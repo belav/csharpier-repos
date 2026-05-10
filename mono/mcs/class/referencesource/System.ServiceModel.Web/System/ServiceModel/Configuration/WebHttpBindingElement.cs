@@ -486,15 +486,17 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(contentTypeMapperType, true);
                 if (!WebContentTypeMapperType.IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR2.GetString(
-                                SR2.ConfigInvalidWebContentTypeMapperType,
-                                contentTypeMapperType,
-                                WebContentTypeMapperType.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR2.GetString(
+                                    SR2.ConfigInvalidWebContentTypeMapperType,
+                                    contentTypeMapperType,
+                                    WebContentTypeMapperType.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 contentTypeMapper = (WebContentTypeMapper)Activator.CreateInstance(type);
             }
@@ -508,9 +510,9 @@ namespace System.ServiceModel.Configuration
         {
             if (webBindingReaderQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "webBindingReaderQuotas"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("webBindingReaderQuotas");
             }
             if (elementReaderQuotas.MaxDepth != 0)
             {

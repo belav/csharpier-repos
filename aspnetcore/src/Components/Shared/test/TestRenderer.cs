@@ -128,7 +128,8 @@ public class TestRenderer : Renderer
         // Clone other data, as underlying storage will get reused by later batches
         capturedBatch.ReferenceFrames = renderBatch.ReferenceFrames.AsEnumerable().ToArray();
         capturedBatch.DisposedComponentIDs = renderBatch
-            .DisposedComponentIDs.AsEnumerable()
+            .DisposedComponentIDs
+            .AsEnumerable()
             .ToList();
 
         // This renderer updates the UI synchronously, like the WebAssembly one.

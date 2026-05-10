@@ -463,7 +463,8 @@ Parent",
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -640,7 +641,8 @@ Parent",
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -1658,7 +1660,8 @@ Parent Set",
                 symbolValidator: module =>
                 {
                     var indexer = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -1944,7 +1947,8 @@ Parent Get",
                 symbolValidator: module =>
                 {
                     var indexer = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -2180,7 +2184,8 @@ Parent Set",
                 symbolValidator: module =>
                 {
                     var indexer = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -2447,7 +2452,8 @@ Parent Set",
                 symbolValidator: module =>
                 {
                     var indexer = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -2733,7 +2739,8 @@ Parent Get",
                 symbolValidator: module =>
                 {
                     var indexer = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )
@@ -2969,7 +2976,8 @@ Parent Set",
                 symbolValidator: module =>
                 {
                     var indexer = module
-                        .ContainingAssembly.BoundReferences()
+                        .ContainingAssembly
+                        .BoundReferences()
                         .Single(assembly =>
                             !assembly.Identity.Equals(module.ContainingAssembly.CorLibrary.Identity)
                         )

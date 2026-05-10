@@ -39,28 +39,29 @@ namespace System.ServiceModel
         public FaultReason(IEnumerable<FaultReasonText> translations)
         {
             if (translations == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("translations")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("translations"));
             int count = 0;
             foreach (FaultReasonText faultReasonText in translations)
                 count++;
             if (count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.AtLeastOneFaultReasonMustBeSpecified),
-                        "translations"
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.AtLeastOneFaultReasonMustBeSpecified),
+                            "translations"
+                        )
+                    );
             FaultReasonText[] array = new FaultReasonText[count];
             int index = 0;
             foreach (FaultReasonText faultReasonText in translations)
             {
                 if (faultReasonText == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "translations",
-                        SR.GetString(SR.NoNullTranslations)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("translations", SR.GetString(SR.NoNullTranslations));
 
                 array[index++] = faultReasonText;
             }
@@ -89,9 +90,9 @@ namespace System.ServiceModel
         public FaultReasonText GetMatchingTranslation(CultureInfo cultureInfo)
         {
             if (cultureInfo == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("cultureInfo")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("cultureInfo"));
 
             // If there's only one translation, use it
             if (translations.Count == 1)
@@ -105,9 +106,13 @@ namespace System.ServiceModel
             // If no exact match is found, proceed by looking for the a translation with a language that is a parent of the current culture
 
             if (translations.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.NoMatchingTranslationFoundForFaultText))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.NoMatchingTranslationFoundForFaultText)
+                        )
+                    );
 
             // Search for a more general language
 #pragma warning suppress 56506

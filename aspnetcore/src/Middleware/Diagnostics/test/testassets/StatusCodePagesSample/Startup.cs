@@ -46,8 +46,9 @@ public class Startup
                     var disableStatusCodePages = context.Request.Query["disableStatusCodePages"];
                     if (disableStatusCodePages == "true")
                     {
-                        var statusCodePagesFeature =
-                            context.Features.Get<IStatusCodePagesFeature>();
+                        var statusCodePagesFeature = context
+                            .Features
+                            .Get<IStatusCodePagesFeature>();
                         if (statusCodePagesFeature != null)
                         {
                             statusCodePagesFeature.Enabled = false;
@@ -74,9 +75,9 @@ public class Startup
                     builder.AppendLine("<html><body>");
                     builder.AppendLine(
                         "An error occurred, Status Code: "
-                            + HtmlEncoder.Default.Encode(
-                                context.Request.Path.ToString().Substring(1)
-                            )
+                            + HtmlEncoder
+                                .Default
+                                .Encode(context.Request.Path.ToString().Substring(1))
                             + "<br>"
                     );
                     var referrer = context.Request.Headers["referer"];

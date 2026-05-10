@@ -90,11 +90,13 @@ namespace System.Web.Http.ContentNegotiation
             baseAddress = "http://localhost/";
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{action}",
-                new { controller = "HttpResponseReturn" }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{action}",
+                    new { controller = "HttpResponseReturn" }
+                );
             config.MessageHandlers.Add(new ConvertToStreamMessageHandler());
 
             server = new HttpServer(config);

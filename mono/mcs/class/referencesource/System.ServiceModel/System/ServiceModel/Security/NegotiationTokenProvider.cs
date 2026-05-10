@@ -86,11 +86,13 @@ namespace System.ServiceModel.Security
         {
             if (this.IssuerBindingContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.IssuerBuildContextNotSet, this.GetType())
+                        )
+                    );
             }
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.SetupRstChannelFactory();

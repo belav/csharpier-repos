@@ -74,10 +74,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             void WorkspaceChangedHandler(object sender, WorkspaceChangeEventArgs e) =>
                 events.Add(e);
 
-            var workspace =
-                await textViewWindowVerifier.TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
-                    cancellationToken
-                );
+            var workspace = await textViewWindowVerifier
+                .TestServices
+                .Shell
+                .GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
             using var workspaceEventRestorer = WithWorkspaceChangedHandler(
                 workspace,
                 WorkspaceChangedHandler
@@ -91,9 +91,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                 return null;
             }
 
-            var actions = await textViewWindowVerifier.TestServices.Editor.GetLightBulbActionsAsync(
-                cancellationToken
-            );
+            var actions = await textViewWindowVerifier
+                .TestServices
+                .Editor
+                .GetLightBulbActionsAsync(cancellationToken);
 
             if (expectedItems != null && expectedItems.Any())
             {
@@ -123,8 +124,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                     )
                 );
 
-                var result =
-                    await textViewWindowVerifier.TestServices.Editor.ApplyLightBulbActionAsync(
+                var result = await textViewWindowVerifier
+                    .TestServices
+                    .Editor
+                    .ApplyLightBulbActionAsync(
                         applyFix,
                         fixAllScope,
                         blockUntilComplete,
@@ -134,23 +137,28 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                 if (blockUntilComplete)
                 {
                     // wait for action to complete
-                    await textViewWindowVerifier.TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                        new[]
-                        {
-                            FeatureAttribute.Workspace,
-                            FeatureAttribute.LightBulb,
-                            FeatureAttribute.Rename,
-                        },
-                        cancellationToken
-                    );
+                    await textViewWindowVerifier
+                        .TestServices
+                        .Workspace
+                        .WaitForAllAsyncOperationsAsync(
+                            new[]
+                            {
+                                FeatureAttribute.Workspace,
+                                FeatureAttribute.LightBulb,
+                                FeatureAttribute.Rename,
+                            },
+                            cancellationToken
+                        );
 
                     if (codeActionLogger.Messages.Any())
                     {
                         foreach (var e in events)
                         {
-                            codeActionLogger.Messages.Add(
-                                $"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}"
-                            );
+                            codeActionLogger
+                                .Messages
+                                .Add(
+                                    $"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}"
+                                );
                         }
                     }
 
@@ -172,9 +180,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         )
         {
             if (
-                await textViewWindowVerifier.TextViewWindow.IsLightBulbSessionExpandedAsync(
-                    cancellationToken
-                )
+                await textViewWindowVerifier
+                    .TextViewWindow
+                    .IsLightBulbSessionExpandedAsync(cancellationToken)
             )
             {
                 throw new InvalidOperationException(
@@ -189,20 +197,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await textViewWindowVerifier.TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[]
-                {
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification,
-                },
-                cancellationToken
-            );
-
-            var actualTokenTypes =
-                await textViewWindowVerifier.TestServices.Editor.GetCurrentClassificationsAsync(
+            await textViewWindowVerifier
+                .TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[]
+                    {
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.Classification,
+                    },
                     cancellationToken
                 );
+
+            var actualTokenTypes = await textViewWindowVerifier
+                .TestServices
+                .Editor
+                .GetCurrentClassificationsAsync(cancellationToken);
             Assert.Equal(1, actualTokenTypes.Length);
             Assert.Contains(tokenType, actualTokenTypes[0]);
             Assert.NotEqual("text", tokenType);

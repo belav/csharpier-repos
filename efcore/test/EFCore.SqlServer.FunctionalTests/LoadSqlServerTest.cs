@@ -2338,10 +2338,11 @@ WHERE 0 = 1
         }
         catch
         {
-            var methodCallLine = Environment.StackTrace.Split(
-                new[] { Environment.NewLine },
-                StringSplitOptions.RemoveEmptyEntries
-            )[2][6..];
+            var methodCallLine = Environment
+                .StackTrace
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)[2][
+                6..
+            ];
 
             var indexMethodEnding = methodCallLine.IndexOf(')') + 1;
             var testName = methodCallLine.Substring(0, indexMethodEnding);

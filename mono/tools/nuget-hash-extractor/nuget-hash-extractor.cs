@@ -79,9 +79,9 @@ class Driver
 
         if (!entries.Any())
         {
-            Console.Error.WriteLine(
-                $"** Warning: No relevant assemblies found for nukpkg: {nupkg}"
-            );
+            Console
+                .Error
+                .WriteLine($"** Warning: No relevant assemblies found for nukpkg: {nupkg}");
             return;
         }
 
@@ -134,7 +134,8 @@ class Driver
             // This needs to be kept in sync with FilterDeniedAssemblies msbuild task in msbuild
             // Sory by assembly name and version
             var query = ignoredAsmTable
-                .Values.GroupBy(data => data.AssemblyName)
+                .Values
+                .GroupBy(data => data.AssemblyName)
                 .OrderBy(group => group.Key)
                 .Select(group => new
                 {

@@ -135,10 +135,9 @@ namespace System.ServiceModel.Channels
             }
             else if (type.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "type",
-                    SR.GetString(SR.ParameterCannotBeEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("type", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 
             return new RedirectionType(type, ns);

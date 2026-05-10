@@ -128,10 +128,9 @@ namespace System.ServiceModel.Channels
             }
             else if (duration.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "duration",
-                    SR.GetString(SR.ParameterCannotBeEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("duration", SR.GetString(SR.ParameterCannotBeEmpty));
             }
 
             return new RedirectionDuration(duration, ns);

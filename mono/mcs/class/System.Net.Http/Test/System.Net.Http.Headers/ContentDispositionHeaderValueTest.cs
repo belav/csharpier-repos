@@ -216,14 +216,14 @@ namespace MonoTests.System.Net.Http.Headers
             Assert.IsNull(value.ReadDate, "#8");
             Assert.IsNull(value.Size, "#9");
 
-            value.Parameters.Add(
-                new NameValueHeaderValue("creation-date", "\"20 Jun 82 11:34:11\"")
-            );
+            value
+                .Parameters
+                .Add(new NameValueHeaderValue("creation-date", "\"20 Jun 82 11:34:11\""));
             value.Parameters.Add(new NameValueHeaderValue("filename", "g*"));
             value.Parameters.Add(new NameValueHeaderValue("filename*", "ag*"));
-            value.Parameters.Add(
-                new NameValueHeaderValue("modification-date", "\"20 Jun 22 4:6:22\"")
-            );
+            value
+                .Parameters
+                .Add(new NameValueHeaderValue("modification-date", "\"20 Jun 22 4:6:22\""));
             value.Parameters.Add(new NameValueHeaderValue("name", "nnn"));
             value.Parameters.Add(new NameValueHeaderValue("read-date", "\"1 Jun 01 1:1:1\""));
             value.Parameters.Add(new NameValueHeaderValue("size", "5"));

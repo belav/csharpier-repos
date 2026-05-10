@@ -30,17 +30,19 @@ namespace System.Security.Cryptography
                 try
                 {
                     if (
-                        Interop.Crypt32.CryptFormatObject(
-                            X509_ASN_ENCODING,
-                            0,
-                            dwFormatStrType,
-                            IntPtr.Zero,
-                            (byte*)oidValuePtr,
-                            rawData,
-                            rawData.Length,
-                            null,
-                            ref cbFormat
-                        )
+                        Interop
+                            .Crypt32
+                            .CryptFormatObject(
+                                X509_ASN_ENCODING,
+                                0,
+                                dwFormatStrType,
+                                IntPtr.Zero,
+                                (byte*)oidValuePtr,
+                                rawData,
+                                rawData.Length,
+                                null,
+                                ref cbFormat
+                            )
                     )
                     {
                         int charLength = (cbFormat + 1) / 2;
@@ -51,17 +53,19 @@ namespace System.Security.Cryptography
                         fixed (char* bufferPtr = buffer)
                         {
                             if (
-                                Interop.Crypt32.CryptFormatObject(
-                                    X509_ASN_ENCODING,
-                                    0,
-                                    dwFormatStrType,
-                                    IntPtr.Zero,
-                                    (byte*)oidValuePtr,
-                                    rawData,
-                                    rawData.Length,
-                                    bufferPtr,
-                                    ref cbFormat
-                                )
+                                Interop
+                                    .Crypt32
+                                    .CryptFormatObject(
+                                        X509_ASN_ENCODING,
+                                        0,
+                                        dwFormatStrType,
+                                        IntPtr.Zero,
+                                        (byte*)oidValuePtr,
+                                        rawData,
+                                        rawData.Length,
+                                        bufferPtr,
+                                        ref cbFormat
+                                    )
                             )
                             {
                                 return new string(bufferPtr);

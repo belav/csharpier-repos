@@ -174,9 +174,9 @@ namespace System.Activities
         // SerializationException with an InnerException is the pattern that DCS follows when values aren't convertible.
         static void WrapInSerializationException(Exception exception)
         {
-            throw FxTrace.Exception.AsError(
-                new SerializationException(exception.Message, exception)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(new SerializationException(exception.Message, exception));
         }
 
         static string ValidateName(string name, string paramName)
@@ -254,9 +254,9 @@ namespace System.Activities
             {
                 if (throwOnError)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ArgumentException(ex.Message, paramName, ex)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ArgumentException(ex.Message, paramName, ex));
                 }
                 else
                 {

@@ -46,27 +46,31 @@ public class Program
         public async Task SimpleExtractMethod()
         {
             await TestServices.Editor.SetTextAsync(TestSource, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync(
-                "Console",
-                charsOffset: -1,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Editor.PlaceCaretAsync(
-                "World",
-                charsOffset: 4,
-                occurrence: 0,
-                extendSelection: true,
-                selectBlock: false,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Refactor.ExtractMethod,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.ExtractMethod,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync("Console", charsOffset: -1, HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    "World",
+                    charsOffset: 4,
+                    occurrence: 0,
+                    extendSelection: true,
+                    selectBlock: false,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Refactor.ExtractMethod,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.ExtractMethod,
+                    HangMitigatingCancellationToken
+                );
 
             var expectedMarkup =
                 @"
@@ -91,53 +95,60 @@ public class Program
 }";
 
             MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out var spans);
-            await TestServices.EditorVerifier.TextContainsAsync(
-                expectedText,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    expectedText,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             var tags = (
                 await TestServices.Editor.GetRenameTagsAsync(HangMitigatingCancellationToken)
             ).SelectAsArray(tag => tag.Span.Span.ToTextSpan());
             AssertEx.SetEqual(spans, tags);
 
-            await TestServices.Input.SendAsync(
-                ["SayHello", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"private static void SayHello()
+            await TestServices
+                .Input
+                .SendAsync(["SayHello", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"private static void SayHello()
     {
         Console.WriteLine(""Hello World"");
     }",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact, WorkItem("https://github.com/dotnet/roslyn/pull/61369")]
         public async Task ExtractMethodWithTriviaSelected()
         {
             await TestServices.Editor.SetTextAsync(TestSource, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync(
-                "int result",
-                charsOffset: -8,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Editor.PlaceCaretAsync(
-                "result;",
-                charsOffset: 4,
-                occurrence: 0,
-                extendSelection: true,
-                selectBlock: false,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Refactor.ExtractMethod,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.ExtractMethod,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync("int result", charsOffset: -8, HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    "result;",
+                    charsOffset: 4,
+                    occurrence: 0,
+                    extendSelection: true,
+                    selectBlock: false,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Refactor.ExtractMethod,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.ExtractMethod,
+                    HangMitigatingCancellationToken
+                );
 
             var expectedMarkup =
                 @"
@@ -170,42 +181,45 @@ public class Program
             ).SelectAsArray(tag => tag.Span.Span.ToTextSpan());
             AssertEx.SetEqual(spans, tags);
 
-            await TestServices.Input.SendAsync(
-                ["SayHello", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"private static int SayHello(int a, int b)
+            await TestServices
+                .Input
+                .SendAsync(["SayHello", VirtualKeyCode.RETURN], HangMitigatingCancellationToken);
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"private static int SayHello(int a, int b)
     {
         return a * b;
     }",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
         public async Task ExtractViaCodeAction()
         {
             await TestServices.Editor.SetTextAsync(TestSource, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync(
-                "a = 5",
-                charsOffset: -1,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Editor.PlaceCaretAsync(
-                "a * b",
-                charsOffset: 1,
-                occurrence: 0,
-                extendSelection: true,
-                selectBlock: false,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CodeActionAsync(
-                "Extract method",
-                applyFix: true,
-                blockUntilComplete: true,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync("a = 5", charsOffset: -1, HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .PlaceCaretAsync(
+                    "a * b",
+                    charsOffset: 1,
+                    occurrence: 0,
+                    extendSelection: true,
+                    selectBlock: false,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .EditorVerifier
+                .CodeActionAsync(
+                    "Extract method",
+                    applyFix: true,
+                    blockUntilComplete: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
             var expectedMarkup =
                 @"

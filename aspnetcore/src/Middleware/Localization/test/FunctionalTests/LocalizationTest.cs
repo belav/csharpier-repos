@@ -106,10 +106,9 @@ public class LocalizationTest
         var client = testHost.CreateClient();
         var request = new HttpRequestMessage();
         var cookieValue = $"c={culture}|uic={culture}";
-        request.Headers.Add(
-            "Cookie",
-            $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}"
-        );
+        request
+            .Headers
+            .Add("Cookie", $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}");
 
         var response = await client.SendAsync(request);
 

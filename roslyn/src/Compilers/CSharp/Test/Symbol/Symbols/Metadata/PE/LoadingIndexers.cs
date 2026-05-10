@@ -863,11 +863,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Assert.False(parameterModoptIndexer.MustCallMethodsDirectly); //NB: we allow this amount of variation (modopt is on, rather than in parameter type)
                     Assert.NotEqual(
                         parameterModoptIndexer
-                            .Parameters.Last()
-                            .TypeWithAnnotations.CustomModifiers.Length,
+                            .Parameters
+                            .Last()
+                            .TypeWithAnnotations
+                            .CustomModifiers
+                            .Length,
                         parameterModoptIndexer
-                            .GetMethod.Parameters.Last()
-                            .TypeWithAnnotations.CustomModifiers.Length
+                            .GetMethod
+                            .Parameters
+                            .Last()
+                            .TypeWithAnnotations
+                            .CustomModifiers
+                            .Length
                     );
 
                     var returnTypeModoptIndexer = @class.GetIndexer<PEPropertySymbol>(

@@ -74,12 +74,14 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         case Oids.Rsa:
                         case Oids.Dsa:
-                            _key = X509Pal.Instance.DecodePublicKey(
-                                _oid,
-                                EncodedKeyValue.RawData,
-                                EncodedParameters.RawData,
-                                null
-                            );
+                            _key = X509Pal
+                                .Instance
+                                .DecodePublicKey(
+                                    _oid,
+                                    EncodedKeyValue.RawData,
+                                    EncodedParameters.RawData,
+                                    null
+                                );
                             break;
 
                         default:

@@ -43,10 +43,10 @@ internal sealed class SaveTempDataFilter : IResourceFilter, IResultFilter
 
         if (!context.HttpContext.Response.HasStarted)
         {
-            context.HttpContext.Response.OnStarting(
-                callback: OnStartingCallback,
-                state: context.HttpContext
-            );
+            context
+                .HttpContext
+                .Response
+                .OnStarting(callback: OnStartingCallback, state: context.HttpContext);
         }
     }
 

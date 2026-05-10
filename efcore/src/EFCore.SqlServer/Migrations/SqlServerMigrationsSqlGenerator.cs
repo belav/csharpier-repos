@@ -280,7 +280,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
         var column = model
             ?.GetRelationalModel()
             .FindTable(operation.Table, operation.Schema)
-            ?.Columns.FirstOrDefault(c => c.Name == operation.Name);
+            ?.Columns
+            .FirstOrDefault(c => c.Name == operation.Name);
 
         if (
             operation.ComputedColumnSql != operation.OldColumn.ComputedColumnSql
@@ -426,10 +427,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                 var typeMapping =
                     (
                         columnType != null
-                            ? Dependencies.TypeMappingSource.FindMapping(
-                                operation.DefaultValue.GetType(),
-                                columnType
-                            )
+                            ? Dependencies
+                                .TypeMappingSource
+                                .FindMapping(operation.DefaultValue.GetType(), columnType)
                             : null
                     ) ?? Dependencies.TypeMappingSource.GetMappingForValue(operation.DefaultValue);
 
@@ -439,10 +439,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             var updateBuilder = new StringBuilder()
                 .Append("UPDATE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" SET ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
@@ -472,10 +471,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             builder
                 .Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ALTER COLUMN ");
 
@@ -527,10 +525,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             builder
                 .Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD");
             DefaultValue(
@@ -634,10 +631,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
         if (operation.NewName != null && operation.NewName != name)
         {
             Rename(
-                Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                    operation.Name,
-                    operation.Schema
-                ),
+                Dependencies
+                    .SqlGenerationHelper
+                    .DelimitIdentifier(operation.Name, operation.Schema),
                 operation.NewName,
                 builder
             );
@@ -729,10 +725,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             subBuilder
                 .Append("CREATE TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Name,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Name, operation.Schema)
                 )
                 .AppendLine(" (");
 
@@ -769,19 +764,18 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             string historyTable;
             if (needsExec)
             {
-                historyTable = Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                    historyTableName!
-                );
+                historyTable = Dependencies
+                    .SqlGenerationHelper
+                    .DelimitIdentifier(historyTableName!);
                 tableCreationOptions.Add(
                     $"SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].{historyTable})"
                 );
             }
             else
             {
-                historyTable = Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                    historyTableName!,
-                    historyTableSchema
-                );
+                historyTable = Dependencies
+                    .SqlGenerationHelper
+                    .DelimitIdentifier(historyTableName!, historyTableSchema);
                 tableCreationOptions.Add(
                     $"SYSTEM_VERSIONING = ON (HISTORY_TABLE = {historyTable})"
                 );
@@ -893,10 +887,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
         if (operation.NewName != null && operation.NewName != name)
         {
             Rename(
-                Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                    operation.Name,
-                    operation.Schema
-                ),
+                Dependencies
+                    .SqlGenerationHelper
+                    .DelimitIdentifier(operation.Name, operation.Schema),
                 operation.NewName,
                 builder
             );
@@ -963,9 +956,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
     )
     {
         var table = model?.GetRelationalModel().FindTable(operation.Table, operation.Schema);
-        var hasNullableColumns = operation.Columns.Any(c =>
-            table?.FindColumn(c)?.IsNullable != false
-        );
+        var hasNullableColumns = operation
+            .Columns
+            .Any(c => table?.FindColumn(c)?.IsNullable != false);
 
         var memoryOptimized = IsMemoryOptimized(
             operation,
@@ -978,10 +971,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             builder
                 .Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 )
                 .Append(" ADD INDEX ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
@@ -1506,10 +1498,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             builder
                 .Append("ALTER TABLE ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table!,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table!, operation.Schema)
                 )
                 .Append(" DROP INDEX ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
@@ -1521,10 +1512,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
                 .Append(" ON ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(operation.Table, operation.Schema)
                 );
         }
 
@@ -1607,7 +1597,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
     )
     {
         var preBatched = operation
-            .Sql.Replace("\\\n", "")
+            .Sql
+            .Replace("\\\n", "")
             .Replace("\\\r\n", "")
             .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
@@ -1726,10 +1717,12 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             .Append(") AND [object_id] = OBJECT_ID(")
             .Append(
                 stringTypeMapping.GenerateSqlLiteral(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema ?? model?.GetDefaultSchema()
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(
+                            operation.Table,
+                            operation.Schema ?? model?.GetDefaultSchema()
+                        )
                 )
             )
             .AppendLine("))");
@@ -1739,10 +1732,12 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             builder
                 .Append("SET IDENTITY_INSERT ")
                 .Append(
-                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        operation.Table,
-                        operation.Schema ?? model?.GetDefaultSchema()
-                    )
+                    Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(
+                            operation.Table,
+                            operation.Schema ?? model?.GetDefaultSchema()
+                        )
                 )
                 .Append(on ? " ON" : " OFF")
                 .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -2082,7 +2077,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
         {
             var table = model?.GetRelationalModel().FindTable(operation.Table, operation.Schema);
             var nullableColumns = operation
-                .Columns.Where(c => table?.FindColumn(c)?.IsNullable != false)
+                .Columns
+                .Where(c => table?.FindColumn(c)?.IsNullable != false)
                 .ToList();
 
             builder.Append(" WHERE ");
@@ -3292,12 +3288,12 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                     alterColumnOperation.RemoveAnnotation(
                         SqlServerAnnotationNames.TemporalIsPeriodEndColumn
                     );
-                    alterColumnOperation.OldColumn.RemoveAnnotation(
-                        SqlServerAnnotationNames.TemporalIsPeriodStartColumn
-                    );
-                    alterColumnOperation.OldColumn.RemoveAnnotation(
-                        SqlServerAnnotationNames.TemporalIsPeriodEndColumn
-                    );
+                    alterColumnOperation
+                        .OldColumn
+                        .RemoveAnnotation(SqlServerAnnotationNames.TemporalIsPeriodStartColumn);
+                    alterColumnOperation
+                        .OldColumn
+                        .RemoveAnnotation(SqlServerAnnotationNames.TemporalIsPeriodEndColumn);
 
                     if (temporalInformation.IsTemporalTable)
                     {
@@ -3534,10 +3530,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
 
             var historyTable =
                 historyTableSchema != null
-                    ? Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                        historyTableName,
-                        historyTableSchema
-                    )
+                    ? Dependencies
+                        .SqlGenerationHelper
+                        .DelimitIdentifier(historyTableName, historyTableSchema)
                     : Dependencies.SqlGenerationHelper.DelimitIdentifier(historyTableName);
 
             stringBuilder
@@ -3627,9 +3622,9 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                         .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(table, schema))
                         .Append(" ALTER COLUMN ")
                         .Append(
-                            Dependencies.SqlGenerationHelper.DelimitIdentifier(
-                                periodStartColumnName
-                            )
+                            Dependencies
+                                .SqlGenerationHelper
+                                .DelimitIdentifier(periodStartColumnName)
                         )
                         .Append(" ADD HIDDEN")
                         .ToString(),

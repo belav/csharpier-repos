@@ -23,11 +23,9 @@ namespace System.ServiceModel.Dispatcher
             IContextChannel channel = OperationContext.Current.Channel;
             if (dispatch_runtime.InstanceContextProvider != null)
             {
-                dispatch_runtime.InstanceContextProvider.InitializeInstanceContext(
-                    iCtx,
-                    message,
-                    channel
-                );
+                dispatch_runtime
+                    .InstanceContextProvider
+                    .InitializeInstanceContext(iCtx, message, channel);
             }
             foreach (
                 IInstanceContextInitializer init in dispatch_runtime.InstanceContextInitializers

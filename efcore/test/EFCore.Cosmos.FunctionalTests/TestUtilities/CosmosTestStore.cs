@@ -134,10 +134,12 @@ public class CosmosTestStore : TestStore
         {
             HttpRequestException re => re.InnerException is SocketException // Exception in Mac/Linux
                 || re.InnerException is IOException { InnerException: SocketException }, // Exception in Windows
-            _ => exception.Message.Contains(
-                "The input authorization token can't serve the request. Please check that the expected payload is built as per the protocol, and check the key being used.",
-                StringComparison.Ordinal
-            ),
+            _ => exception
+                .Message
+                .Contains(
+                    "The input authorization token can't serve the request. Please check that the expected payload is built as per the protocol, and check the key being used.",
+                    StringComparison.Ordinal
+                ),
         };
 
     protected override void Initialize(

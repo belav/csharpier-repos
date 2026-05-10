@@ -126,10 +126,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             // See https://github.com/dotnet/roslyn/pull/70794 for details.
             const string AnalysisLevelKey = "build_property.EffectiveAnalysisLevelStyle";
 
-            return analyzerOptions.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue(
-                    AnalysisLevelKey,
-                    out var value
-                )
+            return analyzerOptions
+                    .AnalyzerConfigOptionsProvider
+                    .GlobalOptions
+                    .TryGetValue(AnalysisLevelKey, out var value)
                 && double.TryParse(value, out var version)
                 && version >= minAnalysisLevel;
         }

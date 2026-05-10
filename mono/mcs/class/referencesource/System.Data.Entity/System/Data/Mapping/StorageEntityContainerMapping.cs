@@ -218,10 +218,10 @@ namespace System.Data.Mapping
         {
             get
             {
-                return System.Linq.Enumerable.Concat(
-                    this.m_entitySetMappings.Values,
-                    this.m_associationSetMappings.Values
-                );
+                return System
+                    .Linq
+                    .Enumerable
+                    .Concat(this.m_entitySetMappings.Values, this.m_associationSetMappings.Values);
             }
         }
 
@@ -299,16 +299,17 @@ namespace System.Data.Mapping
             //First select the association set maps that are mapped to this table
             IEnumerable<StorageAssociationSetMapping> associationSetMappings =
                 m_associationSetMappings
-                    .Values.Cast<StorageAssociationSetMapping>()
+                    .Values
+                    .Cast<StorageAssociationSetMapping>()
                     .Where(w =>
                         ((w.StoreEntitySet != null) && (w.StoreEntitySet == storeEntitySet))
                     );
             //From this again filter the ones that have the specified EntitySet on atleast one end
             associationSetMappings = associationSetMappings.Where(associationSetMap =>
                 (
-                    (associationSetMap.Set as AssociationSet).AssociationSetEnds.Any(
-                        associationSetEnd => associationSetEnd.EntitySet == edmEntitySet
-                    )
+                    (associationSetMap.Set as AssociationSet)
+                        .AssociationSetEnds
+                        .Any(associationSetEnd => associationSetEnd.EntitySet == edmEntitySet)
                 )
             );
             return associationSetMappings;

@@ -22,9 +22,11 @@ public class LargeArrayTest
 
         TestLibrary.TestFramework.BeginTestCase("Large array test");
 
-        TestLibrary.TestFramework.BeginScenario(
-            "Allocate arrays of values Int32.MaxValue to Int32.MaxValue-" + lowerBound
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "Allocate arrays of values Int32.MaxValue to Int32.MaxValue-" + lowerBound
+            );
 
         for (int i = 0; i <= lowerBound; i++)
         {

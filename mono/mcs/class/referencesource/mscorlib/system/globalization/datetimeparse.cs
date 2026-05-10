@@ -2426,12 +2426,9 @@ namespace System
             if (monthDayOrder == ORDER_DM || monthDayOrder == ORDER_MD)
             {
                 if (
-                    result.calendar.IsValidDay(
-                        result.Year,
-                        result.Month,
-                        raw.GetNumber(0),
-                        result.era
-                    )
+                    result
+                        .calendar
+                        .IsValidDay(result.Year, result.Month, raw.GetNumber(0), result.era)
                 )
                 {
                     result.Day = raw.GetNumber(0);
@@ -3573,17 +3570,19 @@ namespace System
             }
 
             if (
-                !result.calendar.TryToDateTime(
-                    result.Year,
-                    result.Month,
-                    result.Day,
-                    result.Hour,
-                    result.Minute,
-                    result.Second,
-                    0,
-                    result.era,
-                    out time
-                )
+                !result
+                    .calendar
+                    .TryToDateTime(
+                        result.Year,
+                        result.Month,
+                        result.Day,
+                        result.Hour,
+                        result.Minute,
+                        result.Second,
+                        0,
+                        result.era,
+                        out time
+                    )
             )
             {
                 result.SetFailure(
@@ -5793,17 +5792,19 @@ namespace System
                 }
             }
             if (
-                !parseInfo.calendar.TryToDateTime(
-                    result.Year,
-                    result.Month,
-                    result.Day,
-                    result.Hour,
-                    result.Minute,
-                    result.Second,
-                    0,
-                    result.era,
-                    out result.parsedDate
-                )
+                !parseInfo
+                    .calendar
+                    .TryToDateTime(
+                        result.Year,
+                        result.Month,
+                        result.Day,
+                        result.Hour,
+                        result.Minute,
+                        result.Second,
+                        0,
+                        result.era,
+                        out result.parsedDate
+                    )
             )
             {
                 result.SetFailure(
@@ -5815,9 +5816,9 @@ namespace System
             }
             if (result.fraction > 0)
             {
-                result.parsedDate = result.parsedDate.AddTicks(
-                    (long)Math.Round(result.fraction * Calendar.TicksPerSecond)
-                );
+                result.parsedDate = result
+                    .parsedDate
+                    .AddTicks((long)Math.Round(result.fraction * Calendar.TicksPerSecond));
             }
 
             //

@@ -296,8 +296,9 @@ namespace System.ServiceModel.Activities
 
         void EnsureCorrelationQueryBehavior(ServiceEndpoint serviceEndpoint)
         {
-            CorrelationQueryBehavior correlationQueryBehavior =
-                serviceEndpoint.Behaviors.Find<CorrelationQueryBehavior>();
+            CorrelationQueryBehavior correlationQueryBehavior = serviceEndpoint
+                .Behaviors
+                .Find<CorrelationQueryBehavior>();
             if (correlationQueryBehavior == null)
             {
                 // Add CorrelationQueryBehavior if either Binding has queries or if either Send or ReceiveReplies
@@ -367,8 +368,9 @@ namespace System.ServiceModel.Activities
         {
             if (!this.IsOneWay)
             {
-                BindingElementCollection elementCollection =
-                    serviceEndpoint.Binding.CreateBindingElements();
+                BindingElementCollection elementCollection = serviceEndpoint
+                    .Binding
+                    .CreateBindingElements();
                 TransactionFlowBindingElement bindingElement =
                     elementCollection.Find<TransactionFlowBindingElement>();
                 bool flowTransaction = ((bindingElement != null) && (bindingElement.Transactions));
@@ -725,11 +727,15 @@ namespace System.ServiceModel.Activities
                 && !correlatesWith.IsInitalized()
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(
-                        SR.SendWithUninitializedCorrelatesWith(this.OperationName ?? string.Empty)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(
+                            SR.SendWithUninitializedCorrelatesWith(
+                                this.OperationName ?? string.Empty
+                            )
+                        )
+                    );
             }
 
             CorrelationHandle ambientHandle = CorrelationHandle.GetAmbientCorrelation(context);
@@ -745,13 +751,15 @@ namespace System.ServiceModel.Activities
             {
                 if (correlatesWith == null || !correlatesWith.IsInitalized())
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ValidationException(
-                            SR.SendWithUninitializedCorrelatesWith(
-                                this.OperationName ?? string.Empty
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ValidationException(
+                                SR.SendWithUninitializedCorrelatesWith(
+                                    this.OperationName ?? string.Empty
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 e2eTracingId = correlatesWith.E2ETraceId;
@@ -771,11 +779,13 @@ namespace System.ServiceModel.Activities
                     if (requestReplyCorrelationHandle != null)
                     {
                         // this is a one-way send , we should not have a RequestReply Correlation initializer
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.RequestReplyHandleShouldNotBePresentForOneWay
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.RequestReplyHandleShouldNotBePresentForOneWay
+                                )
+                            );
                     }
                 }
                 else
@@ -783,13 +793,15 @@ namespace System.ServiceModel.Activities
                     if (requestReplyCorrelationHandle == null && ambientHandle == null)
                     {
                         // we neither have a requestReply nor an ambientHandle
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(
-                                    this.OperationName ?? string.Empty
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(
+                                        this.OperationName ?? string.Empty
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -825,10 +837,12 @@ namespace System.ServiceModel.Activities
             {
                 CorrelationMessageProperty correlationMessageProperty;
                 if (
-                    !message.Properties.TryGetValue(
-                        CorrelationMessageProperty.Name,
-                        out correlationMessageProperty
-                    )
+                    !message
+                        .Properties
+                        .TryGetValue(
+                            CorrelationMessageProperty.Name,
+                            out correlationMessageProperty
+                        )
                 )
                 {
                     InstanceKey requestReplyCorrelationKey = new InstanceKey(
@@ -962,11 +976,13 @@ namespace System.ServiceModel.Activities
 
             if (state != null && correlationMessageProperty == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.InvalidDataFromSendBookmarkState(this.OperationName ?? string.Empty)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.InvalidDataFromSendBookmarkState(this.OperationName ?? string.Empty)
+                        )
+                    );
             }
 
             if (correlationMessageProperty != null)
@@ -1127,8 +1143,11 @@ namespace System.ServiceModel.Activities
 
             // retrieve the correct CorrelationQueryBehavior from the ChannelExtensions collection
             CorrelationQueryBehavior correlationBehavior = null;
-            Collection<CorrelationQueryBehavior> correlationQueryBehaviors =
-                instance.OperationContext.Channel.Extensions.FindAll<CorrelationQueryBehavior>();
+            Collection<CorrelationQueryBehavior> correlationQueryBehaviors = instance
+                .OperationContext
+                .Channel
+                .Extensions
+                .FindAll<CorrelationQueryBehavior>();
             foreach (CorrelationQueryBehavior cqb in correlationQueryBehaviors)
             {
                 if (cqb.ServiceContractName == this.ServiceContractName)
@@ -1156,9 +1175,9 @@ namespace System.ServiceModel.Activities
                         if (
                             correlationBehavior.SendNames.Count == 1
                             && (
-                                correlationBehavior.SendNames.Contains(
-                                    ContextExchangeCorrelationHelper.CorrelationName
-                                )
+                                correlationBehavior
+                                    .SendNames
+                                    .Contains(ContextExchangeCorrelationHelper.CorrelationName)
                             )
                         )
                         {
@@ -1190,13 +1209,16 @@ namespace System.ServiceModel.Activities
                         else
                         {
                             // Initialize correlations through channel callback
-                            instance.OperationContext.OutgoingMessageProperties.Add(
-                                CorrelationCallbackMessageProperty.Name,
-                                new MessageCorrelationCallbackMessageProperty(
-                                    correlationBehavior.SendNames ?? new string[0],
-                                    instance
-                                )
-                            );
+                            instance
+                                .OperationContext
+                                .OutgoingMessageProperties
+                                .Add(
+                                    CorrelationCallbackMessageProperty.Name,
+                                    new MessageCorrelationCallbackMessageProperty(
+                                        correlationBehavior.SendNames ?? new string[0],
+                                        instance
+                                    )
+                                );
                             instance.CorrelationSynchronizer = new CorrelationSynchronizer();
                         }
                     }
@@ -1214,9 +1236,10 @@ namespace System.ServiceModel.Activities
             {
                 try
                 {
-                    instance.ResponseContext.WorkflowOperationContext.SendFault(
-                        instance.ResponseContext.Exception
-                    );
+                    instance
+                        .ResponseContext
+                        .WorkflowOperationContext
+                        .SendFault(instance.ResponseContext.Exception);
                 }
                 catch (Exception e)
                 {
@@ -1231,9 +1254,10 @@ namespace System.ServiceModel.Activities
             {
                 try
                 {
-                    instance.ResponseContext.WorkflowOperationContext.SendReply(
-                        instance.RequestOrReply
-                    );
+                    instance
+                        .ResponseContext
+                        .WorkflowOperationContext
+                        .SendReply(instance.RequestOrReply);
                 }
                 catch (Exception e)
                 {
@@ -1539,7 +1563,9 @@ namespace System.ServiceModel.Activities
                 // Do it with or without correlation
                 if (
                     instance.CorrelationSynchronizer == null
-                    || instance.CorrelationSynchronizer.NotifyWorkflowCorrelationProcessingComplete()
+                    || instance
+                        .CorrelationSynchronizer
+                        .NotifyWorkflowCorrelationProcessingComplete()
                 )
                 {
                     // The send complete notification has already occurred
@@ -1591,9 +1617,13 @@ namespace System.ServiceModel.Activities
 
             if (instance.EndpointAddress == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(SR.EndpointAddressNotSetInEndpoint(this.OperationName))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(
+                            SR.EndpointAddressNotSetInEndpoint(this.OperationName)
+                        )
+                    );
             }
 
             // Configname to be used for the FactoryCacheKey,
@@ -1778,9 +1808,13 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.ContextMismatchInContextAndCallBackContext)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ContextMismatchInContextAndCallBackContext
+                            )
+                        );
                 }
             }
             else if (instance.CorrelationCallbackContext != null)
@@ -1837,13 +1871,16 @@ namespace System.ServiceModel.Activities
             if (instance.CorrelationSendNames != null)
             {
                 // we're going to initialize request correlations later
-                instance.RequestOrReply.Properties.Add(
-                    CorrelationCallbackMessageProperty.Name,
-                    new MessageCorrelationCallbackMessageProperty(
-                        instance.CorrelationSendNames,
-                        instance
-                    )
-                );
+                instance
+                    .RequestOrReply
+                    .Properties
+                    .Add(
+                        CorrelationCallbackMessageProperty.Name,
+                        new MessageCorrelationCallbackMessageProperty(
+                            instance.CorrelationSendNames,
+                            instance
+                        )
+                    );
 
                 instance.CorrelationSynchronizer = new CorrelationSynchronizer();
             }
@@ -1922,9 +1959,11 @@ namespace System.ServiceModel.Activities
                         )
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.TryRegisterRequestContextFailed)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(SR.TryRegisterRequestContextFailed)
+                            );
                     }
                 }
                 else // if that fails, use the ambient handle. We do not use the CorrelatesWith handle for RequestReply correlation
@@ -1937,15 +1976,18 @@ namespace System.ServiceModel.Activities
                             "For two way send we need to have either a RequestReply correlation handle or an ambient handle"
                         );
                         if (
-                            !instance.AmbientHandle.TryRegisterRequestContext(
-                                context,
-                                instance.RequestContext
-                            )
+                            !instance
+                                .AmbientHandle
+                                .TryRegisterRequestContext(context, instance.RequestContext)
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.TryRegisterRequestContextFailed)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.TryRegisterRequestContextFailed
+                                    )
+                                );
                         }
                     }
                 }
@@ -2031,10 +2073,9 @@ namespace System.ServiceModel.Activities
 
                     if (this.instance.FactoryReference.NeedsOpen)
                     {
-                        IAsyncResult result = this.instance.FactoryReference.BeginOpen(
-                            PrepareAsyncCompletion(channelFactoryOpenCompletion),
-                            this
-                        );
+                        IAsyncResult result = this.instance
+                            .FactoryReference
+                            .BeginOpen(PrepareAsyncCompletion(channelFactoryOpenCompletion), this);
                         if (result.CompletedSynchronously)
                         {
                             completeSelf = OnNewChannelFactoryOpened(result);
@@ -2065,8 +2106,9 @@ namespace System.ServiceModel.Activities
 
                 bool OnNewChannelFactoryOpened(IAsyncResult result)
                 {
-                    ObjectCacheItem<ChannelFactoryReference> newCacheItem =
-                        this.instance.FactoryReference.EndOpen(result, this.instance.FactoryCache);
+                    ObjectCacheItem<ChannelFactoryReference> newCacheItem = this.instance
+                        .FactoryReference
+                        .EndOpen(result, this.instance.FactoryCache);
                     this.instance.RegisterNewCacheItem(newCacheItem);
 
                     return true;
@@ -2253,10 +2295,9 @@ namespace System.ServiceModel.Activities
                                     Message reply = ((IRequestChannel)this.channel).EndRequest(
                                         result
                                     );
-                                    this.instance.RequestContext.ReceiveReply(
-                                        this.instance.OperationContext,
-                                        reply
-                                    );
+                                    this.instance
+                                        .RequestContext
+                                        .ReceiveReply(this.instance.OperationContext, reply);
                                 }
                             }
                             else
@@ -2347,11 +2388,10 @@ namespace System.ServiceModel.Activities
                             reply = ((IRequestChannel)thisPtr.channel).EndRequest(result);
 
                             //
-                            thisPtr.instance.RequestContext.ReceiveAsyncReply(
-                                thisPtr.instance.OperationContext,
-                                reply,
-                                null
-                            );
+                            thisPtr
+                                .instance
+                                .RequestContext
+                                .ReceiveAsyncReply(thisPtr.instance.OperationContext, reply, null);
 
                             requestSucceeded = true;
                         }
@@ -2367,11 +2407,10 @@ namespace System.ServiceModel.Activities
                             throw;
                         }
 
-                        thisPtr.instance.RequestContext.ReceiveAsyncReply(
-                            thisPtr.instance.OperationContext,
-                            null,
-                            exception
-                        );
+                        thisPtr
+                            .instance
+                            .RequestContext
+                            .ReceiveAsyncReply(thisPtr.instance.OperationContext, null, exception);
                     }
                     finally
                     {
@@ -2746,13 +2785,15 @@ namespace System.ServiceModel.Activities
                 {
                     // if send or sendReply has a correlatesWith, it should always be initialized with either content or with callbackcontext, context or
                     // ResponseContext
-                    throw FxTrace.Exception.AsError(
-                        new ValidationException(
-                            SR.SendWithUninitializedCorrelatesWith(
-                                this.parent.OperationName ?? string.Empty
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ValidationException(
+                                SR.SendWithUninitializedCorrelatesWith(
+                                    this.parent.OperationName ?? string.Empty
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (correlatesWith == null)
@@ -2780,11 +2821,13 @@ namespace System.ServiceModel.Activities
                         if (requestReplyCorrelationHandle != null)
                         {
                             // this is a one-way send , we should not have a RequestReply Correlation initializer
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.RequestReplyHandleShouldNotBePresentForOneWay
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.RequestReplyHandleShouldNotBePresentForOneWay
+                                    )
+                                );
                         }
                     }
                     else // two-way send
@@ -2792,19 +2835,22 @@ namespace System.ServiceModel.Activities
                         if (requestReplyCorrelationHandle == null && this.AmbientHandle == null)
                         {
                             this.AmbientHandle =
-                                context.Properties.Find(
-                                    CorrelationHandle.StaticExecutionPropertyName
-                                ) as CorrelationHandle;
+                                context
+                                    .Properties
+                                    .Find(CorrelationHandle.StaticExecutionPropertyName)
+                                as CorrelationHandle;
                             if (this.AmbientHandle == null)
                             {
                                 // we neither have a channelHandle nor an ambientHandle
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(
-                                            parent.OperationName ?? string.Empty
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(
+                                                parent.OperationName ?? string.Empty
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                     }
@@ -2832,11 +2878,13 @@ namespace System.ServiceModel.Activities
                         || !correlatesWith.TryAcquireResponseContext(context, out responseContext)
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.CorrelatedContextRequiredForAnonymousSend
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.CorrelatedContextRequiredForAnonymousSend
+                                )
+                            );
                     }
 
                     // Contract inference logic should validate that the Receive and Following send do not have conflicting data(e.g., OperationName)
@@ -3139,9 +3187,12 @@ namespace System.ServiceModel.Activities
 
                         property.Instance.RequestOrReply = message;
 
-                        property.Instance.CorrelationSynchronizer.NotifyRequestSetByChannel(
-                            new Action<Message>(OnWorkflowCorrelationProcessingComplete)
-                        );
+                        property
+                            .Instance
+                            .CorrelationSynchronizer
+                            .NotifyRequestSetByChannel(
+                                new Action<Message>(OnWorkflowCorrelationProcessingComplete)
+                            );
 
                         // We have to do this dance with the lock because
                         // we aren't sure if we've been running sync or not.
@@ -3310,8 +3361,9 @@ namespace System.ServiceModel.Activities
                 {
                     if (this.correlationQueryBehavior == null)
                     {
-                        this.correlationQueryBehavior =
-                            this.targetEndpoint.Behaviors.Find<CorrelationQueryBehavior>();
+                        this.correlationQueryBehavior = this.targetEndpoint
+                            .Behaviors
+                            .Find<CorrelationQueryBehavior>();
                     }
 
                     return this.correlationQueryBehavior;

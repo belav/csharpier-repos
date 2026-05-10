@@ -37,8 +37,11 @@ public class JsonColumn : Column, IColumn
     protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
         (RelationalTypeMapping)
             Table
-                .Model.Model.GetModelDependencies()
-                .TypeMappingSource.FindMapping(typeof(JsonElement))!;
+                .Model
+                .Model
+                .GetModelDependencies()
+                .TypeMappingSource
+                .FindMapping(typeof(JsonElement))!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

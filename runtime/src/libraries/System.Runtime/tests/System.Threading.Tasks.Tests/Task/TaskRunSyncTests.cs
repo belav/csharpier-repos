@@ -393,7 +393,8 @@ namespace System.Threading.Tasks.Tests
 
                         case WorkloadType.RunWithUserScheduler:
                             TaskScheduler ts = new TaskRunSyncTaskScheduler(true);
-                            Task.Factory.StartNew(
+                            Task.Factory
+                                .StartNew(
                                     () => { },
                                     _cts.Token,
                                     TaskCreationOptions.AttachedToParent,

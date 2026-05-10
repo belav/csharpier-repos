@@ -27,13 +27,15 @@ namespace System.ServiceModel.Diagnostics
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        typeof(PerformanceCounterScope)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(PerformanceCounterScope)
+                        )
+                    );
             }
         }
     }

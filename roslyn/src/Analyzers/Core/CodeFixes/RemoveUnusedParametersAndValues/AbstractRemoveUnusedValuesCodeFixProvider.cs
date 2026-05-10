@@ -211,10 +211,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                         title = CodeFixesResources.Use_discard_underscore;
 
-                        var syntaxFacts =
-                            context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                        var syntaxFacts = context
+                            .Document
+                            .GetRequiredLanguageService<ISyntaxFactsService>();
                         var root = await context
-                            .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+                            .Document
+                            .GetRequiredSyntaxRootAsync(context.CancellationToken)
                             .ConfigureAwait(false);
                         var node = root.FindNode(context.Span, getInnermostNodeForTie: true);
 
@@ -628,7 +630,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                 );
                                 // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
                                 var localDecl = editor
-                                    .Generator.LocalDeclarationStatement(
+                                    .Generator
+                                    .LocalDeclarationStatement(
                                         name: name,
                                         initializer: expression.WithoutLeadingTrivia()
                                     )
@@ -987,7 +990,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             ) =>
                 (TLocalDeclarationStatementSyntax)
                     editor
-                        .Generator.LocalDeclarationStatement(type, name)
+                        .Generator
+                        .LocalDeclarationStatement(type, name)
                         .WithLeadingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed)
                         .WithAdditionalAnnotations(
                             s_newLocalDeclarationStatementAnnotation,

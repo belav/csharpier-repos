@@ -16,7 +16,8 @@ namespace Microsoft.Interop
             EnvironmentFlags flags = EnvironmentFlags.None;
             if (
                 compilation
-                    .SourceModule.GetAttributes()
+                    .SourceModule
+                    .GetAttributes()
                     .Any(attr =>
                         attr.AttributeClass.ToDisplayString()
                         == TypeNames.System_Runtime_CompilerServices_SkipLocalsInitAttribute
@@ -27,7 +28,8 @@ namespace Microsoft.Interop
             }
             if (
                 compilation
-                    .SourceModule.GetAttributes()
+                    .SourceModule
+                    .GetAttributes()
                     .Any(attr =>
                         attr.AttributeClass.ToDisplayString()
                         == TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute

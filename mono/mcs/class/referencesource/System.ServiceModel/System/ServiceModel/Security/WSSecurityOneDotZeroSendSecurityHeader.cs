@@ -371,11 +371,13 @@ namespace System.ServiceModel.Security
                     }
                     else
                         // More than one 'To' header is specified in the message.
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(SR.TransportSecuredMessageHasMoreThanOneToHeader)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.TransportSecuredMessageHasMoreThanOneToHeader)
+                                )
+                            );
 
                     return;
                 }
@@ -670,16 +672,20 @@ namespace System.ServiceModel.Security
             {
                 if (timestamp.Id == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.TimestampToSignHasNoId))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.TimestampToSignHasNoId))
+                        );
                 }
                 HashStream hashStream = TakeHashStream();
-                this.StandardsManager.WSUtilitySpecificationVersion.WriteTimestampCanonicalForm(
-                    hashStream,
-                    timestamp,
-                    this.signedInfo.ResourcePool.TakeEncodingBuffer()
-                );
+                this.StandardsManager
+                    .WSUtilitySpecificationVersion
+                    .WriteTimestampCanonicalForm(
+                        hashStream,
+                        timestamp,
+                        this.signedInfo.ResourcePool.TakeEncodingBuffer()
+                    );
                 signedInfo.AddReference(timestamp.Id, hashStream.FlushHashAndGetValue());
             }
 
@@ -692,11 +698,13 @@ namespace System.ServiceModel.Security
                 if (this.toHeaderHash != null)
                     signedInfo.AddReference(this.toHeaderId, this.toHeaderHash);
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.TransportSecurityRequireToHeader)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.TransportSecurityRequireToHeader)
+                            )
+                        );
             }
 
             AddSignatureReference(signatureConfirmations);
@@ -814,15 +822,17 @@ namespace System.ServiceModel.Security
             MemoryStream stream
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(
-                        SR.HeaderEncryptionNotSupportedInWsSecurityJan2004,
-                        plainTextHeader.Name,
-                        plainTextHeader.Namespace
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HeaderEncryptionNotSupportedInWsSecurityJan2004,
+                            plainTextHeader.Name,
+                            plainTextHeader.Namespace
+                        )
                     )
-                )
-            );
+                );
         }
 
         HashStream TakeHashStream()
@@ -876,14 +886,16 @@ namespace System.ServiceModel.Security
             );
             if (this.encryptingSymmetricAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.UnableToCreateSymmetricAlgorithmFromToken,
-                            this.EncryptionAlgorithm
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.UnableToCreateSymmetricAlgorithmFromToken,
+                                this.EncryptionAlgorithm
+                            )
                         )
-                    )
-                );
+                    );
             }
             this.encryptionKeyIdentifier = keyIdentifier;
             this.referenceList = new ReferenceList();
@@ -902,14 +914,16 @@ namespace System.ServiceModel.Security
                 suite.DefaultCanonicalizationAlgorithmDictionaryString;
             if (canonicalizationAlgorithm != SecurityAlgorithms.ExclusiveC14n)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.UnsupportedCanonicalizationAlgorithm,
-                            suite.DefaultCanonicalizationAlgorithm
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.UnsupportedCanonicalizationAlgorithm,
+                                suite.DefaultCanonicalizationAlgorithm
+                            )
                         )
-                    )
-                );
+                    );
             }
             string signatureAlgorithm;
             XmlDictionaryString signatureAlgorithmDictionaryString;
@@ -986,9 +1000,11 @@ namespace System.ServiceModel.Security
 
             if (elementToSign.Id == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ElementToSignMustHaveId))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ElementToSignMustHaveId))
+                    );
             }
             Reference reference = new Reference(
                 ServiceModelDictionaryManager.Instance,
@@ -1042,10 +1058,9 @@ namespace System.ServiceModel.Security
                         writer,
                         keyIdentifierClause.Id
                     );
-                    this.StandardsManager.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                        wrappedLocalWriter,
-                        keyIdentifierClause
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifierClause(wrappedLocalWriter, keyIdentifierClause);
                 }
                 else
                     throw TraceUtility.ThrowHelperError(

@@ -1677,7 +1677,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     {
         using var context = CreateContext();
         var customer = context
-            .Customers.Include(c => c.Orders)
+            .Customers
+            .Include(c => c.Orders)
             .Single(c => c.CustomerID == "ALFKI");
         var orderDetails = context.OrderDetails.Where(od => customer.Orders.Contains(od.Order));
 

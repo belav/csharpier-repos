@@ -295,14 +295,16 @@ namespace System.ServiceModel.Configuration
             XmlReader reader
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ConfigurationErrorsException(
-                    SR.GetString(
-                        SR.ConfigBindingExtensionNotFound,
-                        ConfigurationHelpers.GetBindingsSectionPath(elementName)
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigBindingExtensionNotFound,
+                            ConfigurationHelpers.GetBindingsSectionPath(elementName)
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal static bool TryAdd(
@@ -488,34 +490,38 @@ namespace System.ServiceModel.Configuration
 
                 if (bindingCollectionElement == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidSection,
-                                ConfigurationHelpers.GetBindingsSectionPath(binding)
-                            ),
-                            configurationElement.ElementInformation.Source,
-                            configurationElement.ElementInformation.LineNumber
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidSection,
+                                    ConfigurationHelpers.GetBindingsSectionPath(binding)
+                                ),
+                                configurationElement.ElementInformation.Source,
+                                configurationElement.ElementInformation.LineNumber
+                            )
+                        );
                 }
 
                 if (!String.IsNullOrEmpty(bindingConfiguration))
                 {
                     if (!bindingCollectionElement.ContainsKey(bindingConfiguration))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidBindingName,
-                                    bindingConfiguration,
-                                    ConfigurationHelpers.GetBindingsSectionPath(binding),
-                                    ConfigurationStrings.BindingConfiguration
-                                ),
-                                configurationElement.ElementInformation.Source,
-                                configurationElement.ElementInformation.LineNumber
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigInvalidBindingName,
+                                        bindingConfiguration,
+                                        ConfigurationHelpers.GetBindingsSectionPath(binding),
+                                        ConfigurationStrings.BindingConfiguration
+                                    ),
+                                    configurationElement.ElementInformation.Source,
+                                    configurationElement.ElementInformation.LineNumber
+                                )
+                            );
                     }
                 }
             }

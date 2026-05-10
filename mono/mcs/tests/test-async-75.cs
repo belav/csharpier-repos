@@ -8,8 +8,8 @@ class CorrectEncodingOfNestedTypes
     static async Task<T> GetAsync<T>(string s)
         where T : new()
     {
-        return await Task
-            .Factory.StartNew(async () =>
+        return await Task.Factory
+            .StartNew(async () =>
             {
                 var response = await Task.FromResult(s);
                 return (T)new object();

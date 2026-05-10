@@ -146,7 +146,8 @@ internal sealed class LoadedProject : IDisposable
             commandLineArguments.BaseDirectory
         );
         var metadataReferences = commandLineArguments
-            .MetadataReferences.Select(cr =>
+            .MetadataReferences
+            .Select(cr =>
             {
                 // The relative path resolver calls File.Exists() to see if the path doesn't exist; it guarantees that generally the path returned
                 // is to an actual file on disk. And it needs to call File.Exists() in some cases if there are reference paths to have to search. But as a fallback
@@ -186,7 +187,8 @@ internal sealed class LoadedProject : IDisposable
         _mostRecentMetadataReferences = metadataReferences;
 
         var analyzerReferences = commandLineArguments
-            .AnalyzerReferences.Select(cr =>
+            .AnalyzerReferences
+            .Select(cr =>
             {
                 // Note that unlike regular references, we do not resolve these with the relative path resolver that searches reference paths
                 var absolutePath = FileUtilities.ResolveRelativePath(

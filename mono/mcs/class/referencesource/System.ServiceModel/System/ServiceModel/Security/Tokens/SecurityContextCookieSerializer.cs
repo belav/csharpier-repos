@@ -29,9 +29,9 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (securityStateEncoder == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityStateEncoder"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityStateEncoder");
             }
             this.securityStateEncoder = securityStateEncoder;
             this.knownTypes = knownTypes ?? new List<Type>();
@@ -177,11 +177,13 @@ namespace System.ServiceModel.Security.Tokens
             reader.ReadEndElement();
             if (cookieVersion != SupportedPersistanceVersion)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(SR.SerializedTokenVersionUnsupported, cookieVersion)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.SerializedTokenVersionUnsupported, cookieVersion)
+                        )
+                    );
             }
             if (cookieContextId == null)
             {
@@ -414,12 +416,14 @@ namespace System.ServiceModel.Security.Tokens
 
         internal static void OnInvalidCookieFailure(string reason, Exception e)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new MessageSecurityException(
-                    SR.GetString(SR.InvalidSecurityContextCookie, reason),
-                    e
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.InvalidSecurityContextCookie, reason),
+                        e
+                    )
+                );
         }
 
         class SctUnconditionalPolicy : IAuthorizationPolicy

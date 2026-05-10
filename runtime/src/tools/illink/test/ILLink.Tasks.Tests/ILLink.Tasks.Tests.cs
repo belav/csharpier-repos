@@ -267,10 +267,10 @@ namespace ILLink.Tasks.Tests
                         out CodeOptimizations codeOptimizations
                     )
                 );
-                var actualValue = driver.Context.Optimizations.IsEnabled(
-                    codeOptimizations,
-                    assemblyName: null
-                );
+                var actualValue = driver
+                    .Context
+                    .Optimizations
+                    .IsEnabled(codeOptimizations, assemblyName: null);
                 Assert.Equal(enabled, actualValue);
             }
         }
@@ -348,10 +348,10 @@ namespace ILLink.Tasks.Tests
                         if (String.IsNullOrEmpty(optimizationValue))
                             continue;
                         var enabled = Boolean.Parse(optimizationValue);
-                        var actualValue = driver.Context.Optimizations.IsEnabled(
-                            codeOptimizations,
-                            assemblyName: assemblyName
-                        );
+                        var actualValue = driver
+                            .Context
+                            .Optimizations
+                            .IsEnabled(codeOptimizations, assemblyName: assemblyName);
                         Assert.Equal(enabled, actualValue);
                     }
                 }
@@ -940,7 +940,9 @@ namespace ILLink.Tasks.Tests
                     );
 
                     var actualStepNames = driver
-                        .Context.Pipeline.GetSteps()
+                        .Context
+                        .Pipeline
+                        .GetSteps()
                         .Select(s => s.GetType().Name);
                     if (!String.IsNullOrEmpty(beforeStepName))
                     {
@@ -1071,7 +1073,9 @@ namespace ILLink.Tasks.Tests
             using (var driver = task.CreateDriver())
             {
                 var actualSteps = driver
-                    .Context.Pipeline.GetSteps()
+                    .Context
+                    .Pipeline
+                    .GetSteps()
                     .Select(s => s.GetType().Name)
                     .ToList();
                 Assert.Equal(
@@ -1090,7 +1094,10 @@ namespace ILLink.Tasks.Tests
                     actualSteps.TakeLast(2).ToList()
                 );
                 var actualMarkHandlers = driver
-                    .Context.Pipeline.MarkHandlers.Select(h => h.GetType().Name)
+                    .Context
+                    .Pipeline
+                    .MarkHandlers
+                    .Select(h => h.GetType().Name)
                     .ToList();
                 Assert.Equal(
                     new List<string>

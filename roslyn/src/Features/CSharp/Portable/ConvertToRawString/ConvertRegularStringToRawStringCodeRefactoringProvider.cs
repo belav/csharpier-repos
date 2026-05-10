@@ -176,8 +176,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 //
                 // In this case, figure out what indentation we're normally like to put this string.  Update *both* the
                 // contents *and* the starting quotes of the raw string.
-                var indenter =
-                    parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+                var indenter = parsedDocument
+                    .LanguageServices
+                    .GetRequiredService<IIndentationService>();
                 var indentationVal = indenter.GetIndentation(
                     parsedDocument,
                     tokenLine.LineNumber,

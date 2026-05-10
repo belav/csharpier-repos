@@ -267,10 +267,9 @@ namespace System.Xml.Xsl.XsltOld
         internal void InsertExtensionNamespace()
         {
             InsertExtensionNamespace(
-                Input!.Navigator.GetAttribute(
-                    Input.Atoms.ExtensionElementPrefixes,
-                    Input.Atoms.UriXsl
-                )
+                Input!
+                    .Navigator
+                    .GetAttribute(Input.Atoms.ExtensionElementPrefixes, Input.Atoms.UriXsl)
             );
         }
 

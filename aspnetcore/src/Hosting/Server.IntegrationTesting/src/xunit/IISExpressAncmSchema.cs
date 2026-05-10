@@ -45,7 +45,8 @@ public class IISExpressAncmSchema
         }
 
         SupportsInProcessHosting = ancmConfig
-            .Root.Descendants("attribute")
+            .Root
+            .Descendants("attribute")
             .Any(n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal));
 
         SkipReason = SupportsInProcessHosting

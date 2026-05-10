@@ -34,14 +34,16 @@ public class ProjectEnumerableOfIntToHashSet
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Items = new List<Item>(new[] { new Item(), new Item(), new Item() }),
-                }
-            );
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new List<Item>(new[] { new Item(), new Item(), new Item() }),
+                    }
+                );
 
             base.Seed(context);
         }

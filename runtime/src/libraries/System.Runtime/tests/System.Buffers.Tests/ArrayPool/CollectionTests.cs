@@ -97,7 +97,8 @@ namespace System.Buffers.ArrayPool.Tests
                 const int AllocSize = 1024 * 1024 * 64;
                 int PageSize = Environment.SystemPageSize;
                 var pressureMethod = ArrayPool<byte>
-                    .Shared.GetType()
+                    .Shared
+                    .GetType()
                     .GetMethod("GetMemoryPressure", BindingFlags.Static | BindingFlags.NonPublic);
                 do
                 {

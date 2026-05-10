@@ -618,12 +618,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 }
 
                 // Map a field to the block (that makes it addressable).
-                var field = _builder.module.GetFieldForData(
-                    data,
-                    alignment: 1,
-                    wrappedExpression.Syntax,
-                    _diagnostics.DiagnosticBag
-                );
+                var field = _builder
+                    .module
+                    .GetFieldForData(
+                        data,
+                        alignment: 1,
+                        wrappedExpression.Syntax,
+                        _diagnostics.DiagnosticBag
+                    );
                 _builder.EmitOpCode(ILOpCode.Ldsflda);
                 _builder.EmitToken(field, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
 
@@ -698,12 +700,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 // ldtoken <PrivateImplementationDetails>...
                 // call ReadOnlySpan<elementType> RuntimeHelpers::CreateSpan<elementType>(fldHandle)
-                var field = _builder.module.GetFieldForData(
-                    data,
-                    alignment: (ushort)specialElementType.SizeInBytes(),
-                    wrappedExpression.Syntax,
-                    _diagnostics.DiagnosticBag
-                );
+                var field = _builder
+                    .module
+                    .GetFieldForData(
+                        data,
+                        alignment: (ushort)specialElementType.SizeInBytes(),
+                        wrappedExpression.Syntax,
+                        _diagnostics.DiagnosticBag
+                    );
                 _builder.EmitOpCode(ILOpCode.Ldtoken);
                 _builder.EmitToken(field, wrappedExpression.Syntax, _diagnostics.DiagnosticBag);
                 _builder.EmitOpCode(ILOpCode.Call, stackAdjustment: 0);
@@ -748,12 +752,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 TypeWithAnnotations.Create(elementType.EnumUnderlyingTypeOrSelf())
             );
 
-            var cachingField = _builder.module.GetArrayCachingFieldForData(
-                data,
-                _module.Translate(arrayType),
-                wrappedExpression.Syntax,
-                _diagnostics.DiagnosticBag
-            );
+            var cachingField = _builder
+                .module
+                .GetArrayCachingFieldForData(
+                    data,
+                    _module.Translate(arrayType),
+                    wrappedExpression.Syntax,
+                    _diagnostics.DiagnosticBag
+                );
             var arrayNotNullLabel = new object();
 
             // T[]? array = PrivateImplementationDetails.cachingField;

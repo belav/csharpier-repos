@@ -1110,11 +1110,14 @@ namespace Microsoft.CodeAnalysis
             // checked earlier:
             Debug.Assert(compilation.Options.MetadataReferenceResolver != null);
 
-            var references = compilation.Options.MetadataReferenceResolver.ResolveReference(
-                reference,
-                basePath,
-                MetadataReferenceProperties.Assembly.WithRecursiveAliases(true)
-            );
+            var references = compilation
+                .Options
+                .MetadataReferenceResolver
+                .ResolveReference(
+                    reference,
+                    basePath,
+                    MetadataReferenceProperties.Assembly.WithRecursiveAliases(true)
+                );
             if (references.IsDefaultOrEmpty)
             {
                 return null;
@@ -1307,10 +1310,9 @@ namespace Microsoft.CodeAnalysis
                             == OutputKind.WindowsRuntimeMetadata
                         && reference.Version.Equals(definition.Version)
                         && reference.IsRetargetable == definition.IsRetargetable
-                        && AssemblyIdentityComparer.CultureComparer.Equals(
-                            reference.CultureName,
-                            definition.CultureName
-                        )
+                        && AssemblyIdentityComparer
+                            .CultureComparer
+                            .Equals(reference.CultureName, definition.CultureName)
                         && AssemblyIdentity.KeysEqual(reference, definition)
                     )
                     {

@@ -17,10 +17,9 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public CorrelationInitializerValueEditor()
         {
-            this.InlineEditorTemplate =
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                    "CorrelationInitializer_InlineTemplate"
-                );
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
+                .Instance
+                .GetCategoryTemplate("CorrelationInitializer_InlineTemplate");
         }
 
         public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)

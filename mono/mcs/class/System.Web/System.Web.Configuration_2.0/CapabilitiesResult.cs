@@ -69,10 +69,11 @@ namespace System.Web.Configuration
                 //nasty hack to convert regular expression replacement text into  Capability item
                 //which we can use to replace with the actual values they are looking for.
                 System.Text.RegularExpressions.MatchCollection regxmatch;
-                regxmatch = System.Text.RegularExpressions.Regex.Matches(
-                    item,
-                    @"\$\{(?'Capability'\w*)\}"
-                );
+                regxmatch = System
+                    .Text
+                    .RegularExpressions
+                    .Regex
+                    .Matches(item, @"\$\{(?'Capability'\w*)\}");
                 if (regxmatch.Count == 0)
                 {
                     return item;
@@ -91,10 +92,11 @@ namespace System.Web.Configuration
                 //nasty hack to convert regular expression replacement text into  Capability item
                 //which we can use to replace with the actual values they are looking for.
                 System.Text.RegularExpressions.MatchCollection regxmatch;
-                regxmatch = System.Text.RegularExpressions.Regex.Matches(
-                    item,
-                    @"\%\{(?'Capability'\w*)\}"
-                );
+                regxmatch = System
+                    .Text
+                    .RegularExpressions
+                    .Regex
+                    .Matches(item, @"\%\{(?'Capability'\w*)\}");
                 if (regxmatch.Count == 0)
                 {
                     return item;

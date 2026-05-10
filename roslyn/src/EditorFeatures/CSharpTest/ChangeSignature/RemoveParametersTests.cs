@@ -275,9 +275,10 @@ class C{i}
             Assert.Null(result.ChangeSignatureFailureKind);
 
             foreach (
-                var updatedDocument in testState.Workspace.Documents.Select(d =>
-                    result.UpdatedSolution.GetDocument(d.Id)
-                )
+                var updatedDocument in testState
+                    .Workspace
+                    .Documents
+                    .Select(d => result.UpdatedSolution.GetDocument(d.Id))
             )
             {
                 if (updatedDocument.Name == "C5.cs")
@@ -383,9 +384,10 @@ class C{i}
             Assert.Null(result.ChangeSignatureFailureKind);
 
             foreach (
-                var updatedDocument in testState.Workspace.Documents.Select(d =>
-                    result.UpdatedSolution.GetDocument(d.Id)
-                )
+                var updatedDocument in testState
+                    .Workspace
+                    .Documents
+                    .Select(d => result.UpdatedSolution.GetDocument(d.Id))
             )
             {
                 if (updatedDocument.Name == "C5.cs")
@@ -436,8 +438,9 @@ class C{i}
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler =
-                workspace.ExportProvider.GetCommandHandler<CSharpChangeSignatureCommandHandler>(
+            var handler = workspace
+                .ExportProvider
+                .GetCommandHandler<CSharpChangeSignatureCommandHandler>(
                     PredefinedCommandHandlerNames.ChangeSignature,
                     ContentTypeNames.CSharpContentType
                 );

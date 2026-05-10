@@ -24,9 +24,9 @@ namespace System.ServiceModel.Security
         {
             if (string.IsNullOrEmpty(samlUri))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.SamlUriCannotBeNullOrEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentException(SR.SamlUriCannotBeNullOrEmpty));
             }
             this.samlUri = samlUri;
         }

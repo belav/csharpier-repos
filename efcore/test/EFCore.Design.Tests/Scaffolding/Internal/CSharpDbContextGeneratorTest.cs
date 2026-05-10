@@ -1597,9 +1597,8 @@ public partial class TestDbContext : DbContext
                         x =>
                         {
                             x.Property<int>("Id")
-                                .Metadata.SetValueGenerationStrategy(
-                                    SqlServerValueGenerationStrategy.None
-                                );
+                                .Metadata
+                                .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
                         }
                     ),
                 new ModelCodeGenerationOptions(),

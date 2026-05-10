@@ -30,13 +30,15 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context.Response.WriteAsync(
-                                context.Request.Scheme
-                                    + "://"
-                                    + context.Request.Host
-                                    + context.Request.Path
-                                    + context.Request.QueryString
-                            )
+                            context
+                                .Response
+                                .WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
                     });
             })
@@ -68,13 +70,15 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context.Response.WriteAsync(
-                                context.Request.Scheme
-                                    + "://"
-                                    + context.Request.Host
-                                    + context.Request.Path
-                                    + context.Request.QueryString
-                            )
+                            context
+                                .Response
+                                .WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
                     });
             })
@@ -104,13 +108,15 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context.Response.WriteAsync(
-                                context.Request.Scheme
-                                    + "://"
-                                    + context.Request.Host
-                                    + context.Request.Path
-                                    + context.Request.QueryString
-                            )
+                            context
+                                .Response
+                                .WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
                     });
             })
@@ -140,13 +146,15 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context.Response.WriteAsync(
-                                context.Request.Scheme
-                                    + "://"
-                                    + context.Request.Host
-                                    + context.Request.Path
-                                    + context.Request.QueryString
-                            )
+                            context
+                                .Response
+                                .WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
                     });
             })
@@ -767,9 +775,11 @@ public class MiddlewareTests
                             endpoints.MapGet(
                                 "/foo",
                                 context =>
-                                    context.Response.WriteAsync(
-                                        $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
-                                    )
+                                    context
+                                        .Response
+                                        .WriteAsync(
+                                            $"{context.GetEndpoint()?.DisplayName} from {context.Request.Path}"
+                                        )
                             );
                         });
                     });
@@ -798,9 +808,9 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context.Response.WriteAsync(
-                                context.Request.Path + context.Request.QueryString
-                            )
+                            context
+                                .Response
+                                .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });
             })
@@ -828,9 +838,9 @@ public class MiddlewareTests
                     {
                         app.UseRewriter(options);
                         app.Run(context =>
-                            context.Response.WriteAsync(
-                                context.Request.Path + context.Request.QueryString
-                            )
+                            context
+                                .Response
+                                .WriteAsync(context.Request.Path + context.Request.QueryString)
                         );
                     });
             })
@@ -990,13 +1000,15 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+                    context
+                        .Response
+                        .WriteAsync(
+                            context.Request.Scheme
+                                + "://"
+                                + context.Request.Host
+                                + context.Request.Path
+                                + context.Request.QueryString
+                        )
             );
         });
 
@@ -1019,10 +1031,12 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(options =>
-        {
-            options.AddRewrite(regex, "http://example.com/g", skipRemainingRules: false);
-        });
+        builder
+            .Services
+            .Configure<RewriteOptions>(options =>
+            {
+                options.AddRewrite(regex, "http://example.com/g", skipRemainingRules: false);
+            });
         await using var app = builder.Build();
 
         app.UseRouting();
@@ -1035,13 +1049,15 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+                    context
+                        .Response
+                        .WriteAsync(
+                            context.Request.Scheme
+                                + "://"
+                                + context.Request.Host
+                                + context.Request.Path
+                                + context.Request.QueryString
+                        )
             );
         });
 
@@ -1059,10 +1075,12 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(options =>
-        {
-            options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
-        });
+        builder
+            .Services
+            .Configure<RewriteOptions>(options =>
+            {
+                options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
+            });
         await using var app = builder.Build();
         app.UseRouting();
 
@@ -1075,13 +1093,15 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+                    context
+                        .Response
+                        .WriteAsync(
+                            context.Request.Scheme
+                                + "://"
+                                + context.Request.Host
+                                + context.Request.Path
+                                + context.Request.QueryString
+                        )
             );
         });
 
@@ -1099,12 +1119,14 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(options =>
-        {
-            options
-                .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: false)
-                .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
-        });
+        builder
+            .Services
+            .Configure<RewriteOptions>(options =>
+            {
+                options
+                    .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: false)
+                    .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
+            });
         await using var app = builder.Build();
         app.UseRouting();
 
@@ -1117,13 +1139,15 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g/h",
                 context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+                    context
+                        .Response
+                        .WriteAsync(
+                            context.Request.Scheme
+                                + "://"
+                                + context.Request.Host
+                                + context.Request.Path
+                                + context.Request.QueryString
+                        )
             );
         });
 
@@ -1141,12 +1165,14 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(options =>
-        {
-            options
-                .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true)
-                .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
-        });
+        builder
+            .Services
+            .Configure<RewriteOptions>(options =>
+            {
+                options
+                    .AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true)
+                    .AddRewrite("(.*)", "http://example.com/$1/h", skipRemainingRules: false);
+            });
         await using var app = builder.Build();
         app.UseRouting();
 
@@ -1159,13 +1185,15 @@ public class MiddlewareTests
             endpoints.MapGet(
                 "/g",
                 context =>
-                    context.Response.WriteAsync(
-                        context.Request.Scheme
-                            + "://"
-                            + context.Request.Host
-                            + context.Request.Path
-                            + context.Request.QueryString
-                    )
+                    context
+                        .Response
+                        .WriteAsync(
+                            context.Request.Scheme
+                                + "://"
+                                + context.Request.Host
+                                + context.Request.Path
+                                + context.Request.QueryString
+                        )
             );
         });
 
@@ -1183,10 +1211,12 @@ public class MiddlewareTests
     {
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseTestServer();
-        builder.Services.Configure<RewriteOptions>(options =>
-        {
-            options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
-        });
+        builder
+            .Services
+            .Configure<RewriteOptions>(options =>
+            {
+                options.AddRewrite("(.*)", "http://example.com/g", skipRemainingRules: true);
+            });
         await using var app = builder.Build();
 
         app.UseRewriter();
@@ -1196,13 +1226,15 @@ public class MiddlewareTests
         app.MapGet(
             "/g",
             context =>
-                context.Response.WriteAsync(
-                    context.Request.Scheme
-                        + "://"
-                        + context.Request.Host
-                        + context.Request.Path
-                        + context.Request.QueryString
-                )
+                context
+                    .Response
+                    .WriteAsync(
+                        context.Request.Scheme
+                            + "://"
+                            + context.Request.Host
+                            + context.Request.Path
+                            + context.Request.QueryString
+                    )
         );
 
         await app.StartAsync();

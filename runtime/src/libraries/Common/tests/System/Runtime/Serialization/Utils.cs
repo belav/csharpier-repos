@@ -239,9 +239,10 @@ namespace System.Runtime.Serialization.Tests
                         {
                             // Check if the namespace matched.
                             if (
-                                baselineXElement.Name.Namespace.Equals(
-                                    actualXElement.Name.Namespace
-                                )
+                                baselineXElement
+                                    .Name
+                                    .Namespace
+                                    .Equals(actualXElement.Name.Namespace)
                             )
                                 return true;
                         }

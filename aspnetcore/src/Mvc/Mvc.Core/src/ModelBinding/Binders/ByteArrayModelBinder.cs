@@ -59,11 +59,13 @@ public class ByteArrayModelBinder : IModelBinder
         }
         catch (Exception exception)
         {
-            bindingContext.ModelState.TryAddModelError(
-                bindingContext.ModelName,
-                exception,
-                bindingContext.ModelMetadata
-            );
+            bindingContext
+                .ModelState
+                .TryAddModelError(
+                    bindingContext.ModelName,
+                    exception,
+                    bindingContext.ModelMetadata
+                );
         }
 
         _logger.DoneAttemptingToBindModel(bindingContext);

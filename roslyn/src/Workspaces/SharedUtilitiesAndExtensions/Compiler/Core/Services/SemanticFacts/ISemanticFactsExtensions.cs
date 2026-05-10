@@ -44,11 +44,13 @@ namespace Microsoft.CodeAnalysis.LanguageService
             if (innerTypeInfo.Type is IDynamicTypeSymbol)
                 return false;
 
-            semanticFacts.SyntaxFacts.GetPartsOfBinaryExpression(
-                parentBinary,
-                out var parentBinaryLeft,
-                out var parentBinaryRight
-            );
+            semanticFacts
+                .SyntaxFacts
+                .GetPartsOfBinaryExpression(
+                    parentBinary,
+                    out var parentBinaryLeft,
+                    out var parentBinaryRight
+                );
 
             // Only allow us to change associativity if all the types are the same.
             // for example, if we have: int + (int + long)  then we don't want to

@@ -531,16 +531,15 @@ namespace System.Net.Http.Formatting
                     // The current method is called by methods that already checked the type for is not null, is generic and is or implements IEnumerable<T>
                     // This retrieves the T type of the IEnumerable<T> interface.
                     Type elementType = genericType.GetGenericArguments()[0];
-                    Type delegatingType =
-                        FormattingUtilities.DelegatingEnumerableGenericType.MakeGenericType(
-                            elementType
-                        );
+                    Type delegatingType = FormattingUtilities
+                        .DelegatingEnumerableGenericType
+                        .MakeGenericType(elementType);
                     ConstructorInfo delegatingConstructor = delegatingType.GetConstructor(
                         new Type[]
                         {
-                            FormattingUtilities.EnumerableInterfaceGenericType.MakeGenericType(
-                                elementType
-                            ),
+                            FormattingUtilities
+                                .EnumerableInterfaceGenericType
+                                .MakeGenericType(elementType),
                         }
                     );
                     _delegatingEnumerableConstructorCache.TryAdd(

@@ -99,8 +99,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         public FSharpInlineRenameLocationSetLegacyWrapper(IFSharpInlineRenameLocationSet set)
         {
             _set = set;
-            _locations = set
-                .Locations?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
+            _locations = set.Locations
+                ?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
                 .ToList();
         }
 

@@ -261,7 +261,8 @@ public class Http3StreamTests : Http3TestBase
                 context.Response.Headers["path"] = context.Request.Path.Value;
                 context.Response.Headers["query"] = context.Request.QueryString.Value;
                 context.Response.Headers["rawtarget"] = context
-                    .Features.Get<IHttpRequestFeature>()
+                    .Features
+                    .Get<IHttpRequestFeature>()
                     .RawTarget;
                 return Task.CompletedTask;
             },
@@ -743,11 +744,10 @@ public class Http3StreamTests : Http3TestBase
                 var total = read;
                 while (read > 0)
                 {
-                    read = await context.Request.Body.ReadAsync(
-                        buffer,
-                        total,
-                        buffer.Length - total
-                    );
+                    read = await context
+                        .Request
+                        .Body
+                        .ReadAsync(buffer, total, buffer.Length - total);
                     total += read;
                 }
                 Assert.Equal(12, total);
@@ -784,10 +784,10 @@ public class Http3StreamTests : Http3TestBase
                 var readResult = await context.Request.BodyReader.ReadAsync();
                 while (!readResult.IsCompleted)
                 {
-                    context.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    context
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await context.Request.BodyReader.ReadAsync();
                 }
 
@@ -1419,11 +1419,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
                     await context.Response.CompleteAsync().DefaultTimeout();
 
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -1479,11 +1481,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
                     await context.Response.CompleteAsync().DefaultTimeout();
@@ -1543,11 +1547,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     context.Response.ContentLength = 25;
                     context.Response.AppendTrailer("CustomName", "Custom Value");
@@ -1607,11 +1613,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -1674,11 +1682,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
                     await context.Response.CompleteAsync().DefaultTimeout();
 
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -1739,11 +1749,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World").DefaultTimeout();
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -1852,11 +1864,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     var buffer = context.Response.BodyWriter.GetMemory();
                     var length = Encoding.UTF8.GetBytes("Hello World", buffer.Span);
@@ -1926,11 +1940,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -1995,11 +2011,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     context.Response.ContentLength = 25;
                     await context.Response.WriteAsync("Hello World");
@@ -2071,11 +2089,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     context.Response.ContentLength = 25;
                     await context.Response.WriteAsync("Hello World");
@@ -2146,11 +2166,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -2224,11 +2246,13 @@ public class Http3StreamTests : Http3TestBase
                 {
                     var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -2307,11 +2331,13 @@ public class Http3StreamTests : Http3TestBase
             {
                 try
                 {
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -2387,11 +2413,13 @@ public class Http3StreamTests : Http3TestBase
                 {
                     var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    context
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
 
                     await context.Response.WriteAsync("Hello World");
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
@@ -3473,7 +3501,8 @@ public class Http3StreamTests : Http3TestBase
         );
 
         var maxFieldSetting = await Http3Api
-            .ServerReceivedSettingsReader.ReadAsync()
+            .ServerReceivedSettingsReader
+            .ReadAsync()
             .DefaultTimeout();
 
         Assert.Equal(Core.Internal.Http3.Http3SettingType.MaxFieldSectionSize, maxFieldSetting.Key);
@@ -3520,9 +3549,10 @@ public class Http3StreamTests : Http3TestBase
                     var readCount = 0;
                     while (readCount < 100)
                     {
-                        readCount += await context.Request.Body.ReadAsync(
-                            buffer.AsMemory(readCount, 100 - readCount)
-                        );
+                        readCount += await context
+                            .Request
+                            .Body
+                            .ReadAsync(buffer.AsMemory(readCount, 100 - readCount));
                     }
 
                     await context.Response.Body.WriteAsync(buffer.AsMemory(0, 100));

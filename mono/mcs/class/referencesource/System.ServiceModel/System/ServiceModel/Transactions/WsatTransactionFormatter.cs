@@ -109,9 +109,11 @@ namespace System.ServiceModel.Transactions
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(SR.FailedToDeserializeIssuedToken, e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionException(SR.FailedToDeserializeIssuedToken, e)
+                    );
             }
 
             return new WsatTransactionInfo(this.wsatProxy, context, issuedToken);

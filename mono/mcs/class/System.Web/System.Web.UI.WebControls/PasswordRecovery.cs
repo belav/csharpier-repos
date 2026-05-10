@@ -1356,26 +1356,30 @@ namespace System.Web.UI.WebControls
                 bool twoCells = _owner.TextLayout == LoginTextLayout.TextOnLeft;
 
                 // row 0
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.UserNameTitleText),
-                        null,
-                        _owner.TitleTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.UserNameTitleText),
+                            null,
+                            _owner.TitleTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 // row 1
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.UserNameInstructionText),
-                        null,
-                        _owner.InstructionTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.UserNameInstructionText),
+                            null,
+                            _owner.InstructionTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 // row 2
                 TextBox UserNameTextBox = new TextBox();
@@ -1412,9 +1416,9 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    table.Rows.Add(
-                        TemplateUtils.CreateRow(UserNameLabel, null, null, null, twoCells)
-                    );
+                    table
+                        .Rows
+                        .Add(TemplateUtils.CreateRow(UserNameLabel, null, null, null, twoCells));
                     TableRow row = TemplateUtils.CreateRow(
                         UserNameTextBox,
                         null,
@@ -1431,15 +1435,17 @@ namespace System.Web.UI.WebControls
                 FailureText.ID = "FailureText";
                 if (_owner.FailureTextStyle.ForeColor.IsEmpty)
                     _owner.FailureTextStyle.ForeColor = System.Drawing.Color.Red;
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        FailureText,
-                        null,
-                        _owner.FailureTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            FailureText,
+                            null,
+                            _owner.FailureTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 // row 4
                 WebControl SubmitButton = null;
@@ -1474,15 +1480,17 @@ namespace System.Web.UI.WebControls
                 table.Rows.Add(buttonRow);
 
                 // row 5
-                table.Rows.Add(
-                    TemplateUtils.CreateHelpRow(
-                        _owner.HelpPageUrl,
-                        _owner.HelpPageText,
-                        _owner.HelpPageIconUrl,
-                        _owner.HyperLinkStyle,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateHelpRow(
+                            _owner.HelpPageUrl,
+                            _owner.HelpPageText,
+                            _owner.HelpPageIconUrl,
+                            _owner.HyperLinkStyle,
+                            twoCells
+                        )
+                    );
 
                 container.Controls.Add(table);
             }
@@ -1505,54 +1513,62 @@ namespace System.Web.UI.WebControls
                 bool twoCells = _owner.TextLayout == LoginTextLayout.TextOnLeft;
 
                 // row 0
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.QuestionTitleText),
-                        null,
-                        _owner.TitleTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.QuestionTitleText),
+                            null,
+                            _owner.TitleTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 // row 1
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.QuestionInstructionText),
-                        null,
-                        _owner.InstructionTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.QuestionInstructionText),
+                            null,
+                            _owner.InstructionTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 // row 2
                 Literal UserNameLiteral = new Literal();
                 UserNameLiteral.ID = "UserName";
 
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.UserNameLabelText),
-                        UserNameLiteral,
-                        _owner.LabelStyle,
-                        _owner.LabelStyle,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.UserNameLabelText),
+                            UserNameLiteral,
+                            _owner.LabelStyle,
+                            _owner.LabelStyle,
+                            twoCells
+                        )
+                    );
 
                 // row 3
                 Literal QuestionLiteral = new Literal();
                 QuestionLiteral.ID = "Question";
 
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.QuestionLabelText),
-                        QuestionLiteral,
-                        _owner.LabelStyle,
-                        _owner.LabelStyle,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.QuestionLabelText),
+                            QuestionLiteral,
+                            _owner.LabelStyle,
+                            _owner.LabelStyle,
+                            twoCells
+                        )
+                    );
 
                 // row 5
                 TextBox AnswerTextBox = new TextBox();
@@ -1588,9 +1604,9 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    table.Rows.Add(
-                        TemplateUtils.CreateRow(AnswerLabel, null, null, null, twoCells)
-                    );
+                    table
+                        .Rows
+                        .Add(TemplateUtils.CreateRow(AnswerLabel, null, null, null, twoCells));
                     TableRow row = TemplateUtils.CreateRow(
                         AnswerTextBox,
                         null,
@@ -1607,15 +1623,17 @@ namespace System.Web.UI.WebControls
                 FailureText.ID = "FailureText";
                 if (_owner.FailureTextStyle.ForeColor.IsEmpty)
                     _owner.FailureTextStyle.ForeColor = System.Drawing.Color.Red;
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        FailureText,
-                        null,
-                        _owner.FailureTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            FailureText,
+                            null,
+                            _owner.FailureTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 // row 7
                 WebControl SubmitButton = null;
@@ -1650,15 +1668,17 @@ namespace System.Web.UI.WebControls
                 table.Rows.Add(buttonRow);
 
                 // row 8
-                table.Rows.Add(
-                    TemplateUtils.CreateHelpRow(
-                        _owner.HelpPageUrl,
-                        _owner.HelpPageText,
-                        _owner.HelpPageIconUrl,
-                        _owner.HyperLinkStyle,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateHelpRow(
+                            _owner.HelpPageUrl,
+                            _owner.HelpPageText,
+                            _owner.HelpPageIconUrl,
+                            _owner.HyperLinkStyle,
+                            twoCells
+                        )
+                    );
 
                 container.Controls.Add(table);
             }
@@ -1681,15 +1701,17 @@ namespace System.Web.UI.WebControls
                 bool twoCells = _owner.TextLayout == LoginTextLayout.TextOnLeft;
 
                 // row 0
-                table.Rows.Add(
-                    TemplateUtils.CreateRow(
-                        new LiteralControl(_owner.SuccessText),
-                        null,
-                        _owner.SuccessTextStyle,
-                        null,
-                        twoCells
-                    )
-                );
+                table
+                    .Rows
+                    .Add(
+                        TemplateUtils.CreateRow(
+                            new LiteralControl(_owner.SuccessText),
+                            null,
+                            _owner.SuccessTextStyle,
+                            null,
+                            twoCells
+                        )
+                    );
 
                 container.Controls.Add(table);
             }

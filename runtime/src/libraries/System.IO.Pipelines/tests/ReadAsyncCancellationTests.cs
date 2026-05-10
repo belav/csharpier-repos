@@ -178,8 +178,8 @@ namespace System.IO.Pipelines.Tests
             var onCompletedCalled = false;
             var cancellationTokenSource = new CancellationTokenSource();
 
-            ValueTaskAwaiter<ReadResult> awaiter = Pipe
-                .Reader.ReadAsync(cancellationTokenSource.Token)
+            ValueTaskAwaiter<ReadResult> awaiter = Pipe.Reader
+                .ReadAsync(cancellationTokenSource.Token)
                 .GetAwaiter();
             bool awaiterIsCompleted = awaiter.IsCompleted;
 
@@ -202,8 +202,8 @@ namespace System.IO.Pipelines.Tests
             var onCompletedCalled = false;
             var cancellationTokenSource = new CancellationTokenSource();
 
-            ValueTaskAwaiter<ReadResult> awaiter = Pipe
-                .Reader.ReadAsync(cancellationTokenSource.Token)
+            ValueTaskAwaiter<ReadResult> awaiter = Pipe.Reader
+                .ReadAsync(cancellationTokenSource.Token)
                 .GetAwaiter();
             bool awaiterIsCompleted = awaiter.IsCompleted;
             awaiter.OnCompleted(() =>
@@ -224,8 +224,8 @@ namespace System.IO.Pipelines.Tests
             var onCompletedCalled = false;
             var cancellationTokenSource = new CancellationTokenSource();
 
-            ValueTaskAwaiter<ReadResult> awaiter = Pipe
-                .Reader.ReadAsync(cancellationTokenSource.Token)
+            ValueTaskAwaiter<ReadResult> awaiter = Pipe.Reader
+                .ReadAsync(cancellationTokenSource.Token)
                 .GetAwaiter();
             bool awaiterIsCompleted = awaiter.IsCompleted;
 

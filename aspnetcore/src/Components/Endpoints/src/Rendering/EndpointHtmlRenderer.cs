@@ -101,7 +101,8 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         if (handler != null && form != null)
         {
             httpContext
-                .RequestServices.GetRequiredService<HttpContextFormDataProvider>()
+                .RequestServices
+                .GetRequiredService<HttpContextFormDataProvider>()
                 .SetFormData(handler, new FormCollectionReadOnlyDictionary(form), form.Files);
         }
 
@@ -115,8 +116,9 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
 
         // It's important that this is initialized since a component might try to restore state during prerendering
         // (which will obviously not work, but should not fail)
-        var componentApplicationLifetime =
-            httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var componentApplicationLifetime = httpContext
+            .RequestServices
+            .GetRequiredService<ComponentStatePersistenceManager>();
         await componentApplicationLifetime.RestoreStateAsync(
             new PrerenderComponentApplicationStore()
         );
@@ -124,8 +126,9 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         if (componentType != null)
         {
             // Saving RouteData to avoid routing twice in Router component
-            var routingStateProvider =
-                httpContext.RequestServices.GetRequiredService<EndpointRoutingStateProvider>();
+            var routingStateProvider = httpContext
+                .RequestServices
+                .GetRequiredService<EndpointRoutingStateProvider>();
             routingStateProvider.RouteData = new RouteData(
                 componentType,
                 httpContext.GetRouteData().Values

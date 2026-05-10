@@ -50,11 +50,13 @@ namespace System.ServiceModel.Channels
             }
 
             if (sessionGramSize > int.MaxValue)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqSessionGramSizeMustBeInIntegerRange)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqSessionGramSizeMustBeInIntegerRange)
+                        )
+                    );
 
             return (int)sessionGramSize;
         }
@@ -194,9 +196,13 @@ namespace System.ServiceModel.Channels
         void OnOpenCore(TimeSpan timeout)
         {
             if (null == Transaction.Current)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionCurrentRequired))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqTransactionCurrentRequired)
+                        )
+                    );
             this.associatedTx = Transaction.Current;
             this.associatedTx.EnlistVolatile(
                 new TransactionEnlistment(this, this.associatedTx),
@@ -264,17 +270,21 @@ namespace System.ServiceModel.Channels
             if (this.associatedTx != Transaction.Current)
             {
                 this.Fault();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
+                    );
             }
 
             if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
             {
                 this.Fault();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
+                    );
             }
         }
 
@@ -368,11 +378,13 @@ namespace System.ServiceModel.Channels
                 if (this.channel.State != CommunicationState.Closed)
                 {
                     channel.Fault();
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqSessionChannelsMustBeClosed)
-                        )
-                    );
+                    Exception e = DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSessionChannelsMustBeClosed)
+                            )
+                        );
                     preparingEnlistment.ForceRollback(e);
                 }
                 else

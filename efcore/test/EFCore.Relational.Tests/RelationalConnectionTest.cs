@@ -110,8 +110,9 @@ public class RelationalConnectionTest
         using var serviceScope = appServiceProvider
             .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
-        var context =
-            serviceScope.ServiceProvider.GetService<ConstructorTestContextNoConfiguration>();
+        var context = serviceScope
+            .ServiceProvider
+            .GetService<ConstructorTestContextNoConfiguration>();
 
         Assert.Equal(
             CoreStrings.NoProviderConfigured,

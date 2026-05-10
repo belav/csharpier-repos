@@ -36,8 +36,9 @@ namespace Internal.Cryptography.Pal.AnyOS
                 data.EncryptedContentInfo.EncryptedContent?.ToArray() ?? Array.Empty<byte>()
             );
 
-            contentEncryptionAlgorithm =
-                data.EncryptedContentInfo.ContentEncryptionAlgorithm.ToPresentationObject();
+            contentEncryptionAlgorithm = data.EncryptedContentInfo
+                .ContentEncryptionAlgorithm
+                .ToPresentationObject();
 
             originatorCerts = new X509Certificate2Collection();
 

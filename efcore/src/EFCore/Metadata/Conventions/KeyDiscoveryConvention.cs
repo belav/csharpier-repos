@@ -92,10 +92,9 @@ public class KeyDiscoveryConvention
             keyProperties = DiscoverKeyProperties(entityType, candidateProperties).ToList();
             if (keyProperties.Count > 1)
             {
-                Dependencies.Logger.MultiplePrimaryKeyCandidates(
-                    keyProperties[0],
-                    keyProperties[1]
-                );
+                Dependencies
+                    .Logger
+                    .MultiplePrimaryKeyCandidates(keyProperties[0], keyProperties[1]);
                 return;
             }
         }

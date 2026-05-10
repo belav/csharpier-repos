@@ -128,14 +128,16 @@ namespace Roslyn.Test.Utilities
         public static StringHandle[] GetAssemblyRefNames(this MetadataReader reader)
         {
             return reader
-                .AssemblyReferences.Select(handle => reader.GetAssemblyReference(handle).Name)
+                .AssemblyReferences
+                .Select(handle => reader.GetAssemblyReference(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetTypeDefNames(this MetadataReader reader)
         {
             return reader
-                .TypeDefinitions.Select(handle => reader.GetTypeDefinition(handle).Name)
+                .TypeDefinitions
+                .Select(handle => reader.GetTypeDefinition(handle).Name)
                 .ToArray();
         }
 
@@ -144,7 +146,8 @@ namespace Roslyn.Test.Utilities
         )
         {
             return reader
-                .TypeDefinitions.Select(handle =>
+                .TypeDefinitions
+                .Select(handle =>
                 {
                     var td = reader.GetTypeDefinition(handle);
                     return (td.Namespace, td.Name);
@@ -155,35 +158,40 @@ namespace Roslyn.Test.Utilities
         public static StringHandle[] GetTypeRefNames(this MetadataReader reader)
         {
             return reader
-                .TypeReferences.Select(handle => reader.GetTypeReference(handle).Name)
+                .TypeReferences
+                .Select(handle => reader.GetTypeReference(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetEventDefNames(this MetadataReader reader)
         {
             return reader
-                .EventDefinitions.Select(handle => reader.GetEventDefinition(handle).Name)
+                .EventDefinitions
+                .Select(handle => reader.GetEventDefinition(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetFieldDefNames(this MetadataReader reader)
         {
             return reader
-                .FieldDefinitions.Select(handle => reader.GetFieldDefinition(handle).Name)
+                .FieldDefinitions
+                .Select(handle => reader.GetFieldDefinition(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetMethodDefNames(this MetadataReader reader)
         {
             return reader
-                .MethodDefinitions.Select(handle => reader.GetMethodDefinition(handle).Name)
+                .MethodDefinitions
+                .Select(handle => reader.GetMethodDefinition(handle).Name)
                 .ToArray();
         }
 
         public static StringHandle[] GetMemberRefNames(this MetadataReader reader)
         {
             return reader
-                .MemberReferences.Select(handle => reader.GetMemberReference(handle).Name)
+                .MemberReferences
+                .Select(handle => reader.GetMemberReference(handle).Name)
                 .ToArray();
         }
 
@@ -198,7 +206,8 @@ namespace Roslyn.Test.Utilities
         public static StringHandle[] GetPropertyDefNames(this MetadataReader reader)
         {
             return reader
-                .PropertyDefinitions.Select(handle => reader.GetPropertyDefinition(handle).Name)
+                .PropertyDefinitions
+                .Select(handle => reader.GetPropertyDefinition(handle).Name)
                 .ToArray();
         }
 
@@ -384,7 +393,8 @@ namespace Roslyn.Test.Utilities
         public static IEnumerable<string> DumpAssemblyReferences(this MetadataReader reader)
         {
             return reader
-                .AssemblyReferences.Select(r => reader.GetAssemblyReference(r))
+                .AssemblyReferences
+                .Select(r => reader.GetAssemblyReference(r))
                 .Select(row =>
                     $"{reader.GetString(row.Name)} {row.Version.Major}.{row.Version.Minor}"
                 );
@@ -393,7 +403,8 @@ namespace Roslyn.Test.Utilities
         public static IEnumerable<string> DumpTypeReferences(this MetadataReader reader)
         {
             return reader
-                .TypeReferences.Select(t => reader.GetTypeReference(t))
+                .TypeReferences
+                .Select(t => reader.GetTypeReference(t))
                 .Select(t =>
                     $"{reader.GetString(t.Name)}, {reader.GetString(t.Namespace)}, {reader.Dump(t.ResolutionScope)}"
                 );
@@ -607,9 +618,8 @@ namespace Roslyn.Test.Utilities
 
                 AssertEx.SetEqual(
                     metadataReader
-                        .CustomAttributes.Select(a =>
-                            metadataReader.GetCustomAttribute(a).Constructor
-                        )
+                        .CustomAttributes
+                        .Select(a => metadataReader.GetCustomAttribute(a).Constructor)
                         .Select(c =>
                             metadataReader.GetMemberReference((MemberReferenceHandle)c).Parent
                         )

@@ -380,22 +380,24 @@ namespace System.Windows.Forms
                 line_width_top_left = 2;
             }
 
-            ThemeEngine.Current.CPDrawBorder(
-                graphics,
-                bounds,
-                color,
-                line_width_top_left,
-                style,
-                color,
-                line_width_top_left,
-                style,
-                color,
-                line_width_bottom_right,
-                style,
-                color,
-                line_width_bottom_right,
-                style
-            );
+            ThemeEngine
+                .Current
+                .CPDrawBorder(
+                    graphics,
+                    bounds,
+                    color,
+                    line_width_top_left,
+                    style,
+                    color,
+                    line_width_top_left,
+                    style,
+                    color,
+                    line_width_bottom_right,
+                    style,
+                    color,
+                    line_width_bottom_right,
+                    style
+                );
         }
 
         public static void DrawBorder(
@@ -415,22 +417,24 @@ namespace System.Windows.Forms
             ButtonBorderStyle bottomStyle
         )
         {
-            ThemeEngine.Current.CPDrawBorder(
-                graphics,
-                bounds,
-                leftColor,
-                leftWidth,
-                leftStyle,
-                topColor,
-                topWidth,
-                topStyle,
-                rightColor,
-                rightWidth,
-                rightStyle,
-                bottomColor,
-                bottomWidth,
-                bottomStyle
-            );
+            ThemeEngine
+                .Current
+                .CPDrawBorder(
+                    graphics,
+                    bounds,
+                    leftColor,
+                    leftWidth,
+                    leftStyle,
+                    topColor,
+                    topWidth,
+                    topStyle,
+                    rightColor,
+                    rightWidth,
+                    rightStyle,
+                    bottomColor,
+                    bottomWidth,
+                    bottomStyle
+                );
         }
 
         public static void DrawBorder3D(Graphics graphics, Rectangle rectangle)
@@ -639,13 +643,15 @@ namespace System.Windows.Forms
 
         public static void DrawMenuGlyph(Graphics graphics, Rectangle rectangle, MenuGlyph glyph)
         {
-            ThemeEngine.Current.CPDrawMenuGlyph(
-                graphics,
-                rectangle,
-                glyph,
-                ThemeEngine.Current.ColorMenuText,
-                Color.Empty
-            );
+            ThemeEngine
+                .Current
+                .CPDrawMenuGlyph(
+                    graphics,
+                    rectangle,
+                    glyph,
+                    ThemeEngine.Current.ColorMenuText,
+                    Color.Empty
+                );
         }
 
         public static void DrawMenuGlyph(
@@ -762,12 +768,9 @@ namespace System.Windows.Forms
             ButtonState state
         )
         {
-            ThemeEngine.Current.CPDrawScrollButton(
-                graphics,
-                new Rectangle(x, y, width, height),
-                button,
-                state
-            );
+            ThemeEngine
+                .Current
+                .CPDrawScrollButton(graphics, new Rectangle(x, y, width, height), button, state);
         }
 
         public static void DrawScrollButton(
@@ -827,14 +830,9 @@ namespace System.Windows.Forms
             StringFormat format
         )
         {
-            ThemeEngine.Current.CPDrawStringDisabled(
-                graphics,
-                s,
-                font,
-                color,
-                layoutRectangle,
-                format
-            );
+            ThemeEngine
+                .Current
+                .CPDrawStringDisabled(graphics, s, font, color, layoutRectangle, format);
         }
 
         public static void DrawStringDisabled(

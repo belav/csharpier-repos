@@ -302,7 +302,8 @@ namespace System.Web.DynamicData
                     table.CreateColumns();
 
                     var tableNameAttribute = tableProvider
-                        .Attributes.OfType<TableNameAttribute>()
+                        .Attributes
+                        .OfType<TableNameAttribute>()
                         .SingleOrDefault();
                     string nameOverride =
                         tableNameAttribute != null ? tableNameAttribute.Name : null;

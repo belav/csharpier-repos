@@ -518,7 +518,8 @@ public class HealthCheckPublisherHostedServiceTest
 
         // Assert - after stop
         var entries = publisher
-            .Entries.SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
+            .Entries
+            .SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
             .OrderBy(k => k)
             .ToArray();
         Assert.Contains("CheckDefault", entries);
@@ -870,7 +871,8 @@ public class HealthCheckPublisherHostedServiceTest
             for (var i = 0; i < publishers.Length; i++)
             {
                 var entries = publishers[i]
-                    .Entries.SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
+                    .Entries
+                    .SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
                     .OrderBy(k => k)
                     .ToArray();
 
@@ -889,7 +891,8 @@ public class HealthCheckPublisherHostedServiceTest
         for (var i = 0; i < publishers.Length; i++)
         {
             var entries = publishers[i]
-                .Entries.SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
+                .Entries
+                .SelectMany(e => e.report.Entries.Select(e2 => e2.Key))
                 .OrderBy(k => k)
                 .ToArray();
 

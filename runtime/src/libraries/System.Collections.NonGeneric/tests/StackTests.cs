@@ -88,9 +88,9 @@ namespace System.Collections.Tests
 
             DebuggerAttributeInfo debuggerAttribute =
                 DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property =>
-                property.Name == "Items"
-            );
+            PropertyInfo infoProperty = debuggerAttribute
+                .Properties
+                .Single(property => property.Name == "Items");
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(stack.ToArray(), items);

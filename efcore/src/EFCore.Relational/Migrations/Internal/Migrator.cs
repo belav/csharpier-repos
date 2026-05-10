@@ -309,7 +309,8 @@ public class Migrator : IMigrator
         {
             var fromMigrationId = _migrationsAssembly.GetMigrationId(fromMigration);
             appliedMigrations = _migrationsAssembly
-                .Migrations.Where(t =>
+                .Migrations
+                .Where(t =>
                     string.Compare(t.Key, fromMigrationId, StringComparison.OrdinalIgnoreCase) <= 0
                 )
                 .Select(t => t.Key);

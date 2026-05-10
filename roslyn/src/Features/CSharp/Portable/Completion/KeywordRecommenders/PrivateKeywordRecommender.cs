@@ -30,12 +30,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForAccessor(CSharpSyntaxContext context)
         {
             if (
-                context.TargetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(
-                    context.Position
-                )
-                || context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
-                    context.Position
-                )
+                context
+                    .TargetToken
+                    .IsAccessorDeclarationContext<PropertyDeclarationSyntax>(context.Position)
+                || context
+                    .TargetToken
+                    .IsAccessorDeclarationContext<IndexerDeclarationSyntax>(context.Position)
             )
             {
                 return CheckPreviousAccessibilityModifiers(context);
@@ -50,11 +50,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             if (
-                context.SyntaxTree.IsGlobalMemberDeclarationContext(
-                    context.Position,
-                    SyntaxKindSet.AllGlobalMemberModifiers,
-                    cancellationToken
-                )
+                context
+                    .SyntaxTree
+                    .IsGlobalMemberDeclarationContext(
+                        context.Position,
+                        SyntaxKindSet.AllGlobalMemberModifiers,
+                        cancellationToken
+                    )
                 || context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,

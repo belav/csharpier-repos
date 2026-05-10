@@ -241,11 +241,13 @@ namespace System.ServiceModel.Syndication
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Item as TSyndicationItem;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.UnknownItemXml, reader.LocalName, reader.NamespaceURI)
+                    )
+                );
         }
 
         [SuppressMessage(

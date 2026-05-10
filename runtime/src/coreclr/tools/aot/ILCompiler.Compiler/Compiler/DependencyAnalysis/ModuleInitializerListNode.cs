@@ -226,9 +226,9 @@ namespace ILCompiler.DependencyAnalysis
 
                         try
                         {
-                            var reference = module.Context.ResolveAssembly(
-                                new System.Reflection.AssemblyName(assemblyName)
-                            );
+                            var reference = module
+                                .Context
+                                .ResolveAssembly(new System.Reflection.AssemblyName(assemblyName));
                             referencedAssemblies.Add(reference);
                         }
                         catch (TypeSystemException) { }

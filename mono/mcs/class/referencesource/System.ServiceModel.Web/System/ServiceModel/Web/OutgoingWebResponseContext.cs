@@ -126,9 +126,9 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext.OutgoingMessageProperties.ContainsKey(
-                        WebResponseFormatPropertyName
-                    )
+                    !operationContext
+                        .OutgoingMessageProperties
+                        .ContainsKey(WebResponseFormatPropertyName)
                 )
                 {
                     return null;
@@ -142,9 +142,9 @@ namespace System.ServiceModel.Web
                 {
                     if (!WebMessageFormatHelper.IsDefined(value.Value))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("value")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                     }
                     else
                     {
@@ -170,9 +170,9 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext.OutgoingMessageProperties.ContainsKey(
-                        AutomatedFormatSelectionContentTypePropertyName
-                    )
+                    !operationContext
+                        .OutgoingMessageProperties
+                        .ContainsKey(AutomatedFormatSelectionContentTypePropertyName)
                 )
                 {
                     return null;
@@ -208,7 +208,8 @@ namespace System.ServiceModel.Web
                         {
                             WebMessageEncodingBindingElement encodingElement =
                                 endpoint
-                                    .Binding.CreateBindingElements()
+                                    .Binding
+                                    .CreateBindingElements()
                                     .Find<WebMessageEncodingBindingElement>()
                                 as WebMessageEncodingBindingElement;
                             if (encodingElement != null)
@@ -227,15 +228,14 @@ namespace System.ServiceModel.Web
             get
             {
                 if (
-                    !operationContext.OutgoingMessageProperties.ContainsKey(
-                        HttpResponseMessageProperty.Name
-                    )
+                    !operationContext
+                        .OutgoingMessageProperties
+                        .ContainsKey(HttpResponseMessageProperty.Name)
                 )
                 {
-                    operationContext.OutgoingMessageProperties.Add(
-                        HttpResponseMessageProperty.Name,
-                        new HttpResponseMessageProperty()
-                    );
+                    operationContext
+                        .OutgoingMessageProperties
+                        .Add(HttpResponseMessageProperty.Name, new HttpResponseMessageProperty());
                 }
                 return operationContext.OutgoingMessageProperties[HttpResponseMessageProperty.Name]
                     as HttpResponseMessageProperty;
@@ -301,11 +301,13 @@ namespace System.ServiceModel.Web
                 && entityTag.EndsWith("\"", StringComparison.OrdinalIgnoreCase)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.WeakEntityTagsNotSupported, entityTag)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.WeakEntityTagsNotSupported, entityTag)
+                        )
+                    );
             }
 
             List<int> escapeCharacterInsertIndices = null;

@@ -901,7 +901,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 assemblyName = "typeforward";
 
                 implProject = workspace
-                    .CurrentSolution.Projects.First()
+                    .CurrentSolution
+                    .Projects
+                    .First()
                     .AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
                 var typeForwardSourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
                 CompileTestSource(
@@ -939,7 +941,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 assemblyName = "implementation";
 
                 implProject = workspace
-                    .CurrentSolution.Projects.First()
+                    .CurrentSolution
+                    .Projects
+                    .First()
                     .AddMetadataReference(
                         MetadataReference.CreateFromFile(realImplementationDllFilePath)
                     );

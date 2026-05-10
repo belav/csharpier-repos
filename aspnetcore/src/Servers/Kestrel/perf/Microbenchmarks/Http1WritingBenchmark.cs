@@ -94,12 +94,9 @@ public class Http1WritingBenchmark
     {
         ResetState();
 
-        return _http1Connection.ResponseBody.WriteAsync(
-            _writeData,
-            0,
-            _writeData.Length,
-            default(CancellationToken)
-        );
+        return _http1Connection
+            .ResponseBody
+            .WriteAsync(_writeData, 0, _writeData.Length, default(CancellationToken));
     }
 
     private TestHttp1Connection MakeHttp1Connection()

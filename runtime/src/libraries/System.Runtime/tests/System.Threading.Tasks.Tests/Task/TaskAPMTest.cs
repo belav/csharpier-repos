@@ -278,13 +278,15 @@ namespace System.Threading.Tasks.Tests
         public IAsyncResult BeginDoTask(T input, AsyncCallback callback, object state)
         {
             // Create IAsyncResult object identifying the asynchronous operation
-            Task<T> task = Task<T>.Factory.StartNew(
-                delegate
-                {
-                    return DoTask(input);
-                },
-                state
-            );
+            Task<T> task = Task<T>
+                .Factory
+                .StartNew(
+                    delegate
+                    {
+                        return DoTask(input);
+                    },
+                    state
+                );
 
             task.ContinueWith(
                 delegate

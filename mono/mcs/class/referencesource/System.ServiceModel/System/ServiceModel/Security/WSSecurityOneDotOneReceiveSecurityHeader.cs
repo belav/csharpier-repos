@@ -51,40 +51,46 @@ namespace System.ServiceModel.Security
             // The Encrypted Headers MustUnderstand, Relay and Actor attributes should match the
             // Security Headers value.
             if (headerXml.MustUnderstand != this.MustUnderstand)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.EncryptedHeaderAttributeMismatch,
-                            XD.MessageDictionary.MustUnderstand.Value,
-                            headerXml.MustUnderstand,
-                            this.MustUnderstand
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.EncryptedHeaderAttributeMismatch,
+                                XD.MessageDictionary.MustUnderstand.Value,
+                                headerXml.MustUnderstand,
+                                this.MustUnderstand
+                            )
                         )
-                    )
-                );
+                    );
 
             if (headerXml.Relay != this.Relay)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.EncryptedHeaderAttributeMismatch,
-                            XD.Message12Dictionary.Relay.Value,
-                            headerXml.Relay,
-                            this.Relay
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.EncryptedHeaderAttributeMismatch,
+                                XD.Message12Dictionary.Relay.Value,
+                                headerXml.Relay,
+                                this.Relay
+                            )
                         )
-                    )
-                );
+                    );
 
             if (headerXml.Actor != this.Actor)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(
-                            SR.EncryptedHeaderAttributeMismatch,
-                            this.Version.Envelope.DictionaryActor,
-                            headerXml.Actor,
-                            this.Actor
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.EncryptedHeaderAttributeMismatch,
+                                this.Version.Envelope.DictionaryActor,
+                                headerXml.Actor,
+                                this.Actor
+                            )
                         )
-                    )
-                );
+                    );
 
             SecurityToken token;
             if (wrappedKeyToken == null)

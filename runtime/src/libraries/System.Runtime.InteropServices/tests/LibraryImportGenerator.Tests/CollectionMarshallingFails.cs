@@ -205,9 +205,9 @@ namespace LibraryImportGenerator.IntegrationTests
                 BoolStructArrayMarshaller.Marshaller.ExpectedFreeCount = throwOn;
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.MarshalMultidimensionalArray_CheckOuterArrayIsIndexTracked(
-                        arr
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .MarshalMultidimensionalArray_CheckOuterArrayIsIndexTracked(arr);
                 });
             }
         }
@@ -223,9 +223,9 @@ namespace LibraryImportGenerator.IntegrationTests
                 BoolStructInMarshallerAllowNull.Marshaller.ExpectedFreeCount = throwOn;
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.MarshalMultidimensionalArray_CheckInnerArraysAreCleared(
-                        arr
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .MarshalMultidimensionalArray_CheckInnerArraysAreCleared(arr);
                 });
                 BoolStructInMarshallerAllowNull.Marshaller.AssertAllHaveBeenCleaned();
             }
@@ -265,11 +265,9 @@ namespace LibraryImportGenerator.IntegrationTests
                 BoolStructOutMarshaller.Marshaller.ExpectedFreedValues = nativeNegated;
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.NegateBoolsOut(
-                        arr,
-                        arr.Length,
-                        out var boolsOut
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .NegateBoolsOut(arr, arr.Length, out var boolsOut);
                 });
                 BoolStructInMarshaller.Marshaller.AssertAllHaveBeenCleaned();
                 BoolStructOutMarshaller.Marshaller.AssertAllHaveBeenCleaned();
@@ -305,12 +303,9 @@ namespace LibraryImportGenerator.IntegrationTests
                 //NegateBoolStructInMarshaller.Marshaller.ExpectedFreedValues = Enumerable.Range(0, 100).Select(_ => new BoolStructNative() { b1 = 0, b2 = 0, b3 = 0 }).ToArray();
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.NegateBoolsOut2D(
-                        arr,
-                        arr.Length,
-                        widths,
-                        out BoolStruct[][] boolsOut
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .NegateBoolsOut2D(arr, arr.Length, widths, out BoolStruct[][] boolsOut);
                 });
                 // https://github.com/dotnet/runtime/issues/93423
                 //NegateBoolStructInMarshaller.Marshaller.AssertAllHaveBeenCleaned();
@@ -331,12 +326,9 @@ namespace LibraryImportGenerator.IntegrationTests
             // https://github.com/dotnet/runtime/issues/93423
             //NegateBoolStructInMarshaller.Marshaller.UnmarshallingFailsIndex = -1;
             //NegateBoolStructInMarshaller.Marshaller.ExpectedFreeCount = 100;
-            NativeExportsNE.MarshallingFails.NegateBoolsOut2D(
-                arr,
-                arr.Length,
-                widths,
-                out BoolStruct[][] boolsOut
-            );
+            NativeExportsNE
+                .MarshallingFails
+                .NegateBoolsOut2D(arr, arr.Length, widths, out BoolStruct[][] boolsOut);
             // https://github.com/dotnet/runtime/issues/93423
             //NegateBoolStructInMarshaller.Marshaller.AssertAllHaveBeenCleaned();
             BoolStructInMarshaller.Marshaller.Reset();
@@ -453,10 +445,9 @@ namespace LibraryImportGenerator.IntegrationTests
                 BoolStructArrayMarshaller.Marshaller.ExpectedFreeCount = throwOn;
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.NegateBoolsRef2D_LastElementMarshalling(
-                        ref arr,
-                        arr.Length
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .NegateBoolsRef2D_LastElementMarshalling(ref arr, arr.Length);
                 });
                 BoolStructArrayMarshaller.Marshaller.AssertAllHaveBeenCleaned();
             }
@@ -475,11 +466,9 @@ namespace LibraryImportGenerator.IntegrationTests
                     throwOn - throwOn % 10;
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.NegateBoolsRef2D_ClearMarshalling(
-                        ref arr,
-                        arr.Length,
-                        widths
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .NegateBoolsRef2D_ClearMarshalling(ref arr, arr.Length, widths);
                 });
                 BoolStructInMarshallerAllowNull.Marshaller.AssertAllHaveBeenCleaned();
             }
@@ -499,11 +488,9 @@ namespace LibraryImportGenerator.IntegrationTests
                     throwOn + 10 - (throwOn % 10);
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    NativeExportsNE.MarshallingFails.NegateBoolsRef2D_ClearMarshalling(
-                        ref arr,
-                        arr.Length,
-                        widths
-                    );
+                    NativeExportsNE
+                        .MarshallingFails
+                        .NegateBoolsRef2D_ClearMarshalling(ref arr, arr.Length, widths);
                 });
                 BoolStructInMarshallerAllowNull.Marshaller.AssertAllHaveBeenCleaned();
             }

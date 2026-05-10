@@ -55,7 +55,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                     return null;
 
                 return await location
-                    .Value.Value.TryRehydrateAsync(project.Solution, cancellationToken)
+                    .Value
+                    .Value
+                    .TryRehydrateAsync(project.Solution, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -253,17 +255,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             var syntaxFacts = project.GetRequiredLanguageService<ISyntaxFactsService>();
             var comparer = syntaxFacts.StringComparer;
 
-            var streams = project.Documents.SelectAsArray(d =>
-                GetSourceLocationsInProcessAsync(
-                    d,
-                    comparer,
-                    container,
-                    symbolName,
-                    symbolArity,
-                    query,
-                    cancellationToken
-                )
-            );
+            var streams = project
+                .Documents
+                .SelectAsArray(d =>
+                    GetSourceLocationsInProcessAsync(
+                        d,
+                        comparer,
+                        container,
+                        symbolName,
+                        symbolArity,
+                        query,
+                        cancellationToken
+                    )
+                );
             return streams.MergeAsync(cancellationToken);
         }
 

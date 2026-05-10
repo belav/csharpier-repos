@@ -86,10 +86,12 @@ namespace Internal.TypeSystem
                         RuntimeTypeHandle rtth;
                         if (
                             argumentsRegistered
-                            && TypeLoaderEnvironment.Instance.TryLookupConstructedGenericTypeForComponents(
-                                new TypeLoaderEnvironment.GenericTypeLookupData(typeAsDefType),
-                                out rtth
-                            )
+                            && TypeLoaderEnvironment
+                                .Instance
+                                .TryLookupConstructedGenericTypeForComponents(
+                                    new TypeLoaderEnvironment.GenericTypeLookupData(typeAsDefType),
+                                    out rtth
+                                )
                         )
                         {
                             typeAsDefType.SetRuntimeTypeHandleUnsafe(rtth);
@@ -166,14 +168,16 @@ namespace Internal.TypeSystem
 
                     if (
                         handlesAvailable
-                        && TypeLoaderEnvironment.Instance.TryLookupFunctionPointerTypeForComponents(
-                            sig.ReturnType.RuntimeTypeHandle,
-                            parameterHandles,
-                            isUnmanaged: (
-                                sig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask
-                            ) != 0,
-                            out RuntimeTypeHandle rtth
-                        )
+                        && TypeLoaderEnvironment
+                            .Instance
+                            .TryLookupFunctionPointerTypeForComponents(
+                                sig.ReturnType.RuntimeTypeHandle,
+                                parameterHandles,
+                                isUnmanaged: (
+                                    sig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask
+                                ) != 0,
+                                out RuntimeTypeHandle rtth
+                            )
                     )
                     {
                         functionPointerType.SetRuntimeTypeHandleUnsafe(rtth);

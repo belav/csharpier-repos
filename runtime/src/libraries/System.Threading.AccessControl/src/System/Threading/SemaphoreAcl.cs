@@ -66,14 +66,16 @@ namespace System.Threading
                     lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
-                SafeWaitHandle handle = Interop.Kernel32.CreateSemaphoreEx(
-                    (IntPtr)(&secAttrs),
-                    initialCount,
-                    maximumCount,
-                    name,
-                    0, // This parameter is reserved and must be 0.
-                    (uint)SemaphoreRights.FullControl // Equivalent to SEMAPHORE_ALL_ACCESS
-                );
+                SafeWaitHandle handle = Interop
+                    .Kernel32
+                    .CreateSemaphoreEx(
+                        (IntPtr)(&secAttrs),
+                        initialCount,
+                        maximumCount,
+                        name,
+                        0, // This parameter is reserved and must be 0.
+                        (uint)SemaphoreRights.FullControl // Equivalent to SEMAPHORE_ALL_ACCESS
+                    );
 
                 int errorCode = Marshal.GetLastPInvokeError();
 

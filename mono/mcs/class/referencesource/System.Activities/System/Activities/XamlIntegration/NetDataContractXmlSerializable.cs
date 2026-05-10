@@ -24,9 +24,13 @@ namespace System.Activities.XamlIntegration
 
         public XmlSchema GetSchema()
         {
-            throw FxTrace.Exception.AsError(
-                new NotSupportedException(SR.CannotGenerateSchemaForXmlSerializable(typeof(T).Name))
-            );
+            throw FxTrace
+                .Exception
+                .AsError(
+                    new NotSupportedException(
+                        SR.CannotGenerateSchemaForXmlSerializable(typeof(T).Name)
+                    )
+                );
         }
 
         public void ReadXml(XmlReader reader)

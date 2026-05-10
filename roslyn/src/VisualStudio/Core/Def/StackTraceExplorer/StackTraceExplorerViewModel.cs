@@ -76,25 +76,29 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             IsLoading = true;
             Frames.Clear();
             var cancellationToken = _threadingContext.DisposalToken;
-            System.Threading.Tasks.Task.Run(
-                async () =>
-                {
-                    try
+            System
+                .Threading
+                .Tasks
+                .Task
+                .Run(
+                    async () =>
                     {
-                        var result = await StackTraceAnalyzer
-                            .AnalyzeAsync(text, cancellationToken)
-                            .ConfigureAwait(false);
-                        await SetStackTraceResultAsync(result, text, cancellationToken)
-                            .ConfigureAwait(false);
-                    }
-                    finally
-                    {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                        IsLoading = false;
-                    }
-                },
-                cancellationToken
-            );
+                        try
+                        {
+                            var result = await StackTraceAnalyzer
+                                .AnalyzeAsync(text, cancellationToken)
+                                .ConfigureAwait(false);
+                            await SetStackTraceResultAsync(result, text, cancellationToken)
+                                .ConfigureAwait(false);
+                        }
+                        finally
+                        {
+                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                            IsLoading = false;
+                        }
+                    },
+                    cancellationToken
+                );
         }
 
         public async System.Threading.Tasks.Task SetStackTraceResultAsync(

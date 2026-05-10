@@ -911,9 +911,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             {
                 if (memberDeclaration.Kind() == SyntaxKind.ConversionOperatorDeclaration)
                 {
-                    name = (
-                        memberDeclaration as ConversionOperatorDeclarationSyntax
-                    )?.Type.ToString();
+                    name = (memberDeclaration as ConversionOperatorDeclarationSyntax)
+                        ?.Type
+                        .ToString();
                 }
                 else
                 {
@@ -1483,9 +1483,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             SyntaxNode localDeclarationStatement
         ) =>
             declarator is VariableDeclaratorSyntax variableDeclarator
-            && (
-                (LocalDeclarationStatementSyntax)localDeclarationStatement
-            ).Declaration.Variables.Contains(variableDeclarator);
+            && ((LocalDeclarationStatementSyntax)localDeclarationStatement)
+                .Declaration
+                .Variables
+                .Contains(variableDeclarator);
 
         public bool AreEquivalent(SyntaxToken token1, SyntaxToken token2) =>
             SyntaxFactory.AreEquivalent(token1, token2);

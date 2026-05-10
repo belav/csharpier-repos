@@ -61,14 +61,16 @@ namespace System.ServiceModel.Activation
             {
                 if (throwOnLowMemory)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InsufficientMemoryException(
-                            SR.Hosting_MemoryGatesCheckFailed(
-                                availableMemoryBytes,
-                                minFreeMemoryPercentage
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InsufficientMemoryException(
+                                SR.Hosting_MemoryGatesCheckFailed(
+                                    availableMemoryBytes,
+                                    minFreeMemoryPercentage
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
@@ -92,12 +94,14 @@ namespace System.ServiceModel.Activation
             {
                 int error = Marshal.GetLastWin32Error();
                 // Treat as the worst case.
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.Hosting_GetGlobalMemoryFailed,
-                        new Win32Exception(error)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.Hosting_GetGlobalMemoryFailed,
+                            new Win32Exception(error)
+                        )
+                    );
             }
         }
     }

@@ -48,9 +48,11 @@ namespace System.ServiceModel.ComIntegration
                 int error = Marshal.GetLastWin32Error();
                 if (error != (int)Win32Error.ERROR_INSUFFICIENT_BUFFER)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
+                        );
                 }
             }
             SafeHandle buffer = SafeHGlobalHandle.AllocHGlobal(length);
@@ -67,9 +69,11 @@ namespace System.ServiceModel.ComIntegration
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(error, SR.GetString(SR.GetTokenInfoFailed, error))
+                        );
                 }
             }
             catch
@@ -143,12 +147,14 @@ namespace System.ServiceModel.ComIntegration
                             )
                             {
                                 int error = Marshal.GetLastWin32Error();
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new Win32Exception(
-                                        error,
-                                        SR.GetString(SR.ImpersonateAnonymousTokenFailed, error)
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new Win32Exception(
+                                            error,
+                                            SR.GetString(SR.ImpersonateAnonymousTokenFailed, error)
+                                        )
+                                    );
                             }
                             isImpersonating = true;
                             bool revertSuccess;
@@ -175,12 +181,14 @@ namespace System.ServiceModel.ComIntegration
                                 isImpersonating = false;
 
                                 Utility.CloseInvalidOutSafeHandle(tokenHandle);
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new Win32Exception(
-                                        error,
-                                        SR.GetString(SR.OpenThreadTokenFailed, error)
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new Win32Exception(
+                                            error,
+                                            SR.GetString(SR.OpenThreadTokenFailed, error)
+                                        )
+                                    );
                             }
 
                             revertSuccess = SafeNativeMethods.RevertToSelf();
@@ -243,12 +251,14 @@ namespace System.ServiceModel.ComIntegration
                     {
                         int error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(tokenHandle);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(
-                                error,
-                                SR.GetString(SR.OpenProcessTokenFailed, error)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new Win32Exception(
+                                    error,
+                                    SR.GetString(SR.OpenProcessTokenFailed, error)
+                                )
+                            );
                     }
                     processIdentity = new WindowsIdentity(tokenHandle.DangerousGetHandle());
                 }
@@ -419,12 +429,14 @@ namespace System.ServiceModel.ComIntegration
                     {
                         int error = Marshal.GetLastWin32Error();
                         Utility.CloseInvalidOutSafeHandle(ImpersonationToken);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(
-                                error,
-                                SR.GetString(SR.DuplicateTokenExFailed, error)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new Win32Exception(
+                                    error,
+                                    SR.GetString(SR.DuplicateTokenExFailed, error)
+                                )
+                            );
                     }
                 }
                 GENERIC_MAPPING GenericMapping = new GENERIC_MAPPING();
@@ -445,9 +457,11 @@ namespace System.ServiceModel.ComIntegration
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(error, SR.GetString(SR.AccessCheckFailed, error))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(error, SR.GetString(SR.AccessCheckFailed, error))
+                        );
                 }
             }
             finally

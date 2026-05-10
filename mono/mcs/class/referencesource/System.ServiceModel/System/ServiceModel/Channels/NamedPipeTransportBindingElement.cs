@@ -95,10 +95,12 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             return (IChannelFactory<TChannel>)
@@ -116,10 +118,12 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             NamedPipeChannelListener listener;
@@ -133,10 +137,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             AspNetEnvironment.Current.ApplyHostedContext(listener, context);

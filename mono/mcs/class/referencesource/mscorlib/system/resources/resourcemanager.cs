@@ -373,19 +373,23 @@ namespace System.Resources
 
                 if (resourceGroveler.HasNeutralResources(culture, defaultResName))
                 {
-                    FrameworkEventSource.Log.ResourceManagerNeutralResourcesFound(
-                        BaseNameField,
-                        MainAssembly,
-                        defaultResName
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerNeutralResourcesFound(
+                            BaseNameField,
+                            MainAssembly,
+                            defaultResName
+                        );
                 }
                 else
                 {
-                    FrameworkEventSource.Log.ResourceManagerNeutralResourcesNotFound(
-                        BaseNameField,
-                        MainAssembly,
-                        defaultResName
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerNeutralResourcesNotFound(
+                            BaseNameField,
+                            MainAssembly,
+                            defaultResName
+                        );
                 }
             }
 #endif
@@ -595,11 +599,13 @@ namespace System.Resources
 
                     if (resourceGroveler.HasNeutralResources(culture, defaultResName))
                     {
-                        FrameworkEventSource.Log.ResourceManagerNeutralResourcesFound(
-                            BaseNameField,
-                            MainAssembly,
-                            defaultResName
-                        );
+                        FrameworkEventSource
+                            .Log
+                            .ResourceManagerNeutralResourcesFound(
+                                BaseNameField,
+                                MainAssembly,
+                                defaultResName
+                            );
                     }
                     else
                     {
@@ -607,11 +613,13 @@ namespace System.Resources
                         if (_locationInfo != null && _locationInfo.Namespace != null)
                             outputResName =
                                 _locationInfo.Namespace + Type.Delimiter + defaultResName;
-                        FrameworkEventSource.Log.ResourceManagerNeutralResourcesNotFound(
-                            BaseNameField,
-                            MainAssembly,
-                            outputResName
-                        );
+                        FrameworkEventSource
+                            .Log
+                            .ResourceManagerNeutralResourcesNotFound(
+                                BaseNameField,
+                                MainAssembly,
+                                outputResName
+                            );
                     }
                 }
 #pragma warning disable 618
@@ -668,10 +676,9 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
             if (FrameworkEventSource.IsInitialized)
             {
-                FrameworkEventSource.Log.ResourceManagerReleasingResources(
-                    BaseNameField,
-                    MainAssembly
-                );
+                FrameworkEventSource
+                    .Log
+                    .ResourceManagerReleasingResources(BaseNameField, MainAssembly);
             }
 #endif
             Dictionary<String, ResourceSet> localResourceSets = _resourceSets;
@@ -906,11 +913,13 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                     if (FrameworkEventSource.IsInitialized)
                     {
-                        FrameworkEventSource.Log.ResourceManagerFoundResourceSetInCache(
-                            BaseNameField,
-                            MainAssembly,
-                            requestedCulture.Name
-                        );
+                        FrameworkEventSource
+                            .Log
+                            .ResourceManagerFoundResourceSetInCache(
+                                BaseNameField,
+                                MainAssembly,
+                                requestedCulture.Name
+                            );
                     }
 #endif
                     return rs;
@@ -928,11 +937,13 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerLookingForResourceSet(
-                        BaseNameField,
-                        MainAssembly,
-                        currentCultureInfo.Name
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerLookingForResourceSet(
+                            BaseNameField,
+                            MainAssembly,
+                            currentCultureInfo.Name
+                        );
                 }
 #endif
                 lock (localResourceSets)
@@ -942,11 +953,13 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                         if (FrameworkEventSource.IsInitialized)
                         {
-                            FrameworkEventSource.Log.ResourceManagerFoundResourceSetInCache(
-                                BaseNameField,
-                                MainAssembly,
-                                currentCultureInfo.Name
-                            );
+                            FrameworkEventSource
+                                .Log
+                                .ResourceManagerFoundResourceSetInCache(
+                                    BaseNameField,
+                                    MainAssembly,
+                                    currentCultureInfo.Name
+                                );
                         }
 #endif
                         // we need to update the cache if we fellback
@@ -1562,11 +1575,9 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerLookupStarted(
-                        BaseNameField,
-                        MainAssembly,
-                        culture.Name
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerLookupStarted(BaseNameField, MainAssembly, culture.Name);
                 }
 #endif
                 ResourceSet last = GetFirstResourceSet(culture);
@@ -1617,11 +1628,9 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                 if (FrameworkEventSource.IsInitialized)
                 {
-                    FrameworkEventSource.Log.ResourceManagerLookupFailed(
-                        BaseNameField,
-                        MainAssembly,
-                        culture.Name
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerLookupFailed(BaseNameField, MainAssembly, culture.Name);
                 }
 #endif
             }
@@ -1675,11 +1684,9 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
             if (FrameworkEventSource.IsInitialized)
             {
-                FrameworkEventSource.Log.ResourceManagerLookupStarted(
-                    BaseNameField,
-                    MainAssembly,
-                    culture.Name
-                );
+                FrameworkEventSource
+                    .Log
+                    .ResourceManagerLookupStarted(BaseNameField, MainAssembly, culture.Name);
             }
 #endif
             ResourceSet last = GetFirstResourceSet(culture);
@@ -1746,11 +1753,9 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
             if (FrameworkEventSource.IsInitialized)
             {
-                FrameworkEventSource.Log.ResourceManagerLookupFailed(
-                    BaseNameField,
-                    MainAssembly,
-                    culture.Name
-                );
+                FrameworkEventSource
+                    .Log
+                    .ResourceManagerLookupFailed(BaseNameField, MainAssembly, culture.Name);
             }
 #endif
             return null;
@@ -1808,19 +1813,23 @@ namespace System.Resources
             {
                 if (pos < 0)
                 {
-                    FrameworkEventSource.Log.ResourceManagerCultureNotFoundInConfigFile(
-                        BaseNameField,
-                        MainAssembly,
-                        lookForCulture.Name
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerCultureNotFoundInConfigFile(
+                            BaseNameField,
+                            MainAssembly,
+                            lookForCulture.Name
+                        );
                 }
                 else
                 {
-                    FrameworkEventSource.Log.ResourceManagerCultureFoundInConfigFile(
-                        BaseNameField,
-                        MainAssembly,
-                        lookForCulture.Name
-                    );
+                    FrameworkEventSource
+                        .Log
+                        .ResourceManagerCultureFoundInConfigFile(
+                            BaseNameField,
+                            MainAssembly,
+                            lookForCulture.Name
+                        );
                 }
             }
 #endif
@@ -1942,11 +1951,13 @@ namespace System.Resources
 #if !FEATURE_CORECLR && !MONO
                     if (FrameworkEventSource.IsInitialized)
                     {
-                        FrameworkEventSource.Log.ResourceManagerAddingCultureFromConfigFile(
-                            BaseNameField,
-                            MainAssembly,
-                            cultureName
-                        );
+                        FrameworkEventSource
+                            .Log
+                            .ResourceManagerAddingCultureFromConfigFile(
+                                BaseNameField,
+                                MainAssembly,
+                                cultureName
+                            );
                     }
 #endif
                 }

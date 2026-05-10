@@ -104,10 +104,12 @@ namespace System.Collections.Generic
 
             if (this.Contains(item.GetType()))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "item",
-                    SR.GetString(SR.DuplicateBehavior1, item.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "item",
+                        SR.GetString(SR.DuplicateBehavior1, item.GetType().FullName)
+                    );
             }
 
             base.InsertItem(index, item);

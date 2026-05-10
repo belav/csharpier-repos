@@ -1941,11 +1941,13 @@ namespace System.Xml
                     attributeNode = AddXmlAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue(
-                        (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
-                        valueOffset,
-                        valueLength
-                    );
+                    attributeNode
+                        .Value
+                        .SetValue(
+                            (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                            valueOffset,
+                            valueLength
+                        );
                     FixXmlAttribute(attributeNode);
                 }
                 else
@@ -1953,11 +1955,13 @@ namespace System.Xml
                     attributeNode = AddAttribute();
                     attributeNode.Prefix.SetValue(_prefix);
                     attributeNode.LocalName.SetValue(_localName);
-                    attributeNode.Value.SetValue(
-                        (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
-                        valueOffset,
-                        valueLength
-                    );
+                    attributeNode
+                        .Value
+                        .SetValue(
+                            (escaped ? ValueHandleType.EscapedUTF8 : ValueHandleType.UTF8),
+                            valueOffset,
+                            valueLength
+                        );
                 }
 
                 attributeNode.QuoteChar = (char)quoteChar;

@@ -25,7 +25,8 @@ namespace System.Web.Mvc.Test
 
             // Act
             Type[] actualTypes = ValueProviderFactories
-                .Factories.Select(p => p.GetType())
+                .Factories
+                .Select(p => p.GetType())
                 .ToArray();
 
             // Assert

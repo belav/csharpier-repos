@@ -669,9 +669,10 @@ namespace System.Workflow.ComponentModel.Design
                         {
                             Bitmap tabImage = DR.GetImage(tabButtonInfo[i, 1]) as Bitmap;
                             string buttonCaption = DR.GetString(tabButtonInfo[i, 0]);
-                            this.toolContainer.TabStrip.Tabs.Add(
-                                new ItemInfo(i + 1, tabImage, buttonCaption)
-                            );
+                            this.toolContainer
+                                .TabStrip
+                                .Tabs
+                                .Add(new ItemInfo(i + 1, tabImage, buttonCaption));
                         }
 
                         this.toolContainer.TabStrip.TabChange +=
@@ -2535,9 +2536,9 @@ namespace System.Workflow.ComponentModel.Design
                         }
 
                         Point logicalPoint = this.workflowView.ClientPointToLogical(clientPoint);
-                        HitTestInfo hitTestInfo = this.workflowView.RootDesigner.HitTest(
-                            logicalPoint
-                        );
+                        HitTestInfo hitTestInfo = this.workflowView
+                            .RootDesigner
+                            .HitTest(logicalPoint);
                         this.messageContext =
                             (hitTestInfo != null) ? hitTestInfo : HitTestInfo.Nowhere;
                         this.workflowView.messageHitTestContexts.Push(this.messageContext);

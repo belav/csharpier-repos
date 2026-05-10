@@ -266,7 +266,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                     if (methodDeclaration.Body.Statements.Count > 0)
                         statements.AddRange(
                             methodDeclaration
-                                .Body.Statements[0]
+                                .Body
+                                .Statements[0]
                                 .WithPrependedLeadingTrivia(methodDeclaration.GetLeadingTrivia())
                         );
 
@@ -279,11 +280,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                         LocalFunctionStatement(
                                 attributeLists: default,
                                 modifiers: TokenList(
-                                    otherMethod.Modifiers.Where(m =>
-                                        m.Kind()
-                                            is SyntaxKind.AsyncKeyword
-                                                or SyntaxKind.UnsafeKeyword
-                                    )
+                                    otherMethod
+                                        .Modifiers
+                                        .Where(m =>
+                                            m.Kind()
+                                                is SyntaxKind.AsyncKeyword
+                                                    or SyntaxKind.UnsafeKeyword
+                                        )
                                 ),
                                 returnType: otherMethod.ReturnType,
                                 identifier: otherMethod.Identifier,

@@ -1081,11 +1081,9 @@ namespace System.Web
                 // Let's emulate .NET
                 throw new NullReferenceException();
 
-            VirtualPathData vpd = RouteTable.Routes.GetVirtualPath(
-                req.RequestContext,
-                routeName,
-                routeValues
-            );
+            VirtualPathData vpd = RouteTable
+                .Routes
+                .GetVirtualPath(req.RequestContext, routeName, routeValues);
             string redirectUrl = vpd != null ? vpd.VirtualPath : null;
             if (String.IsNullOrEmpty(redirectUrl))
                 throw new InvalidOperationException("No matching route found for RedirectToRoute");

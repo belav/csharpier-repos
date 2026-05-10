@@ -58,11 +58,9 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
 
                 try
                 {
-                    return await interceptorHandle.Instance.ClientStreamingServerHandler(
-                        requestStream,
-                        context,
-                        next
-                    );
+                    return await interceptorHandle
+                        .Instance
+                        .ClientStreamingServerHandler(requestStream, context, next);
                 }
                 finally
                 {
@@ -95,12 +93,9 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
 
                 try
                 {
-                    await interceptorHandle.Instance.DuplexStreamingServerHandler(
-                        requestStream,
-                        responseStream,
-                        context,
-                        next
-                    );
+                    await interceptorHandle
+                        .Instance
+                        .DuplexStreamingServerHandler(requestStream, responseStream, context, next);
                 }
                 finally
                 {
@@ -133,12 +128,9 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
 
                 try
                 {
-                    await interceptorHandle.Instance.ServerStreamingServerHandler(
-                        request,
-                        responseStream,
-                        context,
-                        next
-                    );
+                    await interceptorHandle
+                        .Instance
+                        .ServerStreamingServerHandler(request, responseStream, context, next);
                 }
                 finally
                 {
@@ -171,11 +163,9 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
 
                 try
                 {
-                    return await interceptorHandle.Instance.UnaryServerHandler(
-                        request,
-                        context,
-                        next
-                    );
+                    return await interceptorHandle
+                        .Instance
+                        .UnaryServerHandler(request, context, next);
                 }
                 finally
                 {

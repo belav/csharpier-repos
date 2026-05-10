@@ -33,9 +33,9 @@
         {
             if (_properties == null)
             {
-                var dictionaryProps = _values.Keys.Select(
-                    propName => new DictionaryPropertyDescriptor(propName)
-                );
+                var dictionaryProps = _values
+                    .Keys
+                    .Select(propName => new DictionaryPropertyDescriptor(propName));
                 _properties = new PropertyDescriptorCollection(dictionaryProps.ToArray());
             }
             return _properties;

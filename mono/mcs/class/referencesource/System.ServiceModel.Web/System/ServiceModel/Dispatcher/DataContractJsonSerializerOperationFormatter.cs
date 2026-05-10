@@ -151,10 +151,12 @@ namespace System.ServiceModel.Dispatcher
         {
             if (message != null)
             {
-                message.Properties.Add(
-                    WebBodyFormatMessageProperty.Name,
-                    WebBodyFormatMessageProperty.JsonProperty
-                );
+                message
+                    .Properties
+                    .Add(
+                        WebBodyFormatMessageProperty.Name,
+                        WebBodyFormatMessageProperty.JsonProperty
+                    );
             }
             base.AddHeadersToMessage(message, messageDescription, parameters, isRequest);
         }
@@ -170,15 +172,19 @@ namespace System.ServiceModel.Dispatcher
         {
             if (reader == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
             }
             if (parameters == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
             }
 
             if (reader.EOF)
@@ -242,69 +248,97 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.InvalidOperationException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameter,
-                                        part.Description.Namespace,
-                                        part.Description.Name
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameter,
+                                                part.Description.Namespace,
+                                                part.Description.Name
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                         catch (System.Runtime.Serialization.InvalidDataContractException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new System.Runtime.Serialization.InvalidDataContractException(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new System.Runtime.Serialization.InvalidDataContractException(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameter,
-                                        part.Description.Namespace,
-                                        part.Description.Name
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameter,
+                                                part.Description.Namespace,
+                                                part.Description.Name
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                         catch (System.FormatException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                OperationFormatter.CreateDeserializationFailedFault(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    OperationFormatter.CreateDeserializationFailedFault(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                                        part.Description.Namespace,
-                                        part.Description.Name,
-                                        e.Message
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                                part.Description.Namespace,
+                                                part.Description.Name,
+                                                e.Message
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                         catch (System.Runtime.Serialization.SerializationException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                OperationFormatter.CreateDeserializationFailedFault(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    OperationFormatter.CreateDeserializationFailedFault(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                                        part.Description.Namespace,
-                                        part.Description.Name,
-                                        e.Message
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                                part.Description.Namespace,
+                                                part.Description.Name,
+                                                e.Message
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                     }
                 }
@@ -344,24 +378,35 @@ namespace System.ServiceModel.Dispatcher
                 );
                 if (formatProperty == null)
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(SR2.MessageFormatPropertyNotFound2, this.OperationName)
-                        )
-                    );
+                    throw System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.MessageFormatPropertyNotFound2,
+                                    this.OperationName
+                                )
+                            )
+                        );
                 }
                 if (formatProperty.Format != WebContentFormat.Json)
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.InvalidHttpMessageFormat3,
-                                this.OperationName,
-                                formatProperty.Format,
-                                WebContentFormat.Json
+                    throw System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.InvalidHttpMessageFormat3,
+                                    this.OperationName,
+                                    formatProperty.Format,
+                                    WebContentFormat.Json
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             base.GetHeadersFromMessage(message, messageDescription, parameters, isRequest);
@@ -440,20 +485,27 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (SerializationException sx)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new CommunicationException(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new CommunicationException(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorSerializingParameter,
-                                        replyMessageInfo.ReturnPart.Description.Namespace,
-                                        replyMessageInfo.ReturnPart.Description.Name,
-                                        sx.Message
-                                    ),
-                                    sx
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorSerializingParameter,
+                                                replyMessageInfo.ReturnPart.Description.Namespace,
+                                                replyMessageInfo.ReturnPart.Description.Name,
+                                                sx.Message
+                                            ),
+                                        sx
+                                    )
+                                );
                         }
                     }
                     else if (replyMessageInfo.BodyParts != null)
@@ -545,69 +597,97 @@ namespace System.ServiceModel.Dispatcher
                         }
                         catch (System.InvalidOperationException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameter,
-                                        part.Description.Namespace,
-                                        part.Description.Name
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameter,
+                                                part.Description.Namespace,
+                                                part.Description.Name
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                         catch (System.Runtime.Serialization.InvalidDataContractException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidDataContractException(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidDataContractException(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameter,
-                                        part.Description.Namespace,
-                                        part.Description.Name
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameter,
+                                                part.Description.Namespace,
+                                                part.Description.Name
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                         catch (System.FormatException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                OperationFormatter.CreateDeserializationFailedFault(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    OperationFormatter.CreateDeserializationFailedFault(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                                        part.Description.Namespace,
-                                        part.Description.Name,
-                                        e.Message
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                                part.Description.Namespace,
+                                                part.Description.Name,
+                                                e.Message
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                         catch (System.Runtime.Serialization.SerializationException e)
                         {
-                            throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                OperationFormatter.CreateDeserializationFailedFault(
-                                    System.ServiceModel.SR.GetString(
+                            throw System
+                                .ServiceModel
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    OperationFormatter.CreateDeserializationFailedFault(
                                         System
                                             .ServiceModel
                                             .SR
-                                            .SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                                        part.Description.Namespace,
-                                        part.Description.Name,
-                                        e.Message
-                                    ),
-                                    e
-                                )
-                            );
+                                            .GetString(
+                                                System
+                                                    .ServiceModel
+                                                    .SR
+                                                    .SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                                part.Description.Namespace,
+                                                part.Description.Name,
+                                                e.Message
+                                            ),
+                                        e
+                                    )
+                                );
                         }
                     }
                     else
@@ -688,63 +768,97 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.InvalidOperationException e)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        System.ServiceModel.SR.GetString(
-                            System.ServiceModel.SR.SFxInvalidMessageBodyErrorDeserializingParameter,
-                            part.Description.Namespace,
-                            part.Description.Name
-                        ),
-                        e
-                    )
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            System
+                                .ServiceModel
+                                .SR
+                                .GetString(
+                                    System
+                                        .ServiceModel
+                                        .SR
+                                        .SFxInvalidMessageBodyErrorDeserializingParameter,
+                                    part.Description.Namespace,
+                                    part.Description.Name
+                                ),
+                            e
+                        )
+                    );
             }
             catch (System.Runtime.Serialization.InvalidDataContractException e)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        System.ServiceModel.SR.GetString(
-                            System.ServiceModel.SR.SFxInvalidMessageBodyErrorDeserializingParameter,
-                            part.Description.Namespace,
-                            part.Description.Name
-                        ),
-                        e
-                    )
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            System
+                                .ServiceModel
+                                .SR
+                                .GetString(
+                                    System
+                                        .ServiceModel
+                                        .SR
+                                        .SFxInvalidMessageBodyErrorDeserializingParameter,
+                                    part.Description.Namespace,
+                                    part.Description.Name
+                                ),
+                            e
+                        )
+                    );
             }
             catch (System.FormatException e)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    OperationFormatter.CreateDeserializationFailedFault(
-                        System.ServiceModel.SR.GetString(
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        OperationFormatter.CreateDeserializationFailedFault(
                             System
                                 .ServiceModel
                                 .SR
-                                .SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                            part.Description.Namespace,
-                            part.Description.Name,
-                            e.Message
-                        ),
-                        e
-                    )
-                );
+                                .GetString(
+                                    System
+                                        .ServiceModel
+                                        .SR
+                                        .SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                    part.Description.Namespace,
+                                    part.Description.Name,
+                                    e.Message
+                                ),
+                            e
+                        )
+                    );
             }
             catch (System.Runtime.Serialization.SerializationException e)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    OperationFormatter.CreateDeserializationFailedFault(
-                        System.ServiceModel.SR.GetString(
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        OperationFormatter.CreateDeserializationFailedFault(
                             System
                                 .ServiceModel
                                 .SR
-                                .SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                            part.Description.Namespace,
-                            part.Description.Name,
-                            e.Message
-                        ),
-                        e
-                    )
-                );
+                                .GetString(
+                                    System
+                                        .ServiceModel
+                                        .SR
+                                        .SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                                    part.Description.Namespace,
+                                    part.Description.Name,
+                                    e.Message
+                                ),
+                            e
+                        )
+                    );
             }
 
             return val;
@@ -813,27 +927,38 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!IsStartElement(reader, JsonGlobals.rootString))
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(
-                        System.ServiceModel.SR.GetString(
-                            System.ServiceModel.SR.SFxInvalidMessageBody,
-                            JsonGlobals.rootString,
-                            string.Empty,
-                            reader.NodeType,
-                            reader.Name,
-                            reader.NamespaceURI
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            System
+                                .ServiceModel
+                                .SR
+                                .GetString(
+                                    System.ServiceModel.SR.SFxInvalidMessageBody,
+                                    JsonGlobals.rootString,
+                                    string.Empty,
+                                    reader.NodeType,
+                                    reader.Name,
+                                    reader.NamespaceURI
+                                )
                         )
-                    )
-                );
+                    );
             }
             string typeAttribute = reader.GetAttribute(JsonGlobals.typeString);
             if (!typeAttribute.Equals(JsonGlobals.objectString, StringComparison.Ordinal))
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR2.GetString(SR2.JsonFormatterExpectedAttributeObject, typeAttribute)
-                    )
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR2.GetString(SR2.JsonFormatterExpectedAttributeObject, typeAttribute)
+                        )
+                    );
             }
 
             bool isEmptyElement = reader.IsEmptyElement;
@@ -850,11 +975,15 @@ namespace System.ServiceModel.Dispatcher
             string typeAttribute = reader.GetAttribute(JsonGlobals.typeString);
             if (!typeAttribute.Equals(JsonGlobals.nullString, StringComparison.Ordinal))
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR2.GetString(SR2.JsonFormatterExpectedAttributeNull, typeAttribute)
-                    )
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR2.GetString(SR2.JsonFormatterExpectedAttributeNull, typeAttribute)
+                        )
+                    );
             }
             OperationFormatter.TraceAndSkipElement(reader);
         }
@@ -871,16 +1000,21 @@ namespace System.ServiceModel.Dispatcher
 
             if (writer == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             }
 
             if (parameters == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
             }
 
             MessageInfo messageInfo;
@@ -928,20 +1062,27 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (SerializationException sx)
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(
-                            System.ServiceModel.SR.GetString(
+                    throw System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
                                 System
                                     .ServiceModel
                                     .SR
-                                    .SFxInvalidMessageBodyErrorSerializingParameter,
-                                part.Description.Namespace,
-                                part.Description.Name,
-                                sx.Message
-                            ),
-                            sx
-                        )
-                    );
+                                    .GetString(
+                                        System
+                                            .ServiceModel
+                                            .SR
+                                            .SFxInvalidMessageBodyErrorSerializingParameter,
+                                        part.Description.Namespace,
+                                        part.Description.Name,
+                                        sx.Message
+                                    ),
+                                sx
+                            )
+                        );
                 }
             }
             if (useAspNetJsonWrapper && !isRequest)
@@ -959,16 +1100,21 @@ namespace System.ServiceModel.Dispatcher
         {
             if (writer == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             }
 
             if (parameters == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("parameters")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("parameters"));
             }
 
             MessageInfo messageInfo;
@@ -1032,17 +1178,27 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException sx)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        System.ServiceModel.SR.GetString(
-                            System.ServiceModel.SR.SFxInvalidMessageBodyErrorSerializingParameter,
-                            part.Description.Namespace,
-                            part.Description.Name,
-                            sx.Message
-                        ),
-                        sx
-                    )
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            System
+                                .ServiceModel
+                                .SR
+                                .GetString(
+                                    System
+                                        .ServiceModel
+                                        .SR
+                                        .SFxInvalidMessageBodyErrorSerializingParameter,
+                                    part.Description.Namespace,
+                                    part.Description.Name,
+                                    sx.Message
+                                ),
+                            sx
+                        )
+                    );
             }
         }
 
@@ -1063,27 +1219,41 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!IsStartElement(reader, messageInfo.WrapperName, messageInfo.WrapperNamespace))
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SerializationException(
-                            System.ServiceModel.SR.GetString(
-                                System.ServiceModel.SR.SFxInvalidMessageBody,
-                                messageInfo.WrapperName,
-                                messageInfo.WrapperNamespace,
-                                reader.NodeType,
-                                reader.Name,
-                                reader.NamespaceURI
+                    throw System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SerializationException(
+                                System
+                                    .ServiceModel
+                                    .SR
+                                    .GetString(
+                                        System.ServiceModel.SR.SFxInvalidMessageBody,
+                                        messageInfo.WrapperName,
+                                        messageInfo.WrapperNamespace,
+                                        reader.NodeType,
+                                        reader.Name,
+                                        reader.NamespaceURI
+                                    )
                             )
-                        )
-                    );
+                        );
                 }
                 string typeAttribute = reader.GetAttribute(JsonGlobals.typeString);
                 if (!typeAttribute.Equals(JsonGlobals.objectString, StringComparison.Ordinal))
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR2.GetString(SR2.JsonFormatterExpectedAttributeObject, typeAttribute)
-                        )
-                    );
+                    throw System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR2.GetString(
+                                    SR2.JsonFormatterExpectedAttributeObject,
+                                    typeAttribute
+                                )
+                            )
+                        );
                 }
             }
         }
@@ -1105,18 +1275,25 @@ namespace System.ServiceModel.Dispatcher
             }
             if (!foundElement)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(
-                        System.ServiceModel.SR.GetString(
-                            System.ServiceModel.SR.SFxInvalidMessageBody,
-                            elementName,
-                            string.Empty,
-                            reader.NodeType,
-                            reader.Name,
-                            reader.NamespaceURI
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            System
+                                .ServiceModel
+                                .SR
+                                .GetString(
+                                    System.ServiceModel.SR.SFxInvalidMessageBody,
+                                    elementName,
+                                    string.Empty,
+                                    reader.NodeType,
+                                    reader.Name,
+                                    reader.NamespaceURI
+                                )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -1141,18 +1318,25 @@ namespace System.ServiceModel.Dispatcher
             }
             if (!foundElement)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SerializationException(
-                        System.ServiceModel.SR.GetString(
-                            System.ServiceModel.SR.SFxInvalidMessageBody,
-                            elementName,
-                            elementNamespace,
-                            reader.NodeType,
-                            reader.Name,
-                            reader.NamespaceURI
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SerializationException(
+                            System
+                                .ServiceModel
+                                .SR
+                                .GetString(
+                                    System.ServiceModel.SR.SFxInvalidMessageBody,
+                                    elementName,
+                                    elementNamespace,
+                                    reader.NodeType,
+                                    reader.Name,
+                                    reader.NamespaceURI
+                                )
                         )
-                    )
-                );
+                    );
             }
         }
 

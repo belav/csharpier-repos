@@ -208,12 +208,14 @@ internal abstract class AbstractUseAutoPropertyAnalyzer<
                     // on, and the diagnostic is not suppressed.
                     if (
                         !namedType
-                            .DeclaringSyntaxReferences.Select(d => d.SyntaxTree)
+                            .DeclaringSyntaxReferences
+                            .Select(d => d.SyntaxTree)
                             .Distinct()
                             .Any(tree =>
                             {
                                 var preferAutoProps = context
-                                    .Options.GetAnalyzerOptions(tree)
+                                    .Options
+                                    .GetAnalyzerOptions(tree)
                                     .PreferAutoProperties;
                                 return preferAutoProps.Value
                                     && !ShouldSkipAnalysis(

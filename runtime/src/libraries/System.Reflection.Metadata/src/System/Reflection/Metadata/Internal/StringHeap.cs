@@ -259,9 +259,9 @@ namespace System.Reflection.Metadata.Ecma335
                 {
                     byte[] bytes = handle.StringKind switch
                     {
-                        StringKind.Virtual => Encoding.UTF8.GetBytes(
-                            GetVirtualString(handle.GetVirtualIndex())
-                        ),
+                        StringKind.Virtual => Encoding
+                            .UTF8
+                            .GetBytes(GetVirtualString(handle.GetVirtualIndex())),
                         StringKind.WinRTPrefixed => GetNonVirtualStringBytes(
                             handle,
                             MetadataReader.WinRTPrefix

@@ -50,9 +50,8 @@ namespace MonoTests.System.ServiceModel.Configuration
             Assert.IsNotNull(
                 StandardEndpointsSection
                     .GetSection(cfg)
-                    .EndpointCollections.FirstOrDefault(e =>
-                        e is ServiceMetadataEndpointCollectionElement
-                    ),
+                    .EndpointCollections
+                    .FirstOrDefault(e => e is ServiceMetadataEndpointCollectionElement),
                 "#1"
             );
         }

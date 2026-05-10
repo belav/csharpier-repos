@@ -14,9 +14,11 @@ namespace System.ServiceModel.Channels
         {
             // no assurances if messages are volatile
             if (!factory.Durable && factory.ExactlyOnce)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MsmqNoAssurancesForVolatile))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqNoAssurancesForVolatile))
+                    );
 
             MsmqChannelFactory<TChannel> transportFactory = factory as MsmqChannelFactory<TChannel>;
             if (
@@ -24,11 +26,13 @@ namespace System.ServiceModel.Channels
                 && transportFactory.UseActiveDirectory
                 && QueueTransferProtocol.Native != transportFactory.QueueTransferProtocol
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqActiveDirectoryRequiresNativeTransfer)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqActiveDirectoryRequiresNativeTransfer)
+                        )
+                    );
 
             bool? useActiveDirectory = null;
             if (null != transportFactory)
@@ -39,41 +43,57 @@ namespace System.ServiceModel.Channels
             {
                 if (DeadLetterQueue.Custom != factory.DeadLetterQueue)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqPerAppDLQRequiresCustom))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqPerAppDLQRequiresCustom)
+                            )
+                        );
                 }
 
                 if (!Msmq.IsPerAppDeadLetterQueueSupported)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqPerAppDLQRequiresMsmq4))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqPerAppDLQRequiresMsmq4)
+                            )
+                        );
                 }
 
                 if (!factory.ExactlyOnce)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqPerAppDLQRequiresExactlyOnce)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqPerAppDLQRequiresExactlyOnce)
+                            )
+                        );
                 }
 
-                string dlqFormatName = MsmqUri.NetMsmqAddressTranslator.UriToFormatName(
-                    factory.CustomDeadLetterQueue
-                );
+                string dlqFormatName = MsmqUri
+                    .NetMsmqAddressTranslator
+                    .UriToFormatName(factory.CustomDeadLetterQueue);
 
                 if (!MsmqQueue.IsWriteable(dlqFormatName))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqDLQNotWriteable))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.MsmqDLQNotWriteable))
+                        );
 
                 bool isQueueTx;
                 if (!MsmqQueue.TryGetIsTransactional(dlqFormatName, out isQueueTx) || !isQueueTx)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqTransactedDLQExpected))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqTransactedDLQExpected)
+                            )
+                        );
             }
 
             if (
@@ -81,9 +101,11 @@ namespace System.ServiceModel.Channels
                 && DeadLetterQueue.Custom == factory.DeadLetterQueue
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MsmqCustomRequiresPerAppDLQ))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqCustomRequiresPerAppDLQ))
+                    );
             }
 
             // token provider needed if Certificate mode requested
@@ -98,17 +120,21 @@ namespace System.ServiceModel.Channels
         {
             if (!receiveParameters.Durable && receiveParameters.ExactlyOnce)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MsmqNoAssurancesForVolatile))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqNoAssurancesForVolatile))
+                    );
             }
             if (receiveParameters.ReceiveContextSettings.Enabled && !receiveParameters.ExactlyOnce)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqExactlyOnceNeededForReceiveContext)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqExactlyOnceNeededForReceiveContext)
+                        )
+                    );
             }
 
             VerifySecurity(receiveParameters.TransportSecurity, null);
@@ -117,23 +143,27 @@ namespace System.ServiceModel.Channels
 
             if (receiveParameters.ReceiveContextSettings.Enabled && formatName.Contains(";"))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqReceiveContextSubqueuesNotSupported)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqReceiveContextSubqueuesNotSupported)
+                        )
+                    );
             }
 
             // check if can open the queue for read
             MsmqException msmqException;
             if (!MsmqQueue.IsReadable(formatName, out msmqException))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqQueueNotReadable),
-                        msmqException
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqQueueNotReadable),
+                            msmqException
+                        )
+                    );
             }
 
             // check if the queue is transactional
@@ -155,15 +185,21 @@ namespace System.ServiceModel.Channels
             if (knownTxStatus)
             {
                 if (!receiveParameters.ExactlyOnce && isQueueTx)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqNonTransactionalQueueNeeded)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqNonTransactionalQueueNeeded)
+                            )
+                        );
                 if (receiveParameters.ExactlyOnce && !isQueueTx)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionalQueueNeeded))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqTransactionalQueueNeeded)
+                            )
+                        );
             }
 
             // check poison handling settings
@@ -175,21 +211,25 @@ namespace System.ServiceModel.Channels
                     {
                         // no retry queues for subqueues
                         if (ReceiveErrorHandling.Move == receiveParameters.ReceiveErrorHandling)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.MsmqNoMoveForSubqueues)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.MsmqNoMoveForSubqueues)
+                                    )
+                                );
                     }
                     else
                     {
                         // should be able to open the retry queue for move
                         if (!MsmqQueue.IsMoveable(formatName + ";retry"))
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.MsmqDirectFormatNameRequiredForPoison)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.MsmqDirectFormatNameRequiredForPoison)
+                                    )
+                                );
                     }
                 }
                 else
@@ -199,11 +239,13 @@ namespace System.ServiceModel.Channels
                         || ReceiveErrorHandling.Move == receiveParameters.ReceiveErrorHandling
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.MsmqAdvancedPoisonHandlingRequired)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.MsmqAdvancedPoisonHandlingRequired)
+                                )
+                            );
                     }
                 }
             }
@@ -215,41 +257,49 @@ namespace System.ServiceModel.Channels
                 security.MsmqAuthenticationMode == MsmqAuthenticationMode.WindowsDomain
                 && !Msmq.ActiveDirectoryEnabled
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MsmqWindowsAuthnRequiresAD))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqWindowsAuthnRequiresAD))
+                    );
 
             // MsmqAuthenticationMode.None implies MsmqProtectionLevel.None
             if (
                 security.MsmqAuthenticationMode == MsmqAuthenticationMode.None
                 && security.MsmqProtectionLevel != ProtectionLevel.None
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqAuthNoneRequiresProtectionNone)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqAuthNoneRequiresProtectionNone)
+                        )
+                    );
 
             // MsmqAuthenticationMode.Certificate implies MsmqProtectionLevel.Sign or MsmqProtectionLevel.SignAndEncrypt
             if (
                 security.MsmqAuthenticationMode == MsmqAuthenticationMode.Certificate
                 && security.MsmqProtectionLevel == ProtectionLevel.None
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqAuthCertificateRequiresProtectionSign)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqAuthCertificateRequiresProtectionSign)
+                        )
+                    );
 
             // MsmqAuthenticationMode.WindowsDomain doesn't allow MsmqProtectionLevel.None
             if (security.MsmqAuthenticationMode == MsmqAuthenticationMode.WindowsDomain)
             {
                 if (security.MsmqProtectionLevel == ProtectionLevel.None)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqAuthWindowsRequiresProtectionNotNone)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqAuthWindowsRequiresProtectionNotNone)
+                            )
+                        );
             }
 
             // public queues (thus: AD) needed for encryption
@@ -258,9 +308,11 @@ namespace System.ServiceModel.Channels
                 && useActiveDirectory.HasValue
                 && !useActiveDirectory.Value
             )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MsmqEncryptRequiresUseAD))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MsmqEncryptRequiresUseAD))
+                    );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -269,11 +321,13 @@ namespace System.ServiceModel.Channels
         )
         {
             if (null == factory.SecurityTokenManager)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.MsmqTokenProviderNeededForCertificates)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqTokenProviderNeededForCertificates)
+                        )
+                    );
         }
     }
 }

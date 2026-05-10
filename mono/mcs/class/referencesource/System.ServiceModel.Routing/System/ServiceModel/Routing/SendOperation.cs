@@ -40,9 +40,9 @@ namespace System.ServiceModel.Routing
 
             if (this.endpointTraits.Count == 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(SR.BackupListEmpty)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ConfigurationErrorsException(SR.BackupListEmpty));
             }
         }
 

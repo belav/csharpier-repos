@@ -144,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         ) =>
             GetLanguage(item)
-                .CompletionProvider!.GetChangeAsync(document, item, commitKey, cancellationToken);
+                .CompletionProvider!
+                .GetChangeAsync(document, item, commitKey, cancellationToken);
 
         internal override Task<CompletionDescription?> GetDescriptionAsync(
             Document document,
@@ -154,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             CancellationToken cancellationToken
         ) =>
             GetLanguage(item)
-                .CompletionProvider!.GetDescriptionAsync(document, item, cancellationToken);
+                .CompletionProvider!
+                .GetDescriptionAsync(document, item, cancellationToken);
 
         private IEmbeddedLanguage GetLanguage(CompletionItem item)
         {

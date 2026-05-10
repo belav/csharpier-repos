@@ -47,9 +47,9 @@ internal sealed class AntiforgeryMiddleware(IAntiforgery antiforgery, RequestDel
         }
         catch (AntiforgeryValidationException e)
         {
-            context.Features.Set<IAntiforgeryValidationFeature>(
-                new AntiforgeryValidationFeature(false, e)
-            );
+            context
+                .Features
+                .Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(false, e));
         }
         await _next(context);
     }

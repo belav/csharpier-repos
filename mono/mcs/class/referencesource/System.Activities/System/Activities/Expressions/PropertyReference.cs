@@ -182,14 +182,16 @@ namespace System.Activities.Expressions
                     {
                         if (!this.propertyInfo.GetGetMethod().IsStatic && this.owner == null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.NullReferencedMemberAccess(
-                                        this.propertyInfo.DeclaringType.Name,
-                                        this.propertyInfo.Name
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.NullReferencedMemberAccess(
+                                            this.propertyInfo.DeclaringType.Name,
+                                            this.propertyInfo.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         return (T)this.getFunc(this.owner, new object[0]);
@@ -202,14 +204,16 @@ namespace System.Activities.Expressions
                         ) == false
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.WriteonlyPropertyCannotBeRead(
-                                    this.propertyInfo.DeclaringType,
-                                    this.propertyInfo.Name
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.WriteonlyPropertyCannotBeRead(
+                                        this.propertyInfo.DeclaringType,
+                                        this.propertyInfo.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     return (T)this.propertyInfo.GetValue(this.owner, null);
@@ -220,14 +224,16 @@ namespace System.Activities.Expressions
                     {
                         if (!this.propertyInfo.GetSetMethod().IsStatic && this.owner == null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.NullReferencedMemberAccess(
-                                        this.propertyInfo.DeclaringType.Name,
-                                        this.propertyInfo.Name
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.NullReferencedMemberAccess(
+                                            this.propertyInfo.DeclaringType.Name,
+                                            this.propertyInfo.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         this.setFunc(this.owner, new object[] { value });

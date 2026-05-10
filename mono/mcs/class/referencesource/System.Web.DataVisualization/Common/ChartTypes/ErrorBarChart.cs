@@ -444,7 +444,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     {
                         if (
                             common
-                                .DataManager.Series[seriesName]
+                                .DataManager
+                                .Series[seriesName]
                                 .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                         )
                         {
@@ -514,7 +515,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         sideBySideWidth =
                             (float)(
                                 common
-                                    .DataManager.Series[linkedSeriesName]
+                                    .DataManager
+                                    .Series[linkedSeriesName]
                                     .GetPointWidth(graph, hAxis, interval, 0.8)
                             ) / numberOfLinkedSeries;
                     }
@@ -564,9 +566,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -926,9 +930,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 ++seriesIndex;
@@ -1457,7 +1463,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     {
                         if (
                             common
-                                .DataManager.Series[seriesName]
+                                .DataManager
+                                .Series[seriesName]
                                 .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                         )
                         {
@@ -1528,9 +1535,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -1942,9 +1951,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
             }
         }
@@ -2315,9 +2326,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 case ErrorBarType.StandardError:
                     return 1.0;
                 default:
-                    System.Diagnostics.Debug.Fail(
-                        "Unknown ErrorBarType=" + errorBarType.ToString()
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Fail("Unknown ErrorBarType=" + errorBarType.ToString());
                     break;
             }
             return 10.0;

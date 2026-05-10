@@ -19,7 +19,8 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
     )
     {
         var duplicateTypeMapConfigs = Expression
-            .Profiles.Append((Profile)Expression)
+            .Profiles
+            .Append((Profile)Expression)
             .SelectMany(p => p.TypeMapConfigs, (profile, typeMap) => (profile, typeMap))
             .GroupBy(x => x.typeMap.Types)
             .Where(g => g.Count() > 1)

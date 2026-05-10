@@ -301,9 +301,9 @@ namespace System.Globalization
             return typeof(TChar) == typeof(char)
                 ? MemoryMarshal.Cast<char, TChar>(_currencyDecimalSeparator)
                 : MemoryMarshal.Cast<byte, TChar>(
-                    _currencyDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(
-                        _currencyDecimalSeparator
-                    )
+                    _currencyDecimalSeparatorUtf8 ??= Encoding
+                        .UTF8
+                        .GetBytes(_currencyDecimalSeparator)
                 );
         }
 
@@ -754,9 +754,9 @@ namespace System.Globalization
             return typeof(TChar) == typeof(char)
                 ? MemoryMarshal.Cast<char, TChar>(_percentDecimalSeparator)
                 : MemoryMarshal.Cast<byte, TChar>(
-                    _percentDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(
-                        _percentDecimalSeparator
-                    )
+                    _percentDecimalSeparatorUtf8 ??= Encoding
+                        .UTF8
+                        .GetBytes(_percentDecimalSeparator)
                 );
         }
 

@@ -51,8 +51,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (operationContext != null)
             {
-                DurableOperationContext.IsInOperation isInOperation =
-                    operationContext.Extensions.Find<DurableOperationContext.IsInOperation>();
+                DurableOperationContext.IsInOperation isInOperation = operationContext
+                    .Extensions
+                    .Find<DurableOperationContext.IsInOperation>();
 
                 if (isInOperation != null)
                 {
@@ -67,58 +68,67 @@ namespace System.ServiceModel.Dispatcher
 
             if (operationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.OnlyCallableFromServiceOperation,
-                            typeof(DurableOperationContext).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.OnlyCallableFromServiceOperation,
+                                typeof(DurableOperationContext).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             IsInOperation isInOperation = operationContext.Extensions.Find<IsInOperation>();
 
             if (isInOperation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.OnlyCallableWhileInOperation,
-                            typeof(DurableOperationContext).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.OnlyCallableWhileInOperation,
+                                typeof(DurableOperationContext).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             InstanceContext currentInstanceContext = operationContext.InstanceContext;
 
             if (currentInstanceContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.OnlyCallableFromServiceOperation,
-                            typeof(DurableOperationContext).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.OnlyCallableFromServiceOperation,
+                                typeof(DurableOperationContext).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
-            ServiceDurableInstance durableInstance =
-                currentInstanceContext.Extensions.Find<ServiceDurableInstance>();
+            ServiceDurableInstance durableInstance = currentInstanceContext
+                .Extensions
+                .Find<ServiceDurableInstance>();
 
             if (durableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.OnlyCallableFromDurableService,
-                            typeof(DurableOperationContext).Name,
-                            typeof(DurableServiceAttribute).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.OnlyCallableFromDurableService,
+                                typeof(DurableOperationContext).Name,
+                                typeof(DurableServiceAttribute).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return durableInstance;

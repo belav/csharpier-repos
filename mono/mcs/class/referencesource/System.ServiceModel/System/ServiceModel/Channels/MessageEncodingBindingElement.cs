@@ -31,9 +31,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null
@@ -45,9 +45,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null
@@ -62,9 +62,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null
@@ -77,9 +77,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters never be null

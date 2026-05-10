@@ -244,9 +244,8 @@ namespace System.Transactions.Tests
                                             }
                                             case 9:
                                             {
-                                                Task.Factory.StartNew(() =>
-                                                        DoTaskUnderAsyncTS(false, null)
-                                                    )
+                                                Task.Factory
+                                                    .StartNew(() => DoTaskUnderAsyncTS(false, null))
                                                     .Wait();
                                                 break;
                                             }
@@ -262,7 +261,8 @@ namespace System.Transactions.Tests
                                             }
                                             case 12:
                                             {
-                                                Task.Factory.StartNew(() =>
+                                                Task.Factory
+                                                    .StartNew(() =>
                                                         SyncTSDoTaskUnderAsyncTS(false, true, null)
                                                     )
                                                     .Wait();
@@ -485,7 +485,8 @@ namespace System.Transactions.Tests
                                             }
                                             case 35:
                                             {
-                                                Task.Factory.StartNew(() =>
+                                                Task.Factory
+                                                    .StartNew(() =>
                                                         AssertTransactionNullAndWaitTask(
                                                             DoAsyncTSL2NestedTxWorkAsync(
                                                                 false,
@@ -531,7 +532,8 @@ namespace System.Transactions.Tests
                                             }
                                             case 38:
                                             {
-                                                Task.Factory.StartNew(() =>
+                                                Task.Factory
+                                                    .StartNew(() =>
                                                         SyncTSL3AsyncTSL2NestedTxWork(
                                                             false,
                                                             false,
@@ -621,7 +623,8 @@ namespace System.Transactions.Tests
                                             }
                                             case 44:
                                             {
-                                                Task.Factory.StartNew(() =>
+                                                Task.Factory
+                                                    .StartNew(() =>
                                                         AssertTransactionNullAndWaitTask(
                                                             DoAsyncTSL3SyncTSL2NestedTxWorkAsync(
                                                                 false,
@@ -685,7 +688,8 @@ namespace System.Transactions.Tests
                                             }
                                             case 48:
                                             {
-                                                Task.Factory.StartNew(() =>
+                                                Task.Factory
+                                                    .StartNew(() =>
                                                         AssertTransactionNullAndWaitTask(
                                                             DoAsyncTSL3SyncTSL2NestedTxWorkAsync(
                                                                 false,
@@ -811,9 +815,9 @@ namespace System.Transactions.Tests
             )
             {
                 txId1 = AssertAndGetCurrentTransactionId();
-                DependentTransaction dependentTx = Transaction.Current.DependentClone(
-                    DependentCloneOption.BlockCommitUntilComplete
-                );
+                DependentTransaction dependentTx = Transaction
+                    .Current
+                    .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
                 Task task1 = Task.Run(
                     delegate
                     {
@@ -2041,7 +2045,8 @@ namespace System.Transactions.Tests
                     RootAsyncFlowOption = asyncFlowOption,
                 };
 
-                Task.Factory.StartNew(
+                Task.Factory
+                    .StartNew(
                         DoTxWork,
                         context,
                         CancellationToken.None,

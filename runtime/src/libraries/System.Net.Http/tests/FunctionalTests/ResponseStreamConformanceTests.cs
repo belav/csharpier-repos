@@ -84,9 +84,9 @@ namespace System.Net.Http.Functional.Tests
         protected override async Task WriteResponseAsync(Stream responseStream, byte[] bodyData)
         {
             await responseStream.WriteAsync(
-                Encoding.ASCII.GetBytes(
-                    $"HTTP/1.1 200 OK\r\nContent-Length: {bodyData.Length}\r\n\r\n"
-                )
+                Encoding
+                    .ASCII
+                    .GetBytes($"HTTP/1.1 200 OK\r\nContent-Length: {bodyData.Length}\r\n\r\n")
             );
             await responseStream.WriteAsync(bodyData);
         }

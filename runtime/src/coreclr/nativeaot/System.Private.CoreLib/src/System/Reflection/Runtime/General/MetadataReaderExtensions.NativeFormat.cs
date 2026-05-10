@@ -176,7 +176,8 @@ namespace System.Reflection.Runtime.General
                 if (optional == modifiedType.IsOptional)
                 {
                     Type customModifier = modifiedType
-                        .ModifierType.Resolve(reader, typeContext)
+                        .ModifierType
+                        .Resolve(reader, typeContext)
                         .ToType();
                     customModifiers.Insert(0, customModifier);
                 }
@@ -268,7 +269,8 @@ namespace System.Reflection.Runtime.General
 
             Exception? exception = null;
             Type? enumType = record
-                .Type.TryResolve(reader, new TypeContext(null, null), ref exception)
+                .Type
+                .TryResolve(reader, new TypeContext(null, null), ref exception)
                 ?.ToType();
             if (enumType == null)
             {
@@ -292,7 +294,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         byte v = record
-                            .Value.ToConstantByteValueHandle(reader)
+                            .Value
+                            .ToConstantByteValueHandle(reader)
                             .GetConstantByteValue(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -304,7 +307,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         sbyte v = record
-                            .Value.ToConstantSByteValueHandle(reader)
+                            .Value
+                            .ToConstantSByteValueHandle(reader)
                             .GetConstantSByteValue(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -316,7 +320,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         short v = record
-                            .Value.ToConstantInt16ValueHandle(reader)
+                            .Value
+                            .ToConstantInt16ValueHandle(reader)
                             .GetConstantInt16Value(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -328,7 +333,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         ushort v = record
-                            .Value.ToConstantUInt16ValueHandle(reader)
+                            .Value
+                            .ToConstantUInt16ValueHandle(reader)
                             .GetConstantUInt16Value(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -340,7 +346,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         int v = record
-                            .Value.ToConstantInt32ValueHandle(reader)
+                            .Value
+                            .ToConstantInt32ValueHandle(reader)
                             .GetConstantInt32Value(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -352,7 +359,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         uint v = record
-                            .Value.ToConstantUInt32ValueHandle(reader)
+                            .Value
+                            .ToConstantUInt32ValueHandle(reader)
                             .GetConstantUInt32Value(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -364,7 +372,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         long v = record
-                            .Value.ToConstantInt64ValueHandle(reader)
+                            .Value
+                            .ToConstantInt64ValueHandle(reader)
                             .GetConstantInt64Value(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -376,7 +385,8 @@ namespace System.Reflection.Runtime.General
                             throw new BadImageFormatException();
 
                         ulong v = record
-                            .Value.ToConstantUInt64ValueHandle(reader)
+                            .Value
+                            .ToConstantUInt64ValueHandle(reader)
                             .GetConstantUInt64Value(reader)
                             .Value;
                         value = RuntimeAugments.Box(enumType.TypeHandle, (IntPtr)(&v));
@@ -541,73 +551,85 @@ namespace System.Reflection.Runtime.General
                     return handle
                         .ToConstantBooleanArrayHandle(reader)
                         .GetConstantBooleanArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantCharArray:
                     return handle
                         .ToConstantCharArrayHandle(reader)
                         .GetConstantCharArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantByteArray:
                     return handle
                         .ToConstantByteArrayHandle(reader)
                         .GetConstantByteArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantSByteArray:
                     return handle
                         .ToConstantSByteArrayHandle(reader)
                         .GetConstantSByteArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantInt16Array:
                     return handle
                         .ToConstantInt16ArrayHandle(reader)
                         .GetConstantInt16Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantUInt16Array:
                     return handle
                         .ToConstantUInt16ArrayHandle(reader)
                         .GetConstantUInt16Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantInt32Array:
                     return handle
                         .ToConstantInt32ArrayHandle(reader)
                         .GetConstantInt32Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantUInt32Array:
                     return handle
                         .ToConstantUInt32ArrayHandle(reader)
                         .GetConstantUInt32Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantInt64Array:
                     return handle
                         .ToConstantInt64ArrayHandle(reader)
                         .GetConstantInt64Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantUInt64Array:
                     return handle
                         .ToConstantUInt64ArrayHandle(reader)
                         .GetConstantUInt64Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantSingleArray:
                     return handle
                         .ToConstantSingleArrayHandle(reader)
                         .GetConstantSingleArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantDoubleArray:
                     return handle
                         .ToConstantDoubleArrayHandle(reader)
                         .GetConstantDoubleArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantEnumArray:
                     return TryParseConstantEnumArray(
@@ -668,7 +690,8 @@ namespace System.Reflection.Runtime.General
 
             ConstantEnumArray enumArray = handle.GetConstantEnumArray(reader);
             Type? elementType = enumArray
-                .ElementType.TryResolve(reader, new TypeContext(null, null), ref exception)
+                .ElementType
+                .TryResolve(reader, new TypeContext(null, null), ref exception)
                 ?.ToType();
             if (exception != null)
                 return null;
@@ -677,51 +700,67 @@ namespace System.Reflection.Runtime.General
             {
                 case HandleType.ConstantByteArray:
                     return enumArray
-                        .Value.ToConstantByteArrayHandle(reader)
+                        .Value
+                        .ToConstantByteArrayHandle(reader)
                         .GetConstantByteArray(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantSByteArray:
                     return enumArray
-                        .Value.ToConstantSByteArrayHandle(reader)
+                        .Value
+                        .ToConstantSByteArrayHandle(reader)
                         .GetConstantSByteArray(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantInt16Array:
                     return enumArray
-                        .Value.ToConstantInt16ArrayHandle(reader)
+                        .Value
+                        .ToConstantInt16ArrayHandle(reader)
                         .GetConstantInt16Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantUInt16Array:
                     return enumArray
-                        .Value.ToConstantUInt16ArrayHandle(reader)
+                        .Value
+                        .ToConstantUInt16ArrayHandle(reader)
                         .GetConstantUInt16Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantInt32Array:
                     return enumArray
-                        .Value.ToConstantInt32ArrayHandle(reader)
+                        .Value
+                        .ToConstantInt32ArrayHandle(reader)
                         .GetConstantInt32Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantUInt32Array:
                     return enumArray
-                        .Value.ToConstantUInt32ArrayHandle(reader)
+                        .Value
+                        .ToConstantUInt32ArrayHandle(reader)
                         .GetConstantUInt32Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantInt64Array:
                     return enumArray
-                        .Value.ToConstantInt64ArrayHandle(reader)
+                        .Value
+                        .ToConstantInt64ArrayHandle(reader)
                         .GetConstantInt64Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantUInt64Array:
                     return enumArray
-                        .Value.ToConstantUInt64ArrayHandle(reader)
+                        .Value
+                        .ToConstantUInt64ArrayHandle(reader)
                         .GetConstantUInt64Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 default:
                     throw new BadImageFormatException();
@@ -737,12 +776,14 @@ namespace System.Reflection.Runtime.General
 
             if (constructorHandleType == HandleType.QualifiedMethod)
                 return customAttribute
-                    .Constructor.ToQualifiedMethodHandle(reader)
+                    .Constructor
+                    .ToQualifiedMethodHandle(reader)
                     .GetQualifiedMethod(reader)
                     .EnclosingType;
             else if (constructorHandleType == HandleType.MemberReference)
                 return customAttribute
-                    .Constructor.ToMemberReferenceHandle(reader)
+                    .Constructor
+                    .ToMemberReferenceHandle(reader)
                     .GetMemberReference(reader)
                     .Parent;
             else
@@ -786,15 +827,14 @@ namespace System.Reflection.Runtime.General
                     if (!namespaceDefinition.Name.StringOrNullEquals(namespacePart, reader))
                         return false;
                     if (
-                        !namespaceDefinition.ParentScopeOrNamespace.IsNamespaceDefinitionHandle(
-                            reader
-                        )
+                        !namespaceDefinition
+                            .ParentScopeOrNamespace
+                            .IsNamespaceDefinitionHandle(reader)
                     )
                         return false;
-                    nsHandle =
-                        namespaceDefinition.ParentScopeOrNamespace.ToNamespaceDefinitionHandle(
-                            reader
-                        );
+                    nsHandle = namespaceDefinition
+                        .ParentScopeOrNamespace
+                        .ToNamespaceDefinitionHandle(reader);
                 }
                 if (!nsHandle.GetNamespaceDefinition(reader).Name.StringOrNullEquals(null, reader))
                     return false;
@@ -809,8 +849,9 @@ namespace System.Reflection.Runtime.General
                     return false;
                 if (!typeReference.ParentNamespaceOrType.IsNamespaceReferenceHandle(reader))
                     return false;
-                NamespaceReferenceHandle nsHandle =
-                    typeReference.ParentNamespaceOrType.ToNamespaceReferenceHandle(reader);
+                NamespaceReferenceHandle nsHandle = typeReference
+                    .ParentNamespaceOrType
+                    .ToNamespaceReferenceHandle(reader);
                 int idx = namespaceParts.Length;
                 while (idx-- != 0)
                 {
@@ -819,14 +860,14 @@ namespace System.Reflection.Runtime.General
                     if (!namespaceReference.Name.StringOrNullEquals(namespacePart, reader))
                         return false;
                     if (
-                        !namespaceReference.ParentScopeOrNamespace.IsNamespaceReferenceHandle(
-                            reader
-                        )
+                        !namespaceReference
+                            .ParentScopeOrNamespace
+                            .IsNamespaceReferenceHandle(reader)
                     )
                         return false;
-                    nsHandle = namespaceReference.ParentScopeOrNamespace.ToNamespaceReferenceHandle(
-                        reader
-                    );
+                    nsHandle = namespaceReference
+                        .ParentScopeOrNamespace
+                        .ToNamespaceReferenceHandle(reader);
                 }
                 if (!nsHandle.GetNamespaceReference(reader).Name.StringOrNullEquals(null, reader))
                     return false;
@@ -978,10 +1019,9 @@ namespace System.Reflection.Runtime.General
                 int index = fullName.Length;
                 fullName.Append(namespacePart);
                 ReverseStringInStringBuilder(fullName, index, namespacePart.Length);
-                namespaceReferenceHandle =
-                    namespaceReference.ParentScopeOrNamespace.ToExpectedNamespaceReferenceHandle(
-                        reader
-                    );
+                namespaceReferenceHandle = namespaceReference
+                    .ParentScopeOrNamespace
+                    .ToExpectedNamespaceReferenceHandle(reader);
             }
             ReverseStringInStringBuilder(fullName, 0, fullName.Length);
             fullName.Append(typeName);

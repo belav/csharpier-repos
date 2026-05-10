@@ -393,21 +393,22 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                                 if (_service._ioService.Exists(databaseFileInfo))
                                 {
                                     LogInfo("Replacing database file");
-                                    _service._ioService.Replace(
-                                        tempFilePath,
-                                        databaseFileInfo.FullName,
-                                        destinationBackupFileName: null,
-                                        ignoreMetadataErrors: true
-                                    );
+                                    _service
+                                        ._ioService
+                                        .Replace(
+                                            tempFilePath,
+                                            databaseFileInfo.FullName,
+                                            destinationBackupFileName: null,
+                                            ignoreMetadataErrors: true
+                                        );
                                     LogInfo("Replace database file completed");
                                 }
                                 else
                                 {
                                     LogInfo("Moving database file");
-                                    _service._ioService.Move(
-                                        tempFilePath,
-                                        databaseFileInfo.FullName
-                                    );
+                                    _service
+                                        ._ioService
+                                        .Move(tempFilePath, databaseFileInfo.FullName);
                                     LogInfo("Moving database file completed");
                                 }
                             }
@@ -642,11 +643,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 //         minutes ago, then the client will attempt to download the file.
                 //         In the interim period null will be returned from client.ReadFile.
                 var pollingMinutes = (int)TimeSpan.FromDays(1).TotalMinutes;
-                using var client = _service._fileDownloaderFactory.CreateClient(
-                    HostId,
-                    serverPath,
-                    pollingMinutes
-                );
+                using var client = _service
+                    ._fileDownloaderFactory
+                    .CreateClient(HostId, serverPath, pollingMinutes);
 
                 LogInfo("Creating download client completed");
 

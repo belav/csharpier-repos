@@ -46,10 +46,12 @@ internal static class InvocationOperationExtensions
                 is "Microsoft.AspNetCore.Routing"
             && targetOperation.TryGetRouteHandlerArgument(out var routeHandlerParameter)
             && routeHandlerParameter is { Parameter.Type: { } delegateType }
-            && SymbolEqualityComparer.Default.Equals(
-                delegateType,
-                wellKnownTypes.Get(WellKnownTypeData.WellKnownType.System_Delegate)
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    delegateType,
+                    wellKnownTypes.Get(WellKnownTypeData.WellKnownType.System_Delegate)
+                )
         )
         {
             invocationOperation = targetOperation;
@@ -151,9 +153,9 @@ internal static class InvocationOperationExtensions
             if (syn is VariableDeclaratorSyntax { Initializer: { Value: var expr } })
             {
                 // Use the correct semantic model based on the syntax tree
-                var targetSemanticModel = semanticModel?.Compilation.GetSemanticModel(
-                    expr.SyntaxTree
-                );
+                var targetSemanticModel = semanticModel
+                    ?.Compilation
+                    .GetSemanticModel(expr.SyntaxTree);
                 var operation = targetSemanticModel?.GetOperation(expr);
 
                 if (operation is not null)

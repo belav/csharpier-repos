@@ -22,12 +22,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
         public UseIsNullCheckForReferenceEqualsTests(ITestOutputHelper logger)
             : base(logger) { }
 
-        private static readonly ParseOptions CSharp7 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7);
-        private static readonly ParseOptions CSharp8 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
-        private static readonly ParseOptions CSharp9 =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp7 = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7);
+        private static readonly ParseOptions CSharp8 = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp9 = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp9);
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace
@@ -106,9 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """,
                 new[] { CSharpAnalyzersResources.Use_is_object_check },
                 new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp8
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp8)
                 )
             );
         }
@@ -131,9 +134,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 """,
                 new[] { CSharpAnalyzersResources.Use_is_not_null_check },
                 new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp9
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp9)
                 )
             );
         }
@@ -312,9 +315,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                 }
                 """,
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp6
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp6)
                 )
             );
         }

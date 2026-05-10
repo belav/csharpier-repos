@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 var endToken = suppressionTargetInfo.EndToken;
                 var nodeWithTokens = suppressionTargetInfo.NodeWithTokens;
                 var root = await nodeWithTokens
-                    .SyntaxTree.GetRootAsync(cancellationToken)
+                    .SyntaxTree
+                    .GetRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var startAndEndTokenAreTheSame = startToken == endToken;

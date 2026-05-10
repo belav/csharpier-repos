@@ -58,19 +58,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         new IntPtr(pRawData),
                         (uint)rawData.Length
                     );
-                    bool success = Interop.Crypt32.CryptQueryObject(
-                        Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
-                        &certBlob,
-                        Interop.Crypt32.ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_CERT,
-                        Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_BINARY,
-                        0,
-                        IntPtr.Zero,
-                        out Interop.Crypt32.ContentType contentType,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        IntPtr.Zero,
-                        out pCertContext
-                    );
+                    bool success = Interop
+                        .Crypt32
+                        .CryptQueryObject(
+                            Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
+                            &certBlob,
+                            Interop.Crypt32.ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_CERT,
+                            Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_BINARY,
+                            0,
+                            IntPtr.Zero,
+                            out Interop.Crypt32.ContentType contentType,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            out pCertContext
+                        );
 
                     if (!success)
                     {

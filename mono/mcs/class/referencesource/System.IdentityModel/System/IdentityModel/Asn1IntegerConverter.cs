@@ -30,12 +30,14 @@ namespace System.IdentityModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("asn1");
 
             if (asn1.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "asn1",
-                        SR.GetString(SR.LengthOfArrayToConvertMustGreaterThanZero)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "asn1",
+                            SR.GetString(SR.LengthOfArrayToConvertMustGreaterThanZero)
+                        )
+                    );
 
             List<byte> positiveDecimalDigits = new List<byte>((asn1.Length * 8) / 3);
             int absoluteBitNumber = 0;

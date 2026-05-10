@@ -244,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 trees.WhereNotNull(),
                 resolvedReferences,
                 Arguments
-                    .CompilationOptions.WithMetadataReferenceResolver(referenceDirectiveResolver)
+                    .CompilationOptions
+                    .WithMetadataReferenceResolver(referenceDirectiveResolver)
                     .WithAssemblyIdentityComparer(assemblyIdentityComparer)
                     .WithXmlReferenceResolver(xmlFileResolver)
                     .WithStrongNameProvider(Arguments.GetStrongNameProvider(loggingFileSystem))

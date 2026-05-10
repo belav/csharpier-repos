@@ -31,7 +31,8 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
                 .GetService<IConfigurationProvider>()
                 .Internal()
                 .GetAllTypeMaps()
-                .Count.ShouldBe(4);
+                .Count
+                .ShouldBe(4);
         }
 
         [Fact]

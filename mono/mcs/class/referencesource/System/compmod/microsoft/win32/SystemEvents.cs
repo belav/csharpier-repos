@@ -1236,15 +1236,17 @@ namespace Microsoft.Win32
                                 //We need access to be able to read from the registry here.  We're not creating a
                                 //registry key, nor are we returning information from the registry to the user.
                                 new RegistryPermission(PermissionState.Unrestricted).Assert();
-                                RegistryKey key = Registry.LocalMachine.OpenSubKey(
-                                    string.Format(
-                                        System.Globalization.CultureInfo.CurrentCulture,
-                                        template,
-                                        CompanyNameInternal,
-                                        ProductNameInternal,
-                                        ProductVersionInternal
-                                    )
-                                );
+                                RegistryKey key = Registry
+                                    .LocalMachine
+                                    .OpenSubKey(
+                                        string.Format(
+                                            System.Globalization.CultureInfo.CurrentCulture,
+                                            template,
+                                            CompanyNameInternal,
+                                            ProductNameInternal,
+                                            ProductVersionInternal
+                                        )
+                                    );
                                 if (key != null)
                                 {
                                     object value = key.GetValue(everettThreadAffinityValue);

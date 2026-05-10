@@ -429,7 +429,8 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
 
             var destructor = compilation
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.DestructorName);
             Assert.Equal(MethodKind.Destructor, destructor.MethodKind);
             Assert.Equal(WellKnownMemberNames.DestructorName, destructor.Name);

@@ -103,9 +103,9 @@ namespace Microsoft.Win32.SafeHandles
                 _strategy = strategy;
                 _bufferSize = memory.Length;
                 _memoryHandle = memory.Pin();
-                _overlapped = _fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                    _preallocatedOverlapped
-                );
+                _overlapped = _fileHandle
+                    .ThreadPoolBinding!
+                    .AllocateNativeOverlapped(_preallocatedOverlapped);
                 if (_fileHandle.CanSeek)
                 {
                     _overlapped->OffsetLow = (int)fileOffset;
@@ -155,10 +155,9 @@ namespace Microsoft.Win32.SafeHandles
                                 {
                                     try
                                     {
-                                        Interop.Kernel32.CancelIoEx(
-                                            vts._fileHandle,
-                                            vts._overlapped
-                                        );
+                                        Interop
+                                            .Kernel32
+                                            .CancelIoEx(vts._fileHandle, vts._overlapped);
                                         // Ignore all failures: no matter whether it succeeds or fails, completion is handled via the IOCallback.
                                     }
                                     catch (ObjectDisposedException) { } // in case the SafeHandle is (erroneously) closed concurrently

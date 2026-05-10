@@ -126,14 +126,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         method.GetNonNullSyntaxNode(),
                         submissionResultType
                     );
-                    var newStatements = block.Statements.Add(
-                        new BoundReturnStatement(
-                            trailingExpression.Syntax,
-                            RefKind.None,
-                            trailingExpression,
-                            @checked: false
-                        )
-                    );
+                    var newStatements = block
+                        .Statements
+                        .Add(
+                            new BoundReturnStatement(
+                                trailingExpression.Syntax,
+                                RefKind.None,
+                                trailingExpression,
+                                @checked: false
+                            )
+                        );
                     block = new BoundBlock(
                         block.Syntax,
                         ImmutableArray<LocalSymbol>.Empty,
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 getErrorsOnly(
                                     diagnostics
                                         .ToReadOnly()
-                                        .Diagnostics.Skip(initialDiagnosticCount)
+                                        .Diagnostics
+                                        .Skip(initialDiagnosticCount)
                                 )
                             )
                     );

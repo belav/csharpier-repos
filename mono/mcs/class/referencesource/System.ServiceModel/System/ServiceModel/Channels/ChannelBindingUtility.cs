@@ -235,20 +235,22 @@ namespace System.ServiceModel.Channels
 
                 if (source.IsInvalid || source.IsClosed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(source.GetType().FullName)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(source.GetType().FullName));
                 }
 
                 if (source.Size <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "source.Size",
-                            source.Size,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "source.Size",
+                                source.Size,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
 
                 //Instantiate the SafeHandle before trying to allocate the native memory

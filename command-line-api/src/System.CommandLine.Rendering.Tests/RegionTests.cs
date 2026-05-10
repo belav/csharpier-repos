@@ -16,7 +16,9 @@ namespace System.CommandLine.Rendering.Tests
             ctorCall
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain("left");
         }
 
@@ -28,7 +30,9 @@ namespace System.CommandLine.Rendering.Tests
             ctorCall
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain("top");
         }
 
@@ -40,7 +44,9 @@ namespace System.CommandLine.Rendering.Tests
             ctorCall
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain("width");
         }
 
@@ -52,7 +58,9 @@ namespace System.CommandLine.Rendering.Tests
             ctorCall
                 .Should()
                 .Throw<ArgumentOutOfRangeException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain("height");
         }
     }

@@ -430,7 +430,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 receiverOpt is null
                     || receiverOpt.Type is { }
                         && receiverOpt
-                            .Type.GetMembers(propertySym.Name)
+                            .Type
+                            .GetMembers(propertySym.Name)
                             .OfType<PropertySymbol>()
                             .Single() == propertySym
             );
@@ -767,12 +768,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 #else
                 CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-                var conversion = Compilation.Conversions.ClassifyConversionFromType(
-                    expression.Type,
-                    CurrentFunction.ReturnType,
-                    isChecked: false,
-                    ref useSiteInfo
-                );
+                var conversion = Compilation
+                    .Conversions
+                    .ClassifyConversionFromType(
+                        expression.Type,
+                        CurrentFunction.ReturnType,
+                        isChecked: false,
+                        ref useSiteInfo
+                    );
                 Debug.Assert(useSiteInfo.Diagnostics.IsNullOrEmpty());
                 Debug.Assert(conversion.Kind != ConversionKind.NoConversion);
                 if (conversion.Kind != ConversionKind.Identity)
@@ -926,12 +929,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             // Because compiler-generated nodes are not lowered, this conversion is not used later in the compiler.
             // But it is a required part of the `BoundIsOperator` node, so we compute a conversion here.
-            Conversion c = Compilation.Conversions.ClassifyBuiltInConversion(
-                operand.Type,
-                type,
-                isChecked: false,
-                ref discardedUseSiteInfo
-            );
+            Conversion c = Compilation
+                .Conversions
+                .ClassifyBuiltInConversion(
+                    operand.Type,
+                    type,
+                    isChecked: false,
+                    ref discardedUseSiteInfo
+                );
             return new BoundIsOperator(
                 this.Syntax,
                 operand,
@@ -2132,9 +2137,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // whether or not to call a method with a value type receiver directly).
             if (
                 !method.ContainingType.IsValueType
-                || !Microsoft.CodeAnalysis.CSharp.CodeGen.CodeGenerator.MayUseCallForStructMethod(
-                    method
-                )
+                || !Microsoft
+                    .CodeAnalysis
+                    .CSharp
+                    .CodeGen
+                    .CodeGenerator
+                    .MayUseCallForStructMethod(method)
             )
             {
                 method = method.GetConstructedLeastOverriddenMethod(
@@ -2200,12 +2208,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 #else
             CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-            Conversion c = Compilation.Conversions.ClassifyConversionFromExpression(
-                arg,
-                type,
-                isChecked: false,
-                ref useSiteInfo
-            );
+            Conversion c = Compilation
+                .Conversions
+                .ClassifyConversionFromExpression(arg, type, isChecked: false, ref useSiteInfo);
             Debug.Assert(c.Exists);
             // The use-site diagnostics should be reported earlier, and we shouldn't get to lowering if they're errors.
             Debug.Assert(!useSiteInfo.HasErrors);
@@ -2243,7 +2248,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 conversion.Kind == ConversionKind.ExplicitNullable
                 && arg.Type.IsNullableType()
-                && arg.Type.GetNullableUnderlyingType()
+                && arg.Type
+                    .GetNullableUnderlyingType()
                     .Equals(type, TypeCompareKind.AllIgnoreOptions)
             )
             {

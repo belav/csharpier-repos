@@ -14,13 +14,15 @@ public class SqlServerMemoryOptimizedTablesConventionTest
 
         Assert.True(
             modelBuilder
-                .Model.FindEntityType(typeof(Order))
+                .Model
+                .FindEntityType(typeof(Order))
                 .GetKeys()
                 .All(k => k.IsClustered() == null)
         );
         Assert.True(
             modelBuilder
-                .Model.FindEntityType(typeof(Order))
+                .Model
+                .FindEntityType(typeof(Order))
                 .GetIndexes()
                 .All(k => k.IsClustered() == null)
         );
@@ -32,13 +34,15 @@ public class SqlServerMemoryOptimizedTablesConventionTest
 
         Assert.True(
             modelBuilder
-                .Model.FindEntityType(typeof(Order))
+                .Model
+                .FindEntityType(typeof(Order))
                 .GetKeys()
                 .All(k => k.IsClustered() == false)
         );
         Assert.True(
             modelBuilder
-                .Model.FindEntityType(typeof(Order))
+                .Model
+                .FindEntityType(typeof(Order))
                 .GetIndexes()
                 .All(k => k.IsClustered() == false)
         );
@@ -47,13 +51,15 @@ public class SqlServerMemoryOptimizedTablesConventionTest
 
         Assert.True(
             modelBuilder
-                .Model.FindEntityType(typeof(Order))
+                .Model
+                .FindEntityType(typeof(Order))
                 .GetKeys()
                 .All(k => k.IsClustered() == null)
         );
         Assert.True(
             modelBuilder
-                .Model.FindEntityType(typeof(Order))
+                .Model
+                .FindEntityType(typeof(Order))
                 .GetIndexes()
                 .All(k => k.IsClustered() == null)
         );

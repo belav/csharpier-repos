@@ -17,11 +17,9 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesDisplayName()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(PropertyDisplayNameModel),
-                "MyProperty"
-            );
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => null, typeof(PropertyDisplayNameModel), "MyProperty");
             var context = new ControllerContext();
             var attribute = new AnnotationsCompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(metadata, context, attribute);
@@ -42,11 +40,9 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesPropertyName()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(PropertyNameModel),
-                "MyProperty"
-            );
+            var metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => null, typeof(PropertyNameModel), "MyProperty");
             var context = new ControllerContext();
             var attribute = new AnnotationsCompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(metadata, context, attribute);
@@ -63,11 +59,9 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesOverride()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(PropertyNameModel),
-                "MyProperty"
-            );
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => null, typeof(PropertyNameModel), "MyProperty");
             ControllerContext context = new ControllerContext();
             AnnotationsCompareAttribute attribute = new AnnotationsCompareAttribute("OtherProperty")
             {
@@ -90,11 +84,9 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesResourceOverride()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
-                () => null,
-                typeof(PropertyNameModel),
-                "MyProperty"
-            );
+            ModelMetadata metadata = ModelMetadataProviders
+                .Current
+                .GetMetadataForProperty(() => null, typeof(PropertyNameModel), "MyProperty");
             ControllerContext context = new ControllerContext();
             AnnotationsCompareAttribute attribute = new AnnotationsCompareAttribute("OtherProperty")
             {

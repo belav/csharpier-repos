@@ -5683,9 +5683,9 @@ public class C { }
             var warnDict = new Dictionary<string, ReportDiagnostic>
             {
                 {
-                    MessageProvider.Instance.GetIdForErrorCode(
-                        (int)ErrorCode.WRN_MissingXMLComment
-                    ),
+                    MessageProvider
+                        .Instance
+                        .GetIdForErrorCode((int)ErrorCode.WRN_MissingXMLComment),
                     ReportDiagnostic.Suppress
                 },
             };
@@ -6955,9 +6955,11 @@ public class C { }
 
             // Don't embed.
             {
-                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(
-                    false
-                );
+                var reference = TestReferences
+                    .SymbolsTests
+                    .NoPia
+                    .GeneralPia
+                    .WithEmbedInteropTypes(false);
                 var comp = CreateCompilationUtil(source, new[] { reference });
                 var actual = GetDocumentationCommentText(comp);
                 Assert.Equal(expected, actual);
@@ -6967,9 +6969,11 @@ public class C { }
 
             // Do embed.
             {
-                var reference = TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(
-                    true
-                );
+                var reference = TestReferences
+                    .SymbolsTests
+                    .NoPia
+                    .GeneralPia
+                    .WithEmbedInteropTypes(true);
                 var comp = CreateCompilationUtil(source, new[] { reference });
                 var actual = GetDocumentationCommentText(comp);
                 Assert.Equal(expected, actual);
@@ -7156,9 +7160,9 @@ public class C {} // CS1587
 ";
 
             var tree = Parse(source, options: TestOptions.RegularWithDocumentationComments);
-            var compOptions = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Error
-            );
+            var compOptions = TestOptions
+                .ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
             CreateCompilation(tree, options: compOptions)
                 .VerifyDiagnostics(
                     // (2,14): error CS1591: Warning as Error: Missing XML comment for publicly visible type or member 'C'
@@ -7440,7 +7444,8 @@ class C { }
                     filename: sourcePath
                 ),
                 options: TestOptions
-                    .ReleaseDll.WithSourceReferenceResolver(SourceFileResolver.Default)
+                    .ReleaseDll
+                    .WithSourceReferenceResolver(SourceFileResolver.Default)
                     .WithXmlReferenceResolver(XmlFileResolver.Default),
                 assemblyName: "Test"
             );

@@ -652,7 +652,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     castedExpressionType != null
                     && isType != null
                     && originalSemanticModel
-                        .Compilation.ClassifyConversion(castedExpressionType, isType)
+                        .Compilation
+                        .ClassifyConversion(castedExpressionType, isType)
                         .Exists
                 )
                 {
@@ -985,10 +986,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 // meaning of `default`.
                 if (
                     originalConditionalExpression
-                        .WhenTrue.WalkDownParentheses()
+                        .WhenTrue
+                        .WalkDownParentheses()
                         .IsKind(SyntaxKind.DefaultLiteralExpression)
                     || originalConditionalExpression
-                        .WhenFalse.WalkDownParentheses()
+                        .WhenFalse
+                        .WalkDownParentheses()
                         .IsKind(SyntaxKind.DefaultLiteralExpression)
                 )
                 {
@@ -1024,10 +1027,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // type of `a ? b : c` to be the same as what `a ? (T)b : c` is converted to.
 
             if (
-                !originalConditionalTypeInfo.ConvertedType!.Equals(
-                    rewrittenConditionalTypeInfo.ConvertedType,
-                    SymbolEqualityComparer.IncludeNullability
-                )
+                !originalConditionalTypeInfo
+                    .ConvertedType!
+                    .Equals(
+                        rewrittenConditionalTypeInfo.ConvertedType,
+                        SymbolEqualityComparer.IncludeNullability
+                    )
             )
                 return false;
 
@@ -1765,9 +1770,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         var originalParameter = originalParameters[i];
                         var rewrittenParameter = rewrittenParameters[i];
 
-                        var argument = invocationOperation.Arguments.FirstOrDefault(a =>
-                            Equals(originalParameter, a.Parameter)
-                        );
+                        var argument = invocationOperation
+                            .Arguments
+                            .FirstOrDefault(a => Equals(originalParameter, a.Parameter));
                         var argumentSyntax = argument?.Syntax as ArgumentSyntax;
 
                         if (

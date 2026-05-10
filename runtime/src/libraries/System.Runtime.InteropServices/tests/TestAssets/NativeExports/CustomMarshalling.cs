@@ -20,9 +20,9 @@ namespace NativeExports
         )
         {
             // Round trip through the managed view to allocate a new native instance.
-            *pStringsOut = StringContainerMarshaller.In.ConvertToUnmanaged(
-                StringContainerMarshaller.Out.ConvertToManaged(strings)
-            );
+            *pStringsOut = StringContainerMarshaller
+                .In
+                .ConvertToUnmanaged(StringContainerMarshaller.Out.ConvertToManaged(strings));
         }
 
         [UnmanagedCallersOnly(EntryPoint = "stringcontainer_reverse_strings")]

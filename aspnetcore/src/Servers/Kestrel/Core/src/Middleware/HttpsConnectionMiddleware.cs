@@ -193,7 +193,8 @@ internal sealed class HttpsConnectionMiddleware
         context.Features.Set<SslStream>(sslStream); // Anti-pattern, but retain for back compat
 
         var metricsContext = context
-            .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()
+            .Features
+            .GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
         var startTimestamp = Stopwatch.GetTimestamp();
         try
@@ -286,13 +287,15 @@ internal sealed class HttpsConnectionMiddleware
             {
                 if (protocolName != "tls")
                 {
-                    metricsTags.Tags.Add(
-                        new KeyValuePair<string, object?>("tls.protocol.name", protocolName)
-                    );
+                    metricsTags
+                        .Tags
+                        .Add(new KeyValuePair<string, object?>("tls.protocol.name", protocolName));
                 }
-                metricsTags.Tags.Add(
-                    new KeyValuePair<string, object?>("tls.protocol.version", protocolVersion)
-                );
+                metricsTags
+                    .Tags
+                    .Add(
+                        new KeyValuePair<string, object?>("tls.protocol.version", protocolVersion)
+                    );
             }
         }
 
@@ -325,9 +328,9 @@ internal sealed class HttpsConnectionMiddleware
             Exception ex
         )
         {
-            KestrelEventSource.Log.TlsHandshakeFailed(
-                metricsContext.ConnectionContext.ConnectionId
-            );
+            KestrelEventSource
+                .Log
+                .TlsHandshakeFailed(metricsContext.ConnectionContext.ConnectionId);
             KestrelEventSource.Log.TlsHandshakeStop(metricsContext.ConnectionContext, null);
             metrics.TlsHandshakeStop(
                 metricsContext,
@@ -373,11 +376,13 @@ internal sealed class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certificate.Thumbprint,
-                        validOnly: false
-                    );
+                    var certs = store
+                        .Certificates
+                        .Find(
+                            X509FindType.FindByThumbprint,
+                            certificate.Thumbprint,
+                            validOnly: false
+                        );
 
                     if (certs.Count > 0 && certs[0].HasPrivateKey)
                     {
@@ -393,11 +398,13 @@ internal sealed class HttpsConnectionMiddleware
             {
                 using (store)
                 {
-                    var certs = store.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        certificate.Thumbprint,
-                        validOnly: false
-                    );
+                    var certs = store
+                        .Certificates
+                        .Find(
+                            X509FindType.FindByThumbprint,
+                            certificate.Thumbprint,
+                            validOnly: false
+                        );
 
                     if (certs.Count > 0 && certs[0].HasPrivateKey)
                     {

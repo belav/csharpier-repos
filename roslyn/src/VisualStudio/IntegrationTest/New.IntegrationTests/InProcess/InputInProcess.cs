@@ -118,10 +118,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         private async Task WaitNavigationItemShowsUpAsync(CancellationToken cancellationToken)
         {
             // Wait for the NavigateTo Features completes on Roslyn side.
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.NavigateTo],
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync([FeatureAttribute.NavigateTo], cancellationToken);
             // Since the all-in-one search experience populates its results asychronously we need
             // to give it time to update the UI. Note: This is not a perfect solution.
             await Task.Delay(1000);

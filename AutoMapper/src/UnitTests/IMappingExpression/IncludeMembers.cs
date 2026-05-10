@@ -1872,7 +1872,8 @@ public class IncludeMembersWithInclude : AutoMapperSpecBase
                     InnerSource = new Source { FirstName = "first", LastName = "last" },
                 }
             )
-            .FullName.ShouldBe("first last");
+            .FullName
+            .ShouldBe("first last");
 }
 
 public class IncludeMembersWithIncludeDifferentOrder : AutoMapperSpecBase
@@ -1917,7 +1918,8 @@ public class IncludeMembersWithIncludeDifferentOrder : AutoMapperSpecBase
                     InnerSource = new Source { FirstName = "first", LastName = "last" },
                 }
             )
-            .FullName.ShouldBe("first last");
+            .FullName
+            .ShouldBe("first last");
 }
 
 public class IncludeMembersWithIncludeBase : AutoMapperSpecBase
@@ -1967,7 +1969,8 @@ public class IncludeMembersWithIncludeBase : AutoMapperSpecBase
             .Map<CreateCustomerDto>(
                 new Customer { Address = new Address { Postcode = "Postcode" } }
             )
-            .Postcode.ShouldBe("Postcode");
+            .Postcode
+            .ShouldBe("Postcode");
 }
 
 public class IncludeMembersWithIncludeBaseOverride : AutoMapperSpecBase
@@ -2021,7 +2024,8 @@ public class IncludeMembersWithIncludeBaseOverride : AutoMapperSpecBase
             .Map<CreateCustomerDto>(
                 new Customer { NewAddress = new Address { Postcode = "Postcode" } }
             )
-            .Postcode.ShouldBe("Postcode");
+            .Postcode
+            .ShouldBe("Postcode");
 }
 
 public class IncludeMembersWithIncludeBaseOverrideMapFrom : AutoMapperSpecBase
@@ -2070,7 +2074,8 @@ public class IncludeMembersWithIncludeBaseOverrideMapFrom : AutoMapperSpecBase
     public void Should_override_IncludeMembers() =>
         Mapper
             .Map<CreateCustomerDto>(new Customer { Name = "Postcode", Address = new Address() })
-            .Postcode.ShouldBe("Postcode");
+            .Postcode
+            .ShouldBe("Postcode");
 }
 
 public class IncludeMembersWithIncludeBaseOverrideConvention : AutoMapperSpecBase
@@ -2125,7 +2130,8 @@ public class IncludeMembersWithIncludeBaseOverrideConvention : AutoMapperSpecBas
             .Map<CreateCustomerDto>(
                 new NewCustomer { Postcode = "Postcode", Address = new Address() }
             )
-            .Postcode.ShouldBe("Postcode");
+            .Postcode
+            .ShouldBe("Postcode");
 }
 
 public class IncludeMembersWithValueTypeValidation : AutoMapperSpecBase
@@ -2311,7 +2317,8 @@ public class IncludeMembersWithCascadedIncludeBase : AutoMapperSpecBase
     public void Should_inherit_IncludeMembers() =>
         Mapper
             .Map<SignedResponse>(new ExpiredItem { MetaData = new MetaData { Hash = "hash" } })
-            .Hash.ShouldBe("hash");
+            .Hash
+            .ShouldBe("hash");
 }
 
 public class IncludeMembersConstructorMapping : AutoMapperSpecBase

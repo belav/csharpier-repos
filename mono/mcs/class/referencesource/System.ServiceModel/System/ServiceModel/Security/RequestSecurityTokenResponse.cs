@@ -136,9 +136,9 @@ namespace System.ServiceModel.Security
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("standardsManager")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
             effectiveTime = SecurityUtils.MinUtcDateTime;
@@ -167,9 +167,9 @@ namespace System.ServiceModel.Security
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("standardsManager")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("standardsManager"));
             }
             this.standardsManager = standardsManager;
             if (rstrXml == null)
@@ -196,9 +196,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.context = value;
             }
         }
@@ -209,9 +211,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.tokenType = value;
             }
         }
@@ -222,9 +226,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.requestedAttachedReference = value;
             }
         }
@@ -235,9 +241,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.requestedUnattachedReference = value;
             }
         }
@@ -258,9 +266,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.computeKey = value;
             }
         }
@@ -271,16 +281,20 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 if (value < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 this.keySize = value;
             }
         }
@@ -291,9 +305,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.isRequestedTokenClosed = value;
             }
         }
@@ -319,9 +335,11 @@ namespace System.ServiceModel.Security
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.standardsManager = (
                     value != null ? value : SecurityStandardsManager.DefaultInstance
                 );
@@ -336,11 +354,13 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "EntropyToken")
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "EntropyToken")
+                            )
+                        );
                 }
                 return this.entropyToken;
             }
@@ -354,20 +374,24 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IssuedToken")
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IssuedToken")
+                            )
+                        );
                 }
                 return this.issuedToken;
             }
             set
             {
                 if (this.isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.issuedToken = value;
             }
         }
@@ -380,20 +404,24 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "ProofToken")
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "ProofToken")
+                            )
+                        );
                 }
                 return this.proofToken;
             }
             set
             {
                 if (this.isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
                 this.proofToken = value;
             }
         }
@@ -406,14 +434,16 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ItemAvailableInDeserializedRSTROnly,
-                                "RequestSecurityTokenXml"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ItemAvailableInDeserializedRSTROnly,
+                                    "RequestSecurityTokenXml"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return this.rstrXml;
             }
@@ -427,11 +457,13 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesTo")
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesTo")
+                            )
+                        );
                 }
                 return this.appliesTo;
             }
@@ -445,14 +477,16 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ItemNotAvailableInDeserializedRST,
-                                "AppliesToSerializer"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ItemNotAvailableInDeserializedRST,
+                                    "AppliesToSerializer"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return this.appliesToSerializer;
             }
@@ -466,11 +500,13 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesToType")
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesToType")
+                            )
+                        );
                 }
                 return this.appliesToType;
             }
@@ -484,11 +520,13 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IsLifetimeSet")
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IsLifetimeSet")
+                            )
+                        );
                 }
                 return this.isLifetimeSet;
             }
@@ -502,18 +540,22 @@ namespace System.ServiceModel.Security
         public void SetIssuerEntropy(byte[] issuerEntropy)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             this.entropyToken = (issuerEntropy != null) ? new NonceToken(issuerEntropy) : null;
         }
 
         internal void SetIssuerEntropy(WrappedKeySecurityToken issuerEntropy)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             this.entropyToken = issuerEntropy;
         }
 
@@ -535,14 +577,16 @@ namespace System.ServiceModel.Security
         public void SetLifetime(DateTime validFrom, DateTime validTo)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             if (validFrom.ToUniversalTime() > validTo.ToUniversalTime())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.EffectiveGreaterThanExpiration)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.EffectiveGreaterThanExpiration));
             }
             this.effectiveTime = validFrom.ToUniversalTime();
             this.expirationTime = validTo.ToUniversalTime();
@@ -552,9 +596,11 @@ namespace System.ServiceModel.Security
         public void SetAppliesTo<T>(T appliesTo, XmlObjectSerializer serializer)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             if (appliesTo != null && serializer == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
@@ -567,16 +613,16 @@ namespace System.ServiceModel.Security
         public void GetAppliesToQName(out string localName, out string namespaceUri)
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ItemAvailableInDeserializedRSTOnly, "MatchesAppliesTo")
-                    )
-                );
-            this.standardsManager.TrustDriver.GetAppliesToQName(
-                this,
-                out localName,
-                out namespaceUri
-            );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemAvailableInDeserializedRSTOnly, "MatchesAppliesTo")
+                        )
+                    );
+            this.standardsManager
+                .TrustDriver
+                .GetAppliesToQName(this, out localName, out namespaceUri);
         }
 
         public T GetAppliesTo<T>()
@@ -610,9 +656,11 @@ namespace System.ServiceModel.Security
             if (negotiation == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("negotiation");
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             this.negotiationData = negotiation;
         }
 
@@ -629,9 +677,11 @@ namespace System.ServiceModel.Security
             if (authenticator == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authenticator");
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             this.authenticator = DiagnosticUtility.Utility.AllocateByteArray(authenticator.Length);
             Buffer.BlockCopy(authenticator, 0, this.authenticator, 0, authenticator.Length);
         }
@@ -646,9 +696,9 @@ namespace System.ServiceModel.Security
                     return null;
                 else
                 {
-                    byte[] result = DiagnosticUtility.Utility.AllocateByteArray(
-                        this.authenticator.Length
-                    );
+                    byte[] result = DiagnosticUtility
+                        .Utility
+                        .AllocateByteArray(this.authenticator.Length);
                     Buffer.BlockCopy(this.authenticator, 0, result, 0, this.authenticator.Length);
                     return result;
                 }
@@ -782,23 +832,27 @@ namespace System.ServiceModel.Security
         )
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")
+                        )
+                    );
 
-            return this.standardsManager.TrustDriver.GetIssuedToken(
-                this,
-                resolver,
-                allowedAuthenticators,
-                keyEntropyMode,
-                requestorEntropy,
-                expectedTokenType,
-                authorizationPolicies,
-                defaultKeySize,
-                isBearerKeyType
-            );
+            return this.standardsManager
+                .TrustDriver
+                .GetIssuedToken(
+                    this,
+                    resolver,
+                    allowedAuthenticators,
+                    keyEntropyMode,
+                    requestorEntropy,
+                    expectedTokenType,
+                    authorizationPolicies,
+                    defaultKeySize,
+                    isBearerKeyType
+                );
         }
 
         public virtual GenericXmlSecurityToken GetIssuedToken(
@@ -808,18 +862,17 @@ namespace System.ServiceModel.Security
         )
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")
+                        )
+                    );
 
-            return this.standardsManager.TrustDriver.GetIssuedToken(
-                this,
-                expectedTokenType,
-                authorizationPolicies,
-                clientKey
-            );
+            return this.standardsManager
+                .TrustDriver
+                .GetIssuedToken(this, expectedTokenType, authorizationPolicies, clientKey);
         }
 
         protected internal virtual void OnWriteCustomAttributes(XmlWriter writer) { }
@@ -835,24 +888,26 @@ namespace System.ServiceModel.Security
         )
         {
             if (requestorEntropy == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestorEntropy"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestorEntropy");
             if (issuerEntropy == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuerEntropy");
             // Do a sanity check here. We don't want to allow invalid keys or keys that are too
             // large.
             if ((keySizeInBits < minSaneKeySizeInBits) || (keySizeInBits > maxSaneKeySizeInBits))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(
-                            SR.InvalidKeySizeSpecifiedInNegotiation,
-                            keySizeInBits,
-                            minSaneKeySizeInBits,
-                            maxSaneKeySizeInBits
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(
+                                SR.InvalidKeySizeSpecifiedInNegotiation,
+                                keySizeInBits,
+                                minSaneKeySizeInBits,
+                                maxSaneKeySizeInBits
+                            )
                         )
-                    )
-                );
+                    );
             Psha1DerivedKeyGenerator generator = new Psha1DerivedKeyGenerator(requestorEntropy);
             return generator.GenerateDerivedKey(new byte[] { }, issuerEntropy, keySizeInBits, 0);
         }

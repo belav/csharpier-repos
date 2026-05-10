@@ -57,20 +57,26 @@ namespace System.ServiceModel.Configuration
             if (this.AuthenticationMode == AuthenticationMode.SecureConversation)
             {
                 if (this.SecureConversationBootstrap == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SecureConversationNeedsBootstrapSecurity)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SecureConversationNeedsBootstrapSecurity)
+                            )
+                        );
                 if (
                     this.SecureConversationBootstrap.AuthenticationMode
                     == AuthenticationMode.SecureConversation
                 )
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SecureConversationBootstrapCannotUseSecureConversation)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecureConversationBootstrapCannotUseSecureConversation
+                                )
+                            )
+                        );
                 SecurityBindingElement bootstrapSecurity = (SecurityBindingElement)
                     this.SecureConversationBootstrap.CreateBindingElement(createTemplateOnly);
                 result = SecurityBindingElement.CreateSecureConversationBindingElement(

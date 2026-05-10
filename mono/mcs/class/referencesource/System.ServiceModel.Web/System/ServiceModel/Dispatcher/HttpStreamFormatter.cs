@@ -86,17 +86,19 @@ namespace System.ServiceModel.Dispatcher
                 Stream streamData = data as Stream;
                 if (streamData == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR2.GetString(
-                                SR2.ParameterIsNotStreamType,
-                                data.GetType(),
-                                this.operationName,
-                                this.contractName,
-                                this.contractNs
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR2.GetString(
+                                    SR2.ParameterIsNotStreamType,
+                                    data.GetType(),
+                                    this.operationName,
+                                    this.contractName,
+                                    this.contractNs
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 result = ByteStreamMessage.CreateMessage(streamData);
                 result.Properties[WebBodyFormatMessageProperty.Name] =
@@ -119,32 +121,36 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.MessageFormatPropertyNotFound,
-                                this.operationName,
-                                this.contractName,
-                                this.contractNs
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.MessageFormatPropertyNotFound,
+                                    this.operationName,
+                                    this.contractName,
+                                    this.contractNs
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             if (formatProperty.Format != WebContentFormat.Raw)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.InvalidHttpMessageFormat,
-                            this.operationName,
-                            this.contractName,
-                            this.contractNs,
-                            formatProperty.Format,
-                            WebContentFormat.Raw
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvalidHttpMessageFormat,
+                                this.operationName,
+                                this.contractName,
+                                this.contractNs,
+                                formatProperty.Format,
+                                WebContentFormat.Raw
+                            )
                         )
-                    )
-                );
+                    );
             }
             return new StreamFormatter.MessageBodyStream(
                 message,

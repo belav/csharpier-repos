@@ -32,12 +32,14 @@ namespace ILCompiler.DependencyAnalysis
             var mdManager = (UsageBasedMetadataManager)factory.MetadataManager;
             try
             {
-                return Dataflow.ReflectionMethodBodyScanner.ScanAndProcessReturnValue(
-                    factory,
-                    mdManager.FlowAnnotations,
-                    mdManager.Logger,
-                    _methodIL
-                );
+                return Dataflow
+                    .ReflectionMethodBodyScanner
+                    .ScanAndProcessReturnValue(
+                        factory,
+                        mdManager.FlowAnnotations,
+                        mdManager.Logger,
+                        _methodIL
+                    );
             }
             catch (TypeSystemException)
             {

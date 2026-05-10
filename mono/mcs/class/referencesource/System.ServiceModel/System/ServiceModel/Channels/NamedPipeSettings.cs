@@ -15,8 +15,9 @@ namespace System.ServiceModel.Channels
         {
             if (elementToBeCloned.ApplicationContainerSettings != null)
             {
-                this.ApplicationContainerSettings =
-                    elementToBeCloned.ApplicationContainerSettings.Clone();
+                this.ApplicationContainerSettings = elementToBeCloned
+                    .ApplicationContainerSettings
+                    .Clone();
             }
         }
 

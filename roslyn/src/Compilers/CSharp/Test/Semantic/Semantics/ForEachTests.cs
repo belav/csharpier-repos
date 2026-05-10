@@ -2838,8 +2838,8 @@ class C
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
 
-            var udc = comp
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+            var udc = comp.GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>(WellKnownMemberNames.ImplicitConversionName);
 
             var tree = comp.SyntaxTrees.Single();

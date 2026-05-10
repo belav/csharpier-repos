@@ -103,19 +103,17 @@ namespace System.Workflow.Activities
                 return -1;
 
             // compare operation
-            int compared = StringComparer.Ordinal.Compare(
-                this.MethodName,
-                eventQueueName.MethodName
-            );
+            int compared = StringComparer
+                .Ordinal
+                .Compare(this.MethodName, eventQueueName.MethodName);
 
             if (compared == 0)
             {
                 // compare type names
 #pragma warning disable 56506
-                compared = StringComparer.Ordinal.Compare(
-                    AssemblyQualifiedName,
-                    eventQueueName.AssemblyQualifiedName
-                );
+                compared = StringComparer
+                    .Ordinal
+                    .Compare(AssemblyQualifiedName, eventQueueName.AssemblyQualifiedName);
 #pragma warning restore 56506
 
                 if (compared == 0)

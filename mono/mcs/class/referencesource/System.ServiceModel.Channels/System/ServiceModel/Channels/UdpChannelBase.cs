@@ -346,13 +346,15 @@ namespace System.ServiceModel.Channels
                 if (this.retransmitSettings.Enabled == true)
                 {
                     // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
-                    throw FxTrace.Exception.AsError(
-                        new ProtocolException(
-                            SR.RetransmissionRequiresAddressingOnMessage(
-                                message.Version.Addressing.ToString()
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ProtocolException(
+                                SR.RetransmissionRequiresAddressingOnMessage(
+                                    message.Version.Addressing.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -545,11 +547,13 @@ namespace System.ServiceModel.Channels
             private bool BeginCloseOutputChannel()
             {
                 // AsyncResult.AsyncCompletionWrapperCallback takes care of catching the exceptions for us.
-                IAsyncResult result = this.channel.UdpOutputChannel.BeginClose(
-                    this.timeoutHelper.RemainingTime(),
-                    this.PrepareAsyncCompletion(completeCloseOutputChannelCallback),
-                    this
-                );
+                IAsyncResult result = this.channel
+                    .UdpOutputChannel
+                    .BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        this.PrepareAsyncCompletion(completeCloseOutputChannelCallback),
+                        this
+                    );
 
                 // SyncContinue calls CompleteCloseOutputChannel for us in sync case.
                 return this.SyncContinue(result);

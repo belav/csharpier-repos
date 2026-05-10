@@ -197,19 +197,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 {
                     return ArrayTypeSymbol.CreateSZArray(
                         _otherAssembly,
-                        symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                            otherElementType,
-                            otherModifiers
-                        )
+                        symbol
+                            .ElementTypeWithAnnotations
+                            .WithTypeAndModifiers(otherElementType, otherModifiers)
                     );
                 }
 
                 return ArrayTypeSymbol.CreateMDArray(
                     _otherAssembly,
-                    symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                        otherElementType,
-                        otherModifiers
-                    ),
+                    symbol
+                        .ElementTypeWithAnnotations
+                        .WithTypeAndModifiers(otherElementType, otherModifiers),
                     symbol.Rank,
                     symbol.Sizes,
                     symbol.LowerBounds
@@ -298,10 +296,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 var leftIdentity = left.Identity;
                 var rightIdentity = right.Identity;
 
-                return AssemblyIdentityComparer.SimpleNameComparer.Equals(
-                        leftIdentity.Name,
-                        rightIdentity.Name
-                    )
+                return AssemblyIdentityComparer
+                        .SimpleNameComparer
+                        .Equals(leftIdentity.Name, rightIdentity.Name)
                     && (left.AssemblyVersionPattern ?? leftIdentity.Version).Equals(
                         right.AssemblyVersionPattern ?? rightIdentity.Version
                     )
@@ -470,10 +467,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     symbol.PointedAtTypeWithAnnotations.CustomModifiers
                 );
                 return new PointerTypeSymbol(
-                    symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
-                        otherPointedAtType,
-                        otherModifiers
-                    )
+                    symbol
+                        .PointedAtTypeWithAnnotations
+                        .WithTypeAndModifiers(otherPointedAtType, otherModifiers)
                 );
             }
 
@@ -521,10 +517,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                             VisitCustomModifiers(param.RefCustomModifiers)
                         );
                         otherParamsBuilder.Add(
-                            param.TypeWithAnnotations.WithTypeAndModifiers(
-                                otherType,
-                                VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
-                            )
+                            param
+                                .TypeWithAnnotations
+                                .WithTypeAndModifiers(
+                                    otherType,
+                                    VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
+                                )
                         );
                     }
 
@@ -594,10 +592,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 );
 
                 var key = new SynthesizedDelegateKey(delegateSymbol.MetadataName);
-                return _synthesizedTypes.AnonymousDelegates.TryGetValue(
-                    key,
-                    out otherDelegateSymbol
-                );
+                return _synthesizedTypes
+                    .AnonymousDelegates
+                    .TryGetValue(key, out otherDelegateSymbol);
             }
 
             internal bool TryGetAnonymousTypeValue(
@@ -611,10 +608,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                 if (template is AnonymousTypeManager.AnonymousTypeTemplateSymbol typeTemplate)
                 {
-                    return _synthesizedTypes.AnonymousTypes.TryGetValue(
-                        typeTemplate.GetAnonymousTypeKey(),
-                        out otherType
-                    );
+                    return _synthesizedTypes
+                        .AnonymousTypes
+                        .TryGetValue(typeTemplate.GetAnonymousTypeKey(), out otherType);
                 }
 
                 var delegateTemplate =
@@ -626,10 +622,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     delegateTemplate.DelegateInvokeMethod.ParameterCount
                 );
                 if (
-                    _synthesizedTypes.AnonymousDelegatesWithIndexedNames.TryGetValue(
-                        key,
-                        out var otherTypeCandidates
-                    )
+                    _synthesizedTypes
+                        .AnonymousDelegatesWithIndexedNames
+                        .TryGetValue(key, out var otherTypeCandidates)
                 )
                 {
                     // The key is partial (not unique). Find a matching Invoke method signature.
@@ -663,13 +658,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                     return type.DelegateInvokeMethod is { } invokeMethod
                         && otherType.DelegateInvokeMethod is { } otherInvokeMethod
-                        && invokeMethod.Parameters.SequenceEqual(
-                            otherInvokeMethod.Parameters,
-                            (x, y) =>
-                                isCorrespondingType(x.TypeWithAnnotations, y.TypeWithAnnotations)
-                                && x.ExplicitDefaultConstantValue == y.ExplicitDefaultConstantValue
-                                && x.IsParams == y.IsParams
-                        )
+                        && invokeMethod
+                            .Parameters
+                            .SequenceEqual(
+                                otherInvokeMethod.Parameters,
+                                (x, y) =>
+                                    isCorrespondingType(
+                                        x.TypeWithAnnotations,
+                                        y.TypeWithAnnotations
+                                    )
+                                    && x.ExplicitDefaultConstantValue
+                                        == y.ExplicitDefaultConstantValue
+                                    && x.IsParams == y.IsParams
+                            )
                         && isCorrespondingType(
                             invokeMethod.ReturnTypeWithAnnotations,
                             otherInvokeMethod.ReturnTypeWithAnnotations
@@ -797,9 +798,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     )
                 );
                 Debug.Assert(
-                    other.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.All(t =>
-                        t.CustomModifiers.IsEmpty
-                    )
+                    other
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                        .All(t => t.CustomModifiers.IsEmpty)
                 );
 
                 return type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SequenceEqual(
@@ -1127,19 +1128,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 {
                     return ArrayTypeSymbol.CreateSZArray(
                         symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly,
-                        symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                            translatedElementType,
-                            translatedModifiers
-                        )
+                        symbol
+                            .ElementTypeWithAnnotations
+                            .WithTypeAndModifiers(translatedElementType, translatedModifiers)
                     );
                 }
 
                 return ArrayTypeSymbol.CreateMDArray(
                     symbol.BaseTypeNoUseSiteDiagnostics.ContainingAssembly,
-                    symbol.ElementTypeWithAnnotations.WithTypeAndModifiers(
-                        translatedElementType,
-                        translatedModifiers
-                    ),
+                    symbol
+                        .ElementTypeWithAnnotations
+                        .WithTypeAndModifiers(translatedElementType, translatedModifiers),
                     symbol.Rank,
                     symbol.Sizes,
                     symbol.LowerBounds
@@ -1193,10 +1192,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     symbol.PointedAtTypeWithAnnotations.CustomModifiers
                 );
                 return new PointerTypeSymbol(
-                    symbol.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
-                        translatedPointedAtType,
-                        translatedModifiers
-                    )
+                    symbol
+                        .PointedAtTypeWithAnnotations
+                        .WithTypeAndModifiers(translatedPointedAtType, translatedModifiers)
                 );
             }
 
@@ -1228,10 +1226,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     {
                         var translatedParamType = (TypeSymbol)Visit(param.Type);
                         translatedParamsBuilder.Add(
-                            param.TypeWithAnnotations.WithTypeAndModifiers(
-                                translatedParamType,
-                                VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
-                            )
+                            param
+                                .TypeWithAnnotations
+                                .WithTypeAndModifiers(
+                                    translatedParamType,
+                                    VisitCustomModifiers(param.TypeWithAnnotations.CustomModifiers)
+                                )
                         );
                         translatedParamRefCustomModifiersBuilder.Add(
                             VisitCustomModifiers(param.RefCustomModifiers)

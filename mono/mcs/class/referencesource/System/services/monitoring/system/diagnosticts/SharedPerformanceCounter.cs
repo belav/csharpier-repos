@@ -772,12 +772,14 @@ namespace System.Diagnostics
                         RegistryKey categoryKey = null;
                         try
                         {
-                            categoryKey = Registry.LocalMachine.OpenSubKey(
-                                PerformanceCounterLib.ServicePath
-                                    + "\\"
-                                    + categoryName
-                                    + "\\Performance"
-                            );
+                            categoryKey = Registry
+                                .LocalMachine
+                                .OpenSubKey(
+                                    PerformanceCounterLib.ServicePath
+                                        + "\\"
+                                        + categoryName
+                                        + "\\Performance"
+                                );
 
                             // first read the options
                             Object optionsObject = categoryKey.GetValue("CategoryOptions");

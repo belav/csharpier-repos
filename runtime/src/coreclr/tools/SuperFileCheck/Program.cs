@@ -259,7 +259,8 @@ namespace SuperFileCheck
             if (namespaceDecl != null)
             {
                 var identifiers = namespaceDecl
-                    .Name.DescendantTokens()
+                    .Name
+                    .DescendantTokens()
                     .Where(x => x.IsKind(SyntaxKind.IdentifierToken))
                     .Select(x => x.ValueText);
                 return $"{String.Join(".", identifiers)}.{qualifiedTypeName}";
@@ -308,8 +309,9 @@ namespace SuperFileCheck
                     //
                     // We are only allowing checks to occur in 'trivia2'.  The 'Contains' check is
                     // used to find 'trivia1'.
-                    return !x
-                        .Token.Parent.Ancestors()
+                    return !x.Token
+                        .Parent
+                        .Ancestors()
                         .Any(p =>
                             p.IsKind(SyntaxKind.MethodDeclaration) && p.Span.Contains(x.Span)
                         );
@@ -574,9 +576,11 @@ namespace SuperFileCheck
         static void PrintErrorMethodNoInlining(string methodName)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine(
-                $"'{methodName}' is not marked with attribute 'MethodImpl(MethodImplOptions.NoInlining)'."
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $"'{methodName}' is not marked with attribute 'MethodImpl(MethodImplOptions.NoInlining)'."
+                );
             Console.ResetColor();
         }
 
@@ -587,9 +591,11 @@ namespace SuperFileCheck
         static void PrintErrorNoMethodsFound(string[] checkPrefixes)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine(
-                "No methods were found. Check if any method bodies are using one or more of the following FileCheck prefixes:"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "No methods were found. Check if any method bodies are using one or more of the following FileCheck prefixes:"
+                );
             foreach (var prefix in checkPrefixes)
             {
                 Console.Error.WriteLine($"    {prefix}");

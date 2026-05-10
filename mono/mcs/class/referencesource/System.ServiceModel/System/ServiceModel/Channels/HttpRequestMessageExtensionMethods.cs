@@ -214,16 +214,18 @@ namespace System.ServiceModel.Channels
             Fx.Assert(httpHeaders != null, "httpHeaders should not be null.");
             if (!httpHeaders.TryAddWithoutValidation(header.Key, header.Value))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.CopyHttpHeaderFailed,
-                            header.Key,
-                            header.Value,
-                            httpHeaders.GetType().Name
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CopyHttpHeaderFailed,
+                                header.Key,
+                                header.Value,
+                                httpHeaders.GetType().Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -277,11 +279,16 @@ namespace System.ServiceModel.Channels
                 && headerInfo.IsResponseHeader
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ResponseHeaderWithRequestHeadersCollection, headerInfo.Name)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ResponseHeaderWithRequestHeadersCollection,
+                                headerInfo.Name
+                            )
+                        )
+                    );
             }
         }
 

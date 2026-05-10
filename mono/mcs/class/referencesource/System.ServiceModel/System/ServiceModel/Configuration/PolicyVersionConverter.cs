@@ -53,16 +53,18 @@ namespace System.ServiceModel.Configuration
                         retval = PolicyVersion.Default;
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException(
-                                "value",
-                                SR.GetString(
-                                    SR.ConfigInvalidClassFactoryValue,
-                                    policyVersion,
-                                    typeof(PolicyVersion).FullName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException(
+                                    "value",
+                                    SR.GetString(
+                                        SR.ConfigInvalidClassFactoryValue,
+                                        policyVersion,
+                                        typeof(PolicyVersion).FullName
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
                 return retval;
             }
@@ -94,15 +96,17 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(
-                                SR.ConfigInvalidClassInstanceValue,
-                                typeof(PolicyVersion).FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(
+                                    SR.ConfigInvalidClassInstanceValue,
+                                    typeof(PolicyVersion).FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return retval;
             }

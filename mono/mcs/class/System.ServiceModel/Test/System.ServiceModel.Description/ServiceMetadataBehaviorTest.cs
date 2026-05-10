@@ -68,9 +68,9 @@ namespace MonoTests.System.ServiceModel.Description
             )
             {
                 host.AddServiceEndpoint(typeof(IMyContract), new BasicHttpBinding(), "e1");
-                host.Description.Behaviors.Add(
-                    new ServiceMetadataBehavior() { HttpGetEnabled = true }
-                );
+                host.Description
+                    .Behaviors
+                    .Add(new ServiceMetadataBehavior() { HttpGetEnabled = true });
 
                 Assert.AreEqual(0, host.ChannelDispatchers.Count, "ChannelDispatchers.Count #1");
 
@@ -135,13 +135,15 @@ namespace MonoTests.System.ServiceModel.Description
             )
             {
                 host.AddServiceEndpoint(typeof(IMyContract), new BasicHttpBinding(), "");
-                host.Description.Behaviors.Add(
-                    new ServiceMetadataBehavior()
-                    {
-                        HttpGetEnabled = true,
-                        HttpGetUrl = new Uri("http://localhost:" + port + "/mex_and_help"),
-                    }
-                );
+                host.Description
+                    .Behaviors
+                    .Add(
+                        new ServiceMetadataBehavior()
+                        {
+                            HttpGetEnabled = true,
+                            HttpGetUrl = new Uri("http://localhost:" + port + "/mex_and_help"),
+                        }
+                    );
                 host.Description.Behaviors.Find<ServiceDebugBehavior>().HttpHelpPageUrl = new Uri(
                     "http://localhost:" + port + "/mex_and_help"
                 );
@@ -203,13 +205,15 @@ namespace MonoTests.System.ServiceModel.Description
             )
             {
                 host.AddServiceEndpoint(typeof(IMyContract), new BasicHttpBinding(), "");
-                host.Description.Behaviors.Add(
-                    new ServiceMetadataBehavior()
-                    {
-                        HttpGetEnabled = true,
-                        HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
-                    }
-                );
+                host.Description
+                    .Behaviors
+                    .Add(
+                        new ServiceMetadataBehavior()
+                        {
+                            HttpGetEnabled = true,
+                            HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
+                        }
+                    );
                 host.Description.Behaviors.Find<ServiceDebugBehavior>().HttpHelpPageUrl = new Uri(
                     "http://localhost:" + port + "/help"
                 );
@@ -302,13 +306,15 @@ namespace MonoTests.System.ServiceModel.Description
             )
             {
                 host.AddServiceEndpoint(typeof(IMyContract), new BasicHttpBinding(), "");
-                host.Description.Behaviors.Add(
-                    new ServiceMetadataBehavior()
-                    {
-                        HttpGetEnabled = true,
-                        HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
-                    }
-                );
+                host.Description
+                    .Behaviors
+                    .Add(
+                        new ServiceMetadataBehavior()
+                        {
+                            HttpGetEnabled = true,
+                            HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
+                        }
+                    );
                 host.Description.Behaviors.Remove<ServiceDebugBehavior>();
 
                 Assert.AreEqual(0, host.ChannelDispatchers.Count, "ChannelDispatchers.Count #1");
@@ -381,13 +387,15 @@ namespace MonoTests.System.ServiceModel.Description
             )
             {
                 host.AddServiceEndpoint(typeof(IMyContract), new BasicHttpBinding(), "");
-                host.Description.Behaviors.Add(
-                    new ServiceMetadataBehavior()
-                    {
-                        HttpGetEnabled = true,
-                        HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
-                    }
-                );
+                host.Description
+                    .Behaviors
+                    .Add(
+                        new ServiceMetadataBehavior()
+                        {
+                            HttpGetEnabled = true,
+                            HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
+                        }
+                    );
                 host.Description.Behaviors.Remove<ServiceDebugBehavior>();
 
                 host.Open();
@@ -418,13 +426,15 @@ namespace MonoTests.System.ServiceModel.Description
             )
             {
                 host.AddServiceEndpoint(typeof(IMyContract), new BasicHttpBinding(), "");
-                host.Description.Behaviors.Add(
-                    new ServiceMetadataBehavior()
-                    {
-                        HttpGetEnabled = true,
-                        HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
-                    }
-                );
+                host.Description
+                    .Behaviors
+                    .Add(
+                        new ServiceMetadataBehavior()
+                        {
+                            HttpGetEnabled = true,
+                            HttpGetUrl = new Uri("http://localhost:" + port + "/mex"),
+                        }
+                    );
                 host.Description.Behaviors.Remove<ServiceDebugBehavior>();
 
                 ServiceMetadataExtension extension = new ServiceMetadataExtension();

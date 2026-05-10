@@ -119,14 +119,15 @@ public abstract class WebViewManager : IAsyncDisposable
         {
             return Dispatcher.InvokeAsync(() =>
             {
-                rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
-                    componentType,
-                    selector
-                );
-                return _currentPageContext.Renderer.RenderRootComponentAsync(
-                    rootComponent.ComponentId.Value,
-                    rootComponent.Parameters
-                );
+                rootComponent.ComponentId = _currentPageContext
+                    .Renderer
+                    .AddRootComponent(componentType, selector);
+                return _currentPageContext
+                    .Renderer
+                    .RenderRootComponentAsync(
+                        rootComponent.ComponentId.Value,
+                        rootComponent.Parameters
+                    );
             });
         }
         else
@@ -211,18 +212,21 @@ public abstract class WebViewManager : IAsyncDisposable
             return false;
         }
 
-        return await capturedCurrentPageContext.Renderer.Dispatcher.InvokeAsync(() =>
-        {
-            if (capturedCurrentPageContext != _currentPageContext)
+        return await capturedCurrentPageContext
+            .Renderer
+            .Dispatcher
+            .InvokeAsync(() =>
             {
-                // If the captured context doesn't match the current context, that means that there was something like
-                // a navigation event that caused the original page to be detached and a new one attached. Thus, we
-                // cancel out of the operation and return failure.
-                return false;
-            }
-            workItem(_currentPageContext.ServiceProvider);
-            return true;
-        });
+                if (capturedCurrentPageContext != _currentPageContext)
+                {
+                    // If the captured context doesn't match the current context, that means that there was something like
+                    // a navigation event that caused the original page to be detached and a new one attached. Thus, we
+                    // cancel out of the operation and return failure.
+                    return false;
+                }
+                workItem(_currentPageContext.ServiceProvider);
+                return true;
+            });
     }
 
     /// <summary>
@@ -278,15 +282,16 @@ public abstract class WebViewManager : IAsyncDisposable
         var pendingRenders = new List<Task>(_rootComponentsBySelector.Count);
         foreach (var (selector, rootComponent) in _rootComponentsBySelector)
         {
-            rootComponent.ComponentId = _currentPageContext.Renderer.AddRootComponent(
-                rootComponent.ComponentType,
-                selector
-            );
+            rootComponent.ComponentId = _currentPageContext
+                .Renderer
+                .AddRootComponent(rootComponent.ComponentType, selector);
             pendingRenders.Add(
-                _currentPageContext.Renderer.RenderRootComponentAsync(
-                    rootComponent.ComponentId.Value,
-                    rootComponent.Parameters
-                )
+                _currentPageContext
+                    .Renderer
+                    .RenderRootComponentAsync(
+                        rootComponent.ComponentId.Value,
+                        rootComponent.Parameters
+                    )
             );
         }
 
@@ -336,9 +341,9 @@ public abstract class WebViewManager : IAsyncDisposable
             if (File.Exists(manifestPath))
             {
                 using var manifestStream = File.OpenRead(manifestPath);
-                var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
-                    manifestStream
-                );
+                var manifest = ManifestStaticWebAssetFileProvider
+                    .StaticWebAssetManifest
+                    .Parse(manifestStream);
                 if (manifest.ContentRoots.Length > 0)
                 {
                     var manifestProvider = new ManifestStaticWebAssetFileProvider(

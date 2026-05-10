@@ -413,9 +413,11 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
+                    );
             }
         }
 
@@ -438,9 +440,11 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
+                    );
             }
         }
 
@@ -454,9 +458,9 @@ namespace System.ServiceModel.Security
                 SecurityBindingElement sbe = elements.Find<SecurityBindingElement>();
                 if (null == sbe)
                 {
-                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID3269))
-                    );
+                    throw IM.DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3269)));
                 }
                 trustVersion = sbe.MessageSecurityVersion.TrustVersion;
             }

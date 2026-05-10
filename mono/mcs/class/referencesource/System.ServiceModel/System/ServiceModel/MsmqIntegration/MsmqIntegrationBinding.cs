@@ -39,13 +39,15 @@ namespace System.ServiceModel.MsmqIntegration
         public MsmqIntegrationBinding(MsmqIntegrationSecurityMode securityMode)
         {
             if (!MsmqIntegrationSecurityModeHelper.IsDefined(securityMode))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "securityMode",
-                        (int)securityMode,
-                        typeof(MsmqIntegrationSecurityMode)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "securityMode",
+                            (int)securityMode,
+                            typeof(MsmqIntegrationSecurityMode)
+                        )
+                    );
             Initialize();
             this.security.Mode = securityMode;
         }
@@ -99,20 +101,25 @@ namespace System.ServiceModel.MsmqIntegration
 
         void ApplyConfiguration(string configurationName)
         {
-            Config.MsmqIntegrationBindingCollectionElement section =
-                Config.MsmqIntegrationBindingCollectionElement.GetBindingCollectionElement();
+            Config.MsmqIntegrationBindingCollectionElement section = Config
+                .MsmqIntegrationBindingCollectionElement
+                .GetBindingCollectionElement();
             Config.MsmqIntegrationBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            Config.ConfigurationStrings.MsmqIntegrationBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                Config
+                                    .ConfigurationStrings
+                                    .MsmqIntegrationBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {

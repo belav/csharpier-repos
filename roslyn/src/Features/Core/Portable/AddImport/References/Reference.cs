@@ -44,10 +44,9 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 // Both our names need to change.  Sort by the name we're
                 // changing to.
-                diff = StringComparer.OrdinalIgnoreCase.Compare(
-                    SearchResult.DesiredName,
-                    other.SearchResult.DesiredName
-                );
+                diff = StringComparer
+                    .OrdinalIgnoreCase
+                    .Compare(SearchResult.DesiredName, other.SearchResult.DesiredName);
                 if (diff != 0)
                 {
                     return diff;

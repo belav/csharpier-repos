@@ -108,8 +108,11 @@ namespace Microsoft.CodeAnalysis.Classification
                 // of classifications from the server.  Note: this must be a separate call (instead of being part of
                 // service.GetSemanticClassificationsAsync below) as we want to try to read in the cached
                 // classifications without doing any syncing to the OOP process.
-                var workspaceStatusService =
-                    document.Project.Solution.Services.GetRequiredService<IWorkspaceStatusService>();
+                var workspaceStatusService = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<IWorkspaceStatusService>();
                 var isFullyLoaded = await workspaceStatusService
                     .IsFullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -224,8 +227,11 @@ namespace Microsoft.CodeAnalysis.Classification
                 var reassignedVariableService =
                     document.GetRequiredLanguageService<IReassignedVariableService>();
 
-                var extensionManager =
-                    document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
+                var extensionManager = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<IExtensionManager>();
                 var classifiers = classificationService.GetDefaultSyntaxClassifiers();
 
                 var getNodeClassifiers = extensionManager.CreateNodeExtensionGetter(

@@ -77,7 +77,9 @@ namespace System.ServiceModel.Activities
                 if (!this.checkedBinding)
                 {
                     foreach (
-                        BindingElement bindingElement in base.Endpoint.Binding.CreateBindingElements()
+                        BindingElement bindingElement in base.Endpoint
+                            .Binding
+                            .CreateBindingElements()
                     )
                     {
                         TransactionFlowBindingElement transactionFlowElement =

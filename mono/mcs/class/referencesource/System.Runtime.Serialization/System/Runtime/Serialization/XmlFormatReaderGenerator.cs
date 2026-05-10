@@ -211,9 +211,9 @@ namespace System.Runtime.Serialization
                     ReadClass(classContract);
                 bool isFactoryType = InvokeFactoryMethod(classContract, objectId);
                 if (
-                    Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
-                        classContract.UnderlyingType
-                    )
+                    Globals
+                        .TypeOfIDeserializationCallback
+                        .IsAssignableFrom(classContract.UnderlyingType)
                 )
                     ilg.Call(objectLocal, XmlFormatGeneratorStatics.OnDeserializationMethod, null);
                 InvokeOnDeserialized(classContract);
@@ -415,9 +415,9 @@ namespace System.Runtime.Serialization
 
             bool HasFactoryMethod(ClassDataContract classContract)
             {
-                return Globals.TypeOfIObjectReference.IsAssignableFrom(
-                    classContract.UnderlyingType
-                );
+                return Globals
+                    .TypeOfIObjectReference
+                    .IsAssignableFrom(classContract.UnderlyingType);
             }
 
             bool InvokeFactoryMethod(ClassDataContract classContract, LocalBuilder objectId)
@@ -837,9 +837,9 @@ namespace System.Runtime.Serialization
                     switch (collectionContract.Kind)
                     {
                         case CollectionKind.GenericDictionary:
-                            type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
-                                itemType.GetGenericArguments()
-                            );
+                            type = Globals
+                                .TypeOfDictionaryGeneric
+                                .MakeGenericType(itemType.GetGenericArguments());
                             constructor = type.GetConstructor(
                                 BindingFlags.Instance | BindingFlags.Public,
                                 null,
@@ -922,8 +922,9 @@ namespace System.Runtime.Serialization
                 );
                 if (isArray)
                 {
-                    MethodInfo ensureArraySizeMethod =
-                        XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod(itemType);
+                    MethodInfo ensureArraySizeMethod = XmlFormatGeneratorStatics
+                        .EnsureArraySizeMethod
+                        .MakeGenericMethod(itemType);
                     ilg.Call(null, ensureArraySizeMethod, growingCollection, i);
                     ilg.Stloc(growingCollection);
                     ilg.StoreArrayElement(growingCollection, i, value);
@@ -942,8 +943,9 @@ namespace System.Runtime.Serialization
                 ilg.EndFor();
                 if (isArray)
                 {
-                    MethodInfo trimArraySizeMethod =
-                        XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(itemType);
+                    MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics
+                        .TrimArraySizeMethod
+                        .MakeGenericMethod(itemType);
                     ilg.Call(null, trimArraySizeMethod, growingCollection, i);
                     ilg.Stloc(objectLocal);
                     ilg.Call(

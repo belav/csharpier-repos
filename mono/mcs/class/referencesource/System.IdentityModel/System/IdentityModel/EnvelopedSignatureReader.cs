@@ -79,9 +79,9 @@ namespace System.IdentityModel
             }
             if (securityTokenSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenSerializer");
             }
 
             _automaticallyReadSignature = automaticallyReadSignature;
@@ -105,19 +105,21 @@ namespace System.IdentityModel
             {
                 if (_requireSignature)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CryptographicException(SR.GetString(SR.ID3089))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3089)));
                 }
             }
             else
             {
                 ResolveSigningCredentials();
                 _signedXml.StartSignatureVerification(_signingCredentials.SigningKey);
-                _wrappedReader.XmlTokens.SetElementExclusion(
-                    XD.XmlSignatureDictionary.Signature.Value,
-                    XD.XmlSignatureDictionary.Namespace.Value
-                );
+                _wrappedReader
+                    .XmlTokens
+                    .SetElementExclusion(
+                        XD.XmlSignatureDictionary.Signature.Value,
+                        XD.XmlSignatureDictionary.Namespace.Value
+                    );
                 WifSignedInfo signedInfo = _signedXml.Signature.SignedInfo as WifSignedInfo;
                 _signedXml.EnsureDigestValidity(signedInfo[0].ExtractReferredId(), _wrappedReader);
                 _signedXml.CompleteSignatureVerification();
@@ -194,9 +196,9 @@ namespace System.IdentityModel
 
             if (_signedXml.Signature.SignedInfo.ReferenceCount != 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(SR.GetString(SR.ID3057))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new CryptographicException(SR.GetString(SR.ID3057)));
             }
         }
 
@@ -208,9 +210,9 @@ namespace System.IdentityModel
                 || _signedXml.Signature.KeyIdentifier.Count == 0
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID3276))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3276)));
             }
 
             SecurityKey signingKey = null;
@@ -232,9 +234,10 @@ namespace System.IdentityModel
                     //
                     EncryptedKeyIdentifierClause encryptedKeyClause;
                     if (
-                        _signedXml.Signature.KeyIdentifier.TryFind<EncryptedKeyIdentifierClause>(
-                            out encryptedKeyClause
-                        )
+                        _signedXml
+                            .Signature
+                            .KeyIdentifier
+                            .TryFind<EncryptedKeyIdentifierClause>(out encryptedKeyClause)
                     )
                     {
                         //
@@ -242,28 +245,32 @@ namespace System.IdentityModel
                         // very good information except the cipher data in this case. We have worked around that
                         // by using the token serializer to serialize the key identifier clause again.
                         //
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SignatureVerificationFailedException(
-                                SR.GetString(
-                                    SR.ID4036,
-                                    XmlUtil.SerializeSecurityKeyIdentifier(
-                                        _signedXml.Signature.KeyIdentifier,
-                                        _tokenSerializer
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SignatureVerificationFailedException(
+                                    SR.GetString(
+                                        SR.ID4036,
+                                        XmlUtil.SerializeSecurityKeyIdentifier(
+                                            _signedXml.Signature.KeyIdentifier,
+                                            _tokenSerializer
+                                        )
                                     )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SignatureVerificationFailedException(
-                                SR.GetString(
-                                    SR.ID4037,
-                                    _signedXml.Signature.KeyIdentifier.ToString()
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SignatureVerificationFailedException(
+                                    SR.GetString(
+                                        SR.ID4037,
+                                        _signedXml.Signature.KeyIdentifier.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }

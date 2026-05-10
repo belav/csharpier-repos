@@ -193,15 +193,17 @@ namespace System.IO
             long preallocationSize = 0
         )
         {
-            Strategies.FileStreamHelpers.ValidateArguments(
-                path,
-                mode,
-                access,
-                share,
-                bufferSize: 0,
-                options,
-                preallocationSize
-            );
+            Strategies
+                .FileStreamHelpers
+                .ValidateArguments(
+                    path,
+                    mode,
+                    access,
+                    share,
+                    bufferSize: 0,
+                    options,
+                    preallocationSize
+                );
 
             return SafeFileHandle.Open(
                 Path.GetFullPath(path),
@@ -1091,9 +1093,9 @@ namespace System.IO
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                buffer = ArrayPool<char>.Shared.Rent(
-                    sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize)
-                );
+                buffer = ArrayPool<char>
+                    .Shared
+                    .Rent(sr.CurrentEncoding.GetMaxCharCount(DefaultBufferSize));
                 StringBuilder sb = new StringBuilder();
                 while (true)
                 {
@@ -1639,9 +1641,11 @@ namespace System.IO
                 return;
             }
 
-            byte[] bytes = ArrayPool<byte>.Shared.Rent(
-                preambleSize + encoding.GetMaxByteCount(Math.Min(contents.Length, ChunkSize))
-            );
+            byte[] bytes = ArrayPool<byte>
+                .Shared
+                .Rent(
+                    preambleSize + encoding.GetMaxByteCount(Math.Min(contents.Length, ChunkSize))
+                );
 
             try
             {

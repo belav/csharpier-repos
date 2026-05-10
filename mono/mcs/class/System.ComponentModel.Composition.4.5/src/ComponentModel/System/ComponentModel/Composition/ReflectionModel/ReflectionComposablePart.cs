@@ -277,8 +277,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private object[] GetConstructorArguments()
         {
-            ReflectionParameterImportDefinition[] parameterImports = this
-                .ImportDefinitions.OfType<ReflectionParameterImportDefinition>()
+            ReflectionParameterImportDefinition[] parameterImports = this.ImportDefinitions
+                .OfType<ReflectionParameterImportDefinition>()
                 .ToArray();
             object[] arguments = new object[parameterImports.Length];
 

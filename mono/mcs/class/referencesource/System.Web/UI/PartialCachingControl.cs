@@ -622,10 +622,9 @@ namespace System.Web.UI
 
             if (cachedVary._varyByCustom != null)
             {
-                string customString = Context.ApplicationInstance.GetVaryByCustomString(
-                    Context,
-                    cachedVary._varyByCustom
-                );
+                string customString = Context
+                    .ApplicationInstance
+                    .GetVaryByCustomString(Context, cachedVary._varyByCustom);
                 if (customString != null)
                     combinedHashCode.AddObject(customString);
             }

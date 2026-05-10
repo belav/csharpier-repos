@@ -43,13 +43,15 @@ namespace System.Net.Sockets
                 //set the socket context
                 try
                 {
-                    errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                        socket.SafeHandle,
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.UpdateConnectContext,
-                        null,
-                        0
-                    );
+                    errorCode = UnsafeNclNativeMethods
+                        .OSSOCK
+                        .setsockopt(
+                            socket.SafeHandle,
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.UpdateConnectContext,
+                            null,
+                            0
+                        );
                     if (errorCode == SocketError.SocketError)
                         errorCode = (SocketError)Marshal.GetLastWin32Error();
                 }

@@ -151,10 +151,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return Expression.Call(
                 operands[0],
                 operands[0]
-                    .Type.GetMethod(
-                        methodName,
-                        parametersExpressions.Select(op => op.Type).ToArray()
-                    ),
+                    .Type
+                    .GetMethod(methodName, parametersExpressions.Select(op => op.Type).ToArray()),
                 parametersExpressions
             );
         }

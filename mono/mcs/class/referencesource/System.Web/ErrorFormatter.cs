@@ -1276,9 +1276,11 @@ namespace System.Web
                             try
                             {
                                 // This could throw if the assembly is dynamic
-                                assemblyDir = System.Web.UI.Util.GetAssemblyCodeBase(
-                                    declaringType.Assembly
-                                );
+                                assemblyDir = System
+                                    .Web
+                                    .UI
+                                    .Util
+                                    .GetAssemblyCodeBase(declaringType.Assembly);
                             }
                             catch { }
 
@@ -1775,10 +1777,11 @@ namespace System.Web
             {
                 Stream stream = VirtualPathProvider.OpenFile(virtualPath);
                 if (stream != null)
-                    reader = System.Web.UI.Util.ReaderFromStream(
-                        stream,
-                        System.Web.VirtualPath.Create(virtualPath)
-                    );
+                    reader = System
+                        .Web
+                        .UI
+                        .Util
+                        .ReaderFromStream(stream, System.Web.VirtualPath.Create(virtualPath));
             }
 
             try

@@ -31,15 +31,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task VerifyDisabled()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 "
-            );
+                );
             await SetUpEditorAsync(
                 @"
 using System;
@@ -55,8 +57,9 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -65,10 +68,12 @@ class Program
                 false
             );
 
-            await TestServices.Editor.PasteAsync(
-                @"Task DoThingAsync() => Task.CompletedTask;",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PasteAsync(
+                    @"Task DoThingAsync() => Task.CompletedTask;",
+                    HangMitigatingCancellationToken
+                );
 
             AssertEx.EqualOrDiff(
                 @"
@@ -90,16 +95,18 @@ class Program
         public async Task VerifyAddImportsOnPaste()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             await SetUpEditorAsync(
                 @"
 using System;
@@ -116,13 +123,13 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            await using var telemetry =
-                await TestServices.Telemetry.EnableTestTelemetryChannelAsync(
-                    HangMitigatingCancellationToken
-                );
+            await using var telemetry = await TestServices
+                .Telemetry
+                .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken);
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -131,10 +138,12 @@ class Program
                 true
             );
 
-            await TestServices.Editor.PasteAsync(
-                @"Task DoThingAsync() => Task.CompletedTask;",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PasteAsync(
+                    @"Task DoThingAsync() => Task.CompletedTask;",
+                    HangMitigatingCancellationToken
+                );
 
             AssertEx.EqualOrDiff(
                 @"
@@ -162,15 +171,17 @@ class Program
         public async Task VerifyIndentation()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 "
-            );
+                );
             await SetUpEditorAsync(
                 @"
 namespace MyNs
@@ -189,8 +200,9 @@ namespace MyNs
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -199,10 +211,12 @@ namespace MyNs
                 true
             );
 
-            await TestServices.Editor.PasteAsync(
-                @"Task DoThingAsync() => Task.CompletedTask;",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PasteAsync(
+                    @"Task DoThingAsync() => Task.CompletedTask;",
+                    HangMitigatingCancellationToken
+                );
 
             AssertEx.EqualOrDiff(
                 @"

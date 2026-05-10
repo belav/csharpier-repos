@@ -288,7 +288,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                     // check lines of line edits:
                     _ = expectedResult
-                        .LineEdits.Zip(
+                        .LineEdits
+                        .Zip(
                             result.LineEdits,
                             (expected, actual) =>
                             {
@@ -475,16 +476,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         }
 
                         var deletedSymbolContainer = actualSemanticEdit
-                            .DeletedSymbolContainer?.Resolve(
-                                newCompilation,
-                                ignoreAssemblyKey: true
-                            )
+                            .DeletedSymbolContainer
+                            ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                             .Symbol;
                         AssertEx.AreEqual(
                             deletedSymbolContainer,
-                            expectedSemanticEdit.DeletedSymbolContainerProvider?.Invoke(
-                                newCompilation
-                            ),
+                            expectedSemanticEdit
+                                .DeletedSymbolContainerProvider
+                                ?.Invoke(newCompilation),
                             message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Incorrect deleted container"
                         );
 
@@ -507,7 +506,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 AssertEx.AreEqual(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
                     actualSemanticEdit
-                        .PartialType?.Resolve(newCompilation, ignoreAssemblyKey: true)
+                        .PartialType
+                        ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol,
                     message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Partial types do not match"
                 );

@@ -192,11 +192,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (emitMethodBodies)
                 {
                     // By this time we have processed all types reachable from module's global namespace
-                    compilation.AnonymousTypeManager.AssignTemplatesNamesAndCompile(
-                        methodCompiler,
-                        moduleBeingBuiltOpt,
-                        diagnostics
-                    );
+                    compilation
+                        .AnonymousTypeManager
+                        .AssignTemplatesNamesAndCompile(
+                            methodCompiler,
+                            moduleBeingBuiltOpt,
+                            diagnostics
+                        );
                 }
 
                 methodCompiler.WaitForWorkers();
@@ -428,11 +430,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(_moduleBeingBuiltOpt != null);
                 return _lazyDebugDocumentProvider ??= new DebugDocumentProvider(
                     (path, basePath) =>
-                        _moduleBeingBuiltOpt.DebugDocumentsBuilder.GetOrAddDebugDocument(
-                            path,
-                            basePath,
-                            CreateDebugDocumentForFile
-                        )
+                        _moduleBeingBuiltOpt
+                            .DebugDocumentsBuilder
+                            .GetOrAddDebugDocument(path, basePath, CreateDebugDocumentForFile)
                 );
             }
 
@@ -728,11 +728,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     Debug.Assert(
-                        processedStaticInitializers.BoundInitializers.All(
-                            (init) =>
-                                (init.Kind == BoundKind.FieldEqualsValue)
-                                && !((BoundFieldEqualsValue)init).Field.IsMetadataConstant
-                        )
+                        processedStaticInitializers
+                            .BoundInitializers
+                            .All(
+                                (init) =>
+                                    (init.Kind == BoundKind.FieldEqualsValue)
+                                    && !((BoundFieldEqualsValue)init).Field.IsMetadataConstant
+                            )
                     );
 
                     MethodSymbol method = new SynthesizedStaticConstructor(sourceTypeSymbol);
@@ -1335,9 +1337,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 )
                                 || methodSymbol is SynthesizedPrimaryConstructor
                                 || instrumentation.Kinds.Contains(InstrumentationKind.TestCoverage)
-                                || instrumentation.Kinds.Contains(
-                                    InstrumentationKindExtensions.LocalStateTracing
-                                )
+                                || instrumentation
+                                    .Kinds
+                                    .Contains(InstrumentationKindExtensions.LocalStateTracing)
                             )
                         )
                         {
@@ -1345,9 +1347,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 methodSymbol.IsImplicitConstructor
                                 && (
                                     instrumentation.Kinds.Contains(InstrumentationKind.TestCoverage)
-                                    || instrumentation.Kinds.Contains(
-                                        InstrumentationKindExtensions.LocalStateTracing
-                                    )
+                                    || instrumentation
+                                        .Kinds
+                                        .Contains(InstrumentationKindExtensions.LocalStateTracing)
                                 )
                             )
                             {
@@ -1517,13 +1519,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 );
                             }
 
-                            _compilation.EventQueue.TryEnqueue(
-                                new SymbolDeclaredCompilationEvent(
-                                    _compilation,
-                                    methodSymbol,
-                                    semanticModelWithCachedBoundNodes
-                                )
-                            );
+                            _compilation
+                                .EventQueue
+                                .TryEnqueue(
+                                    new SymbolDeclaredCompilationEvent(
+                                        _compilation,
+                                        methodSymbol,
+                                        semanticModelWithCachedBoundNodes
+                                    )
+                                );
                         }
                     }
                     finally
@@ -1667,9 +1671,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // For test coverage, field initializers are instrumented as part of constructors,
                                 // and so are never instrumented here.
                                 Debug.Assert(
-                                    !instrumentation.Kinds.Contains(
-                                        InstrumentationKind.TestCoverage
-                                    )
+                                    !instrumentation
+                                        .Kinds
+                                        .Contains(InstrumentationKind.TestCoverage)
                                 );
 
                                 BoundStatement lowered = LowerBodyOrInitializer(
@@ -1868,12 +1872,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return loweredBody;
                 }
 
-                lazyVariableSlotAllocator ??=
-                    compilationState.ModuleBuilderOpt.TryCreateVariableSlotAllocator(
-                        method,
-                        method,
-                        diagnostics.DiagnosticBag
-                    );
+                lazyVariableSlotAllocator ??= compilationState
+                    .ModuleBuilderOpt
+                    .TryCreateVariableSlotAllocator(method, method, diagnostics.DiagnosticBag);
 
                 BoundStatement bodyWithoutLambdas = loweredBody;
                 if (sawLambdas || sawLocalFunctions)

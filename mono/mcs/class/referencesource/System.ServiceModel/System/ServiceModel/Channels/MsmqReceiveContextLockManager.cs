@@ -92,9 +92,11 @@ namespace System.ServiceModel.Channels
                     if (DateTime.UtcNow > entry.ExpiryTime)
                     {
                         entry.MarkContextExpired();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
+                            );
                     }
                     else
                     {
@@ -136,9 +138,11 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     // it was cleaned up by the expiry timer
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MsmqException(SR.GetString(SR.MessageValidityExpired, lookupId))
+                        );
                 }
             }
         }

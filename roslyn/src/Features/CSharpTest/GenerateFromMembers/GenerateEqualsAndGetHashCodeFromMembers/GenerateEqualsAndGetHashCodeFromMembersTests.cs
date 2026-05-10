@@ -30,8 +30,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
     {
         private class TestWithDialog : VerifyCS.Test
         {
-            private static readonly TestComposition s_composition =
-                EditorTestCompositions.EditorFeatures.AddParts(typeof(TestPickMembersService));
+            private static readonly TestComposition s_composition = EditorTestCompositions
+                .EditorFeatures
+                .AddParts(typeof(TestPickMembersService));
 
             public ImmutableArray<string> MemberNames;
             public Action<ImmutableArray<PickMembersOption>> OptionsCallback;
@@ -3301,9 +3302,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateEqualsAndGetHas
                             ),
                     },
                 },
-                ReferenceAssemblies = ReferenceAssemblies.Default.WithAssemblies(
-                    ImmutableArray<string>.Empty
-                ),
+                ReferenceAssemblies = ReferenceAssemblies
+                    .Default
+                    .WithAssemblies(ImmutableArray<string>.Empty),
             }.RunAsync();
         }
 

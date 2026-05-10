@@ -132,7 +132,8 @@ public class RelationalBuilderExtensionsTest
         modelBuilder.Entity<Customer>().Property(e => e.SomeShort).HasDefaultValue(7);
 
         var property = modelBuilder
-            .Model.FindEntityType(typeof(Customer))
+            .Model
+            .FindEntityType(typeof(Customer))
             .FindProperty("SomeShort");
 
         Assert.Equal((short)7, property.GetDefaultValue());
@@ -165,7 +166,8 @@ public class RelationalBuilderExtensionsTest
         modelBuilder.Entity<Customer>().Property(e => e.EnumValue).HasDefaultValue(MyEnum.Tue);
 
         var property = modelBuilder
-            .Model.FindEntityType(typeof(Customer))
+            .Model
+            .FindEntityType(typeof(Customer))
             .FindProperty("EnumValue");
 
         Assert.Equal(typeof(MyEnum), property.GetDefaultValue().GetType());
@@ -229,7 +231,8 @@ public class RelationalBuilderExtensionsTest
             .HasForeignKey(e => e.CustomerId);
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(Order))
+            .Model
+            .FindEntityType(typeof(Order))
             .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -252,7 +255,8 @@ public class RelationalBuilderExtensionsTest
             .HasConstraintName("LemonSupreme");
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(Order))
+            .Model
+            .FindEntityType(typeof(Order))
             .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -280,7 +284,8 @@ public class RelationalBuilderExtensionsTest
             .HasConstraintName("LemonSupreme");
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(Order))
+            .Model
+            .FindEntityType(typeof(Order))
             .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -299,7 +304,8 @@ public class RelationalBuilderExtensionsTest
             .HasConstraintName("LemonSupreme");
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(Order))
+            .Model
+            .FindEntityType(typeof(Order))
             .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -327,7 +333,8 @@ public class RelationalBuilderExtensionsTest
             .HasConstraintName("LemonSupreme");
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(Order))
+            .Model
+            .FindEntityType(typeof(Order))
             .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
@@ -347,7 +354,8 @@ public class RelationalBuilderExtensionsTest
             .HasConstraintName("LemonSupreme");
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(OrderDetails))
+            .Model
+            .FindEntityType(typeof(OrderDetails))
             .GetForeignKeys()
             .Single();
 
@@ -375,7 +383,8 @@ public class RelationalBuilderExtensionsTest
             .HasConstraintName("LemonSupreme");
 
         var foreignKey = modelBuilder
-            .Model.FindEntityType(typeof(OrderDetails))
+            .Model
+            .FindEntityType(typeof(OrderDetails))
             .GetForeignKeys()
             .Single();
 

@@ -1519,10 +1519,9 @@ namespace System.Net.Sockets
             try
             {
                 int error = (int)
-                    sockares.socket.GetSocketOption(
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.Error
-                    );
+                    sockares
+                        .socket
+                        .GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Error);
 
                 if (error == 0)
                 {
@@ -2544,14 +2543,16 @@ namespace System.Net.Sockets
             try
             {
                 SocketError errorCode;
-                total = sockares.socket.ReceiveFrom(
-                    sockares.Buffer,
-                    sockares.Offset,
-                    sockares.Size,
-                    sockares.SockFlags,
-                    ref sockares.EndPoint,
-                    out errorCode
-                );
+                total = sockares
+                    .socket
+                    .ReceiveFrom(
+                        sockares.Buffer,
+                        sockares.Offset,
+                        sockares.Size,
+                        sockares.SockFlags,
+                        ref sockares.EndPoint,
+                        out errorCode
+                    );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -3413,13 +3414,15 @@ namespace System.Net.Sockets
             int total = 0;
             try
             {
-                total = sockares.socket.SendTo(
-                    sockares.Buffer,
-                    sockares.Offset,
-                    sockares.Size,
-                    sockares.SockFlags,
-                    sockares.EndPoint
-                );
+                total = sockares
+                    .socket
+                    .SendTo(
+                        sockares.Buffer,
+                        sockares.Offset,
+                        sockares.Size,
+                        sockares.SockFlags,
+                        sockares.EndPoint
+                    );
 
                 if (sockares.error == 0)
                 {

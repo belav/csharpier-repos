@@ -40,9 +40,10 @@ namespace System.Data
         private CollectionChangeEventHandler onCollectionChangingDelegate;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         internal int ObjectID
         {
@@ -906,8 +907,10 @@ namespace System.Data
                     relation.ChildTable.CacheNestedParent();
                 }
 
-                ForeignKeyConstraint foreignKey =
-                    relation.ChildTable.Constraints.FindForeignKeyConstraint(
+                ForeignKeyConstraint foreignKey = relation
+                    .ChildTable
+                    .Constraints
+                    .FindForeignKeyConstraint(
                         relation.ParentColumnsReference,
                         relation.ChildColumnsReference
                     );
@@ -915,12 +918,15 @@ namespace System.Data
                 {
                     if (foreignKey == null)
                     {
-                        relation.ChildTable.Constraints.Add(
-                            foreignKey = new ForeignKeyConstraint(
-                                relation.ParentColumnsReference,
-                                relation.ChildColumnsReference
-                            )
-                        );
+                        relation
+                            .ChildTable
+                            .Constraints
+                            .Add(
+                                foreignKey = new ForeignKeyConstraint(
+                                    relation.ParentColumnsReference,
+                                    relation.ChildColumnsReference
+                                )
+                            );
 
                         // try to name the fk constraint the same as the parent relation:
                         try
@@ -939,9 +945,10 @@ namespace System.Data
                         }
                     }
                 }
-                UniqueConstraint key = relation.ParentTable.Constraints.FindKeyConstraint(
-                    relation.ParentColumnsReference
-                );
+                UniqueConstraint key = relation
+                    .ParentTable
+                    .Constraints
+                    .FindKeyConstraint(relation.ParentColumnsReference);
                 relation.SetParentKeyConstraint(key);
                 relation.SetChildKeyConstraint(foreignKey);
             }

@@ -33,8 +33,8 @@ namespace Internal.TypeSystem.Ecma
                 if (attributeHandle.IsNil)
                     return null;
 
-                guidAttribute = this
-                    .MetadataReader.GetCustomAttribute(attributeHandle)
+                guidAttribute = this.MetadataReader
+                    .GetCustomAttribute(attributeHandle)
                     .DecodeValue(new CustomAttributeTypeProvider(this.EcmaModule));
             }
 

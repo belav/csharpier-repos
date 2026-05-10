@@ -44,18 +44,16 @@ namespace Internal.TypeSystem
                     var otherArrayType = (ArrayType)otherType;
                     if (arrayType.Rank != otherArrayType.Rank)
                         return false;
-                    return arrayType.ParameterType.IsEquivalentTo(
-                        otherArrayType.ParameterType,
-                        visited
-                    );
+                    return arrayType
+                        .ParameterType
+                        .IsEquivalentTo(otherArrayType.ParameterType, visited);
 
                 case TypeFlags.SzArray:
                 case TypeFlags.ByRef:
                 case TypeFlags.Pointer:
-                    return ((ParameterizedType)thisType).ParameterType.IsEquivalentTo(
-                        ((ParameterizedType)otherType).ParameterType,
-                        visited
-                    );
+                    return ((ParameterizedType)thisType)
+                        .ParameterType
+                        .IsEquivalentTo(((ParameterizedType)otherType).ParameterType, visited);
 
                 case TypeFlags.FunctionPointer:
                     return false;

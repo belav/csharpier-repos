@@ -485,9 +485,11 @@ namespace System.ComponentModel
                 // class initializer for editorBaseType hasn't
                 // actually run.
                 //
-                System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(
-                    editorBaseType.TypeHandle
-                );
+                System
+                    .Runtime
+                    .CompilerServices
+                    .RuntimeHelpers
+                    .RunClassConstructor(editorBaseType.TypeHandle);
                 table = _editorTables[editorBaseType];
 
                 // If the table is still null, then throw a

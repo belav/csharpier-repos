@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             if (expectValidSession)
             {
                 var closingPoint = session
-                    .ClosingPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot)
+                    .ClosingPoint
+                    .GetPoint(session.SubjectBuffer.CurrentSnapshot)
                     .Subtract(1);
                 Assert.Equal(closingPoint.GetChar(), session.ClosingBrace);
             }
@@ -50,9 +51,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
 
         internal static void CheckBackspace(IBraceCompletionSession session)
         {
-            session.TextView.TryMoveCaretToAndEnsureVisible(
-                session.OpeningPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot).Add(1)
-            );
+            session
+                .TextView
+                .TryMoveCaretToAndEnsureVisible(
+                    session.OpeningPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot).Add(1)
+                );
             session.PreBackspace(out var handled);
             if (!handled)
             {
@@ -141,9 +144,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             bool allowOverType = true
         )
         {
-            var preClosingPoint = session.ClosingPoint.GetPoint(
-                session.SubjectBuffer.CurrentSnapshot
-            );
+            var preClosingPoint = session
+                .ClosingPoint
+                .GetPoint(session.SubjectBuffer.CurrentSnapshot);
             Assert.Equal(session.ClosingBrace, preClosingPoint.Subtract(1).GetChar());
             session.PreOverType(out var handled);
             if (!handled)
@@ -151,9 +154,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
                 session.PostOverType();
             }
 
-            var postClosingPoint = session.ClosingPoint.GetPoint(
-                session.SubjectBuffer.CurrentSnapshot
-            );
+            var postClosingPoint = session
+                .ClosingPoint
+                .GetPoint(session.SubjectBuffer.CurrentSnapshot);
             Assert.Equal(postClosingPoint.Subtract(1).GetChar(), session.ClosingBrace);
 
             var caret = session.TextView.GetCaretPoint(session.SubjectBuffer).Value;
@@ -199,10 +202,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             var textView = document.GetTextView();
 
             globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-            workspace.GlobalOptions.SetEditorOptions(
-                textView.Options.GlobalOptions,
-                document.Project.Language
-            );
+            workspace
+                .GlobalOptions
+                .SetEditorOptions(textView.Options.GlobalOptions, document.Project.Language);
 
             if (
                 provider.TryCreateSession(textView, openingPoint, opening, closing, out var session)

@@ -34,9 +34,9 @@ internal class DefaultRazorComponentsServiceOptionsConfiguration(
             MaxKeyBufferSize = options.MaxFormMappingKeySize,
         };
 
-        var file = environment.WebRootFileProvider.GetFileInfo(
-            $"{environment.ApplicationName}.modules.json"
-        );
+        var file = environment
+            .WebRootFileProvider
+            .GetFileInfo($"{environment.ApplicationName}.modules.json");
 
         if (file.Exists)
         {

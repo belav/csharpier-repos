@@ -548,10 +548,11 @@ namespace System.Data.Mapping
             if (Helper.IsEnumType(edmType) ^ Helper.IsEnumType(objectType))
             {
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_EnumTypeMappingToNonEnumType(
-                        edmType.FullName,
-                        objectType.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_EnumTypeMappingToNonEnumType(edmType.FullName, objectType.FullName)
                 );
             }
 
@@ -559,10 +560,14 @@ namespace System.Data.Mapping
             if (edmType.Abstract != objectType.Abstract)
             {
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_AbstractTypeMappingToNonAbstractType(
-                        edmType.FullName,
-                        objectType.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_AbstractTypeMappingToNonAbstractType(
+                            edmType.FullName,
+                            objectType.FullName
+                        )
                 );
             }
 
@@ -610,20 +615,26 @@ namespace System.Data.Mapping
             // Assuming that we will have a single member in O-space for a member in C space
             EdmMember objectMember;
             if (
-                !objectType.Members.TryGetValue(
-                    edmMember.Name,
-                    false /*ignoreCase*/
-                    ,
-                    out objectMember
-                )
+                !objectType
+                    .Members
+                    .TryGetValue(
+                        edmMember.Name,
+                        false /*ignoreCase*/
+                        ,
+                        out objectMember
+                    )
             )
             {
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_Default_OCMapping_Clr_Member(
-                        edmMember.Name,
-                        edmMember.DeclaringType.FullName,
-                        objectType.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Default_OCMapping_Clr_Member(
+                            edmMember.Name,
+                            edmMember.DeclaringType.FullName,
+                            objectType.FullName
+                        )
                 );
             }
 
@@ -645,14 +656,18 @@ namespace System.Data.Mapping
             if (edmMember.BuiltInTypeKind != objectMember.BuiltInTypeKind)
             {
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_Default_OCMapping_MemberKind_Mismatch(
-                        edmMember.Name,
-                        edmMember.DeclaringType.FullName,
-                        edmMember.BuiltInTypeKind,
-                        objectMember.Name,
-                        objectMember.DeclaringType.FullName,
-                        objectMember.BuiltInTypeKind
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Default_OCMapping_MemberKind_Mismatch(
+                            edmMember.Name,
+                            edmMember.DeclaringType.FullName,
+                            edmMember.BuiltInTypeKind,
+                            objectMember.Name,
+                            objectMember.DeclaringType.FullName,
+                            objectMember.BuiltInTypeKind
+                        )
                 );
             }
 
@@ -692,14 +707,18 @@ namespace System.Data.Mapping
                 )
                 {
                     throw new MappingException(
-                        System.Data.Entity.Strings.Mapping_Default_OCMapping_Invalid_MemberType(
-                            edmMember.TypeUsage.EdmType.FullName,
-                            edmMember.Name,
-                            edmMember.DeclaringType.FullName,
-                            objectMember.TypeUsage.EdmType.FullName,
-                            objectMember.Name,
-                            objectMember.DeclaringType.FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Default_OCMapping_Invalid_MemberType(
+                                edmMember.TypeUsage.EdmType.FullName,
+                                edmMember.Name,
+                                edmMember.DeclaringType.FullName,
+                                objectMember.TypeUsage.EdmType.FullName,
+                                objectMember.Name,
+                                objectMember.DeclaringType.FullName
+                            )
                     );
                 }
             }
@@ -747,14 +766,18 @@ namespace System.Data.Mapping
                 )
                 {
                     throw new MappingException(
-                        System.Data.Entity.Strings.Mapping_Default_OCMapping_Invalid_MemberType(
-                            edmMember.TypeUsage.EdmType.FullName,
-                            edmMember.Name,
-                            edmMember.DeclaringType.FullName,
-                            objectMember.TypeUsage.EdmType.FullName,
-                            objectMember.Name,
-                            objectMember.DeclaringType.FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Default_OCMapping_Invalid_MemberType(
+                                edmMember.TypeUsage.EdmType.FullName,
+                                edmMember.Name,
+                                edmMember.DeclaringType.FullName,
+                                objectMember.TypeUsage.EdmType.FullName,
+                                objectMember.Name,
+                                objectMember.DeclaringType.FullName
+                            )
                     );
                 }
             }
@@ -889,10 +912,14 @@ namespace System.Data.Mapping
             if (cdmStructuralType.Members.Count != objectStructuralType.Members.Count)
             {
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_Default_OCMapping_Member_Count_Mismatch(
-                        cdmStructuralType.FullName,
-                        objectStructuralType.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Default_OCMapping_Member_Count_Mismatch(
+                            cdmStructuralType.FullName,
+                            objectStructuralType.FullName
+                        )
                 );
             }
 
@@ -901,11 +928,15 @@ namespace System.Data.Mapping
                 if (!cdmStructuralType.Members.Contains(member.Identity))
                 {
                     throw new MappingException(
-                        System.Data.Entity.Strings.Mapping_Default_OCMapping_Clr_Member2(
-                            member.Name,
-                            objectStructuralType.FullName,
-                            cdmStructuralType.FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Default_OCMapping_Clr_Member2(
+                                member.Name,
+                                objectStructuralType.FullName,
+                                cdmStructuralType.FullName
+                            )
                     );
                 }
             }
@@ -938,12 +969,16 @@ namespace System.Data.Mapping
             )
             {
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_Enum_OCMapping_UnderlyingTypesMismatch(
-                        edmEnumType.UnderlyingType.Name,
-                        edmEnumType.FullName,
-                        objectEnumType.UnderlyingType.Name,
-                        objectEnumType.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Enum_OCMapping_UnderlyingTypesMismatch(
+                            edmEnumType.UnderlyingType.Name,
+                            edmEnumType.FullName,
+                            objectEnumType.UnderlyingType.Name,
+                            objectEnumType.FullName
+                        )
                 );
             }
 
@@ -951,11 +986,13 @@ namespace System.Data.Mapping
             // The drawback is that there can be multiple members with the same value. To break
             // the tie we need to sort by name after sorting by value.
             var edmEnumTypeMembersSortedEnumerator = edmEnumType
-                .Members.OrderBy(m => Convert.ToInt64(m.Value, CultureInfo.InvariantCulture))
+                .Members
+                .OrderBy(m => Convert.ToInt64(m.Value, CultureInfo.InvariantCulture))
                 .ThenBy(m => m.Name)
                 .GetEnumerator();
             var objectEnumTypeMembersSortedEnumerator = objectEnumType
-                .Members.OrderBy(m => Convert.ToInt64(m.Value, CultureInfo.InvariantCulture))
+                .Members
+                .OrderBy(m => Convert.ToInt64(m.Value, CultureInfo.InvariantCulture))
                 .ThenBy(m => m.Name)
                 .GetEnumerator();
 
@@ -966,9 +1003,10 @@ namespace System.Data.Mapping
                     if (
                         edmEnumTypeMembersSortedEnumerator.Current.Name
                             == objectEnumTypeMembersSortedEnumerator.Current.Name
-                        && edmEnumTypeMembersSortedEnumerator.Current.Value.Equals(
-                            objectEnumTypeMembersSortedEnumerator.Current.Value
-                        )
+                        && edmEnumTypeMembersSortedEnumerator
+                            .Current
+                            .Value
+                            .Equals(objectEnumTypeMembersSortedEnumerator.Current.Value)
                     )
                     {
                         if (!edmEnumTypeMembersSortedEnumerator.MoveNext())
@@ -979,12 +1017,16 @@ namespace System.Data.Mapping
                 }
 
                 throw new MappingException(
-                    System.Data.Entity.Strings.Mapping_Enum_OCMapping_MemberMismatch(
-                        objectEnumType.FullName,
-                        edmEnumTypeMembersSortedEnumerator.Current.Name,
-                        edmEnumTypeMembersSortedEnumerator.Current.Value,
-                        edmEnumType.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Enum_OCMapping_MemberMismatch(
+                            objectEnumType.FullName,
+                            edmEnumTypeMembersSortedEnumerator.Current.Name,
+                            edmEnumTypeMembersSortedEnumerator.Current.Value,
+                            edmEnumType.FullName
+                        )
                 );
             }
         }
@@ -1028,14 +1070,18 @@ namespace System.Data.Mapping
                 if (edmEnd.RelationshipMultiplicity != objectEnd.RelationshipMultiplicity)
                 {
                     throw new MappingException(
-                        System.Data.Entity.Strings.Mapping_Default_OCMapping_MultiplicityMismatch(
-                            edmEnd.RelationshipMultiplicity,
-                            edmEnd.Name,
-                            association.FullName,
-                            objectEnd.RelationshipMultiplicity,
-                            objectEnd.Name,
-                            objectAssociation.FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Default_OCMapping_MultiplicityMismatch(
+                                edmEnd.RelationshipMultiplicity,
+                                edmEnd.Name,
+                                association.FullName,
+                                objectEnd.RelationshipMultiplicity,
+                                objectEnd.Name,
+                                objectAssociation.FullName
+                            )
                     );
                 }
 

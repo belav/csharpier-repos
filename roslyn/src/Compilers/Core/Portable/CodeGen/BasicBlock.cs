@@ -654,10 +654,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private string GetDebuggerDisplay()
             {
 #if DEBUG
-                var visType = System.Type.GetType(
-                    "Roslyn.Test.Utilities.ILBuilderVisualizer, Roslyn.Test.Utilities",
-                    false
-                );
+                var visType = System
+                    .Type
+                    .GetType(
+                        "Roslyn.Test.Utilities.ILBuilderVisualizer, Roslyn.Test.Utilities",
+                        false
+                    );
                 if (visType != null)
                 {
                     var method = visType.GetTypeInfo().GetDeclaredMethod("BasicBlockToString");

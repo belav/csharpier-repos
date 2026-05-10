@@ -42,10 +42,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return true;
             }
 
-            return referencedSymbol.Definition.ShouldShowWithNoReferenceLocations(
-                options,
-                showMetadataSymbolsWithoutReferences: true
-            );
+            return referencedSymbol
+                .Definition
+                .ShouldShowWithNoReferenceLocations(
+                    options,
+                    showMetadataSymbolsWithoutReferences: true
+                );
         }
 
         public static bool ShouldShowWithNoReferenceLocations(
@@ -110,10 +112,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var q =
                 from r in result
-                let aliasLocations = r
-                    .Locations.Where(loc =>
-                        SymbolEquivalenceComparer.Instance.Equals(loc.Alias, aliasSymbol)
-                    )
+                let aliasLocations = r.Locations
+                    .Where(loc => SymbolEquivalenceComparer.Instance.Equals(loc.Alias, aliasSymbol))
                     .ToImmutableArray()
                 where aliasLocations.Any()
                 select new ReferencedSymbol(r.Definition, aliasLocations);
@@ -142,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             foreach (var reference in references)
             {
                 var isCaseSensitive = solution
-                    .Services.GetLanguageServices(reference.Definition.Language)
+                    .Services
+                    .GetLanguageServices(reference.Definition.Language)
                     .GetRequiredService<ISyntaxFactsService>()
                     .IsCaseSensitive;
                 var comparer = isCaseSensitive

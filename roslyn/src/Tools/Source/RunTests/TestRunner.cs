@@ -295,14 +295,18 @@ namespace RunTests
                 // Update the assembly groups to test with the assembly paths in the context of the helix work item.
                 workItemInfo = workItemInfo with
                 {
-                    Filters = workItemInfo.Filters.ToImmutableSortedDictionary(
-                        kvp =>
-                            kvp.Key with
-                            {
-                                AssemblyPath = GetHelixRelativeAssemblyPath(kvp.Key.AssemblyPath),
-                            },
-                        kvp => kvp.Value
-                    ),
+                    Filters = workItemInfo
+                        .Filters
+                        .ToImmutableSortedDictionary(
+                            kvp =>
+                                kvp.Key with
+                                {
+                                    AssemblyPath = GetHelixRelativeAssemblyPath(
+                                        kvp.Key.AssemblyPath
+                                    ),
+                                },
+                            kvp => kvp.Value
+                        ),
                 };
 
                 AddRehydrateTestFoldersCommand(command, workItemInfo, isUnix);

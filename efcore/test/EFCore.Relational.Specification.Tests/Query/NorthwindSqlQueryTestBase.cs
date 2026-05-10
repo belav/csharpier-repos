@@ -31,9 +31,11 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
     public virtual async Task SqlQueryRaw_over_int(bool async)
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<int>(
-            NormalizeDelimitersInRawString(@"SELECT [ProductID] FROM [Products]")
-        );
+        var query = context
+            .Database
+            .SqlQueryRaw<int>(
+                NormalizeDelimitersInRawString(@"SELECT [ProductID] FROM [Products]")
+            );
 
         var result = async ? await query.ToListAsync() : query.ToList();
 
@@ -49,7 +51,8 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
             .Set<Order>()
             .Where(e =>
                 context
-                    .Database.SqlQuery<int>(
+                    .Database
+                    .SqlQuery<int>(
                         NormalizeDelimitersInInterpolatedString(
                             @$"SELECT [ProductID] AS [Value] FROM [Products]"
                         )
@@ -69,11 +72,13 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
         using var context = CreateContext();
         var query =
             from o in context.Set<Order>()
-            join p in context.Database.SqlQuery<int>(
-                NormalizeDelimitersInInterpolatedString(
-                    @$"SELECT [ProductID] AS [Value] FROM [Products]"
+            join p in context
+                .Database
+                .SqlQuery<int>(
+                    NormalizeDelimitersInInterpolatedString(
+                        @$"SELECT [ProductID] AS [Value] FROM [Products]"
+                    )
                 )
-            )
                 on o.OrderID equals p
             select new { o, p };
 
@@ -88,11 +93,13 @@ public abstract class NorthwindSqlQueryTestBase<TFixture> : IClassFixture<TFixtu
     {
         using var context = CreateContext();
         var value = 10;
-        var query = context.Database.SqlQuery<int>(
-            NormalizeDelimitersInInterpolatedString(
-                @$"SELECT [ProductID] FROM [Products] WHERE [ProductID] = {value}"
-            )
-        );
+        var query = context
+            .Database
+            .SqlQuery<int>(
+                NormalizeDelimitersInInterpolatedString(
+                    @$"SELECT [ProductID] FROM [Products] WHERE [ProductID] = {value}"
+                )
+            );
 
         var result = async ? await query.ToListAsync() : query.ToList();
 

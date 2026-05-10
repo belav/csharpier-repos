@@ -123,11 +123,10 @@ namespace System.Xml.Schema
             if (context!.NeedValidateChildren)
             {
                 int errorCode;
-                context.ElementDecl!.ContentValidator!.ValidateElement(
-                    elementName,
-                    context,
-                    out errorCode
-                );
+                context
+                    .ElementDecl!
+                    .ContentValidator!
+                    .ValidateElement(elementName, context, out errorCode);
                 if (errorCode < 0)
                 {
                     XmlSchemaValidator.ElementValidationError(

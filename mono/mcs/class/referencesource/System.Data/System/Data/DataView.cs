@@ -125,9 +125,10 @@ namespace System.Data
         DataViewListener dvListener = null;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         internal DataView(DataTable table, bool locked)
         {
@@ -1137,9 +1138,12 @@ namespace System.Data
             // the index will only contain the original or current record, never proposed.
             // return index.GetIndex(rowview.GetRecord());
             return index.GetIndex(
-                rowview.Row.GetRecordFromVersion(
-                    rowview.Row.GetDefaultRowVersion(this.RowStateFilter) & ~DataRowVersion.Proposed
-                )
+                rowview
+                    .Row
+                    .GetRecordFromVersion(
+                        rowview.Row.GetDefaultRowVersion(this.RowStateFilter)
+                            & ~DataRowVersion.Proposed
+                    )
             );
         }
 

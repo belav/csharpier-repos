@@ -98,12 +98,14 @@ namespace System.Net.PeerToPeer
             string classifier;
             if (!StrongParsePeerName(remotePeerName, out authority, out classifier))
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "PeerName string {0} failed the check for a valid peer name",
-                    remotePeerName
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "PeerName string {0} failed the check for a valid peer name",
+                        remotePeerName
+                    );
                 throw new ArgumentException(
                     SR.GetString(SR.Pnrp_InvalidPeerName),
                     "remotePeerName"
@@ -117,14 +119,16 @@ namespace System.Net.PeerToPeer
                 m_PeerName = authority;
             m_Authority = authority;
             m_Classifier = classifier;
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "PeerName instance created - PeerName {0} Authority {1} Classfier {2}",
-                m_PeerName,
-                m_Authority,
-                ((m_Classifier == null) ? "null" : m_Classifier)
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "PeerName instance created - PeerName {0} Authority {1} Classfier {2}",
+                    m_PeerName,
+                    m_Authority,
+                    ((m_Classifier == null) ? "null" : m_Classifier)
+                );
         }
 
         /// <summary>
@@ -225,14 +229,16 @@ namespace System.Net.PeerToPeer
                 if (shDefaultIdentity != null)
                     shDefaultIdentity.Dispose();
             }
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "PeerName instance created - PeerName {0} Authority {1} Classfier {2}",
-                m_PeerName,
-                m_Authority,
-                m_Classifier
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "PeerName instance created - PeerName {0} Authority {1} Classfier {2}",
+                    m_PeerName,
+                    m_Authority,
+                    m_Classifier
+                );
         }
 
         /// <summary>
@@ -290,15 +296,17 @@ namespace System.Net.PeerToPeer
             string classifier;
             WeakParsePeerName(peerName, out authority, out classifier);
             PeerName p = new PeerName(peerName, authority, classifier);
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "PeerName created from PeerHostName - PeerHostName {0} to PeerName PeerName {1} Authority {2} Classfier {3}",
-                peerHostName,
-                peerName,
-                authority,
-                classifier
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "PeerName created from PeerHostName - PeerHostName {0} to PeerName PeerName {1} Authority {2} Classfier {3}",
+                    peerHostName,
+                    peerName,
+                    authority,
+                    classifier
+                );
             return p;
         }
 
@@ -383,14 +391,16 @@ namespace System.Net.PeerToPeer
             string newClassifier;
             WeakParsePeerName(newPeerName, out authority, out newClassifier);
             PeerName p = new PeerName(newPeerName, authority, newClassifier);
-            Logging.P2PTraceSource.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "A new PeerName created from existing PeerName with a new classfier. Existing PeerName {0} Classifier {1} New PeerName {2}",
-                peerName,
-                classifier,
-                p
-            );
+            Logging
+                .P2PTraceSource
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "A new PeerName created from existing PeerName with a new classfier. Existing PeerName {0} Classifier {1} New PeerName {2}",
+                    peerName,
+                    classifier,
+                    p
+                );
             return p;
         }
 
@@ -493,13 +503,15 @@ namespace System.Net.PeerToPeer
                             shPeerHostName.Dispose();
                     }
                 }
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "PeerHostName created for PeerName PeerHostName {0} PeerName {1}",
-                    m_PeerHostName,
-                    this
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "PeerHostName created for PeerName PeerHostName {0} PeerName {1}",
+                        m_PeerHostName,
+                        this
+                    );
                 return m_PeerHostName;
             }
         }

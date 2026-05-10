@@ -132,11 +132,13 @@ Process.GetCurrentProcess()"
         [Fact]
         public void SearchPaths1()
         {
-            var options = ScriptOptions.Default.WithMetadataResolver(
-                ScriptMetadataResolver.Default.WithSearchPaths(
-                    RuntimeEnvironment.GetRuntimeDirectory()
-                )
-            );
+            var options = ScriptOptions
+                .Default
+                .WithMetadataResolver(
+                    ScriptMetadataResolver
+                        .Default
+                        .WithSearchPaths(RuntimeEnvironment.GetRuntimeDirectory())
+                );
 
             var result = CSharpScript
                 .EvaluateAsync(
@@ -187,18 +189,20 @@ new System.Data.DataSet()
         [Fact]
         public async Task SearchPaths_BaseDirectory()
         {
-            var options = ScriptOptions.Default.WithMetadataResolver(
-                new TestMetadataReferenceResolver(
-                    pathResolver: new VirtualizedRelativePathResolver(
-                        existingFullPaths: new[] { @"C:\dir\x.dll" },
-                        baseDirectory: @"C:\goo\bar"
-                    ),
-                    files: new Dictionary<string, PortableExecutableReference>
-                    {
-                        { @"C:\dir\x.dll", (PortableExecutableReference)SystemCoreRef },
-                    }
-                )
-            );
+            var options = ScriptOptions
+                .Default
+                .WithMetadataResolver(
+                    new TestMetadataReferenceResolver(
+                        pathResolver: new VirtualizedRelativePathResolver(
+                            existingFullPaths: new[] { @"C:\dir\x.dll" },
+                            baseDirectory: @"C:\goo\bar"
+                        ),
+                        files: new Dictionary<string, PortableExecutableReference>
+                        {
+                            { @"C:\dir\x.dll", (PortableExecutableReference)SystemCoreRef },
+                        }
+                    )
+                );
 
             var script = CSharpScript.Create(
                 @"
@@ -220,10 +224,12 @@ var x = from a in new[] { 1, 2 ,3 } select a + 1;
         [Fact]
         public async Task References1()
         {
-            var options0 = ScriptOptions.Default.AddReferences(
-                typeof(Process).Assembly,
-                typeof(System.Linq.Expressions.Expression).Assembly
-            );
+            var options0 = ScriptOptions
+                .Default
+                .AddReferences(
+                    typeof(Process).Assembly,
+                    typeof(System.Linq.Expressions.Expression).Assembly
+                );
 
             var s0 = await CSharpScript.RunAsync<Process>(
                 $@"
@@ -281,10 +287,11 @@ new System.Windows.Forms.Form()
         public void References2()
         {
             var options = ScriptOptions
-                .Default.WithMetadataResolver(
-                    ScriptMetadataResolver.Default.WithSearchPaths(
-                        RuntimeEnvironment.GetRuntimeDirectory()
-                    )
+                .Default
+                .WithMetadataResolver(
+                    ScriptMetadataResolver
+                        .Default
+                        .WithSearchPaths(RuntimeEnvironment.GetRuntimeDirectory())
                 )
                 .AddReferences("System.Core", "System.dll")
                 .AddReferences(typeof(System.Data.DataSet).Assembly);
@@ -307,14 +314,18 @@ System.Diagnostics.Process.GetCurrentProcess()
         private static readonly Lazy<bool> s_isSystemV2AndV4Available = new Lazy<bool>(() =>
         {
             string path;
-            return GlobalAssemblyCache.Instance.ResolvePartialName(
-                    "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                    out path
-                ) != null
-                && GlobalAssemblyCache.Instance.ResolvePartialName(
-                    "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                    out path
-                ) != null;
+            return GlobalAssemblyCache
+                    .Instance
+                    .ResolvePartialName(
+                        "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        out path
+                    ) != null
+                && GlobalAssemblyCache
+                    .Instance
+                    .ResolvePartialName(
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        out path
+                    ) != null;
         });
 
         [Fact]
@@ -685,10 +696,9 @@ c1 = c2;
         [Fact]
         public async Task HostObjectBinding_DuplicateReferences()
         {
-            var options = ScriptOptions.Default.AddReferences(
-                typeof(C).Assembly,
-                typeof(C).Assembly
-            );
+            var options = ScriptOptions
+                .Default
+                .AddReferences(typeof(C).Assembly, typeof(C).Assembly);
 
             var s0 = await CSharpScript.RunAsync<int>("x", options, new C());
             var c0 = s0.Script.GetCompilation();

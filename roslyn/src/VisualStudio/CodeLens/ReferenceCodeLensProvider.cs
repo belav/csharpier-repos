@@ -113,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var projectVersions = await _lazyCodeLensCallbackService
-                    .Value.InvokeAsync<ImmutableDictionary<Guid, string>>(
+                    .Value
+                    .InvokeAsync<ImmutableDictionary<Guid, string>>(
                         this,
                         nameof(ICodeLensContext.GetProjectVersionsAsync),
                         new object[] { keys },
@@ -342,7 +343,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var entries = referenceLocationDescriptors
-                    ?.references.Select(referenceLocationDescriptor =>
+                    ?.references
+                    .Select(referenceLocationDescriptor =>
                     {
                         ImageId imageId = default;
                         if (referenceLocationDescriptor.Glyph.HasValue)

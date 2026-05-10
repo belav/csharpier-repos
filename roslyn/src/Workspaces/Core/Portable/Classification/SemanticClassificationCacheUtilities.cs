@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Classification
             // information since we don't necessarily know about other files, metadata, or dependencies.  So during
             // load, we allow for the previous semantic classifications to be used as long as the file contents match.
             var checksums = await document
-                .State.GetStateChecksumsAsync(cancellationToken)
+                .State
+                .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             return (documentKey, checksums.Text);

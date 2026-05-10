@@ -1536,9 +1536,9 @@ namespace System.Web.UI.MobileControls
             // We need to make sure that the hash is case insensitive, since the file system
             // is, and strange view state errors could otherwise happen (ASURT 128657)
 
-            int pageHashCode = StringComparer.InvariantCultureIgnoreCase.GetHashCode(
-                TemplateSourceDirectory
-            );
+            int pageHashCode = StringComparer
+                .InvariantCultureIgnoreCase
+                .GetHashCode(TemplateSourceDirectory);
             pageHashCode += StringComparer.InvariantCultureIgnoreCase.GetHashCode(GetType().Name);
 
             byte[] macKeyModifier;
@@ -1548,13 +1548,9 @@ namespace System.Web.UI.MobileControls
                 // Modify the key with the ViewStateUserKey, if any (ASURT 126375)
                 int count = Encoding.Unicode.GetByteCount(ViewStateUserKey);
                 macKeyModifier = new byte[count + 4];
-                Encoding.Unicode.GetBytes(
-                    ViewStateUserKey,
-                    0,
-                    ViewStateUserKey.Length,
-                    macKeyModifier,
-                    4
-                );
+                Encoding
+                    .Unicode
+                    .GetBytes(ViewStateUserKey, 0, ViewStateUserKey.Length, macKeyModifier, 4);
             }
             else
             {

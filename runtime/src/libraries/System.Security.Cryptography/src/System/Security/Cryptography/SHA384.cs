@@ -116,11 +116,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
-                HashAlgorithmNames.SHA384,
-                source,
-                destination
-            );
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .HashData(HashAlgorithmNames.SHA384, source, destination);
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;

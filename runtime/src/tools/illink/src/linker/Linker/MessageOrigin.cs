@@ -88,7 +88,9 @@ namespace Mono.Linker
             {
                 var offset = ILOffset ?? method.DebugInformation.SequencePoints[0].Offset;
                 SequencePoint? correspondingSequencePoint = method
-                    .DebugInformation.SequencePoints.Where(s => s.Offset <= offset)
+                    .DebugInformation
+                    .SequencePoints
+                    .Where(s => s.Offset <= offset)
                     ?.Last();
 
                 // If the warning comes from hidden line (compiler generated code typically)
@@ -96,7 +98,9 @@ namespace Mono.Linker
                 if (correspondingSequencePoint?.StartLine == HiddenLineNumber)
                 {
                     correspondingSequencePoint = method
-                        .DebugInformation.SequencePoints.Where(s => s.StartLine != HiddenLineNumber)
+                        .DebugInformation
+                        .SequencePoints
+                        .Where(s => s.StartLine != HiddenLineNumber)
                         .FirstOrDefault();
                 }
 

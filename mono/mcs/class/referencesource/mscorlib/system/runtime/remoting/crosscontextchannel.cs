@@ -157,11 +157,9 @@ namespace System.Runtime.Remoting.Channels
                 args[0] = reqMsg;
                 args[1] = srvID.ServerContext;
                 replyMsg = (IMessage)
-                    Thread.CurrentThread.InternalCrossContextCallback(
-                        srvID.ServerContext,
-                        s_xctxDel,
-                        args
-                    );
+                    Thread
+                        .CurrentThread
+                        .InternalCrossContextCallback(srvID.ServerContext, s_xctxDel, args);
             }
             catch (Exception e)
             {
@@ -492,13 +490,15 @@ namespace System.Runtime.Remoting.Channels
 
                 // Call the dynamic sinks to notify that the async call
                 // has completed
-                Thread.CurrentContext.NotifyDynamicSinks(
-                    msg, // this is the async reply
-                    false, // bCliSide
-                    false, // bStart
-                    true, // bAsync
-                    true
-                ); // bNotifyGlobals
+                Thread
+                    .CurrentContext
+                    .NotifyDynamicSinks(
+                        msg, // this is the async reply
+                        false, // bCliSide
+                        false, // bStart
+                        true, // bAsync
+                        true
+                    ); // bNotifyGlobals
 
                 Object[] args = new Object[] { _replySink, msg };
 

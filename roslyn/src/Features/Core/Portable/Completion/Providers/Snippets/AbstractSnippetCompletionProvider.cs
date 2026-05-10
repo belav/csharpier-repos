@@ -88,10 +88,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
                 change = new TextChange(textSpan, snippetText);
             }
 
-            var props = ImmutableDictionary<string, string>.Empty.Add(
-                SnippetCompletionItem.LSPSnippetKey,
-                lspSnippet
-            );
+            var props = ImmutableDictionary<string, string>
+                .Empty
+                .Add(SnippetCompletionItem.LSPSnippetKey, lspSnippet);
 
             return CompletionChange.Create(
                 change,

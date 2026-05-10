@@ -503,9 +503,9 @@ namespace DbLinq.Vendor.Implementation
 
                 //find which table this column belongs to
                 string fullColumnDbName = GetFullDbName(columnRow.TableName, columnRow.TableSchema);
-                DbLinq.Schema.Dbml.Table tableSchema = schema.Tables.FirstOrDefault(tblSchema =>
-                    fullColumnDbName == tblSchema.Name
-                );
+                DbLinq.Schema.Dbml.Table tableSchema = schema
+                    .Tables
+                    .FirstOrDefault(tblSchema => fullColumnDbName == tblSchema.Name);
                 if (tableSchema == null)
                 {
                     WriteErrorLine(

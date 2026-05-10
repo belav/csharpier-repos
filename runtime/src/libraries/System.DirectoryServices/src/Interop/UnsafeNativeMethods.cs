@@ -46,14 +46,9 @@ namespace System.DirectoryServices
             IntPtr ppObjectNative = IntPtr.Zero;
             try
             {
-                int hr = global::Interop.Activeds.ADsOpenObject(
-                    path,
-                    userName,
-                    password,
-                    flags,
-                    ref iid,
-                    out ppObjectNative
-                );
+                int hr = global::Interop
+                    .Activeds
+                    .ADsOpenObject(path, userName, password, flags, ref iid, out ppObjectNative);
                 try
                 {
                     ppObject =

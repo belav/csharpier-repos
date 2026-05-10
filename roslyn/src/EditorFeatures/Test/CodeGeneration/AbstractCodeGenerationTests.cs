@@ -30,12 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             var projectId = ProjectId.CreateNewId();
 
             var project = workspace
-                .CurrentSolution.AddProject(
-                    projectId,
-                    languageName,
-                    $"{languageName}.dll",
-                    languageName
-                )
+                .CurrentSolution
+                .AddProject(projectId, languageName, $"{languageName}.dll", languageName)
                 .GetRequiredProject(projectId);
 
             var normalizedSyntax = syntaxNode.NormalizeWhitespace().ToFullString();
@@ -49,7 +45,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             );
 
             var options = document
-                .Project.Services.GetRequiredService<ISimplificationService>()
+                .Project
+                .Services
+                .GetRequiredService<ISimplificationService>()
                 .DefaultOptions;
             var simplifiedDocument = Simplifier
                 .ReduceAsync(annotatedDocument, options, CancellationToken.None)
@@ -102,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             if (cs != null || csSimple != null)
             {
                 var codeDefFactory = workspace
-                    .Services.GetLanguageServices(LanguageNames.CSharp)
+                    .Services
+                    .GetLanguageServices(LanguageNames.CSharp)
                     .GetRequiredService<SyntaxGenerator>();
 
                 var node = nodeCreator(codeDefFactory);
@@ -137,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             if (vb != null || vbSimple != null)
             {
                 var codeDefFactory = workspace
-                    .Services.GetLanguageServices(LanguageNames.VisualBasic)
+                    .Services
+                    .GetLanguageServices(LanguageNames.VisualBasic)
                     .GetRequiredService<SyntaxGenerator>();
 
                 var node = nodeCreator(codeDefFactory);

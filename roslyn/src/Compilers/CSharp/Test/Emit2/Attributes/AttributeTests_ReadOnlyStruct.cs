@@ -41,7 +41,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsReadOnly);
                     Assert.Empty(type.GetAttributes());
@@ -96,7 +97,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsReadOnly);
                     Assert.Empty(type.GetAttributes());
@@ -144,7 +146,8 @@ class Test<T>
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test`1")
                         .GetTypeMember("S1");
                     Assert.True(type.IsReadOnly);
                     Assert.Empty(type.GetAttributes());
@@ -179,7 +182,8 @@ class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsReadOnly);
                     Assert.Empty(type.GetAttributes());
@@ -574,7 +578,8 @@ public class Test
                 symbolValidator: module =>
                 {
                     var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Test")
                         .GetTypeMember("S1");
                     Assert.True(type.IsReadOnly);
                     Assert.Empty(type.GetAttributes());
@@ -660,9 +665,11 @@ class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                 }
             );

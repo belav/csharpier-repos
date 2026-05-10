@@ -54,7 +54,8 @@ namespace System.Net.Http.Functional.Tests
                         Assert.Equal("foo", await response.Content.ReadAsStringAsync());
 
                         string initialUser = response
-                            .Headers.GetValues(NtAuthTests.UserHeaderName)
+                            .Headers
+                            .GetValues(NtAuthTests.UserHeaderName)
                             .First();
 
                         using (WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent())
@@ -92,7 +93,8 @@ namespace System.Net.Http.Functional.Tests
                                 );
 
                                 string newUser = response
-                                    .Headers.GetValues(NtAuthTests.UserHeaderName)
+                                    .Headers
+                                    .GetValues(NtAuthTests.UserHeaderName)
                                     .First();
                                 Assert.Equal(_fixture.TestAccount.AccountName, newUser);
                             }

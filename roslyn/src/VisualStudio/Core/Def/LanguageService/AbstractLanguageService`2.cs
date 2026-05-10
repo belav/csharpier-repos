@@ -137,13 +137,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             // This method should only contain calls to acquire services off of the component model
             // or service providers.  Anything else which is more complicated should go in Initialize
             // instead.
-            this.EditorOptionsService =
-                this.Package.ComponentModel.GetService<EditorOptionsService>();
+            this.EditorOptionsService = this.Package
+                .ComponentModel
+                .GetService<EditorOptionsService>();
             this.Workspace = this.Package.ComponentModel.GetService<VisualStudioWorkspaceImpl>();
-            this.EditorAdaptersFactoryService =
-                this.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
-            this.AnalyzerFileWatcherService =
-                this.Package.ComponentModel.GetService<AnalyzerFileWatcherService>();
+            this.EditorAdaptersFactoryService = this.Package
+                .ComponentModel
+                .GetService<IVsEditorAdaptersFactoryService>();
+            this.AnalyzerFileWatcherService = this.Package
+                .ComponentModel
+                .GetService<AnalyzerFileWatcherService>();
         }
 
         protected virtual void RemoveServices()
@@ -171,8 +174,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
         private void PrimeLanguageServiceComponentsOnBackground()
         {
-            var formatter = this
-                .Workspace.Services.GetLanguageServices(RoslynLanguageName)
+            var formatter = this.Workspace
+                .Services
+                .GetLanguageServices(RoslynLanguageName)
                 .GetService<ISyntaxFormattingService>();
             formatter?.GetDefaultFormattingRules();
         }
@@ -203,7 +207,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             var collapseAllImplementations = false;
 
             var openDocument = wpfTextView
-                .TextBuffer.AsTextContainer()
+                .TextBuffer
+                .AsTextContainer()
                 .GetRelatedDocuments()
                 .FirstOrDefault();
             if (openDocument?.Project.Solution.Workspace is MetadataAsSourceWorkspace masWorkspace)
@@ -218,10 +223,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     openDocument.Project.Language,
                     isMetadataAsSource: masWorkspace is not null
                 );
-                collapseAllImplementations = masWorkspace.FileService.ShouldCollapseOnOpen(
-                    openDocument.FilePath,
-                    options
-                );
+                collapseAllImplementations = masWorkspace
+                    .FileService
+                    .ShouldCollapseOnOpen(openDocument.FilePath, options);
             }
 
             ConditionallyCollapseOutliningRegions(
@@ -267,8 +271,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             bool collapseAllImplementations
         )
         {
-            var outliningManagerService =
-                this.Package.ComponentModel.GetService<IOutliningManagerService>();
+            var outliningManagerService = this.Package
+                .ComponentModel
+                .GetService<IOutliningManagerService>();
             var outliningManager = outliningManagerService.GetOutliningManager(wpfTextView);
             if (outliningManager == null)
                 return;

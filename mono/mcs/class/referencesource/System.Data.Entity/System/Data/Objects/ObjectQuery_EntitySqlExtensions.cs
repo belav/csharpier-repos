@@ -103,10 +103,12 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(T),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            context
+                .MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(T),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
         }
 
         #endregion
@@ -147,10 +149,12 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(T),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            context
+                .MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(T),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
         }
 
         #endregion
@@ -208,10 +212,12 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(T),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            context
+                .MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(T),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
         }
 
         private static string BuildScanEntitySetEsql(EntitySetBase entitySet)
@@ -403,10 +409,13 @@ namespace System.Data.Objects
             }
 
             // SQLPUDT 484477: Make sure TResultType is loaded.
-            this.QueryState.ObjectContext.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(TResultType),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            this.QueryState
+                .ObjectContext
+                .MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(TResultType),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
 
             // Retrieve the O-Space type metadata for the result type specified. If no
             // metadata can be found for the specified type, fail. Otherwise, if the
@@ -416,16 +425,20 @@ namespace System.Data.Objects
             Type clrOfType = typeof(TResultType);
             EdmType ofType = null;
             if (
-                !this
-                    .QueryState.ObjectContext.MetadataWorkspace.GetItemCollection(DataSpace.OSpace)
+                !this.QueryState
+                    .ObjectContext
+                    .MetadataWorkspace
+                    .GetItemCollection(DataSpace.OSpace)
                     .TryGetType(clrOfType.Name, clrOfType.Namespace ?? string.Empty, out ofType)
                 || !(Helper.IsEntityType(ofType) || Helper.IsComplexType(ofType))
             )
             {
                 throw EntityUtil.EntitySqlError(
-                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidResultType(
-                        typeof(TResultType).FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ObjectQuery_QueryBuilder_InvalidResultType(typeof(TResultType).FullName)
                 );
             }
 
@@ -550,10 +563,13 @@ namespace System.Data.Objects
             }
 
             // SQLPUDT 484974: Make sure TResultType is loaded.
-            this.QueryState.ObjectContext.MetadataWorkspace.ImplicitLoadAssemblyForType(
-                typeof(TResultType),
-                System.Reflection.Assembly.GetCallingAssembly()
-            );
+            this.QueryState
+                .ObjectContext
+                .MetadataWorkspace
+                .ImplicitLoadAssemblyForType(
+                    typeof(TResultType),
+                    System.Reflection.Assembly.GetCallingAssembly()
+                );
 
             return new ObjectQuery<TResultType>(
                 EntitySqlQueryBuilder.SelectValue(

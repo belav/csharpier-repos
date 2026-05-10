@@ -24,11 +24,13 @@ namespace System.Diagnostics
         public static PerformanceDataRegistryKey OpenRemoteBaseKey(string machineName)
         {
             // connect to the specified remote registry
-            int ret = Interop.Advapi32.RegConnectRegistry(
-                machineName,
-                new IntPtr(PerformanceData),
-                out SafeRegistryHandle foreignHKey
-            );
+            int ret = Interop
+                .Advapi32
+                .RegConnectRegistry(
+                    machineName,
+                    new IntPtr(PerformanceData),
+                    out SafeRegistryHandle foreignHKey
+                );
             if (ret == 0 && !foreignHKey.IsInvalid)
             {
                 return new PerformanceDataRegistryKey(foreignHKey);
@@ -68,14 +70,16 @@ namespace System.Diagnostics
             while (
                 Interop.Errors.ERROR_MORE_DATA
                 == (
-                    ret = Interop.Advapi32.RegQueryValueEx(
-                        _hkey,
-                        name,
-                        lpReserved: null,
-                        ref type,
-                        data,
-                        ref sizeInput
-                    )
+                    ret = Interop
+                        .Advapi32
+                        .RegQueryValueEx(
+                            _hkey,
+                            name,
+                            lpReserved: null,
+                            ref type,
+                            data,
+                            ref sizeInput
+                        )
                 )
             )
             {

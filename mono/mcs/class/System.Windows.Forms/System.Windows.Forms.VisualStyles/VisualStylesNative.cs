@@ -271,11 +271,14 @@ namespace System.Windows.Forms.VisualStyles
             int retval;
             int hresult = UXTheme.GetThemeColor(hTheme, iPartId, iStateId, (int)prop, out retval);
 
-            result = System.Drawing.Color.FromArgb(
-                (int)(0x000000FFU & retval),
-                (int)(0x0000FF00U & retval) >> 8,
-                (int)(0x00FF0000U & retval) >> 16
-            );
+            result = System
+                .Drawing
+                .Color
+                .FromArgb(
+                    (int)(0x000000FFU & retval),
+                    (int)(0x0000FF00U & retval) >> 8,
+                    (int)(0x00FF0000U & retval) >> 16
+                );
             return hresult;
         }
 
@@ -666,11 +669,14 @@ namespace System.Windows.Forms.VisualStyles
                 uint retval = UXTheme.GetThemeSysColor(theme, 1621);
                 UXTheme.CloseThemeData(theme);
 
-                return System.Drawing.Color.FromArgb(
-                    (int)(0x000000FFU & retval),
-                    (int)(0x0000FF00U & retval) >> 8,
-                    (int)(0x00FF0000U & retval) >> 16
-                );
+                return System
+                    .Drawing
+                    .Color
+                    .FromArgb(
+                        (int)(0x000000FFU & retval),
+                        (int)(0x0000FF00U & retval) >> 8,
+                        (int)(0x00FF0000U & retval) >> 16
+                    );
             }
         }
         public string VisualStyleInformationCopyright
@@ -803,11 +809,14 @@ namespace System.Windows.Forms.VisualStyles
                 uint retval = UXTheme.GetThemeSysColor(theme, 1611);
                 UXTheme.CloseThemeData(theme);
 
-                return System.Drawing.Color.FromArgb(
-                    (int)(0x000000FFU & retval),
-                    (int)(0x0000FF00U & retval) >> 8,
-                    (int)(0x00FF0000U & retval) >> 16
-                );
+                return System
+                    .Drawing
+                    .Color
+                    .FromArgb(
+                        (int)(0x000000FFU & retval),
+                        (int)(0x0000FF00U & retval) >> 8,
+                        (int)(0x00FF0000U & retval) >> 16
+                    );
             }
         }
         public string VisualStyleInformationUrl

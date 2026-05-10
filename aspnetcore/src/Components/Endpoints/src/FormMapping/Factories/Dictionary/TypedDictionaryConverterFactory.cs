@@ -153,38 +153,36 @@ internal sealed class TypedDictionaryConverterFactory<TDictionaryType, TKey, TVa
                         ConcurrentDictionary<TKey, TValue>,
                         TKey,
                         TValue
-                    >.Instance.CreateConverter(type, options),
+                    >
+                        .Instance
+                        .CreateConverter(type, options),
 
                 // Generic collections
                 var _ when type == (typeof(SortedList<TKey, TValue>)) =>
-                    ConcreteTypeDictionaryConverterFactory<
-                        SortedList<TKey, TValue>,
-                        TKey,
-                        TValue
-                    >.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<SortedList<TKey, TValue>, TKey, TValue>
+                        .Instance
+                        .CreateConverter(type, options),
                 var _ when type == (typeof(SortedDictionary<TKey, TValue>)) =>
                     ConcreteTypeDictionaryConverterFactory<
                         SortedDictionary<TKey, TValue>,
                         TKey,
                         TValue
-                    >.Instance.CreateConverter(type, options),
+                    >
+                        .Instance
+                        .CreateConverter(type, options),
                 var _ when type == (typeof(Dictionary<TKey, TValue>)) =>
-                    ConcreteTypeDictionaryConverterFactory<
-                        Dictionary<TKey, TValue>,
-                        TKey,
-                        TValue
-                    >.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<Dictionary<TKey, TValue>, TKey, TValue>
+                        .Instance
+                        .CreateConverter(type, options),
 
                 // Some of the types above implement IDictionary<TKey, TValue>, but do so in a very inneficient way, so we want to
                 // use special converters for them.
                 var _
                     when type.IsAssignableTo(typeof(IDictionary<TKey, TValue>))
                         && type.GetConstructor(Type.EmptyTypes) != null =>
-                    ConcreteTypeDictionaryConverterFactory<
-                        TDictionaryType,
-                        TKey,
-                        TValue
-                    >.Instance.CreateConverter(type, options),
+                    ConcreteTypeDictionaryConverterFactory<TDictionaryType, TKey, TValue>
+                        .Instance
+                        .CreateConverter(type, options),
                 _ => throw new InvalidOperationException(
                     $"Unable to create converter for '{type.FullName}'."
                 ),

@@ -105,7 +105,8 @@ namespace Microsoft.AspNet.Facebook
         )
         {
             return permissionsStatus
-                .Status.Where(kvp => kvp.Value == status)
+                .Status
+                .Where(kvp => kvp.Value == status)
                 .Select(kvp => kvp.Key);
         }
     }

@@ -77,7 +77,8 @@ namespace System.Collections.Concurrent.Tests
         {
             var bag = new ConcurrentBag<int>(Enumerable.Range(1, 5));
 
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     () =>
                     {
                         int item;
@@ -114,7 +115,8 @@ namespace System.Collections.Concurrent.Tests
         public static void AddManyItems_ThenTakeOnDifferentThread_ItemsOutputInExpectedOrder()
         {
             var bag = new ConcurrentBag<int>(Enumerable.Range(0, 100000));
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     () =>
                     {
                         for (int i = 0; i < 100000; i++)

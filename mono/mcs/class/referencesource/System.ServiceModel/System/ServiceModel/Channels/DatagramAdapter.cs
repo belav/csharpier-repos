@@ -1043,9 +1043,9 @@ namespace System.ServiceModel.Channels
                 if (channelSource == null)
                 {
                     Fx.Assert("DatagramAdapterChannelBase.ctor: (channelSource == null)");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "channelSource"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("channelSource");
                 }
                 this.channelParameters = new ChannelParameterCollection(this);
                 this.channelSource = channelSource;

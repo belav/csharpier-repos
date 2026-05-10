@@ -145,9 +145,11 @@ namespace System.ServiceModel.Activities
                 {
                     if (!this.TryGetMessageVersion(correlatesWith.InstanceKey, out version))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR2.MessageVersionInformationNotFound)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(SR2.MessageVersionInformationNotFound)
+                            );
                     }
                 }
                 else if (correlatesWith.TryAcquireResponseContext(context, out responseContext))
@@ -155,9 +157,9 @@ namespace System.ServiceModel.Activities
                     //Register the ResponseContext so that InternalSendMessage can access it.
                     if (!correlatesWith.TryRegisterResponseContext(context, responseContext))
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR2.ResponseContextIsNotNull)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(new InvalidOperationException(SR2.ResponseContextIsNotNull));
                     }
 
                     //Use the same MessageVersion as the incoming message that is retrieved using CorrelatonHandle
@@ -165,16 +167,22 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR2.CorrelationResponseContextShouldNotBeNull)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.CorrelationResponseContextShouldNotBeNull
+                            )
+                        );
                 }
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR2.CorrelationResponseContextShouldNotBeNull)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR2.CorrelationResponseContextShouldNotBeNull)
+                    );
             }
 
             Fx.Assert(
@@ -243,17 +251,17 @@ namespace System.ServiceModel.Activities
 
                 if (messageFault == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR2.CannotCreateMessageFault)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SR2.CannotCreateMessageFault));
                 }
                 else
                 {
-                    Message outMessage = System.ServiceModel.Channels.Message.CreateMessage(
-                        version,
-                        messageFault,
-                        action
-                    );
+                    Message outMessage = System
+                        .ServiceModel
+                        .Channels
+                        .Message
+                        .CreateMessage(version, messageFault, action);
                     this.Message.Set(context, outMessage);
                 }
             }
@@ -293,10 +301,12 @@ namespace System.ServiceModel.Activities
             {
                 InstanceValue messageVersionValue;
                 if (
-                    instanceKey.Metadata.TryGetValue(
-                        WorkflowServiceNamespace.MessageVersionForReplies,
-                        out messageVersionValue
-                    )
+                    instanceKey
+                        .Metadata
+                        .TryGetValue(
+                            WorkflowServiceNamespace.MessageVersionForReplies,
+                            out messageVersionValue
+                        )
                 )
                 {
                     version = (MessageVersion)messageVersionValue.Value;
@@ -311,15 +321,21 @@ namespace System.ServiceModel.Activities
         {
             if (this.Formatter == null && this.FaultFormatter == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(SR2.OperationFormatterAndFaultFormatterNotSet)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(SR2.OperationFormatterAndFaultFormatterNotSet)
+                    );
             }
             if (this.Formatter != null && this.FaultFormatter != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(SR2.OperationFormatterAndFaultFormatterIncorrectlySet)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(
+                            SR2.OperationFormatterAndFaultFormatterIncorrectlySet
+                        )
+                    );
             }
         }
     }

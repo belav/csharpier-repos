@@ -99,13 +99,15 @@ namespace System.Security.Cryptography
             try
             {
                 if (
-                    !CapiNative.UnsafeNativeMethods.CryptCreateHash(
-                        m_cspHandle,
-                        m_algorithmId,
-                        SafeCapiKeyHandle.InvalidHandle,
-                        0,
-                        out newHashAlgorithm
-                    )
+                    !CapiNative
+                        .UnsafeNativeMethods
+                        .CryptCreateHash(
+                            m_cspHandle,
+                            m_algorithmId,
+                            SafeCapiKeyHandle.InvalidHandle,
+                            0,
+                            out newHashAlgorithm
+                        )
                 )
                 {
                     // BadAlgorithmId means that this CSP does not support the specified algorithm, which means

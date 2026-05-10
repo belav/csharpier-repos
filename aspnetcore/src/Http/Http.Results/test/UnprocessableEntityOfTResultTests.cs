@@ -93,7 +93,8 @@ public class UnprocessableEntityOfTResultTests
 
         // Assert
         var producesResponseTypeMetadata = builder
-            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Metadata
+            .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(
             StatusCodes.Status422UnprocessableEntity,

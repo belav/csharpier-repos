@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                 .ConfigureAwait(false);
 
             var compilation = await document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (
                 !CanOfferUseProgramMain(

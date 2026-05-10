@@ -46,9 +46,10 @@ namespace MonoTests.Microsoft.Build.Execution
             var ts = bp.GetToolset("2.0");
             // They are equal
             Assert.AreEqual(
-                ProjectCollection.GlobalProjectCollection.Toolsets.First(t =>
-                    t.ToolsVersion == "2.0"
-                ),
+                ProjectCollection
+                    .GlobalProjectCollection
+                    .Toolsets
+                    .First(t => t.ToolsVersion == "2.0"),
                 ts,
                 "#2"
             );
@@ -58,9 +59,10 @@ namespace MonoTests.Microsoft.Build.Execution
             ts = bp.GetToolset("2.0");
             // They are NOT equal, because ProjectCollection seems to be different.
             Assert.AreNotEqual(
-                ProjectCollection.GlobalProjectCollection.Toolsets.First(t =>
-                    t.ToolsVersion == "2.0"
-                ),
+                ProjectCollection
+                    .GlobalProjectCollection
+                    .Toolsets
+                    .First(t => t.ToolsVersion == "2.0"),
                 ts,
                 "#2"
             );

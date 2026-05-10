@@ -73,10 +73,9 @@ public class InternalPropertyBuilder
                         );
                     }
 
-                    var removed = key.DeclaringEntityType.Builder.HasNoKey(
-                        key,
-                        configurationSource
-                    );
+                    var removed = key.DeclaringEntityType
+                        .Builder
+                        .HasNoKey(key, configurationSource);
                     Check.DebugAssert(removed != null, "removed is null");
                 }
 

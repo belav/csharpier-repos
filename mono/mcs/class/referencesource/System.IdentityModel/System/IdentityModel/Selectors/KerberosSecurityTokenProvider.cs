@@ -31,20 +31,22 @@ namespace System.IdentityModel.Selectors
         )
         {
             if (servicePrincipalName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "servicePrincipalName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("servicePrincipalName");
             if (
                 tokenImpersonationLevel != TokenImpersonationLevel.Identification
                 && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "tokenImpersonationLevel",
-                        SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "tokenImpersonationLevel",
+                            SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)
+                        )
+                    );
             }
 
             this.servicePrincipalName = servicePrincipalName;

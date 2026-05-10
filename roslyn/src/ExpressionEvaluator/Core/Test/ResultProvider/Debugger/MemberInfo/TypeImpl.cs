@@ -239,8 +239,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override MethodInfo[] GetMethods(BindingFlags flags)
         {
-            return this
-                .Type.GetMethods((System.Reflection.BindingFlags)flags)
+            return this.Type
+                .GetMethods((System.Reflection.BindingFlags)flags)
                 .Select(m => new MethodInfoImpl(m))
                 .ToArray();
         }

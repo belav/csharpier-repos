@@ -66,21 +66,23 @@ namespace System.ServiceModel.Activities.Description
                 || dispatchOperation.Parent.ChannelDispatcher.Host.Description.Behaviors == null
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.DispatchOperationInInvalidState)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.DispatchOperationInInvalidState));
             }
 
             ServiceHostBase serviceHost = dispatchOperation.Parent.ChannelDispatcher.Host;
             if (!(serviceHost is WorkflowServiceHost))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.WorkflowBehaviorWithNonWorkflowHost(
-                            typeof(WorkflowOperationBehavior).Name
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.WorkflowBehaviorWithNonWorkflowHost(
+                                typeof(WorkflowOperationBehavior).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             CorrelationKeyCalculator correlationKeyCalculator = null;
@@ -97,8 +99,9 @@ namespace System.ServiceModel.Activities.Description
 
             if (endpoint != null)
             {
-                CorrelationQueryBehavior queryBehavior =
-                    endpoint.Behaviors.Find<CorrelationQueryBehavior>();
+                CorrelationQueryBehavior queryBehavior = endpoint
+                    .Behaviors
+                    .Find<CorrelationQueryBehavior>();
 
                 if (queryBehavior != null)
                 {
@@ -258,10 +261,9 @@ namespace System.ServiceModel.Activities.Description
                         "InstanceKey is null or invalid in GetInstanceTransaction"
                     );
 
-                    tx =
-                        this.InstanceManager.PersistenceProviderDirectory.GetTransactionForInstance(
-                            instanceKey
-                        );
+                    tx = this.InstanceManager
+                        .PersistenceProviderDirectory
+                        .GetTransactionForInstance(instanceKey);
                 }
 
                 return tx;

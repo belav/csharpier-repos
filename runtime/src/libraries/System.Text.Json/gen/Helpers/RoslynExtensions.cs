@@ -66,7 +66,8 @@ namespace System.Text.Json.SourceGeneration
                     }
 
                     ImmutableArray<ITypeSymbol> erasedElements = namedType
-                        .TupleElements.Select(e => compilation.EraseCompileTimeMetadata(e.Type))
+                        .TupleElements
+                        .Select(e => compilation.EraseCompileTimeMetadata(e.Type))
                         .ToImmutableArray();
 
                     type = compilation.CreateTupleTypeSymbol(erasedElements);

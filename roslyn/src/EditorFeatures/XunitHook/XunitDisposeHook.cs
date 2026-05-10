@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 throw new InvalidOperationException();
 
             var xunitUtilities = AppDomain
-                .CurrentDomain.GetAssemblies()
+                .CurrentDomain
+                .GetAssemblies()
                 .Where(static assembly =>
                     assembly.GetName().Name.StartsWith("xunit.runner.utility")
                 )

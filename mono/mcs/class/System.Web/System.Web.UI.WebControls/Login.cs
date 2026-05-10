@@ -246,25 +246,34 @@ namespace System.Web.UI.WebControls
                 table.CellPadding = 0;
 
                 // Title row
-                table.Rows.Add(
-                    CreateRow(
-                        CreateCell(TitleText, null, _login.TitleTextStyle, HorizontalAlign.Center)
-                    )
-                );
-
-                // Instruction row
-                if (_login.InstructionText.Length > 0)
-                {
-                    table.Rows.Add(
+                table
+                    .Rows
+                    .Add(
                         CreateRow(
                             CreateCell(
-                                InstructionText,
+                                TitleText,
                                 null,
-                                _login.instructionTextStyle,
+                                _login.TitleTextStyle,
                                 HorizontalAlign.Center
                             )
                         )
                     );
+
+                // Instruction row
+                if (_login.InstructionText.Length > 0)
+                {
+                    table
+                        .Rows
+                        .Add(
+                            CreateRow(
+                                CreateCell(
+                                    InstructionText,
+                                    null,
+                                    _login.instructionTextStyle,
+                                    HorizontalAlign.Center
+                                )
+                            )
+                        );
                 }
 
                 if (_login.Orientation == Orientation.Horizontal)
@@ -292,18 +301,32 @@ namespace System.Web.UI.WebControls
                 else
                 { // Orientation.Vertical
                     if (_login.TextLayout == LoginTextLayout.TextOnLeft)
-                        table.Rows.Add(
-                            CreateRow(UserNameLabel, UserName, UserNameRequired, _login.LabelStyle)
-                        );
+                        table
+                            .Rows
+                            .Add(
+                                CreateRow(
+                                    UserNameLabel,
+                                    UserName,
+                                    UserNameRequired,
+                                    _login.LabelStyle
+                                )
+                            );
                     else
                     {
                         table.Rows.Add(CreateRow(UserNameLabel, null, null, _login.LabelStyle));
                         table.Rows.Add(CreateRow(null, UserName, UserNameRequired, null));
                     }
                     if (_login.TextLayout == LoginTextLayout.TextOnLeft)
-                        table.Rows.Add(
-                            CreateRow(PasswordLabel, Password, PasswordRequired, _login.LabelStyle)
-                        );
+                        table
+                            .Rows
+                            .Add(
+                                CreateRow(
+                                    PasswordLabel,
+                                    Password,
+                                    PasswordRequired,
+                                    _login.LabelStyle
+                                )
+                            );
                     else
                     {
                         table.Rows.Add(CreateRow(PasswordLabel, null, null, _login.LabelStyle));
@@ -311,9 +334,9 @@ namespace System.Web.UI.WebControls
                     }
                     if (useRememberMe)
                         table.Rows.Add(CreateRow(CreateCell(RememberMe, null, null)));
-                    table.Rows.Add(
-                        CreateRow(CreateCell(LoginButton, null, null, HorizontalAlign.Right))
-                    );
+                    table
+                        .Rows
+                        .Add(CreateRow(CreateCell(LoginButton, null, null, HorizontalAlign.Right)));
                 }
 
                 // Error message row
@@ -1542,10 +1565,12 @@ namespace System.Web.UI.WebControls
 
                 string url = DestinationPageUrl;
                 if (
-                    Page.Request.Path.StartsWith(
-                        FormsAuthentication.LoginUrl,
-                        StringComparison.InvariantCultureIgnoreCase
-                    )
+                    Page.Request
+                        .Path
+                        .StartsWith(
+                            FormsAuthentication.LoginUrl,
+                            StringComparison.InvariantCultureIgnoreCase
+                        )
                 )
                 {
                     if (!String.IsNullOrEmpty(FormsAuthentication.ReturnUrl))

@@ -448,9 +448,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.InvalidNumberOfParametersForAggregateFunction,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System.Data.Entity.Strings.InvalidNumberOfParametersForAggregateFunction(
-                                FQName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidNumberOfParametersForAggregateFunction(FQName)
                         );
                     }
                     else if (Parameters.GetElementAt(0).CollectionKind == CollectionKind.None)
@@ -463,10 +465,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.InvalidParameterTypeForAggregateFunction,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System.Data.Entity.Strings.InvalidParameterTypeForAggregateFunction(
-                                param.Name,
-                                FQName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidParameterTypeForAggregateFunction(param.Name, FQName)
                         );
                     }
                 }
@@ -524,14 +527,18 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                         EdmSchemaErrorSeverity.Error,
                         this,
-                        System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
-                            GetTypeNameForErrorMessage(
-                                _type,
-                                _returnTypeCollectionKind,
-                                _isRefType
-                            ),
-                            this.FQName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .FunctionWithNonPrimitiveTypeNotSupported(
+                                GetTypeNameForErrorMessage(
+                                    _type,
+                                    _returnTypeCollectionKind,
+                                    _isRefType
+                                ),
+                                this.FQName
+                            )
                     );
                 }
             }
@@ -803,9 +810,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.InvalidValueForParameterTypeSemantics,
                             EdmSchemaErrorSeverity.Error,
                             reader,
-                            System.Data.Entity.Strings.InvalidValueForParameterTypeSemanticsAttribute(
-                                value
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidValueForParameterTypeSemanticsAttribute(value)
                         );
 
                         break;

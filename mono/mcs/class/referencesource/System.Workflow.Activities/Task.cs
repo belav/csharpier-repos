@@ -574,10 +574,12 @@ namespace System.Workflow.Activities
             }
 
             templateExecutionContext.ExecuteActivity(templateExecutionContext.Activity);
-            templateExecutionContext.Activity.RegisterForStatusChange(
-                Activity.ClosedEvent,
-                new ReplicatorSubscriber(this, templateExecutionContext.ContextGuid)
-            );
+            templateExecutionContext
+                .Activity
+                .RegisterForStatusChange(
+                    Activity.ClosedEvent,
+                    new ReplicatorSubscriber(this, templateExecutionContext.ContextGuid)
+                );
         }
 
         private void HandleStatusChange(

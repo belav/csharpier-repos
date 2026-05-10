@@ -362,12 +362,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                CacheControlHeaderParser.Parser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                CacheControlHeaderParser
+                    .Parser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (CacheControlHeaderValue?)output ?? new CacheControlHeaderValue();

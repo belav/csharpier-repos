@@ -58,7 +58,8 @@ namespace System.CommandLine.Tests
             await configuration.InvokeAsync("--help");
 
             configuration
-                .Output.ToString()
+                .Output
+                .ToString()
                 .Should()
                 .Match("*Options:*--version*Show version information*");
         }
@@ -110,7 +111,8 @@ namespace System.CommandLine.Tests
             var result = rootCommand.Parse(commandLine, configuration);
 
             result
-                .Errors.Should()
+                .Errors
+                .Should()
                 .Contain(e =>
                     e.Message == "--version option cannot be combined with other arguments."
                 );
@@ -128,8 +130,11 @@ namespace System.CommandLine.Tests
             CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
 
             configuration
-                .RootCommand.Subcommands.Single(c => c.Name == "subcommand")
-                .Options.Should()
+                .RootCommand
+                .Subcommands
+                .Single(c => c.Name == "subcommand")
+                .Options
+                .Should()
                 .BeEmpty();
         }
 
@@ -170,7 +175,8 @@ namespace System.CommandLine.Tests
             var result = rootCommand.Parse("-v subcommand", configuration);
 
             result
-                .Errors.Should()
+                .Errors
+                .Should()
                 .ContainSingle(e =>
                     e.Message == "-v option cannot be combined with other arguments."
                 );

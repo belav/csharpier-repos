@@ -163,18 +163,19 @@ namespace System
             if (!pElementEEType.IsValueType)
                 return;
 
-            IntPtr constructorEntryPoint =
-                RuntimeAugments.TypeLoaderCallbacks.TryGetDefaultConstructorForType(
-                    new RuntimeTypeHandle(pElementEEType)
-                );
+            IntPtr constructorEntryPoint = RuntimeAugments
+                .TypeLoaderCallbacks
+                .TryGetDefaultConstructorForType(new RuntimeTypeHandle(pElementEEType));
             if (constructorEntryPoint == IntPtr.Zero)
                 return;
 
             var constructorFtn = (delegate* <ref byte, void>)
-                RuntimeAugments.TypeLoaderCallbacks.ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(
-                    constructorEntryPoint,
-                    new RuntimeTypeHandle(pElementEEType)
-                );
+                RuntimeAugments
+                    .TypeLoaderCallbacks
+                    .ConvertUnboxingFunctionPointerToUnderlyingNonUnboxingPointer(
+                        constructorEntryPoint,
+                        new RuntimeTypeHandle(pElementEEType)
+                    );
 
             ref byte arrayRef = ref MemoryMarshal.GetArrayDataReference(this);
             nuint elementSize = ElementSize;

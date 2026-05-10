@@ -43,8 +43,9 @@ namespace System.ServiceModel.Channels
             );
 
             // Pick up the MapCertificateToWindowsAccount setting from the configured token authenticator.
-            SecurityCredentialsManager credentialProvider =
-                context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credentialProvider = context
+                .BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (credentialProvider == null)
             {
                 credentialProvider = ServiceCredentials.CreateDefaultCredentials();
@@ -93,12 +94,14 @@ namespace System.ServiceModel.Channels
                 && this.AuthenticationScheme.IsNotSet(AuthenticationSchemes.Anonymous)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    new InvalidOperationException(
-                        SR.GetString(SR.HttpAuthSchemeAndClientCert, this.AuthenticationScheme)
-                    ),
-                    TraceEventType.Error
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelper(
+                        new InvalidOperationException(
+                            SR.GetString(SR.HttpAuthSchemeAndClientCert, this.AuthenticationScheme)
+                        ),
+                        TraceEventType.Error
+                    );
             }
 
             this.channelBindingProvider = new ChannelBindingProviderHelper();
@@ -137,10 +140,9 @@ namespace System.ServiceModel.Channels
         internal override void ApplyHostedContext(string virtualPath, bool isMetadataListener)
         {
             base.ApplyHostedContext(virtualPath, isMetadataListener);
-            useHostedClientCertificateMapping = AspNetEnvironment.Current.ValidateHttpsSettings(
-                virtualPath,
-                ref this.requireClientCertificate
-            );
+            useHostedClientCertificateMapping = AspNetEnvironment
+                .Current
+                .ValidateHttpsSettings(virtualPath, ref this.requireClientCertificate);
 
             // We want to validate the certificate if IIS is set to require a client certificate
             if (this.requireClientCertificate)
@@ -442,9 +444,9 @@ namespace System.ServiceModel.Channels
                             this.AuthenticationScheme,
                             result
                         );
-                        Exception exception = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(message)
-                        );
+                        Exception exception = DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new MessageSecurityException(message));
                         WriteAuditEvent(
                             AuditLevel.Failure,
                             (clientCertificate != null)
@@ -534,9 +536,9 @@ namespace System.ServiceModel.Channels
                             this.AuthenticationScheme,
                             result
                         );
-                        Exception exception = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(message)
-                        );
+                        Exception exception = DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new MessageSecurityException(message));
                         WriteAuditEvent(
                             AuditLevel.Failure,
                             (certificateEx != null)

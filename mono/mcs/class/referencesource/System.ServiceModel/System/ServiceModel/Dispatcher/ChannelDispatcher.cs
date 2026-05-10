@@ -251,13 +251,15 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
 
                 this.ThrowIfDisposedOrImmutable();
@@ -355,9 +357,9 @@ namespace System.ServiceModel.Dispatcher
                         break;
 
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("value")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.ThrowIfDisposedOrImmutable();
@@ -378,24 +380,28 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.ThrowIfDisposedOrImmutable();
@@ -697,9 +703,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateOuterExceptionWithEndpointsInformation(e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
                 }
             }
         }
@@ -782,9 +788,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateOuterExceptionWithEndpointsInformation(e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
                 }
             }
             else
@@ -803,9 +809,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (InvalidOperationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateOuterExceptionWithEndpointsInformation(e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(CreateOuterExceptionWithEndpointsInformation(e));
                 }
             }
             else

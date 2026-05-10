@@ -30,7 +30,8 @@ internal static class OmniSharpFindDefinitionService
                     new OmniSharpNavigableItem(
                         original.DisplayTaggedParts,
                         await original
-                            .Document.GetRequiredDocumentAsync(solution, cancellationToken)
+                            .Document
+                            .GetRequiredDocumentAsync(solution, cancellationToken)
                             .ConfigureAwait(false),
                         original.SourceSpan
                     ),

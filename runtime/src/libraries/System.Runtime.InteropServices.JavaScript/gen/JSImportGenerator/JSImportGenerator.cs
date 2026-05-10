@@ -36,16 +36,18 @@ namespace Microsoft.Interop.JavaScript
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Collect all methods adorned with JSImportAttribute
-            var attributedMethods = context.SyntaxProvider.ForAttributeWithMetadataName(
-                Constants.JSImportAttribute,
-                static (node, ct) => node is MethodDeclarationSyntax,
-                static (context, ct) =>
-                    new
-                    {
-                        Syntax = (MethodDeclarationSyntax)context.TargetNode,
-                        Symbol = (IMethodSymbol)context.TargetSymbol,
-                    }
-            );
+            var attributedMethods = context
+                .SyntaxProvider
+                .ForAttributeWithMetadataName(
+                    Constants.JSImportAttribute,
+                    static (node, ct) => node is MethodDeclarationSyntax,
+                    static (context, ct) =>
+                        new
+                        {
+                            Syntax = (MethodDeclarationSyntax)context.TargetNode,
+                            Symbol = (IMethodSymbol)context.TargetSymbol,
+                        }
+                );
 
             // Validate if attributed methods can have source generated
             var methodsWithDiagnostics = attributedMethods.Select(

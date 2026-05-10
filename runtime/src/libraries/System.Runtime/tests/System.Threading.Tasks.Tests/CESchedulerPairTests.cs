@@ -744,7 +744,8 @@ namespace System.Threading.Tasks.Tests
                                                         Task.Factory.StartNew(
                                                             () =>
                                                             {
-                                                                Task.Factory.StartNew(
+                                                                Task.Factory
+                                                                    .StartNew(
                                                                         () =>
                                                                         {
                                                                             throw new InvalidOperationException(

@@ -413,10 +413,12 @@ namespace System.Data.Entity.Design
                             break;
                         case BuiltInTypeKind.EntitySet:
                             EntitySet set = (EntitySet)storeSet;
-                            session.CandidateCollapsedAssociations.Add(
-                                set,
-                                new OneToOneMappingSerializer.CollapsedEntityAssociationSet(set)
-                            );
+                            session
+                                .CandidateCollapsedAssociations
+                                .Add(
+                                    set,
+                                    new OneToOneMappingSerializer.CollapsedEntityAssociationSet(set)
+                                );
                             break;
                         default:
                             // error
@@ -471,9 +473,10 @@ namespace System.Data.Entity.Design
                 }
 
                 // save the set that needs to be created and mapped
-                session.MappingLookups.CollapsedEntityAssociationSets.AddRange(
-                    session.CandidateCollapsedAssociations.Values
-                );
+                session
+                    .MappingLookups
+                    .CollapsedEntityAssociationSets
+                    .AddRange(session.CandidateCollapsedAssociations.Values);
 
                 // do this in a seperate loop so we are sure all the necessary EntitySets have been created
                 foreach (
@@ -670,10 +673,12 @@ namespace System.Data.Entity.Design
                 // Create function import parameters.
                 UniqueIdentifierService usedParameterNames = new UniqueIdentifierService(false);
                 var parameters = storeFunction
-                    .Parameters.Select(p => CreateFunctionImportParameter(p, usedParameterNames))
+                    .Parameters
+                    .Select(p => CreateFunctionImportParameter(p, usedParameterNames))
                     .ToArray();
                 var failedStoreParameterName = storeFunction
-                    .Parameters.Select(p => p.Name)
+                    .Parameters
+                    .Select(p => p.Name)
                     .Except(parameters.Select(p => p.Name))
                     .FirstOrDefault();
                 if (failedStoreParameterName != null)
@@ -730,9 +735,10 @@ namespace System.Data.Entity.Design
                 modelEntityContainer.AddFunctionImport(functionImport);
 
                 // Add mapping tuple.
-                session.MappingLookups.StoreFunctionToFunctionImport.Add(
-                    Tuple.Create(storeFunction, functionImport)
-                );
+                session
+                    .MappingLookups
+                    .StoreFunctionToFunctionImport
+                    .Add(Tuple.Create(storeFunction, functionImport));
             }
         }
 
@@ -893,10 +899,9 @@ namespace System.Data.Entity.Design
                     {
                         if (!session.FkProperties.ContainsKey(property))
                         {
-                            session.FkProperties.Add(
-                                property,
-                                ((AssociationSet)storeSet).ElementType
-                            );
+                            session
+                                .FkProperties
+                                .Add(property, ((AssociationSet)storeSet).ElementType);
                         }
                     }
                 }
@@ -1017,10 +1022,10 @@ namespace System.Data.Entity.Design
 
             EntityType foundEntity;
             if (
-                session.MappingLookups.StoreEntityTypeToModelEntityType.TryGetValue(
-                    storeEntityType,
-                    out foundEntity
-                )
+                session
+                    .MappingLookups
+                    .StoreEntityTypeToModelEntityType
+                    .TryGetValue(storeEntityType, out foundEntity)
             )
             {
                 // this entity type is used in two different entity sets
@@ -1043,11 +1048,9 @@ namespace System.Data.Entity.Design
             {
                 // add fk properties only if requested
                 EdmMember member;
-                bool isKey = storeEntityType.KeyMembers.TryGetValue(
-                    storeProperty.Name,
-                    false,
-                    out member
-                );
+                bool isKey = storeEntityType
+                    .KeyMembers
+                    .TryGetValue(storeProperty.Name, false, out member);
 
                 AssociationType association;
                 if (
@@ -1076,10 +1079,10 @@ namespace System.Data.Entity.Design
                 keyMemberNames,
                 members
             );
-            session.MappingLookups.StoreEntityTypeToModelEntityType.Add(
-                storeEntityType,
-                entityType
-            );
+            session
+                .MappingLookups
+                .StoreEntityTypeToModelEntityType
+                .Add(storeEntityType, entityType);
             return entityType;
         }
 
@@ -1120,7 +1123,8 @@ namespace System.Data.Entity.Design
                             false /*isFixLength*/
                         ),
                         storeTypeUsage
-                            .Facets.GetValue(DesignXmlConstants.StoreGeneratedPattern, false)
+                            .Facets
+                            .GetValue(DesignXmlConstants.StoreGeneratedPattern, false)
                             .Value
                     )
                 );
@@ -1181,10 +1185,10 @@ namespace System.Data.Entity.Design
                 ];
                 AssociationSetEnd setEnd = new AssociationSetEnd(entitySet, set, end);
                 set.AddAssociationSetEnd(setEnd);
-                session.MappingLookups.StoreAssociationSetEndToModelAssociationSetEnd.Add(
-                    storeEnd,
-                    setEnd
-                );
+                session
+                    .MappingLookups
+                    .StoreAssociationSetEndToModelAssociationSetEnd
+                    .Add(storeEnd, setEnd);
             }
 
             // don't need a referential constraint
@@ -1204,17 +1208,17 @@ namespace System.Data.Entity.Design
             AssociationType association;
             // we will get a value when the same association is used for multiple association sets
             if (
-                !session.MappingLookups.StoreAssociationTypeToModelAssociationType.TryGetValue(
-                    storeAssociationSet.ElementType,
-                    out association
-                )
+                !session
+                    .MappingLookups
+                    .StoreAssociationTypeToModelAssociationType
+                    .TryGetValue(storeAssociationSet.ElementType, out association)
             )
             {
                 association = CreateModelAssociationType(session, storeAssociationSet.ElementType);
-                session.MappingLookups.StoreAssociationTypeToModelAssociationType.Add(
-                    storeAssociationSet.ElementType,
-                    association
-                );
+                session
+                    .MappingLookups
+                    .StoreAssociationTypeToModelAssociationType
+                    .Add(storeAssociationSet.ElementType, association);
             }
 
             string name = CreateModelName(
@@ -1226,16 +1230,16 @@ namespace System.Data.Entity.Design
             foreach (AssociationSetEnd storeEnd in storeAssociationSet.AssociationSetEnds)
             {
                 AssociationSetEnd end = CreateModelAssociationSetEnd(session, storeEnd, set);
-                session.MappingLookups.StoreAssociationSetEndToModelAssociationSetEnd.Add(
-                    storeEnd,
-                    end
-                );
+                session
+                    .MappingLookups
+                    .StoreAssociationSetEndToModelAssociationSetEnd
+                    .Add(storeEnd, end);
                 set.AddAssociationSetEnd(end);
             }
-            session.MappingLookups.StoreAssociationSetToModelAssociationSet.Add(
-                storeAssociationSet,
-                set
-            );
+            session
+                .MappingLookups
+                .StoreAssociationSetToModelAssociationSet
+                .Add(storeAssociationSet, set);
             return set;
         }
 
@@ -1299,10 +1303,10 @@ namespace System.Data.Entity.Design
                     endMultiplicityOverride,
                     usedEndMemberNames
                 );
-                session.MappingLookups.StoreAssociationEndMemberToModelAssociationEndMember.Add(
-                    storeEndMember,
-                    end
-                );
+                session
+                    .MappingLookups
+                    .StoreAssociationEndMemberToModelAssociationEndMember
+                    .Add(storeEndMember, end);
                 association.AddMember(end);
             }
 
@@ -1340,15 +1344,15 @@ namespace System.Data.Entity.Design
             bool nullableColumnsImplyingOneToOneMultiplicity = false;
             if (this.GenerateForeignKeyProperties)
             {
-                nullableColumnsImplyingOneToOneMultiplicity = storeConstraint.ToProperties.All(p =>
-                    p.Nullable == false
-                );
+                nullableColumnsImplyingOneToOneMultiplicity = storeConstraint
+                    .ToProperties
+                    .All(p => p.Nullable == false);
             }
             else
             {
-                nullableColumnsImplyingOneToOneMultiplicity = storeConstraint.ToProperties.Any(p =>
-                    p.Nullable == false
-                );
+                nullableColumnsImplyingOneToOneMultiplicity = storeConstraint
+                    .ToProperties
+                    .Any(p => p.Nullable == false);
             }
 
             if (

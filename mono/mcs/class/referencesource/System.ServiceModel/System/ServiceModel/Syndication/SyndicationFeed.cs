@@ -123,11 +123,13 @@ namespace System.ServiceModel.Syndication
             {
                 if (cloneItems)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.UnbufferedItemsCannotBeCloned)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UnbufferedItemsCannotBeCloned)
+                            )
+                        );
                 }
                 this.items = source.items;
             }
@@ -291,11 +293,13 @@ namespace System.ServiceModel.Syndication
                 rssSerializer.ReadFrom(reader);
                 return rssSerializer.Feed as TSyndicationFeed;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
+                    )
+                );
         }
 
         public virtual SyndicationFeed Clone(bool cloneItems)

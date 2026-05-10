@@ -156,7 +156,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     try
                     {
                         await context
-                            .Request.Body.FillEntireBufferAsync(data, cts.Token)
+                            .Request
+                            .Body
+                            .FillEntireBufferAsync(data, cts.Token)
                             .DefaultTimeout();
 
                         Assert.Equal("Hello ", Encoding.ASCII.GetString(data));
@@ -394,17 +396,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(() =>
-            {
-                local.Value++;
-                return Task.CompletedTask;
-            });
+            context
+                .Response
+                .OnStarting(() =>
+                {
+                    local.Value++;
+                    return Task.CompletedTask;
+                });
 
-            context.Response.OnCompleted(() =>
-            {
-                local.Value++;
-                return Task.CompletedTask;
-            });
+            context
+                .Response
+                .OnCompleted(() =>
+                {
+                    local.Value++;
+                    return Task.CompletedTask;
+                });
 
             local.Value++;
             context.Response.ContentLength = 1;
@@ -431,17 +437,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(() =>
-            {
-                local.Value.Value++;
-                return Task.CompletedTask;
-            });
+            context
+                .Response
+                .OnStarting(() =>
+                {
+                    local.Value.Value++;
+                    return Task.CompletedTask;
+                });
 
-            context.Response.OnCompleted(() =>
-            {
-                local.Value.Value++;
-                return Task.CompletedTask;
-            });
+            context
+                .Response
+                .OnCompleted(() =>
+                {
+                    local.Value.Value++;
+                    return Task.CompletedTask;
+                });
 
             local.Value.Value++;
             context.Response.ContentLength = 1;
@@ -466,17 +476,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(async () =>
-            {
-                local.Value++;
-                Assert.Equal(1, local.Value);
-            });
+            context
+                .Response
+                .OnStarting(async () =>
+                {
+                    local.Value++;
+                    Assert.Equal(1, local.Value);
+                });
 
-            context.Response.OnCompleted(async () =>
-            {
-                local.Value++;
-                Assert.Equal(1, local.Value);
-            });
+            context
+                .Response
+                .OnCompleted(async () =>
+                {
+                    local.Value++;
+                    Assert.Equal(1, local.Value);
+                });
 
             context.Response.ContentLength = 1;
             return context.Response.WriteAsync($"{value}");
@@ -498,17 +512,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(async () =>
-            {
-                local.Value++;
-                Assert.Equal(2, local.Value);
-            });
+            context
+                .Response
+                .OnStarting(async () =>
+                {
+                    local.Value++;
+                    Assert.Equal(2, local.Value);
+                });
 
-            context.Response.OnCompleted(async () =>
-            {
-                local.Value++;
-                Assert.Equal(2, local.Value);
-            });
+            context
+                .Response
+                .OnCompleted(async () =>
+                {
+                    local.Value++;
+                    Assert.Equal(2, local.Value);
+                });
 
             local.Value++;
             Assert.Equal(1, local.Value);
@@ -539,17 +557,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value); // Start
 
-            context.Response.OnStarting(async () =>
-            {
-                local.Value.Value++;
-                Assert.Equal(2, local.Value.Value); // Second
-            });
+            context
+                .Response
+                .OnStarting(async () =>
+                {
+                    local.Value.Value++;
+                    Assert.Equal(2, local.Value.Value); // Second
+                });
 
-            context.Response.OnCompleted(async () =>
-            {
-                local.Value.Value++;
-                Assert.Equal(4, local.Value.Value); // Fourth
-            });
+            context
+                .Response
+                .OnCompleted(async () =>
+                {
+                    local.Value.Value++;
+                    Assert.Equal(4, local.Value.Value); // Fourth
+                });
 
             local.Value.Value++;
             Assert.Equal(1, local.Value.Value); // First
@@ -578,21 +600,25 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(() =>
-            {
-                local.Value++;
-                Assert.Equal(2, local.Value);
+            context
+                .Response
+                .OnStarting(() =>
+                {
+                    local.Value++;
+                    Assert.Equal(2, local.Value);
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                });
 
-            context.Response.OnCompleted(() =>
-            {
-                local.Value++;
-                Assert.Equal(2, local.Value);
+            context
+                .Response
+                .OnCompleted(() =>
+                {
+                    local.Value++;
+                    Assert.Equal(2, local.Value);
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                });
 
             local.Value++;
             Assert.Equal(1, local.Value);
@@ -653,9 +679,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             )
         )
         {
-            var requestId = await server.HttpClientSlim.GetStringAsync(
-                $"http://localhost:{server.Port}/"
-            );
+            var requestId = await server
+                .HttpClientSlim
+                .GetStringAsync($"http://localhost:{server.Port}/");
             Assert.Equal(knownId, requestId);
         }
     }
@@ -690,9 +716,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 tasks.Add(
                     Task.Run(async () =>
                     {
-                        var id = await server.HttpClientSlim.GetStringAsync(
-                            $"http://localhost:{server.Port}/"
-                        );
+                        var id = await server
+                            .HttpClientSlim
+                            .GetStringAsync($"http://localhost:{server.Port}/");
                         Assert.DoesNotContain(id, usedIds.ToArray());
                         usedIds.Add(id);
                     })
@@ -720,11 +746,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     while (offset < identifierLength)
                     {
-                        var read = await connection.Reader.ReadAsync(
-                            buffer,
-                            offset,
-                            identifierLength - offset
-                        );
+                        var read = await connection
+                            .Reader
+                            .ReadAsync(buffer, offset, identifierLength - offset);
                         offset += read;
 
                         Assert.NotEqual(0, read);
@@ -1064,7 +1088,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 async httpContext =>
                 {
                     var readResult = await httpContext
-                        .Request.BodyReader.ReadAsync()
+                        .Request
+                        .BodyReader
+                        .ReadAsync()
                         .AsTask()
                         .DefaultTimeout();
                     // This will hang if 0 content length is not assumed by the server
@@ -1153,10 +1179,10 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
                     // This will hang if 0 content length is not assumed by the server
                     Assert.Equal(5, readResult.Buffer.Length);
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
                     Assert.Equal(5, readResult.Buffer.Length);
                 },
@@ -1197,19 +1223,19 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
                     // This will hang if 0 content length is not assumed by the server
                     Assert.Equal(5, readResult.Buffer.Length);
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     for (var i = 0; i < 2; i++)
                     {
                         readResult = await httpContext.Request.BodyReader.ReadAsync();
                         Assert.Equal(5, readResult.Buffer.Length);
-                        httpContext.Request.BodyReader.AdvanceTo(
-                            readResult.Buffer.Start,
-                            readResult.Buffer.End
-                        );
+                        httpContext
+                            .Request
+                            .BodyReader
+                            .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     }
                 },
                 testContext
@@ -1318,17 +1344,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(3, readResult.Buffer.Length);
                     tcs.SetResult();
 
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     // Buffer 1 more byte.
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     tcs2.SetResult();
 
                     // Buffer 1 last byte.
@@ -1336,10 +1362,10 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     Assert.Equal(5, readResult.Buffer.Length);
 
                     // Do one more read to ensure completion is always observed.
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
                     Assert.True(readResult.IsCompleted);
                 },
@@ -1376,16 +1402,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var readResult = await httpContext.Request.BodyReader.ReadAsync();
 
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
 
                     readResult = await httpContext.Request.BodyReader.ReadAsync();
-                    httpContext.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Slice(1).Start,
-                        readResult.Buffer.End
-                    );
+                    httpContext
+                        .Request
+                        .BodyReader
+                        .AdvanceTo(readResult.Buffer.Slice(1).Start, readResult.Buffer.End);
                 },
                 testContext
             )
@@ -1837,7 +1863,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     using (
                         var stream = await context
-                            .Features.Get<IHttpUpgradeFeature>()
+                            .Features
+                            .Get<IHttpUpgradeFeature>()
                             .UpgradeAsync()
                     )
                     {
@@ -2012,7 +2039,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     var buffer = new byte[5];
                     var length = await context
-                        .Request.Body.FillBufferUntilEndAsync(buffer)
+                        .Request
+                        .Body
+                        .FillBufferUntilEndAsync(buffer)
                         .DefaultTimeout();
 
                     Assert.Equal(5, length);
@@ -2138,9 +2167,11 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -2187,9 +2218,11 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -2275,9 +2308,11 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
                     response.Headers["Content-Length"] = new[] { "11" };
 
-                    await response.BodyWriter.WriteAsync(
-                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
-                    );
+                    await response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                        );
                 },
                 testContext
             )
@@ -2375,7 +2410,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 {
                     requestCount++;
                     var persistentStateCollection = context
-                        .Features.Get<IPersistentStateFeature>()
+                        .Features
+                        .Get<IPersistentStateFeature>()
                         .State;
                     if (persistentStateCollection.TryGetValue("Counter", out var value))
                     {

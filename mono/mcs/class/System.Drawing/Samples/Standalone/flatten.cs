@@ -84,11 +84,9 @@ namespace Samples
             int fcount = path.PointCount;
             path.Dispose();
 
-            infoLabel.Text = System.String.Format(
-                "Path Points: {0}, Flat Points: {1}",
-                pcount,
-                fcount
-            );
+            infoLabel.Text = System
+                .String
+                .Format("Path Points: {0}, Flat Points: {1}", pcount, fcount);
         }
 
         private void redrawButton_Click(object sender, EventArgs e)

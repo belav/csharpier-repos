@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             // first see if we need to re-order our primary constructor parameters.
             var propertiesToAssign = positionalParameterInfos.SelectAsArray(info => info.Symbol);
             var primaryConstructor = typeDeclaration
-                .Members.OfType<ConstructorDeclarationSyntax>()
+                .Members
+                .OfType<ConstructorDeclarationSyntax>()
                 .FirstOrDefault(constructor =>
                 {
                     var constructorSymbol = (IMethodSymbol)
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     // We can't use something like set equality because some parameter types may be duplicate.
                     // So, we order the types in a consistent way (by name) and then compare the lists of types.
                     return constructorSymbol
-                            .Parameters.SelectAsArray(parameter => parameter.Type)
+                            .Parameters
+                            .SelectAsArray(parameter => parameter.Type)
                             .OrderBy(type => type.Name)
                             .SequenceEqual(
                                 propertiesToAssign
@@ -209,9 +211,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     positionalParameterInfos = propertiesToAssign.SelectAsArray(symbol =>
                         positionalParameterInfos.First(info => info.Symbol.Equals(symbol))
                     );
-                    defaults = constructor.ParameterList.Parameters.SelectAsArray(param =>
-                        param.Default
-                    );
+                    defaults = constructor
+                        .ParameterList
+                        .Parameters
+                        .SelectAsArray(param => param.Default);
                     documentEditor.RemoveNode(constructor);
                 }
                 else
@@ -243,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     // already produce an error as the signatures conflict. Better to leave as is and show errors.
                     else if (
                         !constructorSymbol
-                            .Parameters.Select(parameter => parameter.Type)
+                            .Parameters
+                            .Select(parameter => parameter.Type)
                             .SequenceEqual(propertiesToAssign.Select(property => property.Type))
                     )
                     {
@@ -284,21 +288,25 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
             // get equality operators and potentially remove them
             var equalsOp = (OperatorDeclarationSyntax?)
-                typeDeclaration.Members.FirstOrDefault(member =>
-                    member
-                        is OperatorDeclarationSyntax
-                        {
-                            OperatorToken.RawKind: (int)SyntaxKind.EqualsEqualsToken
-                        }
-                );
+                typeDeclaration
+                    .Members
+                    .FirstOrDefault(member =>
+                        member
+                            is OperatorDeclarationSyntax
+                            {
+                                OperatorToken.RawKind: (int)SyntaxKind.EqualsEqualsToken
+                            }
+                    );
             var notEqualsOp = (OperatorDeclarationSyntax?)
-                typeDeclaration.Members.FirstOrDefault(member =>
-                    member
-                        is OperatorDeclarationSyntax
-                        {
-                            OperatorToken.RawKind: (int)SyntaxKind.ExclamationEqualsToken
-                        }
-                );
+                typeDeclaration
+                    .Members
+                    .FirstOrDefault(member =>
+                        member
+                            is OperatorDeclarationSyntax
+                            {
+                                OperatorToken.RawKind: (int)SyntaxKind.ExclamationEqualsToken
+                            }
+                    );
             if (equalsOp != null && notEqualsOp != null)
             {
                 var equalsBodyOperation = (IMethodBodyOperation)
@@ -539,9 +547,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         : typeDeclaration.Keyword.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
                     // remove trailing trivia from places where we would want to insert the parameter list before a line break
                     typeDeclaration.Identifier.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
-                    typeDeclaration.TypeParameterList?.WithTrailingTrivia(
-                        SyntaxFactory.ElasticMarker
-                    ),
+                    typeDeclaration
+                        .TypeParameterList
+                        ?.WithTrailingTrivia(SyntaxFactory.ElasticMarker),
                     SyntaxFactory
                         .ParameterList(SyntaxFactory.SeparatedList(propertiesToAddAsParams))
                         .WithAppendedTrailingTrivia(constructorTrivia),
@@ -576,24 +584,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             }
 
             return SyntaxFactory.List(
-                result.Declaration.AttributeLists.SelectAsArray(attributeList =>
-                {
-                    if (attributeList.Target == null)
+                result
+                    .Declaration
+                    .AttributeLists
+                    .SelectAsArray(attributeList =>
                     {
-                        // convert attributes attached to the property with no target into "property :" targeted attributes
-                        return attributeList
-                            .WithTarget(
-                                SyntaxFactory.AttributeTargetSpecifier(
-                                    SyntaxFactory.Token(SyntaxKind.PropertyKeyword)
+                        if (attributeList.Target == null)
+                        {
+                            // convert attributes attached to the property with no target into "property :" targeted attributes
+                            return attributeList
+                                .WithTarget(
+                                    SyntaxFactory.AttributeTargetSpecifier(
+                                        SyntaxFactory.Token(SyntaxKind.PropertyKeyword)
+                                    )
                                 )
-                            )
-                            .WithoutTrivia();
-                    }
-                    else
-                    {
-                        return attributeList.WithoutTrivia();
-                    }
-                })
+                                .WithoutTrivia();
+                        }
+                        else
+                        {
+                            return attributeList.WithoutTrivia();
+                        }
+                    })
             );
         }
 
@@ -634,10 +645,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 foreach (var objectCreationExpression in objectCreationExpressions)
                 {
                     var objectCreationOperation = (IObjectCreationOperation)
-                        documentEditor.SemanticModel.GetRequiredOperation(
-                            objectCreationExpression,
-                            cancellationToken
-                        );
+                        documentEditor
+                            .SemanticModel
+                            .GetRequiredOperation(objectCreationExpression, cancellationToken);
 
                     var expressions = ConvertToRecordHelpers.GetAssignmentValuesFromObjectCreation(
                         objectCreationOperation,
@@ -652,9 +662,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         // if initializer was null we wouldn't have found expressions
                         // any constructed nodes (default/null) should give -1 because parent is null
                         expression =>
-                            objectCreationExpression.Initializer!.Expressions.IndexOf(
-                                expression.Parent
-                            )
+                            objectCreationExpression
+                                .Initializer!
+                                .Expressions
+                                .IndexOf(expression.Parent)
                     );
 
                     documentEditor.ReplaceNode(
@@ -798,16 +809,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             )
             {
                 // insert parameters after summary node and the extra newline or at start if no summary
-                var summaryIndex = originalClassDoc.Content.IndexOf(node =>
-                    node is XmlElementSyntax element
-                    && element.StartTag?.Name.LocalName.ValueText
-                        == DocumentationCommentXmlNames.SummaryElementName
-                );
+                var summaryIndex = originalClassDoc
+                    .Content
+                    .IndexOf(node =>
+                        node is XmlElementSyntax element
+                        && element.StartTag?.Name.LocalName.ValueText
+                            == DocumentationCommentXmlNames.SummaryElementName
+                    );
 
                 // if not found, summaryIndex + 1 = -1 + 1 = 0, so our params go to the start
                 newClassDocComment = originalClassDoc.WithContent(
                     originalClassDoc
-                        .Content.Replace(originalClassDoc.Content[0], originalClassDoc.Content[0])
+                        .Content
+                        .Replace(originalClassDoc.Content[0], originalClassDoc.Content[0])
                         .InsertRange(summaryIndex + 1, propertyParamComments)
                 );
             }
@@ -821,7 +835,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             result => !result.IsInherited,
                             result =>
                                 result
-                                    .Declaration!.GetLeadingTrivia()
+                                    .Declaration!
+                                    .GetLeadingTrivia()
                                     .FirstOrNull(trivia => trivia.IsDocComment())
                         )
                         .FirstOrDefault(t => t != null)
@@ -1009,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 {
                     // get the documentation comment
                     var potentialDocComment = result
-                        .Declaration.GetLeadingTrivia()
+                        .Declaration
+                        .GetLeadingTrivia()
                         .FirstOrNull(trivia => trivia.IsDocComment());
                     var paramContent = ImmutableArray<XmlNodeSyntax>.Empty;
                     if (
@@ -1018,11 +1034,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     )
                     {
                         // get the summary node if there is one
-                        var summaryNode = docComment.Content.FirstOrDefault(node =>
-                            node is XmlElementSyntax element
-                            && element.StartTag?.Name.LocalName.ValueText
-                                == DocumentationCommentXmlNames.SummaryElementName
-                        );
+                        var summaryNode = docComment
+                            .Content
+                            .FirstOrDefault(node =>
+                                node is XmlElementSyntax element
+                                && element.StartTag?.Name.LocalName.ValueText
+                                    == DocumentationCommentXmlNames.SummaryElementName
+                            );
 
                         if (summaryNode != null)
                         {
@@ -1079,8 +1097,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                                             kind: SyntaxKind.XmlTextLiteralToken
                                                         ) textLiteral,
                                                     ]
-                                                && textLiteral.Text.GetFirstNonWhitespaceIndexInString()
-                                                    == -1
+                                                && textLiteral
+                                                    .Text
+                                                    .GetFirstNonWhitespaceIndexInString() == -1
                                             )
                                             {
                                                 // the last text token contains a new line, then a whitespace only text (which would start the closing tag)

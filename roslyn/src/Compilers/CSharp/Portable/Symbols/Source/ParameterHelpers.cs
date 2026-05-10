@@ -310,9 +310,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 Debug.Assert(methodOwner?.MethodKind != MethodKind.LambdaMethod);
                 bool allowShadowingNames =
-                    withTypeParametersBinder.Compilation.IsFeatureEnabled(
-                        MessageID.IDS_FeatureNameShadowingInNestedFunctions
-                    )
+                    withTypeParametersBinder
+                        .Compilation
+                        .IsFeatureEnabled(MessageID.IDS_FeatureNameShadowingInNestedFunctions)
                     && methodOwner?.MethodKind == MethodKind.LocalFunction;
 
                 withTypeParametersBinder.ValidateParameterNameConflicts(
@@ -842,10 +842,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         if (parsingLambdaParams)
                         {
-                            MessageID.IDS_FeatureLambdaParamsArray.CheckFeatureAvailability(
-                                diagnostics,
-                                modifier
-                            );
+                            MessageID
+                                .IDS_FeatureLambdaParamsArray
+                                .CheckFeatureAvailability(diagnostics, modifier);
                         }
                         break;
 
@@ -1050,7 +1049,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // error CS1737: Optional parameters must appear after all required parameters
                 Location loc = ((ParameterSyntax)syntax)
-                    .Identifier.GetNextToken(includeZeroWidth: true)
+                    .Identifier
+                    .GetNextToken(includeZeroWidth: true)
                     .GetLocation(); //could be missing
                 diagnostics.Add(ErrorCode.ERR_DefaultValueBeforeRequiredValue, loc);
             }
@@ -1114,11 +1114,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
                 diagnostics
             );
-            Conversion conversion = binder.Conversions.ClassifyImplicitConversionFromExpression(
-                defaultExpression,
-                parameterType,
-                ref useSiteInfo
-            );
+            Conversion conversion = binder
+                .Conversions
+                .ClassifyImplicitConversionFromExpression(
+                    defaultExpression,
+                    parameterType,
+                    ref useSiteInfo
+                );
             diagnostics.Add(defaultExpression.Syntax, useSiteInfo);
 
             var refKind = GetModifiers(

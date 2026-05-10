@@ -296,8 +296,10 @@ class TestClass
         public void Test01_NamedTypeAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             Assert.IsType<RetargetingNamedTypeSymbol>(testClass);
             test.TestAttributeRetargeting(testClass);
@@ -307,8 +309,10 @@ class TestClass
         public void Test01_FieldAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             FieldSymbol testField = testClass
                 .GetMembers("testField")
@@ -322,8 +326,10 @@ class TestClass
         public void Test01_PropertyAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             PropertySymbol testProperty = testClass
                 .GetMembers("TestProperty")
@@ -341,8 +347,10 @@ class TestClass
         public void Test01_MethodAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             MethodSymbol testMethod = testClass
                 .GetMembers("TestMethod")
@@ -356,8 +364,10 @@ class TestClass
         public void Test01_TypeParameterAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             MethodSymbol testMethod = testClass
                 .GetMembers("TestMethod")
@@ -373,8 +383,10 @@ class TestClass
         public void Test01_ParameterAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             MethodSymbol testMethod = testClass
                 .GetMembers("TestMethod")
@@ -390,8 +402,10 @@ class TestClass
         public void Test01_ReturnTypeAttribute()
         {
             Test01 test = new Test01();
-            var testClass = test
-                .c2.Compilation.GlobalNamespace.GetTypeMembers("TestClass")
+            var testClass = test.c2
+                .Compilation
+                .GlobalNamespace
+                .GetTypeMembers("TestClass")
                 .Single();
             MethodSymbol testMethod = testClass
                 .GetMembers("TestMethod")

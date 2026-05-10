@@ -67,21 +67,23 @@ namespace System.IdentityModel.Diagnostics
                         typeof(TraceUtility)
                     )
                 );
-                string msdnTraceCode =
-                    System.ServiceModel.Diagnostics.LegacyDiagnosticTrace.GenerateMsdnTraceCode(
-                        "System.IdentityModel",
-                        traceCodes[traceCode]
+                string msdnTraceCode = System
+                    .ServiceModel
+                    .Diagnostics
+                    .LegacyDiagnosticTrace
+                    .GenerateMsdnTraceCode("System.IdentityModel", traceCodes[traceCode]);
+                DiagnosticUtility
+                    .DiagnosticTrace
+                    .TraceEvent(
+                        severity,
+                        traceCode,
+                        msdnTraceCode,
+                        traceDescription,
+                        extendedData,
+                        exception,
+                        activityId,
+                        source
                     );
-                DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                    severity,
-                    traceCode,
-                    msdnTraceCode,
-                    traceDescription,
-                    extendedData,
-                    exception,
-                    activityId,
-                    source
-                );
             }
         }
 

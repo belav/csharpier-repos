@@ -77,10 +77,9 @@ namespace System.Web.Configuration
             HttpBrowserCapabilities bcap = GetHttpBrowserCapabilitiesFromBrowscapini(ua);
             GetConfigCapabilities_called = true;
             if (HttpApplicationFactory.AppBrowsersFiles.Length > 0)
-                bcap = HttpApplicationFactory.CapabilitiesProcessor.Process(
-                    request,
-                    bcap.Capabilities
-                );
+                bcap = HttpApplicationFactory
+                    .CapabilitiesProcessor
+                    .Process(request, bcap.Capabilities);
             bcap.useragent = ua;
             bcap.Init();
             return bcap;

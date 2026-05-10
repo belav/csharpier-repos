@@ -376,8 +376,9 @@ namespace System.Data.Common.Utils
         {
             Debug.Assert(null != end);
             // there must be exactly one ("Single") other end that isn't ("Filter") this end
-            AssociationSetEnd otherEnd = end
-                .ParentAssociationSet.AssociationSetEnds.Where(e => !e.EdmEquals(end))
+            AssociationSetEnd otherEnd = end.ParentAssociationSet
+                .AssociationSetEnds
+                .Where(e => !e.EdmEquals(end))
                 .Single();
             return otherEnd;
         }
@@ -389,11 +390,9 @@ namespace System.Data.Common.Utils
             Debug.Assert(function != null);
             MetadataProperty isComposableProperty;
             if (
-                function.MetadataProperties.TryGetValue(
-                    "IsComposableAttribute",
-                    false,
-                    out isComposableProperty
-                )
+                function
+                    .MetadataProperties
+                    .TryGetValue("IsComposableAttribute", false, out isComposableProperty)
             )
             {
                 return (bool)isComposableProperty.Value;
@@ -437,11 +436,12 @@ namespace System.Data.Common.Utils
 
             //find EntitySetMappings where one of the mapping fragment maps some type to the given table
             return containerMapping
-                .EntitySetMaps.Where(map =>
+                .EntitySetMaps
+                .Where(map =>
                     map.TypeMappings.Any(typeMap =>
-                        typeMap.MappingFragments.Any(mappingFrag =>
-                            mappingFrag.TableSet.EdmEquals(table)
-                        )
+                        typeMap
+                            .MappingFragments
+                            .Any(mappingFrag => mappingFrag.TableSet.EdmEquals(table))
                     )
                 )
                 .Select(m => m.Set)
@@ -660,10 +660,12 @@ namespace System.Data.Common.Utils
             HashSet<Pair<EdmMember, EntityType>> thisEndKeys = new HashSet<
                 Pair<EdmMember, EntityType>
             >(
-                thisEndsEntityType.KeyMembers.Select(edmMember => new Pair<EdmMember, EntityType>(
-                    edmMember,
-                    thisEndsEntityType
-                ))
+                thisEndsEntityType
+                    .KeyMembers
+                    .Select(edmMember => new Pair<EdmMember, EntityType>(
+                        edmMember,
+                        thisEndsEntityType
+                    ))
             );
 
             foreach (ReferentialConstraint constraint in assocType.ReferentialConstraints)
@@ -980,11 +982,13 @@ namespace System.Data.Common.Utils
         {
             Facet concurrencyFacet;
             if (
-                typeUsage.Facets.TryGetValue(
-                    EdmProviderManifest.ConcurrencyModeFacetName,
-                    false,
-                    out concurrencyFacet
-                )
+                typeUsage
+                    .Facets
+                    .TryGetValue(
+                        EdmProviderManifest.ConcurrencyModeFacetName,
+                        false,
+                        out concurrencyFacet
+                    )
                 && concurrencyFacet.Value != null
             )
             {
@@ -999,11 +1003,14 @@ namespace System.Data.Common.Utils
         {
             Facet storeGeneratedFacet;
             if (
-                member.TypeUsage.Facets.TryGetValue(
-                    EdmProviderManifest.StoreGeneratedPatternFacetName,
-                    false,
-                    out storeGeneratedFacet
-                )
+                member
+                    .TypeUsage
+                    .Facets
+                    .TryGetValue(
+                        EdmProviderManifest.StoreGeneratedPatternFacetName,
+                        false,
+                        out storeGeneratedFacet
+                    )
                 && storeGeneratedFacet.Value != null
             )
             {

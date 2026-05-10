@@ -79,10 +79,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IMethodSymbol? GetTopLevelStatementsMethod(this Compilation compilation)
         {
             foreach (
-                var candidateTopLevelType in compilation.SourceModule.GlobalNamespace.GetTypeMembers(
-                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName,
-                    arity: 0
-                )
+                var candidateTopLevelType in compilation
+                    .SourceModule
+                    .GlobalNamespace
+                    .GetTypeMembers(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointTypeName,
+                        arity: 0
+                    )
             )
             {
                 foreach (

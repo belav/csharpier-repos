@@ -66,16 +66,16 @@ namespace System.IdentityModel.Tokens
         {
             if (securityTokenXml == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenXml"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenXml");
             }
 
             if (securityTokenHandlers == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandlers"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandlers");
             }
 
             _securityTokenXml = securityTokenXml;
@@ -142,9 +142,9 @@ namespace System.IdentityModel.Tokens
         {
             if (securityTokenXml == null || securityTokenHandlers == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4052))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4052)));
             }
 
             SecurityToken securityToken = GetSecurityToken();
@@ -171,16 +171,18 @@ namespace System.IdentityModel.Tokens
             securityToken = securityTokenHandlers.ReadToken(reader);
             if (securityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ID4051,
-                            securityTokenXml,
-                            reader.LocalName,
-                            reader.NamespaceURI
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ID4051,
+                                securityTokenXml,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return securityToken;

@@ -24,8 +24,10 @@ namespace System.CommandLine.Benchmarks
 #pragma warning disable CA1062 // Validate arguments of public methods
             =>
             DefaultConfig
-                .Instance.With(
-                    Job.Default.WithWarmupCount(1)
+                .Instance
+                .With(
+                    Job.Default
+                        .WithWarmupCount(1)
                         .WithIterationTime(TimeInterval.FromMilliseconds(250))
                         .WithMinIterationCount(15)
                         .WithMaxIterationCount(20)

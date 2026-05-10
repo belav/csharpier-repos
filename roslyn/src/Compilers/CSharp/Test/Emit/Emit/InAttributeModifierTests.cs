@@ -1914,9 +1914,11 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
@@ -1943,9 +1945,11 @@ abstract class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
@@ -1973,7 +1977,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2001,7 +2006,8 @@ abstract class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2030,7 +2036,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2059,7 +2066,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var method = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method");
 
                 Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -2088,7 +2096,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var property = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2116,7 +2125,8 @@ abstract class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var property = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2145,7 +2155,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var property = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2174,7 +2185,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var property = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("Property");
 
                 Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
@@ -2202,9 +2214,11 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
@@ -2231,9 +2245,11 @@ abstract class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
@@ -2261,7 +2277,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var indexer = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]");
 
                 Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
@@ -2289,7 +2306,8 @@ abstract class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var indexer = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]");
 
                 Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
@@ -2319,7 +2337,8 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var indexer = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]");
 
                 Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
@@ -2403,9 +2422,11 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 Assert.Empty(parameter.RefCustomModifiers);
@@ -2432,9 +2453,11 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("Method")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 Assert.Empty(parameter.RefCustomModifiers);
@@ -2461,9 +2484,11 @@ class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetProperty("this[]")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 Assert.Empty(parameter.RefCustomModifiers);
@@ -2490,9 +2515,11 @@ public class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("op_LogicalNot")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 Assert.Empty(parameter.RefCustomModifiers);
@@ -2519,7 +2546,8 @@ public class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameters = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod("op_Addition")
                     .Parameters;
                 Assert.Equal(2, parameters.Length);
@@ -2552,9 +2580,11 @@ public class Test
             Action<ModuleSymbol> validator = module =>
             {
                 var parameter = module
-                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Test")
                     .GetMethod(".ctor")
-                    .Parameters.Single();
+                    .Parameters
+                    .Single();
 
                 Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                 Assert.Empty(parameter.RefCustomModifiers);
@@ -3165,7 +3195,8 @@ public class Program
                 Assert.Equal(
                     "void Parent.M(in modreq(System.Runtime.InteropServices.InAttribute) System.Int32 p)",
                     explicitImplementation
-                        .ExplicitInterfaceImplementations.Single()
+                        .ExplicitInterfaceImplementations
+                        .Single()
                         .ToTestDisplayString()
                 );
 
@@ -4110,7 +4141,8 @@ public class Program
                 Assert.Equal(
                     "void Parent.this[in modreq(System.Runtime.InteropServices.InAttribute) System.Int32 p].set",
                     explicitImplementation
-                        .ExplicitInterfaceImplementations.Single()
+                        .ExplicitInterfaceImplementations
+                        .Single()
                         .ToTestDisplayString()
                 );
 
@@ -4581,8 +4613,11 @@ public class Program
                 symbolValidator: module =>
                 {
                     var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.Parameters.Single();
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("D")
+                        .DelegateInvokeMethod
+                        .Parameters
+                        .Single();
 
                     Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                     AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
@@ -4628,7 +4663,8 @@ public class Test
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod;
 
                     Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -4683,8 +4719,11 @@ public delegate void D(in int p);"
                 symbolValidator: module =>
                 {
                     var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.Parameters.Single();
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("D")
+                        .DelegateInvokeMethod
+                        .Parameters
+                        .Single();
 
                     Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
                     AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
@@ -4741,7 +4780,8 @@ public delegate ref readonly int D();"
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod;
 
                     Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
@@ -5170,9 +5210,11 @@ public class Parent
                 symbolValidator: module =>
                 {
                     var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .RefCustomModifiers.Single()
+                        .RefCustomModifiers
+                        .Single()
                         .Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
                 }
@@ -5200,9 +5242,11 @@ public class Program
             Action<ModuleSymbol> validator = module =>
             {
                 var childModifier = module
-                    .ContainingAssembly.GetTypeByMetadataName("Child")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Child")
                     .GetMethod("M")
-                    .RefCustomModifiers.Single()
+                    .RefCustomModifiers
+                    .Single()
                     .Modifier;
                 Assert.Equal("testRef", childModifier.ContainingAssembly.Name);
             };
@@ -5244,9 +5288,11 @@ public abstract class Parent
                 symbolValidator: module =>
                 {
                     var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .RefCustomModifiers.Single()
+                        .RefCustomModifiers
+                        .Single()
                         .Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
                 }
@@ -5274,9 +5320,11 @@ public class Program
             Action<ModuleSymbol> validator = module =>
             {
                 var childModifier = module
-                    .ContainingAssembly.GetTypeByMetadataName("Child")
+                    .ContainingAssembly
+                    .GetTypeByMetadataName("Child")
                     .GetMethod("M")
-                    .RefCustomModifiers.Single()
+                    .RefCustomModifiers
+                    .Single()
                     .Modifier;
                 Assert.Equal("testRef", childModifier.ContainingAssembly.Name);
             };
@@ -5318,9 +5366,11 @@ public interface Parent
                 symbolValidator: module =>
                 {
                     var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .RefCustomModifiers.Single()
+                        .RefCustomModifiers
+                        .Single()
                         .Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
                 }
@@ -5350,7 +5400,8 @@ public class Program
                 var type = module.ContainingAssembly.GetTypeByMetadataName("Child");
 
                 var explicitModifier = type.GetMethod("Parent.M")
-                    .RefCustomModifiers.Single()
+                    .RefCustomModifiers
+                    .Single()
                     .Modifier;
                 Assert.Equal("testRef", explicitModifier.ContainingAssembly.Name);
             };
@@ -5392,9 +5443,11 @@ public interface Parent
                 symbolValidator: module =>
                 {
                     var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .RefCustomModifiers.Single()
+                        .RefCustomModifiers
+                        .Single()
                         .Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
                 }
@@ -5430,7 +5483,8 @@ public class Program
                 );
 
                 var explicitModifier = type.GetMethod("Parent.M")
-                    .RefCustomModifiers.Single()
+                    .RefCustomModifiers
+                    .Single()
                     .Modifier;
                 Assert.Equal("testRef", explicitModifier.ContainingAssembly.Name);
             };
@@ -5472,9 +5526,11 @@ public interface Parent
                 symbolValidator: module =>
                 {
                     var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .RefCustomModifiers.Single()
+                        .RefCustomModifiers
+                        .Single()
                         .Modifier;
                     Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
                 }
@@ -5511,7 +5567,8 @@ public class Program
                 );
 
                 var explicitModifier = type.GetMethod("Parent.M")
-                    .RefCustomModifiers.Single()
+                    .RefCustomModifiers
+                    .Single()
                     .Modifier;
                 Assert.Equal("testRef", explicitModifier.ContainingAssembly.Name);
             };
@@ -5656,21 +5713,24 @@ class Child: Parent, IM
                     {
                         // Nothing on Parent
                         var parentMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Parent")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M");
                         Assert.False(parentMethod.IsMetadataVirtual());
                         Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
 
                         // Nothing on Child
                         var childMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Child")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("Child")
                             .GetMethod("M");
                         Assert.False(childMethod.IsMetadataVirtual());
                         Assert.Empty(childMethod.Parameters.Single().RefCustomModifiers);
 
                         // Modreq on Interface
                         var interfaceMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("IM")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("IM")
                             .GetMethod("M");
                         Assert.True(interfaceMethod.IsMetadataVirtual());
                         AssertSingleInAttributeRequiredModifier(
@@ -5679,7 +5739,8 @@ class Child: Parent, IM
 
                         // Modreq on proxy
                         var proxyMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Child")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("Child")
                             .GetMethod("IM.M");
                         Assert.True(proxyMethod.IsMetadataVirtual());
                         AssertSingleInAttributeRequiredModifier(
@@ -5720,7 +5781,8 @@ class Child: Parent, IM
                     {
                         // Nothing on Parent
                         var parentMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Parent")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("Parent")
                             .GetMethod("M");
                         Assert.False(parentMethod.IsMetadataVirtual());
                         Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
@@ -5733,7 +5795,8 @@ class Child: Parent, IM
 
                         // Modreq on Interface
                         var interfaceMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("IM")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("IM")
                             .GetMethod("M");
                         Assert.True(interfaceMethod.IsMetadataVirtual());
                         AssertSingleInAttributeRequiredModifier(
@@ -5742,7 +5805,8 @@ class Child: Parent, IM
 
                         // Modreq on proxy
                         var proxyMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Child")
+                            .ContainingAssembly
+                            .GetTypeByMetadataName("Child")
                             .GetMethod("IM.M");
                         Assert.True(proxyMethod.IsMetadataVirtual());
                         AssertSingleInAttributeRequiredModifier(

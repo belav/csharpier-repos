@@ -188,9 +188,9 @@ namespace ILCompiler
                 DefaultInterfaceMethodImplementationInstantiationThunkHashtableKey key
             )
             {
-                TypeDesc owningTypeOfThunks = (
-                    (CompilerTypeSystemContext)key.TargetMethod.Context
-                ).GeneratedAssembly.GetGlobalModuleType();
+                TypeDesc owningTypeOfThunks = ((CompilerTypeSystemContext)key.TargetMethod.Context)
+                    .GeneratedAssembly
+                    .GetGlobalModuleType();
                 return new DefaultInterfaceMethodImplementationInstantiationThunk(
                     owningTypeOfThunks,
                     key.TargetMethod,

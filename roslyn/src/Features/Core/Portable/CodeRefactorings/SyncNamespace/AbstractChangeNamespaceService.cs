@@ -94,9 +94,11 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         protected static SyntaxAnnotation ContainerAnnotation { get; } = new SyntaxAnnotation();
 
         protected static SyntaxAnnotation WarningAnnotation { get; } =
-            CodeActions.WarningAnnotation.Create(
-                FeaturesResources.Warning_colon_changing_namespace_may_produce_invalid_code_and_change_code_meaning
-            );
+            CodeActions
+                .WarningAnnotation
+                .Create(
+                    FeaturesResources.Warning_colon_changing_namespace_may_produce_invalid_code_and_change_code_meaning
+                );
 
         protected abstract TCompilationUnitSyntax ChangeNamespaceDeclaration(
             TCompilationUnitSyntax root,
@@ -1224,7 +1226,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                         : container;
 
                 var compilation = await document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                    .Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var root = await document
                     .GetRequiredSyntaxRootAsync(cancellationToken)

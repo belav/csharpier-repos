@@ -157,21 +157,21 @@ namespace System
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(
-                    "tzdata file \"{0}\" was present but invalid: {1}",
-                    path,
-                    e
-                );
+                Console
+                    .Error
+                    .WriteLine("tzdata file \"{0}\" was present but invalid: {1}", path, e);
             }
             return false;
         }
 
         unsafe void ReadHeader()
         {
-            int size = System.Math.Max(
-                Marshal.SizeOf(typeof(AndroidTzDataHeader)),
-                Marshal.SizeOf(typeof(AndroidTzDataEntry))
-            );
+            int size = System
+                .Math
+                .Max(
+                    Marshal.SizeOf(typeof(AndroidTzDataHeader)),
+                    Marshal.SizeOf(typeof(AndroidTzDataEntry))
+                );
             var buffer = new byte[size];
             var header = ReadAt<AndroidTzDataHeader>(0, buffer);
 
